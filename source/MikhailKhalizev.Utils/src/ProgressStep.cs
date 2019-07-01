@@ -108,7 +108,7 @@ namespace MikhailKhalizev.Utils
 
         public void StartProcess()
         {
-            if (StartTime == default(DateTime))
+            if (StartTime == default)
                 StartTime = DateTime.UtcNow;
 
             Report(StartProgress);
@@ -116,7 +116,7 @@ namespace MikhailKhalizev.Utils
 
         public void ReportProcess(int index, int count)
         {
-            if (StartTime == default(DateTime))
+            if (StartTime == default)
                 StartTime = DateTime.UtcNow;
 
             Report(StartProgress + (EndProgress - StartProgress) * index / count);
@@ -124,10 +124,10 @@ namespace MikhailKhalizev.Utils
 
         public void EndProcess(bool force = true)
         {
-            if (!force && (EndTime != default(DateTime) || StartTime == default(DateTime)))
+            if (!force && (EndTime != default || StartTime == default))
                 return;
 
-            _childs?.LastOrDefault(x => x.StartTime != default(DateTime))?.EndProcess(false);
+            _childs?.LastOrDefault(x => x.StartTime != default)?.EndProcess(false);
 
             EndTime = DateTime.UtcNow;
             Report(EndProgress);
@@ -140,7 +140,7 @@ namespace MikhailKhalizev.Utils
         private void Report(double v)
         {
             var now = DateTime.UtcNow;
-            if (LastReport != default(DateTime) && DurationNoReport < now - LastReport)
+            if (LastReport != default && DurationNoReport < now - LastReport)
                 DurationNoReport = now - LastReport;
 
             LastReport = now;
@@ -157,9 +157,9 @@ namespace MikhailKhalizev.Utils
                 || Math.Abs(currentPercent - recommendPercent) < 0.015;
 
             var flags = new List<string>();
-            if (StartTime == default(DateTime))
+            if (StartTime == default)
                 flags.Add("NotStarted");
-            if (EndTime == default(DateTime))
+            if (EndTime == default)
                 flags.Add("NotEnded");
             if (1 < DurationNoReport.TotalSeconds && (_childs == null || _childs.Count == 0))
                 flags.Add("LongNoReport");
@@ -179,7 +179,7 @@ namespace MikhailKhalizev.Utils
                 var delayBeforePercent = Math.Abs((_childs[0].StartTime - StartTime).TotalSeconds) /
                     DurationTime.TotalSeconds;
                 var delayAfterPernent =
-                    Math.Abs((EndTime - _childs.Last(x => x.StartTime != default(DateTime)).EndTime).TotalSeconds) /
+                    Math.Abs((EndTime - _childs.Last(x => x.StartTime != default).EndTime).TotalSeconds) /
                     DurationTime.TotalSeconds;
 
                 var add = string.Empty;

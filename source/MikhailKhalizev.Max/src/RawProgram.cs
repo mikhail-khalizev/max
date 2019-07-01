@@ -167,9 +167,4 @@ namespace MikhailKhalizev.Max
             //timers_init();
         }
     }
-
-
-    /** 16-bit DOS MZ executable
-     * @note all multi-byte values are stored LSB first. One block is 512 bytes,
-     * one paragraph is 16 bytes */
 }

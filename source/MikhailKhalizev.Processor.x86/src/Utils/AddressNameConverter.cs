@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public static Address GetAddress(string nameOrAddress)
         {
             var address = KnownDefinitions.GetKeyOrDefault(nameOrAddress);
-            if (address != default(Address))
+            if (address != default)
                 return address;
 
             return Address.Parse(nameOrAddress);

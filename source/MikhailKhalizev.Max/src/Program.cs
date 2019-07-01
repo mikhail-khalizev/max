@@ -63,7 +63,7 @@ namespace MikhailKhalizev.Max
 
         public void ExtractInformationFromOldCore()
         {
-            var paths = Directory.GetFiles(@"..\..\old\program\", "*.cpp", SearchOption.AllDirectories);
+            var paths = Directory.GetFiles(@"..\old-cpp\program\", "*.cpp", SearchOption.AllDirectories);
             var resultCmd = new List<(ArchitectureMode, string, Address, string, Instruction)>();
             var resultFunc = new List<(ArchitectureMode, Address, string)>();
 

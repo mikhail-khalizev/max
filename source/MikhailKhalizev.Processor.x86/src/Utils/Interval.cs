@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public T Begin { get; }
         public T End { get; }
 
-        public static Interval<T> Empty => default(Interval<T>);
+        public static Interval<T> Empty => default;
         public bool IsEmpty => EqualityComparer.Equals(Begin, End);
 
 

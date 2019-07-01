@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Utils
         /// </summary>
         /// <param name="action">The method representing the operation.</param>
         public LongOperation(Action action)
-            : this(action, default(TimeSpan))
+            : this(action, default)
         { }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Utils
         /// operation is already completed.
         /// </param>
         public LongOperation(Func<Task> action)
-            : this(action, default(TimeSpan))
+            : this(action, default)
         { }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Utils
         /// <param name="actionMinWorkTime">Contains the minimum allowed time for the action to take place.</param>
         public LongOperation(Func<Task> action, TimeSpan actionMinWorkTime)
         {
-            if (actionMinWorkTime == default(TimeSpan))
+            if (actionMinWorkTime == default)
                 _action = action;
             else
                 _action = async () =>

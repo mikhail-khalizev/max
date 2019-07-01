@@ -3,6 +3,8 @@ using System.Runtime.InteropServices;
 
 namespace MikhailKhalizev.Max.Dos
 {
+    // TODO migrate to http://formats.kaitai.io/dos_mz/csharp.html
+
     /// <summary>
     /// 16-bit DOS MZ executable.
     /// </summary>

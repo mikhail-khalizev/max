@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Utils
         /// Adds a method to the queue and starts executing operations.
         /// </summary>
         /// <remarks>Thread-safe.</remarks>
-        public Task Enqueue(Func<Task> act, CancellationToken cancellationToken = default(CancellationToken))
+        public Task Enqueue(Func<Task> act, CancellationToken cancellationToken = default)
         {
             return Enqueue<object>(async () =>
             {
@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Utils
         /// <remarks>Thread-safe.</remarks>
         public async Task<T> Enqueue<T>(
             Func<Task<T>> act,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var tcs = new TaskCompletionSource<T>();
             using (var cancelRegistered = cancellationToken.Register(() => tcs.TrySetCanceled()))
