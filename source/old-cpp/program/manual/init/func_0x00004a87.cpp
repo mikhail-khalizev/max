@@ -1,0 +1,15 @@
+FUNC_BEGIN(0x00004a87, 0x9fac172fa8889a59, 0x10, ({0x8b, 0xdc, 0x8b, 0x47, 0x2, 0x50, 0x50, 0xe8, 0x7f, 0x11, 0x91, 0x58, 0x5a, 0xbb, 0x2, 0, 0xb4, 0x40, 0xcd, 0x21, 0xc3}))
+    II(0x00004a87, 0x2)   mov(bx, sp);                          /* mov bx, sp */
+    II(0x00004a89, 0x3)   mov(ax, memw_a16(ds, bx + 0x2));      /* mov ax, [bx+0x2] */
+    II(0x00004a8c, 0x1)   pushw(ax);                            /* push ax */
+    II(0x00004a8d, 0x1)   pushw(ax);                            /* push ax */
+    II(0x00004a8e, 0x3)   callw(0x00005c10, 0x117f);            /* call 0x5c10 */
+    II(0x00004a91, 0x1)   xchg(cx, ax);                         /* xchg cx, ax */
+    II(0x00004a92, 0x1)   popw(ax);                             /* pop ax */
+    II(0x00004a93, 0x1)   popw(dx);                             /* pop dx */
+    II(0x00004a94, 0x3)   mov(bx, 0x2);                         /* mov bx, 0x2 */
+    II(0x00004a97, 0x2)   mov(ah, 0x40);                        /* mov ah, 0x40 */
+    II(0x00004a99, 0x2)   int_(0x21);                           /* int 0x21 */
+    II(0x00004a9b, 0x1)   retw();                               /* ret  */
+FUNC_END
+

@@ -1,0 +1,26 @@
+FUNC_BEGIN(0x0013e0f0, 0xa6b58de4b4a9ce4e, 0x10, ({0x55, 0x8b, 0xec, 0x8c, 0xd9, 0xc5, 0x5e, 0x6, 0x8b, 0xd3, 0xeb, 0xb, 0x2c, 0x61, 0x3c, 0x1a, 0x73, 0x4, 0x4, 0x41, 0x88, 0x7, 0x43, 0x8a, 0x7, 0xa, 0xc0, 0x75, 0xef, 0x92, 0x8c, 0xda, 0x8e, 0xd9, 0x5d, 0xcb}))
+    II(0x0013e0f0, 0x1)   pushw(bp);                            /* push bp */
+    II(0x0013e0f1, 0x2)   mov(bp, sp);                          /* mov bp, sp */
+    II(0x0013e0f3, 0x2)   mov(cx, ds);                          /* mov cx, ds */
+    II(0x0013e0f5, 0x3)   lds(bx, ss, bp + 0x6);                /* lds bx, [bp+0x6] */
+    II(0x0013e0f8, 0x2)   mov(dx, bx);                          /* mov dx, bx */
+    II(0x0013e0fa, 0x2)   jmpw(0x0013e107, 0xb);                /* jmp 0x13e107 */
+l_0x0013e0fc:
+    II(0x0013e0fc, 0x2)   sub(al, 0x61);                        /* sub al, 0x61 */
+    II(0x0013e0fe, 0x2)   cmp(al, 0x1a);                        /* cmp al, 0x1a */
+    II(0x0013e100, 0x2)   jaew(0x0013e106, 0x4);                /* jae 0x13e106 */
+    II(0x0013e102, 0x2)   add(al, 0x41);                        /* add al, 0x41 */
+    II(0x0013e104, 0x2)   mov(memb_a16(ds, bx), al);            /* mov [bx], al */
+l_0x0013e106:
+    II(0x0013e106, 0x1)   inc(bx);                              /* inc bx */
+l_0x0013e107:
+    II(0x0013e107, 0x2)   mov(al, memb_a16(ds, bx));            /* mov al, [bx] */
+    II(0x0013e109, 0x2)   or_(al, al);                          /* or al, al */
+    II(0x0013e10b, 0x2)   jnzw(0x0013e0fc, -0x11);              /* jnz 0x13e0fc */
+    II(0x0013e10d, 0x1)   xchg(dx, ax);                         /* xchg dx, ax */
+    II(0x0013e10e, 0x2)   mov(dx, ds);                          /* mov dx, ds */
+    II(0x0013e110, 0x2)   mov(ds, cx);                          /* mov ds, cx */
+    II(0x0013e112, 0x1)   popw(bp);                             /* pop bp */
+    II(0x0013e113, 0x1)   retfw();                              /* retf  */
+FUNC_END
+

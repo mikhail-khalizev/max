@@ -1,0 +1,8 @@
+FUNC_BEGIN(0x0014e054, 0x460b8d73a2aaacb1, 0x10, ({0x3a, 0xdc, 0x73, 0xa, 0xd1, 0xe3, 0xfc, 0x2e, 0xff, 0x20}))
+    II(0x0014e054, 0x2)   cmp(bl, ah);                          /* cmp bl, ah */
+    II(0x0014e056, 0x2)   jaew_func(0x0014e062, 0xa);           /* jae 0x14e062 */
+    II(0x0014e058, 0x2)   shl(bx, 0x1);                         /* shl bx, 1 */
+    II(0x0014e05a, 0x1)   cld();                                /* cld  */
+    II(0x0014e05b, 0x3)   jmpw_abs(memw_a16(cs, bx + si));      /* jmp word near [cs:bx+si] */
+FUNC_END
+

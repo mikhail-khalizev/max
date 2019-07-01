@@ -1,0 +1,16 @@
+FUNC_BEGIN(0x00150520, 0xcb3d89db51de4275, 0x10, ({0xe, 0xe8, 0x10, 0, 0xb, 0xc0, 0x74, 0xb, 0x1e, 0x68, 0x78, 0x18, 0x90, 0xe, 0xe8, 0x29, 0x4a, 0x5b, 0x5b, 0xcb}))
+    II(0x00150520, 0x1)   pushw(cs);                            /* push cs */
+    II(0x00150521, 0x3)   callw(0x00150534, 0x10);              /* call 0x150534 */
+    II(0x00150524, 0x2)   or_(ax, ax);                          /* or ax, ax */
+    II(0x00150526, 0x2)   jzw(0x00150533, 0xb);                 /* jz 0x150533 */
+    II(0x00150528, 0x1)   pushw(ds);                            /* push ds */
+    II(0x00150529, 0x3)   pushw(0x1878);                        /* push word 0x1878 */
+//    II(0x0015052c, 0x1)   nop();                                /* nop  */
+    II(0x0015052d, 0x1)   pushw(cs);                            /* push cs */
+    II(0x0015052e, 0x3)   callw(0x00154f5a, 0x4a29);            /* call 0x154f5a */
+    II(0x00150531, 0x1)   popw(bx);                             /* pop bx */
+    II(0x00150532, 0x1)   popw(bx);                             /* pop bx */
+l_0x00150533:
+    II(0x00150533, 0x1)   retfw();                              /* retf  */
+FUNC_END
+

@@ -1,0 +1,6 @@
+FUNC_BEGIN(0x00005dce, 0x29b554d53bdde01a, 0x10, ({0x32, 0xe4, 0xe8, 0x1, 0, 0xc3}))
+    II(0x00005dce, 0x2)   xor_(ah, ah);                         /* xor ah, ah */
+    II(0x00005dd0, 0x3)   callw(0x00005dd4, 0x1);               /* call 0x5dd4 */
+    II(0x00005dd3, 0x1)   retw();                               /* ret  */
+FUNC_END
+

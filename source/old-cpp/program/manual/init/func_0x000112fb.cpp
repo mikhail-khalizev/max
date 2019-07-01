@@ -1,0 +1,7 @@
+FUNC_BEGIN(0x000112fb, 0xebe25ff6cd7d9fda, 0x10, ({0x66, 0x3b, 0xf9, 0x76, 0xe9, 0xe8, 0x13, 0}))
+    II(0x000112fb, 0x3)   cmp(edi, ecx);                        /* cmp edi, ecx */
+    II(0x000112fe, 0x2)   jbew_func(0x000112e9, -0x17);         /* jbe 0x112e9 */
+    II(0x00011300, 0x3)   callw(0x00011316, 0x13);              /* call 0x11316 */
+    II(0x00011303, 0)     jmpd_func(0x00011303, 0);             /* Принудительное завершение функции. */
+FUNC_END
+

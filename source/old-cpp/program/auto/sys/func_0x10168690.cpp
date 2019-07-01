@@ -1,0 +1,4 @@
+FUNC_BEGIN(/* sys */ 0x10168690, 0xa3b7da5df0559b, 0x20, ({0xe9, 0xe3, 0x88, 0, 0}))
+    II(0x10168690, 0x5)   jmpd_func(sys_fclose_internal, 0x88e3); /* jmp 0x10170f78 */
+FUNC_END
+

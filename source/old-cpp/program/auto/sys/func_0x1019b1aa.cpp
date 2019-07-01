@@ -1,0 +1,24 @@
+FUNC_BEGIN(/* sys */ 0x1019b1aa, 0xf5cb12786745cf72, 0x20, ({0x53, 0x51, 0x89, 0xd1, 0x31, 0xdb, 0x31, 0xd2, 0x8a, 0x10, 0x83, 0xfa, 0x30, 0x7c, 0x10, 0x83, 0xfa, 0x39, 0x7f, 0xb, 0x6b, 0xdb, 0xa, 0x1, 0xda, 0x40, 0x8d, 0x5a, 0xd0, 0xeb, 0xe7, 0x89, 0x19, 0x59, 0x5b, 0xc3}))
+    II(0x1019b1aa, 0x1)   pushd(ebx);                           /* push ebx */
+    II(0x1019b1ab, 0x1)   pushd(ecx);                           /* push ecx */
+    II(0x1019b1ac, 0x2)   mov(ecx, edx);                        /* mov ecx, edx */
+    II(0x1019b1ae, 0x2)   xor_(ebx, ebx);                       /* xor ebx, ebx */
+l_0x1019b1b0:
+    II(0x1019b1b0, 0x2)   xor_(edx, edx);                       /* xor edx, edx */
+    II(0x1019b1b2, 0x2)   mov(dl, memb_a32(ds, eax));           /* mov dl, [eax] */
+    II(0x1019b1b4, 0x3)   cmp(edx, 0x30);                       /* cmp edx, 0x30 */
+    II(0x1019b1b7, 0x2)   jld(0x1019b1c9, 0x10);                /* jl 0x1019b1c9 */
+    II(0x1019b1b9, 0x3)   cmp(edx, 0x39);                       /* cmp edx, 0x39 */
+    II(0x1019b1bc, 0x2)   jgd(0x1019b1c9, 0xb);                 /* jg 0x1019b1c9 */
+    II(0x1019b1be, 0x3)   imul(ebx, ebx, 0xa);                  /* imul ebx, ebx, 0xa */
+    II(0x1019b1c1, 0x2)   add(edx, ebx);                        /* add edx, ebx */
+    II(0x1019b1c3, 0x1)   inc(eax);                             /* inc eax */
+    II(0x1019b1c4, 0x3)   lea(ebx, edx - 0x30);                 /* lea ebx, [edx-0x30] */
+    II(0x1019b1c7, 0x2)   jmpd(0x1019b1b0, -0x19);              /* jmp 0x1019b1b0 */
+l_0x1019b1c9:
+    II(0x1019b1c9, 0x2)   mov(memd_a32(ds, ecx), ebx);          /* mov [ecx], ebx */
+    II(0x1019b1cb, 0x1)   popd(ecx);                            /* pop ecx */
+    II(0x1019b1cc, 0x1)   popd(ebx);                            /* pop ebx */
+    II(0x1019b1cd, 0x1)   retd();                               /* ret */
+FUNC_END
+

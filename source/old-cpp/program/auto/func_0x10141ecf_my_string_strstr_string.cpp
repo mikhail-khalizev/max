@@ -1,0 +1,31 @@
+FUNC_BEGIN(my_string_strstr_string, 0x91b32e813db38c59, 0x20, ({0x68, 0x24, 0, 0, 0, 0xe8, 0x79, 0x3e, 0x2, 0, 0x53, 0x51, 0x56, 0x57, 0x55, 0x89, 0xe5, 0x81, 0xec, 0xc, 0, 0, 0, 0x89, 0x45, 0xf8, 0x89, 0x55, 0xfc, 0x8b, 0x45, 0xfc, 0x8b, 0, 0xe8, 0x6, 0x79, 0xf4, 0xff, 0x89, 0xc2, 0x8b, 0x45, 0xf8, 0x8b, 0, 0xe8, 0xfa, 0x78, 0xf4, 0xff, 0xe8, 0x9, 0x71, 0x3, 0, 0x89, 0x45, 0xf4, 0x8b, 0x45, 0xf4, 0x89, 0xec, 0x5d, 0x5f, 0x5e, 0x59, 0x5b, 0xc3}))
+    II(0x10141ecf, 0x5)   pushd(0x24);                          /* push dword 0x24 */
+    II(0x10141ed4, 0x5)   calld(sys_check_available_stack_size, 0x23e79); /* call 0x10165d52 */
+    II(0x10141ed9, 0x1)   pushd(ebx);                           /* push ebx */
+    II(0x10141eda, 0x1)   pushd(ecx);                           /* push ecx */
+    II(0x10141edb, 0x1)   pushd(esi);                           /* push esi */
+    II(0x10141edc, 0x1)   pushd(edi);                           /* push edi */
+    II(0x10141edd, 0x1)   pushd(ebp);                           /* push ebp */
+    II(0x10141ede, 0x2)   mov(ebp, esp);                        /* mov ebp, esp */
+    II(0x10141ee0, 0x6)   sub(esp, 0xc);                        /* sub esp, 0xc */
+    II(0x10141ee6, 0x3)   mov(memd_a32(ss, ebp - 0x8), eax);    /* mov [ebp-0x8], eax */
+    II(0x10141ee9, 0x3)   mov(memd_a32(ss, ebp - 0x4), edx);    /* mov [ebp-0x4], edx */
+    II(0x10141eec, 0x3)   mov(eax, memd_a32(ss, ebp - 0x4));    /* mov eax, [ebp-0x4] */
+    II(0x10141eef, 0x2)   mov(eax, memd_a32(ds, eax));          /* mov eax, [eax] */
+    II(0x10141ef1, 0x5)   calld(my_strobj_c_str, -0xb86fa);     /* call 0x100897fc */
+    II(0x10141ef6, 0x2)   mov(edx, eax);                        /* mov edx, eax */
+    II(0x10141ef8, 0x3)   mov(eax, memd_a32(ss, ebp - 0x8));    /* mov eax, [ebp-0x8] */
+    II(0x10141efb, 0x2)   mov(eax, memd_a32(ds, eax));          /* mov eax, [eax] */
+    II(0x10141efd, 0x5)   calld(my_strobj_c_str, -0xb8706);     /* call 0x100897fc */
+    II(0x10141f02, 0x5)   calld(sys_strstr, 0x37109);           /* call 0x10179010 */
+    II(0x10141f07, 0x3)   mov(memd_a32(ss, ebp - 0xc), eax);    /* mov [ebp-0xc], eax */
+//    II(0x10141f0a, 0x3)   mov(eax, memd_a32(ss, ebp - 0xc));    /* mov eax, [ebp-0xc] */
+    II(0x10141f0d, 0x2)   mov(esp, ebp);                        /* mov esp, ebp */
+    II(0x10141f0f, 0x1)   popd(ebp);                            /* pop ebp */
+    II(0x10141f10, 0x1)   popd(edi);                            /* pop edi */
+    II(0x10141f11, 0x1)   popd(esi);                            /* pop esi */
+    II(0x10141f12, 0x1)   popd(ecx);                            /* pop ecx */
+    II(0x10141f13, 0x1)   popd(ebx);                            /* pop ebx */
+    II(0x10141f14, 0x1)   retd();                               /* ret */
+FUNC_END
+

@@ -1,0 +1,26 @@
+FUNC_BEGIN(0x0015b92e, 0xe80d7cef2d8d9015, 0x10, ({0x55, 0x8b, 0xec, 0x56, 0x2b, 0xf6, 0xeb, 0xb, 0x26, 0x8a, 0x40, 0x1, 0xc4, 0x5e, 0x4, 0x26, 0x88, 0, 0x46, 0xc4, 0x5e, 0x8, 0x26, 0x8a, 0x7, 0x98, 0x3b, 0xc6, 0x7f, 0xea, 0xc4, 0x5e, 0x4, 0x26, 0xc6, 0, 0, 0x8b, 0xc3, 0x8c, 0xc2, 0x5e, 0xc9, 0xc2, 0x8, 0}))
+    II(0x0015b92e, 0x1)   pushw(bp);                            /* push bp */
+    II(0x0015b92f, 0x2)   mov(bp, sp);                          /* mov bp, sp */
+    II(0x0015b931, 0x1)   pushw(si);                            /* push si */
+    II(0x0015b932, 0x2)   sub(si, si);                          /* sub si, si */
+    II(0x0015b934, 0x2)   jmpw(0x0015b941, 0xb);                /* jmp 0x15b941 */
+l_0x0015b936:
+    II(0x0015b936, 0x4)   mov(al, memb_a16(es, bx + si + 0x1)); /* mov al, [es:bx+si+0x1] */
+    II(0x0015b93a, 0x3)   les(bx, ss, bp + 0x4);                /* les bx, [bp+0x4] */
+    II(0x0015b93d, 0x3)   mov(memb_a16(es, bx + si), al);       /* mov [es:bx+si], al */
+    II(0x0015b940, 0x1)   inc(si);                              /* inc si */
+l_0x0015b941:
+    II(0x0015b941, 0x3)   les(bx, ss, bp + 0x8);                /* les bx, [bp+0x8] */
+    II(0x0015b944, 0x3)   mov(al, memb_a16(es, bx));            /* mov al, [es:bx] */
+    II(0x0015b947, 0x1)   cbw();                                /* cbw  */
+    II(0x0015b948, 0x2)   cmp(ax, si);                          /* cmp ax, si */
+    II(0x0015b94a, 0x2)   jgw(0x0015b936, -0x16);               /* jg 0x15b936 */
+    II(0x0015b94c, 0x3)   les(bx, ss, bp + 0x4);                /* les bx, [bp+0x4] */
+    II(0x0015b94f, 0x4)   mov(memb_a16(es, bx + si), 0);        /* mov byte [es:bx+si], 0x0 */
+    II(0x0015b953, 0x2)   mov(ax, bx);                          /* mov ax, bx */
+    II(0x0015b955, 0x2)   mov(dx, es);                          /* mov dx, es */
+    II(0x0015b957, 0x1)   popw(si);                             /* pop si */
+    II(0x0015b958, 0x1)   leavew();                             /* leave  */
+    II(0x0015b959, 0x3)   retw(0x8);                            /* ret 0x8 */
+FUNC_END
+

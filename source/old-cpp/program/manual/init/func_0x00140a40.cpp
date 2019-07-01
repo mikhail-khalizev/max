@@ -1,0 +1,13 @@
+FUNC_BEGIN(0x00140a40, 0x39d5d8a0188204cf, 0x10, ({0x1e, 0xb8, 0x68, 0x3e, 0x8e, 0xd8, 0xa1, 0x18, 0x14, 0x2b, 0xdb, 0x8e, 0xc0, 0x26, 0x8a, 0x47, 0x47, 0x25, 0x80, 0, 0x1f, 0xc3}))
+    II(0x00140a40, 0x1)   pushw(ds);                            /* push ds */
+    II(0x00140a41, 0x3)   mov(ax, 0x3e68);                      /* mov ax, 0x3e68 */
+    II(0x00140a44, 0x2)   mov(ds, ax);                          /* mov ds, ax */
+    II(0x00140a46, 0x3)   mov(ax, memw_a16(ds, 0x1418));        /* mov ax, [0x1418] */
+    II(0x00140a49, 0x2)   sub(bx, bx);                          /* sub bx, bx */
+    II(0x00140a4b, 0x2)   mov(es, ax);                          /* mov es, ax */
+    II(0x00140a4d, 0x4)   mov(al, memb_a16(es, bx + 0x47));     /* mov al, [es:bx+0x47] */
+    II(0x00140a51, 0x3)   and_(ax, 0x80);                       /* and ax, 0x80 */
+    II(0x00140a54, 0x1)   popw(ds);                             /* pop ds */
+    II(0x00140a55, 0x1)   retw();                               /* ret  */
+FUNC_END
+

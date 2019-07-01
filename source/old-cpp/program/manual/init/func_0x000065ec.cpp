@@ -1,0 +1,15 @@
+FUNC_BEGIN(0x000065ec, 0xa16b387806f13d4b, 0x10, ({0x53, 0x8c, 0xd3, 0x80, 0xe3, 0xf8, 0x6a, 0x8, 0x7, 0xb8, 0xff, 0xff, 0xfa, 0x26, 0x87, 0x7, 0x8e, 0xd3, 0x26, 0x87, 0x7, 0x5b, 0xeb, 0x7}))
+    II(0x000065ec, 0x1)   pushw(bx);                            /* push bx */
+    II(0x000065ed, 0x2)   mov(bx, ss);                          /* mov bx, ss */
+    II(0x000065ef, 0x3)   and_(bl, 0xf8);                       /* and bl, 0xf8 */
+    II(0x000065f2, 0x2)   pushw(0x8);                           /* push 0x8 */
+    II(0x000065f4, 0x1)   popw(es);                             /* pop es */
+    II(0x000065f5, 0x3)   mov(ax, 0xffff);                      /* mov ax, 0xffff */
+    II(0x000065f8, 0x1)   cli();                                /* cli  */
+    II(0x000065f9, 0x3)   xchg(memw_a16(es, bx), ax);           /* xchg [es:bx], ax */
+    II(0x000065fc, 0x2)   mov(ss, bx);                          /* mov ss, bx */
+    II(0x000065fe, 0x3)   xchg(memw_a16(es, bx), ax);           /* xchg [es:bx], ax */
+    II(0x00006601, 0x1)   popw(bx);                             /* pop bx */
+    II(0x00006602, 0x2)   jmpw_func(0x0000660b, 0x7);           /* jmp 0x660b */
+FUNC_END
+

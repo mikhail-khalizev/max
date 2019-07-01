@@ -1,0 +1,16 @@
+FUNC_BEGIN(0x0015f01e, 0x7884a9cf1cd38358, 0x10, ({0xc8, 0, 0, 0, 0x57, 0x56, 0x6a, 0x6c, 0x6a, 0, 0x1e, 0x68, 0x3c, 0x2e, 0x9a, 0x8a, 0x40, 0x80, 0, 0x83, 0xc4, 0x8, 0x5e, 0x5f, 0xc9, 0xcb}))
+    II(0x0015f01e, 0x4)   enterw(0, 0);                         /* enter 0x0, 0x0 */
+    II(0x0015f022, 0x1)   pushw(di);                            /* push di */
+    II(0x0015f023, 0x1)   pushw(si);                            /* push si */
+    II(0x0015f024, 0x2)   pushw(0x6c);                          /* push 0x6c */
+    II(0x0015f026, 0x2)   pushw(0);                             /* push 0x0 */
+    II(0x0015f028, 0x1)   pushw(ds);                            /* push ds */
+    II(0x0015f029, 0x3)   pushw(0x2e3c);                        /* push word 0x2e3c */
+    II(0x0015f02c, 0x5)   callw_far_abs(0x80, 0x408a);          /* call word 0x80:0x408a */
+    II(0x0015f031, 0x3)   add(sp, 0x8);                         /* add sp, 0x8 */
+    II(0x0015f034, 0x1)   popw(si);                             /* pop si */
+    II(0x0015f035, 0x1)   popw(di);                             /* pop di */
+    II(0x0015f036, 0x1)   leavew();                             /* leave  */
+    II(0x0015f037, 0x1)   retfw();                              /* retf  */
+FUNC_END
+

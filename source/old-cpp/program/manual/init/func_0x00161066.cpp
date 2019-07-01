@@ -1,0 +1,7 @@
+FUNC_BEGIN(0x00161066, 0xeb0dd842536326ef, 0x10, ({0x58, 0xe, 0x50, 0xea, 0x89, 0x22, 0x80, 0}))
+    II(0x00161066, 0x1)   popw(ax);                             /* pop ax */
+    II(0x00161067, 0x1)   pushw(cs);                            /* push cs */
+    II(0x00161068, 0x1)   pushw(ax);                            /* push ax */
+    II(0x00161069, 0x5)   jmpw_far_abs(0x80, 0x2289);           /* jmp word 0x80:0x2289 */
+FUNC_END
+

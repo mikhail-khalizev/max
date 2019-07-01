@@ -1,0 +1,12 @@
+FUNC_BEGIN(/* sys */ 0x10165ebf, 0x92b1597e1ab3a402, 0x20, ({0x52, 0x89, 0xc2, 0xe8, 0xce, 0xff, 0xff, 0xff, 0x85, 0xc0, 0x74, 0x2, 0x89, 0x10, 0x5a, 0xc3}))
+    II(0x10165ebf, 0x1)   pushd(edx);                           /* push edx */
+    II(0x10165ec0, 0x2)   mov(edx, eax);                        /* mov edx, eax */
+    II(0x10165ec2, 0x5)   calld(/* sys */ 0x10165e95, -0x32);   /* call 0x10165e95 */
+    II(0x10165ec7, 0x2)   test(eax, eax);                       /* test eax, eax */
+    II(0x10165ec9, 0x2)   jzd(0x10165ecd, 0x2);                 /* jz 0x10165ecd */
+    II(0x10165ecb, 0x2)   mov(memd_a32(ds, eax), edx);          /* mov [eax], edx */
+l_0x10165ecd:
+    II(0x10165ecd, 0x1)   popd(edx);                            /* pop edx */
+    II(0x10165ece, 0x1)   retd();                               /* ret */
+FUNC_END
+

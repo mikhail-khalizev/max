@@ -1,0 +1,5 @@
+FUNC_BEGIN(/* sys */ 0x10181ce1, 0xa3b7d4523f4e94, 0x20, ({0xc6, 0x40, 0x8, 0, 0xc3}))
+    II(0x10181ce1, 0x4)   mov(memb_a32(ds, eax + 0x8), 0);      /* mov byte [eax+0x8], 0x0 */
+    II(0x10181ce5, 0x1)   retd();                               /* ret */
+FUNC_END
+

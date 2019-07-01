@@ -1,0 +1,19 @@
+FUNC_BEGIN(/* sys */ 0x1018d4b6, 0xa44d1206304dec53, 0x20, ({0x51, 0x89, 0xd9, 0x89, 0xc3, 0xb4, 0x3f, 0xcd, 0x21, 0xd1, 0xd0, 0xd1, 0xc8, 0x89, 0xc2, 0x85, 0xc0, 0x7d, 0xa, 0x31, 0xc0, 0x66, 0x89, 0xd0, 0xe8, 0xe4, 0x6, 0, 0, 0x59, 0xc3}))
+    II(0x1018d4b6, 0x1)   pushd(ecx);                           /* push ecx */
+    II(0x1018d4b7, 0x2)   mov(ecx, ebx);                        /* mov ecx, ebx */
+    II(0x1018d4b9, 0x2)   mov(ebx, eax);                        /* mov ebx, eax */
+    II(0x1018d4bb, 0x2)   mov(ah, 0x3f);                        /* mov ah, 0x3f */
+    II(0x1018d4bd, 0x2)   int_(0x21);                           /* int 0x21 */
+    II(0x1018d4bf, 0x2)   rcl(eax, 0x1);                        /* rcl eax, 1 */
+    II(0x1018d4c1, 0x2)   ror(eax, 0x1);                        /* ror eax, 1 */
+    II(0x1018d4c3, 0x2)   mov(edx, eax);                        /* mov edx, eax */
+    II(0x1018d4c5, 0x2)   test(eax, eax);                       /* test eax, eax */
+    II(0x1018d4c7, 0x2)   jged(0x1018d4d3, 0xa);                /* jge 0x1018d4d3 */
+    II(0x1018d4c9, 0x2)   xor_(eax, eax);                       /* xor eax, eax */
+    II(0x1018d4cb, 0x3)   mov(ax, dx);                          /* mov ax, dx */
+    II(0x1018d4ce, 0x5)   calld(/* sys */ 0x1018dbb7, 0x6e4);   /* call 0x1018dbb7 */
+l_0x1018d4d3:
+    II(0x1018d4d3, 0x1)   popd(ecx);                            /* pop ecx */
+    II(0x1018d4d4, 0x1)   retd();                               /* ret */
+FUNC_END
+

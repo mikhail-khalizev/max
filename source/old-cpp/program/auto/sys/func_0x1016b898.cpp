@@ -1,0 +1,15 @@
+FUNC_BEGIN(/* sys */ 0x1016b898, 0x6c1f5bcbf187ea0d, 0x20, ({0x52, 0x89, 0xc2, 0xe8, 0x18, 0xff, 0xff, 0xff, 0x39, 0xc2, 0x77, 0x4, 0x29, 0xd0, 0x5a, 0xc3, 0xb8, 0xff, 0xff, 0xff, 0x7f, 0x5a, 0xc3}))
+    II(0x1016b898, 0x1)   pushd(edx);                           /* push edx */
+    II(0x1016b899, 0x2)   mov(edx, eax);                        /* mov edx, eax */
+    II(0x1016b89b, 0x5)   calld(/* sys */ 0x1016b7b8, -0xe8);   /* call 0x1016b7b8 */
+    II(0x1016b8a0, 0x2)   cmp(edx, eax);                        /* cmp edx, eax */
+    II(0x1016b8a2, 0x2)   jad(0x1016b8a8, 0x4);                 /* ja 0x1016b8a8 */
+    II(0x1016b8a4, 0x2)   sub(eax, edx);                        /* sub eax, edx */
+    II(0x1016b8a6, 0x1)   popd(edx);                            /* pop edx */
+    II(0x1016b8a7, 0x1)   retd();                               /* ret */
+l_0x1016b8a8:
+    II(0x1016b8a8, 0x5)   mov(eax, 0x7fffffff);                 /* mov eax, 0x7fffffff */
+    II(0x1016b8ad, 0x1)   popd(edx);                            /* pop edx */
+    II(0x1016b8ae, 0x1)   retd();                               /* ret */
+FUNC_END
+

@@ -1,0 +1,6 @@
+FUNC_BEGIN(0x00005c17, 0xa3b7dab3a821ed, 0x10, ({0xe8, 0xc, 0, 0xb3, 0x3f}))
+    II(0x00005c17, 0x3)   callw(0x00005c26, 0xc);               /* call 0x5c26 */
+    II(0x00005c1a, 0x2)   mov(bl, 0x3f);                        /* mov bl, 0x3f */
+    II(0x00005c1c, 0)     jmpd_func(0x00005c1c, 0);             /* Принудительное завершение функции. */
+FUNC_END
+

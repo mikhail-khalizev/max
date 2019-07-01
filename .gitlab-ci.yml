@@ -1,0 +1,15 @@
+image: microsoft/dotnet:latest
+
+stages:
+    - build
+    - test
+
+build:
+    stage: build
+    script:
+        - "cd source && dotnet build"
+
+test:
+    stage: test
+    script:
+        - "cd source && dotnet test --no-build"

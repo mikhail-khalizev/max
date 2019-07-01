@@ -1,0 +1,8 @@
+rusmax encoding - CP771
+
+arg1  eax
+arg2  edx
+arg3  ebx
+arg4  ecx
+arg5  push
+Компилятор watcom

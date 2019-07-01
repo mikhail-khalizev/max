@@ -1,0 +1,5 @@
+FUNC_BEGIN(/* sys */ 0x10181cc4, 0x28253d6639904, 0x20, ({0x83, 0xc0, 0x8, 0xc3}))
+    II(0x10181cc4, 0x3)   add(eax, 0x8);                        /* add eax, 0x8 */
+    II(0x10181cc7, 0x1)   retd();                               /* ret */
+FUNC_END
+

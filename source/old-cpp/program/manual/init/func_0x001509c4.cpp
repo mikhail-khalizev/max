@@ -1,0 +1,26 @@
+FUNC_BEGIN(0x001509c4, 0xd0c2fde8bb076ef1, 0x10, ({0xc8, 0, 0, 0, 0x6, 0x1e, 0x66, 0x56, 0x66, 0x57, 0x66, 0x51, 0x66, 0x8b, 0x76, 0x6, 0x8e, 0x5e, 0xa, 0xc4, 0x7e, 0xc, 0x66, 0xf, 0xb7, 0xff, 0x8b, 0x4e, 0x10, 0xe3, 0x9, 0x66, 0xf, 0xb7, 0xc9, 0x67, 0xf3, 0xa4, 0x67, 0x90, 0x66, 0x59, 0x66, 0x5f, 0x66, 0x5e, 0x1f, 0x7, 0xc9, 0xcb}))
+    II(0x001509c4, 0x4)   enterw(0, 0);                         /* enter 0x0, 0x0 */
+    II(0x001509c8, 0x1)   pushw(es);                            /* push es */
+    II(0x001509c9, 0x1)   pushw(ds);                            /* push ds */
+    II(0x001509ca, 0x2)   pushd(esi);                           /* push esi */
+    II(0x001509cc, 0x2)   pushd(edi);                           /* push edi */
+    II(0x001509ce, 0x2)   pushd(ecx);                           /* push ecx */
+    II(0x001509d0, 0x4)   mov(esi, memd_a16(ss, bp + 0x6));     /* mov esi, [bp+0x6] */
+    II(0x001509d4, 0x3)   mov(ds, memw_a16(ss, bp + 0xa));      /* mov ds, [bp+0xa] */
+    II(0x001509d7, 0x3)   les(di, ss, bp + 0xc);                /* les di, [bp+0xc] */
+    II(0x001509da, 0x4)   movzx(edi, di);                       /* movzx edi, di */
+    II(0x001509de, 0x3)   mov(cx, memw_a16(ss, bp + 0x10));     /* mov cx, [bp+0x10] */
+    II(0x001509e1, 0x2)   jcxzw(0x001509ec, 0x9);               /* jcxz 0x1509ec */
+    II(0x001509e3, 0x4)   movzx(ecx, cx);                       /* movzx ecx, cx */
+    II(0x001509e7, 0x3)   rep_a32 movsb_a32();                  /* a32 rep movsb  */
+//    II(0x001509ea, 0x2)   nop();                                /* a32 nop  */
+l_0x001509ec:
+    II(0x001509ec, 0x2)   popd(ecx);                            /* pop ecx */
+    II(0x001509ee, 0x2)   popd(edi);                            /* pop edi */
+    II(0x001509f0, 0x2)   popd(esi);                            /* pop esi */
+    II(0x001509f2, 0x1)   popw(ds);                             /* pop ds */
+    II(0x001509f3, 0x1)   popw(es);                             /* pop es */
+    II(0x001509f4, 0x1)   leavew();                             /* leave  */
+    II(0x001509f5, 0x1)   retfw();                              /* retf  */
+FUNC_END
+

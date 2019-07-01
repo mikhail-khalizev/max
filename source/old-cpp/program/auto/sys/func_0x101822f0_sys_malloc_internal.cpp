@@ -1,0 +1,5 @@
+FUNC_BEGIN(sys_malloc_internal, 0x5e77d28dae35ec66, 0x20, ({0xff, 0x15, 0x18, 0xe8, 0x1b, 0x10, 0xc3}))
+    II(0x101822f0, 0x6)   calld_abs(memd_a32(ds, 0x101be818));  /* call dword near [0x101be818] */ /* Вызов '0x101822f8'. */
+    II(0x101822f6, 0x1)   retd();                               /* ret */
+FUNC_END
+

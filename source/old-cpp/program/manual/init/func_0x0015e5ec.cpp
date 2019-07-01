@@ -1,0 +1,17 @@
+FUNC_BEGIN(0x0015e5ec, 0xc29977b1eb8c4618, 0x10, ({0xc8, 0, 0, 0, 0x57, 0x56, 0xa1, 0xf6, 0x48, 0x5, 0xb6, 0x48, 0x1e, 0x50, 0xff, 0x76, 0x8, 0xff, 0x76, 0x6, 0xe8, 0x69, 0x19, 0x5e, 0x5f, 0xc9, 0xcb}))
+    II(0x0015e5ec, 0x4)   enterw(0, 0);                         /* enter 0x0, 0x0 */
+    II(0x0015e5f0, 0x1)   pushw(di);                            /* push di */
+    II(0x0015e5f1, 0x1)   pushw(si);                            /* push si */
+    II(0x0015e5f2, 0x3)   mov(ax, memw_a16(ds, 0x48f6));        /* mov ax, [0x48f6] */
+    II(0x0015e5f5, 0x3)   add(ax, 0x48b6);                      /* add ax, 0x48b6 */
+    II(0x0015e5f8, 0x1)   pushw(ds);                            /* push ds */
+    II(0x0015e5f9, 0x1)   pushw(ax);                            /* push ax */
+    II(0x0015e5fa, 0x3)   pushw(memw_a16(ss, bp + 0x8));        /* push word [bp+0x8] */
+    II(0x0015e5fd, 0x3)   pushw(memw_a16(ss, bp + 0x6));        /* push word [bp+0x6] */
+    II(0x0015e600, 0x3)   callw(0x0015ff6c, 0x1969);            /* call 0x15ff6c */
+    II(0x0015e603, 0x1)   popw(si);                             /* pop si */
+    II(0x0015e604, 0x1)   popw(di);                             /* pop di */
+    II(0x0015e605, 0x1)   leavew();                             /* leave  */
+    II(0x0015e606, 0x1)   retfw();                              /* retf  */
+FUNC_END
+

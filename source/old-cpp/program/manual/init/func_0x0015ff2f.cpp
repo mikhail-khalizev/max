@@ -1,0 +1,16 @@
+FUNC_BEGIN(0x0015ff2f, 0x3d72255e31e9f2de, 0x10, ({0x55, 0x8b, 0xec, 0x1e, 0xb8, 0xa8, 0, 0x8e, 0xd8, 0xff, 0x76, 0x6, 0xff, 0x76, 0x4, 0x9a, 0x2c, 0x45, 0x80, 0, 0x5b, 0x5b, 0x1f, 0xc9, 0xc2, 0x4, 0}))
+    II(0x0015ff2f, 0x1)   pushw(bp);                            /* push bp */
+    II(0x0015ff30, 0x2)   mov(bp, sp);                          /* mov bp, sp */
+    II(0x0015ff32, 0x1)   pushw(ds);                            /* push ds */
+    II(0x0015ff33, 0x3)   mov(ax, 0xa8);                        /* mov ax, 0xa8 */
+    II(0x0015ff36, 0x2)   mov(ds, ax);                          /* mov ds, ax */
+    II(0x0015ff38, 0x3)   pushw(memw_a16(ss, bp + 0x6));        /* push word [bp+0x6] */
+    II(0x0015ff3b, 0x3)   pushw(memw_a16(ss, bp + 0x4));        /* push word [bp+0x4] */
+    II(0x0015ff3e, 0x5)   callw_far_abs(0x80, 0x452c);          /* call word 0x80:0x452c */
+    II(0x0015ff43, 0x1)   popw(bx);                             /* pop bx */
+    II(0x0015ff44, 0x1)   popw(bx);                             /* pop bx */
+    II(0x0015ff45, 0x1)   popw(ds);                             /* pop ds */
+    II(0x0015ff46, 0x1)   leavew();                             /* leave  */
+    II(0x0015ff47, 0x3)   retw(0x4);                            /* ret 0x4 */
+FUNC_END
+

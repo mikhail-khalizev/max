@@ -1,0 +1,9 @@
+FUNC_BEGIN(0x00009dbd, 0xb9903e4863380491, 0x10, ({0x58, 0x5b, 0x8b, 0x26, 0x50, 0xf, 0x53, 0x50, 0xe9, 0x85, 0xc2}))
+    II(0x00009dbd, 0x1)   popw(ax);                             /* pop ax */
+    II(0x00009dbe, 0x1)   popw(bx);                             /* pop bx */
+    II(0x00009dbf, 0x4)   mov(sp, memw_a16(ds, 0xf50));         /* mov sp, [0xf50] */
+    II(0x00009dc3, 0x1)   pushw(bx);                            /* push bx */
+    II(0x00009dc4, 0x1)   pushw(ax);                            /* push ax */
+    II(0x00009dc5, 0x3)   jmpw_func(0x0000604d, -0x3d7b);       /* jmp 0x604d */
+FUNC_END
+

@@ -1,0 +1,26 @@
+FUNC_BEGIN(0x100f133a, 0xd33c7b48ce5c2288, 0x20, ({0x68, 0x24, 0, 0, 0, 0xe8, 0xe, 0x4a, 0x7, 0, 0x53, 0x51, 0x56, 0x57, 0x55, 0x89, 0xe5, 0x81, 0xec, 0xc, 0, 0, 0, 0x89, 0x45, 0xf8, 0x89, 0x55, 0xfc, 0x8b, 0x45, 0xf8, 0xe8, 0xaf, 0, 0, 0, 0x8b, 0x45, 0xf8, 0x89, 0x45, 0xf4, 0x8b, 0x45, 0xf4, 0x89, 0xec, 0x5d, 0x5f, 0x5e, 0x59, 0x5b, 0xc3}))
+    II(0x100f133a, 0x5)   pushd(0x24);                          /* push dword 0x24 */
+    II(0x100f133f, 0x5)   calld(sys_check_available_stack_size, 0x74a0e); /* call 0x10165d52 */
+    II(0x100f1344, 0x1)   pushd(ebx);                           /* push ebx */
+    II(0x100f1345, 0x1)   pushd(ecx);                           /* push ecx */
+    II(0x100f1346, 0x1)   pushd(esi);                           /* push esi */
+    II(0x100f1347, 0x1)   pushd(edi);                           /* push edi */
+    II(0x100f1348, 0x1)   pushd(ebp);                           /* push ebp */
+    II(0x100f1349, 0x2)   mov(ebp, esp);                        /* mov ebp, esp */
+    II(0x100f134b, 0x6)   sub(esp, 0xc);                        /* sub esp, 0xc */
+    II(0x100f1351, 0x3)   mov(memd_a32(ss, ebp - 0x8), eax);    /* mov [ebp-0x8], eax */
+    II(0x100f1354, 0x3)   mov(memd_a32(ss, ebp - 0x4), edx);    /* mov [ebp-0x4], edx */
+//    II(0x100f1357, 0x3)   mov(eax, memd_a32(ss, ebp - 0x8));    /* mov eax, [ebp-0x8] */
+    II(0x100f135a, 0x5)   calld(0x100f140e, 0xaf);              /* call 0x100f140e */
+    II(0x100f135f, 0x3)   mov(eax, memd_a32(ss, ebp - 0x8));    /* mov eax, [ebp-0x8] */
+    II(0x100f1362, 0x3)   mov(memd_a32(ss, ebp - 0xc), eax);    /* mov [ebp-0xc], eax */
+//    II(0x100f1365, 0x3)   mov(eax, memd_a32(ss, ebp - 0xc));    /* mov eax, [ebp-0xc] */
+    II(0x100f1368, 0x2)   mov(esp, ebp);                        /* mov esp, ebp */
+    II(0x100f136a, 0x1)   popd(ebp);                            /* pop ebp */
+    II(0x100f136b, 0x1)   popd(edi);                            /* pop edi */
+    II(0x100f136c, 0x1)   popd(esi);                            /* pop esi */
+    II(0x100f136d, 0x1)   popd(ecx);                            /* pop ecx */
+    II(0x100f136e, 0x1)   popd(ebx);                            /* pop ebx */
+    II(0x100f136f, 0x1)   retd();                               /* ret */
+FUNC_END
+

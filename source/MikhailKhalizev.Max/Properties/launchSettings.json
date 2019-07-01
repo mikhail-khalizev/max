@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Exo.Application.Max": {
+      "commandName": "Project",
+      "workingDirectory": "."
+    }
+  }
+}

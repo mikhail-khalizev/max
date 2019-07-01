@@ -1,0 +1,31 @@
+FUNC_BEGIN(0x000047dd, 0x822299b1946f8cd5, 0x10, ({0x55, 0x8b, 0xec, 0x56, 0x57, 0xe8, 0x9b, 0xf0, 0x6a, 0x8, 0x1f, 0x8b, 0x46, 0x4, 0xa3, 0x62, 0, 0x8b, 0x46, 0x6, 0xa2, 0x64, 0, 0x88, 0x26, 0x67, 0, 0x8b, 0x4e, 0xa, 0x6a, 0x60, 0x1f, 0x33, 0xf6, 0x8b, 0x7e, 0x8, 0xfc, 0xf3, 0xa4, 0x16, 0x1f, 0xe8, 0xe, 0xf7, 0x5f, 0x5e, 0x8b, 0xe5, 0x5d, 0xfb, 0xc3}))
+    II(0x000047dd, 0x1)   pushw(bp);                            /* push bp */
+    II(0x000047de, 0x2)   mov(bp, sp);                          /* mov bp, sp */
+    II(0x000047e0, 0x1)   pushw(si);                            /* push si */
+    II(0x000047e1, 0x1)   pushw(di);                            /* push di */
+    II(0x000047e2, 0x3)   callw(0x00003880, -0xf65);            /* call 0x3880 */
+    II(0x000047e5, 0x2)   pushw(0x8);                           /* push 0x8 */
+    II(0x000047e7, 0x1)   popw(ds);                             /* pop ds */
+    II(0x000047e8, 0x3)   mov(ax, memw_a16(ss, bp + 0x4));      /* mov ax, [bp+0x4] */
+    II(0x000047eb, 0x3)   mov(memw_a16(ds, 0x62), ax);          /* mov [0x62], ax */
+    II(0x000047ee, 0x3)   mov(ax, memw_a16(ss, bp + 0x6));      /* mov ax, [bp+0x6] */
+    II(0x000047f1, 0x3)   mov(memb_a16(ds, 0x64), al);          /* mov [0x64], al */
+    II(0x000047f4, 0x4)   mov(memb_a16(ds, 0x67), ah);          /* mov [0x67], ah */
+    II(0x000047f8, 0x3)   mov(cx, memw_a16(ss, bp + 0xa));      /* mov cx, [bp+0xa] */
+    II(0x000047fb, 0x2)   pushw(0x60);                          /* push 0x60 */
+    II(0x000047fd, 0x1)   popw(ds);                             /* pop ds */
+    II(0x000047fe, 0x2)   xor_(si, si);                         /* xor si, si */
+    II(0x00004800, 0x3)   mov(di, memw_a16(ss, bp + 0x8));      /* mov di, [bp+0x8] */
+    II(0x00004803, 0x1)   cld();                                /* cld  */
+    II(0x00004804, 0x2)   rep_a16 movsb_a16();                  /* rep movsb  */
+    II(0x00004806, 0x1)   pushw(ss);                            /* push ss */
+    II(0x00004807, 0x1)   popw(ds);                             /* pop ds */
+    II(0x00004808, 0x3)   callw(0x00003f19, -0x8f2);            /* call 0x3f19 */
+    II(0x0000480b, 0x1)   popw(di);                             /* pop di */
+    II(0x0000480c, 0x1)   popw(si);                             /* pop si */
+    II(0x0000480d, 0x2)   mov(sp, bp);                          /* mov sp, bp */
+    II(0x0000480f, 0x1)   popw(bp);                             /* pop bp */
+    II(0x00004810, 0x1)   sti();                                /* sti  */
+    II(0x00004811, 0x1)   retw();                               /* ret  */
+FUNC_END
+

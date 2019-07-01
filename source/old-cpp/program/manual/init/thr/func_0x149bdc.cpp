@@ -1,0 +1,8 @@
+FUNC_INFO_V4(0x149bdc, func_0x149bdc, 0x10, {0xe8, 0x41, 0x3})
+{
+    FUNC_START_V2(0x149bdc, 0x10);
+    II(0x149bdc, 0x3)    callw(0x149f20, 0x341);                  /* call 0x149f20 */
+
+    throw std::logic_error("Принудительное завершение функции.");
+}
+

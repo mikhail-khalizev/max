@@ -1,0 +1,118 @@
+Таблица параметров юнитов в МАХ. v 1.1
+         Название           I  Жизни(Hits)  I  Броня(Armor)  I  Атака(Attack)  I  Радиус(Range)  I  Патроны(Ammo)  I  Выстрелы(Shots)  I  Обзор(Scan)  I  Ход(Speed)  I  Цена(Cost)  I  Груз(Cargo)  I  Эл.Энергия(Prod.) I  Производство(Uses)  I        ---   ---   Особенности   ---   ---       I
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-  Юниты  -
+
+Constructur\Строитель       I      24ж      I       6 Б      I                 I                 I                 I                   I       3       I      6       I      24      I   60 метала   I                    I      -2 метала       I        Строит большие здания,амфибия             I
+Engineer\Инженер            I      14ж      I       4 Б      I                 I                 I                 I                   I       3       I      6       I      18      I   40 метала   I                    I      -2 метала       I       С троит малые здания, амфибия              I
+Surveyor\Геолог             I      16ж      I       4 Б      I                 I                 I                 I                   I       3       I      7       I       9      I               I                    I                      I      Разведует залежи ископаемых и мины          I
+Scout\Скаут                 I      16ж      I       4 Б      I       12а       I        3        I   10 патронов   I         1"        I       9       I      12      I       9      I               I                    I                      I  Амфибия, не теряет выстрелов при движении       I
+Scanner\Наземный Моб.Радар  I      24ж      I       4 Б      I                 I                 I                 I                   I       14      I      7       I      12      I               I                    I                      I                                                  I
+Tank\Танк                   I      24ж      I       10Б      I       16а       I        4        I   14 патронов   I         2         I       4       I      6       I      12      I               I                    I                      I                                                  I
+Assault Gun\                I      24ж      I       4 Б      I       18а       I        6        I   14 патронов   I         2         I       5       I      12      I      24      I               I                    I                      I                                                  I
+Rocket Launcher\ РСЗО       I      24ж      I       4 Б      I       15а       I        7        I   16 патронов   I         2         I       4       I      6       I      24      I               I                    I                      I  Высирел покрывает територию размером 2*3        I
+Missile Crawler\Ракетница   I      24ж      I       4 Б      I       22а       I        10       I    6 патронов   I         1+        I       4       I      6       I      36      I               I                    I                      I                                                  I
+Personnel Carrier\ БТР      I      24ж      I       8 Б      I                 I                 I                 I                   I       4       I      10      I      12      I 6 пехотинцев  I                    I                      I            Плавает, под водой невидим            I
+Infantry\ Пехота            I      8ж       I       2 Б      I       16а       I        4        I    4 патрона    I         1+        I       4       I      5       I      2* (6)  I               I                    I                      I            Обнаруживает Диверсантов              I
+Mobile AntiAircraft\ 
+         Моб.ПВО            I      24ж      I       4 Б      I       22а       I        7        I   10 патронов   I         1+        I       4       I      7       I      18      I               I                    I                      I            Атакует только по воздуху
+Infiltrator\ 
+         Диверсант          I      8ж       I       2 Б      I        6а       I        4        I   12 патронов   I         1"        I       4       I      5       I      9* (27) I               I                    I                      I  Способен отключать и захватывать юниты, невидим I
+Mine Layer\
+         Миноукладчик       I      24Ж      I       4 Б      I  Укладует Мины  I                 I 1метала =1 мина I                   I       4       I      7       I      9       I   30 метала   I                    I                      I                Видит наземные мины               I
+Supply Truck\
+    Грузовик Снабжения      I      24ж      I       4 Б      I                 I                 I   перезаряжает  I                   I       3       I       7      I      12      I   50 метала   I                    I                      I                                                  I
+Gold Truck\ Инкасатор       I      24ж      I       4 Б      I                 I                 I                 I                   I       3       I       7      I      12      I   50 золота   I                    I                      I                                                  I
+Fuel Truck\ Бинзовоз        I      20ж      I       4 Б      I                 I                 I                 I                   I       3       I       7      I      12      I   50 топлива  I                    I                      I                                                  I
+Bulldozer\ Бульдозер        I      14ж      I       4 Б      IРасчищает обломкиI                 I                 I                   I       3       I       7      I      15      I   30 метала   I                    I                      I                                                  I
+Repair Unit\ Ремонтник      I      20ж      I       4 Б      I   Ремонтирует   I        1        I                 I                   I       3       I       7      I      15      I   30 метала   I                    I                      I                                                  I
+Escort\ Эскорт              I      32ж      I       6 Б      I       22а       I        7        I   24 патрона    I          1+       I       9       I       9      I      18      I               I                    I                      I               Атакует только по воздуху          I
+Corvette\ Корвет            I      32ж      I       6 Б      I       14а       I        5        I   14 патронов   I          2        I       5       I       9      I      18      I               I                    I                      I                Обнаруживает подлодки             I
+Submarine\ Подлодка         I      24ж      I       2 Б      I       20а       I        4        I   16 патронов   I          2        I       6       I       7      I      18      I               I                    I                      I          Невидима для всех кроме корвета         I
+GunBoat\ Фрегат             I      32ж      I       12Б      I       20а       I        7        I   14 патронов   I          2        I       4       I       7      I      24      I               I                    I                      I                                                  I
+Missile Cruiser\
+    Морская Ракетница       I      28ж      I       6б       I       28а       I        10       I   10 патронов   I          1+       I       4       I       7      I      36      I               I                    I                      I                                                  I
+Sea Transport\ 
+    Десантное судно         I      32ж      I       12Б      I                 I                 I                 I                   I       3       I       7      I      12      I   6 техники   I                    I                      I                                                  I
+Cargo Ship\ Баржа           I      32ж      I       12Б      I                 I                 I  перезаряжает   I                   I       3       I       7      I      12      I   50 метала   I                    I                      I                                                  I
+Sea Mine Layer\Эсминец      I      28ж      I       8 Б      I  Укладует Мины  I                 I 1метала =1 мина I                   I       4       I       9      I      18      I   30 метала   I                    I                      I             Видит морские мины                   I
+Fighter\ Истребитель        I      12ж      I       4 Б      I       16а       I        5        I    4 патрона    I          1"       I       5       I       24     I      24      I               I                    I                      I                                                  I
+Ground Attack Plane\
+     Штурмовик              I      18ж      I       4 Б      I       18а       I        4        I   12 патронов   I          2"       I       5       I       18     I      30      I               I                    I                      I                                                  I
+Air Transport\
+    Воздушний транспорт     I      18ж      I       4 Б      I                 I                 I                 I                   I       5       I       18     I      18      I   3 техники   I                    I                      I                                                  I
+AWAC\ Самолет ДРЛО          I      18ж      I       4 Б      I                 I                 I                 I                   I       12      I       18     I      18      I               I                    I                      I                                                  I
+Land Mine\ Мина             I      2ж       I                I       28а       I                 I                 I                   I       1       I              I      1       I               I                    I                      I   Невидима для всех кроме миноносцев и геолога   I
+Sea Mine\ Морская мина      I      2ж       I                I       28а       I                 I                 I                   I       1       I              I      1       I               I                    I                      I   Невидима для всех кроме миноносцев и геолога   I
+Air Tanker\ Авиатанкер      I               I                I                 I                 I                 I                   I               I              I              I               I                    I                      I                                                  I 
+Mobile Generator\ 
+     Мобильный Генератор    I               I                I                 I                 I                 I                   I               I              I              I               I                    I                      I                                                  I                                                  I
+Mobile Mining Station(MMS)\
+     Мобильная шахта        I               I                I                 I                 I                 I                   I               I              I              I               I                    I                      I                                                  I
+Havy Ground Transporter\
+     Тягач (HGT)            I               I                I                 I                 I                 I                   I               I              I              I               I                    I                      I                                                  I
+AntiAircraft Infantry\
+     Пехота ЗРК             I               I                I                 I                 I                 I                   I               I              I              I               I                    I                      I                                                  I
+Carrier\ Авианосец          I               I                I                 I                 I                 I                   I               I              I              I               I                    I                      I                                                  I
+
+
+
+- Здания -
+
+Gun Turret\ Пушка           I      24ж      I       12Б     I        16а       I        6        I   14 патронов   I          2        I       4       I              I       8      I               I                    I                      I                                                  I
+AntiAircraft\ Сис.ПВО       I      24ж      I       8 Б     I        16а       I        8        I   20 патронов   I          2        I       4       I              I       12     I               I                    I                      I           Атакует только по воздуху              I
+Artillery\ Артилерия        I      24ж      I       9 Б     I        18а       I        8        I   16 патронов   I          2        I       4       I              I       16     I               I                    I                      I                                                  I
+Missile Launcher\ 
+        Ракетница           I      24ж      I       6 Б     I        28а       I        11       I   10 патронов   I          1        I       4       I              I       24     I               I                    I                      I                                                  I
+Connector\Трубопровод       I      14ж      I       8 Б     I                  I                 I                 I                   I       1       I              I       2      I               I                    I                      IСоединяет здания и распредиляет между ними ресурсыI
+Water Platform\
+     Морская Платформа      I      10ж      I       6 Б     I                  I                 I                 I                   I       1       I              I       2      I               I                    I                      I        Позволяет строить на воде, как суша       I
+Concrete Block\ Стена       I      24ж      I       16Б     I                  I                 I                 I                   I       1       I              I       2      I               I                    I                      I                                                  I
+Bridge\ Мост                I      20ж      I       8 Б     I                  I                 I                 I                   I       1       I              I       2      I               I                    I                      I     Позволяет перевозить технику через остров    I
+Storage Unit\Хранилище      I      14ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       4      I   50 метала   I                    I                      I                                                  I
+Fuel Tank\ Цистерна         I      14ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       4      I   50 топлива  I                    I                      I                                                  I
+Gold Vault\ Сейф            I      14ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       4      I   50 золота   I                    I                      I                                                  I
+Landing Pad\
+  Посадочная площадка       I      14ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       4      I   1 авиации   I                    I                      I                                                  I
+Power Generator\
+      Генератор             I      14ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       8      I               I    +1 энергии      I      -2 топлива      I                                                  I
+Barracks\ Бараки            I      56ж      I       12Б     I                  I                 I  перезаряжает   I                   I       3       I              I       10     I   12 пехоты   I                    I                      I                                                  I
+Depot\ Гараж                I      56ж      I       12Б     I                  I                 I  перезаряжает   I                   I       3       I              I       12     I   12 техники  I                    I обслуживает технику  I                                                  I
+Dock\ Док                   I      56ж      I       12Б     I                  I                 I  перезаряжает   I                   I       3       I              I       12     I   6 кораблей  I                    I обслуживает корабли  I                                                  I
+Hangar\ Ангар               I      56ж      I       12Б     I                  I                 I  перезаряжает   I                   I       3       I              I       16     I   12 авиации  I                    I обслуживает авиацию  I                                                  I
+Radar\ Радар                I      24ж      I       8 Б     I                  I                 I                 I                   I       18      I              I       18     I               I                    I                      I                                                  I
+Light Vehicle Plant\
+ Завод Легкой Техники       I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       20     I               I    -1 энергии      I      -3 метала       I            Производит легкую технику             I
+Habitat\ Жилище             I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       20     I               I                    I      +3 население    I                                                  I
+Eco-sphere\ Экосфкра        I      56ж      I       8 Б     I                  I                 I дает очки победыI                   I       3       I              I       20     I               I    -1 энергии      I      -1 население    I                                                  I
+Traning Hall\
+       Зал Тренировок       I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       20     I               I    -1 энергии      I-1 населения,-1 металаI                Производит пехоту
+Gold Refinery\
+ Золотоотчестительный завод I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       24     I               I    -1 энергии      I      -5 золота       I   Производит улучшение параметров 1 типа юнитов  I
+Power Station\ 
+          Эл.Станция        I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       24     I               I    +6 энергии     I       -6 топлива      I                                                  I
+Research Center\ НИИ        I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       24     I               I    -1 энергии     I       -1 населения    I Производит улучшения параметров для всей техники I
+Mining Station\ Шахта       I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       24     I    25 метала  I    -1 энергии     I   добыча материалов   I                                                  I
+Air Units Plant\
+  Авиазавод                 I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       40     I               I    -1 энергии     I       -3 метала       I               Произврдит авиацию                 I
+Shipyard\ Верфь             I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       40     I               I    -1 энергии     I       -3 метала       I               Производит морфлот                 I
+Heavy Vehicle Plant\
+ Завод тяжолой техники      I      56ж      I       8 Б     I                  I                 I                 I                   I       3       I              I       40     I               I    -1 энергии     I       -3 метала       I            Производит тяжолую технику            I
+Resourse Defractor\
+         Конвертер ресурсов I               I               I                  I                 I                 I                   I               I              I              I               I                   I                       I                                                  I
+Infantry bunker\ дот        I               I               I                  I                 I                 I                   I               I              I              I               I                   I                       I                                                  I
+Gates\ Врата                I               I               I                  I                 I                 I                   I               I              I              I               I                   I                       I                                                  I
+
+
+*- означает что юнит имеет две цены. Одна отображается в строке параметров при закуаке юнитов, а другая в таблице закупки юнитов. Что это может означать?!
+"- означает что юнит не теряет выстрелов при движении 
++- означает что юнит совершив хоть 1 шаг теряет выстрел
+!!! Все остальные юниты теряют один выстрел при использовании 40% своего хода.
+
+Данная таблица не являеться официально признаной!
+Данная таблица построена на параметрах юнитов клана "Axis" так как у него нет особенностей в параметрах юнитов. Параметры легкого и тяжолого заводов взяты из клана "The Choosen".  
+Данная таблица предназначена для этапа 2 голосований по юнитам. С ее помощью каждый сможет прикинуть приблезительные параметры юнитов для МАХ Золота. 
+Просьба указывать на все допущеные в этой таблице ошибки и недоработки.
+По мере завершения голосований данная таблица будет изменяться и менять версию.
+Заранее спасибо!
+(CWU) Core                                                                                                                                                                                                                                                                                 (CWU) Core

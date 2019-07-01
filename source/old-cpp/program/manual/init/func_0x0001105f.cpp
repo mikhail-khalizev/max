@@ -1,0 +1,18 @@
+FUNC_BEGIN(0x0001105f, 0x4538f0a894bcb905, 0x10, ({0x46, 0xfc, 0, 0, 0x8d, 0x46, 0xf6, 0x50, 0x56, 0xe8, 0x8d, 0xb, 0x5b, 0x5b, 0xc4, 0x5e, 0x4, 0x26, 0x80, 0x67, 0x26, 0xfe, 0x26, 0x89, 0x77, 0x6, 0x5e, 0xc9, 0xc3}))
+    II(0x0001105f, 0x1)   inc(si);                              /* inc si */
+    II(0x00011060, 0x1)   cld();                                /* cld  */
+    II(0x00011061, 0x2)   add(memb_a16(ds, bx + si), al);       /* add [bx+si], al */
+    II(0x00011063, 0x3)   lea(ax, bp - 0xa);                    /* lea ax, [bp-0xa] */
+    II(0x00011066, 0x1)   pushw(ax);                            /* push ax */
+    II(0x00011067, 0x1)   pushw(si);                            /* push si */
+    II(0x00011068, 0x3)   callw(0x00011bf8, 0xb8d);             /* call 0x11bf8 */
+    II(0x0001106b, 0x1)   popw(bx);                             /* pop bx */
+    II(0x0001106c, 0x1)   popw(bx);                             /* pop bx */
+    II(0x0001106d, 0x3)   les(bx, ss, bp + 0x4);                /* les bx, [bp+0x4] */
+    II(0x00011070, 0x5)   and_(memb_a16(es, bx + 0x26), -0x2 /* 0xfe */); /* and byte [es:bx+0x26], 0xfe */
+    II(0x00011075, 0x4)   mov(memw_a16(es, bx + 0x6), si);      /* mov [es:bx+0x6], si */
+    II(0x00011079, 0x1)   popw(si);                             /* pop si */
+    II(0x0001107a, 0x1)   leavew();                             /* leave  */
+    II(0x0001107b, 0x1)   retw();                               /* ret  */
+FUNC_END
+
