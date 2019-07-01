@@ -5,15 +5,9 @@ namespace MikhailKhalizev.Processor.x86.Utils
 {
     public struct Interval
     {
-        public static Interval<T> From<T>(T begin, T end)
-        {
-            return new Interval<T>(begin, end);
-        }
+        public static Interval<T> From<T>(T begin, T end) => new Interval<T>(begin, end);
 
-        public static Interval<T> Empty<T>()
-        {
-            return Interval<T>.Empty;
-        }
+        public static Interval<T> Empty<T>() => Interval<T>.Empty;
     }
 
     /// <summary>

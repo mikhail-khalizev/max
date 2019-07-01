@@ -2024,7 +2024,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void lea(Value.Value dst, MemoryValue src)
+        public void lea(Value dst, MemoryValue src)
         {
             Implementation.lea(dst, src);
         }
@@ -2228,7 +2228,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void mov(Value.Value dst, Value.Value src)
+        public void mov(Value dst, Value src)
         {
             Implementation.mov(dst, src);
         }
@@ -2450,7 +2450,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movsx(Value.Value dst, Value.Value src)
+        public void movsx(Value dst, Value src)
         {
             Implementation.movsx(dst, src);
         }
@@ -2474,7 +2474,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movzx(Value.Value dst, Value.Value src)
+        public void movzx(Value dst, Value src)
         {
             Implementation.movzx(dst, src);
         }
@@ -3092,13 +3092,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public ushort popw(Value.Value d = null)
+        public ushort popw(Value d = null)
         {
             return Implementation.popw(d);
         }
 
         /// <inheritdoc />
-        public uint popd(Value.Value d = null)
+        public uint popd(Value d = null)
         {
             return Implementation.popd(d);
         }
@@ -3386,13 +3386,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void pushw(Value.Value s)
+        public void pushw(Value s)
         {
             Implementation.pushw(s);
         }
 
         /// <inheritdoc />
-        public void pushd(Value.Value s)
+        public void pushd(Value s)
         {
             Implementation.pushd(s);
         }
@@ -3434,7 +3434,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void rcl(Value.Value dst, int count)
+        public void rcl(Value dst, int count)
         {
             Implementation.rcl(dst, count);
         }
@@ -3452,7 +3452,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void rcr(Value.Value dst, int count)
+        public void rcr(Value dst, int count)
         {
             Implementation.rcr(dst, count);
         }
@@ -3568,13 +3568,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
         
         /// <inheritdoc />
-        public void rol(Value.Value dst, int count)
+        public void rol(Value dst, int count)
         {
             Implementation.rol(dst, count);
         }
 
         /// <inheritdoc />
-        public void ror(Value.Value dst, int count)
+        public void ror(Value dst, int count)
         {
             Implementation.ror(dst, count);
         }
@@ -3640,7 +3640,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void sar(Value.Value dst, int count)
+        public void sar(Value dst, int count)
         {
             Implementation.sar(dst, count);
         }
@@ -3742,13 +3742,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void shl(Value.Value dst, int count)
+        public void shl(Value dst, int count)
         {
             Implementation.shl(dst, count);
         }
 
         /// <inheritdoc />
-        public void shld(Value.Value dst, Value.Value src, int count)
+        public void shld(Value dst, Value src, int count)
         {
             Implementation.shld(dst, src, count);
         }
@@ -3760,13 +3760,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void shr(Value.Value dst, int count)
+        public void shr(Value dst, int count)
         {
             Implementation.shr(dst, count);
         }
 
         /// <inheritdoc />
-        public void shrd(Value.Value dst, Value.Value src, int count)
+        public void shrd(Value dst, Value src, int count)
         {
             Implementation.shrd(dst, src, count);
         }
@@ -3898,7 +3898,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void sub(Value.Value dst, Value.Value val)
+        public void sub(Value dst, Value val)
         {
             Implementation.sub(dst, val);
         }

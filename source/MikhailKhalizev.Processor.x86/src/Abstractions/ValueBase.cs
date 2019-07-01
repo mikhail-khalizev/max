@@ -1,5 +1,4 @@
 ﻿using System;
-using MikhailKhalizev.Processor.x86.Abstractions.Value;
 using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions
@@ -143,54 +142,49 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             set => UInt64 = (ulong)value;
         }
 
+
         public bool IsNegative => IsBitSet(Bits - 1);
 
-        public virtual bool IsBitSet(int bit)
-        {
-            return BinaryHelper.IsSet(UInt64, bit);
-        }
+        public virtual bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
 
 
         #region Cast from Numeric Operators
 
-        public static implicit operator ValueBase(int value) => (Value.Value)value;
-        public static implicit operator ValueBase(uint value) => (Value.Value)value;
-        public static implicit operator ValueBase(long value) => (Value.Value)value;
-        public static implicit operator ValueBase(ulong value) => (Value.Value)value;
+        public static implicit operator ValueBase(int value) => (Value)value;
+        public static implicit operator ValueBase(uint value) => (Value)value;
+        public static implicit operator ValueBase(long value) => (Value)value;
+        public static implicit operator ValueBase(ulong value) => (Value)value;
 
         #endregion
 
         #region Math Operators
 
-        // Рискованно переопределять * / < <= > >= т.к. не известно, знаковые ли у нас переменные или нет.
+        // Рискованно переопределять [*, /, <, <=, >, >=] т.к. не известно, знаковые ли у нас переменные или нет.
 
-        public static Value.Value operator ~(ValueBase v1) => ~v1.UInt64;
+        public static Value operator ~(ValueBase v1) => ~v1.UInt64;
 
-        public static Value.Value operator +(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator +(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value.Value operator -(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator -(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value.Value operator *(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 * v2.UInt64, Math.Min(v1.Bits + v2.Bits, 64));
+        //public static Value.Value operator *(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 * v2.UInt64, Math.Min(v1.Bits + v2.Bits, 64));
         
-        public static Value.Value operator &(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 & v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator &(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 & v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value.Value operator |(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 | v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator |(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 | v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value.Value operator ^(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 ^ v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator ^(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 ^ v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value.Value operator >>(ValueBase v1, int v2) => new NumericValue(v1.UInt64 >> v2, v1.Bits);
+        public static Value operator >>(ValueBase v1, int v2) => new NumericValue(v1.UInt64 >> v2, v1.Bits);
 
-        public static Value.Value operator <<(ValueBase v1, int v2) => new NumericValue(v1.UInt64 << v2, v1.Bits);
+        public static Value operator <<(ValueBase v1, int v2) => new NumericValue(v1.UInt64 << v2, v1.Bits);
 
         #endregion
 
         #region IEquatable<ValueBase>
 
         /// <inheritdoc />
-        public bool Equals(ValueBase other)
-        {
-            return UInt64 == other?.UInt64;
-        }
+        public bool Equals(ValueBase other) => UInt64 == other?.UInt64;
 
         /// <inheritdoc />
         public override bool Equals(object obj)
@@ -202,20 +196,11 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-        {
-            return UInt64.GetHashCode();
-        }
+        public override int GetHashCode() => UInt64.GetHashCode();
 
-        public static bool operator ==(ValueBase left, ValueBase right)
-        {
-            return Equals(left, right);
-        }
+        public static bool operator ==(ValueBase left, ValueBase right) => Equals(left, right);
 
-        public static bool operator !=(ValueBase left, ValueBase right)
-        {
-            return !Equals(left, right);
-        }
+        public static bool operator !=(ValueBase left, ValueBase right) => !Equals(left, right);
 
         #endregion
     }

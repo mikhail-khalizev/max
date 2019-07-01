@@ -1,4 +1,4 @@
-namespace MikhailKhalizev.Processor.x86.Abstractions.Value
+namespace MikhailKhalizev.Processor.x86.Abstractions
 {
     public class ValueFromAnyValue : Value
     {
@@ -7,7 +7,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Value
         /// <inheritdoc />
         public override int Bits => _bits ?? Value.Bits;
 
-        private int? _bits;
+        private readonly int? _bits;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal

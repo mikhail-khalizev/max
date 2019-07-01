@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), value);
         }
 
-        public static void SetUInt16(this ArraySegment<byte> bytes, Value.Value value, int byteOffset = 0)
+        public static void SetUInt16(this ArraySegment<byte> bytes, Value value, int byteOffset = 0)
         {
             SetUInt32(bytes, value.UInt32, byteOffset);
         }
@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), value);
         }
         
-        public static void SetUInt32(this ArraySegment<byte> bytes, Value.Value value, int byteOffset = 0)
+        public static void SetUInt32(this ArraySegment<byte> bytes, Value value, int byteOffset = 0)
         {
             SetUInt32(bytes, value.UInt32, byteOffset);
         }

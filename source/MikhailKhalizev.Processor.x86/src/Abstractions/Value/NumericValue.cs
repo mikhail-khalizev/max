@@ -1,4 +1,4 @@
-namespace MikhailKhalizev.Processor.x86.Abstractions.Value
+namespace MikhailKhalizev.Processor.x86.Abstractions
 {
     public sealed class NumericValue : Value
     {

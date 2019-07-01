@@ -22,15 +22,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public string ToShortString() => HexHelper.ToString(_value, o => o.SetTrimZero(true).SetGroupSize(4));
         public string ToFullString() => HexHelper.ToString(_value, o => o.SetTrimZero(false).SetGroupSize(4));
 
-        public Address AddBytes(int count)
-        {
-            return (Address)(_value + count);
-        }
+        public Address AddBytes(int count) => _value + count;
 
-        public int OffsetFromInBytes(Address from)
-        {
-            return (int)(_value - from._value);
-        }
+        public int OffsetFromInBytes(Address from) => (int)(_value - from._value);
 
         #region IEquatable
 
@@ -43,33 +37,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             return obj is Address address && Equals(address);
         }
 
-        public bool Equals(Address other)
-        {
-            return _value == other._value;
-        }
+        public bool Equals(Address other) => _value == other._value;
 
         /// <summary>Returns a value that indicates whether the values of two <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> objects are equal.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if the <paramref name="left" /> and <paramref name="right" /> parameters have the same value; otherwise, false.</returns>
-        public static bool operator ==(Address left, Address right)
-        {
-            return left.Equals(right);
-        }
+        public static bool operator ==(Address left, Address right) => left.Equals(right);
 
         /// <summary>Returns a value that indicates whether two <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> objects have different values.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, false.</returns>
-        public static bool operator !=(Address left, Address right)
-        {
-            return !left.Equals(right);
-        }
+        public static bool operator !=(Address left, Address right) => !left.Equals(right);
 
-        public override int GetHashCode()
-        {
-            return (int)_value;
-        }
+        public override int GetHashCode() => (int)_value;
 
         #endregion
 
@@ -96,49 +78,37 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is less than <paramref name="right" />; otherwise, false.</returns>
-        public static bool operator <(Address left, Address right)
-        {
-            return left.CompareTo(right) < 0;
-        }
+        public static bool operator <(Address left, Address right) => left.CompareTo(right) < 0;
 
         /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is greater than another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is greater than <paramref name="right" />; otherwise, false.</returns>
-        public static bool operator >(Address left, Address right)
-        {
-            return left.CompareTo(right) > 0;
-        }
+        public static bool operator >(Address left, Address right) => left.CompareTo(right) > 0;
 
         /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is less than or equal to another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is less than or equal to <paramref name="right" />; otherwise, false.</returns>
-        public static bool operator <=(Address left, Address right)
-        {
-            return left.CompareTo(right) <= 0;
-        }
+        public static bool operator <=(Address left, Address right) => left.CompareTo(right) <= 0;
 
         /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is greater than or equal to another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is greater than <paramref name="right" />; otherwise, false.</returns>
-        public static bool operator >=(Address left, Address right)
-        {
-            return left.CompareTo(right) >= 0;
-        }
+        public static bool operator >=(Address left, Address right) => left.CompareTo(right) >= 0;
 
         #endregion
 
         #region Cast from/to Value Operators
 
-        public static implicit operator Value.Value(Address address) => address._value;
+        public static implicit operator Value(Address address) => address._value;
 
         public static implicit operator Address(ValueBase v)
         {
             if (32 < v.Bits)
-                throw new ArgumentOutOfRangeException("32 < reg.Bits");
-            return v.UInt64;
+                throw new ArgumentOutOfRangeException("32 < Bits");
+            return v.UInt32;
         }
 
         #endregion
@@ -151,12 +121,17 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public static implicit operator Address(byte address) => new Address(address);
         public static implicit operator Address(ushort address) => new Address(address);
         public static implicit operator Address(uint address) => new Address(address);
-        public static implicit operator Address(ulong address) => new Address((uint)address);
+        public static implicit operator Address(ulong address)
+        {
+            if (uint.MaxValue < address)
+                throw new InvalidCastException("uint.MaxValue < address");
+            return new Address((uint) address);
+        }
 
-        public static implicit operator Address(sbyte address) => new Address((uint)address);
-        public static implicit operator Address(short address) => new Address((uint)address);
-        public static implicit operator Address(int address) => new Address((uint)address);
-        public static implicit operator Address(long address) => new Address((uint)address);
+        public static implicit operator Address(sbyte address) => (byte)address;
+        public static implicit operator Address(short address) => (ushort)address;
+        public static implicit operator Address(int address) => (uint)address;
+        public static implicit operator Address(long address) => (ulong) address;
 
         #endregion
     }

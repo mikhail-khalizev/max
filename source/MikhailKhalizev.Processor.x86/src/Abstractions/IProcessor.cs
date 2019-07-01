@@ -1909,7 +1909,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Load Effective Address.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LEA.html</remarks>
-        void lea(Value.Value dst, MemoryValue src);
+        void lea(Value dst, MemoryValue src);
 
         /// <summary>
         /// High Level Procedure Exit.
@@ -2113,7 +2113,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Move.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOV.html</remarks>
-        void mov(Value.Value dst, Value.Value src);
+        void mov(Value dst, Value src);
 
         /// <summary>
         /// Move to/from Control Registers.
@@ -2335,7 +2335,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Move with Sign-Extension.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVSX:MOVSXD.html</remarks>
-        void movsx(Value.Value dst, Value.Value src);
+        void movsx(Value dst, Value src);
 
         /// <summary>
         /// Move with Sign-Extension.
@@ -2359,7 +2359,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Move with Zero-Extend.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVZX.html</remarks>
-        void movzx(Value.Value dst, Value.Value src);
+        void movzx(Value dst, Value src);
 
         /// <summary>
         /// Compute Multiple Packed Sums of Absolute Difference.
@@ -2977,13 +2977,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Pop a Value from the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
-        ushort popw(Value.Value d = null);
+        ushort popw(Value d = null);
 
         /// <summary>
         /// Pop a Value from the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
-        uint popd(Value.Value d = null);
+        uint popd(Value d = null);
         
         /// <summary>
         /// Pop All General-Purpose Registers.
@@ -3271,13 +3271,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Push Word, Doubleword or Quadword Onto the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSH.html</remarks>
-        void pushw(Value.Value s);
+        void pushw(Value s);
 
         /// <summary>
         /// Push Word, Doubleword or Quadword Onto the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSH.html</remarks>
-        void pushd(Value.Value s);
+        void pushd(Value s);
 
         /// <summary>
         /// Push All General-Purpose Registers.
@@ -3319,7 +3319,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rcl(Value.Value dst, int count);
+        void rcl(Value dst, int count);
 
         /// <summary>
         /// Compute Reciprocals of Packed Single-Precision Floating-Point Values.
@@ -3337,7 +3337,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rcr(Value.Value dst, int count);
+        void rcr(Value dst, int count);
 
         /// <summary>
         /// Read FS/GS Segment Base.
@@ -3457,13 +3457,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rol(Value.Value dst, int count);
+        void rol(Value dst, int count);
 
         /// <summary>
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void ror(Value.Value dst, int count);
+        void ror(Value dst, int count);
 
         /// <summary>
         /// Rotate Right Logical Without Affecting Flags.
@@ -3529,7 +3529,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void sar(Value.Value dst, int count);
+        void sar(Value dst, int count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -3631,13 +3631,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void shl(Value.Value dst, int count);
+        void shl(Value dst, int count);
 
         /// <summary>
         /// Double Precision Shift Left.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SHLD.html</remarks>
-        void shld(Value.Value dst, Value.Value src, int count);
+        void shld(Value dst, Value src, int count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -3649,13 +3649,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void shr(Value.Value dst, int count);
+        void shr(Value dst, int count);
 
         /// <summary>
         /// Double Precision Shift Right.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SHRD.html</remarks>
-        void shrd(Value.Value dst, Value.Value src, int count);
+        void shrd(Value dst, Value src, int count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -3787,7 +3787,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SUB.html</remarks>
-        void sub(Value.Value dst, Value.Value val);
+        void sub(Value dst, Value val);
 
         /// <summary>
         /// Subtract Packed Double-Precision Floating-Point Values.

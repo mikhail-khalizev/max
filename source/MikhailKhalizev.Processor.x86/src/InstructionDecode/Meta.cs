@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         // 2. Branch hints: Branch not taken (used only with Jcc instructions).
         public static byte PrefixCs => 0x2e;
         // 1. DS segment override prefix (use with any branch instruction is reserved).
-        // 2. Branch taken (used only with Jcc instructions).
+        // 2. Branch hints: Branch taken (used only with Jcc instructions).
         public static byte PrefixDs => 0x3e;
         public static byte PrefixSs => 0x36;
         public static byte PrefixEs => 0x26;
@@ -63,8 +63,8 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             };
 
             Prefixes = prefixGroups
-                .SelectMany((prefixes, group) => prefixes.Select(prefix => new {prefix, group}))
-                .ToDictionary(x => x.prefix, x => x.group);
+                .SelectMany((prefixes, groupIndex) => prefixes.Select(prefix => new {prefix, groupIndex}))
+                .ToDictionary(x => x.prefix, x => x.groupIndex);
 
             // ? rex - u.dis_mode == 64 && (last & 0xF0) == 0x40
         }

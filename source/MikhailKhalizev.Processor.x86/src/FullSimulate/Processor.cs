@@ -11,7 +11,6 @@ using System.Numerics;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
-using MikhailKhalizev.Processor.x86.Abstractions.Value;
 using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Processor.x86.FullSimulate
@@ -77,10 +76,10 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             _tr = new SegmentRegisterImpl(this);
             _tr.ResetTaskRegisterSegment();
 
-            _eflags = new EflagsRegisterImpl {UInt64 = 0x0000_0002};
+            _eflags = new EflagsRegisterImpl { UInt64 = 0x0000_0002 };
             _ia32Efer = new Ia32EferRegisterImpl();
 
-            _cr0 = new Cr0RegisterImpl {UInt64 = 0x6000_0010};
+            _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
             _cr2 = new SimpleRegister(64);
             _cr3 = new SimpleRegister(64);
             _cr4 = new Cr4RegisterImpl();
@@ -531,8 +530,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var offset = selector & 0xfff8u;
 
             if (dt_limit < offset + 7)
-                throw
-                    new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
+                throw new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
 
             return new SegmentDescriptor(
                 Memory.mem_pg_raw(dt_base + offset, 8).Take(8).ToArray());

@@ -14,8 +14,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 {
     public class CodeGenerator
     {
-        public const string decodeJsonFileName = @"..\..\..\..\Exo.Processor.x86\resources\decode.json";
-        public const string instructionUniqueNameCsFileName = @"..\..\..\..\Exo.Processor.x86\src\InstructionDecode\InstructionUniqueName.cs";
+        public const string decodeJsonFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\resources\decode.json";
+        public const string instructionUniqueNameCsFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\src\InstructionDecode\InstructionUniqueName.cs";
 
         [Fact(Skip = "For developer")]
         public void FelixcloutierParse()
@@ -100,8 +100,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 else if (uniqueName.StartsWith("vpgather") && description.Contains("with Signed"))
                     uniqueName += "_s";
                 else if (mnemonicLowers.Contains(uniqueName + "d") &&
-                         !mnemonicLowers.Contains(uniqueName + "w") &&
-                         instruction.Url.ToLowerInvariant().Contains(uniqueName + "d"))
+                        !mnemonicLowers.Contains(uniqueName + "w") &&
+                        instruction.Url.ToLowerInvariant().Contains(uniqueName + "d"))
                     uniqueName += "w";
 
                 instruction.UniqueName = uniqueName;
@@ -203,21 +203,21 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 "// ReSharper disable IdentifierTypo",
                 "// ReSharper disable CommentTypo",
                 "",
-                "namespace Exo.Processor.x86",
+                "namespace MikhailKhalizev.Processor.x86.InstructionDecode",
                 "{",
-                "\tpublic enum InstructionUniqueName",
-                "\t{",
+                "    public enum InstructionUniqueName",
+                "    {",
             }.Concat(decodeMeta.Instructions.SelectMany(x => new[]
             {
-                "\t\t/// <summary>",
-                $"\t\t/// {x.Description}.",
-                "\t\t/// </summary>",
-                $"\t\t/// <remarks>{x.Url}</remarks>",
-                $"\t\t{x.UniqueName},",
+                $"        /// <summary>",
+                $"        /// {x.Description}.",
+                $"        /// </summary>",
+                $"        /// <remarks>{x.Url}</remarks>",
+                $"        {x.UniqueName},",
                 ""
             }).SkipLast(1)).Concat(new[]
             {
-                "\t}",
+                "    }",
                 "}"
             });
 
@@ -229,13 +229,15 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
             var fileIProcessorCs = string.Join(Environment.NewLine, decodeMeta.Instructions.SelectMany(x => new[]
             {
-                "/// <summary>",
+                $"/// <summary>",
                 $"/// {x.Description}.",
-                "/// </summary>",
+                $"/// </summary>",
                 $"/// <remarks>{x.Url}</remarks>",
                 $"void {x.UniqueName}();",
                 ""
             }));
+
+            // NOTE Copy manually 'fileIProcessorCs' value to 'IProcessor.cs'.
         }
     }
 }
