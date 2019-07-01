@@ -6,4 +6,4 @@ stages:
 build_test:
     stage: build_test
     script:
-        - "cd source && dotnet test"
+        - "cd source && dotnet build && dotnet test --no-build"
