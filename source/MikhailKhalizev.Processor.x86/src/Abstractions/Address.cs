@@ -128,10 +128,19 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             return new Address((uint) address);
         }
 
-        public static implicit operator Address(sbyte address) => (byte)address;
-        public static implicit operator Address(short address) => (ushort)address;
+        public static implicit operator Address(sbyte address) => (uint)address;
+        public static implicit operator Address(short address) => (uint)address;
         public static implicit operator Address(int address) => (uint)address;
-        public static implicit operator Address(long address) => (ulong) address;
+        public static implicit operator Address(long address)
+        {
+            if (uint.MaxValue < address)
+                throw new InvalidCastException("uint.MaxValue < address");
+            
+            if (address < int.MinValue)
+                throw new InvalidCastException("address < int.MinValue");
+
+            return (ulong) address;
+        }
 
         #endregion
     }

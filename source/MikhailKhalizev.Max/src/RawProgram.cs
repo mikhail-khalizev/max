@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max
             if (eflags.cf)
                 throw new Exception();
 
-            // Alloc image
+            // Alloc image.
 
             var exe_image_off = exe.exe_data_start();
             var image_size = exe.extra_data_start() - exe_image_off;
@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Max
             var memory = processor.Memory;
             var image = memory.mem_seg_pg_raw(ds, 0, image_size);
 
-            // Read image of program.
+            // Upload image of program.
 
             exeBytes.AsSpan().Slice(exe_image_off, image_size)
                 .CopyTo(image.Slice(0, image_size));

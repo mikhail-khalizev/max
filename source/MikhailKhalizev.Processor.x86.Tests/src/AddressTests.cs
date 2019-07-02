@@ -7,7 +7,7 @@ namespace MikhailKhalizev.Processor.x86.Tests
     public class AddressTests
     {
         [Fact]
-        public void Convert_sbyte_to_Address()
+        public void ConvertSbyteToAddress()
         {
             const sbyte b = -1;
             var addr = (Address)b;
