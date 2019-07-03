@@ -1,0 +1,31 @@
+## Process this file with automake to produce Makefile.in
+
+AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include
+AM_LDFLAGS = $(top_builddir)/src/libexo.la
+AM_DEFAULT_SOURCE_EXT = .cpp
+
+
+BUILT_SOURCES = \
+	all_headers.cpp
+
+CLEANFILES = \
+	all_headers.cpp
+
+all_headers.cpp: Makefile
+	find  ../include/ -type d -regex ".*/\\.[^/]*" -prune -o  -name '*.hpp' -printf "#include <%P>\\n" > $@
+	echo -e "\nint main() { return 0; }" >> $@
+
+
+TESTS = $(check_PROGRAMS)
+
+check_PROGRAMS = \
+	all_headers	\
+	memory_space	\
+	util/auto_increment	\
+	util/identificator	\
+	util/used_space	\
+	util/delegate	\
+	math/std_types
+
+IN_PROCESS = \
+	integer
