@@ -159,11 +159,11 @@ int main()
 
 namespace std {
 
-#pragma GCC diagnostic push
+//#pragma GCC diagnostic push
 /* У базового класса нет виртуального деструктора,
  * но в данном случае он нам и не нужен. Так что отключаем
  * соответствующее предупреждение компилятора. */
-#pragma GCC diagnostic ignored "-Weffc++"
+//#pragma GCC diagnostic ignored "-Weffc++"
 
 
 template<exo::abstract_int bits_>
@@ -177,7 +177,7 @@ struct numeric_limits<exo::math::sint_<bits_>>
 {};
 
 
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 } /* namespace std */
 

@@ -39,13 +39,13 @@ static boost::unordered_map<path, size_t> get_files()
 
             if (is_directory(file -> status()))
             {
-                if (memory_space_const(last_comp -> native()).starts_with("."))
+                if (memory_space_const(last_comp -> string()).starts_with("."))
                     continue; // skip
 
                 search_dirctory.push_back(file -> path());
             }
             else
-                if (memory_space_const(last_comp -> native()).ends_with(".cpp"))
+                if (memory_space_const(last_comp -> string()).ends_with(".cpp"))
                 {
 //                    auto ret =
                             files.insert(std::make_pair(file -> path(), file_size(file -> path())));
@@ -71,7 +71,7 @@ static void forget_success_files(boost::unordered_map<path, size_t> & files)
             auto last_comp = iter_build_file -> path().end();
             last_comp--;
 
-            if (memory_space_const(last_comp -> native()).ends_with(".cpp") == false)
+            if (memory_space_const(last_comp -> string()).ends_with(".cpp") == false)
                 continue;
         }
 
@@ -159,7 +159,7 @@ static std::multimap<size_t, std::string> get_files_to_process()
     std::multimap<size_t, std::string> files_to_process;
 
     for (auto i : files)
-        files_to_process.insert(std::make_pair(i.second, i.first.native()));
+        files_to_process.insert(std::make_pair(i.second, i.first.string()));
 
     return files_to_process;
 }

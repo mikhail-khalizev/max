@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <stdexcept>
 #include <type_traits>
+#include <algorithm>
 
 #include <string.h>
 #include <boost/functional/hash_fwd.hpp>
@@ -187,15 +188,15 @@ public:
 };
 
 
-#pragma GCC diagnostic push
+//#pragma GCC diagnostic push
 /* У базового класса нет виртуального деструктора,
  * но в данном случае он нам и не нужен. Так что отключаем
  * соответствующее предупреждение компилятора. */
-#pragma GCC diagnostic ignored "-Weffc++"
+//#pragma GCC diagnostic ignored "-Weffc++"
 
 class memory_space : public memory_space_const
 {
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 public:
 

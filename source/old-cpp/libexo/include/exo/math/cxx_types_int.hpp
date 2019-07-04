@@ -8,7 +8,7 @@ TYPE(int)
 TYPE(long int)
 TYPE(long long int)
 
-#if 1
+#if 0
 TYPE(__int128)
 #endif
 

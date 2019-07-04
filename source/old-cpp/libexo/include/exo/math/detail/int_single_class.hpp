@@ -213,17 +213,17 @@ MYSELF
 #undef MYSELF
 
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wtype-limits"
-#pragma GCC diagnostic ignored "-Wsign-conversion"
+//#pragma GCC diagnostic push
+//#pragma GCC diagnostic ignored "-Wtype-limits"
+//#pragma GCC diagnostic ignored "-Wsign-conversion"
 
 #define MYSELF    \
     template<abstract_int bits_2>    \
-    constexpr auto operator OP(const NAME_CLASS_1<bits_2> & b) -> NAME_CLASS_1< bits_ < bits_2 ? bits_2 : bits_ >    \
+    constexpr auto operator OP(const NAME_CLASS_1<bits_2> & b) -> NAME_CLASS_1< (bits_ < bits_2 ? bits_2 : bits_) >    \
     { return get() OP b.get(); }     \
     \
     template<abstract_int bits_2>    \
-    constexpr auto operator OP(const NAME_CLASS_2<bits_2> & b) -> typename std::conditional<std::is_signed<decltype(type() OP b.get())>::value, NAME_CLASS_S< bits_ < bits_2 ? bits_2 : bits_ >, NAME_CLASS_U< bits_ < bits_2 ? bits_2 : bits_ >>::type    \
+    constexpr auto operator OP(const NAME_CLASS_2<bits_2> & b) -> typename std::conditional<std::is_signed<decltype(type() OP b.get())>::value, NAME_CLASS_S< (bits_ < bits_2 ? bits_2 : bits_) >, NAME_CLASS_U< (bits_ < bits_2 ? bits_2 : bits_) >>::type    \
     { return get() OP b.get(); }
 
 
@@ -297,7 +297,7 @@ MYSELF
 #undef OP
 #undef MYSELF
 
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 
     constexpr operator type() const
