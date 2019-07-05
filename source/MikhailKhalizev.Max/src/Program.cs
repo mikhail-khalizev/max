@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max
     {
         static void Main(string[] args)
         {
-            new Program(args).Process2();
+            new Program(args);
         }
 
         public IServiceProvider Services { get; set; }
@@ -52,14 +52,12 @@ namespace MikhailKhalizev.Max
             var funcs = JsonConvert.DeserializeObject<IEnumerable<FunctionModel>>(funcsStr);
             //var str = JsonConvert.SerializeObject(funcs, Formatting.Indented);
 
-            var rp = new RawProgram(new Processor.x86.FullSimulate.Processor(), installedPath, "MAXRUN.EXE");
+            var processor = new Processor.x86.FullSimulate.Processor();
+            var rp = new RawProgram(processor, installedPath, "MAXRUN.EXE");
             rp.init_x86_dos_prog();
+            processor.correct_function_position(0);
         }
 
-        public void Process2()
-        {
-
-        }
 
         public void ExtractInformationFromOldCore()
         {

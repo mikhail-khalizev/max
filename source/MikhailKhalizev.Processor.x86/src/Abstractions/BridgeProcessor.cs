@@ -19,6 +19,20 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         #region Registers
 
+        /// <inheritdoc />
+        public Address eip
+        {
+            get => Implementation.eip;
+            set => Implementation.eip = value;
+        }
+
+        /// <inheritdoc />
+        public Address CurrentInstructionAddress
+        {
+            get => Implementation.CurrentInstructionAddress;
+            set => Implementation.CurrentInstructionAddress = value;
+        }
+
         public Register eax
         {
             get => Implementation.eax;

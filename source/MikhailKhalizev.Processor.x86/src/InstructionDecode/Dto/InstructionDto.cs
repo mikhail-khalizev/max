@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 
 namespace MikhailKhalizev.Processor.x86.InstructionDecode.Dto
 {
-
     public class InstructionDto
     {
         /// <summary>

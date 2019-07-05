@@ -140,6 +140,19 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// IDTR Interrupt Descriptor Table Register Limit.
         /// </summary>
         ushort idtr_limit { get; set; }
+        
+        /// <summary>
+        /// EIP (instruction pointer) register.
+        /// </summary>
+        /// <remarks>The EIP register contains a 32-bit pointer to the next instruction to be executed.</remarks>
+        /// <seealso cref="CurrentInstructionAddress"/>
+        Address eip { get; set; }
+
+        /// <summary>
+        /// Gets or sets address of current executing instruction.
+        /// </summary>
+        /// <seealso cref="eip"/>
+        Address CurrentInstructionAddress { get; set; }
 
         #endregion
 

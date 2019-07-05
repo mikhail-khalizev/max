@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Kaitai;
 using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
@@ -11,7 +12,10 @@ namespace MikhailKhalizev.Max
     {
         public string Directory { get; }
         public string ExeFileName { get; }
-        public Dos.Memory DosMemory { get; }
+
+        public Memory DosMemory { get; }
+        public Interrupt DosInterrupt { get; }
+        public Timer DosTimer { get; }
 
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
         public const ushort pspseg = image_load_seg - 16; // 0x192
@@ -21,16 +25,19 @@ namespace MikhailKhalizev.Max
         {
             Directory = directory;
             ExeFileName = exeFileName;
+
             DosMemory = new Memory(implementation);
+            DosInterrupt = new Interrupt(implementation);
+            DosTimer = new Timer(implementation);
         }
 
         public void init_x86_dos_prog()
         {
             var exeBytes = File.ReadAllBytes(Path.Combine(Directory, ExeFileName));
+            var dosMz = new DosMz(exeBytes);
 
-            var exe = exeBytes.GetStructure<Exe16BitHeader>();
 
-            if (!exe.is_correct())
+            if (!dosMz.IsCorrect)
                 throw new Exception();
 
             DosMemory.dos_mem_init();
@@ -44,8 +51,8 @@ namespace MikhailKhalizev.Max
 
             // Alloc image.
 
-            var exe_image_off = exe.exe_data_start();
-            var image_size = exe.extra_data_start() - exe_image_off;
+            var exe_image_off = dosMz.ExeDataStart;
+            var image_size = dosMz.ExeDataLength;
 
             bx = (image_size + 15) / 16 + 16; // psp_size
             DosMemory.dos_mem_alloc();
@@ -66,24 +73,17 @@ namespace MikhailKhalizev.Max
             exeBytes.AsSpan().Slice(exe_image_off, image_size)
                 .CopyTo(image.Slice(0, image_size));
             
-            // Read relocations.
-            
-            var reallocs = new ArraySegment<byte>(exeBytes).Slice(exe.reloc_table_offset, 4 * exe.num_relocs);
-
             // Apply realoc.
 
-            for (var i = 0; i < exe.num_relocs; i++)
+            foreach (var relocation in dosMz.Relocations)
             {
-                var offset = reallocs.GetUInt16(4 * i);
-                var segment = reallocs.GetUInt16(4 * i + 3);
-
-                var addr = segment * 16 + offset;
+                var addr = relocation.Seg * 16 + relocation.Ofs;
 
                 if (image_size <= addr + 1)
                     throw new Exception();
 
                 var val = image.GetUInt16(addr);
-                image.SetUInt16(val + image_load_seg);
+                image.SetUInt16(val + image_load_seg, addr);
             }
 
             // set psp
@@ -135,8 +135,7 @@ namespace MikhailKhalizev.Max
             memw_a16[ds, 0x3] = 0xc02 - 0x191;
 
 
-            throw new NotImplementedException();
-            // install_std_ints();
+            DosInterrupt.install_std_ints();
 
 
             // Устанавливаем начальные значения в регистры.
@@ -144,12 +143,12 @@ namespace MikhailKhalizev.Max
             ds.Load(pspseg);
             es = ds;
 
-            ss.Load(image_load_seg + exe.ss);
-            sp = exe.sp;
+            ss.Load(image_load_seg + dosMz.Hdr.InitialSs);
+            sp = dosMz.Hdr.InitialSp;
 
-            cs.Load(image_load_seg + exe.cs);
-            processor.eip = exe.ip;
-            processor.CurrentInstructionAddress = exe.ip;
+            cs.Load(image_load_seg + dosMz.Hdr.InitialCs);
+            eip = dosMz.Hdr.InitialIp;
+            CurrentInstructionAddress = dosMz.Hdr.InitialIp;
 
             eax = 0;
             ebx = 0;
@@ -163,8 +162,7 @@ namespace MikhailKhalizev.Max
             eflags.UInt32 = 0x7202;
 
 
-            throw new NotImplementedException();
-            //timers_init();
+            DosTimer.timers_init();
         }
     }
 }
