@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace MikhailKhalizev.Utils.Tests
 {
-    public class MiscTests
+    public class HexHelperTests
     {
         [Theory]
         [InlineData("123", new byte[] { 0x01, 0x23 })]
@@ -69,20 +68,6 @@ namespace MikhailKhalizev.Utils.Tests
         }
 
         [Fact]
-        public void EnumerateBits()
-        {
-            BinaryHelper.EnumerateBits(0).Reverse().SkipWhile(x => !x).Should().BeEquivalentTo();
-            BinaryHelper.EnumerateBits(1).Reverse().SkipWhile(x => !x).Should().BeEquivalentTo(true);
-            BinaryHelper.EnumerateBits(2).Reverse().SkipWhile(x => !x).Should().BeEquivalentTo(true, false);
-            BinaryHelper.EnumerateBits(3).Reverse().SkipWhile(x => !x).Should().BeEquivalentTo(true, true);
-
-            BinaryHelper.EnumerateBits(-1).Reverse().SkipWhile(x => x).Should().BeEquivalentTo();
-            BinaryHelper.EnumerateBits(-2).Reverse().SkipWhile(x => x).Should().BeEquivalentTo(false);
-            BinaryHelper.EnumerateBits(-3).Reverse().SkipWhile(x => x).Should().BeEquivalentTo(false, true);
-            BinaryHelper.EnumerateBits(-4).Reverse().SkipWhile(x => x).Should().BeEquivalentTo(false, false);
-        }
-
-        [Fact]
         public void IntToString()
         {
             var str = HexHelper.ToString(0x01020304, o => o.SetGroupSize(0).SetLittleEndian().SetTrimZero());
@@ -96,36 +81,6 @@ namespace MikhailKhalizev.Utils.Tests
 
             str = HexHelper.ToString(0x01020304, o => o.SetGroupSize(0).SetBigEndian().SetTrimZero(false));
             str.Should().Be("0x04030201");
-        }
-
-        [Fact]
-        public void SplitTest()
-        {
-            var access = 0;
-            var test = Enumerable.Range(0, 10)
-                .Select(x =>
-                {
-                    access++;
-                    return x;
-                });
-
-            var result = test.Split(3);
-
-            var r1 = result.ToList();
-            r1.Count.Should().Be(4);
-            access.Should().Be(10);
-
-            access = 0;
-            var r2 = result.First();
-            access.Should().Be(3);
-            r2.Should().HaveCount(3);
-
-            access = 0;
-            var r3 = result.Skip(1).First();
-            access.Should().Be(6);
-            r2.Should().HaveCount(3);
-
-            Enumerable.Range(0, 9).Split(3).Should().HaveCount(3);
         }
     }
 }

@@ -56,22 +56,8 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
         /// </summary>
         public uint Base
         {
-            get
-            {
-                uint value = 0;
-                BinaryHelper.Set(Bytes[2], ref value, 0);
-                BinaryHelper.Set(Bytes[3], ref value, 8);
-                BinaryHelper.Set(Bytes[4], ref value, 16);
-                BinaryHelper.Set(Bytes[7], ref value, 24);
-                return value;
-            }
-            set
-            {
-                BinaryHelper.Set(ref Bytes[2], value, 0);
-                BinaryHelper.Set(ref Bytes[3], value, 8);
-                BinaryHelper.Set(ref Bytes[4], value, 16);
-                BinaryHelper.Set(ref Bytes[7], value, 24);
-            }
+            get => BinaryHelper.FromBytes(Bytes[7], Bytes[4], Bytes[3], Bytes[2]);
+            set => BinaryHelper.ToBytes(value, ref Bytes[7], ref Bytes[4], ref Bytes[3], ref Bytes[2]);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
@@ -212,6 +213,27 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
                 return (pte & 0xffff_f000) + off;
             }
+        }
+
+        public bool mem_pg_equals(Address address, ArraySegment<byte> left)
+        {
+            var proccessed = 0;
+
+            while (left.Count != 0)
+            {
+                var code = mem_pg_raw(address + proccessed, 1);
+
+                if (left.Count <= code.Count)
+                    return code.Slice(0, left.Count).SequenceEqual(left);
+                
+                if (left.Slice(0, code.Count).SequenceEqual(code) == false)
+                    return false;
+
+                proccessed += code.Count;
+                left = left.Slice(code.Count);
+            }
+
+            return true;
         }
     }
 }

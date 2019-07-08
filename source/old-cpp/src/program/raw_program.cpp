@@ -39,6 +39,7 @@ using exo::format_header::exe_dos;
 bool extra_log = false;
 
 
+// +
 struct func_info
 {
     /** Адрес вызываемой функции (уже декодированной). */
@@ -75,6 +76,7 @@ const uint_<16> image_load_seg = 0x1a2; // Const from dosbox.
 const uint_<16> pspseg = image_load_seg - 16; // 0x192
 
 
+// +
 //static boost::unordered_multimap<uint_<32>, func_info> funcs_by_pc;
 static std::multimap<uint_<32>, func_info> funcs_by_pc;
 
@@ -89,6 +91,7 @@ static std::pair<uint_<32>, uint_<8>> used_funcs_known[] = {
 
 void debug_breakpoint() {}
 
+// +
 static func_info * find_func_exact(seg_reg & seg, uint_<32> addr)
 {
     auto range_iter = funcs_by_pc.equal_range(seg.get_base() + addr);
@@ -328,6 +331,7 @@ static void decode_function(seg_reg & seg, uint_<32> short_addr)
     to_cxx.write_cxx_to_dir("program/auto");
 }
 
+// +
 static const func_info & get_func(seg_reg & seg, uint_<32> addr)
 {
     if (seg.get_base() + addr == 0)
@@ -373,6 +377,7 @@ static void add_to_used_func_list(uint_<32> full_addr, uint_<8> mode)
     }
 }
 
+// +
 void run_func()
 {
     const uint_<32> run = cs.get_base() + eip;

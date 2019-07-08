@@ -353,6 +353,7 @@ uint_<80> & memt_a32(const seg_reg &, uint_<32>)
     throw exo::exception::not_implemented();
 }
 
+// +
 bool mem_pg_equals(uint_<32> addr, exo::memory_space_const left)
 {
     uint_<32> proccessed = 0;

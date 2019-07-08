@@ -49,12 +49,16 @@ namespace MikhailKhalizev.Max
                 (new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"));
 
             var funcsStr = File.ReadAllText("settings/funcs.json");
-            var funcs = JsonConvert.DeserializeObject<IEnumerable<FunctionModel>>(funcsStr);
+            var funcs = JsonConvert.DeserializeObject<List<FunctionModel>>(funcsStr);
             //var str = JsonConvert.SerializeObject(funcs, Formatting.Indented);
 
+
             var processor = new Processor.x86.FullSimulate.Processor();
+            
             var rp = new RawProgram(processor, installedPath, "MAXRUN.EXE");
             rp.init_x86_dos_prog();
+            processor.run_func += rp.run_func;
+
             processor.correct_function_position(0);
         }
 

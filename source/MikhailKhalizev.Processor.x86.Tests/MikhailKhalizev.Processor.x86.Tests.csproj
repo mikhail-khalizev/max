@@ -35,7 +35,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\external\SharpDisasm\SharpDisasm.csproj" />
     <ProjectReference Include="..\MikhailKhalizev.Processor.x86\MikhailKhalizev.Processor.x86.csproj" />
-    <ProjectReference Include="..\MikhailKhalizev.Utils\MikhailKhalizev.Utils.csproj" />
   </ItemGroup>
 
 </Project>

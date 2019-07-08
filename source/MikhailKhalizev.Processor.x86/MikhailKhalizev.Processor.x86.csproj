@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\external\SharpDisasm\SharpDisasm.csproj" />
-    <ProjectReference Include="..\MikhailKhalizev.Utils\MikhailKhalizev.Utils.csproj" />
   </ItemGroup>
 
 </Project>

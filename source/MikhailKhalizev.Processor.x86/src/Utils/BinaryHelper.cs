@@ -66,8 +66,16 @@ namespace MikhailKhalizev.Utils
 
         public static uint FromBytes(int high, int middle, int low) => (uint) ((high << 16) + (middle << 8) + low);
 
-        public static uint FromBytes(int p4, int high, int middle, int low) =>
-            (uint) ((p4 << 24) + (high << 16) + (middle << 8) + low);
+        public static uint FromBytes(int p3, int p2, int p1, int p0) =>
+            (uint) ((p3 << 24) + (p2 << 16) + (p1 << 8) + p0);
+
+        public static void ToBytes(uint value, ref byte p3, ref byte p2, ref byte p1, ref byte p0)
+        {
+            p3 = (byte)(value >> 24);
+            p2 = (byte)(value >> 16);
+            p1 = (byte)(value >> 8);
+            p0 = (byte)(value);
+        }
 
         public static IEnumerable<bool> EnumerateBits(BigInteger value)
         {

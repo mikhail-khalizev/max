@@ -1,15 +1,19 @@
 ﻿using System;
 using System.IO;
+using System.Net.Mime;
 using Kaitai;
 using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Max
 {
     public class RawProgram : BridgeProcessor
     {
+        public new Processor.x86.FullSimulate.Processor Implementation { get; }
         public string Directory { get; }
         public string ExeFileName { get; }
 
@@ -17,12 +21,15 @@ namespace MikhailKhalizev.Max
         public Interrupt DosInterrupt { get; }
         public Timer DosTimer { get; }
 
+        public bool extra_log { get; set; } = true;
+
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
         public const ushort pspseg = image_load_seg - 16; // 0x192
 
-        public RawProgram(IProcessor implementation, string directory, string exeFileName) 
+        public RawProgram(Processor.x86.FullSimulate.Processor implementation, string directory, string exeFileName)
             : base(implementation)
         {
+            Implementation = implementation;
             Directory = directory;
             ExeFileName = exeFileName;
 
@@ -41,7 +48,7 @@ namespace MikhailKhalizev.Max
                 throw new Exception();
 
             DosMemory.dos_mem_init();
-            
+
             // Alloc dos - dummy.
 
             bx = pspseg - 2; // internal alloc logic
@@ -64,15 +71,13 @@ namespace MikhailKhalizev.Max
 
             ds.Load(image_load_seg);
 
-            var processor = (Processor.x86.FullSimulate.Processor)Implementation;
-            var memory = processor.Memory;
-            var image = memory.mem_seg_pg_raw(ds, 0, image_size);
+            var image = Implementation.Memory.mem_seg_pg_raw(ds, 0, image_size);
 
             // Upload image of program.
 
             exeBytes.AsSpan().Slice(exe_image_off, image_size)
                 .CopyTo(image.Slice(0, image_size));
-            
+
             // Apply realoc.
 
             foreach (var relocation in dosMz.Relocations)
@@ -112,7 +117,7 @@ namespace MikhailKhalizev.Max
 
             ds.Load(evnseg);
             evn_init.CopyTo(
-                memory
+                Implementation.Memory
                     .mem_seg_pg_raw(ds, 0, evn_init.Length)
                     .Slice(0, evn_init.Length)
                     .AsSpan());
@@ -164,5 +169,123 @@ namespace MikhailKhalizev.Max
 
             DosTimer.timers_init();
         }
+
+        public void run_func(object sender, EventArgs e)
+        {
+            var run = cs.Descriptor.Base + eip;
+
+            // "--on-run-func={none, dump-reg}"
+            var on_run_func__dump_reg = true;
+
+            if (on_run_func__dump_reg)
+            {
+                Console.WriteLine(
+                    $"before run {run:x}" +
+                    $", eax {eax:x}" +
+                    $", ebx {ebx:x}" +
+                    $", ecx {ecx:x}" +
+                    $", edx {edx:x}" +
+                    $", esi {esi:x}" +
+                    $", edi {edi:x}" +
+                    $", esp {esp:x}" +
+                    $", ebp {ebp:x}" +
+                    $", ds.val {ds.Selector:x}" +
+                    $", es.val {es.Selector:x}" +
+                    $", cs.val {cs.Selector:x}" +
+                    $", ss.val {ss.Selector:x}" +
+                    $", fs.val {fs.Selector:x}" +
+                    $", gs.val {gs.Selector:x}");
+            }
+
+            CurrentInstructionAddress = eip; // Check, is it correct?
+            var info = get_func(cs, eip);
+
+            if (extra_log)
+                Console.WriteLine($"run {info.func_name}");
+
+            add_to_used_func_list(run, (cs.db ? 32 : 16));
+            info.func();
+            CurrentInstructionAddress = eip; // Check, is it correct?
+
+            if (on_run_func__dump_reg)
+            {
+                Console.WriteLine(
+                    $"after run {run:x}" +
+                    $", eax {eax:x}" +
+                    $", ebx {ebx:x}" +
+                    $", ecx {ecx:x}" +
+                    $", edx {edx:x}" +
+                    $", esi {esi:x}" +
+                    $", edi {edi:x}" +
+                    $", esp {esp:x}" +
+                    $", ebp {ebp:x}" +
+                    $", ds.val {ds.Selector:x}" +
+                    $", es.val {es.Selector:x}" +
+                    $", cs.val {cs.Selector:x}" +
+                    $", ss.val {ss.Selector:x}" +
+                    $", fs.val {fs.Selector:x}" +
+                    $", gs.val {gs.Selector:x}");
+            }
+        }
+
+        public FunctionInfo get_func(SegmentRegister seg, Address addr)
+        {
+            if (seg.Descriptor.Base + addr == 0)
+                throw new InvalidOperationException("Запрос функции по нулевому указателю.");
+
+            var ret = find_func_exact(seg, addr);
+            if (ret != null)
+                return ret;
+
+            ret = find_func_from_known_and_remember_it(seg, addr);
+            if (ret != null)
+                return ret;
+
+            // Всё-таки декодируем.
+            decode_function(seg, addr);
+            
+            // TODO Update comment: Use in bash:  ERR=5 ; while [ $ERR == 5 ] ; do make -j8 && { rm /tmp/*.png ; time ./openmax ; } ; ERR=$? ; done
+            Environment.Exit(5);
+
+            // Просто так. На всякий случай.
+            throw new InvalidOperationException("Функция не найдена.");
+        }
+
+        public FunctionInfo find_func_exact(SegmentRegister seg, Address addr)
+        {
+            var infos = funcs_by_pc.GetValues(seg.Descriptor.Base + addr, false);
+            if (infos == null)
+                return null;
+
+            foreach (var info in infos)
+            {
+                if ((int)info.Model.Mode != (cs.db ? 32 : 16))
+                    continue;
+
+                if (Implementation.Memory.mem_pg_equals(seg.Descriptor.Base + addr, info.GetRawBytes()))
+                    return info;
+            }
+
+            return null;
+        }
+
+        public MultiValueDictionary<Address, FunctionInfo> funcs_by_pc;
+    }
+
+    public class FunctionInfo
+    {
+        public FunctionModel Model { get; set; }
+
+        /// <summary>
+        /// Имя функции C++ без namespace. Например: "func_0x101354f7".
+        /// </summary>
+        public string func_name { get; set; }
+
+        /// <summary>
+        /// Адрес вызываемой функции (уже декодированной).
+        /// </summary>
+        public Action func { get; set; }
+
+        public byte[] GetRawBytes() => HexHelper.ToBytes(Model.Raw);
     }
 }
