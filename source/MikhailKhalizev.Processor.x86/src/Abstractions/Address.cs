@@ -22,9 +22,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public string ToShortString() => HexHelper.ToString(_value, o => o.SetTrimZero(true).SetGroupSize(4));
         public string ToFullString() => HexHelper.ToString(_value, o => o.SetTrimZero(false).SetGroupSize(4));
 
-        public Address AddBytes(int count) => _value + count;
+        public Address WithBytes(int count) => _value + count;
 
-        public int OffsetFromInBytes(Address from) => (int)(_value - from._value);
+        public int GetDistanceFrom(Address from) => (int)(_value - from._value);
 
         #region IEquatable
 

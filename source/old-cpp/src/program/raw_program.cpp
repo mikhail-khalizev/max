@@ -108,6 +108,7 @@ static func_info * find_func_exact(seg_reg & seg, uint_<32> addr)
     return NULL;
 }
 
+// +
 static func_info * find_func_from_known_and_remember_it(seg_reg & seg, uint_<32> addr)
 {
     // Попробуем найти её среди известных.
@@ -354,6 +355,7 @@ static const func_info & get_func(seg_reg & seg, uint_<32> addr)
     throw std::logic_error("Функция не найдена.");
 }
 
+// +
 static void add_to_used_func_list(uint_<32> full_addr, uint_<8> mode)
 {
     static std::map<uint_<32>, uint_<8>> used_funcs; // <addr, bit mode>

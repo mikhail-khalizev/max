@@ -386,7 +386,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             default: throw new NotImplementedException();
                         }
 
-                        os.Append(AddressNameConverter.GetResultName(End.AddBytes(val), true, need_write_namespace));
+                        os.Append(AddressNameConverter.GetResultName(End.WithBytes(val), true, need_write_namespace));
                         os.Append(", ");
 
                         os.Append(val < 0 ? $"-{HexHelper.ToString(-val, o => o.SetTrimZero())}" : HexHelper.ToString(val, o => o.SetTrimZero()));

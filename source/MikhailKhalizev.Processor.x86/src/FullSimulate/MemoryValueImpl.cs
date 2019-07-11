@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         {
             get
             {
-                var address = (Segment?.Descriptor.Base ?? 0) + Address;
+                var address = Segment + Address;
                 return MemoryAccess.Memory.mem_pg_raw_get_phys_addr(address);
             }
         }

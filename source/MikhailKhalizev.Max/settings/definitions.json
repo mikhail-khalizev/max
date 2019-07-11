@@ -8,7 +8,7 @@
   "0x100ef48f": "my_fread",
 
   "0x101157ff": "my_play_video_company",
-  "0x100fded4": "my_game_map_start_animatioin", // Анимация карты при запуске ?
+  "0x100fded4": "my_game_map_start_animation", // Анимация карты при запуске ?
 
   "0x10133fd8": "my_get_res_data_by_id",
   "0x101341eb": "my_get_res_data_by_id_malloc",
@@ -174,7 +174,7 @@
   "0x10166046": "sys_sqrt",
   "0x1016607e": "sys_round",
 
-  "0x1016cbbc": "sys_display_applay_palette",
+  "0x1016cbbc": "sys_display_apply_palette",
   "0x10167484": "sys_display_draw_0",
   "0x101674a8": "sys_display_draw_1",
   "0x10168af0": "sys_display_draw_2",

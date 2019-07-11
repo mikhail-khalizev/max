@@ -560,8 +560,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
-        // raw_program::run_func();
-        // todo rename RunSubMethod
+        // todo rename ExecuteSubMethod
         public event EventHandler<EventArgs> run_func;
 
 
@@ -586,7 +585,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
                 while (true)
                 {
-                    var toRun = cs.Descriptor.Base + eip;
+                    var toRun = cs[eip];
                     hist.Add(toRun);
 
                     if (toRun == 0)
@@ -1417,7 +1416,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var curSave = CurrentInstructionAddress;
             var eipSave = eip;
             var mode = cs.db ? 32 : 16;
-            var returnAddress = cs.Descriptor.Base + CurrentInstructionAddress;
+            var returnAddress = cs + CurrentInstructionAddress;
 
             int_internal(0xe, true, false, true, 0);
 

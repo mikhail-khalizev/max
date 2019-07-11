@@ -16,6 +16,17 @@ using Instruction = SharpDisasm.Instruction;
 
 namespace MikhailKhalizev.Max
 {
+    public class ConfigurationDto
+    {
+        public ConfigurationMaxDto Max { get; set; } = new ConfigurationMaxDto();
+    }
+
+    public class ConfigurationMaxDto
+    {
+        public string InstalledPath { get; set; }
+    }
+
+
     public class Program
     {
         static void Main(string[] args)
@@ -25,22 +36,34 @@ namespace MikhailKhalizev.Max
 
         public IServiceProvider Services { get; set; }
         public IConfiguration Configuration { get; set; }
+        public ConfigurationDto ConfigurationDto { get; set; }
 
         public Program(string[] args)
         {
+            // Read configuration.
+
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
+                .AddJsonFile("settings/appsettings.json", optional: true, reloadOnChange: true)
                 .AddUserSecrets<Program>()
+                .AddEnvironmentVariables()
                 .AddCommandLine(args)
                 .Build();
+            ConfigurationDto = Configuration.Get<ConfigurationDto>();
 
-            var installedPath = Configuration["Max:InstalledPath"];
+            // Check configuration.
+
+            var installedPath = ConfigurationDto.Max.InstalledPath;
+            if (!Directory.Exists(installedPath))
+                throw new InvalidOperationException($"Directory '{installedPath}' not found. Check Max:InstalledPath configuration parameter.");
+
+            // Create ServiceProvider.
 
             var serviceCollection = new ServiceCollection();
             Services = serviceCollection.BuildServiceProvider();
-
-
+            
+            // Start.
+            
             var definitionsStr = File.ReadAllText("settings/definitions.json");
             foreach (var x in JsonConvert.DeserializeObject<Dictionary<string, string>>(definitionsStr))
                 AddressNameConverter.KnownDefinitions[Address.Parse(x.Key)] = x.Value;
@@ -54,10 +77,9 @@ namespace MikhailKhalizev.Max
 
 
             var processor = new Processor.x86.FullSimulate.Processor();
-            
             var rp = new RawProgram(processor, installedPath, "MAXRUN.EXE");
-            rp.init_x86_dos_prog();
             processor.run_func += rp.run_func;
+            rp.init_x86_dos_prog();
 
             processor.correct_function_position(0);
         }
@@ -106,10 +128,10 @@ namespace MikhailKhalizev.Max
                     var dec = instr.Groups["dec"].Value.Trim();
 
                     if (il == 0)
-                        il = fb.Count - ia.OffsetFromInBytes(fa);
+                        il = fb.Count - ia.GetDistanceFrom(fa);
 
                     var ib = new byte[il];
-                    fb.CopyTo(ia.OffsetFromInBytes(fa), ib, 0, il);
+                    fb.CopyTo(ia.GetDistanceFrom(fa), ib, 0, il);
 
                     if (il != 0 && !dec.StartsWith("/*") && !dec.Contains("switch") && !dec.Contains("_func"))
                     {

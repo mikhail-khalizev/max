@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Utils;
 using Newtonsoft.Json;
@@ -13,7 +14,26 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     public class FunctionModel
     {
         public Guid Guid { get; set; }
-        public Address Address { get; set; }
+
+        public Address Address
+        {
+            get => Addresses.FirstOrDefault();
+            set
+            {
+                if (Addresses.Count == 0)
+                    Addresses.Add(value);
+                else if (Addresses.Count == 1)
+                    Addresses[0] = value;
+                else
+                    throw new InvalidOperationException("Multiple addresses associated with function.");
+            }
+        }
+
+        public bool ShouldSerializeAddress() => 1 == Addresses.Count;
+
+        public List<Address> Addresses { get; set; } = new List<Address>();
+
+        public bool ShouldSerializeAddresses() => 1 < Addresses.Count;
 
         /// <summary>
         /// Разрядность декодируемого кода. 16 или 32 бит.

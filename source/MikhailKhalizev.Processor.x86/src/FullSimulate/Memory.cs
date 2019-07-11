@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             if (seg.fail_limit_check(address, size))
                 throw new NotImplementedException();
 
-            var ret = mem_pg_raw(seg.Descriptor.Base + address, size);
+            var ret = mem_pg_raw(seg[address], size);
 
 
             // correct size with segment limit

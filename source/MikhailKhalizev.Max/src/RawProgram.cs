@@ -21,6 +21,8 @@ namespace MikhailKhalizev.Max
         public Interrupt DosInterrupt { get; }
         public Timer DosTimer { get; }
 
+        public MultiValueDictionary<Address, FunctionInfo> funcs_by_pc = new MultiValueDictionary<Address, FunctionInfo>();
+
         public bool extra_log { get; set; } = true;
 
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
@@ -172,7 +174,7 @@ namespace MikhailKhalizev.Max
 
         public void run_func(object sender, EventArgs e)
         {
-            var run = cs.Descriptor.Base + eip;
+            var run = cs[eip];
 
             // "--on-run-func={none, dump-reg}"
             var on_run_func__dump_reg = true;
@@ -228,9 +230,9 @@ namespace MikhailKhalizev.Max
             }
         }
 
-        public FunctionInfo get_func(SegmentRegister seg, Address addr)
+        private FunctionInfo get_func(SegmentRegister seg, Address addr)
         {
-            if (seg.Descriptor.Base + addr == 0)
+            if (seg[addr] == 0)
                 throw new InvalidOperationException("Запрос функции по нулевому указателю.");
 
             var ret = find_func_exact(seg, addr);
@@ -251,9 +253,9 @@ namespace MikhailKhalizev.Max
             throw new InvalidOperationException("Функция не найдена.");
         }
 
-        public FunctionInfo find_func_exact(SegmentRegister seg, Address addr)
+        private FunctionInfo find_func_exact(SegmentRegister seg, Address addr)
         {
-            var infos = funcs_by_pc.GetValues(seg.Descriptor.Base + addr, false);
+            var infos = funcs_by_pc.GetValues(seg[addr], false);
             if (infos == null)
                 return null;
 
@@ -262,14 +264,88 @@ namespace MikhailKhalizev.Max
                 if ((int)info.Model.Mode != (cs.db ? 32 : 16))
                     continue;
 
-                if (Implementation.Memory.mem_pg_equals(seg.Descriptor.Base + addr, info.GetRawBytes()))
+                if (Implementation.Memory.mem_pg_equals(seg[addr], info.GetRawBytes()))
                     return info;
             }
 
             return null;
         }
 
-        public MultiValueDictionary<Address, FunctionInfo> funcs_by_pc;
+        private FunctionInfo find_func_from_known_and_remember_it(SegmentRegister seg, Address addr)
+        {
+            // Попробуем найти её среди известных.
+
+            foreach (var pair in funcs_by_pc)
+            foreach (var info in pair.Value)
+            {
+                var code = info.GetRawBytes();
+                if (code.Length == 0)
+                    continue;
+
+                if (string.IsNullOrEmpty(info.func_name))
+                    throw new InvalidOperationException("Код у функции есть, а его имя неизвестно.");
+
+                if ((int)info.Model.Mode != (cs.db ? 32 : 16))
+                    continue;
+
+                var seg_addr = seg[addr];
+                if (!Implementation.Memory.mem_pg_equals(seg_addr, code))
+                    continue;
+
+
+                // Всё хорошо. Запомним её, а затем сохраним в файл, чтоб в следующий раз не пришлось искать.
+
+                funcs_by_pc.Add(seg_addr, info);
+
+                info.Model.Addresses.Add(seg_addr);
+
+
+                // TODO
+                //std::fstream output("program/auto/link.cpp", std::ios_base::app | std::ios_base::out);
+                //output << std::hex << std::showbase;
+
+                    //output << "LINK(";
+                    // /*bin_to_cxx::*/
+                    //write_addr_with_check_known_definitions(output, seg.get_base() + addr, true, true);
+                    //output << ", " << val.second.func_name << ", " << static_cast < uint_ < 16 >> (val.second.mode);
+                    //output << ", ({";
+
+
+                    //for (uint_ < 32 > i = 0; i < val.second.code.size() - 1; i++)
+                    //    output << val.second.code.get < uint_ < 8 >, uint_ < 32 >> (i) << ", ";
+                    //output << val.second.code.get < uint_ < 8 >, uint_ < 32 >> (val.second.code.size() - 1);
+
+                    //output << "}))\n\n";
+
+                    return info;
+            }
+
+            return null;
+        }
+
+        private void add_to_used_func_list(Address full_addr, int mode)
+        {
+            static std::map<uint_<32>, uint_<8>> used_funcs; // <addr, bit mode>
+
+            if (used_funcs.empty())
+                for (auto i = std::begin(used_funcs_known); i != std::end(used_funcs_known); i++)
+                    used_funcs.insert(std::make_pair(i->first, i->second));
+
+            auto ret = used_funcs.insert(std::make_pair(full_addr, mode));
+            ret.first->second = mode;
+            if (ret.second)
+            {
+                std::fstream file("program/info/funcs_any_time_runs.hpp", std::ios_base::out);
+                file << std::hex << std::showbase;
+                for (auto & i : used_funcs)
+                {
+                    file << "INFO(";
+                    /*bin_to_cxx::*/
+                    write_addr(file, i.first);
+                    file << ", " << static_cast < uint_ < 32 >> (i.second) << ")\n";
+                }
+            }
+        }
     }
 
     public class FunctionInfo
@@ -286,6 +362,7 @@ namespace MikhailKhalizev.Max
         /// </summary>
         public Action func { get; set; }
 
-        public byte[] GetRawBytes() => HexHelper.ToBytes(Model.Raw);
+        public byte[] GetRawBytes() => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Model.Raw));
+        private byte[] _rawBytes;
     }
 }

@@ -128,5 +128,12 @@
             Descriptor.Present = true;
             Descriptor.Type = 0b011;
         }
+
+        public static Address operator +(SegmentRegister segment, Address address)
+        {
+            return (segment?.Descriptor.Base ?? 0) + address;
+        }
+
+        public Address this[Address address] => Descriptor.Base + address;
     }
 }
