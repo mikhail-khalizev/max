@@ -15,14 +15,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     {
         public Address Begin { get; }
         public Address End { get; }
-        private List<string> _comments = new List<string>();
+
+        public List<string> Comments { get; } = new List<string>();
         //private bool _commentThis; // Закомментировать всю напечатанную строку.
 
         private int _addrMode;
         private int _oprMode;
 
         private ud_mnemonic_code _mnemonic;
-        private List<ud_operand> _operands;
+        public List<ud_operand> Operands { get; }
 
         private ud_type _pfx_seg;
         private bool _br_far;
@@ -41,11 +42,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             : this(new Disassembler(raw, mode, address, true, Vendor.Intel).NextInstruction())
         { }
 
-        public Instruction(ArchitectureMode mode, Address address, IMemorySpaceReadAccess memory)
+        public Instruction(ArchitectureMode mode, Address address, IMemoryReadAccess memory)
             : this(CreateDisassembler(mode, address, memory).NextInstruction())
         { }
 
-        public static Disassembler CreateDisassembler(ArchitectureMode mode, Address address, IMemorySpaceReadAccess memory)
+        public static Disassembler CreateDisassembler(ArchitectureMode mode, Address address, IMemoryReadAccess memory)
         {
             var disassembler = new Disassembler(new byte[0], mode, 0, true, Vendor.Intel);
             var ud = disassembler._u;
@@ -93,11 +94,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (instr.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
                 throw new NotImplementedException();
 
-            _operands = instr.Operands
+            Operands = instr.Operands
                 .Select(x => x.UdOperand)
                 .ToList();
 
-            if ((_is_any_jump || _is_any_loop || _is_call) && _operands[0].type == ud_type.UD_OP_PTR)
+            if ((_is_any_jump || _is_any_loop || _is_call) && Operands[0].type == ud_type.UD_OP_PTR)
                 _br_far = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
 
             _addrMode = instr.adr_mode;
@@ -106,7 +107,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             try
             {
                 var str = instr.ToString();
-                _comments.Add(str);
+                Comments.Add(str);
             }
             catch { }
         }
@@ -142,13 +143,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var eff_opr_size = _oprMode;
             if (_mnemonic == ud_mnemonic_code.UD_Iout)
-                if (ud_type.UD_R_AL <= _operands[1].@base && _operands[1].@base <= ud_type.UD_R_BH)
+                if (ud_type.UD_R_AL <= Operands[1].@base && Operands[1].@base <= ud_type.UD_R_BH)
                     eff_opr_size = 8;
 
             if (_mnemonic == ud_mnemonic_code.UD_Iin
                 || _mnemonic == ud_mnemonic_code.UD_Iimul
                 || _mnemonic == ud_mnemonic_code.UD_Imul)
-                if (ud_type.UD_R_AL <= _operands[0].@base && _operands[0].@base <= ud_type.UD_R_BH)
+                if (ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH)
                     eff_opr_size = 8;
 
             if (_pfx_repne)
@@ -183,7 +184,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
                     new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(_mnemonic) &&
                     _br_far &&
-                    _operands[0].type == ud_type.UD_OP_MEM)
+                    Operands[0].type == ud_type.UD_OP_MEM)
                 os.Append(adr_mode_str);
 
             if (_br_far)
@@ -192,12 +193,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var need_write_namespace = _is_call;
             if (_is_any_jump || _is_any_loop || _is_call)
             {
-                if (_operands[0].type == ud_type.UD_OP_PTR)
+                if (Operands[0].type == ud_type.UD_OP_PTR)
                 {
                     os.Append("_abs");
                     need_write_namespace = true;
                 }
-                else if (_operands[0].type == ud_type.UD_OP_MEM || _operands[0].type == ud_type.UD_OP_REG)
+                else if (Operands[0].type == ud_type.UD_OP_MEM || Operands[0].type == ud_type.UD_OP_REG)
                 {
                     os.Append(_br_far ? "_ind" : "_abs");
                     need_write_namespace = true;
@@ -214,7 +215,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var non_first_arg = false;
             var use_pfx_seg = false; // Используется ли где-то в операндах сегмент?
 
-            foreach (var op in _operands)
+            foreach (var op in Operands)
             {
                 if (non_first_arg)
                     os.Append(", ");
@@ -352,7 +353,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 }.Contains(_mnemonic);
 
                                 // Работа не с 8-байтой инструкцией.
-                                if (!(ud_type.UD_R_AL <= _operands[0].@base && _operands[0].@base <= ud_type.UD_R_BH))
+                                if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
                                     need_sign_extend = need_sign_extend ||
                                                        _mnemonic == ud_mnemonic_code.UD_Iand ||
                                                        _mnemonic == ud_mnemonic_code.UD_Ior ||

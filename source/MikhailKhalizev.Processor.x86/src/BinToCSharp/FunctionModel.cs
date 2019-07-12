@@ -48,6 +48,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         [JsonExtensionData]
         private IDictionary<string, JToken> AdditionalData { get; set; }
 
+        
+        public byte[] GetRawBytes() => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Raw));
+        private byte[] _rawBytes;
+
 
         public static IEqualityComparer<FunctionModel> BodyEqualityComparer =>
             new CustomEqualityComparer<FunctionModel>(

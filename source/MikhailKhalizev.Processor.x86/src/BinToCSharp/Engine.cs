@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MikhailKhalizev.Max;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Plugin;
 using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     /// <summary>
-    /// Возможно, устарело:
-    /// 
     /// Алгоритм декодирует код по частям. Каждую часть декодируется последовательно
     /// до тех пор пока не встретится потенциальный конец функции (ret или jmp). После
     /// чего декодирование части заканчивается и начинается декодирование других частей,
     /// выявленных по операциям ветвления (jcc, jmp, loop, call).
     /// 
     /// Алгоритм устроен так, что без необходимости, ничего лишнего он не декодирует.
+    ///
+    /// (Возможно описание устарело) 
     /// </summary>
     public class Engine
     {
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
-        public IMemorySpaceReadAccess Memory { get; }
+        public IMemoryReadAccess Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
 
@@ -37,8 +39,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// то эта инструкция относится к методу, расположенному с меньшим адресом.
         /// </remarks>
         public HashSet<Address> ForceEndFuncs { get; } = new HashSet<Address>();
-        public List<FunctionModel> AlreadyDecodedFuncs { get; } = new List<FunctionModel>();
-        public List<(Address, Address)> SuppressDecode { get; } = new List<(Address, Address)>(); // [begin, end)
+        public MultiValueDictionary<Address, FunctionModel> AlreadyDecodedFuncs { get; } = new MultiValueDictionary<Address, FunctionModel>();
+
+        // [begin, end)
+        public List<(Address, Address)> SuppressDecode { get; } = new List<(Address, Address)>();
 
         //private HashSet<Instruction> AllDecodedInstruction
         private HashSet<DetectedMethod> NewDetectedMethods = new HashSet<DetectedMethod>(DetectedMethod.BeginEqualityComparer);
@@ -52,18 +56,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private const int LineCmdOffset = 22;
         private const int LineCommentOffset = 60;
 
-        // plugin::jmp_call_loop_simple plugin_jmp_call_loop_simple;
-        // plugin::switch_ plugin_switch;
-        // plugin::add_comment_string_data plugin_add_comment_string_data;
-        // plugin::comment_idle plugin_comment_idle;
+        // TODO plugin::jmp_call_loop_simple plugin_jmp_call_loop_simple; - addr_to_decode from any jmp.
+        // TODO plugin::switch_ plugin_switch; - decode switch.
+        private readonly AddCStringToCommentPlugin _addCStringToCommentPlugin;
+        // TODO plugin::comment_idle plugin_comment_idle; - comment dummy instruction
 
 
-        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemorySpaceReadAccess memory)
+        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemoryReadAccess memory)
         {
             Mode = mode;
             CsBase = csBase;
             DsBase = dsBase;
             Memory = memory;
+
+            if (csBase != 0)
+                SuppressDecode.Add((0, csBase));
+
+            _addCStringToCommentPlugin = new AddCStringToCommentPlugin(this);
         }
 
         public void Decode(Address address)
@@ -96,31 +105,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (address < CsBase)
                 return;
 
-            var nearSuppressDecode = SuppressDecode
-                .Where(x => address < x.Item2)
+            var nearestSuppressDecode = SuppressDecode
+                .Where(x => address < x.Item2 || x.Item2 == 0)
                 .Select(x => x.Item1)
-                .OrderBy(x => x)
                 .DefaultIfEmpty(Address.MaxValue)
-                .FirstOrDefault();
+                .Min();
 
-            if (nearSuppressDecode <= address)
+            if (nearestSuppressDecode <= address)
                 return;
 
             Memory.GetFixSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
 
             var disassembler = Instruction.CreateDisassembler(Mode, address, Memory);
-            var nearForceEnd = ForceEndFuncs.OrderBy(x => x).FirstOrDefault(x => address < x); // Специально '<', чтобы функция, начинающаяся с точного совпадения с ForceEndFuncs смогла начать декодироваться.
-
-            var nearAlreadyDecoded = AlreadyDecodedFuncs
-                .Where(x => x.Mode == Mode && address < (Address)(x.Raw.Length / 2))
-                .Select(x => x.Address)
-                .ToHashSet();
+            var nearestForceEnd = ForceEndFuncs.OrderBy(x => x).FirstOrDefault(x => address < x); // Специально '<', чтобы функция, начинающаяся с точного совпадения с ForceEndFuncs смогла начать декодироваться.
 
             for (;;)
             {
-                if (nearForceEnd <= disassembler.Address ||
-                        nearSuppressDecode <= disassembler.Address ||
-                        nearAlreadyDecoded.Contains((Address)disassembler.Address))
+                if (nearestForceEnd <= disassembler.Address ||
+                        nearestSuppressDecode <= disassembler.Address ||
+                        AlreadyDecodedFuncs.ContainsKey(disassembler.Address))
                     break;
 
                 var rawInstr = disassembler.NextInstruction();
@@ -130,6 +133,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
 
             }
+        }
+
+        public void set_string_data_area(Address begin, Address end)
+        {
+            _addCStringToCommentPlugin.StringDataAreaBegin = begin;
+            _addCStringToCommentPlugin.StringDataAreaEnd = end;
         }
     }
 }

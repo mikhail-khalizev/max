@@ -16,6 +16,7 @@ namespace x86 {
 
 class bin_to_cxx;
 
+// +
 class plugin_base : public exo::abstract_base
 {
     friend class bin_to_cxx;

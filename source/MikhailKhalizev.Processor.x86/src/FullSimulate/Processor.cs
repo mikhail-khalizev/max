@@ -533,7 +533,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 throw new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
 
             return new SegmentDescriptor(
-                Memory.mem_pg_raw(dt_base + offset, 8).Take(8).ToArray());
+                Memory.GetFixSize(dt_base + offset, 8).ToArray());
         }
 
         public void StoreSegmentDescriptor(ushort selector, SegmentDescriptor descriptor)
@@ -547,7 +547,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 throw
                     new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
 
-            ArraySegment<byte> ms = Memory.mem_pg_raw(gdtr_base + offset, 8);
+            var ms = Memory.GetFixSize(gdtr_base + offset, 8);
             descriptor.Bytes.CopyTo(ms.AsSpan());
         }
 
@@ -1024,7 +1024,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 tr.Descriptor.SystemSegmentTypeIn32BitMode != SystemSegmentTypeIn32BitMode.Tss32BitBusy)
                 throw new NotImplementedException();
 
-            var ms = Memory.mem_pg_raw(tr.Descriptor.Base, 104);
+            var ms = Memory.GetFixSize(tr.Descriptor.Base, 104);
 
             cr3 = ms.GetUInt32(28);
             eip = ms.GetUInt32(32);
@@ -1087,7 +1087,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 pushw(eip);
 
                 /* No error codes are pushed in real-address mode */
-                var ms = Memory.mem_pg_raw(idtr_base + num * 4, 4);
+                var ms = Memory.GetFixSize(idtr_base + num * 4, 4);
                 eip = ms.GetUInt16();
                 cs.Load(ms.GetUInt16(2));
             }
@@ -1242,7 +1242,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public void tss32SaveContext(Address address, bool next_eip, bool clr_nt_flag)
         {
-            var ms = Memory.mem_pg_raw(address, 104);
+            var ms = Memory.GetFixSize(address, 104);
 
             var ef = eflags.UInt32;
             if (clr_nt_flag)
@@ -1307,7 +1307,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                     if (eflags.nt)
                     {
                         // TASK-RETURN
-                        var tss_old_ms = Memory.mem_pg_raw(tr.Descriptor.Base, 104);
+                        var tss_old_ms = Memory.GetFixSize(tr.Descriptor.Base, 104);
                         var tss_new_selector = tss_old_ms.GetUInt16();
 
                         if (((tss_new_selector >> 2) & 0x1) == 1 /* local */

@@ -170,7 +170,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         MemoryAccess memd_a32 { get; }
         MemoryAccess memq_a32 { get; }
 
-        // IMemorySpaceReadAccess mem { get; }
+        // IMemoryReadAccess mem { get; }
 
         #endregion
 

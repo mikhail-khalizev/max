@@ -8,6 +8,7 @@ namespace x86 {
 namespace plugin {
 
 
+// +
 class add_comment_string_data : public plugin_base
 {
     addr_type string_data_area_begin;

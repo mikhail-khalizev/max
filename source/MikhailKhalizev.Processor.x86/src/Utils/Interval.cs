@@ -7,7 +7,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
     {
         public static Interval<T> From<T>(T begin, T end) => new Interval<T>(begin, end);
 
-        public static Interval<T> Empty<T>() => Interval<T>.Empty;
+        public static Interval<T> Empty<T>(T dummy = default) => Interval<T>.Empty;
     }
 
     /// <summary>

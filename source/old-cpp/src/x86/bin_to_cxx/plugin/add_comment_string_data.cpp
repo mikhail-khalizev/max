@@ -16,6 +16,7 @@ add_comment_string_data::add_comment_string_data(bin_to_cxx & obj_)
     register_on_instruction_decoded( exo::util::delegate_unsafe<void (cmd_info &)>::create(this, &add_comment_string_data::on_instruction_decoded) );
 }
 
+// +
 void add_comment_string_data::on_instruction_decoded(cmd_info & cmd)
 {
     for (int i = 0; i < 3; i++)

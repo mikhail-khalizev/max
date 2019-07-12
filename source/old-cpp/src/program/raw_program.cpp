@@ -155,6 +155,7 @@ static func_info * find_func_from_known_and_remember_it(seg_reg & seg, uint_<32>
     return NULL;
 }
 
+// +
 static void decode_function(seg_reg & seg, uint_<32> short_addr)
 {
 //    exit(1); // "--on-unknown-func={decode-and-exit, exit}"

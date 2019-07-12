@@ -68,9 +68,6 @@ namespace MikhailKhalizev.Max
             foreach (var x in JsonConvert.DeserializeObject<Dictionary<string, string>>(definitionsStr))
                 AddressNameConverter.KnownDefinitions[Address.Parse(x.Key)] = x.Value;
 
-            AddressNameConverter.DefaultNamespaceByAddress.Add(
-                (new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"));
-
             var funcsStr = File.ReadAllText("settings/funcs.json");
             var funcs = JsonConvert.DeserializeObject<List<FunctionModel>>(funcsStr);
             //var str = JsonConvert.SerializeObject(funcs, Formatting.Indented);
@@ -144,19 +141,6 @@ namespace MikhailKhalizev.Max
                         dec = dec.Replace("fld(0 /* st0 */, ", "fld(");
                         dec = dec.Replace("loopnzw", "loopnew");
                         dec = dec.Replace("setnb", "setae");
-                        dec = dec.Replace("setnb", "setae");
-                        dec = dec.Replace("/* sys */ ", "");
-                        cmdStr = cmdStr.Replace("/* sys */ ", "");
-
-                        if (cmdStr != dec &&
-                            !(dec.StartsWith("mov(memd_a32(") && cmdStr.StartsWith("mov(memw_a32")) &&
-                            !(dec.StartsWith("mov(gs, memd_a32") && cmdStr.StartsWith("mov(gs, memw_a32")) &&
-                            !(dec.StartsWith("mov(ds, memd_a32") && cmdStr.StartsWith("mov(ds, memw_a32")) &&
-                            !(dec.StartsWith("mov(es, memd_a32") && cmdStr.StartsWith("mov(es, memw_a32")) &&
-                            !(dec.StartsWith("mov(fs, memd_a32") && cmdStr.StartsWith("mov(fs, memw_a32")))
-                        {
-                            var i = 0;
-                        }
 
                         resultCmd.Add((arch, HexHelper.ToString(ins.Bytes), ia, dec, ins));
                     }

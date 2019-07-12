@@ -17,8 +17,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public ArraySegment<byte> MemorySpace =>
             _memorySpace ?? (_memorySpace = Segment == null
-                ? MemoryAccess.Memory.mem_pg_raw(Address, Bits)
-                : MemoryAccess.Memory.mem_seg_pg_raw(Segment, Address, Bits)).Value;
+                ? MemoryAccess.Memory.GetMinSize(Address, Bits / 8)
+                : MemoryAccess.Memory.GetMinSize(Segment, Address, Bits / 8)).Value;
         private ArraySegment<byte>? _memorySpace;
 
         /// <inheritdoc />

@@ -35,6 +35,7 @@ void write_addr(std::ostream & os, addr_type addr);
  */
 void write_addr_with_check_known_definitions(std::ostream & os, addr_type val, bool padding, bool with_namespace);
 
+// + AddressNameConverter.DefaultNamespaceByAddress
 /**
  * @brief Пространство имён по умолчанию, используемое у функций с заданым диапазонов адресов.
  */
@@ -140,6 +141,7 @@ public:
         already_decoded_funcs_.erase(addr);
     }
 
+    // +
     void set_string_data_area(addr_type begin, addr_type end)
     {
         plugin_add_comment_string_data.set_string_data_area(begin, end);

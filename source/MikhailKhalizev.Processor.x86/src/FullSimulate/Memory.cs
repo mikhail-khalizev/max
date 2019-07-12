@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
@@ -7,7 +8,7 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.FullSimulate
 {
-    public class Memory
+    public class Memory : IMemoryReadAccess, IDisposable
     {
         public byte[] Ram { get; set; }
 
@@ -20,10 +21,16 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         private readonly bool[] cache_ena = new bool[2];
         private readonly Address[] cache_map = new Address[2];
 
+        private GCHandle _handleRam;
+        private GCHandle _handleCache;
+
         public Memory(Processor processor)
         {
             Processor = processor;
             Ram = new byte[32 * 1024 * 1024]; // 32Mb = 0x200_0000
+
+            _handleRam = GCHandle.Alloc(Ram, GCHandleType.Pinned);
+            _handleCache = GCHandle.Alloc(cache, GCHandleType.Pinned);
         }
 
         /// <summary>
@@ -38,7 +45,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             var input = new Interval<Address>(address, address + size);
 
-            for (var i = 0; i < 2; i++)
+            for (var i = 0; i < cache.Length; i++)
             {
                 if (cache_ena[i] == false)
                     continue;
@@ -72,43 +79,43 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             return ret;
         }
 
-        /// <summary>
-        /// no seg, yes pg - may return size more, then input size.
-        /// </summary>
-        public ArraySegment<byte> mem_pg_raw(Address addr, int size)
+        /// <inheritdoc />
+        public ArraySegment<byte> GetMinSize(Address address, int minSize)
         {
             if (!Processor.cr0.pg)
-                return mem_phys_raw(addr, size);
+                return mem_phys_raw(address, minSize);
 
-            var physAddresses = new Address[2]; /* { current, current + page } */
-            physAddresses[0] = mem_pg_raw_get_phys_addr(addr);
+            var physAddresses = new Address[2]; // { current, current + page }
+            physAddresses[0] = mem_pg_raw_get_phys_addr(address);
 
-            Address startPageBase = physAddresses[0] & ~0xfffu;
-            Address endPageBase = (physAddresses[0] + (size == 0 ? 0 : size - 1)) & ~0xfffu;
+            Address firstPageBase = physAddresses[0] & ~0xfffu;
+            Address lastPageBase = (physAddresses[0] + (minSize == 0 ? 0 : minSize - 1)) & ~0xfffu;
 
             // Одна страница.
 
-            if (startPageBase == endPageBase)
-                return mem_phys_raw(physAddresses[0], size)
+            if (firstPageBase == lastPageBase)
+                return mem_phys_raw(physAddresses[0], minSize)
                     .Slice(0,
-                        endPageBase + 0x1000 -
+                        lastPageBase + 0x1000 -
                         physAddresses[0]); /* Ограничим размер страницей в которой находится область. */
 
             // Более двух страниц.
 
-            if (startPageBase + 0x1000 != endPageBase)
+            if (firstPageBase + 0x1000 != lastPageBase)
                 throw new NotImplementedException();
 
-            physAddresses[1] = mem_pg_raw_get_phys_addr(addr + 0x1000);
+            // Две страницы.
 
             // Страницы идут последовательно.
 
-            if (physAddresses[0] + 0x1000 == physAddresses[1])
-                return mem_phys_raw(physAddresses[0], size)
-                    .Slice(0,
-                        endPageBase + 0x1000 -
-                        physAddresses[0]); /* Ограничим размер страницами в которых находится область. */
+            physAddresses[1] = mem_pg_raw_get_phys_addr(address + 0x1000);
 
+            if (physAddresses[0] + 0x1000 == physAddresses[1])
+                return mem_phys_raw(physAddresses[0], minSize)
+                    .Slice(
+                        0,
+                        lastPageBase + 0x1000 -
+                        physAddresses[0]); // Ограничим размер страницами в которых находится область.
 
             // Не идут последовательно -> загружаем в кэш.
 
@@ -117,17 +124,20 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             for (var i = 0; i < 2; i++)
             {
-                if (cache_ena[i]) /* Страница кэша занята. */
+                // Страница кэша занята.
+                if (cache_ena[i]) 
                 {
-                    if ((cache_map[i] | 0xfff) != (physAddresses[i] | 0xfff)) /* И не тем, чем нужно. */
+                    // И не тем, чем нужно.
+                    if ((cache_map[i] | 0xfff) != (physAddresses[i] | 0xfff))
                     {
-                        /* Выгружаем страницу обратно. */
+                        // Выгружаем страницу обратно.
                         Array.Copy(cache, i * 0x1000, Ram, cache_map[i], 0x1000);
                         cache_ena[i] = false;
                     }
                 }
 
-                if (!cache_ena[i]) /* Страница кэша пуста. */
+                // Страница кэша пуста.
+                if (!cache_ena[i]) 
                 {
                     // Загружаем страницу.
                     cache_map[i] = physAddresses[i] & ~0xfffu;
@@ -142,18 +152,16 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 0x2000 - (physAddresses[0] - cache_map[0]));
         }
 
-        /// <summary>
-        /// yes seg, yes pg - may return size more, then input size.
-        /// </summary>
-        public ArraySegment<byte> mem_seg_pg_raw(SegmentRegister seg, Address address, int size)
+        /// <inheritdoc />
+        public ArraySegment<byte> GetMinSize(SegmentRegister seg, Address address, int minSize)
         {
             if (seg.Descriptor.Present == false /* @todo || seg.is_null() */)
                 throw new NotImplementedException();
 
-            if (seg.fail_limit_check(address, size))
+            if (seg.fail_limit_check(address, minSize))
                 throw new NotImplementedException();
 
-            var ret = mem_pg_raw(seg[address], size);
+            var ret = GetMinSize(seg[address], minSize);
 
 
             // correct size with segment limit
@@ -221,7 +229,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             while (left.Count != 0)
             {
-                var code = mem_pg_raw(address + proccessed, 1);
+                var code = GetMinSize(address + proccessed, 1);
 
                 if (left.Count <= code.Count)
                     return code.Slice(0, left.Count).SequenceEqual(left);
@@ -235,5 +243,28 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             return true;
         }
+
+        #region IDispose
+
+        private void ReleaseUnmanagedResources()
+        {
+            _handleRam.Free();
+            _handleCache.Free();
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            ReleaseUnmanagedResources();
+            GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc />
+        ~Memory()
+        {
+            ReleaseUnmanagedResources();
+        }
+
+        #endregion
     }
 }
