@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MikhailKhalizev.Utils
+namespace MikhailKhalizev.Processor.x86.Utils
 {
     public class CustomComparer<T> : IComparer<T>
     {

@@ -10,19 +10,6 @@ using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
-    public class DecodedCode
-    {
-        private SortedSet<Instruction> cmds = new SortedSet<Instruction>(Instruction.BeginComparer);
-        private UsedSpace<Address> area = new UsedSpace<Address>();
-
-        SortedSet<Instruction> cmd_get(Address addr)
-        {
-            return cmds.GetViewBetween(
-                Instruction.CreateDummyInstruction(addr), 
-                Instruction.CreateDummyInstruction(Address.MaxValue));
-        }
-    }
-
     /// <summary>
     /// Алгоритм декодирует код по частям. Каждую часть декодируется последовательно
     /// до тех пор пока не встретится потенциальный конец функции (ret или jmp). После
@@ -56,7 +43,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public MultiValueDictionary<Address, FunctionModel> AlreadyDecodedFuncs { get; } = new MultiValueDictionary<Address, FunctionModel>();
 
         // [begin, end)
-        public List<(Address, Address)> SuppressDecode { get; } = new List<(Address, Address)>();
+        public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
 
         //private HashSet<Instruction> AllDecodedInstruction
         private HashSet<DetectedMethod> NewDetectedMethods = new HashSet<DetectedMethod>(DetectedMethod.BeginEqualityComparer);
@@ -84,7 +71,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             Memory = memory;
 
             if (csBase != 0)
-                SuppressDecode.Add((0, csBase));
+                SuppressDecode.Add(0, csBase);
 
             _addCStringToCommentPlugin = new AddCStringToCommentPlugin(this);
         }
@@ -113,40 +100,41 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void Process(Address address)
         {
-            //if (code.contains(address))
-            //    return; // Код включающий этот адрес уже декодирован.
+            if (code.contains(address))
+                return; // Код включающий этот адрес уже декодирован.
 
             if (address < CsBase)
                 return;
 
-            var nearestSuppressDecode = SuppressDecode
-                .Where(x => address < x.Item2 || x.Item2 == 0)
-                .Select(x => x.Item1)
-                .DefaultIfEmpty(Address.MaxValue)
-                .Min();
+            // TODO
+            //var nearestSuppressDecode = SuppressDecode
+            //    .Where(x => address < x.Item2 || x.Item2 == 0)
+            //    .Select(x => x.Item1)
+            //    .DefaultIfEmpty(Address.MaxValue)
+            //    .Min();
 
-            if (nearestSuppressDecode <= address)
-                return;
+            //if (nearestSuppressDecode <= address)
+            //    return;
 
-            Memory.GetFixSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
+            //Memory.GetFixSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
 
-            var disassembler = Instruction.CreateDisassembler(Mode, address, Memory);
-            var nearestForceEnd = ForceEndFuncs.OrderBy(x => x).FirstOrDefault(x => address < x); // Специально '<', чтобы функция, начинающаяся с точного совпадения с ForceEndFuncs смогла начать декодироваться.
+            //var disassembler = Instruction.CreateDisassembler(Mode, address, Memory);
+            //var nearestForceEnd = ForceEndFuncs.OrderBy(x => x).FirstOrDefault(x => address < x); // Специально '<', чтобы функция, начинающаяся с точного совпадения с ForceEndFuncs смогла начать декодироваться.
 
-            for (;;)
-            {
-                if (nearestForceEnd <= disassembler.Address ||
-                        nearestSuppressDecode <= disassembler.Address ||
-                        AlreadyDecodedFuncs.ContainsKey(disassembler.Address))
-                    break;
+            //for (;;)
+            //{
+            //    if (nearestForceEnd <= disassembler.Address ||
+            //            nearestSuppressDecode <= disassembler.Address ||
+            //            AlreadyDecodedFuncs.ContainsKey(disassembler.Address))
+            //        break;
 
-                var rawInstr = disassembler.NextInstruction();
-                if (rawInstr == null)
-                    throw new InvalidOperationException("Преждевременное завершение функции из-за нехватки кода.");
-                var instr = new Instruction(rawInstr);
+            //    var rawInstr = disassembler.NextInstruction();
+            //    if (rawInstr == null)
+            //        throw new InvalidOperationException("Преждевременное завершение функции из-за нехватки кода.");
+            //    var instr = new Instruction(rawInstr);
 
 
-            }
+            //}
         }
 
         public void SetCStringDataArea(Address begin, Address end)

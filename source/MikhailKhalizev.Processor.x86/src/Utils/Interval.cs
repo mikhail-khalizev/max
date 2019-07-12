@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Utils
 {
@@ -126,7 +127,12 @@ namespace MikhailKhalizev.Processor.x86.Utils
         {
             return !left.Equals(right);
         }
-        
+
         #endregion
+
+
+        public static IComparer<Interval<T>> BeginComparer =>
+            new CustomComparer<Interval<T>>(
+                (x, y) => Comparer.Compare(x.Begin, y.Begin));
     }
 }

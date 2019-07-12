@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public int MemorySize => Ram.Length;
+        public int Length => Ram.Length;
 
         /// <summary>
         /// no seg, no pg - may return size more, then input size.

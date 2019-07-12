@@ -277,16 +277,25 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         #region Memory
 
-        public int MemorySize => Implementation.MemorySize;
+        /// <inheritdoc />
+        public IMemory Memory => Implementation.Memory;
 
+        /// <inheritdoc />
         public MemoryAccess memb_a16 => Implementation.memb_a16;
+        /// <inheritdoc />
         public MemoryAccess memw_a16 => Implementation.memw_a16;
+        /// <inheritdoc />
         public MemoryAccess memd_a16 => Implementation.memd_a16;
+        /// <inheritdoc />
         public MemoryAccess memq_a16 => Implementation.memq_a16;
 
+        /// <inheritdoc />
         public MemoryAccess memb_a32 => Implementation.memb_a32;
+        /// <inheritdoc />
         public MemoryAccess memw_a32 => Implementation.memw_a32;
+        /// <inheritdoc />
         public MemoryAccess memd_a32 => Implementation.memd_a32;
+        /// <inheritdoc />
         public MemoryAccess memq_a32 => Implementation.memq_a32;
 
         #endregion

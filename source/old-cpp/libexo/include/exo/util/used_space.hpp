@@ -164,6 +164,7 @@ public:
         spaces.clear();
     }
 
+// +
     iterator find(T const val, bool with_rigth_bound = true)
     {
         auto iter = spaces.upper_bound(val);
@@ -183,6 +184,7 @@ public:
         return end();
     }
 
+// +
     iterator lower_bound(T const val, bool with_rigth_bound = true)
     {
         auto iter = spaces.upper_bound(val);
@@ -203,11 +205,13 @@ public:
             return iterator(iter);
     }
 
+// +
     bool contains(T const val, bool with_rigth_bound = true)
     {
         return find(val, with_rigth_bound) != end();
     }
 
+// +
     iterator set_end(const iterator cur, T const new_end)
     {
         if (new_end == cur.get_begin())
@@ -236,6 +240,7 @@ public:
         return cur;
     }
 
+// +
     /** Добавляет область [begin, end). */
     iterator add(T new_begin, const T new_end)
     {

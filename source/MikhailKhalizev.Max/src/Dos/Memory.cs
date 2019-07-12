@@ -91,7 +91,7 @@ namespace MikhailKhalizev.Max.Dos
             {
                 ax = findParagraph;
 
-                if (MemorySize < (bx + ax).Int32 * 16)
+                if (Memory.Length < (bx + ax).Int32 * 16)
                     throw new Exception("std::bad_alloc()");
 
                 bx -= 1;
@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Dos
                 throw new Exception();
             }
 
-            if (MemorySize < bx.UInt16 * 16 + iter)
+            if (Memory.Length < bx.UInt16 * 16 + iter)
                 throw new Exception("std::bad_alloc()");
 
             eflags.cf = false;
@@ -192,7 +192,7 @@ namespace MikhailKhalizev.Max.Dos
                     dx = 1; // handle
                     ax = 1; // success
 
-                    if (MemorySize < handle_1_size + 0x130000)
+                    if (Memory.Length < handle_1_size + 0x130000)
                         throw new Exception("std::bad_alloc()");
 
                     maps.Add(0x130000, handle_1_size);

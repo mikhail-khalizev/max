@@ -361,10 +361,10 @@ namespace MikhailKhalizev.Max
                 Implementation.Memory);
 
             if (seg.Descriptor.Base != 0)
-                to_cxx.SuppressDecode.Add((0, seg.Descriptor.Base));
+                to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
 
             if (seg.Descriptor.Base + seg.Descriptor.Limit + 1 != 0)
-                to_cxx.SuppressDecode.Add((seg.Descriptor.Base + seg.Descriptor.Limit + 1 + 1, 0));
+                to_cxx.SuppressDecode.Add(seg.Descriptor.Base + seg.Descriptor.Limit + 1 + 1, 0);
 
 
             /* Аргументы следующим методам установлены опытным путём. */
@@ -526,7 +526,9 @@ namespace MikhailKhalizev.Max
             Console.WriteLine($"Запуск декодирования функции '{seg[short_addr]}'.");
 
             to_cxx.DecodeMethod(seg[short_addr]);
-            to_cxx.write_cxx_to_dir("src/Auto");
+
+            throw new NotImplementedException();
+            //to_cxx.write_cxx_to_dir("src/Auto");
         }
     }
 

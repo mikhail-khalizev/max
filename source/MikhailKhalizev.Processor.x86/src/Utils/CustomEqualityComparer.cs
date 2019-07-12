@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MikhailKhalizev.Utils
+namespace MikhailKhalizev.Processor.x86.Utils
 {
     /// <summary>
     /// Представляет настраиваемую реализацию <see cref="IEqualityComparer{T}" />.

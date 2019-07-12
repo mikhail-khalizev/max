@@ -1,7 +1,8 @@
 ﻿using FluentAssertions;
+using MikhailKhalizev.Utils;
 using Xunit;
 
-namespace MikhailKhalizev.Utils.Tests
+namespace MikhailKhalizev.Processor.x86.Tests.Utils
 {
     public class HexHelperTests
     {
