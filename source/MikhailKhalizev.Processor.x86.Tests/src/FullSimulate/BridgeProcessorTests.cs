@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
             eax = 0x0000_7678;
             sar(eax, 4);
             eax.UInt64.Should().Be(0x0000_0767);
-            
+
             eax = 0xffff_fffe;
             sar(eax, 1);
             eax.UInt64.Should().Be(0xffff_ffff);
@@ -92,7 +92,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
             al.UInt64.Should().Be(0b1000_0000);
             eflags.cf.Should().BeFalse();
         }
-        
+
         [Fact]
         public void Check_rol()
         {
@@ -151,7 +151,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
         public void CheckPopRegister()
         {
             memw_a32[0] = 0x0102;
-            
+
             popw(eax);
 
             eax.UInt32.Should().Be(0x0102);
@@ -161,24 +161,16 @@ namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
         [Fact(Skip = "work-in-progress")]
         public void Experemental()
         {
-            Manage(
-                new Block(0x100a1dca, () =>
-                {
-                    ii(0x100a1dca, 0x5); pushd(0x24);                          /* push dword 0x24 */
-                    // ii(0x100a1dcf, 0x5); calld(sys_check_available_stack_size, 0xc3f7e); /* call 0x10165d52 */
-                    ii(0x100a1dd4, 0x1); pushd(ebx);                           /* push ebx */
-                    ii(0x100a1dd5, 0x1); pushd(ecx);                           /* push ecx */
-                    ii(0x100a1dd6, 0x1); pushd(memb_a16[ss, 0x5]);
-                    ii(0x100a1dd7, 0x1); memb_a16[ss, 0x5] = memb_a16[ss, 0x6];
-                }),
-                new Block(0x100a1dd8, () =>
-                {
-                    ii(0x100a1dd8, 0x1); pushd(edi);                           /* push edi */
-                    ii(0x100a1dd9, 0x1); pushd(ebp);                           /* push ebp */
-                    ii(0x100a1dda, 0x2); mov(ebp, esp);                        /* mov ebp, esp */
-                    ii(0x100a1ddc, 0x6); sub(esp, 0x4);                        /* sub esp, 0x4 */
-                })
-            );
+            ii(0x100a1dca, 0x5); pushd(0x24);                          /* push dword 0x24 */
+         // ii(0x100a1dcf, 0x5); calld(sys_check_available_stack_size, 0xc3f7e); /* call 0x10165d52 */
+            ii(0x100a1dd4, 0x1); pushd(ebx);                           /* push ebx */
+            ii(0x100a1dd5, 0x1); pushd(ecx);                           /* push ecx */
+            ii(0x100a1dd6, 0x1); pushd(memb_a16[ss, 0x5]);
+            ii(0x100a1dd7, 0x1); memb_a16[ss, 0x5] = memb_a16[ss, 0x6];
+            ii(0x100a1dd8, 0x1); pushd(edi);                           /* push edi */
+            ii(0x100a1dd9, 0x1); pushd(ebp);                           /* push ebp */
+            ii(0x100a1dda, 0x2); mov(ebp, esp);                        /* mov ebp, esp */
+            ii(0x100a1ddc, 0x6); sub(esp, 0x4);                        /* sub esp, 0x4 */
         }
     }
 }

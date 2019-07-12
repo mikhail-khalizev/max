@@ -384,10 +384,9 @@ namespace MikhailKhalizev.Max
 
             foreach (var pair in funcs_by_pc)
             foreach (var info in pair.Value)
-            foreach (var address in info.Model.Addresses)
-                to_cxx.AlreadyDecodedFuncs.Add(address, info.Model);
+                to_cxx.AddAlreadyDecodedFunc(info.Model);
 
-            to_cxx.AlreadyDecodedFuncs.Remove(seg[short_addr]); // force decode.
+            to_cxx.RemoveAlreadyDecodedFunc(seg[short_addr]); // force decode.
 
             // TODO
 #if false
@@ -528,7 +527,7 @@ namespace MikhailKhalizev.Max
             to_cxx.DecodeMethod(seg[short_addr]);
 
             throw new NotImplementedException();
-            //to_cxx.write_cxx_to_dir("src/Auto");
+            //to_cxx.write_cxx_to_dir("src/Program/Auto");
         }
     }
 

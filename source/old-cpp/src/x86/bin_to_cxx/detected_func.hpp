@@ -10,6 +10,7 @@ namespace x86 {
 
 class cmd_info;
 
+// +
 struct detected_func
 {
     const addr_type begin; // 0 if unknown

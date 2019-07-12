@@ -86,6 +86,7 @@ decltype(bin_to_cxx::already_decoded_funcs_)::iterator bin_to_cxx::already_decod
     return already_decoded_funcs_.end();
 }
 
+// +
 // @todo Проверять suppress_decode.
 int bin_to_cxx::inp_code_hook(struct ud * ud_obj)
 {
@@ -121,7 +122,7 @@ void bin_to_cxx::decode_processing()
     }
 }
 
-
+// + Process
 void bin_to_cxx::decode_processing(addr_type addr_cur_func)
 {
     if (code.contains(addr_cur_func))

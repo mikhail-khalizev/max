@@ -19,20 +19,6 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         #region Registers
 
-        /// <inheritdoc />
-        public Address eip
-        {
-            get => Implementation.eip;
-            set => Implementation.eip = value;
-        }
-
-        /// <inheritdoc />
-        public Address CurrentInstructionAddress
-        {
-            get => Implementation.CurrentInstructionAddress;
-            set => Implementation.CurrentInstructionAddress = value;
-        }
-
         public Register eax
         {
             get => Implementation.eax;
@@ -273,6 +259,20 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             set => Implementation.idtr_limit = value;
         }
 
+        /// <inheritdoc />
+        public Address eip
+        {
+            get => Implementation.eip;
+            set => Implementation.eip = value;
+        }
+        
+        /// <inheritdoc />
+        public Address CurrentInstructionAddress
+        {
+            get => Implementation.CurrentInstructionAddress;
+            set => Implementation.CurrentInstructionAddress = value;
+        }
+
         #endregion
 
         #region Memory
@@ -304,10 +304,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         /// <inheritdoc />
         public void ii(Address address, uint length) => Implementation.ii(address, length);
-
-        /// <inheritdoc />
-        public void Manage(params object[] blocks) => Implementation.Manage(blocks);
-
+        
         #endregion
 
         #region Instructions

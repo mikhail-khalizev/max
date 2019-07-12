@@ -51,17 +51,20 @@ namespace MikhailKhalizev.Max
                 .Build();
             ConfigurationDto = Configuration.Get<ConfigurationDto>();
 
+
             // Check configuration.
 
             var installedPath = ConfigurationDto.Max.InstalledPath;
             if (!Directory.Exists(installedPath))
                 throw new InvalidOperationException($"Directory '{installedPath}' not found. Check Max:InstalledPath configuration parameter.");
 
+
             // Create ServiceProvider.
 
             var serviceCollection = new ServiceCollection();
             Services = serviceCollection.BuildServiceProvider();
             
+
             // Start.
             
             var definitionsStr = File.ReadAllText("settings/definitions.json");

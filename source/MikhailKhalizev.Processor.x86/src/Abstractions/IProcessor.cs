@@ -174,10 +174,11 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         #region C# emulate specific
 
+        /// <summary>
+        /// Set instruction info before execute.
+        /// </summary>
         void ii(Address address, uint length);
-
-        void Manage(params object[] blocks);
-
+        
         #endregion
 
         #region Instructions

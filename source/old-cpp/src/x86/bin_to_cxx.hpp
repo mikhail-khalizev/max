@@ -131,11 +131,13 @@ public:
         return const_cast<std::set<addr_type>&>(force_end_funcs_);
     }
 
+// +
     void already_decoded_funcs_insert(addr_type addr, exo::memory_space_const code_)
     {
         already_decoded_funcs_.insert(std::make_pair(addr, std::make_pair(code_, 0)));
     }
 
+// +
     void already_decoded_funcs_erase(addr_type addr)
     {
         already_decoded_funcs_.erase(addr);

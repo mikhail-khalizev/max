@@ -84,8 +84,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (instr == null)
                 throw new ArgumentNullException(nameof(instr));
 
-            Begin = (Address)instr.Offset;
-            End = (Address)instr.PC;
+            Begin = instr.Offset;
+            End = instr.PC;
 
             _mnemonic = instr.Mnemonic;
 

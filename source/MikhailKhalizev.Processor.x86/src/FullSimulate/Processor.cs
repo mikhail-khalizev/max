@@ -617,11 +617,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 throw new Exception("Bad eip");
         }
 
-        public void Manage(params object[] blocks)
-        {
-            throw new NotImplementedException();
-        }
-
         public void jmp_far_prepare(ushort segmentSelector, Address tempEIP)
         {
             if (!cr0.pe || (cr0.pe && eflags.vm)) /* Real-address or virtual-8086 mode */

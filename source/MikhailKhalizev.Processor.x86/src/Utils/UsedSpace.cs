@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
             return interval;
         }
 
-        public Interval<T> Find(T val, bool withRightBound = true)
+        public Interval<T> Find(T val, bool withRightBound)
         {
             var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(val, default));
             if (view.Count == 0)
@@ -178,14 +178,17 @@ namespace MikhailKhalizev.Processor.x86.Utils
             return Interval<T>.Empty;
         }
 
-        public bool Contains(T val, bool withRightBound = true)
+        public bool Contains(T val, bool withRightBound)
         {
             return !Find(val, withRightBound).IsEmpty;
         }
 
-        public Interval<T> LowerBound(T val, bool withRightBound = true)
+        /// <summary>
+        /// Возвращает интервал с наименьшим Begin содержащий область значений больше и равную value.
+        /// </summary>
+        public Interval<T> LowerBound(T value, bool withRightBound)
         {
-            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(val, default));
+            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(value, default));
             
             if (view.Count != 0)
             {
@@ -196,37 +199,18 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
                 if (withRightBound)
                 {
-                    if (Comparer.Compare(val, interval.End) <= 0)
+                    if (Comparer.Compare(value, interval.End) <= 0)
                         return interval;
                 }
                 else
                 {
-                    if (Comparer.Compare(val, interval.End) < 0)
+                    if (Comparer.Compare(value, interval.End) < 0)
                         return interval;
                 }
             }
 
-            return _spaces.GetViewBetween(Interval.From(val, default), Interval.From(MaxValue, default)).FirstOrDefault();
+            return _spaces.GetViewBetween(Interval.From(value, default), Interval.From(MaxValue, default)).FirstOrDefault();
         }
-
-        #region IReadOnlyCollection
-
-        /// <inheritdoc />
-        public IEnumerator<Interval<T>> GetEnumerator()
-        {
-            return _spaces.GetEnumerator();
-        }
-
-        /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable) _spaces).GetEnumerator();
-        }
-
-        /// <inheritdoc />
-        public int Count => _spaces.Count;
-
-        #endregion
 
         public string ToSpacesString()
         {
@@ -243,5 +227,24 @@ namespace MikhailKhalizev.Processor.x86.Utils
             sb.Length -= 2;
             return sb.ToString();
         }
+
+        #region IReadOnlyCollection
+
+        /// <inheritdoc />
+        public IEnumerator<Interval<T>> GetEnumerator()
+        {
+            return _spaces.GetEnumerator();
+        }
+
+        /// <inheritdoc />
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)_spaces).GetEnumerator();
+        }
+
+        /// <inheritdoc />
+        public int Count => _spaces.Count;
+
+        #endregion
     }
 }

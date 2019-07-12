@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             var input = new Interval<Address>(address, address + size);
 
-            for (var i = 0; i < cache.Length; i++)
+            for (var i = 0; i < 2; i++)
             {
                 if (cache_ena[i] == false)
                     continue;
