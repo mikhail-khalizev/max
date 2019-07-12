@@ -455,8 +455,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         #region Memory
 
         public Memory Memory { get; }
-
-        public int MemorySize => Memory.Ram.Length;
+        IMemory IProcessor.Memory => Memory;
 
         public MemoryAccess memb_a16 { get; }
         public MemoryAccess memw_a16 { get; }

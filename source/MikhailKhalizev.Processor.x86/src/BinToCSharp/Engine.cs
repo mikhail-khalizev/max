@@ -5,10 +5,24 @@ using MikhailKhalizev.Max;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.BinToCSharp.Plugin;
+using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
+    public class DecodedCode
+    {
+        private SortedSet<Instruction> cmds = new SortedSet<Instruction>(Instruction.BeginComparer);
+        private UsedSpace<Address> area = new UsedSpace<Address>();
+
+        SortedSet<Instruction> cmd_get(Address addr)
+        {
+            return cmds.GetViewBetween(
+                Instruction.CreateDummyInstruction(addr), 
+                Instruction.CreateDummyInstruction(Address.MaxValue));
+        }
+    }
+
     /// <summary>
     /// Алгоритм декодирует код по частям. Каждую часть декодируется последовательно
     /// до тех пор пока не встретится потенциальный конец функции (ret или jmp). После
@@ -24,7 +38,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
-        public IMemoryReadAccess Memory { get; }
+        public IMemory Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
 
@@ -50,7 +64,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private Dictionary<Address, ArchitectureMode> Aligment = new Dictionary<Address, ArchitectureMode>(); // <addr of start, aligment>
 
         // std::map<addr_type, jtka> jmp_to_known_addr; /* <cmd_addr_start, ... */
-        // decoded_code code;        
+        private DecodedCode code = new DecodedCode();
         // addr_type pc_used_in_input_hook;
 
         private const int LineCmdOffset = 22;
@@ -62,7 +76,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         // TODO plugin::comment_idle plugin_comment_idle; - comment dummy instruction
 
 
-        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemoryReadAccess memory)
+        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemory memory)
         {
             Mode = mode;
             CsBase = csBase;
@@ -75,25 +89,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             _addCStringToCommentPlugin = new AddCStringToCommentPlugin(this);
         }
 
-        public void Decode(Address address)
-        {
-            AddressesToDecode.Add(address);
-            Process();
-        }
-
         public void DecodeMethod(Address address)
         {
             if (NewDetectedMethods.Add(new DetectedMethod(address)))
                 Decode(address);
         }
 
+        private void Decode(Address address)
+        {
+            AddressesToDecode.Add(address);
+            Process();
+        }
+
         private void Process()
         {
             while (AddressesToDecode.Count != 0)
             {
-                var addr = AddressesToDecode.First();
-                AddressesToDecode.Remove(addr);
-                Process(addr);
+                var address = AddressesToDecode.First();
+                AddressesToDecode.Remove(address);
+                Process(address);
             }
         }
 
@@ -135,7 +149,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        public void set_string_data_area(Address begin, Address end)
+        public void SetCStringDataArea(Address begin, Address end)
         {
             _addCStringToCommentPlugin.StringDataAreaBegin = begin;
             _addCStringToCommentPlugin.StringDataAreaEnd = end;

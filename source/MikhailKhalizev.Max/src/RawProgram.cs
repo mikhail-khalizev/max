@@ -200,7 +200,7 @@ namespace MikhailKhalizev.Max
                     $", gs.val {gs.Selector:x}");
             }
 
-            CurrentInstructionAddress = eip; // Check, is it correct?
+            CurrentInstructionAddress = eip; // TODO Check, is it correct?
             var info = get_func(cs, eip);
 
             if (extra_log)
@@ -208,7 +208,7 @@ namespace MikhailKhalizev.Max
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
             info.func();
-            CurrentInstructionAddress = eip; // Check, is it correct?
+            CurrentInstructionAddress = eip; // TODO Check, is it correct?
 
             if (on_run_func__dump_reg)
             {
@@ -369,7 +369,7 @@ namespace MikhailKhalizev.Max
 
             /* Аргументы следующим методам установлены опытным путём. */
 
-            to_cxx.set_string_data_area(0x101a0003, 0x101b384d);
+            to_cxx.SetCStringDataArea(0x101a0003, 0x101b384d);
 
             to_cxx.ForceEndFuncs.Add(0x14b5b5);
             to_cxx.ForceEndFuncs.Add(0x14edfc);
@@ -389,22 +389,19 @@ namespace MikhailKhalizev.Max
 
             to_cxx.AlreadyDecodedFuncs.Remove(seg[short_addr]); // force decode.
 
-
+            // TODO
 #if false
     // Замечено, что многие функции начинаются со следующих двух команд.
 
-    {0x68, 0x28, 0, 0, 0,  0xe8, 0x90, 0xa1, 0xb, 0}
-    II(0x100abbb8, 0x5)   pushd(0x28);                          /* push dword 0x28 */
-    II(0x100abbbd, 0x5)   calld(sys_check_available_stack_size, 0xba190); /* call 0x10165d52 */
-#endif
+    // {0x68, 0x28, 0, 0, 0,  0xe8, 0x90, 0xa1, 0xb, 0}
+    // II(0x100abbb8, 0x5)   pushd(0x28);                          /* push dword 0x28 */
+    // II(0x100abbbd, 0x5)   calld(sys_check_available_stack_size, 0xb_a190); /* call 0x10165d52 */
 
-#if true
-    const addr_type code_start = 0x10070000;
-    const addr_type code_end = 0x10165d52;
-
+    const Address code_start = 0x1007_0000;
+    const Address code_end = 0x1016_5d52;
 
     static bool its_first = true;
-    if (cs.get_base() == 0 && cs.get_db() && its_first)
+    if (cs.Descriptor.Base == 0 && cs.db && its_first)
     {
         its_first = false;
 
@@ -417,7 +414,7 @@ namespace MikhailKhalizev.Max
             if (code.get<uint_<8>>() == 0x68)
             {
                 code = mem_seg_pg_raw(seg, i, 10);
-                if (code.get<uint_<8>>(0, 5) == 0xe8 && (code.get<uint_<32>>(0, 6) + i + 10 == 0x10165d52)
+                if (code.get<uint_<8>>(0, 5) == 0xe8 && (code.get<uint_<32>>(0, 6) + i + 10 == 0x1016_5d52)
                         && funcs_by_pc.find(i) == funcs_by_pc.end())
                     to_cxx.decode_func(i);
             }
@@ -514,7 +511,8 @@ namespace MikhailKhalizev.Max
             //    to_cxx.add_region_to_suppress_decode(0x10289000, 0); // Чтоб не выходил за пределы MAXRUN.EXE
             //    to_cxx.decode_area(code_start, code_end); // Весь код MAXRUN.EXE
 
-# ifdef PREDICTABLE_DECODE
+            // TODO
+#if false // PREDICTABLE_DECODE
             // Функции, когда либо запускавшиеся.
             for (auto i = std::begin(used_funcs_known); i != std::end(used_funcs_known); i++)
                 if (i->second == (seg.get_db() ? 32 : 16)
@@ -525,13 +523,10 @@ namespace MikhailKhalizev.Max
                 }
 #endif
 
-            // @todo -> Перенести в to_cxx. И добавить флаг verbose. Или просто в syslog info.
-            std::cout << "Запуск декодирования функции '" << std::hex << std::showbase;
-            write_addr(std::cout, seg.get_base() + short_addr);
-            std::cout << "'." << std::endl;
+            Console.WriteLine($"Запуск декодирования функции '{seg[short_addr]}'.");
 
-            to_cxx.decode_func(seg.get_base() + short_addr);
-            to_cxx.write_cxx_to_dir("program/auto");
+            to_cxx.DecodeMethod(seg[short_addr]);
+            to_cxx.write_cxx_to_dir("src/Auto");
         }
     }
 

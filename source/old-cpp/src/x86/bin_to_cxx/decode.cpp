@@ -17,17 +17,20 @@ namespace raw_program {
 namespace x86 {
 
 
+// +
 void bin_to_cxx::decode(addr_type addr)
 {
     addr_to_decode.insert(addr);
     decode_processing();
 }
 
+// -
 void bin_to_cxx::decode_func(addr_type addr)
 {
     decode_func(addr, "Функция определена пользователем.");
 }
 
+// +
 void bin_to_cxx::decode_func(addr_type addr, std::string /* reason */)
 {
     auto ret = new_detected_funcs.insert(detected_func(addr)); // create if not exist.
@@ -106,6 +109,7 @@ int bin_to_cxx::inp_code_hook(struct ud * ud_obj)
     }
 }
 
+// + Process
 void bin_to_cxx::decode_processing()
 {
     while (addr_to_decode.size() != 0)

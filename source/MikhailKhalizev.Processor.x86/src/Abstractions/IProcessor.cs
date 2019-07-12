@@ -158,8 +158,8 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         #region Memory
 
-        int MemorySize { get; }
-
+        IMemory Memory { get; }
+        
         MemoryAccess memb_a16 { get; }
         MemoryAccess memw_a16 { get; }
         MemoryAccess memd_a16 { get; }
@@ -169,9 +169,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         MemoryAccess memw_a32 { get; }
         MemoryAccess memd_a32 { get; }
         MemoryAccess memq_a32 { get; }
-
-        // IMemoryReadAccess mem { get; }
-
+        
         #endregion
 
         #region C# emulate specific

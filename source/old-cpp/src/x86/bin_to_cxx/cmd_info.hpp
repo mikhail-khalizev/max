@@ -18,6 +18,7 @@ namespace x86 {
 
 class detected_func;
 
+// + MikhailKhalizev.Processor.x86.BinToCSharp.Instruction
 struct cmd_info
 {
     const addr_type begin;

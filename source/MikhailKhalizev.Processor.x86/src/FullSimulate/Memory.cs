@@ -8,7 +8,7 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.FullSimulate
 {
-    public class Memory : IMemoryReadAccess, IDisposable
+    public class Memory : IMemory, IDisposable
     {
         public byte[] Ram { get; set; }
 
@@ -32,6 +32,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             _handleRam = GCHandle.Alloc(Ram, GCHandleType.Pinned);
             _handleCache = GCHandle.Alloc(cache, GCHandleType.Pinned);
         }
+
+        /// <inheritdoc />
+        public int MemorySize => Ram.Length;
 
         /// <summary>
         /// no seg, no pg - may return size more, then input size.

@@ -8,17 +8,17 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
 {
     public static class MemoryReadAccessExtension
     {
-        public static ArraySegment<byte> GetFixSize(this IMemoryReadAccess memory, Address address, int size)
+        public static ArraySegment<byte> GetFixSize(this IMemory memory, Address address, int size)
         {
             return memory.GetMinSize(address, size).Slice(0, size);
         }
      
-        public static ArraySegment<byte> GetFixSize(this IMemoryReadAccess memory, SegmentRegister seg, Address address, int size)
+        public static ArraySegment<byte> GetFixSize(this IMemory memory, SegmentRegister seg, Address address, int size)
         {
             return memory.GetMinSize(seg, address, size).Slice(0, size);
         }
 
-        public static unsafe ref T GetStruct<T>(this IMemoryReadAccess memory, Address address)
+        public static unsafe ref T GetStruct<T>(this IMemory memory, Address address)
             where T : struct
         {
             var bytes = memory.GetMinSize(address, Marshal.SizeOf<T>());

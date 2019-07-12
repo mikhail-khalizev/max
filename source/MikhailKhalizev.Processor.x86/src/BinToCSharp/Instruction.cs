@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public Address End { get; }
 
         public List<string> Comments { get; } = new List<string>();
-        //private bool _commentThis; // Закомментировать всю напечатанную строку.
+        public bool _commentThis; // Закомментировать всю напечатанную строку.
 
         private int _addrMode;
         private int _oprMode;
@@ -38,15 +38,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private bool _is_jmp_or_ret;
 
 
+        private Instruction(Address begin)
+        {
+            Begin = begin;
+        }
+
+        public static Instruction CreateDummyInstruction(Address begin)
+        {
+            return new Instruction(begin);
+        }
+
         public Instruction(ArchitectureMode mode, Address address, byte[] raw)
             : this(new Disassembler(raw, mode, address, true, Vendor.Intel).NextInstruction())
         { }
 
-        public Instruction(ArchitectureMode mode, Address address, IMemoryReadAccess memory)
+        public Instruction(ArchitectureMode mode, Address address, IMemory memory)
             : this(CreateDisassembler(mode, address, memory).NextInstruction())
         { }
 
-        public static Disassembler CreateDisassembler(ArchitectureMode mode, Address address, IMemoryReadAccess memory)
+        public static Disassembler CreateDisassembler(ArchitectureMode mode, Address address, IMemory memory)
         {
             var disassembler = new Disassembler(new byte[0], mode, 0, true, Vendor.Intel);
             var ud = disassembler._u;
@@ -665,5 +675,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             };
 
         #endregion
+
+        public static IEqualityComparer<Instruction> BeginEqualityComparer =>
+            new CustomEqualityComparer<Instruction>(
+                (x, y) => x.Begin == y.Begin,
+                x => x.Begin.GetHashCode());
+
+        public static IComparer<Instruction> BeginComparer =>
+            new CustomComparer<Instruction>(
+                (x, y) => x.Begin.CompareTo(y.Begin));
     }
 }

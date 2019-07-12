@@ -58,6 +58,7 @@ public:
         return cmds.end();
     }
 
+    // +
     decltype(cmds.begin()) cmd_get(addr_type addr)
     {
         return cmds.find(cmd_info(addr));
