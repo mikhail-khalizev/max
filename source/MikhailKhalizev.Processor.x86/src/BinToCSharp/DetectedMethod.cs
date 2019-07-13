@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     {
         public Address Begin { get; }
         public Address End { get; set; } // 0 if unknown
-        public HashSet<Address> Labels { get; } = new HashSet<Address>();
-        public List<Instruction> Instructions { get; } = new List<Instruction>();
+        public HashSet<Address> Labels { get; set; } = new HashSet<Address>();
+        public List<Instruction> Instructions { get; set; } = new List<Instruction>();
         
         //        addr_type count_call_to_this;
         //        std::string[] reason_to_add; // @todo Условие добавления (для отладки).
@@ -24,5 +24,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             new CustomEqualityComparer<DetectedMethod>(
                 (x, y) => x.Begin == y.Begin,
                 x => x.Begin.GetHashCode());
+
+        public static IComparer<DetectedMethod> BeginComparer =>
+            new CustomComparer<DetectedMethod>(
+                (x, y) => x.Begin.CompareTo(y.Begin));
     }
 }

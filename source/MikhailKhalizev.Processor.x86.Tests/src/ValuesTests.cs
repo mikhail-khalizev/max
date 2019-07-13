@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Processor.x86.Tests
         [Fact]
         public void CheckInt64ValueNegative()
         {
-            var v = new NumericValue(-1l);
+            var v = new NumericValue(-1L);
             v.UInt64.Should().Be(0xffff_ffff_ffff_ffff);
         }
 

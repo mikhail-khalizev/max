@@ -48,6 +48,7 @@ public:
         return area.end();
     }
 
+// +
     decltype(area.begin()) area_find(const addr_type val, bool with_rigth_bound = true)
     {
         return area.find(val, with_rigth_bound);
@@ -91,6 +92,7 @@ public:
         return cmds.end();
     }
 
+// +
     /**
      * @brief Возвращает инструкцию, следующую за заданной.
      * @param i Инструкция, для которой необходимо определить следующую инструкцию.

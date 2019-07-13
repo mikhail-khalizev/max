@@ -40,7 +40,7 @@ void bin_to_cxx::decode_func(addr_type addr, std::string /* reason */)
     decode(addr);
 }
 
-
+// -
 void bin_to_cxx::decode_area(addr_type begin, addr_type end)
 {
     throw exo::exception::not_implemented();
@@ -77,6 +77,7 @@ bool bin_to_cxx::already_decoded_funcs_check(decltype(already_decoded_funcs_)::i
     return (iter -> second.second == 1);
 }
 
+// +
 decltype(bin_to_cxx::already_decoded_funcs_)::iterator bin_to_cxx::already_decoded_funcs_try_find(addr_type addr, addr_type size)
 {
     for (auto i = already_decoded_funcs_.begin(); i != already_decoded_funcs_.end(); i++)
@@ -216,6 +217,7 @@ void bin_to_cxx::decode_processing(addr_type addr_cur_func)
     }
 }
 
+// +
 void bin_to_cxx::add_aligment_as_instructions()
 {
     for (auto & a : aligment)
@@ -239,6 +241,7 @@ void bin_to_cxx::add_aligment_as_instructions()
     }
 }
 
+// +
 void bin_to_cxx::layout_funcs()
 {
     add_aligment_as_instructions();

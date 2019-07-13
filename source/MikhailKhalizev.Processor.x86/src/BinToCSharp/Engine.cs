@@ -30,6 +30,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public IMemory Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
+        
+        public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
+
+
 
         /// <summary>
         /// Список адресов на которых происходит принудительное завершение декодирования.
@@ -76,26 +80,33 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return false;
         }
 
+        FunctionModel already_decoded_funcs_try_find(Address addr, int size)
+        {
+            foreach (var pair in already_decoded_funcs_)
+            foreach (var functionModel in pair.Value)
+            {
+                var bytes = functionModel.GetRawBytes();
+                if (bytes.Length == size && Memory.mem_pg_equals(addr, bytes))
+                    return functionModel;
+            }
 
-        public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
+            return null;
+        }
 
-        //private HashSet<Instruction> AllDecodedInstruction
-
-        /// <summary>
-        /// Содержит информацию об определённых методах.
-        /// </summary>
-        private HashSet<DetectedMethod> NewDetectedMethods = new HashSet<DetectedMethod>(DetectedMethod.BeginEqualityComparer);
-        
         /// <summary>
         /// Набор адресов начиная с которых необходимо произвести декодирование.
         /// </summary>
         private HashSet<Address> AddressesToDecode = new HashSet<Address>();
 
-        private Dictionary<Address, ArchitectureMode> Aligment = new Dictionary<Address, ArchitectureMode>(); // <addr of start, aligment>
+        /// <summary>
+        /// Содержит информацию об определённых методах.
+        /// </summary>
+        private SortedSet<DetectedMethod> NewDetectedMethods = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
 
-        // std::map<addr_type, jtka> jmp_to_known_addr; /* <cmd_addr_start, ... */
+        private Dictionary<Address, int> Aligment = new Dictionary<Address, int>(); // <addr of start, aligment>
+
+        private SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
         private DecodedCode code = new DecodedCode();
-        // addr_type pc_used_in_input_hook;
 
         private const int LineCmdOffset = 22;
         private const int LineCommentOffset = 60;
@@ -250,6 +261,181 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             _addCStringToCommentPlugin.StringDataAreaBegin = begin;
             _addCStringToCommentPlugin.StringDataAreaEnd = end;
+        }
+        
+        public void add_aligment_as_instructions()
+        {
+            foreach (var a in Aligment)
+            {
+                var iter_area = code.area.Find(a.Key, false);
+                if (iter_area.IsEmpty)
+                    throw new InvalidOperationException();
+
+                if (iter_area.Begin < a.Key)
+                    continue; // Выравнивание не требуется, т.к. до нас уже что-то есть.
+
+                if (iter_area != code.area.First())
+                {
+                    var i = code.area.GetIntervalBefore(a.Key);
+                    var prev_addr = i.End;
+
+                    if (a.Key < prev_addr + a.Value)
+                        code.Insert(new Instruction(prev_addr, a.Key, "Выравнивание."));
+                }
+            }
+        }
+
+        public void layout_funcs()
+        {
+            add_aligment_as_instructions();
+            
+            while (true)
+            {
+                var success_count = 0;
+                var toRemove = new List<DetectedMethod>();
+
+                foreach (var func in NewDetectedMethods)
+                {
+                    var addr_func = func.Begin;
+
+                    // Следует ли вычислять конец этой функции или он уже вычислен.
+                    if (func.End != 0)
+                    {
+                        var next = NewDetectedMethods.GetViewBetween(
+                            new DetectedMethod(addr_func + 1),
+                            new DetectedMethod(Address.MaxValue)).FirstOrDefault();
+
+                        if (next != null && func.End <= next.Begin)
+                        {
+                            success_count++;
+                            continue;
+                        }
+
+                        func.End = 0;
+                    }
+
+                    if (!code.Contains(addr_func))
+                    {
+                        // Вообще не декодировали этот адрес. Видимо он либо alredy_decoded или suppress.
+                        toRemove.Add(func);
+                        continue;
+                    }
+
+                    // --- Вычисляем... ---
+                    
+                    var first_cmd = code.cmd_get(addr_func);
+
+                    if (first_cmd == null)
+                        throw new InvalidOperationException("Начало функции делит инструкцию пополам.");
+
+                    // --- Посчитаем min_end - адрес конца функции, дальше которого функция точно уже не может продолжаться. ---
+
+                    var nearestForceEnd = force_end_funcs_.GetViewBetween(addr_func, Address.MaxValue)
+                        .Where(x => x != addr_func)
+                        .DefaultIfEmpty(Address.MaxValue)
+                        .First();
+
+                    var min_end = nearestForceEnd;
+
+                    // Учтём, что инструкции в decoded_code могут пересекаться. Найдём 'верную дорожку'.
+
+                    var instr = new List<Instruction>();
+                    var last_instr_end = first_cmd.Begin;
+                    var may_be_end_of_func = new List<Address>();
+
+                    for (var cmd = first_cmd; cmd != null; cmd = code.cmd_get_next_logical(cmd))
+                    {
+                        if (min_end <= cmd.Begin)
+                            break;
+
+                        if (2 * (last_instr_end - first_cmd.Begin) < cmd.Begin - last_instr_end)
+                            break; // Не допускаем большие "дыры".
+
+                        // Проверим на принадлежность к new_detected_funcs.
+
+                        if (NewDetectedMethods.Contains(new DetectedMethod(cmd.Begin)))
+                        {
+                            // Т.к. эта инструкция является new_detected_funcs, то предыдущая - конец функции.
+                            break;
+                        }
+
+                        // Проверим на принадлежность к already_decoded_funcs_.
+
+                        if (already_decoded_funcs_check(cmd.Begin))
+                        {
+                            // Нашли среди декодированных.
+                            break;
+                        }
+
+                        if (cmd._is_jmp_or_ret)
+                            may_be_end_of_func.Add(cmd.End);
+
+                        instr.Add(cmd);
+                        last_instr_end = cmd.End;
+                    }
+
+                    // Убираем конечные закомментированные инструкции.
+
+                    while (instr.Count != 0)
+                    {
+                        if (instr[instr.Count - 1]._commentThis == false)
+                            break;
+
+                        instr.RemoveAt(instr.Count - 1);
+                    }
+
+                    min_end = instr[instr.Count - 1].End;
+
+                    // Заполняем label.
+
+                    func.Labels.Clear();
+
+                    foreach (var i in jmp_to_known_addr.GetViewBetween(JumpsToKnownAddresses.CreateDummy(addr_func), JumpsToKnownAddresses.CreateDummy(min_end)))
+                    {
+                        foreach (var to in i.To)
+                        {
+                            if (addr_func <= to && to < min_end)
+                            {
+                                // Ссылка внутрь функции.
+
+                                var index = instr.BinarySearch(Instruction.CreateDummyInstruction(to), Instruction.BeginComparer);
+
+                                if (0 <= index)
+                                    func.Labels.Add(to);
+                                else
+                                {
+                                    Console.Error.WriteLine($"Предупреждение: Метка '{to}' делит инструкцию пополам.");
+
+                                    // @todo Улучшить.
+                                    NewDetectedMethods.Add(new DetectedMethod(to)); // create if not exist.
+                                }
+                            }
+                            else
+                            {
+                                if (code.Contains(to))
+                                    NewDetectedMethods.Add(new DetectedMethod(to)); // create if not exist.
+                            }
+                        }
+                    }
+
+                    func.Instructions = instr;
+                    func.End = min_end;
+                    success_count++;
+                }
+
+                foreach (var detectedMethod in toRemove)
+                    NewDetectedMethods.Remove(detectedMethod);
+
+                if (success_count == NewDetectedMethods.Count)
+                    break;
+            }
+        }
+
+        public void write_cxx_to_dir(string path)
+        {
+            layout_funcs();
+
+            throw new NotImplementedException();
         }
     }
 }

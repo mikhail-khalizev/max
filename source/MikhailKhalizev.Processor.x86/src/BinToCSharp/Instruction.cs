@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public Address Begin { get; }
         public Address End { get; }
 
-        public List<string> Comments { get; } = new List<string>();
+        public List<string> Comments { get; }
         public bool _commentThis; // Закомментировать всю напечатанную строку.
 
         public int _addrMode;
@@ -48,10 +48,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return new Instruction(begin);
         }
 
+        public Instruction(Address begin, Address end, string comment)
+        {
+            Begin = begin;
+            End = end;
+            Comments = new List<string> { comment };
+        }
+
         public Instruction(SharpDisasm.Instruction instr)
         {
             if (instr == null)
                 throw new ArgumentNullException(nameof(instr));
+            
+            Comments = new List<string>();
 
             Begin = instr.Offset;
             End = instr.PC;

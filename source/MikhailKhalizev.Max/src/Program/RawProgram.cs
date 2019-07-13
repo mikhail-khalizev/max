@@ -526,8 +526,7 @@ namespace MikhailKhalizev.Max
 
             to_cxx.DecodeMethod(seg[short_addr]);
 
-            throw new NotImplementedException();
-            //to_cxx.write_cxx_to_dir("src/Program/Auto");
+            to_cxx.write_cxx_to_dir("src/Program/Auto");
         }
     }
 

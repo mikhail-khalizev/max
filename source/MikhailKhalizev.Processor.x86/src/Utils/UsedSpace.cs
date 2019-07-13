@@ -183,8 +183,18 @@ namespace MikhailKhalizev.Processor.x86.Utils
             return !Find(val, withRightBound).IsEmpty;
         }
 
+        public Interval<T> GetIntervalBefore(T begin)
+        {
+            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(begin, default));
+
+            return view.Reverse()
+                .Where(x => Comparer.Compare(x.Begin, begin) < 0)
+                .DefaultIfEmpty(Interval<T>.Empty)
+                .First();
+        }
+
         /// <summary>
-        /// Возвращает интервал с наименьшим Begin содержащий область значений больше и равную value.
+        /// Возвращает интервал с наименьшим Begin содержащим область значений больше и равную value.
         /// </summary>
         public Interval<T> LowerBound(T value, bool withRightBound)
         {
