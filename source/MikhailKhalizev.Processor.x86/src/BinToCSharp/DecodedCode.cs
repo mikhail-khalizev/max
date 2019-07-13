@@ -16,9 +16,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 Instruction.CreateDummyInstruction(Address.MaxValue));
         }
 
-        public bool contains(Address addr)
+        public bool Contains(Address addr)
         {
-            return cmd_get(addr).Count != 0;
+            return cmds.Contains(Instruction.CreateDummyInstruction(addr));
+        }
+
+        public void Insert(Instruction cmd)
+        {
+            if (cmds.Add(cmd))
+                area.Add(cmd.Begin, cmd.End);
         }
     }
 }

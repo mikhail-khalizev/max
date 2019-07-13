@@ -27,6 +27,7 @@ public:
     {}
 
 
+// +
     std::pair<decltype(cmds.begin()), bool> insert(cmd_info && cmd)
     {
         auto ret = cmds.insert(std::move(cmd));
@@ -64,6 +65,7 @@ public:
         return cmds.find(cmd_info(addr));
     }
 
+// -
     decltype(cmds.begin()) cmd_get(addr_type addr, decltype(cmds.begin()) iter_near)
     {
         if (iter_near == cmds.end())

@@ -183,21 +183,21 @@ namespace MikhailKhalizev.Max
             if (on_run_func__dump_reg)
             {
                 Console.WriteLine(
-                    $"before run {run:x}" +
-                    $", eax {eax:x}" +
-                    $", ebx {ebx:x}" +
-                    $", ecx {ecx:x}" +
-                    $", edx {edx:x}" +
-                    $", esi {esi:x}" +
-                    $", edi {edi:x}" +
-                    $", esp {esp:x}" +
-                    $", ebp {ebp:x}" +
-                    $", ds.val {ds.Selector:x}" +
-                    $", es.val {es.Selector:x}" +
-                    $", cs.val {cs.Selector:x}" +
-                    $", ss.val {ss.Selector:x}" +
-                    $", fs.val {fs.Selector:x}" +
-                    $", gs.val {gs.Selector:x}");
+                    $"before run 0x{run:x}" +
+                    $", eax: 0x{eax.UInt32:x}" +
+                    $", ebx: 0x{ebx.UInt32:x}" +
+                    $", ecx: 0x{ecx.UInt32:x}" +
+                    $", edx: 0x{edx.UInt32:x}" +
+                    $", esi: 0x{esi.UInt32:x}" +
+                    $", edi: 0x{edi.UInt32:x}" +
+                    $", esp: 0x{esp.UInt32:x}" +
+                    $", ebp: 0x{ebp.UInt32:x}" +
+                    $", ds: 0x{ds.Selector:x}" +
+                    $", es: 0x{es.Selector:x}" +
+                    $", cs: 0x{cs.Selector:x}" +
+                    $", ss: 0x{ss.Selector:x}" +
+                    $", fs: 0x{fs.Selector:x}" +
+                    $", gs: 0x{gs.Selector:x}");
             }
 
             CurrentInstructionAddress = eip; // TODO Check, is it correct?
@@ -213,21 +213,21 @@ namespace MikhailKhalizev.Max
             if (on_run_func__dump_reg)
             {
                 Console.WriteLine(
-                    $"after run {run:x}" +
-                    $", eax {eax:x}" +
-                    $", ebx {ebx:x}" +
-                    $", ecx {ecx:x}" +
-                    $", edx {edx:x}" +
-                    $", esi {esi:x}" +
-                    $", edi {edi:x}" +
-                    $", esp {esp:x}" +
-                    $", ebp {ebp:x}" +
-                    $", ds.val {ds.Selector:x}" +
-                    $", es.val {es.Selector:x}" +
-                    $", cs.val {cs.Selector:x}" +
-                    $", ss.val {ss.Selector:x}" +
-                    $", fs.val {fs.Selector:x}" +
-                    $", gs.val {gs.Selector:x}");
+                    $"after run 0x{run:x}" +
+                    $", eax: 0x{eax.UInt32:x}" +
+                    $", ebx: 0x{ebx.UInt32:x}" +
+                    $", ecx: 0x{ecx.UInt32:x}" +
+                    $", edx: 0x{edx.UInt32:x}" +
+                    $", esi: 0x{esi.UInt32:x}" +
+                    $", edi: 0x{edi.UInt32:x}" +
+                    $", esp: 0x{esp.UInt32:x}" +
+                    $", ebp: 0x{ebp.UInt32:x}" +
+                    $", ds: 0x{ds.Selector:x}" +
+                    $", es: 0x{es.Selector:x}" +
+                    $", cs: 0x{cs.Selector:x}" +
+                    $", ss: 0x{ss.Selector:x}" +
+                    $", fs: 0x{fs.Selector:x}" +
+                    $", gs: 0x{gs.Selector:x}");
             }
         }
 
@@ -371,11 +371,11 @@ namespace MikhailKhalizev.Max
 
             to_cxx.SetCStringDataArea(0x101a0003, 0x101b384d);
 
-            to_cxx.ForceEndFuncs.Add(0x14b5b5);
-            to_cxx.ForceEndFuncs.Add(0x14edfc);
-            to_cxx.ForceEndFuncs.Add(0x14f88b);
-            to_cxx.ForceEndFuncs.Add(0x14f8ef);
-            to_cxx.ForceEndFuncs.Add(0x158748);
+            to_cxx.AddForceEndFuncs(0x14b5b5);
+            to_cxx.AddForceEndFuncs(0x14edfc);
+            to_cxx.AddForceEndFuncs(0x14f88b);
+            to_cxx.AddForceEndFuncs(0x14f8ef);
+            to_cxx.AddForceEndFuncs(0x158748);
 
             
             AddressNameConverter.DefaultNamespaceByAddress.Add(

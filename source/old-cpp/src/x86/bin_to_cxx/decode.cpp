@@ -63,6 +63,7 @@ void bin_to_cxx::decode_area(addr_type begin, addr_type end)
     }
 }
 
+// +
 bool bin_to_cxx::already_decoded_funcs_check(decltype(already_decoded_funcs_)::iterator iter)
 {
     if (iter -> second.second == 0)

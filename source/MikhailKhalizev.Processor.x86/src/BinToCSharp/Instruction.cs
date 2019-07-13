@@ -19,23 +19,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public List<string> Comments { get; } = new List<string>();
         public bool _commentThis; // Закомментировать всю напечатанную строку.
 
-        private int _addrMode;
-        private int _oprMode;
+        public int _addrMode;
+        public int _oprMode;
 
-        private ud_mnemonic_code _mnemonic;
+        public ud_mnemonic_code _mnemonic;
         public List<ud_operand> Operands { get; }
 
-        private ud_type _pfx_seg;
-        private bool _br_far;
-        private bool _pfx_rep;
-        private bool _pfx_repe;
-        private bool _pfx_repne;
+        public ud_type _pfx_seg;
+        public bool _br_far;
+        public bool _pfx_rep;
+        public bool _pfx_repe;
+        public bool _pfx_repne;
 
-        private bool _is_call;
-        private bool _is_any_loop;
-        private bool _is_any_jump;
-        private bool _is_any_ret;
-        private bool _is_jmp_or_ret;
+        public bool _is_call;
+        public bool _is_any_loop;
+        public bool _is_any_jump;
+        public bool _is_any_ret;
+        public bool _is_jmp_or_ret;
 
 
         private Instruction(Address begin)
@@ -46,37 +46,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public static Instruction CreateDummyInstruction(Address begin)
         {
             return new Instruction(begin);
-        }
-
-        public Instruction(ArchitectureMode mode, Address address, byte[] raw)
-            : this(new Disassembler(raw, mode, address, true, Vendor.Intel).NextInstruction())
-        { }
-
-        public Instruction(ArchitectureMode mode, Address address, IMemory memory)
-            : this(CreateDisassembler(mode, address, memory).NextInstruction())
-        { }
-
-        public static Disassembler CreateDisassembler(ArchitectureMode mode, Address address, IMemory memory)
-        {
-            var disassembler = new Disassembler(new byte[0], mode, 0, true, Vendor.Intel);
-            var ud = disassembler._u;
-
-            var pcInInputHook = disassembler.Address;
-            ud.inp_hook = delegate
-            {
-                try
-                {
-                    var ret = memory.GetFixSize(pcInInputHook, 1);
-                    pcInInputHook++;
-                    return ret[0];
-                }
-                catch
-                {
-                    return -1;
-                }
-            };
-
-            return disassembler;
         }
 
         public Instruction(SharpDisasm.Instruction instr)
@@ -131,7 +100,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return ud_type.UD_R_DS;
         }
 
-        public string MyToString()
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return ToCodeString();
+        }
+
+        public string ToCodeString()
         {
             var os = new StringBuilder();
 

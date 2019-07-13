@@ -1,79 +1,57 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
+using System.Resources;
+using System.Runtime.InteropServices;
+using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using System.Runtime.CompilerServices;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
 {
     public static class MemoryExtensions
     {
-        public static short GetInt16(this ArraySegment<byte> bytes, int byteOffset = 0)
+        public static ArraySegment<byte> GetFixSize(this IMemory memory, Address address, int size)
         {
-            return BitConverter.ToInt16(bytes.Slice(byteOffset).AsSpan());
+            return memory.GetMinSize(address, size).Slice(0, size);
+        }
+     
+        public static ArraySegment<byte> GetFixSize(this IMemory memory, SegmentRegister seg, Address address, int size)
+        {
+            return memory.GetMinSize(seg, address, size).Slice(0, size);
         }
 
-        public static ushort GetUInt16(this ArraySegment<byte> bytes, int byteOffset = 0)
+        public static unsafe ref T GetStruct<T>(this IMemory memory, Address address)
+            where T : struct
         {
-            return BitConverter.ToUInt16(bytes.Slice(byteOffset).AsSpan());
+            var bytes = memory.GetMinSize(address, Marshal.SizeOf<T>());
+
+            // bytes.Array must be pinned. See MikhailKhalizev.Processor.x86.FullSimulate.Memory constructor.
+
+            var intPtr = Marshal.UnsafeAddrOfPinnedArrayElement(bytes.Array, bytes.Offset);
+            var ptr = intPtr.ToPointer();
+            
+            ref var element = ref Unsafe.AsRef<T>(ptr);
+            return ref element;
         }
 
-        public static void SetUInt16(this ArraySegment<byte> bytes, ushort value, int byteOffset = 0)
+        public static bool mem_pg_equals(this IMemory memory, Address address, ArraySegment<byte> left)
         {
-            BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), value);
-        }
+            var proccessed = 0;
 
-        public static void SetUInt16(this ArraySegment<byte> bytes, Value value, int byteOffset = 0)
-        {
-            SetUInt32(bytes, value.UInt32, byteOffset);
-        }
+            while (left.Count != 0)
+            {
+                var code = memory.GetMinSize(address + proccessed, 1);
 
+                if (left.Count <= code.Count)
+                    return code.Slice(0, left.Count).SequenceEqual(left);
 
-        public static int GetInt32(this ArraySegment<byte> bytes, int byteOffset = 0)
-        {
-            return BitConverter.ToInt32(bytes.Slice(byteOffset).AsSpan());
-        }
+                if (left.Slice(0, code.Count).SequenceEqual(code) == false)
+                    return false;
 
-        public static void SetInt32(this ArraySegment<byte> bytes, int value, int byteOffset = 0)
-        {
-            BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), value);
-        }
+                proccessed += code.Count;
+                left = left.Slice(code.Count);
+            }
 
-        
-        public static uint GetUInt32(this ArraySegment<byte> bytes, int byteOffset = 0)
-        {
-            return BitConverter.ToUInt32(bytes.Slice(byteOffset).AsSpan());
-        }
-
-        public static void SetUInt32(this ArraySegment<byte> bytes, uint value, int byteOffset = 0)
-        {
-            BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), value);
-        }
-        
-        public static void SetUInt32(this ArraySegment<byte> bytes, Value value, int byteOffset = 0)
-        {
-            SetUInt32(bytes, value.UInt32, byteOffset);
-        }
-
-
-        public static float GetFloat(this ArraySegment<byte> bytes, int byteOffset = 0)
-        {
-            // 4 bytes.
-            return BitConverter.ToSingle(bytes.Slice(byteOffset).AsSpan());
-        }
-
-        public static double GetDouble(this ArraySegment<byte> bytes, int byteOffset = 0)
-        {
-            // 8 bytes.
-            return BitConverter.ToDouble(bytes.Slice(byteOffset).AsSpan());
-        }
-
-        public static string GetCString(this ArraySegment<byte> bytes, int byteOffset = 0, int maxLength = int.MaxValue)
-        {
-            return Encoding.UTF8.GetString(
-                bytes
-                    .Slice(byteOffset)
-                    .Take(maxLength)
-                    .TakeWhile(x => x != 0)
-                    .ToArray());
+            return true;
         }
     }
 }

@@ -226,27 +226,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             }
         }
 
-        public bool mem_pg_equals(Address address, ArraySegment<byte> left)
-        {
-            var proccessed = 0;
-
-            while (left.Count != 0)
-            {
-                var code = GetMinSize(address + proccessed, 1);
-
-                if (left.Count <= code.Count)
-                    return code.Slice(0, left.Count).SequenceEqual(left);
-                
-                if (left.Slice(0, code.Count).SequenceEqual(code) == false)
-                    return false;
-
-                proccessed += code.Count;
-                left = left.Slice(code.Count);
-            }
-
-            return true;
-        }
-
         #region IDispose
 
         private void ReleaseUnmanagedResources()

@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
         private void EngineOnInstructionDecoded(object sender, Instruction cmd)
         {
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < cmd.Operands.Count; i++)
             {
                 if (cmd.Operands[i].type == ud_type.UD_OP_IMM
                     && StringDataAreaBegin <= cmd.Operands[i].lval.uqword

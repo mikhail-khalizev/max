@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MikhailKhalizev.Max;
 using MikhailKhalizev.Processor.x86.Abstractions;
@@ -40,7 +41,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// Если <see cref="ForceEndFuncs"/> делит инструкцию пополам,
         /// то эта инструкция относится к методу, расположенному с меньшим адресом.
         /// </remarks>
-        public HashSet<Address> ForceEndFuncs { get; } = new HashSet<Address>();
+        private SortedSet<Address> force_end_funcs_ { get; } = new SortedSet<Address>();
+
+        public void AddForceEndFuncs(Address address)
+        {
+            force_end_funcs_.Add(address);
+        }
+
 
         private MultiValueDictionary<Address, FunctionModel> already_decoded_funcs_ { get; } = new MultiValueDictionary<Address, FunctionModel>();
 
@@ -53,6 +60,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public void RemoveAlreadyDecodedFunc(Address address)
         {
             already_decoded_funcs_.Remove(address);
+        }
+
+        public bool already_decoded_funcs_check(Address address)
+        {
+            if (!already_decoded_funcs_.TryGetValue(address, out var models))
+                return false;
+
+            foreach (var model in models)
+            {
+                if (Memory.mem_pg_equals(address, model.GetRawBytes()))
+                    return true;
+            }
+
+            return false;
         }
 
 
@@ -163,17 +184,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void Process(Address address)
         {
-            if (code.contains(address))
+            if (code.Contains(address))
                 return; // Код включающий этот адрес уже декодирован.
 
             if (address < CsBase)
                 return;
 
             var lowerBound = SuppressDecode.LowerBound(address, false);
-            var near_suppress_decode = lowerBound.IsEmpty ? Address.MaxValue : lowerBound.Begin;
-
-
-            if (near_suppress_decode <= address)
+            var nearestSuppressDecode = lowerBound.IsEmpty ? Address.MaxValue : lowerBound.Begin;
+            
+            if (nearestSuppressDecode <= address)
                 return;
 
 
@@ -182,47 +202,48 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             Memory.GetMinSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
 
             var ac = new AssemblyCode(this);
-            var dis = new Disassembler(ac, Mode, address, true);
+            var dis = new Disassembler(ac, Mode, address, true, Vendor.Intel);
             ac.Disassembler = dis;
             dis._u.inp_buf_index = address;
 
-            var ins = dis.NextInstruction();
-            var cmd = new Instruction(ins);
-            var str = cmd.MyToString();
+
+            
+            // Функция, начинающаяся с точного совпадения force_end_funcs_ может начать декодироваться.
+            var nearestForceEnd = force_end_funcs_.GetViewBetween(address, Address.MaxValue)
+                .Where(x => x != address)
+                .DefaultIfEmpty(Address.MaxValue)
+                .First();
 
 
+            while (true)
+            {
+                var eip = dis._u.pc;
+                if (nearestForceEnd <= eip || nearestSuppressDecode <= eip)
+                    break;
+
+                if (already_decoded_funcs_check(eip))
+                    break; // Нашли среди декодированных.
 
 
+                var rawInstruction = dis.NextInstruction();
+                if (rawInstruction == null)
+                    throw new InvalidOperationException("Преждевременное завершение функции из-за нехватки кода.");
 
-            // TODO Old
-            //var nearestSuppressDecode = SuppressDecode
-            //    .Where(x => address < x.Item2 || x.Item2 == 0)
-            //    .Select(x => x.Item1)
-            //    .DefaultIfEmpty(Address.MaxValue)
-            //    .Min();
+                var cmd = new Instruction(rawInstruction);
 
-            //if (nearestSuppressDecode <= address)
-            //    return;
+                // Бывают случаи, когда ud_obj незнаком с инструкцией, хотя в документации x86 она есть.
+                //        if (cmd.mnemonic == UD_Iinvalid)
+                //            throw exo::exception::not_implemented();
 
-            //Memory.GetFixSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
+                code.Insert(cmd);
+                InstructionDecoded?.Invoke(this, cmd);
 
-            //var disassembler = Instruction.CreateDisassembler(Mode, address, Memory);
-            //var nearestForceEnd = ForceEndFuncs.OrderBy(x => x).FirstOrDefault(x => address < x); // Специально '<', чтобы функция, начинающаяся с точного совпадения с ForceEndFuncs смогла начать декодироваться.
-
-            //for (;;)
-            //{
-            //    if (nearestForceEnd <= disassembler.Address ||
-            //            nearestSuppressDecode <= disassembler.Address ||
-            //            AlreadyDecodedFuncs.ContainsKey(disassembler.Address))
-            //        break;
-
-            //    var rawInstr = disassembler.NextInstruction();
-            //    if (rawInstr == null)
-            //        throw new InvalidOperationException("Преждевременное завершение функции из-за нехватки кода.");
-            //    var instr = new Instruction(rawInstr);
-
-
-            //}
+                if (cmd._is_jmp_or_ret)
+                    break; // Потенциальный конец функции.
+                
+                if (code.Contains(cmd.End))
+                    break; // Следующая часть кода уже декодирована.
+            }
         }
 
         public void SetCStringDataArea(Address begin, Address end)

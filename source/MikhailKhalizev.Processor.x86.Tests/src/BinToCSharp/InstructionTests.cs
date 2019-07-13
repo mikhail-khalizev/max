@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
             var dis = new Disassembler(HexHelper.ToBytes(raw), (ArchitectureMode)arch, address, true);
             var ins = dis.NextInstruction();
             var cmd = new Instruction(ins);
-            var str = cmd.MyToString();
+            var str = cmd.ToCodeString();
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 
