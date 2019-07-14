@@ -12,19 +12,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public Instruction cmd_get(Address addr)
         {
-            if (cmds.TryGetValue(Instruction.CreateDummyInstruction(addr), out var actual))
-                return actual;
-            else
-                return null;
-
-            //return cmds.GetViewBetween(
-            //    Instruction.CreateDummyInstruction(addr), 
-            //    Instruction.CreateDummyInstruction(Address.MaxValue));
+            cmds.TryGetValue(new Instruction(addr), out var actual);
+            return actual;
         }
 
         public bool Contains(Address addr)
         {
-            return cmds.Contains(Instruction.CreateDummyInstruction(addr));
+            return cmds.Contains(new Instruction(addr));
         }
 
         public void Insert(Instruction cmd)

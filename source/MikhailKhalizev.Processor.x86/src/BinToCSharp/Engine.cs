@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
+using System.Text;
 using MikhailKhalizev.Max;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
@@ -249,7 +251,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 code.Insert(cmd);
                 InstructionDecoded?.Invoke(this, cmd);
 
-                if (cmd._is_jmp_or_ret)
+                if (cmd.IsJmpOrRet)
                     break; // Потенциальный конец функции.
                 
                 if (code.Contains(cmd.End))
@@ -353,7 +355,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                         // Проверим на принадлежность к new_detected_funcs.
 
-                        if (NewDetectedMethods.Contains(new DetectedMethod(cmd.Begin)))
+                        if (cmd != first_cmd && NewDetectedMethods.Contains(new DetectedMethod(cmd.Begin)))
                         {
                             // Т.к. эта инструкция является new_detected_funcs, то предыдущая - конец функции.
                             break;
@@ -367,7 +369,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             break;
                         }
 
-                        if (cmd._is_jmp_or_ret)
+                        if (cmd.IsJmpOrRet)
                             may_be_end_of_func.Add(cmd.End);
 
                         instr.Add(cmd);
@@ -378,7 +380,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     while (instr.Count != 0)
                     {
-                        if (instr[instr.Count - 1]._commentThis == false)
+                        if (instr[instr.Count - 1].CommentThis == false)
                             break;
 
                         instr.RemoveAt(instr.Count - 1);
@@ -398,7 +400,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             {
                                 // Ссылка внутрь функции.
 
-                                var index = instr.BinarySearch(Instruction.CreateDummyInstruction(to), Instruction.BeginComparer);
+                                var index = instr.BinarySearch(new Instruction(to), Instruction.BeginComparer);
 
                                 if (0 <= index)
                                     func.Labels.Add(to);
@@ -435,7 +437,209 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             layout_funcs();
 
-            throw new NotImplementedException();
+            foreach (var detectedMethod in NewDetectedMethods)
+            {
+                var methodBegin = detectedMethod.Begin;
+                var methodEnd = detectedMethod.End;
+
+                if (methodBegin == methodEnd)
+                    continue; // Skip empty method.
+
+
+                // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем их.
+                var functionModel = already_decoded_funcs_try_find(methodBegin, methodEnd - methodBegin);
+                if (functionModel != null)
+                {
+                    Console.WriteLine($"Декодированная функция '{methodBegin}' эквивалентна уже существующей {{{functionModel.Guid}}} по адресу'{functionModel.Address}'.");
+                    continue;
+                }
+
+
+                Console.WriteLine($"Сохранение функции '{methodBegin}' в файл.");
+                
+                var output = new StringBuilder();
+                write_cxx_func_to_stream(output, detectedMethod);
+
+
+                var ns = AddressNameConverter.GetNamespace(methodBegin);
+                var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
+
+                var filePath = path;
+
+                if (ns != null)
+                    filePath += $"/{ns}";
+
+                filePath += $"/func_{methodBegin}";
+
+                if (kd != null)
+                    filePath += $"_{kd}";
+
+                filePath += ".cs";
+
+
+                File.WriteAllText(filePath, output.ToString());
+            }
+        }
+
+        private void write_cxx_func_to_stream(StringBuilder output, DetectedMethod iter_func)
+        {
+            var addr_func = iter_func.Begin;
+            var addr_func_end = iter_func.End;
+
+
+            var first_cmd = iter_func.Instructions.First();
+
+
+            output.Append($"FUNC_BEGIN({AddressNameConverter.GetResultName(addr_func, true, true)}");
+
+            // hash compute
+
+            //{
+            //    size_t hash = 0;
+
+            //    for (var i = addr_func; i < addr_func_end;)
+            //    {
+            //        memory_space_const avail_space = mem(i, 1).sub_space(0, addr_func_end - i);
+            //        hash_value(hash, avail_space);
+            //        i += avail_space.size();
+            //    }
+
+            //    output << ", " << hash;
+            //}
+
+            output.Append($", {(int)Mode}, ({{");
+
+            {
+                //memory_space_const avail_space = mem(addr_func, 1);
+
+                //for (addr_type i = addr_func; i < addr_func_end - 1; i++)
+                //{
+                //    if (avail_space.is_empty())
+                //        avail_space = mem(i, 1);
+
+                //    output << avail_space.get<uint8_t, addr_type>(0) << ", ";
+
+                //    avail_space = avail_space.remove_prefix(1);
+                //}
+
+                //output << avail_space.get<uint8_t, addr_type>(0);
+            }
+
+            output.AppendLine("}))");
+
+
+            bool skip = false; // Если нашли недостижимый код устанавливаем в true.
+            bool last_instr_jmp_or_ret = false;
+            var last_instr_end = first_cmd.Begin;
+
+            for (var cmd_index = 0; cmd_index < iter_func.Instructions.Count; cmd_index++)//   cmd = first_cmd; cmd != iter_func -> instr.end(); cmd++)
+            {
+                var cmd = iter_func.Instructions[cmd_index];
+                bool have_label = iter_func.Labels.Contains(cmd.Begin);
+
+                var addr_of_line = cmd.Begin;
+
+                if (addr_func_end <= addr_of_line)
+                    break;
+
+
+                if (last_instr_end != cmd.Begin) // Обнаружен не декодированный код.
+                {
+                    if (last_instr_jmp_or_ret == false)
+                        throw new NotImplementedException(); // Случай когда перед недостижимым кодом нет ret или jmp. Пока достаточно генерировать исключение.
+
+                    var os = new StringBuilder();
+                    write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin);
+                    output.AppendLine($"//  {os}/* Недостижимый код. */");
+                }
+
+
+                if (have_label)
+                {
+                    output.AppendLine($"l_{addr_of_line}:");
+                    skip = false;
+                }
+
+
+                // instruction_to_string может изменить comment_this. Поэтому вызывается раньше.
+                var instr = instruction_to_string(iter_func, cmd_index);
+
+
+                if (skip || cmd.CommentThis)
+                    output.Append("//"); // Комментируем недостижимый код.
+
+                if (cmd.IsJmpOrRet)
+                    skip = true;
+
+
+                output.AppendLine($"    {instr}");
+
+                last_instr_end = cmd.End;
+                last_instr_jmp_or_ret = cmd.IsJmpOrRet;
+            }
+
+            if (last_instr_jmp_or_ret == false)
+            {
+                // Функция не заканчивается на jmp или ret.
+                // Возможно её разбивает другая функция в неудобном месте.
+
+                var os = new StringBuilder();
+                write_instruction_position_and_spaces(os, addr_func_end, addr_func_end);
+                os.Append($"jmpd_func({AddressNameConverter.GetResultName(addr_func_end, true, true)}, 0);");
+                write_spaces(os, LineCommentOffset - 1);
+                output.AppendLine($"    {os} /* Принудительное завершение функции. */");
+            }
+
+            output.AppendLine("FUNC_END");
+            output.AppendLine("");
+        }
+
+        private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end)
+        {
+            write_instruction_position(os, begin, end);
+            write_spaces(os, LineCommentOffset - 1);
+            os.Append(' ');
+        }
+
+        private void write_spaces(StringBuilder os, int offset)
+        {
+            var count = offset - os.Length;
+            if (0 < count)
+                os.Append(new string(' ', count));
+        }
+
+        private void write_instruction_position(StringBuilder os, Address begin, Address end)
+        {
+            os.Append($"ii({begin}, {end - begin})");
+        }
+
+        private string instruction_to_string(DetectedMethod df, int cmd_index)
+        {
+            var os = new StringBuilder();
+
+            var cmd = df.Instructions[cmd_index];
+
+            write_instruction_position(os, cmd.Begin, cmd.End);
+            write_spaces(os, LineCmdOffset - 1);
+
+            var comments_in_current_func = new List<string>();
+
+            if (cmd.write_cmd != null)
+            {
+                os.Append(' ');
+                cmd.write_cmd(os, df, cmd_index, comments_in_current_func);
+
+                if (cmd.Comments.Count != 0 || comments_in_current_func.Count != 0)
+                    write_spaces(os, LineCommentOffset - 1);
+            }
+
+            foreach (var s in cmd.Comments)
+                os.Append($" /* {s} */");
+            
+            foreach (var s in comments_in_current_func)
+                os.Append($" /* {s} */");
+
+            return os.ToString();
         }
     }
 }

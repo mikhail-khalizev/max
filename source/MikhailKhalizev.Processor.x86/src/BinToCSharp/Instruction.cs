@@ -13,71 +13,81 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     public class Instruction
     {
-        public Address Begin { get; }
-        public Address End { get; }
+        public Address Begin { get; set; }
+        public Address End { get; set; }
 
-        public List<string> Comments { get; }
-        public bool _commentThis; // Закомментировать всю напечатанную строку.
+        /// <summary>
+        /// Закомментировать всю напечатанную строку.
+        /// </summary>
+        public bool CommentThis { get; set; }
 
-        public int _addrMode;
-        public int _oprMode;
+        /// <summary>
+        /// Комментарии к иструкции.
+        /// </summary>
+        public List<string> Comments { get; set; }
 
-        public ud_mnemonic_code _mnemonic;
-        public List<ud_operand> Operands { get; }
+        public int AddrMode { get; set; }
+        public int OprMode { get; set; }
 
-        public ud_type _pfx_seg;
-        public bool _br_far;
-        public bool _pfx_rep;
-        public bool _pfx_repe;
-        public bool _pfx_repne;
+        public ud_mnemonic_code Mnemonic { get; set; }
+        public List<ud_operand> Operands { get; set; }
 
-        public bool _is_call;
-        public bool _is_any_loop;
-        public bool _is_any_jump;
-        public bool _is_any_ret;
-        public bool _is_jmp_or_ret;
+        public ud_type PfxSeg { get; set; }
+        public bool PfxRep { get; set; }
+        public bool PfxRepe { get; set; }
+        public bool PfxRepne { get; set; }
 
+        public bool BrFar { get; set; }
 
-        private Instruction(Address begin)
+        public bool IsCall { get; set; }
+        public bool IsAnyLoop { get; set; }
+        public bool IsAnyJump { get; set; }
+        public bool IsAnyRet { get; set; }
+        public bool IsJmpOrRet { get; set; }
+
+        public delegate void write_cmd_Delegate(StringBuilder sb, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func);
+
+        public write_cmd_Delegate write_cmd { get; set; }
+
+        public Instruction(Address address)
         {
-            Begin = begin;
+            Begin = address;
+            End = address;
         }
 
-        public static Instruction CreateDummyInstruction(Address begin)
-        {
-            return new Instruction(begin);
-        }
-
-        public Instruction(Address begin, Address end, string comment)
+        public Instruction(Address begin, Address end, string comment = null)
         {
             Begin = begin;
             End = end;
-            Comments = new List<string> { comment };
+            if (comment != null)
+                Comments = new List<string> { comment };
         }
 
         public Instruction(SharpDisasm.Instruction instr)
         {
             if (instr == null)
                 throw new ArgumentNullException(nameof(instr));
-            
+
+            write_cmd = (sb, dm, index, func) => sb.Append(ToCodeString());
+
             Comments = new List<string>();
 
             Begin = instr.Offset;
             End = instr.PC;
 
-            _mnemonic = instr.Mnemonic;
+            Mnemonic = instr.Mnemonic;
 
-            _br_far = instr.br_far != 0;
-            _pfx_seg = (ud_type)instr.pfx_seg;
-            _pfx_rep = instr.pfx_rep != 0;
-            _pfx_repe = instr.pfx_repe != 0;
-            _pfx_repne = instr.pfx_repne != 0;
+            BrFar = instr.br_far != 0;
+            PfxSeg = (ud_type)instr.pfx_seg;
+            PfxRep = instr.pfx_rep != 0;
+            PfxRepe = instr.pfx_repe != 0;
+            PfxRepne = instr.pfx_repne != 0;
 
-            _is_call = instr.Mnemonic == ud_mnemonic_code.UD_Icall;
-            _is_any_loop = udis86.ud_lookup_mnemonic(_mnemonic).StartsWith("loop");
-            _is_any_jump = udis86.ud_lookup_mnemonic(_mnemonic).StartsWith("j");
-            _is_any_ret = 0 <= instr.Mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
-            _is_jmp_or_ret = instr.Mnemonic == ud_mnemonic_code.UD_Ijmp || _is_any_ret;
+            IsCall = instr.Mnemonic == ud_mnemonic_code.UD_Icall;
+            IsAnyLoop = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");
+            IsAnyJump = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("j");
+            IsAnyRet = 0 <= instr.Mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
+            IsJmpOrRet = instr.Mnemonic == ud_mnemonic_code.UD_Ijmp || IsAnyRet;
 
             if (instr.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
                 throw new NotImplementedException();
@@ -86,11 +96,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 .Select(x => x.UdOperand)
                 .ToList();
 
-            if ((_is_any_jump || _is_any_loop || _is_call) && Operands[0].type == ud_type.UD_OP_PTR)
-                _br_far = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
+            if ((IsAnyJump || IsAnyLoop || IsCall) && Operands[0].type == ud_type.UD_OP_PTR)
+                BrFar = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
 
-            _addrMode = instr.adr_mode;
-            _oprMode = instr.opr_mode;
+            AddrMode = instr.adr_mode;
+            OprMode = instr.opr_mode;
 
             try
             {
@@ -102,8 +112,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         
         private ud_type GetEffectiveSegmentOfOperand(ud_operand op)
         {
-            if (_pfx_seg != ud_type.UD_NONE)
-                return _pfx_seg;
+            if (PfxSeg != ud_type.UD_NONE)
+                return PfxSeg;
             if (new[] { ud_type.UD_R_BP, ud_type.UD_R_SP, ud_type.UD_R_EBP, ud_type.UD_R_ESP }.Contains(op.@base))
                 return ud_type.UD_R_SS;
             return ud_type.UD_R_DS;
@@ -119,7 +129,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             var os = new StringBuilder();
 
-            var flags = KnownInstr[_mnemonic];
+            var flags = KnownInstr[Mnemonic];
             //auto meta = get_meta(mnemonic);
             //if (meta.first == false)
             //{
@@ -133,34 +143,34 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             //    throw std::logic_error(err.str());
             //}
 
-            var adr_mode_str = $"_a{_addrMode}";
+            var adr_mode_str = $"_a{AddrMode}";
 
-            var eff_opr_size = _oprMode;
-            if (_mnemonic == ud_mnemonic_code.UD_Iout)
+            var eff_opr_size = OprMode;
+            if (Mnemonic == ud_mnemonic_code.UD_Iout)
                 if (ud_type.UD_R_AL <= Operands[1].@base && Operands[1].@base <= ud_type.UD_R_BH)
                     eff_opr_size = 8;
 
-            if (_mnemonic == ud_mnemonic_code.UD_Iin
-                || _mnemonic == ud_mnemonic_code.UD_Iimul
-                || _mnemonic == ud_mnemonic_code.UD_Imul)
+            if (Mnemonic == ud_mnemonic_code.UD_Iin
+                || Mnemonic == ud_mnemonic_code.UD_Iimul
+                || Mnemonic == ud_mnemonic_code.UD_Imul)
                 if (ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH)
                     eff_opr_size = 8;
 
-            if (_pfx_repne)
+            if (PfxRepne)
                 os.Append($"repne{adr_mode_str} ");
-            else if (_pfx_repe)
+            else if (PfxRepe)
                 os.Append($"repe{adr_mode_str} ");
-            if (_pfx_rep)
+            if (PfxRep)
                 os.Append($"rep{adr_mode_str} ");
 
-            os.Append(udis86.ud_lookup_mnemonic(_mnemonic));
+            os.Append(udis86.ud_lookup_mnemonic(Mnemonic));
             if (new[] {
                     ud_mnemonic_code.UD_Iint,
                     ud_mnemonic_code.UD_Iand,
                     ud_mnemonic_code.UD_Ior,
                     ud_mnemonic_code.UD_Ixor,
                     ud_mnemonic_code.UD_Istd,
-                    ud_mnemonic_code.UD_Inot}.Contains(_mnemonic))
+                    ud_mnemonic_code.UD_Inot}.Contains(Mnemonic))
                 os.Append('_'); // Чтоб не конфликтовать с различными ключевыми словами C++ и студии разработки.
 
             if (flags.HasFlag(InstrFlags.UseOprSizeInside))
@@ -176,16 +186,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
 
             if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
-                    new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(_mnemonic) &&
-                    _br_far &&
+                    new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
+                    BrFar &&
                     Operands[0].type == ud_type.UD_OP_MEM)
                 os.Append(adr_mode_str);
 
-            if (_br_far)
+            if (BrFar)
                 os.Append("_far");
 
-            var need_write_namespace = _is_call;
-            if (_is_any_jump || _is_any_loop || _is_call)
+            var need_write_namespace = IsCall;
+            if (IsAnyJump || IsAnyLoop || IsCall)
             {
                 if (Operands[0].type == ud_type.UD_OP_PTR)
                 {
@@ -194,7 +204,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 }
                 else if (Operands[0].type == ud_type.UD_OP_MEM || Operands[0].type == ud_type.UD_OP_REG)
                 {
-                    os.Append(_br_far ? "_ind" : "_abs");
+                    os.Append(BrFar ? "_ind" : "_abs");
                     need_write_namespace = true;
                 }
             }
@@ -248,10 +258,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 ud_mnemonic_code.UD_Ifnsave,
                                 ud_mnemonic_code.UD_Ifrstor,
                                 ud_mnemonic_code.UD_Ifbstp,
-                                ud_mnemonic_code.UD_Ibound}.Contains(_mnemonic) ||
+                                ud_mnemonic_code.UD_Ibound}.Contains(Mnemonic) ||
                                 new[] {
                                     ud_mnemonic_code.UD_Icall,
-                                    ud_mnemonic_code.UD_Ijmp}.Contains(_mnemonic) && _br_far;
+                                    ud_mnemonic_code.UD_Ijmp}.Contains(Mnemonic) && BrFar;
 
                             if (mem_inside == false)
                             {
@@ -270,11 +280,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 os.Append($"{adr_mode_str}[");
                             }
 
-                            if (_mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
+                            if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
                             {
                                 os.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
 
-                                if (_pfx_seg != ud_type.UD_NONE)
+                                if (PfxSeg != ud_type.UD_NONE)
                                     use_pfx_seg = true;
                             }
 
@@ -344,14 +354,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     ud_mnemonic_code.UD_Isbb,
                                     ud_mnemonic_code.UD_Isub,
                                     ud_mnemonic_code.UD_Icmp
-                                }.Contains(_mnemonic);
+                                }.Contains(Mnemonic);
 
                                 // Работа не с 8-байтой инструкцией.
                                 if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
                                     need_sign_extend = need_sign_extend ||
-                                                       _mnemonic == ud_mnemonic_code.UD_Iand ||
-                                                       _mnemonic == ud_mnemonic_code.UD_Ior ||
-                                                       _mnemonic == ud_mnemonic_code.UD_Ixor;
+                                                       Mnemonic == ud_mnemonic_code.UD_Iand ||
+                                                       Mnemonic == ud_mnemonic_code.UD_Ior ||
+                                                       Mnemonic == ud_mnemonic_code.UD_Ixor;
 
                                 val = op.lval.@sbyte;
 
@@ -400,9 +410,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 }
             }
 
-            if (use_pfx_seg == false && _pfx_seg != ud_type.UD_NONE
-                && _mnemonic != ud_mnemonic_code.UD_Imov
-                && _mnemonic != ud_mnemonic_code.UD_Ilea)
+            if (use_pfx_seg == false && PfxSeg != ud_type.UD_NONE
+                && Mnemonic != ud_mnemonic_code.UD_Imov
+                && Mnemonic != ud_mnemonic_code.UD_Ilea)
             {
                 // к примеру movsb(es)
 
@@ -410,7 +420,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     os.Append(", ");
                 non_first_arg = true;
 
-                os.Append(syn.ud_reg_tab[_pfx_seg - ud_type.UD_R_AL]);
+                os.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
             }
 
             //if (func_add_arg.size() != 0)

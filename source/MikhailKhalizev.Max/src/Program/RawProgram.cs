@@ -378,8 +378,7 @@ namespace MikhailKhalizev.Max
             to_cxx.AddForceEndFuncs(0x158748);
 
             
-            AddressNameConverter.DefaultNamespaceByAddress.Add(
-                (new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"));
+            AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys");
 
 
             foreach (var pair in funcs_by_pc)
@@ -525,7 +524,6 @@ namespace MikhailKhalizev.Max
             Console.WriteLine($"Запуск декодирования функции '{seg[short_addr]}'.");
 
             to_cxx.DecodeMethod(seg[short_addr]);
-
             to_cxx.write_cxx_to_dir("src/Program/Auto");
         }
     }

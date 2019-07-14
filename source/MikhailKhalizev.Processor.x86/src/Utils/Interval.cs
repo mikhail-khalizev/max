@@ -86,6 +86,12 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 : (Comparer.Compare(Begin, b.End) < 0) & (Comparer.Compare(End, b.Begin) > 0);
         }
 
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"[{Begin}, {End})";
+        }
+
         #region IEquatable
 
         /// <summary>Показывает, равен ли этот экземпляр заданному объекту.</summary>

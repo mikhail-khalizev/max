@@ -17,6 +17,7 @@ namespace raw_program {
 namespace x86 {
 
 
+// + Address ToString
 void write_addr(std::ostream & os, addr_type addr)
 {
     auto sf_ = os.setf(std::ios_base::fmtflags(), std::ios_base::showbase);
@@ -31,9 +32,10 @@ void write_addr(std::ostream & os, addr_type addr)
     os.setf(sf_);
 }
 
-
+// + see AddressNameConverter
 std::map<addr_type /* begin */, std::pair<addr_type /* end */, std::vector<std::string>>> defualt_namespace_by_addr;
 
+// + AddressNameConverter.GetNamespace
 static const std::vector<std::string> * get_namespaces_of_addr(addr_type addr)
 {
     auto iter = defualt_namespace_by_addr.lower_bound(addr);
@@ -61,6 +63,7 @@ static const std::vector<std::string> * get_namespaces_of_addr(addr_type addr)
     return NULL;
 }
 
+// + AddressNameConverter.KnownDefinitions
 static exo::memory_space_const get_known_definition(addr_type addr)
 {
     static std::map<addr_type, exo::memory_space_const> known_definitions;
@@ -85,7 +88,7 @@ static exo::memory_space_const get_known_definition(addr_type addr)
         return exo::memory_space_const();
 }
 
-
+// + AddressNameConverter.GetResultName
 void write_addr_with_check_known_definitions(std::ostream & os, addr_type val, bool padding, bool with_namespace)
 {
     auto kd = get_known_definition(val);
@@ -122,6 +125,7 @@ void write_addr_with_check_known_definitions(std::ostream & os, addr_type val, b
     }
 }
 
+// +
 void bin_to_cxx::write_spaces(std::ostringstream & os, size_t offset)
 {
     size_t str_length = os.str().length();
@@ -137,6 +141,7 @@ void bin_to_cxx::write_spaces(std::ostringstream & os, size_t offset)
     os << spaces;
 }
 
+// +
 void bin_to_cxx::write_instruction_position(std::ostringstream & os, addr_type begin, addr_type end)
 {
     os << std::hex << std::showbase;
@@ -145,6 +150,7 @@ void bin_to_cxx::write_instruction_position(std::ostringstream & os, addr_type b
     os << ", " << static_cast<addr_type>(end - begin) << ")";
 }
 
+// +
 void bin_to_cxx::write_instruction_position_and_spaces(std::ostringstream & os, addr_type begin, addr_type end)
 {
     write_instruction_position(os, begin, end);
@@ -152,6 +158,7 @@ void bin_to_cxx::write_instruction_position_and_spaces(std::ostringstream & os, 
     os << ' ';
 }
 
+// +
 std::string bin_to_cxx::instruction_to_string(detected_func & df, size_t cmd_index)
 {
     std::ostringstream os;
@@ -181,6 +188,7 @@ std::string bin_to_cxx::instruction_to_string(detected_func & df, size_t cmd_ind
     return os.str();
 }
 
+// +
 void bin_to_cxx::write_cxx_func_to_stream(std::ostream & output, decltype(new_detected_funcs.begin()) iter_func)
 {
     const addr_type addr_func = iter_func -> begin;
@@ -302,6 +310,7 @@ void bin_to_cxx::write_cxx_func_to_stream(std::ostream & output, decltype(new_de
     output << "FUNC_END\n\n";
 }
 
+// +
 void bin_to_cxx::write_cxx_to_dir(std::string path)
 {
     layout_funcs();

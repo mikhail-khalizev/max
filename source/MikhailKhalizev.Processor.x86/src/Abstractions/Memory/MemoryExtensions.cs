@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -52,6 +53,20 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             }
 
             return true;
+        }
+
+        public static byte[] ReadAll(this IMemory memory, Address address, int size)
+        {
+            var result = new byte[size];
+
+            for (var i = 0; i < size;)
+            {
+                var availableSpace = memory.GetMinSize(address + i, 1).Slice(0, size - i);
+                availableSpace.CopyTo(result, i);
+                i += availableSpace.Count;
+            }
+
+            return result;
         }
     }
 }
