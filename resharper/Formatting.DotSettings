@@ -29,6 +29,30 @@
     <s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=WrongIndentSize/@EntryIndexedValue">WARNING</s:String>
 
     <s:String x:Key="/Default/CodeStyle/CodeCleanup/SilentCleanupProfile/@EntryValue">Built-in: Full Cleanup</s:String>
+	<s:String x:Key="/Default/Environment/ManagedLanguageParameterNameHintsOptions/BlackList/@EntryValue">(begin*, end*)
+(start*, end*)
+(first*, last*)
+(first*, second*)
+(from*, to*)
+(min*, max*)
+(key, value)
+(action)
+(func)
+(lambda)
+(callback)
+(value)
+System.Object.Equals
+System.Object.ReferenceEquals
+System.Collections.IEqualityComparer.Equals
+System.Math.*
+System.Text.StringBuilder.*
+System.Linq.Enumerable.*
+System.Linq.Queryable.*
+Newtonsoft.Json.Linq.*
+System.Xml.Linq.*
+System.Threading.Tasks.Task.ConfigureAwait
+System.Threading.Tasks.Task.ConfigureAwait`1
+MikhailKhalizev.Processor.x86.Abstractions.BridgeProcessor.*</s:String>
 
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>

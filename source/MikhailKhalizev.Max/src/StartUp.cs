@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.Utils;
@@ -16,36 +17,26 @@ using Instruction = SharpDisasm.Instruction;
 
 namespace MikhailKhalizev.Max
 {
-    public class ConfigurationDto
-    {
-        public ConfigurationMaxDto Max { get; set; } = new ConfigurationMaxDto();
-    }
-
-    public class ConfigurationMaxDto
-    {
-        public string InstalledPath { get; set; }
-    }
-
-
-    public class Program
+    public class StartUp
     {
         static void Main(string[] args)
         {
-            new Program(args);
+            new StartUp(args);
         }
 
         public IServiceProvider Services { get; set; }
         public IConfiguration Configuration { get; set; }
         public ConfigurationDto ConfigurationDto { get; set; }
 
-        public Program(string[] args)
+        public StartUp(string[] args)
         {
             // Read configuration.
 
             Configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("settings/appsettings.json", optional: true, reloadOnChange: true)
-                .AddUserSecrets<Program>()
+                .SetBasePath(Environment.CurrentDirectory)
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddJsonFile("settings/appsettings.json", optional: true)
+                .AddUserSecrets<StartUp>()
                 .AddEnvironmentVariables()
                 .AddCommandLine(args)
                 .Build();
@@ -77,7 +68,7 @@ namespace MikhailKhalizev.Max
 
 
             var processor = new Processor.x86.FullSimulate.Processor();
-            var rp = new RawProgram(processor, installedPath, "MAXRUN.EXE");
+            var rp = new RawProgramMain(processor, installedPath, ConfigurationDto);
             processor.run_func += rp.run_func;
             rp.init_x86_dos_prog();
 

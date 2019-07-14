@@ -26,6 +26,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     /// </summary>
     public class Engine
     {
+        public ConfigurationDto Configuration { get; }
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
@@ -110,7 +111,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
         private DecodedCode code = new DecodedCode();
 
-        private const int LineCmdOffset = 22;
+        private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
         // TODO plugin::jmp_call_loop_simple plugin_jmp_call_loop_simple; - addr_to_decode from any jmp.
@@ -119,12 +120,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         // TODO plugin::comment_idle plugin_comment_idle; - comment dummy instruction
 
 
-        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemory memory)
+        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemory memory, ConfigurationDto configuration)
         {
             Mode = mode;
             CsBase = csBase;
             DsBase = dsBase;
             Memory = memory;
+            Configuration = configuration;
 
             if (csBase != 0)
                 SuppressDecode.Add(0, csBase);
@@ -469,7 +471,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (ns != null)
                     filePath += $"/{ns}";
 
-                filePath += $"/func_{methodBegin}";
+                filePath += $"/z-{methodBegin}";
 
                 if (kd != null)
                     filePath += $"_{kd}";
@@ -489,8 +491,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var first_cmd = iter_func.Instructions.First();
 
+            AddressNameConverter.KnownDefinitions.TryGetValue(addr_func, out var methodName);
+            if (methodName == null)
+                methodName = $"Method_{addr_func}";
+            
+            var ns = AddressNameConverter.GetNamespace(addr_func);
+            if (ns != null)
+                ns = $"/* {ns} */ ";
 
-            output.Append($"FUNC_BEGIN({AddressNameConverter.GetResultName(addr_func, true, true)}");
+            output.AppendLine("using MikhailKhalizev.Processor.x86.BinToCSharp;");
+            output.AppendLine("");
+            output.AppendLine($"namespace {Configuration.Namespace}");
+            output.AppendLine("{");
+            output.AppendLine($"    public partial class {Configuration.ClassName}");
+            output.AppendLine("    {");
+            output.AppendLine("        [MethodInfo(\"TODO\")]");
+            output.AppendLine($"        public void {ns}{methodName}()");
+            output.AppendLine("        {");
 
             // hash compute
 
@@ -507,7 +524,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             //    output << ", " << hash;
             //}
 
-            output.Append($", {(int)Mode}, ({{");
+            //output.Append($", {(int)Mode}, ({{");
 
             {
                 //memory_space_const avail_space = mem(addr_func, 1);
@@ -525,7 +542,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 //output << avail_space.get<uint8_t, addr_type>(0);
             }
 
-            output.AppendLine("}))");
+            //output.AppendLine("}))");
 
 
             bool skip = false; // Если нашли недостижимый код устанавливаем в true.
@@ -543,6 +560,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     break;
 
 
+                output.Append("        ");
+
                 if (last_instr_end != cmd.Begin) // Обнаружен не декодированный код.
                 {
                     if (last_instr_jmp_or_ret == false)
@@ -550,7 +569,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     var os = new StringBuilder();
                     write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin);
-                    output.AppendLine($"//  {os}/* Недостижимый код. */");
+                    output.AppendLine($"//  {os} /* Недостижимый код. */");
                 }
 
 
@@ -590,8 +609,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 output.AppendLine($"    {os} /* Принудительное завершение функции. */");
             }
 
-            output.AppendLine("FUNC_END");
-            output.AppendLine("");
+            output.AppendLine("        }");
+            output.AppendLine("    }");
+            output.AppendLine("}");
         }
 
         private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end)
@@ -610,7 +630,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void write_instruction_position(StringBuilder os, Address begin, Address end)
         {
-            os.Append($"ii({begin}, {end - begin})");
+            os.Append($"ii({begin}, {end - begin});");
         }
 
         private string instruction_to_string(DetectedMethod df, int cmd_index)
