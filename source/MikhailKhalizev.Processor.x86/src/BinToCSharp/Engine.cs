@@ -30,6 +30,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
+        public MethodInfos MethodInfos { get; }
         public IMemory Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
@@ -56,9 +57,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         }
 
 
-        private MultiValueDictionary<Address, FunctionModel> already_decoded_funcs_ { get; } = new MultiValueDictionary<Address, FunctionModel>();
+        private MultiValueDictionary<Address, MethodInfoDto> already_decoded_funcs_ { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
 
-        public void AddAlreadyDecodedFunc(FunctionModel model)
+        public void AddAlreadyDecodedFunc(MethodInfoDto model)
         {
             foreach (var address in model.Addresses)
                 already_decoded_funcs_.Add(address, model);
@@ -76,20 +77,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             foreach (var model in models)
             {
-                if (Memory.mem_pg_equals(address, model.GetRawBytes()))
+                if (Memory.Equals(address, model.RawBytes))
                     return true;
             }
 
             return false;
         }
 
-        FunctionModel already_decoded_funcs_try_find(Address addr, int size)
+        MethodInfoDto already_decoded_funcs_try_find(Address addr, int size)
         {
             foreach (var pair in already_decoded_funcs_)
             foreach (var functionModel in pair.Value)
             {
-                var bytes = functionModel.GetRawBytes();
-                if (bytes.Length == size && Memory.mem_pg_equals(addr, bytes))
+                var bytes = functionModel.RawBytes;
+                if (bytes.Length == size && Memory.Equals(addr, bytes))
                     return functionModel;
             }
 
@@ -120,14 +121,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         // TODO plugin::comment_idle plugin_comment_idle; - comment dummy instruction
 
 
-        public Engine(ArchitectureMode mode, Address csBase, Address dsBase, IMemory memory, ConfigurationDto configuration)
+        public Engine(ConfigurationDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodInfos methodInfos = null)
         {
+            Configuration = configuration;
+            Memory = memory;
             Mode = mode;
             CsBase = csBase;
             DsBase = dsBase;
-            Memory = memory;
-            Configuration = configuration;
-
+            MethodInfos = methodInfos ?? MethodInfos.Load(configuration);
+            
             if (csBase != 0)
                 SuppressDecode.Add(0, csBase);
 
@@ -424,6 +426,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     func.Instructions = instr;
                     func.End = min_end;
+                    func.RawBytes = Memory.ReadAll(func.Begin, func.End - func.Begin);
+
                     success_count++;
                 }
 
@@ -435,9 +439,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        public void write_cxx_to_dir(string path)
+        public void Save()
         {
+            var path = Configuration.CodeOutput;
+
             layout_funcs();
+
+            MethodInfos.OpenFile(); // Убедимся, что у нас есть доступ к файлу.
 
             foreach (var detectedMethod in NewDetectedMethods)
             {
@@ -453,6 +461,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (functionModel != null)
                 {
                     Console.WriteLine($"Декодированная функция '{methodBegin}' эквивалентна уже существующей {{{functionModel.Guid}}} по адресу'{functionModel.Address}'.");
+                    if (!functionModel.Addresses.Contains(methodBegin))
+                        functionModel.Addresses.Add(methodBegin);
                     continue;
                 }
 
@@ -481,23 +491,36 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 File.WriteAllText(filePath, output.ToString());
             }
+
+            MethodInfos.Save();
         }
 
-        private void write_cxx_func_to_stream(StringBuilder output, DetectedMethod iter_func)
+        private void write_cxx_func_to_stream(StringBuilder output, DetectedMethod detectedMethod)
         {
-            var addr_func = iter_func.Begin;
-            var addr_func_end = iter_func.End;
+            var methodAddress = detectedMethod.Begin;
+            var addr_func_end = detectedMethod.End;
 
 
-            var first_cmd = iter_func.Instructions.First();
+            var first_cmd = detectedMethod.Instructions.First();
 
-            AddressNameConverter.KnownDefinitions.TryGetValue(addr_func, out var methodName);
+            AddressNameConverter.KnownDefinitions.TryGetValue(methodAddress, out var methodName);
             if (methodName == null)
-                methodName = $"Method_{addr_func}";
+                methodName = $"Method_{methodAddress}";
             
-            var ns = AddressNameConverter.GetNamespace(addr_func);
+            var ns = AddressNameConverter.GetNamespace(methodAddress);
             if (ns != null)
                 ns = $"/* {ns} */ ";
+
+            var mi = MethodInfos.GetByRawBytes(detectedMethod.RawBytes);
+            if (mi == null)
+            {
+                mi = new MethodInfoDto();
+                mi.Guid = Guid.NewGuid();
+                mi.Address = methodAddress;
+                mi.Mode = Mode;
+                mi.RawBytes = detectedMethod.RawBytes;
+                MethodInfos.Add(mi);
+            }
 
             output.AppendLine("using MikhailKhalizev.Processor.x86.BinToCSharp;");
             output.AppendLine("");
@@ -505,7 +528,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine("{");
             output.AppendLine($"    public partial class {Configuration.ClassName}");
             output.AppendLine("    {");
-            output.AppendLine("        [MethodInfo(\"TODO\")]");
+            output.AppendLine($"        [MethodInfo(\"{mi.Guid}\")]");
             output.AppendLine($"        public void {ns}{methodName}()");
             output.AppendLine("        {");
 
@@ -549,10 +572,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             bool last_instr_jmp_or_ret = false;
             var last_instr_end = first_cmd.Begin;
 
-            for (var cmd_index = 0; cmd_index < iter_func.Instructions.Count; cmd_index++)//   cmd = first_cmd; cmd != iter_func -> instr.end(); cmd++)
+            for (var cmd_index = 0; cmd_index < detectedMethod.Instructions.Count; cmd_index++)//   cmd = first_cmd; cmd != detectedMethod -> instr.end(); cmd++)
             {
-                var cmd = iter_func.Instructions[cmd_index];
-                bool have_label = iter_func.Labels.Contains(cmd.Begin);
+                var cmd = detectedMethod.Instructions[cmd_index];
+                bool have_label = detectedMethod.Labels.Contains(cmd.Begin);
 
                 var addr_of_line = cmd.Begin;
 
@@ -581,7 +604,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
 
                 // instruction_to_string может изменить comment_this. Поэтому вызывается раньше.
-                var instr = instruction_to_string(iter_func, cmd_index);
+                var instr = instruction_to_string(detectedMethod, cmd_index);
 
 
                 if (skip || cmd.CommentThis)

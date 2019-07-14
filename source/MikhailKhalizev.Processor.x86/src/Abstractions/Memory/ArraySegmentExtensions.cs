@@ -16,14 +16,14 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             return BitConverter.ToUInt16(bytes.Slice(byteOffset).AsSpan());
         }
 
-        public static void SetUInt16(this ArraySegment<byte> bytes, ushort value, int byteOffset = 0)
+        public static void SetUInt16(this ArraySegment<byte> bytes, int value, int byteOffset = 0)
         {
-            BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), value);
+            BitConverter.TryWriteBytes(bytes.AsSpan(byteOffset), (ushort) value);
         }
 
         public static void SetUInt16(this ArraySegment<byte> bytes, Value value, int byteOffset = 0)
         {
-            SetUInt32(bytes, value.UInt32, byteOffset);
+            SetUInt16(bytes, value.UInt16, byteOffset);
         }
 
 

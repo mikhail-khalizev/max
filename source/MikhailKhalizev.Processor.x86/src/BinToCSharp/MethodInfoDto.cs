@@ -12,7 +12,7 @@ using SharpDisasm;
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
-    public class FunctionModel
+    public class MethodInfoDto
     {
         public Guid Guid { get; set; }
 
@@ -49,23 +49,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         [JsonExtensionData]
         private IDictionary<string, JToken> AdditionalData { get; set; }
 
-        
-        public byte[] GetRawBytes() => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Raw));
+        [JsonIgnore]
+        public byte[] RawBytes
+        {
+            get => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Raw));
+            set => Raw = HexHelper.ToString(value, o => o.SetAddHexPrefix(false).SetGroupSize(0));
+        }
+
         private byte[] _rawBytes;
 
 
-        public static IEqualityComparer<FunctionModel> BodyEqualityComparer =>
-            new CustomEqualityComparer<FunctionModel>(
+        public static IEqualityComparer<MethodInfoDto> BodyEqualityComparer =>
+            new CustomEqualityComparer<MethodInfoDto>(
                 (x, y) => x.Mode == y.Mode && x.Raw == y.Raw,
                 x => Tuple.Create(x.Mode, x.Raw).GetHashCode());
 
-        public static IEqualityComparer<FunctionModel> GuidEqualityComparer =>
-            new CustomEqualityComparer<FunctionModel>(
+        public static IEqualityComparer<MethodInfoDto> GuidEqualityComparer =>
+            new CustomEqualityComparer<MethodInfoDto>(
                 (x, y) => x.Guid == y.Guid,
                 x => x.Guid.GetHashCode());
 
-        public static IEqualityComparer<FunctionModel> AddressAndModeEqualityComparer =>
-            new CustomEqualityComparer<FunctionModel>(
+        public static IEqualityComparer<MethodInfoDto> AddressAndModeEqualityComparer =>
+            new CustomEqualityComparer<MethodInfoDto>(
                 (x, y) => x.Mode == y.Mode && x.Address == y.Address,
                 x => Tuple.Create(x.Mode, x.Address).GetHashCode());
     }

@@ -62,10 +62,6 @@ namespace MikhailKhalizev.Max
             foreach (var x in JsonConvert.DeserializeObject<Dictionary<string, string>>(definitionsStr))
                 AddressNameConverter.KnownDefinitions[Address.Parse(x.Key)] = x.Value;
 
-            var funcsStr = File.ReadAllText("settings/funcs.json");
-            var funcs = JsonConvert.DeserializeObject<List<FunctionModel>>(funcsStr);
-            //var str = JsonConvert.SerializeObject(funcs, Formatting.Indented);
-
 
             var processor = new Processor.x86.FullSimulate.Processor();
             var rp = new RawProgramMain(processor, installedPath, ConfigurationDto);

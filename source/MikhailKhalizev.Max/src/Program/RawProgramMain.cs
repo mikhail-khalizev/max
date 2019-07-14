@@ -79,8 +79,7 @@ namespace MikhailKhalizev.Max.Program
 
             // Upload image of program.
 
-            exeBytes.AsSpan().Slice(exe_image_off, image_size)
-                .CopyTo(image);
+            exeBytes.AsSpan().Slice(exe_image_off, image_size).CopyTo(image);
 
             // Apply realoc.
 
@@ -265,7 +264,7 @@ namespace MikhailKhalizev.Max.Program
                 if ((int)info.Model.Mode != (cs.db ? 32 : 16))
                     continue;
 
-                if (Implementation.Memory.mem_pg_equals(seg[addr], info.Model.GetRawBytes()))
+                if (Implementation.Memory.Equals(seg[addr], info.Model.RawBytes))
                     return info;
             }
 
@@ -279,7 +278,7 @@ namespace MikhailKhalizev.Max.Program
             foreach (var pair in funcs_by_pc)
             foreach (var info in pair.Value)
             {
-                var code = info.Model.GetRawBytes();
+                var code = info.Model.RawBytes;
                 if (code.Length == 0)
                     continue;
 
@@ -290,7 +289,7 @@ namespace MikhailKhalizev.Max.Program
                     continue;
 
                 var seg_addr = seg[addr];
-                if (!Implementation.Memory.mem_pg_equals(seg_addr, code))
+                if (!Implementation.Memory.Equals(seg_addr, code))
                     continue;
 
 
@@ -354,12 +353,7 @@ namespace MikhailKhalizev.Max.Program
         {
             //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
 
-            var to_cxx = new Engine(
-                seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
-                seg.Descriptor.Base,
-                ds.Descriptor.Base,
-                Implementation.Memory,
-                Configuration.BinToCode);
+            var to_cxx = new Engine(Configuration.BinToCSharp, Implementation.Memory, seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16, seg.Descriptor.Base, ds.Descriptor.Base);
 
             if (seg.Descriptor.Base != 0)
                 to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
@@ -525,13 +519,13 @@ namespace MikhailKhalizev.Max.Program
             Console.WriteLine($"Запуск декодирования функции '{seg[short_addr]}'.");
 
             to_cxx.DecodeMethod(seg[short_addr]);
-            to_cxx.write_cxx_to_dir(Configuration.BinToCode.CodeOutput);
+            to_cxx.Save();
         }
     }
 
     public class FunctionInfo
     {
-        public FunctionModel Model { get; set; }
+        public MethodInfoDto Model { get; set; }
 
         /// <summary>
         /// Имя функции C++ без namespace. Например: "func_0x101354f7".

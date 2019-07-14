@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         public NumericValue(short value, int bits = 16)
         {
-            UInt64Internal = (ulong)value;
+            UInt64Internal = (ulong) value;
             Bits = bits;
         }
 

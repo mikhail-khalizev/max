@@ -34,21 +34,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             return ref element;
         }
 
-        public static bool mem_pg_equals(this IMemory memory, Address address, ArraySegment<byte> left)
+        public static bool Equals(this IMemory memory, Address address, ArraySegment<byte> left)
         {
-            var proccessed = 0;
+            var i = 0;
 
             while (left.Count != 0)
             {
-                var code = memory.GetMinSize(address + proccessed, 1);
+                var code = memory.GetMinSize(address + i, 1);
 
                 if (left.Count <= code.Count)
                     return code.Slice(0, left.Count).SequenceEqual(left);
 
-                if (left.Slice(0, code.Count).SequenceEqual(code) == false)
+                if (!left.Slice(0, code.Count).SequenceEqual(code))
                     return false;
 
-                proccessed += code.Count;
+                i += code.Count;
                 left = left.Slice(code.Count);
             }
 
