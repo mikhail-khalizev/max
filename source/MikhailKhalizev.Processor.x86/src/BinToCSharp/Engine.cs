@@ -265,8 +265,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public void SetCStringDataArea(Address begin, Address end)
         {
-            _addCStringToCommentPlugin.StringDataAreaBegin = begin;
-            _addCStringToCommentPlugin.StringDataAreaEnd = end;
+            _addCStringToCommentPlugin.StringArea = Interval.From(begin, end);
         }
         
         public void add_aligment_as_instructions()
@@ -677,8 +676,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (cmd.write_cmd != null)
             {
-                os.Append(' ');
-                cmd.write_cmd(os, df, cmd_index, comments_in_current_func);
+                os.Append(" " + cmd.write_cmd(df, cmd_index, comments_in_current_func));
 
                 if (cmd.Comments.Count != 0 || comments_in_current_func.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);

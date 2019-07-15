@@ -5,6 +5,7 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
 {
@@ -67,6 +68,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             }
 
             return result;
+        }
+        
+        public static string ReadCString(this IMemory memory, Address address, int maxLength = int.MaxValue)
+        {
+            var availSpace = ArraySegment<byte>.Empty;
+
+            var sb = new StringBuilder();
+            for (var ptr = address; 0 < maxLength; ptr++, maxLength--)
+            {
+                if (availSpace.Count == 0)
+                    availSpace = memory.GetMinSize(ptr, 1);
+
+                var c = (char) availSpace[0];
+                availSpace = availSpace.Slice(1);
+
+                if (c == '\0')
+                    break;
+                sb.Append(c);
+            }
+
+            return sb.ToString();
         }
     }
 }

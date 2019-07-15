@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public bool IsAnyRet { get; set; }
         public bool IsJmpOrRet { get; set; }
 
-        public delegate void write_cmd_Delegate(StringBuilder sb, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func);
+        public delegate string write_cmd_Delegate(DetectedMethod dm, int cmd_index, List<string> comments_in_current_func);
 
         public write_cmd_Delegate write_cmd { get; set; }
 
@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (instr == null)
                 throw new ArgumentNullException(nameof(instr));
 
-            write_cmd = (sb, dm, index, func) => sb.Append(ToCodeString());
+            write_cmd = (dm, index, func) => ToCodeString();
 
             Comments = new List<string>();
 

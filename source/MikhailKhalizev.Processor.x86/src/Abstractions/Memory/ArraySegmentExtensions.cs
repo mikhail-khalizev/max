@@ -65,15 +65,5 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             // 8 bytes.
             return BitConverter.ToDouble(bytes.Slice(byteOffset).AsSpan());
         }
-
-        public static string GetCString(this ArraySegment<byte> bytes, int byteOffset = 0, int maxLength = int.MaxValue)
-        {
-            return Encoding.UTF8.GetString(
-                bytes
-                    .Slice(byteOffset)
-                    .Take(maxLength)
-                    .TakeWhile(x => x != 0)
-                    .ToArray());
-        }
     }
 }
