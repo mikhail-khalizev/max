@@ -27,26 +27,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public void Save()
         {
-            var allText = JsonConvert.SerializeObject(_models.OrderBy(x => x.Address), Formatting.Indented);
-
-            if (_outputFileStream != null)
+            var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile);
+            using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+            using (var sw = new StreamWriter(fs))
             {
-                using (var sw = new StreamWriter(_outputFileStream))
-                {
-                    sw.Write(allText);
-                    _outputFileStream.SetLength(_outputFileStream.Position);
-                    _outputFileStream = null;
-                }
+                var allText = JsonConvert.SerializeObject(_models.OrderBy(x => x.Address), Formatting.Indented);
+                sw.Write(allText);
+                sw.Flush();
+                fs.SetLength(fs.Position);
             }
-            else
-                File.WriteAllText(Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile), allText);
         }
-
-        public void OpenFile()
+        
+        public MethodInfoDto GetByGuid(Guid guid)
         {
-            _outputFileStream = File.Open(
-                Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile),
-                FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
+            return _models.FirstOrDefault(x => x.Guid == guid);
         }
 
         public MethodInfoDto GetByRawBytes(byte[] rawBytes)

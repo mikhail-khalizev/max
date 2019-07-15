@@ -63,12 +63,8 @@ namespace MikhailKhalizev.Max
                 AddressNameConverter.KnownDefinitions[Address.Parse(x.Key)] = x.Value;
 
 
-            var processor = new Processor.x86.FullSimulate.Processor();
-            var rp = new RawProgramMain(processor, installedPath, ConfigurationDto);
-            processor.run_func += rp.run_func;
-            rp.init_x86_dos_prog();
-
-            processor.correct_function_position(0);
+            var rp = new RawProgramMain(ConfigurationDto);
+            rp.Start();
         }
     }
 }

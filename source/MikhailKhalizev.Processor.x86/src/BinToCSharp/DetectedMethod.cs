@@ -12,9 +12,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public HashSet<Address> Labels { get; set; } = new HashSet<Address>();
         public List<Instruction> Instructions { get; set; } = new List<Instruction>();
         public byte[] RawBytes { get; set; }
-        
-        //        addr_type count_call_to_this;
-        //        std::string[] reason_to_add; // @todo Условие добавления (для отладки).
+        public MethodInfoDto MethodInfo { get; set; }
+
 
         public DetectedMethod(Address begin)
         {

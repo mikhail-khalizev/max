@@ -610,8 +610,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public void ii(Address address, uint length)
         {
-            CurrentInstructionAddress = address + CSharpFunctionDelta - cs.Descriptor.Base;
-            eip = CurrentInstructionAddress + length;
+            var cur = address + CSharpFunctionDelta - cs.Descriptor.Base;
+
+            if (eip != cur)
+                throw new InvalidOperationException("Ожидается другая инструкция.");
+
+            CurrentInstructionAddress = cur;
+            eip = cur + length;
 
             if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
                 throw new Exception("Bad eip");

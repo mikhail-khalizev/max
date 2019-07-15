@@ -445,7 +445,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             layout_funcs();
 
-            MethodInfos.OpenFile(); // Убедимся, что у нас есть доступ к файлу.
+            foreach (var detectedMethod in NewDetectedMethods)
+            {
+                if (detectedMethod.MethodInfo != null)
+                    continue;
+                
+                var mi = MethodInfos.GetByRawBytes(detectedMethod.RawBytes);
+                if (mi == null)
+                {
+                    mi = new MethodInfoDto();
+                    mi.Guid = Guid.NewGuid();
+                    mi.Address = detectedMethod.Begin;
+                    mi.Mode = Mode;
+                    mi.RawBytes = detectedMethod.RawBytes;
+                    MethodInfos.Add(mi);
+                }
+                else if (!mi.Addresses.Contains(detectedMethod.Begin))
+                    mi.Addresses.Add(detectedMethod.Begin);
+
+                detectedMethod.MethodInfo = mi;
+            }
+
+            MethodInfos.Save();
 
             foreach (var detectedMethod in NewDetectedMethods)
             {
@@ -461,8 +482,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (functionModel != null)
                 {
                     Console.WriteLine($"Декодированная функция '{methodBegin}' эквивалентна уже существующей {{{functionModel.Guid}}} по адресу'{functionModel.Address}'.");
-                    if (!functionModel.Addresses.Contains(methodBegin))
-                        functionModel.Addresses.Add(methodBegin);
                     continue;
                 }
 
@@ -510,25 +529,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var ns = AddressNameConverter.GetNamespace(methodAddress);
             if (ns != null)
                 ns = $"/* {ns} */ ";
-
-            var mi = MethodInfos.GetByRawBytes(detectedMethod.RawBytes);
-            if (mi == null)
-            {
-                mi = new MethodInfoDto();
-                mi.Guid = Guid.NewGuid();
-                mi.Address = methodAddress;
-                mi.Mode = Mode;
-                mi.RawBytes = detectedMethod.RawBytes;
-                MethodInfos.Add(mi);
-            }
-
+            
             output.AppendLine("using MikhailKhalizev.Processor.x86.BinToCSharp;");
             output.AppendLine("");
             output.AppendLine($"namespace {Configuration.Namespace}");
             output.AppendLine("{");
             output.AppendLine($"    public partial class {Configuration.ClassName}");
             output.AppendLine("    {");
-            output.AppendLine($"        [MethodInfo(\"{mi.Guid}\")]");
+            output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
             output.AppendLine($"        public void {ns}{methodName}()");
             output.AppendLine("        {");
 

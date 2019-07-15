@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Kaitai;
 using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Processor.x86.Abstractions;
@@ -14,37 +16,73 @@ namespace MikhailKhalizev.Max.Program
     public class RawProgramMain : BridgeProcessor
     {
         public new Processor.x86.FullSimulate.Processor Implementation { get; }
-        public string Directory { get; }
         public ConfigurationDto Configuration { get; }
-        public string ExeFileName { get; }
+        public MethodInfos MethodInfos { get; private set; }
 
         public Memory DosMemory { get; }
         public Interrupt DosInterrupt { get; }
         public Timer DosTimer { get; }
 
-        public MultiValueDictionary<Address, FunctionInfo> funcs_by_pc = new MultiValueDictionary<Address, FunctionInfo>();
+        public MultiValueDictionary<Address, MyMethodInfo> funcs_by_pc = new MultiValueDictionary<Address, MyMethodInfo>();
 
         public bool extra_log { get; set; } = true;
 
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
         public const ushort pspseg = image_load_seg - 16; // 0x192
 
-        public RawProgramMain(Processor.x86.FullSimulate.Processor implementation, string directory, ConfigurationDto Configuration)
+        public RawProgramMain(ConfigurationDto configuration)
+            : this(new Processor.x86.FullSimulate.Processor(), configuration)
+        { }
+
+        public RawProgramMain(Processor.x86.FullSimulate.Processor implementation, ConfigurationDto configuration)
             : base(implementation)
         {
             Implementation = implementation;
-            Directory = directory;
-            this.Configuration = Configuration;
-            ExeFileName = Configuration.Max.ExeFileName;
+            Configuration = configuration;
 
             DosMemory = new Memory(implementation);
             DosInterrupt = new Interrupt(implementation);
             DosTimer = new Timer(implementation);
+
+            implementation.run_func += run_func;
+        }
+
+        public void Start()
+        {
+            MethodInfos = MethodInfos.Load(Configuration.BinToCSharp);
+            
+            foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
+            {
+                object instance = null;
+
+                foreach (var methodInfo in bridgeProcessor.GetMethods(BindingFlags.Instance | BindingFlags.Public))
+                {
+                    var a = methodInfo.GetCustomAttribute<MethodInfoAttribute>();
+                    if (a == null)
+                        continue;
+
+                    var mi = MethodInfos.GetByGuid(a.Guid);
+
+                    if (instance == null)
+                        instance = Activator.CreateInstance(bridgeProcessor, Implementation);
+
+                    var fi = new MyMethodInfo();
+                    fi.MethodInfo = mi;
+                    fi.Name = methodInfo.Name;
+                    fi.Action = () => methodInfo.Invoke(instance, Array.Empty<object>());
+
+                    foreach (var address in mi.Addresses)
+                        funcs_by_pc.Add(address, fi);
+                }
+            }
+            
+            init_x86_dos_prog();
+            Implementation.correct_function_position(0);
         }
 
         public void init_x86_dos_prog()
         {
-            var exeBytes = File.ReadAllBytes(Path.Combine(Directory, ExeFileName));
+            var exeBytes = File.ReadAllBytes(Path.Combine(Configuration.Max.InstalledPath, Configuration.Max.ExeFileName));
             var dosMz = new DosMz(exeBytes);
 
 
@@ -203,10 +241,10 @@ namespace MikhailKhalizev.Max.Program
             var info = get_func(cs, eip);
 
             if (extra_log)
-                Console.WriteLine($"run {info.func_name}");
+                Console.WriteLine($"run {info.Name}");
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
-            info.func();
+            info.Action();
             CurrentInstructionAddress = eip; // TODO Check, is it correct?
 
             if (on_run_func__dump_reg)
@@ -230,7 +268,7 @@ namespace MikhailKhalizev.Max.Program
             }
         }
 
-        private FunctionInfo get_func(SegmentRegister seg, Address addr)
+        private MyMethodInfo get_func(SegmentRegister seg, Address addr)
         {
             if (seg[addr] == 0)
                 throw new InvalidOperationException("Запрос функции по нулевому указателю.");
@@ -253,7 +291,7 @@ namespace MikhailKhalizev.Max.Program
             throw new InvalidOperationException("Функция не найдена.");
         }
 
-        private FunctionInfo find_func_exact(SegmentRegister seg, Address addr)
+        private MyMethodInfo find_func_exact(SegmentRegister seg, Address addr)
         {
             var infos = funcs_by_pc.GetValues(seg[addr], false);
             if (infos == null)
@@ -261,31 +299,31 @@ namespace MikhailKhalizev.Max.Program
 
             foreach (var info in infos)
             {
-                if ((int)info.Model.Mode != (cs.db ? 32 : 16))
+                if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
                     continue;
 
-                if (Implementation.Memory.Equals(seg[addr], info.Model.RawBytes))
+                if (Implementation.Memory.Equals(seg[addr], info.MethodInfo.RawBytes))
                     return info;
             }
 
             return null;
         }
 
-        private FunctionInfo find_func_from_known_and_remember_it(SegmentRegister seg, Address addr)
+        private MyMethodInfo find_func_from_known_and_remember_it(SegmentRegister seg, Address addr)
         {
             // Попробуем найти её среди известных.
 
             foreach (var pair in funcs_by_pc)
             foreach (var info in pair.Value)
             {
-                var code = info.Model.RawBytes;
+                var code = info.MethodInfo.RawBytes;
                 if (code.Length == 0)
                     continue;
 
-                if (string.IsNullOrEmpty(info.func_name))
+                if (string.IsNullOrEmpty(info.Name))
                     throw new InvalidOperationException("Код у функции есть, а его имя неизвестно.");
 
-                if ((int)info.Model.Mode != (cs.db ? 32 : 16))
+                if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
                     continue;
 
                 var seg_addr = seg[addr];
@@ -297,27 +335,10 @@ namespace MikhailKhalizev.Max.Program
 
                 funcs_by_pc.Add(seg_addr, info);
 
-                info.Model.Addresses.Add(seg_addr);
+                info.MethodInfo.Addresses.Add(seg_addr);
+                MethodInfos.Save();
 
-
-                // TODO
-                //std::fstream output("program/auto/link.cpp", std::ios_base::app | std::ios_base::out);
-                //output << std::hex << std::showbase;
-
-                    //output << "LINK(";
-                    // /*bin_to_cxx::*/
-                    //write_addr_with_check_known_definitions(output, seg.get_base() + addr, true, true);
-                    //output << ", " << val.second.func_name << ", " << static_cast < uint_ < 16 >> (val.second.mode);
-                    //output << ", ({";
-
-
-                    //for (uint_ < 32 > i = 0; i < val.second.code.size() - 1; i++)
-                    //    output << val.second.code.get < uint_ < 8 >, uint_ < 32 >> (i) << ", ";
-                    //output << val.second.code.get < uint_ < 8 >, uint_ < 32 >> (val.second.code.size() - 1);
-
-                    //output << "}))\n\n";
-
-                    return info;
+                return info;
             }
 
             return null;
@@ -353,7 +374,15 @@ namespace MikhailKhalizev.Max.Program
         {
             //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
 
-            var to_cxx = new Engine(Configuration.BinToCSharp, Implementation.Memory, seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16, seg.Descriptor.Base, ds.Descriptor.Base);
+            var address = seg[short_addr];
+
+            var to_cxx = new Engine(
+                Configuration.BinToCSharp,
+                Implementation.Memory,
+                seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
+                seg.Descriptor.Base,
+                ds.Descriptor.Base,
+                MethodInfos);
 
             if (seg.Descriptor.Base != 0)
                 to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
@@ -378,9 +407,8 @@ namespace MikhailKhalizev.Max.Program
 
             foreach (var pair in funcs_by_pc)
             foreach (var info in pair.Value)
-                to_cxx.AddAlreadyDecodedFunc(info.Model);
-
-            to_cxx.RemoveAlreadyDecodedFunc(seg[short_addr]); // force decode.
+                to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
+            to_cxx.RemoveAlreadyDecodedFunc(address); // force decode.
 
             // TODO
 #if false
@@ -516,25 +544,19 @@ namespace MikhailKhalizev.Max.Program
                 }
 #endif
 
-            Console.WriteLine($"Запуск декодирования функции '{seg[short_addr]}'.");
+            Console.WriteLine($"Запуск декодирования функции '{address}'.");
 
-            to_cxx.DecodeMethod(seg[short_addr]);
+            to_cxx.DecodeMethod(address);
             to_cxx.Save();
         }
     }
 
-    public class FunctionInfo
+    public class MyMethodInfo
     {
-        public MethodInfoDto Model { get; set; }
+        public MethodInfoDto MethodInfo { get; set; }
 
-        /// <summary>
-        /// Имя функции C++ без namespace. Например: "func_0x101354f7".
-        /// </summary>
-        public string func_name { get; set; }
+        public string Name { get; set; }
 
-        /// <summary>
-        /// Адрес вызываемой функции (уже декодированной).
-        /// </summary>
-        public Action func { get; set; }
+        public Action Action { get; set; }
     }
 }
