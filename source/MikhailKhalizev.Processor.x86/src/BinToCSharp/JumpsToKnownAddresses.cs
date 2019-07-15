@@ -6,17 +6,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     public class JumpsToKnownAddresses
     {
-        public Address From { get; private set; }
-        public SortedSet<Address> To { get; private set; }
+        public Address From { get; set; }
+        public SortedSet<Address> To { get; set; }
 
-        private JumpsToKnownAddresses()
-        { }
-
-        public static JumpsToKnownAddresses CreateDummy(Address from)
+        public JumpsToKnownAddresses(Address from)
         {
-            var obj = new JumpsToKnownAddresses();
-            obj.From = from;
-            return obj;
+            From = from;
         }
 
         public static IComparer<JumpsToKnownAddresses> BeginComparer =>

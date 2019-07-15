@@ -18,6 +18,7 @@ jmp_call_loop_simple::jmp_call_loop_simple(bin_to_cxx & obj_)
     register_on_instruction_decoded( exo::util::delegate_unsafe<void (cmd_info &)>::create(this, &jmp_call_loop_simple::on_instruction_decoded) );
 }
 
+// +
 void jmp_call_loop_simple::on_instruction_decoded(cmd_info & cmd)
 {
     struct ud_operand & op = cmd.operand[0];
@@ -129,6 +130,7 @@ void jmp_call_loop_simple::on_instruction_decoded(cmd_info & cmd)
     }
 }
 
+// +
 void jmp_call_loop_simple::on_cmd_write(std::ostream & os, detected_func & df, size_t cmd_index, std::vector<std::string> & comments_in_current_func)
 {
     auto cur_jmp = jmp_to_known_addr().find(df.instr[cmd_index].first -> begin);

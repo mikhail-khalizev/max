@@ -168,6 +168,7 @@ cmd_info::cmd_info(ud_t & ud_obj)
     }
 }
 
+// +
 enum ud_type cmd_info::get_effective_segment_of_operand(uint8_t num) const
 {
     if (pfx_seg)

@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public bool IsAnyRet { get; set; }
         public bool IsJmpOrRet { get; set; }
 
-        public delegate string write_cmd_Delegate(DetectedMethod dm, int cmd_index, List<string> comments_in_current_func);
+        public delegate string write_cmd_Delegate(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func);
 
         public write_cmd_Delegate write_cmd { get; set; }
 
@@ -110,7 +110,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             catch { }
         }
         
-        private ud_type GetEffectiveSegmentOfOperand(ud_operand op)
+        public ud_type GetEffectiveSegmentOfOperand(ud_operand op)
         {
             if (PfxSeg != ud_type.UD_NONE)
                 return PfxSeg;
@@ -125,7 +125,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return ToCodeString();
         }
 
-        public string ToCodeString()
+        public string ToCodeString(string cmd_suffix = "")
         {
             var os = new StringBuilder();
 
@@ -212,7 +212,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 need_write_namespace = true;
 
 
-            // os << cmd_suffix;
+            os.Append(cmd_suffix);
             os.Append("(");
 
 

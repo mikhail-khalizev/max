@@ -61,6 +61,7 @@ REG(cr2, UD_R_CR2, 15, 0xf)    \
 REG(cr3, UD_R_CR3, 15, 0xf)
 
 
+// + MikhailKhalizev.Processor.x86.InstructionDecode.Register
 enum class reg_base_v2 : uint32_t
 {
 #define REG(name, name_ud, mj, mn)   name = (mj << 16) + mn,
@@ -68,6 +69,7 @@ REGS
 #undef REG
 };
 
+// +
 static reg_base_v2 convert_reg(enum ud_type base)
 {
     switch(base)
@@ -81,6 +83,7 @@ REGS
     }
 }
 
+// +
 static bool intersects(reg_base_v2 a, reg_base_v2 b)
 {
     if (a == reg_base_v2::none || b == reg_base_v2::none)
@@ -106,6 +109,7 @@ comment_idle::comment_idle(bin_to_cxx & obj_)
     register_on_instruction_decoded( exo::util::delegate_unsafe<void (cmd_info &)>::create(this, &comment_idle::on_instruction_decoded) );
 }
 
+// +
 void comment_idle::on_instruction_decoded(cmd_info & cmd)
 {
     if (cmd.mnemonic == UD_Inop)
@@ -125,6 +129,7 @@ void comment_idle::on_instruction_decoded(cmd_info & cmd)
     }
 }
 
+// +
 void comment_idle::on__cmd_mov_to_reg__write(std::ostream & os, detected_func & df, size_t cmd_index, std::vector<std::string> &)
 {
     cmd_info & cmd_orig = * df.instr[cmd_index].first;

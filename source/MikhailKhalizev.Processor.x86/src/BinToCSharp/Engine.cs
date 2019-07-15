@@ -10,7 +10,6 @@ using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.BinToCSharp.Plugin;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
-using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
@@ -100,25 +99,26 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// <summary>
         /// Набор адресов начиная с которых необходимо произвести декодирование.
         /// </summary>
-        private HashSet<Address> AddressesToDecode = new HashSet<Address>();
+        public HashSet<Address> AddressesToDecode = new HashSet<Address>();
 
         /// <summary>
         /// Содержит информацию об определённых методах.
         /// </summary>
-        private SortedSet<DetectedMethod> NewDetectedMethods = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
+        public SortedSet<DetectedMethod> NewDetectedMethods = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
 
         private Dictionary<Address, int> Aligment = new Dictionary<Address, int>(); // <addr of start, aligment>
 
-        private SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
+        // Переходы на известные адреса.
+        public SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
         private DecodedCode code = new DecodedCode();
 
         private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
-        // TODO plugin::jmp_call_loop_simple plugin_jmp_call_loop_simple; - addr_to_decode from any jmp.
-        // TODO plugin::switch_ plugin_switch; - decode switch.
+        private readonly JmpCallLoopSimple jmp_call_loop_simple; // addr_to_decode from any jmp.
+        private readonly Switch switch_;
         private readonly AddCStringToCommentPlugin _addCStringToCommentPlugin;
-        // TODO plugin::comment_idle plugin_comment_idle; - comment dummy instruction
+        private readonly CommentDummyInstructions comment_idle; // comment dummy instruction
 
 
         public Engine(ConfigurationDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodInfos methodInfos = null)
@@ -134,6 +134,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 SuppressDecode.Add(0, csBase);
 
             _addCStringToCommentPlugin = new AddCStringToCommentPlugin(this);
+            comment_idle = new CommentDummyInstructions(this);
+            jmp_call_loop_simple = new JmpCallLoopSimple(this);
+            switch_ = new Switch(this);
         }
 
         public void DecodeMethod(Address address)
