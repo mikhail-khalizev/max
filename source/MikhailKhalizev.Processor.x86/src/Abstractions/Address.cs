@@ -139,7 +139,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             if (address < int.MinValue)
                 throw new InvalidCastException("address < int.MinValue");
 
-            return (ulong) address;
+            return (uint) address; // Именно uint. Например чтобы для смещения -20 преобразование в Address увенчалось успешно.
         }
 
         #endregion

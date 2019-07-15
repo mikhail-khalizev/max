@@ -21,6 +21,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
         private void EngineOnInstructionDecoded(object sender, Instruction cmd)
         {
+            if (cmd.Operands.Count < 1)
+                return;
+
             var op = cmd.Operands[0];
             Address toAddr = 0;
 
@@ -41,7 +44,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     && op.type == ud_type.UD_OP_MEM
                     && op.@base == ud_type.UD_NONE
                     && op.index == ud_type.UD_NONE
-                    && op.offset != 0)
+                    && op.offset != 0
+                    // Support only flat model (without segments) to increase accuracy.
+                    && Engine.Mode != ArchitectureMode.x86_16
+                    && Engine.CsBase == 0
+                    && Engine.DsBase == 0)
             {
                 Address where;
                 switch (op.offset)
@@ -90,7 +97,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     "Вызов '" +
                     AddressNameConverter.GetResultName(
                         toAddr,
-                        true,
+                        false,
                         false /* лучше true, но комментарий в комментарие.. */) +
                     "'.";
 

@@ -302,7 +302,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var success_count = 0;
                 var toRemove = new List<DetectedMethod>();
 
-                foreach (var func in NewDetectedMethods)
+                foreach (var func in NewDetectedMethods.ToList())
                 {
                     var addr_func = func.Begin;
 
@@ -492,8 +492,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 
                 var output = new StringBuilder();
                 write_cxx_func_to_stream(output, detectedMethod);
-
-
+                
                 var ns = AddressNameConverter.GetNamespace(methodBegin);
                 var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
 
@@ -609,6 +608,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (have_label)
                 {
                     output.AppendLine($"l_{addr_of_line}:");
+                    output.Append("        ");
                     skip = false;
                 }
 
@@ -637,9 +637,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 var os = new StringBuilder();
                 write_instruction_position_and_spaces(os, addr_func_end, addr_func_end);
-                os.Append($"jmpd_func({AddressNameConverter.GetResultName(addr_func_end, true, true)}, 0);");
+                os.Append($"jmpd_func({AddressNameConverter.GetResultName(addr_func_end, false, true)}, 0);");
                 write_spaces(os, LineCommentOffset - 1);
-                output.AppendLine($"    {os} /* Принудительное завершение функции. */");
+                output.AppendLine($"            {os} /* Принудительное завершение функции. */");
             }
 
             output.AppendLine("        }");
@@ -650,7 +650,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end)
         {
             write_instruction_position(os, begin, end);
-            write_spaces(os, LineCommentOffset - 1);
+            write_spaces(os, LineCmdOffset - 1);
             os.Append(' ');
         }
 

@@ -24,12 +24,17 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             ByteMask = byteMask;
             Size = size;
 
-            var name = UdType.ToString();
-            if (!name.StartsWith("UD_R_"))
-                throw new InvalidOperationException($"Invalid {nameof(udType)}: {udType}");
-            name = name.Substring("UD_R_".Length).ToLowerInvariant();
+            if (udType == ud_type.UD_NONE)
+                Name = "none";
+            else
+            {
+                var name = udType.ToString();
+                if (!name.StartsWith("UD_R_"))
+                    throw new InvalidOperationException($"Invalid {nameof(udType)}: {udType}");
+                name = name.Substring("UD_R_".Length).ToLowerInvariant();
 
-            Name = name;
+                Name = name;
+            }
         }
 
         public static IReadOnlyCollection<Register> Registers => _registerByType.Values;
