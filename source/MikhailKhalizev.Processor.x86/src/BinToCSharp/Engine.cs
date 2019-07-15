@@ -35,6 +35,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public event EventHandler<Instruction> InstructionDecoded;
         
         public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
+        public DecodedCode code { get; } = new DecodedCode();
 
 
 
@@ -104,14 +105,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// <summary>
         /// Содержит информацию об определённых методах.
         /// </summary>
-        public SortedSet<DetectedMethod> NewDetectedMethods = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
+        public SortedSet<DetectedMethod> NewDetectedMethods { get; } = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
 
-        private Dictionary<Address, int> Aligment = new Dictionary<Address, int>(); // <addr of start, aligment>
+        public Dictionary<Address, int> Aligment { get; } = new Dictionary<Address, int>(); // <addr of start, aligment>
 
         // Переходы на известные адреса.
         public SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
-        private DecodedCode code = new DecodedCode();
-
+        
         private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
@@ -349,7 +349,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     var instr = new List<Instruction>();
                     var last_instr_end = first_cmd.Begin;
-                    var may_be_end_of_func = new List<Address>();
+                    //var may_be_end_of_func = new List<Address>();
 
                     for (var cmd = first_cmd; cmd != null; cmd = code.cmd_get_next_logical(cmd))
                     {
@@ -375,8 +375,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             break;
                         }
 
-                        if (cmd.IsJmpOrRet)
-                            may_be_end_of_func.Add(cmd.End);
+                        //if (cmd.IsJmpOrRet)
+                        //    may_be_end_of_func.Add(cmd.End);
 
                         instr.Add(cmd);
                         last_instr_end = cmd.End;
@@ -398,7 +398,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     func.Labels.Clear();
 
-                    foreach (var i in jmp_to_known_addr.GetViewBetween(JumpsToKnownAddresses.CreateDummy(addr_func), JumpsToKnownAddresses.CreateDummy(min_end)))
+                    foreach (var i in jmp_to_known_addr.GetViewBetween(new JumpsToKnownAddresses(addr_func), new JumpsToKnownAddresses(min_end)))
                     {
                         foreach (var to in i.To)
                         {
@@ -679,7 +679,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (cmd.write_cmd != null)
             {
-                os.Append(" " + cmd.write_cmd(df, cmd_index, comments_in_current_func));
+                os.Append(" " + cmd.write_cmd(this, df, cmd_index, comments_in_current_func));
 
                 if (cmd.Comments.Count != 0 || comments_in_current_func.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);

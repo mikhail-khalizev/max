@@ -21,9 +21,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
         private void EngineOnInstructionDecoded(object sender, Instruction cmd)
         {
-            var engine = (Engine) sender;
             var op = cmd.Operands[0];
-            Address to_addr;
+            Address toAddr = 0;
 
             if ((cmd.IsAnyJump || cmd.IsAnyLoop || cmd.IsCall) && (op.type == ud_type.UD_OP_JIMM))
             {
@@ -35,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     default: throw new NotImplementedException();
                 }
 
-                to_addr = cmd.End + (Address)op.lval.sqword;
+                toAddr = cmd.End + (Address)op.lval.sqword;
             }
             else if ((cmd.IsCall || cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp)
                     && !cmd.BrFar
@@ -57,10 +56,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 switch (cmd.GetEffectiveSegmentOfOperand(cmd.Operands[0]))
                 {
                     case ud_type.UD_R_CS:
-                        where += engine.CsBase;
+                        where += Engine.CsBase;
                         break;
                     case ud_type.UD_R_DS:
-                        where += engine.DsBase;
+                        where += Engine.DsBase;
                         break;
                     case ud_type.UD_R_SS:
                         return;
@@ -70,27 +69,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
                 switch (op.size)
                 {
-                case 16:
-                    to_addr = engine.Memory.GetFixSize(where, 2).GetUInt16();
-                    break;
-                case 32:
-                    to_addr = engine.Memory.GetFixSize(where, 4).GetUInt32();
-                    break;
-                default:
-                    throw new NotImplementedException();
+                    case 16:
+                        toAddr = Engine.Memory.GetFixSize(where, 2).GetUInt16();
+                        break;
+                    case 32:
+                        toAddr = Engine.Memory.GetFixSize(where, 4).GetUInt32();
+                        break;
+                    default:
+                        throw new NotImplementedException();
                 }
 
-                to_addr += engine.CsBase;
+                toAddr += Engine.CsBase;
 
 
-                if (to_addr == 0)
+                if (toAddr == 0)
                     return;
 
 
                 var os =
                     "Вызов '" +
                     AddressNameConverter.GetResultName(
-                        to_addr,
+                        toAddr,
                         true,
                         false /* лучше true, но комментарий в комментарие.. */) +
                     "'.";
@@ -101,33 +100,33 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 return;
 
 
-            Address _eip = to_addr - engine.CsBase;
-            if (engine.Mode == ArchitectureMode.x86_16)
-                _eip &= 0xffff;
-            to_addr = engine.CsBase + _eip;
+            Address eip = toAddr - Engine.CsBase;
+            if (Engine.Mode == ArchitectureMode.x86_16)
+                eip &= 0xffff;
+            toAddr = Engine.CsBase + eip;
 
 
-            bool not_suppressed = engine.SuppressDecode.Contains(to_addr, false);
+            var notSuppressed = !Engine.SuppressDecode.Contains(toAddr, false);
 
-            if (not_suppressed)
-                engine.AddressesToDecode.Add(to_addr);
+            if (notSuppressed)
+                Engine.AddressesToDecode.Add(toAddr);
 
             if (cmd.IsCall || op.type != ud_type.UD_OP_JIMM)
             {
-                if (not_suppressed)
-                    engine.NewDetectedMethods.Add(new DetectedMethod(to_addr)); // create if not exist.
+                if (notSuppressed)
+                    Engine.NewDetectedMethods.Add(new DetectedMethod(toAddr)); // create if not exist.
             }
             else
             {
-                engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(cmd.Begin), out var actual);
+                Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(cmd.Begin), out var actual);
                 if (actual == null)
                 {
                     actual = new JumpsToKnownAddresses(cmd.Begin);
                     actual.To = new SortedSet<Address>();
-                    engine.jmp_to_known_addr.Add(actual);
+                    Engine.jmp_to_known_addr.Add(actual);
                 }
 
-                actual.To.Add(to_addr);
+                actual.To.Add(toAddr);
                 cmd.write_cmd = on_cmd_write;
             }
         }

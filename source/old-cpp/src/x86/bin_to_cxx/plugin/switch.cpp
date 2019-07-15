@@ -78,6 +78,7 @@ switch_::switch_(bin_to_cxx & obj_)
     register_on_instruction_decoded( exo::util::delegate_unsafe<void (cmd_info &)>::create(this, &switch_::on_instruction_decoded) );
 }
 
+// +
 void switch_::add_switch_at(cmd_info & cmd)
 {
     if (cmd.br_far)
@@ -127,6 +128,7 @@ void switch_::add_switch_at(cmd_info & cmd)
     cmd.write_cmd = decltype(cmd.write_cmd)::create(this, &switch_::on_cmd_write);
 }
 
+// +
 void switch_::on_instruction_decoded(cmd_info & cmd)
 {
 #if 0
@@ -380,6 +382,7 @@ l_0x001577dd:
     }
 }
 
+// +
 void switch_::on_cmd_write(std::ostream & os, detected_func & df, size_t cmd_index, std::vector<std::string> &)
 {
     auto cur_jmp = jmp_to_known_addr().find(df.instr[cmd_index].first -> begin);

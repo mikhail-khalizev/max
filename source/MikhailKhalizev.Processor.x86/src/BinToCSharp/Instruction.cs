@@ -59,6 +59,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             Begin = begin;
             End = end;
+            CommentThis = true;
             if (comment != null)
                 Comments = new List<string> { comment };
         }
@@ -68,7 +69,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (instr == null)
                 throw new ArgumentNullException(nameof(instr));
 
-            write_cmd = (dm, index, func) => ToCodeString();
+            write_cmd = (e, dm, index, func) => ToCodeString();
 
             Comments = new List<string>();
 
@@ -125,7 +126,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return ToCodeString();
         }
 
-        public string ToCodeString(string cmd_suffix = "")
+        public string ToCodeString(string cmd_suffix = "", string func_add_arg = "")
         {
             var os = new StringBuilder();
 
@@ -423,14 +424,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 os.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
             }
 
-            //if (func_add_arg.size() != 0)
-            //{
-            //    if (non_first_arg)
-            //        os << ", ";
-            //    non_first_arg = true;
+            if (func_add_arg.Length != 0)
+            {
+                if (non_first_arg)
+                    os.Append(", ");
+                non_first_arg = true;
 
-            //    os << func_add_arg;
-            //}
+                os.Append(func_add_arg);
+            }
 
             os.Append(");");
             return os.ToString();
