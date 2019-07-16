@@ -52,25 +52,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Add Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ADDPD.html</remarks>
-        addpd_fp,
+        addpd,
 
         /// <summary>
         /// Add Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ADDPS.html</remarks>
-        addps_fp,
+        addps,
 
         /// <summary>
         /// Add Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ADDSD.html</remarks>
-        addsd_fp,
+        addsd,
 
         /// <summary>
         /// Add Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ADDSS.html</remarks>
-        addss_fp,
+        addss,
 
         /// <summary>
         /// Packed Double-FP Add/Subtract.
@@ -142,25 +142,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ANDNPD.html</remarks>
-        andnpd_fp,
+        andnpd,
 
         /// <summary>
         /// Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ANDNPS.html</remarks>
-        andnps_fp,
+        andnps,
 
         /// <summary>
         /// Bitwise Logical AND of Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ANDPD.html</remarks>
-        andpd_fp,
+        andpd,
 
         /// <summary>
         /// Bitwise Logical AND of Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ANDPS.html</remarks>
-        andps_fp,
+        andps,
 
         /// <summary>
         /// Adjust RPL Field of Segment Selector.
@@ -178,25 +178,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Blend Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BLENDPD.html</remarks>
-        blendpd_fp,
+        blendpd,
 
         /// <summary>
         /// Blend Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BLENDPS.html</remarks>
-        blendps_fp,
+        blendps,
 
         /// <summary>
         /// Variable Blend Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BLENDVPD.html</remarks>
-        blendvpd_fp,
+        blendvpd,
 
         /// <summary>
         /// Variable Blend Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BLENDVPS.html</remarks>
-        blendvps_fp,
+        blendvps,
 
         /// <summary>
         /// Extract Lowest Set Isolated Bit.
@@ -406,13 +406,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Compare Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMPPD.html</remarks>
-        cmppd_fp,
+        cmppd,
 
         /// <summary>
         /// Compare Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMPPS.html</remarks>
-        cmpps_fp,
+        cmpps,
 
         /// <summary>
         /// Compare String Operands.
@@ -448,7 +448,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Compare Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMPSS.html</remarks>
-        cmpss_fp,
+        cmpss,
 
         /// <summary>
         /// Compare String Operands.
@@ -478,13 +478,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/COMISD.html</remarks>
-        comisd_fp,
+        comisd,
 
         /// <summary>
         /// Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/COMISS.html</remarks>
-        comiss_fp,
+        comiss,
 
         /// <summary>
         /// CPU Identification.
@@ -508,19 +508,19 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTDQ2PD.html</remarks>
-        cvtdq2pd_fp,
+        cvtdq2pd,
 
         /// <summary>
         /// Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTDQ2PS.html</remarks>
-        cvtdq2ps_fp,
+        cvtdq2ps,
 
         /// <summary>
         /// Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTPD2DQ.html</remarks>
-        cvtpd2dq_fp,
+        cvtpd2dq,
 
         /// <summary>
         /// Convert Packed Double-Precision FP Values to Packed Dword Integers.
@@ -532,7 +532,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTPD2PS.html</remarks>
-        cvtpd2ps_fp,
+        cvtpd2ps,
 
         /// <summary>
         /// Convert Packed Dword Integers to Packed Double-Precision FP Values.
@@ -550,13 +550,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTPS2DQ.html</remarks>
-        cvtps2dq_fp,
+        cvtps2dq,
 
         /// <summary>
         /// Convert Packed Single-Precision Floating-Point Values to Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTPS2PD.html</remarks>
-        cvtps2pd_fp,
+        cvtps2pd,
 
         /// <summary>
         /// Convert Packed Single-Precision FP Values to Packed Dword Integers.
@@ -568,43 +568,43 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert Scalar Double-Precision Floating-Point Value to Doubleword Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTSD2SI.html</remarks>
-        cvtsd2si_fp,
+        cvtsd2si,
 
         /// <summary>
         /// Convert Scalar Double-Precision Floating-Point Value to Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTSD2SS.html</remarks>
-        cvtsd2ss_fp,
+        cvtsd2ss,
 
         /// <summary>
         /// Convert Doubleword Integer to Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTSI2SD.html</remarks>
-        cvtsi2sd_fp,
+        cvtsi2sd,
 
         /// <summary>
         /// Convert Doubleword Integer to Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTSI2SS.html</remarks>
-        cvtsi2ss_fp,
+        cvtsi2ss,
 
         /// <summary>
         /// Convert Scalar Single-Precision Floating-Point Value to Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTSS2SD.html</remarks>
-        cvtss2sd_fp,
+        cvtss2sd,
 
         /// <summary>
         /// Convert Scalar Single-Precision Floating-Point Value to Doubleword Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTSS2SI.html</remarks>
-        cvtss2si_fp,
+        cvtss2si,
 
         /// <summary>
         /// Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Doubleword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTTPD2DQ.html</remarks>
-        cvttpd2dq_fp,
+        cvttpd2dq,
 
         /// <summary>
         /// Convert with Truncation Packed Double-Precision FP Values to Packed Dword Integers.
@@ -616,7 +616,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTTPS2DQ.html</remarks>
-        cvttps2dq_fp,
+        cvttps2dq,
 
         /// <summary>
         /// Convert with Truncation Packed Single-Precision FP Values to Packed Dword Integers.
@@ -628,13 +628,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert with Truncation Scalar Double-Precision Floating-Point Value to Signed Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTTSD2SI.html</remarks>
-        cvttsd2si_fp,
+        cvttsd2si,
 
         /// <summary>
         /// Convert with Truncation Scalar Single-Precision Floating-Point Value to Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CVTTSS2SI.html</remarks>
-        cvttss2si_fp,
+        cvttss2si,
 
         /// <summary>
         /// Convert Word to Doubleword/Convert Doubleword to Quadword.
@@ -676,37 +676,37 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Divide Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DIVPD.html</remarks>
-        divpd_fp,
+        divpd,
 
         /// <summary>
         /// Divide Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DIVPS.html</remarks>
-        divps_fp,
+        divps,
 
         /// <summary>
         /// Divide Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DIVSD.html</remarks>
-        divsd_fp,
+        divsd,
 
         /// <summary>
         /// Divide Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DIVSS.html</remarks>
-        divss_fp,
+        divss,
 
         /// <summary>
         /// Dot Product of Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DPPD.html</remarks>
-        dppd_fp,
+        dppd,
 
         /// <summary>
         /// Dot Product of Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DPPS.html</remarks>
-        dpps_fp,
+        dpps,
 
         /// <summary>
         /// Empty MMX Technology State.
@@ -724,7 +724,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Extract Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/EXTRACTPS.html</remarks>
-        extractps_fp,
+        extractps,
 
         /// <summary>
         /// Compute 2x–1.
@@ -778,7 +778,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Floating-Point Conditional Move.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
-        fcmovcc_fp,
+        fcmovcc,
 
         /// <summary>
         /// Compare Floating Point Values.
@@ -850,7 +850,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Free Floating-Point Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FFREE.html</remarks>
-        ffree_fp,
+        ffree,
 
         /// <summary>
         /// Add.
@@ -904,7 +904,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Initialize Floating-Point Unit.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FINIT:FNINIT.html</remarks>
-        finit_fp,
+        finit,
 
         /// <summary>
         /// Store Integer.
@@ -1018,7 +1018,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Initialize Floating-Point Unit.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FINIT:FNINIT.html</remarks>
-        fninit_fp,
+        fninit,
 
         /// <summary>
         /// No Operation.
@@ -1216,7 +1216,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Examine Floating-Point.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FXAM.html</remarks>
-        fxam_fp,
+        fxam,
 
         /// <summary>
         /// Exchange Register Contents.
@@ -1330,7 +1330,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Insert Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INSERTPS.html</remarks>
-        insertps_fp,
+        insertps,
 
         /// <summary>
         /// Input from Port to String.
@@ -1384,7 +1384,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Interrupt Return.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IRET:IRETD.html</remarks>
-        iretw,
+        iret,
 
         /// <summary>
         /// Interrupt Return.
@@ -1888,25 +1888,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Maximum of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MAXPD.html</remarks>
-        maxpd_fp,
+        maxpd,
 
         /// <summary>
         /// Maximum of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MAXPS.html</remarks>
-        maxps_fp,
+        maxps,
 
         /// <summary>
         /// Return Maximum Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MAXSD.html</remarks>
-        maxsd_fp,
+        maxsd,
 
         /// <summary>
         /// Return Maximum Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MAXSS.html</remarks>
-        maxss_fp,
+        maxss,
 
         /// <summary>
         /// Memory Fence.
@@ -1918,25 +1918,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Minimum of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MINPD.html</remarks>
-        minpd_fp,
+        minpd,
 
         /// <summary>
         /// Minimum of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MINPS.html</remarks>
-        minps_fp,
+        minps,
 
         /// <summary>
         /// Return Minimum Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MINSD.html</remarks>
-        minsd_fp,
+        minsd,
 
         /// <summary>
         /// Return Minimum Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MINSS.html</remarks>
-        minss_fp,
+        minss,
 
         /// <summary>
         /// Set Up Monitor Address.
@@ -1966,13 +1966,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Move Aligned Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVAPD.html</remarks>
-        movapd_fp,
+        movapd,
 
         /// <summary>
         /// Move Aligned Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVAPS.html</remarks>
-        movaps_fp,
+        movaps,
 
         /// <summary>
         /// Move Data After Swapping Bytes.
@@ -2014,49 +2014,49 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Move Packed Single-Precision Floating-Point Values High to Low.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVHLPS.html</remarks>
-        movhlps_fp,
+        movhlps,
 
         /// <summary>
         /// Move High Packed Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVHPD.html</remarks>
-        movhpd_fp,
+        movhpd,
 
         /// <summary>
         /// Move High Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVHPS.html</remarks>
-        movhps_fp,
+        movhps,
 
         /// <summary>
         /// Move Packed Single-Precision Floating-Point Values Low to High.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVLHPS.html</remarks>
-        movlhps_fp,
+        movlhps,
 
         /// <summary>
         /// Move Low Packed Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVLPD.html</remarks>
-        movlpd_fp,
+        movlpd,
 
         /// <summary>
         /// Move Low Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVLPS.html</remarks>
-        movlps_fp,
+        movlps,
 
         /// <summary>
         /// Extract Packed Double-Precision Floating-Point Sign Mask.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVMSKPD.html</remarks>
-        movmskpd_fp,
+        movmskpd,
 
         /// <summary>
         /// Extract Packed Single-Precision Floating-Point Sign Mask.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVMSKPS.html</remarks>
-        movmskps_fp,
+        movmskps,
 
         /// <summary>
         /// Store Packed Integers Using Non-Temporal Hint.
@@ -2080,13 +2080,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVNTPD.html</remarks>
-        movntpd_fp,
+        movntpd,
 
         /// <summary>
         /// Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVNTPS.html</remarks>
-        movntps_fp,
+        movntps,
 
         /// <summary>
         /// Store of Quadword Using Non-Temporal Hint.
@@ -2158,7 +2158,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Move or Merge Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVSS.html</remarks>
-        movss_fp,
+        movss,
 
         /// <summary>
         /// Move Data from String to String.
@@ -2170,7 +2170,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Move with Sign-Extension.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVSX:MOVSXD.html</remarks>
-        movsxw,
+        movsx,
 
         /// <summary>
         /// Move with Sign-Extension.
@@ -2182,13 +2182,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Move Unaligned Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVUPD.html</remarks>
-        movupd_fp,
+        movupd,
 
         /// <summary>
         /// Move Unaligned Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVUPS.html</remarks>
-        movups_fp,
+        movups,
 
         /// <summary>
         /// Move with Zero-Extend.
@@ -2212,25 +2212,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Multiply Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MULPD.html</remarks>
-        mulpd_fp,
+        mulpd,
 
         /// <summary>
         /// Multiply Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MULPS.html</remarks>
-        mulps_fp,
+        mulps,
 
         /// <summary>
         /// Multiply Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MULSD.html</remarks>
-        mulsd_fp,
+        mulsd,
 
         /// <summary>
         /// Multiply Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MULSS.html</remarks>
-        mulss_fp,
+        mulss,
 
         /// <summary>
         /// Unsigned Multiply Without Affecting Flags.
@@ -2272,13 +2272,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Bitwise Logical OR of Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ORPD.html</remarks>
-        orpd_fp,
+        orpd,
 
         /// <summary>
         /// Bitwise Logical OR of Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ORPS.html</remarks>
-        orps_fp,
+        orps,
 
         /// <summary>
         /// Output to Port.
@@ -2818,7 +2818,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Pop All General-Purpose Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POPA:POPAD.html</remarks>
-        popaw,
+        popa,
 
         /// <summary>
         /// Pop All General-Purpose Registers.
@@ -2836,7 +2836,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Pop Stack into EFLAGS Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POPF:POPFD:POPFQ.html</remarks>
-        popfw,
+        popf,
 
         /// <summary>
         /// Pop Stack into EFLAGS Register.
@@ -3106,7 +3106,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Push All General-Purpose Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSHA:PUSHAD.html</remarks>
-        pushaw,
+        pusha,
 
         /// <summary>
         /// Push All General-Purpose Registers.
@@ -3118,7 +3118,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Push EFLAGS Register onto the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSHF:PUSHFD:PUSHFQ.html</remarks>
-        pushfw,
+        pushf,
 
         /// <summary>
         /// Push EFLAGS Register onto the Stack.
@@ -3148,13 +3148,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Compute Reciprocals of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCPPS.html</remarks>
-        rcpps_fp,
+        rcpps,
 
         /// <summary>
         /// Compute Reciprocal of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCPSS.html</remarks>
-        rcpss_fp,
+        rcpss,
 
         /// <summary>
         /// Rotate.
@@ -3280,25 +3280,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Round Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ROUNDPD.html</remarks>
-        roundpd_fp,
+        roundpd,
 
         /// <summary>
         /// Round Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ROUNDPS.html</remarks>
-        roundps_fp,
+        roundps,
 
         /// <summary>
         /// Round Scalar Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ROUNDSD.html</remarks>
-        roundsd_fp,
+        roundsd,
 
         /// <summary>
         /// Round Scalar Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ROUNDSS.html</remarks>
-        roundss_fp,
+        roundss,
 
         /// <summary>
         /// Resume from System Management Mode.
@@ -3310,13 +3310,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RSQRTPS.html</remarks>
-        rsqrtps_fp,
+        rsqrtps,
 
         /// <summary>
         /// Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RSQRTSS.html</remarks>
-        rsqrtss_fp,
+        rsqrtss,
 
         /// <summary>
         /// Store AH into Flags.
@@ -3472,13 +3472,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Packed Interleave Shuffle of Pairs of Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SHUFPD.html</remarks>
-        shufpd_fp,
+        shufpd,
 
         /// <summary>
         /// Packed Interleave Shuffle of Quadruplets of Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SHUFPS.html</remarks>
-        shufps_fp,
+        shufps,
 
         /// <summary>
         /// Store Interrupt Descriptor Table Register.
@@ -3502,19 +3502,19 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Square Root of Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SQRTPD.html</remarks>
-        sqrtpd_fp,
+        sqrtpd,
 
         /// <summary>
         /// Square Root of Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SQRTPS.html</remarks>
-        sqrtps_fp,
+        sqrtps,
 
         /// <summary>
         /// Compute Square Root of Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SQRTSD.html</remarks>
-        sqrtsd_fp,
+        sqrtsd,
 
         /// <summary>
         /// Compute Square Root of Scalar Single-Precision Value.
@@ -3598,25 +3598,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Subtract Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SUBPD.html</remarks>
-        subpd_fp,
+        subpd,
 
         /// <summary>
         /// Subtract Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SUBPS.html</remarks>
-        subps_fp,
+        subps,
 
         /// <summary>
         /// Subtract Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SUBSD.html</remarks>
-        subsd_fp,
+        subsd,
 
         /// <summary>
         /// Subtract Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SUBSS.html</remarks>
-        subss_fp,
+        subss,
 
         /// <summary>
         /// Swap GS Base Register.
@@ -3664,13 +3664,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UCOMISD.html</remarks>
-        ucomisd_fp,
+        ucomisd,
 
         /// <summary>
         /// Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UCOMISS.html</remarks>
-        ucomiss_fp,
+        ucomiss,
 
         /// <summary>
         /// Undefined Instruction.
@@ -3682,25 +3682,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Unpack and Interleave High Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UNPCKHPD.html</remarks>
-        unpckhpd_fp,
+        unpckhpd,
 
         /// <summary>
         /// Unpack and Interleave High Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UNPCKHPS.html</remarks>
-        unpckhps_fp,
+        unpckhps,
 
         /// <summary>
         /// Unpack and Interleave Low Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UNPCKLPD.html</remarks>
-        unpcklpd_fp,
+        unpcklpd,
 
         /// <summary>
         /// Unpack and Interleave Low Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UNPCKLPS.html</remarks>
-        unpcklps_fp,
+        unpcklps,
 
         /// <summary>
         /// Align Doubleword/Quadword Vectors.
@@ -3730,37 +3730,37 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Load with Broadcast Floating-Point Data.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
-        vbroadcast_fp,
+        vbroadcast,
 
         /// <summary>
         /// Store Sparse Packed Double-Precision Floating-Point Values into Dense Memory.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCOMPRESSPD.html</remarks>
-        vcompresspd_fp,
+        vcompresspd,
 
         /// <summary>
         /// Store Sparse Packed Single-Precision Floating-Point Values into Dense Memory.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCOMPRESSPS.html</remarks>
-        vcompressps_fp,
+        vcompressps,
 
         /// <summary>
         /// Convert Packed Double-Precision Floating-Point Values to Packed Quadword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPD2QQ.html</remarks>
-        vcvtpd2qq_fp,
+        vcvtpd2qq,
 
         /// <summary>
         /// Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPD2UDQ.html</remarks>
-        vcvtpd2udq_fp,
+        vcvtpd2udq,
 
         /// <summary>
         /// Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPD2UQQ.html</remarks>
-        vcvtpd2uqq_fp,
+        vcvtpd2uqq,
 
         /// <summary>
         /// Convert 16-bit FP values to Single-Precision FP values.
@@ -3778,127 +3778,127 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPS2QQ.html</remarks>
-        vcvtps2qq_fp,
+        vcvtps2qq,
 
         /// <summary>
         /// Convert Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPS2UDQ.html</remarks>
-        vcvtps2udq_fp,
+        vcvtps2udq,
 
         /// <summary>
         /// Convert Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPS2UQQ.html</remarks>
-        vcvtps2uqq_fp,
+        vcvtps2uqq,
 
         /// <summary>
         /// Convert Packed Quadword Integers to Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTQQ2PD.html</remarks>
-        vcvtqq2pd_fp,
+        vcvtqq2pd,
 
         /// <summary>
         /// Convert Packed Quadword Integers to Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTQQ2PS.html</remarks>
-        vcvtqq2ps_fp,
+        vcvtqq2ps,
 
         /// <summary>
         /// Convert Scalar Double-Precision Floating-Point Value to Unsigned Doubleword Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTSD2USI.html</remarks>
-        vcvtsd2usi_fp,
+        vcvtsd2usi,
 
         /// <summary>
         /// Convert Scalar Single-Precision Floating-Point Value to Unsigned Doubleword Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTSS2USI.html</remarks>
-        vcvtss2usi_fp,
+        vcvtss2usi,
 
         /// <summary>
         /// Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Quadword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPD2QQ.html</remarks>
-        vcvttpd2qq_fp,
+        vcvttpd2qq,
 
         /// <summary>
         /// Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPD2UDQ.html</remarks>
-        vcvttpd2udq_fp,
+        vcvttpd2udq,
 
         /// <summary>
         /// Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPD2UQQ.html</remarks>
-        vcvttpd2uqq_fp,
+        vcvttpd2uqq,
 
         /// <summary>
         /// Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPS2QQ.html</remarks>
-        vcvttps2qq_fp,
+        vcvttps2qq,
 
         /// <summary>
         /// Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPS2UDQ.html</remarks>
-        vcvttps2udq_fp,
+        vcvttps2udq,
 
         /// <summary>
         /// Convert with Truncation Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPS2UQQ.html</remarks>
-        vcvttps2uqq_fp,
+        vcvttps2uqq,
 
         /// <summary>
         /// Convert with Truncation Scalar Double-Precision Floating-Point Value to Unsigned Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTSD2USI.html</remarks>
-        vcvttsd2usi_fp,
+        vcvttsd2usi,
 
         /// <summary>
         /// Convert with Truncation Scalar Single-Precision Floating-Point Value to Unsigned Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTSS2USI.html</remarks>
-        vcvttss2usi_fp,
+        vcvttss2usi,
 
         /// <summary>
         /// Convert Packed Unsigned Doubleword Integers to Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTUDQ2PD.html</remarks>
-        vcvtudq2pd_fp,
+        vcvtudq2pd,
 
         /// <summary>
         /// Convert Packed Unsigned Doubleword Integers to Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTUDQ2PS.html</remarks>
-        vcvtudq2ps_fp,
+        vcvtudq2ps,
 
         /// <summary>
         /// Convert Packed Unsigned Quadword Integers to Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTUQQ2PD.html</remarks>
-        vcvtuqq2pd_fp,
+        vcvtuqq2pd,
 
         /// <summary>
         /// Convert Packed Unsigned Quadword Integers to Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTUQQ2PS.html</remarks>
-        vcvtuqq2ps_fp,
+        vcvtuqq2ps,
 
         /// <summary>
         /// Convert Unsigned Integer to Scalar Double-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTUSI2SD.html</remarks>
-        vcvtusi2sd_fp,
+        vcvtusi2sd,
 
         /// <summary>
         /// Convert Unsigned Integer to Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTUSI2SS.html</remarks>
-        vcvtusi2ss_fp,
+        vcvtusi2ss,
 
         /// <summary>
         /// Double Block Packed Sum-Absolute-Differences (SAD) on Unsigned Bytes.
@@ -3922,43 +3922,43 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Load Sparse Packed Double-Precision Floating-Point Values from Dense Memory.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXPANDPD.html</remarks>
-        vexpandpd_fp,
+        vexpandpd,
 
         /// <summary>
         /// Load Sparse Packed Single-Precision Floating-Point Values from Dense Memory.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXPANDPS.html</remarks>
-        vexpandps_fp,
+        vexpandps,
 
         /// <summary>
         /// Extra ct Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html</remarks>
-        vextractf128_fp,
+        vextractf128,
 
         /// <summary>
         /// Extra ct Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html</remarks>
-        vextractf32x4_fp,
+        vextractf32x4,
 
         /// <summary>
         /// Extra ct Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html</remarks>
-        vextractf32x8_fp,
+        vextractf32x8,
 
         /// <summary>
         /// Extra ct Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html</remarks>
-        vextractf64x2_fp,
+        vextractf64x2,
 
         /// <summary>
         /// Extra ct Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html</remarks>
-        vextractf64x4_fp,
+        vextractf64x4,
 
         /// <summary>
         /// Extract packed Integer Values.
@@ -4018,361 +4018,361 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Fused Multiply-Add of Packed Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html</remarks>
-        vfmadd132pd_fp,
+        vfmadd132pd,
 
         /// <summary>
         /// Fused Multiply-Add of Packed Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html</remarks>
-        vfmadd132ps_fp,
+        vfmadd132ps,
 
         /// <summary>
         /// Fused Multiply-Add of Scalar Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html</remarks>
-        vfmadd132sd_fp,
+        vfmadd132sd,
 
         /// <summary>
         /// Fused Multiply-Add of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html</remarks>
-        vfmadd132ss_fp,
+        vfmadd132ss,
 
         /// <summary>
         /// Fused Multiply-Add of Packed Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html</remarks>
-        vfmadd213pd_fp,
+        vfmadd213pd,
 
         /// <summary>
         /// Fused Multiply-Add of Packed Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html</remarks>
-        vfmadd213ps_fp,
+        vfmadd213ps,
 
         /// <summary>
         /// Fused Multiply-Add of Scalar Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html</remarks>
-        vfmadd213sd_fp,
+        vfmadd213sd,
 
         /// <summary>
         /// Fused Multiply-Add of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html</remarks>
-        vfmadd213ss_fp,
+        vfmadd213ss,
 
         /// <summary>
         /// Fused Multiply-Add of Packed Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html</remarks>
-        vfmadd231pd_fp,
+        vfmadd231pd,
 
         /// <summary>
         /// Fused Multiply-Add of Packed Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html</remarks>
-        vfmadd231ps_fp,
+        vfmadd231ps,
 
         /// <summary>
         /// Fused Multiply-Add of Scalar Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html</remarks>
-        vfmadd231sd_fp,
+        vfmadd231sd,
 
         /// <summary>
         /// Fused Multiply-Add of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html</remarks>
-        vfmadd231ss_fp,
+        vfmadd231ss,
 
         /// <summary>
         /// Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html</remarks>
-        vfmaddsub132pd_fp,
+        vfmaddsub132pd,
 
         /// <summary>
         /// Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html</remarks>
-        vfmaddsub132ps_fp,
+        vfmaddsub132ps,
 
         /// <summary>
         /// Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html</remarks>
-        vfmaddsub213pd_fp,
+        vfmaddsub213pd,
 
         /// <summary>
         /// Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html</remarks>
-        vfmaddsub213ps_fp,
+        vfmaddsub213ps,
 
         /// <summary>
         /// Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html</remarks>
-        vfmaddsub231pd_fp,
+        vfmaddsub231pd,
 
         /// <summary>
         /// Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html</remarks>
-        vfmaddsub231ps_fp,
+        vfmaddsub231ps,
 
         /// <summary>
         /// Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html</remarks>
-        vfmsub132pd_fp,
+        vfmsub132pd,
 
         /// <summary>
         /// Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html</remarks>
-        vfmsub132ps_fp,
+        vfmsub132ps,
 
         /// <summary>
         /// Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html</remarks>
-        vfmsub132sd_fp,
+        vfmsub132sd,
 
         /// <summary>
         /// Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html</remarks>
-        vfmsub132ss_fp,
+        vfmsub132ss,
 
         /// <summary>
         /// Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html</remarks>
-        vfmsub213pd_fp,
+        vfmsub213pd,
 
         /// <summary>
         /// Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html</remarks>
-        vfmsub213ps_fp,
+        vfmsub213ps,
 
         /// <summary>
         /// Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html</remarks>
-        vfmsub213sd_fp,
+        vfmsub213sd,
 
         /// <summary>
         /// Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html</remarks>
-        vfmsub213ss_fp,
+        vfmsub213ss,
 
         /// <summary>
         /// Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html</remarks>
-        vfmsub231pd_fp,
+        vfmsub231pd,
 
         /// <summary>
         /// Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html</remarks>
-        vfmsub231ps_fp,
+        vfmsub231ps,
 
         /// <summary>
         /// Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html</remarks>
-        vfmsub231sd_fp,
+        vfmsub231sd,
 
         /// <summary>
         /// Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html</remarks>
-        vfmsub231ss_fp,
+        vfmsub231ss,
 
         /// <summary>
         /// Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html</remarks>
-        vfmsubadd132pd_fp,
+        vfmsubadd132pd,
 
         /// <summary>
         /// Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html</remarks>
-        vfmsubadd132ps_fp,
+        vfmsubadd132ps,
 
         /// <summary>
         /// Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html</remarks>
-        vfmsubadd213pd_fp,
+        vfmsubadd213pd,
 
         /// <summary>
         /// Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html</remarks>
-        vfmsubadd213ps_fp,
+        vfmsubadd213ps,
 
         /// <summary>
         /// Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html</remarks>
-        vfmsubadd231pd_fp,
+        vfmsubadd231pd,
 
         /// <summary>
         /// Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html</remarks>
-        vfmsubadd231ps_fp,
+        vfmsubadd231ps,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html</remarks>
-        vfnmadd132pd_fp,
+        vfnmadd132pd,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html</remarks>
-        vfnmadd132ps_fp,
+        vfnmadd132ps,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html</remarks>
-        vfnmadd132sd_fp,
+        vfnmadd132sd,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html</remarks>
-        vfnmadd132ss_fp,
+        vfnmadd132ss,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html</remarks>
-        vfnmadd213pd_fp,
+        vfnmadd213pd,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html</remarks>
-        vfnmadd213ps_fp,
+        vfnmadd213ps,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html</remarks>
-        vfnmadd213sd_fp,
+        vfnmadd213sd,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html</remarks>
-        vfnmadd213ss_fp,
+        vfnmadd213ss,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html</remarks>
-        vfnmadd231pd_fp,
+        vfnmadd231pd,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html</remarks>
-        vfnmadd231ps_fp,
+        vfnmadd231ps,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html</remarks>
-        vfnmadd231sd_fp,
+        vfnmadd231sd,
 
         /// <summary>
         /// Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html</remarks>
-        vfnmadd231ss_fp,
+        vfnmadd231ss,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html</remarks>
-        vfnmsub132pd_fp,
+        vfnmsub132pd,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html</remarks>
-        vfnmsub132ps_fp,
+        vfnmsub132ps,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html</remarks>
-        vfnmsub132sd_fp,
+        vfnmsub132sd,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html</remarks>
-        vfnmsub132ss_fp,
+        vfnmsub132ss,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html</remarks>
-        vfnmsub213pd_fp,
+        vfnmsub213pd,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html</remarks>
-        vfnmsub213ps_fp,
+        vfnmsub213ps,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html</remarks>
-        vfnmsub213sd_fp,
+        vfnmsub213sd,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html</remarks>
-        vfnmsub213ss_fp,
+        vfnmsub213ss,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html</remarks>
-        vfnmsub231pd_fp,
+        vfnmsub231pd,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html</remarks>
-        vfnmsub231ps_fp,
+        vfnmsub231ps,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html</remarks>
-        vfnmsub231sd_fp,
+        vfnmsub231sd,
 
         /// <summary>
         /// Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html</remarks>
-        vfnmsub231ss_fp,
+        vfnmsub231ss,
 
         /// <summary>
         /// Tests Types Of a Packed Float64 Values.
@@ -4498,31 +4498,31 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Insert Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html</remarks>
-        vinsertf128_fp,
+        vinsertf128,
 
         /// <summary>
         /// Insert Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html</remarks>
-        vinsertf32x4_fp,
+        vinsertf32x4,
 
         /// <summary>
         /// Insert Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html</remarks>
-        vinsertf32x8_fp,
+        vinsertf32x8,
 
         /// <summary>
         /// Insert Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html</remarks>
-        vinsertf64x2_fp,
+        vinsertf64x2,
 
         /// <summary>
         /// Insert Packed Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html</remarks>
-        vinsertf64x4_fp,
+        vinsertf64x4,
 
         /// <summary>
         /// Insert Packed Integer Values.
@@ -4738,7 +4738,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Permute Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPERM2F128.html</remarks>
-        vperm2f128_fp,
+        vperm2f128,
 
         /// <summary>
         /// Permute Integer Values.
@@ -4798,25 +4798,25 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Permute In-Lane of Pairs of Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPERMILPD.html</remarks>
-        vpermilpd_fp,
+        vpermilpd,
 
         /// <summary>
         /// Permute In-Lane of Quadruples of Single-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPERMILPS.html</remarks>
-        vpermilps_fp,
+        vpermilps,
 
         /// <summary>
         /// Permute Double-Precision Floating-Point Elements.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPERMPD.html</remarks>
-        vpermpd_fp,
+        vpermpd,
 
         /// <summary>
         /// Permute Single-Precision Floating-Point Elements.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPERMPS.html</remarks>
-        vpermps_fp,
+        vpermps,
 
         /// <summary>
         /// Qwords Element Permutation.
@@ -5620,13 +5620,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Bitwise Logical XOR of Packed Double Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/XORPD.html</remarks>
-        xorpd_fp,
+        xorpd,
 
         /// <summary>
         /// Bitwise Logical XOR of Packed Single Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/XORPS.html</remarks>
-        xorps_fp,
+        xorps,
 
         /// <summary>
         /// Hardware Lock Elision Prefix Hints.

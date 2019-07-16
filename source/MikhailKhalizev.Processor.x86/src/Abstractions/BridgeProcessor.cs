@@ -304,11 +304,11 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         /// <inheritdoc />
         public void ii(Address address, uint length) => Implementation.ii(address, length);
-        
+
         #endregion
 
         #region Instructions
-
+        
         /// <inheritdoc />
         public void aaa()
         {
@@ -346,33 +346,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void add()
+        public void add(Value dst, Value src)
         {
-            Implementation.add();
+            Implementation.add(dst, src);
         }
 
         /// <inheritdoc />
-        public void addpd_fp()
+        public void addpd()
         {
-            Implementation.addpd_fp();
+            Implementation.addpd();
         }
 
         /// <inheritdoc />
-        public void addps_fp()
+        public void addps()
         {
-            Implementation.addps_fp();
+            Implementation.addps();
         }
 
         /// <inheritdoc />
-        public void addsd_fp()
+        public void addsd()
         {
-            Implementation.addsd_fp();
+            Implementation.addsd();
         }
 
         /// <inheritdoc />
-        public void addss_fp()
+        public void addss()
         {
-            Implementation.addss_fp();
+            Implementation.addss();
         }
 
         /// <inheritdoc />
@@ -442,27 +442,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void andnpd_fp()
+        public void andnpd()
         {
-            Implementation.andnpd_fp();
+            Implementation.andnpd();
         }
 
         /// <inheritdoc />
-        public void andnps_fp()
+        public void andnps()
         {
-            Implementation.andnps_fp();
+            Implementation.andnps();
         }
 
         /// <inheritdoc />
-        public void andpd_fp()
+        public void andpd()
         {
-            Implementation.andpd_fp();
+            Implementation.andpd();
         }
 
         /// <inheritdoc />
-        public void andps_fp()
+        public void andps()
         {
-            Implementation.andps_fp();
+            Implementation.andps();
         }
 
         /// <inheritdoc />
@@ -478,27 +478,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void blendpd_fp()
+        public void blendpd()
         {
-            Implementation.blendpd_fp();
+            Implementation.blendpd();
         }
 
         /// <inheritdoc />
-        public void blendps_fp()
+        public void blendps()
         {
-            Implementation.blendps_fp();
+            Implementation.blendps();
         }
 
         /// <inheritdoc />
-        public void blendvpd_fp()
+        public void blendvpd()
         {
-            Implementation.blendvpd_fp();
+            Implementation.blendvpd();
         }
 
         /// <inheritdoc />
-        public void blendvps_fp()
+        public void blendvps()
         {
-            Implementation.blendvps_fp();
+            Implementation.blendvps();
         }
 
         /// <inheritdoc />
@@ -706,15 +706,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cmppd_fp()
+        public void cmppd()
         {
-            Implementation.cmppd_fp();
+            Implementation.cmppd();
         }
 
         /// <inheritdoc />
-        public void cmpps_fp()
+        public void cmpps()
         {
-            Implementation.cmpps_fp();
+            Implementation.cmpps();
         }
 
         /// <inheritdoc />
@@ -748,9 +748,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cmpss_fp()
+        public void cmpss()
         {
-            Implementation.cmpss_fp();
+            Implementation.cmpss();
         }
 
         /// <inheritdoc />
@@ -778,15 +778,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void comisd_fp()
+        public void comisd()
         {
-            Implementation.comisd_fp();
+            Implementation.comisd();
         }
 
         /// <inheritdoc />
-        public void comiss_fp()
+        public void comiss()
         {
-            Implementation.comiss_fp();
+            Implementation.comiss();
         }
 
         /// <inheritdoc />
@@ -808,21 +808,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cvtdq2pd_fp()
+        public void cvtdq2pd()
         {
-            Implementation.cvtdq2pd_fp();
+            Implementation.cvtdq2pd();
         }
 
         /// <inheritdoc />
-        public void cvtdq2ps_fp()
+        public void cvtdq2ps()
         {
-            Implementation.cvtdq2ps_fp();
+            Implementation.cvtdq2ps();
         }
 
         /// <inheritdoc />
-        public void cvtpd2dq_fp()
+        public void cvtpd2dq()
         {
-            Implementation.cvtpd2dq_fp();
+            Implementation.cvtpd2dq();
         }
 
         /// <inheritdoc />
@@ -832,9 +832,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cvtpd2ps_fp()
+        public void cvtpd2ps()
         {
-            Implementation.cvtpd2ps_fp();
+            Implementation.cvtpd2ps();
         }
 
         /// <inheritdoc />
@@ -850,15 +850,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cvtps2dq_fp()
+        public void cvtps2dq()
         {
-            Implementation.cvtps2dq_fp();
+            Implementation.cvtps2dq();
         }
 
         /// <inheritdoc />
-        public void cvtps2pd_fp()
+        public void cvtps2pd()
         {
-            Implementation.cvtps2pd_fp();
+            Implementation.cvtps2pd();
         }
 
         /// <inheritdoc />
@@ -868,45 +868,45 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cvtsd2si_fp()
+        public void cvtsd2si()
         {
-            Implementation.cvtsd2si_fp();
+            Implementation.cvtsd2si();
         }
 
         /// <inheritdoc />
-        public void cvtsd2ss_fp()
+        public void cvtsd2ss()
         {
-            Implementation.cvtsd2ss_fp();
+            Implementation.cvtsd2ss();
         }
 
         /// <inheritdoc />
-        public void cvtsi2sd_fp()
+        public void cvtsi2sd()
         {
-            Implementation.cvtsi2sd_fp();
+            Implementation.cvtsi2sd();
         }
 
         /// <inheritdoc />
-        public void cvtsi2ss_fp()
+        public void cvtsi2ss()
         {
-            Implementation.cvtsi2ss_fp();
+            Implementation.cvtsi2ss();
         }
 
         /// <inheritdoc />
-        public void cvtss2sd_fp()
+        public void cvtss2sd()
         {
-            Implementation.cvtss2sd_fp();
+            Implementation.cvtss2sd();
         }
 
         /// <inheritdoc />
-        public void cvtss2si_fp()
+        public void cvtss2si()
         {
-            Implementation.cvtss2si_fp();
+            Implementation.cvtss2si();
         }
 
         /// <inheritdoc />
-        public void cvttpd2dq_fp()
+        public void cvttpd2dq()
         {
-            Implementation.cvttpd2dq_fp();
+            Implementation.cvttpd2dq();
         }
 
         /// <inheritdoc />
@@ -916,9 +916,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cvttps2dq_fp()
+        public void cvttps2dq()
         {
-            Implementation.cvttps2dq_fp();
+            Implementation.cvttps2dq();
         }
 
         /// <inheritdoc />
@@ -928,15 +928,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void cvttsd2si_fp()
+        public void cvttsd2si()
         {
-            Implementation.cvttsd2si_fp();
+            Implementation.cvttsd2si();
         }
 
         /// <inheritdoc />
-        public void cvttss2si_fp()
+        public void cvttss2si()
         {
-            Implementation.cvttss2si_fp();
+            Implementation.cvttss2si();
         }
 
         /// <inheritdoc />
@@ -976,39 +976,39 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void divpd_fp()
+        public void divpd()
         {
-            Implementation.divpd_fp();
+            Implementation.divpd();
         }
 
         /// <inheritdoc />
-        public void divps_fp()
+        public void divps()
         {
-            Implementation.divps_fp();
+            Implementation.divps();
         }
 
         /// <inheritdoc />
-        public void divsd_fp()
+        public void divsd()
         {
-            Implementation.divsd_fp();
+            Implementation.divsd();
         }
 
         /// <inheritdoc />
-        public void divss_fp()
+        public void divss()
         {
-            Implementation.divss_fp();
+            Implementation.divss();
         }
 
         /// <inheritdoc />
-        public void dppd_fp()
+        public void dppd()
         {
-            Implementation.dppd_fp();
+            Implementation.dppd();
         }
 
         /// <inheritdoc />
-        public void dpps_fp()
+        public void dpps()
         {
-            Implementation.dpps_fp();
+            Implementation.dpps();
         }
 
         /// <inheritdoc />
@@ -1024,9 +1024,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void extractps_fp()
+        public void extractps()
         {
-            Implementation.extractps_fp();
+            Implementation.extractps();
         }
 
         /// <inheritdoc />
@@ -1078,9 +1078,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fcmovcc_fp()
+        public void fcmovcc()
         {
-            Implementation.fcmovcc_fp();
+            Implementation.fcmovcc();
         }
 
         /// <inheritdoc />
@@ -1150,9 +1150,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void ffree_fp()
+        public void ffree()
         {
-            Implementation.ffree_fp();
+            Implementation.ffree();
         }
 
         /// <inheritdoc />
@@ -1204,9 +1204,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void finit_fp()
+        public void finit()
         {
-            Implementation.finit_fp();
+            Implementation.finit();
         }
 
         /// <inheritdoc />
@@ -1318,9 +1318,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fninit_fp()
+        public void fninit()
         {
-            Implementation.fninit_fp();
+            Implementation.fninit();
         }
 
         /// <inheritdoc />
@@ -1516,9 +1516,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fxam_fp()
+        public void fxam()
         {
-            Implementation.fxam_fp();
+            Implementation.fxam();
         }
 
         /// <inheritdoc />
@@ -1630,9 +1630,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void insertps_fp()
+        public void insertps()
         {
-            Implementation.insertps_fp();
+            Implementation.insertps();
         }
 
         /// <inheritdoc />
@@ -1660,9 +1660,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void into()
+        public void @into()
         {
-            Implementation.into();
+            Implementation.@into();
         }
 
         /// <inheritdoc />
@@ -2188,27 +2188,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void maxpd_fp()
+        public void maxpd()
         {
-            Implementation.maxpd_fp();
+            Implementation.maxpd();
         }
 
         /// <inheritdoc />
-        public void maxps_fp()
+        public void maxps()
         {
-            Implementation.maxps_fp();
+            Implementation.maxps();
         }
 
         /// <inheritdoc />
-        public void maxsd_fp()
+        public void maxsd()
         {
-            Implementation.maxsd_fp();
+            Implementation.maxsd();
         }
 
         /// <inheritdoc />
-        public void maxss_fp()
+        public void maxss()
         {
-            Implementation.maxss_fp();
+            Implementation.maxss();
         }
 
         /// <inheritdoc />
@@ -2218,27 +2218,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void minpd_fp()
+        public void minpd()
         {
-            Implementation.minpd_fp();
+            Implementation.minpd();
         }
 
         /// <inheritdoc />
-        public void minps_fp()
+        public void minps()
         {
-            Implementation.minps_fp();
+            Implementation.minps();
         }
 
         /// <inheritdoc />
-        public void minsd_fp()
+        public void minsd()
         {
-            Implementation.minsd_fp();
+            Implementation.minsd();
         }
 
         /// <inheritdoc />
-        public void minss_fp()
+        public void minss()
         {
-            Implementation.minss_fp();
+            Implementation.minss();
         }
 
         /// <inheritdoc />
@@ -2266,15 +2266,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movapd_fp()
+        public void movapd()
         {
-            Implementation.movapd_fp();
+            Implementation.movapd();
         }
 
         /// <inheritdoc />
-        public void movaps_fp()
+        public void movaps()
         {
-            Implementation.movaps_fp();
+            Implementation.movaps();
         }
 
         /// <inheritdoc />
@@ -2314,51 +2314,51 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movhlps_fp()
+        public void movhlps()
         {
-            Implementation.movhlps_fp();
+            Implementation.movhlps();
         }
 
         /// <inheritdoc />
-        public void movhpd_fp()
+        public void movhpd()
         {
-            Implementation.movhpd_fp();
+            Implementation.movhpd();
         }
 
         /// <inheritdoc />
-        public void movhps_fp()
+        public void movhps()
         {
-            Implementation.movhps_fp();
+            Implementation.movhps();
         }
 
         /// <inheritdoc />
-        public void movlhps_fp()
+        public void movlhps()
         {
-            Implementation.movlhps_fp();
+            Implementation.movlhps();
         }
 
         /// <inheritdoc />
-        public void movlpd_fp()
+        public void movlpd()
         {
-            Implementation.movlpd_fp();
+            Implementation.movlpd();
         }
 
         /// <inheritdoc />
-        public void movlps_fp()
+        public void movlps()
         {
-            Implementation.movlps_fp();
+            Implementation.movlps();
         }
 
         /// <inheritdoc />
-        public void movmskpd_fp()
+        public void movmskpd()
         {
-            Implementation.movmskpd_fp();
+            Implementation.movmskpd();
         }
 
         /// <inheritdoc />
-        public void movmskps_fp()
+        public void movmskps()
         {
-            Implementation.movmskps_fp();
+            Implementation.movmskps();
         }
 
         /// <inheritdoc />
@@ -2380,15 +2380,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movntpd_fp()
+        public void movntpd()
         {
-            Implementation.movntpd_fp();
+            Implementation.movntpd();
         }
 
         /// <inheritdoc />
-        public void movntps_fp()
+        public void movntps()
         {
-            Implementation.movntps_fp();
+            Implementation.movntps();
         }
 
         /// <inheritdoc />
@@ -2458,9 +2458,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movss_fp()
+        public void movss()
         {
-            Implementation.movss_fp();
+            Implementation.movss();
         }
 
         /// <inheritdoc />
@@ -2482,15 +2482,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movupd_fp()
+        public void movupd()
         {
-            Implementation.movupd_fp();
+            Implementation.movupd();
         }
 
         /// <inheritdoc />
-        public void movups_fp()
+        public void movups()
         {
-            Implementation.movups_fp();
+            Implementation.movups();
         }
 
         /// <inheritdoc />
@@ -2512,27 +2512,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void mulpd_fp()
+        public void mulpd()
         {
-            Implementation.mulpd_fp();
+            Implementation.mulpd();
         }
 
         /// <inheritdoc />
-        public void mulps_fp()
+        public void mulps()
         {
-            Implementation.mulps_fp();
+            Implementation.mulps();
         }
 
         /// <inheritdoc />
-        public void mulsd_fp()
+        public void mulsd()
         {
-            Implementation.mulsd_fp();
+            Implementation.mulsd();
         }
 
         /// <inheritdoc />
-        public void mulss_fp()
+        public void mulss()
         {
-            Implementation.mulss_fp();
+            Implementation.mulss();
         }
 
         /// <inheritdoc />
@@ -2572,15 +2572,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void orpd_fp()
+        public void orpd()
         {
-            Implementation.orpd_fp();
+            Implementation.orpd();
         }
 
         /// <inheritdoc />
-        public void orps_fp()
+        public void orps()
         {
-            Implementation.orps_fp();
+            Implementation.orps();
         }
 
         /// <inheritdoc />
@@ -3430,9 +3430,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void pushfw()
+        public void pushf()
         {
-            Implementation.pushfw();
+            Implementation.pushf();
         }
 
         /// <inheritdoc />
@@ -3460,15 +3460,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void rcpps_fp()
+        public void rcpps()
         {
-            Implementation.rcpps_fp();
+            Implementation.rcpps();
         }
 
         /// <inheritdoc />
-        public void rcpss_fp()
+        public void rcpss()
         {
-            Implementation.rcpss_fp();
+            Implementation.rcpss();
         }
 
         /// <inheritdoc />
@@ -3567,26 +3567,30 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             Implementation.repz();
         }
 
+        /// <inheritdoc />
         public void retw()
         {
             Implementation.retw();
         }
 
+        /// <inheritdoc />
         public void retd()
         {
             Implementation.retd();
         }
 
+        /// <inheritdoc />
         public void retfw()
         {
             Implementation.retfw();
         }
 
+        /// <inheritdoc />
         public void retfd()
         {
             Implementation.retfd();
         }
-        
+
         /// <inheritdoc />
         public void rol(Value dst, int count)
         {
@@ -3606,27 +3610,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void roundpd_fp()
+        public void roundpd()
         {
-            Implementation.roundpd_fp();
+            Implementation.roundpd();
         }
 
         /// <inheritdoc />
-        public void roundps_fp()
+        public void roundps()
         {
-            Implementation.roundps_fp();
+            Implementation.roundps();
         }
 
         /// <inheritdoc />
-        public void roundsd_fp()
+        public void roundsd()
         {
-            Implementation.roundsd_fp();
+            Implementation.roundsd();
         }
 
         /// <inheritdoc />
-        public void roundss_fp()
+        public void roundss()
         {
-            Implementation.roundss_fp();
+            Implementation.roundss();
         }
 
         /// <inheritdoc />
@@ -3636,15 +3640,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void rsqrtps_fp()
+        public void rsqrtps()
         {
-            Implementation.rsqrtps_fp();
+            Implementation.rsqrtps();
         }
 
         /// <inheritdoc />
-        public void rsqrtss_fp()
+        public void rsqrtss()
         {
-            Implementation.rsqrtss_fp();
+            Implementation.rsqrtss();
         }
 
         /// <inheritdoc />
@@ -3798,15 +3802,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void shufpd_fp()
+        public void shufpd()
         {
-            Implementation.shufpd_fp();
+            Implementation.shufpd();
         }
 
         /// <inheritdoc />
-        public void shufps_fp()
+        public void shufps()
         {
-            Implementation.shufps_fp();
+            Implementation.shufps();
         }
 
         /// <inheritdoc />
@@ -3828,21 +3832,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void sqrtpd_fp()
+        public void sqrtpd()
         {
-            Implementation.sqrtpd_fp();
+            Implementation.sqrtpd();
         }
 
         /// <inheritdoc />
-        public void sqrtps_fp()
+        public void sqrtps()
         {
-            Implementation.sqrtps_fp();
+            Implementation.sqrtps();
         }
 
         /// <inheritdoc />
-        public void sqrtsd_fp()
+        public void sqrtsd()
         {
-            Implementation.sqrtsd_fp();
+            Implementation.sqrtsd();
         }
 
         /// <inheritdoc />
@@ -3918,33 +3922,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void sub(Value dst, Value val)
+        public void sub(Value dst, Value src)
         {
-            Implementation.sub(dst, val);
+            Implementation.sub(dst, src);
         }
 
         /// <inheritdoc />
-        public void subpd_fp()
+        public void subpd()
         {
-            Implementation.subpd_fp();
+            Implementation.subpd();
         }
 
         /// <inheritdoc />
-        public void subps_fp()
+        public void subps()
         {
-            Implementation.subps_fp();
+            Implementation.subps();
         }
 
         /// <inheritdoc />
-        public void subsd_fp()
+        public void subsd()
         {
-            Implementation.subsd_fp();
+            Implementation.subsd();
         }
 
         /// <inheritdoc />
-        public void subss_fp()
+        public void subss()
         {
-            Implementation.subss_fp();
+            Implementation.subss();
         }
 
         /// <inheritdoc />
@@ -3990,15 +3994,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void ucomisd_fp()
+        public void ucomisd()
         {
-            Implementation.ucomisd_fp();
+            Implementation.ucomisd();
         }
 
         /// <inheritdoc />
-        public void ucomiss_fp()
+        public void ucomiss()
         {
-            Implementation.ucomiss_fp();
+            Implementation.ucomiss();
         }
 
         /// <inheritdoc />
@@ -4008,27 +4012,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void unpckhpd_fp()
+        public void unpckhpd()
         {
-            Implementation.unpckhpd_fp();
+            Implementation.unpckhpd();
         }
 
         /// <inheritdoc />
-        public void unpckhps_fp()
+        public void unpckhps()
         {
-            Implementation.unpckhps_fp();
+            Implementation.unpckhps();
         }
 
         /// <inheritdoc />
-        public void unpcklpd_fp()
+        public void unpcklpd()
         {
-            Implementation.unpcklpd_fp();
+            Implementation.unpcklpd();
         }
 
         /// <inheritdoc />
-        public void unpcklps_fp()
+        public void unpcklps()
         {
-            Implementation.unpcklps_fp();
+            Implementation.unpcklps();
         }
 
         /// <inheritdoc />
@@ -4056,39 +4060,39 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vbroadcast_fp()
+        public void vbroadcast()
         {
-            Implementation.vbroadcast_fp();
+            Implementation.vbroadcast();
         }
 
         /// <inheritdoc />
-        public void vcompresspd_fp()
+        public void vcompresspd()
         {
-            Implementation.vcompresspd_fp();
+            Implementation.vcompresspd();
         }
 
         /// <inheritdoc />
-        public void vcompressps_fp()
+        public void vcompressps()
         {
-            Implementation.vcompressps_fp();
+            Implementation.vcompressps();
         }
 
         /// <inheritdoc />
-        public void vcvtpd2qq_fp()
+        public void vcvtpd2qq()
         {
-            Implementation.vcvtpd2qq_fp();
+            Implementation.vcvtpd2qq();
         }
 
         /// <inheritdoc />
-        public void vcvtpd2udq_fp()
+        public void vcvtpd2udq()
         {
-            Implementation.vcvtpd2udq_fp();
+            Implementation.vcvtpd2udq();
         }
 
         /// <inheritdoc />
-        public void vcvtpd2uqq_fp()
+        public void vcvtpd2uqq()
         {
-            Implementation.vcvtpd2uqq_fp();
+            Implementation.vcvtpd2uqq();
         }
 
         /// <inheritdoc />
@@ -4104,129 +4108,129 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vcvtps2qq_fp()
+        public void vcvtps2qq()
         {
-            Implementation.vcvtps2qq_fp();
+            Implementation.vcvtps2qq();
         }
 
         /// <inheritdoc />
-        public void vcvtps2udq_fp()
+        public void vcvtps2udq()
         {
-            Implementation.vcvtps2udq_fp();
+            Implementation.vcvtps2udq();
         }
 
         /// <inheritdoc />
-        public void vcvtps2uqq_fp()
+        public void vcvtps2uqq()
         {
-            Implementation.vcvtps2uqq_fp();
+            Implementation.vcvtps2uqq();
         }
 
         /// <inheritdoc />
-        public void vcvtqq2pd_fp()
+        public void vcvtqq2pd()
         {
-            Implementation.vcvtqq2pd_fp();
+            Implementation.vcvtqq2pd();
         }
 
         /// <inheritdoc />
-        public void vcvtqq2ps_fp()
+        public void vcvtqq2ps()
         {
-            Implementation.vcvtqq2ps_fp();
+            Implementation.vcvtqq2ps();
         }
 
         /// <inheritdoc />
-        public void vcvtsd2usi_fp()
+        public void vcvtsd2usi()
         {
-            Implementation.vcvtsd2usi_fp();
+            Implementation.vcvtsd2usi();
         }
 
         /// <inheritdoc />
-        public void vcvtss2usi_fp()
+        public void vcvtss2usi()
         {
-            Implementation.vcvtss2usi_fp();
+            Implementation.vcvtss2usi();
         }
 
         /// <inheritdoc />
-        public void vcvttpd2qq_fp()
+        public void vcvttpd2qq()
         {
-            Implementation.vcvttpd2qq_fp();
+            Implementation.vcvttpd2qq();
         }
 
         /// <inheritdoc />
-        public void vcvttpd2udq_fp()
+        public void vcvttpd2udq()
         {
-            Implementation.vcvttpd2udq_fp();
+            Implementation.vcvttpd2udq();
         }
 
         /// <inheritdoc />
-        public void vcvttpd2uqq_fp()
+        public void vcvttpd2uqq()
         {
-            Implementation.vcvttpd2uqq_fp();
+            Implementation.vcvttpd2uqq();
         }
 
         /// <inheritdoc />
-        public void vcvttps2qq_fp()
+        public void vcvttps2qq()
         {
-            Implementation.vcvttps2qq_fp();
+            Implementation.vcvttps2qq();
         }
 
         /// <inheritdoc />
-        public void vcvttps2udq_fp()
+        public void vcvttps2udq()
         {
-            Implementation.vcvttps2udq_fp();
+            Implementation.vcvttps2udq();
         }
 
         /// <inheritdoc />
-        public void vcvttps2uqq_fp()
+        public void vcvttps2uqq()
         {
-            Implementation.vcvttps2uqq_fp();
+            Implementation.vcvttps2uqq();
         }
 
         /// <inheritdoc />
-        public void vcvttsd2usi_fp()
+        public void vcvttsd2usi()
         {
-            Implementation.vcvttsd2usi_fp();
+            Implementation.vcvttsd2usi();
         }
 
         /// <inheritdoc />
-        public void vcvttss2usi_fp()
+        public void vcvttss2usi()
         {
-            Implementation.vcvttss2usi_fp();
+            Implementation.vcvttss2usi();
         }
 
         /// <inheritdoc />
-        public void vcvtudq2pd_fp()
+        public void vcvtudq2pd()
         {
-            Implementation.vcvtudq2pd_fp();
+            Implementation.vcvtudq2pd();
         }
 
         /// <inheritdoc />
-        public void vcvtudq2ps_fp()
+        public void vcvtudq2ps()
         {
-            Implementation.vcvtudq2ps_fp();
+            Implementation.vcvtudq2ps();
         }
 
         /// <inheritdoc />
-        public void vcvtuqq2pd_fp()
+        public void vcvtuqq2pd()
         {
-            Implementation.vcvtuqq2pd_fp();
+            Implementation.vcvtuqq2pd();
         }
 
         /// <inheritdoc />
-        public void vcvtuqq2ps_fp()
+        public void vcvtuqq2ps()
         {
-            Implementation.vcvtuqq2ps_fp();
+            Implementation.vcvtuqq2ps();
         }
 
         /// <inheritdoc />
-        public void vcvtusi2sd_fp()
+        public void vcvtusi2sd()
         {
-            Implementation.vcvtusi2sd_fp();
+            Implementation.vcvtusi2sd();
         }
 
         /// <inheritdoc />
-        public void vcvtusi2ss_fp()
+        public void vcvtusi2ss()
         {
-            Implementation.vcvtusi2ss_fp();
+            Implementation.vcvtusi2ss();
         }
 
         /// <inheritdoc />
@@ -4248,45 +4252,45 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vexpandpd_fp()
+        public void vexpandpd()
         {
-            Implementation.vexpandpd_fp();
+            Implementation.vexpandpd();
         }
 
         /// <inheritdoc />
-        public void vexpandps_fp()
+        public void vexpandps()
         {
-            Implementation.vexpandps_fp();
+            Implementation.vexpandps();
         }
 
         /// <inheritdoc />
-        public void vextractf128_fp()
+        public void vextractf128()
         {
-            Implementation.vextractf128_fp();
+            Implementation.vextractf128();
         }
 
         /// <inheritdoc />
-        public void vextractf32x4_fp()
+        public void vextractf32x4()
         {
-            Implementation.vextractf32x4_fp();
+            Implementation.vextractf32x4();
         }
 
         /// <inheritdoc />
-        public void vextractf32x8_fp()
+        public void vextractf32x8()
         {
-            Implementation.vextractf32x8_fp();
+            Implementation.vextractf32x8();
         }
 
         /// <inheritdoc />
-        public void vextractf64x2_fp()
+        public void vextractf64x2()
         {
-            Implementation.vextractf64x2_fp();
+            Implementation.vextractf64x2();
         }
 
         /// <inheritdoc />
-        public void vextractf64x4_fp()
+        public void vextractf64x4()
         {
-            Implementation.vextractf64x4_fp();
+            Implementation.vextractf64x4();
         }
 
         /// <inheritdoc />
@@ -4344,363 +4348,363 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vfmadd132pd_fp()
+        public void vfmadd132pd()
         {
-            Implementation.vfmadd132pd_fp();
+            Implementation.vfmadd132pd();
         }
 
         /// <inheritdoc />
-        public void vfmadd132ps_fp()
+        public void vfmadd132ps()
         {
-            Implementation.vfmadd132ps_fp();
+            Implementation.vfmadd132ps();
         }
 
         /// <inheritdoc />
-        public void vfmadd132sd_fp()
+        public void vfmadd132sd()
         {
-            Implementation.vfmadd132sd_fp();
+            Implementation.vfmadd132sd();
         }
 
         /// <inheritdoc />
-        public void vfmadd132ss_fp()
+        public void vfmadd132ss()
         {
-            Implementation.vfmadd132ss_fp();
+            Implementation.vfmadd132ss();
         }
 
         /// <inheritdoc />
-        public void vfmadd213pd_fp()
+        public void vfmadd213pd()
         {
-            Implementation.vfmadd213pd_fp();
+            Implementation.vfmadd213pd();
         }
 
         /// <inheritdoc />
-        public void vfmadd213ps_fp()
+        public void vfmadd213ps()
         {
-            Implementation.vfmadd213ps_fp();
+            Implementation.vfmadd213ps();
         }
 
         /// <inheritdoc />
-        public void vfmadd213sd_fp()
+        public void vfmadd213sd()
         {
-            Implementation.vfmadd213sd_fp();
+            Implementation.vfmadd213sd();
         }
 
         /// <inheritdoc />
-        public void vfmadd213ss_fp()
+        public void vfmadd213ss()
         {
-            Implementation.vfmadd213ss_fp();
+            Implementation.vfmadd213ss();
         }
 
         /// <inheritdoc />
-        public void vfmadd231pd_fp()
+        public void vfmadd231pd()
         {
-            Implementation.vfmadd231pd_fp();
+            Implementation.vfmadd231pd();
         }
 
         /// <inheritdoc />
-        public void vfmadd231ps_fp()
+        public void vfmadd231ps()
         {
-            Implementation.vfmadd231ps_fp();
+            Implementation.vfmadd231ps();
         }
 
         /// <inheritdoc />
-        public void vfmadd231sd_fp()
+        public void vfmadd231sd()
         {
-            Implementation.vfmadd231sd_fp();
+            Implementation.vfmadd231sd();
         }
 
         /// <inheritdoc />
-        public void vfmadd231ss_fp()
+        public void vfmadd231ss()
         {
-            Implementation.vfmadd231ss_fp();
+            Implementation.vfmadd231ss();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub132pd_fp()
+        public void vfmaddsub132pd()
         {
-            Implementation.vfmaddsub132pd_fp();
+            Implementation.vfmaddsub132pd();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub132ps_fp()
+        public void vfmaddsub132ps()
         {
-            Implementation.vfmaddsub132ps_fp();
+            Implementation.vfmaddsub132ps();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub213pd_fp()
+        public void vfmaddsub213pd()
         {
-            Implementation.vfmaddsub213pd_fp();
+            Implementation.vfmaddsub213pd();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub213ps_fp()
+        public void vfmaddsub213ps()
         {
-            Implementation.vfmaddsub213ps_fp();
+            Implementation.vfmaddsub213ps();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub231pd_fp()
+        public void vfmaddsub231pd()
         {
-            Implementation.vfmaddsub231pd_fp();
+            Implementation.vfmaddsub231pd();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub231ps_fp()
+        public void vfmaddsub231ps()
         {
-            Implementation.vfmaddsub231ps_fp();
+            Implementation.vfmaddsub231ps();
         }
 
         /// <inheritdoc />
-        public void vfmsub132pd_fp()
+        public void vfmsub132pd()
         {
-            Implementation.vfmsub132pd_fp();
+            Implementation.vfmsub132pd();
         }
 
         /// <inheritdoc />
-        public void vfmsub132ps_fp()
+        public void vfmsub132ps()
         {
-            Implementation.vfmsub132ps_fp();
+            Implementation.vfmsub132ps();
         }
 
         /// <inheritdoc />
-        public void vfmsub132sd_fp()
+        public void vfmsub132sd()
         {
-            Implementation.vfmsub132sd_fp();
+            Implementation.vfmsub132sd();
         }
 
         /// <inheritdoc />
-        public void vfmsub132ss_fp()
+        public void vfmsub132ss()
         {
-            Implementation.vfmsub132ss_fp();
+            Implementation.vfmsub132ss();
         }
 
         /// <inheritdoc />
-        public void vfmsub213pd_fp()
+        public void vfmsub213pd()
         {
-            Implementation.vfmsub213pd_fp();
+            Implementation.vfmsub213pd();
         }
 
         /// <inheritdoc />
-        public void vfmsub213ps_fp()
+        public void vfmsub213ps()
         {
-            Implementation.vfmsub213ps_fp();
+            Implementation.vfmsub213ps();
         }
 
         /// <inheritdoc />
-        public void vfmsub213sd_fp()
+        public void vfmsub213sd()
         {
-            Implementation.vfmsub213sd_fp();
+            Implementation.vfmsub213sd();
         }
 
         /// <inheritdoc />
-        public void vfmsub213ss_fp()
+        public void vfmsub213ss()
         {
-            Implementation.vfmsub213ss_fp();
+            Implementation.vfmsub213ss();
         }
 
         /// <inheritdoc />
-        public void vfmsub231pd_fp()
+        public void vfmsub231pd()
         {
-            Implementation.vfmsub231pd_fp();
+            Implementation.vfmsub231pd();
         }
 
         /// <inheritdoc />
-        public void vfmsub231ps_fp()
+        public void vfmsub231ps()
         {
-            Implementation.vfmsub231ps_fp();
+            Implementation.vfmsub231ps();
         }
 
         /// <inheritdoc />
-        public void vfmsub231sd_fp()
+        public void vfmsub231sd()
         {
-            Implementation.vfmsub231sd_fp();
+            Implementation.vfmsub231sd();
         }
 
         /// <inheritdoc />
-        public void vfmsub231ss_fp()
+        public void vfmsub231ss()
         {
-            Implementation.vfmsub231ss_fp();
+            Implementation.vfmsub231ss();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd132pd_fp()
+        public void vfmsubadd132pd()
         {
-            Implementation.vfmsubadd132pd_fp();
+            Implementation.vfmsubadd132pd();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd132ps_fp()
+        public void vfmsubadd132ps()
         {
-            Implementation.vfmsubadd132ps_fp();
+            Implementation.vfmsubadd132ps();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd213pd_fp()
+        public void vfmsubadd213pd()
         {
-            Implementation.vfmsubadd213pd_fp();
+            Implementation.vfmsubadd213pd();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd213ps_fp()
+        public void vfmsubadd213ps()
         {
-            Implementation.vfmsubadd213ps_fp();
+            Implementation.vfmsubadd213ps();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd231pd_fp()
+        public void vfmsubadd231pd()
         {
-            Implementation.vfmsubadd231pd_fp();
+            Implementation.vfmsubadd231pd();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd231ps_fp()
+        public void vfmsubadd231ps()
         {
-            Implementation.vfmsubadd231ps_fp();
+            Implementation.vfmsubadd231ps();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132pd_fp()
+        public void vfnmadd132pd()
         {
-            Implementation.vfnmadd132pd_fp();
+            Implementation.vfnmadd132pd();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132ps_fp()
+        public void vfnmadd132ps()
         {
-            Implementation.vfnmadd132ps_fp();
+            Implementation.vfnmadd132ps();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132sd_fp()
+        public void vfnmadd132sd()
         {
-            Implementation.vfnmadd132sd_fp();
+            Implementation.vfnmadd132sd();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132ss_fp()
+        public void vfnmadd132ss()
         {
-            Implementation.vfnmadd132ss_fp();
+            Implementation.vfnmadd132ss();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213pd_fp()
+        public void vfnmadd213pd()
         {
-            Implementation.vfnmadd213pd_fp();
+            Implementation.vfnmadd213pd();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213ps_fp()
+        public void vfnmadd213ps()
         {
-            Implementation.vfnmadd213ps_fp();
+            Implementation.vfnmadd213ps();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213sd_fp()
+        public void vfnmadd213sd()
         {
-            Implementation.vfnmadd213sd_fp();
+            Implementation.vfnmadd213sd();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213ss_fp()
+        public void vfnmadd213ss()
         {
-            Implementation.vfnmadd213ss_fp();
+            Implementation.vfnmadd213ss();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231pd_fp()
+        public void vfnmadd231pd()
         {
-            Implementation.vfnmadd231pd_fp();
+            Implementation.vfnmadd231pd();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231ps_fp()
+        public void vfnmadd231ps()
         {
-            Implementation.vfnmadd231ps_fp();
+            Implementation.vfnmadd231ps();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231sd_fp()
+        public void vfnmadd231sd()
         {
-            Implementation.vfnmadd231sd_fp();
+            Implementation.vfnmadd231sd();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231ss_fp()
+        public void vfnmadd231ss()
         {
-            Implementation.vfnmadd231ss_fp();
+            Implementation.vfnmadd231ss();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132pd_fp()
+        public void vfnmsub132pd()
         {
-            Implementation.vfnmsub132pd_fp();
+            Implementation.vfnmsub132pd();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132ps_fp()
+        public void vfnmsub132ps()
         {
-            Implementation.vfnmsub132ps_fp();
+            Implementation.vfnmsub132ps();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132sd_fp()
+        public void vfnmsub132sd()
         {
-            Implementation.vfnmsub132sd_fp();
+            Implementation.vfnmsub132sd();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132ss_fp()
+        public void vfnmsub132ss()
         {
-            Implementation.vfnmsub132ss_fp();
+            Implementation.vfnmsub132ss();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213pd_fp()
+        public void vfnmsub213pd()
         {
-            Implementation.vfnmsub213pd_fp();
+            Implementation.vfnmsub213pd();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213ps_fp()
+        public void vfnmsub213ps()
         {
-            Implementation.vfnmsub213ps_fp();
+            Implementation.vfnmsub213ps();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213sd_fp()
+        public void vfnmsub213sd()
         {
-            Implementation.vfnmsub213sd_fp();
+            Implementation.vfnmsub213sd();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213ss_fp()
+        public void vfnmsub213ss()
         {
-            Implementation.vfnmsub213ss_fp();
+            Implementation.vfnmsub213ss();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231pd_fp()
+        public void vfnmsub231pd()
         {
-            Implementation.vfnmsub231pd_fp();
+            Implementation.vfnmsub231pd();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231ps_fp()
+        public void vfnmsub231ps()
         {
-            Implementation.vfnmsub231ps_fp();
+            Implementation.vfnmsub231ps();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231sd_fp()
+        public void vfnmsub231sd()
         {
-            Implementation.vfnmsub231sd_fp();
+            Implementation.vfnmsub231sd();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231ss_fp()
+        public void vfnmsub231ss()
         {
-            Implementation.vfnmsub231ss_fp();
+            Implementation.vfnmsub231ss();
         }
 
         /// <inheritdoc />
@@ -4824,33 +4828,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vinsertf128_fp()
+        public void vinsertf128()
         {
-            Implementation.vinsertf128_fp();
+            Implementation.vinsertf128();
         }
 
         /// <inheritdoc />
-        public void vinsertf32x4_fp()
+        public void vinsertf32x4()
         {
-            Implementation.vinsertf32x4_fp();
+            Implementation.vinsertf32x4();
         }
 
         /// <inheritdoc />
-        public void vinsertf32x8_fp()
+        public void vinsertf32x8()
         {
-            Implementation.vinsertf32x8_fp();
+            Implementation.vinsertf32x8();
         }
 
         /// <inheritdoc />
-        public void vinsertf64x2_fp()
+        public void vinsertf64x2()
         {
-            Implementation.vinsertf64x2_fp();
+            Implementation.vinsertf64x2();
         }
 
         /// <inheritdoc />
-        public void vinsertf64x4_fp()
+        public void vinsertf64x4()
         {
-            Implementation.vinsertf64x4_fp();
+            Implementation.vinsertf64x4();
         }
 
         /// <inheritdoc />
@@ -5064,9 +5068,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vperm2f128_fp()
+        public void vperm2f128()
         {
-            Implementation.vperm2f128_fp();
+            Implementation.vperm2f128();
         }
 
         /// <inheritdoc />
@@ -5124,27 +5128,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void vpermilpd_fp()
+        public void vpermilpd()
         {
-            Implementation.vpermilpd_fp();
+            Implementation.vpermilpd();
         }
 
         /// <inheritdoc />
-        public void vpermilps_fp()
+        public void vpermilps()
         {
-            Implementation.vpermilps_fp();
+            Implementation.vpermilps();
         }
 
         /// <inheritdoc />
-        public void vpermpd_fp()
+        public void vpermpd()
         {
-            Implementation.vpermpd_fp();
+            Implementation.vpermpd();
         }
 
         /// <inheritdoc />
-        public void vpermps_fp()
+        public void vpermps()
         {
-            Implementation.vpermps_fp();
+            Implementation.vpermps();
         }
 
         /// <inheritdoc />
@@ -5940,21 +5944,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void xor()
+        public void xor(Value dst, Value src)
         {
-            Implementation.xor();
+            Implementation.xor(dst, src);
         }
 
         /// <inheritdoc />
-        public void xorpd_fp()
+        public void xorpd()
         {
-            Implementation.xorpd_fp();
+            Implementation.xorpd();
         }
 
         /// <inheritdoc />
-        public void xorps_fp()
+        public void xorps()
         {
-            Implementation.xorps_fp();
+            Implementation.xorps();
         }
 
         /// <inheritdoc />

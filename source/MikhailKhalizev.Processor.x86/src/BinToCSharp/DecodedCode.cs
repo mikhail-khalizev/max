@@ -7,35 +7,35 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     public class DecodedCode
     {
-        private SortedSet<Instruction> cmds = new SortedSet<Instruction>(Instruction.BeginComparer);
-        public UsedSpace<Address> area = new UsedSpace<Address>();
+        // NOTE. Инструкции могут пересекаться.
+        private readonly Dictionary<Address, Instruction> _instructions = new Dictionary<Address, Instruction>();
+        public UsedSpace<Address> Area { get; } = new UsedSpace<Address>();
 
-        public Instruction cmd_get(Address addr)
+        public Instruction GetInstruction(Address address)
         {
-            cmds.TryGetValue(new Instruction(addr), out var actual);
+            _instructions.TryGetValue(address, out var actual);
             return actual;
         }
 
-        public bool Contains(Address addr)
+        /// <summary>
+        /// Возвращает инструкцию, следующую за заданной.
+        /// </summary>
+        /// <param name="instruction">Инструкция, для которой необходимо определить следующую инструкцию.</param>
+        /// <returns></returns>
+        public Instruction GetNextInstruction(Instruction instruction)
         {
-            return cmds.Contains(new Instruction(addr));
+            return GetInstruction(instruction.End);
         }
 
-        public void Insert(Instruction cmd)
+        public bool Contains(Address address)
         {
-            if (cmds.Add(cmd))
-                area.Add(cmd.Begin, cmd.End);
+            return _instructions.ContainsKey(address);
         }
 
-        /**
- * @brief Возвращает инструкцию, следующую за заданной.
- * @param i Инструкция, для которой необходимо определить следующую инструкцию.
- */
-        public Instruction cmd_get_next_logical(Instruction i)
+        public void Insert(Instruction instruction)
         {
-            // Инструкции могут пересекаться.
-
-            return cmd_get(i.End);
+            _instructions[instruction.Begin] = instruction;
+            Area.Add(instruction.Begin, instruction.End);
         }
-}
+    }
 }

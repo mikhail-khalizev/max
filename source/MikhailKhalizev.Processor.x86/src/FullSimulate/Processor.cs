@@ -488,21 +488,23 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             eflags.pf = pf;
         }
-        /*
-         * IA-32e mode has two sub-modes:
-         * - Compatibility Mode
-         * - 64-Bit Mode
-         */
+
+        // Режим IA-32e (IA-32e mode, EM64T) фактически является копией режима AMD64.
+        // В режиме IA-32e можно выделить два подрежима:
+        // - собственно 64-разрядный режим(64-bit mode);
+        // - режим совместимости(compatibility mode), предназначенный для исполнения 32-разрядных программ, созданных для защищённого режима работы процессора.
+
+        // Постепенно Intel отказывается от наименований IA-32, IA-32e и EM64T в пользу 'Intel 64', которое теперь является единственным официальным для этой архитектуры со стороны компании Intel.
 
         // IA-32 architecture supports three basic operating modes:
-        // protected mode,
-        // real-address mode,
-        // system management mode.
+        // - protected mode,
+        // - real-address mode,
+        // - system management mode.
 
         /// <summary>
-        /// IA-32e mode has two sub-modes. These are:
-        /// Compatibility Mode,
-        /// 64-Bit Mode.
+        /// IA-32e mode has two sub-modes.
+        /// - Compatibility Mode
+        /// - 64-Bit Mode
         /// </summary>
         public bool InIa32eMode => cr4.pae && cr0.pg && ia32_efer.lma;
 
@@ -543,83 +545,10 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var offset = selector & 0xfff8u;
 
             if (gdtr_limit < offset + 7)
-                throw
-                    new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
+                throw new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
 
             var ms = Memory.GetFixSize(gdtr_base + offset, 8);
             descriptor.Bytes.CopyTo(ms.AsSpan());
-        }
-
-        #endregion
-
-        #region C# emulate specific
-
-        public int CSharpEmulateMode { get; set; }
-        public int CSharpFunctionDelta { get; set; }
-
-        public List<Address> callReturnAddresses { get; set; } = new List<Address>();
-
-        // todo rename ExecuteSubMethod
-        public event EventHandler<EventArgs> run_func;
-
-
-        public void check_mode() => check_mode(CSharpEmulateMode);
-
-        public void check_mode(int mode)
-        {
-            if (In64BitMode)
-                throw new NotImplementedException();
-            if (mode != (cs.db ? 32 : 16))
-                throw new Exception("Bad mode");
-        }
-
-        /** @return Возвращает истину, если необходимо сделать return. */
-        public bool correct_function_position(Address returnAddress)
-        {
-            callReturnAddresses.Add(returnAddress);
-
-            try
-            {
-                var hist = new List<Address>(); // for debug
-
-                while (true)
-                {
-                    var toRun = cs[eip];
-                    hist.Add(toRun);
-
-                    if (toRun == 0)
-                        throw new Exception("Переход по нулевому указателю.");
-
-                    if (toRun == returnAddress)
-                        return false;
-
-                    // Шаг первый - ищем среди уже вызванных функций.
-                    var index = callReturnAddresses.LastIndexOf(toRun);
-                    if (0 <= index)
-                        return true;
-
-                    // Шаг второй - если не нашли - значит вызываем новую функцию.
-                    run_func?.Invoke(this, null);
-                }
-            }
-            finally
-            {
-                callReturnAddresses.RemoveAt(callReturnAddresses.Count - 1);
-            }
-        }
-
-        public void ii(Address address, uint length)
-        {
-            var cur = address + CSharpFunctionDelta - cs.Descriptor.Base;
-
-            if (eip != cur)
-                throw new InvalidOperationException("Ожидается другая инструкция.");
-
-            CurrentInstructionAddress = cur;
-            eip = cur + length;
-
-            if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
-                throw new Exception("Bad eip");
         }
 
         public void jmp_far_prepare(ushort segmentSelector, Address tempEIP)
@@ -661,7 +590,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 else
                 {
                     if (!(new_cs.Descriptor.IsTypeCode ||
-                          new[] {SystemSegmentTypeInIa32Mode.CallGate64Bit}.Contains(new_cs.Descriptor
+                          new[] { SystemSegmentTypeInIa32Mode.CallGate64Bit }.Contains(new_cs.Descriptor
                               .SystemSegmentTypeInIa32eMode)))
                         throw new NotImplementedException(); // #GP(segment selector)
                 }
@@ -758,7 +687,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 else
                 {
                     if (!(new_cs.Descriptor.IsTypeCode ||
-                          new[] {SystemSegmentTypeInIa32Mode.CallGate64Bit}.Contains(new_cs.Descriptor
+                          new[] { SystemSegmentTypeInIa32Mode.CallGate64Bit }.Contains(new_cs.Descriptor
                               .SystemSegmentTypeInIa32eMode)))
                         throw new NotImplementedException(); // #GP(segment selector)
                 }
@@ -1078,7 +1007,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 // IF stack not large enough for a 6-byte return information
                 // THEN #SS; FI;
 
-                pushfw();
+                pushf();
                 eflags.@if = false; /* Clear interrupt flag */
                 eflags.tf = false; /* Clear trap flag */
                 eflags.ac = false; /* Clear AC flag */
@@ -1095,12 +1024,12 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 if (eflags.vm && eflags.iopl < 3 && in_interrupt_int_n)
                     throw new NotImplementedException(); // #GP(0); (* Bit 0 of error code is 0 because INT n *)
                 else
-                    /* Protected mode, IA-32e mode, or virtual-8086 mode interrupt */
+                /* Protected mode, IA-32e mode, or virtual-8086 mode interrupt */
                 if (ia32_efer.lma == false)
                 {
                     /* Protected mode, or virtual-8086 mode interrupt */
 
-                    var desc = get_desc_ref(idtr_base, idtr_limit, (ushort) (num * 8));
+                    var desc = get_desc_ref(idtr_base, idtr_limit, (ushort)(num * 8));
 
                     if (!(new[]
                     {
@@ -1406,8 +1335,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             }
         }
 
-
-
         public void paging_fault(Address address)
         {
             cr2 = address;
@@ -1427,6 +1354,77 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             eip = eipSave;
         }
 
+        #endregion
+
+        #region C# emulate specific
+
+        public int CSharpEmulateMode { get; set; }
+        public int CSharpFunctionDelta { get; set; }
+
+        public List<Address> callReturnAddresses { get; set; } = new List<Address>();
+
+        // todo rename ExecuteSubMethod
+        public event EventHandler<EventArgs> run_func;
+        
+        public void check_mode() => check_mode(CSharpEmulateMode);
+
+        public void check_mode(int mode)
+        {
+            if (In64BitMode)
+                throw new NotImplementedException();
+            if (mode != (cs.db ? 32 : 16))
+                throw new Exception("Bad mode");
+        }
+
+        /** @return Возвращает истину, если необходимо сделать return. */
+        public bool correct_function_position(Address returnAddress)
+        {
+            callReturnAddresses.Add(returnAddress);
+
+            try
+            {
+                var hist = new List<Address>(); // for debug
+
+                while (true)
+                {
+                    var toRun = cs[eip];
+                    hist.Add(toRun);
+
+                    if (toRun == 0)
+                        throw new Exception("Переход по нулевому указателю.");
+
+                    if (toRun == returnAddress)
+                        return false;
+
+                    // Шаг первый - ищем среди уже вызванных функций.
+                    var index = callReturnAddresses.LastIndexOf(toRun);
+                    if (0 <= index)
+                        return true;
+
+                    // Шаг второй - если не нашли - значит вызываем новую функцию.
+                    run_func?.Invoke(this, null);
+                }
+            }
+            finally
+            {
+                callReturnAddresses.RemoveAt(callReturnAddresses.Count - 1);
+            }
+        }
+
+        public void ii(Address address, uint length)
+        {
+            var cur = address + CSharpFunctionDelta - cs.Descriptor.Base;
+
+            if (eip != cur)
+                throw new InvalidOperationException("Ожидается другая инструкция.");
+
+            CurrentInstructionAddress = cur;
+            eip = cur + length;
+
+            if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
+                throw new Exception("Bad eip");
+        }
+        
         #endregion
 
         #region Instructions
@@ -1468,31 +1466,31 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void add()
+        public void add(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void addpd_fp()
+        public void addpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void addps_fp()
+        public void addps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void addsd_fp()
+        public void addsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void addss_fp()
+        public void addss()
         {
             throw new NotImplementedException();
         }
@@ -1564,25 +1562,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void andnpd_fp()
+        public void andnpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void andnps_fp()
+        public void andnps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void andpd_fp()
+        public void andpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void andps_fp()
+        public void andps()
         {
             throw new NotImplementedException();
         }
@@ -1600,25 +1598,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void blendpd_fp()
+        public void blendpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void blendps_fp()
+        public void blendps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void blendvpd_fp()
+        public void blendvpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void blendvps_fp()
+        public void blendvps()
         {
             throw new NotImplementedException();
         }
@@ -1828,13 +1826,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cmppd_fp()
+        public void cmppd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cmpps_fp()
+        public void cmpps()
         {
             throw new NotImplementedException();
         }
@@ -1870,7 +1868,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cmpss_fp()
+        public void cmpss()
         {
             throw new NotImplementedException();
         }
@@ -1900,13 +1898,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void comisd_fp()
+        public void comisd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void comiss_fp()
+        public void comiss()
         {
             throw new NotImplementedException();
         }
@@ -1930,19 +1928,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cvtdq2pd_fp()
+        public void cvtdq2pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtdq2ps_fp()
+        public void cvtdq2ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtpd2dq_fp()
+        public void cvtpd2dq()
         {
             throw new NotImplementedException();
         }
@@ -1954,7 +1952,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cvtpd2ps_fp()
+        public void cvtpd2ps()
         {
             throw new NotImplementedException();
         }
@@ -1972,13 +1970,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cvtps2dq_fp()
+        public void cvtps2dq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtps2pd_fp()
+        public void cvtps2pd()
         {
             throw new NotImplementedException();
         }
@@ -1990,43 +1988,43 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cvtsd2si_fp()
+        public void cvtsd2si()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtsd2ss_fp()
+        public void cvtsd2ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtsi2sd_fp()
+        public void cvtsi2sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtsi2ss_fp()
+        public void cvtsi2ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtss2sd_fp()
+        public void cvtss2sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvtss2si_fp()
+        public void cvtss2si()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvttpd2dq_fp()
+        public void cvttpd2dq()
         {
             throw new NotImplementedException();
         }
@@ -2038,7 +2036,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cvttps2dq_fp()
+        public void cvttps2dq()
         {
             throw new NotImplementedException();
         }
@@ -2050,13 +2048,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cvttsd2si_fp()
+        public void cvttsd2si()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void cvttss2si_fp()
+        public void cvttss2si()
         {
             throw new NotImplementedException();
         }
@@ -2098,37 +2096,37 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void divpd_fp()
+        public void divpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void divps_fp()
+        public void divps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void divsd_fp()
+        public void divsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void divss_fp()
+        public void divss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void dppd_fp()
+        public void dppd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void dpps_fp()
+        public void dpps()
         {
             throw new NotImplementedException();
         }
@@ -2146,7 +2144,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void extractps_fp()
+        public void extractps()
         {
             throw new NotImplementedException();
         }
@@ -2200,7 +2198,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void fcmovcc_fp()
+        public void fcmovcc()
         {
             throw new NotImplementedException();
         }
@@ -2272,7 +2270,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void ffree_fp()
+        public void ffree()
         {
             throw new NotImplementedException();
         }
@@ -2326,7 +2324,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void finit_fp()
+        public void finit()
         {
             throw new NotImplementedException();
         }
@@ -2440,7 +2438,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void fninit_fp()
+        public void fninit()
         {
             throw new NotImplementedException();
         }
@@ -2638,7 +2636,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void fxam_fp()
+        public void fxam()
         {
             throw new NotImplementedException();
         }
@@ -2752,7 +2750,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void insertps_fp()
+        public void insertps()
         {
             throw new NotImplementedException();
         }
@@ -3310,25 +3308,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void maxpd_fp()
+        public void maxpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void maxps_fp()
+        public void maxps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void maxsd_fp()
+        public void maxsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void maxss_fp()
+        public void maxss()
         {
             throw new NotImplementedException();
         }
@@ -3340,25 +3338,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void minpd_fp()
+        public void minpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void minps_fp()
+        public void minps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void minsd_fp()
+        public void minsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void minss_fp()
+        public void minss()
         {
             throw new NotImplementedException();
         }
@@ -3388,13 +3386,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movapd_fp()
+        public void movapd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movaps_fp()
+        public void movaps()
         {
             throw new NotImplementedException();
         }
@@ -3436,49 +3434,49 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movhlps_fp()
+        public void movhlps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movhpd_fp()
+        public void movhpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movhps_fp()
+        public void movhps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movlhps_fp()
+        public void movlhps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movlpd_fp()
+        public void movlpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movlps_fp()
+        public void movlps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movmskpd_fp()
+        public void movmskpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movmskps_fp()
+        public void movmskps()
         {
             throw new NotImplementedException();
         }
@@ -3502,13 +3500,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movntpd_fp()
+        public void movntpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movntps_fp()
+        public void movntps()
         {
             throw new NotImplementedException();
         }
@@ -3580,7 +3578,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movss_fp()
+        public void movss()
         {
             throw new NotImplementedException();
         }
@@ -3604,13 +3602,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movupd_fp()
+        public void movupd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movups_fp()
+        public void movups()
         {
             throw new NotImplementedException();
         }
@@ -3634,25 +3632,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void mulpd_fp()
+        public void mulpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void mulps_fp()
+        public void mulps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void mulsd_fp()
+        public void mulsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void mulss_fp()
+        public void mulss()
         {
             throw new NotImplementedException();
         }
@@ -3692,13 +3690,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void orpd_fp()
+        public void orpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void orps_fp()
+        public void orps()
         {
             throw new NotImplementedException();
         }
@@ -4612,7 +4610,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void pushfw()
+        public void pushf()
         {
             throw new NotImplementedException();
         }
@@ -4679,13 +4677,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void rcpps_fp()
+        public void rcpps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void rcpss_fp()
+        public void rcpss()
         {
             throw new NotImplementedException();
         }
@@ -4894,25 +4892,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void roundpd_fp()
+        public void roundpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void roundps_fp()
+        public void roundps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void roundsd_fp()
+        public void roundsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void roundss_fp()
+        public void roundss()
         {
             throw new NotImplementedException();
         }
@@ -4924,13 +4922,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void rsqrtps_fp()
+        public void rsqrtps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void rsqrtss_fp()
+        public void rsqrtss()
         {
             throw new NotImplementedException();
         }
@@ -5134,13 +5132,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void shufpd_fp()
+        public void shufpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void shufps_fp()
+        public void shufps()
         {
             throw new NotImplementedException();
         }
@@ -5164,19 +5162,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void sqrtpd_fp()
+        public void sqrtpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void sqrtps_fp()
+        public void sqrtps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void sqrtsd_fp()
+        public void sqrtsd()
         {
             throw new NotImplementedException();
         }
@@ -5260,25 +5258,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void subpd_fp()
+        public void subpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void subps_fp()
+        public void subps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void subsd_fp()
+        public void subsd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void subss_fp()
+        public void subss()
         {
             throw new NotImplementedException();
         }
@@ -5326,13 +5324,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void ucomisd_fp()
+        public void ucomisd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void ucomiss_fp()
+        public void ucomiss()
         {
             throw new NotImplementedException();
         }
@@ -5344,25 +5342,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void unpckhpd_fp()
+        public void unpckhpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void unpckhps_fp()
+        public void unpckhps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void unpcklpd_fp()
+        public void unpcklpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void unpcklps_fp()
+        public void unpcklps()
         {
             throw new NotImplementedException();
         }
@@ -5392,37 +5390,37 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vbroadcast_fp()
+        public void vbroadcast()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcompresspd_fp()
+        public void vcompresspd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcompressps_fp()
+        public void vcompressps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtpd2qq_fp()
+        public void vcvtpd2qq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtpd2udq_fp()
+        public void vcvtpd2udq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtpd2uqq_fp()
+        public void vcvtpd2uqq()
         {
             throw new NotImplementedException();
         }
@@ -5440,127 +5438,127 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vcvtps2qq_fp()
+        public void vcvtps2qq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtps2udq_fp()
+        public void vcvtps2udq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtps2uqq_fp()
+        public void vcvtps2uqq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtqq2pd_fp()
+        public void vcvtqq2pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtqq2ps_fp()
+        public void vcvtqq2ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtsd2usi_fp()
+        public void vcvtsd2usi()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtss2usi_fp()
+        public void vcvtss2usi()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttpd2qq_fp()
+        public void vcvttpd2qq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttpd2udq_fp()
+        public void vcvttpd2udq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttpd2uqq_fp()
+        public void vcvttpd2uqq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttps2qq_fp()
+        public void vcvttps2qq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttps2udq_fp()
+        public void vcvttps2udq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttps2uqq_fp()
+        public void vcvttps2uqq()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttsd2usi_fp()
+        public void vcvttsd2usi()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvttss2usi_fp()
+        public void vcvttss2usi()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtudq2pd_fp()
+        public void vcvtudq2pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtudq2ps_fp()
+        public void vcvtudq2ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtuqq2pd_fp()
+        public void vcvtuqq2pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtuqq2ps_fp()
+        public void vcvtuqq2ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtusi2sd_fp()
+        public void vcvtusi2sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vcvtusi2ss_fp()
+        public void vcvtusi2ss()
         {
             throw new NotImplementedException();
         }
@@ -5584,43 +5582,43 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vexpandpd_fp()
+        public void vexpandpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vexpandps_fp()
+        public void vexpandps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vextractf128_fp()
+        public void vextractf128()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vextractf32x4_fp()
+        public void vextractf32x4()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vextractf32x8_fp()
+        public void vextractf32x8()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vextractf64x2_fp()
+        public void vextractf64x2()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vextractf64x4_fp()
+        public void vextractf64x4()
         {
             throw new NotImplementedException();
         }
@@ -5680,361 +5678,361 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vfmadd132pd_fp()
+        public void vfmadd132pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd132ps_fp()
+        public void vfmadd132ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd132sd_fp()
+        public void vfmadd132sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd132ss_fp()
+        public void vfmadd132ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd213pd_fp()
+        public void vfmadd213pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd213ps_fp()
+        public void vfmadd213ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd213sd_fp()
+        public void vfmadd213sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd213ss_fp()
+        public void vfmadd213ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd231pd_fp()
+        public void vfmadd231pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd231ps_fp()
+        public void vfmadd231ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd231sd_fp()
+        public void vfmadd231sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmadd231ss_fp()
+        public void vfmadd231ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub132pd_fp()
+        public void vfmaddsub132pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub132ps_fp()
+        public void vfmaddsub132ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub213pd_fp()
+        public void vfmaddsub213pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub213ps_fp()
+        public void vfmaddsub213ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub231pd_fp()
+        public void vfmaddsub231pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmaddsub231ps_fp()
+        public void vfmaddsub231ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub132pd_fp()
+        public void vfmsub132pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub132ps_fp()
+        public void vfmsub132ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub132sd_fp()
+        public void vfmsub132sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub132ss_fp()
+        public void vfmsub132ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub213pd_fp()
+        public void vfmsub213pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub213ps_fp()
+        public void vfmsub213ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub213sd_fp()
+        public void vfmsub213sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub213ss_fp()
+        public void vfmsub213ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub231pd_fp()
+        public void vfmsub231pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub231ps_fp()
+        public void vfmsub231ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub231sd_fp()
+        public void vfmsub231sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsub231ss_fp()
+        public void vfmsub231ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd132pd_fp()
+        public void vfmsubadd132pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd132ps_fp()
+        public void vfmsubadd132ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd213pd_fp()
+        public void vfmsubadd213pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd213ps_fp()
+        public void vfmsubadd213ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd231pd_fp()
+        public void vfmsubadd231pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfmsubadd231ps_fp()
+        public void vfmsubadd231ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132pd_fp()
+        public void vfnmadd132pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132ps_fp()
+        public void vfnmadd132ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132sd_fp()
+        public void vfnmadd132sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd132ss_fp()
+        public void vfnmadd132ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213pd_fp()
+        public void vfnmadd213pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213ps_fp()
+        public void vfnmadd213ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213sd_fp()
+        public void vfnmadd213sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd213ss_fp()
+        public void vfnmadd213ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231pd_fp()
+        public void vfnmadd231pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231ps_fp()
+        public void vfnmadd231ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231sd_fp()
+        public void vfnmadd231sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmadd231ss_fp()
+        public void vfnmadd231ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132pd_fp()
+        public void vfnmsub132pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132ps_fp()
+        public void vfnmsub132ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132sd_fp()
+        public void vfnmsub132sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub132ss_fp()
+        public void vfnmsub132ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213pd_fp()
+        public void vfnmsub213pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213ps_fp()
+        public void vfnmsub213ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213sd_fp()
+        public void vfnmsub213sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub213ss_fp()
+        public void vfnmsub213ss()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231pd_fp()
+        public void vfnmsub231pd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231ps_fp()
+        public void vfnmsub231ps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231sd_fp()
+        public void vfnmsub231sd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vfnmsub231ss_fp()
+        public void vfnmsub231ss()
         {
             throw new NotImplementedException();
         }
@@ -6160,31 +6158,31 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vinsertf128_fp()
+        public void vinsertf128()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vinsertf32x4_fp()
+        public void vinsertf32x4()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vinsertf32x8_fp()
+        public void vinsertf32x8()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vinsertf64x2_fp()
+        public void vinsertf64x2()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vinsertf64x4_fp()
+        public void vinsertf64x4()
         {
             throw new NotImplementedException();
         }
@@ -6400,7 +6398,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vperm2f128_fp()
+        public void vperm2f128()
         {
             throw new NotImplementedException();
         }
@@ -6460,25 +6458,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void vpermilpd_fp()
+        public void vpermilpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vpermilps_fp()
+        public void vpermilps()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vpermpd_fp()
+        public void vpermpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void vpermps_fp()
+        public void vpermps()
         {
             throw new NotImplementedException();
         }
@@ -7274,21 +7272,21 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         {
             throw new NotImplementedException();
         }
-
+        
         /// <inheritdoc />
-        public void xor()
+        public void xor(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void xorpd_fp()
+        public void xorpd()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void xorps_fp()
+        public void xorps()
         {
             throw new NotImplementedException();
         }

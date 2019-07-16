@@ -275,16 +275,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             foreach (var a in Aligment)
             {
-                var iter_area = code.area.Find(a.Key, false);
+                var iter_area = code.Area.Find(a.Key, false);
                 if (iter_area.IsEmpty)
                     throw new InvalidOperationException();
 
                 if (iter_area.Begin < a.Key)
                     continue; // Выравнивание не требуется, т.к. до нас уже что-то есть.
 
-                if (iter_area != code.area.First())
+                if (iter_area != code.Area.First())
                 {
-                    var i = code.area.GetIntervalBefore(a.Key);
+                    var i = code.Area.GetIntervalBefore(a.Key);
                     var prev_addr = i.End;
 
                     if (a.Key < prev_addr + a.Value)
@@ -331,7 +331,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // --- Вычисляем... ---
                     
-                    var first_cmd = code.cmd_get(addr_func);
+                    var first_cmd = code.GetInstruction(addr_func);
 
                     if (first_cmd == null)
                         throw new InvalidOperationException("Начало функции делит инструкцию пополам.");
@@ -351,7 +351,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     var last_instr_end = first_cmd.Begin;
                     //var may_be_end_of_func = new List<Address>();
 
-                    for (var cmd = first_cmd; cmd != null; cmd = code.cmd_get_next_logical(cmd))
+                    for (var cmd = first_cmd; cmd != null; cmd = code.GetNextInstruction(cmd))
                     {
                         if (min_end <= cmd.Begin)
                             break;
@@ -498,13 +498,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 var filePath = path;
 
-                if (ns != null)
-                    filePath += $"/{ns}";
+                filePath += $"/z-{methodBegin.ToFullString()}";
 
-                filePath += $"/z-{methodBegin}";
+                if (ns != null)
+                    filePath += $"-{ns}";
 
                 if (kd != null)
-                    filePath += $"_{kd}";
+                    filePath += $"-{kd}";
 
                 filePath += ".cs";
 

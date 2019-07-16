@@ -85,12 +85,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
                 var description = instruction.Description;
 
-                if (description == "Move to/from Control Registers")
+                if (uniqueName == "mov" && description == "Move to/from Control Registers")
                     uniqueName += "_cr";
-                else if (description == "Move to/from Debug Registers")
+                else if (uniqueName == "mov" && description == "Move to/from Debug Registers")
                     uniqueName += "_dr";
-                else if (description.Contains("Floating-Point"))
-                    uniqueName += "_fp";
                 else if (uniqueName == "movq" && description == "Move Doubleword/Move Quadword")
                     uniqueName += "_1";
                 else if (uniqueName == "movq" && description == "Move Quadword")
@@ -99,10 +97,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     uniqueName += "_s";
                 else if (uniqueName.StartsWith("vpgather") && description.Contains("with Signed"))
                     uniqueName += "_s";
-                else if (mnemonicLowers.Contains(uniqueName + "d") &&
-                        !mnemonicLowers.Contains(uniqueName + "w") &&
-                        instruction.Url.ToLowerInvariant().Contains(uniqueName + "d"))
-                    uniqueName += "w";
+                else if ((uniqueName == "cmpsd" || uniqueName == "movsd") && description.Contains("Floating-Point"))
+                    uniqueName += "_fp";
 
                 instruction.UniqueName = uniqueName;
             }
@@ -189,7 +185,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             }
         }
 
-        [Fact(Skip = "For developer")]
+        [Fact]
         public void FileGenerator()
         {
             var str = File.ReadAllText(decodeJsonFileName);

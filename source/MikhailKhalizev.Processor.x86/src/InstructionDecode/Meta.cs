@@ -65,8 +65,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             Prefixes = prefixGroups
                 .SelectMany((prefixes, groupIndex) => prefixes.Select(prefix => new {prefix, groupIndex}))
                 .ToDictionary(x => x.prefix, x => x.groupIndex);
-
-            // ? rex - u.dis_mode == 64 && (last & 0xF0) == 0x40
         }
 
         public static bool IsPrefix(byte prefix) => Prefixes.ContainsKey(prefix);

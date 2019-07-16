@@ -10,7 +10,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     {
         private readonly ConfigurationDto _configuration;
         private readonly List<MethodInfoDto> _models;
-        private FileStream _outputFileStream;
 
         public static MethodInfos Load(ConfigurationDto configuration)
         {
@@ -28,6 +27,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public void Save()
         {
             var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile);
+
             using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
             using (var sw = new StreamWriter(fs))
             {

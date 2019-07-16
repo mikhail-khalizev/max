@@ -23,6 +23,14 @@ namespace MikhailKhalizev.Utils
         public static ulong HighBitsMask(int bit) => ~(Mask(bit) >> 1);
 
 
+        public static bool IsSet(int value, int bit)
+        {
+            if (bit < 0)
+                return false;
+
+            return ((value >> bit) & 1) != 0;
+        }
+
         public static bool IsSet(ulong value, int bit)
         {
             if (bit < 0)

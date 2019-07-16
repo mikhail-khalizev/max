@@ -542,25 +542,21 @@
     },
     {
       "Mnemonic": "ADDPD",
-      "UniqueName": "addpd_fp",
       "Description": "Add Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDPD.html"
     },
     {
       "Mnemonic": "ADDPS",
-      "UniqueName": "addps_fp",
       "Description": "Add Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDPS.html"
     },
     {
       "Mnemonic": "ADDSD",
-      "UniqueName": "addsd_fp",
       "Description": "Add Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDSD.html"
     },
     {
       "Mnemonic": "ADDSS",
-      "UniqueName": "addss_fp",
       "Description": "Add Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDSS.html"
     },
@@ -969,25 +965,21 @@
     },
     {
       "Mnemonic": "ANDNPD",
-      "UniqueName": "andnpd_fp",
       "Description": "Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDNPD.html"
     },
     {
       "Mnemonic": "ANDNPS",
-      "UniqueName": "andnps_fp",
       "Description": "Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDNPS.html"
     },
     {
       "Mnemonic": "ANDPD",
-      "UniqueName": "andpd_fp",
       "Description": "Bitwise Logical AND of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDPD.html"
     },
     {
       "Mnemonic": "ANDPS",
-      "UniqueName": "andps_fp",
       "Description": "Bitwise Logical AND of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDPS.html"
     },
@@ -1032,7 +1024,6 @@
     },
     {
       "Mnemonic": "BLENDPD",
-      "UniqueName": "blendpd_fp",
       "Description": "Blend Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDPD.html",
       "OperandEncoding": [
@@ -1057,7 +1048,6 @@
     },
     {
       "Mnemonic": "BLENDPS",
-      "UniqueName": "blendps_fp",
       "Description": "Blend Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDPS.html",
       "OperandEncoding": [
@@ -1082,7 +1072,6 @@
     },
     {
       "Mnemonic": "BLENDVPD",
-      "UniqueName": "blendvpd_fp",
       "Description": "Variable Blend Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDVPD.html",
       "OperandEncoding": [
@@ -1107,7 +1096,6 @@
     },
     {
       "Mnemonic": "BLENDVPS",
-      "UniqueName": "blendvps_fp",
       "Description": "Variable Blend Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDVPS.html",
       "OperandEncoding": [
@@ -2934,13 +2922,11 @@
     },
     {
       "Mnemonic": "CMPPD",
-      "UniqueName": "cmppd_fp",
       "Description": "Compare Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CMPPD.html"
     },
     {
       "Mnemonic": "CMPPS",
-      "UniqueName": "cmpps_fp",
       "Description": "Compare Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CMPPS.html"
     },
@@ -3228,7 +3214,6 @@
     },
     {
       "Mnemonic": "CMPSS",
-      "UniqueName": "cmpss_fp",
       "Description": "Compare Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CMPSS.html"
     },
@@ -3343,13 +3328,11 @@
     },
     {
       "Mnemonic": "COMISD",
-      "UniqueName": "comisd_fp",
       "Description": "Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/COMISD.html"
     },
     {
       "Mnemonic": "COMISS",
-      "UniqueName": "comiss_fp",
       "Description": "Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/COMISS.html"
     },
@@ -3423,19 +3406,16 @@
     },
     {
       "Mnemonic": "CVTDQ2PD",
-      "UniqueName": "cvtdq2pd_fp",
       "Description": "Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTDQ2PD.html"
     },
     {
       "Mnemonic": "CVTDQ2PS",
-      "UniqueName": "cvtdq2ps_fp",
       "Description": "Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTDQ2PS.html"
     },
     {
       "Mnemonic": "CVTPD2DQ",
-      "UniqueName": "cvtpd2dq_fp",
       "Description": "Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTPD2DQ.html"
     },
@@ -3455,7 +3435,6 @@
     },
     {
       "Mnemonic": "CVTPD2PS",
-      "UniqueName": "cvtpd2ps_fp",
       "Description": "Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPD2PS.html"
     },
@@ -3489,13 +3468,11 @@
     },
     {
       "Mnemonic": "CVTPS2DQ",
-      "UniqueName": "cvtps2dq_fp",
       "Description": "Convert Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPS2DQ.html"
     },
     {
       "Mnemonic": "CVTPS2PD",
-      "UniqueName": "cvtps2pd_fp",
       "Description": "Convert Packed Single-Precision Floating-Point Values to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPS2PD.html"
     },
@@ -3515,43 +3492,36 @@
     },
     {
       "Mnemonic": "CVTSD2SI",
-      "UniqueName": "cvtsd2si_fp",
       "Description": "Convert Scalar Double-Precision Floating-Point Value to Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTSD2SI.html"
     },
     {
       "Mnemonic": "CVTSD2SS",
-      "UniqueName": "cvtsd2ss_fp",
       "Description": "Convert Scalar Double-Precision Floating-Point Value to Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSD2SS.html"
     },
     {
       "Mnemonic": "CVTSI2SD",
-      "UniqueName": "cvtsi2sd_fp",
       "Description": "Convert Doubleword Integer to Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSI2SD.html"
     },
     {
       "Mnemonic": "CVTSI2SS",
-      "UniqueName": "cvtsi2ss_fp",
       "Description": "Convert Doubleword Integer to Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSI2SS.html"
     },
     {
       "Mnemonic": "CVTSS2SD",
-      "UniqueName": "cvtss2sd_fp",
       "Description": "Convert Scalar Single-Precision Floating-Point Value to Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSS2SD.html"
     },
     {
       "Mnemonic": "CVTSS2SI",
-      "UniqueName": "cvtss2si_fp",
       "Description": "Convert Scalar Single-Precision Floating-Point Value to Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTSS2SI.html"
     },
     {
       "Mnemonic": "CVTTPD2DQ",
-      "UniqueName": "cvttpd2dq_fp",
       "Description": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTTPD2DQ.html"
     },
@@ -3571,7 +3541,6 @@
     },
     {
       "Mnemonic": "CVTTPS2DQ",
-      "UniqueName": "cvttps2dq_fp",
       "Description": "Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/CVTTPS2DQ.html"
     },
@@ -3591,13 +3560,11 @@
     },
     {
       "Mnemonic": "CVTTSD2SI",
-      "UniqueName": "cvttsd2si_fp",
       "Description": "Convert with Truncation Scalar Double-Precision Floating-Point Value to Signed Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTTSD2SI.html"
     },
     {
       "Mnemonic": "CVTTSS2SI",
-      "UniqueName": "cvttss2si_fp",
       "Description": "Convert with Truncation Scalar Single-Precision Floating-Point Value to Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTTSS2SI.html"
     },
@@ -3834,31 +3801,26 @@
     },
     {
       "Mnemonic": "DIVPD",
-      "UniqueName": "divpd_fp",
       "Description": "Divide Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DIVPD.html"
     },
     {
       "Mnemonic": "DIVPS",
-      "UniqueName": "divps_fp",
       "Description": "Divide Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DIVPS.html"
     },
     {
       "Mnemonic": "DIVSD",
-      "UniqueName": "divsd_fp",
       "Description": "Divide Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/DIVSD.html"
     },
     {
       "Mnemonic": "DIVSS",
-      "UniqueName": "divss_fp",
       "Description": "Divide Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DIVSS.html"
     },
     {
       "Mnemonic": "DPPD",
-      "UniqueName": "dppd_fp",
       "Description": "Dot Product of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DPPD.html",
       "OperandEncoding": [
@@ -3883,7 +3845,6 @@
     },
     {
       "Mnemonic": "DPPS",
-      "UniqueName": "dpps_fp",
       "Description": "Dot Product of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DPPS.html",
       "OperandEncoding": [
@@ -3965,7 +3926,6 @@
     },
     {
       "Mnemonic": "EXTRACTPS",
-      "UniqueName": "extractps_fp",
       "Description": "Extract Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/EXTRACTPS.html"
     },
@@ -4151,7 +4111,6 @@
     },
     {
       "Mnemonic": "FCMOVcc",
-      "UniqueName": "fcmovcc_fp",
       "Description": "Floating-Point Conditional Move",
       "Url": "https://www.felixcloutier.com/x86/FCMOVcc.html"
     },
@@ -4648,7 +4607,6 @@
     },
     {
       "Mnemonic": "FFREE",
-      "UniqueName": "ffree_fp",
       "Description": "Free Floating-Point Register",
       "Url": "https://www.felixcloutier.com/x86/FFREE.html",
       "Table": [
@@ -4982,7 +4940,6 @@
     },
     {
       "Mnemonic": "FINIT",
-      "UniqueName": "finit_fp",
       "Description": "Initialize Floating-Point Unit",
       "Url": "https://www.felixcloutier.com/x86/FINIT:FNINIT.html",
       "Table": [
@@ -5418,7 +5375,6 @@
     },
     {
       "Mnemonic": "FNINIT",
-      "UniqueName": "fninit_fp",
       "Description": "Initialize Floating-Point Unit",
       "Url": "https://www.felixcloutier.com/x86/FINIT:FNINIT.html",
       "Table": [
@@ -6280,7 +6236,6 @@
     },
     {
       "Mnemonic": "FXAM",
-      "UniqueName": "fxam_fp",
       "Description": "Examine Floating-Point",
       "Url": "https://www.felixcloutier.com/x86/FXAM.html",
       "Table": [
@@ -6947,7 +6902,6 @@
     },
     {
       "Mnemonic": "INSERTPS",
-      "UniqueName": "insertps_fp",
       "Description": "Insert Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/INSERTPS.html"
     },
@@ -7243,7 +7197,6 @@
     },
     {
       "Mnemonic": "IRET",
-      "UniqueName": "iretw",
       "Description": "Interrupt Return",
       "Url": "https://www.felixcloutier.com/x86/IRET:IRETD.html",
       "Table": [
@@ -10258,25 +10211,21 @@
     },
     {
       "Mnemonic": "MAXPD",
-      "UniqueName": "maxpd_fp",
       "Description": "Maximum of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MAXPD.html"
     },
     {
       "Mnemonic": "MAXPS",
-      "UniqueName": "maxps_fp",
       "Description": "Maximum of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MAXPS.html"
     },
     {
       "Mnemonic": "MAXSD",
-      "UniqueName": "maxsd_fp",
       "Description": "Return Maximum Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MAXSD.html"
     },
     {
       "Mnemonic": "MAXSS",
-      "UniqueName": "maxss_fp",
       "Description": "Return Maximum Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MAXSS.html"
     },
@@ -10287,25 +10236,21 @@
     },
     {
       "Mnemonic": "MINPD",
-      "UniqueName": "minpd_fp",
       "Description": "Minimum of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MINPD.html"
     },
     {
       "Mnemonic": "MINPS",
-      "UniqueName": "minps_fp",
       "Description": "Minimum of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MINPS.html"
     },
     {
       "Mnemonic": "MINSD",
-      "UniqueName": "minsd_fp",
       "Description": "Return Minimum Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MINSD.html"
     },
     {
       "Mnemonic": "MINSS",
-      "UniqueName": "minss_fp",
       "Description": "Return Minimum Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MINSS.html"
     },
@@ -10656,13 +10601,11 @@
     },
     {
       "Mnemonic": "MOVAPD",
-      "UniqueName": "movapd_fp",
       "Description": "Move Aligned Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVAPD.html"
     },
     {
       "Mnemonic": "MOVAPS",
-      "UniqueName": "movaps_fp",
       "Description": "Move Aligned Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVAPS.html"
     },
@@ -10714,7 +10657,6 @@
     },
     {
       "Mnemonic": "MOVHLPS",
-      "UniqueName": "movhlps_fp",
       "Description": "Move Packed Single-Precision Floating-Point Values High to Low",
       "Url": "https://www.felixcloutier.com/x86/MOVHLPS.html",
       "OperandEncoding": [
@@ -10737,19 +10679,16 @@
     },
     {
       "Mnemonic": "MOVHPD",
-      "UniqueName": "movhpd_fp",
       "Description": "Move High Packed Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVHPD.html"
     },
     {
       "Mnemonic": "MOVHPS",
-      "UniqueName": "movhps_fp",
       "Description": "Move High Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVHPS.html"
     },
     {
       "Mnemonic": "MOVLHPS",
-      "UniqueName": "movlhps_fp",
       "Description": "Move Packed Single-Precision Floating-Point Values Low to High",
       "Url": "https://www.felixcloutier.com/x86/MOVLHPS.html",
       "OperandEncoding": [
@@ -10772,19 +10711,16 @@
     },
     {
       "Mnemonic": "MOVLPD",
-      "UniqueName": "movlpd_fp",
       "Description": "Move Low Packed Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVLPD.html"
     },
     {
       "Mnemonic": "MOVLPS",
-      "UniqueName": "movlps_fp",
       "Description": "Move Low Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVLPS.html"
     },
     {
       "Mnemonic": "MOVMSKPD",
-      "UniqueName": "movmskpd_fp",
       "Description": "Extract Packed Double-Precision Floating-Point Sign Mask",
       "Url": "https://www.felixcloutier.com/x86/MOVMSKPD.html",
       "OperandEncoding": [
@@ -10799,7 +10735,6 @@
     },
     {
       "Mnemonic": "MOVMSKPS",
-      "UniqueName": "movmskps_fp",
       "Description": "Extract Packed Single-Precision Floating-Point Sign Mask",
       "Url": "https://www.felixcloutier.com/x86/MOVMSKPS.html",
       "OperandEncoding": [
@@ -10854,13 +10789,11 @@
     },
     {
       "Mnemonic": "MOVNTPD",
-      "UniqueName": "movntpd_fp",
       "Description": "Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTPD.html"
     },
     {
       "Mnemonic": "MOVNTPS",
-      "UniqueName": "movntps_fp",
       "Description": "Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTPS.html"
     },
@@ -11216,7 +11149,6 @@
     },
     {
       "Mnemonic": "MOVSS",
-      "UniqueName": "movss_fp",
       "Description": "Move or Merge Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVSS.html"
     },
@@ -11291,7 +11223,6 @@
     },
     {
       "Mnemonic": "MOVSX",
-      "UniqueName": "movsxw",
       "Description": "Move with Sign-Extension",
       "Url": "https://www.felixcloutier.com/x86/MOVSX:MOVSXD.html",
       "Table": [
@@ -11436,13 +11367,11 @@
     },
     {
       "Mnemonic": "MOVUPD",
-      "UniqueName": "movupd_fp",
       "Description": "Move Unaligned Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVUPD.html"
     },
     {
       "Mnemonic": "MOVUPS",
-      "UniqueName": "movups_fp",
       "Description": "Move Unaligned Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVUPS.html"
     },
@@ -11573,25 +11502,21 @@
     },
     {
       "Mnemonic": "MULPD",
-      "UniqueName": "mulpd_fp",
       "Description": "Multiply Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MULPD.html"
     },
     {
       "Mnemonic": "MULPS",
-      "UniqueName": "mulps_fp",
       "Description": "Multiply Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MULPS.html"
     },
     {
       "Mnemonic": "MULSD",
-      "UniqueName": "mulsd_fp",
       "Description": "Multiply Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MULSD.html"
     },
     {
       "Mnemonic": "MULSS",
-      "UniqueName": "mulss_fp",
       "Description": "Multiply Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MULSS.html"
     },
@@ -11964,13 +11889,11 @@
     },
     {
       "Mnemonic": "ORPD",
-      "UniqueName": "orpd_fp",
       "Description": "Bitwise Logical OR of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ORPD.html"
     },
     {
       "Mnemonic": "ORPS",
-      "UniqueName": "orps_fp",
       "Description": "Bitwise Logical OR of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ORPS.html"
     },
@@ -12835,7 +12758,6 @@
     },
     {
       "Mnemonic": "POPA",
-      "UniqueName": "popaw",
       "Description": "Pop All General-Purpose Registers",
       "Url": "https://www.felixcloutier.com/x86/POPA:POPAD.html",
       "Table": [
@@ -12927,7 +12849,6 @@
     },
     {
       "Mnemonic": "POPF",
-      "UniqueName": "popfw",
       "Description": "Pop Stack into EFLAGS Register",
       "Url": "https://www.felixcloutier.com/x86/POPF:POPFD:POPFQ.html",
       "Table": [
@@ -13388,7 +13309,6 @@
     },
     {
       "Mnemonic": "PUSHA",
-      "UniqueName": "pushaw",
       "Description": "Push All General-Purpose Registers",
       "Url": "https://www.felixcloutier.com/x86/PUSHA:PUSHAD.html",
       "Table": [
@@ -13443,7 +13363,6 @@
     },
     {
       "Mnemonic": "PUSHF",
-      "UniqueName": "pushfw",
       "Description": "Push EFLAGS Register onto the Stack",
       "Url": "https://www.felixcloutier.com/x86/PUSHF:PUSHFD:PUSHFQ.html",
       "OperandEncoding": [
@@ -13510,7 +13429,6 @@
     },
     {
       "Mnemonic": "RCPPS",
-      "UniqueName": "rcpps_fp",
       "Description": "Compute Reciprocals of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/RCPPS.html",
       "OperandEncoding": [
@@ -13525,7 +13443,6 @@
     },
     {
       "Mnemonic": "RCPSS",
-      "UniqueName": "rcpss_fp",
       "Description": "Compute Reciprocal of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/RCPSS.html",
       "OperandEncoding": [
@@ -15429,7 +15346,6 @@
     },
     {
       "Mnemonic": "ROUNDPD",
-      "UniqueName": "roundpd_fp",
       "Description": "Round Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDPD.html",
       "OperandEncoding": [
@@ -15445,7 +15361,6 @@
     },
     {
       "Mnemonic": "ROUNDPS",
-      "UniqueName": "roundps_fp",
       "Description": "Round Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDPS.html",
       "OperandEncoding": [
@@ -15461,7 +15376,6 @@
     },
     {
       "Mnemonic": "ROUNDSD",
-      "UniqueName": "roundsd_fp",
       "Description": "Round Scalar Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDSD.html",
       "OperandEncoding": [
@@ -15486,7 +15400,6 @@
     },
     {
       "Mnemonic": "ROUNDSS",
-      "UniqueName": "roundss_fp",
       "Description": "Round Scalar Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDSS.html",
       "OperandEncoding": [
@@ -15522,7 +15435,6 @@
     },
     {
       "Mnemonic": "RSQRTPS",
-      "UniqueName": "rsqrtps_fp",
       "Description": "Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/RSQRTPS.html",
       "OperandEncoding": [
@@ -15537,7 +15449,6 @@
     },
     {
       "Mnemonic": "RSQRTSS",
-      "UniqueName": "rsqrtss_fp",
       "Description": "Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/RSQRTSS.html",
       "OperandEncoding": [
@@ -17369,13 +17280,11 @@
     },
     {
       "Mnemonic": "SHUFPD",
-      "UniqueName": "shufpd_fp",
       "Description": "Packed Interleave Shuffle of Pairs of Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SHUFPD.html"
     },
     {
       "Mnemonic": "SHUFPS",
-      "UniqueName": "shufps_fp",
       "Description": "Packed Interleave Shuffle of Quadruplets of Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SHUFPS.html"
     },
@@ -17420,19 +17329,16 @@
     },
     {
       "Mnemonic": "SQRTPD",
-      "UniqueName": "sqrtpd_fp",
       "Description": "Square Root of Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SQRTPD.html"
     },
     {
       "Mnemonic": "SQRTPS",
-      "UniqueName": "sqrtps_fp",
       "Description": "Square Root of Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SQRTPS.html"
     },
     {
       "Mnemonic": "SQRTSD",
-      "UniqueName": "sqrtsd_fp",
       "Description": "Compute Square Root of Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/SQRTSD.html"
     },
@@ -18086,25 +17992,21 @@
     },
     {
       "Mnemonic": "SUBPD",
-      "UniqueName": "subpd_fp",
       "Description": "Subtract Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SUBPD.html"
     },
     {
       "Mnemonic": "SUBPS",
-      "UniqueName": "subps_fp",
       "Description": "Subtract Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SUBPS.html"
     },
     {
       "Mnemonic": "SUBSD",
-      "UniqueName": "subsd_fp",
       "Description": "Subtract Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/SUBSD.html"
     },
     {
       "Mnemonic": "SUBSS",
-      "UniqueName": "subss_fp",
       "Description": "Subtract Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/SUBSS.html"
     },
@@ -18366,13 +18268,11 @@
     },
     {
       "Mnemonic": "UCOMISD",
-      "UniqueName": "ucomisd_fp",
       "Description": "Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/UCOMISD.html"
     },
     {
       "Mnemonic": "UCOMISS",
-      "UniqueName": "ucomiss_fp",
       "Description": "Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/UCOMISS.html"
     },
@@ -18419,25 +18319,21 @@
     },
     {
       "Mnemonic": "UNPCKHPD",
-      "UniqueName": "unpckhpd_fp",
       "Description": "Unpack and Interleave High Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKHPD.html"
     },
     {
       "Mnemonic": "UNPCKHPS",
-      "UniqueName": "unpckhps_fp",
       "Description": "Unpack and Interleave High Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKHPS.html"
     },
     {
       "Mnemonic": "UNPCKLPD",
-      "UniqueName": "unpcklpd_fp",
       "Description": "Unpack and Interleave Low Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKLPD.html"
     },
     {
       "Mnemonic": "UNPCKLPS",
-      "UniqueName": "unpcklps_fp",
       "Description": "Unpack and Interleave Low Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKLPS.html"
     },
@@ -18463,37 +18359,31 @@
     },
     {
       "Mnemonic": "VBROADCAST",
-      "UniqueName": "vbroadcast_fp",
       "Description": "Load with Broadcast Floating-Point Data",
       "Url": "https://www.felixcloutier.com/x86/VBROADCAST.html"
     },
     {
       "Mnemonic": "VCOMPRESSPD",
-      "UniqueName": "vcompresspd_fp",
       "Description": "Store Sparse Packed Double-Precision Floating-Point Values into Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VCOMPRESSPD.html"
     },
     {
       "Mnemonic": "VCOMPRESSPS",
-      "UniqueName": "vcompressps_fp",
       "Description": "Store Sparse Packed Single-Precision Floating-Point Values into Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VCOMPRESSPS.html"
     },
     {
       "Mnemonic": "VCVTPD2QQ",
-      "UniqueName": "vcvtpd2qq_fp",
       "Description": "Convert Packed Double-Precision Floating-Point Values to Packed Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTPD2QQ.html"
     },
     {
       "Mnemonic": "VCVTPD2UDQ",
-      "UniqueName": "vcvtpd2udq_fp",
       "Description": "Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTPD2UDQ.html"
     },
     {
       "Mnemonic": "VCVTPD2UQQ",
-      "UniqueName": "vcvtpd2uqq_fp",
       "Description": "Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTPD2UQQ.html"
     },
@@ -18509,127 +18399,106 @@
     },
     {
       "Mnemonic": "VCVTPS2QQ",
-      "UniqueName": "vcvtps2qq_fp",
       "Description": "Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2QQ.html"
     },
     {
       "Mnemonic": "VCVTPS2UDQ",
-      "UniqueName": "vcvtps2udq_fp",
       "Description": "Convert Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2UDQ.html"
     },
     {
       "Mnemonic": "VCVTPS2UQQ",
-      "UniqueName": "vcvtps2uqq_fp",
       "Description": "Convert Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2UQQ.html"
     },
     {
       "Mnemonic": "VCVTQQ2PD",
-      "UniqueName": "vcvtqq2pd_fp",
       "Description": "Convert Packed Quadword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTQQ2PD.html"
     },
     {
       "Mnemonic": "VCVTQQ2PS",
-      "UniqueName": "vcvtqq2ps_fp",
       "Description": "Convert Packed Quadword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTQQ2PS.html"
     },
     {
       "Mnemonic": "VCVTSD2USI",
-      "UniqueName": "vcvtsd2usi_fp",
       "Description": "Convert Scalar Double-Precision Floating-Point Value to Unsigned Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTSD2USI.html"
     },
     {
       "Mnemonic": "VCVTSS2USI",
-      "UniqueName": "vcvtss2usi_fp",
       "Description": "Convert Scalar Single-Precision Floating-Point Value to Unsigned Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTSS2USI.html"
     },
     {
       "Mnemonic": "VCVTTPD2QQ",
-      "UniqueName": "vcvttpd2qq_fp",
       "Description": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPD2QQ.html"
     },
     {
       "Mnemonic": "VCVTTPD2UDQ",
-      "UniqueName": "vcvttpd2udq_fp",
       "Description": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPD2UDQ.html"
     },
     {
       "Mnemonic": "VCVTTPD2UQQ",
-      "UniqueName": "vcvttpd2uqq_fp",
       "Description": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPD2UQQ.html"
     },
     {
       "Mnemonic": "VCVTTPS2QQ",
-      "UniqueName": "vcvttps2qq_fp",
       "Description": "Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2QQ.html"
     },
     {
       "Mnemonic": "VCVTTPS2UDQ",
-      "UniqueName": "vcvttps2udq_fp",
       "Description": "Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2UDQ.html"
     },
     {
       "Mnemonic": "VCVTTPS2UQQ",
-      "UniqueName": "vcvttps2uqq_fp",
       "Description": "Convert with Truncation Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2UQQ.html"
     },
     {
       "Mnemonic": "VCVTTSD2USI",
-      "UniqueName": "vcvttsd2usi_fp",
       "Description": "Convert with Truncation Scalar Double-Precision Floating-Point Value to Unsigned Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTTSD2USI.html"
     },
     {
       "Mnemonic": "VCVTTSS2USI",
-      "UniqueName": "vcvttss2usi_fp",
       "Description": "Convert with Truncation Scalar Single-Precision Floating-Point Value to Unsigned Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTTSS2USI.html"
     },
     {
       "Mnemonic": "VCVTUDQ2PD",
-      "UniqueName": "vcvtudq2pd_fp",
       "Description": "Convert Packed Unsigned Doubleword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUDQ2PD.html"
     },
     {
       "Mnemonic": "VCVTUDQ2PS",
-      "UniqueName": "vcvtudq2ps_fp",
       "Description": "Convert Packed Unsigned Doubleword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUDQ2PS.html"
     },
     {
       "Mnemonic": "VCVTUQQ2PD",
-      "UniqueName": "vcvtuqq2pd_fp",
       "Description": "Convert Packed Unsigned Quadword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUQQ2PD.html"
     },
     {
       "Mnemonic": "VCVTUQQ2PS",
-      "UniqueName": "vcvtuqq2ps_fp",
       "Description": "Convert Packed Unsigned Quadword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUQQ2PS.html"
     },
     {
       "Mnemonic": "VCVTUSI2SD",
-      "UniqueName": "vcvtusi2sd_fp",
       "Description": "Convert Unsigned Integer to Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/VCVTUSI2SD.html"
     },
     {
       "Mnemonic": "VCVTUSI2SS",
-      "UniqueName": "vcvtusi2ss_fp",
       "Description": "Convert Unsigned Integer to Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/VCVTUSI2SS.html"
     },
@@ -18698,43 +18567,36 @@
     },
     {
       "Mnemonic": "VEXPANDPD",
-      "UniqueName": "vexpandpd_fp",
       "Description": "Load Sparse Packed Double-Precision Floating-Point Values from Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VEXPANDPD.html"
     },
     {
       "Mnemonic": "VEXPANDPS",
-      "UniqueName": "vexpandps_fp",
       "Description": "Load Sparse Packed Single-Precision Floating-Point Values from Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VEXPANDPS.html"
     },
     {
       "Mnemonic": "VEXTRACTF128",
-      "UniqueName": "vextractf128_fp",
       "Description": "Extra ct Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html"
     },
     {
       "Mnemonic": "VEXTRACTF32x4",
-      "UniqueName": "vextractf32x4_fp",
       "Description": "Extra ct Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html"
     },
     {
       "Mnemonic": "VEXTRACTF32x8",
-      "UniqueName": "vextractf32x8_fp",
       "Description": "Extra ct Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html"
     },
     {
       "Mnemonic": "VEXTRACTF64x2",
-      "UniqueName": "vextractf64x2_fp",
       "Description": "Extra ct Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html"
     },
     {
       "Mnemonic": "VEXTRACTF64x4",
-      "UniqueName": "vextractf64x4_fp",
       "Description": "Extra ct Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html"
     },
@@ -18785,361 +18647,301 @@
     },
     {
       "Mnemonic": "VFMADD132PD",
-      "UniqueName": "vfmadd132pd_fp",
       "Description": "Fused Multiply-Add of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html"
     },
     {
       "Mnemonic": "VFMADD132PS",
-      "UniqueName": "vfmadd132ps_fp",
       "Description": "Fused Multiply-Add of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html"
     },
     {
       "Mnemonic": "VFMADD132SD",
-      "UniqueName": "vfmadd132sd_fp",
       "Description": "Fused Multiply-Add of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html"
     },
     {
       "Mnemonic": "VFMADD132SS",
-      "UniqueName": "vfmadd132ss_fp",
       "Description": "Fused Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html"
     },
     {
       "Mnemonic": "VFMADD213PD",
-      "UniqueName": "vfmadd213pd_fp",
       "Description": "Fused Multiply-Add of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html"
     },
     {
       "Mnemonic": "VFMADD213PS",
-      "UniqueName": "vfmadd213ps_fp",
       "Description": "Fused Multiply-Add of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html"
     },
     {
       "Mnemonic": "VFMADD213SD",
-      "UniqueName": "vfmadd213sd_fp",
       "Description": "Fused Multiply-Add of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html"
     },
     {
       "Mnemonic": "VFMADD213SS",
-      "UniqueName": "vfmadd213ss_fp",
       "Description": "Fused Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html"
     },
     {
       "Mnemonic": "VFMADD231PD",
-      "UniqueName": "vfmadd231pd_fp",
       "Description": "Fused Multiply-Add of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html"
     },
     {
       "Mnemonic": "VFMADD231PS",
-      "UniqueName": "vfmadd231ps_fp",
       "Description": "Fused Multiply-Add of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html"
     },
     {
       "Mnemonic": "VFMADD231SD",
-      "UniqueName": "vfmadd231sd_fp",
       "Description": "Fused Multiply-Add of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html"
     },
     {
       "Mnemonic": "VFMADD231SS",
-      "UniqueName": "vfmadd231ss_fp",
       "Description": "Fused Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html"
     },
     {
       "Mnemonic": "VFMADDSUB132PD",
-      "UniqueName": "vfmaddsub132pd_fp",
       "Description": "Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html"
     },
     {
       "Mnemonic": "VFMADDSUB132PS",
-      "UniqueName": "vfmaddsub132ps_fp",
       "Description": "Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html"
     },
     {
       "Mnemonic": "VFMADDSUB213PD",
-      "UniqueName": "vfmaddsub213pd_fp",
       "Description": "Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html"
     },
     {
       "Mnemonic": "VFMADDSUB213PS",
-      "UniqueName": "vfmaddsub213ps_fp",
       "Description": "Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html"
     },
     {
       "Mnemonic": "VFMADDSUB231PD",
-      "UniqueName": "vfmaddsub231pd_fp",
       "Description": "Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html"
     },
     {
       "Mnemonic": "VFMADDSUB231PS",
-      "UniqueName": "vfmaddsub231ps_fp",
       "Description": "Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html"
     },
     {
       "Mnemonic": "VFMSUB132PD",
-      "UniqueName": "vfmsub132pd_fp",
       "Description": "Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html"
     },
     {
       "Mnemonic": "VFMSUB132PS",
-      "UniqueName": "vfmsub132ps_fp",
       "Description": "Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html"
     },
     {
       "Mnemonic": "VFMSUB132SD",
-      "UniqueName": "vfmsub132sd_fp",
       "Description": "Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html"
     },
     {
       "Mnemonic": "VFMSUB132SS",
-      "UniqueName": "vfmsub132ss_fp",
       "Description": "Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html"
     },
     {
       "Mnemonic": "VFMSUB213PD",
-      "UniqueName": "vfmsub213pd_fp",
       "Description": "Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html"
     },
     {
       "Mnemonic": "VFMSUB213PS",
-      "UniqueName": "vfmsub213ps_fp",
       "Description": "Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html"
     },
     {
       "Mnemonic": "VFMSUB213SD",
-      "UniqueName": "vfmsub213sd_fp",
       "Description": "Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html"
     },
     {
       "Mnemonic": "VFMSUB213SS",
-      "UniqueName": "vfmsub213ss_fp",
       "Description": "Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html"
     },
     {
       "Mnemonic": "VFMSUB231PD",
-      "UniqueName": "vfmsub231pd_fp",
       "Description": "Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html"
     },
     {
       "Mnemonic": "VFMSUB231PS",
-      "UniqueName": "vfmsub231ps_fp",
       "Description": "Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html"
     },
     {
       "Mnemonic": "VFMSUB231SD",
-      "UniqueName": "vfmsub231sd_fp",
       "Description": "Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html"
     },
     {
       "Mnemonic": "VFMSUB231SS",
-      "UniqueName": "vfmsub231ss_fp",
       "Description": "Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html"
     },
     {
       "Mnemonic": "VFMSUBADD132PD",
-      "UniqueName": "vfmsubadd132pd_fp",
       "Description": "Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html"
     },
     {
       "Mnemonic": "VFMSUBADD132PS",
-      "UniqueName": "vfmsubadd132ps_fp",
       "Description": "Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html"
     },
     {
       "Mnemonic": "VFMSUBADD213PD",
-      "UniqueName": "vfmsubadd213pd_fp",
       "Description": "Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html"
     },
     {
       "Mnemonic": "VFMSUBADD213PS",
-      "UniqueName": "vfmsubadd213ps_fp",
       "Description": "Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html"
     },
     {
       "Mnemonic": "VFMSUBADD231PD",
-      "UniqueName": "vfmsubadd231pd_fp",
       "Description": "Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html"
     },
     {
       "Mnemonic": "VFMSUBADD231PS",
-      "UniqueName": "vfmsubadd231ps_fp",
       "Description": "Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html"
     },
     {
       "Mnemonic": "VFNMADD132PD",
-      "UniqueName": "vfnmadd132pd_fp",
       "Description": "Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html"
     },
     {
       "Mnemonic": "VFNMADD132PS",
-      "UniqueName": "vfnmadd132ps_fp",
       "Description": "Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html"
     },
     {
       "Mnemonic": "VFNMADD132SD",
-      "UniqueName": "vfnmadd132sd_fp",
       "Description": "Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html"
     },
     {
       "Mnemonic": "VFNMADD132SS",
-      "UniqueName": "vfnmadd132ss_fp",
       "Description": "Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html"
     },
     {
       "Mnemonic": "VFNMADD213PD",
-      "UniqueName": "vfnmadd213pd_fp",
       "Description": "Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html"
     },
     {
       "Mnemonic": "VFNMADD213PS",
-      "UniqueName": "vfnmadd213ps_fp",
       "Description": "Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html"
     },
     {
       "Mnemonic": "VFNMADD213SD",
-      "UniqueName": "vfnmadd213sd_fp",
       "Description": "Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html"
     },
     {
       "Mnemonic": "VFNMADD213SS",
-      "UniqueName": "vfnmadd213ss_fp",
       "Description": "Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html"
     },
     {
       "Mnemonic": "VFNMADD231PD",
-      "UniqueName": "vfnmadd231pd_fp",
       "Description": "Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html"
     },
     {
       "Mnemonic": "VFNMADD231PS",
-      "UniqueName": "vfnmadd231ps_fp",
       "Description": "Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html"
     },
     {
       "Mnemonic": "VFNMADD231SD",
-      "UniqueName": "vfnmadd231sd_fp",
       "Description": "Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html"
     },
     {
       "Mnemonic": "VFNMADD231SS",
-      "UniqueName": "vfnmadd231ss_fp",
       "Description": "Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html"
     },
     {
       "Mnemonic": "VFNMSUB132PD",
-      "UniqueName": "vfnmsub132pd_fp",
       "Description": "Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html"
     },
     {
       "Mnemonic": "VFNMSUB132PS",
-      "UniqueName": "vfnmsub132ps_fp",
       "Description": "Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html"
     },
     {
       "Mnemonic": "VFNMSUB132SD",
-      "UniqueName": "vfnmsub132sd_fp",
       "Description": "Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html"
     },
     {
       "Mnemonic": "VFNMSUB132SS",
-      "UniqueName": "vfnmsub132ss_fp",
       "Description": "Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html"
     },
     {
       "Mnemonic": "VFNMSUB213PD",
-      "UniqueName": "vfnmsub213pd_fp",
       "Description": "Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html"
     },
     {
       "Mnemonic": "VFNMSUB213PS",
-      "UniqueName": "vfnmsub213ps_fp",
       "Description": "Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html"
     },
     {
       "Mnemonic": "VFNMSUB213SD",
-      "UniqueName": "vfnmsub213sd_fp",
       "Description": "Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html"
     },
     {
       "Mnemonic": "VFNMSUB213SS",
-      "UniqueName": "vfnmsub213ss_fp",
       "Description": "Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html"
     },
     {
       "Mnemonic": "VFNMSUB231PD",
-      "UniqueName": "vfnmsub231pd_fp",
       "Description": "Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html"
     },
     {
       "Mnemonic": "VFNMSUB231PS",
-      "UniqueName": "vfnmsub231ps_fp",
       "Description": "Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html"
     },
     {
       "Mnemonic": "VFNMSUB231SD",
-      "UniqueName": "vfnmsub231sd_fp",
       "Description": "Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html"
     },
     {
       "Mnemonic": "VFNMSUB231SS",
-      "UniqueName": "vfnmsub231ss_fp",
       "Description": "Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html"
     },
@@ -19289,31 +19091,26 @@
     },
     {
       "Mnemonic": "VINSERTF128",
-      "UniqueName": "vinsertf128_fp",
       "Description": "Insert Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html"
     },
     {
       "Mnemonic": "VINSERTF32x4",
-      "UniqueName": "vinsertf32x4_fp",
       "Description": "Insert Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html"
     },
     {
       "Mnemonic": "VINSERTF32x8",
-      "UniqueName": "vinsertf32x8_fp",
       "Description": "Insert Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html"
     },
     {
       "Mnemonic": "VINSERTF64x2",
-      "UniqueName": "vinsertf64x2_fp",
       "Description": "Insert Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html"
     },
     {
       "Mnemonic": "VINSERTF64x4",
-      "UniqueName": "vinsertf64x4_fp",
       "Description": "Insert Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html"
     },
@@ -19532,7 +19329,6 @@
     },
     {
       "Mnemonic": "VPERM2F128",
-      "UniqueName": "vperm2f128_fp",
       "Description": "Permute Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VPERM2F128.html",
       "OperandEncoding": [
@@ -19605,25 +19401,21 @@
     },
     {
       "Mnemonic": "VPERMILPD",
-      "UniqueName": "vpermilpd_fp",
       "Description": "Permute In-Lane of Pairs of Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VPERMILPD.html"
     },
     {
       "Mnemonic": "VPERMILPS",
-      "UniqueName": "vpermilps_fp",
       "Description": "Permute In-Lane of Quadruples of Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VPERMILPS.html"
     },
     {
       "Mnemonic": "VPERMPD",
-      "UniqueName": "vpermpd_fp",
       "Description": "Permute Double-Precision Floating-Point Elements",
       "Url": "https://www.felixcloutier.com/x86/VPERMPD.html"
     },
     {
       "Mnemonic": "VPERMPS",
-      "UniqueName": "vpermps_fp",
       "Description": "Permute Single-Precision Floating-Point Elements",
       "Url": "https://www.felixcloutier.com/x86/VPERMPS.html"
     },
@@ -21003,13 +20795,11 @@
     },
     {
       "Mnemonic": "XORPD",
-      "UniqueName": "xorpd_fp",
       "Description": "Bitwise Logical XOR of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/XORPD.html"
     },
     {
       "Mnemonic": "XORPS",
-      "UniqueName": "xorps_fp",
       "Description": "Bitwise Logical XOR of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/XORPS.html"
     },
@@ -21132,8 +20922,8 @@
     "ModRM16Bit": "r8(/r)\r\nr16(/r)\r\nr32(/r)\r\nmm(/r)\r\nxmm(/r)\r\n(In decimal) /digit (Opcode)\r\n(In binary) REG =\r\nAL\r\nAX\r\nEAX\r\nMM0\r\nXMM0\r\n0\r\n000\r\nCL\r\nCX\r\nECX\r\nMM1\r\nXMM1\r\n1\r\n001\r\nDL\r\nDX\r\nEDX\r\nMM2\r\nXMM2\r\n2\r\n010\r\nBL\r\nBX\r\nEBX\r\nMM3\r\nXMM3\r\n3\r\n011\r\nAH\r\nSP\r\nESP\r\nMM4\r\nXMM4\r\n4\r\n100\r\nCH\r\nBP1\r\nEBP\r\nMM5\r\nXMM5\r\n5\r\n101\r\nDH\r\nSI\r\nESI\r\nMM6\r\nXMM6\r\n6\r\n110\r\nBH\r\nDI\r\nEDI\r\nMM7\r\nXMM7\r\n7\r\n111\r\nEffective Address Mod R/M Value of ModR/M Byte (in Hexadecimal)\r\n[BX+SI]\r\n[BX+DI]\r\n[BP+SI]\r\n[BP+DI]\r\n[SI]\r\n[DI]\r\ndisp162\r\n[BX]\r\n00 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n00\r\n01\r\n02\r\n03\r\n04\r\n05\r\n06\r\n07\r\n08\r\n09\r\n0A\r\n0B\r\n0C\r\n0D\r\n0E\r\n0F\r\n10\r\n11\r\n12\r\n13\r\n14\r\n15\r\n16\r\n17\r\n18\r\n19\r\n1A\r\n1B\r\n1C\r\n1D\r\n1E\r\n1F\r\n20\r\n21\r\n22\r\n23\r\n24\r\n25\r\n26\r\n27\r\n28\r\n29\r\n2A\r\n2B\r\n2C\r\n2D\r\n2E\r\n2F\r\n30\r\n31\r\n32\r\n33\r\n34\r\n35\r\n36\r\n37\r\n38\r\n39\r\n3A\r\n3B\r\n3C\r\n3D\r\n3E\r\n3F\r\n[BX+SI]+disp83\r\n[BX+DI]+disp8\r\n[BP+SI]+disp8\r\n[BP+DI]+disp8\r\n[SI]+disp8\r\n[DI]+disp8\r\n[BP]+disp8\r\n[BX]+disp8\r\n01 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n40\r\n41\r\n42\r\n43\r\n44\r\n45\r\n46\r\n47\r\n48\r\n49\r\n4A\r\n4B\r\n4C\r\n4D\r\n4E\r\n4F\r\n50\r\n51\r\n52\r\n53\r\n54\r\n55\r\n56\r\n57\r\n58\r\n59\r\n5A\r\n5B\r\n5C\r\n5D\r\n5E\r\n5F\r\n60\r\n61\r\n62\r\n63\r\n64\r\n65\r\n66\r\n67\r\n68\r\n69\r\n6A\r\n6B\r\n6C\r\n6D\r\n6E\r\n6F\r\n70\r\n71\r\n72\r\n73\r\n74\r\n75\r\n76\r\n77\r\n78\r\n79\r\n7A\r\n7B\r\n7C\r\n7D\r\n7E\r\n7F\r\n[BX+SI]+disp16\r\n[BX+DI]+disp16\r\n[BP+SI]+disp16\r\n[BP+DI]+disp16\r\n[SI]+disp16\r\n[DI]+disp16\r\n[BP]+disp16\r\n[BX]+disp16\r\n10 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n80\r\n81\r\n82\r\n83\r\n84\r\n85\r\n86\r\n87\r\n88\r\n89\r\n8A\r\n8B\r\n8C\r\n8D\r\n8E\r\n8F\r\n90\r\n91\r\n92\r\n93\r\n94\r\n95\r\n96\r\n97\r\n98\r\n99\r\n9A\r\n9B\r\n9C\r\n9D\r\n9E\r\n9F\r\nA0\r\nA1\r\nA2\r\nA3\r\nA4\r\nA5\r\nA6\r\nA7\r\nA8\r\nA9\r\nAA\r\nAB\r\nAC\r\nAD\r\nAE\r\nAF\r\nB0\r\nB1\r\nB2\r\nB3\r\nB4\r\nB5\r\nB6\r\nB7\r\nB8\r\nB9\r\nBA\r\nBB\r\nBC\r\nBD\r\nBE\r\nBF\r\nEAX/AX/AL/MM0/XMM0\r\nECX/CX/CL/MM1/XMM1\r\nEDX/DX/DL/MM2/XMM2\r\nEBX/BX/BL/MM3/XMM3\r\nESP/SP/AHMM4/XMM4\r\nEBP/BP/CH/MM5/XMM5\r\nESI/SI/DH/MM6/XMM6\r\nEDI/DI/BH/MM7/XMM7\r\n11 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\nC0\r\nC1\r\nC2\r\nC3\r\nC4\r\nC5\r\nC6\r\nC7\r\nC8\r\nC9\r\nCA\r\nCB\r\nCC\r\nCD\r\nCE\r\nCF\r\nD0\r\nD1\r\nD2\r\nD3\r\nD4\r\nD5\r\nD6\r\nD7\r\nD8\r\nD9\r\nDA\r\nDB\r\nDC\r\nDD\r\nDE\r\nDF\r\nE0\r\nE1\r\nE2\r\nE3\r\nE4\r\nE5\r\nE6\r\nE7\r\nE8\r\nE9\r\nEA\r\nEB\r\nEC\r\nED\r\nEE\r\nEF\r\nF0\r\nF1\r\nF2\r\nF3\r\nF4\r\nF5\r\nF6\r\nF7\r\nF8\r\nF9\r\nFA\r\nFB\r\nFC\r\nFD\r\nFE\r\nFF",
     "ModRM32Bit": "r8(/r)\r\nr16(/r)\r\nr32(/r)\r\nmm(/r)\r\nxmm(/r)\r\n(In decimal) /digit (Opcode)\r\n(In binary) REG =\r\nAL\r\nAX\r\nEAX\r\nMM0\r\nXMM0\r\n0\r\n000\r\nCL\r\nCX\r\nECX\r\nMM1\r\nXMM1\r\n1\r\n001\r\nDL\r\nDX\r\nEDX\r\nMM2\r\nXMM2\r\n2\r\n010\r\nBL\r\nBX\r\nEBX\r\nMM3\r\nXMM3\r\n3\r\n011\r\nAH\r\nSP\r\nESP\r\nMM4\r\nXMM4\r\n4\r\n100\r\nCH\r\nBP\r\nEBP\r\nMM5\r\nXMM5\r\n5\r\n101\r\nDH\r\nSI\r\nESI\r\nMM6\r\nXMM6\r\n6\r\n110\r\nBH\r\nDI\r\nEDI\r\nMM7\r\nXMM7\r\n7\r\n111\r\nEffective Address Mod R/M Value of ModR/M Byte (in Hexadecimal)\r\n[EAX]\r\n[ECX]\r\n[EDX]\r\n[EBX]\r\n[--][--]1\r\ndisp322\r\n[ESI]\r\n[EDI]\r\n00 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n00\r\n01\r\n02\r\n03\r\n04\r\n05\r\n06\r\n07\r\n08\r\n09\r\n0A\r\n0B\r\n0C\r\n0D\r\n0E\r\n0F\r\n10\r\n11\r\n12\r\n13\r\n14\r\n15\r\n16\r\n17\r\n18\r\n19\r\n1A\r\n1B\r\n1C\r\n1D\r\n1E\r\n1F\r\n20\r\n21\r\n22\r\n23\r\n24\r\n25\r\n26\r\n27\r\n28\r\n29\r\n2A\r\n2B\r\n2C\r\n2D\r\n2E\r\n2F\r\n30\r\n31\r\n32\r\n33\r\n34\r\n35\r\n36\r\n37\r\n38\r\n39\r\n3A\r\n3B\r\n3C\r\n3D\r\n3E\r\n3F\r\n[EAX]+disp83\r\n[ECX]+disp8\r\n[EDX]+disp8\r\n[EBX]+disp8\r\n[--][--]+disp8\r\n[EBP]+disp8\r\n[ESI]+disp8\r\n[EDI]+disp8\r\n01 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n40\r\n41\r\n42\r\n43\r\n44\r\n45\r\n46\r\n47\r\n48\r\n49\r\n4A\r\n4B\r\n4C\r\n4D\r\n4E\r\n4F\r\n50\r\n51\r\n52\r\n53\r\n54\r\n55\r\n56\r\n57\r\n58\r\n59\r\n5A\r\n5B\r\n5C\r\n5D\r\n5E\r\n5F\r\n60\r\n61\r\n62\r\n63\r\n64\r\n65\r\n66\r\n67\r\n68\r\n69\r\n6A\r\n6B\r\n6C\r\n6D\r\n6E\r\n6F\r\n70\r\n71\r\n72\r\n73\r\n74\r\n75\r\n76\r\n77\r\n78\r\n79\r\n7A\r\n7B\r\n7C\r\n7D\r\n7E\r\n7F\r\n[EAX]+disp32\r\n[ECX]+disp32\r\n[EDX]+disp32\r\n[EBX]+disp32\r\n[--][--]+disp32\r\n[EBP]+disp32\r\n[ESI]+disp32\r\n[EDI]+disp32\r\n10 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n80\r\n81\r\n82\r\n83\r\n84\r\n85\r\n86\r\n87\r\n88\r\n89\r\n8A\r\n8B\r\n8C\r\n8D\r\n8E\r\n8F\r\n90\r\n91\r\n92\r\n93\r\n94\r\n95\r\n96\r\n97\r\n98\r\n99\r\n9A\r\n9B\r\n9C\r\n9D\r\n9E\r\n9F\r\nA0\r\nA1\r\nA2\r\nA3\r\nA4\r\nA5\r\nA6\r\nA7\r\nA8\r\nA9\r\nAA\r\nAB\r\nAC\r\nAD\r\nAE\r\nAF\r\nB0\r\nB1\r\nB2\r\nB3\r\nB4\r\nB5\r\nB6\r\nB7\r\nB8\r\nB9\r\nBA\r\nBB\r\nBC\r\nBD\r\nBE\r\nBF\r\nEAX/AX/AL/MM0/XMM0\r\nECX/CX/CL/MM/XMM1\r\nEDX/DX/DL/MM2/XMM2\r\nEBX/BX/BL/MM3/XMM3\r\nESP/SP/AH/MM4/XMM4\r\nEBP/BP/CH/MM5/XMM5\r\nESI/SI/DH/MM6/XMM6\r\nEDI/DI/BH/MM7/XMM7\r\n11 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\nC0\r\nC1\r\nC2\r\nC3\r\nC4\r\nC5\r\nC6\r\nC7\r\nC8\r\nC9\r\nCA\r\nCB\r\nCC\r\nCD\r\nCE\r\nCF\r\nD0\r\nD1\r\nD2\r\nD3\r\nD4\r\nD5\r\nD6\r\nD7\r\nD8\r\nD9\r\nDA\r\nDB\r\nDC\r\nDD\r\nDE\r\nDF\r\nE0\r\nE1\r\nE2\r\nE3\r\nE4\r\nE5\r\nE6\r\nE7\r\nE8\r\nE9\r\nEA\r\nEB\r\nEC\r\nED\r\nEE\r\nEF\r\nF0\r\nF1\r\nF2\r\nF3\r\nF4\r\nF5\r\nF6\r\nF7\r\nF8\r\nF9\r\nFA\r\nFB\r\nFC\r\nFD\r\nFE\r\nFF",
     "SIB32Bit": "r32\r\n(In decimal) Base =\r\n(In binary) Base =\r\nEAX\r\n0\r\n000\r\nECX\r\n1\r\n001\r\nEDX\r\n2\r\n010\r\nEBX\r\n3\r\n011\r\nESP\r\n4\r\n100\r\n[*]\r\n5\r\n101\r\nESI\r\n6\r\n110\r\nEDI\r\n7\r\n111\r\nScaled Index SS Index Value of SIB Byte (in Hexadecimal)\r\n[EAX]\r\n[ECX]\r\n[EDX]\r\n[EBX]\r\nnone\r\n[EBP]\r\n[ESI]\r\n[EDI]\r\n00 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n00\r\n08\r\n10\r\n18\r\n20\r\n28\r\n30\r\n38\r\n01\r\n09\r\n11\r\n19\r\n21\r\n29\r\n31\r\n39\r\n02\r\n0A\r\n12\r\n1A\r\n22\r\n2A\r\n32\r\n3A\r\n03\r\n0B\r\n13\r\n1B\r\n23\r\n2B\r\n33\r\n3B\r\n04\r\n0C\r\n14\r\n1C\r\n24\r\n2C\r\n34\r\n3C\r\n05\r\n0D\r\n15\r\n1D\r\n25\r\n2D\r\n35\r\n3D\r\n06\r\n0E\r\n16\r\n1E\r\n26\r\n2E\r\n36\r\n3E\r\n07\r\n0F\r\n17\r\n1F\r\n27\r\n2F\r\n37\r\n3F\r\n[EAX*2]\r\n[ECX*2]\r\n[EDX*2]\r\n[EBX*2]\r\nnone\r\n[EBP*2]\r\n[ESI*2]\r\n[EDI*2]\r\n01 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n40\r\n48\r\n50\r\n58\r\n60\r\n68\r\n70\r\n78\r\n41\r\n49\r\n51\r\n59\r\n61\r\n69\r\n71\r\n79\r\n42\r\n4A\r\n52\r\n5A\r\n62\r\n6A\r\n72\r\n7A\r\n43\r\n4B\r\n53\r\n5B\r\n63\r\n6B\r\n73\r\n7B\r\n44\r\n4C\r\n54\r\n5C\r\n64\r\n6C\r\n74\r\n7C\r\n45\r\n4D\r\n55\r\n5D\r\n65\r\n6D\r\n75\r\n7D\r\n46\r\n4E\r\n56\r\n5E\r\n66\r\n6E\r\n76\r\n7E\r\n47\r\n4F\r\n57\r\n5F\r\n67\r\n6F\r\n77\r\n7F\r\n[EAX*4]\r\n[ECX*4]\r\n[EDX*4]\r\n[EBX*4]\r\nnone\r\n[EBP*4]\r\n[ESI*4]\r\n[EDI*4]\r\n10 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n80\r\n88\r\n90\r\n98\r\nA0\r\nA8\r\nB0\r\nB8\r\n81\r\n89\r\n91\r\n99\r\nA1\r\nA9\r\nB1\r\nB9\r\n82\r\n8A\r\n92\r\n9A\r\nA2\r\nAA\r\nB2\r\nBA\r\n83\r\n8B\r\n93\r\n9B\r\nA3\r\nAB\r\nB3\r\nBB\r\n84\r\n8C\r\n94\r\n9C\r\nA4\r\nAC\r\nB4\r\nBC\r\n85\r\n8D\r\n95\r\n9D\r\nA5\r\nAD\r\nB5\r\nBD\r\n86\r\n8E\r\n96\r\n9E\r\nA6\r\nAE\r\nB6\r\nBE\r\n87\r\n8F\r\n97\r\n9F\r\nA7\r\nAF\r\nB7\r\nBF\r\n[EAX*8]\r\n[ECX*8]\r\n[EDX*8]\r\n[EBX*8]\r\nnone\r\n[EBP*8]\r\n[ESI*8]\r\n[EDI*8]\r\n11 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\nC0\r\nC8\r\nD0\r\nD8\r\nE0\r\nE8\r\nF0\r\nF8\r\nC1\r\nC9\r\nD1\r\nD9\r\nE1\r\nE9\r\nF1\r\nF9\r\nC2\r\nCA\r\nD2\r\nDA\r\nE2\r\nEA\r\nF2\r\nFA\r\nC3\r\nCB\r\nD3\r\nDB\r\nE3\r\nEB\r\nF3\r\nFB\r\nC4\r\nCC\r\nD4\r\nDC\r\nE4\r\nEC\r\nF4\r\nFC\r\nC5\r\nCD\r\nD5\r\nDD\r\nE5\r\nED\r\nF5\r\nFD\r\nC6\r\nCE\r\nD6\r\nDE\r\nE6\r\nEE\r\nF6\r\nFE\r\nC7\r\nCF\r\nD7\r\nDF\r\nE7\r\nEF\r\nF7\r\nFF",
+    "EflagsCrossReference": "Table A-2.  EFLAGS Cross-Reference\r\nInstruction\tOF\tSF\tZF\tAF\tPF\tCF\tTF\tIF\tDF\tNT\tRF\r\nAAA\t—\t—\t—\tTM\t—\tM\t\t\t\t\t\r\nAAD\t—\tM\tM\t—\tM\t—\t\t\t\t\t\r\nAAM\t—\tM\tM\t—\tM\t—\t\t\t\t\t\r\nAAS\t—\t—\t—\tTM\t—\tM\t\t\t\t\t\r\nADC\tM\tM\tM\tM\tM\tTM\t\t\t\t\t\r\nADD\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nAND\t0\tM\tM\t—\tM\t0\t\t\t\t\t\r\nARPL\t\t\tM\t\t\t\t\t\t\t\t\r\nBOUND\t\t\t\t\t\t\t\t\t\t\t\r\nBSF/BSR\t—\t—\tM\t—\t—\t—\t\t\t\t\t\r\nBSWAP\t\t\t\t\t\t\t\t\t\t\t\r\nBT/BTS/BTR/BTC\t—\t—\t\t—\t—\tM\t\t\t\t\t\r\nCALL\t\t\t\t\t\t\t\t\t\t\t\r\nCBW\t\t\t\t\t\t\t\t\t\t\t\r\nCLC\t\t\t\t\t\t0\t\t\t\t\t\r\nCLD\t\t\t\t\t\t\t\t\t0\t\t\r\nCLI\t\t\t\t\t\t\t\t0\t\t\t\r\nCLTS\t\t\t\t\t\t\t\t\t\t\t\r\nCMC\t\t\t\t\t\tM\t\t\t\t\t\r\nCMOVcc\tT\tT\tT\t\tT\tT\t\t\t\t\t\r\nCMP\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nCMPS\tM\tM\tM\tM\tM\tM\t\t\tT\t\t\r\nCMPXCHG\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nCMPXCHG8B\t\t\tM\t\t\t\t\t\t\t\t\r\nCOMISD\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nCOMISS\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nCPUID\t\t\t\t\t\t\t\t\t\t\t\r\nCWD\t\t\t\t\t\t\t\t\t\t\t\r\nDAA\t—\tM\tM\tTM\tM\tTM\t\t\t\t\t\r\nDAS\t—\tM\tM\tTM\tM\tTM\t\t\t\t\t\r\nDEC\tM\tM\tM\tM\tM\t\t\t\t\t\t\r\nDIV\t—\t—\t—\t—\t—\t—\t\t\t\t\t\r\nENTER\t\t\t\t\t\t\t\t\t\t\t\r\nESC\t\t\t\t\t\t\t\t\t\t\t\r\nFCMOVcc\t\t\tT\t\tT\tT\t\t\t\t\t\r\nFCOMI, FCOMIP, FUCOMI, FUCOMIP\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nHLT\t\t\t\t\t\t\t\t\t\t\t\r\nIDIV\t—\t—\t—\t—\t—\t—\t\t\t\t\t\r\nIMUL\tM\t—\t—\t—\t—\tM\t\t\t\t\t\r\nIN\t\t\t\t\t\t\t\t\t\t\t\r\nINC\tM\tM\tM\tM\tM\t\t\t\t\t\t\r\nINS\t\t\t\t\t\t\t\t\tT\t\t\r\nINT\t\t\t\t\t\t\t0\t\t\t0\t\r\nINTO\tT\t\t\t\t\t\t0\t\t\t0\t\r\nINVD\t\t\t\t\t\t\t\t\t\t\t\r\nINVLPG\t\t\t\t\t\t\t\t\t\t\t\r\nUCOMISD\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nUCOMISS\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nIRET\tR\tR\tR\tR\tR\tR\tR\tR\tR\tT\t\r\nJcc\tT\tT\tT\t\tT\tT\t\t\t\t\t\r\nJCXZ\t\t\t\t\t\t\t\t\t\t\t\r\nJMP\t\t\t\t\t\t\t\t\t\t\t\r\nLAHF\t\t\t\t\t\t\t\t\t\t\t\r\nLAR\t\t\tM\t\t\t\t\t\t\t\t\r\nLDS/LES/LSS/LFS/LGS\t\t\t\t\t\t\t\t\t\t\t\r\nLEA\t\t\t\t\t\t\t\t\t\t\t\r\nLEAVE\t\t\t\t\t\t\t\t\t\t\t\r\nLGDT/LIDT/LLDT/LMSW\t\t\t\t\t\t\t\t\t\t\t\r\nLOCK\t\t\t\t\t\t\t\t\t\t\t\r\nLODS\t\t\t\t\t\t\t\t\tT\t\t\r\nLOOP\t\t\t\t\t\t\t\t\t\t\t\r\nLOOPE/LOOPNE\t\t\tT\t\t\t\t\t\t\t\t\r\nLSL\t\t\tM\t\t\t\t\t\t\t\t\r\nLTR\t\t\t\t\t\t\t\t\t\t\t\r\nMONITOR\t\t\t\t\t\t\t\t\t\t\t\r\nMWAIT\t\t\t\t\t\t\t\t\t\t\t\r\nMOV\t\t\t\t\t\t\t\t\t\t\t\r\nMOV control, debug, test\t—\t—\t—\t—\t—\t—\t\t\t\t\t\r\nMOVS\t\t\t\t\t\t\t\t\tT\t\t\r\nMOVSX/MOVZX\t\t\t\t\t\t\t\t\t\t\t\r\nMUL\tM\t—\t—\t—\t—\tM\t\t\t\t\t\r\nNEG\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nNOP\t\t\t\t\t\t\t\t\t\t\t\r\nNOT\t\t\t\t\t\t\t\t\t\t\t\r\nOR\t0\tM\tM\t—\tM\t0\t\t\t\t\t\r\nOUT\t\t\t\t\t\t\t\t\t\t\t\r\nOUTS\t\t\t\t\t\t\t\t\tT\t\t\r\nPOP/POPA\t\t\t\t\t\t\t\t\t\t\t\r\nPOPF\tR\tR\tR\tR\tR\tR\tR\tR\tR\tR\t\r\nPUSH/PUSHA/PUSHF\t\t\t\t\t\t\t\t\t\t\t\r\nRCL/RCR 1\tM\t\t\t\t\tTM\t\t\t\t\t\r\nRCL/RCR count\t—\t\t\t\t\tTM\t\t\t\t\t\r\nRDMSR\t\t\t\t\t\t\t\t\t\t\t\r\nRDPMC\t\t\t\t\t\t\t\t\t\t\t\r\nRDTSC\t\t\t\t\t\t\t\t\t\t\t\r\nREP/REPE/REPNE\t\t\t\t\t\t\t\t\t\t\t\r\nRET\t\t\t\t\t\t\t\t\t\t\t\r\nROL/ROR 1\tM\t\t\t\t\tM\t\t\t\t\t\r\nROL/ROR count\t—\t\t\t\t\tM\t\t\t\t\t\r\nRSM\tM\tM\tM\tM\tM\tM\tM\tM\tM\tM\tM\r\nSAHF\t\tR\tR\tR\tR\tR\t\t\t\t\t\r\nSAL/SAR/SHL/SHR 1\tM\tM\tM\t—\tM\tM\t\t\t\t\t\r\nSAL/SAR/SHL/SHR count\t—\tM\tM\t—\tM\tM\t\t\t\t\t\r\nSBB\tM\tM\tM\tM\tM\tTM\t\t\t\t\t\r\nSCAS\tM\tM\tM\tM\tM\tM\t\t\tT\t\t\r\nSETcc\tT\tT\tT\t\tT\tT\t\t\t\t\t\r\nSGDT/SIDT/SLDT/SMSW\t\t\t\t\t\t\t\t\t\t\t\r\nSHLD/SHRD\t—\tM\tM\t—\tM\tM\t\t\t\t\t\r\nSTC\t\t\t\t\t\t1\t\t\t\t\t\r\nSTD\t\t\t\t\t\t\t\t\t1\t\t\r\nSTI\t\t\t\t\t\t\t\t1\t\t\t\r\nSTOS\t\t\t\t\t\t\t\t\tT\t\t\r\nSTR\t\t\t\t\t\t\t\t\t\t\t\r\nSUB\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nTEST\t0\tM\tM\t—\tM\t0\t\t\t\t\t\r\nUD\t\t\t\t\t\t\t\t\t\t\t\r\nVERR/VERRW\t\t\tM\t\t\t\t\t\t\t\t\r\nWAIT\t\t\t\t\t\t\t\t\t\t\t\r\nWBINVD\t\t\t\t\t\t\t\t\t\t\t\r\nWRMSR\t\t\t\t\t\t\t\t\t\t\t\r\nXADD\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nXCHG\t\t\t\t\t\t\t\t\t\t\t\r\nXLAT \t\t\t\t\t\t\t\t\t\t\t\r\nXOR\t0\tM\tM\t—\tM\t0\t\t\t\t\t",
     "VexRegisterNameMapping": "VEX.vvvv Dest Register Valid in Legacy/Compatibility 32-bit modes?\r\n    1111B XMM0/YMM0 Valid\r\n    1110B XMM1/YMM1 Valid\r\n    1101B XMM2/YMM2 Valid\r\n    1100B XMM3/YMM3 Valid\r\n    1011B XMM4/YMM4 Valid\r\n    1010B XMM5/YMM5 Valid\r\n    1001B XMM6/YMM6 Valid\r\n    1000B XMM7/YMM7 Valid\r\n    0111B XMM8/YMM8 Invalid\r\n    0110B XMM9/YMM9 Invalid\r\n    0101B XMM10/YMM10 Invalid\r\n    0100B XMM11/YMM11 Invalid\r\n    0011B XMM12/YMM12 Invalid\r\n    0010B XMM13/YMM13 Invalid\r\n    0001B XMM14/YMM14 Invalid\r\n    0000B XMM15/YMM15 Invalid",
-    "Vsib32Bit": "r32\r\n(In decimal) Base =\r\n(In binary) Base =\r\nEAX/\r\nR8L\r\n0\r\n000\r\nECX/\r\nR9L\r\n1\r\n001\r\nEDX/\r\nR10L\r\n2\r\n010\r\nEBX/\r\nR11L\r\n3\r\n011\r\nESP/\r\nR12L\r\n4\r\n100\r\nEBP/\r\nR13L1\r\n5\r\n101\r\nESI/\r\nR14L\r\n6\r\n110\r\nEDI/\r\nR15L\r\n7\r\n111\r\nScaled Index SS Index Value of SIB Byte (in Hexadecimal)\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*1 00 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n00\r\n08\r\n10\r\n18\r\n20\r\n28\r\n30\r\n38\r\n01\r\n09\r\n11\r\n19\r\n21\r\n29\r\n31\r\n39\r\n02\r\n0A\r\n12\r\n1A\r\n22\r\n2A\r\n32\r\n3A\r\n03\r\n0B\r\n13\r\n1B\r\n23\r\n2B\r\n33\r\n3B\r\n04\r\n0C\r\n14\r\n1C\r\n24\r\n2C\r\n34\r\n3C\r\n05\r\n0D\r\n15\r\n1D\r\n25\r\n2D\r\n35\r\n3D\r\n06\r\n0E\r\n16\r\n1E\r\n26\r\n2E\r\n36\r\n3E\r\n07\r\n0F\r\n17\r\n1F\r\n27\r\n2F\r\n37\r\n3F\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*2 01 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n40\r\n48\r\n50\r\n58\r\n60\r\n68\r\n70\r\n78\r\n41\r\n49\r\n51\r\n59\r\n61\r\n69\r\n71\r\n79\r\n42\r\n4A\r\n52\r\n5A\r\n62\r\n6A\r\n72\r\n7A\r\n43\r\n4B\r\n53\r\n5B\r\n63\r\n6B\r\n73\r\n7B\r\n44\r\n4C\r\n54\r\n5C\r\n64\r\n6C\r\n74\r\n7C\r\n45\r\n4D\r\n55\r\n5D\r\n65\r\n6D\r\n75\r\n7D\r\n46\r\n4E\r\n56\r\n5E\r\n66\r\n6E\r\n76\r\n7E\r\n47\r\n4F\r\n57\r\n5F\r\n67\r\n6F\r\n77\r\n7F\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*4 10 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n80\r\n88\r\n90\r\n98\r\nA0\r\nA8\r\nB0\r\nB8\r\n81\r\n89\r\n91\r\n89\r\nA1\r\nA9\r\nB1\r\nB9\r\n82\r\n8A\r\n92\r\n9A\r\nA2\r\nAA\r\nB2\r\nBA\r\n83\r\n8B\r\n93\r\n9B\r\nA3\r\nAB\r\nB3\r\nBB\r\n84\r\n8C\r\n94\r\n9C\r\nA4\r\nAC\r\nB4\r\nBC\r\n85\r\n8D\r\n95\r\n9D\r\nA5\r\nAD\r\nB5\r\nBD\r\n86\r\n8E\r\n96\r\n9E\r\nA6\r\nAE\r\nB6\r\nBE\r\n87\r\n8F\r\n97\r\n9F\r\nA7\r\nAF\r\nB7\r\nBF\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*8 11 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\nC0\r\nC8\r\nD0\r\nD8\r\nE0\r\nE8\r\nF0\r\nF8\r\nC1\r\nC9\r\nD1\r\nD9\r\nE1\r\nE9\r\nF1\r\nF9\r\nC2\r\nCA\r\nD2\r\nDA\r\nE2\r\nEA\r\nF2\r\nFA\r\nC3\r\nCB\r\nD3\r\nDB\r\nE3\r\nEB\r\nF3\r\nFB\r\nC4\r\nCC\r\nD4\r\nDC\r\nE4\r\nEC\r\nF4\r\nFC\r\nC5\r\nCD\r\nD5\r\nDD\r\nE5\r\nED\r\nF5\r\nFD\r\nC6\r\nCE\r\nD6\r\nDE\r\nE6\r\nEE\r\nF6\r\nFE\r\nC7\r\nCF\r\nD7\r\nDF\r\nE7\r\nEF\r\nF7\r\nFF",
-    "EflagsCrossReference": "Table A-2.  EFLAGS Cross-Reference\r\nInstruction\tOF\tSF\tZF\tAF\tPF\tCF\tTF\tIF\tDF\tNT\tRF\r\nAAA\t—\t—\t—\tTM\t—\tM\t\t\t\t\t\r\nAAD\t—\tM\tM\t—\tM\t—\t\t\t\t\t\r\nAAM\t—\tM\tM\t—\tM\t—\t\t\t\t\t\r\nAAS\t—\t—\t—\tTM\t—\tM\t\t\t\t\t\r\nADC\tM\tM\tM\tM\tM\tTM\t\t\t\t\t\r\nADD\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nAND\t0\tM\tM\t—\tM\t0\t\t\t\t\t\r\nARPL\t\t\tM\t\t\t\t\t\t\t\t\r\nBOUND\t\t\t\t\t\t\t\t\t\t\t\r\nBSF/BSR\t—\t—\tM\t—\t—\t—\t\t\t\t\t\r\nBSWAP\t\t\t\t\t\t\t\t\t\t\t\r\nBT/BTS/BTR/BTC\t—\t—\t\t—\t—\tM\t\t\t\t\t\r\nCALL\t\t\t\t\t\t\t\t\t\t\t\r\nCBW\t\t\t\t\t\t\t\t\t\t\t\r\nCLC\t\t\t\t\t\t0\t\t\t\t\t\r\nCLD\t\t\t\t\t\t\t\t\t0\t\t\r\nCLI\t\t\t\t\t\t\t\t0\t\t\t\r\nCLTS\t\t\t\t\t\t\t\t\t\t\t\r\nCMC\t\t\t\t\t\tM\t\t\t\t\t\r\nCMOVcc\tT\tT\tT\t\tT\tT\t\t\t\t\t\r\nCMP\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nCMPS\tM\tM\tM\tM\tM\tM\t\t\tT\t\t\r\nCMPXCHG\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nCMPXCHG8B\t\t\tM\t\t\t\t\t\t\t\t\r\nCOMISD\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nCOMISS\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nCPUID\t\t\t\t\t\t\t\t\t\t\t\r\nCWD\t\t\t\t\t\t\t\t\t\t\t\r\nDAA\t—\tM\tM\tTM\tM\tTM\t\t\t\t\t\r\nDAS\t—\tM\tM\tTM\tM\tTM\t\t\t\t\t\r\nDEC\tM\tM\tM\tM\tM\t\t\t\t\t\t\r\nDIV\t—\t—\t—\t—\t—\t—\t\t\t\t\t\r\nENTER\t\t\t\t\t\t\t\t\t\t\t\r\nESC\t\t\t\t\t\t\t\t\t\t\t\r\nFCMOVcc\t\t\tT\t\tT\tT\t\t\t\t\t\r\nFCOMI, FCOMIP, FUCOMI, FUCOMIP\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nHLT\t\t\t\t\t\t\t\t\t\t\t\r\nIDIV\t—\t—\t—\t—\t—\t—\t\t\t\t\t\r\nIMUL\tM\t—\t—\t—\t—\tM\t\t\t\t\t\r\nIN\t\t\t\t\t\t\t\t\t\t\t\r\nINC\tM\tM\tM\tM\tM\t\t\t\t\t\t\r\nINS\t\t\t\t\t\t\t\t\tT\t\t\r\nINT\t\t\t\t\t\t\t0\t\t\t0\t\r\nINTO\tT\t\t\t\t\t\t0\t\t\t0\t\r\nINVD\t\t\t\t\t\t\t\t\t\t\t\r\nINVLPG\t\t\t\t\t\t\t\t\t\t\t\r\nUCOMISD\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nUCOMISS\t0\t0\tM\t0\tM\tM\t\t\t\t\t\r\nIRET\tR\tR\tR\tR\tR\tR\tR\tR\tR\tT\t\r\nJcc\tT\tT\tT\t\tT\tT\t\t\t\t\t\r\nJCXZ\t\t\t\t\t\t\t\t\t\t\t\r\nJMP\t\t\t\t\t\t\t\t\t\t\t\r\nLAHF\t\t\t\t\t\t\t\t\t\t\t\r\nLAR\t\t\tM\t\t\t\t\t\t\t\t\r\nLDS/LES/LSS/LFS/LGS\t\t\t\t\t\t\t\t\t\t\t\r\nLEA\t\t\t\t\t\t\t\t\t\t\t\r\nLEAVE\t\t\t\t\t\t\t\t\t\t\t\r\nLGDT/LIDT/LLDT/LMSW\t\t\t\t\t\t\t\t\t\t\t\r\nLOCK\t\t\t\t\t\t\t\t\t\t\t\r\nLODS\t\t\t\t\t\t\t\t\tT\t\t\r\nLOOP\t\t\t\t\t\t\t\t\t\t\t\r\nLOOPE/LOOPNE\t\t\tT\t\t\t\t\t\t\t\t\r\nLSL\t\t\tM\t\t\t\t\t\t\t\t\r\nLTR\t\t\t\t\t\t\t\t\t\t\t\r\nMONITOR\t\t\t\t\t\t\t\t\t\t\t\r\nMWAIT\t\t\t\t\t\t\t\t\t\t\t\r\nMOV\t\t\t\t\t\t\t\t\t\t\t\r\nMOV control, debug, test\t—\t—\t—\t—\t—\t—\t\t\t\t\t\r\nMOVS\t\t\t\t\t\t\t\t\tT\t\t\r\nMOVSX/MOVZX\t\t\t\t\t\t\t\t\t\t\t\r\nMUL\tM\t—\t—\t—\t—\tM\t\t\t\t\t\r\nNEG\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nNOP\t\t\t\t\t\t\t\t\t\t\t\r\nNOT\t\t\t\t\t\t\t\t\t\t\t\r\nOR\t0\tM\tM\t—\tM\t0\t\t\t\t\t\r\nOUT\t\t\t\t\t\t\t\t\t\t\t\r\nOUTS\t\t\t\t\t\t\t\t\tT\t\t\r\nPOP/POPA\t\t\t\t\t\t\t\t\t\t\t\r\nPOPF\tR\tR\tR\tR\tR\tR\tR\tR\tR\tR\t\r\nPUSH/PUSHA/PUSHF\t\t\t\t\t\t\t\t\t\t\t\r\nRCL/RCR 1\tM\t\t\t\t\tTM\t\t\t\t\t\r\nRCL/RCR count\t—\t\t\t\t\tTM\t\t\t\t\t\r\nRDMSR\t\t\t\t\t\t\t\t\t\t\t\r\nRDPMC\t\t\t\t\t\t\t\t\t\t\t\r\nRDTSC\t\t\t\t\t\t\t\t\t\t\t\r\nREP/REPE/REPNE\t\t\t\t\t\t\t\t\t\t\t\r\nRET\t\t\t\t\t\t\t\t\t\t\t\r\nROL/ROR 1\tM\t\t\t\t\tM\t\t\t\t\t\r\nROL/ROR count\t—\t\t\t\t\tM\t\t\t\t\t\r\nRSM\tM\tM\tM\tM\tM\tM\tM\tM\tM\tM\tM\r\nSAHF\t\tR\tR\tR\tR\tR\t\t\t\t\t\r\nSAL/SAR/SHL/SHR 1\tM\tM\tM\t—\tM\tM\t\t\t\t\t\r\nSAL/SAR/SHL/SHR count\t—\tM\tM\t—\tM\tM\t\t\t\t\t\r\nSBB\tM\tM\tM\tM\tM\tTM\t\t\t\t\t\r\nSCAS\tM\tM\tM\tM\tM\tM\t\t\tT\t\t\r\nSETcc\tT\tT\tT\t\tT\tT\t\t\t\t\t\r\nSGDT/SIDT/SLDT/SMSW\t\t\t\t\t\t\t\t\t\t\t\r\nSHLD/SHRD\t—\tM\tM\t—\tM\tM\t\t\t\t\t\r\nSTC\t\t\t\t\t\t1\t\t\t\t\t\r\nSTD\t\t\t\t\t\t\t\t\t1\t\t\r\nSTI\t\t\t\t\t\t\t\t1\t\t\t\r\nSTOS\t\t\t\t\t\t\t\t\tT\t\t\r\nSTR\t\t\t\t\t\t\t\t\t\t\t\r\nSUB\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nTEST\t0\tM\tM\t—\tM\t0\t\t\t\t\t\r\nUD\t\t\t\t\t\t\t\t\t\t\t\r\nVERR/VERRW\t\t\tM\t\t\t\t\t\t\t\t\r\nWAIT\t\t\t\t\t\t\t\t\t\t\t\r\nWBINVD\t\t\t\t\t\t\t\t\t\t\t\r\nWRMSR\t\t\t\t\t\t\t\t\t\t\t\r\nXADD\tM\tM\tM\tM\tM\tM\t\t\t\t\t\r\nXCHG\t\t\t\t\t\t\t\t\t\t\t\r\nXLAT \t\t\t\t\t\t\t\t\t\t\t\r\nXOR\t0\tM\tM\t—\tM\t0\t\t\t\t\t"
+    "Vsib32Bit": "r32\r\n(In decimal) Base =\r\n(In binary) Base =\r\nEAX/\r\nR8L\r\n0\r\n000\r\nECX/\r\nR9L\r\n1\r\n001\r\nEDX/\r\nR10L\r\n2\r\n010\r\nEBX/\r\nR11L\r\n3\r\n011\r\nESP/\r\nR12L\r\n4\r\n100\r\nEBP/\r\nR13L1\r\n5\r\n101\r\nESI/\r\nR14L\r\n6\r\n110\r\nEDI/\r\nR15L\r\n7\r\n111\r\nScaled Index SS Index Value of SIB Byte (in Hexadecimal)\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*1 00 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n00\r\n08\r\n10\r\n18\r\n20\r\n28\r\n30\r\n38\r\n01\r\n09\r\n11\r\n19\r\n21\r\n29\r\n31\r\n39\r\n02\r\n0A\r\n12\r\n1A\r\n22\r\n2A\r\n32\r\n3A\r\n03\r\n0B\r\n13\r\n1B\r\n23\r\n2B\r\n33\r\n3B\r\n04\r\n0C\r\n14\r\n1C\r\n24\r\n2C\r\n34\r\n3C\r\n05\r\n0D\r\n15\r\n1D\r\n25\r\n2D\r\n35\r\n3D\r\n06\r\n0E\r\n16\r\n1E\r\n26\r\n2E\r\n36\r\n3E\r\n07\r\n0F\r\n17\r\n1F\r\n27\r\n2F\r\n37\r\n3F\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*2 01 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n40\r\n48\r\n50\r\n58\r\n60\r\n68\r\n70\r\n78\r\n41\r\n49\r\n51\r\n59\r\n61\r\n69\r\n71\r\n79\r\n42\r\n4A\r\n52\r\n5A\r\n62\r\n6A\r\n72\r\n7A\r\n43\r\n4B\r\n53\r\n5B\r\n63\r\n6B\r\n73\r\n7B\r\n44\r\n4C\r\n54\r\n5C\r\n64\r\n6C\r\n74\r\n7C\r\n45\r\n4D\r\n55\r\n5D\r\n65\r\n6D\r\n75\r\n7D\r\n46\r\n4E\r\n56\r\n5E\r\n66\r\n6E\r\n76\r\n7E\r\n47\r\n4F\r\n57\r\n5F\r\n67\r\n6F\r\n77\r\n7F\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*4 10 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\n80\r\n88\r\n90\r\n98\r\nA0\r\nA8\r\nB0\r\nB8\r\n81\r\n89\r\n91\r\n89\r\nA1\r\nA9\r\nB1\r\nB9\r\n82\r\n8A\r\n92\r\n9A\r\nA2\r\nAA\r\nB2\r\nBA\r\n83\r\n8B\r\n93\r\n9B\r\nA3\r\nAB\r\nB3\r\nBB\r\n84\r\n8C\r\n94\r\n9C\r\nA4\r\nAC\r\nB4\r\nBC\r\n85\r\n8D\r\n95\r\n9D\r\nA5\r\nAD\r\nB5\r\nBD\r\n86\r\n8E\r\n96\r\n9E\r\nA6\r\nAE\r\nB6\r\nBE\r\n87\r\n8F\r\n97\r\n9F\r\nA7\r\nAF\r\nB7\r\nBF\r\nVR0/VR8\r\nVR1/VR9\r\nVR2/VR10\r\nVR3/VR11\r\nVR4/VR12\r\nVR5/VR13\r\nVR6/VR14\r\nVR7/VR15\r\n*8 11 000\r\n001\r\n010\r\n011\r\n100\r\n101\r\n110\r\n111\r\nC0\r\nC8\r\nD0\r\nD8\r\nE0\r\nE8\r\nF0\r\nF8\r\nC1\r\nC9\r\nD1\r\nD9\r\nE1\r\nE9\r\nF1\r\nF9\r\nC2\r\nCA\r\nD2\r\nDA\r\nE2\r\nEA\r\nF2\r\nFA\r\nC3\r\nCB\r\nD3\r\nDB\r\nE3\r\nEB\r\nF3\r\nFB\r\nC4\r\nCC\r\nD4\r\nDC\r\nE4\r\nEC\r\nF4\r\nFC\r\nC5\r\nCD\r\nD5\r\nDD\r\nE5\r\nED\r\nF5\r\nFD\r\nC6\r\nCE\r\nD6\r\nDE\r\nE6\r\nEE\r\nF6\r\nFE\r\nC7\r\nCF\r\nD7\r\nDF\r\nE7\r\nEF\r\nF7\r\nFF"
   }
 }

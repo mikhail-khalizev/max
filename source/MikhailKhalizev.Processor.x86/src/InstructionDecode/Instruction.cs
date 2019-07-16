@@ -8,14 +8,29 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
     {
         public ArraySegment<byte> Source { get; }
 
+        /// <summary>
+        /// Режим процессора: 16, 32, 64.
+        /// </summary>
         public int Mode { get; }
+        
+        /// <summary>
+        /// Эффективный размер адреса (с учетом префикса).
+        /// </summary>
+        public int EffectiveAddressSize { get; private set; }
+
+        /// <summary>
+        /// Эффективный размер операнда (с учетом префикса).
+        /// </summary>
+        public int EffectiveOperandSize { get; private set; }
 
 
         public bool IsInvalid { get; }
 
         public string Reason { get; }
 
-        // instruction-size limit - 15 bytes
+        /// <summary>
+        /// Длина инструкции (до 15 байт)
+        /// </summary>
         public int Length { get; private set; }
 
 
@@ -33,10 +48,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         public bool RexX { get; private set; }
         public bool RexB { get; private set; }
 
-
-        public int EffectiveAddressSize { get; private set; }
-
-        public int EffectiveOperandSize { get; private set; }
 
 
         //// max - 3 bytes.
@@ -76,7 +87,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             var allGroups = Prefixes.Select(Meta.GetPrefixGroup).ToList();
             var distinctGroup = allGroups.Distinct().ToList();
             if (allGroups.Count != distinctGroup.Count)
-                return "Prefix group repeated";
+                return $"Prefix group repeated: ({string.Join(", ", allGroups)}).";
 
             // Determine Rex prefix.
             if (Mode == 64 && (left[0] | 0x0f) == 0b0100_1111)
@@ -113,8 +124,8 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
                     {
                         EffectiveOperandSize = 64;
 
-                        // For non-byte operations: if a 66H prefix is used with prefix (REX.W = 1), 66H is ignored.
-                        HasPrefixOperandSizeOverride = false;
+                        // NOTE. For non-byte operations: if a 66H prefix is used with prefix (REX.W = 1), 66H is ignored.
+                        // HasPrefixOperandSizeOverride = false;
                     }
                     else
                         EffectiveOperandSize = HasPrefixOperandSizeOverride ? 16 : 32;
@@ -129,29 +140,33 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
     public class ModRM
     {
-        public byte Source { get; }
+        public int RM { get; }
+        public int RegOpcode { get; }
+        public int Mod { get; }
+        public int Source { get; }
 
-        public int RM => BinaryHelper.GetInt(Source, 3, 0);
-        public int RegOpcode => BinaryHelper.GetInt(Source, 3, 3);
-        public int Mod => BinaryHelper.GetInt(Source, 2, 6);
-
-        public ModRM(byte source)
+        public ModRM(int source)
         {
             Source = source;
+            RM = source & 0b0111;
+            RegOpcode = (source >> 3) & 0b0111;
+            Mod = source >> 6;
         }
     }
 
     public class Sib
     {
-        public byte Source { get; }
+        public int Base { get; }
+        public int Index { get; }
+        public int Scale { get; }
+        public int Source { get; }
 
-        public int Base => BinaryHelper.GetInt(Source, 3, 0);
-        public int Index => BinaryHelper.GetInt(Source, 3, 3);
-        public int Scale => BinaryHelper.GetInt(Source, 2, 6);
-
-        public Sib(byte source)
+        public Sib(int source)
         {
             Source = source;
+            Base = source & 0b0111;
+            Index = (source >> 3) & 0b0111;
+            Scale = source >> 6;
         }
     }
 }

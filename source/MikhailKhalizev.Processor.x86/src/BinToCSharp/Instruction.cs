@@ -170,14 +170,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 os.Append($"rep{adr_mode_str} ");
 
             os.Append(udis86.ud_lookup_mnemonic(Mnemonic));
-            if (new[] {
-                    ud_mnemonic_code.UD_Iint,
-                    ud_mnemonic_code.UD_Iand,
-                    ud_mnemonic_code.UD_Ior,
-                    ud_mnemonic_code.UD_Ixor,
-                    ud_mnemonic_code.UD_Istd,
-                    ud_mnemonic_code.UD_Inot}.Contains(Mnemonic))
-                os.Append('_'); // Чтоб не конфликтовать с различными ключевыми словами C++ и студии разработки.
+            if (Mnemonic == ud_mnemonic_code.UD_Iint)
+                os.Append("_n");
 
             if (flags.HasFlag(InstrFlags.UseOprSizeInside))
             {
