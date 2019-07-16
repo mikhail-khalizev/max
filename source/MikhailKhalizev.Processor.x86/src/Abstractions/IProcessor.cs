@@ -2210,7 +2210,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Load Effective Address.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LEA.html</remarks>
-        void lea(Value dst, MemoryValue src);
+        void lea(Value dst, Value src);
 
         /// <summary>
         /// High Level Procedure Exit.

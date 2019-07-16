@@ -2333,7 +2333,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void lea(Value dst, MemoryValue src)
+        public void lea(Value dst, Value src)
         {
             Implementation.lea(dst, src);
         }

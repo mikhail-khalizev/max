@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
     public class MemoryValueImpl : MemoryValue
     {
         public MemoryAccessImpl MemoryAccess { get; }
-        public SegmentRegister Segment { get; }
-        public Address Address { get; }
+        public override SegmentRegister Segment { get; }
+        public override Address Address { get; }
 
         /// <inheritdoc />
         public override int Bits => MemoryAccess.DataBits;
@@ -34,16 +34,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             {
                 var bytes = BitConverter.GetBytes(value);
                 bytes.AsSpan().Slice(0, Bits / 8).CopyTo(MemorySpace);
-            }
-        }
-
-        /// <inheritdoc />
-        public override Address EffectiveAddress
-        {
-            get
-            {
-                var address = Segment + Address;
-                return MemoryAccess.Memory.mem_pg_raw_get_phys_addr(address);
             }
         }
 

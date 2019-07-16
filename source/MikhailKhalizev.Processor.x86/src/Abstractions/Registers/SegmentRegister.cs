@@ -87,7 +87,7 @@
 
         protected abstract void LoadDescriptor();
 
-        // todo rename to CheckLimit
+        // todo rename to CheckLimit, CheckAccess
         /// <summary>
         /// Return true if check fail.
         /// </summary>

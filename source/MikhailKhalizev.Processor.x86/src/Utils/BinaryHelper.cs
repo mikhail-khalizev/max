@@ -20,6 +20,7 @@ namespace MikhailKhalizev.Utils
 
         public static ulong Mask(int bits, int offset) => Mask(bits) << offset;
 
+        // TODO rename to SignBitAndHigher
         public static ulong HighBitsMask(int bit) => ~(Mask(bit) >> 1);
 
 

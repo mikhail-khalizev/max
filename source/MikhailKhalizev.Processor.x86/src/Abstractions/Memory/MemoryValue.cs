@@ -1,10 +1,12 @@
-﻿using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+﻿using JetBrains.Annotations;
+using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
 {
     public abstract class MemoryValue : ValueBase
     {
-        public abstract Address EffectiveAddress { get; }
+        public abstract SegmentRegister Segment { get; }
+        public abstract Address Address { get; }
 
         public static implicit operator MemoryValue(Value value) => new MemoryValueFromValue(value);
         public static implicit operator Value(MemoryValue value) => new ValueFromAnyValue(value);

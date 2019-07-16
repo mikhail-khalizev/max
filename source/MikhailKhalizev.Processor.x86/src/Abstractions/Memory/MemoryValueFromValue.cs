@@ -1,4 +1,5 @@
 using System;
+using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
 {
@@ -15,13 +16,16 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
             get => Value.UInt64;
             set => Value.UInt64 = value;
         }
-
-        /// <inheritdoc />
-        public override Address EffectiveAddress => throw new NotSupportedException();
         
         public MemoryValueFromValue(ValueBase value)
         {
             Value = value;
         }
+
+        /// <inheritdoc />
+        public override SegmentRegister Segment => throw new NotSupportedException();
+
+        /// <inheritdoc />
+        public override Address Address => throw new NotSupportedException();
     }
 }

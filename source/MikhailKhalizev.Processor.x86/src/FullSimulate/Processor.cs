@@ -840,9 +840,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 case 32:
                     popd(flg);
                     break;
-                case 64:
-                    popq(flg);
-                    break;
                 case 16:
                     popw(flg);
                     no_mod_mask = 0xffff0000;
@@ -1767,7 +1764,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cbw()
         {
-            movsx(ax, al);
+            ah = al.IsNegative ? -1 : 0;
         }
 
         /// <inheritdoc />
@@ -3451,9 +3448,12 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lea(Value dst, MemoryValue src)
+        public void lea(Value dst, Value src)
         {
-            dst.UInt64 = src.EffectiveAddress;
+            // MemoryValue src
+            // dst.UInt64 = src.Address;
+
+            dst.UInt64 = src.UInt64;
         }
 
         /// <inheritdoc />
@@ -3829,13 +3829,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movsw_a16(SegmentRegister segment = null)
+        public void movsb_a16()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movsb_a16()
+        public void movsw_a16(SegmentRegister segment = null)
         {
             throw new NotImplementedException();
         }
@@ -4528,6 +4528,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public ushort popw(Value d = null)
         {
             ushort value;
@@ -4539,7 +4540,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             else
             {
                 sp += 2;
-                value = memw_a16[ss, esp - 2].UInt16;
+                value = memw_a16[ss, sp - 2].UInt16;
             }
 
             if (d != null)
@@ -4548,6 +4549,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             return value;
         }
 
+        /// <inheritdoc />
         public uint popd(Value d = null)
         {
             uint value;
@@ -4566,11 +4568,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 d.UInt64 = value;
 
             return value;
-        }
-
-        public ulong popq(Value d)
-        {
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -4860,7 +4857,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         {
             // todo Join popw, popd in one method push ?
             // todo Join pushw, pushd in one method push ?
-
+            
             if (ss.db)
             {
                 esp -= 2;
@@ -5113,27 +5110,31 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         {
             throw new NotImplementedException();
         }
-        
+
+        /// <inheritdoc />
         public void retw(int allocSize = 0)
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public void retd()
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public void retfw()
         {
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         public void retfd()
         {
             throw new NotImplementedException();
         }
-        
+
         /// <inheritdoc />
         public void rol(Value dst, int count)
         {
@@ -5414,8 +5415,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             if (count != 0 && count <= dst.Bits)
             {
                 eflags.cf = dst.IsBitSet(count - 1);
-                var total = ((BigInteger) src.UInt64 << dst.Bits) + dst.UInt64;
-                dst.UInt64 = (ulong) (total >> count);
+                var total = ((BigInteger)src.UInt64 << dst.Bits) + dst.UInt64;
+                dst.UInt64 = (ulong)(total >> count);
             }
         }
 
@@ -5552,7 +5553,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void sub(Value dst, Value val)
+        public void sub(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
@@ -7572,7 +7573,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         {
             throw new NotImplementedException();
         }
-        
+
         /// <inheritdoc />
         public void xor(Value dst, Value src)
         {

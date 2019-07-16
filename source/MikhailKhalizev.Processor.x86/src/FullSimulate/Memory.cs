@@ -89,7 +89,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 return mem_phys_raw(address, minSize);
 
             var physAddresses = new Address[2]; // { current, current + page }
-            physAddresses[0] = mem_pg_raw_get_phys_addr(address);
+            physAddresses[0] = GetRamAddress(address);
 
             Address firstPageBase = physAddresses[0] & ~0xfffu;
             Address lastPageBase = (physAddresses[0] + (minSize == 0 ? 0 : minSize - 1)) & ~0xfffu;
@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             // Страницы идут последовательно.
 
-            physAddresses[1] = mem_pg_raw_get_phys_addr(address + 0x1000);
+            physAddresses[1] = GetRamAddress(address + 0x1000);
 
             if (physAddresses[0] + 0x1000 == physAddresses[1])
                 return mem_phys_raw(physAddresses[0], minSize)
@@ -190,7 +190,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <summary>
         /// @note На самом деле это внутренняя функция. Она сделана "публичной" в целях отладки. */
         /// </summary>
-        public Address mem_pg_raw_get_phys_addr(Address address)
+        public Address GetRamAddress(Address address)
         {
             if (!Processor.cr0.pg)
                 return address;
