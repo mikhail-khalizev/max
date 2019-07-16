@@ -185,7 +185,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             }
         }
 
-        [Fact]
+        [Fact(Skip = "For developer")]
         public void FileGenerator()
         {
             var str = File.ReadAllText(decodeJsonFileName);
