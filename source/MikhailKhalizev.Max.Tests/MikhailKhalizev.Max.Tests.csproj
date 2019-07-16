@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\Utils\" />
+    <Folder Include="src\" />
   </ItemGroup>
 
 </Project>
