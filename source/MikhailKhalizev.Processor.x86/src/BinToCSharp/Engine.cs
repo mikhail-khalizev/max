@@ -488,17 +488,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 }
 
 
-                Console.WriteLine($"Сохранение функции '{methodBegin}' в файл.");
+                Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
                 
                 var output = new StringBuilder();
-                write_cxx_func_to_stream(output, detectedMethod);
+                WriteCSharpMethodToStringBuilder(output, detectedMethod);
                 
                 var ns = AddressNameConverter.GetNamespace(methodBegin);
                 var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
 
                 var filePath = path;
 
-                filePath += $"/z-{methodBegin.ToFullString()}";
+                filePath += $"/z-{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4).SetGroupSeparator("-"))}";
 
                 if (ns != null)
                     filePath += $"-{ns}";
@@ -515,7 +515,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             MethodInfos.Save();
         }
 
-        private void write_cxx_func_to_stream(StringBuilder output, DetectedMethod detectedMethod)
+        private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod)
         {
             var methodAddress = detectedMethod.Begin;
             var addr_func_end = detectedMethod.End;
@@ -525,7 +525,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             AddressNameConverter.KnownDefinitions.TryGetValue(methodAddress, out var methodName);
             if (methodName == null)
-                methodName = $"Method_{methodAddress}";
+                methodName = $"Method_{methodAddress.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4))}";
             
             var ns = AddressNameConverter.GetNamespace(methodAddress);
             if (ns != null)

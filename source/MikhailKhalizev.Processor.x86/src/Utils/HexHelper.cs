@@ -134,7 +134,7 @@ namespace MikhailKhalizev.Utils
                         var num = i + offset;
 
                         if (i != chars.Length - 1 && num % options.GroupSize == 0)
-                            return $"{c}_";
+                            return $"{c}" + options.GroupSeparator;
                         return $"{c}";
                     }));
         }
@@ -160,6 +160,7 @@ namespace MikhailKhalizev.Utils
             public static Options Default { get; } = new Options();
 
             public int GroupSize { get; private set; }
+            public string GroupSeparator { get; private set; } = "_";
             public bool TrimZero { get; private set; }
             public bool ChecksumEnable { get; private set; }
             public string ChecksumPurpose { get; private set; }
@@ -176,6 +177,13 @@ namespace MikhailKhalizev.Utils
                 return o;
             }
 
+            public Options SetGroupSeparator(string groupSeparator)
+            {
+                var o = Clone();
+                o.GroupSeparator = groupSeparator;
+                return o;
+            }
+
             public Options SetTrimZero(bool trimZero = true)
             {
                 var o = Clone();
@@ -187,6 +195,13 @@ namespace MikhailKhalizev.Utils
             {
                 var o = Clone();
                 o.AddHexPrefix = addHexPrefix;
+                return o;
+            }
+
+            public Options RemoveHexPrefix()
+            {
+                var o = Clone();
+                o.AddHexPrefix = false;
                 return o;
             }
 

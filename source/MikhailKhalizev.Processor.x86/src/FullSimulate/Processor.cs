@@ -1,6 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
-// ReSharper disable CommentTypo
 
 #pragma warning disable IDE1006 // Naming Styles
 
@@ -1007,7 +1006,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 // IF stack not large enough for a 6-byte return information
                 // THEN #SS; FI;
 
-                pushf();
+                pushfw();
                 eflags.@if = false; /* Clear interrupt flag */
                 eflags.tf = false; /* Clear trap flag */
                 eflags.ac = false; /* Clear AC flag */
@@ -1424,7 +1423,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
                 throw new Exception("Bad eip");
         }
-        
+
+        /// <inheritdoc />
+        public void invalid()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Instructions
@@ -1454,7 +1459,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void adc()
+        public void adc(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
@@ -1550,7 +1555,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void and()
+        public void and(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
@@ -1712,7 +1717,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void btc()
+        public void btc(Value a, Value b)
         {
             throw new NotImplementedException();
         }
@@ -1736,7 +1741,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void call()
+        public void callw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void callw_abs(Value address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void callw_far_abs(int segment, Address address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void callw_a16_far_ind(SegmentRegister segment, Value address)
         {
             throw new NotImplementedException();
         }
@@ -1820,7 +1843,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cmp()
+        public void cmp(Value a, Value b)
         {
             throw new NotImplementedException();
         }
@@ -1844,7 +1867,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cmpsb()
+        public void cmpsb_a16()
         {
             throw new NotImplementedException();
         }
@@ -1874,7 +1897,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void cmpsw()
+        public void cmpsw_a16()
         {
             throw new NotImplementedException();
         }
@@ -2084,7 +2107,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void dec()
+        public void dec(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2138,7 +2161,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void enter()
+        public void enterw(int allocSize, int nestingLevel)
         {
             throw new NotImplementedException();
         }
@@ -2450,13 +2473,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void fnsave()
+        public void fnsavew_a16(SegmentRegister segment, Value address)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fnstcw()
+        public void fnstcw(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2468,7 +2491,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void fnstsw()
+        public void fnstsw(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2708,25 +2731,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void idiv()
+        public void idiv(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void imul()
+        public void imul(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void @in()
+        public void inb(Value dst, Value port)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void inc()
+        public void inc(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2762,7 +2785,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void int_n()
+        public void int_n(int number)
         {
             throw new NotImplementedException();
         }
@@ -2804,7 +2827,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void iret()
+        public void iretw()
         {
             throw new NotImplementedException();
         }
@@ -2816,13 +2839,277 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void jmp()
+        public void jmpw(Address address, int offset)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void jcc()
+        public void jmpw_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jmpw_abs(Value address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jmpw_far_abs(int segment, Address address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jmpw_a16_far_ind(SegmentRegister segment, Value address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jmpd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jaw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jaew(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jaew_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jbw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jbw_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jbew(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jbew_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jcw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jcxzw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jcxzw_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jecxzw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jrcxz(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jew(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jgw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jgew(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jlw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jlew(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jlew_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnaw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnaew(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnbw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnbe(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnc(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jne(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jng(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnge(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnl(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnle(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jno(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnp(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnsw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jnzw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jnzw_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jow(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jp(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jpe(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jpo(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jsw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jzw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jzw_func(Address address, int offset)
         {
             throw new NotImplementedException();
         }
@@ -3140,7 +3427,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lar()
+        public void lar(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
@@ -3158,7 +3445,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lds()
+        public void lds(Value dst, SegmentRegister segment, Value offset)
         {
             throw new NotImplementedException();
         }
@@ -3170,13 +3457,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void leave()
+        public void leavew()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void les()
+        public void les(Value dst, SegmentRegister segment, Value offset)
         {
             throw new NotImplementedException();
         }
@@ -3194,7 +3481,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lgdt()
+        public void lgdtw_a16(SegmentRegister segment, Value address)
         {
             throw new NotImplementedException();
         }
@@ -3206,19 +3493,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lidt()
+        public void lidtw_a16(SegmentRegister segment, Value address)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void lldt()
+        public void lldt(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void lmsw()
+        public void lmsw(Value value)
         {
             throw new NotImplementedException();
         }
@@ -3236,13 +3523,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lodsb()
+        public void lodsb_a16()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void lodsd()
+        public void lodsd_a16()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void lodsd_a32()
         {
             throw new NotImplementedException();
         }
@@ -3254,25 +3547,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void lodsw()
+        public void lodsw_a16()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void loop()
+        public bool loopw_a16(Address address, int offset)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void loopcc()
+        public bool loopnew_a16(Address address, int offset)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void lsl()
+        public void lsl(Value dst, Value selector)
         {
             throw new NotImplementedException();
         }
@@ -3536,19 +3829,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movs()
+        public void movsw_a16(SegmentRegister segment = null)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movsb()
+        public void movsb_a16()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void movsd()
+        public void movsd_a16()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void movsd_a32()
         {
             throw new NotImplementedException();
         }
@@ -3626,7 +3925,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void mul()
+        public void mul(Value value)
         {
             throw new NotImplementedException();
         }
@@ -3668,7 +3967,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void neg()
+        public void neg(Value value)
         {
             throw new NotImplementedException();
         }
@@ -3678,13 +3977,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         { }
 
         /// <inheritdoc />
-        public void not()
+        public void not(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void or()
+        public void or(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
@@ -3702,7 +4001,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void @out()
+        public void outb(Value dst, Value port)
         {
             throw new NotImplementedException();
         }
@@ -4293,7 +4592,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void popf()
+        public void popfw()
         {
             throw new NotImplementedException();
         }
@@ -4610,7 +4909,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void pushf()
+        public void pushfw()
         {
             throw new NotImplementedException();
         }
@@ -4792,36 +5091,30 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void rep()
+        public void rep_a16(Action action)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void repe()
+        public void rep_a32(Action action)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void repne()
+        public void repe_a16(Action action)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void repnz()
+        public void repne_a16(Action action)
         {
             throw new NotImplementedException();
         }
-
-        /// <inheritdoc />
-        public void repz()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void retw()
+        
+        public void retw(int allocSize = 0)
         {
             throw new NotImplementedException();
         }
@@ -4966,7 +5259,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void sbb()
+        public void sbb(Value dst, Value src)
         {
             throw new NotImplementedException();
         }
@@ -4978,7 +5271,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void scasb()
+        public void scasb_a16()
         {
             throw new NotImplementedException();
         }
@@ -4996,7 +5289,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void setcc()
+        public void seta(Value value)
         {
             throw new NotImplementedException();
         }
@@ -5056,8 +5349,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void shl(Value dst, int count)
+        public void shl(Value dst, Value count_)
         {
+            var count = count_.Int32;
             var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
 
             if (count != 0)
@@ -5156,7 +5450,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void smsw()
+        public void smsw(Value value)
         {
             throw new NotImplementedException();
         }
@@ -5222,13 +5516,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void stosb()
+        public void stosb_a16()
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void stosd()
+        public void stosd_a16()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void stosd_a32()
         {
             throw new NotImplementedException();
         }
@@ -5240,7 +5540,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void stosw()
+        public void stosw_a16()
         {
             throw new NotImplementedException();
         }
@@ -5312,7 +5612,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void test()
+        public void test(Value a, Value b)
         {
             throw new NotImplementedException();
         }
@@ -7244,7 +7544,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void xchg()
+        public void xchg(Value a, Value b)
         {
             throw new NotImplementedException();
         }
@@ -7268,7 +7568,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void xlatb()
+        public void xlatb_a16()
         {
             throw new NotImplementedException();
         }

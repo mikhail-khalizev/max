@@ -146,16 +146,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             var to = cur_jmp.To.Single();
 
-            var func_suffix = "";
+            var jmpOutside = false;
+            var suffix = "";
             if (!dm.Labels.Contains(to))
             {
-                func_suffix = "_func";
+                jmpOutside = true;
+                suffix = "_func";
 
                 if (dm.Begin <= to && to < dm.End)
                     comments_in_current_func.Add("Адрес перехода делит инструкцию в этой функции пополам.");
             }
 
-            return dm.Instructions[cmd_index].ToCodeString(func_suffix);
+            return dm.Instructions[cmd_index].ToCodeString(suffix, isJmpOutside: jmpOutside);
         }
     }
 }
