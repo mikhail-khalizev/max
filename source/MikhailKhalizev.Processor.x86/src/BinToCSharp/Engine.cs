@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using MikhailKhalizev.Max;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
@@ -470,47 +471,51 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             MethodInfos.Save();
 
-            foreach (var detectedMethod in NewDetectedMethods)
-            {
-                var methodBegin = detectedMethod.Begin;
-                var methodEnd = detectedMethod.End;
-
-                if (methodBegin == methodEnd)
-                    continue; // Skip empty method.
-
-
-                // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем их.
-                var functionModel = already_decoded_funcs_try_find(methodBegin, methodEnd - methodBegin);
-                if (functionModel != null)
+            Parallel.ForEach(
+                NewDetectedMethods,
+                detectedMethod =>
                 {
-                    Console.WriteLine($"Декодированная функция '{methodBegin}' эквивалентна уже существующей {{{functionModel.Guid}}} по адресу'{functionModel.Address}'.");
-                    continue;
-                }
+                    var methodBegin = detectedMethod.Begin;
+                    var methodEnd = detectedMethod.End;
+
+                    if (methodBegin == methodEnd)
+                        return; // Skip empty method.
 
 
-                Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
-                
-                var output = new StringBuilder();
-                WriteCSharpMethodToStringBuilder(output, detectedMethod);
-                
-                var ns = AddressNameConverter.GetNamespace(methodBegin);
-                var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
-
-                var filePath = path;
-
-                filePath += $"/z-{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4).SetGroupSeparator("-"))}";
-
-                if (ns != null)
-                    filePath += $"-{ns}";
-
-                if (kd != null)
-                    filePath += $"-{kd}";
-
-                filePath += ".cs";
+                    // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем их.
+                    var functionModel = already_decoded_funcs_try_find(methodBegin, methodEnd - methodBegin);
+                    if (functionModel != null)
+                    {
+                        Console.WriteLine(
+                            $"Декодированная функция '{methodBegin}' эквивалентна уже существующей {{{functionModel.Guid}}} по адресу'{functionModel.Address}'.");
+                        return;
+                    }
 
 
-                File.WriteAllText(filePath, output.ToString());
-            }
+                    Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
+
+                    var output = new StringBuilder();
+                    WriteCSharpMethodToStringBuilder(output, detectedMethod);
+
+                    var ns = AddressNameConverter.GetNamespace(methodBegin);
+                    var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
+
+                    var filePath = path;
+
+                    filePath +=
+                        $"/z-{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4).SetGroupSeparator("-"))}";
+
+                    if (ns != null)
+                        filePath += $"-{ns}";
+
+                    if (kd != null)
+                        filePath += $"-{kd}";
+
+                    filePath += ".cs";
+
+
+                    File.WriteAllText(filePath, output.ToString());
+                });
 
             MethodInfos.Save();
         }
