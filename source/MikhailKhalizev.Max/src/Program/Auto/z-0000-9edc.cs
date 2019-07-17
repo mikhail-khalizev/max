@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9ee6, 3);    sub(sp, 0x22);                            /* sub sp, 0x22 */
             ii(0x9ee9, 2);    mov(dx, sp);                              /* mov dx, sp */
             ii(0x9eeb, 3);    mov(ax, 0x3800);                          /* mov ax, 0x3800 */
-            ii(0x9eee, 2);    int_n(0x21);                              /* int 0x21 */
+            ii(0x9eee, 2);    @int(0x21);                              /* int 0x21 */
             ii(0x9ef0, 3);    add(sp, 0x22);                            /* add sp, 0x22 */
             ii(0x9ef3, 1);    xchg(bx, ax);                             /* xchg bx, ax */
         l_0x9ef4:

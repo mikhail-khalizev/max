@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_a264()
         {
             ii(0xa264, 3);    mov(ax, 0x4300);                          /* mov ax, 0x4300 */
-            ii(0xa267, 2);    int_n(0x2f);                              /* int 0x2f */
+            ii(0xa267, 2);    @int(0x2f);                              /* int 0x2f */
             ii(0xa269, 2);    cmp(al, -0x80 /* 0x80 */);                /* cmp al, 0x80 */
             ii(0xa26b, 2);    if(jzw(0xa26f, 0x2)) goto l_0xa26f;       /* jz 0xa26f */
             ii(0xa26d, 2);    xor(ax, ax);                              /* xor ax, ax */

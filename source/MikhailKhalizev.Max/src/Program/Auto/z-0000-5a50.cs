@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x5a50, 4);    popw(memw_a16[ds, 0xd10]);                /* pop word [0xd10] */
             ii(0x5a54, 2);    mov(ah, 0x30);                            /* mov ah, 0x30 */
-            ii(0x5a56, 2);    int_n(0x21);                              /* int 0x21 */
+            ii(0x5a56, 2);    @int(0x21);                              /* int 0x21 */
             ii(0x5a58, 3);    mov(memw_a16[ds, 0xcee], ax);             /* mov [0xcee], ax */
             ii(0x5a5b, 3);    mov(dx, 0x1);                             /* mov dx, 0x1 */
             ii(0x5a5e, 2);    cmp(al, 0x2);                             /* cmp al, 0x2 */

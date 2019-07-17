@@ -7461,19 +7461,19 @@
     "Arch": 16,
     "Addr": "0x0013d212",
     "Raw": "cd00",
-    "Dec": "int_n(0);"
+    "Dec": "@int(0);"
   },
   {
     "Arch": 16,
     "Addr": "0x00002576",
     "Raw": "cd21",
-    "Dec": "int_n(0x21);"
+    "Dec": "@int(0x21);"
   },
   {
     "Arch": 16,
     "Addr": "0x000099f6",
     "Raw": "cddc",
-    "Dec": "int_n(0xdc);"
+    "Dec": "@int(0xdc);"
   },
   {
     "Arch": 16,
@@ -15057,7 +15057,7 @@
     "Arch": 32,
     "Addr": "0x1016c7a1",
     "Raw": "cd21",
-    "Dec": "int_n(0x21);"
+    "Dec": "@int(0x21);"
   },
   {
     "Arch": 32,

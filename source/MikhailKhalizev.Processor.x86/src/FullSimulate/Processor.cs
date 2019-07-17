@@ -1458,7 +1458,22 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void adc(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            src = new NumericValue(src.UInt64, dst.Bits);
+
+            var ss = src.IsPositive;
+            var ds = dst.IsPositive;
+
+            var sv = src.UInt64;
+            var dv = dst.UInt64;
+            dst.UInt64 = dv + sv + (eflags.cf ? 1u : 0);
+            var rv = dst.UInt64;
+
+            var rs = dst.IsPositive;
+            
+            eflags.of = (ds == ss) && (ss != rs);
+            eflags.cf = rv < sv || rv < dv;
+            set_sf_zf_pf(dst);
+            // af
         }
 
         /// <inheritdoc />
@@ -1470,7 +1485,34 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void add(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            src = new NumericValue(src.UInt64, dst.Bits);
+
+            var ss = src.IsPositive;
+            var ds = dst.IsPositive;
+
+            var sv = src.UInt64;
+            var dv = dst.UInt64;
+            
+            dst.UInt64 = dv + sv;
+
+            var rv = dst.UInt64;
+            var rs = dst.IsPositive;
+
+            /* d  s  r  of
+             * +  +  +   0
+             * +  +  -   1
+             * +  -  +   0
+             * +  -  -   0
+             * -  +  +   0
+             * -  +  -   0
+             * -  -  +   1
+             * -  -  -   0
+             */
+
+            eflags.of = (ds == ss) && (ss != rs);
+            eflags.cf = rv < sv || rv < dv;
+            set_sf_zf_pf(dst);
+            // af
         }
 
         /// <inheritdoc />
@@ -1842,7 +1884,26 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cmp(Value a, Value b)
         {
-            throw new NotImplementedException();
+            eflags.cf = a.UInt64 < b.UInt64;
+
+            var r = new NumericValue(a.UInt64 - b.UInt64, a.Bits);
+            var ds = a.IsPositive;
+            var ss = b.IsPositive;
+            var rs = r.IsPositive;
+
+            /* d  s  r  of
+             * +  +  +   0
+             * +  +  -   0
+             * +  -  +   0
+             * +  -  -   1
+             * -  +  +   1
+             * -  +  -   0
+             * -  -  +   0
+             * -  -  -   0  */
+
+            eflags.of = (ds != ss) && (ss == rs);
+            set_sf_zf_pf(r);
+            // af
         }
 
         /// <inheritdoc />
@@ -2106,7 +2167,16 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void dec(Value value)
         {
-            throw new NotImplementedException();
+            var r = new NumericValue(value.UInt64 - 1, value.Bits);
+            var ds = value.IsPositive;
+            var ss = true;
+            var rs = r.IsPositive;
+
+            eflags.of = (ds != ss) && (ss == rs);
+            set_sf_zf_pf(r);
+            // af
+
+            value.UInt64 = r.UInt64;
         }
 
         /// <inheritdoc />
@@ -2748,7 +2818,17 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void inc(Value value)
         {
-            throw new NotImplementedException();
+            var r = new NumericValue(value.UInt64 + 1, value.Bits);
+
+            var ds = value.IsPositive;
+            var ss = true;
+            var rs = r.IsPositive;
+
+            eflags.of = (ds == ss) && (ss != rs);
+            set_sf_zf_pf(r);
+            // af
+
+            value.UInt64 = r.UInt64;
         }
 
         /// <inheritdoc />
@@ -2782,7 +2862,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void int_n(int number)
+        public void @int(int number)
         {
             throw new NotImplementedException();
         }
@@ -2800,7 +2880,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void @into()
+        public void into()
         {
             throw new NotImplementedException();
         }
@@ -3969,7 +4049,11 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void neg(Value value)
         {
-            throw new NotImplementedException();
+            eflags.cf = value.UInt64 != 0;
+            value.UInt64 = 0 - value.UInt64;
+            set_sf_zf_pf(value);
+            // af
+            // of = ???
         }
 
         /// <inheritdoc />
@@ -5262,7 +5346,22 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void sbb(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            src = new NumericValue(src.UInt64, dst.Bits);
+
+            var r = new NumericValue(dst.UInt64 - src.UInt64 - (eflags.cf ? 1u : 0), dst.Bits);
+            var ds = dst.IsPositive;
+            var ss = src.IsPositive;
+            var rs = r.IsPositive;
+
+            if (src.UInt64 == ulong.MaxValue && eflags.cf)
+                eflags.cf = true;
+            else
+                eflags.cf = dst.UInt64 < (src.UInt64 + (eflags.cf ? 1u : 0));
+
+            eflags.of = (ds != ss) && (ss == rs);
+            set_sf_zf_pf(r);
+
+            dst.UInt64 = r.UInt64;
         }
 
         /// <inheritdoc />
@@ -5555,7 +5654,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void sub(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            src = new NumericValue(src.UInt64, dst.Bits);
+            cmp(dst, src);
+            dst.UInt64 = dst.UInt64 - src.UInt64;
         }
 
         /// <inheritdoc />

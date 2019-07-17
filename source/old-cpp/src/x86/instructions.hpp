@@ -1025,7 +1025,7 @@ inline void popad()
     popd(eax);
 }
 
-
+// +
 template<exo::abstract_int L, typename T>
 void add(uint_<L> & d, T s_)
 {
@@ -1055,6 +1055,7 @@ void add(uint_<L> & d, T s_)
     d = r;
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void adc(uint_<L> & d, T s_)
 {
@@ -1083,6 +1084,7 @@ void test(uint_<L> d, T s_)
     of = false;
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void cmp(uint_<L> d, T s_)
 {
@@ -1109,7 +1111,7 @@ void cmp(uint_<L> d, T s_)
     // af
 }
 
-
+// +
 template<exo::abstract_int L, typename T>
 void sub(uint_<L> & d, T s_)
 {
@@ -1118,6 +1120,7 @@ void sub(uint_<L> & d, T s_)
     d = d - s;
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void sbb(uint_<L> & d, T s_)
 {
@@ -1134,7 +1137,7 @@ void sbb(uint_<L> & d, T s_)
     d = r;
 }
 
-
+// +
 template<exo::abstract_int L>
 void inc(uint_<L> & d)
 {
@@ -1151,6 +1154,7 @@ void inc(uint_<L> & d)
     d = r;
 }
 
+// +
 template<exo::abstract_int L>
 void dec(uint_<L> & d)
 {
@@ -1166,6 +1170,7 @@ void dec(uint_<L> & d)
     d = r;
 }
 
+// +
 template<exo::abstract_int L>
 void neg(uint_<L> & d)
 {

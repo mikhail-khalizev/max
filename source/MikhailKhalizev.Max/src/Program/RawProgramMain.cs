@@ -240,7 +240,7 @@ namespace MikhailKhalizev.Max.Program
             var info = get_func(cs, eip);
 
             if (extra_log)
-                Console.WriteLine($"run {info.Name} {{{info.MethodInfo.Guid}}}");
+                Console.WriteLine($"Run {info.Name} {{{info.MethodInfo.Guid}}}");
 
             Implementation.CSharpFunctionDelta = (int)(cs.Descriptor.Base + eip - info.MethodInfo.Address);
             Implementation.CSharpEmulateMode = (int)info.MethodInfo.Mode;

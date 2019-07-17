@@ -308,7 +308,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// <inheritdoc />
         public void invalid()
         {
-            throw new NotImplementedException();
+            Implementation.invalid();
         }
 
         #endregion
@@ -1666,9 +1666,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void int_n(int number)
+        public void @int(int number)
         {
-            Implementation.int_n(number);
+            Implementation.@int(number);
         }
 
         /// <inheritdoc />

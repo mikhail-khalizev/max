@@ -144,6 +144,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
 
         public bool IsNegative => IsBitSet(Bits - 1);
+        public bool IsPositive => !IsNegative;
 
         public virtual bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
 

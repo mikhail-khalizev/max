@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x66a4, 1);    retw();                                   /* ret */
         l_0x66a5:
             ii(0x66a5, 2);    mov(ah, 0xd);                             /* mov ah, 0xd */
-            ii(0x66a7, 2);    int_n(0x21);                              /* int 0x21 */
+            ii(0x66a7, 2);    @int(0x21);                              /* int 0x21 */
             ii(0x66a9, 3);    dec(memw_a16[ss, bp - 0x2]);              /* dec word [bp-0x2] */
         l_0x66ac:
             ii(0x66ac, 4);    cmp(memw_a16[ss, bp - 0x2], 0);           /* cmp word [bp-0x2], 0x0 */

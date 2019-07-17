@@ -1541,7 +1541,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Call to Interrupt Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INTn:INTO:INT3:INT1.html</remarks>
-        void int_n(int number);
+        void @int(int number);
 
         /// <summary>
         /// Call to Interrupt Procedure.

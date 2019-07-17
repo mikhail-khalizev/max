@@ -181,9 +181,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (!gotoLabel)
             {
-                sb.Append(udis86.ud_lookup_mnemonic(Mnemonic));
                 if (Mnemonic == ud_mnemonic_code.UD_Iint)
-                    sb.Append("_n");
+                    sb.Append("@");
+                sb.Append(udis86.ud_lookup_mnemonic(Mnemonic));
 
                 if (flags.HasFlag(InstrFlags.UseOprSizeInside))
                 {

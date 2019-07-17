@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb236, 2);    jzw_func(0xb251, 0x19);                   /* jz 0xb251 */
         l_0xb238:
             ii(0xb238, 3);    mov(ax, 0xde04);                          /* mov ax, 0xde04 */
-            ii(0xb23b, 2);    int_n(0x67);                              /* int 0x67 */
+            ii(0xb23b, 2);    @int(0x67);                              /* int 0x67 */
             ii(0xb23d, 2);    or(ah, ah);                               /* or ah, ah */
             ii(0xb23f, 4);    jnzw_func(0xae96, -0x3ad);                /* jnz 0xae96 */
             ii(0xb243, 4);    inc(memw_a16[ds, 0xdf6]);                 /* inc word [0xdf6] */
