@@ -85,17 +85,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return false;
         }
 
-        MethodInfoDto already_decoded_funcs_try_find(Address addr, int size)
+        private bool AlreadyDecodedContainsMethodInfo(MethodInfoDto methodInfoDto)
         {
-            foreach (var pair in already_decoded_funcs_)
-            foreach (var functionModel in pair.Value)
-            {
-                var bytes = functionModel.RawBytes;
-                if (bytes.Length == size && Memory.Equals(addr, bytes))
-                    return functionModel;
-            }
-
-            return null;
+            return already_decoded_funcs_.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
         }
 
         /// <summary>
@@ -475,19 +467,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 NewDetectedMethods,
                 detectedMethod =>
                 {
-                    var methodBegin = detectedMethod.Begin;
-                    var methodEnd = detectedMethod.End;
+                    var methodBegin = detectedMethod.MethodInfo.Address;
+                    var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
 
                     if (methodBegin == methodEnd)
                         return; // Skip empty method.
 
 
-                    // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем их.
-                    var functionModel = already_decoded_funcs_try_find(methodBegin, methodEnd - methodBegin);
-                    if (functionModel != null)
+                    // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
+                    if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
                     {
                         Console.WriteLine(
-                            $"Декодированная функция '{methodBegin}' эквивалентна уже существующей {{{functionModel.Guid}}} по адресу'{functionModel.Address}'.");
+                            $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
                         return;
                     }
 
@@ -502,8 +493,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     var filePath = path;
 
-                    filePath +=
-                        $"/z-{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4).SetGroupSeparator("-"))}";
+                    filePath += "/z-" + methodBegin.ToString(o => o
+                        .RemoveHexPrefix()
+                        .SetTrimZero(false)
+                        .SetGroupSize(4)
+                        .SetGroupSeparator("-"));
 
                     if (ns != null)
                         filePath += $"-{ns}";
@@ -516,23 +510,21 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     File.WriteAllText(filePath, output.ToString());
                 });
-
-            MethodInfos.Save();
         }
 
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod)
         {
-            var methodAddress = detectedMethod.Begin;
-            var addr_func_end = detectedMethod.End;
+            var methodBegin = detectedMethod.MethodInfo.Address;
+            var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
 
 
             var first_cmd = detectedMethod.Instructions.First();
 
-            AddressNameConverter.KnownDefinitions.TryGetValue(methodAddress, out var methodName);
+            AddressNameConverter.KnownDefinitions.TryGetValue(methodBegin, out var methodName);
             if (methodName == null)
-                methodName = $"Method_{methodAddress.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4))}";
+                methodName = $"Method_{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4))}";
             
-            var ns = AddressNameConverter.GetNamespace(methodAddress);
+            var ns = AddressNameConverter.GetNamespace(methodBegin);
             if (ns != null)
                 ns = $"/* {ns} */ ";
             
@@ -593,9 +585,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 var addr_of_line = cmd.Begin;
 
-                if (addr_func_end <= addr_of_line)
-                    break;
-
 
                 output.Append("        ");
 
@@ -641,8 +630,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 // Возможно её разбивает другая функция в неудобном месте.
 
                 var os = new StringBuilder();
-                write_instruction_position_and_spaces(os, addr_func_end, addr_func_end);
-                os.Append($"jmpd_func({AddressNameConverter.GetResultName(addr_func_end, false, true)}, 0);");
+                write_instruction_position_and_spaces(os, methodEnd, methodEnd);
+                os.Append($"jmpd_func({AddressNameConverter.GetResultName(methodEnd, false, true)}, 0);");
                 write_spaces(os, LineCommentOffset - 1);
                 output.AppendLine($"            {os} /* Принудительное завершение функции. */");
             }

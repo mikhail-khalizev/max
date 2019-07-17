@@ -237,15 +237,17 @@ namespace MikhailKhalizev.Max.Program
                     $", gs: 0x{gs.Selector:x}");
             }
 
-            CurrentInstructionAddress = eip; // TODO Check, is it correct?
             var info = get_func(cs, eip);
 
             if (extra_log)
-                Console.WriteLine($"run {info.Name}");
+                Console.WriteLine($"run {info.Name} {{{info.MethodInfo.Guid}}}");
+
+            Implementation.CSharpFunctionDelta = (int)(cs.Descriptor.Base + eip - info.MethodInfo.Address);
+            Implementation.CSharpEmulateMode = (int)info.MethodInfo.Mode;
+            Implementation.check_mode();
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
             info.Action();
-            CurrentInstructionAddress = eip; // TODO Check, is it correct?
 
             if (on_run_func__dump_reg)
             {
@@ -313,29 +315,34 @@ namespace MikhailKhalizev.Max.Program
         {
             // Попробуем найти её среди известных.
 
-            foreach (var pair in funcs_by_pc)
-            foreach (var info in pair.Value)
-            {
-                var code = info.MethodInfo.RawBytes;
-                if (code.Length == 0)
-                    continue;
+            var infos = funcs_by_pc
+                .SelectMany(x => x.Value)
+                .Where(
+                    info =>
+                    {
+                        var code = info.MethodInfo.RawBytes;
+                        if (code.Length == 0)
+                            return false;
+                        if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
+                            return false;
+                        return true;
+                    })
+                .OrderByDescending(x => x.MethodInfo.RawBytes.Length);
 
+            foreach (var info in infos)
+            {
                 if (string.IsNullOrEmpty(info.Name))
                     throw new InvalidOperationException("Код у функции есть, а его имя неизвестно.");
-
-                if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
+                
+                var segAddr = seg[addr];
+                if (!Implementation.Memory.Equals(segAddr, info.MethodInfo.RawBytes))
                     continue;
-
-                var seg_addr = seg[addr];
-                if (!Implementation.Memory.Equals(seg_addr, code))
-                    continue;
-
-
+                
                 // Всё хорошо. Запомним её, а затем сохраним в файл, чтоб в следующий раз не пришлось искать.
 
-                funcs_by_pc.Add(seg_addr, info);
+                funcs_by_pc.Add(segAddr, info);
 
-                info.MethodInfo.Addresses.Add(seg_addr);
+                info.MethodInfo.Addresses.Add(segAddr);
                 MethodInfos.Save();
 
                 return info;

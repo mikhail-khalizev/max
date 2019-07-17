@@ -28,10 +28,11 @@ public:
     func_info_inserter(uint_<32> pc, exo::memory_space_const func_name, void (*func)(),  std::initializer_list<unsigned char> code, uint_<8> mode);
 };
 
-
+// -
 #define FUNC_INFO_V4(pc, suffix, mode, ...)         \
     FUNC_INFO_V5(pc, suffix, mode, (__VA_ARGS__))
 
+// -
 #define FUNC_INFO_V5(pc, suffix, mode, code)        \
     namespace raw_program {                         \
         using namespace x86;                        \
@@ -42,19 +43,22 @@ public:
     void raw_program:: BOOST_PP_CAT(func_, BOOST_PP_CAT(pc, BOOST_PP_CAT(_, suffix)))()
 
 
+// + RawProgramMain.run_func
 #define FUNC_START_V2(pc, mode_)                                \
         uint_<32> func_delta = cs.get_base() + eip - pc;        \
         func_delta = func_delta; /* Чтобы не было warning. */   \
         const uint_<8> mode = mode_;                            \
         check_mode()
 
-
+// -
 #define FUNC_BEGIN(pc, suffix, mode, code)        \
         FUNC_INFO_V5(pc, suffix, mode, code) {    \
         FUNC_START_V2(pc, mode);
 
+// -
 #define FUNC_END    }
 
+// - => MethodInfo.Addresses
 #define LINK(pc, full_func_name, mode, code)    \
     namespace raw_program {                     \
         using namespace x86;                    \
