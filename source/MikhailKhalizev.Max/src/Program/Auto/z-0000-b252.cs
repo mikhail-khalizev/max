@@ -91,7 +91,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb325, 2);    shr(cx, 0x1);                             /* shr cx, 1 */
             ii(0xb327, 2);    rep_a16(() => stosw_a16());               /* rep stosw */
             ii(0xb329, 3);    callw(0x53e7, -0x5f45);                   /* call 0x53e7 */
-            ii(0xb32c, 2);    goto l_0xb308;                            /* jmp 0xb308 */
+            ii(0xb32c, 2);    jmpw(0xb308, -0x26); goto l_0xb308;       /* jmp 0xb308 */
         }
     }
 }

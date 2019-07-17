@@ -29,13 +29,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9bef, 2);    if(jzw(0x9bfa, 0x9)) goto l_0x9bfa;       /* jz 0x9bfa */
             ii(0x9bf1, 3);    mov(ax, 0x3);                             /* mov ax, 0x3 */
             ii(0x9bf4, 4);    mov(memd_a16[ds, 0x10f2], eax);           /* mov [0x10f2], eax */
-            ii(0x9bf8, 2);    goto l_0x9c06;                            /* jmp 0x9c06 */
+            ii(0x9bf8, 2);    jmpw(0x9c06, 0xc); goto l_0x9c06;         /* jmp 0x9c06 */
         l_0x9bfa:
             ii(0x9bfa, 3);    mov(ax, 0x2);                             /* mov ax, 0x2 */
-            ii(0x9bfd, 2);    goto l_0x9c06;                            /* jmp 0x9c06 */
+            ii(0x9bfd, 2);    jmpw(0x9c06, 0x7); goto l_0x9c06;         /* jmp 0x9c06 */
         l_0x9bff:
             ii(0x9bff, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
-            ii(0x9c02, 2);    goto l_0x9c06;                            /* jmp 0x9c06 */
+            ii(0x9c02, 2);    jmpw(0x9c06, 0x2); goto l_0x9c06;         /* jmp 0x9c06 */
         l_0x9c04:
             ii(0x9c04, 2);    xor(ax, ax);                              /* xor ax, ax */
         l_0x9c06:

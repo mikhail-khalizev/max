@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x99f0, 2);    xor(ax, ax);                              /* xor ax, ax */
             ii(0x99f2, 2);    xor(bx, bx);                              /* xor bx, bx */
             ii(0x99f4, 2);    mov(cl, 0x82);                            /* mov cl, 0x82 */
-            ii(0x99f6, 2);    @int(0xdc);                              /* int 0xdc */
+            ii(0x99f6, 2);    @int(0xdc);                               /* int 0xdc */
             ii(0x99f8, 2);    mov(al, bl);                              /* mov al, bl */
             ii(0x99fa, 2);    or(al, bh);                               /* or al, bh */
             ii(0x99fc, 2);    if(jzw(0x9a0c, 0xe)) goto l_0x9a0c;       /* jz 0x9a0c */

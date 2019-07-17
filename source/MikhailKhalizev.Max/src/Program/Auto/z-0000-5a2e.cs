@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5a3e, 1);    inc(ax);                                  /* inc ax */
             ii(0x5a3f, 2);    if(jzw(0x5a46, 0x5)) goto l_0x5a46;       /* jz 0x5a46 */
             ii(0x5a41, 3);    mov(ax, memw_a16[ss, bp - 0x2]);          /* mov ax, [bp-0x2] */
-            ii(0x5a44, 2);    goto l_0x5a48;                            /* jmp 0x5a48 */
+            ii(0x5a44, 2);    jmpw(0x5a48, 0x2); goto l_0x5a48;         /* jmp 0x5a48 */
         l_0x5a46:
             ii(0x5a46, 2);    sub(ax, ax);                              /* sub ax, ax */
         l_0x5a48:

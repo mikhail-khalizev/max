@@ -49,10 +49,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9786, 2);    if(jnzw(0x976f, -0x19)) goto l_0x976f;    /* jnz 0x976f */
         l_0x9788:
             ii(0x9788, 3);    lea(ax, bx - 0x1);                        /* lea ax, [bx-0x1] */
-            ii(0x978b, 2);    goto l_0x9794;                            /* jmp 0x9794 */
+            ii(0x978b, 2);    jmpw(0x9794, 0x7); goto l_0x9794;         /* jmp 0x9794 */
         l_0x978d:
             ii(0x978d, 3);    mov(ax, memw_a16[ss, bp + 0x4]);          /* mov ax, [bp+0x4] */
-            ii(0x9790, 2);    goto l_0x9794;                            /* jmp 0x9794 */
+            ii(0x9790, 2);    jmpw(0x9794, 0x2); goto l_0x9794;         /* jmp 0x9794 */
         l_0x9792:
             ii(0x9792, 2);    xor(ax, ax);                              /* xor ax, ax */
         l_0x9794:

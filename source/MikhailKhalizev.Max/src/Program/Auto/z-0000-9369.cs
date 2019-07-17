@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9383, 4);    cmp(memw_a16[ss, bp - 0x2], 0);           /* cmp word [bp-0x2], 0x0 */
             ii(0x9387, 2);    if(jnzw(0x938e, 0x5)) goto l_0x938e;      /* jnz 0x938e */
             ii(0x9389, 3);    mov(ax, memw_a16[ss, bp - 0xe]);          /* mov ax, [bp-0xe] */
-            ii(0x938c, 2);    goto l_0x939e;                            /* jmp 0x939e */
+            ii(0x938c, 2);    jmpw(0x939e, 0x10); goto l_0x939e;        /* jmp 0x939e */
         l_0x938e:
             ii(0x938e, 4);    cmp(memw_a16[ss, bp - 0xe], 0x8);         /* cmp word [bp-0xe], 0x8 */
             ii(0x9392, 2);    if(jnzw(0x939c, 0x8)) goto l_0x939c;      /* jnz 0x939c */

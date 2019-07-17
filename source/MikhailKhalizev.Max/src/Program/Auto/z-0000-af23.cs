@@ -79,7 +79,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xafdc, 2);    inc(ch);                                  /* inc ch */
             ii(0xafde, 2);    mov(es, cx);                              /* mov es, cx */
             ii(0xafe0, 4);    mov(eax, memd_a16[es, si]);               /* mov eax, [es:si] */
-            ii(0xafe4, 2);    goto l_0xafa3;                            /* jmp 0xafa3 */
+            ii(0xafe4, 2);    jmpw(0xafa3, -0x43); goto l_0xafa3;       /* jmp 0xafa3 */
         }
     }
 }

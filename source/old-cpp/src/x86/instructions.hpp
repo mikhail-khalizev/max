@@ -235,9 +235,11 @@ void iret_(uint_<8> op_size);
         jmpd_func(__VA_ARGS__) /* Один раз отработает, потом return, что правильно. */
 
 
+// +
 #define rep_a16    \
     for (; cx != 0; cx--)
 
+// +
 #define rep_a32    \
     for (; ecx != 0; ecx--)
 
@@ -254,6 +256,7 @@ void iret_(uint_<8> op_size);
     for (zf = false; ecx != 0 && !zf; ecx--)
 
 
+// + in jmpw_if
 #define jmpw(to, off)                                   \
     do {                                                \
         eip = eip_next + (off);                         \
@@ -1076,7 +1079,7 @@ void adc(uint_<L> & d, T s_)
     d = r;
 }
 
-
+// +
 template<exo::abstract_int L, typename T>
 void test(uint_<L> d, T s_)
 {
@@ -1242,6 +1245,7 @@ void or_(uint_<L> & d, T s_)
     set_sf_zf_pf(d);
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void xor_(uint_<L> & d, T s_)
 {
@@ -1347,6 +1351,7 @@ inline void std_()
     df = true;
 }
 
+// +
 inline void cld()
 {
     df = false;
@@ -1850,6 +1855,7 @@ inline void lahf()
     throw exo::exception::not_implemented();
 }
 
+// +
 inline void stosb_a16()
 {
     memb_a16(es, di) = al;

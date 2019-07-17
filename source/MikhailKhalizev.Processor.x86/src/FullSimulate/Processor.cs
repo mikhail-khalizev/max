@@ -1345,10 +1345,26 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             eip = eipSave;
         }
 
+        private void run_irqs()
+        {
+            // TODO dos::pic.run_irqs();
+        }
+
+        private bool jmpw_if(bool cond, Address address, int offset)
+        {
+            if (cond)
+            {
+                jmpw(address, offset);
+                return true;
+            }
+
+            return false;
+        }
+
         #endregion
 
         #region C# emulate specific
-        
+
         /// <summary>
         /// Gets or sets address of current executing instruction.
         /// </summary>
@@ -1839,7 +1855,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cld()
         {
-            throw new NotImplementedException();
+            eflags.df = false;
         }
 
         /// <inheritdoc />
@@ -2871,9 +2887,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             int_internal(number, true, true, false, 0);
             
-            //eip_next = eip;
-
-            // TODO dos::pic.run_irqs();
+            run_irqs();
             
             if (correct_function_position(ret_addr))
                 throw new NotImplementedException(); // return;
@@ -2932,7 +2946,15 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void jmpw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            eip = eip + offset;
+            eip &= 0xffff;
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+            if (cs[eip] != address + CSharpFunctionDelta)
+                throw new NotImplementedException();
+
+            run_irqs();
         }
 
         /// <inheritdoc />
@@ -2986,7 +3008,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jbw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.cf == true, address, offset);
         }
 
         /// <inheritdoc />
@@ -5190,13 +5212,15 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void rep_a16(Action action)
         {
-            throw new NotImplementedException();
+            for (; cx.UInt32 != 0; cx.UInt32--)
+                action();
         }
 
         /// <inheritdoc />
         public void rep_a32(Action action)
         {
-            throw new NotImplementedException();
+            for (; ecx.UInt32 != 0; ecx.UInt32--)
+                action();
         }
 
         /// <inheritdoc />
@@ -5634,7 +5658,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void stosb_a16()
         {
-            throw new NotImplementedException();
+            memb_a16[es, di] = al;
+            di += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
@@ -5732,7 +5757,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void test(Value a, Value b)
         {
-            throw new NotImplementedException();
+            set_sf_zf_pf(a & b);
+            eflags.cf = false;
+            eflags.of = false;
         }
 
         /// <inheritdoc />
@@ -7694,7 +7721,11 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void xor(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            dst.UInt64 ^= src.UInt64;
+
+            eflags.cf = false;
+            eflags.of = false;
+            set_sf_zf_pf(dst);
         }
 
         /// <inheritdoc />

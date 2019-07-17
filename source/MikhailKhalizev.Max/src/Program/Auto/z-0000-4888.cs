@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x48ae, 2);    if(jzw(0x48a0, -0x10)) goto l_0x48a0;     /* jz 0x48a0 */
             ii(0x48b0, 1);    movsw_a16();                              /* movsw */
             ii(0x48b1, 1);    movsw_a16();                              /* movsw */
-            ii(0x48b2, 2);    goto l_0x48a2;                            /* jmp 0x48a2 */
+            ii(0x48b2, 2);    jmpw(0x48a2, -0x12); goto l_0x48a2;       /* jmp 0x48a2 */
         }
     }
 }

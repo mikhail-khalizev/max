@@ -43,11 +43,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x63d4, 1);    popw(bx);                                 /* pop bx */
             ii(0x63d5, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0x63d7, 2);    if(jnzw(0x63dc, 0x3)) goto l_0x63dc;      /* jnz 0x63dc */
-            ii(0x63d9, 3);    goto l_0x6470;                            /* jmp 0x6470 */
+            ii(0x63d9, 3);    jmpw(0x6470, 0x94); goto l_0x6470;        /* jmp 0x6470 */
         l_0x63dc:
             ii(0x63dc, 4);    cmp(memw_a16[ss, bp + 0x4], 0x1);         /* cmp word [bp+0x4], 0x1 */
             ii(0x63e0, 2);    if(jgw(0x63e5, 0x3)) goto l_0x63e5;       /* jg 0x63e5 */
-            ii(0x63e2, 3);    goto l_0x6470;                            /* jmp 0x6470 */
+            ii(0x63e2, 3);    jmpw(0x6470, 0x8b); goto l_0x6470;        /* jmp 0x6470 */
         l_0x63e5:
             ii(0x63e5, 3);    mov(bx, memw_a16[ss, bp + 0x6]);          /* mov bx, [bp+0x6] */
             ii(0x63e8, 3);    pushw(memw_a16[ds, bx + 0x2]);            /* push word [bx+0x2] */
@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6410, 1);    inc(ax);                                  /* inc ax */
             ii(0x6411, 3);    mov(memw_a16[ss, bp - 0x4], ax);          /* mov [bp-0x4], ax */
             ii(0x6414, 3);    mov(memw_a16[ss, bp - 0x2], dx);          /* mov [bp-0x2], dx */
-            ii(0x6417, 2);    goto l_0x6421;                            /* jmp 0x6421 */
+            ii(0x6417, 2);    jmpw(0x6421, 0x8); goto l_0x6421;         /* jmp 0x6421 */
         l_0x6419:
             ii(0x6419, 3);    dec(memw_a16[ss, bp - 0xa]);              /* dec word [bp-0xa] */
             ii(0x641c, 2);    if(jsw(0x643c, 0x1e)) goto l_0x643c;      /* js 0x643c */
@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x642d, 1);    popw(bx);                                 /* pop bx */
             ii(0x642e, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0x6430, 2);    if(jnzw(0x6419, -0x19)) goto l_0x6419;    /* jnz 0x6419 */
-            ii(0x6432, 2);    goto l_0x643c;                            /* jmp 0x643c */
+            ii(0x6432, 2);    jmpw(0x643c, 0x8); goto l_0x643c;         /* jmp 0x643c */
         l_0x6434:
             ii(0x6434, 3);    dec(memw_a16[ss, bp - 0xa]);              /* dec word [bp-0xa] */
             ii(0x6437, 2);    if(jsw(0x644d, 0x14)) goto l_0x644d;      /* js 0x644d */

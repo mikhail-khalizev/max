@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x894d:
             ii(0x894d, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x894f, 1);    cwd();                                    /* cwd */
-            ii(0x8950, 2);    goto l_0x89cc;                            /* jmp 0x89cc */
+            ii(0x8950, 2);    jmpw(0x89cc, 0x7a); goto l_0x89cc;        /* jmp 0x89cc */
         l_0x8952:
             ii(0x8952, 3);    les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
             ii(0x8955, 3);    mov(ax, memw_a16[es, bx]);                /* mov ax, [es:bx] */

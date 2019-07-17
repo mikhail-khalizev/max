@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8691, 1);    popw(bx);                                 /* pop bx */
             ii(0x8692, 3);    mov(memw_a16[ds, 0x9c], ax);              /* mov [0x9c], ax */
             ii(0x8695, 4);    mov(memw_a16[ds, 0x9e], dx);              /* mov [0x9e], dx */
-            ii(0x8699, 3);    goto l_0x8786;                            /* jmp 0x8786 */
+            ii(0x8699, 3);    jmpw(0x8786, 0xea); goto l_0x8786;        /* jmp 0x8786 */
         l_0x869c:
             ii(0x869c, 5);    test(memb_a16[ds, 0x47], 0x1);            /* test byte [0x47], 0x1 */
             ii(0x86a1, 2);    if(jnzw(0x86e7, 0x44)) goto l_0x86e7;     /* jnz 0x86e7 */
@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x86c1, 3);    callw(0xa274, 0x1bb0);                    /* call 0xa274 */
             ii(0x86c4, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0x86c6, 2);    if(jnzw(0x86cb, 0x3)) goto l_0x86cb;      /* jnz 0x86cb */
-            ii(0x86c8, 3);    goto l_0x8786;                            /* jmp 0x8786 */
+            ii(0x86c8, 3);    jmpw(0x8786, 0xbb); goto l_0x8786;        /* jmp 0x8786 */
         l_0x86cb:
             ii(0x86cb, 3);    mov(ax, memw_a16[ds, 0xecc]);             /* mov ax, [0xecc] */
             ii(0x86ce, 3);    mov(memw_a16[ds, 0xa8], ax);              /* mov [0xa8], ax */
@@ -181,7 +181,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x8818:
             ii(0x8818, 3);    mov(ax, memw_a16[ss, bp - 0x12]);         /* mov ax, [bp-0x12] */
             ii(0x881b, 3);    mov(dx, memw_a16[ss, bp - 0x10]);         /* mov dx, [bp-0x10] */
-            ii(0x881e, 3);    goto l_0x86de;                            /* jmp 0x86de */
+            ii(0x881e, 3);    jmpw(0x86de, -0x143); goto l_0x86de;      /* jmp 0x86de */
         l_0x8821:
             ii(0x8821, 3);    mov(ax, memw_a16[ds, 0x9c]);              /* mov ax, [0x9c] */
             ii(0x8824, 4);    mov(dx, memw_a16[ds, 0x9e]);              /* mov dx, [0x9e] */

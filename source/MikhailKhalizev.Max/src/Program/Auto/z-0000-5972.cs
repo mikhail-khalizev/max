@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x599a, 2);    sub(bx, si);                              /* sub bx, si */
             ii(0x599c, 2);    neg(bx);                                  /* neg bx */
             ii(0x599e, 2);    mov(ah, 0x4a);                            /* mov ah, 0x4a */
-            ii(0x59a0, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0x59a0, 2);    @int(0x21);                               /* int 0x21 */
             ii(0x59a2, 5);    mov(memw_a16[ss, 0xcec], ds);             /* mov [ss:0xcec], ds */
             ii(0x59a7, 1);    pushw(ss);                                /* push ss */
             ii(0x59a8, 1);    popw(es);                                 /* pop es */
@@ -38,12 +38,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x59b6, 1);    pushw(ss);                                /* push ss */
             ii(0x59b7, 1);    popw(ds);                                 /* pop ds */
             ii(0x59b8, 2);    mov(ah, 0x30);                            /* mov ah, 0x30 */
-            ii(0x59ba, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0x59ba, 2);    @int(0x21);                               /* int 0x21 */
             ii(0x59bc, 3);    mov(memw_a16[ds, 0xcee], ax);             /* mov [0xcee], ax */
             ii(0x59bf, 3);    mov(bx, 0x4);                             /* mov bx, 0x4 */
         l_0x59c2:
             ii(0x59c2, 3);    mov(ax, 0x4400);                          /* mov ax, 0x4400 */
-            ii(0x59c5, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0x59c5, 2);    @int(0x21);                               /* int 0x21 */
             ii(0x59c7, 2);    if(jbw(0x59d3, 0xa)) goto l_0x59d3;       /* jb 0x59d3 */
             ii(0x59c9, 3);    test(dl, 0x80);                           /* test dl, 0x80 */
             ii(0x59cc, 2);    if(jzw(0x59d3, 0x5)) goto l_0x59d3;       /* jz 0x59d3 */

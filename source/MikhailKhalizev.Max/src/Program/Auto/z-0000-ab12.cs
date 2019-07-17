@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_ab12()
         {
             ii(0xab12, 3);    mov(ax, 0x1600);                          /* mov ax, 0x1600 */
-            ii(0xab15, 2);    @int(0x2f);                              /* int 0x2f */
+            ii(0xab15, 2);    @int(0x2f);                               /* int 0x2f */
             ii(0xab17, 2);    test(al, 0x7f);                           /* test al, 0x7f */
             ii(0xab19, 2);    if(jzw(0xab6e, 0x53)) goto l_0xab6e;      /* jz 0xab6e */
             ii(0xab1b, 2);    cmp(al, 0x3);                             /* cmp al, 0x3 */
@@ -16,13 +16,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0xab1f, 3);    cmp(ah, 0xa);                             /* cmp ah, 0xa */
             ii(0xab22, 2);    if(jaew(0xab6e, 0x4a)) goto l_0xab6e;     /* jae 0xab6e */
             ii(0xab24, 3);    mov(ax, 0x4300);                          /* mov ax, 0x4300 */
-            ii(0xab27, 2);    @int(0x2f);                              /* int 0x2f */
+            ii(0xab27, 2);    @int(0x2f);                               /* int 0x2f */
             ii(0xab29, 2);    cmp(al, -0x80 /* 0x80 */);                /* cmp al, 0x80 */
             ii(0xab2b, 2);    if(jnzw(0xab6f, 0x42)) goto l_0xab6f;     /* jnz 0xab6f */
             ii(0xab2d, 1);    pushw(es);                                /* push es */
             ii(0xab2e, 1);    pushw(bp);                                /* push bp */
             ii(0xab2f, 3);    mov(ax, 0x4310);                          /* mov ax, 0x4310 */
-            ii(0xab32, 2);    @int(0x2f);                              /* int 0x2f */
+            ii(0xab32, 2);    @int(0x2f);                               /* int 0x2f */
             ii(0xab34, 1);    pushw(es);                                /* push es */
             ii(0xab35, 1);    pushw(bx);                                /* push bx */
             ii(0xab36, 2);    mov(bp, sp);                              /* mov bp, sp */
@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xab53, 1);    dec(ax);                                  /* dec ax */
             ii(0xab54, 2);    if(jnzw(0xab6f, 0x19)) goto l_0xab6f;     /* jnz 0xab6f */
             ii(0xab56, 3);    mov(ax, 0x1681);                          /* mov ax, 0x1681 */
-            ii(0xab59, 2);    @int(0x2f);                              /* int 0x2f */
+            ii(0xab59, 2);    @int(0x2f);                               /* int 0x2f */
             ii(0xab5b, 4);    mov(memb_a16[cs, 0x6d4b], al);            /* mov [cs:0x6d4b], al */
             ii(0xab5f, 2);    mov(ah, 0xb);                             /* mov ah, 0xb */
             ii(0xab61, 3);    callw_a16_far_ind(ss, bp + 0);            /* call far word [bp] */

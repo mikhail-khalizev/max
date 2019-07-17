@@ -50,14 +50,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa21a, 3);    add(memw_a16[ss, bp + 0x1e], cx);         /* add [bp+0x1e], cx */
             ii(0xa21d, 3);    mov(bx, memw_a16[ss, bp + 0x4]);          /* mov bx, [bp+0x4] */
             ii(0xa220, 3);    mov(ax, 0xa);                             /* mov ax, 0xa */
-            ii(0xa223, 2);    @int(0x31);                              /* int 0x31 */
+            ii(0xa223, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa225, 2);    jbw_func(0xa1b8, -0x6f);                  /* jb 0xa1b8 */
             ii(0xa227, 2);    mov(es, ax);                              /* mov es, ax */
             ii(0xa229, 2);    mov(bx, ax);                              /* mov bx, ax */
             ii(0xa22b, 3);    mov(di, memw_a16[ss, bp + 0xa]);          /* mov di, [bp+0xa] */
             ii(0xa22e, 3);    mov(memw_a16[es, di], dx);                /* mov [es:di], dx */
             ii(0xa231, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
-            ii(0xa234, 2);    @int(0x31);                              /* int 0x31 */
+            ii(0xa234, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa236, 0);    jmpd_func(0xa236, 0);                     /* Принудительное завершение функции. */
         }
     }

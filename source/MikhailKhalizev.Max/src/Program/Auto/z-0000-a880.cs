@@ -32,14 +32,14 @@ namespace MikhailKhalizev.Max.Program
         l_0xa8be:
             ii(0xa8be, 2);    mov(ah, 0x35);                            /* mov ah, 0x35 */
             ii(0xa8c0, 3);    mov(al, memb_a16[ds, 0x34]);              /* mov al, [0x34] */
-            ii(0xa8c3, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0xa8c3, 2);    @int(0x21);                               /* int 0x21 */
             ii(0xa8c5, 1);    pushw(cs);                                /* push cs */
             ii(0xa8c6, 1);    popw(ds);                                 /* pop ds */
             ii(0xa8c7, 4);    mov(memw_a16[ds, 0x12c4], bx);            /* mov [0x12c4], bx */
             ii(0xa8cb, 4);    mov(memw_a16[ds, 0x12c6], es);            /* mov [0x12c6], es */
             ii(0xa8cf, 3);    mov(dx, 0x7273);                          /* mov dx, 0x7273 */
             ii(0xa8d2, 2);    mov(ah, 0x25);                            /* mov ah, 0x25 */
-            ii(0xa8d4, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0xa8d4, 2);    @int(0x21);                               /* int 0x21 */
             ii(0xa8d6, 1);    pushw(ss);                                /* push ss */
             ii(0xa8d7, 1);    popw(ds);                                 /* pop ds */
             ii(0xa8d8, 6);    mov(memw_a16[ds, 0xac2], 0x7322);         /* mov word [0xac2], 0x7322 */
@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa915, 1);    popw(cx);                                 /* pop cx */
             ii(0xa916, 1);    popw(ax);                                 /* pop ax */
             ii(0xa917, 2);    mov(ah, 0x4c);                            /* mov ah, 0x4c */
-            ii(0xa919, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0xa919, 2);    @int(0x21);                               /* int 0x21 */
             ii(0xa91b, 3);    callw(0xa0c7, -0x857);                    /* call 0xa0c7 */
             ii(0xa91e, 6);    adc(memw_a16[ds, bx + si + 0], 0);        /* adc word [bx+si], 0x0 */
             ii(0xa924, 2);    add(memb_a16[ds, bx + si], al);           /* add [bx+si], al */
@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa9c2, 3);    sub(di, 0x32);                            /* sub di, 0x32 */
             ii(0xa9c5, 2);    xor(bx, bx);                              /* xor bx, bx */
             ii(0xa9c7, 3);    mov(ax, 0x302);                           /* mov ax, 0x302 */
-            ii(0xa9ca, 2);    @int(0x31);                              /* int 0x31 */
+            ii(0xa9ca, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa9cc, 3);    mov(ax, 0);                               /* mov ax, 0x0 */
             ii(0xa9cf, 2);    if(jbw(0xa9f4, 0x23)) goto l_0xa9f4;      /* jb 0xa9f4 */
             ii(0xa9d1, 5);    mov(ds, memw_a16[cs, 0x208e]);            /* mov ds, [cs:0x208e] */

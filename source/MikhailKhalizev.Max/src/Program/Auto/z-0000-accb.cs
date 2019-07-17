@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xaccc, 1);    pushw(di);                                /* push di */
             ii(0xaccd, 3);    callw(0x9f7b, -0xd55);                    /* call 0x9f7b */
             ii(0xacd0, 3);    mov(ax, 0x3567);                          /* mov ax, 0x3567 */
-            ii(0xacd3, 2);    @int(0x21);                              /* int 0x21 */
+            ii(0xacd3, 2);    @int(0x21);                               /* int 0x21 */
             ii(0xacd5, 2);    mov(cx, es);                              /* mov cx, es */
             ii(0xacd7, 4);    cmp(cx, memw_a16[ds, 0x58]);              /* cmp cx, [0x58] */
             ii(0xacdb, 2);    jzw_func(0xad46, 0x69);                   /* jz 0xad46 */
@@ -30,12 +30,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0xad0e, 5);    test(memb_a16[ds, 0x14], 0x2);            /* test byte [0x14], 0x2 */
             ii(0xad13, 2);    jnzw_func(0xad41, 0x2c);                  /* jnz 0xad41 */
             ii(0xad15, 3);    mov(ax, 0xde00);                          /* mov ax, 0xde00 */
-            ii(0xad18, 2);    @int(0x67);                              /* int 0x67 */
+            ii(0xad18, 2);    @int(0x67);                               /* int 0x67 */
             ii(0xad1a, 2);    or(ah, ah);                               /* or ah, ah */
             ii(0xad1c, 2);    jzw_func(0xad41, 0x23);                   /* jz 0xad41 */
             ii(0xad1e, 2);    mov(ah, 0x43);                            /* mov ah, 0x43 */
             ii(0xad20, 3);    mov(bx, 0x1);                             /* mov bx, 0x1 */
-            ii(0xad23, 2);    @int(0x67);                              /* int 0x67 */
+            ii(0xad23, 2);    @int(0x67);                               /* int 0x67 */
             ii(0xad25, 2);    or(ah, ah);                               /* or ah, ah */
             ii(0xad27, 2);    jnzw_func(0xad46, 0x1d);                  /* jnz 0xad46 */
             ii(0xad29, 5);    mov(memw_a16[cs, 0x2ad9], dx);            /* mov [cs:0x2ad9], dx */

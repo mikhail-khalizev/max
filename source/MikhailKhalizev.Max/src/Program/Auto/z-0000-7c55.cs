@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7c61, 2);    if(jnzw(0x7c67, 0x4)) goto l_0x7c67;      /* jnz 0x7c67 */
         l_0x7c63:
             ii(0x7c63, 2);    sub(ax, ax);                              /* sub ax, ax */
-            ii(0x7c65, 2);    goto l_0x7cc9;                            /* jmp 0x7cc9 */
+            ii(0x7c65, 2);    jmpw(0x7cc9, 0x62); goto l_0x7cc9;        /* jmp 0x7cc9 */
         l_0x7c67:
             ii(0x7c67, 3);    mov(ax, memw_a16[ds, 0x9b8]);             /* mov ax, [0x9b8] */
             ii(0x7c6a, 5);    mov(memw_a16[ss, bp - 0x4], 0);           /* mov word [bp-0x4], 0x0 */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7c75, 4);    cmp(memb_a16[es, bx], 0);                 /* cmp byte [es:bx], 0x0 */
             ii(0x7c79, 2);    if(jzw(0x7c63, -0x18)) goto l_0x7c63;     /* jz 0x7c63 */
             ii(0x7c7b, 3);    mov(si, memw_a16[ss, bp + 0x4]);          /* mov si, [bp+0x4] */
-            ii(0x7c7e, 2);    goto l_0x7c9c;                            /* jmp 0x7c9c */
+            ii(0x7c7e, 2);    jmpw(0x7c9c, 0x1c); goto l_0x7c9c;        /* jmp 0x7c9c */
         l_0x7c80:
             ii(0x7c80, 2);    mov(al, memb_a16[ds, si]);                /* mov al, [si] */
             ii(0x7c82, 3);    les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7c8d, 3);    inc(memw_a16[ss, bp - 0x4]);              /* inc word [bp-0x4] */
             ii(0x7c90, 4);    cmp(memb_a16[es, bx], 0);                 /* cmp byte [es:bx], 0x0 */
             ii(0x7c94, 2);    if(jzw(0x7c72, -0x24)) goto l_0x7c72;     /* jz 0x7c72 */
-            ii(0x7c96, 2);    goto l_0x7c8a;                            /* jmp 0x7c8a */
+            ii(0x7c96, 2);    jmpw(0x7c8a, -0xe); goto l_0x7c8a;        /* jmp 0x7c8a */
         l_0x7c98:
             ii(0x7c98, 1);    inc(si);                                  /* inc si */
             ii(0x7c99, 3);    inc(memw_a16[ss, bp - 0x4]);              /* inc word [bp-0x4] */

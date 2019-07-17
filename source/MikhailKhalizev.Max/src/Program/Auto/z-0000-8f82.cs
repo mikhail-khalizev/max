@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8f97, 5);    cmp(memb_a16[ds, 0xcee], 0x3);            /* cmp byte [0xcee], 0x3 */
             ii(0x8f9c, 2);    if(jgew(0x8fa1, 0x3)) goto l_0x8fa1;      /* jge 0x8fa1 */
         l_0x8f9e:
-            ii(0x8f9e, 3);    goto l_0x90c2;                            /* jmp 0x90c2 */
+            ii(0x8f9e, 3);    jmpw(0x90c2, 0x121); goto l_0x90c2;       /* jmp 0x90c2 */
         l_0x8fa1:
             ii(0x8fa1, 3);    callw(0x9edc, 0xf38);                     /* call 0x9edc */
             ii(0x8fa4, 4);    mov(memw_a16[ss, bp - 0x106], ax);        /* mov [bp-0x106], ax */
@@ -124,7 +124,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9091, 5);    cmp(memw_a16[ss, bp - 0x10a], 0x4d);      /* cmp word [bp-0x10a], 0x4d */
             ii(0x9096, 2);    if(jnzw(0x909d, 0x5)) goto l_0x909d;      /* jnz 0x909d */
             ii(0x9098, 3);    callw(0x93c2, 0x327);                     /* call 0x93c2 */
-            ii(0x909b, 2);    goto l_0x90ac;                            /* jmp 0x90ac */
+            ii(0x909b, 2);    jmpw(0x90ac, 0xf); goto l_0x90ac;         /* jmp 0x90ac */
         l_0x909d:
             ii(0x909d, 4);    pushw(memw_a16[ss, bp - 0x106]);          /* push word [bp-0x106] */
             ii(0x90a1, 3);    callw(0x91cb, 0x127);                     /* call 0x91cb */

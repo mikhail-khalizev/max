@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb058, 2);    if(jzw(0xb065, 0xb)) goto l_0xb065;       /* jz 0xb065 */
             ii(0xb05a, 4);    sub(edi, 0x4);                            /* sub edi, 0x4 */
             ii(0xb05e, 5);    mov(memb_a32[es, edi], 0);                /* mov byte [es:edi], 0x0 */
-            ii(0xb063, 2);    goto l_0xb053;                            /* jmp 0xb053 */
+            ii(0xb063, 2);    jmpw(0xb053, -0x12); goto l_0xb053;       /* jmp 0xb053 */
         l_0xb065:
             ii(0xb065, 1);    pushw(ax);                                /* push ax */
             ii(0xb066, 3);    callw(0x3f1c, -0x714d);                   /* call 0x3f1c */
@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb06a, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0xb06c, 4);    jzw_func(0xaf1b, -0x155);                 /* jz 0xaf1b */
             ii(0xb070, 5);    mov(cx, memw_a16[cs, 0x79f6]);            /* mov cx, [cs:0x79f6] */
-            ii(0xb075, 3);    goto l_0xafec;                            /* jmp 0xafec */
+            ii(0xb075, 3);    jmpw(0xafec, -0x8c); goto l_0xafec;       /* jmp 0xafec */
         }
     }
 }

@@ -179,238 +179,157 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (gotoLabelConditional)
                 sb.Append("if(");
 
-            if (!gotoLabel)
+            if (Mnemonic == ud_mnemonic_code.UD_Iint)
+                sb.Append("@");
+            sb.Append(udis86.ud_lookup_mnemonic(Mnemonic));
+
+            if (flags.HasFlag(InstrFlags.UseOprSizeInside))
             {
-                if (Mnemonic == ud_mnemonic_code.UD_Iint)
-                    sb.Append("@");
-                sb.Append(udis86.ud_lookup_mnemonic(Mnemonic));
+                if (eff_opr_size == 8)
+                    sb.Append('b');
+                else if (eff_opr_size == 16)
+                    sb.Append('w');
+                else if (eff_opr_size == 32)
+                    sb.Append('d');
+                else if (eff_opr_size != 0)
+                    throw new InvalidOperationException();
+            }
 
-                if (flags.HasFlag(InstrFlags.UseOprSizeInside))
+            if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
+                new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
+                BrFar &&
+                Operands[0].type == ud_type.UD_OP_MEM)
+                sb.Append(adr_mode_str);
+
+            if (BrFar)
+                sb.Append("_far");
+
+            var need_write_namespace = IsCall;
+            if (IsAnyJump || IsAnyLoop || IsCall)
+            {
+                if (Operands[0].type == ud_type.UD_OP_PTR)
                 {
-                    if (eff_opr_size == 8)
-                        sb.Append('b');
-                    else if (eff_opr_size == 16)
-                        sb.Append('w');
-                    else if (eff_opr_size == 32)
-                        sb.Append('d');
-                    else if (eff_opr_size != 0)
-                        throw new InvalidOperationException();
-                }
-
-                if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
-                    new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
-                    BrFar &&
-                    Operands[0].type == ud_type.UD_OP_MEM)
-                    sb.Append(adr_mode_str);
-
-                if (BrFar)
-                    sb.Append("_far");
-
-                var need_write_namespace = IsCall;
-                if (IsAnyJump || IsAnyLoop || IsCall)
-                {
-                    if (Operands[0].type == ud_type.UD_OP_PTR)
-                    {
-                        sb.Append("_abs");
-                        need_write_namespace = true;
-                    }
-                    else if (Operands[0].type == ud_type.UD_OP_MEM || Operands[0].type == ud_type.UD_OP_REG)
-                    {
-                        sb.Append(BrFar ? "_ind" : "_abs");
-                        need_write_namespace = true;
-                    }
-                }
-                else
+                    sb.Append("_abs");
                     need_write_namespace = true;
-
-
-                sb.Append(cmd_suffix);
-                sb.Append("(");
-
-
-                var non_first_arg = false;
-                var use_pfx_seg = false; // Используется ли где-то в операндах сегмент?
-
-                foreach (var op in Operands)
+                }
+                else if (Operands[0].type == ud_type.UD_OP_MEM || Operands[0].type == ud_type.UD_OP_REG)
                 {
-                    if (non_first_arg)
-                        sb.Append(", ");
-                    non_first_arg = true;
+                    sb.Append(BrFar ? "_ind" : "_abs");
+                    need_write_namespace = true;
+                }
+            }
+            else
+                need_write_namespace = true;
 
-                    var opr_size = (int) op.size;
-                    if (opr_size == 0)
-                        opr_size = eff_opr_size;
 
-                    int val;
-                    switch (op.type)
+            sb.Append(cmd_suffix);
+            sb.Append("(");
+
+
+            var non_first_arg = false;
+            var use_pfx_seg = false; // Используется ли где-то в операндах сегмент?
+
+            foreach (var op in Operands)
+            {
+                if (non_first_arg)
+                    sb.Append(", ");
+                non_first_arg = true;
+
+                var opr_size = (int) op.size;
+                if (opr_size == 0)
+                    opr_size = eff_opr_size;
+
+                int val;
+                switch (op.type)
+                {
+                    case ud_type.UD_NONE:
+                        break;
+
+                    case ud_type.UD_OP_REG:
+                        if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
+                            sb.Append(
+                                $"{HexHelper.ToString(op.@base - ud_type.UD_R_ST0, o => o.SetTrimZero())} /* {syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]} */");
+                        else
+                            sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
+                        break;
+
+                    case ud_type.UD_OP_MEM:
                     {
-                        case ud_type.UD_NONE:
-                            break;
+                        var mem_inside = /* Обращение к памяти происходит внутри инструкции. */
+                            new[]
+                            {
+                                ud_mnemonic_code.UD_Ilds,
+                                ud_mnemonic_code.UD_Iles,
+                                ud_mnemonic_code.UD_Ilss,
+                                ud_mnemonic_code.UD_Ilgs,
+                                ud_mnemonic_code.UD_Ilfs,
+                                ud_mnemonic_code.UD_Ilea,
+                                ud_mnemonic_code.UD_Ilgdt,
+                                ud_mnemonic_code.UD_Ilidt,
+                                ud_mnemonic_code.UD_Isidt,
+                                ud_mnemonic_code.UD_Ifnsave,
+                                ud_mnemonic_code.UD_Ifrstor,
+                                ud_mnemonic_code.UD_Ifbstp,
+                                ud_mnemonic_code.UD_Ibound
+                            }.Contains(Mnemonic) ||
+                            new[]
+                            {
+                                ud_mnemonic_code.UD_Icall,
+                                ud_mnemonic_code.UD_Ijmp
+                            }.Contains(Mnemonic) && BrFar;
 
-                        case ud_type.UD_OP_REG:
-                            if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
-                                sb.Append(
-                                    $"{HexHelper.ToString(op.@base - ud_type.UD_R_ST0, o => o.SetTrimZero())} /* {syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]} */");
-                            else
-                                sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
-                            break;
-
-                        case ud_type.UD_OP_MEM:
+                        if (mem_inside == false)
                         {
-                            var mem_inside = /* Обращение к памяти происходит внутри инструкции. */
-                                new[]
-                                {
-                                    ud_mnemonic_code.UD_Ilds,
-                                    ud_mnemonic_code.UD_Iles,
-                                    ud_mnemonic_code.UD_Ilss,
-                                    ud_mnemonic_code.UD_Ilgs,
-                                    ud_mnemonic_code.UD_Ilfs,
-                                    ud_mnemonic_code.UD_Ilea,
-                                    ud_mnemonic_code.UD_Ilgdt,
-                                    ud_mnemonic_code.UD_Ilidt,
-                                    ud_mnemonic_code.UD_Isidt,
-                                    ud_mnemonic_code.UD_Ifnsave,
-                                    ud_mnemonic_code.UD_Ifrstor,
-                                    ud_mnemonic_code.UD_Ifbstp,
-                                    ud_mnemonic_code.UD_Ibound
-                                }.Contains(Mnemonic) ||
-                                new[]
-                                {
-                                    ud_mnemonic_code.UD_Icall,
-                                    ud_mnemonic_code.UD_Ijmp
-                                }.Contains(Mnemonic) && BrFar;
-
-                            if (mem_inside == false)
-                            {
-                                if (opr_size == 8)
-                                    sb.Append("memb");
-                                else if (opr_size == 16)
-                                    sb.Append("memw");
-                                else if (opr_size == 32)
-                                    sb.Append("memd");
-                                else if (opr_size == 64)
-                                    sb.Append("memq");
-                                else if (opr_size == 80)
-                                    sb.Append("memt");
-                                else
-                                    throw new NotImplementedException();
-                                sb.Append($"{adr_mode_str}[");
-                            }
-
-                            if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
-                            {
-                                sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
-
-                                if (PfxSeg != ud_type.UD_NONE)
-                                    use_pfx_seg = true;
-                            }
-
-                            var op_f = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
-                            if (op.@base != ud_type.UD_NONE)
-                            {
-                                sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
-                                op_f = true;
-                            }
-
-                            if (op.index != ud_type.UD_NONE)
-                            {
-                                if (op_f)
-                                    sb.Append(" + ");
-                                op_f = true;
-
-                                sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
-                            }
-
-                            if (1 < op.scale)
-                            {
-                                if (op.index == ud_type.UD_NONE)
-                                    throw new NotImplementedException();
-
-                                sb.Append($" * {HexHelper.ToString(op.scale, o => o.SetTrimZero())}");
-                            }
-
-                            if (op.offset != 0)
-                            {
-                                switch (op.offset)
-                                {
-                                    case 8:
-                                        val = op.lval.@sbyte;
-                                        break;
-                                    case 16:
-                                        val = op.lval.sword;
-                                        break;
-                                    case 32:
-                                        val = op.lval.sdword;
-                                        break;
-                                    default: throw new NotImplementedException();
-                                }
-
-                                if (val < 0)
-                                {
-                                    sb.Append(op_f ? " - " : "-");
-                                    sb.Append($"0x{-val:x}");
-                                }
-                                else
-                                {
-                                    sb.Append(op_f ? " + " : "");
-                                    sb.Append(AddressNameConverter.GetResultName((Address) val, false, need_write_namespace));
-                                }
-
-                                op_f = true;
-                            }
-
-                            if (mem_inside == false)
-                                sb.Append(']');
-                            break;
+                            if (opr_size == 8)
+                                sb.Append("memb");
+                            else if (opr_size == 16)
+                                sb.Append("memw");
+                            else if (opr_size == 32)
+                                sb.Append("memd");
+                            else if (opr_size == 64)
+                                sb.Append("memq");
+                            else if (opr_size == 80)
+                                sb.Append("memt");
+                            else
+                                throw new NotImplementedException();
+                            sb.Append($"{adr_mode_str}[");
                         }
 
-                        case ud_type.UD_OP_IMM:
-                            switch (opr_size)
-                            {
-                                case 8:
-                                {
-                                    var need_sign_extend = new[]
-                                    {
-                                        ud_mnemonic_code.UD_Iimul,
-                                        ud_mnemonic_code.UD_Ipush,
-                                        ud_mnemonic_code.UD_Iadc,
-                                        ud_mnemonic_code.UD_Iadd,
-                                        ud_mnemonic_code.UD_Isbb,
-                                        ud_mnemonic_code.UD_Isub,
-                                        ud_mnemonic_code.UD_Icmp
-                                    }.Contains(Mnemonic);
+                        if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
+                        {
+                            sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
 
-                                    // Работа не с 8-байтой инструкцией.
-                                    if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
-                                        need_sign_extend = need_sign_extend ||
-                                            Mnemonic == ud_mnemonic_code.UD_Iand ||
-                                            Mnemonic == ud_mnemonic_code.UD_Ior ||
-                                            Mnemonic == ud_mnemonic_code.UD_Ixor;
+                            if (PfxSeg != ud_type.UD_NONE)
+                                use_pfx_seg = true;
+                        }
 
-                                    val = op.lval.@sbyte;
+                        var op_f = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
+                        if (op.@base != ud_type.UD_NONE)
+                        {
+                            sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
+                            op_f = true;
+                        }
 
-                                    if (val < 0 && need_sign_extend)
-                                        sb.Append(
-                                            $"-{HexHelper.ToString(-val, o => o.SetTrimZero())} /* {HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero())} */");
-                                    else
-                                        sb.Append(HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero()));
-                                    break;
-                                }
+                        if (op.index != ud_type.UD_NONE)
+                        {
+                            if (op_f)
+                                sb.Append(" + ");
+                            op_f = true;
 
-                                case 16:
-                                    sb.Append(AddressNameConverter.GetResultName(op.lval.uword, false, need_write_namespace));
-                                    break;
-                                case 32:
-                                    sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, need_write_namespace));
-                                    break;
-                                default:
-                                    throw new NotImplementedException();
-                            }
+                            sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
+                        }
 
-                            break;
+                        if (1 < op.scale)
+                        {
+                            if (op.index == ud_type.UD_NONE)
+                                throw new NotImplementedException();
 
-                        case ud_type.UD_OP_JIMM:
-                            switch (opr_size)
+                            sb.Append($" * {HexHelper.ToString(op.scale, o => o.SetTrimZero())}");
+                        }
+
+                        if (op.offset != 0)
+                        {
+                            switch (op.offset)
                             {
                                 case 8:
                                     val = op.lval.@sbyte;
@@ -424,56 +343,136 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 default: throw new NotImplementedException();
                             }
 
-                            sb.Append(AddressNameConverter.GetResultName(End.WithBytes(val), false, need_write_namespace));
-                            sb.Append(", ");
+                            if (val < 0)
+                            {
+                                sb.Append(op_f ? " - " : "-");
+                                sb.Append($"0x{-val:x}");
+                            }
+                            else
+                            {
+                                sb.Append(op_f ? " + " : "");
+                                sb.Append(AddressNameConverter.GetResultName((Address) val, false, need_write_namespace));
+                            }
 
-                            sb.Append(
-                                val < 0
-                                    ? $"-{HexHelper.ToString(-val, o => o.SetTrimZero())}"
-                                    : HexHelper.ToString(val, o => o.SetTrimZero()));
-                            break;
+                            op_f = true;
+                        }
 
-                        case ud_type.UD_OP_CONST:
-                            sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, need_write_namespace));
-                            break;
-
-                        case ud_type.UD_OP_PTR:
-                            sb.Append(
-                                $"{HexHelper.ToString(op.lval.ptr_seg, o => o.SetTrimZero())}, {HexHelper.ToString(op.lval.ptr_off, o => o.SetTrimZero())}");
-                            break;
-
-                        default:
-                            throw new NotImplementedException();
+                        if (mem_inside == false)
+                            sb.Append(']');
+                        break;
                     }
-                }
 
-                if (use_pfx_seg == false && PfxSeg != ud_type.UD_NONE
-                    && Mnemonic != ud_mnemonic_code.UD_Imov
-                    && Mnemonic != ud_mnemonic_code.UD_Ilea)
-                {
-                    // к примеру movsb_a16(es)
+                    case ud_type.UD_OP_IMM:
+                        switch (opr_size)
+                        {
+                            case 8:
+                            {
+                                var need_sign_extend = new[]
+                                {
+                                    ud_mnemonic_code.UD_Iimul,
+                                    ud_mnemonic_code.UD_Ipush,
+                                    ud_mnemonic_code.UD_Iadc,
+                                    ud_mnemonic_code.UD_Iadd,
+                                    ud_mnemonic_code.UD_Isbb,
+                                    ud_mnemonic_code.UD_Isub,
+                                    ud_mnemonic_code.UD_Icmp
+                                }.Contains(Mnemonic);
 
-                    if (non_first_arg)
+                                // Работа не с 8-байтой инструкцией.
+                                if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
+                                    need_sign_extend = need_sign_extend ||
+                                        Mnemonic == ud_mnemonic_code.UD_Iand ||
+                                        Mnemonic == ud_mnemonic_code.UD_Ior ||
+                                        Mnemonic == ud_mnemonic_code.UD_Ixor;
+
+                                val = op.lval.@sbyte;
+
+                                if (val < 0 && need_sign_extend)
+                                    sb.Append(
+                                        $"-{HexHelper.ToString(-val, o => o.SetTrimZero())} /* {HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero())} */");
+                                else
+                                    sb.Append(HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero()));
+                                break;
+                            }
+
+                            case 16:
+                                sb.Append(AddressNameConverter.GetResultName(op.lval.uword, false, need_write_namespace));
+                                break;
+                            case 32:
+                                sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, need_write_namespace));
+                                break;
+                            default:
+                                throw new NotImplementedException();
+                        }
+
+                        break;
+
+                    case ud_type.UD_OP_JIMM:
+                        switch (opr_size)
+                        {
+                            case 8:
+                                val = op.lval.@sbyte;
+                                break;
+                            case 16:
+                                val = op.lval.sword;
+                                break;
+                            case 32:
+                                val = op.lval.sdword;
+                                break;
+                            default: throw new NotImplementedException();
+                        }
+
+                        sb.Append(AddressNameConverter.GetResultName(End.WithBytes(val), false, need_write_namespace));
                         sb.Append(", ");
-                    non_first_arg = true;
 
-                    sb.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
+                        sb.Append(
+                            val < 0
+                                ? $"-{HexHelper.ToString(-val, o => o.SetTrimZero())}"
+                                : HexHelper.ToString(val, o => o.SetTrimZero()));
+                        break;
+
+                    case ud_type.UD_OP_CONST:
+                        sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, need_write_namespace));
+                        break;
+
+                    case ud_type.UD_OP_PTR:
+                        sb.Append(
+                            $"{HexHelper.ToString(op.lval.ptr_seg, o => o.SetTrimZero())}, {HexHelper.ToString(op.lval.ptr_off, o => o.SetTrimZero())}");
+                        break;
+
+                    default:
+                        throw new NotImplementedException();
                 }
-
-                if (func_add_arg.Length != 0)
-                {
-                    if (non_first_arg)
-                        sb.Append(", ");
-                    non_first_arg = true;
-
-                    sb.Append(func_add_arg);
-                }
-
-                if (HaveAnyRep)
-                    sb.Append(")");
-                sb.Append(")");
             }
-            
+
+            if (use_pfx_seg == false && PfxSeg != ud_type.UD_NONE
+                && Mnemonic != ud_mnemonic_code.UD_Imov
+                && Mnemonic != ud_mnemonic_code.UD_Ilea)
+            {
+                // к примеру movsb_a16(es)
+
+                if (non_first_arg)
+                    sb.Append(", ");
+                non_first_arg = true;
+
+                sb.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
+            }
+
+            if (func_add_arg.Length != 0)
+            {
+                if (non_first_arg)
+                    sb.Append(", ");
+                non_first_arg = true;
+
+                sb.Append(func_add_arg);
+            }
+
+            if (HaveAnyRep)
+                sb.Append(")");
+            sb.Append(")");
+
+            if (gotoLabel)
+                sb.Append("; ");
             if (gotoLabelConditional)
                 sb.Append($") ");
             if (gotoLabelConditional || gotoLabel)

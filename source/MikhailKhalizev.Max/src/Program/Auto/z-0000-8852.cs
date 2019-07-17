@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x88b0, 3);    add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x88b3, 5);    add(memw_a16[ss, bp - 0x4], 0x400);       /* add word [bp-0x4], 0x400 */
             ii(0x88b8, 4);    adc(memw_a16[ss, bp - 0x2], 0);           /* adc word [bp-0x2], 0x0 */
-            ii(0x88bc, 2);    goto l_0x8867;                            /* jmp 0x8867 */
+            ii(0x88bc, 2);    jmpw(0x8867, -0x57); goto l_0x8867;       /* jmp 0x8867 */
         l_0x88be:
             ii(0x88be, 3);    mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x88c1, 3);    add(ah, 0x60);                            /* add ah, 0x60 */
