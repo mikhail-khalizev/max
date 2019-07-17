@@ -443,12 +443,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <seealso cref="CurrentInstructionAddress"/>
         public Address eip { get; set; }
 
-        /// <summary>
-        /// Gets or sets address of current executing instruction.
-        /// </summary>
-        /// <seealso cref="eip"/>
-        public Address CurrentInstructionAddress { get; set; }
-
         #endregion
 
         #region Memory
@@ -1338,14 +1332,15 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var curSave = CurrentInstructionAddress;
             var eipSave = eip;
             var mode = cs.db ? 32 : 16;
-            var returnAddress = cs + CurrentInstructionAddress;
+
+            var returnAddress = cs[CurrentInstructionAddress];
 
             int_internal(0xe, true, false, true, 0);
 
             if (correct_function_position(returnAddress))
                 throw new NotImplementedException();
+            
             check_mode(mode);
-
             CurrentInstructionAddress = curSave;
             eip = eipSave;
         }
@@ -1353,6 +1348,12 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         #endregion
 
         #region C# emulate specific
+        
+        /// <summary>
+        /// Gets or sets address of current executing instruction.
+        /// </summary>
+        /// <seealso cref="eip"/>
+        public Address CurrentInstructionAddress { get; set; }
 
         public int CSharpEmulateMode { get; set; }
         public int CSharpFunctionDelta { get; set; }
@@ -1361,7 +1362,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         // todo rename ExecuteSubMethod
         public event EventHandler<EventArgs> run_func;
-        
+
         public void check_mode() => check_mode(CSharpEmulateMode);
 
         public void check_mode(int mode)
@@ -1372,7 +1373,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 throw new Exception("Bad mode");
         }
 
-        /** @return Возвращает истину, если необходимо сделать return. */
+        // @return Возвращает истину, если необходимо сделать return.
         public bool correct_function_position(Address returnAddress)
         {
             callReturnAddresses.Add(returnAddress);
@@ -1385,10 +1386,12 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 {
                     var toRun = cs[eip];
                     hist.Add(toRun);
-
+                    
                     if (toRun == 0)
                         throw new Exception("Переход по нулевому указателю.");
 
+                    Memory.GetMinSize(cs, eip, 1); // Проверим, есть ли у нас доступ к памяти.
+                    
                     if (toRun == returnAddress)
                         return false;
 
@@ -1469,7 +1472,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var rv = dst.UInt64;
 
             var rs = dst.IsPositive;
-            
+
             eflags.of = (ds == ss) && (ss != rs);
             eflags.cf = rv < sv || rv < dv;
             set_sf_zf_pf(dst);
@@ -1492,7 +1495,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             var sv = src.UInt64;
             var dv = dst.UInt64;
-            
+
             dst.UInt64 = dv + sv;
 
             var rv = dst.UInt64;
@@ -2864,7 +2867,18 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void @int(int number)
         {
-            throw new NotImplementedException();
+            var ret_addr = cs[eip];
+
+            int_internal(number, true, true, false, 0);
+            
+            //eip_next = eip;
+
+            // TODO dos::pic.run_irqs();
+            
+            if (correct_function_position(ret_addr))
+                throw new NotImplementedException(); // return;
+
+            check_mode();
         }
 
         /// <inheritdoc />
@@ -2906,13 +2920,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void iretw()
         {
-            throw new NotImplementedException();
+            iret_(16);
         }
 
         /// <inheritdoc />
         public void iretd()
         {
-            throw new NotImplementedException();
+            iret_(32);
         }
 
         /// <inheritdoc />
@@ -4627,7 +4641,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 value = memw_a16[ss, sp - 2].UInt16;
             }
 
-            if (d != null)
+            if ((d as ValueFromAnyValue)?.Value is SegmentRegister sr)
+                sr.Load(value);
+            else if (d != null)
                 d.UInt64 = value;
 
             return value;
@@ -4941,7 +4957,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         {
             // todo Join popw, popd in one method push ?
             // todo Join pushw, pushd in one method push ?
-            
+
             if (ss.db)
             {
                 esp -= 2;
@@ -4992,13 +5008,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void pushfw()
         {
-            throw new NotImplementedException();
+            pushw((ushort)eflags.UInt64);
         }
 
         /// <inheritdoc />
         public void pushfd()
         {
-            throw new NotImplementedException();
+            pushd((uint)eflags.UInt64);
         }
 
         /// <inheritdoc />
@@ -5476,8 +5492,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             if (count != 0 && count <= dst.Bits)
             {
                 eflags.cf = dst.IsBitSet(dst.Bits - count);
-                var total = ((BigInteger) dst.UInt64 << src.Bits) + src.UInt64;
-                dst.UInt64 = (ulong) (total >> (src.Bits - count));
+                var total = ((BigInteger)dst.UInt64 << src.Bits) + src.UInt64;
+                dst.UInt64 = (ulong)(total >> (src.Bits - count));
             }
         }
 

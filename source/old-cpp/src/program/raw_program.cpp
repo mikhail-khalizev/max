@@ -447,6 +447,7 @@ uint_<32> add_internal_dyn_func(void (*func)(), uint_<8> mode)
     return internal_dyn_count;
 }
 
+// +
 void add_internal_dyn_func(void (*func)(), uint_<8> mode, uint_<32> addr)
 {
     auto range_iter = funcs_by_pc.equal_range(addr);
@@ -458,6 +459,7 @@ void add_internal_dyn_func(void (*func)(), uint_<8> mode, uint_<32> addr)
     funcs_by_pc.insert(std::make_pair(addr, func_info(func, mode)));
 }
 
+// +
 void add_internal_dyn_func_if_free(void (*func)(), uint_<8> mode, uint_<32> addr)
 {
     auto iter = funcs_by_pc.find(addr);

@@ -38,8 +38,11 @@ namespace MikhailKhalizev.Utils
 
         public static byte[] ToBytes(string hex, Func<Options, Options> setupOptions = null)
         {
+            if (string.IsNullOrEmpty(hex))
+                return Array.Empty<byte>();
+
             var options = setupOptions?.Invoke(Options.Default) ?? Options.Default;
-            hex = hex.WithoutHexPrefix().Replace("_", "");
+            hex = hex.WithoutHexPrefix().Replace(options.GroupSeparator, "");
 
             var ret = new byte[(hex.Length + 1) / 2];
 

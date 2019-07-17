@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
             Configuration = configuration;
 
             DosMemory = new Memory(implementation);
-            DosInterrupt = new Interrupt(implementation);
+            DosInterrupt = new Interrupt(implementation, this);
             DosTimer = new Timer(implementation);
 
             implementation.run_func += run_func;
@@ -50,7 +50,14 @@ namespace MikhailKhalizev.Max.Program
         public void Start()
         {
             MethodInfos = MethodInfos.Load(Configuration.BinToCSharp);
-            
+            InitializeMethods();
+            DosInterrupt.install_std_ints();
+            init_x86_dos_prog();
+            Implementation.correct_function_position(0);
+        }
+
+        private void InitializeMethods()
+        {
             foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
             {
                 object instance = null;
@@ -75,17 +82,13 @@ namespace MikhailKhalizev.Max.Program
                         funcs_by_pc.Add(address, fi);
                 }
             }
-            
-            init_x86_dos_prog();
-            Implementation.correct_function_position(0);
         }
 
         public void init_x86_dos_prog()
         {
             var exeBytes = File.ReadAllBytes(Path.Combine(Configuration.Max.InstalledPath, Configuration.Max.ExeFileName));
             var dosMz = new DosMz(exeBytes);
-
-
+            
             if (!dosMz.IsCorrect)
                 throw new Exception();
 
@@ -179,9 +182,7 @@ namespace MikhailKhalizev.Max.Program
             // memw_a16(ds, 0x3) = 0x1346 - 0x191;
             memw_a16[ds, 0x3] = 0xc02 - 0x191;
 
-
-            DosInterrupt.install_std_ints();
-
+            
 
             // Устанавливаем начальные значения в регистры.
 
@@ -220,7 +221,7 @@ namespace MikhailKhalizev.Max.Program
             if (on_run_func__dump_reg)
             {
                 Console.WriteLine(
-                    $"before run 0x{run:x}" +
+                    $"before run {run:x}" +
                     $", eax: 0x{eax.UInt32:x}" +
                     $", ebx: 0x{ebx.UInt32:x}" +
                     $", ecx: 0x{ecx.UInt32:x}" +
@@ -252,7 +253,7 @@ namespace MikhailKhalizev.Max.Program
             if (on_run_func__dump_reg)
             {
                 Console.WriteLine(
-                    $"after run 0x{run:x}" +
+                    $"after run {run:x}" +
                     $", eax: 0x{eax.UInt32:x}" +
                     $", ebx: 0x{ebx.UInt32:x}" +
                     $", ecx: 0x{ecx.UInt32:x}" +
@@ -270,21 +271,21 @@ namespace MikhailKhalizev.Max.Program
             }
         }
 
-        private MyMethodInfo get_func(SegmentRegister seg, Address addr)
+        private MyMethodInfo get_func(SegmentRegister seg, Address address)
         {
-            if (seg[addr] == 0)
+            if (seg[address] == 0)
                 throw new InvalidOperationException("Запрос функции по нулевому указателю.");
 
-            var ret = find_func_exact(seg, addr);
+            var ret = find_func_exact(seg, address);
             if (ret != null)
                 return ret;
 
-            ret = find_func_from_known_and_remember_it(seg, addr);
+            ret = find_func_from_known_and_remember_it(seg, address);
             if (ret != null)
                 return ret;
 
             // Всё-таки декодируем.
-            decode_function(seg, addr);
+            decode_function(seg, address);
             
             // TODO Update comment: Use in bash:  ERR=5 ; while [ $ERR == 5 ] ; do make -j8 && { rm /tmp/*.png ; time ./openmax ; } ; ERR=$? ; done
             Environment.Exit(5);
@@ -293,9 +294,9 @@ namespace MikhailKhalizev.Max.Program
             throw new InvalidOperationException("Функция не найдена.");
         }
 
-        private MyMethodInfo find_func_exact(SegmentRegister seg, Address addr)
+        private MyMethodInfo find_func_exact(SegmentRegister seg, Address address)
         {
-            var infos = funcs_by_pc.GetValues(seg[addr], false);
+            var infos = funcs_by_pc.GetValues(seg[address], false);
             if (infos == null)
                 return null;
 
@@ -304,14 +305,14 @@ namespace MikhailKhalizev.Max.Program
                 if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
                     continue;
 
-                if (Implementation.Memory.Equals(seg[addr], info.MethodInfo.RawBytes))
+                if (Implementation.Memory.Equals(seg[address], info.MethodInfo.RawBytes))
                     return info;
             }
 
             return null;
         }
 
-        private MyMethodInfo find_func_from_known_and_remember_it(SegmentRegister seg, Address addr)
+        private MyMethodInfo find_func_from_known_and_remember_it(SegmentRegister seg, Address address)
         {
             // Попробуем найти её среди известных.
 
@@ -334,15 +335,15 @@ namespace MikhailKhalizev.Max.Program
                 if (string.IsNullOrEmpty(info.Name))
                     throw new InvalidOperationException("Код у функции есть, а его имя неизвестно.");
                 
-                var segAddr = seg[addr];
-                if (!Implementation.Memory.Equals(segAddr, info.MethodInfo.RawBytes))
+                var fullAddress = seg[address];
+                if (!Implementation.Memory.Equals(fullAddress, info.MethodInfo.RawBytes))
                     continue;
                 
                 // Всё хорошо. Запомним её, а затем сохраним в файл, чтоб в следующий раз не пришлось искать.
 
-                funcs_by_pc.Add(segAddr, info);
+                funcs_by_pc.Add(fullAddress, info);
 
-                info.MethodInfo.Addresses.Add(segAddr);
+                info.MethodInfo.Addresses.Add(fullAddress);
                 MethodInfos.Save();
 
                 return info;
@@ -377,11 +378,11 @@ namespace MikhailKhalizev.Max.Program
             //}
         }
 
-        private void decode_function(SegmentRegister seg, Address short_addr)
+        private void decode_function(SegmentRegister seg, Address address)
         {
             //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
 
-            var address = seg[short_addr];
+            var fullAddress = seg[address];
 
             var to_cxx = new Engine(
                 Configuration.BinToCSharp,
@@ -415,7 +416,7 @@ namespace MikhailKhalizev.Max.Program
             foreach (var pair in funcs_by_pc)
             foreach (var info in pair.Value)
                 to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
-            to_cxx.RemoveAlreadyDecodedFunc(address); // force decode.
+            to_cxx.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
 
             // TODO
 #if false
@@ -551,10 +552,38 @@ namespace MikhailKhalizev.Max.Program
                 }
 #endif
 
-            Console.WriteLine($"Запуск декодирования функции '{address}'.");
+            Console.WriteLine($"Запуск декодирования функции '{fullAddress}'.");
 
-            to_cxx.DecodeMethod(address);
+            to_cxx.DecodeMethod(fullAddress);
             to_cxx.Save();
+        }
+        
+        public void add_internal_dyn_func(Action func, int mode, int address)
+        {
+            var myMethodInfos = funcs_by_pc.GetValues(address, false);
+
+            if (myMethodInfos != null)
+            {
+                foreach (var myMethodInfo in myMethodInfos)
+                    if (myMethodInfo.Action != func)
+                        throw new InvalidOperationException();
+            }
+
+            funcs_by_pc.Add(
+                address,
+                new MyMethodInfo
+                {
+                    Action = func, Name = func.Method.Name,
+                    MethodInfo = new MethodInfoDto { Address = address, Mode = (ArchitectureMode) mode }
+                });
+        }
+
+        public void add_internal_dyn_func_if_free(Action func, int mode, int address)
+        {
+            if (funcs_by_pc.ContainsKey(address))
+                return;
+
+            add_internal_dyn_func(func, mode, address);
         }
     }
 

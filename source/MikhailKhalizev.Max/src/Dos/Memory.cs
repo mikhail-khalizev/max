@@ -14,10 +14,9 @@ namespace MikhailKhalizev.Max.Dos
 
         public void dos_mem_init()
         {
-            var processor = (Processor.x86.FullSimulate.Processor) Implementation;
-            var memory = processor.Memory;
+            var memory = Implementation.Memory;
 
-            var physMem = memory.mem_phys_raw(0, 0x100030);
+            var physMem = memory.GetMinSize(0, 0x100030);
 
             //for (var addr = 0x100000; addr < 0x100030; addr++)
             //    phys_mem_ms.get<char>(addr) = rand();

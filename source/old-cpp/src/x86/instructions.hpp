@@ -531,7 +531,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
-
+// +
 #define int_(num)                                        \
     do {                                                 \
         uint_<32> ret_addr = cs.get_base() + eip_next;   \
@@ -951,11 +951,13 @@ void popq(T & d)
     }
 }
 
+// +
 inline void pushfw()
 {
     pushw(eflags);
 }
 
+// +
 inline void pushfd()
 {
     pushd(eflags);

@@ -452,6 +452,7 @@ static std::string get_path()
     return path;
 }
 
+// +
 /* int_dos */
 void int_21()
 {
@@ -963,13 +964,13 @@ void int_67()
     syscall_iretww();
 }
 
-
+// +
 static void int_unknown()
 {
     throw exception::not_implemented();
 }
 
-
+// +
 void install_std_ints()
 {
     struct
