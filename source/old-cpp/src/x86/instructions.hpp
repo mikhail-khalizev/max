@@ -38,6 +38,7 @@ void iret_(uint_<8> op_size);
 #define jad_func(...)    \
     jmpd_func_if(cf == false && zf == false, __VA_ARGS__)
 
+
 #define jaew_func(...)   \
     jmpw_func_if(cf == false, __VA_ARGS__)
 
@@ -114,6 +115,7 @@ void iret_(uint_<8> op_size);
 #define jad(...)    \
     jmpd_if(cf == false && zf == false, __VA_ARGS__)
 
+// +
 #define jaew(...)   \
     jmpw_if(cf == false, __VA_ARGS__)
 
@@ -248,6 +250,7 @@ void iret_(uint_<8> op_size);
 #define rep_a32    \
     for (; ecx != 0; ecx--)
 
+// +
 #define repe_a16   \
     for (zf = true; cx != 0 && zf; cx--)
 
@@ -1282,6 +1285,7 @@ void and_(uint_<L> & d, T s_)
 }
 
 
+// +
 #define xchg std::swap
 
 
@@ -1326,6 +1330,7 @@ inline void sti()
     dos::pic.run_irqs();
 }
 
+// +
 inline void cli()
 {
     if (cr0.pe == false)
@@ -1564,6 +1569,7 @@ inline void leaved()
     popd(ebp);
 }
 
+// +
 inline void cpuid()
 {
     if (eax != 1)
@@ -2057,6 +2063,7 @@ inline void cmpsb_a32()
     esi += df ? -1 : 1;
 }
 
+// +
 inline void cmpsw_a16()
 {
     cmp(memw_a16(ds, si), memw_a16(es, di));

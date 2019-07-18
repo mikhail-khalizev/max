@@ -22,6 +22,7 @@ namespace MikhailKhalizev.Max.Program
         public Memory DosMemory { get; }
         public Interrupt DosInterrupt { get; }
         public Timer DosTimer { get; }
+        public Port DosPort { get; }
 
         public MultiValueDictionary<Address, MyMethodInfo> funcs_by_pc = new MultiValueDictionary<Address, MyMethodInfo>();
 
@@ -43,8 +44,11 @@ namespace MikhailKhalizev.Max.Program
             DosMemory = new Memory(implementation);
             DosInterrupt = new Interrupt(implementation, this);
             DosTimer = new Timer(implementation);
+            DosPort = new Port(implementation);
 
             implementation.run_func += run_func;
+            implementation.runInb += (sender, tuple) => DosPort.inb(tuple.value, tuple.port);
+            implementation.runOutb += (sender, tuple) => DosPort.outb(tuple.port, tuple.value);
         }
 
         public void Start()

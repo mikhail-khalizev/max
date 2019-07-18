@@ -22,7 +22,38 @@ namespace MikhailKhalizev.Max.Dos
 
         public void int_08() { throw new NotImplementedException(); }
         public void int_10() { throw new NotImplementedException(); }
-        public void int_15() { throw new NotImplementedException(); }
+
+        // int_sys_srv
+        public void int_15()
+        {
+            switch (ah.UInt32)
+            {
+                case 0xbf:
+                    ah = 0x86; // from dosbox.
+                    eflags.cf = true;
+                    break;
+
+                case 0xc0:
+                    ah = 0;
+                    bx = 0;
+                    es.Load(0xc8c3); /* from dosbox */
+
+                    memw_a16[es, bx + 0x2] = 0xfc; // model id
+                    eflags.cf = false;
+                    break;
+
+                case 0x88: /* Extended memory size. */
+                    ax = 0;
+                    eflags.cf = false;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            syscall_iretww();
+        }
+
         public void int_16() { throw new NotImplementedException(); }
         public void int_1c() { throw new NotImplementedException(); }
 
@@ -33,7 +64,7 @@ namespace MikhailKhalizev.Max.Dos
         // int_dos
         public void int_21()
         {
-            switch (ah.Int32)
+            switch (ah.UInt32)
             {
                 case 0x06:
                     if (dl == 0xff)
@@ -60,7 +91,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (cr0.pe)
                             throw new NotImplementedException();
 
-                        Memory.GetStruct<int>(al.Int32 * 4) = (ds.Selector << 16) + dx.Int32;
+                        Memory.GetStruct<int>(al.UInt32 * 4) = (ds.Selector << 16) + dx.UInt16;
                     }
                     break;
 
@@ -106,7 +137,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (cr0.pe)
                             throw new NotImplementedException();
 
-                        var v = Memory.GetStruct<int>(al.Int32 * 4);
+                        var v = Memory.GetStruct<int>(al.UInt32 * 4);
 
                         es.Load(v >> 16);
                         bx = v;
@@ -175,7 +206,7 @@ namespace MikhailKhalizev.Max.Dos
                         var fileMode = FileMode.Open;
                         FileAccess fileAccess;
 
-                        switch (al.Int32)
+                        switch (al.UInt32)
                         {
                             case 0:
                                 fileAccess = FileAccess.Read;
@@ -215,7 +246,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x3e: // close_file
-                    if (bx.Int32 <= 0x7FFF)
+                    if (bx.UInt32 <= 0x7FFF)
                     {
                         fileHandels[bx.Int32].Dispose();
 
@@ -294,11 +325,11 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x42: // lseek
                     {
-                        var to_seek = (cx.Int32 << 16) + dx.Int32;
+                        var to_seek = (int)((cx.UInt32 << 16) + dx.UInt32);
 
                         var file = fileHandels[bx.Int32];
 
-                        switch (al.Int32)
+                        switch (al.UInt32)
                         {
                             case 0:
                                 file.Position = to_seek;
@@ -359,7 +390,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x44: // ioctl
-                    if (bx.Int32 <= 4) // "CON"
+                    if (bx.UInt32 <= 4) // "CON"
                         if (al == 0)
                         {
                             eflags.cf = false;

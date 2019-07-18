@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Max.Dos
             {
                 ax = findParagraph;
 
-                if (Memory.Length < (bx + ax).Int32 * 16)
+                if (Memory.Length < (bx + ax).UInt32 * 16)
                     throw new Exception("std::bad_alloc()");
 
                 bx -= 1;

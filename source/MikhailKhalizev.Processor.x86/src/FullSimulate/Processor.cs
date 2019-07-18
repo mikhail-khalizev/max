@@ -1200,7 +1200,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 // REAL-ADDRESS-MODE
                 if (op_size == 32)
                 {
-                    popd(eip);
+                    eip = popd();
                     if ((eip | 0xffff) != 0xffff)
                         throw new NotImplementedException(); // #GP(0)
                     popd(cs);
@@ -1402,6 +1402,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         // todo rename ExecuteSubMethod
         public event EventHandler<EventArgs> run_func;
+        public event EventHandler<(Value value, Value port)> runInb;
+        public event EventHandler<(Value port, Value value)> runOutb;
 
         public void check_mode() => check_mode(CSharpEmulateMode);
 
@@ -1831,6 +1833,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void callw(Address address, int offset)
         {
+            var retAddr = cs[eip];
             pushw(eip);
 
             var ret_addr = cs[eip];
@@ -1917,7 +1920,35 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cli()
         {
-            throw new NotImplementedException();
+            if (cr0.pe == false)
+                eflags.@if = false;
+            else
+            {
+                if (eflags.vm == false)
+                {
+                    if (CPL <= eflags.iopl)
+                        eflags.@if = false;
+                    else
+                    {
+                        if (eflags.iopl < CPL && CPL == 3 && cr4.pvi)
+                            eflags.vif = false;
+                        else
+                            throw new NotImplementedException(); // #GP(0);
+                    }
+                }
+                else
+                {
+                    if (eflags.iopl == 3)
+                        eflags.@if = false;
+                    else
+                    {
+                        if (eflags.iopl < 3 && cr4.vme)
+                            eflags.vif = false;
+                        else
+                            throw new NotImplementedException(); // #GP(0);
+                    }
+                }
+            }
         }
 
         /// <inheritdoc />
@@ -2020,7 +2051,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cmpsw_a16()
         {
-            throw new NotImplementedException();
+            cmp(memw_a16[ds, si], memw_a16[es, di]);
+            di += eflags.df ? -2 : 2;
+            si += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />
@@ -2056,7 +2089,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cpuid()
         {
-            throw new NotImplementedException();
+            if (eax != 1)
+                throw new NotImplementedException();
+
+            eax = 0x402; // Intel 486.
+            ebx = 0;
+            ecx = 0;
+            edx = 1;
         }
 
         /// <inheritdoc />
@@ -2889,7 +2928,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void inb(Value dst, Value port)
         {
-            throw new NotImplementedException();
+            runInb?.Invoke(this, (dst, port));
         }
 
         /// <inheritdoc />
@@ -3059,7 +3098,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jaew(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(!eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3624,7 +3663,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         public void lds(Value dst, SegmentRegister segment, Value offset)
         {
             dst.UInt32 = memd_a32[segment, offset].UInt32;
-            ds.Load(memw_a32[segment, offset + dst.Bits / 8].Int32);
+            ds.Load(memw_a32[segment, offset + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -3650,7 +3689,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         public void les(Value dst, SegmentRegister segment, Value offset)
         {
             dst.UInt32 = memd_a32[segment, offset].UInt32;
-            es.Load(memw_a32[segment, offset + dst.Bits / 8].Int32);
+            es.Load(memw_a32[segment, offset + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -4195,9 +4234,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void outb(Value dst, Value port)
+        public void outb(Value port, Value value)
         {
-            throw new NotImplementedException();
+            runOutb?.Invoke(this, (port, value));
         }
 
         /// <inheritdoc />
@@ -4737,9 +4776,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 value = memw_a16[ss, sp - 2].UInt16;
             }
 
-            if ((d as ValueFromAnyValue)?.Value is SegmentRegister sr)
-                sr.Load(value);
-            else if (d != null)
+            if (d != null)
                 d.UInt64 = value;
 
             return value;
@@ -5300,7 +5337,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void repe_a16(Action action)
         {
-            throw new NotImplementedException();
+            for (eflags.zf = true; cx != 0 && eflags.zf; cx--)
+                action();
         }
 
         /// <inheritdoc />
@@ -5313,7 +5351,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void retw(int allocSize = 0)
         {
-            popw(eip);
+            eip = popw();
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
             __plus_sp(allocSize);                          
@@ -7770,7 +7808,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void xchg(Value a, Value b)
         {
-            throw new NotImplementedException();
+            var x = a.UInt64;
+            a.UInt64 = b.UInt64;
+            b.UInt64 = x;
         }
 
         /// <inheritdoc />

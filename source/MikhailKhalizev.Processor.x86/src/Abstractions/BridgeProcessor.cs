@@ -2885,9 +2885,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void outb(Value dst, Value port)
+        public void outb(Value port, Value value)
         {
-            Implementation.outb(dst, port);
+            Implementation.outb(port, value);
         }
 
         /// <inheritdoc />

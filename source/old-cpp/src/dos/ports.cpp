@@ -86,7 +86,7 @@ static uint_<8>::type dsp_cmd_lens[256] = {
   0,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0   // 0xf0
 };
 
-
+// +
 void inb(uint_<8> & d, uint_<16> port)
 {
     d = 0;
@@ -231,6 +231,7 @@ void inb(uint_<8> & d, uint_<16> port)
     }
 }
 
+// +
 void outb(uint_<16> port, uint_<8> s)
 {
     switch (port)

@@ -171,7 +171,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         MemoryAccess memw_a32 { get; }
         MemoryAccess memd_a32 { get; }
         MemoryAccess memq_a32 { get; }
-        
+
         #endregion
 
         #region C# emulate specific
@@ -2762,7 +2762,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Output to Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/OUT.html</remarks>
-        void outb(Value dst, Value port);
+        void outb(Value port, Value value);
 
         /// <summary>
         /// Output String to Port.
