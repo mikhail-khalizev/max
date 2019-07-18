@@ -156,12 +156,14 @@ void iret_(uint_<8> op_size);
 #define jled(...)   \
     jmpd_if(zf == true || sf != of, __VA_ARGS__)
 
+// +
 #define jzw(...)    \
     jmpw_if(zf == true, __VA_ARGS__)
 
 #define jzd(...)    \
     jmpd_if(zf == true, __VA_ARGS__)
 
+// +
 #define jnzw(...)   \
     jmpw_if(zf == false, __VA_ARGS__)
 
@@ -192,6 +194,7 @@ void iret_(uint_<8> op_size);
 #define jecxzd(...) \
     jmpd_if(ecx == 0, __VA_ARGS__)
 
+// +
 #define jnsw(...)   \
     jmpw_if(sf == false, __VA_ARGS__)
 
@@ -249,6 +252,7 @@ void iret_(uint_<8> op_size);
 #define repe_a32   \
     for (zf = true; ecx != 0 && zf; ecx--)
 
+// +
 #define repne_a16  \
     for (zf = false; cx != 0 && !zf; cx--)
 
@@ -322,7 +326,7 @@ void iret_(uint_<8> op_size);
     if (cond)                         \
         jmpd_func(to, off)
 
-
+// +
 #define jmpw_abs(off)                                                   \
     do {                                                                \
         eip = (off) & 0xffff;                                           \
@@ -416,6 +420,7 @@ void iret_(uint_<8> op_size);
  * off может быть mem*(ss, *), т.е. браться из стека.
  * Поэтому push* надо делать после чтения off. */
 
+// +
 #define callw(to, off)                                    \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -1186,13 +1191,14 @@ void neg(uint_<L> & d)
     // of = ???
 }
 
+// +
 template<exo::abstract_int L>
 void not_(uint_<L> & d)
 {
     d = ~d;
 }
 
-
+// +
 template<exo::abstract_int L, typename T>
 void lds(uint_<L> & d, seg_reg & s, T o)
 {
@@ -1233,7 +1239,7 @@ void lfs(uint_<L> & d, seg_reg & s, T o)
     fs = mem<uint_<16>>(s, o);
 }
 
-
+// +
 template<exo::abstract_int L, typename T>
 void or_(uint_<L> & d, T s_)
 {
@@ -1257,6 +1263,7 @@ void xor_(uint_<L> & d, T s_)
     set_sf_zf_pf(d);
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void and_(uint_<L> & d, T s_)
 {
@@ -1892,6 +1899,7 @@ inline void stosd_a32()
     edi += df ? -4 : 4;
 }
 
+// +
 inline void scasb_a16()
 {
     cmp(al, memb_a16(es, di));
@@ -1922,6 +1930,7 @@ inline void scasd_a32()
     edi += df ? -4 : 4;
 }
 
+// +
 inline void lodsb_a16()
 {
     al = memb_a16(ds, si);

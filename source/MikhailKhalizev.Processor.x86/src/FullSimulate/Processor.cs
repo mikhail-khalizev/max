@@ -1339,7 +1339,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             if (correct_function_position(returnAddress))
                 throw new NotImplementedException();
-            
+
             check_mode(mode);
             CurrentInstructionAddress = curSave;
             eip = eipSave;
@@ -1402,12 +1402,12 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 {
                     var toRun = cs[eip];
                     hist.Add(toRun);
-                    
+
                     if (toRun == 0)
                         throw new Exception("Переход по нулевому указателю.");
 
                     Memory.GetMinSize(cs, eip, 1); // Проверим, есть ли у нас доступ к памяти.
-                    
+
                     if (toRun == returnAddress)
                         return false;
 
@@ -1615,7 +1615,11 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void and(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            dst.UInt64 &= src.UInt64;
+
+            eflags.cf = false;
+            eflags.of = false;
+            set_sf_zf_pf(dst);
         }
 
         /// <inheritdoc />
@@ -1801,7 +1805,21 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void callw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            var ret_addr = cs[eip];
+            eip = eip + offset;
+            eip &= 0xffff;
+
+            pushw(eip);
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+
+            if (correct_function_position(ret_addr))
+                return;
+
+            check_mode();
         }
 
         /// <inheritdoc />
@@ -2886,9 +2904,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var ret_addr = cs[eip];
 
             int_internal(number, true, true, false, 0);
-            
+
             run_irqs();
-            
+
             if (correct_function_position(ret_addr))
                 throw new NotImplementedException(); // return;
 
@@ -2966,7 +2984,10 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void jmpw_abs(Value address)
         {
-            throw new NotImplementedException();
+            eip = address & 0xffff;
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+            run_irqs();
         }
 
         /// <inheritdoc />
@@ -3008,7 +3029,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jbw(Address address, int offset)
         {
-            return jmpw_if(eflags.cf == true, address, offset);
+            return jmpw_if(eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3170,13 +3191,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jnsw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(!eflags.sf, address, offset);
         }
 
         /// <inheritdoc />
         public bool jnzw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(!eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3218,7 +3239,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jzw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3560,7 +3581,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void lds(Value dst, SegmentRegister segment, Value offset)
         {
-            throw new NotImplementedException();
+            dst.UInt32 = memd_a32[segment, offset].UInt32;
+            var o2 = offset + dst.Bits / 8;
+            ds.Load(memw_a32[segment, o2].Int32);
         }
 
         /// <inheritdoc />
@@ -3641,7 +3664,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void lodsb_a16()
         {
-            throw new NotImplementedException();
+            al = memb_a16[ds, si];
+            si += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
@@ -4099,13 +4123,17 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void not(Value value)
         {
-            throw new NotImplementedException();
+            value.UInt64 = ~value.UInt64;
         }
 
         /// <inheritdoc />
         public void or(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            dst.UInt64 |= src.UInt64;
+
+            eflags.cf = false;
+            eflags.of = false;
+            set_sf_zf_pf(dst);
         }
 
         /// <inheritdoc />
@@ -5212,14 +5240,14 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void rep_a16(Action action)
         {
-            for (; cx.UInt32 != 0; cx.UInt32--)
+            for (; cx != 0; cx--)
                 action();
         }
 
         /// <inheritdoc />
         public void rep_a32(Action action)
         {
-            for (; ecx.UInt32 != 0; ecx.UInt32--)
+            for (; ecx != 0; ecx--)
                 action();
         }
 
@@ -5232,7 +5260,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void repne_a16(Action action)
         {
-            throw new NotImplementedException();
+            for (eflags.zf = false; cx != 0 && !eflags.zf; cx--)
+                action();
         }
 
         /// <inheritdoc />
@@ -5413,7 +5442,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void scasb_a16()
         {
-            throw new NotImplementedException();
+            cmp(al, memb_a16[es, di]);
+            di += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />

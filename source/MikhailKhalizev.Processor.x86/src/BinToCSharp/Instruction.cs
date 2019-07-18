@@ -132,12 +132,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return ToCodeString();
         }
 
-        public string ToCodeString(string cmd_suffix = "", string func_add_arg = "", bool isJmpOutside = true)
+        public string ToCodeString(string cmdSuffix = "", string funcAddArg = "", bool isJmpOutside = true)
         {
             var gotoLabelConditional = 
                 (IsAnyJump || IsAnyLoop) && Operands[0].type == ud_type.UD_OP_JIMM && !isJmpOutside && Mnemonic != ud_mnemonic_code.UD_Ijmp;
             var gotoLabel = 
                 IsAnyJump && Operands[0].type == ud_type.UD_OP_JIMM && !isJmpOutside && Mnemonic == ud_mnemonic_code.UD_Ijmp;
+
+            var addIf = gotoLabelConditional;
+            var addGotoLabel = gotoLabelConditional || gotoLabel;
+            var addReturn = Mnemonic == ud_mnemonic_code.UD_Ijmp;
 
 
             var sb = new StringBuilder();
@@ -176,7 +180,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (PfxRep)
                 sb.Append($"rep{adr_mode_str}(() => ");
 
-            if (gotoLabelConditional)
+            if (addIf)
                 sb.Append("if(");
 
             if (Mnemonic == ud_mnemonic_code.UD_Iint)
@@ -222,7 +226,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 need_write_namespace = true;
 
 
-            sb.Append(cmd_suffix);
+            sb.Append(cmdSuffix);
             sb.Append("(");
 
 
@@ -458,24 +462,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 sb.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
             }
 
-            if (func_add_arg.Length != 0)
+            if (funcAddArg.Length != 0)
             {
                 if (non_first_arg)
                     sb.Append(", ");
                 non_first_arg = true;
 
-                sb.Append(func_add_arg);
+                sb.Append(funcAddArg);
             }
 
             if (HaveAnyRep)
                 sb.Append(")");
             sb.Append(")");
 
-            if (gotoLabel)
-                sb.Append("; ");
-            if (gotoLabelConditional)
+            if (addIf)
                 sb.Append($") ");
-            if (gotoLabelConditional || gotoLabel)
+            else
+                sb.Append("; ");
+
+            if (addGotoLabel)
             {
                 Address val;
                 var op = Operands[0];
@@ -497,10 +502,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     default: throw new NotImplementedException();
                 }
 
-                sb.Append($"goto l_{End.WithBytes(val)}");
+                sb.Append($"goto l_{End.WithBytes(val)};");
             }
+            else if (addReturn)
+                sb.Append($"return;");
 
-            sb.Append(";");
             return sb.ToString();
         }
         

@@ -149,6 +149,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public virtual bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
 
 
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return HexHelper.ToString(UInt64, o => o.SetTrimZero().SetGroupSize(4));
+        }
+
         #region Cast from Numeric Operators
 
         public static implicit operator ValueBase(int value) => (Value)value;
@@ -179,7 +185,11 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public static Value operator >>(ValueBase v1, int v2) => new NumericValue(v1.UInt64 >> v2, v1.Bits);
 
         public static Value operator <<(ValueBase v1, int v2) => new NumericValue(v1.UInt64 << v2, v1.Bits);
-
+        
+        public static Value operator ++(ValueBase v) => ++v.UInt64;
+        
+        public static Value operator --(ValueBase v) => --v.UInt64;
+        
         #endregion
 
         #region IEquatable<ValueBase>

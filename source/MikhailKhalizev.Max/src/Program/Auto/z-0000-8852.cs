@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8867, 4);    cmp(memw_a16[ss, bp - 0x2], 0xf);         /* cmp word [bp-0x2], 0xf */
             ii(0x886b, 2);    if(jgw(0x88be, 0x51)) goto l_0x88be;      /* jg 0x88be */
             ii(0x886d, 2);    if(jlw(0x8875, 0x6)) goto l_0x8875;       /* jl 0x8875 */
-            ii(0x886f, 4);    cmp(memw_a16[ss, bp - 0x4], -0x1 /* 0xff */); /* cmp word [bp-0x4], 0xffff */
+            ii(0x886f, 4);    cmp(memw_a16[ss, bp - 0x4], -0x1 /* 0xff */);  /* cmp word [bp-0x4], 0xffff */
             ii(0x8873, 2);    if(jaew(0x88be, 0x49)) goto l_0x88be;     /* jae 0x88be */
         l_0x8875:
             ii(0x8875, 3);    pushw(memw_a16[ss, bp - 0x2]);            /* push word [bp-0x2] */
@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x88d3, 1);    leavew();                                 /* leave */
             ii(0x88d4, 1);    retw();                                   /* ret */
         l_0x88d5:
-            ii(0x88d5, 5);    and(memb_a16[ds, 0x47], -0x3 /* 0xfd */); /* and byte [0x47], 0xfd */
+            ii(0x88d5, 5);    and(memb_a16[ds, 0x47], -0x3 /* 0xfd */);  /* and byte [0x47], 0xfd */
             ii(0x88da, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x88dc, 1);    cwd();                                    /* cwd */
             ii(0x88dd, 1);    leavew();                                 /* leave */

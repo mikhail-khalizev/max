@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb271, 1);    inc(cx);                                  /* inc cx */
             ii(0xb272, 5);    test(memb_a16[ds, 0x47], 0x80);           /* test byte [0x47], 0x80 */
             ii(0xb277, 2);    jzw_func(0xb21b, -0x5e);                  /* jz 0xb21b */
-            ii(0xb279, 3);    jmpw_func(0xafec, -0x290);                /* jmp 0xafec */
+            ii(0xb279, 3);    jmpw_func(0xafec, -0x290); return;        /* jmp 0xafec */
         l_0xb27c:
             ii(0xb27c, 4);    mov(cx, memw_a16[ds, 0xdfa]);             /* mov cx, [0xdfa] */
             ii(0xb280, 2);    jcxzw_func(0xb251, -0x31);                /* jcxz 0xb251 */

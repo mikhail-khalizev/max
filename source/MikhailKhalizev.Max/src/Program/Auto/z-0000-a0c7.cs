@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa142, 2);    mov(bp, sp);                              /* mov bp, sp */
             ii(0xa144, 4);    cmp(memw_a16[ss, bp + 0x18], 0xd);        /* cmp word [bp+0x18], 0xd */
             ii(0xa148, 2);    jzw_func(0xa1bd, 0x73);                   /* jz 0xa1bd */
-            ii(0xa14a, 5);    jmpw_a16_far_ind(cs, 0x17be);             /* jmp far word [cs:0x17be] */
+            ii(0xa14a, 5);    jmpw_a16_far_ind(cs, 0x17be); return;     /* jmp far word [cs:0x17be] */
         }
     }
 }

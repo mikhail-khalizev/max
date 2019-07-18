@@ -75,7 +75,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xae0c, 5);    test(memb_a16[ds, 0x47], 0x80);           /* test byte [0x47], 0x80 */
             ii(0xae11, 2);    if(jnzw(0xae62, 0x4f)) goto l_0xae62;     /* jnz 0xae62 */
         l_0xae13:
-            ii(0xae13, 3);    jmpw_func(0xaec1, 0xab);                  /* jmp 0xaec1 */
+            ii(0xae13, 3);    jmpw_func(0xaec1, 0xab); return;          /* jmp 0xaec1 */
         l_0xae16:
             ii(0xae16, 1);    pushw(ss);                                /* push ss */
             ii(0xae17, 1);    popw(ds);                                 /* pop ds */
