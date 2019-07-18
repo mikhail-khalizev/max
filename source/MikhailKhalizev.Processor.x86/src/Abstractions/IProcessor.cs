@@ -2588,7 +2588,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Move Data from String to String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
-        void movsb_a16();
+        void movsb_a16(SegmentRegister segment = null);
 
         /// <summary>
         /// Move Data from String to String.

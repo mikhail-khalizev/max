@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             _bp = new OffsetRegister(_ebp, 16, 0);
             _sp = new OffsetRegister(_esp, 16, 0);
-            
+
 
             _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
             _cr2 = new SimpleRegister(64);
@@ -1365,7 +1365,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             return false;
         }
-        
+
         private void __plus_sp(int s)
         {
             if (ss.db)
@@ -1373,7 +1373,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             else
                 sp += s;
         }
-        
+
         private void SaveJumpInfo()
         {
             var from = cs[CurrentInstructionAddress];
@@ -1397,7 +1397,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public int CSharpEmulateMode { get; set; }
         public int CSharpFunctionDelta { get; set; }
-        
+
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
         // todo rename ExecuteSubMethod
@@ -1808,7 +1808,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         public void btc(Value dst, Value src)
         {
             bt(dst, src);
-            var x = (1u << (int) (src.UInt32 % dst.Bits));
+            var x = (1u << (int)(src.UInt32 % dst.Bits));
             dst.UInt32 ^= x;
         }
 
@@ -1839,7 +1839,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             var ret_addr = cs[eip];
             eip = eip + offset;
             eip &= 0xffff;
-            
+
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
@@ -1854,7 +1854,21 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void callw_abs(Value address)
         {
-            throw new NotImplementedException();
+            pushw(eip);
+            var ret_addr = cs[eip];
+
+            eip = address & 0xffff;
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+
+            SaveJumpInfo();
+
+            if (correct_function_position(ret_addr))
+                throw new NotImplementedException();
+
+            check_mode();
         }
 
         /// <inheritdoc />
@@ -2021,7 +2035,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void cmpsb_a16()
         {
-            throw new NotImplementedException();
+            cmp(memb_a16[ds, si], memb_a16[es, di]);
+            di += eflags.df ? -1 : 1;
+            si += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
@@ -2916,7 +2932,25 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void idiv(Value value)
         {
-            throw new NotImplementedException();
+            switch (value.Bits)
+            {
+                case 16:
+
+                    if (value == 0)
+                        throw new NotImplementedException(); // #DE
+
+                    int w = (dx.UInt16 << 16) + ax.UInt16;
+
+                    int t = w / value.Int16;
+                    if (short.MaxValue < t || t < short.MinValue)
+                        throw new NotImplementedException(); // #DE
+
+                    ax = t;
+                    dx = w % value.Int16;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         /// <inheritdoc />
@@ -3092,7 +3126,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jaw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(!eflags.cf && !eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3122,7 +3156,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jbew(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.cf || eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3140,7 +3174,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jcxzw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(cx == 0, address, offset);
         }
 
         /// <inheritdoc />
@@ -3182,7 +3216,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jlw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -3780,7 +3814,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool loopw_a16(Address address, int offset)
         {
-            throw new NotImplementedException();
+            if (--cx != 0)
+            {
+                jmpw(address, offset);
+                return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />
@@ -4054,15 +4094,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void movsb_a16()
+        public void movsb_a16(SegmentRegister segment = null)
         {
-            throw new NotImplementedException();
+            memb_a16[es, di] = memb_a16[segment ?? ds, si];
+            di += eflags.df ? -1 : 1;
+            si += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
         public void movsw_a16(SegmentRegister segment = null)
         {
-            throw new NotImplementedException();
+            memw_a16[es, di] = memw_a16[segment ?? ds, si];
+            di += eflags.df ? -2 : 2;
+            si += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />
@@ -5354,7 +5398,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             eip = popw();
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
-            __plus_sp(allocSize);                          
+            __plus_sp(allocSize);
         }
 
         /// <inheritdoc />

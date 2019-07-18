@@ -108,7 +108,7 @@ void iret_(uint_<8> op_size);
 #define jsw_func(...)    \
     jmpw_func_if(sf == true, __VA_ARGS__)
 
-
+// +
 #define jaw(...)    \
     jmpw_if(cf == false && zf == false, __VA_ARGS__)
 
@@ -128,6 +128,7 @@ void iret_(uint_<8> op_size);
 #define jbd(...)    \
     jmpd_if(cf == true, __VA_ARGS__)
 
+// +
 #define jbew(...)   \
     jmpw_if(cf == true || zf == true, __VA_ARGS__)
 
@@ -148,6 +149,7 @@ void iret_(uint_<8> op_size);
 #define jged(...)   \
     jmpd_if(sf == of, __VA_ARGS__)
 
+// +
 #define jlw(...)    \
     jmpw_if(sf != of, __VA_ARGS__)
 
@@ -189,6 +191,7 @@ void iret_(uint_<8> op_size);
 #define jpd(...)    \
     jmpd_if(pf == true, __VA_ARGS__)
 
+// +
 #define jcxzw(...)  \
     jmpw_if(cx == 0, __VA_ARGS__)
 
@@ -224,6 +227,7 @@ void iret_(uint_<8> op_size);
 
 #define loopew_a16 loopzw_a16
 
+// +
 #define loopw_a16(...)        \
     if (--cx != 0)            \
         jmpw(__VA_ARGS__)
@@ -455,6 +459,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
+// +
 #define callw_abs(off)                                    \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -1449,6 +1454,7 @@ void imul(uint_<L> & d, uint_<L> s, T c_)
 
 void idiv(uint_<8> s);
 
+// +
 inline void idiv(uint_<16> s)
 {
     if (s == 0)
@@ -1981,6 +1987,7 @@ inline void lodsd_a32()
     esi += df ? -4 : 4;
 }
 
+// +
 inline void movsb_a16(seg_reg & seg)
 {
     memb_a16(es, di) = memb_a16(seg, si);
@@ -1988,6 +1995,7 @@ inline void movsb_a16(seg_reg & seg)
     si += df ? -1 : 1;
 }
 
+// +
 inline void movsb_a16()
 {
     movsb_a16(ds);
@@ -2005,6 +2013,7 @@ inline void movsb_a32()
     movsb_a32(ds);
 }
 
+// +
 inline void movsw_a16(seg_reg & seg)
 {
     memw_a16(es, di) = memw_a16(seg, si);
@@ -2012,6 +2021,7 @@ inline void movsw_a16(seg_reg & seg)
     si += df ? -2 : 2;
 }
 
+// +
 inline void movsw_a16()
 {
     movsw_a16(ds);
@@ -2048,7 +2058,7 @@ inline void movsd_a32()
     movsd_a32(ds);
 }
 
-
+// +
 inline void cmpsb_a16()
 {
     cmp(memb_a16(ds, si), memb_a16(es, di));

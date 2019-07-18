@@ -230,6 +230,11 @@ namespace MikhailKhalizev.Max.Dos
 
                             ax = fd;
                         }
+                        catch (FileNotFoundException)
+                        {
+                            eflags.cf = true;
+                            ax = 2;
+                        }
                         catch
                         {
                             eflags.cf = true;
@@ -479,7 +484,7 @@ namespace MikhailKhalizev.Max.Dos
 
             var path = Memory.ReadCString(ds[dx]);
             
-            if (path.StartsWith("C:/"))
+            if (path.StartsWith("C:\\"))
                 path = path.Substring(3);
 
             if (path[0] != '/')

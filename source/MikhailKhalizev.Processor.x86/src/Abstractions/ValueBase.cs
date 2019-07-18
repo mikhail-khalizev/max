@@ -72,6 +72,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             }
         }
 
+        public short Int16
+        {
+            get
+            {
+                var maskSrc = BinaryHelper.Mask(Bits);
+
+                var val = UInt16;
+                if (IsNegative)
+                    val = (ushort)(val | (~(ushort)maskSrc));
+
+                return (short)val;
+            }
+            set => UInt16 = (ushort)value;
+        }
+
         public uint UInt32
         {
             get
