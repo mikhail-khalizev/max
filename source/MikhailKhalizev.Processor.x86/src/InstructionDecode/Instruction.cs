@@ -80,11 +80,11 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
         private string DecodeInternal()
         {
-            Prefixes = Source.Slice(0, Source.TakeWhile(Meta.IsPrefix).Count());
+            Prefixes = Source.Slice(0, Source.TakeWhile(PrefixMetadata.IsPrefix).Count());
             Length += Prefixes.Count;
             var left = Source.Slice(Length);
 
-            var allGroups = Prefixes.Select(Meta.GetPrefixGroup).ToList();
+            var allGroups = Prefixes.Select(PrefixMetadata.GetPrefixGroup).ToList();
             var distinctGroup = allGroups.Distinct().ToList();
             if (allGroups.Count != distinctGroup.Count)
                 return $"Prefix group repeated: ({string.Join(", ", allGroups)}).";
@@ -103,8 +103,8 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
                 RexB = BinaryHelper.IsSet(Rex, 0);
             }
             
-            HasPrefixOperandSizeOverride = Prefixes.Contains(Meta.PrefixOperandSizeOverride);
-            HasPrefixAddressSizeOverride = Prefixes.Contains(Meta.PrefixAddressSizeOverride);
+            HasPrefixOperandSizeOverride = Prefixes.Contains(PrefixMetadata.PrefixOperandSizeOverride);
+            HasPrefixAddressSizeOverride = Prefixes.Contains(PrefixMetadata.PrefixAddressSizeOverride);
 
             // Table 3-3. Effective Operand- and Address-Size Attributes
             // Table 3-4. Effective Operand- and Address-Size Attributes in 64-Bit Mode

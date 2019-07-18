@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.InstructionDecode
 {
-    public static class Meta
+    public static class PrefixMetadata
     {
         // 1. CS segment override (use with any branch instruction is reserved).
         // 2. Branch hints: Branch not taken (used only with Jcc instructions).
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
         private static Dictionary<byte, int> Prefixes { get; }
         
-        static Meta()
+        static PrefixMetadata()
         {
             var prefixGroups = new[]
             {

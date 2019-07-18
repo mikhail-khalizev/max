@@ -975,6 +975,7 @@ inline void pushfd()
     pushd(eflags);
 }
 
+// +
 void popf_(uint_<8> OperandSize);
 #define popfw() popf_(16)
 #define popfd() popf_(32)
@@ -1575,34 +1576,40 @@ inline void cpuid()
 }
 
 
+// +
 inline void bt(uint_<8> & d, uint_<8> s)
 {
     cf = 0 != ((d >> (s % 8)) & 1);
 }
 
+// +
 inline void bt(uint_<16> & d, uint_<8> s)
 {
     cf = 0 != ((d >> (s % 16)) & 1);
 }
 
+// +
 inline void bt(uint_<32> & d, uint_<8> s)
 {
     cf = 0 != ((d >> (s % 32)) & 1);
 }
 
 
+// +
 inline void btc(uint_<8> & d, uint_<8> s)
 {
     bt(d, s);
     d ^= (1 << (s % 8));
 }
 
+// +
 inline void btc(uint_<16> & d, uint_<8> s)
 {
     bt(d, s);
     d ^= (1 << (s % 16));
 }
 
+// +
 inline void btc(uint_<32> & d, uint_<8> s)
 {
     bt(d, s);

@@ -830,17 +830,17 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public void popf_(int operandSize)
         {
-            Value flg = 0ul;
+            uint flg = 0;
             uint clr_flg = 0;
-            uint no_mod_mask = 0; // eflags.reserved_mask();
+            uint no_mod_mask = 0;
 
             switch (operandSize)
             {
                 case 32:
-                    popd(flg);
+                    flg = popd();
                     break;
                 case 16:
-                    popw(flg);
+                    flg = popw();
                     no_mod_mask = 0xffff0000;
                     break;
                 default:
@@ -871,7 +871,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
                 throw new NotImplementedException();
             }
 
-            eflags.UInt64 = ((eflags.UInt64 & (~clr_flg)) & no_mod_mask) | (flg.UInt64 & (~no_mod_mask));
+            eflags.UInt64 = ((eflags.UInt64 & (~clr_flg)) & no_mod_mask) | (flg & (~no_mod_mask));
         }
 
         public void switch_task(
@@ -1797,15 +1797,17 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         }
 
         /// <inheritdoc />
-        public void bt()
+        public void bt(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            eflags.cf = 0 != ((dst.UInt32 >> (int)(src.UInt32 % dst.Bits)) & 1);
         }
 
         /// <inheritdoc />
-        public void btc(Value a, Value b)
+        public void btc(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            bt(dst, src);
+            var x = (1u << (int) (src.UInt32 % dst.Bits));
+            dst.UInt32 ^= x;
         }
 
         /// <inheritdoc />
@@ -4785,13 +4787,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void popfw()
         {
-            throw new NotImplementedException();
+            popf_(16);
         }
 
         /// <inheritdoc />
         public void popfd()
         {
-            throw new NotImplementedException();
+            popf_(32);
         }
 
         /// <inheritdoc />

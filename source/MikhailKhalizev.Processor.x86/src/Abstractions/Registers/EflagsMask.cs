@@ -1,4 +1,6 @@
-﻿namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
+﻿using System;
+
+namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
 {
     public static class EflagsMask
     {
@@ -22,5 +24,30 @@
         public const uint vif = 1 << 19;
         public const uint vip = 1 << 20;
         public const uint id = 1 << 21;
+    }
+    
+    [Flags]
+    public enum EflagsMaskEnum : uint
+    {
+        none = 0,
+        reserved = 0xffc0802a,
+
+        cf = 1 << 0,
+        pf = 1 << 2,
+        af = 1 << 4,
+        zf = 1 << 6,
+        sf = 1 << 7,
+        tf = 1 << 8,
+        @if = 1 << 9,
+        df = 1 << 10,
+        of = 1 << 11,
+        iopl = 3 << 12,
+        nt = 1 << 14,
+        rf = 1 << 16,
+        vm = 1 << 17,
+        ac = 1 << 18,
+        vif = 1 << 19,
+        vip = 1 << 20,
+        id = 1 << 21,
     }
 }

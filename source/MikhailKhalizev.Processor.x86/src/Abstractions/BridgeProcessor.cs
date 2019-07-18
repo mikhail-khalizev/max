@@ -592,15 +592,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void bt()
+        public void bt(Value dst, Value src)
         {
-            Implementation.bt();
+            Implementation.bt(dst, src);
         }
 
         /// <inheritdoc />
-        public void btc(Value a, Value b)
+        public void btc(Value dst, Value src)
         {
-            Implementation.btc(a, b);
+            Implementation.btc(dst, src);
         }
 
         /// <inheritdoc />

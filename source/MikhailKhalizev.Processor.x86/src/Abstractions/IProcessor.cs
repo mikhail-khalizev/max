@@ -467,13 +467,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Bit Test.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BT.html</remarks>
-        void bt();
+        void bt(Value dst, Value src);
 
         /// <summary>
         /// Bit Test and Complement.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BTC.html</remarks>
-        void btc(Value a, Value b);
+        void btc(Value dst, Value src);
 
         /// <summary>
         /// Bit Test and Reset.
