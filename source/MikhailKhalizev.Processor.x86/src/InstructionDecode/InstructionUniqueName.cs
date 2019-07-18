@@ -719,6 +719,8 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ENTER.html</remarks>
         enter,
+        
+        esc,
 
         /// <summary>
         /// Extract Packed Floating-Point Values.
@@ -1342,7 +1344,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Call to Interrupt Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INTn:INTO:INT3:INT1.html</remarks>
-        int_n,
+        @int,
 
         /// <summary>
         /// Call to Interrupt Procedure.
@@ -1403,6 +1405,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         jcc,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jcxz,
 
         /// <summary>
         /// ADD Two Masks.
@@ -1846,7 +1854,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        loopcc,
+        loope,
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        loopne,
 
         /// <summary>
         /// Load Segment Limit.
