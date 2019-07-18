@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             DosTimer = new Timer(implementation);
             DosPort = new Port(implementation);
 
-            implementation.run_func += run_func;
+            implementation.run_func += ExecuteSubMethod;
             implementation.runInb += (sender, tuple) => DosPort.inb(tuple.value, tuple.port);
             implementation.runOutb += (sender, tuple) => DosPort.outb(tuple.port, tuple.value);
         }
@@ -215,12 +215,12 @@ namespace MikhailKhalizev.Max.Program
             DosTimer.timers_init();
         }
 
-        public void run_func(object sender, EventArgs e)
+        public void ExecuteSubMethod(object sender, EventArgs e)
         {
             var run = cs[eip];
 
             // "--on-run-func={none, dump-reg}"
-            var on_run_func__dump_reg = true;
+            var on_run_func__dump_reg = false;
 
             if (on_run_func__dump_reg)
             {

@@ -527,6 +527,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             var methodBegin = detectedMethod.MethodInfo.Address;
             var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
+            var offset = detectedMethod.MethodInfo.Address - detectedMethod.Begin;
 
 
             var first_cmd = detectedMethod.Instructions.First();
@@ -605,7 +606,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         throw new NotImplementedException(); // Случай когда перед недостижимым кодом нет ret или jmp. Пока достаточно генерировать исключение.
 
                     var os = new StringBuilder();
-                    write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin);
+                    write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin, offset);
                     output.AppendLine($"//  {os} /* Недостижимый код. */");
                 }
 
@@ -619,7 +620,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
 
                 // instruction_to_string может изменить comment_this. Поэтому вызывается раньше.
-                var instr = instruction_to_string(detectedMethod, cmd_index);
+                var instr = instruction_to_string(detectedMethod, cmd_index, offset);
 
 
                 if (skip || cmd.CommentThis)
@@ -652,9 +653,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine("}");
         }
 
-        private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end)
+        private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end, int offset)
         {
-            write_instruction_position(os, begin, end);
+            write_instruction_position(os, begin, end, offset);
             write_spaces(os, LineCmdOffset - 1);
             os.Append(' ');
         }
@@ -666,18 +667,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 os.Append(new string(' ', count));
         }
 
-        private void write_instruction_position(StringBuilder os, Address begin, Address end)
+        private void write_instruction_position(StringBuilder os, Address begin, Address end, int offset)
         {
-            os.Append($"ii({begin}, {end - begin});");
+            os.Append($"ii({(Address)(begin + offset)}, {end - begin + offset});");
         }
 
-        private string instruction_to_string(DetectedMethod df, int cmd_index)
+        private string instruction_to_string(DetectedMethod df, int cmd_index, int offset)
         {
             var os = new StringBuilder();
 
             var cmd = df.Instructions[cmd_index];
 
-            write_instruction_position(os, cmd.Begin, cmd.End);
+            write_instruction_position(os, cmd.Begin, cmd.End, offset);
             write_spaces(os, LineCmdOffset - 1);
 
             var comments_in_current_func = new List<string>();
