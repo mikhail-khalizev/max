@@ -10,7 +10,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9e8e, 1);    pushw(si);                                /* push si */
             ii(0x9e8f, 2);    xor(si, si);                              /* xor si, si */
             ii(0x9e91, 3);    mov(cx, 0x4000);                          /* mov cx, 0x4000 */
-            ii(0x9e94, 0);    jmpd_func(0x9e94, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

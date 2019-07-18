@@ -27,7 +27,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa1b3, 1);    inc(ax);                                  /* inc ax */
             ii(0xa1b4, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa1b6, 2);    jaew_func(0xa236, 0x7e);                  /* jae 0xa236 */
-            ii(0xa1b8, 0);    jmpd_func(0xa1b8, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

@@ -629,11 +629,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 // Функция не заканчивается на jmp или ret.
                 // Возможно её разбивает другая функция в неудобном месте.
 
-                var os = new StringBuilder();
-                write_instruction_position_and_spaces(os, methodEnd, methodEnd);
-                os.Append($"jmpd_func({AddressNameConverter.GetResultName(methodEnd, false, true)}, 0);");
-                write_spaces(os, LineCommentOffset - 1);
-                output.AppendLine($"            {os} /* Принудительное завершение функции. */");
+                //var os = new StringBuilder();
+                //write_instruction_position_and_spaces(os, methodEnd, methodEnd);
+                //os.Append($"jmpd_func({AddressNameConverter.GetResultName(methodEnd, false, true)}, 0);");
+                //write_spaces(os, LineCommentOffset - 1);
+                //output.AppendLine($"            {os} /* Принудительное завершение функции. */");
             }
 
             output.AppendLine("        }");

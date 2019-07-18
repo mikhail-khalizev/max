@@ -40,7 +40,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x42d5, 2);    movsd_a16();                              /* movsd */
             ii(0x42d7, 3);    mov(ax, 0x20);                            /* mov ax, 0x20 */
             ii(0x42da, 2);    mov(ds, ax);                              /* mov ds, ax */
-            ii(0x42dc, 0);    jmpd_func(0x42dc, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

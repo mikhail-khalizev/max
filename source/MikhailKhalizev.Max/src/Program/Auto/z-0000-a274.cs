@@ -29,7 +29,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa2a6, 5);    sub(ax, memw_a16[cs, 0x1df5]);            /* sub ax, [cs:0x1df5] */
             ii(0xa2ab, 2);    jaew_func(0xa2af, 0x2);                   /* jae 0xa2af */
             ii(0xa2ad, 2);    xor(ax, ax);                              /* xor ax, ax */
-            ii(0xa2af, 0);    jmpd_func(0xa2af, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

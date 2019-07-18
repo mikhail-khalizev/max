@@ -25,7 +25,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xaebb, 2);    shr(cx, 0x1);                             /* shr cx, 1 */
             ii(0xaebd, 2);    xor(ax, ax);                              /* xor ax, ax */
             ii(0xaebf, 2);    rep_a16(() => stosw_a16());               /* rep stosw */
-            ii(0xaec1, 0);    jmpd_func(0xaec1, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

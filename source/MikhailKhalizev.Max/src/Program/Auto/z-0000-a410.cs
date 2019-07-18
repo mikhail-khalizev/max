@@ -64,7 +64,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa4b3, 2);    mov(es, bx);                              /* mov es, bx */
             ii(0xa4b5, 3);    mov(ax, 0xb);                             /* mov ax, 0xb */
             ii(0xa4b8, 2);    @int(0x31);                               /* int 0x31 */
-            ii(0xa4ba, 5);    and(memb_a16[es, di + 0x6], -0x41 /* 0xbf */);  /* and byte [es:di+0x6], 0xbf */
+            ii(0xa4ba, 5);    and(memb_a16[es, di + 0x6], -0x41 /* 0xbf */); /* and byte [es:di+0x6], 0xbf */
             ii(0xa4bf, 3);    mov(ax, 0xc);                             /* mov ax, 0xc */
             ii(0xa4c2, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa4c4, 2);    mov(bx, ds);                              /* mov bx, ds */
@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa4c8, 2);    mov(es, bx);                              /* mov es, bx */
             ii(0xa4ca, 3);    mov(ax, 0xb);                             /* mov ax, 0xb */
             ii(0xa4cd, 2);    @int(0x31);                               /* int 0x31 */
-            ii(0xa4cf, 5);    and(memb_a16[es, di + 0x6], -0x41 /* 0xbf */);  /* and byte [es:di+0x6], 0xbf */
+            ii(0xa4cf, 5);    and(memb_a16[es, di + 0x6], -0x41 /* 0xbf */); /* and byte [es:di+0x6], 0xbf */
             ii(0xa4d4, 3);    mov(ax, 0xc);                             /* mov ax, 0xc */
             ii(0xa4d7, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa4d9, 3);    add(sp, 0x8);                             /* add sp, 0x8 */

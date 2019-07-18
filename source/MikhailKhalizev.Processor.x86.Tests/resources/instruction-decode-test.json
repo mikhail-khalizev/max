@@ -2637,19 +2637,19 @@
     "Arch": 16,
     "Addr": "0x0001001b",
     "Raw": "2eff20",
-    "Dec": "jmpw_abs(memw_a16[cs, bx + si]);"
+    "Dec": "jmpw_abs(memw_a16[cs, bx + si]); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x000040d7",
     "Raw": "2eff26fa02",
-    "Dec": "jmpw_abs(memw_a16[cs, 0x2fa]);"
+    "Dec": "jmpw_abs(memw_a16[cs, 0x2fa]); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0000a14a",
     "Raw": "2eff2ebe17",
-    "Dec": "jmpw_a16_far_ind(cs, 0x17be);"
+    "Dec": "jmpw_a16_far_ind(cs, 0x17be); return;"
   },
   {
     "Arch": 16,
@@ -2661,7 +2661,7 @@
     "Arch": 16,
     "Addr": "0x0001001e",
     "Raw": "2eff6cfa",
-    "Dec": "jmpw_a16_far_ind(cs, si - 0x6);"
+    "Dec": "jmpw_a16_far_ind(cs, si - 0x6); return;"
   },
   {
     "Arch": 16,
@@ -2673,7 +2673,7 @@
     "Arch": 16,
     "Addr": "0x0000e7e7",
     "Raw": "2effa56a06",
-    "Dec": "jmpw_abs(memw_a16[cs, di + 0x66a]);"
+    "Dec": "jmpw_abs(memw_a16[cs, di + 0x66a]); return;"
   },
   {
     "Arch": 16,
@@ -3171,7 +3171,7 @@
     "Arch": 16,
     "Addr": "0x00005488",
     "Raw": "3eff2ef20a",
-    "Dec": "jmpw_a16_far_ind(ds, 0xaf2);"
+    "Dec": "jmpw_a16_far_ind(ds, 0xaf2); return;"
   },
   {
     "Arch": 16,
@@ -3717,7 +3717,7 @@
     "Arch": 16,
     "Addr": "0x0015d97f",
     "Raw": "6665ff6e06",
-    "Dec": "jmpd_a16_far_ind(gs, bp + 0x6);"
+    "Dec": "jmpd_a16_far_ind(gs, bp + 0x6); return;"
   },
   {
     "Arch": 16,
@@ -4185,7 +4185,7 @@
     "Arch": 16,
     "Addr": "0x0014de3d",
     "Raw": "66ea200000008000",
-    "Dec": "jmpd_far_abs(0x80, 0x20);"
+    "Dec": "jmpd_far_abs(0x80, 0x20); return;"
   },
   {
     "Arch": 16,
@@ -4215,7 +4215,7 @@
     "Arch": 16,
     "Addr": "0x0014fe3a",
     "Raw": "66ff2f",
-    "Dec": "jmpd_a16_far_ind(ds, bx);"
+    "Dec": "jmpd_a16_far_ind(ds, bx); return;"
   },
   {
     "Arch": 16,
@@ -7671,61 +7671,61 @@
     "Arch": 16,
     "Addr": "0x001504c9",
     "Raw": "e90000",
-    "Dec": "jmpw(0x1504cc, 0);"
+    "Dec": "jmpw(0x1504cc, 0); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0000262a",
     "Raw": "e950ff",
-    "Dec": "jmpw(0x257d, -0xb0);"
+    "Dec": "jmpw(0x257d, -0xb0); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0013e318",
     "Raw": "ea1f9b583e",
-    "Dec": "jmpw_far_abs(0x3e58, 0x9b1f);"
+    "Dec": "jmpw_far_abs(0x3e58, 0x9b1f); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x00153ca6",
     "Raw": "ea2f488000",
-    "Dec": "jmpw_far_abs(0x80, 0x482f);"
+    "Dec": "jmpw_far_abs(0x80, 0x482f); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x000040cd",
     "Raw": "ea34031800",
-    "Dec": "jmpw_far_abs(0x18, 0x334);"
+    "Dec": "jmpw_far_abs(0x18, 0x334); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x00005674",
     "Raw": "ea93557000",
-    "Dec": "jmpw_far_abs(0x70, 0x5593);"
+    "Dec": "jmpw_far_abs(0x70, 0x5593); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x00006656",
     "Raw": "eabb28da03",
-    "Dec": "jmpw_far_abs(0x3da, 0x28bb);"
+    "Dec": "jmpw_far_abs(0x3da, 0x28bb); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x00008666",
     "Raw": "eabb28db05",
-    "Dec": "jmpw_far_abs(0x5db, 0x28bb);"
+    "Dec": "jmpw_far_abs(0x5db, 0x28bb); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x000036fb",
     "Raw": "eb00",
-    "Dec": "jmpw(0x36fd, 0);"
+    "Dec": "jmpw(0x36fd, 0); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0000369c",
     "Raw": "ebda",
-    "Dec": "jmpw(0x3678, -0x26);"
+    "Dec": "jmpw(0x3678, -0x26); return;"
   },
   {
     "Arch": 16,
@@ -8187,13 +8187,13 @@
     "Arch": 16,
     "Addr": "0x000038a1",
     "Raw": "ff26c209",
-    "Dec": "jmpw_abs(memw_a16[ds, 0x9c2]);"
+    "Dec": "jmpw_abs(memw_a16[ds, 0x9c2]); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x00005489",
     "Raw": "ff2ef20a",
-    "Dec": "jmpw_a16_far_ind(ds, 0xaf2);"
+    "Dec": "jmpw_a16_far_ind(ds, 0xaf2); return;"
   },
   {
     "Arch": 16,
@@ -8325,13 +8325,13 @@
     "Arch": 16,
     "Addr": "0x00009d4a",
     "Raw": "ffe3",
-    "Dec": "jmpw_abs(bx);"
+    "Dec": "jmpw_abs(bx); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0014e7a8",
     "Raw": "ffe5",
-    "Dec": "jmpw_abs(bp);"
+    "Dec": "jmpw_abs(bp); return;"
   },
   {
     "Arch": 16,
@@ -15183,31 +15183,31 @@
     "Arch": 32,
     "Addr": "0x1016bf2f",
     "Raw": "d8c9",
-    "Dec": "fmul(0 /* st0 */, 0x1 /* st1 */);"
+    "Dec": "fmul(0 /* st0 */, 1 /* st1 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016c5ab",
     "Raw": "d8ca",
-    "Dec": "fmul(0 /* st0 */, 0x2 /* st2 */);"
+    "Dec": "fmul(0 /* st0 */, 2 /* st2 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016c4d3",
     "Raw": "d8da",
-    "Dec": "fcomp(0 /* st0 */, 0x2 /* st2 */);"
+    "Dec": "fcomp(0 /* st0 */, 2 /* st2 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x10187252",
     "Raw": "d8e1",
-    "Dec": "fsub(0 /* st0 */, 0x1 /* st1 */);"
+    "Dec": "fsub(0 /* st0 */, 1 /* st1 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019a9ec",
     "Raw": "d8f1",
-    "Dec": "fdiv(0 /* st0 */, 0x1 /* st1 */);"
+    "Dec": "fdiv(0 /* st0 */, 1 /* st1 */);"
   },
   {
     "Arch": 32,
@@ -15237,19 +15237,19 @@
     "Arch": 32,
     "Addr": "0x1016c4cf",
     "Raw": "d9c1",
-    "Dec": "fld(0x1 /* st1 */);"
+    "Dec": "fld(1 /* st1 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016c4ef",
     "Raw": "d9c2",
-    "Dec": "fld(0x2 /* st2 */);"
+    "Dec": "fld(2 /* st2 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x100d829a",
     "Raw": "d9c9",
-    "Dec": "fxch(0 /* st0 */, 0x1 /* st1 */);"
+    "Dec": "fxch(0 /* st0 */, 1 /* st1 */);"
   },
   {
     "Arch": 32,
@@ -15441,7 +15441,7 @@
     "Arch": 32,
     "Addr": "0x1016c5e9",
     "Raw": "dcc9",
-    "Dec": "fmul(0x1 /* st1 */, 0 /* st0 */);"
+    "Dec": "fmul(1 /* st1 */, 0 /* st0 */);"
   },
   {
     "Arch": 32,
@@ -15513,19 +15513,19 @@
     "Arch": 32,
     "Addr": "0x1016c5a5",
     "Raw": "ddd9",
-    "Dec": "fstp(0x1 /* st1 */);"
+    "Dec": "fstp(1 /* st1 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x10133299",
     "Raw": "dec1",
-    "Dec": "faddp(0x1 /* st1 */, 0 /* st0 */);"
+    "Dec": "faddp(1 /* st1 */, 0 /* st0 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x100d82a1",
     "Raw": "dec9",
-    "Dec": "fmulp(0x1 /* st1 */, 0 /* st0 */);"
+    "Dec": "fmulp(1 /* st1 */, 0 /* st0 */);"
   },
   {
     "Arch": 32,
@@ -15537,19 +15537,19 @@
     "Arch": 32,
     "Addr": "0x101332d8",
     "Raw": "dee9",
-    "Dec": "fsubp(0x1 /* st1 */, 0 /* st0 */);"
+    "Dec": "fsubp(1 /* st1 */, 0 /* st0 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016c571",
     "Raw": "def1",
-    "Dec": "fdivrp(0x1 /* st1 */, 0 /* st0 */);"
+    "Dec": "fdivrp(1 /* st1 */, 0 /* st0 */);"
   },
   {
     "Arch": 32,
     "Addr": "0x101332bd",
     "Raw": "def9",
-    "Dec": "fdivp(0x1 /* st1 */, 0 /* st0 */);"
+    "Dec": "fdivp(1 /* st1 */, 0 /* st0 */);"
   },
   {
     "Arch": 32,
@@ -15615,19 +15615,19 @@
     "Arch": 32,
     "Addr": "0x100700da",
     "Raw": "e9cf010000",
-    "Dec": "jmpd(0x100702ae, 0x1cf);"
+    "Dec": "jmpd(0x100702ae, 0x1cf); return;"
   },
   {
     "Arch": 32,
     "Addr": "0x1018dd62",
     "Raw": "eb00",
-    "Dec": "jmpd(0x1018dd64, 0);"
+    "Dec": "jmpd(0x1018dd64, 0); return;"
   },
   {
     "Arch": 32,
     "Addr": "0x100700ad",
     "Raw": "eb0e",
-    "Dec": "jmpd(0x100700bd, 0xe);"
+    "Dec": "jmpd(0x100700bd, 0xe); return;"
   },
   {
     "Arch": 32,
@@ -16209,7 +16209,7 @@
     "Arch": 32,
     "Addr": "0x1018738a",
     "Raw": "ff248580301c10",
-    "Dec": "jmpd_abs(memd_a32[ds, eax * 0x4 + 0x101c3080]);"
+    "Dec": "jmpd_abs(memd_a32[ds, eax * 0x4 + 0x101c3080]); return;"
   },
   {
     "Arch": 32,

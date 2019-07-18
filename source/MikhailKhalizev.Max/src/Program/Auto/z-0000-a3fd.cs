@@ -17,7 +17,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa40a, 2);    add(memb_a16[ds, bx + si], al);           /* add [bx+si], al */
             ii(0xa40c, 2);    add(memb_a16[ds, bx + si], al);           /* add [bx+si], al */
             ii(0xa40e, 2);    add(memb_a16[ds, bx + si], al);           /* add [bx+si], al */
-            ii(0xa410, 0);    jmpd_func(0xa410, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

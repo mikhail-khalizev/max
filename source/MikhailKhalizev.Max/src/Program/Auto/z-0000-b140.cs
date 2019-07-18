@@ -45,7 +45,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb192, 4);    mov(memw_a16[ds, 0xeca], bx);             /* mov [0xeca], bx */
             ii(0xb196, 3);    mov(memw_a16[ds, 0xdfa], ax);             /* mov [0xdfa], ax */
             ii(0xb199, 2);    or(ax, ax);                               /* or ax, ax */
-            ii(0xb19b, 0);    jmpd_func(0xb19b, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

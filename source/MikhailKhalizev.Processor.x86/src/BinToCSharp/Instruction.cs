@@ -252,7 +252,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     case ud_type.UD_OP_REG:
                         if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
                             sb.Append(
-                                $"{HexHelper.ToString(op.@base - ud_type.UD_R_ST0, o => o.SetTrimZero())} /* {syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]} */");
+                                $"{op.@base - ud_type.UD_R_ST0} /* {syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]} */");
                         else
                             sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
                         break;
@@ -476,9 +476,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             sb.Append(")");
 
             if (addIf)
-                sb.Append($") ");
+                sb.Append($")");
             else
-                sb.Append("; ");
+                sb.Append(";");
 
             if (addGotoLabel)
             {
@@ -502,10 +502,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     default: throw new NotImplementedException();
                 }
 
-                sb.Append($"goto l_{End.WithBytes(val)};");
+                sb.Append($" goto l_{End.WithBytes(val)};");
             }
             else if (addReturn)
-                sb.Append($"return;");
+                sb.Append($" return;");
 
             return sb.ToString();
         }

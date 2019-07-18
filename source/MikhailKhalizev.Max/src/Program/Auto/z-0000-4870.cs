@@ -18,7 +18,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x487f, 3);    mov(cx, 0x4e);                            /* mov cx, 0x4e */
             ii(0x4882, 1);    cli();                                    /* cli */
             ii(0x4883, 2);    rep_a16(() => movsw_a16());               /* rep movsw */
-            ii(0x4885, 0);    jmpd_func(0x4885, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

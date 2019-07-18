@@ -130,7 +130,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xae90, 1);    popw(cx);                                 /* pop cx */
             ii(0xae91, 3);    cmp(ax, 0xffff);                          /* cmp ax, 0xffff */
             ii(0xae94, 2);    jnzw_func(0xae9b, 0x5);                   /* jnz 0xae9b */
-            ii(0xae96, 0);    jmpd_func(0xae96, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

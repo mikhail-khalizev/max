@@ -24,7 +24,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb24b, 2);    xchg(edx, eax);                           /* xchg edx, eax */
             ii(0xb24d, 2);    stosd_a16();                              /* stosd */
             ii(0xb24f, 2);    if(loopw_a16(0xb238, -0x19)) goto l_0xb238; /* loop 0xb238 */
-            ii(0xb251, 0);    jmpd_func(0xb251, 0);                     /* Принудительное завершение функции. */
         }
     }
 }

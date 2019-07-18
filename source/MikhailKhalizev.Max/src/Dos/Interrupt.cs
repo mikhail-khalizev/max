@@ -172,16 +172,16 @@ namespace MikhailKhalizev.Max.Dos
 
                         Console.Error.WriteLine("\tOpen: " + path);
 
-                        var flag = FileMode.Open;
-                        FileAccess f2;
+                        var fileMode = FileMode.Open;
+                        FileAccess fileAccess;
 
                         switch (al.Int32)
                         {
                             case 0:
-                                f2 = FileAccess.Read;
+                                fileAccess = FileAccess.Read;
                                 break;
                             case 2:
-                                f2 = FileAccess.ReadWrite;
+                                fileAccess = FileAccess.ReadWrite;
                                 break;
                             default:
                                 throw new NotImplementedException();
@@ -189,7 +189,7 @@ namespace MikhailKhalizev.Max.Dos
 
                         try
                         {
-                            var file = File.Open(path, flag, FileAccess.Read);
+                            var file = File.Open(path, fileMode, fileAccess);
                             fileHandels.Add(file);
                             var fd = fileHandels.Count - 1;
 
@@ -199,7 +199,7 @@ namespace MikhailKhalizev.Max.Dos
 
                             ax = fd;
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             eflags.cf = true;
                             //switch (errno)
@@ -298,7 +298,6 @@ namespace MikhailKhalizev.Max.Dos
 
                         var file = fileHandels[bx.Int32];
 
-                        int whence;
                         switch (al.Int32)
                         {
                             case 0:
