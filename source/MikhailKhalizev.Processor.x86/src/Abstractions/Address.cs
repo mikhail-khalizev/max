@@ -24,11 +24,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public string ToString(Func<HexHelper.Options, HexHelper.Options> setupOptions) => HexHelper.ToString(_value, setupOptions);
         public string ToShortString() => HexHelper.ToString(_value, o => o.SetTrimZero(true).SetGroupSize(4));
         public string ToFullString() => HexHelper.ToString(_value, o => o.SetTrimZero(false).SetGroupSize(4));
-
-        public Address WithBytes(int count) => _value + count;
-
-        public int GetDistanceFrom(Address from) => (int)(_value - from._value);
-
+        
         #region IEquatable
 
         /// <summary>Показывает, равен ли этот экземпляр заданному объекту.</summary>

@@ -593,10 +593,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             for (var cmd_index = 0; cmd_index < detectedMethod.Instructions.Count; cmd_index++)//   cmd = first_cmd; cmd != detectedMethod -> instr.end(); cmd++)
             {
                 var cmd = detectedMethod.Instructions[cmd_index];
-                bool have_label = detectedMethod.Labels.Contains(cmd.Begin);
-
-                var addr_of_line = cmd.Begin;
-
+                var haveLabel = detectedMethod.Labels.Contains(cmd.Begin);
 
                 output.Append("        ");
 
@@ -611,9 +608,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 }
 
 
-                if (have_label)
+                if (haveLabel)
                 {
-                    output.AppendLine($"l_{addr_of_line}:");
+                    output.AppendLine($"l_{(Address)(cmd.Begin + offset)}:");
                     output.Append("        ");
                     skip = false;
                 }
@@ -672,11 +669,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             os.Append($"ii({(Address)(begin + offset)}, {end - begin});");
         }
 
-        private string instruction_to_string(DetectedMethod df, int cmd_index, int offset)
+        private string instruction_to_string(DetectedMethod df, int cmdIndex, int offset)
         {
             var os = new StringBuilder();
 
-            var cmd = df.Instructions[cmd_index];
+            var cmd = df.Instructions[cmdIndex];
 
             WriteInstructionPosition(os, cmd.Begin, cmd.End, offset);
             write_spaces(os, LineCmdOffset - 1);
@@ -685,7 +682,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (cmd.write_cmd != null)
             {
-                os.Append(" " + cmd.write_cmd(this, df, cmd_index, comments_in_current_func));
+                os.Append(" " + cmd.write_cmd(this, df, cmdIndex, comments_in_current_func, offset));
 
                 if (cmd.Comments.Count != 0 || comments_in_current_func.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);

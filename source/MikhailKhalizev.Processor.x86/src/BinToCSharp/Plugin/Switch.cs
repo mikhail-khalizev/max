@@ -327,7 +327,7 @@ l_0x001577dd:
             cmd.write_cmd = WriteCmd;
         }
 
-        private string WriteCmd(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func)
+        private string WriteCmd(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
         {
             Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var curJmp);
             if (curJmp == null)
@@ -343,7 +343,7 @@ l_0x001577dd:
             if (funcAddArg.Length != 0)
                 funcSuffix = "_switch";
 
-            return dm.Instructions[cmd_index].ToCodeString(funcSuffix, funcAddArg.ToString());
+            return dm.Instructions[cmd_index].ToCodeString(funcSuffix, funcAddArg.ToString(), offset: offset);
         }
     }
 }

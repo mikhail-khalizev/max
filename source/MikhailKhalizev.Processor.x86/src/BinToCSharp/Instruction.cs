@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public bool IsAnyRet { get; set; }
         public bool IsJmpOrRet { get; set; }
 
-        public delegate string write_cmd_Delegate(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func);
+        public delegate string write_cmd_Delegate(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset);
 
         public write_cmd_Delegate write_cmd { get; set; }
 
@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (instr == null)
                 throw new ArgumentNullException(nameof(instr));
 
-            write_cmd = (e, dm, index, func) => ToCodeString();
+            write_cmd = (e, dm, index, func, offset) => ToCodeString(offset: offset);
 
             Comments = new List<string>();
 
@@ -132,7 +132,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return ToCodeString();
         }
 
-        public string ToCodeString(string cmdSuffix = "", string funcAddArg = "", bool isJmpOutside = true)
+        public string ToCodeString(string cmdSuffix = "", string funcAddArg = "", bool isJmpOutside = true, int offset = 0)
         {
             var gotoLabelConditional = 
                 (IsAnyJump || IsAnyLoop) && Operands[0].type == ud_type.UD_OP_JIMM && !isJmpOutside && Mnemonic != ud_mnemonic_code.UD_Ijmp;
@@ -363,7 +363,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             else
                             {
                                 sb.Append(op_f ? " + " : "");
-                                sb.Append(AddressNameConverter.GetResultName((Address) val, false, need_write_namespace));
+                                sb.Append(AddressNameConverter.GetResultName(val, false, need_write_namespace));
                             }
 
                             op_f = true;
@@ -379,7 +379,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         {
                             case 8:
                             {
-                                var need_sign_extend = new[]
+                                var needSignExtend = new[]
                                 {
                                     ud_mnemonic_code.UD_Iimul,
                                     ud_mnemonic_code.UD_Ipush,
@@ -392,14 +392,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                                 // Работа не с 8-байтой инструкцией.
                                 if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
-                                    need_sign_extend = need_sign_extend ||
+                                    needSignExtend = needSignExtend ||
                                         Mnemonic == ud_mnemonic_code.UD_Iand ||
                                         Mnemonic == ud_mnemonic_code.UD_Ior ||
                                         Mnemonic == ud_mnemonic_code.UD_Ixor;
 
                                 val = op.lval.@sbyte;
 
-                                if (val < 0 && need_sign_extend)
+                                if (val < 0 && needSignExtend)
                                     sb.Append(
                                         $"-{HexHelper.ToString(-val, o => o.SetTrimZero())} /* {HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero())} */");
                                 else
@@ -434,7 +434,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             default: throw new NotImplementedException();
                         }
 
-                        sb.Append(AddressNameConverter.GetResultName(End.WithBytes(val), false, need_write_namespace));
+                        sb.Append(AddressNameConverter.GetResultName(End + val + offset, false, need_write_namespace));
                         sb.Append(", ");
 
                         sb.Append(
@@ -510,7 +510,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     default: throw new NotImplementedException();
                 }
 
-                sb.Append($" goto l_{End.WithBytes(val)};");
+                sb.Append($" goto l_{(Address)(End + val + offset)};");
             }
             else if (addReturn)
                 sb.Append($" return;");

@@ -138,7 +138,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             }
         }
 
-        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func)
+        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
         {
             engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var cur_jmp);
             if (cur_jmp == null)
@@ -157,7 +157,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     comments_in_current_func.Add("Адрес перехода делит инструкцию в этой функции пополам.");
             }
 
-            return dm.Instructions[cmd_index].ToCodeString(suffix, isJmpOutside: jmpOutside);
+            return dm.Instructions[cmd_index].ToCodeString(suffix, isJmpOutside: jmpOutside, offset: offset);
         }
     }
 }
