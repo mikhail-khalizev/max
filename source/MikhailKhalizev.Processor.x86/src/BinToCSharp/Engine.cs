@@ -655,7 +655,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end, int offset)
         {
-            write_instruction_position(os, begin, end, offset);
+            WriteInstructionPosition(os, begin, end, offset);
             write_spaces(os, LineCmdOffset - 1);
             os.Append(' ');
         }
@@ -667,9 +667,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 os.Append(new string(' ', count));
         }
 
-        private void write_instruction_position(StringBuilder os, Address begin, Address end, int offset)
+        private void WriteInstructionPosition(StringBuilder os, Address begin, Address end, int offset)
         {
-            os.Append($"ii({(Address)(begin + offset)}, {end - begin + offset});");
+            os.Append($"ii({(Address)(begin + offset)}, {end - begin});");
         }
 
         private string instruction_to_string(DetectedMethod df, int cmd_index, int offset)
@@ -678,7 +678,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var cmd = df.Instructions[cmd_index];
 
-            write_instruction_position(os, cmd.Begin, cmd.End, offset);
+            WriteInstructionPosition(os, cmd.Begin, cmd.End, offset);
             write_spaces(os, LineCmdOffset - 1);
 
             var comments_in_current_func = new List<string>();

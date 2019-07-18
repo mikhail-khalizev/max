@@ -463,7 +463,10 @@
   },
   {
     "Guid": "facfe096-52a1-4d3f-955f-581144723e9b",
-    "Address": "0x5593",
+    "Addresses": [
+      "0x5593",
+      "0x4de3"
+    ],
     "Mode": 16,
     "Raw": "558becb8180e50e89afc5bb8c40a50e892fc5bff7604e88bfc5b837e06007417b8cd0a50e87dfc5bff7606e876fc5bb8d00a50e86efc5be8abff833ed411007506c706d411ffffff36d411ff16c20a5b8be55dc3"
   },
