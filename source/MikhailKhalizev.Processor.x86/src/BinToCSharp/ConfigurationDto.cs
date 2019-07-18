@@ -4,6 +4,7 @@
     {
         public string SettingsDirectory { get; set; }
         public string MethodInfosFile => "methods.json";
+        public string JumpInfosFile => "method-jumps.json";
 
 
         public string MetadataOutput { get; set; }

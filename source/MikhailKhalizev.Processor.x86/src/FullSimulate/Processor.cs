@@ -10,6 +10,8 @@ using System.Numerics;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.Utils;
 using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Processor.x86.FullSimulate
@@ -49,6 +51,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             _bp = new OffsetRegister(_ebp, 16, 0);
             _sp = new OffsetRegister(_esp, 16, 0);
+            
+
+            _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
+            _cr2 = new SimpleRegister(64);
+            _cr3 = new SimpleRegister(64);
+            _cr4 = new Cr4RegisterImpl();
+
 
             _ds = new SegmentRegisterImpl(this);
             _ds.ResetDataSegment();
@@ -75,13 +84,9 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             _tr = new SegmentRegisterImpl(this);
             _tr.ResetTaskRegisterSegment();
 
+
             _eflags = new EflagsRegisterImpl { UInt64 = 0x0000_0002 };
             _ia32Efer = new Ia32EferRegisterImpl();
-
-            _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
-            _cr2 = new SimpleRegister(64);
-            _cr3 = new SimpleRegister(64);
-            _cr4 = new Cr4RegisterImpl();
 
             gdtr_base = 0;
             gdtr_limit = 0xffff;
@@ -1360,10 +1365,29 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             return false;
         }
+        
+        private void __plus_sp(int s)
+        {
+            if (ss.db)
+                esp += s;
+            else
+                sp += s;
+        }
+        
+        private void SaveJumpInfo()
+        {
+            var from = cs[CurrentInstructionAddress];
+            var to = cs[eip];
+            if (!callReturnAddresses.Contains(to))
+                MethodsInfo.AddJumpAndSave(MethodInfo, from, to, CSharpFunctionDelta);
+        }
 
         #endregion
 
         #region C# emulate specific
+
+        public MethodInfoDto MethodInfo { get; set; }
+        public MethodsInfo MethodsInfo { get; set; }
 
         /// <summary>
         /// Gets or sets address of current executing instruction.
@@ -1373,7 +1397,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
         public int CSharpEmulateMode { get; set; }
         public int CSharpFunctionDelta { get; set; }
-
+        
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
         // todo rename ExecuteSubMethod
@@ -1444,14 +1468,6 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         public void invalid()
         {
             throw new NotImplementedException();
-        }
-
-        private void __plus_sp(int s)
-        {
-            if (ss.db)
-                esp += s;
-            else
-                sp += s;
         }
 
         #endregion
@@ -1813,19 +1829,19 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void callw(Address address, int offset)
         {
+            pushw(eip);
+
             var ret_addr = cs[eip];
             eip = eip + offset;
             eip &= 0xffff;
-
-            pushw(eip);
-
+            
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
             run_irqs();
 
             if (correct_function_position(ret_addr))
-                return;
+                throw new NotImplementedException();
 
             check_mode();
         }
@@ -3010,6 +3026,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
             run_irqs();
+
+            SaveJumpInfo();
         }
 
         /// <inheritdoc />

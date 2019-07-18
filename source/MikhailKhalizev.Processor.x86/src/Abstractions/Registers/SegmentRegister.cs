@@ -17,7 +17,7 @@
         /// Descriptor.
         /// </summary>
         /// <remarks>Hidden part of segment.</remarks>
-        public SegmentDescriptor Descriptor { get; set; }
+        public SegmentDescriptor Descriptor { get; set; } = new SegmentDescriptor();
 
         /// <summary>
         /// Index multiplies by 8.
@@ -77,8 +77,8 @@
         /// segment selector causes a general-protection exception (#GP) to be generated.
         /// </remarks>
         public bool IsNull => Selector <= 0x3;
-
-
+        
+        // TODO Remove
         public void Load(int selector)
         {
             Selector = (ushort)selector;

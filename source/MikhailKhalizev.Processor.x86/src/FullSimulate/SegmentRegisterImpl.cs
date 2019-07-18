@@ -7,7 +7,16 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         public Processor Processor { get; }
 
         /// <inheritdoc />
-        protected override ulong UInt64Internal { get; set; }
+        protected override ulong UInt64Internal
+        {
+            get => _uInt64Internal;
+            set
+            {
+                _uInt64Internal = value;
+                LoadDescriptor();
+            }
+        }
+        private ulong _uInt64Internal;
 
 
         public bool In64BitMode => Processor.InIa32eMode && l && !db;

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using MikhailKhalizev.Utils;
 using Newtonsoft.Json;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions
 {
     [JsonConverter(typeof(AddressJsonConverter))]
+    [TypeConverter(typeof(AddressTypeConverter))]
     public struct Address : IEquatable<Address>, IComparable<Address>, IComparable
     {
         public static Address MinValue { get; } = uint.MinValue;

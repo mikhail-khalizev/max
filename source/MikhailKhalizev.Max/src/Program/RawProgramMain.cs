@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
     {
         public new Processor.x86.FullSimulate.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
-        public MethodInfos MethodInfos { get; private set; }
+        public MethodsInfo MethodsInfo { get; private set; }
 
         public Memory DosMemory { get; }
         public Interrupt DosInterrupt { get; }
@@ -49,14 +49,14 @@ namespace MikhailKhalizev.Max.Program
 
         public void Start()
         {
-            MethodInfos = MethodInfos.Load(Configuration.BinToCSharp);
-            InitializeMethods();
+            MethodsInfo = MethodsInfo.Load(Configuration.BinToCSharp);
+            LoadMethods();
             DosInterrupt.install_std_ints();
             init_x86_dos_prog();
             Implementation.correct_function_position(0);
         }
 
-        private void InitializeMethods()
+        private void LoadMethods()
         {
             foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
             {
@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
                     if (a == null)
                         continue;
 
-                    var mi = MethodInfos.GetByGuid(a.Guid);
+                    var mi = MethodsInfo.GetByGuid(a.Guid);
 
                     if (instance == null)
                         instance = Activator.CreateInstance(bridgeProcessor, Implementation);
@@ -243,12 +243,24 @@ namespace MikhailKhalizev.Max.Program
             if (extra_log)
                 Console.WriteLine($"Run {info.Name} {{{info.MethodInfo.Guid}}}");
 
+            Implementation.MethodsInfo = MethodsInfo;
+
+            var prevMethodInfo = Implementation.MethodInfo;
+            var prevCSharpFunctionDelta = Implementation.CSharpFunctionDelta;
+            var prevCSharpEmulateMode = Implementation.CSharpEmulateMode;
+
+            Implementation.MethodInfo = info.MethodInfo;
             Implementation.CSharpFunctionDelta = (int)(cs.Descriptor.Base + eip - info.MethodInfo.Address);
             Implementation.CSharpEmulateMode = (int)info.MethodInfo.Mode;
             Implementation.check_mode();
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
             info.Action();
+
+            Implementation.MethodInfo = prevMethodInfo;
+            Implementation.CSharpFunctionDelta = prevCSharpFunctionDelta;
+            Implementation.CSharpEmulateMode = prevCSharpEmulateMode;
+            Implementation.check_mode();
 
             if (on_run_func__dump_reg)
             {
@@ -285,7 +297,7 @@ namespace MikhailKhalizev.Max.Program
                 return ret;
 
             // Всё-таки декодируем.
-            decode_function(seg, address);
+            DecodeNewMethod(seg, address);
             
             // TODO Update comment: Use in bash:  ERR=5 ; while [ $ERR == 5 ] ; do make -j8 && { rm /tmp/*.png ; time ./openmax ; } ; ERR=$? ; done
             Environment.Exit(5);
@@ -344,7 +356,7 @@ namespace MikhailKhalizev.Max.Program
                 funcs_by_pc.Add(fullAddress, info);
 
                 info.MethodInfo.Addresses.Add(fullAddress);
-                MethodInfos.Save();
+                MethodsInfo.Save();
 
                 return info;
             }
@@ -378,7 +390,7 @@ namespace MikhailKhalizev.Max.Program
             //}
         }
 
-        private void decode_function(SegmentRegister seg, Address address)
+        private void DecodeNewMethod(SegmentRegister seg, Address address)
         {
             //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
 
@@ -390,7 +402,7 @@ namespace MikhailKhalizev.Max.Program
                 seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
                 seg.Descriptor.Base,
                 ds.Descriptor.Base,
-                MethodInfos);
+                MethodsInfo);
 
             if (seg.Descriptor.Base != 0)
                 to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
@@ -573,8 +585,15 @@ namespace MikhailKhalizev.Max.Program
                 address,
                 new MyMethodInfo
                 {
-                    Action = func, Name = func.Method.Name,
-                    MethodInfo = new MethodInfoDto { Address = address, Mode = (ArchitectureMode) mode }
+                    Action = func,
+                    Name = func.Method.Name,
+                    MethodInfo = new MethodInfoDto
+                    {
+                        Guid = Guid.NewGuid(),
+                        Address = address,
+                        Mode = (ArchitectureMode) mode,
+                        IgnoreSave = true
+                    },
                 });
         }
 

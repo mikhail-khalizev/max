@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
-        public MethodInfos MethodInfos { get; }
+        public MethodsInfo MethodsInfo { get; }
         public IMemory Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
@@ -114,14 +114,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private readonly CommentDummyInstructions comment_idle; // comment dummy instruction
 
 
-        public Engine(ConfigurationDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodInfos methodInfos = null)
+        public Engine(ConfigurationDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodsInfo methodsInfo = null)
         {
             Configuration = configuration;
             Memory = memory;
             Mode = mode;
             CsBase = csBase;
             DsBase = dsBase;
-            MethodInfos = methodInfos ?? MethodInfos.Load(configuration);
+            MethodsInfo = methodsInfo ?? MethodsInfo.Load(configuration);
             
             if (csBase != 0)
                 SuppressDecode.Add(0, csBase);
@@ -295,30 +295,30 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var success_count = 0;
                 var toRemove = new List<DetectedMethod>();
 
-                foreach (var func in NewDetectedMethods.ToList())
+                foreach (var detectedMethod in NewDetectedMethods.ToList())
                 {
-                    var addr_func = func.Begin;
+                    var addr_func = detectedMethod.Begin;
 
                     // Следует ли вычислять конец этой функции или он уже вычислен.
-                    if (func.End != 0)
+                    if (detectedMethod.End != 0)
                     {
                         var next = NewDetectedMethods.GetViewBetween(
                             new DetectedMethod(addr_func + 1),
                             new DetectedMethod(Address.MaxValue)).FirstOrDefault();
 
-                        if (next != null && func.End <= next.Begin)
+                        if (next != null && detectedMethod.End <= next.Begin)
                         {
                             success_count++;
                             continue;
                         }
 
-                        func.End = 0;
+                        detectedMethod.End = 0;
                     }
 
                     if (!code.Contains(addr_func))
                     {
                         // Вообще не декодировали этот адрес. Видимо он либо alredy_decoded или suppress.
-                        toRemove.Add(func);
+                        toRemove.Add(detectedMethod);
                         continue;
                     }
 
@@ -389,7 +389,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // Заполняем label.
 
-                    func.Labels.Clear();
+                    detectedMethod.Labels.Clear();
 
                     foreach (var i in jmp_to_known_addr.GetViewBetween(new JumpsToKnownAddresses(addr_func), new JumpsToKnownAddresses(min_end)))
                     {
@@ -402,7 +402,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 var index = instr.BinarySearch(new Instruction(to), Instruction.BeginComparer);
 
                                 if (0 <= index)
-                                    func.Labels.Add(to);
+                                    detectedMethod.Labels.Add(to);
                                 else
                                 {
                                     Console.Error.WriteLine($"Предупреждение: Метка '{to}' делит инструкцию пополам.");
@@ -419,9 +419,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         }
                     }
 
-                    func.Instructions = instr;
-                    func.End = min_end;
-                    func.RawBytes = Memory.ReadAll(func.Begin, func.End - func.Begin);
+                    detectedMethod.Instructions = instr;
+                    detectedMethod.End = min_end;
+                    detectedMethod.RawBytes = Memory.ReadAll(detectedMethod.Begin, detectedMethod.End - detectedMethod.Begin);
+                    detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(detectedMethod.RawBytes);
+                    
+                    if (detectedMethod.MethodInfo?.Jumps != null)
+                    {
+                        var interval = Interval.From(detectedMethod.Begin, detectedMethod.End);
+                        foreach (var externalJump in detectedMethod.MethodInfo.Jumps.Values.SelectMany(x => x)
+                            .Where(x => !interval.Contains(x)))
+                        {
+                            DecodeMethod(externalJump);
+                        }
+                    }
 
                     success_count++;
                 }
@@ -445,7 +456,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (detectedMethod.MethodInfo != null)
                     continue;
                 
-                var mi = MethodInfos.GetByRawBytes(detectedMethod.RawBytes);
+                var mi = MethodsInfo.GetByRawBytes(detectedMethod.RawBytes);
                 if (mi == null)
                 {
                     mi = new MethodInfoDto();
@@ -453,7 +464,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     mi.Address = detectedMethod.Begin;
                     mi.Mode = Mode;
                     mi.RawBytes = detectedMethod.RawBytes;
-                    MethodInfos.Add(mi);
+                    MethodsInfo.Add(mi);
                 }
                 else if (!mi.Addresses.Contains(detectedMethod.Begin))
                     mi.Addresses.Add(detectedMethod.Begin);
@@ -461,7 +472,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 detectedMethod.MethodInfo = mi;
             }
 
-            MethodInfos.Save();
+            MethodsInfo.Save();
 
             Parallel.ForEach(
                 NewDetectedMethods,

@@ -58,6 +58,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private byte[] _rawBytes;
 
+        [JsonIgnore]
+        public Dictionary<Address /* from */, HashSet<Address /* to */>> Jumps { get; set; } = new Dictionary<Address, HashSet<Address>>();
+
+        [JsonIgnore]
+        public bool IgnoreSave { get; set; }
+
 
         public static IEqualityComparer<MethodInfoDto> BodyEqualityComparer =>
             new CustomEqualityComparer<MethodInfoDto>(
