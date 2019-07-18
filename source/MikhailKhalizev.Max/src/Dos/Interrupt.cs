@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -18,6 +19,10 @@ namespace MikhailKhalizev.Max.Dos
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;
+            
+            fileHandels.Add(null); // in
+            fileHandels.Add(null); // out
+            fileHandels.Add(null); // err
         }
 
         public void int_08() { throw new NotImplementedException(); }
@@ -291,7 +296,11 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var ms = Memory.GetFixSize(ds, dx, cx.Int32);
 
-                        fileHandels[bx.Int32].Write(ms.AsSpan());
+                        if (bx.Int32 == 2)
+                            Console.Error.Write(ms.Select(x => (char)x).ToArray());
+                        else
+                            fileHandels[bx.Int32].Write(ms.AsSpan());
+
                         var writed = cx.Int32;
                         if (0 <= writed)
                         {
@@ -499,7 +508,7 @@ namespace MikhailKhalizev.Max.Dos
             return path;
         }
 
-        private List<FileStream> fileHandels = new List<FileStream>();
+        private List<Stream> fileHandels = new List<Stream>();
 
         public void install_std_ints()
         {

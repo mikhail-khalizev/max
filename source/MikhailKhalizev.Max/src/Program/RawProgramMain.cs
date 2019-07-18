@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
 
         public MultiValueDictionary<Address, MyMethodInfo> funcs_by_pc = new MultiValueDictionary<Address, MyMethodInfo>();
 
-        public bool extra_log { get; set; } = true;
+        public bool extra_log { get; set; } = false;
 
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
         public const ushort pspseg = image_load_seg - 16; // 0x192
