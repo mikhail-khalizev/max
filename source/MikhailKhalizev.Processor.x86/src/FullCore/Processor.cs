@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using MikhailKhalizev.Processor.x86.Abstractions;
@@ -1452,6 +1453,8 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             }
         }
 
+        private StreamWriter _stateLog;
+
         public void ii(Address address, uint length)
         {
             var cur = address + CSharpFunctionDelta - cs.Descriptor.Base;
@@ -1464,6 +1467,30 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
 
             if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
                 throw new Exception("Bad eip");
+
+            if (false)
+            {
+                if (_stateLog == null)
+                    _stateLog = new StreamWriter("state.log");
+
+                _stateLog.WriteLine(
+                    "cs[eip]: " + cs[CurrentInstructionAddress]
+                    + ", eax: " + eax
+                    + ", ebx: " + ebx
+                    + ", ecx: " + ecx
+                    + ", edx: " + edx
+                    + ", esi: " + esi
+                    + ", edi: " + edi
+                    + ", esp: " + esp
+                    + ", ebp: " + ebp
+                    + ", flags: " + eflags
+                    + ", cs: " + cs
+                    + ", ss: " + ss
+                    + ", ds: " + ds
+                    + ", es: " + es
+                    + ", fs: " + fs
+                    + ", gs: " + gs);
+            }
         }
 
         /// <inheritdoc />
@@ -5135,38 +5162,42 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             // todo Join popw, popd in one method push ?
             // todo Join pushw, pushd in one method push ?
 
+            var value = s.UInt32;
+
             if (ss.db)
             {
                 esp -= 2;
                 if (ss.fail_limit_check(esp, 2))
                     throw new NotImplementedException(); // #SS(0)
-                memw_a32[ss, esp] = s;
+                memw_a32[ss, esp] = value;
             }
             else
             {
                 sp -= 2;
                 if (ss.fail_limit_check(sp, 2))
                     throw new NotImplementedException(); // #SS(0)
-                memw_a16[ss, sp] = s;
+                memw_a16[ss, sp] = value;
             }
         }
 
         /// <inheritdoc />
         public void pushd(Value s)
         {
+            var value = s.UInt32;
+
             if (ss.db)
             {
                 esp -= 4;
                 if (ss.fail_limit_check(esp, 4))
                     throw new NotImplementedException(); // #SS(0)
-                memd_a32[ss, esp] = s;
+                memd_a32[ss, esp] = value;
             }
             else
             {
                 sp -= 4;
                 if (ss.fail_limit_check(sp, 4))
                     throw new NotImplementedException(); // #SS(0)
-                memd_a16[ss, sp] = s;
+                memd_a16[ss, sp] = value;
             }
         }
 

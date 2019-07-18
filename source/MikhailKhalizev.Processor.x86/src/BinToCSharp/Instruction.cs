@@ -267,7 +267,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     case ud_type.UD_OP_MEM:
                     {
-                        var mem_inside = /* Обращение к памяти происходит внутри инструкции. */
+                        var memInside = // Обращение к памяти происходит внутри инструкции.
                             new[]
                             {
                                 ud_mnemonic_code.UD_Ilds,
@@ -290,7 +290,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 ud_mnemonic_code.UD_Ijmp
                             }.Contains(Mnemonic) && BrFar;
 
-                        if (mem_inside == false)
+                        if (memInside == false)
                         {
                             if (opr_size == 8)
                                 sb.Append("memb");
@@ -369,7 +369,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             op_f = true;
                         }
 
-                        if (mem_inside == false)
+                        if (memInside == false)
                             sb.Append(']');
                         break;
                     }

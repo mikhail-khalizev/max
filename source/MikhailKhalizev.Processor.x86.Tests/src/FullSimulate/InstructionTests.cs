@@ -171,6 +171,28 @@ namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
         }
 
         [Fact]
+        public void CheckPushSpRegister()
+        {
+            sp = 20;
+            pushw(sp);
+            popw(bx);
+
+            sp.UInt32.Should().Be(20);
+            bx.UInt32.Should().Be(20);
+        }
+
+        [Fact]
+        public void CheckPushEspRegister()
+        {
+            esp = 20;
+            pushd(esp);
+            popd(ebx);
+
+            esp.UInt32.Should().Be(20);
+            ebx.UInt32.Should().Be(20);
+        }
+
+        [Fact]
         public void CheckRcl()
         {
             al = 0b0000_0001;
