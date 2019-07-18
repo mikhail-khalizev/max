@@ -42,11 +42,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8566, 4);    mov(memw_a16[ds, 0x9a], dx);              /* mov [0x9a], dx */
             ii(0x856a, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x856d, 1);    leavew();                                 /* leave */
-            ii(0x856e, 1);    retw();                                   /* ret */
+            ii(0x856e, 1);    retw(); return;                           /* ret */
         l_0x856f:
             ii(0x856f, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x8571, 1);    leavew();                                 /* leave */
-            ii(0x8572, 1);    retw();                                   /* ret */
+            ii(0x8572, 1);    retw(); return;                           /* ret */
         }
     }
 }

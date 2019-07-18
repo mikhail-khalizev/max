@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x4f76:
             ii(0x4f76, 2);    mov(sp, bp);                              /* mov sp, bp */
             ii(0x4f78, 1);    popw(bp);                                 /* pop bp */
-            ii(0x4f79, 1);    retw();                                   /* ret */
+            ii(0x4f79, 1);    retw(); return;                           /* ret */
         }
     }
 }

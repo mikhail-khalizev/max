@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x9c5d:
             ii(0x9c5d, 2);    xor(al, al);                              /* xor al, al */
             ii(0x9c5f, 2);    outb(0x96, al);                           /* out 0x96, al */
-            ii(0x9c61, 1);    retw();                                   /* ret */
+            ii(0x9c61, 1);    retw(); return;                           /* ret */
         }
     }
 }

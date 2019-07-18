@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xab6c, 1);    popw(bp);                                 /* pop bp */
             ii(0xab6d, 1);    popw(es);                                 /* pop es */
         l_0xab6e:
-            ii(0xab6e, 1);    retw();                                   /* ret */
+            ii(0xab6e, 1);    retw(); return;                           /* ret */
         l_0xab6f:
             ii(0xab6f, 2);    pushw(0x21);                              /* push 0x21 */
             ii(0xab71, 3);    callw(0x589d, -0x52d7);                   /* call 0x589d */
@@ -63,7 +63,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xab75, 5);    mov(ds, memw_a16[cs, 0x208e]);            /* mov ds, [cs:0x208e] */
             ii(0xab7a, 4);    inc(memb_a16[ds, 0xc45]);                 /* inc byte [0xc45] */
             ii(0xab7e, 1);    popw(ds);                                 /* pop ds */
-            ii(0xab7f, 2);    iretd();                                  /* iretd */
+            ii(0xab7f, 2);    iretd(); return;                          /* iretd */
         }
     }
 }

@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa738, 6);    mov(edx, memd_a16[cs, 0x6e1c]);           /* mov edx, [cs:0x6e1c] */
             ii(0xa73e, 6);    mov(memw_a16[ds, 0xaa4], 0x571d);         /* mov word [0xaa4], 0x571d */
             ii(0xa744, 6);    mov(memw_a16[ds, 0xaa6], 0x56f4);         /* mov word [0xaa6], 0x56f4 */
-            ii(0xa74a, 1);    retw();                                   /* ret */
+            ii(0xa74a, 1);    retw(); return;                           /* ret */
         }
     }
 }

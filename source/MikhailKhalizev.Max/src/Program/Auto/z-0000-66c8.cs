@@ -150,7 +150,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6855, 5);    or(memb_a16[ds, 0x15], 0x20);             /* or byte [0x15], 0x20 */
         l_0x685a:
             ii(0x685a, 1);    leavew();                                 /* leave */
-            ii(0x685b, 1);    retw();                                   /* ret */
+            ii(0x685b, 1);    retw(); return;                           /* ret */
         }
     }
 }

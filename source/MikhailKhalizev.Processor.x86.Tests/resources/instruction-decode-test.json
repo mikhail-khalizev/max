@@ -4167,19 +4167,19 @@
     "Arch": 16,
     "Addr": "0x0014a04e",
     "Raw": "66ca0400",
-    "Dec": "retfd(0x4);"
+    "Dec": "retfd(0x4); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0000a13b",
     "Raw": "66cb",
-    "Dec": "retfd();"
+    "Dec": "retfd(); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0000387e",
     "Raw": "66cf",
-    "Dec": "iretd();"
+    "Dec": "iretd(); return;"
   },
   {
     "Arch": 16,
@@ -7143,13 +7143,13 @@
     "Arch": 16,
     "Addr": "0x000097b3",
     "Raw": "c20400",
-    "Dec": "retw(0x4);"
+    "Dec": "retw(0x4); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x0000375b",
     "Raw": "c3",
-    "Dec": "retw();"
+    "Dec": "retw(); return;"
   },
   {
     "Arch": 16,
@@ -7443,13 +7443,13 @@
     "Arch": 16,
     "Addr": "0x0013d86c",
     "Raw": "ca0200",
-    "Dec": "retfw(0x2);"
+    "Dec": "retfw(0x2); return;"
   },
   {
     "Arch": 16,
     "Addr": "0x00002581",
     "Raw": "cb",
-    "Dec": "retfw();"
+    "Dec": "retfw(); return;"
   },
   {
     "Arch": 16,
@@ -7479,7 +7479,7 @@
     "Arch": 16,
     "Addr": "0x00003621",
     "Raw": "cf",
-    "Dec": "iretw();"
+    "Dec": "iretw(); return;"
   },
   {
     "Arch": 16,
@@ -11613,7 +11613,7 @@
     "Arch": 32,
     "Addr": "0x00161e4b",
     "Raw": "66cb",
-    "Dec": "retfw();"
+    "Dec": "retfw(); return;"
   },
   {
     "Arch": 32,
@@ -14631,13 +14631,13 @@
     "Arch": 32,
     "Addr": "0x100702b6",
     "Raw": "c20400",
-    "Dec": "retd(0x4);"
+    "Dec": "retd(0x4); return;"
   },
   {
     "Arch": 32,
     "Addr": "0x10070a28",
     "Raw": "c3",
-    "Dec": "retd();"
+    "Dec": "retd(); return;"
   },
   {
     "Arch": 32,
@@ -15045,7 +15045,7 @@
     "Arch": 32,
     "Addr": "0x1016c9f4",
     "Raw": "cb",
-    "Dec": "retfd();"
+    "Dec": "retfd(); return;"
   },
   {
     "Arch": 32,
@@ -15063,7 +15063,7 @@
     "Arch": 32,
     "Addr": "0x10148293",
     "Raw": "cf",
-    "Dec": "iretd();"
+    "Dec": "iretd(); return;"
   },
   {
     "Arch": 32,

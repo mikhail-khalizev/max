@@ -16,11 +16,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x4ed4, 3);    mov(ax, memw_a16[ss, bp + 0x4]);          /* mov ax, [bp+0x4] */
             ii(0x4ed7, 3);    sub(ax, 0x20);                            /* sub ax, 0x20 */
             ii(0x4eda, 1);    popw(bp);                                 /* pop bp */
-            ii(0x4edb, 1);    retw();                                   /* ret */
+            ii(0x4edb, 1);    retw(); return;                           /* ret */
         l_0x4edc:
             ii(0x4edc, 3);    mov(ax, memw_a16[ss, bp + 0x4]);          /* mov ax, [bp+0x4] */
             ii(0x4edf, 1);    popw(bp);                                 /* pop bp */
-            ii(0x4ee0, 1);    retw();                                   /* ret */
+            ii(0x4ee0, 1);    retw(); return;                           /* ret */
         }
     }
 }

@@ -37,11 +37,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8633, 2);    if(jnzw(0x863a, 0x5)) goto l_0x863a;      /* jnz 0x863a */
             ii(0x8635, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x8638, 1);    leavew();                                 /* leave */
-            ii(0x8639, 1);    retw();                                   /* ret */
+            ii(0x8639, 1);    retw(); return;                           /* ret */
         l_0x863a:
             ii(0x863a, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x863c, 1);    leavew();                                 /* leave */
-            ii(0x863d, 1);    retw();                                   /* ret */
+            ii(0x863d, 1);    retw(); return;                           /* ret */
         }
     }
 }

@@ -141,7 +141,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var addIf = gotoLabelConditional;
             var addGotoLabel = gotoLabelConditional || gotoLabel;
-            var addReturn = Mnemonic == ud_mnemonic_code.UD_Ijmp;
+            var addReturn = new[]
+            {
+                ud_mnemonic_code.UD_Ijmp,
+                ud_mnemonic_code.UD_Iret,
+                ud_mnemonic_code.UD_Iretf,
+                ud_mnemonic_code.UD_Iiretw,
+                ud_mnemonic_code.UD_Iiretd,
+                ud_mnemonic_code.UD_Iiretq
+            }.Contains(Mnemonic);
 
 
             var sb = new StringBuilder();

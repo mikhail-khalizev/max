@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x669e, 2);    if(jnzw(0x66a5, 0x5)) goto l_0x66a5;      /* jnz 0x66a5 */
             ii(0x66a0, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x66a3, 1);    leavew();                                 /* leave */
-            ii(0x66a4, 1);    retw();                                   /* ret */
+            ii(0x66a4, 1);    retw(); return;                           /* ret */
         l_0x66a5:
             ii(0x66a5, 2);    mov(ah, 0xd);                             /* mov ah, 0xd */
             ii(0x66a7, 2);    @int(0x21);                               /* int 0x21 */
@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x66c0, 3);    mov(memw_a16[ds, 0x11dc], ax);            /* mov [0x11dc], ax */
             ii(0x66c3, 3);    mov(memw_a16[ds, 0x11da], ax);            /* mov [0x11da], ax */
             ii(0x66c6, 1);    leavew();                                 /* leave */
-            ii(0x66c7, 1);    retw();                                   /* ret */
+            ii(0x66c7, 1);    retw(); return;                           /* ret */
         }
     }
 }

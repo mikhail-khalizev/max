@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x5df8:
             ii(0x5df8, 1);    cbw();                                    /* cbw */
             ii(0x5df9, 3);    mov(memw_a16[ds, 0xce8], ax);             /* mov [0xce8], ax */
-            ii(0x5dfc, 1);    retw();                                   /* ret */
+            ii(0x5dfc, 1);    retw(); return;                           /* ret */
         l_0x5dfd:
             ii(0x5dfd, 2);    mov(al, ah);                              /* mov al, ah */
             ii(0x5dff, 2);    jmpw(0x5df8, -0x9); goto l_0x5df8;        /* jmp 0x5df8 */

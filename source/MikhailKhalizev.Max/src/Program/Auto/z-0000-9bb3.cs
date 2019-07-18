@@ -17,10 +17,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9bc2, 4);    cmp(cx, memw_a16[ds, 0xce6]);             /* cmp cx, [0xce6] */
             ii(0x9bc6, 2);    if(jaw(0x9bcd, 0x5)) goto l_0x9bcd;       /* ja 0x9bcd */
             ii(0x9bc8, 4);    mov(memw_a16[ds, 0xcde], cx);             /* mov [0xcde], cx */
-            ii(0x9bcc, 1);    retw();                                   /* ret */
+            ii(0x9bcc, 1);    retw(); return;                           /* ret */
         l_0x9bcd:
             ii(0x9bcd, 3);    mov(ax, 0xffff);                          /* mov ax, 0xffff */
-            ii(0x9bd0, 1);    retw();                                   /* ret */
+            ii(0x9bd0, 1);    retw(); return;                           /* ret */
         }
     }
 }

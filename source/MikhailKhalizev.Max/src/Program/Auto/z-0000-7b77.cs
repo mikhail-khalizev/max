@@ -20,11 +20,11 @@ namespace MikhailKhalizev.Max.Program
         l_0x7b92:
             ii(0x7b92, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x7b95, 1);    popw(bp);                                 /* pop bp */
-            ii(0x7b96, 1);    retw();                                   /* ret */
+            ii(0x7b96, 1);    retw(); return;                           /* ret */
         l_0x7b97:
             ii(0x7b97, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x7b99, 1);    popw(bp);                                 /* pop bp */
-            ii(0x7b9a, 1);    retw();                                   /* ret */
+            ii(0x7b9a, 1);    retw(); return;                           /* ret */
         }
     }
 }

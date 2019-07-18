@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9f42, 1);    popw(ds);                                 /* pop ds */
             ii(0x9f43, 1);    pushw(ax);                                /* push ax */
             ii(0x9f44, 1);    pushw(cx);                                /* push cx */
-            ii(0x9f45, 1);    retfw();                                  /* retf */
+            ii(0x9f45, 1);    retfw(); return;                          /* retf */
         }
     }
 }

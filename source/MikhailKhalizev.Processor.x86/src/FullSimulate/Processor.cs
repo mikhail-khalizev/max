@@ -1446,6 +1446,14 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
             throw new NotImplementedException();
         }
 
+        private void __plus_sp(int s)
+        {
+            if (ss.db)
+                esp += s;
+            else
+                sp += s;
+        }
+
         #endregion
 
         #region Instructions
@@ -2267,7 +2275,21 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void enterw(int allocSize, int nestingLevel)
         {
-            throw new NotImplementedException();
+            if (nestingLevel != 0)
+                throw new NotImplementedException();
+
+            pushw(bp);
+
+            if (ss.db)
+            {
+                ebp = esp;
+                esp -= allocSize;
+            }
+            else
+            {
+                bp = sp;
+                sp -= allocSize;
+            }
         }
 
         /// <inheritdoc />
@@ -3089,13 +3111,13 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public bool jgw(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
         public bool jgew(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -3582,8 +3604,7 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         public void lds(Value dst, SegmentRegister segment, Value offset)
         {
             dst.UInt32 = memd_a32[segment, offset].UInt32;
-            var o2 = offset + dst.Bits / 8;
-            ds.Load(memw_a32[segment, o2].Int32);
+            ds.Load(memw_a32[segment, offset + dst.Bits / 8].Int32);
         }
 
         /// <inheritdoc />
@@ -3598,13 +3619,18 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void leavew()
         {
-            throw new NotImplementedException();
+            if (ss.db)
+                esp = ebp;
+            else
+                sp = bp;
+            popw(bp);
         }
 
         /// <inheritdoc />
         public void les(Value dst, SegmentRegister segment, Value offset)
         {
-            throw new NotImplementedException();
+            dst.UInt32 = memd_a32[segment, offset].UInt32;
+            es.Load(memw_a32[segment, offset + dst.Bits / 8].Int32);
         }
 
         /// <inheritdoc />
@@ -5267,7 +5293,10 @@ namespace MikhailKhalizev.Processor.x86.FullSimulate
         /// <inheritdoc />
         public void retw(int allocSize = 0)
         {
-            throw new NotImplementedException();
+            popw(eip);
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+            __plus_sp(allocSize);                          
         }
 
         /// <inheritdoc />

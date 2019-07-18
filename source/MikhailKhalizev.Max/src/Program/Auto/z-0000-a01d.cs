@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa052, 2);    test(al, al);                             /* test al, al */
             ii(0xa054, 2);    if(jnzw(0xa050, -0x6)) goto l_0xa050;     /* jnz 0xa050 */
             ii(0xa056, 1);    popw(bp);                                 /* pop bp */
-            ii(0xa057, 1);    retw();                                   /* ret */
+            ii(0xa057, 1);    retw(); return;                           /* ret */
         }
     }
 }

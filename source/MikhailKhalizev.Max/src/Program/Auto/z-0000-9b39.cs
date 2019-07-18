@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9b42, 2);    @int(0x10);                               /* int 0x10 */
             ii(0x9b44, 3);    mov(memb_a16[ds, 0xa17], al);             /* mov [0xa17], al */
         l_0x9b47:
-            ii(0x9b47, 1);    retw();                                   /* ret */
+            ii(0x9b47, 1);    retw(); return;                           /* ret */
         }
     }
 }

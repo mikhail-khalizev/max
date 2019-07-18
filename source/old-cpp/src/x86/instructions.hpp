@@ -132,12 +132,14 @@ void iret_(uint_<8> op_size);
 #define jbed(...)   \
     jmpd_if(cf == true || zf == true, __VA_ARGS__)
 
+// +
 #define jgw(...)    \
     jmpw_if(zf == false && sf == of, __VA_ARGS__)
 
 #define jgd(...)    \
     jmpd_if(zf == false && sf == of, __VA_ARGS__)
 
+// +
 #define jgew(...)   \
     jmpw_if(sf == of, __VA_ARGS__)
 
@@ -553,6 +555,7 @@ void iret_(uint_<8> op_size);
 
 #define int3()    throw exo::exception::not_implemented();
 
+// +
 inline void __plus_sp() {}
 inline void __plus_sp(uint_<16> s)
 {
@@ -562,6 +565,7 @@ inline void __plus_sp(uint_<16> s)
         sp += s;
 }
 
+// +
 #define retw(...)                                    \
     popw(eip);                                       \
     if (cs.fail_limit_check(eip))                    \
@@ -1207,6 +1211,7 @@ void lds(uint_<L> & d, seg_reg & s, T o)
     ds = mem<uint_<16>>(s, o);
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void les(uint_<L> & d, seg_reg & s, T o)
 {
@@ -1519,6 +1524,7 @@ inline void div(uint_<32> s)
 void div(uint_<64> s);
 
 
+// +
 inline void enterw(uint_<16> d, uint_<8> nesting_level)
 {
     if (nesting_level != 0)
@@ -1538,6 +1544,7 @@ inline void enterw(uint_<16> d, uint_<8> nesting_level)
     }
 }
 
+// +
 inline void leavew()
 {
     if (ss.get_db())

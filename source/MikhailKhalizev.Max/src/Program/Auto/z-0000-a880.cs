@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa904, 4);    mov(memw_a16[ds, 0xf50], bp);             /* mov [0xf50], bp */
             ii(0xa908, 2);    mov(ds, bx);                              /* mov ds, bx */
             ii(0xa90a, 2);    mov(es, bx);                              /* mov es, bx */
-            ii(0xa90c, 1);    iretw();                                  /* iretw */
+            ii(0xa90c, 1);    iretw(); return;                          /* iretw */
         l_0xa90d:
             ii(0xa90d, 2);    pushw(0xd);                               /* push 0xd */
             ii(0xa90f, 3);    callw(0x589d, -0x5075);                   /* call 0x589d */
@@ -183,7 +183,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xaa04, 2);    popd(edi);                                /* pop edi */
             ii(0xaa06, 1);    popw(si);                                 /* pop si */
             ii(0xaa07, 1);    popw(bp);                                 /* pop bp */
-            ii(0xaa08, 1);    retfw();                                  /* retf */
+            ii(0xaa08, 1);    retfw(); return;                          /* retf */
         }
     }
 }

@@ -89,7 +89,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x5073:
             ii(0x5073, 1);    popw(si);                                 /* pop si */
             ii(0x5074, 1);    leavew();                                 /* leave */
-            ii(0x5075, 1);    retw();                                   /* ret */
+            ii(0x5075, 1);    retw(); return;                           /* ret */
         }
     }
 }

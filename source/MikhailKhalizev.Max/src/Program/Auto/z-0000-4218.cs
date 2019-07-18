@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x421f, 2);    if(jnzw(0x4223, 0x2)) goto l_0x4223;      /* jnz 0x4223 */
         l_0x4221:
             ii(0x4221, 1);    popw(cx);                                 /* pop cx */
-            ii(0x4222, 1);    retw();                                   /* ret */
+            ii(0x4222, 1);    retw(); return;                           /* ret */
         l_0x4223:
             ii(0x4223, 2);    if(loopnew_a16(0x421b, -0xa)) goto l_0x421b; /* loopne 0x421b */
             ii(0x4225, 2);    if(jzw(0x4221, -0x6)) goto l_0x4221;      /* jz 0x4221 */

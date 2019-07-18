@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_6385()
         {
             ii(0x6385, 3);    mov(ax, 0xffff);                          /* mov ax, 0xffff */
-            ii(0x6388, 1);    retw();                                   /* ret */
+            ii(0x6388, 1);    retw(); return;                           /* ret */
         }
     }
 }

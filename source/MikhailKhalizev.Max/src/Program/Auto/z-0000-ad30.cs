@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
         l_0xad3d:
             ii(0xad3d, 1);    popw(di);                                 /* pop di */
             ii(0xad3e, 1);    popw(si);                                 /* pop si */
-            ii(0xad3f, 1);    retw();                                   /* ret */
+            ii(0xad3f, 1);    retw(); return;                           /* ret */
         }
     }
 }

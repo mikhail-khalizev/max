@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9c04, 2);    xor(ax, ax);                              /* xor ax, ax */
         l_0x9c06:
             ii(0x9c06, 1);    popfw();                                  /* popfw */
-            ii(0x9c07, 1);    retw();                                   /* ret */
+            ii(0x9c07, 1);    retw(); return;                           /* ret */
         }
     }
 }
