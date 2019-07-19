@@ -8,8 +8,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode.Dto
     {
         public List<InstructionDto> Instructions { get; set; }
 
-        public TablesDto Tables { get; set; }
-
         [JsonExtensionData]
         private IDictionary<string, JToken> AdditionalData { get; set; }
     }

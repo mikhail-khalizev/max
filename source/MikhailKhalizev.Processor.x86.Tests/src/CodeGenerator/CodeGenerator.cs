@@ -75,8 +75,6 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 .Where(x => x?.Url != null)
                 .ToList();
 
-            var mnemonicLowers = decodeMeta.Instructions.Select(x => x.Mnemonic.ToLowerInvariant()).ToHashSet();
-
             foreach (var instruction in decodeMeta.Instructions)
             {
                 var uniqueName = instruction.Mnemonic.ToLowerInvariant();
@@ -116,7 +114,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
         private static void ParseMainTable(List<(HtmlNode Table, List<string> Headers)> tables, InstructionDto instruction)
         {
-            var (table, header) = tables.FirstOrDefault(x => x.Headers[0] == "Opcode");
+            var (table, header) = tables.FirstOrDefault(x => x.Headers[0] == "Opcode" || x.Headers[0] == "Opcode/Instruction");
             if (table == null)
                 return;
 
@@ -124,25 +122,41 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             
             var indexOpcode = header.IndexOf("Opcode");
             var indexInstruction = header.IndexOf("Instruction");
+            var indexOpcodeInstruction = header.IndexOf("Opcode/Instruction");
             var indexOperandEncoding = header.IndexOf("Op/En");
             var index64bitMode = header.IndexOf("64-bit Mode");
             var indexCompatLegMode = header.IndexOf("Compat/Leg Mode");
+            var indexBit64Bit32ModeSupport = header.IndexOf("64/32 bit Mode Support");
+            var indexCpuidFeatureFlag = header.IndexOf("CPUID Feature Flag");
             var indexDescription = header.IndexOf("Description");
 
             foreach (var itemNode in table.ChildNodes.Where(x => x.Name == "tr").Skip(1))
             {
                 var item = new InstructionTableItemDto();
-                instruction.Table.Add(item);
 
                 var values = itemNode
                     .ChildNodes
                     .Where(x => x.Name == "td")
-                    .Select(x => x.InnerText)
+                    .Select(x => x.InnerText.Trim())
                     .ToList();
 
                 if (values.Count != header.Count)
                     continue;
 
+                if (0 <= indexOpcodeInstruction)
+                {
+                    var str = values[indexOpcodeInstruction];
+                    
+                    var index = str.IndexOf(instruction.Mnemonic, StringComparison.InvariantCulture);
+                    if (index < 0)
+                        continue;
+                    index = str.LastIndexOf(' ', index, index);
+                    if (index < 0)
+                        continue;
+
+                    item.Opcode = str.Substring(0, index).Trim();
+                    item.Instruction = str.Substring(index).Trim();
+                }
                 if (0 <= indexOpcode)
                     item.Opcode = values[indexOpcode];
                 if (0 <= indexInstruction)
@@ -153,8 +167,19 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     item.Bit64Mode = values[index64bitMode];
                 if (0 <= indexCompatLegMode)
                     item.CompatLegMode = values[indexCompatLegMode];
+                if (0 <= indexBit64Bit32ModeSupport)
+                    item.Bit64Bit32ModeSupport = values[indexBit64Bit32ModeSupport];
+                if (0 <= indexCpuidFeatureFlag)
+                {
+                    item.CpuidFeatureFlag = values[indexCpuidFeatureFlag];
+                    if (string.IsNullOrEmpty(item.CpuidFeatureFlag))
+                        item.CpuidFeatureFlag = null;
+                }
+
                 if (0 <= indexDescription)
                     item.Description = values[indexDescription];
+
+                instruction.Table.Add(item);
             }
         }
 
