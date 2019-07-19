@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Aspose.Pdf.Cloud.Sdk.Api;
 using HtmlAgilityPack;
 using MikhailKhalizev.Processor.x86.InstructionDecode;
 using MikhailKhalizev.Processor.x86.InstructionDecode.Dto;
@@ -16,12 +17,13 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
     {
         public const string decodeJsonFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\resources\decode.json";
         public const string mnemonicCodeCsFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\src\InstructionDecode\MnemonicCode.cs";
+        public const string asposeRawJsonFileName = @"Aspose\Json\page-{0}.json";
 
         [Fact(Skip = "For developer")]
         public void FelixcloutierParse()
         {
             var web = new HtmlWeb();
-            web.CachePath = Path.Combine(Directory.GetCurrentDirectory(), "web-cache");
+            web.CachePath = Path.Combine(Directory.GetCurrentDirectory(), "WebCache");
             web.UsingCache = true;
             web.UsingCacheIfExists = true;
 
@@ -40,55 +42,55 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             decodeMeta.Instructions = indexTable.ChildNodes
                 .Select(
                     indexItem =>
-                {
-                    var node = indexItem.ChildNodes[0].FirstChild;
-                    var href = node.Attributes["href"];
-                    var url = href == null ? null : urlBase + href.Value.Substring(1);
-                    var summary = indexItem.ChildNodes[1].InnerText;
-
-                    return new
                     {
-                        url,
-                        summary
-                    };
-                })
+                        var node = indexItem.ChildNodes[0].FirstChild;
+                        var href = node.Attributes["href"];
+                        var url = href == null ? null : urlBase + href.Value.Substring(1);
+                        var summary = indexItem.ChildNodes[1].InnerText;
+
+                        return new
+                        {
+                            url,
+                            summary
+                        };
+                    })
                 .Where(x => x.url != null)
                 .Distinct()
                 .Select(
                     item =>
-                {
-                    var htmlDocument = web.Load(item.url);
-
-                    var titleNodeText = htmlDocument.DocumentNode.SelectSingleNode("//head/title").InnerText;
-                    if (!titleNodeText.EndsWith(item.summary))
-                        throw new InvalidOperationException();
-
-                    var mnemonics = titleNodeText
-                        .Substring(0, titleNodeText.Length - item.summary.Length)
-                        .Trim('\r', '\n', '\t', ' ', '—');
-
-                    var instruction = new InstructionDto
                     {
-                        Url = item.url,
-                        Mnemonics = mnemonics,
-                        Summary = item.summary
-                    };
+                        var htmlDocument = web.Load(item.url);
 
-                    var tables = htmlDocument.DocumentNode
-                        .SelectNodes("//body/table")
+                        var titleNodeText = htmlDocument.DocumentNode.SelectSingleNode("//head/title").InnerText;
+                        if (!titleNodeText.EndsWith(item.summary))
+                            throw new InvalidOperationException();
+
+                        var mnemonics = titleNodeText
+                            .Substring(0, titleNodeText.Length - item.summary.Length)
+                            .Trim('\r', '\n', '\t', ' ', '—');
+
+                        var instruction = new InstructionDto
+                        {
+                            Url = item.url,
+                            Mnemonics = mnemonics,
+                            Summary = item.summary
+                        };
+
+                        var tables = htmlDocument.DocumentNode
+                            .SelectNodes("//body/table")
                             .Select(
                                 table => (Table: table, Header: table.ChildNodes["tr"]
-                            .ChildNodes
-                            .Where(x => x.Name == "th" || x.Name == "td")
+                                    .ChildNodes
+                                    .Where(x => x.Name == "th" || x.Name == "td")
                                     .Select(x => x.InnerText.TrimEnd(' ', '*'))
-                            .ToList()))
-                        .ToList();
+                                    .ToList()))
+                            .ToList();
 
-                    ParseMainTable(tables, instruction);
-                    ParseOperandEncodingTable(tables, instruction);
+                        ParseMainTable(tables, instruction);
+                        ParseOperandEncodingTable(tables, instruction);
 
-                    return instruction;
-                })
+                        return instruction;
+                    })
                 .Where(x => x.Url != null)
                 .ToList();
 
@@ -146,22 +148,22 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
                     item.Mnemonic =
                         str.Split(' ', StringSplitOptions.RemoveEmptyEntries)
-                        .Select(x => x.TrimEnd('*'))
-                        .Where(
-                            token =>
-                            {
-                                if (char.IsDigit(token[0]))
-                                    return false;
+                            .Select(x => x.TrimEnd('*'))
+                            .Where(
+                                token =>
+                                {
+                                    if (char.IsDigit(token[0]))
+                                        return false;
                                     if (token.EndsWith(','))
                                         return false;
-                                if (token.Any(y => !char.IsLetterOrDigit(y)))
-                                    return false;
+                                    if (token.Any(y => !char.IsLetterOrDigit(y)))
+                                        return false;
                                     if (token.Where(char.IsLetter).All(char.IsLower))
                                         return false;
                                     if (Register.HasRegister(token))
                                         return false;
-                                return true;
-                            })
+                                    return true;
+                                })
                             .Last();
 
                     var index = str.IndexOf(item.Mnemonic, StringComparison.InvariantCulture);
@@ -261,14 +263,14 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 "    public enum MnemonicCode",
                 "    {",
             }.AsEnumerable();
-
+            
             lines = lines.Concat(mnemonicCodes.OrderBy(x => x.Key).SelectMany(x =>
             {
                 var summaries = x.Select(y => y.Summary).Distinct();
                 var urls = x.Select(y => y.Url).Distinct().ToList();
 
                 var result = Enumerable.Empty<string>()
-                        .Append("        /// <summary>")
+                    .Append("        /// <summary>")
                     .Concat(summaries.Select(y => $"        /// {y}."))
                     .Append("        /// </summary>");
 
@@ -289,7 +291,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
                 result = result
                     .Append($"        {prefix}{x.Key},")
-                        .Append("");
+                    .Append("");
 
                 return result;
             }).SkipLast(1));
@@ -324,6 +326,50 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     }));
 
             // NOTE Copy manually 'fileIProcessorCs' value to 'IProcessor.cs'.
+        }
+
+        [Fact(Skip = "For developer")]
+        public void AsposeLoad()
+        {
+            var documentName = "325383-sdm-vol-2abcd.pdf";
+            var appSid = "9fa9e638-7858-4022-ba7f-9a99edbdeeac";
+            var appKey = "74b609b2f5238cdf432afdb73e8201d3";
+
+            var dir = Path.GetDirectoryName(asposeRawJsonFileName);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+            
+            var pdfApi = new PdfApi(appKey, appSid);
+            var doc = pdfApi.GetDocument(documentName).Document;
+            var pageResponse = pdfApi.GetPage(documentName, 1);
+            
+            for (var i = 1; i <= doc.Pages.List.Count; i++)
+            {
+                var file = string.Format(asposeRawJsonFileName, i.ToString().PadLeft(4, '0'));
+                if (File.Exists(file))
+                    continue;
+
+                var page = new PageRawDto();
+                page.Number = i;
+                page.CreationDate = doc.DocumentProperties.List.Single(x => x.Name == "CreationDate").Value;
+                page.ModDate = doc.DocumentProperties.List.Single(x => x.Name == "ModDate").Value;
+                page.Tables = JObject.Parse(pdfApi.GetPageTables(documentName, i).Tables.ToJson())["List"];
+                page.Texts = JObject.Parse(
+                    pdfApi.GetPageText(
+                        documentName,
+                        i,
+                        pageResponse.Page.Rectangle.LLX,
+                        pageResponse.Page.Rectangle.LLY,
+                        pageResponse.Page.Rectangle.URX,
+                        pageResponse.Page.Rectangle.URY).TextOccurrences.ToJson())["List"];
+
+                var pageString = JToken.FromObject(page, JsonSerializer.CreateDefault(
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    })).ToString();
+                File.WriteAllText(file, pageString);
+            }
         }
     }
 }
