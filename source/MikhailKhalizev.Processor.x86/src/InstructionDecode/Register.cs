@@ -1,44 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.InstructionDecode
 {
     public class Register
     {
-        public static Register Empty { get; } = new Register(ud_type.UD_NONE, 0, 0, 0);
-
-        public string Name { get; }
-        public ud_type UdType { get; }
-        public int Index { get; }
-        public int ByteMask { get; }
-        public int Size { get; }
-        public bool IsGeneralPurpose { get; private set; }
-
-        private Register(ud_type udType, int index, int byteMask, int size)
-        {
-            UdType = udType;
-            Index = index;
-            ByteMask = byteMask;
-            Size = size;
-
-            if (udType == ud_type.UD_NONE)
-                Name = "none";
-            else
-            {
-                var name = udType.ToString();
-                if (!name.StartsWith("UD_R_"))
-                    throw new InvalidOperationException($"Invalid {nameof(udType)}: {udType}");
-                name = name.Substring("UD_R_".Length).ToLowerInvariant();
-
-                Name = name;
-            }
-        }
-
-        public static IReadOnlyCollection<Register> Registers => _registerByType.Values;
         private static readonly Dictionary<ud_type, Register> _registerByType;
+        private static readonly HashSet<string> _allRegNames;
 
         static Register()
         {
@@ -51,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             regs.Add(new Register(ud_type.UD_R_AL, ++index, 0b0001, 8) { IsGeneralPurpose = true });
             regs.Add(new Register(ud_type.UD_R_AH, index, 0b0010, 8) { IsGeneralPurpose = true });
             regs.Add(new Register(ud_type.UD_R_AX, index, 0b0011, 16) { IsGeneralPurpose = true });
-            regs.Add(new Register(ud_type.UD_R_EAX, index, 0b1111,32) { IsGeneralPurpose = true });
+            regs.Add(new Register(ud_type.UD_R_EAX, index, 0b1111, 32) { IsGeneralPurpose = true });
 
             regs.Add(new Register(ud_type.UD_R_BL, ++index, 0b0001, 8) { IsGeneralPurpose = true });
             regs.Add(new Register(ud_type.UD_R_BH, index, 0b0010, 8) { IsGeneralPurpose = true });
@@ -96,9 +66,50 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             regs.Add(new Register(ud_type.UD_R_CR3, ++index, 0b1111, 32));
 
             _registerByType = regs.ToDictionary(x => x.UdType, x => x);
+
+            _allRegNames = Enum.GetValues(typeof(ud_type))
+                .Cast<ud_type>()
+                .Select(x => x.ToString())
+                .Where(x => x.StartsWith("UD_R_"))
+                .Select(x => x.Substring("UD_R_".Length).ToLowerInvariant())
+                .ToHashSet();
         }
 
-        public static Register GetRegister(ud_type udType) => _registerByType[udType];
+        private Register(ud_type udType, int index, int byteMask, int size)
+        {
+            UdType = udType;
+            Index = index;
+            ByteMask = byteMask;
+            Size = size;
+
+            if (udType == ud_type.UD_NONE)
+                Name = "none";
+            else
+            {
+                var name = udType.ToString();
+                if (!name.StartsWith("UD_R_"))
+                    throw new InvalidOperationException($"Invalid {nameof(udType)}: {udType}");
+                name = name.Substring("UD_R_".Length).ToLowerInvariant();
+
+                Name = name;
+            }
+        }
+
+        public static Register Empty { get; } = new Register(ud_type.UD_NONE, 0, 0, 0);
+
+        public string Name { get; }
+        public ud_type UdType { get; }
+        public int Index { get; }
+        public int ByteMask { get; }
+        public int Size { get; }
+        public bool IsGeneralPurpose { get; private set; }
+
+        public static IReadOnlyCollection<Register> Registers => _registerByType.Values;
+
+        public static Register GetRegister(ud_type udType)
+        {
+            return _registerByType[udType];
+        }
 
         public static bool Intersects(ud_type a, ud_type b)
         {
@@ -109,6 +120,11 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
             var rb = GetRegister(b);
 
             return ra.Index == rb.Index && (ra.ByteMask & rb.ByteMask) != 0;
+        }
+
+        public static bool HasRegister(string name)
+        {
+            return _allRegNames.Contains(name.ToLowerInvariant());
         }
     }
 }

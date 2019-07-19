@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FluentAssertions;
 using HtmlAgilityPack;
+using MikhailKhalizev.Processor.x86.InstructionDecode;
 using MikhailKhalizev.Processor.x86.InstructionDecode.Dto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
     public class CodeGenerator
     {
         public const string decodeJsonFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\resources\decode.json";
-        public const string instructionUniqueNameCsFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\src\InstructionDecode\InstructionUniqueName.cs";
+        public const string mnemonicCodeCsFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\src\InstructionDecode\MnemonicCode.cs";
 
         [Fact(Skip = "For developer")]
         public void FelixcloutierParse()
@@ -30,40 +30,57 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
             var htmlDocumentIndex = web.Load(urlIndex);
 
-            var titleNode = htmlDocumentIndex.DocumentNode.SelectNodes("//body/h2")
+            var headerNode = htmlDocumentIndex.DocumentNode.SelectNodes("//body/h2")
                 .Single(x => x.InnerText == "Core Instructions");
-            var indexTable = titleNode.NextSibling;
+            var indexTable = headerNode.NextSibling;
 
             var str = File.ReadAllText(decodeJsonFileName);
             var decodeMeta = JsonConvert.DeserializeObject<DecodeDto>(str);
 
             decodeMeta.Instructions = indexTable.ChildNodes
-                .Select(indexItem =>
+                .Select(
+                    indexItem =>
                 {
                     var node = indexItem.ChildNodes[0].FirstChild;
-                    var mnemonic = node.InnerText.Replace(" ", "_");
                     var href = node.Attributes["href"];
                     var url = href == null ? null : urlBase + href.Value.Substring(1);
-                    var description = indexItem.ChildNodes[1].InnerText;
+                    var summary = indexItem.ChildNodes[1].InnerText;
 
-                    if (url == null)
-                        return null;
+                    return new
+                    {
+                        url,
+                        summary
+                    };
+                })
+                .Where(x => x.url != null)
+                .Distinct()
+                .Select(
+                    item =>
+                {
+                    var htmlDocument = web.Load(item.url);
+
+                    var titleNodeText = htmlDocument.DocumentNode.SelectSingleNode("//head/title").InnerText;
+                    if (!titleNodeText.EndsWith(item.summary))
+                        throw new InvalidOperationException();
+
+                    var mnemonics = titleNodeText
+                        .Substring(0, titleNodeText.Length - item.summary.Length)
+                        .Trim('\r', '\n', '\t', ' ', '—');
 
                     var instruction = new InstructionDto
                     {
-                        Mnemonic = mnemonic,
-                        Description = description,
-                        Url = url
+                        Url = item.url,
+                        Mnemonics = mnemonics,
+                        Summary = item.summary
                     };
-
-                    var htmlDocument = web.Load(url);
 
                     var tables = htmlDocument.DocumentNode
                         .SelectNodes("//body/table")
-                        .Select(table => (Table: table, Headers: table.ChildNodes["tr"]
+                            .Select(
+                                table => (Table: table, Header: table.ChildNodes["tr"]
                             .ChildNodes
                             .Where(x => x.Name == "th" || x.Name == "td")
-                            .Select(x => x.InnerText)
+                                    .Select(x => x.InnerText.TrimEnd(' ', '*'))
                             .ToList()))
                         .ToList();
 
@@ -72,36 +89,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
                     return instruction;
                 })
-                .Where(x => x?.Url != null)
+                .Where(x => x.Url != null)
                 .ToList();
-
-            foreach (var instruction in decodeMeta.Instructions)
-            {
-                var uniqueName = instruction.Mnemonic.ToLowerInvariant();
-                if (new[] { "in", "lock", "out" }.Contains(uniqueName))
-                    uniqueName = "@" + uniqueName;
-
-                var description = instruction.Description;
-
-                if (uniqueName == "mov" && description == "Move to/from Control Registers")
-                    uniqueName += "_cr";
-                else if (uniqueName == "mov" && description == "Move to/from Debug Registers")
-                    uniqueName += "_dr";
-                else if (uniqueName == "movq" && description == "Move Doubleword/Move Quadword")
-                    uniqueName += "_1";
-                else if (uniqueName == "movq" && description == "Move Quadword")
-                    uniqueName += "_2";
-                else if (uniqueName.StartsWith("vgather") && description.Contains("with Signed"))
-                    uniqueName += "_s";
-                else if (uniqueName.StartsWith("vpgather") && description.Contains("with Signed"))
-                    uniqueName += "_s";
-                else if ((uniqueName == "cmpsd" || uniqueName == "movsd") && description.Contains("Floating-Point"))
-                    uniqueName += "_fp";
-
-                instruction.UniqueName = uniqueName;
-            }
-
-            decodeMeta.Instructions.Select(x => x.UniqueName).Should().OnlyHaveUniqueItems();
 
             str = JToken.FromObject(decodeMeta, JsonSerializer.CreateDefault(
                 new JsonSerializerSettings
@@ -112,27 +101,35 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             File.WriteAllText(decodeJsonFileName, str);
         }
 
-        private static void ParseMainTable(List<(HtmlNode Table, List<string> Headers)> tables, InstructionDto instruction)
+        private static void ParseMainTable(List<(HtmlNode Table, List<string> Header)> tables, InstructionDto instruction)
         {
-            var (table, header) = tables.FirstOrDefault(x => x.Headers[0] == "Opcode" || x.Headers[0] == "Opcode/Instruction");
+            var (table, header) = tables.FirstOrDefault(
+                x =>
+                    string.Equals(x.Header[0], "Opcode", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(x.Header[0], "Opcode Instruction", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(x.Header[0], "Opcode/Instruction", StringComparison.OrdinalIgnoreCase));
             if (table == null)
                 return;
 
-            instruction.Table = new List<InstructionTableItemDto>();
+            instruction.Items = new List<InstructionItemDto>();
             
-            var indexOpcode = header.IndexOf("Opcode");
-            var indexInstruction = header.IndexOf("Instruction");
-            var indexOpcodeInstruction = header.IndexOf("Opcode/Instruction");
-            var indexOperandEncoding = header.IndexOf("Op/En");
-            var index64bitMode = header.IndexOf("64-bit Mode");
-            var indexCompatLegMode = header.IndexOf("Compat/Leg Mode");
-            var indexBit64Bit32ModeSupport = header.IndexOf("64/32 bit Mode Support");
-            var indexCpuidFeatureFlag = header.IndexOf("CPUID Feature Flag");
-            var indexDescription = header.IndexOf("Description");
+            var indexOpcode = header.FindIndex(x => string.Equals(x, "Opcode", StringComparison.OrdinalIgnoreCase));
+            var indexInstruction = header.FindIndex(x => string.Equals(x, "Instruction", StringComparison.OrdinalIgnoreCase));
+            var indexOpcodeInstruction =
+                Math.Max(
+                    header.FindIndex(x => string.Equals(x, "Opcode Instruction", StringComparison.OrdinalIgnoreCase)),
+                    header.FindIndex(x => string.Equals(x, "Opcode/Instruction", StringComparison.OrdinalIgnoreCase)));
+
+            var indexOperandEncoding = header.FindIndex(x => string.Equals(x, "Op/En", StringComparison.OrdinalIgnoreCase));
+            var index64bitMode = header.FindIndex(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
+            var indexCompatLegMode = header.FindIndex(x => string.Equals(x, "Compat/Leg Mode", StringComparison.OrdinalIgnoreCase));
+            var indexBit64Bit32ModeSupport = header.FindIndex(x => string.Equals(x, "64/32 bit Mode Support", StringComparison.OrdinalIgnoreCase));
+            var indexCpuidFeatureFlag = header.FindIndex(x => string.Equals(x, "CPUID Feature Flag", StringComparison.OrdinalIgnoreCase));
+            var indexDescription = header.FindIndex(x => string.Equals(x, "Description", StringComparison.OrdinalIgnoreCase));
 
             foreach (var itemNode in table.ChildNodes.Where(x => x.Name == "tr").Skip(1))
             {
-                var item = new InstructionTableItemDto();
+                var item = new InstructionItemDto();
 
                 var values = itemNode
                     .ChildNodes
@@ -146,21 +143,43 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 if (0 <= indexOpcodeInstruction)
                 {
                     var str = values[indexOpcodeInstruction];
-                    
-                    var index = str.IndexOf(instruction.Mnemonic, StringComparison.InvariantCulture);
-                    if (index < 0)
-                        continue;
-                    index = str.LastIndexOf(' ', index, index);
-                    if (index < 0)
-                        continue;
 
-                    item.Opcode = str.Substring(0, index).Trim();
-                    item.Instruction = str.Substring(index).Trim();
+                    item.Mnemonic =
+                        str.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                        .Select(x => x.TrimEnd('*'))
+                        .Where(
+                            token =>
+                            {
+                                if (char.IsDigit(token[0]))
+                                    return false;
+                                    if (token.EndsWith(','))
+                                        return false;
+                                if (token.Any(y => !char.IsLetterOrDigit(y)))
+                                    return false;
+                                    if (token.Where(char.IsLetter).All(char.IsLower))
+                                        return false;
+                                    if (Register.HasRegister(token))
+                                        return false;
+                                return true;
+                            })
+                            .Last();
+
+                    var index = str.IndexOf(item.Mnemonic, StringComparison.InvariantCulture);
+                    item.Opcode = str.Substring(0, index).TrimEnd();
+                    item.Instruction = str.Substring(index).TrimStart();
                 }
                 if (0 <= indexOpcode)
                     item.Opcode = values[indexOpcode];
                 if (0 <= indexInstruction)
+                {
                     item.Instruction = values[indexInstruction];
+
+                    var index = item.Instruction.IndexOf(' ');
+                    if (index < 0)
+                        index = item.Instruction.Length;
+                    item.Mnemonic = item.Instruction.Substring(0, index).TrimEnd('*');
+                }
+
                 if (0 <= indexOperandEncoding)
                     item.OperandEncoding = values[indexOperandEncoding];
                 if (0 <= index64bitMode)
@@ -179,7 +198,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 if (0 <= indexDescription)
                     item.Description = values[indexDescription];
 
-                instruction.Table.Add(item);
+                if (item.Mnemonic == "RET" && item.Description.Contains("Far"))
+                    item.MnemonicCode = "retf";
+
+                instruction.Items.Add(item);
             }
         }
 
@@ -189,11 +211,11 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             if (table == null)
                 return;
 
-            instruction.OperandEncoding = new List<InstructionOperandEncodingItemDto>();
+            instruction.OperandEncoding = new List<OperandEncodingDto>();
 
             foreach (var itemNode in table.ChildNodes.Where(x => x.Name == "tr").Skip(1))
             {
-                var item = new InstructionOperandEncodingItemDto();
+                var item = new OperandEncodingDto();
                 instruction.OperandEncoding.Add(item);
 
                 var values = itemNode
@@ -218,6 +240,16 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
             // InstructionUniqueName.cs
 
+            var mnemonicCodes = decodeMeta.Instructions
+                .Where(x => x.Items != null)
+                .SelectMany(x => x.Items.Select(y => new
+                {
+                    y.MnemonicCode,
+                    x.Summary,
+                    x.Url
+                }))
+                .ToLookup(x => x.MnemonicCode);
+
             var lines = new[]
             {
                 "// ReSharper disable InconsistentNaming",
@@ -226,37 +258,70 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 "",
                 "namespace MikhailKhalizev.Processor.x86.InstructionDecode",
                 "{",
-                "    public enum InstructionUniqueName",
+                "    public enum MnemonicCode",
                 "    {",
-            }.Concat(decodeMeta.Instructions.SelectMany(x => new[]
+            }.AsEnumerable();
+
+            lines = lines.Concat(mnemonicCodes.OrderBy(x => x.Key).SelectMany(x =>
             {
-                $"        /// <summary>",
-                $"        /// {x.Description}.",
-                $"        /// </summary>",
-                $"        /// <remarks>{x.Url}</remarks>",
-                $"        {x.UniqueName},",
-                ""
-            }).SkipLast(1)).Concat(new[]
+                var summaries = x.Select(y => y.Summary).Distinct();
+                var urls = x.Select(y => y.Url).Distinct().ToList();
+
+                var result = Enumerable.Empty<string>()
+                        .Append("        /// <summary>")
+                    .Concat(summaries.Select(y => $"        /// {y}."))
+                    .Append("        /// </summary>");
+
+                if (urls.Count == 1)
+                {
+                    result = result
+                        .Append($"        /// <remarks>{urls[0]}</remarks>");
+                }
+                else
+                {
+                    result = result
+                        .Append("        /// <remarks>")
+                        .Concat(urls.Select(y => $"        /// {y}"))
+                        .Append("        /// </remarks>");
+                }
+
+                var prefix = new[] { "in", "out", "lock", "int" }.Contains(x.Key) ? "@" : "";
+
+                result = result
+                    .Append($"        {prefix}{x.Key},")
+                        .Append("");
+
+                return result;
+            }).SkipLast(1));
+
+
+            lines = lines.Concat(new[]
             {
                 "    }",
                 "}"
             });
 
             str = string.Join(Environment.NewLine, lines);
-            File.WriteAllText(instructionUniqueNameCsFileName, str);
+            File.WriteAllText(mnemonicCodeCsFileName, str);
 
 
             // IProcessor.cs (instruction region)
 
-            var fileIProcessorCs = string.Join(Environment.NewLine, decodeMeta.Instructions.SelectMany(x => new[]
-            {
-                $"/// <summary>",
-                $"/// {x.Description}.",
-                $"/// </summary>",
-                $"/// <remarks>{x.Url}</remarks>",
-                $"void {x.UniqueName}();",
-                ""
-            }));
+            var fileIProcessorCs = string.Join(
+                Environment.NewLine,
+                mnemonicCodes.OrderBy(x => x.Key).SelectMany(
+                    x =>
+                    {
+                        return
+                            Enumerable.Empty<string>()
+                                .Append("/// <summary>")
+                                .Concat(x.Select(y => $"/// {y.Summary}."))
+                                .Append("/// </summary>")
+                                .Append("/// <remarks>")
+                                .Concat(x.Select(y => $"/// {y.Url}."))
+                                .Append("/// </remarks>")
+                                .Append($"void {x.Key}();");
+                    }));
 
             // NOTE Copy manually 'fileIProcessorCs' value to 'IProcessor.cs'.
         }

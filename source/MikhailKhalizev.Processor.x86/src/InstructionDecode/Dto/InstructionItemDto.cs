@@ -4,8 +4,26 @@ using Newtonsoft.Json.Linq;
 
 namespace MikhailKhalizev.Processor.x86.InstructionDecode.Dto
 {
-    public class InstructionTableItemDto
+    public class InstructionItemDto
     {
+        /// <summary>
+        /// A mnemonic is a reserved name for a class of instruction opcodes which have the same function.
+        /// </summary>
+        public string Mnemonic { get; set; }
+
+        public string MnemonicCode
+        {
+            get => _mnemonicCode ?? Mnemonic.ToLowerInvariant();
+            set => _mnemonicCode = value;
+        }
+        private string _mnemonicCode;
+
+        public bool ShouldSerializeMnemonicCode()
+        {
+            return MnemonicCode != Mnemonic.ToLowerInvariant();
+        }
+
+
         public string Opcode { get; set; } = "";
         public string Instruction { get; set; } = "";
         public string OperandEncoding { get; set; }

@@ -4,7 +4,7 @@
 
 namespace MikhailKhalizev.Processor.x86.InstructionDecode
 {
-    public enum InstructionUniqueName
+    public enum MnemonicCode
     {
         /// <summary>
         /// ASCII Adjust After Addition.
@@ -167,6 +167,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ARPL.html</remarks>
         arpl,
+
+        /// <summary>
+        /// Count the Number of Leading Zero Bits.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LZCNT.html</remarks>
+        bd,
 
         /// <summary>
         /// Bit Field Extract.
@@ -394,7 +400,181 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Conditional Move.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
-        cmovcc,
+        cmova,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovae,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovb,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovbe,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovc,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmove,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovg,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovge,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovl,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovle,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovna,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnae,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnb,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnbe,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnc,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovne,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovng,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnge,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnl,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnle,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovno,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnp,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovns,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovnz,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovo,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovp,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovpe,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovpo,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovs,
+
+        /// <summary>
+        /// Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMOVcc.html</remarks>
+        cmovz,
 
         /// <summary>
         /// Compare Two Operands.
@@ -428,15 +608,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
         /// <summary>
         /// Compare String Operands.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html</remarks>
-        cmpsd,
-
-        /// <summary>
         /// Compare Scalar Double-Precision Floating-Point Value.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CMPSD.html</remarks>
-        cmpsd_fp,
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html
+        /// https://www.felixcloutier.com/x86/CMPSD.html
+        /// </remarks>
+        cmpsd,
 
         /// <summary>
         /// Compare String Operands.
@@ -719,8 +897,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ENTER.html</remarks>
         enter,
-        
-        esc,
 
         /// <summary>
         /// Extract Packed Floating-Point Values.
@@ -780,7 +956,49 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Floating-Point Conditional Move.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
-        fcmovcc,
+        fcmovb,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmovbe,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmove,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmovnb,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmovnbe,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmovne,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmovnu,
+
+        /// <summary>
+        /// Floating-Point Conditional Move.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FCMOVcc.html</remarks>
+        fcmovu,
 
         /// <summary>
         /// Compare Floating Point Values.
@@ -1233,10 +1451,22 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         fxrstor,
 
         /// <summary>
+        /// Restore x87 FPU, MMX, XMM, and MXCSR State.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FXRSTOR.html</remarks>
+        fxrstor64,
+
+        /// <summary>
         /// Save x87 FPU, MMX Technology, and SSE State.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FXSAVE.html</remarks>
         fxsave,
+
+        /// <summary>
+        /// Save x87 FPU, MMX Technology, and SSE State.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FXSAVE.html</remarks>
+        fxsave64,
 
         /// <summary>
         /// Extract Exponent and Significand.
@@ -1285,6 +1515,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/HSUBPS.html</remarks>
         hsubps,
+
+        /// <summary>
+        /// Permute In-Lane of Quadruples of Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPERMILPS.html</remarks>
+        ibvpermilps,
 
         /// <summary>
         /// Signed Divide.
@@ -1371,12 +1607,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         invd,
 
         /// <summary>
-        /// Invalidate TLB Entries.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/INVLPG.html</remarks>
-        invlpg,
-
-        /// <summary>
         /// Invalidate Process-Context Identifier.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INVPCID.html</remarks>
@@ -1395,6 +1625,84 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         iretd,
 
         /// <summary>
+        /// Interrupt Return.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/IRET:IRETD.html</remarks>
+        iretq,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        ja,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jae,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jb,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jbe,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jc,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jcxz,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        je,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jecxz,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jg,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jge,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jl,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jle,
+
+        /// <summary>
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
@@ -1404,13 +1712,127 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        jcc,
+        jna,
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        jcxz,
+        jnae,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnb,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnbe,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnc,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jne,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jng,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnge,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnl,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnle,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jno,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnp,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jns,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jnz,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jo,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jp,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jpe,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jpo,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jrcxz,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        js,
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        jz,
 
         /// <summary>
         /// ADD Two Masks.
@@ -1719,12 +2141,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         kxorw,
 
         /// <summary>
-        /// Load Status Flags into AH Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LAHF.html</remarks>
-        lahf,
-
-        /// <summary>
         /// Load Access Rights Byte.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LAR.html</remarks>
@@ -1881,12 +2297,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         ltr,
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LZCNT.html</remarks>
-        lzcnt,
-
-        /// <summary>
         /// Store Selected Bytes of Double Quadword.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MASKMOVDQU.html</remarks>
@@ -1923,12 +2333,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         maxss,
 
         /// <summary>
-        /// Memory Fence.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MFENCE.html</remarks>
-        mfence,
-
-        /// <summary>
         /// Minimum of Packed Double-Precision Floating-Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MINPD.html</remarks>
@@ -1953,28 +2357,16 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         minss,
 
         /// <summary>
-        /// Set Up Monitor Address.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MONITOR.html</remarks>
-        monitor,
-
-        /// <summary>
         /// Move.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOV.html</remarks>
-        mov,
-
-        /// <summary>
         /// Move to/from Control Registers.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOV-1.html</remarks>
-        mov_cr,
-
-        /// <summary>
         /// Move to/from Debug Registers.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOV-2.html</remarks>
-        mov_dr,
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/MOV.html
+        /// https://www.felixcloutier.com/x86/MOV-1.html
+        /// https://www.felixcloutier.com/x86/MOV-2.html
+        /// </remarks>
+        mov,
 
         /// <summary>
         /// Move Aligned Packed Double-Precision Floating-Point Values.
@@ -1989,12 +2381,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         movaps,
 
         /// <summary>
-        /// Move Data After Swapping Bytes.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVBE.html</remarks>
-        movbe,
-
-        /// <summary>
         /// Move Doubleword/Move Quadword.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVD:MOVQ.html</remarks>
@@ -2005,12 +2391,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVDDUP.html</remarks>
         movddup,
-
-        /// <summary>
-        /// Move Quadword from XMM to MMX Technology Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVDQ2Q.html</remarks>
-        movdq2q,
 
         /// <summary>
         /// Move Aligned Packed Integer Values.
@@ -2110,15 +2490,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
         /// <summary>
         /// Move Doubleword/Move Quadword.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVD:MOVQ.html</remarks>
-        movq_1,
-
-        /// <summary>
         /// Move Quadword.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVQ.html</remarks>
-        movq_2,
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/MOVD:MOVQ.html
+        /// https://www.felixcloutier.com/x86/MOVQ.html
+        /// </remarks>
+        movq,
 
         /// <summary>
         /// Move Quadword from MMX Technology to XMM Register.
@@ -2140,15 +2518,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
         /// <summary>
         /// Move Data from String to String.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
-        movsd,
-
-        /// <summary>
         /// Move or Merge Scalar Double-Precision Floating-Point Value.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVSD.html</remarks>
-        movsd_fp,
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html
+        /// https://www.felixcloutier.com/x86/MOVSD.html
+        /// </remarks>
+        movsd,
 
         /// <summary>
         /// Replicate Single FP Values.
@@ -2335,12 +2711,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PABSB:PABSW:PABSD:PABSQ.html</remarks>
         pabsd,
-
-        /// <summary>
-        /// Packed Absolute Value.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PABSB:PABSW:PABSD:PABSQ.html</remarks>
-        pabsq,
 
         /// <summary>
         /// Packed Absolute Value.
@@ -2676,12 +3046,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Maximum of Packed Signed Integers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html</remarks>
-        pmaxsq,
-
-        /// <summary>
-        /// Maximum of Packed Signed Integers.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html</remarks>
         pmaxsw,
 
         /// <summary>
@@ -2695,12 +3059,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMAXUD:PMAXUQ.html</remarks>
         pmaxud,
-
-        /// <summary>
-        /// Maximum of Packed Unsigned Integers.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PMAXUD:PMAXUQ.html</remarks>
-        pmaxuq,
 
         /// <summary>
         /// Maximum of Packed Unsigned Integers.
@@ -2723,12 +3081,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// <summary>
         /// Minimum of Packed Signed Integers.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PMINSD:PMINSQ.html</remarks>
-        pminsq,
-
-        /// <summary>
-        /// Minimum of Packed Signed Integers.
-        /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMINSB:PMINSW.html</remarks>
         pminsw,
 
@@ -2747,12 +3099,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// <summary>
         /// Minimum of Packed Unsigned Integers.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PMINUD:PMINUQ.html</remarks>
-        pminuq,
-
-        /// <summary>
-        /// Minimum of Packed Unsigned Integers.
-        /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMINUB:PMINUW.html</remarks>
         pminuw,
 
@@ -2766,13 +3112,73 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Packed Move with Sign Extend.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
-        pmovsx,
+        pmovsxbd,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        pmovsxbq,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        pmovsxbw,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        pmovsxdq,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        pmovsxwd,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        pmovsxwq,
 
         /// <summary>
         /// Packed Move with Zero Extend.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
-        pmovzx,
+        pmovzxbd,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        pmovzxbq,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        pmovzxbw,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        pmovzxdq,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        pmovzxwd,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        pmovzxwq,
 
         /// <summary>
         /// Multiply Packed Doubleword Integers.
@@ -2803,12 +3209,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMULLD:PMULLQ.html</remarks>
         pmulld,
-
-        /// <summary>
-        /// Multiply Packed Integers and Store Low Result.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PMULLD:PMULLQ.html</remarks>
-        pmullq,
 
         /// <summary>
         /// Multiply Packed Signed Integers and Store Low Result.
@@ -2871,16 +3271,34 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         por,
 
         /// <summary>
-        /// Prefetch Data into Caches in Anticipation of a Write.
+        /// Prefetch Data Into Caches.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PREFETCHW.html</remarks>
-        prefetchw,
+        /// <remarks>https://www.felixcloutier.com/x86/PREFETCHh.html</remarks>
+        prefetchnta,
 
         /// <summary>
         /// Prefetch Data Into Caches.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PREFETCHh.html</remarks>
-        prefetchh,
+        prefetcht0,
+
+        /// <summary>
+        /// Prefetch Data Into Caches.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PREFETCHh.html</remarks>
+        prefetcht1,
+
+        /// <summary>
+        /// Prefetch Data Into Caches.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PREFETCHh.html</remarks>
+        prefetcht2,
+
+        /// <summary>
+        /// Prefetch Data into Caches in Anticipation of a Write.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PREFETCHW.html</remarks>
+        prefetchw,
 
         /// <summary>
         /// Compute Sum of Absolute Differences.
@@ -2965,12 +3383,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PSRAW:PSRAD:PSRAQ.html</remarks>
         psrad,
-
-        /// <summary>
-        /// Shift Packed Data Right Arithmetic.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PSRAW:PSRAD:PSRAQ.html</remarks>
-        psraq,
 
         /// <summary>
         /// Shift Packed Data Right Arithmetic.
@@ -3147,28 +3559,10 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         pushfq,
 
         /// <summary>
-        /// Logical Exclusive OR.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/PXOR.html</remarks>
-        pxor,
-
-        /// <summary>
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
         rcl,
-
-        /// <summary>
-        /// Compute Reciprocals of Packed Single-Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/RCPPS.html</remarks>
-        rcpps,
-
-        /// <summary>
-        /// Compute Reciprocal of Scalar Single-Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/RCPSS.html</remarks>
-        rcpss,
 
         /// <summary>
         /// Rotate.
@@ -3189,12 +3583,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         rdgsbase,
 
         /// <summary>
-        /// Read from Model Specific Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/RDMSR.html</remarks>
-        rdmsr,
-
-        /// <summary>
         /// Read Processor ID.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RDPID.html</remarks>
@@ -3211,12 +3599,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RDPMC.html</remarks>
         rdpmc,
-
-        /// <summary>
-        /// Read Random Number.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/RDRAND.html</remarks>
-        rdrand,
 
         /// <summary>
         /// Read Random SEED.
@@ -3255,22 +3637,16 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         repne,
 
         /// <summary>
-        /// Repeat String Operation Prefix.
+        /// Return from Procedure.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
-        repnz,
-
-        /// <summary>
-        /// Repeat String Operation Prefix.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
-        repz,
+        /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
+        ret,
 
         /// <summary>
         /// Return from Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
-        ret,
+        retf,
 
         /// <summary>
         /// Rotate.
@@ -3291,46 +3667,10 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         rorx,
 
         /// <summary>
-        /// Round Packed Double Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/ROUNDPD.html</remarks>
-        roundpd,
-
-        /// <summary>
-        /// Round Packed Single Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/ROUNDPS.html</remarks>
-        roundps,
-
-        /// <summary>
-        /// Round Scalar Double Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/ROUNDSD.html</remarks>
-        roundsd,
-
-        /// <summary>
-        /// Round Scalar Single Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/ROUNDSS.html</remarks>
-        roundss,
-
-        /// <summary>
         /// Resume from System Management Mode.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RSM.html</remarks>
         rsm,
-
-        /// <summary>
-        /// Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/RSQRTPS.html</remarks>
-        rsqrtps,
-
-        /// <summary>
-        /// Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/RSQRTSS.html</remarks>
-        rsqrtss,
 
         /// <summary>
         /// Store AH into Flags.
@@ -3384,25 +3724,199 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Scan String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
+        scasq,
+
+        /// <summary>
+        /// Scan String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
         scasw,
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        setcc,
+        seta,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setae,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setb,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setbe,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setc,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        sete,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setg,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setge,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setl,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setle,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setna,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnae,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnb,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnbe,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnc,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setne,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setng,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnge,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnl,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnle,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setno,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnp,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setns,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setnz,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        seto,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setp,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setpe,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setpo,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        sets,
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        setz,
 
         /// <summary>
         /// Store Fence.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SFENCE.html</remarks>
         sfence,
-
-        /// <summary>
-        /// Store Global Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/SGDT.html</remarks>
-        sgdt,
 
         /// <summary>
         /// Perform an Intermediate Calculation for the Next Four SHA1 Message Dwords.
@@ -3463,12 +3977,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SARX:SHLX:SHRX.html</remarks>
         shlx,
-
-        /// <summary>
-        /// Shift.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        shr,
 
         /// <summary>
         /// Double Precision Shift Right.
@@ -3559,12 +4067,6 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STI.html</remarks>
         sti,
-
-        /// <summary>
-        /// Store MXCSR Register State.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/STMXCSR.html</remarks>
-        stmxcsr,
 
         /// <summary>
         /// Store String.
@@ -3690,7 +4192,19 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// Undefined Instruction.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UD.html</remarks>
-        ud,
+        ud01,
+
+        /// <summary>
+        /// Undefined Instruction.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UD.html</remarks>
+        ud1,
+
+        /// <summary>
+        /// Undefined Instruction.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UD.html</remarks>
+        ud2,
 
         /// <summary>
         /// Unpack and Interleave High Packed Double-Precision Floating-Point Values.
@@ -3717,6 +4231,78 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         unpcklps,
 
         /// <summary>
+        /// Add Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ADDPD.html</remarks>
+        vaddpd,
+
+        /// <summary>
+        /// Add Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ADDPS.html</remarks>
+        vaddps,
+
+        /// <summary>
+        /// Add Scalar Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ADDSD.html</remarks>
+        vaddsd,
+
+        /// <summary>
+        /// Add Scalar Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ADDSS.html</remarks>
+        vaddss,
+
+        /// <summary>
+        /// Packed Double-FP Add/Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ADDSUBPD.html</remarks>
+        vaddsubpd,
+
+        /// <summary>
+        /// Packed Single-FP Add/Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ADDSUBPS.html</remarks>
+        vaddsubps,
+
+        /// <summary>
+        /// Perform One Round of an AES Decryption Flow.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/AESDEC.html</remarks>
+        vaesdec,
+
+        /// <summary>
+        /// Perform Last Round of an AES Decryption Flow.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/AESDECLAST.html</remarks>
+        vaesdeclast,
+
+        /// <summary>
+        /// Perform One Round of an AES Encryption Flow.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/AESENC.html</remarks>
+        vaesenc,
+
+        /// <summary>
+        /// Perform Last Round of an AES Encryption Flow.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/AESENCLAST.html</remarks>
+        vaesenclast,
+
+        /// <summary>
+        /// Perform the AES InvMixColumn Transformation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/AESIMC.html</remarks>
+        vaesimc,
+
+        /// <summary>
+        /// AES Round Key Generation Assist.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/AESKEYGENASSIST.html</remarks>
+        vaeskeygenassist,
+
+        /// <summary>
         /// Align Doubleword/Quadword Vectors.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VALIGND:VALIGNQ.html</remarks>
@@ -3727,6 +4313,30 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VALIGND:VALIGNQ.html</remarks>
         valignq,
+
+        /// <summary>
+        /// Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ANDNPD.html</remarks>
+        vandnpd,
+
+        /// <summary>
+        /// Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ANDNPS.html</remarks>
+        vandnps,
+
+        /// <summary>
+        /// Bitwise Logical AND of Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ANDPD.html</remarks>
+        vandpd,
+
+        /// <summary>
+        /// Bitwise Logical AND of Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ANDPS.html</remarks>
+        vandps,
 
         /// <summary>
         /// Blend Float64/Float32 Vectors Using an OpMask Control.
@@ -3741,10 +4351,148 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vblendmps,
 
         /// <summary>
+        /// Blend Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/BLENDPD.html</remarks>
+        vblendpd,
+
+        /// <summary>
+        /// Blend Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/BLENDPS.html</remarks>
+        vblendps,
+
+        /// <summary>
+        /// Variable Blend Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/BLENDVPD.html</remarks>
+        vblendvpd,
+
+        /// <summary>
+        /// Variable Blend Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/BLENDVPS.html</remarks>
+        vblendvps,
+
+        /// <summary>
         /// Load with Broadcast Floating-Point Data.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
-        vbroadcast,
+        vbroadcastf128,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastf32x2,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastf32x4,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastf32x8,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastf64x2,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastf64x4,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
+        vbroadcasti128,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
+        vbroadcasti32x2,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
+        vbroadcasti32x4,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
+        vbroadcasti32x8,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
+        vbroadcasti64x2,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
+        vbroadcasti64x4,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastsd,
+
+        /// <summary>
+        /// Load with Broadcast Floating-Point Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VBROADCAST.html</remarks>
+        vbroadcastss,
+
+        /// <summary>
+        /// Compare Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMPPD.html</remarks>
+        vcmppd,
+
+        /// <summary>
+        /// Compare Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMPPS.html</remarks>
+        vcmpps,
+
+        /// <summary>
+        /// Compare Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMPSD.html</remarks>
+        vcmpsd,
+
+        /// <summary>
+        /// Compare Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMPSS.html</remarks>
+        vcmpss,
+
+        /// <summary>
+        /// Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/COMISD.html</remarks>
+        vcomisd,
+
+        /// <summary>
+        /// Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/COMISS.html</remarks>
+        vcomiss,
 
         /// <summary>
         /// Store Sparse Packed Double-Precision Floating-Point Values into Dense Memory.
@@ -3757,6 +4505,30 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCOMPRESSPS.html</remarks>
         vcompressps,
+
+        /// <summary>
+        /// Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTDQ2PD.html</remarks>
+        vcvtdq2pd,
+
+        /// <summary>
+        /// Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTDQ2PS.html</remarks>
+        vcvtdq2ps,
+
+        /// <summary>
+        /// Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTPD2DQ.html</remarks>
+        vcvtpd2dq,
+
+        /// <summary>
+        /// Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTPD2PS.html</remarks>
+        vcvtpd2ps,
 
         /// <summary>
         /// Convert Packed Double-Precision Floating-Point Values to Packed Quadword Integers.
@@ -3781,6 +4553,18 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTPH2PS.html</remarks>
         vcvtph2ps,
+
+        /// <summary>
+        /// Convert Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTPS2DQ.html</remarks>
+        vcvtps2dq,
+
+        /// <summary>
+        /// Convert Packed Single-Precision Floating-Point Values to Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTPS2PD.html</remarks>
+        vcvtps2pd,
 
         /// <summary>
         /// Convert Single-Precision FP value to 16-bit FP value.
@@ -3819,16 +4603,58 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vcvtqq2ps,
 
         /// <summary>
+        /// Convert Scalar Double-Precision Floating-Point Value to Doubleword Integer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTSD2SI.html</remarks>
+        vcvtsd2si,
+
+        /// <summary>
+        /// Convert Scalar Double-Precision Floating-Point Value to Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTSD2SS.html</remarks>
+        vcvtsd2ss,
+
+        /// <summary>
         /// Convert Scalar Double-Precision Floating-Point Value to Unsigned Doubleword Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTSD2USI.html</remarks>
         vcvtsd2usi,
 
         /// <summary>
+        /// Convert Doubleword Integer to Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTSI2SD.html</remarks>
+        vcvtsi2sd,
+
+        /// <summary>
+        /// Convert Doubleword Integer to Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTSI2SS.html</remarks>
+        vcvtsi2ss,
+
+        /// <summary>
+        /// Convert Scalar Single-Precision Floating-Point Value to Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTSS2SD.html</remarks>
+        vcvtss2sd,
+
+        /// <summary>
+        /// Convert Scalar Single-Precision Floating-Point Value to Doubleword Integer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTSS2SI.html</remarks>
+        vcvtss2si,
+
+        /// <summary>
         /// Convert Scalar Single-Precision Floating-Point Value to Unsigned Doubleword Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTSS2USI.html</remarks>
         vcvtss2usi,
+
+        /// <summary>
+        /// Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Doubleword Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTTPD2DQ.html</remarks>
+        vcvttpd2dq,
 
         /// <summary>
         /// Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Quadword Integers.
@@ -3849,6 +4675,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vcvttpd2uqq,
 
         /// <summary>
+        /// Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTTPS2DQ.html</remarks>
+        vcvttps2dq,
+
+        /// <summary>
         /// Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTPS2QQ.html</remarks>
@@ -3867,10 +4699,22 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vcvttps2uqq,
 
         /// <summary>
+        /// Convert with Truncation Scalar Double-Precision Floating-Point Value to Signed Integer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTTSD2SI.html</remarks>
+        vcvttsd2si,
+
+        /// <summary>
         /// Convert with Truncation Scalar Double-Precision Floating-Point Value to Unsigned Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VCVTTSD2USI.html</remarks>
         vcvttsd2usi,
+
+        /// <summary>
+        /// Convert with Truncation Scalar Single-Precision Floating-Point Value to Integer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CVTTSS2SI.html</remarks>
+        vcvttss2si,
 
         /// <summary>
         /// Convert with Truncation Scalar Single-Precision Floating-Point Value to Unsigned Integer.
@@ -3919,6 +4763,42 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VDBPSADBW.html</remarks>
         vdbpsadbw,
+
+        /// <summary>
+        /// Divide Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/DIVPD.html</remarks>
+        vdivpd,
+
+        /// <summary>
+        /// Divide Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/DIVPS.html</remarks>
+        vdivps,
+
+        /// <summary>
+        /// Divide Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/DIVSD.html</remarks>
+        vdivsd,
+
+        /// <summary>
+        /// Divide Scalar Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/DIVSS.html</remarks>
+        vdivss,
+
+        /// <summary>
+        /// Dot Product of Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/DPPD.html</remarks>
+        vdppd,
+
+        /// <summary>
+        /// Dot Product of Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/DPPS.html</remarks>
+        vdpps,
 
         /// <summary>
         /// Verify a Segment for Reading or Writing.
@@ -4003,6 +4883,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VEXTRACTI128:VEXTRACTI32x4:VEXTRACTI64x2:VEXTRACTI32x8:VEXTRACTI64x4.html</remarks>
         vextracti64x4,
+
+        /// <summary>
+        /// Extract Packed Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/EXTRACTPS.html</remarks>
+        vextractps,
 
         /// <summary>
         /// Fix Up Special Packed Float64 Values.
@@ -4414,51 +5300,43 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 
         /// <summary>
         /// Gather Packed DP FP Values Using Signed Dword/Qword Indices.
+        /// Gather Packed Single, Packed Double with Signed Dword.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERDPD:VGATHERQPD.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VGATHERDPD:VGATHERQPD.html
+        /// https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERDPD.html
+        /// </remarks>
         vgatherdpd,
 
         /// <summary>
         /// Gather Packed Single, Packed Double with Signed Dword.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERDPD.html</remarks>
-        vgatherdpd_s,
-
-        /// <summary>
         /// Gather Packed SP FP values Using Signed Dword/Qword Indices.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERDPD.html
+        /// https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html
+        /// </remarks>
         vgatherdps,
 
         /// <summary>
-        /// Gather Packed Single, Packed Double with Signed Dword.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERDPD.html</remarks>
-        vgatherdps_s,
-
-        /// <summary>
         /// Gather Packed DP FP Values Using Signed Dword/Qword Indices.
+        /// Gather Packed Single, Packed Double with Signed Qword Indices.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERDPD:VGATHERQPD.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VGATHERDPD:VGATHERQPD.html
+        /// https://www.felixcloutier.com/x86/VGATHERQPS:VGATHERQPD.html
+        /// </remarks>
         vgatherqpd,
 
         /// <summary>
-        /// Gather Packed Single, Packed Double with Signed Qword Indices.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERQPS:VGATHERQPD.html</remarks>
-        vgatherqpd_s,
-
-        /// <summary>
         /// Gather Packed SP FP values Using Signed Dword/Qword Indices.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html</remarks>
-        vgatherqps,
-
-        /// <summary>
         /// Gather Packed Single, Packed Double with Signed Qword Indices.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VGATHERQPS:VGATHERQPD.html</remarks>
-        vgatherqps_s,
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html
+        /// https://www.felixcloutier.com/x86/VGATHERQPS:VGATHERQPD.html
+        /// </remarks>
+        vgatherqps,
 
         /// <summary>
         /// Convert Exponents of Packed DP FP Values to DP FP Values.
@@ -4507,6 +5385,30 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VGETMANTSS.html</remarks>
         vgetmantss,
+
+        /// <summary>
+        /// Packed Double-FP Horizontal Add.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/HADDPD.html</remarks>
+        vhaddpd,
+
+        /// <summary>
+        /// Packed Single-FP Horizontal Add.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/HADDPS.html</remarks>
+        vhaddps,
+
+        /// <summary>
+        /// Packed Double-FP Horizontal Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/HSUBPD.html</remarks>
+        vhsubpd,
+
+        /// <summary>
+        /// Packed Single-FP Horizontal Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/HSUBPS.html</remarks>
+        vhsubps,
 
         /// <summary>
         /// Insert Packed Floating-Point Values.
@@ -4569,10 +5471,118 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vinserti64x4,
 
         /// <summary>
+        /// Insert Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/INSERTPS.html</remarks>
+        vinsertps,
+
+        /// <summary>
+        /// Load Unaligned Integer 128 Bits.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDDQU.html</remarks>
+        vlddqu,
+
+        /// <summary>
+        /// Load MXCSR Register.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDMXCSR.html</remarks>
+        vldmxcsr,
+
+        /// <summary>
+        /// Store Selected Bytes of Double Quadword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MASKMOVDQU.html</remarks>
+        vmaskmovdqu,
+
+        /// <summary>
         /// Conditional SIMD Packed Loads and Stores.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VMASKMOV.html</remarks>
-        vmaskmov,
+        vmaskmovpd,
+
+        /// <summary>
+        /// Conditional SIMD Packed Loads and Stores.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VMASKMOV.html</remarks>
+        vmaskmovps,
+
+        /// <summary>
+        /// Maximum of Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MAXPD.html</remarks>
+        vmaxpd,
+
+        /// <summary>
+        /// Maximum of Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MAXPS.html</remarks>
+        vmaxps,
+
+        /// <summary>
+        /// Return Maximum Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MAXSD.html</remarks>
+        vmaxsd,
+
+        /// <summary>
+        /// Return Maximum Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MAXSS.html</remarks>
+        vmaxss,
+
+        /// <summary>
+        /// Minimum of Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MINPD.html</remarks>
+        vminpd,
+
+        /// <summary>
+        /// Minimum of Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MINPS.html</remarks>
+        vminps,
+
+        /// <summary>
+        /// Return Minimum Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MINSD.html</remarks>
+        vminsd,
+
+        /// <summary>
+        /// Return Minimum Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MINSS.html</remarks>
+        vminss,
+
+        /// <summary>
+        /// Move Aligned Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVAPD.html</remarks>
+        vmovapd,
+
+        /// <summary>
+        /// Move Aligned Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVAPS.html</remarks>
+        vmovaps,
+
+        /// <summary>
+        /// Move Doubleword/Move Quadword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVD:MOVQ.html</remarks>
+        vmovd,
+
+        /// <summary>
+        /// Replicate Double FP Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVDDUP.html</remarks>
+        vmovddup,
+
+        /// <summary>
+        /// Move Aligned Packed Integer Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVDQA:VMOVDQA32:VMOVDQA64.html</remarks>
+        vmovdqa,
 
         /// <summary>
         /// Move Aligned Packed Integer Values.
@@ -4585,6 +5595,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVDQA:VMOVDQA32:VMOVDQA64.html</remarks>
         vmovdqa64,
+
+        /// <summary>
+        /// Move Unaligned Packed Integer Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVDQU:VMOVDQU8:VMOVDQU16:VMOVDQU32:VMOVDQU64.html</remarks>
+        vmovdqu,
 
         /// <summary>
         /// Move Unaligned Packed Integer Values.
@@ -4609,6 +5625,310 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVDQU:VMOVDQU8:VMOVDQU16:VMOVDQU32:VMOVDQU64.html</remarks>
         vmovdqu8,
+
+        /// <summary>
+        /// Move Packed Single-Precision Floating-Point Values High to Low.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVHLPS.html</remarks>
+        vmovhlps,
+
+        /// <summary>
+        /// Move High Packed Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVHPD.html</remarks>
+        vmovhpd,
+
+        /// <summary>
+        /// Move High Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVHPS.html</remarks>
+        vmovhps,
+
+        /// <summary>
+        /// Move Packed Single-Precision Floating-Point Values Low to High.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVLHPS.html</remarks>
+        vmovlhps,
+
+        /// <summary>
+        /// Move Low Packed Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVLPD.html</remarks>
+        vmovlpd,
+
+        /// <summary>
+        /// Move Low Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVLPS.html</remarks>
+        vmovlps,
+
+        /// <summary>
+        /// Extract Packed Double-Precision Floating-Point Sign Mask.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVMSKPD.html</remarks>
+        vmovmskpd,
+
+        /// <summary>
+        /// Extract Packed Single-Precision Floating-Point Sign Mask.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVMSKPS.html</remarks>
+        vmovmskps,
+
+        /// <summary>
+        /// Store Packed Integers Using Non-Temporal Hint.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVNTDQ.html</remarks>
+        vmovntdq,
+
+        /// <summary>
+        /// Load Double Quadword Non-Temporal Aligned Hint.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVNTDQA.html</remarks>
+        vmovntdqa,
+
+        /// <summary>
+        /// Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVNTPD.html</remarks>
+        vmovntpd,
+
+        /// <summary>
+        /// Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVNTPS.html</remarks>
+        vmovntps,
+
+        /// <summary>
+        /// Move Doubleword/Move Quadword.
+        /// Move Quadword.
+        /// </summary>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/MOVD:MOVQ.html
+        /// https://www.felixcloutier.com/x86/MOVQ.html
+        /// </remarks>
+        vmovq,
+
+        /// <summary>
+        /// Move or Merge Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVSD.html</remarks>
+        vmovsd,
+
+        /// <summary>
+        /// Replicate Single FP Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVSHDUP.html</remarks>
+        vmovshdup,
+
+        /// <summary>
+        /// Replicate Single FP Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVSLDUP.html</remarks>
+        vmovsldup,
+
+        /// <summary>
+        /// Move or Merge Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVSS.html</remarks>
+        vmovss,
+
+        /// <summary>
+        /// Move Unaligned Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVUPD.html</remarks>
+        vmovupd,
+
+        /// <summary>
+        /// Move Unaligned Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVUPS.html</remarks>
+        vmovups,
+
+        /// <summary>
+        /// Compute Multiple Packed Sums of Absolute Difference.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MPSADBW.html</remarks>
+        vmpsadbw,
+
+        /// <summary>
+        /// Multiply Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MULPD.html</remarks>
+        vmulpd,
+
+        /// <summary>
+        /// Multiply Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MULPS.html</remarks>
+        vmulps,
+
+        /// <summary>
+        /// Multiply Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MULSD.html</remarks>
+        vmulsd,
+
+        /// <summary>
+        /// Multiply Scalar Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MULSS.html</remarks>
+        vmulss,
+
+        /// <summary>
+        /// Bitwise Logical OR of Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ORPD.html</remarks>
+        vorpd,
+
+        /// <summary>
+        /// Bitwise Logical OR of Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ORPS.html</remarks>
+        vorps,
+
+        /// <summary>
+        /// Packed Absolute Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PABSB:PABSW:PABSD:PABSQ.html</remarks>
+        vpabsb,
+
+        /// <summary>
+        /// Packed Absolute Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PABSB:PABSW:PABSD:PABSQ.html</remarks>
+        vpabsd,
+
+        /// <summary>
+        /// Packed Absolute Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PABSB:PABSW:PABSD:PABSQ.html</remarks>
+        vpabsw,
+
+        /// <summary>
+        /// Pack with Signed Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PACKSSWB:PACKSSDW.html</remarks>
+        vpackssdw,
+
+        /// <summary>
+        /// Pack with Signed Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PACKSSWB:PACKSSDW.html</remarks>
+        vpacksswb,
+
+        /// <summary>
+        /// Pack with Unsigned Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PACKUSDW.html</remarks>
+        vpackusdw,
+
+        /// <summary>
+        /// Pack with Unsigned Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PACKUSWB.html</remarks>
+        vpackuswb,
+
+        /// <summary>
+        /// Add Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDB:PADDW:PADDD:PADDQ.html</remarks>
+        vpaddb,
+
+        /// <summary>
+        /// Add Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDB:PADDW:PADDD:PADDQ.html</remarks>
+        vpaddd,
+
+        /// <summary>
+        /// Add Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDB:PADDW:PADDD:PADDQ.html</remarks>
+        vpaddq,
+
+        /// <summary>
+        /// Add Packed Signed Integers with Signed Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDSB:PADDSW.html</remarks>
+        vpaddsb,
+
+        /// <summary>
+        /// Add Packed Signed Integers with Signed Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDSB:PADDSW.html</remarks>
+        vpaddsw,
+
+        /// <summary>
+        /// Add Packed Unsigned Integers with Unsigned Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDUSB:PADDUSW.html</remarks>
+        vpaddusb,
+
+        /// <summary>
+        /// Add Packed Unsigned Integers with Unsigned Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDUSB:PADDUSW.html</remarks>
+        vpaddusw,
+
+        /// <summary>
+        /// Add Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PADDB:PADDW:PADDD:PADDQ.html</remarks>
+        vpaddw,
+
+        /// <summary>
+        /// Packed Align Right.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PALIGNR.html</remarks>
+        vpalignr,
+
+        /// <summary>
+        /// Logical AND.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PAND.html</remarks>
+        vpand,
+
+        /// <summary>
+        /// Logical AND.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PAND.html</remarks>
+        vpandd,
+
+        /// <summary>
+        /// Logical AND NOT.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PANDN.html</remarks>
+        vpandn,
+
+        /// <summary>
+        /// Logical AND NOT.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PANDN.html</remarks>
+        vpandnd,
+
+        /// <summary>
+        /// Logical AND NOT.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PANDN.html</remarks>
+        vpandnq,
+
+        /// <summary>
+        /// Logical AND.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PAND.html</remarks>
+        vpandq,
+
+        /// <summary>
+        /// Average Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PAVGB:PAVGW.html</remarks>
+        vpavgb,
+
+        /// <summary>
+        /// Average Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PAVGB:PAVGW.html</remarks>
+        vpavgw,
 
         /// <summary>
         /// Blend Packed Dwords.
@@ -4641,40 +5961,74 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpblendmw,
 
         /// <summary>
-        /// Load Integer and Broadcast.
+        /// Variable Blend Packed Bytes.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCAST.html</remarks>
-        vpbroadcast,
+        /// <remarks>https://www.felixcloutier.com/x86/PBLENDVB.html</remarks>
+        vpblendvb,
 
         /// <summary>
+        /// Blend Packed Words.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PBLENDW.html</remarks>
+        vpblendw,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
         /// Load with Broadcast Integer Data from General Purpose Register.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPBROADCAST.html
+        /// https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html
+        /// </remarks>
         vpbroadcastb,
 
         /// <summary>
+        /// Load Integer and Broadcast.
         /// Load with Broadcast Integer Data from General Purpose Register.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPBROADCAST.html
+        /// https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html
+        /// </remarks>
         vpbroadcastd,
 
         /// <summary>
         /// Broadcast Mask to Vector Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTM.html</remarks>
-        vpbroadcastm,
+        vpbroadcastmb2q,
 
         /// <summary>
+        /// Broadcast Mask to Vector Register.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTM.html</remarks>
+        vpbroadcastmw2d,
+
+        /// <summary>
+        /// Load Integer and Broadcast.
         /// Load with Broadcast Integer Data from General Purpose Register.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPBROADCAST.html
+        /// https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html
+        /// </remarks>
         vpbroadcastq,
 
         /// <summary>
+        /// Load Integer and Broadcast.
         /// Load with Broadcast Integer Data from General Purpose Register.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPBROADCAST.html
+        /// https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html
+        /// </remarks>
         vpbroadcastw,
+
+        /// <summary>
+        /// Carry-Less Multiplication Quadword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCLMULQDQ.html</remarks>
+        vpclmulqdq,
 
         /// <summary>
         /// Compare Packed Byte Values Into Mask.
@@ -4687,6 +6041,78 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPD:VPCMPUD.html</remarks>
         vpcmpd,
+
+        /// <summary>
+        /// Compare Packed Data for Equal.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPEQB:PCMPEQW:PCMPEQD.html</remarks>
+        vpcmpeqb,
+
+        /// <summary>
+        /// Compare Packed Data for Equal.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPEQB:PCMPEQW:PCMPEQD.html</remarks>
+        vpcmpeqd,
+
+        /// <summary>
+        /// Compare Packed Qword Data for Equal.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPEQQ.html</remarks>
+        vpcmpeqq,
+
+        /// <summary>
+        /// Compare Packed Data for Equal.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPEQB:PCMPEQW:PCMPEQD.html</remarks>
+        vpcmpeqw,
+
+        /// <summary>
+        /// Packed Compare Explicit Length Strings, Return Index.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPESTRI.html</remarks>
+        vpcmpestri,
+
+        /// <summary>
+        /// Packed Compare Explicit Length Strings, Return Mask.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPESTRM.html</remarks>
+        vpcmpestrm,
+
+        /// <summary>
+        /// Compare Packed Signed Integers for Greater Than.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPGTB:PCMPGTW:PCMPGTD.html</remarks>
+        vpcmpgtb,
+
+        /// <summary>
+        /// Compare Packed Signed Integers for Greater Than.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPGTB:PCMPGTW:PCMPGTD.html</remarks>
+        vpcmpgtd,
+
+        /// <summary>
+        /// Compare Packed Data for Greater Than.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPGTQ.html</remarks>
+        vpcmpgtq,
+
+        /// <summary>
+        /// Compare Packed Signed Integers for Greater Than.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPGTB:PCMPGTW:PCMPGTD.html</remarks>
+        vpcmpgtw,
+
+        /// <summary>
+        /// Packed Compare Implicit Length Strings, Return Index.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPISTRI.html</remarks>
+        vpcmpistri,
+
+        /// <summary>
+        /// Packed Compare Implicit Length Strings, Return Mask.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PCMPISTRM.html</remarks>
+        vpcmpistrm,
 
         /// <summary>
         /// Compare Packed Integer Values into Mask.
@@ -4893,52 +6319,134 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpexpandq,
 
         /// <summary>
-        /// Gather Packed Dword Values Using Signed Dword/Qword Indices.
+        /// Extract Byte/Dword/Qword.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERQD.html</remarks>
+        /// <remarks>https://www.felixcloutier.com/x86/PEXTRB:PEXTRD:PEXTRQ.html</remarks>
+        vpextrb,
+
+        /// <summary>
+        /// Extract Byte/Dword/Qword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PEXTRB:PEXTRD:PEXTRQ.html</remarks>
+        vpextrd,
+
+        /// <summary>
+        /// Extract Byte/Dword/Qword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PEXTRB:PEXTRD:PEXTRQ.html</remarks>
+        vpextrq,
+
+        /// <summary>
+        /// Extract Word.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PEXTRW.html</remarks>
+        vpextrw,
+
+        /// <summary>
+        /// Gather Packed Dword Values Using Signed Dword/Qword Indices.
+        /// Gather Packed Dword, Packed Qword with Signed Dword Indices.
+        /// </summary>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERQD.html
+        /// https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERDQ.html
+        /// </remarks>
         vpgatherdd,
 
         /// <summary>
         /// Gather Packed Dword, Packed Qword with Signed Dword Indices.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERDQ.html</remarks>
-        vpgatherdd_s,
-
-        /// <summary>
-        /// Gather Packed Dword, Packed Qword with Signed Dword Indices.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERDQ.html</remarks>
-        vpgatherdq_s,
-
-        /// <summary>
         /// Gather Packed Qword Values Using Signed Dword/Qword Indices.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERDQ:VPGATHERQQ.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERDQ.html
+        /// https://www.felixcloutier.com/x86/VPGATHERDQ:VPGATHERQQ.html
+        /// </remarks>
         vpgatherdq,
 
         /// <summary>
         /// Gather Packed Dword Values Using Signed Dword/Qword Indices.
+        /// Gather Packed Dword, Packed Qword with Signed Qword Indices.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERQD.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERQD.html
+        /// https://www.felixcloutier.com/x86/VPGATHERQD:VPGATHERQQ.html
+        /// </remarks>
         vpgatherqd,
 
         /// <summary>
+        /// Gather Packed Qword Values Using Signed Dword/Qword Indices.
         /// Gather Packed Dword, Packed Qword with Signed Qword Indices.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERQD:VPGATHERQQ.html</remarks>
-        vpgatherqd_s,
-
-        /// <summary>
-        /// Gather Packed Qword Values Using Signed Dword/Qword Indices.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERDQ:VPGATHERQQ.html</remarks>
+        /// <remarks>
+        /// https://www.felixcloutier.com/x86/VPGATHERDQ:VPGATHERQQ.html
+        /// https://www.felixcloutier.com/x86/VPGATHERQD:VPGATHERQQ.html
+        /// </remarks>
         vpgatherqq,
 
         /// <summary>
-        /// Gather Packed Dword, Packed Qword with Signed Qword Indices.
+        /// Packed Horizontal Add.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPGATHERQD:VPGATHERQQ.html</remarks>
-        vpgatherqq_s,
+        /// <remarks>https://www.felixcloutier.com/x86/PHADDW:PHADDD.html</remarks>
+        vphaddd,
+
+        /// <summary>
+        /// Packed Horizontal Add and Saturate.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PHADDSW.html</remarks>
+        vphaddsw,
+
+        /// <summary>
+        /// Packed Horizontal Add.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PHADDW:PHADDD.html</remarks>
+        vphaddw,
+
+        /// <summary>
+        /// Packed Horizontal Word Minimum.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PHMINPOSUW.html</remarks>
+        vphminposuw,
+
+        /// <summary>
+        /// Packed Horizontal Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PHSUBW:PHSUBD.html</remarks>
+        vphsubd,
+
+        /// <summary>
+        /// Packed Horizontal Subtract and Saturate.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PHSUBSW.html</remarks>
+        vphsubsw,
+
+        /// <summary>
+        /// Packed Horizontal Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PHSUBW:PHSUBD.html</remarks>
+        vphsubw,
+
+        /// <summary>
+        /// Insert Byte/Dword/Qword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PINSRB:PINSRD:PINSRQ.html</remarks>
+        vpinsrb,
+
+        /// <summary>
+        /// Insert Byte/Dword/Qword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PINSRB:PINSRD:PINSRQ.html</remarks>
+        vpinsrd,
+
+        /// <summary>
+        /// Insert Byte/Dword/Qword.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PINSRB:PINSRD:PINSRQ.html</remarks>
+        vpinsrq,
+
+        /// <summary>
+        /// Insert Word.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PINSRW.html</remarks>
+        vpinsrw,
 
         /// <summary>
         /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
@@ -4965,10 +6473,124 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpmadd52luq,
 
         /// <summary>
+        /// Multiply and Add Packed Signed and Unsigned Bytes.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMADDUBSW.html</remarks>
+        vpmaddubsw,
+
+        /// <summary>
+        /// Multiply and Add Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMADDWD.html</remarks>
+        vpmaddwd,
+
+        /// <summary>
         /// Conditional SIMD Integer Packed Loads and Stores.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMASKMOV.html</remarks>
-        vpmaskmov,
+        vpmaskmovd,
+
+        /// <summary>
+        /// Conditional SIMD Integer Packed Loads and Stores.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/VPMASKMOV.html</remarks>
+        vpmaskmovq,
+
+        /// <summary>
+        /// Maximum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html</remarks>
+        vpmaxsb,
+
+        /// <summary>
+        /// Maximum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html</remarks>
+        vpmaxsd,
+
+        /// <summary>
+        /// Maximum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html</remarks>
+        vpmaxsq,
+
+        /// <summary>
+        /// Maximum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html</remarks>
+        vpmaxsw,
+
+        /// <summary>
+        /// Maximum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXUB:PMAXUW.html</remarks>
+        vpmaxub,
+
+        /// <summary>
+        /// Maximum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXUD:PMAXUQ.html</remarks>
+        vpmaxud,
+
+        /// <summary>
+        /// Maximum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXUD:PMAXUQ.html</remarks>
+        vpmaxuq,
+
+        /// <summary>
+        /// Maximum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMAXUB:PMAXUW.html</remarks>
+        vpmaxuw,
+
+        /// <summary>
+        /// Minimum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINSB:PMINSW.html</remarks>
+        vpminsb,
+
+        /// <summary>
+        /// Minimum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINSD:PMINSQ.html</remarks>
+        vpminsd,
+
+        /// <summary>
+        /// Minimum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINSD:PMINSQ.html</remarks>
+        vpminsq,
+
+        /// <summary>
+        /// Minimum of Packed Signed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINSB:PMINSW.html</remarks>
+        vpminsw,
+
+        /// <summary>
+        /// Minimum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINUB:PMINUW.html</remarks>
+        vpminub,
+
+        /// <summary>
+        /// Minimum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINUD:PMINUQ.html</remarks>
+        vpminud,
+
+        /// <summary>
+        /// Minimum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINUD:PMINUQ.html</remarks>
+        vpminuq,
+
+        /// <summary>
+        /// Minimum of Packed Unsigned Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMINUB:PMINUW.html</remarks>
+        vpminuw,
 
         /// <summary>
         /// Convert a Vector Register to a Mask.
@@ -5017,6 +6639,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html</remarks>
         vpmovm2w,
+
+        /// <summary>
+        /// Move Byte Mask.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVMSKB.html</remarks>
+        vpmovmskb,
 
         /// <summary>
         /// Convert a Vector Register to a Mask.
@@ -5079,6 +6707,42 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpmovswb,
 
         /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        vpmovsxbd,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        vpmovsxbq,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        vpmovsxbw,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        vpmovsxdq,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        vpmovsxwd,
+
+        /// <summary>
+        /// Packed Move with Sign Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVSX.html</remarks>
+        vpmovsxwq,
+
+        /// <summary>
         /// Down Convert DWord to Byte.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVDB:VPMOVSDB:VPMOVUSDB.html</remarks>
@@ -5127,10 +6791,106 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpmovwb,
 
         /// <summary>
-        /// Select Packed Unaligned Bytes from Quadword Sources.
+        /// Packed Move with Zero Extend.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/VPMULTISHIFTQB.html</remarks>
-        vpmultishiftqb,
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        vpmovzxbd,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        vpmovzxbq,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        vpmovzxbw,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        vpmovzxdq,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        vpmovzxwd,
+
+        /// <summary>
+        /// Packed Move with Zero Extend.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMOVZX.html</remarks>
+        vpmovzxwq,
+
+        /// <summary>
+        /// Multiply Packed Doubleword Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULDQ.html</remarks>
+        vpmuldq,
+
+        /// <summary>
+        /// Packed Multiply High with Round and Scale.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULHRSW.html</remarks>
+        vpmulhrsw,
+
+        /// <summary>
+        /// Multiply Packed Unsigned Integers and Store High Result.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULHUW.html</remarks>
+        vpmulhuw,
+
+        /// <summary>
+        /// Multiply Packed Signed Integers and Store High Result.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULHW.html</remarks>
+        vpmulhw,
+
+        /// <summary>
+        /// Multiply Packed Integers and Store Low Result.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULLD:PMULLQ.html</remarks>
+        vpmulld,
+
+        /// <summary>
+        /// Multiply Packed Integers and Store Low Result.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULLD:PMULLQ.html</remarks>
+        vpmullq,
+
+        /// <summary>
+        /// Multiply Packed Signed Integers and Store Low Result.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULLW.html</remarks>
+        vpmullw,
+
+        /// <summary>
+        /// Multiply Packed Unsigned Doubleword Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PMULUDQ.html</remarks>
+        vpmuludq,
+
+        /// <summary>
+        /// Bitwise Logical OR.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/POR.html</remarks>
+        vpor,
+
+        /// <summary>
+        /// Bitwise Logical OR.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/POR.html</remarks>
+        vpord,
+
+        /// <summary>
+        /// Bitwise Logical OR.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/POR.html</remarks>
+        vporq,
 
         /// <summary>
         /// Bit Rotate Left.
@@ -5181,6 +6941,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vprorvq,
 
         /// <summary>
+        /// Compute Sum of Absolute Differences.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSADBW.html</remarks>
+        vpsadbw,
+
+        /// <summary>
         /// Scatter Packed Dword, Packed Qword with Signed Dword, Signed Qword Indices.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPSCATTERDD:VPSCATTERDQ:VPSCATTERQD:VPSCATTERQQ.html</remarks>
@@ -5205,6 +6971,66 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpscatterqq,
 
         /// <summary>
+        /// Packed Shuffle Bytes.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSHUFB.html</remarks>
+        vpshufb,
+
+        /// <summary>
+        /// Shuffle Packed Doublewords.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSHUFD.html</remarks>
+        vpshufd,
+
+        /// <summary>
+        /// Shuffle Packed High Words.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSHUFHW.html</remarks>
+        vpshufhw,
+
+        /// <summary>
+        /// Shuffle Packed Low Words.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSHUFLW.html</remarks>
+        vpshuflw,
+
+        /// <summary>
+        /// Packed SIGN.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSIGNB:PSIGNW:PSIGND.html</remarks>
+        vpsignb,
+
+        /// <summary>
+        /// Packed SIGN.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSIGNB:PSIGNW:PSIGND.html</remarks>
+        vpsignd,
+
+        /// <summary>
+        /// Packed SIGN.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSIGNB:PSIGNW:PSIGND.html</remarks>
+        vpsignw,
+
+        /// <summary>
+        /// Shift Packed Data Left Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSLLW:PSLLD:PSLLQ.html</remarks>
+        vpslld,
+
+        /// <summary>
+        /// Shift Double Quadword Left Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSLLDQ.html</remarks>
+        vpslldq,
+
+        /// <summary>
+        /// Shift Packed Data Left Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSLLW:PSLLD:PSLLQ.html</remarks>
+        vpsllq,
+
+        /// <summary>
         /// Variable Bit Shift Left Logical.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPSLLVW:VPSLLVD:VPSLLVQ.html</remarks>
@@ -5221,6 +7047,18 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPSLLVW:VPSLLVD:VPSLLVQ.html</remarks>
         vpsllvw,
+
+        /// <summary>
+        /// Shift Packed Data Left Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSLLW:PSLLD:PSLLQ.html</remarks>
+        vpsllw,
+
+        /// <summary>
+        /// Shift Packed Data Right Arithmetic.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSRAW:PSRAD:PSRAQ.html</remarks>
+        vpsrad,
 
         /// <summary>
         /// Variable Bit Shift Right Arithmetic.
@@ -5241,6 +7079,30 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpsravw,
 
         /// <summary>
+        /// Shift Packed Data Right Arithmetic.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSRAW:PSRAD:PSRAQ.html</remarks>
+        vpsraw,
+
+        /// <summary>
+        /// Shift Packed Data Right Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSRLW:PSRLD:PSRLQ.html</remarks>
+        vpsrld,
+
+        /// <summary>
+        /// Shift Double Quadword Right Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSRLDQ.html</remarks>
+        vpsrldq,
+
+        /// <summary>
+        /// Shift Packed Data Right Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSRLW:PSRLD:PSRLQ.html</remarks>
+        vpsrlq,
+
+        /// <summary>
         /// Variable Bit Shift Right Logical.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPSRLVW:VPSRLVD:VPSRLVQ.html</remarks>
@@ -5259,6 +7121,60 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vpsrlvw,
 
         /// <summary>
+        /// Shift Packed Data Right Logical.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSRLW:PSRLD:PSRLQ.html</remarks>
+        vpsrlw,
+
+        /// <summary>
+        /// Subtract Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBB:PSUBW:PSUBD.html</remarks>
+        vpsubb,
+
+        /// <summary>
+        /// Subtract Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBB:PSUBW:PSUBD.html</remarks>
+        vpsubd,
+
+        /// <summary>
+        /// Subtract Packed Quadword Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBQ.html</remarks>
+        vpsubq,
+
+        /// <summary>
+        /// Subtract Packed Signed Integers with Signed Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBSB:PSUBSW.html</remarks>
+        vpsubsb,
+
+        /// <summary>
+        /// Subtract Packed Signed Integers with Signed Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBSB:PSUBSW.html</remarks>
+        vpsubsw,
+
+        /// <summary>
+        /// Subtract Packed Unsigned Integers with Unsigned Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBUSB:PSUBUSW.html</remarks>
+        vpsubusb,
+
+        /// <summary>
+        /// Subtract Packed Unsigned Integers with Unsigned Saturation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBUSB:PSUBUSW.html</remarks>
+        vpsubusw,
+
+        /// <summary>
+        /// Subtract Packed Integers.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PSUBB:PSUBW:PSUBD.html</remarks>
+        vpsubw,
+
+        /// <summary>
         /// Bitwise Ternary Logic.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTERNLOGD:VPTERNLOGQ.html</remarks>
@@ -5269,6 +7185,12 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTERNLOGD:VPTERNLOGQ.html</remarks>
         vpternlogq,
+
+        /// <summary>
+        /// Logical Compare.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PTEST.html</remarks>
+        vptest,
 
         /// <summary>
         /// Logical AND and Set Mask.
@@ -5317,6 +7239,54 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTESTNMB:VPTESTNMW:VPTESTNMD:VPTESTNMQ.html</remarks>
         vptestnmw,
+
+        /// <summary>
+        /// Unpack High Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKHBW:PUNPCKHWD:PUNPCKHDQ:PUNPCKHQDQ.html</remarks>
+        vpunpckhbw,
+
+        /// <summary>
+        /// Unpack High Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKHBW:PUNPCKHWD:PUNPCKHDQ:PUNPCKHQDQ.html</remarks>
+        vpunpckhdq,
+
+        /// <summary>
+        /// Unpack High Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKHBW:PUNPCKHWD:PUNPCKHDQ:PUNPCKHQDQ.html</remarks>
+        vpunpckhqdq,
+
+        /// <summary>
+        /// Unpack High Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKHBW:PUNPCKHWD:PUNPCKHDQ:PUNPCKHQDQ.html</remarks>
+        vpunpckhwd,
+
+        /// <summary>
+        /// Unpack Low Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKLBW:PUNPCKLWD:PUNPCKLDQ:PUNPCKLQDQ.html</remarks>
+        vpunpcklbw,
+
+        /// <summary>
+        /// Unpack Low Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKLBW:PUNPCKLWD:PUNPCKLDQ:PUNPCKLQDQ.html</remarks>
+        vpunpckldq,
+
+        /// <summary>
+        /// Unpack Low Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKLBW:PUNPCKLWD:PUNPCKLDQ:PUNPCKLQDQ.html</remarks>
+        vpunpcklqdq,
+
+        /// <summary>
+        /// Unpack Low Data.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUNPCKLBW:PUNPCKLWD:PUNPCKLDQ:PUNPCKLQDQ.html</remarks>
+        vpunpcklwd,
 
         /// <summary>
         /// Range Restriction Calculation For Packed Pairs of Float64 Values.
@@ -5511,6 +7481,66 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         vshufi64x2,
 
         /// <summary>
+        /// Packed Interleave Shuffle of Pairs of Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SHUFPD.html</remarks>
+        vshufpd,
+
+        /// <summary>
+        /// Packed Interleave Shuffle of Quadruplets of Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SHUFPS.html</remarks>
+        vshufps,
+
+        /// <summary>
+        /// Square Root of Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SQRTPD.html</remarks>
+        vsqrtpd,
+
+        /// <summary>
+        /// Square Root of Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SQRTPS.html</remarks>
+        vsqrtps,
+
+        /// <summary>
+        /// Compute Square Root of Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SQRTSD.html</remarks>
+        vsqrtsd,
+
+        /// <summary>
+        /// Compute Square Root of Scalar Single-Precision Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SQRTSS.html</remarks>
+        vsqrtss,
+
+        /// <summary>
+        /// Subtract Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SUBPD.html</remarks>
+        vsubpd,
+
+        /// <summary>
+        /// Subtract Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SUBPS.html</remarks>
+        vsubps,
+
+        /// <summary>
+        /// Subtract Scalar Double-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SUBSD.html</remarks>
+        vsubsd,
+
+        /// <summary>
+        /// Subtract Scalar Single-Precision Floating-Point Value.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SUBSS.html</remarks>
+        vsubss,
+
+        /// <summary>
         /// Packed Bit Test.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VTESTPD:VTESTPS.html</remarks>
@@ -5521,6 +7551,54 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VTESTPD:VTESTPS.html</remarks>
         vtestps,
+
+        /// <summary>
+        /// Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UCOMISD.html</remarks>
+        vucomisd,
+
+        /// <summary>
+        /// Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UCOMISS.html</remarks>
+        vucomiss,
+
+        /// <summary>
+        /// Unpack and Interleave High Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UNPCKHPD.html</remarks>
+        vunpckhpd,
+
+        /// <summary>
+        /// Unpack and Interleave High Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UNPCKHPS.html</remarks>
+        vunpckhps,
+
+        /// <summary>
+        /// Unpack and Interleave Low Packed Double-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UNPCKLPD.html</remarks>
+        vunpcklpd,
+
+        /// <summary>
+        /// Unpack and Interleave Low Packed Single-Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/UNPCKLPS.html</remarks>
+        vunpcklps,
+
+        /// <summary>
+        /// Bitwise Logical XOR of Packed Double Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/XORPD.html</remarks>
+        vxorpd,
+
+        /// <summary>
+        /// Bitwise Logical XOR of Packed Single Precision Floating-Point Values.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/XORPS.html</remarks>
+        vxorps,
 
         /// <summary>
         /// Zero All YMM Registers.
@@ -5649,40 +7727,16 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         xrelease,
 
         /// <summary>
-        /// Restore Processor Extended States.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/XRSTOR.html</remarks>
-        xrstor,
-
-        /// <summary>
-        /// Restore Processor Extended States Supervisor.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/XRSTORS.html</remarks>
-        xrstors,
-
-        /// <summary>
-        /// Save Processor Extended States.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/XSAVE.html</remarks>
-        xsave,
-
-        /// <summary>
-        /// Save Processor Extended States with Compaction.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/XSAVEC.html</remarks>
-        xsavec,
-
-        /// <summary>
         /// Save Processor Extended States Optimized.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/XSAVEOPT.html</remarks>
         xsaveopt,
 
         /// <summary>
-        /// Save Processor Extended States Supervisor.
+        /// Save Processor Extended States Optimized.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/XSAVES.html</remarks>
-        xsaves,
+        /// <remarks>https://www.felixcloutier.com/x86/XSAVEOPT.html</remarks>
+        xsaveopt64,
 
         /// <summary>
         /// Set Extended Control Register.
