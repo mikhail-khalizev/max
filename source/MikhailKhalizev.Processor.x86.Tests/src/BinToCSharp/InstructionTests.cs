@@ -8,6 +8,7 @@ using MikhailKhalizev.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpDisasm;
+using SharpDisasm.Udis86;
 using Xunit;
 using Instruction = MikhailKhalizev.Processor.x86.BinToCSharp.Instruction;
 
@@ -47,14 +48,38 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
         [Theory, MemberData(nameof(DecodeSource))]
         public void Decode(int arch, string raw, Address address, string dec)
         {
-            var dis = new Disassembler(HexHelper.ToBytes(raw), (ArchitectureMode)arch, address, true);
-            var ins = dis.NextInstruction();
-            var cmd = new Instruction(ins);
+            var u = new ud();
+            udis86.ud_init(ref u);
+            udis86.ud_set_input_buffer(ref u, new AssemblyCodeArray(HexHelper.ToBytes(raw)));
+
+            udis86.ud_set_mode(ref u, (byte)arch);
+            udis86.ud_set_pc(ref u, address);
+            udis86.ud_set_vendor(ref u, (int)Vendor.Any);
+
+            var length = udis86.ud_disassemble(ref u);
+            length.Should().BeGreaterOrEqualTo(0);
+            u.error.Should().Be(0);
+
+            var cmd = new Instruction(u);
             var str = cmd.ToCodeString();
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 
             str.Should().Be(dec);
+        }
+
+        class AssemblyCodeArray : IAssemblyCode
+        {
+            private byte[] _buffer;
+
+            public AssemblyCodeArray(byte[] buffer)
+            {
+                _buffer = buffer;
+            }
+
+            byte IAssemblyCode.this[int index] => _buffer[index];
+
+            int IAssemblyCode.Length => _buffer.Length;
         }
     }
 }

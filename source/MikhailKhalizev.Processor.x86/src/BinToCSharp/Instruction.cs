@@ -65,48 +65,48 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 Comments = new List<string> { comment };
         }
 
-        public Instruction(SharpDisasm.Instruction instr)
+        public Instruction(ud ud)
         {
-            if (instr == null)
-                throw new ArgumentNullException(nameof(instr));
+            if (ud == null)
+                throw new ArgumentNullException(nameof(ud));
 
             write_cmd = (e, dm, index, func, offset) => ToCodeString(offset: offset);
 
             Comments = new List<string>();
 
-            Begin = instr.Offset;
-            End = instr.PC;
+            Begin = ud.insn_offset;
+            End = ud.pc;
 
-            Mnemonic = instr.Mnemonic;
+            Mnemonic = ud.mnemonic;
 
-            BrFar = instr.br_far != 0;
-            PfxSeg = (ud_type)instr.pfx_seg;
-            PfxRep = instr.pfx_rep != 0;
-            PfxRepe = instr.pfx_repe != 0;
-            PfxRepne = instr.pfx_repne != 0;
+            BrFar = ud.br_far != 0;
+            PfxSeg = (ud_type)ud.pfx_seg;
+            PfxRep = ud.pfx_rep != 0;
+            PfxRepe = ud.pfx_repe != 0;
+            PfxRepne = ud.pfx_repne != 0;
 
-            IsCall = instr.Mnemonic == ud_mnemonic_code.UD_Icall;
+            IsCall = ud.mnemonic == ud_mnemonic_code.UD_Icall;
             IsAnyLoop = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");
             IsAnyJump = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("j");
-            IsAnyRet = 0 <= instr.Mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
-            IsJmpOrRet = instr.Mnemonic == ud_mnemonic_code.UD_Ijmp || IsAnyRet;
+            IsAnyRet = 0 <= ud.mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
+            IsJmpOrRet = ud.mnemonic == ud_mnemonic_code.UD_Ijmp || IsAnyRet;
 
-            if (instr.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
+            if (ud.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
                 throw new NotImplementedException();
 
-            Operands = instr.Operands
-                .Select(x => x.UdOperand)
+            Operands = ud.operand
+                .TakeWhile(x => x.type != ud_type.UD_NONE)
                 .ToList();
 
             if ((IsAnyJump || IsAnyLoop || IsCall) && Operands[0].type == ud_type.UD_OP_PTR)
                 BrFar = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
 
-            AddrMode = instr.adr_mode;
-            OprMode = instr.opr_mode;
+            AddrMode = ud.adr_mode;
+            OprMode = ud.opr_mode;
 
             try
             {
-                var str = instr.ToString();
+                var str = new string(ud.asm_buf, 0, ud.asm_buf_fill);
                 Comments.Add(str);
             }
             catch { }

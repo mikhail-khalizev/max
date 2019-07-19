@@ -11,6 +11,7 @@ using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.BinToCSharp.Plugin;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
+using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
@@ -158,11 +159,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private class AssemblyCode : IAssemblyCode
         {
             public Engine Engine { get; }
-            public Disassembler Disassembler { get; set; }
+            public ud Ud { get; }
 
-            public AssemblyCode(Engine engine)
+            public AssemblyCode(Engine engine, ud ud)
             {
                 Engine = engine;
+                Ud = ud;
             }
 
             /// <inheritdoc />
@@ -183,9 +185,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     }
                     catch (Exception)
                     {
-                        Disassembler._u.inp_end = 1;
-                        Disassembler._u.error = 1;
-                        Disassembler._u.errorMessage = "byte expected, eoi received";
+                        Ud.inp_end = 1;
+                        Ud.error = 1;
+                        Ud.errorMessage = "byte expected, eoi received";
                         return 0;
                     }
                 }
@@ -214,11 +216,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             Memory.GetMinSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
 
-            var ac = new AssemblyCode(this);
-            var dis = new Disassembler(ac, Mode, address, true, Vendor.Intel);
-            ac.Disassembler = dis;
-            dis._u.inp_buf_index = address;
 
+            var u = new ud();
+            var ac = new AssemblyCode(this, u);
+            udis86.ud_init(ref u);
+            udis86.ud_set_pc(ref u, address);
+            udis86.ud_set_mode(ref u, (byte)Mode);
+            udis86.ud_set_vendor(ref u, (int)Vendor.Any);
+            udis86.ud_set_syntax(ref u, new syn_intel().ud_translate_intel);
+            udis86.ud_set_input_buffer(ref u, ac);
+
+            u.inp_buf_index = address;
 
             
             // Функция, начинающаяся с точного совпадения force_end_funcs_ может начать декодироваться.
@@ -230,7 +238,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             while (true)
             {
-                var eip = dis._u.pc;
+                var eip = u.pc;
                 if (nearestForceEnd <= eip || nearestSuppressDecode <= eip)
                     break;
 
@@ -238,11 +246,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     break; // Нашли среди декодированных.
 
 
-                var rawInstruction = dis.NextInstruction();
-                if (rawInstruction == null)
-                    throw new InvalidOperationException("Преждевременное завершение функции из-за нехватки кода.");
+                var length = udis86.ud_disassemble(ref u);
+                if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
+                    throw new InvalidOperationException("Преждевременное завершение функции.");
 
-                var cmd = new Instruction(rawInstruction);
+                var cmd = new Instruction(u);
 
                 // Бывают случаи, когда ud_obj незнаком с инструкцией, хотя в документации x86 она есть.
                 //        if (cmd.mnemonic == UD_Iinvalid)
