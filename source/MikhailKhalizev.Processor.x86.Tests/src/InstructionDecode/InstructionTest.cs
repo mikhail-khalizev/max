@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.InstructionDecode
             
             instruction.IsInvalid.Should().BeTrue();
             instruction.Reason.Should().Be("Prefix group repeated: (2e, 3e).");
-            instruction.Bytes.Should().HaveCount(3);
+            instruction.ReadLength.Should().Be(3);
         }
     }
 }

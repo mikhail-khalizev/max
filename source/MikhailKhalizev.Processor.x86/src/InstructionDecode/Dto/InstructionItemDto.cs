@@ -13,14 +13,14 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode.Dto
 
         public string MnemonicCode
         {
-            get => _mnemonicCode ?? Mnemonic.ToLowerInvariant();
+            get => _mnemonicCode ?? Mnemonic?.ToLowerInvariant();
             set => _mnemonicCode = value;
         }
         private string _mnemonicCode;
 
         public bool ShouldSerializeMnemonicCode()
         {
-            return MnemonicCode != Mnemonic.ToLowerInvariant();
+            return MnemonicCode != Mnemonic?.ToLowerInvariant();
         }
 
 

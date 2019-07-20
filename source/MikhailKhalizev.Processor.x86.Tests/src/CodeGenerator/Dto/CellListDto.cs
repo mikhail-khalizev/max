@@ -18,11 +18,18 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             var left = a.TrimEnd();
             var right = b.TrimStart();
 
-            var middle = " ";
-            if (left.EndsWith("/"))
-                middle = "";
+            var middle = 
+                left.EndsWith("/") || left.EndsWith("-") ||
+                right.StartsWith("-") || right.StartsWith(",") || right.StartsWith("*") ? "" : " ";
 
-            return left + middle + right;
+            var result = left + middle + right;
+
+            result = result
+                .Replace("Val id", "Valid")
+                .Replace("Comp are", "Compare")
+                .Replace("Mov e", "Move");
+
+            return result;
         }
     }
 }

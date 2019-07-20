@@ -4,6 +4,7 @@
       "Mnemonics": "AAA",
       "Summary": "ASCII Adjust After Addition",
       "Url": "https://www.felixcloutier.com/x86/AAA.html",
+      "PageNumber": 120,
       "Items": [
         {
           "Mnemonic": "AAA",
@@ -26,6 +27,7 @@
       "Mnemonics": "AAD",
       "Summary": "ASCII Adjust AX Before Division",
       "Url": "https://www.felixcloutier.com/x86/AAD.html",
+      "PageNumber": 122,
       "Items": [
         {
           "Mnemonic": "AAD",
@@ -57,6 +59,7 @@
       "Mnemonics": "AAM",
       "Summary": "ASCII Adjust AX After Multiply",
       "Url": "https://www.felixcloutier.com/x86/AAM.html",
+      "PageNumber": 124,
       "Items": [
         {
           "Mnemonic": "AAM",
@@ -88,6 +91,7 @@
       "Mnemonics": "AAS",
       "Summary": "ASCII Adjust AL After Subtraction",
       "Url": "https://www.felixcloutier.com/x86/AAS.html",
+      "PageNumber": 126,
       "Items": [
         {
           "Mnemonic": "AAS",
@@ -110,6 +114,7 @@
       "Mnemonics": "ADC",
       "Summary": "Add with Carry",
       "Url": "https://www.felixcloutier.com/x86/ADC.html",
+      "PageNumber": 128,
       "Items": [
         {
           "Mnemonic": "ADC",
@@ -345,6 +350,7 @@
       "Mnemonics": "ADCX",
       "Summary": "Unsigned Integer Addition of Two Operands with Carry Flag",
       "Url": "https://www.felixcloutier.com/x86/ADCX.html",
+      "PageNumber": 131,
       "Items": [
         {
           "Mnemonic": "ADCX",
@@ -377,6 +383,7 @@
       "Mnemonics": "ADD",
       "Summary": "Add",
       "Url": "https://www.felixcloutier.com/x86/ADD.html",
+      "PageNumber": 133,
       "Items": [
         {
           "Mnemonic": "ADD",
@@ -612,6 +619,7 @@
       "Mnemonics": "ADDPD",
       "Summary": "Add Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDPD.html",
+      "PageNumber": 135,
       "Items": [
         {
           "Mnemonic": "ADDPD",
@@ -667,6 +675,7 @@
       "Mnemonics": "ADDPS",
       "Summary": "Add Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDPS.html",
+      "PageNumber": 138,
       "Items": [
         {
           "Mnemonic": "ADDPS",
@@ -722,6 +731,7 @@
       "Mnemonics": "ADDSD",
       "Summary": "Add Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDSD.html",
+      "PageNumber": 141,
       "Items": [
         {
           "Mnemonic": "ADDSD",
@@ -756,6 +766,7 @@
       "Mnemonics": "ADDSS",
       "Summary": "Add Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ADDSS.html",
+      "PageNumber": 143,
       "Items": [
         {
           "Mnemonic": "ADDSS",
@@ -790,6 +801,7 @@
       "Mnemonics": "ADDSUBPD",
       "Summary": "Packed Double-FP Add/Subtract",
       "Url": "https://www.felixcloutier.com/x86/ADDSUBPD.html",
+      "PageNumber": 145,
       "Items": [
         {
           "Mnemonic": "ADDSUBPD",
@@ -838,6 +850,7 @@
       "Mnemonics": "ADDSUBPS",
       "Summary": "Packed Single-FP Add/Subtract",
       "Url": "https://www.felixcloutier.com/x86/ADDSUBPS.html",
+      "PageNumber": 147,
       "Items": [
         {
           "Mnemonic": "ADDSUBPS",
@@ -886,6 +899,7 @@
       "Mnemonics": "ADOX",
       "Summary": "Unsigned Integer Addition of Two Operands with Overflow Flag",
       "Url": "https://www.felixcloutier.com/x86/ADOX.html",
+      "PageNumber": 150,
       "Items": [
         {
           "Mnemonic": "ADOX",
@@ -918,6 +932,7 @@
       "Mnemonics": "AESDEC",
       "Summary": "Perform One Round of an AES Decryption Flow",
       "Url": "https://www.felixcloutier.com/x86/AESDEC.html",
+      "PageNumber": 152,
       "Items": [
         {
           "Mnemonic": "AESDEC",
@@ -958,6 +973,7 @@
       "Mnemonics": "AESDECLAST",
       "Summary": "Perform Last Round of an AES Decryption Flow",
       "Url": "https://www.felixcloutier.com/x86/AESDECLAST.html",
+      "PageNumber": 154,
       "Items": [
         {
           "Mnemonic": "AESDECLAST",
@@ -998,6 +1014,7 @@
       "Mnemonics": "AESENC",
       "Summary": "Perform One Round of an AES Encryption Flow",
       "Url": "https://www.felixcloutier.com/x86/AESENC.html",
+      "PageNumber": 156,
       "Items": [
         {
           "Mnemonic": "AESENC",
@@ -1038,6 +1055,7 @@
       "Mnemonics": "AESENCLAST",
       "Summary": "Perform Last Round of an AES Encryption Flow",
       "Url": "https://www.felixcloutier.com/x86/AESENCLAST.html",
+      "PageNumber": 158,
       "Items": [
         {
           "Mnemonic": "AESENCLAST",
@@ -1078,6 +1096,7 @@
       "Mnemonics": "AESIMC",
       "Summary": "Perform the AES InvMixColumn Transformation",
       "Url": "https://www.felixcloutier.com/x86/AESIMC.html",
+      "PageNumber": 160,
       "Items": [
         {
           "Mnemonic": "AESIMC",
@@ -1110,6 +1129,7 @@
       "Mnemonics": "AESKEYGENASSIST",
       "Summary": "AES Round Key Generation Assist",
       "Url": "https://www.felixcloutier.com/x86/AESKEYGENASSIST.html",
+      "PageNumber": 161,
       "Items": [
         {
           "Mnemonic": "AESKEYGENASSIST",
@@ -1143,6 +1163,7 @@
       "Mnemonics": "AND",
       "Summary": "Logical AND",
       "Url": "https://www.felixcloutier.com/x86/AND.html",
+      "PageNumber": 163,
       "Items": [
         {
           "Mnemonic": "AND",
@@ -1378,6 +1399,7 @@
       "Mnemonics": "ANDN",
       "Summary": "Logical AND NOT",
       "Url": "https://www.felixcloutier.com/x86/ANDN.html",
+      "PageNumber": 165,
       "Items": [
         {
           "Mnemonic": "ANDN",
@@ -1411,6 +1433,7 @@
       "Mnemonics": "ANDPD",
       "Summary": "Bitwise Logical AND of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDPD.html",
+      "PageNumber": 166,
       "Items": [
         {
           "Mnemonic": "ANDPD",
@@ -1472,6 +1495,7 @@
       "Mnemonics": "ANDPS",
       "Summary": "Bitwise Logical AND of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDPS.html",
+      "PageNumber": 169,
       "Items": [
         {
           "Mnemonic": "ANDPS",
@@ -1533,6 +1557,7 @@
       "Mnemonics": "ANDNPD",
       "Summary": "Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDNPD.html",
+      "PageNumber": 172,
       "Items": [
         {
           "Mnemonic": "ANDNPD",
@@ -1594,6 +1619,7 @@
       "Mnemonics": "ANDNPS",
       "Summary": "Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDNPS.html",
+      "PageNumber": 175,
       "Items": [
         {
           "Mnemonic": "ANDNPS",
@@ -1649,6 +1675,7 @@
       "Mnemonics": "ARPL",
       "Summary": "Adjust RPL Field of Segment Selector",
       "Url": "https://www.felixcloutier.com/x86/ARPL.html",
+      "PageNumber": 178,
       "Items": [
         {
           "Mnemonic": "ARPL",
@@ -1674,6 +1701,7 @@
       "Mnemonics": "BEXTR",
       "Summary": "Bit Field Extract",
       "Url": "https://www.felixcloutier.com/x86/BEXTR.html",
+      "PageNumber": 180,
       "Items": [
         {
           "Mnemonic": "BEXTR",
@@ -1707,6 +1735,7 @@
       "Mnemonics": "BLENDPD",
       "Summary": "Blend Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDPD.html",
+      "PageNumber": 181,
       "Items": [
         {
           "Mnemonic": "BLENDPD",
@@ -1757,6 +1786,7 @@
       "Mnemonics": "BLENDPS",
       "Summary": "Blend Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDPS.html",
+      "PageNumber": 183,
       "Items": [
         {
           "Mnemonic": "BLENDPS",
@@ -1807,6 +1837,7 @@
       "Mnemonics": "BLENDVPD",
       "Summary": "Variable Blend Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDVPD.html",
+      "PageNumber": 185,
       "Items": [
         {
           "Mnemonic": "BLENDVPD",
@@ -1857,6 +1888,7 @@
       "Mnemonics": "BLENDVPS",
       "Summary": "Variable Blend Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/BLENDVPS.html",
+      "PageNumber": 187,
       "Items": [
         {
           "Mnemonic": "BLENDVPS",
@@ -1907,6 +1939,7 @@
       "Mnemonics": "BLSI",
       "Summary": "Extract Lowest Set Isolated Bit",
       "Url": "https://www.felixcloutier.com/x86/BLSI.html",
+      "PageNumber": 190,
       "Items": [
         {
           "Mnemonic": "BLSI",
@@ -1939,6 +1972,7 @@
       "Mnemonics": "BLSMSK",
       "Summary": "Get Mask Up to Lowest Set Bit",
       "Url": "https://www.felixcloutier.com/x86/BLSMSK.html",
+      "PageNumber": 191,
       "Items": [
         {
           "Mnemonic": "BLSMSK",
@@ -1971,6 +2005,7 @@
       "Mnemonics": "BLSR",
       "Summary": "Reset Lowest Set Bit",
       "Url": "https://www.felixcloutier.com/x86/BLSR.html",
+      "PageNumber": 192,
       "Items": [
         {
           "Mnemonic": "BLSR",
@@ -2003,6 +2038,7 @@
       "Mnemonics": "BNDCL",
       "Summary": "Check Lower Bound",
       "Url": "https://www.felixcloutier.com/x86/BNDCL.html",
+      "PageNumber": 193,
       "Items": [
         {
           "Mnemonic": "BNDCL",
@@ -2037,6 +2073,7 @@
       "Mnemonics": "BNDCU/BNDCN",
       "Summary": "Check Upper Bound",
       "Url": "https://www.felixcloutier.com/x86/BNDCU:BNDCN.html",
+      "PageNumber": 195,
       "Items": [
         {
           "Mnemonic": "BNDCU",
@@ -2089,6 +2126,7 @@
       "Mnemonics": "BNDLDX",
       "Summary": "Load Extended Bounds Using Address Translation",
       "Url": "https://www.felixcloutier.com/x86/BNDLDX.html",
+      "PageNumber": 197,
       "Items": [
         {
           "Mnemonic": "BNDLDX",
@@ -2114,6 +2152,7 @@
       "Mnemonics": "BNDMK",
       "Summary": "Make Bounds",
       "Url": "https://www.felixcloutier.com/x86/BNDMK.html",
+      "PageNumber": 200,
       "Items": [
         {
           "Mnemonic": "BNDMK",
@@ -2148,6 +2187,7 @@
       "Mnemonics": "BNDMOV",
       "Summary": "Move Bounds",
       "Url": "https://www.felixcloutier.com/x86/BNDMOV.html",
+      "PageNumber": 202,
       "Items": [
         {
           "Mnemonic": "BNDMOV",
@@ -2207,6 +2247,7 @@
       "Mnemonics": "BNDSTX",
       "Summary": "Store Extended Bounds Using Address Translation",
       "Url": "https://www.felixcloutier.com/x86/BNDSTX.html",
+      "PageNumber": 205,
       "Items": [
         {
           "Mnemonic": "BNDSTX",
@@ -2232,6 +2273,7 @@
       "Mnemonics": "BOUND",
       "Summary": "Check Array Index Against Bounds",
       "Url": "https://www.felixcloutier.com/x86/BOUND.html",
+      "PageNumber": 208,
       "Items": [
         {
           "Mnemonic": "BOUND",
@@ -2266,6 +2308,7 @@
       "Mnemonics": "BSF",
       "Summary": "Bit Scan Forward",
       "Url": "https://www.felixcloutier.com/x86/BSF.html",
+      "PageNumber": 210,
       "Items": [
         {
           "Mnemonic": "BSF",
@@ -2309,6 +2352,7 @@
       "Mnemonics": "BSR",
       "Summary": "Bit Scan Reverse",
       "Url": "https://www.felixcloutier.com/x86/BSR.html",
+      "PageNumber": 212,
       "Items": [
         {
           "Mnemonic": "BSR",
@@ -2352,6 +2396,7 @@
       "Mnemonics": "BSWAP",
       "Summary": "Byte Swap",
       "Url": "https://www.felixcloutier.com/x86/BSWAP.html",
+      "PageNumber": 214,
       "Items": [
         {
           "Mnemonic": "BSWAP",
@@ -2385,6 +2430,7 @@
       "Mnemonics": "BT",
       "Summary": "Bit Test",
       "Url": "https://www.felixcloutier.com/x86/BT.html",
+      "PageNumber": 215,
       "Items": [
         {
           "Mnemonic": "BT",
@@ -2462,6 +2508,7 @@
       "Mnemonics": "BTC",
       "Summary": "Bit Test and Complement",
       "Url": "https://www.felixcloutier.com/x86/BTC.html",
+      "PageNumber": 217,
       "Items": [
         {
           "Mnemonic": "BTC",
@@ -2539,6 +2586,7 @@
       "Mnemonics": "BTR",
       "Summary": "Bit Test and Reset",
       "Url": "https://www.felixcloutier.com/x86/BTR.html",
+      "PageNumber": 219,
       "Items": [
         {
           "Mnemonic": "BTR",
@@ -2616,6 +2664,7 @@
       "Mnemonics": "BTS",
       "Summary": "Bit Test and Set",
       "Url": "https://www.felixcloutier.com/x86/BTS.html",
+      "PageNumber": 221,
       "Items": [
         {
           "Mnemonic": "BTS",
@@ -2693,6 +2742,7 @@
       "Mnemonics": "BZHI",
       "Summary": "Zero High Bits Starting with Specified Bit Position",
       "Url": "https://www.felixcloutier.com/x86/BZHI.html",
+      "PageNumber": 223,
       "Items": [
         {
           "Mnemonic": "BZHI",
@@ -2726,6 +2776,7 @@
       "Mnemonics": "CALL",
       "Summary": "Call Procedure",
       "Url": "https://www.felixcloutier.com/x86/CALL.html",
+      "PageNumber": 224,
       "Items": [
         {
           "Mnemonic": "CALL",
@@ -2837,6 +2888,7 @@
       "Mnemonics": "CBW/CWDE/CDQE",
       "Summary": "Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword to Quadword",
       "Url": "https://www.felixcloutier.com/x86/CBW:CWDE:CDQE.html",
+      "PageNumber": 238,
       "Items": [
         {
           "Mnemonic": "CBW",
@@ -2877,6 +2929,7 @@
       "Mnemonics": "CLAC",
       "Summary": "Clear AC Flag in EFLAGS Register",
       "Url": "https://www.felixcloutier.com/x86/CLAC.html",
+      "PageNumber": 239,
       "Items": [
         {
           "Mnemonic": "CLAC",
@@ -2898,6 +2951,7 @@
       "Mnemonics": "CLC",
       "Summary": "Clear Carry Flag",
       "Url": "https://www.felixcloutier.com/x86/CLC.html",
+      "PageNumber": 240,
       "Items": [
         {
           "Mnemonic": "CLC",
@@ -2920,6 +2974,7 @@
       "Mnemonics": "CLD",
       "Summary": "Clear Direction Flag",
       "Url": "https://www.felixcloutier.com/x86/CLD.html",
+      "PageNumber": 241,
       "Items": [
         {
           "Mnemonic": "CLD",
@@ -2940,12 +2995,14 @@
     },
     {
       "Mnemonics": "CLDEMOTE",
-      "Summary": "Cache Line Demote"
+      "Summary": "Cache Line Demote",
+      "PageNumber": 242
     },
     {
       "Mnemonics": "CLFLUSH",
       "Summary": "Flush Cache Line",
       "Url": "https://www.felixcloutier.com/x86/CLFLUSH.html",
+      "PageNumber": 244,
       "Items": [
         {
           "Mnemonic": "CLFLUSH",
@@ -2970,6 +3027,7 @@
       "Mnemonics": "CLFLUSHOPT",
       "Summary": "Flush Cache Line Optimized",
       "Url": "https://www.felixcloutier.com/x86/CLFLUSHOPT.html",
+      "PageNumber": 246,
       "Items": [
         {
           "Mnemonic": "CLFLUSHOPT",
@@ -2994,6 +3052,7 @@
       "Mnemonics": "CLI",
       "Summary": "Clear Interrupt Flag",
       "Url": "https://www.felixcloutier.com/x86/CLI.html",
+      "PageNumber": 248,
       "Items": [
         {
           "Mnemonic": "CLI",
@@ -3016,6 +3075,7 @@
       "Mnemonics": "CLTS",
       "Summary": "Clear Task-Switched Flag in CR0",
       "Url": "https://www.felixcloutier.com/x86/CLTS.html",
+      "PageNumber": 250,
       "Items": [
         {
           "Mnemonic": "CLTS",
@@ -3038,6 +3098,7 @@
       "Mnemonics": "CLWB",
       "Summary": "Cache Line Write Back",
       "Url": "https://www.felixcloutier.com/x86/CLWB.html",
+      "PageNumber": 251,
       "Items": [
         {
           "Mnemonic": "CLWB",
@@ -3054,6 +3115,7 @@
       "Mnemonics": "CMC",
       "Summary": "Complement Carry Flag",
       "Url": "https://www.felixcloutier.com/x86/CMC.html",
+      "PageNumber": 253,
       "Items": [
         {
           "Mnemonic": "CMC",
@@ -3076,6 +3138,7 @@
       "Mnemonics": "CMOVcc",
       "Summary": "Conditional Move",
       "Url": "https://www.felixcloutier.com/x86/CMOVcc.html",
+      "PageNumber": 254,
       "Items": [
         {
           "Mnemonic": "CMOVA",
@@ -3902,6 +3965,7 @@
       "Mnemonics": "CMP",
       "Summary": "Compare Two Operands",
       "Url": "https://www.felixcloutier.com/x86/CMP.html",
+      "PageNumber": 258,
       "Items": [
         {
           "Mnemonic": "CMP",
@@ -4137,6 +4201,7 @@
       "Mnemonics": "CMPPD",
       "Summary": "Compare Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CMPPD.html",
+      "PageNumber": 260,
       "Items": [
         {
           "Mnemonic": "CMPPD",
@@ -4192,6 +4257,7 @@
       "Mnemonics": "CMPPS",
       "Summary": "Compare Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CMPPS.html",
+      "PageNumber": 267,
       "Items": [
         {
           "Mnemonic": "CMPPS",
@@ -4247,6 +4313,7 @@
       "Mnemonics": "CMPS/CMPSB/CMPSW/CMPSD/CMPSQ",
       "Summary": "Compare String Operands",
       "Url": "https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html",
+      "PageNumber": 274,
       "Items": [
         {
           "Mnemonic": "CMPS",
@@ -4332,6 +4399,7 @@
       "Mnemonics": "CMPSD",
       "Summary": "Compare Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CMPSD.html",
+      "PageNumber": 278,
       "Items": [
         {
           "Mnemonic": "CMPSD",
@@ -4363,6 +4431,7 @@
       "Mnemonics": "CMPSS",
       "Summary": "Compare Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CMPSS.html",
+      "PageNumber": 282,
       "Items": [
         {
           "Mnemonic": "CMPSS",
@@ -4394,6 +4463,7 @@
       "Mnemonics": "CMPXCHG",
       "Summary": "Compare and Exchange",
       "Url": "https://www.felixcloutier.com/x86/CMPXCHG.html",
+      "PageNumber": 286,
       "Items": [
         {
           "Mnemonic": "CMPXCHG",
@@ -4455,6 +4525,7 @@
       "Mnemonics": "CMPXCHG8B/CMPXCHG16B",
       "Summary": "Compare and Exchange Bytes",
       "Url": "https://www.felixcloutier.com/x86/CMPXCHG8B:CMPXCHG16B.html",
+      "PageNumber": 288,
       "Items": [
         {
           "Mnemonic": "CMPXCHG8B",
@@ -4488,6 +4559,7 @@
       "Mnemonics": "COMISD",
       "Summary": "Compare Scalar Ordered Double-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/COMISD.html",
+      "PageNumber": 291,
       "Items": [
         {
           "Mnemonic": "COMISD",
@@ -4522,6 +4594,7 @@
       "Mnemonics": "COMISS",
       "Summary": "Compare Scalar Ordered Single-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/COMISS.html",
+      "PageNumber": 293,
       "Items": [
         {
           "Mnemonic": "COMISS",
@@ -4556,6 +4629,7 @@
       "Mnemonics": "CPUID",
       "Summary": "CPU Identification",
       "Url": "https://www.felixcloutier.com/x86/CPUID.html",
+      "PageNumber": 295,
       "Items": [
         {
           "Mnemonic": "CPUID",
@@ -4578,6 +4652,7 @@
       "Mnemonics": "CRC32",
       "Summary": "Accumulate CRC32 Value",
       "Url": "https://www.felixcloutier.com/x86/CRC32.html",
+      "PageNumber": 334,
       "Items": [
         {
           "Mnemonic": "CRC32",
@@ -4648,6 +4723,7 @@
       "Mnemonics": "CVTDQ2PD",
       "Summary": "Convert Packed Doubleword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTDQ2PD.html",
+      "PageNumber": 337,
       "Items": [
         {
           "Mnemonic": "CVTDQ2PD",
@@ -4709,6 +4785,7 @@
       "Mnemonics": "CVTDQ2PS",
       "Summary": "Convert Packed Doubleword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTDQ2PS.html",
+      "PageNumber": 341,
       "Items": [
         {
           "Mnemonic": "CVTDQ2PS",
@@ -4770,6 +4847,7 @@
       "Mnemonics": "CVTPD2DQ",
       "Summary": "Convert Packed Double-Precision Floating-Point Values to Packed Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTPD2DQ.html",
+      "PageNumber": 344,
       "Items": [
         {
           "Mnemonic": "CVTPD2DQ",
@@ -4825,6 +4903,7 @@
       "Mnemonics": "CVTPD2PI",
       "Summary": "Convert Packed Double-Precision FP Values to Packed Dword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTPD2PI.html",
+      "PageNumber": 348,
       "Items": [
         {
           "Mnemonic": "CVTPD2PI",
@@ -4850,6 +4929,7 @@
       "Mnemonics": "CVTPD2PS",
       "Summary": "Convert Packed Double-Precision Floating-Point Values to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPD2PS.html",
+      "PageNumber": 349,
       "Items": [
         {
           "Mnemonic": "CVTPD2PS",
@@ -4911,6 +4991,7 @@
       "Mnemonics": "CVTPI2PD",
       "Summary": "Convert Packed Dword Integers to Packed Double-Precision FP Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPI2PD.html",
+      "PageNumber": 353,
       "Items": [
         {
           "Mnemonic": "CVTPI2PD",
@@ -4936,6 +5017,7 @@
       "Mnemonics": "CVTPI2PS",
       "Summary": "Convert Packed Dword Integers to Packed Single-Precision FP Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPI2PS.html",
+      "PageNumber": 354,
       "Items": [
         {
           "Mnemonic": "CVTPI2PS",
@@ -4961,6 +5043,7 @@
       "Mnemonics": "CVTPS2DQ",
       "Summary": "Convert Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPS2DQ.html",
+      "PageNumber": 355,
       "Items": [
         {
           "Mnemonic": "CVTPS2DQ",
@@ -5022,6 +5105,7 @@
       "Mnemonics": "CVTPS2PD",
       "Summary": "Convert Packed Single-Precision Floating-Point Values to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/CVTPS2PD.html",
+      "PageNumber": 358,
       "Items": [
         {
           "Mnemonic": "CVTPS2PD",
@@ -5083,6 +5167,7 @@
       "Mnemonics": "CVTPS2PI",
       "Summary": "Convert Packed Single-Precision FP Values to Packed Dword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTPS2PI.html",
+      "PageNumber": 361,
       "Items": [
         {
           "Mnemonic": "CVTPS2PI",
@@ -5108,6 +5193,7 @@
       "Mnemonics": "CVTSD2SI",
       "Summary": "Convert Scalar Double-Precision Floating-Point Value to Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTSD2SI.html",
+      "PageNumber": 362,
       "Items": [
         {
           "Mnemonic": "CVTSD2SI",
@@ -5169,6 +5255,7 @@
       "Mnemonics": "CVTSD2SS",
       "Summary": "Convert Scalar Double-Precision Floating-Point Value to Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSD2SS.html",
+      "PageNumber": 364,
       "Items": [
         {
           "Mnemonic": "CVTSD2SS",
@@ -5200,6 +5287,7 @@
       "Mnemonics": "CVTSI2SD",
       "Summary": "Convert Doubleword Integer to Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSI2SD.html",
+      "PageNumber": 366,
       "Items": [
         {
           "Mnemonic": "CVTSI2SD",
@@ -5255,6 +5343,7 @@
       "Mnemonics": "CVTSI2SS",
       "Summary": "Convert Doubleword Integer to Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSI2SS.html",
+      "PageNumber": 368,
       "Items": [
         {
           "Mnemonic": "CVTSI2SS",
@@ -5310,6 +5399,7 @@
       "Mnemonics": "CVTSS2SD",
       "Summary": "Convert Scalar Single-Precision Floating-Point Value to Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/CVTSS2SD.html",
+      "PageNumber": 370,
       "Items": [
         {
           "Mnemonic": "CVTSS2SD",
@@ -5341,6 +5431,7 @@
       "Mnemonics": "CVTSS2SI",
       "Summary": "Convert Scalar Single-Precision Floating-Point Value to Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTSS2SI.html",
+      "PageNumber": 372,
       "Items": [
         {
           "Mnemonic": "CVTSS2SI",
@@ -5402,6 +5493,7 @@
       "Mnemonics": "CVTTPD2DQ",
       "Summary": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTTPD2DQ.html",
+      "PageNumber": 374,
       "Items": [
         {
           "Mnemonic": "CVTTPD2DQ",
@@ -5463,6 +5555,7 @@
       "Mnemonics": "CVTTPD2PI",
       "Summary": "Convert with Truncation Packed Double-Precision FP Values to Packed Dword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTTPD2PI.html",
+      "PageNumber": 378,
       "Items": [
         {
           "Mnemonic": "CVTTPD2PI",
@@ -5488,6 +5581,7 @@
       "Mnemonics": "CVTTPS2DQ",
       "Summary": "Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Signed Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/CVTTPS2DQ.html",
+      "PageNumber": 379,
       "Items": [
         {
           "Mnemonic": "CVTTPS2DQ",
@@ -5549,6 +5643,7 @@
       "Mnemonics": "CVTTPS2PI",
       "Summary": "Convert with Truncation Packed Single-Precision FP Values to Packed Dword Integers",
       "Url": "https://www.felixcloutier.com/x86/CVTTPS2PI.html",
+      "PageNumber": 382,
       "Items": [
         {
           "Mnemonic": "CVTTPS2PI",
@@ -5574,6 +5669,7 @@
       "Mnemonics": "CVTTSD2SI",
       "Summary": "Convert with Truncation Scalar Double-Precision Floating-Point Value to Signed Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTTSD2SI.html",
+      "PageNumber": 383,
       "Items": [
         {
           "Mnemonic": "CVTTSD2SI",
@@ -5629,6 +5725,7 @@
       "Mnemonics": "CVTTSS2SI",
       "Summary": "Convert with Truncation Scalar Single-Precision Floating-Point Value to Integer",
       "Url": "https://www.felixcloutier.com/x86/CVTTSS2SI.html",
+      "PageNumber": 385,
       "Items": [
         {
           "Mnemonic": "CVTTSS2SI",
@@ -5690,6 +5787,7 @@
       "Mnemonics": "CWD/CDQ/CQO",
       "Summary": "Convert Word to Doubleword/Convert Doubleword to Quadword",
       "Url": "https://www.felixcloutier.com/x86/CWD:CDQ:CQO.html",
+      "PageNumber": 387,
       "Items": [
         {
           "Mnemonic": "CWD",
@@ -5730,6 +5828,7 @@
       "Mnemonics": "DAA",
       "Summary": "Decimal Adjust AL after Addition",
       "Url": "https://www.felixcloutier.com/x86/DAA.html",
+      "PageNumber": 388,
       "Items": [
         {
           "Mnemonic": "DAA",
@@ -5752,6 +5851,7 @@
       "Mnemonics": "DAS",
       "Summary": "Decimal Adjust AL after Subtraction",
       "Url": "https://www.felixcloutier.com/x86/DAS.html",
+      "PageNumber": 390,
       "Items": [
         {
           "Mnemonic": "DAS",
@@ -5774,6 +5874,7 @@
       "Mnemonics": "DEC",
       "Summary": "Decrement by 1",
       "Url": "https://www.felixcloutier.com/x86/DEC.html",
+      "PageNumber": 392,
       "Items": [
         {
           "Mnemonic": "DEC",
@@ -5858,6 +5959,7 @@
       "Mnemonics": "DIV",
       "Summary": "Unsigned Divide",
       "Url": "https://www.felixcloutier.com/x86/DIV.html",
+      "PageNumber": 394,
       "Items": [
         {
           "Mnemonic": "DIV",
@@ -5918,6 +6020,7 @@
       "Mnemonics": "DIVPD",
       "Summary": "Divide Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DIVPD.html",
+      "PageNumber": 397,
       "Items": [
         {
           "Mnemonic": "DIVPD",
@@ -5979,6 +6082,7 @@
       "Mnemonics": "DIVPS",
       "Summary": "Divide Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DIVPS.html",
+      "PageNumber": 400,
       "Items": [
         {
           "Mnemonic": "DIVPS",
@@ -6040,6 +6144,7 @@
       "Mnemonics": "DIVSD",
       "Summary": "Divide Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/DIVSD.html",
+      "PageNumber": 403,
       "Items": [
         {
           "Mnemonic": "DIVSD",
@@ -6074,6 +6179,7 @@
       "Mnemonics": "DIVSS",
       "Summary": "Divide Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DIVSS.html",
+      "PageNumber": 405,
       "Items": [
         {
           "Mnemonic": "DIVSS",
@@ -6108,6 +6214,7 @@
       "Mnemonics": "DPPD",
       "Summary": "Dot Product of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DPPD.html",
+      "PageNumber": 407,
       "Items": [
         {
           "Mnemonic": "DPPD",
@@ -6150,6 +6257,7 @@
       "Mnemonics": "DPPS",
       "Summary": "Dot Product of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/DPPS.html",
+      "PageNumber": 409,
       "Items": [
         {
           "Mnemonic": "DPPS",
@@ -6200,6 +6308,7 @@
       "Mnemonics": "EMMS",
       "Summary": "Empty MMX Technology State",
       "Url": "https://www.felixcloutier.com/x86/EMMS.html",
+      "PageNumber": 412,
       "Items": [
         {
           "Mnemonic": "EMMS",
@@ -6222,6 +6331,7 @@
       "Mnemonics": "ENTER",
       "Summary": "Make Stack Frame for Procedure Parameters",
       "Url": "https://www.felixcloutier.com/x86/ENTER.html",
+      "PageNumber": 413,
       "Items": [
         {
           "Mnemonic": "ENTER",
@@ -6265,6 +6375,7 @@
       "Mnemonics": "EXTRACTPS",
       "Summary": "Extract Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/EXTRACTPS.html",
+      "PageNumber": 416,
       "Items": [
         {
           "Mnemonic": "EXTRACTPS",
@@ -6299,6 +6410,7 @@
       "Mnemonics": "F2XM1",
       "Summary": "Compute 2x–1",
       "Url": "https://www.felixcloutier.com/x86/F2XM1.html",
+      "PageNumber": 418,
       "Items": [
         {
           "Mnemonic": "F2XM1",
@@ -6314,6 +6426,7 @@
       "Mnemonics": "FABS",
       "Summary": "Absolute Value",
       "Url": "https://www.felixcloutier.com/x86/FABS.html",
+      "PageNumber": 420,
       "Items": [
         {
           "Mnemonic": "FABS",
@@ -6329,6 +6442,7 @@
       "Mnemonics": "FADD/FADDP/FIADD",
       "Summary": "Add",
       "Url": "https://www.felixcloutier.com/x86/FADD:FADDP:FIADD.html",
+      "PageNumber": 421,
       "Items": [
         {
           "Mnemonic": "FADD",
@@ -6400,6 +6514,7 @@
       "Mnemonics": "FBLD",
       "Summary": "Load Binary Coded Decimal",
       "Url": "https://www.felixcloutier.com/x86/FBLD.html",
+      "PageNumber": 424,
       "Items": [
         {
           "Mnemonic": "FBLD",
@@ -6415,6 +6530,7 @@
       "Mnemonics": "FBSTP",
       "Summary": "Store BCD Integer and Pop",
       "Url": "https://www.felixcloutier.com/x86/FBSTP.html",
+      "PageNumber": 426,
       "Items": [
         {
           "Mnemonic": "FBSTP",
@@ -6430,6 +6546,7 @@
       "Mnemonics": "FCHS",
       "Summary": "Change Sign",
       "Url": "https://www.felixcloutier.com/x86/FCHS.html",
+      "PageNumber": 428,
       "Items": [
         {
           "Mnemonic": "FCHS",
@@ -6445,6 +6562,7 @@
       "Mnemonics": "FCLEX/FNCLEX",
       "Summary": "Clear Exceptions",
       "Url": "https://www.felixcloutier.com/x86/FCLEX:FNCLEX.html",
+      "PageNumber": 430,
       "Items": [
         {
           "Mnemonic": "FCLEX",
@@ -6468,6 +6586,7 @@
       "Mnemonics": "FCMOVcc",
       "Summary": "Floating-Point Conditional Move",
       "Url": "https://www.felixcloutier.com/x86/FCMOVcc.html",
+      "PageNumber": 432,
       "Items": [
         {
           "Mnemonic": "FCMOVB",
@@ -6539,6 +6658,7 @@
       "Mnemonics": "FCOM/FCOMP/FCOMPP",
       "Summary": "Compare Floating Point Values",
       "Url": "https://www.felixcloutier.com/x86/FCOM:FCOMP:FCOMPP.html",
+      "PageNumber": 434,
       "Items": [
         {
           "Mnemonic": "FCOM",
@@ -6618,6 +6738,7 @@
       "Mnemonics": "FCOMI/FCOMIP/FUCOMI/FUCOMIP",
       "Summary": "Compare Floating Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/FCOMI:FCOMIP:FUCOMI:FUCOMIP.html",
+      "PageNumber": 437,
       "Items": [
         {
           "Mnemonic": "FCOMI",
@@ -6657,6 +6778,7 @@
       "Mnemonics": "FCOS",
       "Summary": "Cosine",
       "Url": "https://www.felixcloutier.com/x86/FCOS.html",
+      "PageNumber": 440,
       "Items": [
         {
           "Mnemonic": "FCOS",
@@ -6672,6 +6794,7 @@
       "Mnemonics": "FDECSTP",
       "Summary": "Decrement Stack-Top Pointer",
       "Url": "https://www.felixcloutier.com/x86/FDECSTP.html",
+      "PageNumber": 442,
       "Items": [
         {
           "Mnemonic": "FDECSTP",
@@ -6687,6 +6810,7 @@
       "Mnemonics": "FDIV/FDIVP/FIDIV",
       "Summary": "Divide",
       "Url": "https://www.felixcloutier.com/x86/FDIV:FDIVP:FIDIV.html",
+      "PageNumber": 443,
       "Items": [
         {
           "Mnemonic": "FDIV",
@@ -6758,6 +6882,7 @@
       "Mnemonics": "FDIVR/FDIVRP/FIDIVR",
       "Summary": "Reverse Divide",
       "Url": "https://www.felixcloutier.com/x86/FDIVR:FDIVRP:FIDIVR.html",
+      "PageNumber": 446,
       "Items": [
         {
           "Mnemonic": "FDIVR",
@@ -6829,6 +6954,7 @@
       "Mnemonics": "FFREE",
       "Summary": "Free Floating-Point Register",
       "Url": "https://www.felixcloutier.com/x86/FFREE.html",
+      "PageNumber": 449,
       "Items": [
         {
           "Mnemonic": "FFREE",
@@ -6844,6 +6970,7 @@
       "Mnemonics": "FICOM/FICOMP",
       "Summary": "Compare Integer",
       "Url": "https://www.felixcloutier.com/x86/FICOM:FICOMP.html",
+      "PageNumber": 450,
       "Items": [
         {
           "Mnemonic": "FICOM",
@@ -6883,6 +7010,7 @@
       "Mnemonics": "FILD",
       "Summary": "Load Integer",
       "Url": "https://www.felixcloutier.com/x86/FILD.html",
+      "PageNumber": 452,
       "Items": [
         {
           "Mnemonic": "FILD",
@@ -6914,6 +7042,7 @@
       "Mnemonics": "FINCSTP",
       "Summary": "Increment Stack-Top Pointer",
       "Url": "https://www.felixcloutier.com/x86/FINCSTP.html",
+      "PageNumber": 454,
       "Items": [
         {
           "Mnemonic": "FINCSTP",
@@ -6929,6 +7058,7 @@
       "Mnemonics": "FINIT/FNINIT",
       "Summary": "Initialize Floating-Point Unit",
       "Url": "https://www.felixcloutier.com/x86/FINIT:FNINIT.html",
+      "PageNumber": 455,
       "Items": [
         {
           "Mnemonic": "FINIT",
@@ -6952,6 +7082,7 @@
       "Mnemonics": "FIST/FISTP",
       "Summary": "Store Integer",
       "Url": "https://www.felixcloutier.com/x86/FIST:FISTP.html",
+      "PageNumber": 457,
       "Items": [
         {
           "Mnemonic": "FIST",
@@ -6999,6 +7130,7 @@
       "Mnemonics": "FISTTP",
       "Summary": "Store Integer with Truncation",
       "Url": "https://www.felixcloutier.com/x86/FISTTP.html",
+      "PageNumber": 460,
       "Items": [
         {
           "Mnemonic": "FISTTP",
@@ -7030,6 +7162,7 @@
       "Mnemonics": "FLD",
       "Summary": "Load Floating Point Value",
       "Url": "https://www.felixcloutier.com/x86/FLD.html",
+      "PageNumber": 462,
       "Items": [
         {
           "Mnemonic": "FLD",
@@ -7069,6 +7202,7 @@
       "Mnemonics": "FLD1/FLDL2T/FLDL2E/FLDPI/FLDLG2/FLDLN2/FLDZ",
       "Summary": "Load Constant",
       "Url": "https://www.felixcloutier.com/x86/FLD1:FLDL2T:FLDL2E:FLDPI:FLDLG2:FLDLN2:FLDZ.html",
+      "PageNumber": 464,
       "Items": [
         {
           "Mnemonic": "FLD1",
@@ -7132,6 +7266,7 @@
       "Mnemonics": "FLDCW",
       "Summary": "Load x87 FPU Control Word",
       "Url": "https://www.felixcloutier.com/x86/FLDCW.html",
+      "PageNumber": 466,
       "Items": [
         {
           "Mnemonic": "FLDCW",
@@ -7147,6 +7282,7 @@
       "Mnemonics": "FLDENV",
       "Summary": "Load x87 FPU Environment",
       "Url": "https://www.felixcloutier.com/x86/FLDENV.html",
+      "PageNumber": 468,
       "Items": [
         {
           "Mnemonic": "FLDENV",
@@ -7162,6 +7298,7 @@
       "Mnemonics": "FMUL/FMULP/FIMUL",
       "Summary": "Multiply",
       "Url": "https://www.felixcloutier.com/x86/FMUL:FMULP:FIMUL.html",
+      "PageNumber": 470,
       "Items": [
         {
           "Mnemonic": "FMUL",
@@ -7233,6 +7370,7 @@
       "Mnemonics": "FNOP",
       "Summary": "No Operation",
       "Url": "https://www.felixcloutier.com/x86/FNOP.html",
+      "PageNumber": 473,
       "Items": [
         {
           "Mnemonic": "FNOP",
@@ -7248,6 +7386,7 @@
       "Mnemonics": "FPATAN",
       "Summary": "Partial Arctangent",
       "Url": "https://www.felixcloutier.com/x86/FPATAN.html",
+      "PageNumber": 474,
       "Items": [
         {
           "Mnemonic": "FPATAN",
@@ -7263,6 +7402,7 @@
       "Mnemonics": "FPREM",
       "Summary": "Partial Remainder",
       "Url": "https://www.felixcloutier.com/x86/FPREM.html",
+      "PageNumber": 476,
       "Items": [
         {
           "Mnemonic": "FPREM",
@@ -7278,6 +7418,7 @@
       "Mnemonics": "FPREM1",
       "Summary": "Partial Remainder",
       "Url": "https://www.felixcloutier.com/x86/FPREM1.html",
+      "PageNumber": 478,
       "Items": [
         {
           "Mnemonic": "FPREM1",
@@ -7293,6 +7434,7 @@
       "Mnemonics": "FPTAN",
       "Summary": "Partial Tangent",
       "Url": "https://www.felixcloutier.com/x86/FPTAN.html",
+      "PageNumber": 480,
       "Items": [
         {
           "Mnemonic": "FPTAN",
@@ -7308,6 +7450,7 @@
       "Mnemonics": "FRNDINT",
       "Summary": "Round to Integer",
       "Url": "https://www.felixcloutier.com/x86/FRNDINT.html",
+      "PageNumber": 482,
       "Items": [
         {
           "Mnemonic": "FRNDINT",
@@ -7323,6 +7466,7 @@
       "Mnemonics": "FRSTOR",
       "Summary": "Restore x87 FPU State",
       "Url": "https://www.felixcloutier.com/x86/FRSTOR.html",
+      "PageNumber": 483,
       "Items": [
         {
           "Mnemonic": "FRSTOR",
@@ -7338,6 +7482,7 @@
       "Mnemonics": "FSAVE/FNSAVE",
       "Summary": "Store x87 FPU State",
       "Url": "https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html",
+      "PageNumber": 485,
       "Items": [
         {
           "Mnemonic": "FSAVE",
@@ -7361,6 +7506,7 @@
       "Mnemonics": "FSCALE",
       "Summary": "Scale",
       "Url": "https://www.felixcloutier.com/x86/FSCALE.html",
+      "PageNumber": 488,
       "Items": [
         {
           "Mnemonic": "FSCALE",
@@ -7376,6 +7522,7 @@
       "Mnemonics": "FSIN",
       "Summary": "Sine",
       "Url": "https://www.felixcloutier.com/x86/FSIN.html",
+      "PageNumber": 490,
       "Items": [
         {
           "Mnemonic": "FSIN",
@@ -7391,6 +7538,7 @@
       "Mnemonics": "FSINCOS",
       "Summary": "Sine and Cosine",
       "Url": "https://www.felixcloutier.com/x86/FSINCOS.html",
+      "PageNumber": 492,
       "Items": [
         {
           "Mnemonic": "FSINCOS",
@@ -7406,6 +7554,7 @@
       "Mnemonics": "FSQRT",
       "Summary": "Square Root",
       "Url": "https://www.felixcloutier.com/x86/FSQRT.html",
+      "PageNumber": 494,
       "Items": [
         {
           "Mnemonic": "FSQRT",
@@ -7421,6 +7570,7 @@
       "Mnemonics": "FST/FSTP",
       "Summary": "Store Floating Point Value",
       "Url": "https://www.felixcloutier.com/x86/FST:FSTP.html",
+      "PageNumber": 496,
       "Items": [
         {
           "Mnemonic": "FST",
@@ -7484,6 +7634,7 @@
       "Mnemonics": "FSTCW/FNSTCW",
       "Summary": "Store x87 FPU Control Word",
       "Url": "https://www.felixcloutier.com/x86/FSTCW:FNSTCW.html",
+      "PageNumber": 498,
       "Items": [
         {
           "Mnemonic": "FSTCW",
@@ -7507,6 +7658,7 @@
       "Mnemonics": "FSTENV/FNSTENV",
       "Summary": "Store x87 FPU Environment",
       "Url": "https://www.felixcloutier.com/x86/FSTENV:FNSTENV.html",
+      "PageNumber": 500,
       "Items": [
         {
           "Mnemonic": "FSTENV",
@@ -7530,6 +7682,7 @@
       "Mnemonics": "FSTSW/FNSTSW",
       "Summary": "Store x87 FPU Status Word",
       "Url": "https://www.felixcloutier.com/x86/FSTSW:FNSTSW.html",
+      "PageNumber": 502,
       "Items": [
         {
           "Mnemonic": "FSTSW",
@@ -7569,6 +7722,7 @@
       "Mnemonics": "FSUB/FSUBP/FISUB",
       "Summary": "Subtract",
       "Url": "https://www.felixcloutier.com/x86/FSUB:FSUBP:FISUB.html",
+      "PageNumber": 504,
       "Items": [
         {
           "Mnemonic": "FSUB",
@@ -7640,6 +7794,7 @@
       "Mnemonics": "FSUBR/FSUBRP/FISUBR",
       "Summary": "Reverse Subtract",
       "Url": "https://www.felixcloutier.com/x86/FSUBR:FSUBRP:FISUBR.html",
+      "PageNumber": 507,
       "Items": [
         {
           "Mnemonic": "FSUBR",
@@ -7711,6 +7866,7 @@
       "Mnemonics": "FTST",
       "Summary": "TEST",
       "Url": "https://www.felixcloutier.com/x86/FTST.html",
+      "PageNumber": 510,
       "Items": [
         {
           "Mnemonic": "FTST",
@@ -7726,6 +7882,7 @@
       "Mnemonics": "FUCOM/FUCOMP/FUCOMPP",
       "Summary": "Unordered Compare Floating Point Values",
       "Url": "https://www.felixcloutier.com/x86/FUCOM:FUCOMP:FUCOMPP.html",
+      "PageNumber": 512,
       "Items": [
         {
           "Mnemonic": "FUCOM",
@@ -7773,6 +7930,7 @@
       "Mnemonics": "FXAM",
       "Summary": "Examine Floating-Point",
       "Url": "https://www.felixcloutier.com/x86/FXAM.html",
+      "PageNumber": 515,
       "Items": [
         {
           "Mnemonic": "FXAM",
@@ -7788,6 +7946,7 @@
       "Mnemonics": "FXCH",
       "Summary": "Exchange Register Contents",
       "Url": "https://www.felixcloutier.com/x86/FXCH.html",
+      "PageNumber": 517,
       "Items": [
         {
           "Mnemonic": "FXCH",
@@ -7811,6 +7970,7 @@
       "Mnemonics": "FXRSTOR",
       "Summary": "Restore x87 FPU, MMX, XMM, and MXCSR State",
       "Url": "https://www.felixcloutier.com/x86/FXRSTOR.html",
+      "PageNumber": 519,
       "Items": [
         {
           "Mnemonic": "FXRSTOR",
@@ -7844,6 +8004,7 @@
       "Mnemonics": "FXSAVE",
       "Summary": "Save x87 FPU, MMX Technology, and SSE State",
       "Url": "https://www.felixcloutier.com/x86/FXSAVE.html",
+      "PageNumber": 522,
       "Items": [
         {
           "Mnemonic": "FXSAVE",
@@ -7877,6 +8038,7 @@
       "Mnemonics": "FXTRACT",
       "Summary": "Extract Exponent and Significand",
       "Url": "https://www.felixcloutier.com/x86/FXTRACT.html",
+      "PageNumber": 530,
       "Items": [
         {
           "Mnemonic": "FXTRACT",
@@ -7892,6 +8054,7 @@
       "Mnemonics": "FYL2X",
       "Summary": "Compute y * log2x",
       "Url": "https://www.felixcloutier.com/x86/FYL2X.html",
+      "PageNumber": 532,
       "Items": [
         {
           "Mnemonic": "FYL2X",
@@ -7907,6 +8070,7 @@
       "Mnemonics": "FYL2XP1",
       "Summary": "Compute y * log2(x +1)",
       "Url": "https://www.felixcloutier.com/x86/FYL2XP1.html",
+      "PageNumber": 534,
       "Items": [
         {
           "Mnemonic": "FYL2XP1",
@@ -7920,20 +8084,24 @@
     },
     {
       "Mnemonics": "GF2P8AFFINEINVQB",
-      "Summary": "Galois Field Affine Transformation Inverse"
+      "Summary": "Galois Field Affine Transformation Inverse",
+      "PageNumber": 536
     },
     {
       "Mnemonics": "GF2P8AFFINEQB",
-      "Summary": "Galois Field Affine Transformation"
+      "Summary": "Galois Field Affine Transformation",
+      "PageNumber": 538
     },
     {
       "Mnemonics": "GF2P8MULB",
-      "Summary": "Galois Field Multiply Bytes"
+      "Summary": "Galois Field Multiply Bytes",
+      "PageNumber": 539
     },
     {
       "Mnemonics": "HADDPD",
       "Summary": "Packed Double-FP Horizontal Add",
       "Url": "https://www.felixcloutier.com/x86/HADDPD.html",
+      "PageNumber": 540,
       "Items": [
         {
           "Mnemonic": "HADDPD",
@@ -7982,6 +8150,7 @@
       "Mnemonics": "HADDPS",
       "Summary": "Packed Single-FP Horizontal Add",
       "Url": "https://www.felixcloutier.com/x86/HADDPS.html",
+      "PageNumber": 543,
       "Items": [
         {
           "Mnemonic": "HADDPS",
@@ -8030,6 +8199,7 @@
       "Mnemonics": "HLT",
       "Summary": "Halt",
       "Url": "https://www.felixcloutier.com/x86/HLT.html",
+      "PageNumber": 546,
       "Items": [
         {
           "Mnemonic": "HLT",
@@ -8052,6 +8222,7 @@
       "Mnemonics": "HSUBPD",
       "Summary": "Packed Double-FP Horizontal Subtract",
       "Url": "https://www.felixcloutier.com/x86/HSUBPD.html",
+      "PageNumber": 547,
       "Items": [
         {
           "Mnemonic": "HSUBPD",
@@ -8100,6 +8271,7 @@
       "Mnemonics": "HSUBPS",
       "Summary": "Packed Single-FP Horizontal Subtract",
       "Url": "https://www.felixcloutier.com/x86/HSUBPS.html",
+      "PageNumber": 550,
       "Items": [
         {
           "Mnemonic": "HSUBPS",
@@ -8148,6 +8320,7 @@
       "Mnemonics": "IDIV",
       "Summary": "Signed Divide",
       "Url": "https://www.felixcloutier.com/x86/IDIV.html",
+      "PageNumber": 553,
       "Items": [
         {
           "Mnemonic": "IDIV",
@@ -8208,6 +8381,7 @@
       "Mnemonics": "IMUL",
       "Summary": "Signed Multiply",
       "Url": "https://www.felixcloutier.com/x86/IMUL.html",
+      "PageNumber": 556,
       "Items": [
         {
           "Mnemonic": "IMUL",
@@ -8355,6 +8529,7 @@
       "Mnemonics": "IN",
       "Summary": "Input from Port",
       "Url": "https://www.felixcloutier.com/x86/IN.html",
+      "PageNumber": 560,
       "Items": [
         {
           "Mnemonic": "IN",
@@ -8428,6 +8603,7 @@
       "Mnemonics": "INC",
       "Summary": "Increment by 1",
       "Url": "https://www.felixcloutier.com/x86/INC.html",
+      "PageNumber": 562,
       "Items": [
         {
           "Mnemonic": "INC",
@@ -8512,6 +8688,7 @@
       "Mnemonics": "INS/INSB/INSW/INSD",
       "Summary": "Input from Port to String",
       "Url": "https://www.felixcloutier.com/x86/INS:INSB:INSW:INSD.html",
+      "PageNumber": 564,
       "Items": [
         {
           "Mnemonic": "INS",
@@ -8579,6 +8756,7 @@
       "Mnemonics": "INSERTPS",
       "Summary": "Insert Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/INSERTPS.html",
+      "PageNumber": 567,
       "Items": [
         {
           "Mnemonic": "INSERTPS",
@@ -8610,6 +8788,7 @@
       "Mnemonics": "INT n/INTO/INT3/INT1",
       "Summary": "Call to Interrupt Procedure",
       "Url": "https://www.felixcloutier.com/x86/INTn:INTO:INT3:INT1.html",
+      "PageNumber": 570,
       "Items": [
         {
           "Mnemonic": "INT3",
@@ -8665,6 +8844,7 @@
       "Mnemonics": "INVD",
       "Summary": "Invalidate Internal Caches",
       "Url": "https://www.felixcloutier.com/x86/INVD.html",
+      "PageNumber": 583,
       "Items": [
         {
           "Mnemonic": "INVD",
@@ -8687,6 +8867,7 @@
       "Mnemonics": "INVLPG",
       "Summary": "Invalidate TLB Entries",
       "Url": "https://www.felixcloutier.com/x86/INVLPG.html",
+      "PageNumber": 585,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -8700,6 +8881,7 @@
       "Mnemonics": "INVPCID",
       "Summary": "Invalidate Process-Context Identifier",
       "Url": "https://www.felixcloutier.com/x86/INVPCID.html",
+      "PageNumber": 587,
       "Items": [
         {
           "Mnemonic": "INVPCID",
@@ -8732,6 +8914,7 @@
       "Mnemonics": "IRET/IRETD",
       "Summary": "Interrupt Return",
       "Url": "https://www.felixcloutier.com/x86/IRET:IRETD.html",
+      "PageNumber": 590,
       "Items": [
         {
           "Mnemonic": "IRET",
@@ -8772,6 +8955,7 @@
       "Mnemonics": "Jcc",
       "Summary": "Jump if Condition Is Met",
       "Url": "https://www.felixcloutier.com/x86/Jcc.html",
+      "PageNumber": 597,
       "Items": [
         {
           "Mnemonic": "JA",
@@ -9642,6 +9826,7 @@
       "Mnemonics": "JMP",
       "Summary": "Jump",
       "Url": "https://www.felixcloutier.com/x86/JMP.html",
+      "PageNumber": 602,
       "Items": [
         {
           "Mnemonic": "JMP",
@@ -9762,6 +9947,7 @@
       "Mnemonics": "KADDW/KADDB/KADDQ/KADDD",
       "Summary": "ADD Two Masks",
       "Url": "https://www.felixcloutier.com/x86/KADDW:KADDB:KADDQ:KADDD.html",
+      "PageNumber": 610,
       "Items": [
         {
           "Mnemonic": "KADDW",
@@ -9815,6 +10001,7 @@
       "Mnemonics": "KANDW/KANDB/KANDQ/KANDD",
       "Summary": "Bitwise Logical AND Masks",
       "Url": "https://www.felixcloutier.com/x86/KANDW:KANDB:KANDQ:KANDD.html",
+      "PageNumber": 611,
       "Items": [
         {
           "Mnemonic": "KANDW",
@@ -9868,6 +10055,7 @@
       "Mnemonics": "KANDNW/KANDNB/KANDNQ/KANDND",
       "Summary": "Bitwise Logical AND NOT Masks",
       "Url": "https://www.felixcloutier.com/x86/KANDNW:KANDNB:KANDNQ:KANDND.html",
+      "PageNumber": 612,
       "Items": [
         {
           "Mnemonic": "KANDNW",
@@ -9921,6 +10109,7 @@
       "Mnemonics": "KMOVW/KMOVB/KMOVQ/KMOVD",
       "Summary": "Move from and to Mask Registers",
       "Url": "https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html",
+      "PageNumber": 613,
       "Items": [
         {
           "Mnemonic": "KMOVW",
@@ -10095,6 +10284,7 @@
       "Mnemonics": "KNOTW/KNOTB/KNOTQ/KNOTD",
       "Summary": "NOT Mask Register",
       "Url": "https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html",
+      "PageNumber": 615,
       "Items": [
         {
           "Mnemonic": "KNOTW",
@@ -10147,6 +10337,7 @@
       "Mnemonics": "KORW/KORB/KORQ/KORD",
       "Summary": "Bitwise Logical OR Masks",
       "Url": "https://www.felixcloutier.com/x86/KORW:KORB:KORQ:KORD.html",
+      "PageNumber": 616,
       "Items": [
         {
           "Mnemonic": "KORW",
@@ -10200,6 +10391,7 @@
       "Mnemonics": "KORTESTW/KORTESTB/KORTESTQ/KORTESTD",
       "Summary": "OR Masks And Set Flags",
       "Url": "https://www.felixcloutier.com/x86/KORTESTW:KORTESTB:KORTESTQ:KORTESTD.html",
+      "PageNumber": 617,
       "Items": [
         {
           "Mnemonic": "KORTESTW",
@@ -10252,6 +10444,7 @@
       "Mnemonics": "KSHIFTLW/KSHIFTLB/KSHIFTLQ/KSHIFTLD",
       "Summary": "Shift Left Mask Registers",
       "Url": "https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html",
+      "PageNumber": 619,
       "Items": [
         {
           "Mnemonic": "KSHIFTLW",
@@ -10305,6 +10498,7 @@
       "Mnemonics": "KSHIFTRW/KSHIFTRB/KSHIFTRQ/KSHIFTRD",
       "Summary": "Shift Right Mask Registers",
       "Url": "https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html",
+      "PageNumber": 621,
       "Items": [
         {
           "Mnemonic": "KSHIFTRW",
@@ -10358,6 +10552,7 @@
       "Mnemonics": "KTESTW/KTESTB/KTESTQ/KTESTD",
       "Summary": "Packed Bit Test Masks and Set Flags",
       "Url": "https://www.felixcloutier.com/x86/KTESTW:KTESTB:KTESTQ:KTESTD.html",
+      "PageNumber": 623,
       "Items": [
         {
           "Mnemonic": "KTESTW",
@@ -10406,6 +10601,7 @@
       "Mnemonics": "KUNPCKBW/KUNPCKWD/KUNPCKDQ",
       "Summary": "Unpack for Mask Registers",
       "Url": "https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html",
+      "PageNumber": 625,
       "Items": [
         {
           "Mnemonic": "KUNPCKBW",
@@ -10450,6 +10646,7 @@
       "Mnemonics": "KXNORW/KXNORB/KXNORQ/KXNORD",
       "Summary": "Bitwise Logical XNOR Masks",
       "Url": "https://www.felixcloutier.com/x86/KXNORW:KXNORB:KXNORQ:KXNORD.html",
+      "PageNumber": 626,
       "Items": [
         {
           "Mnemonic": "KXNORW",
@@ -10503,6 +10700,7 @@
       "Mnemonics": "KXORW/KXORB/KXORQ/KXORD",
       "Summary": "Bitwise Logical XOR Masks",
       "Url": "https://www.felixcloutier.com/x86/KXORW:KXORB:KXORQ:KXORD.html",
+      "PageNumber": 627,
       "Items": [
         {
           "Mnemonic": "KXORW",
@@ -10556,6 +10754,7 @@
       "Mnemonics": "LAHF",
       "Summary": "Load Status Flags into AH Register",
       "Url": "https://www.felixcloutier.com/x86/LAHF.html",
+      "PageNumber": 628,
       "OperandEncoding": [
         {
           "OperandEncoding": "ZO",
@@ -10567,6 +10766,7 @@
       "Mnemonics": "LAR",
       "Summary": "Load Access Rights Byte",
       "Url": "https://www.felixcloutier.com/x86/LAR.html",
+      "PageNumber": 629,
       "Items": [
         {
           "Mnemonic": "LAR",
@@ -10601,6 +10801,7 @@
       "Mnemonics": "LDDQU",
       "Summary": "Load Unaligned Integer 128 Bits",
       "Url": "https://www.felixcloutier.com/x86/LDDQU.html",
+      "PageNumber": 632,
       "Items": [
         {
           "Mnemonic": "LDDQU",
@@ -10641,6 +10842,7 @@
       "Mnemonics": "LDMXCSR",
       "Summary": "Load MXCSR Register",
       "Url": "https://www.felixcloutier.com/x86/LDMXCSR.html",
+      "PageNumber": 634,
       "Items": [
         {
           "Mnemonic": "LDMXCSR",
@@ -10672,6 +10874,7 @@
       "Mnemonics": "LDS/LES/LFS/LGS/LSS",
       "Summary": "Load Far Pointer",
       "Url": "https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html",
+      "PageNumber": 635,
       "Items": [
         {
           "Mnemonic": "LDS",
@@ -10805,6 +11008,7 @@
       "Mnemonics": "LEA",
       "Summary": "Load Effective Address",
       "Url": "https://www.felixcloutier.com/x86/LEA.html",
+      "PageNumber": 639,
       "Items": [
         {
           "Mnemonic": "LEA",
@@ -10848,6 +11052,7 @@
       "Mnemonics": "LEAVE",
       "Summary": "High Level Procedure Exit",
       "Url": "https://www.felixcloutier.com/x86/LEAVE.html",
+      "PageNumber": 641,
       "Items": [
         {
           "Mnemonic": "LEAVE",
@@ -10888,6 +11093,7 @@
       "Mnemonics": "LFENCE",
       "Summary": "Load Fence",
       "Url": "https://www.felixcloutier.com/x86/LFENCE.html",
+      "PageNumber": 643,
       "Items": [
         {
           "Mnemonic": "LFENCE",
@@ -10910,6 +11116,7 @@
       "Mnemonics": "LGDT/LIDT",
       "Summary": "Load Global/Interrupt Descriptor Table Register",
       "Url": "https://www.felixcloutier.com/x86/LGDT:LIDT.html",
+      "PageNumber": 644,
       "Items": [
         {
           "Mnemonic": "LGDT",
@@ -10961,6 +11168,7 @@
       "Mnemonics": "LLDT",
       "Summary": "Load Local Descriptor Table Register",
       "Url": "https://www.felixcloutier.com/x86/LLDT.html",
+      "PageNumber": 647,
       "Items": [
         {
           "Mnemonic": "LLDT",
@@ -10985,6 +11193,7 @@
       "Mnemonics": "LMSW",
       "Summary": "Load Machine Status Word",
       "Url": "https://www.felixcloutier.com/x86/LMSW.html",
+      "PageNumber": 649,
       "Items": [
         {
           "Mnemonic": "LMSW",
@@ -11009,6 +11218,7 @@
       "Mnemonics": "LOCK",
       "Summary": "Assert LOCK# Signal Prefix",
       "Url": "https://www.felixcloutier.com/x86/LOCK.html",
+      "PageNumber": 651,
       "Items": [
         {
           "Mnemonic": "LOCK",
@@ -11031,6 +11241,7 @@
       "Mnemonics": "LODS/LODSB/LODSW/LODSD/LODSQ",
       "Summary": "Load String",
       "Url": "https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html",
+      "PageNumber": 653,
       "Items": [
         {
           "Mnemonic": "LODS",
@@ -11116,6 +11327,7 @@
       "Mnemonics": "LOOP/LOOPcc",
       "Summary": "Loop According to ECX Counter",
       "Url": "https://www.felixcloutier.com/x86/LOOP:LOOPcc.html",
+      "PageNumber": 656,
       "Items": [
         {
           "Mnemonic": "LOOP",
@@ -11158,6 +11370,7 @@
       "Mnemonics": "LSL",
       "Summary": "Load Segment Limit",
       "Url": "https://www.felixcloutier.com/x86/LSL.html",
+      "PageNumber": 658,
       "Items": [
         {
           "Mnemonic": "LSL",
@@ -11201,6 +11414,7 @@
       "Mnemonics": "LTR",
       "Summary": "Load Task Register",
       "Url": "https://www.felixcloutier.com/x86/LTR.html",
+      "PageNumber": 661,
       "Items": [
         {
           "Mnemonic": "LTR",
@@ -11225,6 +11439,7 @@
       "Mnemonics": "LZCNT",
       "Summary": "Count the Number of Leading Zero Bits",
       "Url": "https://www.felixcloutier.com/x86/LZCNT.html",
+      "PageNumber": 663,
       "Items": [
         {
           "Mnemonic": "BD",
@@ -11265,6 +11480,7 @@
       "Mnemonics": "MASKMOVDQU",
       "Summary": "Store Selected Bytes of Double Quadword",
       "Url": "https://www.felixcloutier.com/x86/MASKMOVDQU.html",
+      "PageNumber": 672,
       "Items": [
         {
           "Mnemonic": "MASKMOVDQU",
@@ -11297,6 +11513,7 @@
       "Mnemonics": "MASKMOVQ",
       "Summary": "Store Selected Bytes of Quadword",
       "Url": "https://www.felixcloutier.com/x86/MASKMOVQ.html",
+      "PageNumber": 674,
       "Items": [
         {
           "Mnemonic": "MASKMOVQ",
@@ -11322,6 +11539,7 @@
       "Mnemonics": "MAXPD",
       "Summary": "Maximum of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MAXPD.html",
+      "PageNumber": 676,
       "Items": [
         {
           "Mnemonic": "MAXPD",
@@ -11383,6 +11601,7 @@
       "Mnemonics": "MAXPS",
       "Summary": "Maximum of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MAXPS.html",
+      "PageNumber": 679,
       "Items": [
         {
           "Mnemonic": "MAXPS",
@@ -11444,6 +11663,7 @@
       "Mnemonics": "MAXSD",
       "Summary": "Return Maximum Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MAXSD.html",
+      "PageNumber": 682,
       "Items": [
         {
           "Mnemonic": "MAXSD",
@@ -11478,6 +11698,7 @@
       "Mnemonics": "MAXSS",
       "Summary": "Return Maximum Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MAXSS.html",
+      "PageNumber": 684,
       "Items": [
         {
           "Mnemonic": "MAXSS",
@@ -11511,12 +11732,14 @@
     {
       "Mnemonics": "MFENCE",
       "Summary": "Memory Fence",
-      "Url": "https://www.felixcloutier.com/x86/MFENCE.html"
+      "Url": "https://www.felixcloutier.com/x86/MFENCE.html",
+      "PageNumber": 686
     },
     {
       "Mnemonics": "MINPD",
       "Summary": "Minimum of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MINPD.html",
+      "PageNumber": 687,
       "Items": [
         {
           "Mnemonic": "MINPD",
@@ -11578,6 +11801,7 @@
       "Mnemonics": "MINPS",
       "Summary": "Minimum of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MINPS.html",
+      "PageNumber": 690,
       "Items": [
         {
           "Mnemonic": "MINPS",
@@ -11639,6 +11863,7 @@
       "Mnemonics": "MINSD",
       "Summary": "Return Minimum Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MINSD.html",
+      "PageNumber": 693,
       "Items": [
         {
           "Mnemonic": "MINSD",
@@ -11670,6 +11895,7 @@
       "Mnemonics": "MINSS",
       "Summary": "Return Minimum Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MINSS.html",
+      "PageNumber": 695,
       "Items": [
         {
           "Mnemonic": "MINSS",
@@ -11700,12 +11926,14 @@
     {
       "Mnemonics": "MONITOR",
       "Summary": "Set Up Monitor Address",
-      "Url": "https://www.felixcloutier.com/x86/MONITOR.html"
+      "Url": "https://www.felixcloutier.com/x86/MONITOR.html",
+      "PageNumber": 697
     },
     {
       "Mnemonics": "MOV",
       "Summary": "Move",
       "Url": "https://www.felixcloutier.com/x86/MOV.html",
+      "PageNumber": 699,
       "Items": [
         {
           "Mnemonic": "MOV",
@@ -12072,6 +12300,7 @@
       "Mnemonics": "MOV",
       "Summary": "Move to/from Control Registers",
       "Url": "https://www.felixcloutier.com/x86/MOV-1.html",
+      "PageNumber": 704,
       "Items": [
         {
           "Mnemonic": "MOV",
@@ -12149,6 +12378,7 @@
       "Mnemonics": "MOV",
       "Summary": "Move to/from Debug Registers",
       "Url": "https://www.felixcloutier.com/x86/MOV-2.html",
+      "PageNumber": 707,
       "Items": [
         {
           "Mnemonic": "MOV",
@@ -12208,6 +12438,7 @@
       "Mnemonics": "MOVAPD",
       "Summary": "Move Aligned Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVAPD.html",
+      "PageNumber": 709,
       "Items": [
         {
           "Mnemonic": "MOVAPD",
@@ -12323,6 +12554,7 @@
       "Mnemonics": "MOVAPS",
       "Summary": "Move Aligned Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVAPS.html",
+      "PageNumber": 713,
       "Items": [
         {
           "Mnemonic": "MOVAPS",
@@ -12438,6 +12670,7 @@
       "Mnemonics": "MOVBE",
       "Summary": "Move Data After Swapping Bytes",
       "Url": "https://www.felixcloutier.com/x86/MOVBE.html",
+      "PageNumber": 717,
       "OperandEncoding": [
         {
           "OperandEncoding": "RM",
@@ -12459,6 +12692,7 @@
       "Mnemonics": "MOVD/MOVQ",
       "Summary": "Move Doubleword/Move Quadword",
       "Url": "https://www.felixcloutier.com/x86/MOVD:MOVQ.html",
+      "PageNumber": 719,
       "Items": [
         {
           "Mnemonic": "MOVD",
@@ -12578,6 +12812,7 @@
       "Mnemonics": "MOVDDUP",
       "Summary": "Replicate Double FP Values",
       "Url": "https://www.felixcloutier.com/x86/MOVDDUP.html",
+      "PageNumber": 723,
       "Items": [
         {
           "Mnemonic": "MOVDDUP",
@@ -12631,16 +12866,19 @@
     },
     {
       "Mnemonics": "MOVDIRI",
-      "Summary": "Move Doubleword as Direct Store"
+      "Summary": "Move Doubleword as Direct Store",
+      "PageNumber": 726
     },
     {
       "Mnemonics": "MOVDIR64B",
-      "Summary": "Move 64 Bytes as Direct Store"
+      "Summary": "Move 64 Bytes as Direct Store",
+      "PageNumber": 728
     },
     {
       "Mnemonics": "MOVDQA,VMOVDQA32/64",
       "Summary": "Move Aligned Packed Integer Values",
       "Url": "https://www.felixcloutier.com/x86/MOVDQA:VMOVDQA32:VMOVDQA64.html",
+      "PageNumber": 730,
       "Items": [
         {
           "Mnemonic": "MOVDQA",
@@ -12810,6 +13048,7 @@
       "Mnemonics": "MOVDQU,VMOVDQU8/16/32/64",
       "Summary": "Move Unaligned Packed Integer Values",
       "Url": "https://www.felixcloutier.com/x86/MOVDQU:VMOVDQU8:VMOVDQU16:VMOVDQU32:VMOVDQU64.html",
+      "PageNumber": 735,
       "Items": [
         {
           "Mnemonic": "MOVDQU",
@@ -13086,12 +13325,14 @@
     {
       "Mnemonics": "MOVDQ2Q",
       "Summary": "Move Quadword from XMM to MMX Technology Register",
-      "Url": "https://www.felixcloutier.com/x86/MOVDQ2Q.html"
+      "Url": "https://www.felixcloutier.com/x86/MOVDQ2Q.html",
+      "PageNumber": 743
     },
     {
       "Mnemonics": "MOVHLPS",
       "Summary": "Move Packed Single-Precision Floating-Point Values High to Low",
       "Url": "https://www.felixcloutier.com/x86/MOVHLPS.html",
+      "PageNumber": 744,
       "Items": [
         {
           "Mnemonic": "MOVHLPS",
@@ -13140,6 +13381,7 @@
       "Mnemonics": "MOVHPD",
       "Summary": "Move High Packed Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVHPD.html",
+      "PageNumber": 746,
       "Items": [
         {
           "Mnemonic": "MOVHPD",
@@ -13195,6 +13437,7 @@
       "Mnemonics": "MOVHPS",
       "Summary": "Move High Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVHPS.html",
+      "PageNumber": 748,
       "Items": [
         {
           "Mnemonic": "MOVHPS",
@@ -13250,6 +13493,7 @@
       "Mnemonics": "MOVLHPS",
       "Summary": "Move Packed Single-Precision Floating-Point Values Low to High",
       "Url": "https://www.felixcloutier.com/x86/MOVLHPS.html",
+      "PageNumber": 750,
       "Items": [
         {
           "Mnemonic": "MOVLHPS",
@@ -13301,6 +13545,7 @@
       "Mnemonics": "MOVLPD",
       "Summary": "Move Low Packed Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVLPD.html",
+      "PageNumber": 752,
       "Items": [
         {
           "Mnemonic": "MOVLPD",
@@ -13356,6 +13601,7 @@
       "Mnemonics": "MOVLPS",
       "Summary": "Move Low Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVLPS.html",
+      "PageNumber": 754,
       "Items": [
         {
           "Mnemonic": "MOVLPS",
@@ -13411,6 +13657,7 @@
       "Mnemonics": "MOVMSKPD",
       "Summary": "Extract Packed Double-Precision Floating-Point Sign Mask",
       "Url": "https://www.felixcloutier.com/x86/MOVMSKPD.html",
+      "PageNumber": 756,
       "Items": [
         {
           "Mnemonic": "MOVMSKPD",
@@ -13451,6 +13698,7 @@
       "Mnemonics": "MOVMSKPS",
       "Summary": "Extract Packed Single-Precision Floating-Point Sign Mask",
       "Url": "https://www.felixcloutier.com/x86/MOVMSKPS.html",
+      "PageNumber": 758,
       "Items": [
         {
           "Mnemonic": "MOVMSKPS",
@@ -13491,6 +13739,7 @@
       "Mnemonics": "MOVNTDQA",
       "Summary": "Load Double Quadword Non-Temporal Aligned Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTDQA.html",
+      "PageNumber": 760,
       "Items": [
         {
           "Mnemonic": "MOVNTDQA",
@@ -13546,6 +13795,7 @@
       "Mnemonics": "MOVNTDQ",
       "Summary": "Store Packed Integers Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTDQ.html",
+      "PageNumber": 762,
       "Items": [
         {
           "Mnemonic": "MOVNTDQ",
@@ -13607,6 +13857,7 @@
       "Mnemonics": "MOVNTI",
       "Summary": "Store Doubleword Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTI.html",
+      "PageNumber": 764,
       "Items": [
         {
           "Mnemonic": "MOVNTI",
@@ -13641,6 +13892,7 @@
       "Mnemonics": "MOVNTPD",
       "Summary": "Store Packed Double-Precision Floating-Point Values Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTPD.html",
+      "PageNumber": 766,
       "Items": [
         {
           "Mnemonic": "MOVNTPD",
@@ -13702,6 +13954,7 @@
       "Mnemonics": "MOVNTPS",
       "Summary": "Store Packed Single-Precision Floating-Point Values Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTPS.html",
+      "PageNumber": 768,
       "Items": [
         {
           "Mnemonic": "MOVNTPS",
@@ -13763,6 +14016,7 @@
       "Mnemonics": "MOVNTQ",
       "Summary": "Store of Quadword Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTQ.html",
+      "PageNumber": 770,
       "Items": [
         {
           "Mnemonic": "MOVNTQ",
@@ -13788,6 +14042,7 @@
       "Mnemonics": "MOVQ",
       "Summary": "Move Quadword",
       "Url": "https://www.felixcloutier.com/x86/MOVQ.html",
+      "PageNumber": 771,
       "Items": [
         {
           "Mnemonic": "MOVQ",
@@ -13851,6 +14106,7 @@
       "Mnemonics": "MOVQ2DQ",
       "Summary": "Move Quadword from MMX Technology to XMM Register",
       "Url": "https://www.felixcloutier.com/x86/MOVQ2DQ.html",
+      "PageNumber": 774,
       "Items": [
         {
           "Mnemonic": "MOVQ2DQ",
@@ -13876,6 +14132,7 @@
       "Mnemonics": "MOVS/MOVSB/MOVSW/MOVSD/MOVSQ",
       "Summary": "Move Data from String to String",
       "Url": "https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html",
+      "PageNumber": 775,
       "Items": [
         {
           "Mnemonic": "MOVS",
@@ -13961,6 +14218,7 @@
       "Mnemonics": "MOVSD",
       "Summary": "Move or Merge Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVSD.html",
+      "PageNumber": 779,
       "Items": [
         {
           "Mnemonic": "MOVSD",
@@ -14056,6 +14314,7 @@
       "Mnemonics": "MOVSHDUP",
       "Summary": "Replicate Single FP Values",
       "Url": "https://www.felixcloutier.com/x86/MOVSHDUP.html",
+      "PageNumber": 782,
       "Items": [
         {
           "Mnemonic": "MOVSHDUP",
@@ -14117,6 +14376,7 @@
       "Mnemonics": "MOVSLDUP",
       "Summary": "Replicate Single FP Values",
       "Url": "https://www.felixcloutier.com/x86/MOVSLDUP.html",
+      "PageNumber": 785,
       "Items": [
         {
           "Mnemonic": "MOVSLDUP",
@@ -14178,6 +14438,7 @@
       "Mnemonics": "MOVSS",
       "Summary": "Move or Merge Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MOVSS.html",
+      "PageNumber": 788,
       "Items": [
         {
           "Mnemonic": "MOVSS",
@@ -14273,6 +14534,7 @@
       "Mnemonics": "MOVSX/MOVSXD",
       "Summary": "Move with Sign-Extension",
       "Url": "https://www.felixcloutier.com/x86/MOVSX:MOVSXD.html",
+      "PageNumber": 792,
       "Items": [
         {
           "Mnemonic": "MOVSX",
@@ -14361,6 +14623,7 @@
       "Mnemonics": "MOVUPD",
       "Summary": "Move Unaligned Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVUPD.html",
+      "PageNumber": 794,
       "Items": [
         {
           "Mnemonic": "MOVUPD",
@@ -14464,6 +14727,7 @@
       "Mnemonics": "MOVUPS",
       "Summary": "Move Unaligned Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MOVUPS.html",
+      "PageNumber": 798,
       "Items": [
         {
           "Mnemonic": "MOVUPS",
@@ -14567,6 +14831,7 @@
       "Mnemonics": "MOVZX",
       "Summary": "Move with Zero-Extend",
       "Url": "https://www.felixcloutier.com/x86/MOVZX.html",
+      "PageNumber": 802,
       "Items": [
         {
           "Mnemonic": "MOVZX",
@@ -14628,6 +14893,7 @@
       "Mnemonics": "MPSADBW",
       "Summary": "Compute Multiple Packed Sums of Absolute Difference",
       "Url": "https://www.felixcloutier.com/x86/MPSADBW.html",
+      "PageNumber": 804,
       "Items": [
         {
           "Mnemonic": "MPSADBW",
@@ -14678,6 +14944,7 @@
       "Mnemonics": "MUL",
       "Summary": "Unsigned Multiply",
       "Url": "https://www.felixcloutier.com/x86/MUL.html",
+      "PageNumber": 812,
       "Items": [
         {
           "Mnemonic": "MUL",
@@ -14738,6 +15005,7 @@
       "Mnemonics": "MULPD",
       "Summary": "Multiply Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MULPD.html",
+      "PageNumber": 814,
       "Items": [
         {
           "Mnemonic": "MULPD",
@@ -14799,6 +15067,7 @@
       "Mnemonics": "MULPS",
       "Summary": "Multiply Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MULPS.html",
+      "PageNumber": 817,
       "Items": [
         {
           "Mnemonic": "MULPS",
@@ -14854,6 +15123,7 @@
       "Mnemonics": "MULSD",
       "Summary": "Multiply Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/MULSD.html",
+      "PageNumber": 820,
       "Items": [
         {
           "Mnemonic": "MULSD",
@@ -14885,6 +15155,7 @@
       "Mnemonics": "MULSS",
       "Summary": "Multiply Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/MULSS.html",
+      "PageNumber": 822,
       "Items": [
         {
           "Mnemonic": "MULSS",
@@ -14916,6 +15187,7 @@
       "Mnemonics": "MULX",
       "Summary": "Unsigned Multiply Without Affecting Flags",
       "Url": "https://www.felixcloutier.com/x86/MULX.html",
+      "PageNumber": 824,
       "Items": [
         {
           "Mnemonic": "MULX",
@@ -14950,6 +15222,7 @@
       "Mnemonics": "MWAIT",
       "Summary": "Monitor Wait",
       "Url": "https://www.felixcloutier.com/x86/MWAIT.html",
+      "PageNumber": 826,
       "Items": [
         {
           "Mnemonic": "MWAIT",
@@ -14972,6 +15245,7 @@
       "Mnemonics": "NEG",
       "Summary": "Two's Complement Negation",
       "Url": "https://www.felixcloutier.com/x86/NEG.html",
+      "PageNumber": 829,
       "Items": [
         {
           "Mnemonic": "NEG",
@@ -15032,6 +15306,7 @@
       "Mnemonics": "NOP",
       "Summary": "No Operation",
       "Url": "https://www.felixcloutier.com/x86/NOP.html",
+      "PageNumber": 831,
       "Items": [
         {
           "Mnemonic": "NOP",
@@ -15078,6 +15353,7 @@
       "Mnemonics": "NOT",
       "Summary": "One's Complement Negation",
       "Url": "https://www.felixcloutier.com/x86/NOT.html",
+      "PageNumber": 832,
       "Items": [
         {
           "Mnemonic": "NOT",
@@ -15138,6 +15414,7 @@
       "Mnemonics": "OR",
       "Summary": "Logical Inclusive OR",
       "Url": "https://www.felixcloutier.com/x86/OR.html",
+      "PageNumber": 834,
       "Items": [
         {
           "Mnemonic": "OR",
@@ -15373,6 +15650,7 @@
       "Mnemonics": "ORPD",
       "Summary": "Bitwise Logical OR of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ORPD.html",
+      "PageNumber": 836,
       "Items": [
         {
           "Mnemonic": "ORPD",
@@ -15428,6 +15706,7 @@
       "Mnemonics": "ORPS",
       "Summary": "Bitwise Logical OR of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ORPS.html",
+      "PageNumber": 839,
       "Items": [
         {
           "Mnemonic": "ORPS",
@@ -15483,6 +15762,7 @@
       "Mnemonics": "OUT",
       "Summary": "Output to Port",
       "Url": "https://www.felixcloutier.com/x86/OUT.html",
+      "PageNumber": 842,
       "Items": [
         {
           "Mnemonic": "OUT",
@@ -15556,6 +15836,7 @@
       "Mnemonics": "OUTS/OUTSB/OUTSW/OUTSD",
       "Summary": "Output String to Port",
       "Url": "https://www.felixcloutier.com/x86/OUTS:OUTSB:OUTSW:OUTSD.html",
+      "PageNumber": 844,
       "Items": [
         {
           "Mnemonic": "OUTS",
@@ -15623,6 +15904,7 @@
       "Mnemonics": "PABSB/PABSW/PABSD/PABSQ",
       "Summary": "Packed Absolute Value",
       "Url": "https://www.felixcloutier.com/x86/PABSB:PABSW:PABSD:PABSQ.html",
+      "PageNumber": 848,
       "Items": [
         {
           "Mnemonic": "PABSB",
@@ -15774,6 +16056,7 @@
       "Mnemonics": "PACKSSWB/PACKSSDW",
       "Summary": "Pack with Signed Saturation",
       "Url": "https://www.felixcloutier.com/x86/PACKSSWB:PACKSSDW.html",
+      "PageNumber": 854,
       "Items": [
         {
           "Mnemonic": "PACKSSWB",
@@ -15889,6 +16172,7 @@
       "Mnemonics": "PACKUSDW",
       "Summary": "Pack with Unsigned Saturation",
       "Url": "https://www.felixcloutier.com/x86/PACKUSDW.html",
+      "PageNumber": 862,
       "Items": [
         {
           "Mnemonic": "PACKUSDW",
@@ -15944,6 +16228,7 @@
       "Mnemonics": "PACKUSWB",
       "Summary": "Pack with Unsigned Saturation",
       "Url": "https://www.felixcloutier.com/x86/PACKUSWB.html",
+      "PageNumber": 867,
       "Items": [
         {
           "Mnemonic": "PACKUSWB",
@@ -16014,6 +16299,7 @@
       "Mnemonics": "PADDB/PADDW/PADDD/PADDQ",
       "Summary": "Add Packed Integers",
       "Url": "https://www.felixcloutier.com/x86/PADDB:PADDW:PADDD:PADDQ.html",
+      "PageNumber": 872,
       "Items": [
         {
           "Mnemonic": "PADDB",
@@ -16273,6 +16559,7 @@
       "Mnemonics": "PADDSB/PADDSW",
       "Summary": "Add Packed Signed Integers with Signed Saturation",
       "Url": "https://www.felixcloutier.com/x86/PADDSB:PADDSW.html",
+      "PageNumber": 879,
       "Items": [
         {
           "Mnemonic": "PADDSB",
@@ -16406,6 +16693,7 @@
       "Mnemonics": "PADDUSB/PADDUSW",
       "Summary": "Add Packed Unsigned Integers with Unsigned Saturation",
       "Url": "https://www.felixcloutier.com/x86/PADDUSB:PADDUSW.html",
+      "PageNumber": 883,
       "Items": [
         {
           "Mnemonic": "PADDUSB",
@@ -16530,6 +16818,7 @@
       "Mnemonics": "PALIGNR",
       "Summary": "Packed Align Right",
       "Url": "https://www.felixcloutier.com/x86/PALIGNR.html",
+      "PageNumber": 887,
       "Items": [
         {
           "Mnemonic": "PALIGNR",
@@ -16600,6 +16889,7 @@
       "Mnemonics": "PAND",
       "Summary": "Logical AND",
       "Url": "https://www.felixcloutier.com/x86/PAND.html",
+      "PageNumber": 891,
       "Items": [
         {
           "Mnemonic": "PAND",
@@ -16697,6 +16987,7 @@
       "Mnemonics": "PANDN",
       "Summary": "Logical AND NOT",
       "Url": "https://www.felixcloutier.com/x86/PANDN.html",
+      "PageNumber": 894,
       "Items": [
         {
           "Mnemonic": "PANDN",
@@ -16794,6 +17085,7 @@
       "Mnemonics": "PAUSE",
       "Summary": "Spin Loop Hint",
       "Url": "https://www.felixcloutier.com/x86/PAUSE.html",
+      "PageNumber": 897,
       "Items": [
         {
           "Mnemonic": "PAUSE",
@@ -16816,6 +17108,7 @@
       "Mnemonics": "PAVGB/PAVGW",
       "Summary": "Average Packed Integers",
       "Url": "https://www.felixcloutier.com/x86/PAVGB:PAVGW.html",
+      "PageNumber": 898,
       "Items": [
         {
           "Mnemonic": "PAVGB",
@@ -16949,6 +17242,7 @@
       "Mnemonics": "PBLENDVB",
       "Summary": "Variable Blend Packed Bytes",
       "Url": "https://www.felixcloutier.com/x86/PBLENDVB.html",
+      "PageNumber": 902,
       "Items": [
         {
           "Mnemonic": "PBLENDVB",
@@ -17002,6 +17296,7 @@
       "Mnemonics": "PBLENDW",
       "Summary": "Blend Packed Words",
       "Url": "https://www.felixcloutier.com/x86/PBLENDW.html",
+      "PageNumber": 906,
       "Items": [
         {
           "Mnemonic": "PBLENDW",
@@ -17055,6 +17350,7 @@
       "Mnemonics": "PCLMULQDQ",
       "Summary": "Carry-Less Multiplication Quadword",
       "Url": "https://www.felixcloutier.com/x86/PCLMULQDQ.html",
+      "PageNumber": 909,
       "Items": [
         {
           "Mnemonic": "PCLMULQDQ",
@@ -17099,6 +17395,7 @@
       "Mnemonics": "PCMPEQB/PCMPEQW/PCMPEQD",
       "Summary": "Compare Packed Data for Equal",
       "Url": "https://www.felixcloutier.com/x86/PCMPEQB:PCMPEQW:PCMPEQD.html",
+      "PageNumber": 912,
       "Items": [
         {
           "Mnemonic": "PCMPEQB",
@@ -17234,6 +17531,7 @@
       "Mnemonics": "PCMPEQQ",
       "Summary": "Compare Packed Qword Data for Equal",
       "Url": "https://www.felixcloutier.com/x86/PCMPEQQ.html",
+      "PageNumber": 918,
       "Items": [
         {
           "Mnemonic": "PCMPEQQ",
@@ -17295,6 +17593,7 @@
       "Mnemonics": "PCMPESTRI",
       "Summary": "Packed Compare Explicit Length Strings, Return Index",
       "Url": "https://www.felixcloutier.com/x86/PCMPESTRI.html",
+      "PageNumber": 921,
       "Items": [
         {
           "Mnemonic": "PCMPESTRI",
@@ -17330,6 +17629,7 @@
       "Mnemonics": "PCMPESTRM",
       "Summary": "Packed Compare Explicit Length Strings, Return Mask",
       "Url": "https://www.felixcloutier.com/x86/PCMPESTRM.html",
+      "PageNumber": 923,
       "Items": [
         {
           "Mnemonic": "PCMPESTRM",
@@ -17365,6 +17665,7 @@
       "Mnemonics": "PCMPGTB/PCMPGTW/PCMPGTD",
       "Summary": "Compare Packed Signed Integers for Greater Than",
       "Url": "https://www.felixcloutier.com/x86/PCMPGTB:PCMPGTW:PCMPGTD.html",
+      "PageNumber": 925,
       "Items": [
         {
           "Mnemonic": "PCMPGTB",
@@ -17525,6 +17826,7 @@
       "Mnemonics": "PCMPGTQ",
       "Summary": "Compare Packed Data for Greater Than",
       "Url": "https://www.felixcloutier.com/x86/PCMPGTQ.html",
+      "PageNumber": 931,
       "Items": [
         {
           "Mnemonic": "PCMPGTQ",
@@ -17586,6 +17888,7 @@
       "Mnemonics": "PCMPISTRI",
       "Summary": "Packed Compare Implicit Length Strings, Return Index",
       "Url": "https://www.felixcloutier.com/x86/PCMPISTRI.html",
+      "PageNumber": 934,
       "Items": [
         {
           "Mnemonic": "PCMPISTRI",
@@ -17621,6 +17924,7 @@
       "Mnemonics": "PCMPISTRM",
       "Summary": "Packed Compare Implicit Length Strings, Return Mask",
       "Url": "https://www.felixcloutier.com/x86/PCMPISTRM.html",
+      "PageNumber": 936,
       "Items": [
         {
           "Mnemonic": "PCMPISTRM",
@@ -17656,6 +17960,7 @@
       "Mnemonics": "PDEP",
       "Summary": "Parallel Bits Deposit",
       "Url": "https://www.felixcloutier.com/x86/PDEP.html",
+      "PageNumber": 938,
       "Items": [
         {
           "Mnemonic": "PDEP",
@@ -17689,6 +17994,7 @@
       "Mnemonics": "PEXT",
       "Summary": "Parallel Bits Extract",
       "Url": "https://www.felixcloutier.com/x86/PEXT.html",
+      "PageNumber": 940,
       "Items": [
         {
           "Mnemonic": "PEXT",
@@ -17722,6 +18028,7 @@
       "Mnemonics": "PEXTRB/PEXTRD/PEXTRQ",
       "Summary": "Extract Byte/Dword/Qword",
       "Url": "https://www.felixcloutier.com/x86/PEXTRB:PEXTRD:PEXTRQ.html",
+      "PageNumber": 942,
       "Items": [
         {
           "Mnemonic": "PEXTRB",
@@ -17801,6 +18108,7 @@
       "Mnemonics": "PEXTRW",
       "Summary": "Extract Word",
       "Url": "https://www.felixcloutier.com/x86/PEXTRW.html",
+      "PageNumber": 945,
       "Items": [
         {
           "Mnemonic": "PEXTRW",
@@ -17864,6 +18172,7 @@
       "Mnemonics": "PHADDW/PHADDD",
       "Summary": "Packed Horizontal Add",
       "Url": "https://www.felixcloutier.com/x86/PHADDW:PHADDD.html",
+      "PageNumber": 948,
       "Items": [
         {
           "Mnemonic": "PHADDW",
@@ -17960,6 +18269,7 @@
       "Mnemonics": "PHADDSW",
       "Summary": "Packed Horizontal Add and Saturate",
       "Url": "https://www.felixcloutier.com/x86/PHADDSW.html",
+      "PageNumber": 952,
       "Items": [
         {
           "Mnemonic": "PHADDSW",
@@ -18020,6 +18330,7 @@
       "Mnemonics": "PHMINPOSUW",
       "Summary": "Packed Horizontal Word Minimum",
       "Url": "https://www.felixcloutier.com/x86/PHMINPOSUW.html",
+      "PageNumber": 954,
       "Items": [
         {
           "Mnemonic": "PHMINPOSUW",
@@ -18054,6 +18365,7 @@
       "Mnemonics": "PHSUBW/PHSUBD",
       "Summary": "Packed Horizontal Subtract",
       "Url": "https://www.felixcloutier.com/x86/PHSUBW:PHSUBD.html",
+      "PageNumber": 956,
       "Items": [
         {
           "Mnemonic": "PHSUBW",
@@ -18150,6 +18462,7 @@
       "Mnemonics": "PHSUBSW",
       "Summary": "Packed Horizontal Subtract and Saturate",
       "Url": "https://www.felixcloutier.com/x86/PHSUBSW.html",
+      "PageNumber": 959,
       "Items": [
         {
           "Mnemonic": "PHSUBSW",
@@ -18210,6 +18523,7 @@
       "Mnemonics": "PINSRB/PINSRD/PINSRQ",
       "Summary": "Insert Byte/Dword/Qword",
       "Url": "https://www.felixcloutier.com/x86/PINSRB:PINSRD:PINSRQ.html",
+      "PageNumber": 961,
       "Items": [
         {
           "Mnemonic": "PINSRB",
@@ -18289,6 +18603,7 @@
       "Mnemonics": "PINSRW",
       "Summary": "Insert Word",
       "Url": "https://www.felixcloutier.com/x86/PINSRW.html",
+      "PageNumber": 964,
       "Items": [
         {
           "Mnemonic": "PINSRW",
@@ -18328,6 +18643,7 @@
       "Mnemonics": "PMADDUBSW",
       "Summary": "Multiply and Add Packed Signed and Unsigned Bytes",
       "Url": "https://www.felixcloutier.com/x86/PMADDUBSW.html",
+      "PageNumber": 966,
       "Items": [
         {
           "Mnemonic": "PMADDUBSW",
@@ -18398,6 +18714,7 @@
       "Mnemonics": "PMADDWD",
       "Summary": "Multiply and Add Packed Integers",
       "Url": "https://www.felixcloutier.com/x86/PMADDWD.html",
+      "PageNumber": 969,
       "Items": [
         {
           "Mnemonic": "PMADDWD",
@@ -18468,6 +18785,7 @@
       "Mnemonics": "PMAXSB/PMAXSW/PMAXSD/PMAXSQ",
       "Summary": "Maximum of Packed Signed Integers",
       "Url": "https://www.felixcloutier.com/x86/PMAXSB:PMAXSW:PMAXSD:PMAXSQ.html",
+      "PageNumber": 972,
       "Items": [
         {
           "Mnemonic": "PMAXSW",
@@ -18651,6 +18969,7 @@
       "Mnemonics": "PMAXUB/PMAXUW",
       "Summary": "Maximum of Packed Unsigned Integers",
       "Url": "https://www.felixcloutier.com/x86/PMAXUB:PMAXUW.html",
+      "PageNumber": 979,
       "Items": [
         {
           "Mnemonic": "PMAXUB",
@@ -18762,6 +19081,7 @@
       "Mnemonics": "PMAXUD/PMAXUQ",
       "Summary": "Maximum of Packed Unsigned Integers",
       "Url": "https://www.felixcloutier.com/x86/PMAXUD:PMAXUQ.html",
+      "PageNumber": 984,
       "Items": [
         {
           "Mnemonic": "PMAXUD",
@@ -18850,6 +19170,7 @@
       "Mnemonics": "PMINSB/PMINSW",
       "Summary": "Minimum of Packed Signed Integers",
       "Url": "https://www.felixcloutier.com/x86/PMINSB:PMINSW.html",
+      "PageNumber": 988,
       "Items": [
         {
           "Mnemonic": "PMINSW",
@@ -18974,6 +19295,7 @@
       "Mnemonics": "PMINSD/PMINSQ",
       "Summary": "Minimum of Packed Signed Integers",
       "Url": "https://www.felixcloutier.com/x86/PMINSD:PMINSQ.html",
+      "PageNumber": 993,
       "Items": [
         {
           "Mnemonic": "PMINSD",
@@ -19062,6 +19384,7 @@
       "Mnemonics": "PMINUB/PMINUW",
       "Summary": "Minimum of Packed Unsigned Integers",
       "Url": "https://www.felixcloutier.com/x86/PMINUB:PMINUW.html",
+      "PageNumber": 997,
       "Items": [
         {
           "Mnemonic": "PMINUB",
@@ -19173,6 +19496,7 @@
       "Mnemonics": "PMINUD/PMINUQ",
       "Summary": "Minimum of Packed Unsigned Integers",
       "Url": "https://www.felixcloutier.com/x86/PMINUD:PMINUQ.html",
+      "PageNumber": 1002,
       "Items": [
         {
           "Mnemonic": "PMINUD",
@@ -19261,6 +19585,7 @@
       "Mnemonics": "PMOVMSKB",
       "Summary": "Move Byte Mask",
       "Url": "https://www.felixcloutier.com/x86/PMOVMSKB.html",
+      "PageNumber": 1006,
       "Items": [
         {
           "Mnemonic": "PMOVMSKB",
@@ -19313,6 +19638,7 @@
       "Mnemonics": "PMOVSX",
       "Summary": "Packed Move with Sign Extend",
       "Url": "https://www.felixcloutier.com/x86/PMOVSX.html",
+      "PageNumber": 1008,
       "Items": [
         {
           "Mnemonic": "PMOVSXBW",
@@ -19608,6 +19934,7 @@
       "Mnemonics": "PMOVZX",
       "Summary": "Packed Move with Zero Extend",
       "Url": "https://www.felixcloutier.com/x86/PMOVZX.html",
+      "PageNumber": 1017,
       "Items": [
         {
           "Mnemonic": "PMOVZXBW",
@@ -19903,6 +20230,7 @@
       "Mnemonics": "PMULDQ",
       "Summary": "Multiply Packed Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/PMULDQ.html",
+      "PageNumber": 1026,
       "Items": [
         {
           "Mnemonic": "PMULDQ",
@@ -19958,6 +20286,7 @@
       "Mnemonics": "PMULHRSW",
       "Summary": "Packed Multiply High with Round and Scale",
       "Url": "https://www.felixcloutier.com/x86/PMULHRSW.html",
+      "PageNumber": 1029,
       "Items": [
         {
           "Mnemonic": "PMULHRSW",
@@ -20028,6 +20357,7 @@
       "Mnemonics": "PMULHUW",
       "Summary": "Multiply Packed Unsigned Integers and Store High Result",
       "Url": "https://www.felixcloutier.com/x86/PMULHUW.html",
+      "PageNumber": 1033,
       "Items": [
         {
           "Mnemonic": "PMULHUW",
@@ -20098,6 +20428,7 @@
       "Mnemonics": "PMULHW",
       "Summary": "Multiply Packed Signed Integers and Store High Result",
       "Url": "https://www.felixcloutier.com/x86/PMULHW.html",
+      "PageNumber": 1037,
       "Items": [
         {
           "Mnemonic": "PMULHW",
@@ -20168,6 +20499,7 @@
       "Mnemonics": "PMULLD/PMULLQ",
       "Summary": "Multiply Packed Integers and Store Low Result",
       "Url": "https://www.felixcloutier.com/x86/PMULLD:PMULLQ.html",
+      "PageNumber": 1041,
       "Items": [
         {
           "Mnemonic": "PMULLD",
@@ -20256,6 +20588,7 @@
       "Mnemonics": "PMULLW",
       "Summary": "Multiply Packed Signed Integers and Store Low Result",
       "Url": "https://www.felixcloutier.com/x86/PMULLW.html",
+      "PageNumber": 1045,
       "Items": [
         {
           "Mnemonic": "PMULLW",
@@ -20326,6 +20659,7 @@
       "Mnemonics": "PMULUDQ",
       "Summary": "Multiply Packed Unsigned Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/PMULUDQ.html",
+      "PageNumber": 1049,
       "Items": [
         {
           "Mnemonic": "PMULUDQ",
@@ -20396,6 +20730,7 @@
       "Mnemonics": "POP",
       "Summary": "Pop a Value from the Stack",
       "Url": "https://www.felixcloutier.com/x86/POP.html",
+      "PageNumber": 1052,
       "Items": [
         {
           "Mnemonic": "POP",
@@ -20556,6 +20891,7 @@
       "Mnemonics": "POPA/POPAD",
       "Summary": "Pop All General-Purpose Registers",
       "Url": "https://www.felixcloutier.com/x86/POPA:POPAD.html",
+      "PageNumber": 1057,
       "Items": [
         {
           "Mnemonic": "POPA",
@@ -20587,6 +20923,7 @@
       "Mnemonics": "POPCNT",
       "Summary": "Return the Count of Number of Bits Set to 1",
       "Url": "https://www.felixcloutier.com/x86/POPCNT.html",
+      "PageNumber": 1059,
       "Items": [
         {
           "Mnemonic": "POPCNT",
@@ -20630,6 +20967,7 @@
       "Mnemonics": "POPF/POPFD/POPFQ",
       "Summary": "Pop Stack into EFLAGS Register",
       "Url": "https://www.felixcloutier.com/x86/POPF:POPFD:POPFQ.html",
+      "PageNumber": 1061,
       "Items": [
         {
           "Mnemonic": "POPF",
@@ -20670,6 +21008,7 @@
       "Mnemonics": "POR",
       "Summary": "Bitwise Logical OR",
       "Url": "https://www.felixcloutier.com/x86/POR.html",
+      "PageNumber": 1065,
       "Items": [
         {
           "Mnemonic": "POR",
@@ -20767,6 +21106,7 @@
       "Mnemonics": "PREFETCHh",
       "Summary": "Prefetch Data Into Caches",
       "Url": "https://www.felixcloutier.com/x86/PREFETCHh.html",
+      "PageNumber": 1068,
       "Items": [
         {
           "Mnemonic": "PREFETCHT0",
@@ -20818,6 +21158,7 @@
       "Mnemonics": "PREFETCHW",
       "Summary": "Prefetch Data into Caches in Anticipation of a Write",
       "Url": "https://www.felixcloutier.com/x86/PREFETCHW.html",
+      "PageNumber": 1070,
       "Items": [
         {
           "Mnemonic": "PREFETCHW",
@@ -20842,6 +21183,7 @@
       "Mnemonics": "PSADBW",
       "Summary": "Compute Sum of Absolute Differences",
       "Url": "https://www.felixcloutier.com/x86/PSADBW.html",
+      "PageNumber": 1072,
       "Items": [
         {
           "Mnemonic": "PSADBW",
@@ -20912,6 +21254,7 @@
       "Mnemonics": "PSHUFB",
       "Summary": "Packed Shuffle Bytes",
       "Url": "https://www.felixcloutier.com/x86/PSHUFB.html",
+      "PageNumber": 1076,
       "Items": [
         {
           "Mnemonic": "PSHUFB",
@@ -20982,6 +21325,7 @@
       "Mnemonics": "PSHUFD",
       "Summary": "Shuffle Packed Doublewords",
       "Url": "https://www.felixcloutier.com/x86/PSHUFD.html",
+      "PageNumber": 1080,
       "Items": [
         {
           "Mnemonic": "PSHUFD",
@@ -21043,6 +21387,7 @@
       "Mnemonics": "PSHUFHW",
       "Summary": "Shuffle Packed High Words",
       "Url": "https://www.felixcloutier.com/x86/PSHUFHW.html",
+      "PageNumber": 1084,
       "Items": [
         {
           "Mnemonic": "PSHUFHW",
@@ -21104,6 +21449,7 @@
       "Mnemonics": "PSHUFLW",
       "Summary": "Shuffle Packed Low Words",
       "Url": "https://www.felixcloutier.com/x86/PSHUFLW.html",
+      "PageNumber": 1087,
       "Items": [
         {
           "Mnemonic": "PSHUFLW",
@@ -21165,6 +21511,7 @@
       "Mnemonics": "PSHUFW",
       "Summary": "Shuffle Packed Words",
       "Url": "https://www.felixcloutier.com/x86/PSHUFW.html",
+      "PageNumber": 1090,
       "Items": [
         {
           "Mnemonic": "PSHUFW",
@@ -21191,6 +21538,7 @@
       "Mnemonics": "PSIGNB/PSIGNW/PSIGND",
       "Summary": "Packed SIGN",
       "Url": "https://www.felixcloutier.com/x86/PSIGNB:PSIGNW:PSIGND.html",
+      "PageNumber": 1091,
       "Items": [
         {
           "Mnemonic": "PSIGNB",
@@ -21323,6 +21671,7 @@
       "Mnemonics": "PSLLDQ",
       "Summary": "Shift Double Quadword Left Logical",
       "Url": "https://www.felixcloutier.com/x86/PSLLDQ.html",
+      "PageNumber": 1095,
       "Items": [
         {
           "Mnemonic": "PSLLDQ",
@@ -21384,6 +21733,7 @@
       "Mnemonics": "PSLLW/PSLLD/PSLLQ",
       "Summary": "Shift Packed Data Left Logical",
       "Url": "https://www.felixcloutier.com/x86/PSLLW:PSLLD:PSLLQ.html",
+      "PageNumber": 1097,
       "Items": [
         {
           "Mnemonic": "PSLLW",
@@ -21571,6 +21921,7 @@
       "Mnemonics": "PSRAW/PSRAD/PSRAQ",
       "Summary": "Shift Packed Data Right Arithmetic",
       "Url": "https://www.felixcloutier.com/x86/PSRAW:PSRAD:PSRAQ.html",
+      "PageNumber": 1109,
       "Items": [
         {
           "Mnemonic": "PSRAW",
@@ -21749,6 +22100,7 @@
       "Mnemonics": "PSRLDQ",
       "Summary": "Shift Double Quadword Right Logical",
       "Url": "https://www.felixcloutier.com/x86/PSRLDQ.html",
+      "PageNumber": 1119,
       "Items": [
         {
           "Mnemonic": "PSRLDQ",
@@ -21810,6 +22162,7 @@
       "Mnemonics": "PSRLW/PSRLD/PSRLQ",
       "Summary": "Shift Packed Data Right Logical",
       "Url": "https://www.felixcloutier.com/x86/PSRLW:PSRLD:PSRLQ.html",
+      "PageNumber": 1121,
       "Items": [
         {
           "Mnemonic": "PSRLW",
@@ -21997,6 +22350,7 @@
       "Mnemonics": "PSUBB/PSUBW/PSUBD",
       "Summary": "Subtract Packed Integers",
       "Url": "https://www.felixcloutier.com/x86/PSUBB:PSUBW:PSUBD.html",
+      "PageNumber": 1133,
       "Items": [
         {
           "Mnemonic": "PSUBB",
@@ -22166,6 +22520,7 @@
       "Mnemonics": "PSUBQ",
       "Summary": "Subtract Packed Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/PSUBQ.html",
+      "PageNumber": 1140,
       "Items": [
         {
           "Mnemonic": "PSUBQ",
@@ -22236,6 +22591,7 @@
       "Mnemonics": "PSUBSB/PSUBSW",
       "Summary": "Subtract Packed Signed Integers with Signed Saturation",
       "Url": "https://www.felixcloutier.com/x86/PSUBSB:PSUBSW.html",
+      "PageNumber": 1143,
       "Items": [
         {
           "Mnemonic": "PSUBSB",
@@ -22360,6 +22716,7 @@
       "Mnemonics": "PSUBUSB/PSUBUSW",
       "Summary": "Subtract Packed Unsigned Integers with Unsigned Saturation",
       "Url": "https://www.felixcloutier.com/x86/PSUBUSB:PSUBUSW.html",
+      "PageNumber": 1147,
       "Items": [
         {
           "Mnemonic": "PSUBUSB",
@@ -22484,6 +22841,7 @@
       "Mnemonics": "PTEST",
       "Summary": "Logical Compare",
       "Url": "https://www.felixcloutier.com/x86/PTEST.html",
+      "PageNumber": 1151,
       "Items": [
         {
           "Mnemonic": "PTEST",
@@ -22527,6 +22885,7 @@
       "Mnemonics": "PTWRITE",
       "Summary": "Write Data to a Processor Trace Packet",
       "Url": "https://www.felixcloutier.com/x86/PTWRITE.html",
+      "PageNumber": 1153,
       "Items": [
         {
           "Mnemonic": "PTWRITE",
@@ -22558,6 +22917,7 @@
       "Mnemonics": "PUNPCKHBW/PUNPCKHWD/PUNPCKHDQ/PUNPCKHQDQ",
       "Summary": "Unpack High Data",
       "Url": "https://www.felixcloutier.com/x86/PUNPCKHBW:PUNPCKHWD:PUNPCKHDQ:PUNPCKHQDQ.html",
+      "PageNumber": 1155,
       "Items": [
         {
           "Mnemonic": "PUNPCKHBW",
@@ -22736,6 +23096,7 @@
       "Mnemonics": "PUNPCKLBW/PUNPCKLWD/PUNPCKLDQ/PUNPCKLQDQ",
       "Summary": "Unpack Low Data",
       "Url": "https://www.felixcloutier.com/x86/PUNPCKLBW:PUNPCKLWD:PUNPCKLDQ:PUNPCKLQDQ.html",
+      "PageNumber": 1165,
       "Items": [
         {
           "Mnemonic": "PUNPCKLBW",
@@ -22914,6 +23275,7 @@
       "Mnemonics": "PUSH",
       "Summary": "Push Word, Doubleword or Quadword Onto the Stack",
       "Url": "https://www.felixcloutier.com/x86/PUSH.html",
+      "PageNumber": 1175,
       "Items": [
         {
           "Mnemonic": "PUSH",
@@ -23080,6 +23442,7 @@
       "Mnemonics": "PUSHA/PUSHAD",
       "Summary": "Push All General-Purpose Registers",
       "Url": "https://www.felixcloutier.com/x86/PUSHA:PUSHAD.html",
+      "PageNumber": 1178,
       "Items": [
         {
           "Mnemonic": "PUSHA",
@@ -23111,6 +23474,7 @@
       "Mnemonics": "PUSHF/PUSHFD/PUSHFQ",
       "Summary": "Push EFLAGS Register onto the Stack",
       "Url": "https://www.felixcloutier.com/x86/PUSHF:PUSHFD:PUSHFQ.html",
+      "PageNumber": 1180,
       "Items": [
         {
           "Mnemonic": "PUSHF",
@@ -23150,12 +23514,14 @@
     {
       "Mnemonics": "PXOR",
       "Summary": "Logical Exclusive OR",
-      "Url": "https://www.felixcloutier.com/x86/PXOR.html"
+      "Url": "https://www.felixcloutier.com/x86/PXOR.html",
+      "PageNumber": 1182
     },
     {
       "Mnemonics": "RCL/RCR/ROL/ROR",
       "Summary": "Rotate",
       "Url": "https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html",
+      "PageNumber": 1185,
       "Items": [
         {
           "Mnemonic": "RCL",
@@ -23726,6 +24092,7 @@
       "Mnemonics": "RCPPS",
       "Summary": "Compute Reciprocals of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/RCPPS.html",
+      "PageNumber": 1190,
       "OperandEncoding": [
         {
           "OperandEncoding": "RM",
@@ -23740,6 +24107,7 @@
       "Mnemonics": "RCPSS",
       "Summary": "Compute Reciprocal of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/RCPSS.html",
+      "PageNumber": 1192,
       "OperandEncoding": [
         {
           "OperandEncoding": "RM",
@@ -23762,6 +24130,7 @@
       "Mnemonics": "RDFSBASE/RDGSBASE",
       "Summary": "Read FS/GS Segment Base",
       "Url": "https://www.felixcloutier.com/x86/RDFSBASE:RDGSBASE.html",
+      "PageNumber": 1194,
       "Items": [
         {
           "Mnemonic": "RDFSBASE",
@@ -23801,6 +24170,7 @@
       "Mnemonics": "RDMSR",
       "Summary": "Read from Model Specific Register",
       "Url": "https://www.felixcloutier.com/x86/RDMSR.html",
+      "PageNumber": 1196,
       "OperandEncoding": [
         {
           "OperandEncoding": "ZO",
@@ -23812,6 +24182,7 @@
       "Mnemonics": "RDPID",
       "Summary": "Read Processor ID",
       "Url": "https://www.felixcloutier.com/x86/RDPID.html",
+      "PageNumber": 1198,
       "Items": [
         {
           "Mnemonic": "RDPID",
@@ -23843,6 +24214,7 @@
       "Mnemonics": "RDPKRU",
       "Summary": "Read Protection Key Rights for User Pages",
       "Url": "https://www.felixcloutier.com/x86/RDPKRU.html",
+      "PageNumber": 1199,
       "Items": [
         {
           "Mnemonic": "RDPKRU",
@@ -23864,6 +24236,7 @@
       "Mnemonics": "RDPMC",
       "Summary": "Read Performance-Monitoring Counters",
       "Url": "https://www.felixcloutier.com/x86/RDPMC.html",
+      "PageNumber": 1201,
       "Items": [
         {
           "Mnemonic": "RDPMC",
@@ -23886,6 +24259,7 @@
       "Mnemonics": "RDRAND",
       "Summary": "Read Random Number",
       "Url": "https://www.felixcloutier.com/x86/RDRAND.html",
+      "PageNumber": 1203,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -23899,6 +24273,7 @@
       "Mnemonics": "RDSEED",
       "Summary": "Read Random SEED",
       "Url": "https://www.felixcloutier.com/x86/RDSEED.html",
+      "PageNumber": 1205,
       "Items": [
         {
           "Mnemonic": "RDSEED",
@@ -23941,6 +24316,7 @@
       "Mnemonics": "RDTSC",
       "Summary": "Read Time-Stamp Counter",
       "Url": "https://www.felixcloutier.com/x86/RDTSC.html",
+      "PageNumber": 1207,
       "Items": [
         {
           "Mnemonic": "RDTSC",
@@ -23963,6 +24339,7 @@
       "Mnemonics": "RDTSCP",
       "Summary": "Read Time-Stamp Counter and Processor ID",
       "Url": "https://www.felixcloutier.com/x86/RDTSCP.html",
+      "PageNumber": 1209,
       "Items": [
         {
           "Mnemonic": "RDTSCP",
@@ -23985,6 +24362,7 @@
       "Mnemonics": "REP/REPE/REPZ/REPNE/REPNZ",
       "Summary": "Repeat String Operation Prefix",
       "Url": "https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html",
+      "PageNumber": 1211,
       "Items": [
         {
           "Mnemonic": "REP",
@@ -24403,6 +24781,7 @@
       "Mnemonics": "RET",
       "Summary": "Return from Procedure",
       "Url": "https://www.felixcloutier.com/x86/RET.html",
+      "PageNumber": 1215,
       "Items": [
         {
           "Mnemonic": "RET",
@@ -24460,6 +24839,7 @@
       "Mnemonics": "RORX",
       "Summary": "Rotate Right Logical Without Affecting Flags",
       "Url": "https://www.felixcloutier.com/x86/RORX.html",
+      "PageNumber": 1225,
       "Items": [
         {
           "Mnemonic": "RORX",
@@ -24493,6 +24873,7 @@
       "Mnemonics": "ROUNDPD",
       "Summary": "Round Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDPD.html",
+      "PageNumber": 1226,
       "OperandEncoding": [
         {
           "OperandEncoding": "RMI",
@@ -24508,6 +24889,7 @@
       "Mnemonics": "ROUNDPS",
       "Summary": "Round Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDPS.html",
+      "PageNumber": 1229,
       "OperandEncoding": [
         {
           "OperandEncoding": "RMI",
@@ -24523,6 +24905,7 @@
       "Mnemonics": "ROUNDSD",
       "Summary": "Round Scalar Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDSD.html",
+      "PageNumber": 1232,
       "OperandEncoding": [
         {
           "OperandEncoding": "RMI",
@@ -24547,6 +24930,7 @@
       "Mnemonics": "ROUNDSS",
       "Summary": "Round Scalar Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ROUNDSS.html",
+      "PageNumber": 1234,
       "OperandEncoding": [
         {
           "OperandEncoding": "RMI",
@@ -24571,6 +24955,7 @@
       "Mnemonics": "RSM",
       "Summary": "Resume from System Management Mode",
       "Url": "https://www.felixcloutier.com/x86/RSM.html",
+      "PageNumber": 1236,
       "Items": [
         {
           "Mnemonic": "RSM",
@@ -24593,6 +24978,7 @@
       "Mnemonics": "RSQRTPS",
       "Summary": "Compute Reciprocals of Square Roots of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/RSQRTPS.html",
+      "PageNumber": 1238,
       "OperandEncoding": [
         {
           "OperandEncoding": "RM",
@@ -24607,6 +24993,7 @@
       "Mnemonics": "RSQRTSS",
       "Summary": "Compute Reciprocal of Square Root of Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/RSQRTSS.html",
+      "PageNumber": 1240,
       "OperandEncoding": [
         {
           "OperandEncoding": "RM",
@@ -24629,6 +25016,7 @@
       "Mnemonics": "SAHF",
       "Summary": "Store AH into Flags",
       "Url": "https://www.felixcloutier.com/x86/SAHF.html",
+      "PageNumber": 1242,
       "Items": [
         {
           "Mnemonic": "SAHF",
@@ -24651,6 +25039,7 @@
       "Mnemonics": "SAL/SAR/SHL/SHR",
       "Summary": "Shift",
       "Url": "https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html",
+      "PageNumber": 1244,
       "Items": [
         {
           "Mnemonic": "SAL",
@@ -25041,6 +25430,7 @@
       "Mnemonics": "SARX/SHLX/SHRX",
       "Summary": "Shift Without Affecting Flags",
       "Url": "https://www.felixcloutier.com/x86/SARX:SHLX:SHRX.html",
+      "PageNumber": 1249,
       "Items": [
         {
           "Mnemonic": "SARX",
@@ -25106,6 +25496,7 @@
       "Mnemonics": "SBB",
       "Summary": "Integer Subtraction with Borrow",
       "Url": "https://www.felixcloutier.com/x86/SBB.html",
+      "PageNumber": 1251,
       "Items": [
         {
           "Mnemonic": "SBB",
@@ -25341,6 +25732,7 @@
       "Mnemonics": "SCAS/SCASB/SCASW/SCASD",
       "Summary": "Scan String",
       "Url": "https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html",
+      "PageNumber": 1254,
       "Items": [
         {
           "Mnemonic": "SCAS",
@@ -25426,6 +25818,7 @@
       "Mnemonics": "SETcc",
       "Summary": "Set Byte on Condition",
       "Url": "https://www.felixcloutier.com/x86/SETcc.html",
+      "PageNumber": 1258,
       "Items": [
         {
           "Mnemonic": "SETA",
@@ -25981,6 +26374,7 @@
       "Mnemonics": "SFENCE",
       "Summary": "Store Fence",
       "Url": "https://www.felixcloutier.com/x86/SFENCE.html",
+      "PageNumber": 1261,
       "Items": [
         {
           "Mnemonic": "SFENCE",
@@ -26003,6 +26397,7 @@
       "Mnemonics": "SGDT",
       "Summary": "Store Global Descriptor Table Register",
       "Url": "https://www.felixcloutier.com/x86/SGDT.html",
+      "PageNumber": 1262,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -26016,6 +26411,7 @@
       "Mnemonics": "SHA1RNDS4",
       "Summary": "Perform Four Rounds of SHA1 Operation",
       "Url": "https://www.felixcloutier.com/x86/SHA1RNDS4.html",
+      "PageNumber": 1264,
       "Items": [
         {
           "Mnemonic": "SHA1RNDS4",
@@ -26042,6 +26438,7 @@
       "Mnemonics": "SHA1NEXTE",
       "Summary": "Calculate SHA1 State Variable E after Four Rounds",
       "Url": "https://www.felixcloutier.com/x86/SHA1NEXTE.html",
+      "PageNumber": 1266,
       "Items": [
         {
           "Mnemonic": "SHA1NEXTE",
@@ -26067,6 +26464,7 @@
       "Mnemonics": "SHA1MSG1",
       "Summary": "Perform an Intermediate Calculation for the Next Four SHA1 Message Dwords",
       "Url": "https://www.felixcloutier.com/x86/SHA1MSG1.html",
+      "PageNumber": 1267,
       "Items": [
         {
           "Mnemonic": "SHA1MSG1",
@@ -26092,6 +26490,7 @@
       "Mnemonics": "SHA1MSG2",
       "Summary": "Perform a Final Calculation for the Next Four SHA1 Message Dwords",
       "Url": "https://www.felixcloutier.com/x86/SHA1MSG2.html",
+      "PageNumber": 1268,
       "Items": [
         {
           "Mnemonic": "SHA1MSG2",
@@ -26117,6 +26516,7 @@
       "Mnemonics": "SHA256RNDS2",
       "Summary": "Perform Two Rounds of SHA256 Operation",
       "Url": "https://www.felixcloutier.com/x86/SHA256RNDS2.html",
+      "PageNumber": 1269,
       "Items": [
         {
           "Mnemonic": "SHA256RNDS2",
@@ -26143,6 +26543,7 @@
       "Mnemonics": "SHA256MSG1",
       "Summary": "Perform an Intermediate Calculation for the Next Four SHA256 Message Dwords",
       "Url": "https://www.felixcloutier.com/x86/SHA256MSG1.html",
+      "PageNumber": 1271,
       "Items": [
         {
           "Mnemonic": "SHA256MSG1",
@@ -26168,6 +26569,7 @@
       "Mnemonics": "SHA256MSG2",
       "Summary": "Perform a Final Calculation for the Next Four SHA256 Message Dwords",
       "Url": "https://www.felixcloutier.com/x86/SHA256MSG2.html",
+      "PageNumber": 1272,
       "Items": [
         {
           "Mnemonic": "SHA256MSG2",
@@ -26193,6 +26595,7 @@
       "Mnemonics": "SHLD",
       "Summary": "Double Precision Shift Left",
       "Url": "https://www.felixcloutier.com/x86/SHLD.html",
+      "PageNumber": 1273,
       "Items": [
         {
           "Mnemonic": "SHLD",
@@ -26272,6 +26675,7 @@
       "Mnemonics": "SHRD",
       "Summary": "Double Precision Shift Right",
       "Url": "https://www.felixcloutier.com/x86/SHRD.html",
+      "PageNumber": 1276,
       "Items": [
         {
           "Mnemonic": "SHRD",
@@ -26351,6 +26755,7 @@
       "Mnemonics": "SHUFPD",
       "Summary": "Packed Interleave Shuffle of Pairs of Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SHUFPD.html",
+      "PageNumber": 1279,
       "Items": [
         {
           "Mnemonic": "SHUFPD",
@@ -26406,6 +26811,7 @@
       "Mnemonics": "SHUFPS",
       "Summary": "Packed Interleave Shuffle of Quadruplets of Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SHUFPS.html",
+      "PageNumber": 1284,
       "Items": [
         {
           "Mnemonic": "SHUFPS",
@@ -26461,6 +26867,7 @@
       "Mnemonics": "SIDT",
       "Summary": "Store Interrupt Descriptor Table Register",
       "Url": "https://www.felixcloutier.com/x86/SIDT.html",
+      "PageNumber": 1288,
       "Items": [
         {
           "Mnemonic": "SIDT",
@@ -26485,6 +26892,7 @@
       "Mnemonics": "SLDT",
       "Summary": "Store Local Descriptor Table Register",
       "Url": "https://www.felixcloutier.com/x86/SLDT.html",
+      "PageNumber": 1290,
       "Items": [
         {
           "Mnemonic": "SLDT",
@@ -26518,6 +26926,7 @@
       "Mnemonics": "SMSW",
       "Summary": "Store Machine Status Word",
       "Url": "https://www.felixcloutier.com/x86/SMSW.html",
+      "PageNumber": 1292,
       "Items": [
         {
           "Mnemonic": "SMSW",
@@ -26560,6 +26969,7 @@
       "Mnemonics": "SQRTPD",
       "Summary": "Square Root of Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SQRTPD.html",
+      "PageNumber": 1294,
       "Items": [
         {
           "Mnemonic": "SQRTPD",
@@ -26621,6 +27031,7 @@
       "Mnemonics": "SQRTPS",
       "Summary": "Square Root of Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SQRTPS.html",
+      "PageNumber": 1297,
       "Items": [
         {
           "Mnemonic": "SQRTPS",
@@ -26682,6 +27093,7 @@
       "Mnemonics": "SQRTSD",
       "Summary": "Compute Square Root of Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/SQRTSD.html",
+      "PageNumber": 1300,
       "Items": [
         {
           "Mnemonic": "SQRTSD",
@@ -26713,6 +27125,7 @@
       "Mnemonics": "SQRTSS",
       "Summary": "Compute Square Root of Scalar Single-Precision Value",
       "Url": "https://www.felixcloutier.com/x86/SQRTSS.html",
+      "PageNumber": 1302,
       "Items": [
         {
           "Mnemonic": "SQRTSS",
@@ -26747,6 +27160,7 @@
       "Mnemonics": "STAC",
       "Summary": "Set AC Flag in EFLAGS Register",
       "Url": "https://www.felixcloutier.com/x86/STAC.html",
+      "PageNumber": 1304,
       "Items": [
         {
           "Mnemonic": "STAC",
@@ -26768,6 +27182,7 @@
       "Mnemonics": "STC",
       "Summary": "Set Carry Flag",
       "Url": "https://www.felixcloutier.com/x86/STC.html",
+      "PageNumber": 1305,
       "Items": [
         {
           "Mnemonic": "STC",
@@ -26790,6 +27205,7 @@
       "Mnemonics": "STD",
       "Summary": "Set Direction Flag",
       "Url": "https://www.felixcloutier.com/x86/STD.html",
+      "PageNumber": 1306,
       "Items": [
         {
           "Mnemonic": "STD",
@@ -26812,6 +27228,7 @@
       "Mnemonics": "STI",
       "Summary": "Set Interrupt Flag",
       "Url": "https://www.felixcloutier.com/x86/STI.html",
+      "PageNumber": 1307,
       "Items": [
         {
           "Mnemonic": "STI",
@@ -26834,6 +27251,7 @@
       "Mnemonics": "STMXCSR",
       "Summary": "Store MXCSR Register State",
       "Url": "https://www.felixcloutier.com/x86/STMXCSR.html",
+      "PageNumber": 1309,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -26847,6 +27265,7 @@
       "Mnemonics": "STOS/STOSB/STOSW/STOSD/STOSQ",
       "Summary": "Store String",
       "Url": "https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html",
+      "PageNumber": 1310,
       "Items": [
         {
           "Mnemonic": "STOS",
@@ -26932,6 +27351,7 @@
       "Mnemonics": "STR",
       "Summary": "Store Task Register",
       "Url": "https://www.felixcloutier.com/x86/STR.html",
+      "PageNumber": 1314,
       "Items": [
         {
           "Mnemonic": "STR",
@@ -26956,6 +27376,7 @@
       "Mnemonics": "SUB",
       "Summary": "Subtract",
       "Url": "https://www.felixcloutier.com/x86/SUB.html",
+      "PageNumber": 1316,
       "Items": [
         {
           "Mnemonic": "SUB",
@@ -27191,6 +27612,7 @@
       "Mnemonics": "SUBPD",
       "Summary": "Subtract Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SUBPD.html",
+      "PageNumber": 1318,
       "Items": [
         {
           "Mnemonic": "SUBPD",
@@ -27252,6 +27674,7 @@
       "Mnemonics": "SUBPS",
       "Summary": "Subtract Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/SUBPS.html",
+      "PageNumber": 1321,
       "Items": [
         {
           "Mnemonic": "SUBPS",
@@ -27313,6 +27736,7 @@
       "Mnemonics": "SUBSD",
       "Summary": "Subtract Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/SUBSD.html",
+      "PageNumber": 1324,
       "Items": [
         {
           "Mnemonic": "SUBSD",
@@ -27344,6 +27768,7 @@
       "Mnemonics": "SUBSS",
       "Summary": "Subtract Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/SUBSS.html",
+      "PageNumber": 1326,
       "Items": [
         {
           "Mnemonic": "SUBSS",
@@ -27375,6 +27800,7 @@
       "Mnemonics": "SWAPGS",
       "Summary": "Swap GS Base Register",
       "Url": "https://www.felixcloutier.com/x86/SWAPGS.html",
+      "PageNumber": 1328,
       "Items": [
         {
           "Mnemonic": "SWAPGS",
@@ -27397,6 +27823,7 @@
       "Mnemonics": "SYSCALL",
       "Summary": "Fast System Call",
       "Url": "https://www.felixcloutier.com/x86/SYSCALL.html",
+      "PageNumber": 1330,
       "Items": [
         {
           "Mnemonic": "SYSCALL",
@@ -27419,6 +27846,7 @@
       "Mnemonics": "SYSENTER",
       "Summary": "Fast System Call",
       "Url": "https://www.felixcloutier.com/x86/SYSENTER.html",
+      "PageNumber": 1332,
       "Items": [
         {
           "Mnemonic": "SYSENTER",
@@ -27441,6 +27869,7 @@
       "Mnemonics": "SYSEXIT",
       "Summary": "Fast Return from Fast System Call",
       "Url": "https://www.felixcloutier.com/x86/SYSEXIT.html",
+      "PageNumber": 1335,
       "Items": [
         {
           "Mnemonic": "SYSEXIT",
@@ -27472,6 +27901,7 @@
       "Mnemonics": "SYSRET",
       "Summary": "Return From Fast System Call",
       "Url": "https://www.felixcloutier.com/x86/SYSRET.html",
+      "PageNumber": 1338,
       "Items": [
         {
           "Mnemonic": "SYSRET",
@@ -27503,6 +27933,7 @@
       "Mnemonics": "TEST",
       "Summary": "Logical Compare",
       "Url": "https://www.felixcloutier.com/x86/TEST.html",
+      "PageNumber": 1341,
       "Items": [
         {
           "Mnemonic": "TEST",
@@ -27657,12 +28088,14 @@
     },
     {
       "Mnemonics": "TPAUSE",
-      "Summary": "Timed PAUSE"
+      "Summary": "Timed PAUSE",
+      "PageNumber": 1343
     },
     {
       "Mnemonics": "TZCNT",
       "Summary": "Count the Number of Trailing Zero Bits",
       "Url": "https://www.felixcloutier.com/x86/TZCNT.html",
+      "PageNumber": 1345,
       "Items": [
         {
           "Mnemonic": "TZCNT",
@@ -27703,6 +28136,7 @@
       "Mnemonics": "UCOMISD",
       "Summary": "Unordered Compare Scalar Double-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/UCOMISD.html",
+      "PageNumber": 1347,
       "Items": [
         {
           "Mnemonic": "UCOMISD",
@@ -27737,6 +28171,7 @@
       "Mnemonics": "UCOMISS",
       "Summary": "Unordered Compare Scalar Single-Precision Floating-Point Values and Set EFLAGS",
       "Url": "https://www.felixcloutier.com/x86/UCOMISS.html",
+      "PageNumber": 1349,
       "Items": [
         {
           "Mnemonic": "UCOMISS",
@@ -27771,6 +28206,7 @@
       "Mnemonics": "UD",
       "Summary": "Undefined Instruction",
       "Url": "https://www.felixcloutier.com/x86/UD.html",
+      "PageNumber": 1351,
       "Items": [
         {
           "Mnemonic": "UD01",
@@ -27816,16 +28252,19 @@
     },
     {
       "Mnemonics": "UMONITOR",
-      "Summary": "User Level Set Up Monitor Address"
+      "Summary": "User Level Set Up Monitor Address",
+      "PageNumber": 1352
     },
     {
       "Mnemonics": "UMWAIT",
-      "Summary": "User Level Monitor Wait"
+      "Summary": "User Level Monitor Wait",
+      "PageNumber": 1354
     },
     {
       "Mnemonics": "UNPCKHPD",
       "Summary": "Unpack and Interleave High Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKHPD.html",
+      "PageNumber": 1356,
       "Items": [
         {
           "Mnemonic": "UNPCKHPD",
@@ -27887,6 +28326,7 @@
       "Mnemonics": "UNPCKHPS",
       "Summary": "Unpack and Interleave High Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKHPS.html",
+      "PageNumber": 1360,
       "Items": [
         {
           "Mnemonic": "UNPCKHPS",
@@ -27948,6 +28388,7 @@
       "Mnemonics": "UNPCKLPD",
       "Summary": "Unpack and Interleave Low Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKLPD.html",
+      "PageNumber": 1364,
       "Items": [
         {
           "Mnemonic": "UNPCKLPD",
@@ -28009,6 +28450,7 @@
       "Mnemonics": "UNPCKLPS",
       "Summary": "Unpack and Interleave Low Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/UNPCKLPS.html",
+      "PageNumber": 1368,
       "Items": [
         {
           "Mnemonic": "UNPCKLPS",
@@ -28070,6 +28512,7 @@
       "Mnemonics": "VALIGND/VALIGNQ",
       "Summary": "Align Doubleword/Quadword Vectors",
       "Url": "https://www.felixcloutier.com/x86/VALIGND:VALIGNQ.html",
+      "PageNumber": 1377,
       "Items": [
         {
           "Mnemonic": "VALIGND",
@@ -28131,6 +28574,7 @@
       "Mnemonics": "VBLENDMPD/VBLENDMPS",
       "Summary": "Blend Float64/Float32 Vectors Using an OpMask Control",
       "Url": "https://www.felixcloutier.com/x86/VBLENDMPD:VBLENDMPS.html",
+      "PageNumber": 1381,
       "Items": [
         {
           "Mnemonic": "VBLENDMPD",
@@ -28192,6 +28636,7 @@
       "Mnemonics": "VBROADCAST",
       "Summary": "Load with Broadcast Floating-Point Data",
       "Url": "https://www.felixcloutier.com/x86/VBROADCAST.html",
+      "PageNumber": 1384,
       "Items": [
         {
           "Mnemonic": "VBROADCASTSS",
@@ -28379,6 +28824,7 @@
       "Mnemonics": "VCOMPRESSPD",
       "Summary": "Store Sparse Packed Double-Precision Floating-Point Values into Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VCOMPRESSPD.html",
+      "PageNumber": 1392,
       "Items": [
         {
           "Mnemonic": "VCOMPRESSPD",
@@ -28413,6 +28859,7 @@
       "Mnemonics": "VCOMPRESSPS",
       "Summary": "Store Sparse Packed Single-Precision Floating-Point Values into Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VCOMPRESSPS.html",
+      "PageNumber": 1394,
       "Items": [
         {
           "Mnemonic": "VCOMPRESSPS",
@@ -28447,6 +28894,7 @@
       "Mnemonics": "VCVTPD2QQ",
       "Summary": "Convert Packed Double-Precision Floating-Point Values to Packed Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTPD2QQ.html",
+      "PageNumber": 1396,
       "Items": [
         {
           "Mnemonic": "VCVTPD2QQ",
@@ -28481,6 +28929,7 @@
       "Mnemonics": "VCVTPD2UDQ",
       "Summary": "Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTPD2UDQ.html",
+      "PageNumber": 1399,
       "Items": [
         {
           "Mnemonic": "VCVTPD2UDQ",
@@ -28515,6 +28964,7 @@
       "Mnemonics": "VCVTPD2UQQ",
       "Summary": "Convert Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTPD2UQQ.html",
+      "PageNumber": 1402,
       "Items": [
         {
           "Mnemonic": "VCVTPD2UQQ",
@@ -28549,6 +28999,7 @@
       "Mnemonics": "VCVTPH2PS",
       "Summary": "Convert 16-bit FP values to Single-Precision FP values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPH2PS.html",
+      "PageNumber": 1405,
       "Items": [
         {
           "Mnemonic": "VCVTPH2PS",
@@ -28596,6 +29047,7 @@
       "Mnemonics": "VCVTPS2PH",
       "Summary": "Convert Single-Precision FP value to 16-bit FP value",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2PH.html",
+      "PageNumber": 1408,
       "Items": [
         {
           "Mnemonic": "VCVTPS2PH",
@@ -28643,6 +29095,7 @@
       "Mnemonics": "VCVTPS2UDQ",
       "Summary": "Convert Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2UDQ.html",
+      "PageNumber": 1412,
       "Items": [
         {
           "Mnemonic": "VCVTPS2UDQ",
@@ -28677,6 +29130,7 @@
       "Mnemonics": "VCVTPS2QQ",
       "Summary": "Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2QQ.html",
+      "PageNumber": 1415,
       "Items": [
         {
           "Mnemonic": "VCVTPS2QQ",
@@ -28708,6 +29162,7 @@
       "Mnemonics": "VCVTPS2UQQ",
       "Summary": "Convert Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2UQQ.html",
+      "PageNumber": 1418,
       "Items": [
         {
           "Mnemonic": "VCVTPS2UQQ",
@@ -28742,6 +29197,7 @@
       "Mnemonics": "VCVTQQ2PD",
       "Summary": "Convert Packed Quadword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTQQ2PD.html",
+      "PageNumber": 1421,
       "Items": [
         {
           "Mnemonic": "VCVTQQ2PD",
@@ -28776,6 +29232,7 @@
       "Mnemonics": "VCVTQQ2PS",
       "Summary": "Convert Packed Quadword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTQQ2PS.html",
+      "PageNumber": 1423,
       "Items": [
         {
           "Mnemonic": "VCVTQQ2PS",
@@ -28810,6 +29267,7 @@
       "Mnemonics": "VCVTSD2USI",
       "Summary": "Convert Scalar Double-Precision Floating-Point Value to Unsigned Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTSD2USI.html",
+      "PageNumber": 1425,
       "Items": [
         {
           "Mnemonic": "VCVTSD2USI",
@@ -28835,6 +29293,7 @@
       "Mnemonics": "VCVTSS2USI",
       "Summary": "Convert Scalar Single-Precision Floating-Point Value to Unsigned Doubleword Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTSS2USI.html",
+      "PageNumber": 1426,
       "Items": [
         {
           "Mnemonic": "VCVTSS2USI",
@@ -28860,6 +29319,7 @@
       "Mnemonics": "VCVTTPD2QQ",
       "Summary": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPD2QQ.html",
+      "PageNumber": 1428,
       "Items": [
         {
           "Mnemonic": "VCVTTPD2QQ",
@@ -28894,6 +29354,7 @@
       "Mnemonics": "VCVTTPD2UDQ",
       "Summary": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Doubleword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPD2UDQ.html",
+      "PageNumber": 1430,
       "Items": [
         {
           "Mnemonic": "VCVTTPD2UDQ",
@@ -28928,6 +29389,7 @@
       "Mnemonics": "VCVTTPD2UQQ",
       "Summary": "Convert with Truncation Packed Double-Precision Floating-Point Values to Packed Unsigned Quadword Integers",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPD2UQQ.html",
+      "PageNumber": 1433,
       "Items": [
         {
           "Mnemonic": "VCVTTPD2UQQ",
@@ -28962,6 +29424,7 @@
       "Mnemonics": "VCVTTPS2UDQ",
       "Summary": "Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2UDQ.html",
+      "PageNumber": 1435,
       "Items": [
         {
           "Mnemonic": "VCVTTPS2UDQ",
@@ -28996,6 +29459,7 @@
       "Mnemonics": "VCVTTPS2QQ",
       "Summary": "Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2QQ.html",
+      "PageNumber": 1437,
       "Items": [
         {
           "Mnemonic": "VCVTTPS2QQ",
@@ -29030,6 +29494,7 @@
       "Mnemonics": "VCVTTPS2UQQ",
       "Summary": "Convert with Truncation Packed Single Precision Floating-Point Values to Packed Unsigned Quadword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2UQQ.html",
+      "PageNumber": 1439,
       "Items": [
         {
           "Mnemonic": "VCVTTPS2UQQ",
@@ -29064,6 +29529,7 @@
       "Mnemonics": "VCVTTSD2USI",
       "Summary": "Convert with Truncation Scalar Double-Precision Floating-Point Value to Unsigned Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTTSD2USI.html",
+      "PageNumber": 1441,
       "Items": [
         {
           "Mnemonic": "VCVTTSD2USI",
@@ -29089,6 +29555,7 @@
       "Mnemonics": "VCVTTSS2USI",
       "Summary": "Convert with Truncation Scalar Single-Precision Floating-Point Value to Unsigned Integer",
       "Url": "https://www.felixcloutier.com/x86/VCVTTSS2USI.html",
+      "PageNumber": 1442,
       "Items": [
         {
           "Mnemonic": "VCVTTSS2USI",
@@ -29114,6 +29581,7 @@
       "Mnemonics": "VCVTUDQ2PD",
       "Summary": "Convert Packed Unsigned Doubleword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUDQ2PD.html",
+      "PageNumber": 1444,
       "Items": [
         {
           "Mnemonic": "VCVTUDQ2PD",
@@ -29148,6 +29616,7 @@
       "Mnemonics": "VCVTUDQ2PS",
       "Summary": "Convert Packed Unsigned Doubleword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUDQ2PS.html",
+      "PageNumber": 1446,
       "Items": [
         {
           "Mnemonic": "VCVTUDQ2PS",
@@ -29182,6 +29651,7 @@
       "Mnemonics": "VCVTUQQ2PD",
       "Summary": "Convert Packed Unsigned Quadword Integers to Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUQQ2PD.html",
+      "PageNumber": 1448,
       "Items": [
         {
           "Mnemonic": "VCVTUQQ2PD",
@@ -29216,6 +29686,7 @@
       "Mnemonics": "VCVTUQQ2PS",
       "Summary": "Convert Packed Unsigned Quadword Integers to Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTUQQ2PS.html",
+      "PageNumber": 1450,
       "Items": [
         {
           "Mnemonic": "VCVTUQQ2PS",
@@ -29250,6 +29721,7 @@
       "Mnemonics": "VCVTUSI2SD",
       "Summary": "Convert Unsigned Integer to Scalar Double-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/VCVTUSI2SD.html",
+      "PageNumber": 1452,
       "Items": [
         {
           "Mnemonic": "VCVTUSI2SD",
@@ -29275,6 +29747,7 @@
       "Mnemonics": "VCVTUSI2SS",
       "Summary": "Convert Unsigned Integer to Scalar Single-Precision Floating-Point Value",
       "Url": "https://www.felixcloutier.com/x86/VCVTUSI2SS.html",
+      "PageNumber": 1454,
       "Items": [
         {
           "Mnemonic": "VCVTUSI2SS",
@@ -29300,6 +29773,7 @@
       "Mnemonics": "VDBPSADBW",
       "Summary": "Double Block Packed Sum-Absolute-Differences (SAD) on Unsigned Bytes",
       "Url": "https://www.felixcloutier.com/x86/VDBPSADBW.html",
+      "PageNumber": 1456,
       "Items": [
         {
           "Mnemonic": "VDBPSADBW",
@@ -29334,6 +29808,7 @@
       "Mnemonics": "VEXPANDPD",
       "Summary": "Load Sparse Packed Double-Precision Floating-Point Values from Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VEXPANDPD.html",
+      "PageNumber": 1460,
       "Items": [
         {
           "Mnemonic": "VEXPANDPD",
@@ -29368,6 +29843,7 @@
       "Mnemonics": "VEXPANDPS",
       "Summary": "Load Sparse Packed Single-Precision Floating-Point Values from Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VEXPANDPS.html",
+      "PageNumber": 1462,
       "Items": [
         {
           "Mnemonic": "VEXPANDPS",
@@ -29402,6 +29878,7 @@
       "Mnemonics": "VERR/VERW",
       "Summary": "Verify a Segment for Reading or Writing",
       "Url": "https://www.felixcloutier.com/x86/VERR:VERW.html",
+      "PageNumber": 1464,
       "Items": [
         {
           "Mnemonic": "VERR",
@@ -29435,6 +29912,7 @@
       "Mnemonics": "VEXTRACTF128/VEXTRACTF32x4/VEXTRACTF64x2/VEXTRACTF32x8/VEXTRACTF64x4",
       "Summary": "Extra ct Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTF128:VEXTRACTF32x4:VEXTRACTF64x2:VEXTRACTF32x8:VEXTRACTF64x4.html",
+      "PageNumber": 1466,
       "Items": [
         {
           "Mnemonic": "VEXTRACTF128",
@@ -29505,6 +29983,7 @@
       "Mnemonics": "VEXTRACTI128/VEXTRACTI32x4/VEXTRACTI64x2/VEXTRACTI32x8/VEXTRACTI64x4",
       "Summary": "Extract packed Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VEXTRACTI128:VEXTRACTI32x4:VEXTRACTI64x2:VEXTRACTI32x8:VEXTRACTI64x4.html",
+      "PageNumber": 1472,
       "Items": [
         {
           "Mnemonic": "VEXTRACTI128",
@@ -29575,6 +30054,7 @@
       "Mnemonics": "VFIXUPIMMPD",
       "Summary": "Fix Up Special Packed Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VFIXUPIMMPD.html",
+      "PageNumber": 1478,
       "Items": [
         {
           "Mnemonic": "VFIXUPIMMPD",
@@ -29609,6 +30089,7 @@
       "Mnemonics": "VFIXUPIMMPS",
       "Summary": "Fix Up Special Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VFIXUPIMMPS.html",
+      "PageNumber": 1482,
       "Items": [
         {
           "Mnemonic": "VFIXUPIMMPS",
@@ -29643,6 +30124,7 @@
       "Mnemonics": "VFIXUPIMMSD",
       "Summary": "Fix Up Special Scalar Float64 Value",
       "Url": "https://www.felixcloutier.com/x86/VFIXUPIMMSD.html",
+      "PageNumber": 1486,
       "Items": [
         {
           "Mnemonic": "VFIXUPIMMSD",
@@ -29659,6 +30141,7 @@
       "Mnemonics": "VFIXUPIMMSS",
       "Summary": "Fix Up Special Scalar Float32 Value",
       "Url": "https://www.felixcloutier.com/x86/VFIXUPIMMSS.html",
+      "PageNumber": 1489,
       "Items": [
         {
           "Mnemonic": "VFIXUPIMMSS",
@@ -29675,6 +30158,7 @@
       "Mnemonics": "VFMADD132PD/VFMADD213PD/VFMADD231PD",
       "Summary": "Fused Multiply-Add of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PD:VFMADD213PD:VFMADD231PD.html",
+      "PageNumber": 1492,
       "Items": [
         {
           "Mnemonic": "VFMADD132PD",
@@ -29817,6 +30301,7 @@
       "Mnemonics": "VFMADD132PS/VFMADD213PS/VFMADD231PS",
       "Summary": "Fused Multiply-Add of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132PS:VFMADD213PS:VFMADD231PS.html",
+      "PageNumber": 1499,
       "Items": [
         {
           "Mnemonic": "VFMADD132PS",
@@ -29959,6 +30444,7 @@
       "Mnemonics": "VFMADD132SD/VFMADD213SD/VFMADD231SD",
       "Summary": "Fused Multiply-Add of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SD:VFMADD213SD:VFMADD231SD.html",
+      "PageNumber": 1506,
       "Items": [
         {
           "Mnemonic": "VFMADD132SD",
@@ -30020,6 +30506,7 @@
       "Mnemonics": "VFMADD132SS/VFMADD213SS/VFMADD231SS",
       "Summary": "Fused Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADD132SS:VFMADD213SS:VFMADD231SS.html",
+      "PageNumber": 1509,
       "Items": [
         {
           "Mnemonic": "VFMADD132SS",
@@ -30081,6 +30568,7 @@
       "Mnemonics": "VFMADDSUB132PD/VFMADDSUB213PD/VFMADDSUB231PD",
       "Summary": "Fused Multiply-Alternating Add/Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PD:VFMADDSUB213PD:VFMADDSUB231PD.html",
+      "PageNumber": 1512,
       "Items": [
         {
           "Mnemonic": "VFMADDSUB132PD",
@@ -30223,6 +30711,7 @@
       "Mnemonics": "VFMADDSUB132PS/VFMADDSUB213PS/VFMADDSUB231PS",
       "Summary": "Fused Multiply-Alternating Add/Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMADDSUB132PS:VFMADDSUB213PS:VFMADDSUB231PS.html",
+      "PageNumber": 1522,
       "Items": [
         {
           "Mnemonic": "VFMADDSUB132PS",
@@ -30350,6 +30839,7 @@
       "Mnemonics": "VFMSUBADD132PD/VFMSUBADD213PD/VFMSUBADD231PD",
       "Summary": "Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html",
+      "PageNumber": 1531,
       "Items": [
         {
           "Mnemonic": "VFMSUBADD132PD",
@@ -30492,6 +30982,7 @@
       "Mnemonics": "VFMSUBADD132PS/VFMSUBADD213PS/VFMSUBADD231PS",
       "Summary": "Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html",
+      "PageNumber": 1541,
       "Items": [
         {
           "Mnemonic": "VFMSUBADD132PS",
@@ -30619,6 +31110,7 @@
       "Mnemonics": "VFMSUB132PD/VFMSUB213PD/VFMSUB231PD",
       "Summary": "Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html",
+      "PageNumber": 1551,
       "Items": [
         {
           "Mnemonic": "VFMSUB132PD",
@@ -30761,6 +31253,7 @@
       "Mnemonics": "VFMSUB132PS/VFMSUB213PS/VFMSUB231PS",
       "Summary": "Fused Multiply-Subtract of Packed Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PS:VFMSUB213PS:VFMSUB231PS.html",
+      "PageNumber": 1558,
       "Items": [
         {
           "Mnemonic": "VFMSUB132PS",
@@ -30888,6 +31381,7 @@
       "Mnemonics": "VFMSUB132SD/VFMSUB213SD/VFMSUB231SD",
       "Summary": "Fused Multiply-Subtract of Scalar Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SD:VFMSUB213SD:VFMSUB231SD.html",
+      "PageNumber": 1565,
       "Items": [
         {
           "Mnemonic": "VFMSUB132SD",
@@ -30943,6 +31437,7 @@
       "Mnemonics": "VFMSUB132SS/VFMSUB213SS/VFMSUB231SS",
       "Summary": "Fused Multiply-Subtract of Scalar Single- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132SS:VFMSUB213SS:VFMSUB231SS.html",
+      "PageNumber": 1568,
       "Items": [
         {
           "Mnemonic": "VFMSUB132SS",
@@ -30998,6 +31493,7 @@
       "Mnemonics": "VFNMADD132PD/VFNMADD213PD/VFNMADD231PD",
       "Summary": "Fused Negative Multiply-Add of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PD:VFNMADD213PD:VFNMADD231PD.html",
+      "PageNumber": 1571,
       "Items": [
         {
           "Mnemonic": "VFNMADD132PD",
@@ -31140,6 +31636,7 @@
       "Mnemonics": "VFNMADD132PS/VFNMADD213PS/VFNMADD231PS",
       "Summary": "Fused Negative Multiply-Add of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132PS:VFNMADD213PS:VFNMADD231PS.html",
+      "PageNumber": 1578,
       "Items": [
         {
           "Mnemonic": "VFNMADD132PS",
@@ -31282,6 +31779,7 @@
       "Mnemonics": "VFNMADD132SD/VFNMADD213SD/VFNMADD231SD",
       "Summary": "Fused Negative Multiply-Add of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SD:VFNMADD213SD:VFNMADD231SD.html",
+      "PageNumber": 1584,
       "Items": [
         {
           "Mnemonic": "VFNMADD132SD",
@@ -31337,6 +31835,7 @@
       "Mnemonics": "VFNMADD132SS/VFNMADD213SS/VFNMADD231SS",
       "Summary": "Fused Negative Multiply-Add of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMADD132SS:VFNMADD213SS:VFNMADD231SS.html",
+      "PageNumber": 1587,
       "Items": [
         {
           "Mnemonic": "VFNMADD132SS",
@@ -31398,6 +31897,7 @@
       "Mnemonics": "VFNMSUB132PD/VFNMSUB213PD/VFNMSUB231PD",
       "Summary": "Fused Negative Multiply-Subtract of Packed Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PD:VFNMSUB213PD:VFNMSUB231PD.html",
+      "PageNumber": 1590,
       "Items": [
         {
           "Mnemonic": "VFNMSUB132PD",
@@ -31540,6 +32040,7 @@
       "Mnemonics": "VFNMSUB132PS/VFNMSUB213PS/VFNMSUB231PS",
       "Summary": "Fused Negative Multiply-Subtract of Packed Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132PS:VFNMSUB213PS:VFNMSUB231PS.html",
+      "PageNumber": 1596,
       "Items": [
         {
           "Mnemonic": "VFNMSUB132PS",
@@ -31682,6 +32183,7 @@
       "Mnemonics": "VFNMSUB132SD/VFNMSUB213SD/VFNMSUB231SD",
       "Summary": "Fused Negative Multiply-Subtract of Scalar Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SD:VFNMSUB213SD:VFNMSUB231SD.html",
+      "PageNumber": 1602,
       "Items": [
         {
           "Mnemonic": "VFNMSUB132SD",
@@ -31743,6 +32245,7 @@
       "Mnemonics": "VFNMSUB132SS/VFNMSUB213SS/VFNMSUB231SS",
       "Summary": "Fused Negative Multiply-Subtract of Scalar Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFNMSUB132SS:VFNMSUB213SS:VFNMSUB231SS.html",
+      "PageNumber": 1605,
       "Items": [
         {
           "Mnemonic": "VFNMSUB132SS",
@@ -31798,6 +32301,7 @@
       "Mnemonics": "VFPCLASSPD",
       "Summary": "Tests Types Of a Packed Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VFPCLASSPD.html",
+      "PageNumber": 1608,
       "Items": [
         {
           "Mnemonic": "VFPCLASSPD",
@@ -31832,6 +32336,7 @@
       "Mnemonics": "VFPCLASSPS",
       "Summary": "Tests Types Of a Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VFPCLASSPS.html",
+      "PageNumber": 1611,
       "Items": [
         {
           "Mnemonic": "VFPCLASSPS",
@@ -31866,6 +32371,7 @@
       "Mnemonics": "VFPCLASSSD",
       "Summary": "Tests Types Of a Scalar Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VFPCLASSSD.html",
+      "PageNumber": 1613,
       "Items": [
         {
           "Mnemonic": "VFPCLASSSD",
@@ -31882,6 +32388,7 @@
       "Mnemonics": "VFPCLASSSS",
       "Summary": "Tests Types Of a Scalar Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VFPCLASSSS.html",
+      "PageNumber": 1615,
       "Items": [
         {
           "Mnemonic": "VFPCLASSSS",
@@ -31898,6 +32405,7 @@
       "Mnemonics": "VGATHERDPD/VGATHERQPD",
       "Summary": "Gather Packed DP FP Values Using Signed Dword/Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VGATHERDPD:VGATHERQPD.html",
+      "PageNumber": 1617,
       "Items": [
         {
           "Mnemonic": "VGATHERDPD",
@@ -31947,6 +32455,7 @@
       "Mnemonics": "VGATHERDPS/VGATHERQPS",
       "Summary": "Gather Packed SP FP values Using Signed Dword/Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html",
+      "PageNumber": 1622,
       "Items": [
         {
           "Mnemonic": "VGATHERDPS",
@@ -31996,6 +32505,7 @@
       "Mnemonics": "VGATHERDPS/VGATHERDPD",
       "Summary": "Gather Packed Single, Packed Double with Signed Dword",
       "Url": "https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERDPD.html",
+      "PageNumber": 1627,
       "Items": [
         {
           "Mnemonic": "VGATHERDPS",
@@ -32057,6 +32567,7 @@
       "Mnemonics": "VGATHERQPS/VGATHERQPD",
       "Summary": "Gather Packed Single, Packed Double with Signed Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VGATHERQPS:VGATHERQPD.html",
+      "PageNumber": 1630,
       "Items": [
         {
           "Mnemonic": "VGATHERQPS",
@@ -32118,6 +32629,7 @@
       "Mnemonics": "VGETEXPPD",
       "Summary": "Convert Exponents of Packed DP FP Values to DP FP Values",
       "Url": "https://www.felixcloutier.com/x86/VGETEXPPD.html",
+      "PageNumber": 1633,
       "Items": [
         {
           "Mnemonic": "VGETEXPPD",
@@ -32152,6 +32664,7 @@
       "Mnemonics": "VGETEXPPS",
       "Summary": "Convert Exponents of Packed SP FP Values to SP FP Values",
       "Url": "https://www.felixcloutier.com/x86/VGETEXPPS.html",
+      "PageNumber": 1636,
       "Items": [
         {
           "Mnemonic": "VGETEXPPS",
@@ -32186,6 +32699,7 @@
       "Mnemonics": "VGETEXPSD",
       "Summary": "Convert Exponents of Scalar DP FP Values to DP FP Value",
       "Url": "https://www.felixcloutier.com/x86/VGETEXPSD.html",
+      "PageNumber": 1640,
       "Items": [
         {
           "Mnemonic": "VGETEXPSD",
@@ -32202,6 +32716,7 @@
       "Mnemonics": "VGETEXPSS",
       "Summary": "Convert Exponents of Scalar SP FP Values to SP FP Value",
       "Url": "https://www.felixcloutier.com/x86/VGETEXPSS.html",
+      "PageNumber": 1642,
       "Items": [
         {
           "Mnemonic": "VGETEXPSS",
@@ -32218,6 +32733,7 @@
       "Mnemonics": "VGETMANTPD",
       "Summary": "Extract Float64 Vector of Normalized Mantissas from Float64 Vector",
       "Url": "https://www.felixcloutier.com/x86/VGETMANTPD.html",
+      "PageNumber": 1644,
       "Items": [
         {
           "Mnemonic": "VGETMANTPD",
@@ -32252,6 +32768,7 @@
       "Mnemonics": "VGETMANTPS",
       "Summary": "Extract Float32 Vector of Normalized Mantissas from Float32 Vector",
       "Url": "https://www.felixcloutier.com/x86/VGETMANTPS.html",
+      "PageNumber": 1648,
       "Items": [
         {
           "Mnemonic": "VGETMANTPS",
@@ -32286,6 +32803,7 @@
       "Mnemonics": "VGETMANTSD",
       "Summary": "Extract Float64 of Normalized Mantissas from Float64 Scalar",
       "Url": "https://www.felixcloutier.com/x86/VGETMANTSD.html",
+      "PageNumber": 1651,
       "Items": [
         {
           "Mnemonic": "VGETMANTSD",
@@ -32302,6 +32820,7 @@
       "Mnemonics": "VGETMANTSS",
       "Summary": "Extract Float32 Vector of Normalized Mantissa from Float32 Vector",
       "Url": "https://www.felixcloutier.com/x86/VGETMANTSS.html",
+      "PageNumber": 1653,
       "Items": [
         {
           "Mnemonic": "VGETMANTSS",
@@ -32318,6 +32837,7 @@
       "Mnemonics": "VINSERTF128/VINSERTF32x4/VINSERTF64x2/VINSERTF32x8/VINSERTF64x4",
       "Summary": "Insert Packed Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTF128:VINSERTF32x4:VINSERTF64x2:VINSERTF32x8:VINSERTF64x4.html",
+      "PageNumber": 1655,
       "Items": [
         {
           "Mnemonic": "VINSERTF128",
@@ -32381,6 +32901,7 @@
       "Mnemonics": "VINSERTI128/VINSERTI32x4/VINSERTI64x2/VINSERTI32x8/VINSERTI64x4",
       "Summary": "Insert Packed Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VINSERTI128:VINSERTI32x4:VINSERTI64x2:VINSERTI32x8:VINSERTI64x4.html",
+      "PageNumber": 1659,
       "Items": [
         {
           "Mnemonic": "VINSERTI128",
@@ -32444,6 +32965,7 @@
       "Mnemonics": "VMASKMOV",
       "Summary": "Conditional SIMD Packed Loads and Stores",
       "Url": "https://www.felixcloutier.com/x86/VMASKMOV.html",
+      "PageNumber": 1663,
       "Items": [
         {
           "Mnemonic": "VMASKMOVPS",
@@ -32533,6 +33055,7 @@
       "Mnemonics": "VPBLENDD",
       "Summary": "Blend Packed Dwords",
       "Url": "https://www.felixcloutier.com/x86/VPBLENDD.html",
+      "PageNumber": 1666,
       "Items": [
         {
           "Mnemonic": "VPBLENDD",
@@ -32567,6 +33090,7 @@
       "Mnemonics": "VPBLENDMB/VPBLENDMW",
       "Summary": "Blend Byte/Word Vectors Using an Opmask Control",
       "Url": "https://www.felixcloutier.com/x86/VPBLENDMB:VPBLENDMW.html",
+      "PageNumber": 1668,
       "Items": [
         {
           "Mnemonic": "VPBLENDMB",
@@ -32628,6 +33152,7 @@
       "Mnemonics": "VPBLENDMD/VPBLENDMQ",
       "Summary": "Blend Int32/Int64 Vectors Using an OpMask Control",
       "Url": "https://www.felixcloutier.com/x86/VPBLENDMD:VPBLENDMQ.html",
+      "PageNumber": 1670,
       "Items": [
         {
           "Mnemonic": "VPBLENDMD",
@@ -32689,6 +33214,7 @@
       "Mnemonics": "VPBROADCASTB/W/D/Q",
       "Summary": "Load with Broadcast Integer Data from General Purpose Register",
       "Url": "https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html",
+      "PageNumber": 1673,
       "Items": [
         {
           "Mnemonic": "VPBROADCASTB",
@@ -32804,6 +33330,7 @@
       "Mnemonics": "VPBROADCAST",
       "Summary": "Load Integer and Broadcast",
       "Url": "https://www.felixcloutier.com/x86/VPBROADCAST.html",
+      "PageNumber": 1676,
       "Items": [
         {
           "Mnemonic": "VPBROADCASTB",
@@ -33081,6 +33608,7 @@
       "Mnemonics": "VPBROADCASTM",
       "Summary": "Broadcast Mask to Vector Register",
       "Url": "https://www.felixcloutier.com/x86/VPBROADCASTM.html",
+      "PageNumber": 1685,
       "Items": [
         {
           "Mnemonic": "VPBROADCASTMB2Q",
@@ -33151,6 +33679,7 @@
       "Mnemonics": "VPCMPB/VPCMPUB",
       "Summary": "Compare Packed Byte Values Into Mask",
       "Url": "https://www.felixcloutier.com/x86/VPCMPB:VPCMPUB.html",
+      "PageNumber": 1687,
       "Items": [
         {
           "Mnemonic": "VPCMPB",
@@ -33212,6 +33741,7 @@
       "Mnemonics": "VPCMPD/VPCMPUD",
       "Summary": "Compare Packed Integer Values into Mask",
       "Url": "https://www.felixcloutier.com/x86/VPCMPD:VPCMPUD.html",
+      "PageNumber": 1690,
       "Items": [
         {
           "Mnemonic": "VPCMPD",
@@ -33273,6 +33803,7 @@
       "Mnemonics": "VPCMPQ/VPCMPUQ",
       "Summary": "Compare Packed Integer Values into Mask",
       "Url": "https://www.felixcloutier.com/x86/VPCMPQ:VPCMPUQ.html",
+      "PageNumber": 1693,
       "Items": [
         {
           "Mnemonic": "VPCMPQ",
@@ -33334,6 +33865,7 @@
       "Mnemonics": "VPCMPW/VPCMPUW",
       "Summary": "Compare Packed Word Values Into Mask",
       "Url": "https://www.felixcloutier.com/x86/VPCMPW:VPCMPUW.html",
+      "PageNumber": 1696,
       "Items": [
         {
           "Mnemonic": "VPCMPW",
@@ -33395,6 +33927,7 @@
       "Mnemonics": "VPCOMPRESSD",
       "Summary": "Store Sparse Packed Doubleword Integer Values into Dense Memory/Register",
       "Url": "https://www.felixcloutier.com/x86/VPCOMPRESSD.html",
+      "PageNumber": 1699,
       "Items": [
         {
           "Mnemonic": "VPCOMPRESSD",
@@ -33429,6 +33962,7 @@
       "Mnemonics": "VPCOMPRESSQ",
       "Summary": "Store Sparse Packed Quadword Integer Values into Dense Memory/Register",
       "Url": "https://www.felixcloutier.com/x86/VPCOMPRESSQ.html",
+      "PageNumber": 1701,
       "Items": [
         {
           "Mnemonic": "VPCOMPRESSQ",
@@ -33463,6 +33997,7 @@
       "Mnemonics": "VPCONFLICTD/Q",
       "Summary": "Detect Conflicts Within a Vector of Packed Dword/Qword Values into Dense Memory/ Register",
       "Url": "https://www.felixcloutier.com/x86/VPCONFLICTD:VPCONFLICTQ.html",
+      "PageNumber": 1703,
       "Items": [
         {
           "Mnemonic": "VPCONFLICTD",
@@ -33524,6 +34059,7 @@
       "Mnemonics": "VPERM2F128",
       "Summary": "Permute Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VPERM2F128.html",
+      "PageNumber": 1706,
       "Items": [
         {
           "Mnemonic": "VPERM2F128",
@@ -33551,6 +34087,7 @@
       "Mnemonics": "VPERM2I128",
       "Summary": "Permute Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VPERM2I128.html",
+      "PageNumber": 1708,
       "Items": [
         {
           "Mnemonic": "VPERM2I128",
@@ -33577,6 +34114,7 @@
       "Mnemonics": "VPERMB",
       "Summary": "Permute Packed Bytes Elements",
       "Url": "https://www.felixcloutier.com/x86/VPERMB.html",
+      "PageNumber": 1710,
       "Items": [
         {
           "Mnemonic": "VPERMB",
@@ -33611,6 +34149,7 @@
       "Mnemonics": "VPERMD/VPERMW",
       "Summary": "Permute Packed Doublewords/Words Elements",
       "Url": "https://www.felixcloutier.com/x86/VPERMD:VPERMW.html",
+      "PageNumber": 1712,
       "Items": [
         {
           "Mnemonic": "VPERMD",
@@ -33666,6 +34205,7 @@
       "Mnemonics": "VPERMI2B",
       "Summary": "Full Permute of Bytes from Two Tables Overwriting the Index",
       "Url": "https://www.felixcloutier.com/x86/VPERMI2B.html",
+      "PageNumber": 1715,
       "Items": [
         {
           "Mnemonic": "VPERMI2B",
@@ -33700,6 +34240,7 @@
       "Mnemonics": "VPERMI2W/D/Q/PS/PD",
       "Summary": "Full Permute From Two Tables Overwriting the Index",
       "Url": "https://www.felixcloutier.com/x86/VPERMI2W:VPERMI2D:VPERMI2Q:VPERMI2PS:VPERMI2PD.html",
+      "PageNumber": 1717,
       "Items": [
         {
           "Mnemonic": "VPERMI2W",
@@ -33842,6 +34383,7 @@
       "Mnemonics": "VPERMILPD",
       "Summary": "Permute In-Lane of Pairs of Double-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VPERMILPD.html",
+      "PageNumber": 1723,
       "Items": [
         {
           "Mnemonic": "VPERMILPD",
@@ -33929,6 +34471,7 @@
       "Mnemonics": "VPERMILPS",
       "Summary": "Permute In-Lane of Quadruples of Single-Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VPERMILPS.html",
+      "PageNumber": 1728,
       "Items": [
         {
           "Mnemonic": "VPERMILPS",
@@ -34016,6 +34559,7 @@
       "Mnemonics": "VPERMPD",
       "Summary": "Permute Double-Precision Floating-Point Elements",
       "Url": "https://www.felixcloutier.com/x86/VPERMPD.html",
+      "PageNumber": 1733,
       "Items": [
         {
           "Mnemonic": "VPERMPD",
@@ -34063,6 +34607,7 @@
       "Mnemonics": "VPERMPS",
       "Summary": "Permute Single-Precision Floating-Point Elements",
       "Url": "https://www.felixcloutier.com/x86/VPERMPS.html",
+      "PageNumber": 1736,
       "Items": [
         {
           "Mnemonic": "VPERMPS",
@@ -34097,6 +34642,7 @@
       "Mnemonics": "VPERMQ",
       "Summary": "Qwords Element Permutation",
       "Url": "https://www.felixcloutier.com/x86/VPERMQ.html",
+      "PageNumber": 1739,
       "Items": [
         {
           "Mnemonic": "VPERMQ",
@@ -34144,6 +34690,7 @@
       "Mnemonics": "VPERMT2B",
       "Summary": "Full Permute of Bytes from Two Tables Overwriting a Table",
       "Url": "https://www.felixcloutier.com/x86/VPERMT2B.html",
+      "PageNumber": 1742,
       "Items": [
         {
           "Mnemonic": "VPERMT2B",
@@ -34175,6 +34722,7 @@
       "Mnemonics": "VPERMT2W/D/Q/PS/PD",
       "Summary": "Full Permute from Two Tables Overwriting one Table",
       "Url": "https://www.felixcloutier.com/x86/VPERMT2W:VPERMT2D:VPERMT2Q:VPERMT2PS:VPERMT2PD.html",
+      "PageNumber": 1744,
       "Items": [
         {
           "Mnemonic": "VPERMT2W",
@@ -34317,6 +34865,7 @@
       "Mnemonics": "VPEXPANDD",
       "Summary": "Load Sparse Packed Doubleword Integer Values from Dense Memory / Register",
       "Url": "https://www.felixcloutier.com/x86/VPEXPANDD.html",
+      "PageNumber": 1749,
       "Items": [
         {
           "Mnemonic": "VPEXPANDD",
@@ -34351,6 +34900,7 @@
       "Mnemonics": "VPEXPANDQ",
       "Summary": "Load Sparse Packed Quadword Integer Values from Dense Memory / Register",
       "Url": "https://www.felixcloutier.com/x86/VPEXPANDQ.html",
+      "PageNumber": 1751,
       "Items": [
         {
           "Mnemonic": "VPEXPANDQ",
@@ -34385,6 +34935,7 @@
       "Mnemonics": "VPGATHERDD/VPGATHERQD",
       "Summary": "Gather Packed Dword Values Using Signed Dword/Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERQD.html",
+      "PageNumber": 1753,
       "Items": [
         {
           "Mnemonic": "VPGATHERDD",
@@ -34434,6 +34985,7 @@
       "Mnemonics": "VPGATHERDD/VPGATHERDQ",
       "Summary": "Gather Packed Dword, Packed Qword with Signed Dword Indices",
       "Url": "https://www.felixcloutier.com/x86/VPGATHERDD:VPGATHERDQ.html",
+      "PageNumber": 1757,
       "Items": [
         {
           "Mnemonic": "VPGATHERDD",
@@ -34495,6 +35047,7 @@
       "Mnemonics": "VPGATHERDQ/VPGATHERQQ",
       "Summary": "Gather Packed Qword Values Using Signed Dword/Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VPGATHERDQ:VPGATHERQQ.html",
+      "PageNumber": 1760,
       "Items": [
         {
           "Mnemonic": "VPGATHERDQ",
@@ -34544,6 +35097,7 @@
       "Mnemonics": "VPGATHERQD/VPGATHERQQ",
       "Summary": "Gather Packed Dword, Packed Qword with Signed Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VPGATHERQD:VPGATHERQQ.html",
+      "PageNumber": 1764,
       "Items": [
         {
           "Mnemonic": "VPGATHERQD",
@@ -34605,6 +35159,7 @@
       "Mnemonics": "VPLZCNTD/Q",
       "Summary": "Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values",
       "Url": "https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html",
+      "PageNumber": 1767,
       "Items": [
         {
           "Mnemonic": "VPLZCNTD",
@@ -34666,6 +35221,7 @@
       "Mnemonics": "VPMADD52HUQ",
       "Summary": "Packed Multiply of Unsigned 52-bit Unsigned Integers and Add High 52-bit Products to 64-bit Accumulators",
       "Url": "https://www.felixcloutier.com/x86/VPMADD52HUQ.html",
+      "PageNumber": 1770,
       "Items": [
         {
           "Mnemonic": "VPMADD52HUQ",
@@ -34694,6 +35250,7 @@
       "Mnemonics": "VPMADD52LUQ",
       "Summary": "Packed Multiply of Unsigned 52-bit Integers and Add the Low 52-bit Products to Qword Accumulators",
       "Url": "https://www.felixcloutier.com/x86/VPMADD52LUQ.html",
+      "PageNumber": 1772,
       "Items": [
         {
           "Mnemonic": "VPMADD52LUQ",
@@ -34722,6 +35279,7 @@
       "Mnemonics": "VPMASKMOV",
       "Summary": "Conditional SIMD Integer Packed Loads and Stores",
       "Url": "https://www.felixcloutier.com/x86/VPMASKMOV.html",
+      "PageNumber": 1774,
       "Items": [
         {
           "Mnemonic": "VPMASKMOVD",
@@ -34811,6 +35369,7 @@
       "Mnemonics": "VPMOVB2M/VPMOVW2M/VPMOVD2M/VPMOVQ2M",
       "Summary": "Convert a Vector Register to a Mask",
       "Url": "https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html",
+      "PageNumber": 1777,
       "Items": [
         {
           "Mnemonic": "VPMOVB2M",
@@ -34935,6 +35494,7 @@
       "Mnemonics": "VPMOVDB/VPMOVSDB/VPMOVUSDB",
       "Summary": "Down Convert DWord to Byte",
       "Url": "https://www.felixcloutier.com/x86/VPMOVDB:VPMOVSDB:VPMOVUSDB.html",
+      "PageNumber": 1780,
       "Items": [
         {
           "Mnemonic": "VPMOVDB",
@@ -35014,6 +35574,7 @@
       "Mnemonics": "VPMOVDW/VPMOVSDW/VPMOVUSDW",
       "Summary": "Down Convert DWord to Word",
       "Url": "https://www.felixcloutier.com/x86/VPMOVDW:VPMOVSDW:VPMOVUSDW.html",
+      "PageNumber": 1784,
       "Items": [
         {
           "Mnemonic": "VPMOVDW",
@@ -35093,6 +35654,7 @@
       "Mnemonics": "VPMOVM2B/VPMOVM2W/VPMOVM2D/VPMOVM2Q",
       "Summary": "Convert a Mask Register to a Vector Register",
       "Url": "https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html",
+      "PageNumber": 1788,
       "Items": [
         {
           "Mnemonic": "VPMOVM2B",
@@ -35217,6 +35779,7 @@
       "Mnemonics": "VPMOVQB/VPMOVSQB/VPMOVUSQB",
       "Summary": "Down Convert QWord to Byte",
       "Url": "https://www.felixcloutier.com/x86/VPMOVQB:VPMOVSQB:VPMOVUSQB.html",
+      "PageNumber": 1791,
       "Items": [
         {
           "Mnemonic": "VPMOVQB",
@@ -35296,6 +35859,7 @@
       "Mnemonics": "VPMOVQD/VPMOVSQD/VPMOVUSQD",
       "Summary": "Down Convert QWord to DWord",
       "Url": "https://www.felixcloutier.com/x86/VPMOVQD:VPMOVSQD:VPMOVUSQD.html",
+      "PageNumber": 1795,
       "Items": [
         {
           "Mnemonic": "VPMOVQD",
@@ -35384,6 +35948,7 @@
       "Mnemonics": "VPMOVQW/VPMOVSQW/VPMOVUSQW",
       "Summary": "Down Convert QWord to Word",
       "Url": "https://www.felixcloutier.com/x86/VPMOVQW:VPMOVSQW:VPMOVUSQW.html",
+      "PageNumber": 1799,
       "Items": [
         {
           "Mnemonic": "VPMOVQW",
@@ -35463,6 +36028,7 @@
       "Mnemonics": "VPMOVWB/VPMOVSWB/VPMOVUSWB",
       "Summary": "Down Convert Word to Byte",
       "Url": "https://www.felixcloutier.com/x86/VPMOVWB:VPMOVSWB:VPMOVUSWB.html",
+      "PageNumber": 1803,
       "Items": [
         {
           "Mnemonic": "VPMOVWB",
@@ -35541,12 +36107,14 @@
     {
       "Mnemonics": "VPMULTISHIFTQB",
       "Summary": "Select Packed Unaligned Bytes from Quadword Sources",
-      "Url": "https://www.felixcloutier.com/x86/VPMULTISHIFTQB.html"
+      "Url": "https://www.felixcloutier.com/x86/VPMULTISHIFTQB.html",
+      "PageNumber": 1807
     },
     {
       "Mnemonics": "VPROLD/VPROLVD/VPROLQ/VPROLVQ",
       "Summary": "Bit Rotate Left",
       "Url": "https://www.felixcloutier.com/x86/VPROLD:VPROLVD:VPROLQ:VPROLVQ.html",
+      "PageNumber": 1809,
       "Items": [
         {
           "Mnemonic": "VPROLVD",
@@ -35650,6 +36218,7 @@
       "Mnemonics": "VPRORD/VPRORVD/VPRORQ/VPRORVQ",
       "Summary": "Bit Rotate Right",
       "Url": "https://www.felixcloutier.com/x86/VPRORD:VPRORVD:VPRORQ:VPRORVQ.html",
+      "PageNumber": 1814,
       "Items": [
         {
           "Mnemonic": "VPRORVD",
@@ -35753,6 +36322,7 @@
       "Mnemonics": "VPSCATTERDD/VPSCATTERDQ/VPSCATTERQD/VPSCATTERQQ",
       "Summary": "Scatter Packed Dword, Packed Qword with Signed Dword, Signed Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VPSCATTERDD:VPSCATTERDQ:VPSCATTERQD:VPSCATTERQQ.html",
+      "PageNumber": 1819,
       "Items": [
         {
           "Mnemonic": "VPSCATTERDD",
@@ -35868,6 +36438,7 @@
       "Mnemonics": "VPSLLVW/VPSLLVD/VPSLLVQ",
       "Summary": "Variable Bit Shift Left Logical",
       "Url": "https://www.felixcloutier.com/x86/VPSLLVW:VPSLLVD:VPSLLVQ.html",
+      "PageNumber": 1823,
       "Items": [
         {
           "Mnemonic": "VPSLLVD",
@@ -35979,6 +36550,7 @@
       "Mnemonics": "VPSRAVW/VPSRAVD/VPSRAVQ",
       "Summary": "Variable Bit Shift Right Arithmetic",
       "Url": "https://www.felixcloutier.com/x86/VPSRAVW:VPSRAVD:VPSRAVQ.html",
+      "PageNumber": 1828,
       "Items": [
         {
           "Mnemonic": "VPSRAVD",
@@ -36085,6 +36657,7 @@
       "Mnemonics": "VPSRLVW/VPSRLVD/VPSRLVQ",
       "Summary": "Variable Bit Shift Right Logical",
       "Url": "https://www.felixcloutier.com/x86/VPSRLVW:VPSRLVD:VPSRLVQ.html",
+      "PageNumber": 1833,
       "Items": [
         {
           "Mnemonic": "VPSRLVD",
@@ -36209,6 +36782,7 @@
       "Mnemonics": "VPTERNLOGD/VPTERNLOGQ",
       "Summary": "Bitwise Ternary Logic",
       "Url": "https://www.felixcloutier.com/x86/VPTERNLOGD:VPTERNLOGQ.html",
+      "PageNumber": 1838,
       "Items": [
         {
           "Mnemonic": "VPTERNLOGD",
@@ -36270,6 +36844,7 @@
       "Mnemonics": "VPTESTMB/VPTESTMW/VPTESTMD/VPTESTMQ",
       "Summary": "Logical AND and Set Mask",
       "Url": "https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html",
+      "PageNumber": 1841,
       "Items": [
         {
           "Mnemonic": "VPTESTMB",
@@ -36385,6 +36960,7 @@
       "Mnemonics": "VPTESTNMB/W/D/Q",
       "Summary": "Logical NAND and Set",
       "Url": "https://www.felixcloutier.com/x86/VPTESTNMB:VPTESTNMW:VPTESTNMD:VPTESTNMQ.html",
+      "PageNumber": 1844,
       "Items": [
         {
           "Mnemonic": "VPTESTNMB",
@@ -36488,6 +37064,7 @@
       "Mnemonics": "VRANGEPD",
       "Summary": "Range Restriction Calculation For Packed Pairs of Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VRANGEPD.html",
+      "PageNumber": 1848,
       "Items": [
         {
           "Mnemonic": "VRANGEPD",
@@ -36522,6 +37099,7 @@
       "Mnemonics": "VRANGEPS",
       "Summary": "Range Restriction Calculation For Packed Pairs of Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VRANGEPS.html",
+      "PageNumber": 1853,
       "Items": [
         {
           "Mnemonic": "VRANGEPS",
@@ -36556,6 +37134,7 @@
       "Mnemonics": "VRANGESD",
       "Summary": "Range Restriction Calculation From a pair of Scalar Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VRANGESD.html",
+      "PageNumber": 1857,
       "Items": [
         {
           "Mnemonic": "VRANGESD",
@@ -36572,6 +37151,7 @@
       "Mnemonics": "VRANGESS",
       "Summary": "Range Restriction Calculation From a Pair of Scalar Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VRANGESS.html",
+      "PageNumber": 1860,
       "Items": [
         {
           "Mnemonic": "VRANGESS",
@@ -36588,6 +37168,7 @@
       "Mnemonics": "VRCP14PD",
       "Summary": "Compute Approximate Reciprocals of Packed Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VRCP14PD.html",
+      "PageNumber": 1863,
       "Items": [
         {
           "Mnemonic": "VRCP14PD",
@@ -36622,6 +37203,7 @@
       "Mnemonics": "VRCP14SD",
       "Summary": "Compute Approximate Reciprocal of Scalar Float64 Value",
       "Url": "https://www.felixcloutier.com/x86/VRCP14SD.html",
+      "PageNumber": 1865,
       "Items": [
         {
           "Mnemonic": "VRCP14SD",
@@ -36637,6 +37219,7 @@
       "Mnemonics": "VRCP14PS",
       "Summary": "Compute Approximate Reciprocals of Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VRCP14PS.html",
+      "PageNumber": 1867,
       "Items": [
         {
           "Mnemonic": "VRCP14PS",
@@ -36671,6 +37254,7 @@
       "Mnemonics": "VRCP14SS",
       "Summary": "Compute Approximate Reciprocal of Scalar Float32 Value",
       "Url": "https://www.felixcloutier.com/x86/VRCP14SS.html",
+      "PageNumber": 1869,
       "Items": [
         {
           "Mnemonic": "VRCP14SS",
@@ -36687,6 +37271,7 @@
       "Mnemonics": "VREDUCEPD",
       "Summary": "Perform Reduction Transformation on Packed Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VREDUCEPD.html",
+      "PageNumber": 1871,
       "Items": [
         {
           "Mnemonic": "VREDUCEPD",
@@ -36721,6 +37306,7 @@
       "Mnemonics": "VREDUCESD",
       "Summary": "Perform a Reduction Transformation on a Scalar Float64 Value",
       "Url": "https://www.felixcloutier.com/x86/VREDUCESD.html",
+      "PageNumber": 1874,
       "Items": [
         {
           "Mnemonic": "VREDUCESD",
@@ -36736,6 +37322,7 @@
       "Mnemonics": "VREDUCEPS",
       "Summary": "Perform Reduction Transformation on Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VREDUCEPS.html",
+      "PageNumber": 1876,
       "Items": [
         {
           "Mnemonic": "VREDUCEPS",
@@ -36770,6 +37357,7 @@
       "Mnemonics": "VREDUCESS",
       "Summary": "Perform a Reduction Transformation on a Scalar Float32 Value",
       "Url": "https://www.felixcloutier.com/x86/VREDUCESS.html",
+      "PageNumber": 1878,
       "Items": [
         {
           "Mnemonic": "VREDUCESS",
@@ -36786,6 +37374,7 @@
       "Mnemonics": "VRNDSCALEPD",
       "Summary": "Round Packed Float64 Values To Include A Given Number Of Fraction Bits",
       "Url": "https://www.felixcloutier.com/x86/VRNDSCALEPD.html",
+      "PageNumber": 1880,
       "Items": [
         {
           "Mnemonic": "VRNDSCALEPD",
@@ -36820,6 +37409,7 @@
       "Mnemonics": "VRNDSCALESD",
       "Summary": "Round Scalar Float64 Value To Include A Given Number Of Fraction Bits",
       "Url": "https://www.felixcloutier.com/x86/VRNDSCALESD.html",
+      "PageNumber": 1884,
       "Items": [
         {
           "Mnemonic": "VRNDSCALESD",
@@ -36836,6 +37426,7 @@
       "Mnemonics": "VRNDSCALEPS",
       "Summary": "Round Packed Float32 Values To Include A Given Number Of Fraction Bits",
       "Url": "https://www.felixcloutier.com/x86/VRNDSCALEPS.html",
+      "PageNumber": 1886,
       "Items": [
         {
           "Mnemonic": "VRNDSCALEPS",
@@ -36870,6 +37461,7 @@
       "Mnemonics": "VRNDSCALESS",
       "Summary": "Round Scalar Float32 Value To Include A Given Number Of Fraction Bits",
       "Url": "https://www.felixcloutier.com/x86/VRNDSCALESS.html",
+      "PageNumber": 1889,
       "Items": [
         {
           "Mnemonic": "VRNDSCALESS",
@@ -36886,6 +37478,7 @@
       "Mnemonics": "VRSQRT14PD",
       "Summary": "Compute Approximate Reciprocals of Square Roots of Packed Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VRSQRT14PD.html",
+      "PageNumber": 1891,
       "Items": [
         {
           "Mnemonic": "VRSQRT14PD",
@@ -36920,6 +37513,7 @@
       "Mnemonics": "VRSQRT14SD",
       "Summary": "Compute Approximate Reciprocal of Square Root of Scalar Float64 Value",
       "Url": "https://www.felixcloutier.com/x86/VRSQRT14SD.html",
+      "PageNumber": 1893,
       "Items": [
         {
           "Mnemonic": "VRSQRT14SD",
@@ -36936,6 +37530,7 @@
       "Mnemonics": "VRSQRT14PS",
       "Summary": "Compute Approximate Reciprocals of Square Roots of Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VRSQRT14PS.html",
+      "PageNumber": 1895,
       "Items": [
         {
           "Mnemonic": "VRSQRT14PS",
@@ -36970,6 +37565,7 @@
       "Mnemonics": "VRSQRT14SS",
       "Summary": "Compute Approximate Reciprocal of Square Root of Scalar Float32 Value",
       "Url": "https://www.felixcloutier.com/x86/VRSQRT14SS.html",
+      "PageNumber": 1897,
       "Items": [
         {
           "Mnemonic": "VRSQRT14SS",
@@ -36986,6 +37582,7 @@
       "Mnemonics": "VSCALEFPD",
       "Summary": "Scale Packed Float64 Values With Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VSCALEFPD.html",
+      "PageNumber": 1899,
       "Items": [
         {
           "Mnemonic": "VSCALEFPD",
@@ -37020,6 +37617,7 @@
       "Mnemonics": "VSCALEFSD",
       "Summary": "Scale Scalar Float64 Values With Float64 Values",
       "Url": "https://www.felixcloutier.com/x86/VSCALEFSD.html",
+      "PageNumber": 1902,
       "Items": [
         {
           "Mnemonic": "VSCALEFSD",
@@ -37036,6 +37634,7 @@
       "Mnemonics": "VSCALEFPS",
       "Summary": "Scale Packed Float32 Values With Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VSCALEFPS.html",
+      "PageNumber": 1904,
       "Items": [
         {
           "Mnemonic": "VSCALEFPS",
@@ -37070,6 +37669,7 @@
       "Mnemonics": "VSCALEFSS",
       "Summary": "Scale Scalar Float32 Value With Float32 Value",
       "Url": "https://www.felixcloutier.com/x86/VSCALEFSS.html",
+      "PageNumber": 1907,
       "Items": [
         {
           "Mnemonic": "VSCALEFSS",
@@ -37086,6 +37686,7 @@
       "Mnemonics": "VSCATTERDPS/VSCATTERDPD/VSCATTERQPS/VSCATTERQPD",
       "Summary": "Scatter Packed Single, Packed Double with Signed Dword and Qword Indices",
       "Url": "https://www.felixcloutier.com/x86/VSCATTERDPS:VSCATTERDPD:VSCATTERQPS:VSCATTERQPD.html",
+      "PageNumber": 1909,
       "Items": [
         {
           "Mnemonic": "VSCATTERDPS",
@@ -37189,6 +37790,7 @@
       "Mnemonics": "VSHUFF32x4/VSHUFF64x2/VSHUFI32x4/VSHUFI64x2",
       "Summary": "Shuffle Packed Values at 128-bit Granularity",
       "Url": "https://www.felixcloutier.com/x86/VSHUFF32x4:VSHUFF64x2:VSHUFI32x4:VSHUFI64x2.html",
+      "PageNumber": 1913,
       "Items": [
         {
           "Mnemonic": "VSHUFF32X4",
@@ -37268,6 +37870,7 @@
       "Mnemonics": "VTESTPD/VTESTPS",
       "Summary": "Packed Bit Test",
       "Url": "https://www.felixcloutier.com/x86/VTESTPD:VTESTPS.html",
+      "PageNumber": 1918,
       "Items": [
         {
           "Mnemonic": "VTESTPS",
@@ -37320,6 +37923,7 @@
       "Mnemonics": "VZEROALL",
       "Summary": "Zero All YMM Registers",
       "Url": "https://www.felixcloutier.com/x86/VZEROALL.html",
+      "PageNumber": 1921,
       "Items": [
         {
           "Mnemonic": "VZEROALL",
@@ -37342,6 +37946,7 @@
       "Mnemonics": "VZEROUPPER",
       "Summary": "Zero Upper Bits of YMM Registers",
       "Url": "https://www.felixcloutier.com/x86/VZEROUPPER.html",
+      "PageNumber": 1922,
       "Items": [
         {
           "Mnemonic": "VZEROUPPER",
@@ -37364,6 +37969,7 @@
       "Mnemonics": "WAIT/FWAIT",
       "Summary": "Wait",
       "Url": "https://www.felixcloutier.com/x86/WAIT:FWAIT.html",
+      "PageNumber": 1923,
       "Items": [
         {
           "Mnemonic": "WAIT",
@@ -37395,6 +38001,7 @@
       "Mnemonics": "WBINVD",
       "Summary": "Write Back and Invalidate Cache",
       "Url": "https://www.felixcloutier.com/x86/WBINVD.html",
+      "PageNumber": 1924,
       "Items": [
         {
           "Mnemonic": "WBINVD",
@@ -37417,6 +38024,7 @@
       "Mnemonics": "WRFSBASE/WRGSBASE",
       "Summary": "Write FS/GS Segment Base",
       "Url": "https://www.felixcloutier.com/x86/WRFSBASE:WRGSBASE.html",
+      "PageNumber": 1926,
       "Items": [
         {
           "Mnemonic": "WRFSBASE",
@@ -37456,6 +38064,7 @@
       "Mnemonics": "WRMSR",
       "Summary": "Write to Model Specific Register",
       "Url": "https://www.felixcloutier.com/x86/WRMSR.html",
+      "PageNumber": 1928,
       "Items": [
         {
           "Mnemonic": "WRMSR",
@@ -37478,6 +38087,7 @@
       "Mnemonics": "WRPKRU",
       "Summary": "Write Data to User Page Key Register",
       "Url": "https://www.felixcloutier.com/x86/WRPKRU.html",
+      "PageNumber": 1930,
       "Items": [
         {
           "Mnemonic": "WRPKRU",
@@ -37499,6 +38109,7 @@
       "Mnemonics": "XACQUIRE/XRELEASE",
       "Summary": "Hardware Lock Elision Prefix Hints",
       "Url": "https://www.felixcloutier.com/x86/XACQUIRE:XRELEASE.html",
+      "PageNumber": 1931,
       "Items": [
         {
           "Mnemonic": "XACQUIRE",
@@ -37520,6 +38131,7 @@
       "Mnemonics": "XABORT",
       "Summary": "Transactional Abort",
       "Url": "https://www.felixcloutier.com/x86/XABORT.html",
+      "PageNumber": 1935,
       "Items": [
         {
           "Mnemonic": "XABORT",
@@ -37543,6 +38155,7 @@
       "Mnemonics": "XADD",
       "Summary": "Exchange and Add",
       "Url": "https://www.felixcloutier.com/x86/XADD.html",
+      "PageNumber": 1937,
       "Items": [
         {
           "Mnemonic": "XADD",
@@ -37604,6 +38217,7 @@
       "Mnemonics": "XBEGIN",
       "Summary": "Transactional Begin",
       "Url": "https://www.felixcloutier.com/x86/XBEGIN.html",
+      "PageNumber": 1939,
       "Items": [
         {
           "Mnemonic": "XBEGIN",
@@ -37635,6 +38249,7 @@
       "Mnemonics": "XCHG",
       "Summary": "Exchange Register/Memory with Register",
       "Url": "https://www.felixcloutier.com/x86/XCHG.html",
+      "PageNumber": 1942,
       "Items": [
         {
           "Mnemonic": "XCHG",
@@ -37816,6 +38431,7 @@
       "Mnemonics": "XEND",
       "Summary": "Transactional End",
       "Url": "https://www.felixcloutier.com/x86/XEND.html",
+      "PageNumber": 1944,
       "Items": [
         {
           "Mnemonic": "XEND",
@@ -37837,6 +38453,7 @@
       "Mnemonics": "XGETBV",
       "Summary": "Get Value of Extended Control Register",
       "Url": "https://www.felixcloutier.com/x86/XGETBV.html",
+      "PageNumber": 1946,
       "Items": [
         {
           "Mnemonic": "XGETBV",
@@ -37859,6 +38476,7 @@
       "Mnemonics": "XLAT/XLATB",
       "Summary": "Table Look-up Translation",
       "Url": "https://www.felixcloutier.com/x86/XLAT:XLATB.html",
+      "PageNumber": 1948,
       "Items": [
         {
           "Mnemonic": "XLAT",
@@ -37899,6 +38517,7 @@
       "Mnemonics": "XOR",
       "Summary": "Logical Exclusive OR",
       "Url": "https://www.felixcloutier.com/x86/XOR.html",
+      "PageNumber": 1950,
       "Items": [
         {
           "Mnemonic": "XOR",
@@ -38134,6 +38753,7 @@
       "Mnemonics": "XORPD",
       "Summary": "Bitwise Logical XOR of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/XORPD.html",
+      "PageNumber": 1952,
       "Items": [
         {
           "Mnemonic": "XORPD",
@@ -38195,6 +38815,7 @@
       "Mnemonics": "XORPS",
       "Summary": "Bitwise Logical XOR of Packed Single Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/XORPS.html",
+      "PageNumber": 1955,
       "Items": [
         {
           "Mnemonic": "XORPS",
@@ -38256,6 +38877,7 @@
       "Mnemonics": "XRSTOR",
       "Summary": "Restore Processor Extended States",
       "Url": "https://www.felixcloutier.com/x86/XRSTOR.html",
+      "PageNumber": 1958,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -38269,6 +38891,7 @@
       "Mnemonics": "XRSTORS",
       "Summary": "Restore Processor Extended States Supervisor",
       "Url": "https://www.felixcloutier.com/x86/XRSTORS.html",
+      "PageNumber": 1963,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -38282,6 +38905,7 @@
       "Mnemonics": "XSAVE",
       "Summary": "Save Processor Extended States",
       "Url": "https://www.felixcloutier.com/x86/XSAVE.html",
+      "PageNumber": 1967,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -38295,6 +38919,7 @@
       "Mnemonics": "XSAVEC",
       "Summary": "Save Processor Extended States with Compaction",
       "Url": "https://www.felixcloutier.com/x86/XSAVEC.html",
+      "PageNumber": 1970,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -38308,6 +38933,7 @@
       "Mnemonics": "XSAVEOPT",
       "Summary": "Save Processor Extended States Optimized",
       "Url": "https://www.felixcloutier.com/x86/XSAVEOPT.html",
+      "PageNumber": 1973,
       "Items": [
         {
           "Mnemonic": "XSAVEOPT",
@@ -38341,6 +38967,7 @@
       "Mnemonics": "XSAVES",
       "Summary": "Save Processor Extended States Supervisor",
       "Url": "https://www.felixcloutier.com/x86/XSAVES.html",
+      "PageNumber": 1976,
       "OperandEncoding": [
         {
           "OperandEncoding": "M",
@@ -38354,6 +38981,7 @@
       "Mnemonics": "XSETBV",
       "Summary": "Set Extended Control Register",
       "Url": "https://www.felixcloutier.com/x86/XSETBV.html",
+      "PageNumber": 1979,
       "Items": [
         {
           "Mnemonic": "XSETBV",
@@ -38376,6 +39004,7 @@
       "Mnemonics": "XTEST",
       "Summary": "Test If In Transactional Execution",
       "Url": "https://www.felixcloutier.com/x86/XTEST.html",
+      "PageNumber": 1981,
       "Items": [
         {
           "Mnemonic": "XTEST",

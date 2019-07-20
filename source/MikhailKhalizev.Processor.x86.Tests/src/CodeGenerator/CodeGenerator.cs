@@ -112,7 +112,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 JsonSerializer.CreateDefault(
                     new JsonSerializerSettings
                     {
-                        NullValueHandling = NullValueHandling.Ignore
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DefaultValueHandling = DefaultValueHandling.Ignore
                     })).ToString();
 
             File.WriteAllText(decodeFelixcloutierJsonFileName, json);
@@ -355,7 +356,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             // NOTE Copy manually 'fileIProcessorCs' value to 'IProcessor.cs'.
         }
 
-        [Fact]
+        [Fact(Skip = "For developer")]
         public void LoadPdfWithAspose()
         {
             var dir = Path.GetDirectoryName(asposePageJsonFileName);

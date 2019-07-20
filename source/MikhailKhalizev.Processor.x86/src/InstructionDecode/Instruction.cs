@@ -14,6 +14,8 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         public IReadOnlyList<byte> Bytes => _pushBack == 0 ? _read : _read.GetRange(0, Length);
         private ImmutableList<byte> _read = ImmutableList<byte>.Empty;
 
+        public int ReadLength => _read.Count;
+
         /// <summary>
         /// Режим процессора: 16, 32, 64.
         /// </summary>
