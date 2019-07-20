@@ -11,7 +11,14 @@ namespace MikhailKhalizev.Processor.x86.Tests.InstructionDecode
         [Fact]
         public void PrefixRepeated()
         {
-            var code = new byte[] { PrefixMetadata.PrefixOperandSizeOverride, PrefixMetadata.PrefixCs, PrefixMetadata.PrefixDs, 0xda, 0x0a };
+            var code = new byte[]
+            {
+                PrefixMetadata.PrefixCs,
+                PrefixMetadata.PrefixOperandSizeOverride,
+                PrefixMetadata.PrefixDs,
+                PrefixMetadata.PrefixAddressSizeOverride,
+                0xda, 0x0a
+            };
             var instruction = Instruction.Decode(code, 32);
             
             instruction.IsInvalid.Should().BeTrue();
