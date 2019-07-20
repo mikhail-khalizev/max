@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using MikhailKhalizev.Utils;
 
@@ -6,7 +8,11 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
 {
     public class Instruction
     {
-        public ArraySegment<byte> Source { get; }
+        /// <summary>
+        /// Код инструкции.
+        /// </summary>
+        public IReadOnlyList<byte> Bytes => _pushBack == 0 ? _read : _read.GetRange(0, Length);
+        private ImmutableList<byte> _read = ImmutableList<byte>.Empty;
 
         /// <summary>
         /// Режим процессора: 16, 32, 64.
@@ -23,19 +29,19 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         /// </summary>
         public int EffectiveOperandSize { get; private set; }
 
-
+        
         public bool IsInvalid { get; }
 
-        public string Reason { get; }
+        public string Reason { get; private set; }
 
         /// <summary>
         /// Длина инструкции (до 15 байт)
         /// </summary>
-        public int Length { get; private set; }
-
+        public int Length => _read.Count - _pushBack;
 
         // max - 4 bytes.
-        public ArraySegment<byte> Prefixes { get; private set; }
+        public IReadOnlyList<byte> Prefixes => _read.GetRange(0, _prefixLength);
+        private int _prefixLength;
 
         public bool HasPrefixOperandSizeOverride { get; private set; }
         
@@ -48,11 +54,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         public bool RexX { get; private set; }
         public bool RexB { get; private set; }
 
-
+        // input source. remove in future - use read by byte.
+        private Func<byte> _readByte;
+        private int _pushBack;
 
         //// max - 3 bytes.
         //public ArraySegment<byte> Opcode { get; }
-        
+
         //[CanBeNull]
         //public ModRM ModRM { get; }
 
@@ -66,43 +74,56 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         //public uint ImmediateUInt { get; }
 
 
-        public Instruction Decode(ArraySegment<byte> source, int mode) => new Instruction(source, mode);
-
-        private Instruction(ArraySegment<byte> source, int mode)
+        public static Instruction Decode(Func<byte> readByte, int mode) => new Instruction(readByte, mode);
+        public static Instruction Decode(ArraySegment<byte> source, int mode)
         {
+            var pos = 0;
+            Func<byte> readByte = () => source[pos++];
+            return Decode(readByte, mode);
+        }
+
+        private Instruction(Func<byte> readByte, int mode)
+        {
+            _readByte = readByte;
             Mode = mode;
-            Source = source;
-            Length = 0;
 
             Reason = DecodeInternal();
             IsInvalid = Reason != null;
+
+            if (_pushBack != 0)
+                throw new InvalidOperationException("Logic error in algorithm");
+        }
+
+        private byte ReadByte()
+        {
+            if (_pushBack != 0)
+            {
+                var b = _read[_read.Count - _pushBack];
+                _pushBack--;
+                return b;
+            }
+            else
+            {
+                var b = _readByte();
+                _read = _read.Add(b);
+                return b;
+            }
+        }
+        
+        private void PushByteBack()
+        {
+            _pushBack++;
         }
 
         private string DecodeInternal()
         {
-            Prefixes = Source.Slice(0, Source.TakeWhile(PrefixMetadata.IsPrefix).Count());
-            Length += Prefixes.Count;
-            var left = Source.Slice(Length);
+            ReadStdPrefixes();
 
-            var allGroups = Prefixes.Select(PrefixMetadata.GetPrefixGroup).ToList();
-            var distinctGroup = allGroups.Distinct().ToList();
-            if (allGroups.Count != distinctGroup.Count)
-                return $"Prefix group repeated: ({string.Join(", ", allGroups)}).";
-
-            // Determine Rex prefix.
-            if (Mode == 64 && (left[0] | 0x0f) == 0b0100_1111)
-            {
-                HasRex = true;
-                Rex = left[0];
-                Length++;
-                left = left.Slice(1);
-                
-                RexW = BinaryHelper.IsSet(Rex, 3);
-                RexR = BinaryHelper.IsSet(Rex, 2);
-                RexX = BinaryHelper.IsSet(Rex, 1);
-                RexB = BinaryHelper.IsSet(Rex, 0);
-            }
+            if (Reason != null)
+                return Reason;
             
+            ReadRexPrefix();
+
             HasPrefixOperandSizeOverride = Prefixes.Contains(PrefixMetadata.PrefixOperandSizeOverride);
             HasPrefixAddressSizeOverride = Prefixes.Contains(PrefixMetadata.PrefixAddressSizeOverride);
 
@@ -134,7 +155,54 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
                     break;
             }
             
-            return null;
+            return Reason;
+        }
+
+        private void ReadStdPrefixes()
+        {
+            var groups = new byte[PrefixMetadata.GroupIdByPrefix.Count];
+
+            while (true)
+            {
+                var b = ReadByte();
+                if (!PrefixMetadata.IsPrefix(b))
+                {
+                    PushByteBack();
+                    break;
+                }
+                _prefixLength++;
+
+                var groupId = PrefixMetadata.GetPrefixGroup(b);
+                var prevPrefix = groups[groupId];
+                if (prevPrefix == 0)
+                {
+                    groups[groupId] = b;
+                }
+                else
+                {
+                    Reason = $"Prefix group repeated: ({prevPrefix:x2}, {b:x2}).";
+                    return;
+                }
+            }
+        }
+
+        private void ReadRexPrefix()
+        {
+            // Determine Rex prefix.
+
+            var b = ReadByte();
+            if (Mode == 64 && (b | 0x0f) == 0b0100_1111)
+            {
+                HasRex = true;
+                Rex = b;
+
+                RexW = BinaryHelper.IsSet(Rex, 3);
+                RexR = BinaryHelper.IsSet(Rex, 2);
+                RexX = BinaryHelper.IsSet(Rex, 1);
+                RexB = BinaryHelper.IsSet(Rex, 0);
+            }
+            else
+                PushByteBack();
         }
     }
 }

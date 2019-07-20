@@ -1408,122 +1408,6 @@
       ]
     },
     {
-      "Mnemonics": "ANDNPD",
-      "Summary": "Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values",
-      "Url": "https://www.felixcloutier.com/x86/ANDNPD.html",
-      "Items": [
-        {
-          "Mnemonic": "ANDNPD",
-          "Opcode": "66 0F 55 /r",
-          "Instruction": "ANDNPD xmm1, xmm2/m128",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SSE2",
-          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in xmm1 and xmm2/mem."
-        },
-        {
-          "Mnemonic": "VANDNPD",
-          "Opcode": "VEX.NDS.128.66.0F 55 /r",
-          "Instruction": "VANDNPD xmm1, xmm2, xmm3/m128",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in xmm2 and xmm3/mem."
-        },
-        {
-          "Mnemonic": "VANDNPD",
-          "Opcode": "VEX.NDS.256.66.0F 55/r",
-          "Instruction": "VANDNPD ymm1, ymm2, ymm3/m256",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in ymm2 and ymm3/mem."
-        },
-        {
-          "Mnemonic": "VANDNPD",
-          "Opcode": "EVEX.NDS.128.66.0F.W1 55 /r",
-          "Instruction": "VANDNPD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in xmm2 and xmm3/m128/m64bcst subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VANDNPD",
-          "Opcode": "EVEX.NDS.256.66.0F.W1 55 /r",
-          "Instruction": "VANDNPD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in ymm2 and ymm3/m256/m64bcst subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VANDNPD",
-          "Opcode": "EVEX.NDS.512.66.0F.W1 55 /r",
-          "Instruction": "VANDNPD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512DQ",
-          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in zmm2 and zmm3/m512/m64bcst subject to writemask k1."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "ANDNPS",
-      "Summary": "Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values",
-      "Url": "https://www.felixcloutier.com/x86/ANDNPS.html",
-      "Items": [
-        {
-          "Mnemonic": "ANDNPS",
-          "Opcode": "NP 0F 55 /r",
-          "Instruction": "ANDNPS xmm1, xmm2/m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SSE",
-          "Description": "Return the bitwise logical AND NOT of packed single-precision floating-point values in xmm1 and xmm2/mem."
-        },
-        {
-          "Mnemonic": "VANDNPS",
-          "Opcode": "VEX.NDS.128.0F 55 /r",
-          "Instruction": "VANDNPS xmm1, xmm2, xmm3/m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Return the bitwise logical AND NOT of packed single-precision floating-point values in xmm2 and xmm3/mem."
-        },
-        {
-          "Mnemonic": "VANDNPS",
-          "Opcode": "VEX.NDS.256.0F 55 /r",
-          "Instruction": "VANDNPS ymm1, ymm2, ymm3/m256",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Return the bitwise logical AND NOT of packed single-precision floating-point values in ymm2 and ymm3/mem."
-        },
-        {
-          "Mnemonic": "VANDNPS",
-          "Opcode": "EVEX.NDS.128.0F.W0 55 /r",
-          "Instruction": "VANDNPS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Return the bitwise logical AND of packed single-precision floating-point values in xmm2 and xmm3/m128/m32bcst subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VANDNPS",
-          "Opcode": "EVEX.NDS.256.0F.W0 55 /r",
-          "Instruction": "VANDNPS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Return the bitwise logical AND of packed single-precision floating-point values in ymm2 and ymm3/m256/m32bcst subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VANDNPS",
-          "Opcode": "EVEX.NDS.512.0F.W0 55 /r",
-          "Instruction": "VANDNPS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512DQ",
-          "Description": "Return the bitwise logical AND of packed single-precision floating-point values in zmm2 and zmm3/m512/m32bcst subject to writemask k1."
-        }
-      ]
-    },
-    {
       "Mnemonics": "ANDPD",
       "Summary": "Bitwise Logical AND of Packed Double Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/ANDPD.html",
@@ -1639,6 +1523,122 @@
           "Opcode": "EVEX.NDS.512.0F.W0 54 /r",
           "Instruction": "VANDPS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst",
           "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512DQ",
+          "Description": "Return the bitwise logical AND of packed single-precision floating-point values in zmm2 and zmm3/m512/m32bcst subject to writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "ANDNPD",
+      "Summary": "Bitwise Logical AND NOT of Packed Double Precision Floating-Point Values",
+      "Url": "https://www.felixcloutier.com/x86/ANDNPD.html",
+      "Items": [
+        {
+          "Mnemonic": "ANDNPD",
+          "Opcode": "66 0F 55 /r",
+          "Instruction": "ANDNPD xmm1, xmm2/m128",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SSE2",
+          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in xmm1 and xmm2/mem."
+        },
+        {
+          "Mnemonic": "VANDNPD",
+          "Opcode": "VEX.NDS.128.66.0F 55 /r",
+          "Instruction": "VANDNPD xmm1, xmm2, xmm3/m128",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in xmm2 and xmm3/mem."
+        },
+        {
+          "Mnemonic": "VANDNPD",
+          "Opcode": "VEX.NDS.256.66.0F 55/r",
+          "Instruction": "VANDNPD ymm1, ymm2, ymm3/m256",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in ymm2 and ymm3/mem."
+        },
+        {
+          "Mnemonic": "VANDNPD",
+          "Opcode": "EVEX.NDS.128.66.0F.W1 55 /r",
+          "Instruction": "VANDNPD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in xmm2 and xmm3/m128/m64bcst subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VANDNPD",
+          "Opcode": "EVEX.NDS.256.66.0F.W1 55 /r",
+          "Instruction": "VANDNPD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in ymm2 and ymm3/m256/m64bcst subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VANDNPD",
+          "Opcode": "EVEX.NDS.512.66.0F.W1 55 /r",
+          "Instruction": "VANDNPD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512DQ",
+          "Description": "Return the bitwise logical AND NOT of packed double-precision floating-point values in zmm2 and zmm3/m512/m64bcst subject to writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "ANDNPS",
+      "Summary": "Bitwise Logical AND NOT of Packed Single Precision Floating-Point Values",
+      "Url": "https://www.felixcloutier.com/x86/ANDNPS.html",
+      "Items": [
+        {
+          "Mnemonic": "ANDNPS",
+          "Opcode": "NP 0F 55 /r",
+          "Instruction": "ANDNPS xmm1, xmm2/m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SSE",
+          "Description": "Return the bitwise logical AND NOT of packed single-precision floating-point values in xmm1 and xmm2/mem."
+        },
+        {
+          "Mnemonic": "VANDNPS",
+          "Opcode": "VEX.NDS.128.0F 55 /r",
+          "Instruction": "VANDNPS xmm1, xmm2, xmm3/m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Return the bitwise logical AND NOT of packed single-precision floating-point values in xmm2 and xmm3/mem."
+        },
+        {
+          "Mnemonic": "VANDNPS",
+          "Opcode": "VEX.NDS.256.0F 55 /r",
+          "Instruction": "VANDNPS ymm1, ymm2, ymm3/m256",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Return the bitwise logical AND NOT of packed single-precision floating-point values in ymm2 and ymm3/mem."
+        },
+        {
+          "Mnemonic": "VANDNPS",
+          "Opcode": "EVEX.NDS.128.0F.W0 55 /r",
+          "Instruction": "VANDNPS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Return the bitwise logical AND of packed single-precision floating-point values in xmm2 and xmm3/m128/m32bcst subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VANDNPS",
+          "Opcode": "EVEX.NDS.256.0F.W0 55 /r",
+          "Instruction": "VANDNPS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Return the bitwise logical AND of packed single-precision floating-point values in ymm2 and ymm3/m256/m32bcst subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VANDNPS",
+          "Opcode": "EVEX.NDS.512.0F.W0 55 /r",
+          "Instruction": "VANDNPS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst",
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512DQ",
           "Description": "Return the bitwise logical AND of packed single-precision floating-point values in zmm2 and zmm3/m512/m32bcst subject to writemask k1."
@@ -2874,46 +2874,6 @@
       ]
     },
     {
-      "Mnemonics": "CWD/CDQ/CQO",
-      "Summary": "Convert Word to Doubleword/Convert Doubleword to Quadword",
-      "Url": "https://www.felixcloutier.com/x86/CWD:CDQ:CQO.html",
-      "Items": [
-        {
-          "Mnemonic": "CWD",
-          "Opcode": "99",
-          "Instruction": "CWD",
-          "OperandEncoding": "ZO",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "DX:AX ← sign-extend of AX."
-        },
-        {
-          "Mnemonic": "CDQ",
-          "Opcode": "99",
-          "Instruction": "CDQ",
-          "OperandEncoding": "ZO",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "EDX:EAX ← sign-extend of EAX."
-        },
-        {
-          "Mnemonic": "CQO",
-          "Opcode": "REX.W + 99",
-          "Instruction": "CQO",
-          "OperandEncoding": "ZO",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "N.E.",
-          "Description": "RDX:RAX← sign-extend of RAX."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "ZO",
-          "Operands": []
-        }
-      ]
-    },
-    {
       "Mnemonics": "CLAC",
       "Summary": "Clear AC Flag in EFLAGS Register",
       "Url": "https://www.felixcloutier.com/x86/CLAC.html",
@@ -2977,6 +2937,10 @@
           "Operands": []
         }
       ]
+    },
+    {
+      "Mnemonics": "CLDEMOTE",
+      "Summary": "Cache Line Demote"
     },
     {
       "Mnemonics": "CLFLUSH",
@@ -5723,6 +5687,46 @@
       ]
     },
     {
+      "Mnemonics": "CWD/CDQ/CQO",
+      "Summary": "Convert Word to Doubleword/Convert Doubleword to Quadword",
+      "Url": "https://www.felixcloutier.com/x86/CWD:CDQ:CQO.html",
+      "Items": [
+        {
+          "Mnemonic": "CWD",
+          "Opcode": "99",
+          "Instruction": "CWD",
+          "OperandEncoding": "ZO",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "DX:AX ← sign-extend of AX."
+        },
+        {
+          "Mnemonic": "CDQ",
+          "Opcode": "99",
+          "Instruction": "CDQ",
+          "OperandEncoding": "ZO",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "EDX:EAX ← sign-extend of EAX."
+        },
+        {
+          "Mnemonic": "CQO",
+          "Opcode": "REX.W + 99",
+          "Instruction": "CQO",
+          "OperandEncoding": "ZO",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "N.E.",
+          "Description": "RDX:RAX← sign-extend of RAX."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "ZO",
+          "Operands": []
+        }
+      ]
+    },
+    {
       "Mnemonics": "DAA",
       "Summary": "Decimal Adjust AL after Addition",
       "Url": "https://www.felixcloutier.com/x86/DAA.html",
@@ -6907,77 +6911,6 @@
       ]
     },
     {
-      "Mnemonics": "FMUL/FMULP/FIMUL",
-      "Summary": "Multiply",
-      "Url": "https://www.felixcloutier.com/x86/FMUL:FMULP:FIMUL.html",
-      "Items": [
-        {
-          "Mnemonic": "FMUL",
-          "Opcode": "D8 /1",
-          "Instruction": "FMUL m32fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(0) by m32fp and store result in ST(0)."
-        },
-        {
-          "Mnemonic": "FMUL",
-          "Opcode": "DC /1",
-          "Instruction": "FMUL m64fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(0) by m64fp and store result in ST(0)."
-        },
-        {
-          "Mnemonic": "FMUL",
-          "Opcode": "D8 C8+i",
-          "Instruction": "FMUL ST(0), ST(i)",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(0) by ST(i) and store result in ST(0)."
-        },
-        {
-          "Mnemonic": "FMUL",
-          "Opcode": "DC C8+i",
-          "Instruction": "FMUL ST(i), ST(0)",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(i) by ST(0) and store result in ST(i)."
-        },
-        {
-          "Mnemonic": "FMULP",
-          "Opcode": "DE C8+i",
-          "Instruction": "FMULP ST(i), ST(0)",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(i) by ST(0), store result in ST(i), and pop the register stack."
-        },
-        {
-          "Mnemonic": "FMULP",
-          "Opcode": "DE C9",
-          "Instruction": "FMULP",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(1) by ST(0), store result in ST(1), and pop the register stack."
-        },
-        {
-          "Mnemonic": "FIMUL",
-          "Opcode": "DA /1",
-          "Instruction": "FIMUL m32int",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(0) by m32int and store result in ST(0)."
-        },
-        {
-          "Mnemonic": "FIMUL",
-          "Opcode": "DE /1",
-          "Instruction": "FIMUL m16int",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Multiply ST(0) by m16int and store result in ST(0)."
-        }
-      ]
-    },
-    {
       "Mnemonics": "FINCSTP",
       "Summary": "Increment Stack-Top Pointer",
       "Url": "https://www.felixcloutier.com/x86/FINCSTP.html",
@@ -7090,6 +7023,545 @@
           "Bit64Mode": "Valid",
           "CompatLegMode": "Valid",
           "Description": "Store ST(0) in m64int with truncation."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FLD",
+      "Summary": "Load Floating Point Value",
+      "Url": "https://www.felixcloutier.com/x86/FLD.html",
+      "Items": [
+        {
+          "Mnemonic": "FLD",
+          "Opcode": "D9 /0",
+          "Instruction": "FLD m32fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push m32fp onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLD",
+          "Opcode": "DD /0",
+          "Instruction": "FLD m64fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push m64fp onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLD",
+          "Opcode": "DB /5",
+          "Instruction": "FLD m80fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push m80fp onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLD",
+          "Opcode": "D9 C0+i",
+          "Instruction": "FLD ST(i)",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push ST(i) onto the FPU register stack."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FLD1/FLDL2T/FLDL2E/FLDPI/FLDLG2/FLDLN2/FLDZ",
+      "Summary": "Load Constant",
+      "Url": "https://www.felixcloutier.com/x86/FLD1:FLDL2T:FLDL2E:FLDPI:FLDLG2:FLDLN2:FLDZ.html",
+      "Items": [
+        {
+          "Mnemonic": "FLD1",
+          "Opcode": "D9 E8",
+          "Instruction": "FLD1",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push +1.0 onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLDL2T",
+          "Opcode": "D9 E9",
+          "Instruction": "FLDL2T",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push log210 onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLDL2E",
+          "Opcode": "D9 EA",
+          "Instruction": "FLDL2E",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push log2e onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLDPI",
+          "Opcode": "D9 EB",
+          "Instruction": "FLDPI",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push π onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLDLG2",
+          "Opcode": "D9 EC",
+          "Instruction": "FLDLG2",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push log102 onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLDLN2",
+          "Opcode": "D9 ED",
+          "Instruction": "FLDLN2",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push loge2 onto the FPU register stack."
+        },
+        {
+          "Mnemonic": "FLDZ",
+          "Opcode": "D9 EE",
+          "Instruction": "FLDZ",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Push +0.0 onto the FPU register stack."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FLDCW",
+      "Summary": "Load x87 FPU Control Word",
+      "Url": "https://www.felixcloutier.com/x86/FLDCW.html",
+      "Items": [
+        {
+          "Mnemonic": "FLDCW",
+          "Opcode": "D9 /5",
+          "Instruction": "FLDCW m2byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Load FPU control word from m2byte."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FLDENV",
+      "Summary": "Load x87 FPU Environment",
+      "Url": "https://www.felixcloutier.com/x86/FLDENV.html",
+      "Items": [
+        {
+          "Mnemonic": "FLDENV",
+          "Opcode": "D9 /4",
+          "Instruction": "FLDENV m14/28byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Load FPU environment from m14byte or m28byte."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FMUL/FMULP/FIMUL",
+      "Summary": "Multiply",
+      "Url": "https://www.felixcloutier.com/x86/FMUL:FMULP:FIMUL.html",
+      "Items": [
+        {
+          "Mnemonic": "FMUL",
+          "Opcode": "D8 /1",
+          "Instruction": "FMUL m32fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(0) by m32fp and store result in ST(0)."
+        },
+        {
+          "Mnemonic": "FMUL",
+          "Opcode": "DC /1",
+          "Instruction": "FMUL m64fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(0) by m64fp and store result in ST(0)."
+        },
+        {
+          "Mnemonic": "FMUL",
+          "Opcode": "D8 C8+i",
+          "Instruction": "FMUL ST(0), ST(i)",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(0) by ST(i) and store result in ST(0)."
+        },
+        {
+          "Mnemonic": "FMUL",
+          "Opcode": "DC C8+i",
+          "Instruction": "FMUL ST(i), ST(0)",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(i) by ST(0) and store result in ST(i)."
+        },
+        {
+          "Mnemonic": "FMULP",
+          "Opcode": "DE C8+i",
+          "Instruction": "FMULP ST(i), ST(0)",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(i) by ST(0), store result in ST(i), and pop the register stack."
+        },
+        {
+          "Mnemonic": "FMULP",
+          "Opcode": "DE C9",
+          "Instruction": "FMULP",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(1) by ST(0), store result in ST(1), and pop the register stack."
+        },
+        {
+          "Mnemonic": "FIMUL",
+          "Opcode": "DA /1",
+          "Instruction": "FIMUL m32int",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(0) by m32int and store result in ST(0)."
+        },
+        {
+          "Mnemonic": "FIMUL",
+          "Opcode": "DE /1",
+          "Instruction": "FIMUL m16int",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Multiply ST(0) by m16int and store result in ST(0)."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FNOP",
+      "Summary": "No Operation",
+      "Url": "https://www.felixcloutier.com/x86/FNOP.html",
+      "Items": [
+        {
+          "Mnemonic": "FNOP",
+          "Opcode": "D9 D0",
+          "Instruction": "FNOP",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "No operation is performed."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FPATAN",
+      "Summary": "Partial Arctangent",
+      "Url": "https://www.felixcloutier.com/x86/FPATAN.html",
+      "Items": [
+        {
+          "Mnemonic": "FPATAN",
+          "Opcode": "D9 F3",
+          "Instruction": "FPATAN",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Replace ST(1) with arctan(ST(1)/ST(0)) and pop the register stack."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FPREM",
+      "Summary": "Partial Remainder",
+      "Url": "https://www.felixcloutier.com/x86/FPREM.html",
+      "Items": [
+        {
+          "Mnemonic": "FPREM",
+          "Opcode": "D9 F8",
+          "Instruction": "FPREM",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Replace ST(0) with the remainder obtained from dividing ST(0) by ST(1)."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FPREM1",
+      "Summary": "Partial Remainder",
+      "Url": "https://www.felixcloutier.com/x86/FPREM1.html",
+      "Items": [
+        {
+          "Mnemonic": "FPREM1",
+          "Opcode": "D9 F5",
+          "Instruction": "FPREM1",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Replace ST(0) with the IEEE remainder obtained from dividing ST(0) by ST(1)."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FPTAN",
+      "Summary": "Partial Tangent",
+      "Url": "https://www.felixcloutier.com/x86/FPTAN.html",
+      "Items": [
+        {
+          "Mnemonic": "FPTAN",
+          "Opcode": "D9 F2",
+          "Instruction": "FPTAN",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Replace ST(0) with its approximate tangent and push 1 onto the FPU stack."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FRNDINT",
+      "Summary": "Round to Integer",
+      "Url": "https://www.felixcloutier.com/x86/FRNDINT.html",
+      "Items": [
+        {
+          "Mnemonic": "FRNDINT",
+          "Opcode": "D9 FC",
+          "Instruction": "FRNDINT",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Round ST(0) to an integer."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FRSTOR",
+      "Summary": "Restore x87 FPU State",
+      "Url": "https://www.felixcloutier.com/x86/FRSTOR.html",
+      "Items": [
+        {
+          "Mnemonic": "FRSTOR",
+          "Opcode": "DD /4",
+          "Instruction": "FRSTOR m94/108byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Load FPU state from m94byte or m108byte."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSAVE/FNSAVE",
+      "Summary": "Store x87 FPU State",
+      "Url": "https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html",
+      "Items": [
+        {
+          "Mnemonic": "FSAVE",
+          "Opcode": "9B DD /6",
+          "Instruction": "FSAVE m94/108byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU state to m94byte or m108byte after checking for pending unmasked floating-point exceptions. Then re-initialize the FPU."
+        },
+        {
+          "Mnemonic": "FNSAVE",
+          "Opcode": "DD /6",
+          "Instruction": "FNSAVE* m94/108byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU environment to m94byte or m108byte without checking for pending unmasked floating-point exceptions. Then re-initialize the FPU."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSCALE",
+      "Summary": "Scale",
+      "Url": "https://www.felixcloutier.com/x86/FSCALE.html",
+      "Items": [
+        {
+          "Mnemonic": "FSCALE",
+          "Opcode": "D9 FD",
+          "Instruction": "FSCALE",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Scale ST(0) by ST(1)."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSIN",
+      "Summary": "Sine",
+      "Url": "https://www.felixcloutier.com/x86/FSIN.html",
+      "Items": [
+        {
+          "Mnemonic": "FSIN",
+          "Opcode": "D9 FE",
+          "Instruction": "FSIN",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Replace ST(0) with the approximate of its sine."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSINCOS",
+      "Summary": "Sine and Cosine",
+      "Url": "https://www.felixcloutier.com/x86/FSINCOS.html",
+      "Items": [
+        {
+          "Mnemonic": "FSINCOS",
+          "Opcode": "D9 FB",
+          "Instruction": "FSINCOS",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Compute the sine and cosine of ST(0); replace ST(0) with the approximate sine, and push the approximate cosine onto the register stack."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSQRT",
+      "Summary": "Square Root",
+      "Url": "https://www.felixcloutier.com/x86/FSQRT.html",
+      "Items": [
+        {
+          "Mnemonic": "FSQRT",
+          "Opcode": "D9 FA",
+          "Instruction": "FSQRT",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Computes square root of ST(0) and stores the result in ST(0)."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FST/FSTP",
+      "Summary": "Store Floating Point Value",
+      "Url": "https://www.felixcloutier.com/x86/FST:FSTP.html",
+      "Items": [
+        {
+          "Mnemonic": "FST",
+          "Opcode": "D9 /2",
+          "Instruction": "FST m32fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to m32fp."
+        },
+        {
+          "Mnemonic": "FST",
+          "Opcode": "DD /2",
+          "Instruction": "FST m64fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to m64fp."
+        },
+        {
+          "Mnemonic": "FST",
+          "Opcode": "DD D0+i",
+          "Instruction": "FST ST(i)",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to ST(i)."
+        },
+        {
+          "Mnemonic": "FSTP",
+          "Opcode": "D9 /3",
+          "Instruction": "FSTP m32fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to m32fp and pop register stack."
+        },
+        {
+          "Mnemonic": "FSTP",
+          "Opcode": "DD /3",
+          "Instruction": "FSTP m64fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to m64fp and pop register stack."
+        },
+        {
+          "Mnemonic": "FSTP",
+          "Opcode": "DB /7",
+          "Instruction": "FSTP m80fp",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to m80fp and pop register stack."
+        },
+        {
+          "Mnemonic": "FSTP",
+          "Opcode": "DD D8+i",
+          "Instruction": "FSTP ST(i)",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Copy ST(0) to ST(i) and pop register stack."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSTCW/FNSTCW",
+      "Summary": "Store x87 FPU Control Word",
+      "Url": "https://www.felixcloutier.com/x86/FSTCW:FNSTCW.html",
+      "Items": [
+        {
+          "Mnemonic": "FSTCW",
+          "Opcode": "9B D9 /7",
+          "Instruction": "FSTCW m2byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU control word to m2byte after checking for pending unmasked floating-point exceptions."
+        },
+        {
+          "Mnemonic": "FNSTCW",
+          "Opcode": "D9 /7",
+          "Instruction": "FNSTCW* m2byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU control word to m2byte without checking for pending unmasked floating-point exceptions."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSTENV/FNSTENV",
+      "Summary": "Store x87 FPU Environment",
+      "Url": "https://www.felixcloutier.com/x86/FSTENV:FNSTENV.html",
+      "Items": [
+        {
+          "Mnemonic": "FSTENV",
+          "Opcode": "9B D9 /6",
+          "Instruction": "FSTENV m14/28byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU environment to m14byte or m28byte after checking for pending unmasked floating-point exceptions. Then mask all floating-point exceptions."
+        },
+        {
+          "Mnemonic": "FNSTENV",
+          "Opcode": "D9 /6",
+          "Instruction": "FNSTENV* m14/28byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU environment to m14byte or m28byte without checking for pending unmasked floating-point exceptions. Then mask all floating-point exceptions."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "FSTSW/FNSTSW",
+      "Summary": "Store x87 FPU Status Word",
+      "Url": "https://www.felixcloutier.com/x86/FSTSW:FNSTSW.html",
+      "Items": [
+        {
+          "Mnemonic": "FSTSW",
+          "Opcode": "9B DD /7",
+          "Instruction": "FSTSW m2byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU status word at m2byte after checking for pending unmasked floating-point exceptions."
+        },
+        {
+          "Mnemonic": "FSTSW",
+          "Opcode": "9B DF E0",
+          "Instruction": "FSTSW AX",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU status word in AX register after checking for pending unmasked floating-point exceptions."
+        },
+        {
+          "Mnemonic": "FNSTSW",
+          "Opcode": "DD /7",
+          "Instruction": "FNSTSW* m2byte",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU status word at m2byte without checking for pending unmasked floating-point exceptions."
+        },
+        {
+          "Mnemonic": "FNSTSW",
+          "Opcode": "DF E0",
+          "Instruction": "FNSTSW* AX",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Store FPU status word in AX register without checking for pending unmasked floating-point exceptions."
         }
       ]
     },
@@ -7236,474 +7708,6 @@
       ]
     },
     {
-      "Mnemonics": "FLD",
-      "Summary": "Load Floating Point Value",
-      "Url": "https://www.felixcloutier.com/x86/FLD.html",
-      "Items": [
-        {
-          "Mnemonic": "FLD",
-          "Opcode": "D9 /0",
-          "Instruction": "FLD m32fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push m32fp onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLD",
-          "Opcode": "DD /0",
-          "Instruction": "FLD m64fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push m64fp onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLD",
-          "Opcode": "DB /5",
-          "Instruction": "FLD m80fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push m80fp onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLD",
-          "Opcode": "D9 C0+i",
-          "Instruction": "FLD ST(i)",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push ST(i) onto the FPU register stack."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FLD1/FLDL2T/FLDL2E/FLDPI/FLDLG2/FLDLN2/FLDZ",
-      "Summary": "Load Constant",
-      "Url": "https://www.felixcloutier.com/x86/FLD1:FLDL2T:FLDL2E:FLDPI:FLDLG2:FLDLN2:FLDZ.html",
-      "Items": [
-        {
-          "Mnemonic": "FLD1",
-          "Opcode": "D9 E8",
-          "Instruction": "FLD1",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push +1.0 onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLDL2T",
-          "Opcode": "D9 E9",
-          "Instruction": "FLDL2T",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push log210 onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLDL2E",
-          "Opcode": "D9 EA",
-          "Instruction": "FLDL2E",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push log2e onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLDPI",
-          "Opcode": "D9 EB",
-          "Instruction": "FLDPI",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push π onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLDLG2",
-          "Opcode": "D9 EC",
-          "Instruction": "FLDLG2",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push log102 onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLDLN2",
-          "Opcode": "D9 ED",
-          "Instruction": "FLDLN2",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push loge2 onto the FPU register stack."
-        },
-        {
-          "Mnemonic": "FLDZ",
-          "Opcode": "D9 EE",
-          "Instruction": "FLDZ",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Push +0.0 onto the FPU register stack."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FLDCW",
-      "Summary": "Load x87 FPU Control Word",
-      "Url": "https://www.felixcloutier.com/x86/FLDCW.html",
-      "Items": [
-        {
-          "Mnemonic": "FLDCW",
-          "Opcode": "D9 /5",
-          "Instruction": "FLDCW m2byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Load FPU control word from m2byte."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FLDENV",
-      "Summary": "Load x87 FPU Environment",
-      "Url": "https://www.felixcloutier.com/x86/FLDENV.html",
-      "Items": [
-        {
-          "Mnemonic": "FLDENV",
-          "Opcode": "D9 /4",
-          "Instruction": "FLDENV m14/28byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Load FPU environment from m14byte or m28byte."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FNOP",
-      "Summary": "No Operation",
-      "Url": "https://www.felixcloutier.com/x86/FNOP.html",
-      "Items": [
-        {
-          "Mnemonic": "FNOP",
-          "Opcode": "D9 D0",
-          "Instruction": "FNOP",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "No operation is performed."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSAVE/FNSAVE",
-      "Summary": "Store x87 FPU State",
-      "Url": "https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html",
-      "Items": [
-        {
-          "Mnemonic": "FSAVE",
-          "Opcode": "9B DD /6",
-          "Instruction": "FSAVE m94/108byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU state to m94byte or m108byte after checking for pending unmasked floating-point exceptions. Then re-initialize the FPU."
-        },
-        {
-          "Mnemonic": "FNSAVE",
-          "Opcode": "DD /6",
-          "Instruction": "FNSAVE* m94/108byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU environment to m94byte or m108byte without checking for pending unmasked floating-point exceptions. Then re-initialize the FPU."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSTCW/FNSTCW",
-      "Summary": "Store x87 FPU Control Word",
-      "Url": "https://www.felixcloutier.com/x86/FSTCW:FNSTCW.html",
-      "Items": [
-        {
-          "Mnemonic": "FSTCW",
-          "Opcode": "9B D9 /7",
-          "Instruction": "FSTCW m2byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU control word to m2byte after checking for pending unmasked floating-point exceptions."
-        },
-        {
-          "Mnemonic": "FNSTCW",
-          "Opcode": "D9 /7",
-          "Instruction": "FNSTCW* m2byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU control word to m2byte without checking for pending unmasked floating-point exceptions."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSTENV/FNSTENV",
-      "Summary": "Store x87 FPU Environment",
-      "Url": "https://www.felixcloutier.com/x86/FSTENV:FNSTENV.html",
-      "Items": [
-        {
-          "Mnemonic": "FSTENV",
-          "Opcode": "9B D9 /6",
-          "Instruction": "FSTENV m14/28byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU environment to m14byte or m28byte after checking for pending unmasked floating-point exceptions. Then mask all floating-point exceptions."
-        },
-        {
-          "Mnemonic": "FNSTENV",
-          "Opcode": "D9 /6",
-          "Instruction": "FNSTENV* m14/28byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU environment to m14byte or m28byte without checking for pending unmasked floating-point exceptions. Then mask all floating-point exceptions."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSTSW/FNSTSW",
-      "Summary": "Store x87 FPU Status Word",
-      "Url": "https://www.felixcloutier.com/x86/FSTSW:FNSTSW.html",
-      "Items": [
-        {
-          "Mnemonic": "FSTSW",
-          "Opcode": "9B DD /7",
-          "Instruction": "FSTSW m2byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU status word at m2byte after checking for pending unmasked floating-point exceptions."
-        },
-        {
-          "Mnemonic": "FSTSW",
-          "Opcode": "9B DF E0",
-          "Instruction": "FSTSW AX",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU status word in AX register after checking for pending unmasked floating-point exceptions."
-        },
-        {
-          "Mnemonic": "FNSTSW",
-          "Opcode": "DD /7",
-          "Instruction": "FNSTSW* m2byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU status word at m2byte without checking for pending unmasked floating-point exceptions."
-        },
-        {
-          "Mnemonic": "FNSTSW",
-          "Opcode": "DF E0",
-          "Instruction": "FNSTSW* AX",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Store FPU status word in AX register without checking for pending unmasked floating-point exceptions."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FPATAN",
-      "Summary": "Partial Arctangent",
-      "Url": "https://www.felixcloutier.com/x86/FPATAN.html",
-      "Items": [
-        {
-          "Mnemonic": "FPATAN",
-          "Opcode": "D9 F3",
-          "Instruction": "FPATAN",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Replace ST(1) with arctan(ST(1)/ST(0)) and pop the register stack."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FPREM",
-      "Summary": "Partial Remainder",
-      "Url": "https://www.felixcloutier.com/x86/FPREM.html",
-      "Items": [
-        {
-          "Mnemonic": "FPREM",
-          "Opcode": "D9 F8",
-          "Instruction": "FPREM",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Replace ST(0) with the remainder obtained from dividing ST(0) by ST(1)."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FPREM1",
-      "Summary": "Partial Remainder",
-      "Url": "https://www.felixcloutier.com/x86/FPREM1.html",
-      "Items": [
-        {
-          "Mnemonic": "FPREM1",
-          "Opcode": "D9 F5",
-          "Instruction": "FPREM1",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Replace ST(0) with the IEEE remainder obtained from dividing ST(0) by ST(1)."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FPTAN",
-      "Summary": "Partial Tangent",
-      "Url": "https://www.felixcloutier.com/x86/FPTAN.html",
-      "Items": [
-        {
-          "Mnemonic": "FPTAN",
-          "Opcode": "D9 F2",
-          "Instruction": "FPTAN",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Replace ST(0) with its approximate tangent and push 1 onto the FPU stack."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FRNDINT",
-      "Summary": "Round to Integer",
-      "Url": "https://www.felixcloutier.com/x86/FRNDINT.html",
-      "Items": [
-        {
-          "Mnemonic": "FRNDINT",
-          "Opcode": "D9 FC",
-          "Instruction": "FRNDINT",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Round ST(0) to an integer."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FRSTOR",
-      "Summary": "Restore x87 FPU State",
-      "Url": "https://www.felixcloutier.com/x86/FRSTOR.html",
-      "Items": [
-        {
-          "Mnemonic": "FRSTOR",
-          "Opcode": "DD /4",
-          "Instruction": "FRSTOR m94/108byte",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Load FPU state from m94byte or m108byte."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSCALE",
-      "Summary": "Scale",
-      "Url": "https://www.felixcloutier.com/x86/FSCALE.html",
-      "Items": [
-        {
-          "Mnemonic": "FSCALE",
-          "Opcode": "D9 FD",
-          "Instruction": "FSCALE",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Scale ST(0) by ST(1)."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSIN",
-      "Summary": "Sine",
-      "Url": "https://www.felixcloutier.com/x86/FSIN.html",
-      "Items": [
-        {
-          "Mnemonic": "FSIN",
-          "Opcode": "D9 FE",
-          "Instruction": "FSIN",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Replace ST(0) with the approximate of its sine."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSINCOS",
-      "Summary": "Sine and Cosine",
-      "Url": "https://www.felixcloutier.com/x86/FSINCOS.html",
-      "Items": [
-        {
-          "Mnemonic": "FSINCOS",
-          "Opcode": "D9 FB",
-          "Instruction": "FSINCOS",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Compute the sine and cosine of ST(0); replace ST(0) with the approximate sine, and push the approximate cosine onto the register stack."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FSQRT",
-      "Summary": "Square Root",
-      "Url": "https://www.felixcloutier.com/x86/FSQRT.html",
-      "Items": [
-        {
-          "Mnemonic": "FSQRT",
-          "Opcode": "D9 FA",
-          "Instruction": "FSQRT",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Computes square root of ST(0) and stores the result in ST(0)."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "FST/FSTP",
-      "Summary": "Store Floating Point Value",
-      "Url": "https://www.felixcloutier.com/x86/FST:FSTP.html",
-      "Items": [
-        {
-          "Mnemonic": "FST",
-          "Opcode": "D9 /2",
-          "Instruction": "FST m32fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to m32fp."
-        },
-        {
-          "Mnemonic": "FST",
-          "Opcode": "DD /2",
-          "Instruction": "FST m64fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to m64fp."
-        },
-        {
-          "Mnemonic": "FST",
-          "Opcode": "DD D0+i",
-          "Instruction": "FST ST(i)",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to ST(i)."
-        },
-        {
-          "Mnemonic": "FSTP",
-          "Opcode": "D9 /3",
-          "Instruction": "FSTP m32fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to m32fp and pop register stack."
-        },
-        {
-          "Mnemonic": "FSTP",
-          "Opcode": "DD /3",
-          "Instruction": "FSTP m64fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to m64fp and pop register stack."
-        },
-        {
-          "Mnemonic": "FSTP",
-          "Opcode": "DB /7",
-          "Instruction": "FSTP m80fp",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to m80fp and pop register stack."
-        },
-        {
-          "Mnemonic": "FSTP",
-          "Opcode": "DD D8+i",
-          "Instruction": "FSTP ST(i)",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Copy ST(0) to ST(i) and pop register stack."
-        }
-      ]
-    },
-    {
       "Mnemonics": "FTST",
       "Summary": "TEST",
       "Url": "https://www.felixcloutier.com/x86/FTST.html",
@@ -7762,37 +7766,6 @@
           "Bit64Mode": "Valid",
           "CompatLegMode": "Valid",
           "Description": "Compare ST(0) with ST(1) and pop register stack twice."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "WAIT/FWAIT",
-      "Summary": "Wait",
-      "Url": "https://www.felixcloutier.com/x86/WAIT:FWAIT.html",
-      "Items": [
-        {
-          "Mnemonic": "WAIT",
-          "Opcode": "9B",
-          "Instruction": "WAIT",
-          "OperandEncoding": "ZO",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Check pending unmasked floating-point exceptions."
-        },
-        {
-          "Mnemonic": "FWAIT",
-          "Opcode": "9B",
-          "Instruction": "FWAIT",
-          "OperandEncoding": "ZO",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Check pending unmasked floating-point exceptions."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "ZO",
-          "Operands": []
         }
       ]
     },
@@ -7917,7 +7890,7 @@
     },
     {
       "Mnemonics": "FYL2X",
-      "Summary": "Compute y ∗ log2x",
+      "Summary": "Compute y * log2x",
       "Url": "https://www.felixcloutier.com/x86/FYL2X.html",
       "Items": [
         {
@@ -7932,7 +7905,7 @@
     },
     {
       "Mnemonics": "FYL2XP1",
-      "Summary": "Compute y ∗ log2(x +1)",
+      "Summary": "Compute y * log2(x +1)",
       "Url": "https://www.felixcloutier.com/x86/FYL2XP1.html",
       "Items": [
         {
@@ -7944,6 +7917,18 @@
           "Description": "Replace ST(1) with ST(1) ∗ log2(ST(0) + 1.0) and pop the register stack."
         }
       ]
+    },
+    {
+      "Mnemonics": "GF2P8AFFINEINVQB",
+      "Summary": "Galois Field Affine Transformation Inverse"
+    },
+    {
+      "Mnemonics": "GF2P8AFFINEQB",
+      "Summary": "Galois Field Affine Transformation"
+    },
+    {
+      "Mnemonics": "GF2P8MULB",
+      "Summary": "Galois Field Multiply Bytes"
     },
     {
       "Mnemonics": "HADDPD",
@@ -8780,126 +8765,6 @@
         {
           "OperandEncoding": "ZO",
           "Operands": []
-        }
-      ]
-    },
-    {
-      "Mnemonics": "JMP",
-      "Summary": "Jump",
-      "Url": "https://www.felixcloutier.com/x86/JMP.html",
-      "Items": [
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "EB cb",
-          "Instruction": "JMP rel8",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Jump short, RIP = RIP + 8-bit displacement sign extended to 64-bits"
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "E9 cw",
-          "Instruction": "JMP rel16",
-          "OperandEncoding": "D",
-          "Bit64Mode": "N.S.",
-          "CompatLegMode": "Valid",
-          "Description": "Jump near, relative, displacement relative to next instruction. Not supported in 64-bit mode."
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "E9 cd",
-          "Instruction": "JMP rel32",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Jump near, relative, RIP = RIP + 32-bit displacement sign extended to 64-bits"
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "FF /4",
-          "Instruction": "JMP r/m16",
-          "OperandEncoding": "M",
-          "Bit64Mode": "N.S.",
-          "CompatLegMode": "Valid",
-          "Description": "Jump near, absolute indirect, address = zero-extended r/m16. Not supported in 64-bit mode."
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "FF /4",
-          "Instruction": "JMP r/m32",
-          "OperandEncoding": "M",
-          "Bit64Mode": "N.S.",
-          "CompatLegMode": "Valid",
-          "Description": "Jump near, absolute indirect, address given in r/m32. Not supported in 64-bit mode."
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "FF /4",
-          "Instruction": "JMP r/m64",
-          "OperandEncoding": "M",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "N.E.",
-          "Description": "Jump near, absolute indirect, RIP = 64-Bit offset from register or memory"
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "EA cd",
-          "Instruction": "JMP ptr16:16",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Inv.",
-          "CompatLegMode": "Valid",
-          "Description": "Jump far, absolute, address given in operand"
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "EA cp",
-          "Instruction": "JMP ptr16:32",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Inv.",
-          "CompatLegMode": "Valid",
-          "Description": "Jump far, absolute, address given in operand"
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "FF /5",
-          "Instruction": "JMP m16:16",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Jump far, absolute indirect, address given in m16:16"
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "FF /5",
-          "Instruction": "JMP m16:32",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Jump far, absolute indirect, address given in m16:32."
-        },
-        {
-          "Mnemonic": "JMP",
-          "Opcode": "REX.W + FF /5",
-          "Instruction": "JMP m16:64",
-          "OperandEncoding": "D",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "N.E.",
-          "Description": "Jump far, absolute indirect, address given in m16:64."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "D",
-          "Operands": [
-            "Offset"
-          ]
-        },
-        {
-          "OperandEncoding": "M",
-          "Operands": [
-            "ModRM:r/m (r)"
-          ]
         }
       ]
     },
@@ -9769,6 +9634,126 @@
           "OperandEncoding": "D",
           "Operands": [
             "Offset"
+          ]
+        }
+      ]
+    },
+    {
+      "Mnemonics": "JMP",
+      "Summary": "Jump",
+      "Url": "https://www.felixcloutier.com/x86/JMP.html",
+      "Items": [
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "EB cb",
+          "Instruction": "JMP rel8",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Jump short, RIP = RIP + 8-bit displacement sign extended to 64-bits"
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "E9 cw",
+          "Instruction": "JMP rel16",
+          "OperandEncoding": "D",
+          "Bit64Mode": "N.S.",
+          "CompatLegMode": "Valid",
+          "Description": "Jump near, relative, displacement relative to next instruction. Not supported in 64-bit mode."
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "E9 cd",
+          "Instruction": "JMP rel32",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Jump near, relative, RIP = RIP + 32-bit displacement sign extended to 64-bits"
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "FF /4",
+          "Instruction": "JMP r/m16",
+          "OperandEncoding": "M",
+          "Bit64Mode": "N.S.",
+          "CompatLegMode": "Valid",
+          "Description": "Jump near, absolute indirect, address = zero-extended r/m16. Not supported in 64-bit mode."
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "FF /4",
+          "Instruction": "JMP r/m32",
+          "OperandEncoding": "M",
+          "Bit64Mode": "N.S.",
+          "CompatLegMode": "Valid",
+          "Description": "Jump near, absolute indirect, address given in r/m32. Not supported in 64-bit mode."
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "FF /4",
+          "Instruction": "JMP r/m64",
+          "OperandEncoding": "M",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "N.E.",
+          "Description": "Jump near, absolute indirect, RIP = 64-Bit offset from register or memory"
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "EA cd",
+          "Instruction": "JMP ptr16:16",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Inv.",
+          "CompatLegMode": "Valid",
+          "Description": "Jump far, absolute, address given in operand"
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "EA cp",
+          "Instruction": "JMP ptr16:32",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Inv.",
+          "CompatLegMode": "Valid",
+          "Description": "Jump far, absolute, address given in operand"
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "FF /5",
+          "Instruction": "JMP m16:16",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Jump far, absolute indirect, address given in m16:16"
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "FF /5",
+          "Instruction": "JMP m16:32",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Jump far, absolute indirect, address given in m16:32."
+        },
+        {
+          "Mnemonic": "JMP",
+          "Opcode": "REX.W + FF /5",
+          "Instruction": "JMP m16:64",
+          "OperandEncoding": "D",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "N.E.",
+          "Description": "Jump far, absolute indirect, address given in m16:64."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "D",
+          "Operands": [
+            "Offset"
+          ]
+        },
+        {
+          "OperandEncoding": "M",
+          "Operands": [
+            "ModRM:r/m (r)"
           ]
         }
       ]
@@ -12645,12 +12630,15 @@
       ]
     },
     {
-      "Mnemonics": "MOVDQ2Q",
-      "Summary": "Move Quadword from XMM to MMX Technology Register",
-      "Url": "https://www.felixcloutier.com/x86/MOVDQ2Q.html"
+      "Mnemonics": "MOVDIRI",
+      "Summary": "Move Doubleword as Direct Store"
     },
     {
-      "Mnemonics": "MOVDQA/VMOVDQA32/VMOVDQA64",
+      "Mnemonics": "MOVDIR64B",
+      "Summary": "Move 64 Bytes as Direct Store"
+    },
+    {
+      "Mnemonics": "MOVDQA,VMOVDQA32/64",
       "Summary": "Move Aligned Packed Integer Values",
       "Url": "https://www.felixcloutier.com/x86/MOVDQA:VMOVDQA32:VMOVDQA64.html",
       "Items": [
@@ -12819,7 +12807,7 @@
       ]
     },
     {
-      "Mnemonics": "MOVDQU/VMOVDQU8/VMOVDQU16/VMOVDQU32/VMOVDQU64",
+      "Mnemonics": "MOVDQU,VMOVDQU8/16/32/64",
       "Summary": "Move Unaligned Packed Integer Values",
       "Url": "https://www.felixcloutier.com/x86/MOVDQU:VMOVDQU8:VMOVDQU16:VMOVDQU32:VMOVDQU64.html",
       "Items": [
@@ -13094,6 +13082,11 @@
           "Description": "Move unaligned packed quadword integer values from zmm1 to zmm2/m512 using writemask k1."
         }
       ]
+    },
+    {
+      "Mnemonics": "MOVDQ2Q",
+      "Summary": "Move Quadword from XMM to MMX Technology Register",
+      "Url": "https://www.felixcloutier.com/x86/MOVDQ2Q.html"
     },
     {
       "Mnemonics": "MOVHLPS",
@@ -13495,6 +13488,61 @@
       ]
     },
     {
+      "Mnemonics": "MOVNTDQA",
+      "Summary": "Load Double Quadword Non-Temporal Aligned Hint",
+      "Url": "https://www.felixcloutier.com/x86/MOVNTDQA.html",
+      "Items": [
+        {
+          "Mnemonic": "MOVNTDQA",
+          "Opcode": "66 0F 38 2A /r",
+          "Instruction": "MOVNTDQA xmm1, m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SSE4_1",
+          "Description": "Move double quadword from m128 to xmm1 using non-temporal hint if WC memory type."
+        },
+        {
+          "Mnemonic": "VMOVNTDQA",
+          "Opcode": "VEX.128.66.0F38.WIG 2A /r",
+          "Instruction": "VMOVNTDQA xmm1, m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Move double quadword from m128 to xmm using non-temporal hint if WC memory type."
+        },
+        {
+          "Mnemonic": "VMOVNTDQA",
+          "Opcode": "VEX.256.66.0F38.WIG 2A /r",
+          "Instruction": "VMOVNTDQA ymm1, m256",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Move 256-bit data from m256 to ymm using non-temporal hint if WC memory type."
+        },
+        {
+          "Mnemonic": "VMOVNTDQA",
+          "Opcode": "EVEX.128.66.0F38.W0 2A /r",
+          "Instruction": "VMOVNTDQA xmm1, m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Move 128-bit data from m128 to xmm using non-temporal hint if WC memory type."
+        },
+        {
+          "Mnemonic": "VMOVNTDQA",
+          "Opcode": "EVEX.256.66.0F38.W0 2A /r",
+          "Instruction": "VMOVNTDQA ymm1, m256",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Move 256-bit data from m256 to ymm using non-temporal hint if WC memory type."
+        },
+        {
+          "Mnemonic": "VMOVNTDQA",
+          "Opcode": "EVEX.512.66.0F38.W0 2A /r",
+          "Instruction": "VMOVNTDQA zmm1, m512",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Move 512-bit data from m512 to zmm using non-temporal hint if WC memory type."
+        }
+      ]
+    },
+    {
       "Mnemonics": "MOVNTDQ",
       "Summary": "Store Packed Integers Using Non-Temporal Hint",
       "Url": "https://www.felixcloutier.com/x86/MOVNTDQ.html",
@@ -13552,61 +13600,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Move packed integer values in zmm1 to m512 using non-temporal hint."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "MOVNTDQA",
-      "Summary": "Load Double Quadword Non-Temporal Aligned Hint",
-      "Url": "https://www.felixcloutier.com/x86/MOVNTDQA.html",
-      "Items": [
-        {
-          "Mnemonic": "MOVNTDQA",
-          "Opcode": "66 0F 38 2A /r",
-          "Instruction": "MOVNTDQA xmm1, m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SSE4_1",
-          "Description": "Move double quadword from m128 to xmm1 using non-temporal hint if WC memory type."
-        },
-        {
-          "Mnemonic": "VMOVNTDQA",
-          "Opcode": "VEX.128.66.0F38.WIG 2A /r",
-          "Instruction": "VMOVNTDQA xmm1, m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Move double quadword from m128 to xmm using non-temporal hint if WC memory type."
-        },
-        {
-          "Mnemonic": "VMOVNTDQA",
-          "Opcode": "VEX.256.66.0F38.WIG 2A /r",
-          "Instruction": "VMOVNTDQA ymm1, m256",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Move 256-bit data from m256 to ymm using non-temporal hint if WC memory type."
-        },
-        {
-          "Mnemonic": "VMOVNTDQA",
-          "Opcode": "EVEX.128.66.0F38.W0 2A /r",
-          "Instruction": "VMOVNTDQA xmm1, m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Move 128-bit data from m128 to xmm using non-temporal hint if WC memory type."
-        },
-        {
-          "Mnemonic": "VMOVNTDQA",
-          "Opcode": "EVEX.256.66.0F38.W0 2A /r",
-          "Instruction": "VMOVNTDQA ymm1, m256",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Move 256-bit data from m256 to ymm using non-temporal hint if WC memory type."
-        },
-        {
-          "Mnemonic": "VMOVNTDQA",
-          "Opcode": "EVEX.512.66.0F38.W0 2A /r",
-          "Instruction": "VMOVNTDQA zmm1, m512",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Move 512-bit data from m512 to zmm using non-temporal hint if WC memory type."
         }
       ]
     },
@@ -20771,30 +20764,6 @@
       ]
     },
     {
-      "Mnemonics": "PREFETCHW",
-      "Summary": "Prefetch Data into Caches in Anticipation of a Write",
-      "Url": "https://www.felixcloutier.com/x86/PREFETCHW.html",
-      "Items": [
-        {
-          "Mnemonic": "PREFETCHW",
-          "Opcode": "0F 0D /1",
-          "Instruction": "PREFETCHW m8",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "PRFCHW",
-          "Description": "Move data from m8 closer to the processor in anticipation of a write."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "M",
-          "Operands": [
-            "ModRM:r/m (r)"
-          ]
-        }
-      ]
-    },
-    {
       "Mnemonics": "PREFETCHh",
       "Summary": "Prefetch Data Into Caches",
       "Url": "https://www.felixcloutier.com/x86/PREFETCHh.html",
@@ -20834,6 +20803,30 @@
           "Bit64Mode": "Valid",
           "CompatLegMode": "Valid",
           "Description": "Move data from m8 closer to the processor using NTA hint."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "M",
+          "Operands": [
+            "ModRM:r/m (r)"
+          ]
+        }
+      ]
+    },
+    {
+      "Mnemonics": "PREFETCHW",
+      "Summary": "Prefetch Data into Caches in Anticipation of a Write",
+      "Url": "https://www.felixcloutier.com/x86/PREFETCHW.html",
+      "Items": [
+        {
+          "Mnemonic": "PREFETCHW",
+          "Opcode": "0F 0D /1",
+          "Instruction": "PREFETCHW m8",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "PRFCHW",
+          "Description": "Move data from m8 closer to the processor in anticipation of a write."
         }
       ],
       "OperandEncoding": [
@@ -21327,6 +21320,67 @@
       ]
     },
     {
+      "Mnemonics": "PSLLDQ",
+      "Summary": "Shift Double Quadword Left Logical",
+      "Url": "https://www.felixcloutier.com/x86/PSLLDQ.html",
+      "Items": [
+        {
+          "Mnemonic": "PSLLDQ",
+          "Opcode": "66 0F 73 /7 ib",
+          "Instruction": "PSLLDQ xmm1, imm8",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SSE2",
+          "Description": "Shift xmm1 left by imm8 bytes while shifting in 0s."
+        },
+        {
+          "Mnemonic": "VPSLLDQ",
+          "Opcode": "VEX.NDD.128.66.0F.WIG 73 /7 ib",
+          "Instruction": "VPSLLDQ xmm1, xmm2, imm8",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Shift xmm2 left by imm8 bytes while shifting in 0s and store result in xmm1."
+        },
+        {
+          "Mnemonic": "VPSLLDQ",
+          "Opcode": "VEX.NDD.256.66.0F.WIG 73 /7 ib",
+          "Instruction": "VPSLLDQ ymm1, ymm2, imm8",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Shift ymm2 left by imm8 bytes while shifting in 0s and store result in ymm1."
+        },
+        {
+          "Mnemonic": "VPSLLDQ",
+          "Opcode": "EVEX.NDD.128.66.0F.WIG 73 /7 ib",
+          "Instruction": "VPSLLDQ xmm1,xmm2/ m128, imm8",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Shift xmm2/m128 left by imm8 bytes while shifting in 0s and store result in xmm1."
+        },
+        {
+          "Mnemonic": "VPSLLDQ",
+          "Opcode": "EVEX.NDD.256.66.0F.WIG 73 /7 ib",
+          "Instruction": "VPSLLDQ ymm1, ymm2/m256, imm8",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Shift ymm2/m256 left by imm8 bytes while shifting in 0s and store result in ymm1."
+        },
+        {
+          "Mnemonic": "VPSLLDQ",
+          "Opcode": "EVEX.NDD.512.66.0F.WIG 73 /7 ib",
+          "Instruction": "VPSLLDQ zmm1, zmm2/m512, imm8",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512BW",
+          "Description": "Shift zmm2/m512 left by imm8 bytes while shifting in 0s and store result in zmm1."
+        }
+      ]
+    },
+    {
       "Mnemonics": "PSLLW/PSLLD/PSLLQ",
       "Summary": "Shift Packed Data Left Logical",
       "Url": "https://www.felixcloutier.com/x86/PSLLW:PSLLD:PSLLQ.html",
@@ -21514,67 +21568,6 @@
       ]
     },
     {
-      "Mnemonics": "PSLLDQ",
-      "Summary": "Shift Double Quadword Left Logical",
-      "Url": "https://www.felixcloutier.com/x86/PSLLDQ.html",
-      "Items": [
-        {
-          "Mnemonic": "PSLLDQ",
-          "Opcode": "66 0F 73 /7 ib",
-          "Instruction": "PSLLDQ xmm1, imm8",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SSE2",
-          "Description": "Shift xmm1 left by imm8 bytes while shifting in 0s."
-        },
-        {
-          "Mnemonic": "VPSLLDQ",
-          "Opcode": "VEX.NDD.128.66.0F.WIG 73 /7 ib",
-          "Instruction": "VPSLLDQ xmm1, xmm2, imm8",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Shift xmm2 left by imm8 bytes while shifting in 0s and store result in xmm1."
-        },
-        {
-          "Mnemonic": "VPSLLDQ",
-          "Opcode": "VEX.NDD.256.66.0F.WIG 73 /7 ib",
-          "Instruction": "VPSLLDQ ymm1, ymm2, imm8",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Shift ymm2 left by imm8 bytes while shifting in 0s and store result in ymm1."
-        },
-        {
-          "Mnemonic": "VPSLLDQ",
-          "Opcode": "EVEX.NDD.128.66.0F.WIG 73 /7 ib",
-          "Instruction": "VPSLLDQ xmm1,xmm2/ m128, imm8",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Shift xmm2/m128 left by imm8 bytes while shifting in 0s and store result in xmm1."
-        },
-        {
-          "Mnemonic": "VPSLLDQ",
-          "Opcode": "EVEX.NDD.256.66.0F.WIG 73 /7 ib",
-          "Instruction": "VPSLLDQ ymm1, ymm2/m256, imm8",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Shift ymm2/m256 left by imm8 bytes while shifting in 0s and store result in ymm1."
-        },
-        {
-          "Mnemonic": "VPSLLDQ",
-          "Opcode": "EVEX.NDD.512.66.0F.WIG 73 /7 ib",
-          "Instruction": "VPSLLDQ zmm1, zmm2/m512, imm8",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512BW",
-          "Description": "Shift zmm2/m512 left by imm8 bytes while shifting in 0s and store result in zmm1."
-        }
-      ]
-    },
-    {
       "Mnemonics": "PSRAW/PSRAD/PSRAQ",
       "Summary": "Shift Packed Data Right Arithmetic",
       "Url": "https://www.felixcloutier.com/x86/PSRAW:PSRAD:PSRAQ.html",
@@ -21749,6 +21742,67 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512BW",
           "Description": "Shift words in zmm2 right by amount specified in xmm3/m128 while shifting in sign bits using writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "PSRLDQ",
+      "Summary": "Shift Double Quadword Right Logical",
+      "Url": "https://www.felixcloutier.com/x86/PSRLDQ.html",
+      "Items": [
+        {
+          "Mnemonic": "PSRLDQ",
+          "Opcode": "66 0F 73 /3 ib",
+          "Instruction": "PSRLDQ xmm1, imm8",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SSE2",
+          "Description": "Shift xmm1 right by imm8 while shifting in 0s."
+        },
+        {
+          "Mnemonic": "VPSRLDQ",
+          "Opcode": "VEX.NDD.128.66.0F.WIG 73 /3 ib",
+          "Instruction": "VPSRLDQ xmm1, xmm2, imm8",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX",
+          "Description": "Shift xmm2 right by imm8 bytes while shifting in 0s."
+        },
+        {
+          "Mnemonic": "VPSRLDQ",
+          "Opcode": "VEX.NDD.256.66.0F.WIG 73 /3 ib",
+          "Instruction": "VPSRLDQ ymm1, ymm2, imm8",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Shift ymm1 right by imm8 bytes while shifting in 0s."
+        },
+        {
+          "Mnemonic": "VPSRLDQ",
+          "Opcode": "EVEX.NDD.128.66.0F.WIG 73 /3 ib",
+          "Instruction": "VPSRLDQ xmm1, xmm2/m128, imm8",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Shift xmm2/m128 right by imm8 bytes while shifting in 0s and store result in xmm1."
+        },
+        {
+          "Mnemonic": "VPSRLDQ",
+          "Opcode": "EVEX.NDD.256.66.0F.WIG 73 /3 ib",
+          "Instruction": "VPSRLDQ ymm1, ymm2/m256, imm8",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Shift ymm2/m256 right by imm8 bytes while shifting in 0s and store result in ymm1."
+        },
+        {
+          "Mnemonic": "VPSRLDQ",
+          "Opcode": "EVEX.NDD.512.66.0F.WIG 73 /3 ib",
+          "Instruction": "VPSRLDQ zmm1, zmm2/m512, imm8",
+          "OperandEncoding": "C",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512BW",
+          "Description": "Shift zmm2/m512 right by imm8 bytes while shifting in 0s and store result in zmm1."
         }
       ]
     },
@@ -21936,67 +21990,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX2",
           "Description": "Shift words in ymm2 right by imm8 while shifting in 0s."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "PSRLDQ",
-      "Summary": "Shift Double Quadword Right Logical",
-      "Url": "https://www.felixcloutier.com/x86/PSRLDQ.html",
-      "Items": [
-        {
-          "Mnemonic": "PSRLDQ",
-          "Opcode": "66 0F 73 /3 ib",
-          "Instruction": "PSRLDQ xmm1, imm8",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SSE2",
-          "Description": "Shift xmm1 right by imm8 while shifting in 0s."
-        },
-        {
-          "Mnemonic": "VPSRLDQ",
-          "Opcode": "VEX.NDD.128.66.0F.WIG 73 /3 ib",
-          "Instruction": "VPSRLDQ xmm1, xmm2, imm8",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX",
-          "Description": "Shift xmm2 right by imm8 bytes while shifting in 0s."
-        },
-        {
-          "Mnemonic": "VPSRLDQ",
-          "Opcode": "VEX.NDD.256.66.0F.WIG 73 /3 ib",
-          "Instruction": "VPSRLDQ ymm1, ymm2, imm8",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Shift ymm1 right by imm8 bytes while shifting in 0s."
-        },
-        {
-          "Mnemonic": "VPSRLDQ",
-          "Opcode": "EVEX.NDD.128.66.0F.WIG 73 /3 ib",
-          "Instruction": "VPSRLDQ xmm1, xmm2/m128, imm8",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Shift xmm2/m128 right by imm8 bytes while shifting in 0s and store result in xmm1."
-        },
-        {
-          "Mnemonic": "VPSRLDQ",
-          "Opcode": "EVEX.NDD.256.66.0F.WIG 73 /3 ib",
-          "Instruction": "VPSRLDQ ymm1, ymm2/m256, imm8",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Shift ymm2/m256 right by imm8 bytes while shifting in 0s and store result in ymm1."
-        },
-        {
-          "Mnemonic": "VPSRLDQ",
-          "Opcode": "EVEX.NDD.512.66.0F.WIG 73 /3 ib",
-          "Instruction": "VPSRLDQ zmm1, zmm2/m512, imm8",
-          "OperandEncoding": "C",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512BW",
-          "Description": "Shift zmm2/m512 right by imm8 bytes while shifting in 0s and store result in zmm1."
         }
       ]
     },
@@ -26020,6 +26013,57 @@
       ]
     },
     {
+      "Mnemonics": "SHA1RNDS4",
+      "Summary": "Perform Four Rounds of SHA1 Operation",
+      "Url": "https://www.felixcloutier.com/x86/SHA1RNDS4.html",
+      "Items": [
+        {
+          "Mnemonic": "SHA1RNDS4",
+          "Opcode": "NP 0F 3A CC /r ib",
+          "Instruction": "SHA1RNDS4 xmm1, xmm2/m128, imm8",
+          "OperandEncoding": "RMI",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SHA",
+          "Description": "Performs four rounds of SHA1 operation operating on SHA1 state (A,B,C,D) from xmm1, with a pre-computed sum of the next 4 round message dwords and state variable E from xmm2/m128. The immediate byte controls logic functions and round constants."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "RMI",
+          "Operands": [
+            "ModRM:reg (r, w)",
+            "ModRM:r/m (r)",
+            "Imm8"
+          ]
+        }
+      ]
+    },
+    {
+      "Mnemonics": "SHA1NEXTE",
+      "Summary": "Calculate SHA1 State Variable E after Four Rounds",
+      "Url": "https://www.felixcloutier.com/x86/SHA1NEXTE.html",
+      "Items": [
+        {
+          "Mnemonic": "SHA1NEXTE",
+          "Opcode": "NP 0F 38 C8 /r",
+          "Instruction": "SHA1NEXTE xmm1, xmm2/m128",
+          "OperandEncoding": "RM",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "SHA",
+          "Description": "Calculates SHA1 state variable E after four rounds of operation from the current SHA1 state variable A in xmm1. The calculated value of the SHA1 state variable E is added to the scheduled dwords in xmm2/m128, and stored with some of the scheduled dwords in xmm1."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "RM",
+          "Operands": [
+            "ModRM:reg (r, w)",
+            "ModRM:r/m (r)"
+          ]
+        }
+      ]
+    },
+    {
       "Mnemonics": "SHA1MSG1",
       "Summary": "Perform an Intermediate Calculation for the Next Four SHA1 Message Dwords",
       "Url": "https://www.felixcloutier.com/x86/SHA1MSG1.html",
@@ -26070,43 +26114,18 @@
       ]
     },
     {
-      "Mnemonics": "SHA1NEXTE",
-      "Summary": "Calculate SHA1 State Variable E after Four Rounds",
-      "Url": "https://www.felixcloutier.com/x86/SHA1NEXTE.html",
+      "Mnemonics": "SHA256RNDS2",
+      "Summary": "Perform Two Rounds of SHA256 Operation",
+      "Url": "https://www.felixcloutier.com/x86/SHA256RNDS2.html",
       "Items": [
         {
-          "Mnemonic": "SHA1NEXTE",
-          "Opcode": "NP 0F 38 C8 /r",
-          "Instruction": "SHA1NEXTE xmm1, xmm2/m128",
-          "OperandEncoding": "RM",
+          "Mnemonic": "SHA256RNDS2",
+          "Opcode": "NP 0F 38 CB /r",
+          "Instruction": "SHA256RNDS2 xmm1, xmm2/m128, &lt;XMM0&gt;",
+          "OperandEncoding": "RM0",
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "SHA",
-          "Description": "Calculates SHA1 state variable E after four rounds of operation from the current SHA1 state variable A in xmm1. The calculated value of the SHA1 state variable E is added to the scheduled dwords in xmm2/m128, and stored with some of the scheduled dwords in xmm1."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "RM",
-          "Operands": [
-            "ModRM:reg (r, w)",
-            "ModRM:r/m (r)"
-          ]
-        }
-      ]
-    },
-    {
-      "Mnemonics": "SHA1RNDS4",
-      "Summary": "Perform Four Rounds of SHA1 Operation",
-      "Url": "https://www.felixcloutier.com/x86/SHA1RNDS4.html",
-      "Items": [
-        {
-          "Mnemonic": "SHA1RNDS4",
-          "Opcode": "NP 0F 3A CC /r ib",
-          "Instruction": "SHA1RNDS4 xmm1, xmm2/m128, imm8",
-          "OperandEncoding": "RMI",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SHA",
-          "Description": "Performs four rounds of SHA1 operation operating on SHA1 state (A,B,C,D) from xmm1, with a pre-computed sum of the next 4 round message dwords and state variable E from xmm2/m128. The immediate byte controls logic functions and round constants."
+          "Description": "Perform 2 rounds of SHA256 operation using an initial SHA256 state (C,D,G,H) from xmm1, an initial SHA256 state (A,B,E,F) from xmm2/m128, and a pre-computed sum of the next 2 round message dwords and the corresponding round constants from the implicit operand XMM0, storing the updated SHA256 state (A,B,E,F) result in xmm1."
         }
       ],
       "OperandEncoding": [
@@ -26115,7 +26134,7 @@
           "Operands": [
             "ModRM:reg (r, w)",
             "ModRM:r/m (r)",
-            "Imm8"
+            "Implicit XMM0 (r)"
           ]
         }
       ]
@@ -26166,32 +26185,6 @@
           "Operands": [
             "ModRM:reg (r, w)",
             "ModRM:r/m (r)"
-          ]
-        }
-      ]
-    },
-    {
-      "Mnemonics": "SHA256RNDS2",
-      "Summary": "Perform Two Rounds of SHA256 Operation",
-      "Url": "https://www.felixcloutier.com/x86/SHA256RNDS2.html",
-      "Items": [
-        {
-          "Mnemonic": "SHA256RNDS2",
-          "Opcode": "NP 0F 38 CB /r",
-          "Instruction": "SHA256RNDS2 xmm1, xmm2/m128, &lt;XMM0&gt;",
-          "OperandEncoding": "RM0",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "SHA",
-          "Description": "Perform 2 rounds of SHA256 operation using an initial SHA256 state (C,D,G,H) from xmm1, an initial SHA256 state (A,B,E,F) from xmm2/m128, and a pre-computed sum of the next 2 round message dwords and the corresponding round constants from the implicit operand XMM0, storing the updated SHA256 state (A,B,E,F) result in xmm1."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "RMI",
-          "Operands": [
-            "ModRM:reg (r, w)",
-            "ModRM:r/m (r)",
-            "Implicit XMM0 (r)"
           ]
         }
       ]
@@ -27663,6 +27656,10 @@
       ]
     },
     {
+      "Mnemonics": "TPAUSE",
+      "Summary": "Timed PAUSE"
+    },
+    {
       "Mnemonics": "TZCNT",
       "Summary": "Count the Number of Trailing Zero Bits",
       "Url": "https://www.felixcloutier.com/x86/TZCNT.html",
@@ -27816,6 +27813,14 @@
           ]
         }
       ]
+    },
+    {
+      "Mnemonics": "UMONITOR",
+      "Summary": "User Level Set Up Monitor Address"
+    },
+    {
+      "Mnemonics": "UMWAIT",
+      "Summary": "User Level Monitor Wait"
     },
     {
       "Mnemonics": "UNPCKHPD",
@@ -28635,37 +28640,6 @@
       ]
     },
     {
-      "Mnemonics": "VCVTPS2QQ",
-      "Summary": "Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
-      "Url": "https://www.felixcloutier.com/x86/VCVTPS2QQ.html",
-      "Items": [
-        {
-          "Mnemonic": "VCVTPS2QQ",
-          "Opcode": "EVEX.128.66.0F.W0 7B /r",
-          "Instruction": "VCVTPS2QQ xmm1 {k1}{z}, xmm2/m64/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Convert two packed single precision floating-point values from xmm2/m64/m32bcst to two packed signed quadword values in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VCVTPS2QQ",
-          "Opcode": "EVEX.256.66.0F.W0 7B /r",
-          "Instruction": "VCVTPS2QQ ymm1 {k1}{z}, xmm2/m128/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Convert four packed single precision floating-point values from xmm2/m128/m32bcst to four packed signed quadword values in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VCVTPS2QQ",
-          "Opcode": "EVEX.512.66.0F.W0 7B /r",
-          "Instruction": "VCVTPS2QQ zmm1 {k1}{z}, ymm2/m256/m32bcst{er}",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512DQ",
-          "Description": "Convert eight packed single precision floating-point values from ymm2/m256/m32bcst to eight packed signed quadword values in zmm1 subject to writemask k1."
-        }
-      ]
-    },
-    {
       "Mnemonics": "VCVTPS2UDQ",
       "Summary": "Convert Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTPS2UDQ.html",
@@ -28696,6 +28670,37 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Convert sixteen packed single-precision floating-point values from zmm2/m512/m32bcst to sixteen packed unsigned doubleword values in zmm1 subject to writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "VCVTPS2QQ",
+      "Summary": "Convert Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
+      "Url": "https://www.felixcloutier.com/x86/VCVTPS2QQ.html",
+      "Items": [
+        {
+          "Mnemonic": "VCVTPS2QQ",
+          "Opcode": "EVEX.128.66.0F.W0 7B /r",
+          "Instruction": "VCVTPS2QQ xmm1 {k1}{z}, xmm2/m64/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Convert two packed single precision floating-point values from xmm2/m64/m32bcst to two packed signed quadword values in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VCVTPS2QQ",
+          "Opcode": "EVEX.256.66.0F.W0 7B /r",
+          "Instruction": "VCVTPS2QQ ymm1 {k1}{z}, xmm2/m128/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Convert four packed single precision floating-point values from xmm2/m128/m32bcst to four packed signed quadword values in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VCVTPS2QQ",
+          "Opcode": "EVEX.512.66.0F.W0 7B /r",
+          "Instruction": "VCVTPS2QQ zmm1 {k1}{z}, ymm2/m256/m32bcst{er}",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512DQ",
+          "Description": "Convert eight packed single precision floating-point values from ymm2/m256/m32bcst to eight packed signed quadword values in zmm1 subject to writemask k1."
         }
       ]
     },
@@ -28954,40 +28959,6 @@
       ]
     },
     {
-      "Mnemonics": "VCVTTPS2QQ",
-      "Summary": "Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
-      "Url": "https://www.felixcloutier.com/x86/VCVTTPS2QQ.html",
-      "Items": [
-        {
-          "Mnemonic": "VCVTTPS2QQ",
-          "Opcode": "EVEX.128.66.0F.W0 7A /r",
-          "Instruction": "VCVTTPS2QQ xmm1 {k1}{z}, xmm2/m64/m32bcst",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Convert two packed single precision floating-point values from xmm2/m64/m32bcst to two packed signed quadword values in xmm1 using truncation subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VCVTTPS2QQ",
-          "Opcode": "EVEX.256.66.0F.W0 7A /r",
-          "Instruction": "VCVTTPS2QQ ymm1 {k1}{z}, xmm2/m128/m32bcst",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
-          "Description": "Convert four packed single precision floating-point values from xmm2/m128/m32bcst to four packed signed quadword values in ymm1 using truncation subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VCVTTPS2QQ",
-          "Opcode": "EVEX.512.66.0F.W0 7A /r",
-          "Instruction": "VCVTTPS2QQ zmm1 {k1}{z}, ymm2/m256/m32bcst{sae}",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512DQ",
-          "Description": "Convert eight packed single precision floating-point values from ymm2/m256/m32bcst to eight packed signed quadword values in zmm1 using truncation subject to writemask k1."
-        }
-      ]
-    },
-    {
       "Mnemonics": "VCVTTPS2UDQ",
       "Summary": "Convert with Truncation Packed Single-Precision Floating-Point Values to Packed Unsigned Doubleword Integer Values",
       "Url": "https://www.felixcloutier.com/x86/VCVTTPS2UDQ.html",
@@ -29018,6 +28989,40 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Convert sixteen packed single-precision floating-point values from zmm2/m512/m32bcst to sixteen packed unsigned doubleword values in zmm1 using truncation subject to writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "VCVTTPS2QQ",
+      "Summary": "Convert with Truncation Packed Single Precision Floating-Point Values to Packed Singed Quadword Integer Values",
+      "Url": "https://www.felixcloutier.com/x86/VCVTTPS2QQ.html",
+      "Items": [
+        {
+          "Mnemonic": "VCVTTPS2QQ",
+          "Opcode": "EVEX.128.66.0F.W0 7A /r",
+          "Instruction": "VCVTTPS2QQ xmm1 {k1}{z}, xmm2/m64/m32bcst",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Convert two packed single precision floating-point values from xmm2/m64/m32bcst to two packed signed quadword values in xmm1 using truncation subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VCVTTPS2QQ",
+          "Opcode": "EVEX.256.66.0F.W0 7A /r",
+          "Instruction": "VCVTTPS2QQ ymm1 {k1}{z}, xmm2/m128/m32bcst",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512DQ",
+          "Description": "Convert four packed single precision floating-point values from xmm2/m128/m32bcst to four packed signed quadword values in ymm1 using truncation subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VCVTTPS2QQ",
+          "Opcode": "EVEX.512.66.0F.W0 7A /r",
+          "Instruction": "VCVTTPS2QQ zmm1 {k1}{z}, ymm2/m256/m32bcst{sae}",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512DQ",
+          "Description": "Convert eight packed single precision floating-point values from ymm2/m256/m32bcst to eight packed signed quadword values in zmm1 using truncation subject to writemask k1."
         }
       ]
     },
@@ -29326,39 +29331,6 @@
       ]
     },
     {
-      "Mnemonics": "VERR/VERW",
-      "Summary": "Verify a Segment for Reading or Writing",
-      "Url": "https://www.felixcloutier.com/x86/VERR:VERW.html",
-      "Items": [
-        {
-          "Mnemonic": "VERR",
-          "Opcode": "0F 00 /4",
-          "Instruction": "VERR r/m16",
-          "OperandEncoding": "M",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Set ZF=1 if segment specified with r/m16 can be read."
-        },
-        {
-          "Mnemonic": "VERW",
-          "Opcode": "0F 00 /5",
-          "Instruction": "VERW r/m16",
-          "OperandEncoding": "M",
-          "Bit64Mode": "Valid",
-          "CompatLegMode": "Valid",
-          "Description": "Set ZF=1 if segment specified with r/m16 can be written."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "M",
-          "Operands": [
-            "ModRM:r/m (r)"
-          ]
-        }
-      ]
-    },
-    {
       "Mnemonics": "VEXPANDPD",
       "Summary": "Load Sparse Packed Double-Precision Floating-Point Values from Dense Memory",
       "Url": "https://www.felixcloutier.com/x86/VEXPANDPD.html",
@@ -29423,6 +29395,39 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Expand packed single-precision floating-point values from zmm2/m512 to zmm1 using writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "VERR/VERW",
+      "Summary": "Verify a Segment for Reading or Writing",
+      "Url": "https://www.felixcloutier.com/x86/VERR:VERW.html",
+      "Items": [
+        {
+          "Mnemonic": "VERR",
+          "Opcode": "0F 00 /4",
+          "Instruction": "VERR r/m16",
+          "OperandEncoding": "M",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Set ZF=1 if segment specified with r/m16 can be read."
+        },
+        {
+          "Mnemonic": "VERW",
+          "Opcode": "0F 00 /5",
+          "Instruction": "VERW r/m16",
+          "OperandEncoding": "M",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Set ZF=1 if segment specified with r/m16 can be written."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "M",
+          "Operands": [
+            "ModRM:r/m (r)"
+          ]
         }
       ]
     },
@@ -30342,6 +30347,275 @@
       ]
     },
     {
+      "Mnemonics": "VFMSUBADD132PD/VFMSUBADD213PD/VFMSUBADD231PD",
+      "Summary": "Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values",
+      "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html",
+      "Items": [
+        {
+          "Mnemonic": "VFMSUBADD132PD",
+          "Opcode": "VEX.DDS.128.66.0F38.W1 97 /r",
+          "Instruction": "VFMSUBADD132PD xmm1, xmm2, xmm3/m128",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm3/mem, subtract/add elements in xmm2 and put result in xmm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PD",
+          "Opcode": "VEX.DDS.128.66.0F38.W1 A7 /r",
+          "Instruction": "VFMSUBADD213PD xmm1, xmm2, xmm3/m128",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/mem and put result in xmm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PD",
+          "Opcode": "VEX.DDS.128.66.0F38.W1 B7 /r",
+          "Instruction": "VFMSUBADD231PD xmm1, xmm2, xmm3/m128",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed double-precision floating-point values from xmm2 and xmm3/mem, subtract/add elements in xmm1 and put result in xmm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PD",
+          "Opcode": "VEX.DDS.256.66.0F38.W1 97 /r",
+          "Instruction": "VFMSUBADD132PD ymm1, ymm2, ymm3/m256",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm3/mem, subtract/add elements in ymm2 and put result in ymm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PD",
+          "Opcode": "VEX.DDS.256.66.0F38.W1 A7 /r",
+          "Instruction": "VFMSUBADD213PD ymm1, ymm2, ymm3/m256",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/mem and put result in ymm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PD",
+          "Opcode": "VEX.DDS.256.66.0F38.W1 B7 /r",
+          "Instruction": "VFMSUBADD231PD ymm1, ymm2, ymm3/m256",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed double-precision floating-point values from ymm2 and ymm3/mem, subtract/add elements in ymm1 and put result in ymm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PD",
+          "Opcode": "EVEX.DDS.128.66.0F38.W1 97 /r",
+          "Instruction": "VFMSUBADD132PD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm3/m128/m64bcst, subtract/add elements in xmm2 and put result in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PD",
+          "Opcode": "EVEX.DDS.128.66.0F38.W1 A7 /r",
+          "Instruction": "VFMSUBADD213PD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/m128/m64bcst and put result in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PD",
+          "Opcode": "EVEX.DDS.128.66.0F38.W1 B7 /r",
+          "Instruction": "VFMSUBADD231PD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from xmm2 and xmm3/m128/m64bcst, subtract/add elements in xmm1 and put result in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PD",
+          "Opcode": "EVEX.DDS.256.66.0F38.W1 97 /r",
+          "Instruction": "VFMSUBADD132PD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm3/m256/m64bcst, subtract/add elements in ymm2 and put result in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PD",
+          "Opcode": "EVEX.DDS.256.66.0F38.W1 A7 /r",
+          "Instruction": "VFMSUBADD213PD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/m256/m64bcst and put result in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PD",
+          "Opcode": "EVEX.DDS.256.66.0F38.W1 B7 /r",
+          "Instruction": "VFMSUBADD231PD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from ymm2 and ymm3/m256/m64bcst, subtract/add elements in ymm1 and put result in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PD",
+          "Opcode": "EVEX.DDS.512.66.0F38.W1 97 /r",
+          "Instruction": "VFMSUBADD132PD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst{er}",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from zmm1 and zmm3/m512/m64bcst, subtract/add elements in zmm2 and put result in zmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PD",
+          "Opcode": "EVEX.DDS.512.66.0F38.W1 A7 /r",
+          "Instruction": "VFMSUBADD213PD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst{er}",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from zmm1 and zmm2, subtract/add elements in zmm3/m512/m64bcst and put result in zmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PD",
+          "Opcode": "EVEX.DDS.512.66.0F38.W1 B7 /r",
+          "Instruction": "VFMSUBADD231PD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst{er}",
+          "OperandEncoding": "B",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Multiply packed double-precision floating-point values from zmm2 and zmm3/m512/m64bcst, subtract/add elements in zmm1 and put result in zmm1 subject to writemask k1."
+        }
+      ]
+    },
+    {
+      "Mnemonics": "VFMSUBADD132PS/VFMSUBADD213PS/VFMSUBADD231PS",
+      "Summary": "Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values",
+      "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html",
+      "Items": [
+        {
+          "Mnemonic": "VFMSUBADD132PS",
+          "Opcode": "VEX.DDS.128.66.0F38.W0 97 /r",
+          "Instruction": "VFMSUBADD132PS xmm1, xmm2, xmm3/m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm3/mem, subtract/add elements in xmm2 and put result in xmm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PS",
+          "Opcode": "VEX.DDS.128.66.0F38.W0 A7 /r",
+          "Instruction": "VFMSUBADD213PS xmm1, xmm2, xmm3/m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/mem and put result in xmm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PS",
+          "Opcode": "VEX.DDS.128.66.0F38.W0 B7 /r",
+          "Instruction": "VFMSUBADD231PS xmm1, xmm2, xmm3/m128",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed single-precision floating-point values from xmm2 and xmm3/mem, subtract/add elements in xmm1 and put result in xmm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PS",
+          "Opcode": "VEX.DDS.256.66.0F38.W0 97 /r",
+          "Instruction": "VFMSUBADD132PS ymm1, ymm2, ymm3/m256",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm3/mem, subtract/add elements in ymm2 and put result in ymm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PS",
+          "Opcode": "VEX.DDS.256.66.0F38.W0 A7 /r",
+          "Instruction": "VFMSUBADD213PS ymm1, ymm2, ymm3/m256",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/mem and put result in ymm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PS",
+          "Opcode": "VEX.DDS.256.66.0F38.W0 B7 /r",
+          "Instruction": "VFMSUBADD231PS ymm1, ymm2, ymm3/m256",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "FMA",
+          "Description": "Multiply packed single-precision floating-point values from ymm2 and ymm3/mem, subtract/add elements in ymm1 and put result in ymm1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PS",
+          "Opcode": "EVEX.DDS.128.66.0F38.W0 97 /r",
+          "Instruction": "VFMSUBADD132PS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm3/m128/m32bcst, subtract/add elements in xmm2 and put result in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PS",
+          "Opcode": "EVEX.DDS.128.66.0F38.W0 A7 /r",
+          "Instruction": "VFMSUBADD213PS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/m128/m32bcst and put result in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PS",
+          "Opcode": "EVEX.DDS.128.66.0F38.W0 B7 /r",
+          "Instruction": "VFMSUBADD231PS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from xmm2 and xmm3/m128/m32bcst, subtract/add elements in xmm1 and put result in xmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PS",
+          "Opcode": "EVEX.DDS.256.66.0F38.W0 97 /r",
+          "Instruction": "VFMSUBADD132PS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm3/m256/m32bcst, subtract/add elements in ymm2 and put result in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PS",
+          "Opcode": "EVEX.DDS.256.66.0F38.W0 A7 /r",
+          "Instruction": "VFMSUBADD213PS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/m256/m32bcst and put result in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PS",
+          "Opcode": "EVEX.DDS.256.66.0F38.W0 B7 /r",
+          "Instruction": "VFMSUBADD231PS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from ymm2 and ymm3/m256/m32bcst, subtract/add elements in ymm1 and put result in ymm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD132PS",
+          "Opcode": "EVEX.DDS.512.66.0F38.W0 97 /r",
+          "Instruction": "VFMSUBADD132PS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst{er}",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from zmm1 and zmm3/m512/m32bcst, subtract/add elements in zmm2 and put result in zmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD213PS",
+          "Opcode": "EVEX.DDS.512.66.0F38.W0 A7 /r",
+          "Instruction": "VFMSUBADD213PS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst{er}",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from zmm1 and zmm2, subtract/add elements in zmm3/m512/m32bcst and put result in zmm1 subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VFMSUBADD231PS",
+          "Opcode": "EVEX.DDS.512.66.0F38.W0 B7 /r",
+          "Instruction": "VFMSUBADD231PS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst{er}",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Multiply packed single-precision floating-point values from zmm2 and zmm3/m512/m32bcst, subtract/add elements in zmm1 and put result in zmm1 subject to writemask k1."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VFMSUB132PD/VFMSUB213PD/VFMSUB231PD",
       "Summary": "Fused Multiply-Subtract of Packed Double- Precision Floating-Point Values",
       "Url": "https://www.felixcloutier.com/x86/VFMSUB132PD:VFMSUB213PD:VFMSUB231PD.html",
@@ -30717,275 +30991,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Multiply scalar single-precision floating-point value from xmm2 and xmm3/m32, subtract xmm1 and put result in xmm1."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VFMSUBADD132PD/VFMSUBADD213PD/VFMSUBADD231PD",
-      "Summary": "Fused Multiply-Alternating Subtract/Add of Packed Double-Precision Floating-Point Values",
-      "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PD:VFMSUBADD213PD:VFMSUBADD231PD.html",
-      "Items": [
-        {
-          "Mnemonic": "VFMSUBADD132PD",
-          "Opcode": "VEX.DDS.128.66.0F38.W1 97 /r",
-          "Instruction": "VFMSUBADD132PD xmm1, xmm2, xmm3/m128",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm3/mem, subtract/add elements in xmm2 and put result in xmm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PD",
-          "Opcode": "VEX.DDS.128.66.0F38.W1 A7 /r",
-          "Instruction": "VFMSUBADD213PD xmm1, xmm2, xmm3/m128",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/mem and put result in xmm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PD",
-          "Opcode": "VEX.DDS.128.66.0F38.W1 B7 /r",
-          "Instruction": "VFMSUBADD231PD xmm1, xmm2, xmm3/m128",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed double-precision floating-point values from xmm2 and xmm3/mem, subtract/add elements in xmm1 and put result in xmm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PD",
-          "Opcode": "VEX.DDS.256.66.0F38.W1 97 /r",
-          "Instruction": "VFMSUBADD132PD ymm1, ymm2, ymm3/m256",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm3/mem, subtract/add elements in ymm2 and put result in ymm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PD",
-          "Opcode": "VEX.DDS.256.66.0F38.W1 A7 /r",
-          "Instruction": "VFMSUBADD213PD ymm1, ymm2, ymm3/m256",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/mem and put result in ymm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PD",
-          "Opcode": "VEX.DDS.256.66.0F38.W1 B7 /r",
-          "Instruction": "VFMSUBADD231PD ymm1, ymm2, ymm3/m256",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed double-precision floating-point values from ymm2 and ymm3/mem, subtract/add elements in ymm1 and put result in ymm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PD",
-          "Opcode": "EVEX.DDS.128.66.0F38.W1 97 /r",
-          "Instruction": "VFMSUBADD132PD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm3/m128/m64bcst, subtract/add elements in xmm2 and put result in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PD",
-          "Opcode": "EVEX.DDS.128.66.0F38.W1 A7 /r",
-          "Instruction": "VFMSUBADD213PD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/m128/m64bcst and put result in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PD",
-          "Opcode": "EVEX.DDS.128.66.0F38.W1 B7 /r",
-          "Instruction": "VFMSUBADD231PD xmm1 {k1}{z}, xmm2, xmm3/m128/m64bcst",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from xmm2 and xmm3/m128/m64bcst, subtract/add elements in xmm1 and put result in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PD",
-          "Opcode": "EVEX.DDS.256.66.0F38.W1 97 /r",
-          "Instruction": "VFMSUBADD132PD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm3/m256/m64bcst, subtract/add elements in ymm2 and put result in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PD",
-          "Opcode": "EVEX.DDS.256.66.0F38.W1 A7 /r",
-          "Instruction": "VFMSUBADD213PD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/m256/m64bcst and put result in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PD",
-          "Opcode": "EVEX.DDS.256.66.0F38.W1 B7 /r",
-          "Instruction": "VFMSUBADD231PD ymm1 {k1}{z}, ymm2, ymm3/m256/m64bcst",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from ymm2 and ymm3/m256/m64bcst, subtract/add elements in ymm1 and put result in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PD",
-          "Opcode": "EVEX.DDS.512.66.0F38.W1 97 /r",
-          "Instruction": "VFMSUBADD132PD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst{er}",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from zmm1 and zmm3/m512/m64bcst, subtract/add elements in zmm2 and put result in zmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PD",
-          "Opcode": "EVEX.DDS.512.66.0F38.W1 A7 /r",
-          "Instruction": "VFMSUBADD213PD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst{er}",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from zmm1 and zmm2, subtract/add elements in zmm3/m512/m64bcst and put result in zmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PD",
-          "Opcode": "EVEX.DDS.512.66.0F38.W1 B7 /r",
-          "Instruction": "VFMSUBADD231PD zmm1 {k1}{z}, zmm2, zmm3/m512/m64bcst{er}",
-          "OperandEncoding": "B",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Multiply packed double-precision floating-point values from zmm2 and zmm3/m512/m64bcst, subtract/add elements in zmm1 and put result in zmm1 subject to writemask k1."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VFMSUBADD132PS/VFMSUBADD213PS/VFMSUBADD231PS",
-      "Summary": "Fused Multiply-Alternating Subtract/Add of Packed Single-Precision Floating-Point Values",
-      "Url": "https://www.felixcloutier.com/x86/VFMSUBADD132PS:VFMSUBADD213PS:VFMSUBADD231PS.html",
-      "Items": [
-        {
-          "Mnemonic": "VFMSUBADD132PS",
-          "Opcode": "VEX.DDS.128.66.0F38.W0 97 /r",
-          "Instruction": "VFMSUBADD132PS xmm1, xmm2, xmm3/m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm3/mem, subtract/add elements in xmm2 and put result in xmm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PS",
-          "Opcode": "VEX.DDS.128.66.0F38.W0 A7 /r",
-          "Instruction": "VFMSUBADD213PS xmm1, xmm2, xmm3/m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/mem and put result in xmm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PS",
-          "Opcode": "VEX.DDS.128.66.0F38.W0 B7 /r",
-          "Instruction": "VFMSUBADD231PS xmm1, xmm2, xmm3/m128",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed single-precision floating-point values from xmm2 and xmm3/mem, subtract/add elements in xmm1 and put result in xmm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PS",
-          "Opcode": "VEX.DDS.256.66.0F38.W0 97 /r",
-          "Instruction": "VFMSUBADD132PS ymm1, ymm2, ymm3/m256",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm3/mem, subtract/add elements in ymm2 and put result in ymm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PS",
-          "Opcode": "VEX.DDS.256.66.0F38.W0 A7 /r",
-          "Instruction": "VFMSUBADD213PS ymm1, ymm2, ymm3/m256",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/mem and put result in ymm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PS",
-          "Opcode": "VEX.DDS.256.66.0F38.W0 B7 /r",
-          "Instruction": "VFMSUBADD231PS ymm1, ymm2, ymm3/m256",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "FMA",
-          "Description": "Multiply packed single-precision floating-point values from ymm2 and ymm3/mem, subtract/add elements in ymm1 and put result in ymm1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PS",
-          "Opcode": "EVEX.DDS.128.66.0F38.W0 97 /r",
-          "Instruction": "VFMSUBADD132PS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm3/m128/m32bcst, subtract/add elements in xmm2 and put result in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PS",
-          "Opcode": "EVEX.DDS.128.66.0F38.W0 A7 /r",
-          "Instruction": "VFMSUBADD213PS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from xmm1 and xmm2, subtract/add elements in xmm3/m128/m32bcst and put result in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PS",
-          "Opcode": "EVEX.DDS.128.66.0F38.W0 B7 /r",
-          "Instruction": "VFMSUBADD231PS xmm1 {k1}{z}, xmm2, xmm3/m128/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from xmm2 and xmm3/m128/m32bcst, subtract/add elements in xmm1 and put result in xmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PS",
-          "Opcode": "EVEX.DDS.256.66.0F38.W0 97 /r",
-          "Instruction": "VFMSUBADD132PS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm3/m256/m32bcst, subtract/add elements in ymm2 and put result in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PS",
-          "Opcode": "EVEX.DDS.256.66.0F38.W0 A7 /r",
-          "Instruction": "VFMSUBADD213PS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from ymm1 and ymm2, subtract/add elements in ymm3/m256/m32bcst and put result in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PS",
-          "Opcode": "EVEX.DDS.256.66.0F38.W0 B7 /r",
-          "Instruction": "VFMSUBADD231PS ymm1 {k1}{z}, ymm2, ymm3/m256/m32bcst",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from ymm2 and ymm3/m256/m32bcst, subtract/add elements in ymm1 and put result in ymm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD132PS",
-          "Opcode": "EVEX.DDS.512.66.0F38.W0 97 /r",
-          "Instruction": "VFMSUBADD132PS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst{er}",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from zmm1 and zmm3/m512/m32bcst, subtract/add elements in zmm2 and put result in zmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD213PS",
-          "Opcode": "EVEX.DDS.512.66.0F38.W0 A7 /r",
-          "Instruction": "VFMSUBADD213PS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst{er}",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from zmm1 and zmm2, subtract/add elements in zmm3/m512/m32bcst and put result in zmm1 subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VFMSUBADD231PS",
-          "Opcode": "EVEX.DDS.512.66.0F38.W0 B7 /r",
-          "Instruction": "VFMSUBADD231PS zmm1 {k1}{z}, zmm2, zmm3/m512/m32bcst{er}",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Multiply packed single-precision floating-point values from zmm2 and zmm3/m512/m32bcst, subtract/add elements in zmm1 and put result in zmm1 subject to writemask k1."
         }
       ]
     },
@@ -31939,6 +31944,55 @@
       ]
     },
     {
+      "Mnemonics": "VGATHERDPS/VGATHERQPS",
+      "Summary": "Gather Packed SP FP values Using Signed Dword/Qword Indices",
+      "Url": "https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html",
+      "Items": [
+        {
+          "Mnemonic": "VGATHERDPS",
+          "Opcode": "VEX.DDS.128.66.0F38.W0 92 /r",
+          "Instruction": "VGATHERDPS xmm1, vm32x, xmm2",
+          "OperandEncoding": "A",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Using dword indices specified in vm32x, gather single-precision FP values from memory conditioned on mask specified by xmm2. Conditionally gathered elements are merged into xmm1."
+        },
+        {
+          "Mnemonic": "VGATHERQPS",
+          "Opcode": "VEX.DDS.128.66.0F38.W0 93 /r",
+          "Instruction": "VGATHERQPS xmm1, vm64x, xmm2",
+          "OperandEncoding": "A",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Using qword indices specified in vm64x, gather single-precision FP values from memory conditioned on mask specified by xmm2. Conditionally gathered elements are merged into xmm1."
+        },
+        {
+          "Mnemonic": "VGATHERDPS",
+          "Opcode": "VEX.DDS.256.66.0F38.W0 92 /r",
+          "Instruction": "VGATHERDPS ymm1, vm32y, ymm2",
+          "OperandEncoding": "A",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Using dword indices specified in vm32y, gather single-precision FP values from memory conditioned on mask specified by ymm2. Conditionally gathered elements are merged into ymm1."
+        },
+        {
+          "Mnemonic": "VGATHERQPS",
+          "Opcode": "VEX.DDS.256.66.0F38.W0 93 /r",
+          "Instruction": "VGATHERQPS xmm1, vm64y, xmm2",
+          "OperandEncoding": "A",
+          "CpuidFeatureFlag": "AVX2",
+          "Description": "Using qword indices specified in vm64y, gather single-precision FP values from memory conditioned on mask specified by xmm2. Conditionally gathered elements are merged into xmm1."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "A",
+          "Operands": [
+            "ModRM:reg (r,w)",
+            "BaseReg (R): VSIB:base, VectorReg(R): VSIB:index",
+            "VEX.vvvv (r, w)"
+          ]
+        }
+      ]
+    },
+    {
       "Mnemonics": "VGATHERDPS/VGATHERDPD",
       "Summary": "Gather Packed Single, Packed Double with Signed Dword",
       "Url": "https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERDPD.html",
@@ -31996,55 +32050,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Using signed dword indices, gather float64 vector into float64 vector zmm1 using k1 as completion mask."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VGATHERDPS/VGATHERQPS",
-      "Summary": "Gather Packed SP FP values Using Signed Dword/Qword Indices",
-      "Url": "https://www.felixcloutier.com/x86/VGATHERDPS:VGATHERQPS.html",
-      "Items": [
-        {
-          "Mnemonic": "VGATHERDPS",
-          "Opcode": "VEX.DDS.128.66.0F38.W0 92 /r",
-          "Instruction": "VGATHERDPS xmm1, vm32x, xmm2",
-          "OperandEncoding": "A",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Using dword indices specified in vm32x, gather single-precision FP values from memory conditioned on mask specified by xmm2. Conditionally gathered elements are merged into xmm1."
-        },
-        {
-          "Mnemonic": "VGATHERQPS",
-          "Opcode": "VEX.DDS.128.66.0F38.W0 93 /r",
-          "Instruction": "VGATHERQPS xmm1, vm64x, xmm2",
-          "OperandEncoding": "A",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Using qword indices specified in vm64x, gather single-precision FP values from memory conditioned on mask specified by xmm2. Conditionally gathered elements are merged into xmm1."
-        },
-        {
-          "Mnemonic": "VGATHERDPS",
-          "Opcode": "VEX.DDS.256.66.0F38.W0 92 /r",
-          "Instruction": "VGATHERDPS ymm1, vm32y, ymm2",
-          "OperandEncoding": "A",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Using dword indices specified in vm32y, gather single-precision FP values from memory conditioned on mask specified by ymm2. Conditionally gathered elements are merged into ymm1."
-        },
-        {
-          "Mnemonic": "VGATHERQPS",
-          "Opcode": "VEX.DDS.256.66.0F38.W0 93 /r",
-          "Instruction": "VGATHERQPS xmm1, vm64y, xmm2",
-          "OperandEncoding": "A",
-          "CpuidFeatureFlag": "AVX2",
-          "Description": "Using qword indices specified in vm64y, gather single-precision FP values from memory conditioned on mask specified by xmm2. Conditionally gathered elements are merged into xmm1."
-        }
-      ],
-      "OperandEncoding": [
-        {
-          "OperandEncoding": "A",
-          "Operands": [
-            "ModRM:reg (r,w)",
-            "BaseReg (R): VSIB:base, VectorReg(R): VSIB:index",
-            "VEX.vvvv (r, w)"
-          ]
         }
       ]
     },
@@ -32681,6 +32686,121 @@
       ]
     },
     {
+      "Mnemonics": "VPBROADCASTB/W/D/Q",
+      "Summary": "Load with Broadcast Integer Data from General Purpose Register",
+      "Url": "https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html",
+      "Items": [
+        {
+          "Mnemonic": "VPBROADCASTB",
+          "Opcode": "EVEX.128.66.0F38.W0 7A /r",
+          "Instruction": "VPBROADCASTB xmm1 {k1}{z}, reg",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Broadcast an 8-bit value from a GPR to all bytes in the 128-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTB",
+          "Opcode": "EVEX.256.66.0F38.W0 7A /r",
+          "Instruction": "VPBROADCASTB ymm1 {k1}{z}, reg",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Broadcast an 8-bit value from a GPR to all bytes in the 256-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTB",
+          "Opcode": "EVEX.512.66.0F38.W0 7A /r",
+          "Instruction": "VPBROADCASTB zmm1 {k1}{z}, reg",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512BW",
+          "Description": "Broadcast an 8-bit value from a GPR to all bytes in the 512-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTW",
+          "Opcode": "EVEX.128.66.0F38.W0 7B /r",
+          "Instruction": "VPBROADCASTW xmm1 {k1}{z}, reg",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Broadcast a 16-bit value from a GPR to all words in the 128-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTW",
+          "Opcode": "EVEX.256.66.0F38.W0 7B /r",
+          "Instruction": "VPBROADCASTW ymm1 {k1}{z}, reg",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512BW",
+          "Description": "Broadcast a 16-bit value from a GPR to all words in the 256-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTW",
+          "Opcode": "EVEX.512.66.0F38.W0 7B /r",
+          "Instruction": "VPBROADCASTW zmm1 {k1}{z}, reg",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512BW",
+          "Description": "Broadcast a 16-bit value from a GPR to all words in the 512-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTD",
+          "Opcode": "EVEX.128.66.0F38.W0 7C /r",
+          "Instruction": "VPBROADCASTD xmm1 {k1}{z}, r32",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Broadcast a 32-bit value from a GPR to all double-words in the 128-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTD",
+          "Opcode": "EVEX.256.66.0F38.W0 7C /r",
+          "Instruction": "VPBROADCASTD ymm1 {k1}{z}, r32",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Broadcast a 32-bit value from a GPR to all double-words in the 256-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTD",
+          "Opcode": "EVEX.512.66.0F38.W0 7C /r",
+          "Instruction": "VPBROADCASTD zmm1 {k1}{z}, r32",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Broadcast a 32-bit value from a GPR to all double-words in the 512-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTQ",
+          "Opcode": "EVEX.128.66.0F38.W1 7C /r",
+          "Instruction": "VPBROADCASTQ xmm1 {k1}{z}, r64",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/N.E.1",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Broadcast a 64-bit value from a GPR to all quad-words in the 128-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTQ",
+          "Opcode": "EVEX.256.66.0F38.W1 7C /r",
+          "Instruction": "VPBROADCASTQ ymm1 {k1}{z}, r64",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/N.E.1",
+          "CpuidFeatureFlag": "AVX512VL AVX512F",
+          "Description": "Broadcast a 64-bit value from a GPR to all quad-words in the 256-bit destination subject to writemask k1."
+        },
+        {
+          "Mnemonic": "VPBROADCASTQ",
+          "Opcode": "EVEX.512.66.0F38.W1 7C /r",
+          "Instruction": "VPBROADCASTQ zmm1 {k1}{z}, r64",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/N.E.1",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Broadcast a 64-bit value from a GPR to all quad-words in the 512-bit destination subject to writemask k1."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VPBROADCAST",
       "Summary": "Load Integer and Broadcast",
       "Url": "https://www.felixcloutier.com/x86/VPBROADCAST.html",
@@ -32954,121 +33074,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Broadcast 256 bits of 4 quadword integer data in mem to locations in zmm1 using writemask k1."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VPBROADCASTB/VPBROADCASTW/VPBROADCASTD/VPBROADCASTQ",
-      "Summary": "Load with Broadcast Integer Data from General Purpose Register",
-      "Url": "https://www.felixcloutier.com/x86/VPBROADCASTB:VPBROADCASTW:VPBROADCASTD:VPBROADCASTQ.html",
-      "Items": [
-        {
-          "Mnemonic": "VPBROADCASTB",
-          "Opcode": "EVEX.128.66.0F38.W0 7A /r",
-          "Instruction": "VPBROADCASTB xmm1 {k1}{z}, reg",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Broadcast an 8-bit value from a GPR to all bytes in the 128-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTB",
-          "Opcode": "EVEX.256.66.0F38.W0 7A /r",
-          "Instruction": "VPBROADCASTB ymm1 {k1}{z}, reg",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Broadcast an 8-bit value from a GPR to all bytes in the 256-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTB",
-          "Opcode": "EVEX.512.66.0F38.W0 7A /r",
-          "Instruction": "VPBROADCASTB zmm1 {k1}{z}, reg",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512BW",
-          "Description": "Broadcast an 8-bit value from a GPR to all bytes in the 512-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTW",
-          "Opcode": "EVEX.128.66.0F38.W0 7B /r",
-          "Instruction": "VPBROADCASTW xmm1 {k1}{z}, reg",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Broadcast a 16-bit value from a GPR to all words in the 128-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTW",
-          "Opcode": "EVEX.256.66.0F38.W0 7B /r",
-          "Instruction": "VPBROADCASTW ymm1 {k1}{z}, reg",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512BW",
-          "Description": "Broadcast a 16-bit value from a GPR to all words in the 256-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTW",
-          "Opcode": "EVEX.512.66.0F38.W0 7B /r",
-          "Instruction": "VPBROADCASTW zmm1 {k1}{z}, reg",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512BW",
-          "Description": "Broadcast a 16-bit value from a GPR to all words in the 512-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTD",
-          "Opcode": "EVEX.128.66.0F38.W0 7C /r",
-          "Instruction": "VPBROADCASTD xmm1 {k1}{z}, r32",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Broadcast a 32-bit value from a GPR to all double-words in the 128-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTD",
-          "Opcode": "EVEX.256.66.0F38.W0 7C /r",
-          "Instruction": "VPBROADCASTD ymm1 {k1}{z}, r32",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Broadcast a 32-bit value from a GPR to all double-words in the 256-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTD",
-          "Opcode": "EVEX.512.66.0F38.W0 7C /r",
-          "Instruction": "VPBROADCASTD zmm1 {k1}{z}, r32",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Broadcast a 32-bit value from a GPR to all double-words in the 512-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTQ",
-          "Opcode": "EVEX.128.66.0F38.W1 7C /r",
-          "Instruction": "VPBROADCASTQ xmm1 {k1}{z}, r64",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/N.E.1",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Broadcast a 64-bit value from a GPR to all quad-words in the 128-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTQ",
-          "Opcode": "EVEX.256.66.0F38.W1 7C /r",
-          "Instruction": "VPBROADCASTQ ymm1 {k1}{z}, r64",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/N.E.1",
-          "CpuidFeatureFlag": "AVX512VL AVX512F",
-          "Description": "Broadcast a 64-bit value from a GPR to all quad-words in the 256-bit destination subject to writemask k1."
-        },
-        {
-          "Mnemonic": "VPBROADCASTQ",
-          "Opcode": "EVEX.512.66.0F38.W1 7C /r",
-          "Instruction": "VPBROADCASTQ zmm1 {k1}{z}, r64",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/N.E.1",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Broadcast a 64-bit value from a GPR to all quad-words in the 512-bit destination subject to writemask k1."
         }
       ]
     },
@@ -33455,7 +33460,7 @@
       ]
     },
     {
-      "Mnemonics": "VPCONFLICTD/VPCONFLICTQ",
+      "Mnemonics": "VPCONFLICTD/Q",
       "Summary": "Detect Conflicts Within a Vector of Packed Dword/Qword Values into Dense Memory/ Register",
       "Url": "https://www.felixcloutier.com/x86/VPCONFLICTD:VPCONFLICTQ.html",
       "Items": [
@@ -33692,7 +33697,7 @@
       ]
     },
     {
-      "Mnemonics": "VPERMI2W/VPERMI2D/VPERMI2Q/VPERMI2PS/VPERMI2PD",
+      "Mnemonics": "VPERMI2W/D/Q/PS/PD",
       "Summary": "Full Permute From Two Tables Overwriting the Index",
       "Url": "https://www.felixcloutier.com/x86/VPERMI2W:VPERMI2D:VPERMI2Q:VPERMI2PS:VPERMI2PD.html",
       "Items": [
@@ -34167,7 +34172,7 @@
       ]
     },
     {
-      "Mnemonics": "VPERMT2W/VPERMT2D/VPERMT2Q/VPERMT2PS/VPERMT2PD",
+      "Mnemonics": "VPERMT2W/D/Q/PS/PD",
       "Summary": "Full Permute from Two Tables Overwriting one Table",
       "Url": "https://www.felixcloutier.com/x86/VPERMT2W:VPERMT2D:VPERMT2Q:VPERMT2PS:VPERMT2PD.html",
       "Items": [
@@ -34597,7 +34602,7 @@
       ]
     },
     {
-      "Mnemonics": "VPLZCNTD/VPLZCNTQ",
+      "Mnemonics": "VPLZCNTD/Q",
       "Summary": "Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values",
       "Url": "https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html",
       "Items": [
@@ -36377,7 +36382,7 @@
       ]
     },
     {
-      "Mnemonics": "VPTESTNMB/VPTESTNMW/VPTESTNMD/VPTESTNMQ",
+      "Mnemonics": "VPTESTNMB/W/D/Q",
       "Summary": "Logical NAND and Set",
       "Url": "https://www.felixcloutier.com/x86/VPTESTNMB:VPTESTNMW:VPTESTNMD:VPTESTNMQ.html",
       "Items": [
@@ -36614,6 +36619,21 @@
       ]
     },
     {
+      "Mnemonics": "VRCP14SD",
+      "Summary": "Compute Approximate Reciprocal of Scalar Float64 Value",
+      "Url": "https://www.felixcloutier.com/x86/VRCP14SD.html",
+      "Items": [
+        {
+          "Mnemonic": "VRCP14SD",
+          "Opcode": "EVEX.NDS.LIG.66.0F38.W1 4D /r",
+          "Instruction": "VRCP14SD xmm1 {k1}{z}, xmm2, xmm3/m64",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Computes the approximate reciprocal of the scalar double-precision floating-point value in xmm3/m64 and stores the result in xmm1 using writemask k1. Also, upper double-precision floating-point value (bits[127:64]) from xmm2 is copied to xmm1[127:64]."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VRCP14PS",
       "Summary": "Compute Approximate Reciprocals of Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VRCP14PS.html",
@@ -36644,21 +36664,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Computes the approximate reciprocals of the packed single-precision floating-point values in zmm2/m512/m32bcst and stores the results in zmm1. Under writemask."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VRCP14SD",
-      "Summary": "Compute Approximate Reciprocal of Scalar Float64 Value",
-      "Url": "https://www.felixcloutier.com/x86/VRCP14SD.html",
-      "Items": [
-        {
-          "Mnemonic": "VRCP14SD",
-          "Opcode": "EVEX.NDS.LIG.66.0F38.W1 4D /r",
-          "Instruction": "VRCP14SD xmm1 {k1}{z}, xmm2, xmm3/m64",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Computes the approximate reciprocal of the scalar double-precision floating-point value in xmm3/m64 and stores the result in xmm1 using writemask k1. Also, upper double-precision floating-point value (bits[127:64]) from xmm2 is copied to xmm1[127:64]."
         }
       ]
     },
@@ -36713,6 +36718,21 @@
       ]
     },
     {
+      "Mnemonics": "VREDUCESD",
+      "Summary": "Perform a Reduction Transformation on a Scalar Float64 Value",
+      "Url": "https://www.felixcloutier.com/x86/VREDUCESD.html",
+      "Items": [
+        {
+          "Mnemonic": "VREDUCESD",
+          "Opcode": "EVEX.NDS.LIG.66.0F3A.W1 57",
+          "Instruction": "VREDUCESD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}, imm8/r",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512D Q",
+          "Description": "Perform a reduction transformation on a scalar double-precision floating point value in xmm3/m64 by subtracting a number of fraction bits specified by the imm8 field. Also, upper double precision floating-point value (bits[127:64]) from xmm2 are copied to xmm1[127:64]. Stores the result in xmm1 register."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VREDUCEPS",
       "Summary": "Perform Reduction Transformation on Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VREDUCEPS.html",
@@ -36743,21 +36763,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512DQ",
           "Description": "Perform reduction transformation on packed single-precision floating point values in zmm2/m512/m32bcst by subtracting a number of fraction bits specified by the imm8 field. Stores the result in zmm1 register under writemask k1."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VREDUCESD",
-      "Summary": "Perform a Reduction Transformation on a Scalar Float64 Value",
-      "Url": "https://www.felixcloutier.com/x86/VREDUCESD.html",
-      "Items": [
-        {
-          "Mnemonic": "VREDUCESD",
-          "Opcode": "EVEX.NDS.LIG.66.0F3A.W1 57",
-          "Instruction": "VREDUCESD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}, imm8/r",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512D Q",
-          "Description": "Perform a reduction transformation on a scalar double-precision floating point value in xmm3/m64 by subtracting a number of fraction bits specified by the imm8 field. Also, upper double precision floating-point value (bits[127:64]) from xmm2 are copied to xmm1[127:64]. Stores the result in xmm1 register."
         }
       ]
     },
@@ -36812,6 +36817,22 @@
       ]
     },
     {
+      "Mnemonics": "VRNDSCALESD",
+      "Summary": "Round Scalar Float64 Value To Include A Given Number Of Fraction Bits",
+      "Url": "https://www.felixcloutier.com/x86/VRNDSCALESD.html",
+      "Items": [
+        {
+          "Mnemonic": "VRNDSCALESD",
+          "Opcode": "EVEX.NDS.LIG.66.0F3A.W1 0B /r ib",
+          "Instruction": "VRNDSCALESD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}, imm8",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Rounds scalar double-precision floating-point value in xmm3/m64 to a number of fraction bits specified by the imm8 field. Stores the result in xmm1 register."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VRNDSCALEPS",
       "Summary": "Round Packed Float32 Values To Include A Given Number Of Fraction Bits",
       "Url": "https://www.felixcloutier.com/x86/VRNDSCALEPS.html",
@@ -36842,22 +36863,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Rounds packed single-precision floating-point values in zmm2/m512/m32bcst to a number of fraction bits specified by the imm8 field. Stores the result in zmm1 register using writemask."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VRNDSCALESD",
-      "Summary": "Round Scalar Float64 Value To Include A Given Number Of Fraction Bits",
-      "Url": "https://www.felixcloutier.com/x86/VRNDSCALESD.html",
-      "Items": [
-        {
-          "Mnemonic": "VRNDSCALESD",
-          "Opcode": "EVEX.NDS.LIG.66.0F3A.W1 0B /r ib",
-          "Instruction": "VRNDSCALESD xmm1 {k1}{z}, xmm2, xmm3/m64{sae}, imm8",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Rounds scalar double-precision floating-point value in xmm3/m64 to a number of fraction bits specified by the imm8 field. Stores the result in xmm1 register."
         }
       ]
     },
@@ -36912,6 +36917,22 @@
       ]
     },
     {
+      "Mnemonics": "VRSQRT14SD",
+      "Summary": "Compute Approximate Reciprocal of Square Root of Scalar Float64 Value",
+      "Url": "https://www.felixcloutier.com/x86/VRSQRT14SD.html",
+      "Items": [
+        {
+          "Mnemonic": "VRSQRT14SD",
+          "Opcode": "EVEX.NDS.LIG.66.0F38.W1 4F /r",
+          "Instruction": "VRSQRT14SD xmm1 {k1}{z}, xmm2, xmm3/m64",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Computes the approximate reciprocal square root of the scalar double-precision floating-point value in xmm3/m64 and stores the result in the low quadword element of xmm1 using writemask k1. Bits[127:64] of xmm2 is copied to xmm1[127:64]."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VRSQRT14PS",
       "Summary": "Compute Approximate Reciprocals of Square Roots of Packed Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VRSQRT14PS.html",
@@ -36942,22 +36963,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Computes the approximate reciprocal square roots of the packed single-precision floating-point values in zmm2/m512/m32bcst and stores the results in zmm1. Under writemask."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VRSQRT14SD",
-      "Summary": "Compute Approximate Reciprocal of Square Root of Scalar Float64 Value",
-      "Url": "https://www.felixcloutier.com/x86/VRSQRT14SD.html",
-      "Items": [
-        {
-          "Mnemonic": "VRSQRT14SD",
-          "Opcode": "EVEX.NDS.LIG.66.0F38.W1 4F /r",
-          "Instruction": "VRSQRT14SD xmm1 {k1}{z}, xmm2, xmm3/m64",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Computes the approximate reciprocal square root of the scalar double-precision floating-point value in xmm3/m64 and stores the result in the low quadword element of xmm1 using writemask k1. Bits[127:64] of xmm2 is copied to xmm1[127:64]."
         }
       ]
     },
@@ -37012,6 +37017,22 @@
       ]
     },
     {
+      "Mnemonics": "VSCALEFSD",
+      "Summary": "Scale Scalar Float64 Values With Float64 Values",
+      "Url": "https://www.felixcloutier.com/x86/VSCALEFSD.html",
+      "Items": [
+        {
+          "Mnemonic": "VSCALEFSD",
+          "Opcode": "EVEX.NDS.LIG.66.0F38.W1 2D /r",
+          "Instruction": "VSCALEFSD xmm1 {k1}{z}, xmm2, xmm3/m64{er}",
+          "OperandEncoding": "A",
+          "Bit64Bit32ModeSupport": "V/V",
+          "CpuidFeatureFlag": "AVX512F",
+          "Description": "Scale the scalar double-precision floating-point values in xmm2 using the value from xmm3/m64. Under writemask k1."
+        }
+      ]
+    },
+    {
       "Mnemonics": "VSCALEFPS",
       "Summary": "Scale Packed Float32 Values With Float32 Values",
       "Url": "https://www.felixcloutier.com/x86/VSCALEFPS.html",
@@ -37042,22 +37063,6 @@
           "Bit64Bit32ModeSupport": "V/V",
           "CpuidFeatureFlag": "AVX512F",
           "Description": "Scale the packed single-precision floating-point values in zmm2 using floating-point values from zmm3/m512/m32bcst. Under writemask k1."
-        }
-      ]
-    },
-    {
-      "Mnemonics": "VSCALEFSD",
-      "Summary": "Scale Scalar Float64 Values With Float64 Values",
-      "Url": "https://www.felixcloutier.com/x86/VSCALEFSD.html",
-      "Items": [
-        {
-          "Mnemonic": "VSCALEFSD",
-          "Opcode": "EVEX.NDS.LIG.66.0F38.W1 2D /r",
-          "Instruction": "VSCALEFSD xmm1 {k1}{z}, xmm2, xmm3/m64{er}",
-          "OperandEncoding": "A",
-          "Bit64Bit32ModeSupport": "V/V",
-          "CpuidFeatureFlag": "AVX512F",
-          "Description": "Scale the scalar double-precision floating-point values in xmm2 using the value from xmm3/m64. Under writemask k1."
         }
       ]
     },
@@ -37356,6 +37361,37 @@
       ]
     },
     {
+      "Mnemonics": "WAIT/FWAIT",
+      "Summary": "Wait",
+      "Url": "https://www.felixcloutier.com/x86/WAIT:FWAIT.html",
+      "Items": [
+        {
+          "Mnemonic": "WAIT",
+          "Opcode": "9B",
+          "Instruction": "WAIT",
+          "OperandEncoding": "ZO",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Check pending unmasked floating-point exceptions."
+        },
+        {
+          "Mnemonic": "FWAIT",
+          "Opcode": "9B",
+          "Instruction": "FWAIT",
+          "OperandEncoding": "ZO",
+          "Bit64Mode": "Valid",
+          "CompatLegMode": "Valid",
+          "Description": "Check pending unmasked floating-point exceptions."
+        }
+      ],
+      "OperandEncoding": [
+        {
+          "OperandEncoding": "ZO",
+          "Operands": []
+        }
+      ]
+    },
+    {
       "Mnemonics": "WBINVD",
       "Summary": "Write Back and Invalidate Cache",
       "Url": "https://www.felixcloutier.com/x86/WBINVD.html",
@@ -37460,6 +37496,27 @@
       ]
     },
     {
+      "Mnemonics": "XACQUIRE/XRELEASE",
+      "Summary": "Hardware Lock Elision Prefix Hints",
+      "Url": "https://www.felixcloutier.com/x86/XACQUIRE:XRELEASE.html",
+      "Items": [
+        {
+          "Mnemonic": "XACQUIRE",
+          "Opcode": "F2",
+          "Instruction": "XACQUIRE",
+          "CpuidFeatureFlag": "HLE1",
+          "Description": "A hint used with an “XACQUIRE-enabled“ instruction to start lock elision on the instruction memory operand address."
+        },
+        {
+          "Mnemonic": "XRELEASE",
+          "Opcode": "F3",
+          "Instruction": "XRELEASE",
+          "CpuidFeatureFlag": "HLE",
+          "Description": "A hint used with an “XRELEASE-enabled“ instruction to end lock elision on the instruction memory operand address."
+        }
+      ]
+    },
+    {
       "Mnemonics": "XABORT",
       "Summary": "Transactional Abort",
       "Url": "https://www.felixcloutier.com/x86/XABORT.html",
@@ -37479,27 +37536,6 @@
           "Operands": [
             "imm8"
           ]
-        }
-      ]
-    },
-    {
-      "Mnemonics": "XACQUIRE/XRELEASE",
-      "Summary": "Hardware Lock Elision Prefix Hints",
-      "Url": "https://www.felixcloutier.com/x86/XACQUIRE:XRELEASE.html",
-      "Items": [
-        {
-          "Mnemonic": "XACQUIRE",
-          "Opcode": "F2",
-          "Instruction": "XACQUIRE",
-          "CpuidFeatureFlag": "HLE1",
-          "Description": "A hint used with an “XACQUIRE-enabled“ instruction to start lock elision on the instruction memory operand address."
-        },
-        {
-          "Mnemonic": "XRELEASE",
-          "Opcode": "F3",
-          "Instruction": "XRELEASE",
-          "CpuidFeatureFlag": "HLE",
-          "Description": "A hint used with an “XRELEASE-enabled“ instruction to end lock elision on the instruction memory operand address."
         }
       ]
     },

@@ -31,8 +31,9 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         public static byte PrefixVex3Byte => 0xc4;
 
 
-        private static Dictionary<byte, int> Prefixes { get; }
-        
+        public static IReadOnlyDictionary<byte, int> GroupIdByPrefix => _groupIdByPrefix;
+        private static readonly Dictionary<byte, int> _groupIdByPrefix;
+
         static PrefixMetadata()
         {
             var prefixGroups = new[]
@@ -62,13 +63,13 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
                 }
             };
 
-            Prefixes = prefixGroups
-                .SelectMany((prefixes, groupIndex) => prefixes.Select(prefix => new {prefix, groupIndex}))
+            _groupIdByPrefix = prefixGroups
+                .SelectMany((prefixes, groupIndex) => prefixes.Select(prefix => new { prefix, groupIndex }))
                 .ToDictionary(x => x.prefix, x => x.groupIndex);
         }
 
-        public static bool IsPrefix(byte prefix) => Prefixes.ContainsKey(prefix);
+        public static bool IsPrefix(byte prefix) => _groupIdByPrefix.ContainsKey(prefix);
 
-        public static int GetPrefixGroup(byte prefix) => Prefixes[prefix];
+        public static int GetPrefixGroup(byte prefix) => _groupIdByPrefix[prefix];
     }
 }

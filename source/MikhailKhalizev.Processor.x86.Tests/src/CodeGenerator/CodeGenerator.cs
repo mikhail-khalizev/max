@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Aspose.Pdf.Cloud.Sdk.Api;
 using Aspose.Pdf.Facades;
 using HtmlAgilityPack;
@@ -19,18 +21,18 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 {
     public class CodeGenerator
     {
-        public const string mnemonicCodeCsFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\src\InstructionDecode\MnemonicCode.cs";
-        public const string decodeJsonFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\resources\decode.json";
-        
-        public const string decodeFelixcloutierJsonFileName = @"decode-felixcloutier.json";
-        public const string asposePageJsonFileName = @"Aspose\Json\page-{0}.json";
-        public const string bookmarksJsonFileName = @"bookmarks.json";
-        
-        public const string documentFolder = @"C:\Users\micky\YandexDisk\Документы\Технологии\x86\intel";
-        public const string documentName = "325383-sdm-vol-2abcd.pdf";
+        public const string mnemonicCodeCsFileName = Constants.mnemonicCodeCsFileName;
+        public const string decodeJsonFileName = Constants.decodeJsonFileName;
 
-        public const string AsposeAppSid = "9fa9e638-7858-4022-ba7f-9a99edbdeeac";
-        public const string AsposeAppKey = "74b609b2f5238cdf432afdb73e8201d3";
+        public const string decodeFelixcloutierJsonFileName = Constants.decodeFelixcloutierJsonFileName;
+        public const string asposePageJsonFileName = Constants.asposePageJsonFileName;
+        public const string bookmarksJsonFileName = Constants.bookmarksJsonFileName;
+
+        public const string documentFolder = Constants.documentFolder;
+        public const string documentName = Constants.documentName;
+
+        public const string AsposeAppSid = Constants.AsposeAppSid;
+        public const string AsposeAppKey = Constants.AsposeAppKey;
 
         [Fact(Skip = "For developer")]
         public void ParseFelixcloutier()
@@ -48,9 +50,9 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             var headerNode = htmlDocumentIndex.DocumentNode.SelectNodes("//body/h2")
                 .Single(x => x.InnerText == "Core Instructions");
             var indexTable = headerNode.NextSibling;
-            
-            var decodeMeta = new DecodeDto();
-            decodeMeta.Instructions = indexTable.ChildNodes
+
+            var decodeDto = new DecodeDto();
+            decodeDto.Instructions = indexTable.ChildNodes
                 .Select(
                     indexItem =>
                     {
@@ -105,11 +107,13 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 .Where(x => x.Url != null)
                 .ToList();
 
-            var json = JToken.FromObject(decodeMeta, JsonSerializer.CreateDefault(
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore
-                })).ToString();
+            var json = JToken.FromObject(
+                decodeDto,
+                JsonSerializer.CreateDefault(
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    })).ToString();
 
             File.WriteAllText(decodeFelixcloutierJsonFileName, json);
         }
@@ -125,18 +129,18 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 return;
 
             instruction.Items = new List<InstructionItemDto>();
-            
+
             var indexOpcode = header.FindIndex(x => string.Equals(x, "Opcode", StringComparison.OrdinalIgnoreCase));
             var indexInstruction = header.FindIndex(x => string.Equals(x, "Instruction", StringComparison.OrdinalIgnoreCase));
             var indexOpcodeInstruction =
                 Math.Max(
                     header.FindIndex(x => string.Equals(x, "Opcode Instruction", StringComparison.OrdinalIgnoreCase)),
                     header.FindIndex(x => string.Equals(x, "Opcode/Instruction", StringComparison.OrdinalIgnoreCase)));
-
             var indexOperandEncoding = header.FindIndex(x => string.Equals(x, "Op/En", StringComparison.OrdinalIgnoreCase));
             var index64bitMode = header.FindIndex(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
             var indexCompatLegMode = header.FindIndex(x => string.Equals(x, "Compat/Leg Mode", StringComparison.OrdinalIgnoreCase));
-            var indexBit64Bit32ModeSupport = header.FindIndex(x => string.Equals(x, "64/32 bit Mode Support", StringComparison.OrdinalIgnoreCase));
+            var indexBit64Bit32ModeSupport =
+                header.FindIndex(x => string.Equals(x, "64/32 bit Mode Support", StringComparison.OrdinalIgnoreCase));
             var indexCpuidFeatureFlag = header.FindIndex(x => string.Equals(x, "CPUID Feature Flag", StringComparison.OrdinalIgnoreCase));
             var indexDescription = header.FindIndex(x => string.Equals(x, "Description", StringComparison.OrdinalIgnoreCase));
 
@@ -181,6 +185,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     item.Opcode = str.Substring(0, index).TrimEnd();
                     item.Instruction = str.Substring(index).TrimStart();
                 }
+
                 if (0 <= indexOpcode)
                     item.Opcode = values[indexOpcode];
                 if (0 <= indexInstruction)
@@ -220,7 +225,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
         private static void ParseOperandEncodingTable(List<(HtmlNode Table, List<string> Headers)> tables, InstructionDto instruction)
         {
-            var (table, header) = tables.FirstOrDefault(x => 2 <= x.Headers.Count && x.Headers[0] == "Op/En" && x.Headers[1] == "Operand 1");
+            var (table, header) =
+                tables.FirstOrDefault(x => 2 <= x.Headers.Count && x.Headers[0] == "Op/En" && x.Headers[1] == "Operand 1");
             if (table == null)
                 return;
 
@@ -255,12 +261,15 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
             var mnemonicCodes = decodeMeta.Instructions
                 .Where(x => x.Items != null)
-                .SelectMany(x => x.Items.Select(y => new
-                {
-                    y.MnemonicCode,
-                    x.Summary,
-                    x.Url
-                }))
+                .SelectMany(
+                    x => x.Items.Select(
+                        y => new
+                        {
+                            y.MnemonicCode,
+                            x.Summary,
+                            x.Url,
+                            x.PageNumber
+                        }))
                 .ToLookup(x => x.MnemonicCode);
 
             var lines = new[]
@@ -274,45 +283,52 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 "    public enum MnemonicCode",
                 "    {",
             }.AsEnumerable();
-            
-            lines = lines.Concat(mnemonicCodes.OrderBy(x => x.Key).SelectMany(x =>
-            {
-                var summaries = x.Select(y => y.Summary).Distinct();
-                var urls = x.Select(y => y.Url).Distinct().ToList();
 
-                var result = Enumerable.Empty<string>()
-                    .Append("        /// <summary>")
-                    .Concat(summaries.Select(y => $"        /// {y}."))
-                    .Append("        /// </summary>");
+            lines = lines.Concat(
+                mnemonicCodes.OrderBy(x => x.Key).SelectMany(
+                    x =>
+                    {
+                        var xo = x.OrderBy(y => y.PageNumber).ToList();
 
-                if (urls.Count == 1)
+                        var summaries = xo.Select(y => y.Summary).Distinct();
+                        var remarks = xo.Select(y => y.Url).Distinct().ToList();
+                        var pages = xo.Select(y => y.PageNumber).Distinct().ToList();
+                        remarks.Add($"Page{(1 < pages.Count ? "s" : "")} {string.Join(", ", pages)} in Intel documentation file '{InstructionDto.DocumentationFile}'.");
+                    
+                        var result = Enumerable.Empty<string>()
+                            .Append("        /// <summary>")
+                            .Concat(summaries.Select(y => $"        /// {y}."))
+                            .Append("        /// </summary>");
+
+                        if (remarks.Count == 1)
+                        {
+                            result = result
+                                .Append($"        /// <remarks>{remarks[0]}</remarks>");
+                        }
+                        else
+                        {
+                            result = result
+                                .Append("        /// <remarks>")
+                                .Concat(remarks.Select(y => $"        /// {y}"))
+                                .Append("        /// </remarks>");
+                        }
+
+                        var prefix = new[] { "in", "out", "lock", "int" }.Contains(x.Key) ? "@" : "";
+
+                        result = result
+                            .Append($"        {prefix}{x.Key},")
+                            .Append("");
+
+                        return result;
+                    }).SkipLast(1));
+
+
+            lines = lines.Concat(
+                new[]
                 {
-                    result = result
-                        .Append($"        /// <remarks>{urls[0]}</remarks>");
-                }
-                else
-                {
-                    result = result
-                        .Append("        /// <remarks>")
-                        .Concat(urls.Select(y => $"        /// {y}"))
-                        .Append("        /// </remarks>");
-                }
-
-                var prefix = new[] { "in", "out", "lock", "int" }.Contains(x.Key) ? "@" : "";
-
-                result = result
-                    .Append($"        {prefix}{x.Key},")
-                    .Append("");
-
-                return result;
-            }).SkipLast(1));
-
-
-            lines = lines.Concat(new[]
-            {
-                "    }",
-                "}"
-            });
+                    "    }",
+                    "}"
+                });
 
             var json = string.Join(Environment.NewLine, lines);
             File.WriteAllText(mnemonicCodeCsFileName, json);
@@ -339,44 +355,69 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             // NOTE Copy manually 'fileIProcessorCs' value to 'IProcessor.cs'.
         }
 
-        [Fact(Skip = "For developer")]
+        [Fact]
         public void LoadPdfWithAspose()
         {
             var dir = Path.GetDirectoryName(asposePageJsonFileName);
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            var pdfApi = new PdfApi(AsposeAppKey, AsposeAppSid);
-            var doc = pdfApi.GetDocument(documentName).Document;
-            var pageResponse = pdfApi.GetPage(documentName, 1);
-            
-            for (var i = 1; i <= doc.Pages.List.Count; i++)
-            {
-                var file = string.Format(asposePageJsonFileName, i.ToString().PadLeft(4, '0'));
-                if (File.Exists(file))
-                    continue;
+            var bag = new ConcurrentBag<PdfApi>();
+            var pdfApiInit = new PdfApi(AsposeAppKey, AsposeAppSid);
 
-                var page = new PageRawDto();
-                page.Number = i;
-                page.CreationDate = doc.DocumentProperties.List.Single(x => x.Name == "CreationDate").Value;
-                page.ModDate = doc.DocumentProperties.List.Single(x => x.Name == "ModDate").Value;
-                page.Tables = JObject.Parse(pdfApi.GetPageTables(documentName, i).Tables.ToJson())["List"];
-                page.Texts = JObject.Parse(
-                    pdfApi.GetPageText(
-                        documentName,
-                        i,
-                        pageResponse.Page.Rectangle.LLX,
-                        pageResponse.Page.Rectangle.LLY,
-                        pageResponse.Page.Rectangle.URX,
-                        pageResponse.Page.Rectangle.URY).TextOccurrences.ToJson())["List"];
+            var doc = pdfApiInit.GetDocument(documentName).Document;
+            var creationDate = doc.DocumentProperties.List.Single(x => x.Name == "CreationDate").Value;
+            var modDate = doc.DocumentProperties.List.Single(x => x.Name == "ModDate").Value;
+            var pageResponse = pdfApiInit.GetPage(documentName, 1);
 
-                var json = JToken.FromObject(page, JsonSerializer.CreateDefault(
-                    new JsonSerializerSettings
+            bag.Add(pdfApiInit);
+
+            Parallel.For(
+                1,
+                doc.Pages.List.Count + 1,
+                new ParallelOptions { MaxDegreeOfParallelism = 3 },
+                i =>
+                {
+                    var file = string.Format(asposePageJsonFileName, i.ToString().PadLeft(4, '0'));
+                    if (File.Exists(file))
                     {
-                        NullValueHandling = NullValueHandling.Ignore
-                    })).ToString();
-                File.WriteAllText(file, json);
-            }
+                        var filePath = string.Format(asposePageJsonFileName, i.ToString().PadLeft(4, '0'));
+                        var allText = File.ReadAllText(filePath);
+                        var pageDto = JsonConvert.DeserializeObject<PageDto>(allText);
+                        if (pageDto.Number == i && pageDto.CreationDate == creationDate && pageDto.ModDate == modDate)
+                            return;
+                    }
+
+                    bag.TryTake(out var pdfApi);
+                    if (pdfApi == null)
+                        pdfApi = new PdfApi(AsposeAppKey, AsposeAppSid);
+
+                    var page = new PageRawDto();
+                    page.Number = i;
+                    page.CreationDate = creationDate;
+                    page.ModDate = modDate;
+                    page.Tables = JObject.Parse(pdfApi.GetPageTables(documentName, i).Tables.ToJson())["List"];
+                    page.Texts = JObject.Parse(
+                        pdfApi.GetPageText(
+                            documentName,
+                            i,
+                            pageResponse.Page.Rectangle.LLX,
+                            pageResponse.Page.Rectangle.LLY,
+                            pageResponse.Page.Rectangle.URX,
+                            pageResponse.Page.Rectangle.URY).TextOccurrences.ToJson())["List"];
+
+                    bag.Add(pdfApi);
+                    pdfApi = null;
+
+                    var json = JToken.FromObject(
+                        page,
+                        JsonSerializer.CreateDefault(
+                            new JsonSerializerSettings
+                            {
+                                NullValueHandling = NullValueHandling.Ignore
+                            })).ToString();
+                    File.WriteAllText(file, json);
+                });
         }
 
         [Fact(Skip = "For developer")]
@@ -410,48 +451,15 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
             var bookmarksDto = Transform(loadedDocument.Bookmarks);
 
-            var json = JToken.FromObject(bookmarksDto, JsonSerializer.CreateDefault(
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    DefaultValueHandling = DefaultValueHandling.Ignore
-                })).ToString();
+            var json = JToken.FromObject(
+                bookmarksDto,
+                JsonSerializer.CreateDefault(
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DefaultValueHandling = DefaultValueHandling.Ignore
+                    })).ToString();
             File.WriteAllText(bookmarksJsonFileName, json);
-        }
-        
-        [Fact(Skip = "For developer")]
-        public void ParsePdf()
-        {
-            var dir = Path.GetDirectoryName(asposePageJsonFileName);
-            var pattern = Path.GetFileName(asposePageJsonFileName).Replace("{0}", "*");
-            var files = Directory.EnumerateFiles(dir, pattern).OrderBy(x => x).ToList();
-
-            foreach (var file in files)
-            {
-                var allText = File.ReadAllText(file);
-                var decodeMeta = JsonConvert.DeserializeObject<PageDto>(allText);
-
-                if (decodeMeta.Tables == null)
-                    continue;
-
-                var opcodesTable = decodeMeta.Tables
-                    .Where(
-                        x =>
-                        {
-                            if (x.RowList.Count < 2)
-                                return false;
-
-                            if (x.RowList[0].CellList.Count < 2)
-                                return false;
-
-                            return x.RowList[0].CellList[0].TextRects.List
-                                .Any(y => y.Text.Contains("Opcode", StringComparison.OrdinalIgnoreCase));
-                        })
-                    .ToList();
-
-                if (opcodesTable.Count == 0)
-                    continue;
-            }
         }
     }
 }
