@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Aspose.Pdf.Cloud.Sdk.Api;
+using Aspose.Pdf.Facades;
 using HtmlAgilityPack;
 using MikhailKhalizev.Processor.x86.InstructionDecode;
 using MikhailKhalizev.Processor.x86.InstructionDecode.Dto;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Interactive;
+using Syncfusion.Pdf.Parsing;
 using Xunit;
 using Path = System.IO.Path;
 
@@ -15,12 +19,21 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 {
     public class CodeGenerator
     {
-        public const string decodeJsonFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\resources\decode.json";
         public const string mnemonicCodeCsFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\src\InstructionDecode\MnemonicCode.cs";
-        public const string asposeRawJsonFileName = @"Aspose\Json\page-{0}.json";
+        public const string decodeJsonFileName = @"..\..\..\..\MikhailKhalizev.Processor.x86\resources\decode.json";
+        
+        public const string decodeFelixcloutierJsonFileName = @"decode-felixcloutier.json";
+        public const string asposePageJsonFileName = @"Aspose\Json\page-{0}.json";
+        public const string bookmarksJsonFileName = @"bookmarks.json";
+        
+        public const string documentFolder = @"C:\Users\micky\YandexDisk\Документы\Технологии\x86\intel";
+        public const string documentName = "325383-sdm-vol-2abcd.pdf";
+
+        public const string AsposeAppSid = "9fa9e638-7858-4022-ba7f-9a99edbdeeac";
+        public const string AsposeAppKey = "74b609b2f5238cdf432afdb73e8201d3";
 
         [Fact(Skip = "For developer")]
-        public void FelixcloutierParse()
+        public void ParseFelixcloutier()
         {
             var web = new HtmlWeb();
             web.CachePath = Path.Combine(Directory.GetCurrentDirectory(), "WebCache");
@@ -35,10 +48,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             var headerNode = htmlDocumentIndex.DocumentNode.SelectNodes("//body/h2")
                 .Single(x => x.InnerText == "Core Instructions");
             var indexTable = headerNode.NextSibling;
-
-            var str = File.ReadAllText(decodeJsonFileName);
-            var decodeMeta = JsonConvert.DeserializeObject<DecodeDto>(str);
-
+            
+            var decodeMeta = new DecodeDto();
             decodeMeta.Instructions = indexTable.ChildNodes
                 .Select(
                     indexItem =>
@@ -94,13 +105,13 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 .Where(x => x.Url != null)
                 .ToList();
 
-            str = JToken.FromObject(decodeMeta, JsonSerializer.CreateDefault(
+            var json = JToken.FromObject(decodeMeta, JsonSerializer.CreateDefault(
                 new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore
                 })).ToString();
 
-            File.WriteAllText(decodeJsonFileName, str);
+            File.WriteAllText(decodeFelixcloutierJsonFileName, json);
         }
 
         private static void ParseMainTable(List<(HtmlNode Table, List<string> Header)> tables, InstructionDto instruction)
@@ -235,7 +246,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         }
 
         [Fact(Skip = "For developer")]
-        public void FileGenerator()
+        public void GenerateFiles()
         {
             var str = File.ReadAllText(decodeJsonFileName);
             var decodeMeta = JsonConvert.DeserializeObject<DecodeDto>(str);
@@ -303,8 +314,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 "}"
             });
 
-            str = string.Join(Environment.NewLine, lines);
-            File.WriteAllText(mnemonicCodeCsFileName, str);
+            var json = string.Join(Environment.NewLine, lines);
+            File.WriteAllText(mnemonicCodeCsFileName, json);
 
 
             // IProcessor.cs (instruction region)
@@ -329,23 +340,19 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         }
 
         [Fact(Skip = "For developer")]
-        public void AsposeLoad()
+        public void LoadPdfWithAspose()
         {
-            var documentName = "325383-sdm-vol-2abcd.pdf";
-            var appSid = "9fa9e638-7858-4022-ba7f-9a99edbdeeac";
-            var appKey = "74b609b2f5238cdf432afdb73e8201d3";
-
-            var dir = Path.GetDirectoryName(asposeRawJsonFileName);
+            var dir = Path.GetDirectoryName(asposePageJsonFileName);
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-            
-            var pdfApi = new PdfApi(appKey, appSid);
+
+            var pdfApi = new PdfApi(AsposeAppKey, AsposeAppSid);
             var doc = pdfApi.GetDocument(documentName).Document;
             var pageResponse = pdfApi.GetPage(documentName, 1);
             
             for (var i = 1; i <= doc.Pages.List.Count; i++)
             {
-                var file = string.Format(asposeRawJsonFileName, i.ToString().PadLeft(4, '0'));
+                var file = string.Format(asposePageJsonFileName, i.ToString().PadLeft(4, '0'));
                 if (File.Exists(file))
                     continue;
 
@@ -363,12 +370,87 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                         pageResponse.Page.Rectangle.URX,
                         pageResponse.Page.Rectangle.URY).TextOccurrences.ToJson())["List"];
 
-                var pageString = JToken.FromObject(page, JsonSerializer.CreateDefault(
+                var json = JToken.FromObject(page, JsonSerializer.CreateDefault(
                     new JsonSerializerSettings
                     {
                         NullValueHandling = NullValueHandling.Ignore
                     })).ToString();
-                File.WriteAllText(file, pageString);
+                File.WriteAllText(file, json);
+            }
+        }
+
+        [Fact(Skip = "For developer")]
+        public void LoadPdfBookmarksWithSyncfusion()
+        {
+            var docStream = new FileStream(Path.Combine(documentFolder, documentName), FileMode.Open, FileAccess.Read);
+            var loadedDocument = new PdfLoadedDocument(docStream);
+
+            var pages = loadedDocument.Pages.Cast<object>().ToList();
+
+            //bookmarksJsonFileName 
+
+            BookmarkDto Transform(PdfBookmarkBase bookmarkBase)
+            {
+                var result = new BookmarkDto();
+
+                if (bookmarkBase is PdfBookmark bookmark)
+                {
+                    result.Title = bookmark.Title;
+                    var page = bookmark.NamedDestination?.Destination?.Page;
+                    if (page != null)
+                        result.PageNumber = pages.IndexOf(page) + 1;
+                }
+
+                result.Children = bookmarkBase.OfType<PdfBookmark>().Select(Transform).ToList();
+                if (result.Children.Count == 0)
+                    result.Children = null;
+
+                return result;
+            }
+
+            var bookmarksDto = Transform(loadedDocument.Bookmarks);
+
+            var json = JToken.FromObject(bookmarksDto, JsonSerializer.CreateDefault(
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.Ignore
+                })).ToString();
+            File.WriteAllText(bookmarksJsonFileName, json);
+        }
+        
+        [Fact(Skip = "For developer")]
+        public void ParsePdf()
+        {
+            var dir = Path.GetDirectoryName(asposePageJsonFileName);
+            var pattern = Path.GetFileName(asposePageJsonFileName).Replace("{0}", "*");
+            var files = Directory.EnumerateFiles(dir, pattern).OrderBy(x => x).ToList();
+
+            foreach (var file in files)
+            {
+                var allText = File.ReadAllText(file);
+                var decodeMeta = JsonConvert.DeserializeObject<PageDto>(allText);
+
+                if (decodeMeta.Tables == null)
+                    continue;
+
+                var opcodesTable = decodeMeta.Tables
+                    .Where(
+                        x =>
+                        {
+                            if (x.RowList.Count < 2)
+                                return false;
+
+                            if (x.RowList[0].CellList.Count < 2)
+                                return false;
+
+                            return x.RowList[0].CellList[0].TextRects.List
+                                .Any(y => y.Text.Contains("Opcode", StringComparison.OrdinalIgnoreCase));
+                        })
+                    .ToList();
+
+                if (opcodesTable.Count == 0)
+                    continue;
             }
         }
     }
