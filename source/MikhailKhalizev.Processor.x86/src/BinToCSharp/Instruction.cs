@@ -267,6 +267,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     case ud_type.UD_OP_MEM:
                     {
+                        // TODO Remove?
                         var memInside = // Обращение к памяти происходит внутри инструкции.
                             new[]
                             {

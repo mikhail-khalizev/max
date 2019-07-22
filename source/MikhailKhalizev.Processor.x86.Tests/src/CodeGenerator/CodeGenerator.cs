@@ -21,15 +21,16 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 {
     public class CodeGenerator
     {
-        public const string mnemonicCodeCsFileName = Constants.mnemonicCodeCsFileName;
-        public const string decodeJsonFileName = Constants.decodeJsonFileName;
+        public const string MnemonicCodeCsFileName = Constants.MnemonicCodeCsFileName;
+        public const string DecodeJsonFileName = Constants.DecodeJsonFileName;
 
-        public const string decodeFelixcloutierJsonFileName = Constants.decodeFelixcloutierJsonFileName;
-        public const string asposePageJsonFileName = Constants.asposePageJsonFileName;
-        public const string bookmarksJsonFileName = Constants.bookmarksJsonFileName;
+        public const string DecodeFelixcloutierJsonFileName = Constants.DecodeFelixcloutierJsonFileName;
+        public const string AsposePageJsonFileName = Constants.AsposePageJsonFileName;
+        public const string BookmarksJsonFileName = Constants.BookmarksJsonFileName;
+        public const string SplitPdfFileName = Constants.SplitPdfFileName;
 
-        public const string documentFolder = Constants.documentFolder;
-        public const string documentName = Constants.documentName;
+        public const string DocumentFolder = Constants.DocumentFolder;
+        public const string DocumentName = Constants.DocumentName;
 
         public const string AsposeAppSid = Constants.AsposeAppSid;
         public const string AsposeAppKey = Constants.AsposeAppKey;
@@ -116,7 +117,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                         DefaultValueHandling = DefaultValueHandling.Ignore
                     })).ToString();
 
-            File.WriteAllText(decodeFelixcloutierJsonFileName, json);
+            File.WriteAllText(DecodeFelixcloutierJsonFileName, json);
         }
 
         private static void ParseMainTable(List<(HtmlNode Table, List<string> Header)> tables, InstructionDto instruction)
@@ -138,7 +139,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     header.FindIndex(x => string.Equals(x, "Opcode Instruction", StringComparison.OrdinalIgnoreCase)),
                     header.FindIndex(x => string.Equals(x, "Opcode/Instruction", StringComparison.OrdinalIgnoreCase)));
             var indexOperandEncoding = header.FindIndex(x => string.Equals(x, "Op/En", StringComparison.OrdinalIgnoreCase));
-            var index64bitMode = header.FindIndex(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
+            var index64BitMode = header.FindIndex(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
             var indexCompatLegMode = header.FindIndex(x => string.Equals(x, "Compat/Leg Mode", StringComparison.OrdinalIgnoreCase));
             var indexBit64Bit32ModeSupport =
                 header.FindIndex(x => string.Equals(x, "64/32 bit Mode Support", StringComparison.OrdinalIgnoreCase));
@@ -201,8 +202,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
                 if (0 <= indexOperandEncoding)
                     item.OperandEncoding = values[indexOperandEncoding];
-                if (0 <= index64bitMode)
-                    item.Bit64Mode = values[index64bitMode];
+                if (0 <= index64BitMode)
+                    item.Bit64Mode = values[index64BitMode];
                 if (0 <= indexCompatLegMode)
                     item.CompatLegMode = values[indexCompatLegMode];
                 if (0 <= indexBit64Bit32ModeSupport)
@@ -255,7 +256,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         [Fact(Skip = "For developer")]
         public void GenerateFiles()
         {
-            var str = File.ReadAllText(decodeJsonFileName);
+            var str = File.ReadAllText(DecodeJsonFileName);
             var decodeMeta = JsonConvert.DeserializeObject<DecodeDto>(str);
 
             // InstructionUniqueName.cs
@@ -295,7 +296,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                         var remarks = xo.Select(y => y.Url).Distinct().ToList();
                         var pages = xo.Select(y => y.PageNumber).Distinct().ToList();
                         remarks.Add($"Page{(1 < pages.Count ? "s" : "")} {string.Join(", ", pages)} in Intel documentation file '{InstructionDto.DocumentationFile}'.");
-                    
+
                         var result = Enumerable.Empty<string>()
                             .Append("        /// <summary>")
                             .Concat(summaries.Select(y => $"        /// {y}."))
@@ -332,7 +333,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 });
 
             var json = string.Join(Environment.NewLine, lines);
-            File.WriteAllText(mnemonicCodeCsFileName, json);
+            File.WriteAllText(MnemonicCodeCsFileName, json);
 
 
             // IProcessor.cs (instruction region)
@@ -359,17 +360,17 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         [Fact(Skip = "For developer")]
         public void LoadPdfWithAspose()
         {
-            var dir = Path.GetDirectoryName(asposePageJsonFileName);
+            var dir = Path.GetDirectoryName(AsposePageJsonFileName);
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
             var bag = new ConcurrentBag<PdfApi>();
             var pdfApiInit = new PdfApi(AsposeAppKey, AsposeAppSid);
 
-            var doc = pdfApiInit.GetDocument(documentName).Document;
+            var doc = pdfApiInit.GetDocument(DocumentName).Document;
             var creationDate = doc.DocumentProperties.List.Single(x => x.Name == "CreationDate").Value;
             var modDate = doc.DocumentProperties.List.Single(x => x.Name == "ModDate").Value;
-            var pageResponse = pdfApiInit.GetPage(documentName, 1);
+            var pageResponse = pdfApiInit.GetPage(DocumentName, 1);
 
             bag.Add(pdfApiInit);
 
@@ -379,10 +380,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 new ParallelOptions { MaxDegreeOfParallelism = 3 },
                 i =>
                 {
-                    var file = string.Format(asposePageJsonFileName, i.ToString().PadLeft(4, '0'));
+                    var file = string.Format(AsposePageJsonFileName, i.ToString().PadLeft(4, '0'));
                     if (File.Exists(file))
                     {
-                        var filePath = string.Format(asposePageJsonFileName, i.ToString().PadLeft(4, '0'));
+                        var filePath = string.Format(AsposePageJsonFileName, i.ToString().PadLeft(4, '0'));
                         var allText = File.ReadAllText(filePath);
                         var pageDto = JsonConvert.DeserializeObject<PageDto>(allText);
                         if (pageDto.Number == i && pageDto.CreationDate == creationDate && pageDto.ModDate == modDate)
@@ -397,10 +398,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     page.Number = i;
                     page.CreationDate = creationDate;
                     page.ModDate = modDate;
-                    page.Tables = JObject.Parse(pdfApi.GetPageTables(documentName, i).Tables.ToJson())["List"];
+                    page.Tables = JObject.Parse(pdfApi.GetPageTables(DocumentName, i).Tables.ToJson())["List"];
                     page.Texts = JObject.Parse(
                         pdfApi.GetPageText(
-                            documentName,
+                            DocumentName,
                             i,
                             pageResponse.Page.Rectangle.LLX,
                             pageResponse.Page.Rectangle.LLY,
@@ -422,14 +423,37 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         }
 
         [Fact(Skip = "For developer")]
-        public void LoadPdfBookmarksWithSyncfusion()
+        public void SplitPdfWithSyncfusion()
         {
-            var docStream = new FileStream(Path.Combine(documentFolder, documentName), FileMode.Open, FileAccess.Read);
+            var dir = Path.GetDirectoryName(SplitPdfFileName);
+            Directory.CreateDirectory(dir);
+
+            var docStream = new FileStream(Path.Combine(DocumentFolder, DocumentName), FileMode.Open, FileAccess.Read);
             var loadedDocument = new PdfLoadedDocument(docStream);
 
-            var pages = loadedDocument.Pages.Cast<object>().ToList();
+            for (var i = 0; i < loadedDocument.PageCount; i++)
+            {
+                var document = new PdfDocument();
+                document.ImportPage(loadedDocument, i);
 
-            //bookmarksJsonFileName 
+                var path = string.Format(SplitPdfFileName, (i + 1).ToString().PadLeft(4, '0'));
+                var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+
+                document.Save(fileStream);
+                document.Close(true);
+
+                fileStream.SetLength(fileStream.Position);
+                fileStream.Dispose();
+            }
+        }
+
+        [Fact(Skip = "For developer")]
+        public void LoadPdfBookmarksWithSyncfusion()
+        {
+            var docStream = new FileStream(Path.Combine(DocumentFolder, DocumentName), FileMode.Open, FileAccess.Read);
+            var loadedDocument = new PdfLoadedDocument(docStream);
+
+            var pages = loadedDocument.Pages.Cast<PdfPageBase>().ToList();
 
             BookmarkDto Transform(PdfBookmarkBase bookmarkBase)
             {
@@ -460,7 +484,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                         NullValueHandling = NullValueHandling.Ignore,
                         DefaultValueHandling = DefaultValueHandling.Ignore
                     })).ToString();
-            File.WriteAllText(bookmarksJsonFileName, json);
+            File.WriteAllText(BookmarksJsonFileName, json);
         }
     }
 }

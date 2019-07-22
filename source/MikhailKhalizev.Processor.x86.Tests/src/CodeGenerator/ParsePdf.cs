@@ -14,15 +14,15 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 {
     public class ParsePdfPart
     {
-        public const string mnemonicCodeCsFileName = Constants.mnemonicCodeCsFileName;
-        public const string decodeJsonFileName = Constants.decodeJsonFileName;
+        public const string MnemonicCodeCsFileName = Constants.MnemonicCodeCsFileName;
+        public const string DecodeJsonFileName = Constants.DecodeJsonFileName;
 
-        public const string decodeFelixcloutierJsonFileName = Constants.decodeFelixcloutierJsonFileName;
-        public const string asposePageJsonFileName = Constants.asposePageJsonFileName;
-        public const string bookmarksJsonFileName = Constants.bookmarksJsonFileName;
+        public const string DecodeFelixcloutierJsonFileName = Constants.DecodeFelixcloutierJsonFileName;
+        public const string AsposePageJsonFileName = Constants.AsposePageJsonFileName;
+        public const string BookmarksJsonFileName = Constants.BookmarksJsonFileName;
 
-        public const string documentFolder = Constants.documentFolder;
-        public const string documentName = Constants.documentName;
+        public const string DocumentFolder = Constants.DocumentFolder;
+        public const string DocumentName = Constants.DocumentName;
 
         public const string AsposeAppSid = Constants.AsposeAppSid;
         public const string AsposeAppKey = Constants.AsposeAppKey;
@@ -32,10 +32,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         {
             // Load documents.
 
-            var allText = File.ReadAllText(bookmarksJsonFileName);
+            var allText = File.ReadAllText(BookmarksJsonFileName);
             var bookmarks = JsonConvert.DeserializeObject<BookmarkDto>(allText);
 
-            allText = File.ReadAllText(decodeFelixcloutierJsonFileName);
+            allText = File.ReadAllText(DecodeFelixcloutierJsonFileName);
             var felixcloutierDecodeDto = JsonConvert.DeserializeObject<DecodeDto>(allText);
             var felixcloutierInstructionDtoTyTitle = felixcloutierDecodeDto.Instructions.ToDictionary(x => x.Title.Replace("∗", "*"));
 
@@ -128,12 +128,12 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                     DefaultValueHandling = DefaultValueHandling.Ignore
                 })).ToString();
 
-            File.WriteAllText(decodeJsonFileName, json);
+            File.WriteAllText(DecodeJsonFileName, json);
         }
 
         private static void LoadFromPdf(BookmarkDto bookmark, InstructionDto instruction)
         {
-            var filePath = string.Format(asposePageJsonFileName, bookmark.PageNumber.ToString().PadLeft(4, '0'));
+            var filePath = string.Format(AsposePageJsonFileName, bookmark.PageNumber.ToString().PadLeft(4, '0'));
             var allText = File.ReadAllText(filePath);
             var pageDto = JsonConvert.DeserializeObject<PageDto>(allText);
             
@@ -168,7 +168,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 header.IndexOf(x => x.StartsWith("Opcode Instruction")),
                 header.IndexOf(x => x.StartsWith("Opcode/Instruction")));
             var indexOperandEncoding = header.IndexOf(x => x == "Op/En");
-            var index64bitMode = header.IndexOf(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
+            var index64BitMode = header.IndexOf(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
             var indexCompatLegMode = header.IndexOf(x => x == "Compat/Leg Mode");
             var indexBit64Bit32ModeSupport = header.IndexOf(x => x == "64/32 bit Mode Support");
             var indexCpuidFeatureFlag = header.IndexOf(x => x == "CPUID Feature Flag");
@@ -250,8 +250,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
                 if (0 <= indexOperandEncoding)
                     item.OperandEncoding = values[indexOperandEncoding];
-                if (0 <= index64bitMode)
-                    item.Bit64Mode = values[index64bitMode];
+                if (0 <= index64BitMode)
+                    item.Bit64Mode = values[index64BitMode];
                 if (0 <= indexCompatLegMode)
                     item.CompatLegMode = values[indexCompatLegMode];
                 if (0 <= indexBit64Bit32ModeSupport)

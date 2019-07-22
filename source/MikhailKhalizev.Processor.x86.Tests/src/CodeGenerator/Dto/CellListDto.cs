@@ -23,12 +23,6 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 right.StartsWith("-") || right.StartsWith(",") || right.StartsWith("*") ? "" : " ";
 
             var result = left + middle + right;
-
-            result = result
-                .Replace("Val id", "Valid")
-                .Replace("Comp are", "Compare")
-                .Replace("Mov e", "Move");
-
             return result;
         }
     }
