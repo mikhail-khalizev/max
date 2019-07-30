@@ -8,7 +8,7 @@
         public ushort Selector
         {
             get => UInt16;
-            protected set => UInt16 = value;
+            set => UInt16 = value;
         }
 
         // todo move SegmentDescriptor logic inside SegmentRegister. Remove SegmentDescriptor class.

@@ -476,7 +476,41 @@ namespace MikhailKhalizev.Max.Dos
             eflags.cf = cf_save;
         }
 
-        public void int_2f() { throw new NotImplementedException(); }
+        public void int_2f()
+        {
+            switch (ax.UInt16)
+            {
+                case 0x1600:
+                case 0x1687:
+                    break;
+
+                case 0x4300:
+                    al = 0x80; // XMS driver installed (HIMEM.SYS).
+                    break;
+
+                case 0x4310:
+                {
+                    es.Selector = 0xc83f;
+                    bx = 0x10;
+
+                    if (xms_handler_added == false)
+                    {
+                        RawProgramMain.add_internal_dyn_func(RawProgramMain.DosMemory.xms_handler, 16, es[bx]);
+                        xms_handler_added = true;
+                    }
+                }
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+                    break;
+            }
+
+            syscall_iretww();
+        }
+
+        private bool xms_handler_added = false;
+
         public void int_31() { throw new NotImplementedException(); }
         public void int_33() { throw new NotImplementedException(); }
         public void int_67() { throw new NotImplementedException(); }

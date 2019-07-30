@@ -101,6 +101,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// </summary>
         public SortedSet<DetectedMethod> NewDetectedMethods { get; } = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
 
+        public bool AddToNewDetectedMethods(Address address)
+        {
+            //if (0xaccb < address && address <= 0xae95)
+            //{
+            //    var debug = 0;
+            //}
+
+            return NewDetectedMethods.Add(new DetectedMethod(address));
+        }
+
         public Dictionary<Address, int> Aligment { get; } = new Dictionary<Address, int>(); // <addr of start, aligment>
 
         // Переходы на известные адреса.
@@ -135,7 +145,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public void DecodeMethod(Address address)
         {
-            if (NewDetectedMethods.Add(new DetectedMethod(address)))
+            if (AddToNewDetectedMethods(address))
                 Decode(address);
         }
 
@@ -416,13 +426,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     Console.Error.WriteLine($"Предупреждение: Метка '{to}' делит инструкцию пополам.");
 
                                     // @todo Улучшить.
-                                    NewDetectedMethods.Add(new DetectedMethod(to)); // create if not exist.
+                                    AddToNewDetectedMethods(to); // create if not exist.
                                 }
                             }
                             else
                             {
                                 if (code.Contains(to))
-                                    NewDetectedMethods.Add(new DetectedMethod(to)); // create if not exist.
+                                    AddToNewDetectedMethods(to); // create if not exist.
                             }
                         }
                     }
@@ -607,12 +617,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 if (last_instr_end != cmd.Begin) // Обнаружен не декодированный код.
                 {
+                    // Случай когда перед недостижимым кодом нет ret или jmp. Пока достаточно генерировать исключение.
                     if (last_instr_jmp_or_ret == false)
-                        throw new NotImplementedException(); // Случай когда перед недостижимым кодом нет ret или jmp. Пока достаточно генерировать исключение.
+                        throw new NotImplementedException();
 
                     var os = new StringBuilder();
                     write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin, offset);
-                    output.AppendLine($"//  {os} /* Недостижимый код. */");
+                    output.AppendLine($"//  {os}Недостижимый код.");
                 }
 
 

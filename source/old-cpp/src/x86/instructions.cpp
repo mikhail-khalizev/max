@@ -1007,7 +1007,7 @@ static void fpu_pop()
 }
 
 
-
+// +
 void fninit()
 {
     FPUControlWord = 0x037F;
@@ -1020,11 +1020,13 @@ void fninit()
     FPULastInstructionOpcode = 0;
 }
 
+// +
 void fnstsw(uint_<16> & DEST)
 {
     DEST = FPUStatusWord;
 }
 
+// +
 void fnstcw(uint_<16> & DEST)
 {
     DEST = FPUControlWord;

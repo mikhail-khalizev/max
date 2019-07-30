@@ -54,6 +54,7 @@ void iret_(uint_<8> op_size);
 #define jbed_func(...)   \
     jmpd_func_if(cf == true || zf == true, __VA_ARGS__)
 
+// +
 #define jzw_func(...)    \
     jmpw_func_if(zf == true, __VA_ARGS__)
 
@@ -296,6 +297,7 @@ void iret_(uint_<8> op_size);
     } while (0)
 
 
+// +
 #define jmpw_func(to, off)                                              \
     do {                                                                \
         eip = eip_next + (off);                                         \
@@ -318,6 +320,7 @@ void iret_(uint_<8> op_size);
     } while(0)
 
 
+// +
 #define jmpw_if(cond, to, off)   \
     if (cond)                    \
         jmpw(to, off)
@@ -327,6 +330,7 @@ void iret_(uint_<8> op_size);
         jmpd(to, off)
 
 
+// +
 #define jmpw_func_if(cond, to, off)   \
     if (cond)                         \
         jmpw_func(to, off)

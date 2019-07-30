@@ -454,7 +454,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         #endregion
 
         #region FPU
-        
+
         // TODO Move to separate class?
         ushort FPUControlWord;
         ushort FPUStatusWord;
@@ -1383,6 +1383,17 @@ namespace MikhailKhalizev.Processor.x86.Core
             return false;
         }
 
+        private bool jmpw_func_if(bool cond, Address address, int offset)
+        {
+            if (cond)
+            {
+                jmpw_func(address, offset);
+                return true;
+            }
+
+            return false;
+        }
+
         private void __plus_sp(int s)
         {
             if (ss.db)
@@ -1879,7 +1890,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             var retAddr = cs[eip];
             pushw(eip);
 
-            var ret_addr = cs[eip];
             eip = eip + offset;
             eip &= 0xffff;
 
@@ -1888,7 +1898,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             run_irqs();
 
-            if (correct_function_position(ret_addr))
+            if (correct_function_position(retAddr))
                 throw new NotImplementedException();
 
             check_mode();
@@ -2730,7 +2740,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fnstcw(Value value)
         {
-            throw new NotImplementedException();
+            value.UInt16 = FPUControlWord;
         }
 
         /// <inheritdoc />
@@ -2742,7 +2752,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fnstsw(Value value)
         {
-            throw new NotImplementedException();
+            value.UInt16 = FPUStatusWord;
         }
 
         /// <inheritdoc />
@@ -3141,7 +3151,20 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jmpw_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            var retAddr = cs[eip];
+
+            eip = eip + offset;
+            eip &= 0xffff;
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+            
+            if (correct_function_position(retAddr))
+                throw new NotImplementedException();
+
+            check_mode();
         }
 
         /// <inheritdoc />
@@ -3410,7 +3433,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jzw_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            jmpw_func_if(eflags.zf, address, offset);
         }
 
         /// <inheritdoc />

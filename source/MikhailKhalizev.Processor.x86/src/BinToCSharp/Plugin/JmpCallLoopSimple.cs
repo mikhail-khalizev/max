@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (cmd.IsCall || op.type != ud_type.UD_OP_JIMM)
             {
                 if (notSuppressed)
-                    Engine.NewDetectedMethods.Add(new DetectedMethod(toAddr)); // create if not exist.
+                    Engine.AddToNewDetectedMethods(toAddr); // create if not exist.
             }
             else
             {
