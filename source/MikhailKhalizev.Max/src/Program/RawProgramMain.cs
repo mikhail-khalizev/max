@@ -8,14 +8,16 @@ using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
+using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max.Program
 {
     public class RawProgramMain : BridgeProcessor
     {
-        public new Processor.x86.FullSimulate.Processor Implementation { get; }
+        public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
         public MethodsInfo MethodsInfo { get; private set; }
 
@@ -32,10 +34,10 @@ namespace MikhailKhalizev.Max.Program
         public const ushort pspseg = image_load_seg - 16; // 0x192
 
         public RawProgramMain(ConfigurationDto configuration)
-            : this(new Processor.x86.FullSimulate.Processor(), configuration)
+            : this(new Processor.x86.Core.Processor(), configuration)
         { }
 
-        public RawProgramMain(Processor.x86.FullSimulate.Processor implementation, ConfigurationDto configuration)
+        public RawProgramMain(Processor.x86.Core.Processor implementation, ConfigurationDto configuration)
             : base(implementation)
         {
             Implementation = implementation;

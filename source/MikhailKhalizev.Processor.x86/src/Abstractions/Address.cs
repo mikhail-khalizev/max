@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using MikhailKhalizev.Utils;
+using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions

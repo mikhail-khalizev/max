@@ -5,4 +5,29 @@ arg2  edx
 arg3  ebx
 arg4  ecx
 arg5  push
-Компилятор watcom
+РљРѕРјРїРёР»СЏС‚РѕСЂ watcom
+
+esi, edi not changed.
++ not used args  not changed.
+
+----
+
+pushd(ebp);
+mov(ebp, esp);
+
+  sub(esp, 0x14);
+
+  mov(memd_a32(ss, ebp - 0x4), edx);
+
+mov(esp, ebp);
+
+----
+
+example
+0x10074395  with 2 push arg1
+0x10070ca1  simple func with 2 reg args in total
+
+----
+
+call
+push(eip)

@@ -1,6 +1,6 @@
 ﻿using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.FullSimulate
+namespace MikhailKhalizev.Processor.x86.Core
 {
     public class EflagsRegisterImpl : EflagsRegister
     {

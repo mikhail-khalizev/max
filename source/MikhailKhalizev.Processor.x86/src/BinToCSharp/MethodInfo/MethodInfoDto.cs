@@ -4,12 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
-using MikhailKhalizev.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpDisasm;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
     [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
     public class MethodInfoDto

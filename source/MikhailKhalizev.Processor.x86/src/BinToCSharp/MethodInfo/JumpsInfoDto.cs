@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using MikhailKhalizev.Processor.x86.Abstractions;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
     [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
     public class JumpsInfoDto

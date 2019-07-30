@@ -23,9 +23,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
         {
             if (cmd.Operands.Count < 1)
                 return;
-
             var op = cmd.Operands[0];
-            Address toAddr = 0;
+            
+            Address toAddr = 0; // prediction address.
 
             if ((cmd.IsAnyJump || cmd.IsAnyLoop || cmd.IsCall) && (op.type == ud_type.UD_OP_JIMM))
             {
@@ -40,15 +40,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 toAddr = cmd.End + (Address)op.lval.sqword;
             }
             else if ((cmd.IsCall || cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp)
-                    && !cmd.BrFar
-                    && op.type == ud_type.UD_OP_MEM
-                    && op.@base == ud_type.UD_NONE
-                    && op.index == ud_type.UD_NONE
-                    && op.offset != 0
-                    // Support only flat model (without segments) to increase accuracy.
-                    && Engine.Mode != ArchitectureMode.x86_16
-                    && Engine.CsBase == 0
-                    && Engine.DsBase == 0)
+                && !cmd.BrFar
+                && op.type == ud_type.UD_OP_MEM
+                && op.@base == ud_type.UD_NONE
+                && op.index == ud_type.UD_NONE
+                && op.offset != 0
+                // Support only flat model (without segments) to increase accuracy.
+                && Engine.Mode != ArchitectureMode.x86_16
+                && Engine.CsBase == 0
+                && Engine.DsBase == 0)
             {
                 Address where;
                 switch (op.offset)
@@ -59,39 +59,34 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     default: throw new NotImplementedException();
                 }
 
-
-                switch (cmd.GetEffectiveSegmentOfOperand(cmd.Operands[0]))
-                {
-                    case ud_type.UD_R_CS:
-                        where += Engine.CsBase;
-                        break;
-                    case ud_type.UD_R_DS:
-                        where += Engine.DsBase;
-                        break;
-                    case ud_type.UD_R_SS:
-                        return;
-                    default:
-                        throw new NotImplementedException();
-                }
+                //switch (cmd.GetEffectiveSegmentOfOperand(cmd.Operands[0]))
+                //{
+                //    case ud_type.UD_R_CS:
+                //        where += Engine.CsBase;
+                //        break;
+                //    case ud_type.UD_R_DS:
+                //        where += Engine.DsBase;
+                //        break;
+                //    case ud_type.UD_R_SS:
+                //        return;
+                //    default:
+                //        throw new NotImplementedException();
+                //}
 
                 switch (op.size)
                 {
                     case 16:
-                        toAddr = Engine.Memory.GetFixSize(where, 2).GetUInt16();
+                        toAddr = Engine.Memory.GetStruct<ushort>(where);
                         break;
                     case 32:
-                        toAddr = Engine.Memory.GetFixSize(where, 4).GetUInt32();
+                        toAddr = Engine.Memory.GetStruct<uint>(where);
                         break;
                     default:
                         throw new NotImplementedException();
                 }
 
-                toAddr += Engine.CsBase;
-
-
                 if (toAddr == 0)
                     return;
-
 
                 var os =
                     "Вызов '" +
@@ -114,7 +109,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
 
             var notSuppressed = !Engine.SuppressDecode.Contains(toAddr, false);
-
             if (notSuppressed)
                 Engine.AddressesToDecode.Add(toAddr);
 

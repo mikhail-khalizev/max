@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Max
+﻿namespace MikhailKhalizev.Max.Configuration
 {
     public class MaxDto
     {

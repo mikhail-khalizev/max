@@ -1,5 +1,5 @@
 ﻿using System;
-using MikhailKhalizev.Utils;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Abstractions
 {

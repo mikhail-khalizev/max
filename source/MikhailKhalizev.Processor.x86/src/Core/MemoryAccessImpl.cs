@@ -1,9 +1,9 @@
 ﻿using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
-using MikhailKhalizev.Utils;
+using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.FullSimulate
+namespace MikhailKhalizev.Processor.x86.Core
 {
     public class MemoryAccessImpl : MemoryAccess
     {

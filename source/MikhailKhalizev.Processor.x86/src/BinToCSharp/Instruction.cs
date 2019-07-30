@@ -5,7 +5,6 @@ using System.Text;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
-using MikhailKhalizev.Utils;
 using SharpDisasm;
 using SharpDisasm.Udis86;
 

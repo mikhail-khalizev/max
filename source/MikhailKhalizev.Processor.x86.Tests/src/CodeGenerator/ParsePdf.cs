@@ -1,13 +1,20 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Aspose.Pdf.Cloud.Sdk.Api;
 using MikhailKhalizev.Processor.x86.InstructionDecode;
 using MikhailKhalizev.Processor.x86.InstructionDecode.Dto;
+using MikhailKhalizev.Processor.x86.Tests.CodeGenerator.Dto;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Interactive;
+using Syncfusion.Pdf.Parsing;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
@@ -20,12 +27,144 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
         public const string DecodeFelixcloutierJsonFileName = Constants.DecodeFelixcloutierJsonFileName;
         public const string AsposePageJsonFileName = Constants.AsposePageJsonFileName;
         public const string BookmarksJsonFileName = Constants.BookmarksJsonFileName;
+        public const string SplitPdfFileName = Constants.SplitPdfFileName;
 
         public const string DocumentFolder = Constants.DocumentFolder;
         public const string DocumentName = Constants.DocumentName;
 
         public const string AsposeAppSid = Constants.AsposeAppSid;
         public const string AsposeAppKey = Constants.AsposeAppKey;
+
+
+        [Fact(Skip = "For developer")]
+        public void LoadPdfWithAspose()
+        {
+            var dir = Path.GetDirectoryName(AsposePageJsonFileName);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            var bag = new ConcurrentBag<PdfApi>();
+            var pdfApiInit = new PdfApi(AsposeAppKey, AsposeAppSid);
+
+            var doc = pdfApiInit.GetDocument(DocumentName).Document;
+            var creationDate = doc.DocumentProperties.List.Single(x => x.Name == "CreationDate").Value;
+            var modDate = doc.DocumentProperties.List.Single(x => x.Name == "ModDate").Value;
+            var pageResponse = pdfApiInit.GetPage(DocumentName, 1);
+
+            bag.Add(pdfApiInit);
+
+            Parallel.For(
+                1,
+                doc.Pages.List.Count + 1,
+                new ParallelOptions { MaxDegreeOfParallelism = 3 },
+                i =>
+                {
+                    var file = string.Format(AsposePageJsonFileName, i.ToString().PadLeft(4, '0'));
+                    if (File.Exists(file))
+                    {
+                        var filePath = string.Format(AsposePageJsonFileName, i.ToString().PadLeft(4, '0'));
+                        var allText = File.ReadAllText(filePath);
+                        var pageDto = JsonConvert.DeserializeObject<PageDto>(allText);
+                        if (pageDto.Number == i && pageDto.CreationDate == creationDate && pageDto.ModDate == modDate)
+                            return;
+                    }
+
+                    bag.TryTake(out var pdfApi);
+                    if (pdfApi == null)
+                        pdfApi = new PdfApi(AsposeAppKey, AsposeAppSid);
+
+                    var page = new PageRawDto();
+                    page.Number = i;
+                    page.CreationDate = creationDate;
+                    page.ModDate = modDate;
+                    page.Tables = JObject.Parse(pdfApi.GetPageTables(DocumentName, i).Tables.ToJson())["List"];
+                    page.Texts = JObject.Parse(
+                        pdfApi.GetPageText(
+                            DocumentName,
+                            i,
+                            pageResponse.Page.Rectangle.LLX,
+                            pageResponse.Page.Rectangle.LLY,
+                            pageResponse.Page.Rectangle.URX,
+                            pageResponse.Page.Rectangle.URY).TextOccurrences.ToJson())["List"];
+
+                    bag.Add(pdfApi);
+                    pdfApi = null;
+
+                    var json = JToken.FromObject(
+                        page,
+                        JsonSerializer.CreateDefault(
+                            new JsonSerializerSettings
+                            {
+                                NullValueHandling = NullValueHandling.Ignore
+                            })).ToString();
+                    File.WriteAllText(file, json);
+                });
+        }
+
+        [Fact(Skip = "For developer")]
+        public void SplitPdfWithSyncfusion()
+        {
+            var dir = Path.GetDirectoryName(SplitPdfFileName);
+            Directory.CreateDirectory(dir);
+
+            var docStream = new FileStream(Path.Combine(DocumentFolder, DocumentName), FileMode.Open, FileAccess.Read);
+            var loadedDocument = new PdfLoadedDocument(docStream);
+
+            for (var i = 0; i < loadedDocument.PageCount; i++)
+            {
+                var document = new PdfDocument();
+                document.ImportPage(loadedDocument, i);
+
+                var path = string.Format(SplitPdfFileName, (i + 1).ToString().PadLeft(4, '0'));
+                var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+
+                document.Save(fileStream);
+                document.Close(true);
+
+                fileStream.SetLength(fileStream.Position);
+                fileStream.Dispose();
+            }
+        }
+
+        [Fact(Skip = "For developer")]
+        public void LoadPdfBookmarksWithSyncfusion()
+        {
+            var docStream = new FileStream(Path.Combine(DocumentFolder, DocumentName), FileMode.Open, FileAccess.Read);
+            var loadedDocument = new PdfLoadedDocument(docStream);
+
+            var pages = loadedDocument.Pages.Cast<PdfPageBase>().ToList();
+
+            BookmarkDto Transform(PdfBookmarkBase bookmarkBase)
+            {
+                var result = new BookmarkDto();
+
+                if (bookmarkBase is PdfBookmark bookmark)
+                {
+                    result.Title = bookmark.Title;
+                    var page = bookmark.NamedDestination?.Destination?.Page;
+                    if (page != null)
+                        result.PageNumber = pages.IndexOf(page) + 1;
+                }
+
+                result.Children = bookmarkBase.OfType<PdfBookmark>().Select(Transform).ToList();
+                if (result.Children.Count == 0)
+                    result.Children = null;
+
+                return result;
+            }
+
+            var bookmarksDto = Transform(loadedDocument.Bookmarks);
+
+            var json = JToken.FromObject(
+                bookmarksDto,
+                JsonSerializer.CreateDefault(
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DefaultValueHandling = DefaultValueHandling.Ignore
+                    })).ToString();
+            File.WriteAllText(BookmarksJsonFileName, json);
+        }
 
         [Fact(Skip = "For developer")]
         public void ParsePdf()

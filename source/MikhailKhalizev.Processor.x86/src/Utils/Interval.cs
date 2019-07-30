@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Utils
 {

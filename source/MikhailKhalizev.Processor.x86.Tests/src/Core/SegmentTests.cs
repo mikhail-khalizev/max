@@ -2,7 +2,7 @@ using FluentAssertions;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
+namespace MikhailKhalizev.Processor.x86.Tests.Core
 {
     public class SegmentTests
     {

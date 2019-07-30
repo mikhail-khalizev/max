@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MikhailKhalizev.Utils
+namespace MikhailKhalizev.Processor.x86.Utils
 {
     public static class HexHelper
     {

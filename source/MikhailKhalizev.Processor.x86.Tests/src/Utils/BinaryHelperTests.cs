@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
-using MikhailKhalizev.Utils;
+using MikhailKhalizev.Processor.x86.Utils;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.Utils

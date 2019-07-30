@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using MikhailKhalizev.Utils;
+using MikhailKhalizev.Processor.x86.InstructionDecode.Metadata;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.InstructionDecode
 {

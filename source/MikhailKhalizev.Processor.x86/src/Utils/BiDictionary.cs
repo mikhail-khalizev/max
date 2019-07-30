@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace MikhailKhalizev.Utils
+namespace MikhailKhalizev.Processor.x86.Utils
 {
     [Serializable]
     [DebuggerDisplay("Count = {" + nameof(Count) + "}")]

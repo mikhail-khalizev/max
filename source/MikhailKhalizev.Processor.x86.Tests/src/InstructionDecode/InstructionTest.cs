@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
 using MikhailKhalizev.Processor.x86.InstructionDecode;
-using MikhailKhalizev.Utils;
+using MikhailKhalizev.Processor.x86.InstructionDecode.Metadata;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.InstructionDecode

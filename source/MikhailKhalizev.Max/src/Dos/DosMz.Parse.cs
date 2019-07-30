@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Linq;
 using Kaitai;
 
-namespace Kaitai
+namespace MikhailKhalizev.Max.Dos
 {
     public partial class DosMz
     {

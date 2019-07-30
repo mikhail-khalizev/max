@@ -2,13 +2,13 @@ using FluentAssertions;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.FullSimulate
+namespace MikhailKhalizev.Processor.x86.Tests.Core
 {
     public class InstructionTests : BridgeProcessor
     {
         /// <inheritdoc />
         public InstructionTests()
-            : base(new x86.FullSimulate.Processor())
+            : base(new x86.Core.Processor())
         { }
 
         [Fact]

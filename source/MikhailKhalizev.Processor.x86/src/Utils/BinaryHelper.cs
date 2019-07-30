@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace MikhailKhalizev.Utils
+namespace MikhailKhalizev.Processor.x86.Utils
 {
     public static class BinaryHelper
     {

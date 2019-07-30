@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MikhailKhalizev.Processor.x86.Abstractions;
+using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
-using MikhailKhalizev.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {

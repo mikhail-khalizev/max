@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
+namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator.Dto
 {
     public class PageRawDto
     {

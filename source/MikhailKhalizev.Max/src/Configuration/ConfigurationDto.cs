@@ -1,6 +1,4 @@
-﻿using MikhailKhalizev.Processor.x86.BinToCSharp;
-
-namespace MikhailKhalizev.Max
+﻿namespace MikhailKhalizev.Max.Configuration
 {
     public class ConfigurationDto
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
+namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator.Dto
 {
     [DebuggerDisplay("Title = {Title}, Page = {PageNumber}")]
     public class BookmarkDto

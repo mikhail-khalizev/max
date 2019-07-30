@@ -9,10 +9,10 @@ using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.Utils;
-using MikhailKhalizev.Utils;
 using Newtonsoft.Json;
 using SharpDisasm;
 using SharpDisasm.Udis86;
+using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 using Instruction = SharpDisasm.Instruction;
 
 namespace MikhailKhalizev.Max

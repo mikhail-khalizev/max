@@ -6,7 +6,7 @@ using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
     public class MethodsInfo
     {

@@ -11,11 +11,10 @@ using System.Numerics;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
-using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
-using MikhailKhalizev.Utils;
 
-namespace MikhailKhalizev.Processor.x86.FullSimulate
+namespace MikhailKhalizev.Processor.x86.Core
 {
     public class Processor : IProcessor
     {

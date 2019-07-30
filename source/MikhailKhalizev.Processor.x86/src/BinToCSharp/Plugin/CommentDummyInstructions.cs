@@ -12,7 +12,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
         public CommentDummyInstructions(Engine engine)
             : base(engine)
         {
-            Engine.InstructionDecoded += EngineOnInstructionDecoded;
+            // NOTE. Ignore this plugin.
+            // Engine.InstructionDecoded += EngineOnInstructionDecoded;
         }
 
         private void EngineOnInstructionDecoded(object sender, Instruction cmd)

@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
+namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator.Dto
 {
     [DebuggerDisplay("Text = {Text}")]
     public class CellListDto
