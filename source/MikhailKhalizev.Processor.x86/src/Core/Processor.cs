@@ -652,7 +652,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new NotImplementedException(); // #GP(segment selector)
         }
 
-        public void call_far_prepare(int operandSize, ushort segmentSelector, Address offset)
+        public void call_far_prepare(int operandSize, int segmentSelector, Address offset)
         {
             if (!cr0.pe || (cr0.pe && eflags.vm)) /* Real-address or virtual-8086 mode */
             {
@@ -662,14 +662,14 @@ namespace MikhailKhalizev.Processor.x86.Core
                         throw new NotImplementedException(); // #GP(0)
                     pushd(cs);
                     pushd(eip);
-                    cs.Load(segmentSelector);
+                    cs.Int32 = segmentSelector;
                     eip = offset;
                 }
                 else /* OperandSize = 16 */
                 {
                     pushw(cs);
                     pushw(eip);
-                    cs.Load(segmentSelector);
+                    cs.Int32 = segmentSelector;
                     eip = offset;
                 }
             }
@@ -1927,7 +1927,15 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void callw_far_abs(int segment, Address address)
         {
-            throw new NotImplementedException();
+            var ret_addr = cs[eip];
+            call_far_prepare(16, segment, address & 0xffff);        
+            
+            run_irqs();                              
+            
+            if (correct_function_position(ret_addr))          
+                return;                                       
+            
+            check_mode();                                     
         }
 
         /// <inheritdoc />
@@ -3016,6 +3024,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void imul(Value value)
         {
+            if (value.Bits == 16)
+            {
+                var r = ax.Int32 * value.Int32;
+                ax = r;
+                dx = r >> 16;
+
+                eflags.cf = eflags.of = (ax != r);
+                return;
+            }
+
             throw new NotImplementedException();
         }
 
@@ -3295,7 +3313,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jlew(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -5526,9 +5544,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void retfw()
+        public void retfw(int size = 0)
         {
-            throw new NotImplementedException();
+            ret_far(16);             
+            __plus_sp(size);  
         }
 
         /// <inheritdoc />
@@ -5807,7 +5826,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void shr(Value dst, int count)
+        public void shr(Value dst, Value count)
         {
             var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
 
@@ -5816,8 +5835,8 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (count != 0)
             {
-                eflags.cf = dst.IsBitSet(count - 1);
-                dst.UInt64 = dst.UInt64 >> count;
+                eflags.cf = dst.IsBitSet(count.Int32 - 1);
+                dst.UInt64 = dst.UInt64 >> count.Int32;
                 set_sf_zf_pf(dst);
             }
         }
@@ -5919,7 +5938,37 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void sti()
         {
-            throw new NotImplementedException();
+            if (cr0.pe == false)
+                eflags.@if = true;
+            else
+            {
+                if (eflags.vm == false)
+                {
+                    if (CPL <= eflags.iopl)
+                        eflags.@if = true;
+                    else
+                    {
+                        if (eflags.iopl < CPL && CPL == 3 && eflags.vip == false)
+                            eflags.vif = true;
+                        else
+                            throw new NotImplementedException(); // #GP(0);
+                    }
+                }
+                else
+                {
+                    if (eflags.iopl == 3)
+                        eflags.@if = true;
+                    else
+                    {
+                        if (eflags.iopl < 3 && eflags.vip == false && cr4.vme)
+                            eflags.vif = true;
+                        else
+                            throw new NotImplementedException(); // #GP(0);
+                    }
+                }
+            }
+
+            run_irqs();
         }
 
         /// <inheritdoc />

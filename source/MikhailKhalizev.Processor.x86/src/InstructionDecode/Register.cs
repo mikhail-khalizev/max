@@ -14,9 +14,8 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
         {
             var regs = new List<Register>();
 
-            var index = 0;
-
             regs.Add(Empty);
+            var index = Empty.Index;
 
             regs.Add(new Register(ud_type.UD_R_AL, ++index, 0b0001, 8) { IsGeneralPurpose = true });
             regs.Add(new Register(ud_type.UD_R_AH, index, 0b0010, 8) { IsGeneralPurpose = true });
@@ -75,12 +74,27 @@ namespace MikhailKhalizev.Processor.x86.InstructionDecode
                 .ToHashSet();
         }
 
+        // TODO Remove size argument.
         private Register(ud_type udType, int index, int byteMask, int size)
         {
             UdType = udType;
             Index = index;
             ByteMask = byteMask;
             Size = size;
+
+
+            var s = 0;
+            var m = byteMask;
+            while (m != 0)
+            {
+                if ((m & 1) != 0)
+                    s += 8;
+                m = m >> 1;
+            }
+
+            if (size != s)
+                throw new InvalidOperationException("Incorrect size");
+
 
             if (udType == ud_type.UD_NONE)
                 Name = "none";

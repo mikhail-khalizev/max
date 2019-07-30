@@ -96,7 +96,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
                     
                 case 0x92:
-                    throw new NotImplementedException();
+                    value.Int32 = 0x2; // a20_gate enable.
                     //d = a20_gate ? 0x2 : 0;
                     break;
 

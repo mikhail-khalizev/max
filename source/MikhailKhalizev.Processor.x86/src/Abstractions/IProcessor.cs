@@ -3752,7 +3752,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Return from Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
-        void retfw();
+        void retfw(int size = 0);
 
         /// <summary>
         /// Return from Procedure.
@@ -3956,7 +3956,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void shr(Value dst, int count);
+        void shr(Value dst, Value count);
 
         /// <summary>
         /// Double Precision Shift Right.

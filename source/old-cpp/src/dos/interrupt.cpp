@@ -943,6 +943,7 @@ void int_33()
     syscall_iretww();
 }
 
+// +
 void int_67()
 {
     if (ax == 0xde00) /* VCPI installation check. */

@@ -513,7 +513,29 @@ namespace MikhailKhalizev.Max.Dos
 
         public void int_31() { throw new NotImplementedException(); }
         public void int_33() { throw new NotImplementedException(); }
-        public void int_67() { throw new NotImplementedException(); }
+
+        public void int_67()
+        {
+            if (ax == 0xde00) /* VCPI installation check. */
+            {
+                ah = 0x84; /* emm_func_nosup. */
+            }
+            else if (ah == 0x43) /* Get handle and allocate pages. */
+            {
+                /* @todo emm_allocate_memory(bx, dx); */
+                ah = 0x0;
+                dx = 0x1;
+            }
+            else if (ah == 0x45) /* Release handle and free pages. */
+            {
+                /* @todo emm_release_memory(dx); */
+                ah = 0;
+            }
+            else
+                throw new NotImplementedException();
+
+            syscall_iretww();
+        }
 
         private void int_unknown()
         {

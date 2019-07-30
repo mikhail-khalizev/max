@@ -3875,9 +3875,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void retfw()
+        public void retfw(int size = 0)
         {
-            Implementation.retfw();
+            Implementation.retfw(size);
         }
 
         /// <inheritdoc />
@@ -4079,7 +4079,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void shr(Value dst, int count)
+        public void shr(Value dst, Value count)
         {
             Implementation.shr(dst, count);
         }

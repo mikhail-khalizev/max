@@ -157,6 +157,7 @@ void iret_(uint_<8> op_size);
 #define jld(...)    \
     jmpd_if(sf != of, __VA_ARGS__)
 
+// +
 #define jlew(...)   \
     jmpw_if(zf == true || sf != of, __VA_ARGS__)
 
@@ -492,6 +493,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
+// +
 #define callw_far_abs(seg, off)                           \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -1308,6 +1310,7 @@ inline void xlatb_a16()
 }
 
 
+// +
 inline void sti()
 {
     if (cr0.pe == false)
@@ -1430,6 +1433,8 @@ void mul(uint_<64> s);
 
 
 void imul(uint_<8> s);
+
+// +
 inline void imul(uint_<16> s)
 {
     uint_<32> r = sint_<32>(sint_<16>(ax)) * sint_<32>(sint_<16>(s));
