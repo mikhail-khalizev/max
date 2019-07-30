@@ -325,7 +325,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             Engine.code.Insert(new Instruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
 
-            cmd.write_cmd = WriteCmd;
+            cmd.WriteCmd = WriteCmd;
         }
 
         private string WriteCmd(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)

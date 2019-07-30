@@ -128,7 +128,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 }
 
                 actual.To.Add(toAddr);
-                cmd.write_cmd = on_cmd_write;
+                cmd.WriteCmd = on_cmd_write;
             }
         }
 

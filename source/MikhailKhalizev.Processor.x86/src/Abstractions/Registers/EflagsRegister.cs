@@ -2,10 +2,29 @@
 {
     public abstract class EflagsRegister : Register
     {
+        /// <summary>
+        /// Carry flag.
+        /// </summary>
         public abstract bool cf { get; set; }
+
+        /// <summary>
+        /// Parity flag.
+        /// </summary>
         public abstract bool pf { get; set; }
+
+        /// <summary>
+        /// Adjust flag.
+        /// </summary>
         public abstract bool af { get; set; }
+
+        /// <summary>
+        /// Zero flag.
+        /// </summary>
         public abstract bool zf { get; set; }
+
+        /// <summary>
+        /// Sign flag.
+        /// </summary>
         public abstract bool sf { get; set; }
 
         /// <summary>
@@ -18,7 +37,14 @@
         /// </summary>
         public abstract bool @if { get; set; }
 
+        /// <summary>
+        /// Direction flag.
+        /// </summary>
         public abstract bool df { get; set; }
+
+        /// <summary>
+        /// Overflow flag.
+        /// </summary>
         public abstract bool of { get; set; }
 
         /// <summary>

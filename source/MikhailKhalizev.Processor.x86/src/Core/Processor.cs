@@ -84,6 +84,9 @@ namespace MikhailKhalizev.Processor.x86.Core
             _tr = new SegmentRegisterImpl(this);
             _tr.ResetTaskRegisterSegment();
 
+            FPUDataPointer_seg = new SegmentRegisterImpl(this);
+            FPUInstructionPointer_seg = new SegmentRegisterImpl(this);
+
 
             _eflags = new EflagsRegisterImpl { UInt64 = 0x0000_0002 };
             _ia32Efer = new Ia32EferRegisterImpl();
@@ -447,6 +450,20 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <remarks>The EIP register contains a 32-bit pointer to the next instruction to be executed.</remarks>
         /// <seealso cref="CurrentInstructionAddress"/>
         public Address eip { get; set; }
+
+        #endregion
+
+        #region FPU
+        
+        // TODO Move to separate class?
+        ushort FPUControlWord;
+        ushort FPUStatusWord;
+        ushort FPUTagWord;
+        SegmentRegister FPUDataPointer_seg;
+        uint FPUDataPointer_off;
+        SegmentRegister FPUInstructionPointer_seg;
+        uint FPUInstructionPointer_off;
+        int FPULastInstructionOpcode;
 
         #endregion
 
@@ -2688,7 +2705,14 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fninit()
         {
-            throw new NotImplementedException();
+            FPUControlWord = 0x037F;
+            FPUStatusWord = 0;
+            FPUTagWord = 0xFFFF;
+            FPUDataPointer_seg.UInt16 = 0;
+            FPUDataPointer_off = 0;
+            FPUInstructionPointer_seg.UInt16 = 0;
+            FPUInstructionPointer_off = 0;
+            FPULastInstructionOpcode = 0;
         }
 
         /// <inheritdoc />
@@ -3834,7 +3858,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lodsw_a16()
         {
-            throw new NotImplementedException();
+            ax = memw_a16[ds, si];
+            si += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />
@@ -4876,13 +4901,37 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void popa()
         {
-            throw new NotImplementedException();
+            popw(di);
+            popw(si);
+            popw(bp);
+
+            if (ss.db)
+                esp += 2;
+            else
+                sp += 2;
+
+            popw(bx);
+            popw(dx);
+            popw(cx);
+            popw(ax);
         }
 
         /// <inheritdoc />
         public void popad()
         {
-            throw new NotImplementedException();
+            popd(edi);
+            popd(esi);
+            popd(ebp);
+
+            if (ss.db)
+                esp += 4;
+            else
+                sp += 4;
+
+            popd(ebx);
+            popd(edx);
+            popd(ecx);
+            popd(eax);
         }
 
         /// <inheritdoc />
@@ -5203,13 +5252,29 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void pusha()
         {
-            throw new NotImplementedException();
+            var t = sp.UInt16;
+            pushw(ax);
+            pushw(cx);
+            pushw(dx);
+            pushw(bx);
+            pushw(t);
+            pushw(bp);
+            pushw(si);
+            pushw(di);
         }
 
         /// <inheritdoc />
         public void pushad()
         {
-            throw new NotImplementedException();
+            var t = esp.UInt32;
+            pushd(eax);
+            pushd(ecx);
+            pushd(edx);
+            pushd(ebx);
+            pushd(t);
+            pushd(ebp);
+            pushd(esi);
+            pushd(edi);
         }
 
         /// <inheritdoc />
@@ -5783,7 +5848,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void smsw(Value value)
         {
-            throw new NotImplementedException();
+            value.UInt32 = cr0.UInt32;
         }
 
         /// <inheritdoc />
@@ -5825,7 +5890,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void std()
         {
-            throw new NotImplementedException();
+            eflags.df = true;
         }
 
         /// <inheritdoc />

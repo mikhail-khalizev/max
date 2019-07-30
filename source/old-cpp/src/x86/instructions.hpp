@@ -988,6 +988,7 @@ void popf_(uint_<8> OperandSize);
 #define popfw() popf_(16)
 #define popfd() popf_(32)
 
+// +
 inline void pusha()
 {
     uint_<16> t = sp;
@@ -1001,6 +1002,7 @@ inline void pusha()
     pushw(di);
 }
 
+// +
 inline void popa()
 {
     popw(di);
@@ -1018,6 +1020,7 @@ inline void popa()
     popw(ax);
 }
 
+// +
 inline void pushad()
 {
     uint_<32> t = esp;
@@ -1031,6 +1034,7 @@ inline void pushad()
     pushd(edi);
 }
 
+// +
 inline void popad()
 {
     popd(edi);
@@ -1369,6 +1373,7 @@ inline void cli()
     }
 }
 
+// +
 inline void std_()
 {
     df = true;
@@ -1745,6 +1750,7 @@ inline void lldt(uint_<16> s)
     }
 }
 
+// +
 inline void smsw(uint_<16> & d)
 {
     d = cr0;
@@ -1969,6 +1975,7 @@ inline void lodsb_a32()
     esi += df ? -1 : 1;
 }
 
+// +
 inline void lodsw_a16()
 {
     ax = memw_a16(ds, si);

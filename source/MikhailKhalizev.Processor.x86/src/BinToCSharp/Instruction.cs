@@ -45,9 +45,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public bool IsAnyRet { get; set; }
         public bool IsJmpOrRet { get; set; }
 
-        public delegate string write_cmd_Delegate(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset);
+        public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset);
 
-        public write_cmd_Delegate write_cmd { get; set; }
+        public WriteCmdDelegate WriteCmd { get; set; }
 
         public Instruction(Address address)
         {
@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (ud == null)
                 throw new ArgumentNullException(nameof(ud));
 
-            write_cmd = (e, dm, index, func, offset) => ToCodeString(offset: offset);
+            WriteCmd = (e, dm, index, func, offset) => ToCodeString(offset: offset);
 
             Comments = new List<string>();
 
@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var sb = new StringBuilder();
 
-            var flags = KnownInstr[Mnemonic];
+            var flags = _knownInstr[Mnemonic];
             //auto meta = get_meta(mnemonic);
             //if (meta.first == false)
             //{
@@ -167,25 +167,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             //    throw std::logic_error(err.str());
             //}
 
-            var adr_mode_str = $"_a{AddrMode}";
+            var adrModeStr = $"_a{AddrMode}";
 
-            var eff_opr_size = OprMode;
+            var effOprSize = OprMode;
             if (Mnemonic == ud_mnemonic_code.UD_Iout)
                 if (ud_type.UD_R_AL <= Operands[1].@base && Operands[1].@base <= ud_type.UD_R_BH)
-                    eff_opr_size = 8;
+                    effOprSize = 8;
 
             if (Mnemonic == ud_mnemonic_code.UD_Iin
                 || Mnemonic == ud_mnemonic_code.UD_Iimul
                 || Mnemonic == ud_mnemonic_code.UD_Imul)
                 if (ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH)
-                    eff_opr_size = 8;
+                    effOprSize = 8;
 
             if (PfxRepne)
-                sb.Append($"repne{adr_mode_str}(() => ");
+                sb.Append($"repne{adrModeStr}(() => ");
             else if (PfxRepe)
-                sb.Append($"repe{adr_mode_str}(() => ");
+                sb.Append($"repe{adrModeStr}(() => ");
             if (PfxRep)
-                sb.Append($"rep{adr_mode_str}(() => ");
+                sb.Append($"rep{adrModeStr}(() => ");
 
             if (addIf)
                 sb.Append("if(");
@@ -196,13 +196,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (flags.HasFlag(InstrFlags.UseOprSizeInside))
             {
-                if (eff_opr_size == 8)
+                if (effOprSize == 8)
                     sb.Append('b');
-                else if (eff_opr_size == 16)
+                else if (effOprSize == 16)
                     sb.Append('w');
-                else if (eff_opr_size == 32)
+                else if (effOprSize == 32)
                     sb.Append('d');
-                else if (eff_opr_size != 0)
+                else if (effOprSize != 0)
                     throw new InvalidOperationException();
             }
 
@@ -210,45 +210,45 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
                 BrFar &&
                 Operands[0].type == ud_type.UD_OP_MEM)
-                sb.Append(adr_mode_str);
+                sb.Append(adrModeStr);
 
             if (BrFar)
                 sb.Append("_far");
 
-            var need_write_namespace = IsCall;
+            var needWriteNamespace = IsCall;
             if (IsAnyJump || IsAnyLoop || IsCall)
             {
                 if (Operands[0].type == ud_type.UD_OP_PTR)
                 {
                     sb.Append("_abs");
-                    need_write_namespace = true;
+                    needWriteNamespace = true;
                 }
                 else if (Operands[0].type == ud_type.UD_OP_MEM || Operands[0].type == ud_type.UD_OP_REG)
                 {
                     sb.Append(BrFar ? "_ind" : "_abs");
-                    need_write_namespace = true;
+                    needWriteNamespace = true;
                 }
             }
             else
-                need_write_namespace = true;
+                needWriteNamespace = true;
 
 
             sb.Append(cmdSuffix);
             sb.Append("(");
 
 
-            var non_first_arg = false;
-            var use_pfx_seg = false; // Используется ли где-то в операндах сегмент?
+            var nonFirstArg = false;
+            var usePfxSeg = false; // Используется ли где-то в операндах сегмент?
 
             foreach (var op in Operands)
             {
-                if (non_first_arg)
+                if (nonFirstArg)
                     sb.Append(", ");
-                non_first_arg = true;
+                nonFirstArg = true;
 
-                var opr_size = (int) op.size;
-                if (opr_size == 0)
-                    opr_size = eff_opr_size;
+                var oprSize = (int) op.size;
+                if (oprSize == 0)
+                    oprSize = effOprSize;
 
                 int val;
                 switch (op.type)
@@ -292,19 +292,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                         if (memInside == false)
                         {
-                            if (opr_size == 8)
+                            if (oprSize == 8)
                                 sb.Append("memb");
-                            else if (opr_size == 16)
+                            else if (oprSize == 16)
                                 sb.Append("memw");
-                            else if (opr_size == 32)
+                            else if (oprSize == 32)
                                 sb.Append("memd");
-                            else if (opr_size == 64)
+                            else if (oprSize == 64)
                                 sb.Append("memq");
-                            else if (opr_size == 80)
+                            else if (oprSize == 80)
                                 sb.Append("memt");
                             else
                                 throw new NotImplementedException();
-                            sb.Append($"{adr_mode_str}[");
+                            sb.Append($"{adrModeStr}[");
                         }
 
                         if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
@@ -312,21 +312,21 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
 
                             if (PfxSeg != ud_type.UD_NONE)
-                                use_pfx_seg = true;
+                                usePfxSeg = true;
                         }
 
-                        var op_f = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
+                        var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
                         if (op.@base != ud_type.UD_NONE)
                         {
                             sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
-                            op_f = true;
+                            isNextOperation = true;
                         }
 
                         if (op.index != ud_type.UD_NONE)
                         {
-                            if (op_f)
+                            if (isNextOperation)
                                 sb.Append(" + ");
-                            op_f = true;
+                            isNextOperation = true;
 
                             sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
                         }
@@ -336,7 +336,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             if (op.index == ud_type.UD_NONE)
                                 throw new NotImplementedException();
 
-                            sb.Append($" * {HexHelper.ToString(op.scale, o => o.SetTrimZero())}");
+                            sb.Append($" * {op.scale}");
                         }
 
                         if (op.offset != 0)
@@ -357,16 +357,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                             if (val < 0)
                             {
-                                sb.Append(op_f ? " - " : "-");
+                                sb.Append(isNextOperation ? " - " : "-");
                                 sb.Append($"0x{-val:x}");
                             }
                             else
                             {
-                                sb.Append(op_f ? " + " : "");
-                                sb.Append(AddressNameConverter.GetResultName(val, false, need_write_namespace));
+                                sb.Append(isNextOperation ? " + " : "");
+                                sb.Append(AddressNameConverter.GetResultName(val, false, needWriteNamespace));
                             }
 
-                            op_f = true;
+                            isNextOperation = true;
                         }
 
                         if (memInside == false)
@@ -375,7 +375,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     }
 
                     case ud_type.UD_OP_IMM:
-                        switch (opr_size)
+                        switch (oprSize)
                         {
                             case 8:
                             {
@@ -408,10 +408,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             }
 
                             case 16:
-                                sb.Append(AddressNameConverter.GetResultName(op.lval.uword, false, need_write_namespace));
+                                sb.Append(AddressNameConverter.GetResultName(op.lval.uword, false, needWriteNamespace));
                                 break;
                             case 32:
-                                sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, need_write_namespace));
+                                sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, needWriteNamespace));
                                 break;
                             default:
                                 throw new NotImplementedException();
@@ -420,7 +420,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         break;
 
                     case ud_type.UD_OP_JIMM:
-                        switch (opr_size)
+                        switch (oprSize)
                         {
                             case 8:
                                 val = op.lval.@sbyte;
@@ -434,7 +434,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             default: throw new NotImplementedException();
                         }
 
-                        sb.Append(AddressNameConverter.GetResultName(End + val + offset, false, need_write_namespace));
+                        sb.Append(AddressNameConverter.GetResultName(End + val + offset, false, needWriteNamespace));
                         sb.Append(", ");
 
                         sb.Append(
@@ -444,7 +444,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         break;
 
                     case ud_type.UD_OP_CONST:
-                        sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, need_write_namespace));
+                        sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, needWriteNamespace));
                         break;
 
                     case ud_type.UD_OP_PTR:
@@ -457,24 +457,24 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 }
             }
 
-            if (use_pfx_seg == false && PfxSeg != ud_type.UD_NONE
+            if (usePfxSeg == false && PfxSeg != ud_type.UD_NONE
                 && Mnemonic != ud_mnemonic_code.UD_Imov
                 && Mnemonic != ud_mnemonic_code.UD_Ilea)
             {
                 // к примеру movsb_a16(es)
 
-                if (non_first_arg)
+                if (nonFirstArg)
                     sb.Append(", ");
-                non_first_arg = true;
+                nonFirstArg = true;
 
                 sb.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
             }
 
             if (funcAddArg.Length != 0)
             {
-                if (non_first_arg)
+                if (nonFirstArg)
                     sb.Append(", ");
-                non_first_arg = true;
+                nonFirstArg = true;
 
                 sb.Append(funcAddArg);
             }
@@ -492,11 +492,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             {
                 Address val;
                 var op = Operands[0];
-                var opr_size = (int)op.size;
-                if (opr_size == 0)
-                    opr_size = eff_opr_size;
+                var oprSize = (int)op.size;
+                if (oprSize == 0)
+                    oprSize = effOprSize;
 
-                switch (opr_size)
+                switch (oprSize)
                 {
                     case 8:
                         val = op.lval.@sbyte;
@@ -528,7 +528,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             UseAdrSizeInside = 2
         }
 
-        private static Dictionary<ud_mnemonic_code, InstrFlags> KnownInstr = new Dictionary<ud_mnemonic_code, InstrFlags>
+        private static Dictionary<ud_mnemonic_code, InstrFlags> _knownInstr = new Dictionary<ud_mnemonic_code, InstrFlags>
             {
                 {ud_mnemonic_code.UD_Istosb, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Istosw, InstrFlags.UseAdrSizeInside},

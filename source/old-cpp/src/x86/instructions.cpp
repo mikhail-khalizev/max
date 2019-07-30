@@ -904,16 +904,24 @@ enum class fpu_precision
     double_extended
 };
 
+// +
 uint_<16> FPUControlWord;
+// +
 uint_<16> FPUStatusWord;
+// +
 uint_<16> FPUTagWord;
 
+// +
 seg_reg FPUDataPointer_seg;
+// +
 uint_<32> FPUDataPointer_off;
 
+// +
 seg_reg FPUInstructionPointer_seg;
+// +
 uint_<32> FPUInstructionPointer_off;
 
+// +
 typename uint_ge<11>::type FPULastInstructionOpcode;
 
 __float80 /* typename exo::math::fixed_ge<80>::utype */ st_regs[8];

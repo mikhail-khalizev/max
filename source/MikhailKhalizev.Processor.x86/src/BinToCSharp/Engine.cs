@@ -688,9 +688,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var comments_in_current_func = new List<string>();
 
-            if (cmd.write_cmd != null)
+            if (cmd.WriteCmd != null)
             {
-                os.Append(" " + cmd.write_cmd(this, df, cmdIndex, comments_in_current_func, offset));
+                os.Append(" " + cmd.WriteCmd(this, df, cmdIndex, comments_in_current_func, offset));
 
                 if (cmd.Comments.Count != 0 || comments_in_current_func.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);
