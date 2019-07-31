@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var physMem = new ArraySegment<byte>(Ram);
 
-            if (A20Gate == false)
+            if (!A20Gate)
                 address &= 0xf_ffff;
 
             var input = new Interval<Address>(address, address + size);

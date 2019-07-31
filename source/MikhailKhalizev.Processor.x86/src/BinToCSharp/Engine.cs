@@ -440,7 +440,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     detectedMethod.Instructions = instr;
                     detectedMethod.End = min_end;
                     detectedMethod.RawBytes = Memory.ReadAll(detectedMethod.Begin, detectedMethod.End - detectedMethod.Begin);
-                    detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(detectedMethod.RawBytes);
+                    detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
                     
                     if (detectedMethod.MethodInfo?.Jumps != null)
                     {
@@ -474,7 +474,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (detectedMethod.MethodInfo != null)
                     continue;
                 
-                var mi = MethodsInfo.GetByRawBytes(detectedMethod.RawBytes);
+                var mi = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
                 if (mi == null)
                 {
                     mi = new MethodInfoDto();

@@ -2369,6 +2369,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void lgdtd_a16(SegmentRegister segment, Value address)
+        {
+            Implementation.lgdtd_a16(segment, address);
+        }
+
+        /// <inheritdoc />
         public void lgs()
         {
             Implementation.lgs();

@@ -1772,6 +1772,7 @@ inline void lmsw(uint_<16> s)
     cr0 = t;
 }
 
+// +
 inline void lgdtw_a16(seg_reg & seg, uint_<16> off)
 {
     if (get_cpl() != 0)
@@ -1781,6 +1782,7 @@ inline void lgdtw_a16(seg_reg & seg, uint_<16> off)
     gdtr_base = memd_a16(seg, off + 2) & 0x00ffffff;
 }
 
+// +
 inline void lgdtd_a16(seg_reg & seg, uint_<16> off)
 {
     if (get_cpl() != 0)
@@ -1910,6 +1912,7 @@ inline void stosb_a16()
     di += df ? -1 : 1;
 }
 
+// +
 inline void stosw_a16()
 {
     memw_a16(es, di) = ax;

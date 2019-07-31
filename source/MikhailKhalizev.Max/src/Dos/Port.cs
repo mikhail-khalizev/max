@@ -96,8 +96,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
                     
                 case 0x92:
-                    value.Int32 = 0x2; // a20_gate enable.
-                    //d = a20_gate ? 0x2 : 0;
+                    value.Int32 = ((Processor.x86.Core.Memory)Memory).A20Gate ? 0x2 : 0;
                     break;
 
                 case 0x215:
@@ -278,8 +277,9 @@ namespace MikhailKhalizev.Max.Dos
                             break;
                         }
                         break;
+                  
 
-                    case 0x64:
+                case 0x64:
                         switch (s)
                         {
                         case 0xd1:
@@ -289,11 +289,12 @@ namespace MikhailKhalizev.Max.Dos
                             // Не известно.
                             break;
                         default:
-                            throw exo::exception::not_implemented();
+                            throw new NotImplementedException();
                             break;
                         }
-                        break;
+                        break;      
                 */
+
                 case 0x70:
                     throw new NotImplementedException();
                     //cmos_reg = s & 0x3f;
@@ -307,8 +308,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x92:
-                    throw new NotImplementedException();
-                    //a20_gate = 0 != (s & 0x2);
+                    ((Processor.x86.Core.Memory)Memory).A20Gate = 0 != (s.Int32 & 0x2);
                     break;
 
 

@@ -5,6 +5,7 @@ using System.Linq;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
+using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
@@ -82,14 +83,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             return method;
         }
 
-        public MethodInfoDto GetByRawBytes(byte[] rawBytes)
+        public MethodInfoDto GetByRawBytes(ArchitectureMode mode, byte[] rawBytes)
         {
-            return _methodByGuid.Values.FirstOrDefault(x => x.RawBytes.SequenceEqual(rawBytes));
+            return _methodByGuid.Values.FirstOrDefault(x => x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
         }
 
         public void Add(MethodInfoDto method)
         {
-            if (_methodByGuid.Values.Any(x => x.Guid == method.Guid || x.RawBytes.SequenceEqual(method.RawBytes)))
+            if (_methodByGuid.Values.Any(x => x.Guid == method.Guid || (x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes))))
                 throw new InvalidOperationException("Duplicated item");
             _methodByGuid.Add(method.Guid, method);
         }

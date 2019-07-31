@@ -32,6 +32,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public List<ud_operand> Operands { get; set; }
 
         public ud_type PfxSeg { get; set; }
+        public bool PfxAddress { get; set; }
+        public bool PfxOpr { get; set; }
+
         public bool HaveAnyRep => PfxRep || PfxRepe || PfxRepne;
         public bool PfxRep { get; set; }
         public bool PfxRepe { get; set; }
@@ -83,6 +86,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             PfxRep = ud.pfx_rep != 0;
             PfxRepe = ud.pfx_repe != 0;
             PfxRepne = ud.pfx_repne != 0;
+            PfxAddress = ud.pfx_adr != 0;
+            PfxOpr = ud.pfx_opr != 0;
 
             IsCall = ud.mnemonic == ud_mnemonic_code.UD_Icall;
             IsAnyLoop = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");

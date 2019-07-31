@@ -2243,6 +2243,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         void lgdtw_a16(SegmentRegister segment, Value address);
 
         /// <summary>
+        /// Load Global/Interrupt Descriptor Table Register.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
+        void lgdtd_a16(SegmentRegister segment, Value address);
+
+        /// <summary>
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>

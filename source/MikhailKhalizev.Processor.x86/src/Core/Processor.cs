@@ -3832,7 +3832,21 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lgdtw_a16(SegmentRegister segment, Value address)
         {
-            throw new NotImplementedException();
+            if (CPL != 0)
+                throw new NotImplementedException(); // #GP(0)
+
+            gdtr_limit = memw_a16[segment, address].UInt16;
+            gdtr_base = memd_a16[segment, address + 2].UInt32 & 0x00ffffff;
+        }
+
+        /// <inheritdoc />
+        public void lgdtd_a16(SegmentRegister segment, Value address)
+        {
+            if (CPL != 0)
+                throw new NotImplementedException(); // #GP(0)
+
+            gdtr_limit = memw_a16[segment, address].UInt16;
+            gdtr_base = memd_a16[segment, address + 2].UInt32;
         }
 
         /// <inheritdoc />
@@ -6011,7 +6025,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void stosw_a16()
         {
-            throw new NotImplementedException();
+            memw_a16[es, di] = ax;
+            di += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />
