@@ -265,7 +265,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             get => Implementation.eip;
             set => Implementation.eip = value;
         }
-        
+
         /// <inheritdoc />
         public Address CurrentInstructionAddress
         {
@@ -314,7 +314,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         #endregion
 
         #region Instructions
-        
+
         /// <inheritdoc />
         public void aaa()
         {
@@ -1740,7 +1740,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// <inheritdoc />
         public void jmpw_far_abs(int segment, Address address)
         {
-            throw new NotImplementedException();
+            Implementation.jmpw_far_abs(segment, address);
         }
 
         /// <inheritdoc />
@@ -2465,9 +2465,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void ltr()
+        public void ltr(Value value)
         {
-            Implementation.ltr();
+            Implementation.ltr(value);
         }
 
         /// <inheritdoc />
@@ -3867,7 +3867,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         {
             Implementation.repne_a16(action);
         }
-        
+
         /// <inheritdoc />
         public void retw(int allocSize = 0)
         {

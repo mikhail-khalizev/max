@@ -567,20 +567,20 @@ namespace MikhailKhalizev.Processor.x86.Core
             descriptor.Bytes.CopyTo(ms.AsSpan());
         }
 
-        public void jmp_far_prepare(ushort segmentSelector, Address tempEIP)
+        public void jmp_far_prepare(int segmentSelector, Address tempEIP)
         {
             if (!cr0.pe || (cr0.pe && eflags.vm)) /* Real-address or virtual-8086 mode */
             {
                 if (cs.fail_limit_check(tempEIP)) // is beyond code segment limit
                     throw new NotImplementedException(); // #GP(0);
-                cs.Load(segmentSelector);
+                cs.Int32 = segmentSelector;
                 eip = tempEIP;
                 return;
             }
 
             if (cr0.pe && !eflags.vm) /* IA-32e mode or protected mode, not virtual-8086 mode */
             {
-                /* @todo Not understand:
+                /* @todo
                     IF effective address in the CS, DS, ES, FS, GS, or SS segment is illegal
                     or segment selector in target operand NULL
                     THEN #GP(0); FI; */
@@ -646,8 +646,8 @@ namespace MikhailKhalizev.Processor.x86.Core
                     cs.RPL = cpl;
                     eip = tempEIP;
                 }
-
-                throw new NotImplementedException();
+                else
+                    throw new NotImplementedException();
             }
             else
                 throw new NotImplementedException(); // #GP(segment selector)
@@ -1473,10 +1473,6 @@ namespace MikhailKhalizev.Processor.x86.Core
                     try
                     {
                         run_func?.Invoke(this, null);
-                    }
-                    catch (TargetInvocationException ex) when (ex.GetBaseException() is GoUpException)
-                    {
-                        // Ignore.
                     }
                     catch (GoUpException)
                     {
@@ -3207,7 +3203,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jmpw_far_abs(int segment, Address address)
         {
-            throw new NotImplementedException();
+            jmp_far_prepare(segment, address);
+            run_irqs();
         }
 
         /// <inheritdoc />
@@ -3866,19 +3863,40 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lidtw_a16(SegmentRegister segment, Value address)
         {
-            throw new NotImplementedException();
+            if (CPL != 0)
+                throw new NotImplementedException(); // #GP(0)
+
+            idtr_limit = memw_a16[segment, address].UInt16;
+            idtr_base = memd_a16[segment, address + 2].UInt32 & 0x00ffffff;
         }
 
         /// <inheritdoc />
         public void lldt(Value value)
         {
-            throw new NotImplementedException();
+            if (CPL != 0)
+                throw new NotImplementedException(); // #GP(0)
+
+            if ((value & 0x4) != 0) // if point to local table
+                throw new NotImplementedException(); // #GP(segment selector)
+
+            ldtr.Selector = value.UInt16;
+
+            if (ldtr.IsNull == false)
+            {
+                if (ldtr.Descriptor.is_type_ldt == false)
+                    throw new NotImplementedException(); // #GP(segment selector)
+
+                if (ldtr.Descriptor.Present == false)
+                    throw new NotImplementedException(); // #NP(segment selector)
+            }
         }
 
         /// <inheritdoc />
         public void lmsw(Value value)
         {
-            throw new NotImplementedException();
+            var t = cr0.UInt32;
+            t = (t & 0xffff0000) | value.UInt32;
+            cr0.UInt32 = t;
         }
 
         /// <inheritdoc />
@@ -3956,9 +3974,22 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void ltr()
+        public void ltr(Value val)
         {
-            throw new NotImplementedException();
+            if ((val & 0x4) != 0)
+                throw new NotImplementedException(); // #GP(segment selector)
+
+            tr.Selector = val.UInt16;
+
+            if (tr.IsNull)
+                throw new NotImplementedException(); // #GP(0)
+
+            if (tr.Descriptor.is_type_tss == false || tr.Descriptor.IsTssBusy)
+                throw new NotImplementedException(); // #GP(segment selector)
+            if (tr.Descriptor.Present == false)
+                throw new NotImplementedException(); // #NP(segment selector)
+
+            tr.Descriptor.IsTssBusy = true;
         }
 
         /// <inheritdoc />

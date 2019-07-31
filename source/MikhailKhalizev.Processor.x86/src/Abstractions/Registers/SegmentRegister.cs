@@ -59,11 +59,7 @@
         /// 0 = Highest privilege (OS),
         /// 3 = Lowest privilege (User applications).
         /// </remarks>
-        public uint RPL
-        {
-            get => Selector & 0b0011u;
-            set => Selector = (ushort) ((Selector & ~0b0011u) | (RPL & 0b0011u));
-        }
+        public abstract uint RPL { get; set; }
 
         /// <summary>
         /// null segment selector.

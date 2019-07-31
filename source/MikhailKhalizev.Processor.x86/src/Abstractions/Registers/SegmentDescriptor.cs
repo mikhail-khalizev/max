@@ -186,7 +186,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
 
         #region System Descriptor Types
 
-        // Page 1736. Table 3-2. System-Segment and Gate-Descriptor Types
+        // 325384-sdm-vol-3abcd.pdf. Page 102. Table 3-2. System-Segment and Gate-Descriptor Types
 
         /// <summary>
         /// Is the descriptor type is a system descriptor.
@@ -204,7 +204,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
         public SystemSegmentTypeIn32BitMode SystemSegmentTypeIn32BitMode => (SystemSegmentTypeIn32BitMode) (Bytes[5] & 0x1fu);
         
         public SystemSegmentTypeInIa32Mode SystemSegmentTypeInIa32eMode => (SystemSegmentTypeInIa32Mode)(Bytes[5] & 0x1fu);
-        
+
+        // Only 32-Bit Mode. See also SystemSegmentTypeIn32BitMode.
+        public bool is_type_tss => (SAndType | 0xa) == 0x0b;
+
+        public bool is_type_ldt => SAndType == 0x2;
+
         public bool IsTssBusy
         {
             get => BinaryHelper.IsSet(SAndType, 1);

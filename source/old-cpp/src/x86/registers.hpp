@@ -139,6 +139,7 @@ extern uint_<16> gdtr_limit;
 extern uint_<64> idtr_base;
 extern uint_<16> idtr_limit;
 
+// + lldr -> ldtr
 extern seg_reg lldr, tr;
 
 

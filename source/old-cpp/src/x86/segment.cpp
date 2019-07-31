@@ -32,6 +32,7 @@ bool seg_desc::is_type_non_conforming_code()
     return (get_s_and_type() | 0x3) == 0x1b;
 }
 
+// +
 bool seg_desc::is_type_tss()
 {
     // @todo only 32-Bit Mode?

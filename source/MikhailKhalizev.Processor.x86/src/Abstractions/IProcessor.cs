@@ -77,6 +77,10 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         SegmentRegister fs { get; set; }
         SegmentRegister gs { get; set; }
+        
+        /// <summary>
+        /// Local descriptor table register.
+        /// </summary>
         SegmentRegister ldtr { get; set; }
         SegmentRegister tr { get; set; }
 
@@ -2342,7 +2346,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Load Task Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LTR.html</remarks>
-        void ltr();
+        void ltr(Value value);
 
         /// <summary>
         /// Count the Number of Leading Zero Bits.

@@ -394,6 +394,8 @@ void iret_(uint_<8> op_size);
     } while(0)
 
 #define jmpw_far_abs jmpd_far_abs
+
+// +
 #define jmpd_far_abs(seg, off)                                          \
     do {                                                                \
         jmp_far_prepare(seg, off);                                      \
@@ -1739,6 +1741,7 @@ inline void cmc()
     cf = ! cf;
 }
 
+// +
 inline void lldt(uint_<16> s)
 {
     if (get_cpl() != 0)
@@ -1765,6 +1768,7 @@ inline void smsw(uint_<16> & d)
     d = cr0;
 }
 
+// +
 inline void lmsw(uint_<16> s)
 {
     uint_<32> t = cr0;
@@ -1792,6 +1796,7 @@ inline void lgdtd_a16(seg_reg & seg, uint_<16> off)
     gdtr_base = memd_a16(seg, off + 2);
 }
 
+// +
 inline void lidtw_a16(seg_reg & seg, uint_<16> off)
 {
     if (get_cpl() != 0)
@@ -1875,6 +1880,7 @@ void lar(uint_<L> & d, T s)
     }
 }
 
+// +
 inline void ltr(uint_<16> val)
 {
     if ((val & 0x4) != 0)
