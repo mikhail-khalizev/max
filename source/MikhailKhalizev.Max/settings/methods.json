@@ -102,6 +102,12 @@
     "Raw": "60ff16c009"
   },
   {
+    "Guid": "af6379ae-88e7-4d87-b0b3-49ebd892d191",
+    "Address": "0x4033",
+    "Mode": 16,
+    "Raw": "60ff16c0098ed2ba20008eda8ec2b868000f00d00f01e00b0640000f01f0ff26c209"
+  },
+  {
     "Guid": "0134336a-75a8-4173-9154-2041be1ceaf4",
     "Address": "0x4038",
     "Mode": 16,
@@ -262,7 +268,10 @@
   },
   {
     "Guid": "8f9bca16-4e64-46bb-919a-451564831b93",
-    "Address": "0x47cd",
+    "Addresses": [
+      "0x47cd",
+      "0x4f7d"
+    ],
     "Mode": 16,
     "Raw": "8bdc368b4702051000d1d8b103d3e8c3"
   },
@@ -439,7 +448,10 @@
   },
   {
     "Guid": "147f7785-fe5f-4631-8cb2-29be7da23e0f",
-    "Address": "0x4f7a",
+    "Addresses": [
+      "0x4f7a",
+      "0x572a"
+    ],
     "Mode": 16,
     "Raw": "6a206a206a206a18ff1e1e0083c408c3"
   },
@@ -496,7 +508,10 @@
   },
   {
     "Guid": "787fcc7d-6c2e-4b2b-8b6b-cf463a05d1ec",
-    "Address": "0x5476",
+    "Addresses": [
+      "0x5476",
+      "0x5c26"
+    ],
     "Mode": 16,
     "Raw": "5b2e8b0f8b1efa0a4343891efa0a8f07688f3eff2ef20a"
   },
@@ -1081,7 +1096,10 @@
   },
   {
     "Guid": "5120b4ea-83c1-495e-8891-1f121a94fc94",
-    "Address": "0x7c18",
+    "Addresses": [
+      "0x7c18",
+      "0x5c08"
+    ],
     "Mode": 16,
     "Raw": "e81b00bb22e81600f024e81100e221"
   },

@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace MikhailKhalizev.Max.Dos
 {
@@ -20,13 +22,303 @@ namespace MikhailKhalizev.Max.Dos
         {
             RawProgramMain = rawProgramMain;
             
-            fileHandels.Add(null); // in
-            fileHandels.Add(null); // out
-            fileHandels.Add(null); // err
+            fileHandlers.Add(null); // in
+            fileHandlers.Add(null); // out
+            fileHandlers.Add(null); // err
         }
 
         public void int_08() { throw new NotImplementedException(); }
-        public void int_10() { throw new NotImplementedException(); }
+
+        public unsafe void int_10()
+        {
+            const int vga_vmemsize = 0x200000;
+
+            switch (ah.UInt16)
+            {
+                case 0x0f:
+                    ah = 0x50; // width in char
+                    al = 0x3; // video mode
+                    bh = 0; // page
+                    break;
+
+                case 0x4f: // VESA Calls
+                    switch (al.UInt16)
+                    {
+                        case 0x01: // Get SVGA Mode Information
+                            if (cx != 0x101)
+                                throw new NotImplementedException();
+
+                            al = 0x4f;
+                            ah = 0; // success
+
+                            {
+                                var page_size = 640 * 480;
+                                page_size = page_size & (~15);
+
+                                ushort mode_attr = 0x9b;
+
+                                var ms = Memory.GetFixSize(es, di, Marshal.SizeOf<mode_info>());
+                                Array.Clear(ms.Array, ms.Offset, ms.Count);
+
+                                ref var mi = ref Memory.GetStruct<mode_info>(es[di]);
+
+                                mi.BytesPerScanLine = 640;
+                                mi.NumberOfPlanes = 1;
+                                mi.BitsPerPixel = 8;
+                                mi.MemoryModel = 4;
+                                mi.WinAAttributes = 7;
+
+                                if (vga_vmemsize < page_size)
+                                {
+                                    throw new NotImplementedException();
+                                }
+                                else
+                                {
+                                    mi.ModeAttributes = mode_attr;
+                                    mi.NumberOfImagePages = (byte)((vga_vmemsize / page_size) - 1);
+                                }
+
+                                mi.WinGranularity = 64;
+                                mi.WinSize = 64;
+                                mi.WinASegment = 0xa000;
+                                mi.XResolution = 640;
+                                mi.YResolution = 480;
+
+                                if (added_callback_setwindow == false)
+                                {
+                                    RawProgramMain.add_internal_dyn_func(callback_setwindow, 16, (Address)0xf0001320);
+                                    added_callback_setwindow = true;
+                                }
+
+                                mi.WinFuncPtr = 0xf0001320;
+                                mi.NumberOfBanks = 1;
+                                mi.Reserved_page = 1;
+                                mi.XCharSize = 8;
+                                mi.YCharSize = 16;
+                                mi.PhysBasePtr = 0;
+                            }
+
+                            break;
+
+                        case 0x02: // Set videomode
+                            if (bx != 0x101)
+                                throw new NotImplementedException();
+
+                            al = 0x4f;
+                            ah = 0; // success
+
+                            // /* mode  ,type     ,sw  ,sh  ,tw ,th ,cw,ch ,pt,pstart  ,plength,htot,vtot,hde,vde special flags */
+                            //{ 0x101  ,M_LIN8   ,640 ,480 ,80 ,30 ,8 ,16 ,1 ,0xa0000 ,0x10000,100 ,525 ,80 ,480 ,0    },
+
+                            break;
+
+                        case 0x05:
+                            if (bh != 0)
+                                throw new NotImplementedException();
+
+                            // ah = SetCPUWindow(bl, dl); (window, address)
+
+                            if (bl != 0)
+                                ah = 1;
+                            else
+                            {
+                                if (dl.Int32 * 0x10000 < vga_vmemsize)
+                                {
+                                    ah = 0;
+                                    // out(0x3d4, 0x6a)
+                                    // out(0x3d5, dl)
+                                    // std::cerr << static_cast<uint>(dl) << std::endl;
+                                    
+
+                                    var curr_bank = ((Processor.x86.Core.Memory) Memory)
+                                        .mem_phys_raw(0xa0000, 0x10000)
+                                        .Slice(0, 0x10000);
+
+
+                                    var offset = 3 * curr_bank_num * 0x10000;
+                                    for (var i = 0; i < 0x10000; i++)
+                                    {
+                                        if (img_data.Length <= offset + 3 * i + 2)
+                                            break;
+
+                                        var c = curr_bank[i];
+
+#if false
+                                        img_data[offset + 3 * i + 0] = c;
+                                        img_data[offset + 3 * i + 1] = c;
+                                        img_data[offset + 3 * i + 2] = c;
+#else
+                                        img_data[offset + 3 * i + 2] = pal[c].rgb[2];
+                                        img_data[offset + 3 * i + 1] = pal[c].rgb[1];
+                                        img_data[offset + 3 * i + 0] = pal[c].rgb[0];
+#endif
+                                    }
+
+                                    if (dl == 0)
+                                    {
+                                        var height = 480;
+                                        var width = 640;
+
+#if false
+                        const int line_y1 = 15; // Вписан.
+                        const int line_y2 = 334; // Вписан
+                        const int line_x1 = 32; // Вписан
+                        const int line_x2 = 603; // Вписан
+
+                        // -> total_height = 320, total_width = 572
+
+                        for (int i = line_x1; i <= line_x2; i++)
+                        {
+                            // Граница заданной области - красная.
+                            img_data[3 * buf_width * line_y1 + 3 * i + 0] = 255;
+                            img_data[3 * buf_width * line_y1 + 3 * i + 1] = 0;
+                            img_data[3 * buf_width * line_y1 + 3 * i + 2] = 0;
+
+                            img_data[3 * buf_width * line_y2 + 3 * i + 0] = 255;
+                            img_data[3 * buf_width * line_y2 + 3 * i + 1] = 0;
+                            img_data[3 * buf_width * line_y2 + 3 * i + 2] = 0;
+
+
+                            // Граница всего изображения - зелёная.
+//                            img_data[3 * i + 0] = 0;
+//                            img_data[3 * i + 1] = 255;
+//                            img_data[3 * i + 2] = 0;
+//
+//                            img_data[3 * buf_width * (buf_height - 1) + 3 * i + 0] = 0;
+//                            img_data[3 * buf_width * (buf_height - 1) + 3 * i + 1] = 255;
+//                            img_data[3 * buf_width * (buf_height - 1) + 3 * i + 2] = 0;
+                        }
+
+                        for (int i = line_y1; i <= line_y2; i++)
+                        {
+                            // Граница заданной области - красная.
+                            img_data[3 * line_x1 + 3 * buf_width * i + 0] = 255;
+                            img_data[3 * line_x1 + 3 * buf_width * i + 1] = 0;
+                            img_data[3 * line_x1 + 3 * buf_width * i + 2] = 0;
+
+                            img_data[3 * line_x2 + 3 * buf_width * i + 0] = 255;
+                            img_data[3 * line_x2 + 3 * buf_width * i + 1] = 0;
+                            img_data[3 * line_x2 + 3 * buf_width * i + 2] = 0;
+
+
+                            // Граница всего изображения - зелёная.
+//                            img_data[3 * buf_width * i + 0] = 0;
+//                            img_data[3 * buf_width * i + 1] = 255;
+//                            img_data[3 * buf_width * i + 2] = 0;
+//
+//                            img_data[3 * (buf_width - 1) + 3 * buf_width * i + 0] = 0;
+//                            img_data[3 * (buf_width - 1) + 3 * buf_width * i + 1] = 255;
+//                            img_data[3 * (buf_width - 1) + 3 * buf_width * i + 2] = 0;
+                        }
+#endif
+
+                                        fileNum++;
+                                        var pngOutput = RawProgramMain.Configuration.Dos.PngOutput;
+                                        var filePath = Path.Combine(pngOutput, $"img-{fileNum:D4}.png");
+                                        
+                                        
+                                        var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
+                                        nimg.Save(filePath);
+
+                                        Console.WriteLine($"draw {fileNum}.png");
+
+                                        //extra_log = (124 <= fileNum); /* Движение единиц. */
+                                    }
+
+                                    
+                                    var need_cpy = (curr_bank_num * 0x10000 < all_banks.Length);
+
+                                    if (need_cpy)
+                                        curr_bank.CopyTo(all_banks, curr_bank_num * 0x10000);
+
+                                    curr_bank_num = dl.UInt16;
+
+                                    if (need_cpy)
+                                        all_banks.AsSpan().Slice(curr_bank_num * 0x10000, 0x10000).CopyTo(curr_bank.AsSpan());
+                                }
+                                else
+                                    ah = 1;
+                            }
+
+                            al = 0x4f;
+                            break;
+
+                        default:
+                            throw new NotImplementedException();
+                    }
+
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            syscall_iretww();
+        }
+
+
+        pal_struct[] pal = new pal_struct[256];
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public unsafe struct pal_struct
+        {
+            public fixed byte rgb[3];
+        }
+
+        uint fileNum;
+
+        // 640 * 480 = 0x4b000
+        const int buf_width = 640;
+        const int buf_height = 480;
+
+        int curr_bank_num = 0;
+        byte[] img_data = new byte[3 * buf_width * buf_height];
+
+        byte[] all_banks = new byte[((buf_width * buf_height + 0x10000 - 1) / 0x10000) * 0x10000];
+
+
+        private bool added_callback_setwindow = false;
+        private static void callback_setwindow() { }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public unsafe struct mode_info
+        {
+            public ushort ModeAttributes;
+            public byte WinAAttributes;
+            public byte WinBAttributes;
+            public ushort WinGranularity;
+            public ushort WinSize;
+            public ushort WinASegment;
+            public ushort WinBSegment;
+            public uint WinFuncPtr;
+            public ushort BytesPerScanLine;
+            public ushort XResolution;
+            public ushort YResolution;
+            public byte XCharSize;
+            public byte YCharSize;
+            public byte NumberOfPlanes;
+            public byte BitsPerPixel;
+            public byte NumberOfBanks;
+            public byte MemoryModel;
+            public byte BankSize;
+            public byte NumberOfImagePages;
+            public byte Reserved_page;
+            public byte RedMaskSize;
+            public byte RedMaskPos;
+            public byte GreenMaskSize;
+            public byte GreenMaskPos;
+            public byte BlueMaskSize;
+            public byte BlueMaskPos;
+            public byte ReservedMaskSize;
+            public byte ReservedMaskPos;
+            public byte DirectColorModeInfo;
+            public uint PhysBasePtr;
+            public uint OffScreenMemOffset;
+            public ushort OffScreenMemSize;
+            public fixed byte Reserved[206];
+        };
+
+
 
         // int_sys_srv
         public void int_15()
@@ -92,7 +384,7 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x25: // set interrupt vector
                     {
-                        // al <- int num, ds:dx <- addr of int
+                        // al <- int fileNum, ds:dx <- addr of int
                         if (cr0.pe)
                             throw new NotImplementedException();
 
@@ -138,7 +430,7 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x35: // get interrupt vector
                     {
-                        // al <- int num. es:bx >- addr of int
+                        // al <- int fileNum. es:bx >- addr of int
                         if (cr0.pe)
                             throw new NotImplementedException();
 
@@ -186,8 +478,8 @@ namespace MikhailKhalizev.Max.Dos
                         Console.Error.WriteLine("\tCreate: " + path);
 
                         var file = File.Open(path, FileMode.OpenOrCreate | FileMode.Truncate);
-                        fileHandels.Add(file);
-                        var fd = fileHandels.Count - 1;
+                        fileHandlers.Add(file);
+                        var fd = fileHandlers.Count - 1;
 
                         if (0 <= fd)
                         {
@@ -226,8 +518,8 @@ namespace MikhailKhalizev.Max.Dos
                         try
                         {
                             var file = File.Open(path, fileMode, fileAccess);
-                            fileHandels.Add(file);
-                            var fd = fileHandels.Count - 1;
+                            fileHandlers.Add(file);
+                            var fd = fileHandlers.Count - 1;
 
                             eflags.cf = false;
                             if (0x7fff < fd)
@@ -258,7 +550,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x3e: // close_file
                     if (bx.UInt32 <= 0x7FFF)
                     {
-                        fileHandels[bx.Int32].Dispose();
+                        fileHandlers[bx.Int32].Dispose();
 
                         //int fd = close(bx);
                         //if (fd == 0)
@@ -276,7 +568,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var ms = Memory.GetFixSize(ds, dx, cx.Int32);
 
-                        var readed = fileHandels[bx.Int32].Read(ms.AsSpan());
+                        var readed = fileHandlers[bx.Int32].Read(ms.AsSpan());
                         if (0 <= readed)
                         {
                             eflags.cf = false;
@@ -299,7 +591,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (bx.Int32 == 2)
                             Console.Error.Write(ms.Select(x => (char)x).ToArray());
                         else
-                            fileHandels[bx.Int32].Write(ms.AsSpan());
+                            fileHandlers[bx.Int32].Write(ms.AsSpan());
 
                         var writed = cx.Int32;
                         if (0 <= writed)
@@ -341,7 +633,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var to_seek = (int)((cx.UInt32 << 16) + dx.UInt32);
 
-                        var file = fileHandels[bx.Int32];
+                        var file = fileHandlers[bx.Int32];
 
                         switch (al.UInt32)
                         {
@@ -413,7 +705,7 @@ namespace MikhailKhalizev.Max.Dos
                         }
 
                     ax = dx = 0x2;
-                    // throw exception::not_implemented();
+                    // throw new NotImplementedException();
                     break;
 
                 case 0x48:
@@ -451,8 +743,8 @@ namespace MikhailKhalizev.Max.Dos
                         Console.Error.WriteLine("\tCreate temp: " + p2);
 
                         var file = File.Open(path, FileMode.OpenOrCreate | FileMode.Truncate);
-                        fileHandels.Add(file);
-                        var fd = fileHandels.Count - 1;
+                        fileHandlers.Add(file);
+                        var fd = fileHandlers.Count - 1;
                         
                         if (fd < 0 || 0xffff < fd)
                             throw new InvalidOperationException();
@@ -564,7 +856,7 @@ namespace MikhailKhalizev.Max.Dos
             return path;
         }
 
-        private List<Stream> fileHandels = new List<Stream>();
+        private List<Stream> fileHandlers = new List<Stream>();
 
         public void install_std_ints()
         {

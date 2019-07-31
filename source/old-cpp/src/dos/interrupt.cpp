@@ -118,6 +118,7 @@ void int_08()
     iret_(16);
 }
 
+// +
 void int_10()
 {
     const uint_<32> vga_vmemsize = 0x200000;
