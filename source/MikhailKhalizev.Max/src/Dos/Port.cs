@@ -7,6 +7,9 @@ namespace MikhailKhalizev.Max.Dos
 
     public class Port : BridgeProcessor
     {
+        int cmos_reg;
+        bool cmos_nmi;
+
         public void inb(Value value, Value port)
         {
             value.UInt32 = 0;
@@ -296,15 +299,13 @@ namespace MikhailKhalizev.Max.Dos
                 */
 
                 case 0x70:
-                    throw new NotImplementedException();
-                    //cmos_reg = s & 0x3f;
-                    //cmos_nmi = 0 != (s & 0x80);
+                    cmos_reg = s.Int32 & 0x3f;
+                    cmos_nmi = 0 != (s.Int32 & 0x80);
                     break;
 
                 case 0x71:
-                    throw new NotImplementedException();
-                    //if (cmos_reg != 0xf)
-                    //    throw exo::exception::not_implemented();
+                    if (cmos_reg != 0xf)
+                        throw new NotImplementedException();
                     break;
 
                 case 0x92:

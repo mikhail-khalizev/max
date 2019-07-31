@@ -64,9 +64,12 @@ namespace MikhailKhalizev.Max.Program
 
         private void LoadMethods()
         {
+            var callActionGenericMethodInfo = GetType().GetTypeInfo().GetDeclaredMethod(nameof(CallAction));
+
             foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
             {
                 object instance = null;
+                var callActionMethodInfo = callActionGenericMethodInfo.MakeGenericMethod(bridgeProcessor);
 
                 foreach (var methodInfo in bridgeProcessor.GetMethods(BindingFlags.Instance | BindingFlags.Public))
                 {
@@ -82,12 +85,21 @@ namespace MikhailKhalizev.Max.Program
                     var fi = new MyMethodInfo();
                     fi.MethodInfo = mi;
                     fi.Name = methodInfo.Name;
-                    fi.Action = () => methodInfo.Invoke(instance, Array.Empty<object>());
+
+                    var methodDelegate = methodInfo.CreateDelegate(typeof(Action<>).MakeGenericType(bridgeProcessor));
+                    var callMethodDelegate = (Action<object>)callActionMethodInfo.CreateDelegate(typeof(Action<object>), methodDelegate);
+
+                    fi.Action = () => callMethodDelegate(instance);
 
                     foreach (var address in mi.Addresses)
                         funcs_by_pc.Add(address, fi);
                 }
             }
+        }
+
+        private static void CallAction<T>(Action<T> setter, object value)
+        {
+            setter((T)value);
         }
 
         public void init_x86_dos_prog()

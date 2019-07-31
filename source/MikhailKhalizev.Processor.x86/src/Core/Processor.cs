@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
@@ -1359,8 +1360,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             int_internal(0xe, true, false, true, 0);
 
-            if (correct_function_position(returnAddress))
-                throw new NotImplementedException();
+            correct_function_position(returnAddress);
 
             check_mode(mode);
             CurrentInstructionAddress = curSave;
@@ -1443,8 +1443,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new Exception("Bad mode");
         }
 
-        // @return Возвращает истину, если необходимо сделать return.
-        public bool correct_function_position(Address returnAddress)
+        public void correct_function_position(Address returnAddress)
         {
             callReturnAddresses.Add(returnAddress);
 
@@ -1463,15 +1462,26 @@ namespace MikhailKhalizev.Processor.x86.Core
                     Memory.GetMinSize(cs, eip, 1); // Проверим, есть ли у нас доступ к памяти.
 
                     if (toRun == returnAddress)
-                        return false;
+                        return;
 
                     // Шаг первый - ищем среди уже вызванных функций.
                     var index = callReturnAddresses.LastIndexOf(toRun);
                     if (0 <= index)
-                        return true;
+                        throw new GoUpException();
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
-                    run_func?.Invoke(this, null);
+                    try
+                    {
+                        run_func?.Invoke(this, null);
+                    }
+                    catch (TargetInvocationException ex) when (ex.GetBaseException() is GoUpException)
+                    {
+                        // Ignore.
+                    }
+                    catch (GoUpException)
+                    {
+                        // Ignore.
+                    }
                 }
             }
             finally
@@ -1479,6 +1489,9 @@ namespace MikhailKhalizev.Processor.x86.Core
                 callReturnAddresses.RemoveAt(callReturnAddresses.Count - 1);
             }
         }
+
+        public class GoUpException : Exception
+        { }
 
         private StreamWriter _stateLog;
 
@@ -1898,8 +1911,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             run_irqs();
 
-            if (correct_function_position(retAddr))
-                throw new NotImplementedException();
+            correct_function_position(retAddr);
 
             check_mode();
         }
@@ -1918,8 +1930,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             SaveJumpInfo();
 
-            if (correct_function_position(ret_addr))
-                throw new NotImplementedException();
+            correct_function_position(ret_addr);
 
             check_mode();
         }
@@ -1928,14 +1939,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void callw_far_abs(int segment, Address address)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(16, segment, address & 0xffff);        
-            
-            run_irqs();                              
-            
-            if (correct_function_position(ret_addr))          
-                return;                                       
-            
-            check_mode();                                     
+            call_far_prepare(16, segment, address & 0xffff);
+
+            run_irqs();
+
+            correct_function_position(ret_addr);
+
+            check_mode();
         }
 
         /// <inheritdoc />
@@ -3098,8 +3108,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             run_irqs();
 
-            if (correct_function_position(ret_addr))
-                throw new NotImplementedException(); // return;
+            correct_function_position(ret_addr);
 
             check_mode();
         }
@@ -3178,9 +3187,8 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new NotImplementedException();
 
             run_irqs();
-            
-            if (correct_function_position(retAddr))
-                throw new NotImplementedException();
+
+            correct_function_position(retAddr);
 
             check_mode();
         }
@@ -5560,8 +5568,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void retfw(int size = 0)
         {
-            ret_far(16);             
-            __plus_sp(size);  
+            ret_far(16);
+            __plus_sp(size);
         }
 
         /// <inheritdoc />
