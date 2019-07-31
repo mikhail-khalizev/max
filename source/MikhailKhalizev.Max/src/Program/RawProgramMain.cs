@@ -273,11 +273,18 @@ namespace MikhailKhalizev.Max.Program
             Implementation.check_mode();
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
-            info.Action();
 
-            Implementation.MethodInfo = prevMethodInfo;
-            Implementation.CSharpFunctionDelta = prevCSharpFunctionDelta;
-            Implementation.CSharpEmulateMode = prevCSharpEmulateMode;
+            try
+            {
+                info.Action();
+            }
+            finally
+            {
+                Implementation.MethodInfo = prevMethodInfo;
+                Implementation.CSharpFunctionDelta = prevCSharpFunctionDelta;
+                Implementation.CSharpEmulateMode = prevCSharpEmulateMode;
+            }
+
             Implementation.check_mode();
 
             if (on_run_func__dump_reg)

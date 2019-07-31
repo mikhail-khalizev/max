@@ -604,9 +604,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void btr()
+        public void btr(Value dst, Value src)
         {
-            Implementation.btr();
+            Implementation.btr(dst, src);
         }
 
         /// <inheritdoc />
@@ -1624,6 +1624,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void imul(Value dst, Value src, int c)
+        {
+            Implementation.imul(dst, src, c);
+        }
+
+        /// <inheritdoc />
         public void inb(Value dst, Value port)
         {
             Implementation.inb(dst, port);
@@ -2450,6 +2456,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool loopnew_a16(Address address, int offset)
         {
             return Implementation.loopnew_a16(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool loopw_a16_func(Address address, int offset)
+        {
+            return Implementation.loopw_a16_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -4223,9 +4235,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void str()
+        public void str(Value value)
         {
-            Implementation.str();
+            Implementation.str(value);
         }
 
         /// <inheritdoc />

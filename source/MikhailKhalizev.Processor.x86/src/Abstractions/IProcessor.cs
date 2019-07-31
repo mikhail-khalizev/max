@@ -483,7 +483,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Bit Test and Reset.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BTR.html</remarks>
-        void btr();
+        void btr(Value dst, Value src);
 
         /// <summary>
         /// Bit Test and Set.
@@ -1500,6 +1500,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         void imul(Value value);
 
         /// <summary>
+        /// Signed Multiply.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/IMUL.html</remarks>
+        void imul(Value dst, Value src, int c);
+
+        /// <summary>
         /// Input from Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IN.html</remarks>
@@ -2329,6 +2335,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopnew_a16(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopw_a16_func(Address address, int offset);
 
         /// <summary>
         /// Load Segment Limit.
@@ -4104,7 +4116,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Store Task Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STR.html</remarks>
-        void str();
+        void str(Value value);
 
         /// <summary>
         /// Subtract.

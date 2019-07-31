@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x3830, 2);    clts();                                   /* clts */
         l_0x3832:
             ii(0x3832, 1);    wait();                                   /* wait */
-            ii(0x3833, 2);    invalid();                                /* fnsetpm */
+            ii(0x3833, 2);    // invalid();                             /* fnsetpm */
         l_0x3835:
             ii(0x3835, 1);    retw(); return;                           /* ret */
         }

@@ -39,6 +39,7 @@ void iret_(uint_<8> op_size);
     jmpd_func_if(cf == false && zf == false, __VA_ARGS__)
 
 
+// +
 #define jaew_func(...)   \
     jmpw_func_if(cf == false, __VA_ARGS__)
 
@@ -91,18 +92,21 @@ void iret_(uint_<8> op_size);
 #define jld_func(...)    \
     jmpd_func_if(sf != of, __VA_ARGS__)
 
+// +
 #define jlew_func(...)   \
     jmpw_func_if(zf == true || sf != of, __VA_ARGS__)
 
 #define jled_func(...)   \
     jmpd_func_if(zf == true || sf != of, __VA_ARGS__)
 
+// +
 #define jcxzw_func(...)  \
     jmpw_func_if(cx == 0, __VA_ARGS__)
 
 #define jecxzd_func(...) \
     jmpd_func_if(ecx == 0, __VA_ARGS__)
 
+// +
 #define jbw_func(...)    \
     jmpw_func_if(cf == true, __VA_ARGS__)
 
@@ -210,6 +214,7 @@ void iret_(uint_<8> op_size);
 #define jnsd(...)   \
     jmpd_if(sf == false, __VA_ARGS__)
 
+// +
 #define jsw(...)    \
     jmpw_if(sf == true, __VA_ARGS__)
 
@@ -518,6 +523,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
+// +
 #define callw_a16_far_ind(mem_seg, mem_off)               \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -1399,6 +1405,7 @@ inline void stc()
     cf = true;
 }
 
+// +
 inline void clc()
 {
     cf = false;
@@ -1413,6 +1420,7 @@ inline void mul(uint_<8> s)
     cf = of = ((ax >> 8) != 0);
 }
 
+// +
 inline void mul(uint_<16> s)
 {
     uint_<32> r = uint_<32>(ax) * uint_<32>(s);
@@ -1457,6 +1465,7 @@ void imul(uint_<L> & d, uint_<L> s)
     cf = of = (r != d);
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void imul(uint_<L> & d, uint_<L> s, T c_)
 {
@@ -1644,7 +1653,7 @@ inline void btc(uint_<32> & d, uint_<8> s)
     d ^= (1 << (s % 32));
 }
 
-
+// +
 inline void btr(uint_<32> & d, uint_<8> s)
 {
     bt(d, s);
@@ -1729,6 +1738,7 @@ inline void bsr(uint_<32> & , uint_<32>)
     throw exo::exception::not_implemented();
 }
 
+// +
 inline void clts()
 {
     if (get_cpl() != 0)
@@ -1841,6 +1851,7 @@ void lsl(uint_<L> & d, T s)
         d = seg.get_limit();
 }
 
+// +
 template<exo::abstract_int L, typename T>
 void lar(uint_<L> & d, T s)
 {
@@ -2153,7 +2164,7 @@ inline void verr(uint_<16>)
     throw exo::exception::not_implemented();
 }
 
-
+// +
 inline void wait()
 {
     // Не нужна.
