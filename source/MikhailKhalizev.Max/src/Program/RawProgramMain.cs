@@ -325,6 +325,7 @@ namespace MikhailKhalizev.Max.Program
             DecodeNewMethod(seg, address);
             
             // TODO Update comment: Use in bash:  ERR=5 ; while [ $ERR == 5 ] ; do make -j8 && { rm /tmp/*.png ; time ./openmax ; } ; ERR=$? ; done
+            (Implementation as IDisposable)?.Dispose();
             Environment.Exit(5);
 
             // Просто так. На всякий случай.

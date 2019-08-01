@@ -63,8 +63,11 @@ namespace MikhailKhalizev.Max
                 AddressNameConverter.KnownDefinitions[Address.Parse(x.Key)] = x.Value;
 
 
-            var rp = new RawProgramMain(ConfigurationDto);
-            rp.Start();
+            using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
+            {
+                var rp = new RawProgramMain(p, ConfigurationDto);
+                rp.Start();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Core
 {
-    public class Processor : IProcessor
+    public class Processor : IProcessor, IDisposable
     {
         public ProcessorDto Configuration { get; }
 
@@ -5927,7 +5927,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (count != 0)
             {
-                eflags.cf = dst.IsBitSet(count - 1);
+                eflags.cf = dst.IsBitSet(dst.Bits - count);
                 dst.UInt64 = dst.UInt64 << count;
                 set_sf_zf_pf(dst);
             }
@@ -8256,6 +8256,25 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void xtest()
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IDisposable
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _stateLog?.Dispose();
+            }
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion

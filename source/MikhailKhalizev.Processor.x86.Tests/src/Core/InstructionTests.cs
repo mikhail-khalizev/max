@@ -335,6 +335,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
             eax = 0x8000_7678;
             shl(eax, 4);
             eax.UInt64.Should().Be(0x0007_6780);
+            eflags.cf.Should().BeFalse();
+
+            shl(eax, 14);
+            eflags.cf.Should().BeTrue();
         }
 
         [Fact]

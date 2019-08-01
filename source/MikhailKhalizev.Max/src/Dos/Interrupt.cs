@@ -635,22 +635,28 @@ namespace MikhailKhalizev.Max.Dos
 
                         var file = fileHandlers[bx.Int32];
 
+                        var new_off = 0l;
+
                         switch (al.UInt32)
                         {
                             case 0:
-                                file.Position = to_seek;
+                                new_off = to_seek;
                                 break;
                             case 1:
-                                file.Position += to_seek;
+                                new_off = file.Position + to_seek;
                                 break;
                             case 2:
-                                file.Position = file.Length + to_seek;
+                                new_off = file.Length + to_seek;
                                 break;
                             default:
                                 throw new NotImplementedException();
                         }
 
-                        var new_off = file.Position;
+                        if (new_off < 0 || file.Length < new_off)
+                            throw new InvalidOperationException();
+
+                        file.Position = new_off;
+
                         if (new_off != -1)
                         {
                             eflags.cf = false;
