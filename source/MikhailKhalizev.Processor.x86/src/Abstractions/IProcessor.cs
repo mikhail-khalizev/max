@@ -1841,6 +1841,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        void jnsw_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnzw(Address address, int offset);
 
         /// <summary>

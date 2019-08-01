@@ -1,0 +1,34 @@
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+
+namespace MikhailKhalizev.Max.Program
+{
+    public partial class RawProgram
+    {
+        [MethodInfo("c1246c74-5c01-4fd0-81d5-2e8987334375")]
+        public void Method_0015_464a()
+        {
+            ii(0x15_464a, 4); enterw(0x14, 0);                          /* enter 0x14, 0x0 */
+            ii(0x15_464e, 1); pushw(ds);                                /* push ds */
+            ii(0x15_464f, 3); mov(ax, 0xa8);                            /* mov ax, 0xa8 */
+            ii(0x15_4652, 2); mov(ds, ax);                              /* mov ds, ax */
+            ii(0x15_4654, 3); mov(ax, memw_a16[ss, bp + 0x6]);          /* mov ax, [bp+0x6] */
+            ii(0x15_4657, 3); mov(memw_a16[ss, bp - 0x6], ax);          /* mov [bp-0x6], ax */
+            ii(0x15_465a, 2); pushw(0);                                 /* push 0x0 */
+            ii(0x15_465c, 2); pushw(0);                                 /* push 0x0 */
+            ii(0x15_465e, 3); lea(ax, bp - 0x14);                       /* lea ax, [bp-0x14] */
+            ii(0x15_4661, 1); pushw(ss);                                /* push ss */
+            ii(0x15_4662, 1); pushw(ax);                                /* push ax */
+            ii(0x15_4663, 2); pushw(-0x1 /* 0xff */);                   /* push 0xffff */
+            ii(0x15_4665, 1); nop();                                    /* nop */
+            ii(0x15_4666, 1); pushw(cs);                                /* push cs */
+            ii(0x15_4667, 3); callw(0x15_4188, -0x4e2);                 /* call 0x4188 */
+            ii(0x15_466a, 3); add(sp, 0xa);                             /* add sp, 0xa */
+            ii(0x15_466d, 3); mov(ah, memb_a16[ss, bp - 0x2]);          /* mov ah, [bp-0x2] */
+            ii(0x15_4670, 2); sub(al, al);                              /* sub al, al */
+            ii(0x15_4672, 3); sar(ax, 0x8);                             /* sar ax, 0x8 */
+            ii(0x15_4675, 1); popw(ds);                                 /* pop ds */
+            ii(0x15_4676, 1); leavew();                                 /* leave */
+            ii(0x15_4677, 1); retfw(); return;                          /* retf */
+        }
+    }
+}

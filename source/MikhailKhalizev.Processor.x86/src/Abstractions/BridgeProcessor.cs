@@ -1960,6 +1960,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jnsw_func(Address address, int offset)
+        {
+            Implementation.jnsw_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jnzw(Address address, int offset)
         {
             return Implementation.jnzw(address, offset);

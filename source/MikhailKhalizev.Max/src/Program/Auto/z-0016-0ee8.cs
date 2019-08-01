@@ -1,0 +1,27 @@
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+
+namespace MikhailKhalizev.Max.Program
+{
+    public partial class RawProgram
+    {
+        [MethodInfo("ef69fb91-e8f2-48bb-ad57-3b169b6eb96a")]
+        public void Method_0016_0ee8()
+        {
+            ii(0x16_0ee8, 4); enterw(0, 0);                             /* enter 0x0, 0x0 */
+            ii(0x16_0eec, 1); pushw(cx);                                /* push cx */
+            ii(0x16_0eed, 3); mov(cx, memw_a16[ss, bp + 0x6]);          /* mov cx, [bp+0x6] */
+            ii(0x16_0ef0, 2); xor(ax, ax);                              /* xor ax, ax */
+            ii(0x16_0ef2, 3); lar(ax, cx);                              /* lar ax, cx */
+            ii(0x16_0ef5, 2); jmpw(0x16_0ef7, 0); goto l_0x16_0ef7;     /* jmp 0xef7 */
+        l_0x16_0ef7:
+            ii(0x16_0ef7, 3); test(ah, 0x10);                           /* test ah, 0x10 */
+            ii(0x16_0efa, 2); if(jnzw(0x16_0efe, 0x2)) goto l_0x16_0efe; /* jnz 0xefe */
+            ii(0x16_0efc, 2); xor(cx, cx);                              /* xor cx, cx */
+        l_0x16_0efe:
+            ii(0x16_0efe, 2); mov(ax, cx);                              /* mov ax, cx */
+            ii(0x16_0f00, 1); popw(cx);                                 /* pop cx */
+            ii(0x16_0f01, 1); leavew();                                 /* leave */
+            ii(0x16_0f02, 1); retfw(); return;                          /* retf */
+        }
+    }
+}

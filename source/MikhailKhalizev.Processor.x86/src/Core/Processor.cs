@@ -3475,6 +3475,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jnsw_func(Address address, int offset)
+        {
+            jmpw_func_if(!eflags.sf, address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jnzw(Address address, int offset)
         {
             return jmpw_if(!eflags.zf, address, offset);

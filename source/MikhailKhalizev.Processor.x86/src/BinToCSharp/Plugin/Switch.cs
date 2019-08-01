@@ -290,10 +290,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. {");
 
-            var jtka = new JumpsToKnownAddresses(cmd.Begin);
-            Engine.jmp_to_known_addr.Add(jtka);
-            Engine.jmp_to_known_addr.TryGetValue(jtka, out jtka);
 
+            Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(cmd.Begin), out var jtka);
+            if (jtka == null)
+            {
+                jtka = new JumpsToKnownAddresses(cmd.Begin);
+                jtka.To = new SortedSet<Address>();
+                Engine.jmp_to_known_addr.Add(jtka);
+            }
+            
             var notFirst = false;
             for (Address i = 0; i < size_of_addr_area; i += (uint)Engine.Mode / 8)
             {
