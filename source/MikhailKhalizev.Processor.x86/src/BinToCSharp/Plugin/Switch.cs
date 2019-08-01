@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
     public class Switch : PluginBase
     {
         private int state;
-        private Register reg;
+        private RegisterInfo reg;
         private ud_operand op;
         private int size_of_addr_area;
 
@@ -106,14 +106,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
                         && cmd.Operands[0].@base == cmd.Operands[1].@base)
                     {
-                        reg = Register.GetRegister(cmd.Operands[1].@base);
+                        reg = RegisterInfo.GetRegister(cmd.Operands[1].@base);
                         if (reg.IsGeneralPurpose)
                             state++;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG)
                     {
-                        reg = Register.GetRegister(cmd.Operands[0].@base);
+                        reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
                         if (reg.IsGeneralPurpose && reg.Size == 32 && Equals(cmd.Operands[1], op))
                             state = 5;
                     }
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 4:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && Register.GetRegister(cmd.Operands[0].@base) == reg
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && Equals(cmd.Operands[1], op))
                         state++;
                     else
@@ -136,7 +136,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 5:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && Register.GetRegister(cmd.Operands[0].@base) == reg
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
                         && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
                         state++;
@@ -147,7 +147,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 6:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp
                         && cmd.Operands[0].type == ud_type.UD_OP_MEM
-                        && Register.GetRegister(cmd.Operands[0].@base) == reg)
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg)
                         add_switch_at(cmd);
 
                     state = 0;
@@ -166,7 +166,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 8:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp
                         && cmd.Operands[0].type == ud_type.UD_OP_MEM
-                        //                && Register.GetRegister(cmd.Operands[0].index) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].index) == reg
                         && cmd.Operands[0].scale == 4)
                     {
                         add_switch_at(cmd);
@@ -175,8 +175,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imovzx
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
-                    //                && Register.GetRegister(cmd.Operands[0].@base) == reg
-                    //                && Register.GetRegister(cmd.Operands[1].@base) == reg
+                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                    //                && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg
                     )
                     {
                         state++;
@@ -185,14 +185,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
                         && cmd.Operands[0].@base == cmd.Operands[1].@base
-                    //                && Register.GetRegister(cmd.Operands[0].@base) == reg
+                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                     {
                         state = 10;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && Register.GetRegister(cmd.Operands[0].@base) == reg
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_CONST)
                         && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
                     {
@@ -206,7 +206,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 9:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp
                         && cmd.Operands[0].type == ud_type.UD_OP_MEM
-                        //                && Register.GetRegister(cmd.Operands[0].index) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].index) == reg
                         && cmd.Operands[0].scale == 4)
                     {
                         add_switch_at(cmd);
@@ -214,7 +214,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        //                && Register.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
                         && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
                         state = 6;
@@ -226,7 +226,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 10:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                    //                && Register.GetRegister(cmd.Operands[0].@base) == reg
+                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                         state = 9;
                     else
@@ -235,9 +235,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
                 case 11:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ixchg
-                        && Register.GetRegister(cmd.Operands[1].@base) == reg)
+                        && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg)
                     {
-                        reg = Register.GetRegister(cmd.Operands[0].@base);
+                        reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
                         state = 6;
                     }
                     else
@@ -272,7 +272,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 }
                 else if (cmd.Operands[0].type == ud_type.UD_OP_REG)
                 {
-                    reg = Register.GetRegister(cmd.Operands[0].@base);
+                    reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
                     state = 7;
                 }
             }

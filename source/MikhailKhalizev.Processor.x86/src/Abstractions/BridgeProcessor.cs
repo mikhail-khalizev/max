@@ -2501,9 +2501,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void lss()
+        public void lss(Value dst, SegmentRegister segment, Value offset)
         {
-            Implementation.lss();
+            Implementation.lss(dst, segment, offset);
         }
 
         /// <inheritdoc />
@@ -2762,6 +2762,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void movsw_a16(SegmentRegister segment = null)
         {
             Implementation.movsw_a16(segment);
+        }
+
+        /// <inheritdoc />
+        public void movsw_a32(SegmentRegister segment = null)
+        {
+            Implementation.movsw_a32(segment);
         }
 
         /// <inheritdoc />
@@ -3929,9 +3935,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void retfd()
+        public void retfd(int size = 0)
         {
-            Implementation.retfd();
+            Implementation.retfd(size);
         }
 
         /// <inheritdoc />

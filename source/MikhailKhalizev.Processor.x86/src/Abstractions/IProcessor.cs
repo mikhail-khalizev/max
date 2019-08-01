@@ -2382,7 +2382,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lss();
+        void lss(Value dst, SegmentRegister segment, Value offset);
 
         /// <summary>
         /// Load Task Register.
@@ -2647,6 +2647,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
         void movsw_a16(SegmentRegister segment = null);
+
+        /// <summary>
+        /// Move Data from String to String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
+        void movsw_a32(SegmentRegister segment = null);
 
         /// <summary>
         /// Move Data from String to String.
@@ -3810,7 +3816,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Return from Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
-        void retfd();
+        void retfd(int size = 0);
 
         /// <summary>
         /// Rotate.

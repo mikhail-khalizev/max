@@ -364,7 +364,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                                         return false;
                                     if (token.Where(char.IsLetter).All(char.IsLower))
                                         return false;
-                                    if (Register.HasRegister(token))
+                                    if (RegisterInfo.HasRegister(token))
                                         return false;
                                     return true;
                                 })

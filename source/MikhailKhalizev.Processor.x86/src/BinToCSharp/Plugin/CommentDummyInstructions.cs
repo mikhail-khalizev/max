@@ -113,14 +113,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     // mov reg1, ?
                     // mob reg2, (reg1)
 
-                    if (srcReg.Any(x => Register.Intersects(to, x)))
+                    if (srcReg.Any(x => RegisterInfo.Intersects(to, x)))
                         break;
 
                     // Изменение регистра, в который cmd записывает.
                     // mov reg1.0, ?
                     // mov reg1.1, ?
 
-                    if (Register.Intersects(to, dstReg)) 
+                    if (RegisterInfo.Intersects(to, dstReg)) 
                         break;
                 }
                 else

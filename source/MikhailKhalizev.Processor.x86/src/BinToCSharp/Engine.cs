@@ -258,7 +258,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 var length = udis86.ud_disassemble(ref u);
                 if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
-                    throw new InvalidOperationException("Преждевременное завершение функции.");
+                    break; //throw new InvalidOperationException("Преждевременное завершение функции.");
 
                 var cmd = new Instruction(u);
 

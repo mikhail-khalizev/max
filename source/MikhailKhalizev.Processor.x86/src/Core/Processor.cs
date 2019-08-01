@@ -4136,9 +4136,11 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lss()
+        public void lss(Value dst, SegmentRegister segment, Value offset)
         {
-            throw new NotImplementedException();
+            var cache = offset.UInt32;
+            dst.UInt32 = memd_a32[segment, cache].UInt32;
+            ss.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -4420,6 +4422,12 @@ namespace MikhailKhalizev.Processor.x86.Core
             memw_a16[es, di] = memw_a16[segment ?? ds, si];
             di += eflags.df ? -2 : 2;
             si += eflags.df ? -2 : 2;
+        }
+
+        /// <inheritdoc />
+        public void movsw_a32(SegmentRegister segment = null)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -5786,9 +5794,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void retfd()
+        public void retfd(int size = 0)
         {
-            throw new NotImplementedException();
+            ret_far(32);
+            __plus_sp(size);
         }
 
         /// <inheritdoc />

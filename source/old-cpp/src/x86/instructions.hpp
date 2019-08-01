@@ -606,11 +606,13 @@ inline void __plus_sp(uint_<16> s)
     __plus_sp(__VA_ARGS__);                          \
     return
 
+// +
 #define retfw(...)           \
     ret_far(16);             \
     __plus_sp(__VA_ARGS__);  \
     return
 
+// +
 #define retfd(...)           \
     ret_far(32);             \
     __plus_sp(__VA_ARGS__);  \
