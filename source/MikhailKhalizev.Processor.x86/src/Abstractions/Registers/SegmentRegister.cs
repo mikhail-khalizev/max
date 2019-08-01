@@ -5,10 +5,10 @@
         /// <inheritdoc />
         public override int Bits => 16;
 
-        public ushort Selector
+        public int Selector
         {
             get => UInt16;
-            set => UInt16 = value;
+            set => UInt16 = (ushort)value;
         }
 
         // todo move SegmentDescriptor logic inside SegmentRegister. Remove SegmentDescriptor class.
@@ -48,6 +48,7 @@
         /// 0 - GDT, 
         /// 1 - LDT.
         /// </remarks>
+        /// // TODO Cache ti in hidden part on selector loaded.
         public bool TI => (Selector & 0x0100) != 0;
 
         /// <summary>
@@ -59,7 +60,7 @@
         /// 0 = Highest privilege (OS),
         /// 3 = Lowest privilege (User applications).
         /// </remarks>
-        public abstract uint RPL { get; set; }
+        public abstract int RPL { get; set; }
 
         /// <summary>
         /// null segment selector.
@@ -68,21 +69,12 @@
         /// The first entry of the GDT is not used by the processor. A segment selector that points to this entry of the GDT (that
         /// is, a segment selector with an index of 0 and the TI flag set to 0) is used as a “null segment selector.” The processor
         /// does not generate an exception when a segment register (other than the CS or SS registers) is loaded with a null
-        /// selector.It does, however, generate an exception when a segment register holding a null selector is used to access
-        /// memory. A null selector can be used to initialize unused segment registers.Loading the CS or SS register with a null
+        /// selector. It does, however, generate an exception when a segment register holding a null selector is used to access
+        /// memory. A null selector can be used to initialize unused segment registers. Loading the CS or SS register with a null
         /// segment selector causes a general-protection exception (#GP) to be generated.
         /// </remarks>
         public bool IsNull => Selector <= 0x3;
         
-        // TODO Remove
-        public void Load(int selector)
-        {
-            Selector = (ushort)selector;
-            LoadDescriptor();
-        }
-
-        protected abstract void LoadDescriptor();
-
         // todo rename to CheckLimit, CheckAccess
         /// <summary>
         /// Return true if check fail.

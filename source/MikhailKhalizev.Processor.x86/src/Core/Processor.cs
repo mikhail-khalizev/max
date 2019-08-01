@@ -533,10 +533,10 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public bool InCompatibilityMode => _cs.InCompatibilityMode;
 
-        public uint CPL => cr0.pe ? cs.RPL : 0u;
+        public int CPL => cr0.pe ? cs.RPL : 0;
 
 
-        public SegmentDescriptor get_orig_desc_ref(ushort selector)
+        public SegmentDescriptor get_orig_desc_ref(int selector)
         {
             if ((selector & 0x7) != 0)
                 throw new NotImplementedException();
@@ -544,7 +544,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             return get_desc_ref(gdtr_base, gdtr_limit, selector);
         }
 
-        public SegmentDescriptor get_desc_ref(uint dt_base, ushort dt_limit, ushort selector)
+        public SegmentDescriptor get_desc_ref(uint dt_base, ushort dt_limit, int selector)
         {
             if (!cr0.pe)
                 throw new Exception();
@@ -558,7 +558,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 Memory.GetFixSize(dt_base + offset, 8).ToArray());
         }
 
-        public void StoreSegmentDescriptor(ushort selector, SegmentDescriptor descriptor)
+        public void StoreSegmentDescriptor(int selector, SegmentDescriptor descriptor)
         {
             if ((selector & 0x7) != 0)
                 throw new NotImplementedException();
@@ -591,7 +591,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     THEN #GP(0); FI; */
 
                 var new_cs = new SegmentRegisterImpl(this);
-                new_cs.Load(segmentSelector);
+                new_cs.Selector = (segmentSelector);
 
                 if (!ia32_efer.lma)
                 {
@@ -688,7 +688,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     THEN #GP(new code segment selector); FI;    */
 
                 var new_cs = new SegmentRegisterImpl(this);
-                new_cs.Load(segmentSelector);
+                new_cs.Selector = (segmentSelector);
 
                 if (!ia32_efer.lma)
                 {
@@ -963,7 +963,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 tss_new_desc.IsTssBusy = true;
 
             // 11.
-            tr.Load(tss_new_selector);
+            tr.Selector = tss_new_selector;
 
             // 12.
             if (tr.Descriptor.SystemSegmentTypeIn32BitMode != SystemSegmentTypeIn32BitMode.Tss32BitAvailable &&
@@ -984,14 +984,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             esi = ms.GetUInt32(64);
             edi = ms.GetUInt32(68);
 
-            ldtr.Load(ms.GetUInt16(96));
+            ldtr.Selector = ms.GetUInt16(96);
 
-            es.Load(ms.GetUInt16(72));
-            cs.Load(ms.GetUInt16(76));
-            ss.Load(ms.GetUInt16(80));
-            ds.Load(ms.GetUInt16(84));
-            fs.Load(ms.GetUInt16(88));
-            gs.Load(ms.GetUInt16(92));
+            es.Selector = (ms.GetUInt16(72));
+            cs.Selector = (ms.GetUInt16(76));
+            ss.Selector = (ms.GetUInt16(80));
+            ds.Selector = (ms.GetUInt16(84));
+            fs.Selector = (ms.GetUInt16(88));
+            gs.Selector = (ms.GetUInt16(92));
 
             // 9.
             if (ts_reason == task_switch_reason.call
@@ -1035,7 +1035,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 /* No error codes are pushed in real-address mode */
                 var ms = Memory.GetFixSize(idtr_base + num * 4, 4);
                 eip = ms.GetUInt16();
-                cs.Load(ms.GetUInt16(2));
+                cs.Selector = (ms.GetUInt16(2));
             }
             else // PE = 1
             {
@@ -1121,7 +1121,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                             throw new NotImplementedException(); // #GP(EXT)
 
                         var new_cs = new SegmentRegisterImpl(this);
-                        new_cs.Load(new_cs_selector);
+                        new_cs.Selector = (new_cs_selector);
 
                         if (!new_cs.Descriptor.IsTypeCode
                             || CPL < new_cs.Descriptor.DPL)
@@ -3899,8 +3899,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lds(Value dst, SegmentRegister segment, Value offset)
         {
-            dst.UInt32 = memd_a32[segment, offset].UInt32;
-            ds.Load(memw_a32[segment, offset + dst.Bits / 8].UInt16);
+            var cache = offset.UInt32;
+            dst.UInt32 = memd_a32[segment, cache].UInt32;
+            ds.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -3925,8 +3926,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void les(Value dst, SegmentRegister segment, Value offset)
         {
-            dst.UInt32 = memd_a32[segment, offset].UInt32;
-            es.Load(memw_a32[segment, offset + dst.Bits / 8].UInt16);
+            var cache = offset.UInt32;
+            dst.UInt32 = memd_a32[segment, cache].UInt32;
+            es.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />

@@ -333,7 +333,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0xc0:
                     ah = 0;
                     bx = 0;
-                    es.Load(0xc8c3); /* from dosbox */
+                    es.Selector = 0xc8c3; /* from dosbox */
 
                     memw_a16[es, bx + 0x2] = 0xfc; // model id
                     eflags.cf = false;
@@ -436,7 +436,7 @@ namespace MikhailKhalizev.Max.Dos
 
                         var v = Memory.GetStruct<int>(al.UInt32 * 4);
 
-                        es.Load(v >> 16);
+                        es.Selector = (v >> 16);
                         bx = v;
                     }
                     break;

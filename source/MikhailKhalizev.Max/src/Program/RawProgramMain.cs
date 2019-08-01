@@ -132,7 +132,7 @@ namespace MikhailKhalizev.Max.Program
             if (ax.UInt16 != pspseg)
                 throw new Exception();
 
-            ds.Load(image_load_seg);
+            ds.Selector = (image_load_seg);
 
             var image = Implementation.Memory.GetFixSize(ds, 0, image_size);
 
@@ -177,13 +177,13 @@ namespace MikhailKhalizev.Max.Program
                 0x58, 0x45, 0x0
             };
 
-            ds.Load(evnseg);
+            ds.Selector = (evnseg);
             evn_init.CopyTo(
                 Implementation.Memory
                     .GetFixSize(ds, 0, evn_init.Length)
                     .AsSpan());
 
-            ds.Load(pspseg); // 0x192
+            ds.Selector = (pspseg); // 0x192
             memb_a16[ds, 0x81] = 0xd; // Empty command-line (terminated by a 0x0D).
             memw_a16[ds, 0x2c] = evnseg;
 
@@ -191,12 +191,12 @@ namespace MikhailKhalizev.Max.Program
             // memw_a16(ds, 0xa) = 0x20c8;
             // memw_a16(ds, 0xa + 2) = 0xf000;
 
-            ds.Load(evnseg - 1); // 0x187
+            ds.Selector = (evnseg - 1); // 0x187
             memb_a16[ds, 0] = 0x4d; // Не знаю, что это.
             memw_a16[ds, 1] = pspseg;
             memw_a16[ds, 3] = 0x9;
 
-            ds.Load(pspseg - 1); // 0x191
+            ds.Selector = (pspseg - 1); // 0x191
             // memw_a16(ds, 0x3) = 0x1346 - 0x191;
             memw_a16[ds, 0x3] = 0xc02 - 0x191;
 
@@ -204,13 +204,13 @@ namespace MikhailKhalizev.Max.Program
 
             // Устанавливаем начальные значения в регистры.
 
-            ds.Load(pspseg);
+            ds.Selector = (pspseg);
             es = ds;
 
-            ss.Load(image_load_seg + dosMz.Hdr.InitialSs);
+            ss.Selector = (image_load_seg + dosMz.Hdr.InitialSs);
             sp = dosMz.Hdr.InitialSp;
 
-            cs.Load(image_load_seg + dosMz.Hdr.InitialCs);
+            cs.Selector = (image_load_seg + dosMz.Hdr.InitialCs);
             eip = dosMz.Hdr.InitialIp;
             CurrentInstructionAddress = dosMz.Hdr.InitialIp;
 

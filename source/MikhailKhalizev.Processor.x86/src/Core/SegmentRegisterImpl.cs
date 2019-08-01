@@ -9,26 +9,26 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         protected override ulong UInt64Internal
         {
-            get => _uInt64Internal;
+            get => (ulong)_selector;
             set
             {
-                _uInt64Internal = value;
+                _selector = (int) value;
                 LoadDescriptor();
             }
         }
-        private ulong _uInt64Internal;
+        private int _selector;
 
         /// <inheritdoc />
-        public override uint RPL
+        public override int RPL
         {
             get => _rpl;
             set
             {
                 _rpl = value;
-                _uInt64Internal = (ushort) ((_uInt64Internal & ~0b0011u) | (_rpl & 0b0011u));
+                _selector = ((_selector & ~0b0011) | (_rpl & 0b0011));
             }
         }
-        private uint _rpl;
+        private int _rpl;
 
 
         public bool In64BitMode => Processor.InIa32eMode && l && !db;
@@ -39,16 +39,16 @@ namespace MikhailKhalizev.Processor.x86.Core
             Processor = processor;
         }
 
-        protected override void LoadDescriptor()
+        private void LoadDescriptor()
         {
             if (Processor.cr0.pe == false)
             {
-                Descriptor.Base = Selector * 16u;
+                Descriptor.Base = (uint)(Selector * 16);
                 _rpl = 0;
                 return;
             }
 
-            _rpl = (uint)_uInt64Internal & 0b0011u;
+            _rpl = _selector & 0b0011;
 
             if (IsNull)
             {
