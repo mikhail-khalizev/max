@@ -357,6 +357,7 @@ void iret_(uint_<8> op_size);
         return;                                                         \
     } while(0)
 
+// +
 #define jmpw_abs_switch(off, addrs)                                     \
     do {                                                                \
         eip = (off) & 0xffff;                                           \

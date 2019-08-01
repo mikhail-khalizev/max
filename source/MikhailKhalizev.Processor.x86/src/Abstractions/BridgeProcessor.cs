@@ -1750,6 +1750,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public int jmpw_abs_switch(Value address)
+        {
+            return Implementation.jmpw_abs_switch(address);
+        }
+
+        /// <inheritdoc />
         public void jmpw_far_abs(int segment, Address address)
         {
             Implementation.jmpw_far_abs(segment, address);

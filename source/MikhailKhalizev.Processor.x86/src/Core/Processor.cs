@@ -3263,6 +3263,17 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public int jmpw_abs_switch(Value address)
+        {
+            eip = address & 0xffff;                                           
+            if (cs.fail_limit_check(eip))                                   
+                throw new NotImplementedException();                   
+            
+            run_irqs();
+            return cs[eip] - CSharpFunctionDelta;
+        }
+
+        /// <inheritdoc />
         public void jmpw_far_abs(int segment, Address address)
         {
             jmp_far_prepare(segment, address);

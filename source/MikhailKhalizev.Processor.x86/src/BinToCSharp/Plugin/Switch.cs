@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
@@ -320,7 +321,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 if (notFirst)
                     os.Append(", ");
                 notFirst = true;
-                os.Append(to);
+                os.Append(to.ToString());
 
                 jtka.To.Add(to);
                 Engine.AddressesToDecode.Add(to);
@@ -342,14 +343,46 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             var funcAddArg = new StringBuilder();
 
             foreach (var to in curJmp.To)
-                if (dm.Labels.Contains(to))
-                    funcAddArg.Append($"({to})");
+            {
+                if (!dm.Labels.Contains(to))
+                    throw new NotImplementedException();
 
-            var funcSuffix = "";
-            if (funcAddArg.Length != 0)
-                funcSuffix = "_switch";
+                funcAddArg.Append($"({to})");
+            }
 
-            return dm.Instructions[cmd_index].ToCodeString(funcSuffix, funcAddArg.ToString(), offset: offset);
+            if (curJmp.To.Count == 0)
+                throw new NotImplementedException();
+            var funcSuffix = "_switch";
+
+            var str = dm.Instructions[cmd_index].ToCodeString(funcSuffix, "", offset: offset, isJmpOutside: false);
+
+            var lines = new[]
+                {
+                    $"            switch ({str.TrimEnd(';')})",
+                    "            {"
+                }
+                .Concat(curJmp.To.SelectMany(
+                    to =>
+                    {
+                        if (!dm.Labels.Contains(to))
+                            throw new NotImplementedException();
+
+                        return
+                            new[]
+                            {
+                                $"                case {to}:",
+                                $"                    goto l_{to};"
+                            };
+                    }))
+                .Concat(
+                    new[]
+                    {
+                        "                default:",
+                        "                    throw new NotImplementedException();",
+                        "            }"
+                    });
+            
+            return Environment.NewLine + string.Join(Environment.NewLine, lines);
         }
     }
 }

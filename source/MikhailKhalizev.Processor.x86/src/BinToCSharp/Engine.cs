@@ -514,12 +514,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
 
-                    var output = new StringBuilder();
-                    WriteCSharpMethodToStringBuilder(output, detectedMethod);
-
-                    var ns = AddressNameConverter.GetNamespace(methodBegin);
-                    var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
-
+                    
                     var filePath = path;
 
                     filePath += "/z-" + methodBegin.ToString(o => o
@@ -528,9 +523,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         .SetGroupSize(4)
                         .SetGroupSeparator("-"));
 
+                    var ns = AddressNameConverter.GetNamespace(methodBegin);
                     if (ns != null)
                         filePath += $"-{ns}";
 
+                    var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
                     if (kd != null)
                         filePath += $"-{kd}";
 
@@ -540,11 +537,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     while (File.Exists(filePathExt))
                         filePathExt = filePath + $".{++num}.cs";
 
+
+                    var output = new StringBuilder();
+                    WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
+                    
+
                     File.WriteAllText(filePathExt, output.ToString());
                 });
         }
 
-        private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod)
+        private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)
         {
             var methodBegin = detectedMethod.MethodInfo.Address;
             var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
@@ -561,6 +563,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (ns != null)
                 ns = $"/* {ns} */ ";
             
+            output.AppendLine("using System;");
             output.AppendLine("using MikhailKhalizev.Processor.x86.BinToCSharp;");
             output.AppendLine("");
             output.AppendLine($"namespace {Configuration.Namespace}");
@@ -568,7 +571,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine($"    public partial class {Configuration.ClassName}");
             output.AppendLine("    {");
             output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
-            output.AppendLine($"        public void {ns}{methodName}()");
+            output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_" + fileNum : "")}()");
             output.AppendLine("        {");
             
             bool skip = false; // Если нашли недостижимый код устанавливаем в true.

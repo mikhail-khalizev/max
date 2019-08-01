@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var addIf = gotoLabelConditional;
             var addGotoLabel = gotoLabelConditional || gotoLabel;
-            var addReturn = new[]
+            var addReturn = isJmpOutside && new[]
             {
                 ud_mnemonic_code.UD_Ijmp,
                 ud_mnemonic_code.UD_Iret,

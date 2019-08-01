@@ -1630,6 +1630,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        int jmpw_abs_switch(Value address);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         void jmpw_far_abs(int segment, Address address);
 
         /// <summary>
