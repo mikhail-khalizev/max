@@ -534,10 +534,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     if (kd != null)
                         filePath += $"-{kd}";
 
-                    filePath += ".cs";
+                    var filePathExt = filePath + ".cs";
 
+                    var num = 1;
+                    while (File.Exists(filePathExt))
+                        filePathExt = filePath + $".{++num}.cs";
 
-                    File.WriteAllText(filePath, output.ToString());
+                    File.WriteAllText(filePathExt, output.ToString());
                 });
         }
 

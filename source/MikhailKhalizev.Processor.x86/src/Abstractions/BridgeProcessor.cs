@@ -1774,6 +1774,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jaw_func(Address address, int offset)
+        {
+            return Implementation.jaw_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jaew(Address address, int offset)
         {
             return Implementation.jaew(address, offset);
@@ -2921,9 +2927,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void outsb()
+        public void outsb_a16(SegmentRegister segment = null)
         {
-            Implementation.outsb();
+            Implementation.outsb_a16(segment);
         }
 
         /// <inheritdoc />

@@ -1655,6 +1655,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jaw_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jaew(Address address, int offset);
 
         /// <summary>
@@ -2802,7 +2808,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Output String to Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/OUTS:OUTSB:OUTSW:OUTSD.html</remarks>
-        void outsb();
+        void outsb_a16(SegmentRegister segment = null);
 
         /// <summary>
         /// Output String to Port.

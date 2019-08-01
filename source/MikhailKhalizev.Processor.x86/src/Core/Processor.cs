@@ -1392,11 +1392,26 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             if (cond)
             {
-                jmpw_func(address, offset);
+                jmpw_func_internal(address, offset, false);
                 return true;
             }
 
             return false;
+        }
+        
+        private void jmpw_func_internal(Address address, int offset, bool haveReturnAfterInstruction)
+        {
+            var retAddr = cs[eip];
+
+            eip = eip + offset;
+            eip &= 0xffff;
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+            correct_function_position(retAddr, haveReturnAfterInstruction);
+            check_mode();
         }
 
         private void __plus_sp(int s)
@@ -1448,9 +1463,12 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new Exception("Bad mode");
         }
 
-        public void correct_function_position(Address returnAddress)
+        public void correct_function_position(Address returnAddress, bool haveReturnAfterInstruction = false)
         {
-            callReturnAddresses.Add(returnAddress);
+            if (!haveReturnAfterInstruction)
+                callReturnAddresses.Add(returnAddress);
+            else
+                returnAddress = 0 < callReturnAddresses.Count ? callReturnAddresses[callReturnAddresses.Count - 1] : (Address)0;
 
             try
             {
@@ -1487,7 +1505,8 @@ namespace MikhailKhalizev.Processor.x86.Core
             }
             finally
             {
-                callReturnAddresses.RemoveAt(callReturnAddresses.Count - 1);
+                if (!haveReturnAfterInstruction)
+                    callReturnAddresses.RemoveAt(callReturnAddresses.Count - 1);
             }
         }
 
@@ -3199,19 +3218,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jmpw_func(Address address, int offset)
         {
-            var retAddr = cs[eip];
-
-            eip = eip + offset;
-            eip &= 0xffff;
-
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
-            run_irqs();
-
-            correct_function_position(retAddr);
-
-            check_mode();
+            jmpw_func_internal(address, offset, true);
         }
 
         /// <inheritdoc />
@@ -3246,6 +3253,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jaw(Address address, int offset)
         {
             return jmpw_if(!eflags.cf && !eflags.zf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jaw_func(Address address, int offset)
+        {
+            return jmpw_func_if(!eflags.cf && !eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3437,7 +3450,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jnzw_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            jmpw_func_if(!eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -4514,7 +4527,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void outsb()
+        public void outsb_a16(SegmentRegister segment = null)
         {
             throw new NotImplementedException();
         }
