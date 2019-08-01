@@ -1,4 +1,5 @@
 using FluentAssertions;
+using MikhailKhalizev.Max.Configuration;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using Xunit;
 
@@ -35,7 +36,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
         [Fact]
         public void CheckProcessorGenericRegister()
         {
-            var r = new x86.Core.Processor();
+            var r = new x86.Core.Processor(new ProcessorDto());
 
             r.eax.UInt64 = 0x1234_5678;
             r.ax.UInt64.Should().Be(0x5678);
