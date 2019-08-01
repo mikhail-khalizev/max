@@ -570,43 +570,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
             output.AppendLine($"        public void {ns}{methodName}()");
             output.AppendLine("        {");
-
-            // hash compute
-
-            //{
-            //    size_t hash = 0;
-
-            //    for (var i = addr_func; i < addr_func_end;)
-            //    {
-            //        memory_space_const avail_space = mem(i, 1).sub_space(0, addr_func_end - i);
-            //        hash_value(hash, avail_space);
-            //        i += avail_space.size();
-            //    }
-
-            //    output << ", " << hash;
-            //}
-
-            //output.Append($", {(int)Mode}, ({{");
-
-            {
-                //memory_space_const avail_space = mem(addr_func, 1);
-
-                //for (addr_type i = addr_func; i < addr_func_end - 1; i++)
-                //{
-                //    if (avail_space.is_empty())
-                //        avail_space = mem(i, 1);
-
-                //    output << avail_space.get<uint8_t, addr_type>(0) << ", ";
-
-                //    avail_space = avail_space.remove_prefix(1);
-                //}
-
-                //output << avail_space.get<uint8_t, addr_type>(0);
-            }
-
-            //output.AppendLine("}))");
-
-
+            
             bool skip = false; // Если нашли недостижимый код устанавливаем в true.
             bool last_instr_jmp_or_ret = false;
             var last_instr_end = first_cmd.Begin;

@@ -1749,6 +1749,7 @@ inline void clts()
     cr0.ts = false;
 }
 
+// +
 inline void cmc()
 {
     cf = ! cf;
@@ -2079,6 +2080,7 @@ inline void movsw_a32()
     movsw_a32(ds);
 }
 
+// +
 inline void movsd_a16()
 {
     memd_a16(es, di) = memd_a16(ds, si);

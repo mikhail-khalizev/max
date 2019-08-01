@@ -2083,7 +2083,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void cmc()
         {
-            throw new NotImplementedException();
+            eflags.cf = !eflags.cf;
         }
 
         /// <inheritdoc />
@@ -4337,7 +4337,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void movsd_a16()
         {
-            throw new NotImplementedException();
+            memd_a16[es, di] = memd_a16[ds, si];
+            di += eflags.df ? -4 : 4;
+            si += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
