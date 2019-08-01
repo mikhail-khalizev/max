@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     /// </summary>
     public class Engine
     {
-        public ConfigurationDto Configuration { get; }
+        public BinToCSharpDto Configuration { get; }
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
@@ -125,7 +125,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private readonly CommentDummyInstructions comment_idle; // comment dummy instruction
 
 
-        public Engine(ConfigurationDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodsInfo methodsInfo = null)
+        public Engine(BinToCSharpDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodsInfo methodsInfo = null)
         {
             Configuration = configuration;
             Memory = memory;

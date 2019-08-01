@@ -1,6 +1,6 @@
 ﻿namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
-    public class ConfigurationDto
+    public class BinToCSharpDto
     {
         public string SettingsDirectory { get; set; }
         public string MethodInfosFile => "methods.json";

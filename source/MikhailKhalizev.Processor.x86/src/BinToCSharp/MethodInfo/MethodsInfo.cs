@@ -11,10 +11,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
     public class MethodsInfo
     {
-        private readonly ConfigurationDto _configuration;
+        private readonly BinToCSharpDto _configuration;
         private readonly Dictionary<Guid, MethodInfoDto> _methodByGuid;
 
-        public static MethodsInfo Load(ConfigurationDto configuration)
+        public static MethodsInfo Load(BinToCSharpDto configuration)
         {
             var path = Path.Combine(configuration.SettingsDirectory, configuration.MethodInfosFile);
             var allText = File.Exists(path) ? File.ReadAllText(path) : "";
@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             return new MethodsInfo(configuration, methods);
         }
 
-        private MethodsInfo(ConfigurationDto configuration, Dictionary<Guid, MethodInfoDto> methodByGuid)
+        private MethodsInfo(BinToCSharpDto configuration, Dictionary<Guid, MethodInfoDto> methodByGuid)
         {
             _configuration = configuration;
             _methodByGuid = methodByGuid;

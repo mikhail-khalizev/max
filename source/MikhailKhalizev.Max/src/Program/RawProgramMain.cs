@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
         public const ushort pspseg = image_load_seg - 16; // 0x192
 
         public RawProgramMain(ConfigurationDto configuration)
-            : this(new Processor.x86.Core.Processor(), configuration)
+            : this(new Processor.x86.Core.Processor(configuration.Processor), configuration)
         { }
 
         public RawProgramMain(Processor.x86.Core.Processor implementation, ConfigurationDto configuration)

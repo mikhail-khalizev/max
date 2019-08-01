@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
         public void CheckGenericOffsetRegister()
         {
             var r = new SimpleRegister(32);
-            var m = new OffsetRegister(r, 8, 4);
+            var m = new OffsetRegister(r, 4, 8);
 
             r.UInt64 = 0x1234;
             m.UInt64.Should().Be(0x23);
@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
         public void CheckGenericOffsetRegister32()
         {
             var r = new SimpleRegister(32);
-            var m = new OffsetRegister(r, 32, 0);
+            var m = new OffsetRegister(r, 0, 32);
 
             r.UInt64 = 0x1234_5678;
             m.UInt64.Should().Be(0x1234_5678);

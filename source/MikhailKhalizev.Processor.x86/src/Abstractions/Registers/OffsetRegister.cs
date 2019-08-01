@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
             set => Register.UInt64 = (Register.UInt64 & ~Mask) | ((value << Offset) & Mask);
         }
 
-        public OffsetRegister(Register register, int bits, int offset)
+        public OffsetRegister(Register register, int offset, int bits)
         {
             Register = register;
             Bits = bits;

@@ -3900,7 +3900,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Scan String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
-        void scasw();
+        void scasw_a16();
 
         /// <summary>
         /// Set Byte on Condition.

@@ -4019,9 +4019,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void scasw()
+        public void scasw_a16()
         {
-            Implementation.scasw();
+            Implementation.scasw_a16();
         }
 
         /// <inheritdoc />

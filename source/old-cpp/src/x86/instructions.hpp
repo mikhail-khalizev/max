@@ -1314,6 +1314,7 @@ void and_(uint_<L> & d, T s_)
 #define xchg std::swap
 
 
+// +
 inline void xlatb_a16()
 {
     al = memb_a16(ds, bx + al);
@@ -1975,6 +1976,7 @@ inline void scasb_a32()
     edi += df ? -1 : 1;
 }
 
+// +
 inline void scasw_a16()
 {
     cmp(ax, memw_a16(es, di));

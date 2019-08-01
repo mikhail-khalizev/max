@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using MikhailKhalizev.Max.Configuration;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
@@ -19,22 +20,26 @@ namespace MikhailKhalizev.Processor.x86.Core
 {
     public class Processor : IProcessor
     {
-        public Processor()
+        public ProcessorDto Configuration { get; }
+
+        public Processor(ProcessorDto configuration)
         {
+            Configuration = configuration;
+
             _eax = new SimpleRegister(32);
             _ebx = new SimpleRegister(32);
             _ecx = new SimpleRegister(32);
             _edx = new SimpleRegister(32);
 
-            _ax = new OffsetRegister(_eax, 16, 0);
-            _bx = new OffsetRegister(_ebx, 16, 0);
-            _cx = new OffsetRegister(_ecx, 16, 0);
-            _dx = new OffsetRegister(_edx, 16, 0);
+            _ax = new OffsetRegister(_eax, 0, 16);
+            _bx = new OffsetRegister(_ebx, 0, 16);
+            _cx = new OffsetRegister(_ecx, 0, 16);
+            _dx = new OffsetRegister(_edx, 0, 16);
 
-            _al = new OffsetRegister(_eax, 8, 0);
-            _bl = new OffsetRegister(_ebx, 8, 0);
-            _cl = new OffsetRegister(_ecx, 8, 0);
-            _dl = new OffsetRegister(_edx, 8, 0);
+            _al = new OffsetRegister(_eax, 0, 8);
+            _bl = new OffsetRegister(_ebx, 0, 8);
+            _cl = new OffsetRegister(_ecx, 0, 8);
+            _dl = new OffsetRegister(_edx, 0, 8);
 
             _ah = new OffsetRegister(_eax, 8, 8);
             _bh = new OffsetRegister(_ebx, 8, 8);
@@ -44,14 +49,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             _esi = new SimpleRegister(32);
             _edi = new SimpleRegister(32);
 
-            _si = new OffsetRegister(_esi, 16, 0);
-            _di = new OffsetRegister(_edi, 16, 0);
+            _si = new OffsetRegister(_esi, 0, 16);
+            _di = new OffsetRegister(_edi, 0, 16);
 
             _ebp = new SimpleRegister(32);
             _esp = new SimpleRegister(32);
 
-            _bp = new OffsetRegister(_ebp, 16, 0);
-            _sp = new OffsetRegister(_esp, 16, 0);
+            _bp = new OffsetRegister(_ebp, 0, 16);
+            _sp = new OffsetRegister(_esp, 0, 16);
 
 
             _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
@@ -1507,10 +1512,10 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
                 throw new Exception("Bad eip");
 
-            if (false)
+            if (!string.IsNullOrEmpty(Configuration.StateOutput))
             {
                 if (_stateLog == null)
-                    _stateLog = new StreamWriter("state.log");
+                    _stateLog = new StreamWriter(Configuration.StateOutput);
 
                 _stateLog.WriteLine(
                     "cs[eip]: " + cs[CurrentInstructionAddress]
@@ -5848,9 +5853,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void scasw()
+        public void scasw_a16()
         {
-            throw new NotImplementedException();
+            cmp(ax, memw_a16[es, di]);
+            di += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />
@@ -8173,7 +8179,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void xlatb_a16()
         {
-            throw new NotImplementedException();
+            al = memb_a16[ds, bx + al];
         }
 
         /// <inheritdoc />

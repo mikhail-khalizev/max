@@ -47,7 +47,7 @@ namespace MikhailKhalizev.Max
 
             var installedPath = ConfigurationDto.Max.InstalledPath;
             if (!Directory.Exists(installedPath))
-                throw new InvalidOperationException($"Directory '{installedPath}' not found. Check Max:InstalledPath configuration parameter.");
+                throw new InvalidOperationException($"Directory '{installedPath}' not found. Check Max:InstalledPath configuration option.");
 
 
             // Create ServiceProvider.
