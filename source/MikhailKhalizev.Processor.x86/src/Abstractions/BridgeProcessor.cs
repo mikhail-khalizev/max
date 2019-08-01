@@ -1000,9 +1000,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void div()
+        public void div(Value value)
         {
-            Implementation.div();
+            Implementation.div(value);
         }
 
         /// <inheritdoc />
@@ -2465,6 +2465,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool loopew_a16(Address address, int offset)
+        {
+            return Implementation.loopew_a16(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool loopnew_a16(Address address, int offset)
         {
             return Implementation.loopnew_a16(address, offset);
@@ -2761,7 +2767,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// <inheritdoc />
         public void movsd_a32(SegmentRegister segment = null)
         {
-            Implementation.movsd_a32();
+            Implementation.movsd_a32(segment);
         }
 
         /// <inheritdoc />

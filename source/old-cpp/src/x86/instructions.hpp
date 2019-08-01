@@ -226,6 +226,7 @@ void iret_(uint_<8> op_size);
     if (--cx != 0 && zf == false)   \
         jmpw(__VA_ARGS__)
 
+// +
 #define loopnew_a16 loopnzw_a16
 
 #define loopzw_a16(...)             \
@@ -1403,6 +1404,7 @@ inline void cld()
     df = false;
 }
 
+// +
 inline void stc()
 {
     cf = true;
@@ -1531,6 +1533,7 @@ inline void div(uint_<8> s)
     ah = w % s;
 }
 
+// +
 inline void div(uint_<16> s)
 {
     if (s == 0)
@@ -1826,6 +1829,7 @@ inline void sidtd_a32(seg_reg &, uint_<32>)
 }
 
 
+// +
 template<exo::abstract_int L, typename T>
 void lsl(uint_<L> & d, T s)
 {

@@ -1535,9 +1535,15 @@ namespace MikhailKhalizev.Processor.x86.Core
             {
                 if (_stateLog == null)
                     _stateLog = new StreamWriter(Configuration.StateOutput);
-
+                
+                var effAddress = cs[CurrentInstructionAddress];
+                var prefix = "";
+                if (effAddress != address)
+                    prefix = $"    method guid: {{{MethodInfo.Guid}}}, csharp_address: {address}{Environment.NewLine}";
+                
                 _stateLog.WriteLine(
-                    "cs[eip]: " + cs[CurrentInstructionAddress]
+                    prefix
+                    + "cs[eip]: " + effAddress
                     + ", eax: " + eax
                     + ", ebx: " + ebx
                     + ", ecx: " + ecx
@@ -1547,13 +1553,23 @@ namespace MikhailKhalizev.Processor.x86.Core
                     + ", esp: " + esp
                     + ", ebp: " + ebp
                     + ", flags: " + eflags
-                    + ", cs: " + cs
-                    + ", ss: " + ss
-                    + ", ds: " + ds
-                    + ", es: " + es
-                    + ", fs: " + fs
-                    + ", gs: " + gs);
+                    + ", cs: " + cs + " " + (Address)cs.Descriptor.Base
+                    + ", ss: " + ss + " " + (Address)ss.Descriptor.Base
+                    + ", ds: " + ds + " " + (Address)ds.Descriptor.Base
+                    + ", es: " + es + " " + (Address)es.Descriptor.Base
+                    + ", fs: " + fs + " " + (Address)fs.Descriptor.Base
+                    + ", gs: " + gs + " " + (Address)gs.Descriptor.Base);
             }
+
+            //if (memw_a32[0x13_0000] == 0xcccc)
+            //{
+            //    var debug = 0;
+            //}
+
+            //if (cs[eip] == 0x14_db21 && eax == 0xcccc)
+            //{
+            //    var debug = 0;
+            //}
         }
 
         /// <inheritdoc />
@@ -2401,8 +2417,25 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void div()
+        public void div(Value value)
         {
+            if (value.Bits == 16)
+            {
+                if (value == 0)
+                    throw new NotImplementedException(); // #DE
+
+                var w = (dx.UInt16 << 16) + ax.UInt16;
+
+                var t = w / value.UInt16;
+                if (0xffff < t)
+                    throw new NotImplementedException(); // #DE
+
+                ax = t;
+                dx = w % value.UInt16;
+
+                return;
+            }
+
             throw new NotImplementedException();
         }
 
@@ -3294,7 +3327,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jbew_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            jmpw_func_if(eflags.cf || eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -4030,9 +4063,21 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool loopnew_a16(Address address, int offset)
+        public bool loopew_a16(Address address, int offset)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool loopnew_a16(Address address, int offset)
+        {
+            if (--cx != 0 && !eflags.zf)
+            {
+                jmpw(address, offset);
+                return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />
@@ -4044,7 +4089,31 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lsl(Value dst, Value selector)
         {
-            throw new NotImplementedException();
+            SegmentRegister seg = new SegmentRegisterImpl(this);
+            seg.UInt32 = selector.UInt32;
+
+            eflags.zf = true; // zf <-> valid
+
+            if (seg.IsNull)
+                eflags.zf = false;
+
+            if (eflags.zf)
+            {
+                var type = seg.Descriptor.SAndType;
+                if (type == 0 || (4 <= type && type <= 8) || (type == 0xa) || (0xc <= type && type <= 0xf))
+                    eflags.zf = false;
+            }
+
+            if (eflags.zf)
+            {
+                if (seg.Descriptor.IsTypeNonConformingCode
+                    && ((seg.Descriptor.DPL < CPL)
+                        || (seg.Descriptor.DPL < seg.RPL)))
+                    eflags.zf = false;
+            }
+
+            if (eflags.zf)
+                dst.UInt32 = seg.Descriptor.Limit;
         }
 
         /// <inheritdoc />
@@ -6074,7 +6143,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void stc()
         {
-            throw new NotImplementedException();
+            eflags.cf = true;
         }
 
         /// <inheritdoc />

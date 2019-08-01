@@ -879,7 +879,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Unsigned Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DIV.html</remarks>
-        void div();
+        void div(Value value);
 
         /// <summary>
         /// Divide Packed Double-Precision Floating-Point Values.
@@ -2341,6 +2341,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopw_a16(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopew_a16(Address address, int offset);
 
         /// <summary>
         /// Loop According to ECX Counter.
