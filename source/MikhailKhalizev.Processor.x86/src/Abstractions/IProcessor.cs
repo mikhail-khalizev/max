@@ -522,6 +522,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         void callw_a16_far_ind(SegmentRegister segment, Value address);
 
         /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void calld_a16_far_ind(SegmentRegister segment, Value address);
+
+        /// <summary>
         /// Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword to Quadword.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CBW:CWDE:CDQE.html</remarks>
@@ -2628,7 +2634,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Move Data from String to String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
-        void movsd_a32();
+        void movsd_a32(SegmentRegister segment = null);
 
         /// <summary>
         /// Move or Merge Scalar Double-Precision Floating-Point Value.

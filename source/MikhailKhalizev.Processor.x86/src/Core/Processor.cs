@@ -1493,10 +1493,13 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public void ii(Address address, uint length)
         {
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
             var cur = address + CSharpFunctionDelta - cs.Descriptor.Base;
 
             if (eip != cur)
-                throw new InvalidOperationException("Ожидается другая инструкция.");
+                throw new InvalidOperationException("Ожидается инструкция другому адресу.");
 
             CurrentInstructionAddress = cur;
             eip = cur + length;
@@ -1907,9 +1910,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new NotImplementedException();
 
             run_irqs();
-
             correct_function_position(retAddr);
-
             check_mode();
         }
 
@@ -1924,11 +1925,8 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new NotImplementedException();
 
             run_irqs();
-
             SaveJumpInfo();
-
             correct_function_position(ret_addr);
-
             check_mode();
         }
 
@@ -1947,6 +1945,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            run_irqs();
+            correct_function_position(ret_addr);
+            check_mode();
+        }
+
+        /// <inheritdoc />
+        public void calld_a16_far_ind(SegmentRegister segment, Value address)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
             run_irqs();
             correct_function_position(ret_addr);
             check_mode();
@@ -3205,10 +3213,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void jmpw_abs(Value address)
         {
             eip = address & 0xffff;
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
             run_irqs();
-
             SaveJumpInfo();
         }
 
@@ -3222,7 +3227,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jmpw_a16_far_ind(SegmentRegister segment, Value address)
         {
-            throw new NotImplementedException();
+            jmp_far_prepare(memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            run_irqs();
         }
 
         /// <inheritdoc />
@@ -4317,9 +4323,11 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void movsd_a32()
+        public void movsd_a32(SegmentRegister segment = null)
         {
-            throw new NotImplementedException();
+            memd_a32[es, edi] = memd_a32[segment ?? ds, esi];
+            edi += eflags.df ? -4 : 4;
+            esi += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />

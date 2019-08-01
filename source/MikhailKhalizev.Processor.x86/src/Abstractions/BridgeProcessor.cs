@@ -646,6 +646,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void calld_a16_far_ind(SegmentRegister segment, Value address)
+        {
+            Implementation.calld_a16_far_ind(segment, address);
+        }
+
+        /// <inheritdoc />
         public void cbw()
         {
             Implementation.cbw();
@@ -2747,7 +2753,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void movsd_a32()
+        public void movsd_a32(SegmentRegister segment = null)
         {
             Implementation.movsd_a32();
         }

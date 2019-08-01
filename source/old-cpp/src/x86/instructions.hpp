@@ -409,6 +409,7 @@ void iret_(uint_<8> op_size);
         return;                                                         \
     } while(0)
 
+// +
 #define jmpw_a16_far_ind(mem_seg, mem_off)                              \
     do {                                                                \
         jmp_far_prepare(                                                \
@@ -537,6 +538,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
+// +
 #define calld_a16_far_ind(mem_seg, mem_off)               \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -2082,6 +2084,7 @@ inline void movsd_a16()
     si += df ? -4 : 4;
 }
 
+// +
 inline void movsd_a32(seg_reg & seg)
 {
     memd_a32(es, edi) = memd_a32(seg, esi);
@@ -2089,6 +2092,7 @@ inline void movsd_a32(seg_reg & seg)
     esi += df ? -4 : 4;
 }
 
+// +
 inline void movsd_a32()
 {
     movsd_a32(ds);
