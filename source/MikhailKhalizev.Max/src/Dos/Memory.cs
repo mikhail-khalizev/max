@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
     public class Memory : BridgeProcessor
     {
-        public Memory(IProcessor implementation) 
+        public RawProgramMain RawProgramMain { get; }
+
+        public Memory(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
-        { }
+        {
+            RawProgramMain = rawProgramMain;
+        }
 
 
         public void dos_mem_init()

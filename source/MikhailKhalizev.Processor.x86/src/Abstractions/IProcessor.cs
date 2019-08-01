@@ -1149,7 +1149,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Load Floating Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FLD.html</remarks>
-        void fld();
+        void fld(Value value);
 
         /// <summary>
         /// Load Constant.
@@ -1518,6 +1518,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         void inb(Value dst, Value port);
 
         /// <summary>
+        /// Input from Port.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/IN.html</remarks>
+        void inw(Value dst, Value port);
+
+        /// <summary>
         /// Increment by 1.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INC.html</remarks>
@@ -1618,6 +1624,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        void jmpd(Address address, int offset);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         void jmpw_func(Address address, int offset);
 
         /// <summary>
@@ -1680,6 +1692,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jbw(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jbd(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.

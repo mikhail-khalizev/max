@@ -25,6 +25,8 @@ namespace MikhailKhalizev.Max.Program
         public Interrupt DosInterrupt { get; }
         public Timer DosTimer { get; }
         public Port DosPort { get; }
+        public Dma DosDma { get; }
+        public Pic DosPic { get; }
 
         public MultiValueDictionary<Address, MyMethodInfo> funcs_by_pc = new MultiValueDictionary<Address, MyMethodInfo>();
 
@@ -43,10 +45,12 @@ namespace MikhailKhalizev.Max.Program
             Implementation = implementation;
             Configuration = configuration;
 
-            DosMemory = new Memory(implementation);
+            DosMemory = new Memory(implementation, this);
             DosInterrupt = new Interrupt(implementation, this);
-            DosTimer = new Timer(implementation);
-            DosPort = new Port(implementation);
+            DosTimer = new Timer(implementation, this);
+            DosPort = new Port(implementation, this);
+            DosDma = new Dma(implementation, this);
+            DosPic = new Pic(implementation, this);
 
             implementation.run_func += ExecuteSubMethod;
             implementation.runInb += (sender, tuple) => DosPort.inb(tuple.value, tuple.port);
@@ -265,12 +269,9 @@ namespace MikhailKhalizev.Max.Program
 
             var prevMethodInfo = Implementation.MethodInfo;
             var prevCSharpFunctionDelta = Implementation.CSharpFunctionDelta;
-            var prevCSharpEmulateMode = Implementation.CSharpEmulateMode;
 
             Implementation.MethodInfo = info.MethodInfo;
-            Implementation.CSharpFunctionDelta = (int)(cs.Descriptor.Base + eip - info.MethodInfo.Address);
-            Implementation.CSharpEmulateMode = (int)info.MethodInfo.Mode;
-            Implementation.check_mode();
+            Implementation.CSharpFunctionDelta = cs[eip] - info.MethodInfo.Address;
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
 
@@ -282,11 +283,8 @@ namespace MikhailKhalizev.Max.Program
             {
                 Implementation.MethodInfo = prevMethodInfo;
                 Implementation.CSharpFunctionDelta = prevCSharpFunctionDelta;
-                Implementation.CSharpEmulateMode = prevCSharpEmulateMode;
             }
-
-            Implementation.check_mode();
-
+            
             if (on_run_func__dump_reg)
             {
                 Console.WriteLine(

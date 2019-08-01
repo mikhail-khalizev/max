@@ -1270,9 +1270,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fld()
+        public void fld(Value value)
         {
-            Implementation.fld();
+            Implementation.fld(value);
         }
 
         /// <inheritdoc />
@@ -1642,6 +1642,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void inw(Value dst, Value port)
+        {
+            Implementation.inw(dst, port);
+        }
+
+        /// <inheritdoc />
         public void inc(Value value)
         {
             Implementation.inc(value);
@@ -1738,6 +1744,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jmpd(Address address, int offset)
+        {
+            Implementation.jmpd(address, offset);
+        }
+
+        /// <inheritdoc />
         public void jmpw_func(Address address, int offset)
         {
             Implementation.jmpw_func(address, offset);
@@ -1801,6 +1813,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool jbw(Address address, int offset)
         {
             return Implementation.jbw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jbd(Address address, int offset)
+        {
+            return Implementation.jbd(address, offset);
         }
 
         /// <inheritdoc />

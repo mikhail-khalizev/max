@@ -25,6 +25,8 @@ namespace MikhailKhalizev.Max.Dos
             fileHandlers.Add(null); // in
             fileHandlers.Add(null); // out
             fileHandlers.Add(null); // err
+            fileHandlers.Add(null); // dummy (from dosbox)
+            fileHandlers.Add(null); // dummy (from dosbox)
         }
 
         public void int_08() { throw new NotImplementedException(); }
@@ -810,7 +812,44 @@ namespace MikhailKhalizev.Max.Dos
         private bool xms_handler_added = false;
 
         public void int_31() { throw new NotImplementedException(); }
-        public void int_33() { throw new NotImplementedException(); }
+
+        // Mouse
+        public void int_33()
+        {
+            if (ax.UInt16 == 0)
+                RawProgramMain.DosPic.set_irq_mask(12, false);
+
+            switch (ax.UInt16)
+            {
+                case 0x0: // reset driver and read status ( fall-through )
+                case 0x21: // software reset
+                    ax = 0xffff;
+                    bx = 3;
+                    // ...
+                    break;
+
+
+                case 0x3: // return position and button status
+                    bx = 0;
+                    cx = 0; // pos_x
+                    dx = 0; // pos_y
+                    break;
+
+                case 0xb: // read motion data
+                    cx = 0; // x
+                    dx = 0; // y
+                    break;
+
+                case 0x15: // get driver storage space requirements
+                    bx = 0x1f0;
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            syscall_iretww();
+        }
 
         public void int_67()
         {

@@ -73,7 +73,6 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             _cs = new SegmentRegisterImpl(this);
             _cs.ResetCodeSegment();
-            CSharpEmulateMode = 16;
 
             _ss = new SegmentRegisterImpl(this);
             _ss.ResetDataSegment();
@@ -1041,7 +1040,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             {
                 if (eflags.vm && eflags.iopl < 3 && in_interrupt_int_n)
                     throw new NotImplementedException(); // #GP(0); (* Bit 0 of error code is 0 because INT n *)
-                else
+                
                 /* Protected mode, IA-32e mode, or virtual-8086 mode interrupt */
                 if (ia32_efer.lma == false)
                 {
@@ -1131,8 +1130,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
                         var cpl = CPL;
 
-                        if (new_cs.Descriptor.IsTypeNonConformingCode
-                            && new_cs.Descriptor.DPL < CPL)
+                        if (new_cs.Descriptor.IsTypeNonConformingCode && new_cs.Descriptor.DPL < CPL)
                         {
                             if (eflags.vm)
                                 throw new NotImplementedException();
@@ -1144,8 +1142,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                         {
                             if (eflags.vm)
                                 throw new NotImplementedException(); // #GP(error_code(new code-segment selector,0,EXT))
-                            if (new_cs.Descriptor.IsTypeConformingCode
-                                || new_cs.Descriptor.DPL == CPL)
+                            if (new_cs.Descriptor.IsTypeConformingCode || new_cs.Descriptor.DPL == CPL)
                             {
                                 // INTRA-PRIVILEGE-LEVEL-INTERRUPT;
                                 if (ia32_efer.lma)
@@ -1443,7 +1440,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <seealso cref="eip"/>
         public Address CurrentInstructionAddress { get; set; }
 
-        public int CSharpEmulateMode { get; set; }
+        public int CSharpEmulateMode => (int) MethodInfo.Mode;
         public int CSharpFunctionDelta { get; set; }
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
@@ -1485,7 +1482,10 @@ namespace MikhailKhalizev.Processor.x86.Core
                     Memory.GetMinSize(cs, eip, 1); // Проверим, есть ли у нас доступ к памяти.
 
                     if (toRun == returnAddress)
+                    {
+                        check_mode();
                         return;
+                    }
 
                     // Шаг первый - ищем среди уже вызванных функций.
                     var index = callReturnAddresses.LastIndexOf(toRun);
@@ -1517,6 +1517,8 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public void ii(Address address, uint length)
         {
+            check_mode();
+
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
@@ -2718,7 +2720,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fld()
+        public void fld(Value value)
         {
             throw new NotImplementedException();
         }
@@ -3127,6 +3129,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void inw(Value dst, Value port)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void inc(Value value)
         {
             var r = new NumericValue(value.UInt64 + 1, value.Bits);
@@ -3249,6 +3257,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jmpd(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jmpw_func(Address address, int offset)
         {
             jmpw_func_internal(address, offset, true);
@@ -3321,6 +3335,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jbw(Address address, int offset)
         {
             return jmpw_if(eflags.cf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jbd(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

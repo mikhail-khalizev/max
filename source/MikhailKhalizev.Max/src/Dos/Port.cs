@@ -1,4 +1,5 @@
 ﻿using System;
+using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
@@ -9,6 +10,13 @@ namespace MikhailKhalizev.Max.Dos
     {
         int cmos_reg;
         bool cmos_nmi;
+        public RawProgramMain RawProgramMain { get; }
+
+        public Port(IProcessor implementation, RawProgramMain rawProgramMain)
+            : base(implementation)
+        {
+            RawProgramMain = rawProgramMain;
+        }
 
         public void inb(Value value, Value port)
         {
@@ -442,9 +450,5 @@ namespace MikhailKhalizev.Max.Dos
                     throw new NotImplementedException();
             }
         }
-
-        /// <inheritdoc />
-        public Port(IProcessor implementation) : base(implementation)
-        { }
     }
 }
