@@ -3807,17 +3807,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/RDTSCP.html</remarks>
         void rdtscp();
 
-        /// <summary>
-        /// Repeat String Operation Prefix.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
-        void rep_a16(Action action);
 
         /// <summary>
         /// Repeat String Operation Prefix.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
-        void rep_a32(Action action);
+        void rep_a16(Action action);
 
         /// <summary>
         /// Repeat String Operation Prefix.
@@ -3830,6 +3825,20 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
         void repne_a16(Action action);
+
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void rep_a32(Action action);
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void repne_a32(Action action);
+
 
         /// <summary>
         /// Return from Procedure.
@@ -3962,6 +3971,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
         void scasd_a16();
+
+        /// <summary>
+        /// Scan String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
+        void scasd_a32();
 
         /// <summary>
         /// Scan String.

@@ -3941,6 +3941,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void repne_a32(Action action)
+        {
+            Implementation.repne_a32(action);
+        }
+
+        /// <inheritdoc />
         public void repe_a16(Action action)
         {
             Implementation.repe_a16(action);
@@ -4082,6 +4088,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void scasd_a16()
         {
             Implementation.scasd_a16();
+        }
+
+        /// <inheritdoc />
+        public void scasd_a32()
+        {
+            Implementation.scasd_a32();
         }
 
         /// <inheritdoc />

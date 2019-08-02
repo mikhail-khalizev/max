@@ -5785,6 +5785,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void repne_a32(Action action)
+        {
+            for (eflags.zf = false; ecx != 0 && !eflags.zf; ecx--)
+                action();
+        }
+
+        /// <inheritdoc />
         public void repe_a16(Action action)
         {
             for (eflags.zf = true; cx != 0 && eflags.zf; cx--)
@@ -5987,6 +5994,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         /// <inheritdoc />
         public void scasd_a16()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void scasd_a32()
         {
             throw new NotImplementedException();
         }

@@ -273,6 +273,7 @@ void iret_(uint_<8> op_size);
 #define repne_a16  \
     for (zf = false; cx != 0 && !zf; cx--)
 
+// +
 #define repne_a32  \
     for (zf = false; ecx != 0 && !zf; ecx--)
 

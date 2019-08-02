@@ -140,10 +140,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         #region Operators
 
-        public static int operator -(Address a1, Address a2)
-        {
-            return ((int)a1 - (int)a2);
-        }
+        public static int operator -(Address a1, Address a2) => (int)a1 - (int)a2;
 
         #endregion
     }
