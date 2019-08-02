@@ -425,8 +425,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x34:
-                    throw new NotImplementedException();
-                    // TODO es = 0xb2; // SDA seg
+                    es.Selector = 0xb2; // SDA seg
                     bx = 1;
                     break;
 
@@ -479,7 +478,8 @@ namespace MikhailKhalizev.Max.Dos
                         // @todo
                         Console.Error.WriteLine("\tCreate: " + path);
 
-                        var file = File.Open(path, FileMode.OpenOrCreate | FileMode.Truncate);
+                        var file = File.Open(path, FileMode.OpenOrCreate);
+                        file.SetLength(0);
                         fileHandlers.Add(file);
                         var fd = fileHandlers.Count - 1;
 
@@ -890,14 +890,10 @@ namespace MikhailKhalizev.Max.Dos
             if (path.StartsWith("C:\\"))
                 path = path.Substring(3);
 
-            if (path[0] != '/')
-            {
-                //for (char & val: path)
-                //    if ('a' <= val && val <= 'z')
-                //        val += 'A' - 'a';
-
-                path = Path.Combine(RawProgramMain.Configuration.Max.InstalledPath, path);
-            }
+            //if (path[0] != '/')
+            //{
+                path = Path.GetFullPath(path, RawProgramMain.Configuration.Max.InstalledPath);
+            //}
 
             return path;
         }
