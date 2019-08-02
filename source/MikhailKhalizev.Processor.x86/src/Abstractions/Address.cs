@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public string ToString(Func<HexHelper.Options, HexHelper.Options> setupOptions) => HexHelper.ToString(_value, setupOptions);
         public string ToShortString() => HexHelper.ToString(_value, o => o.SetTrimZero(true).SetGroupSize(4));
         public string ToFullString() => HexHelper.ToString(_value, o => o.SetTrimZero(false).SetGroupSize(4));
-        
+
         #region IEquatable
 
         /// <summary>Показывает, равен ли этот экземпляр заданному объекту.</summary>
@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         #region Cast from/to Numeric Operators
 
         public static implicit operator uint(Address address) => address._value;
-        public static implicit operator int(Address address) => (int)address._value;
+        public static explicit operator int(Address address) => (int)address._value;
 
         public static implicit operator Address(byte address) => new Address(address);
         public static implicit operator Address(ushort address) => new Address(address);
@@ -124,7 +124,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         {
             if (uint.MaxValue < address)
                 throw new InvalidCastException("uint.MaxValue < address");
-            return new Address((uint) address);
+            return new Address((uint)address);
         }
 
         public static implicit operator Address(sbyte address) => (uint)address;
@@ -134,11 +134,20 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         {
             if (uint.MaxValue < address)
                 throw new InvalidCastException("uint.MaxValue < address");
-            
+
             if (address < int.MinValue)
                 throw new InvalidCastException("address < int.MinValue");
 
-            return (uint) address; // Именно uint. Например чтобы для смещения -20 преобразование в Address увенчалось успешно.
+            return (uint)address; // Именно uint. Например чтобы для смещения -20 преобразование в Address увенчалось успешно.
+        }
+
+        #endregion
+
+        #region Operators
+
+        public static int operator -(Address a1, Address a2)
+        {
+            return ((int)a1 - (int)a2);
         }
 
         #endregion

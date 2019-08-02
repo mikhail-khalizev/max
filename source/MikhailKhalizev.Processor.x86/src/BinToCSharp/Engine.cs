@@ -236,7 +236,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             udis86.ud_set_syntax(ref u, new syn_intel().ud_translate_intel);
             udis86.ud_set_input_buffer(ref u, ac);
 
-            u.inp_buf_index = address;
+            u.inp_buf_index = (int)address;
 
             
             // Функция, начинающаяся с точного совпадения force_end_funcs_ может начать декодироваться.

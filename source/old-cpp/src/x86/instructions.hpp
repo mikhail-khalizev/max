@@ -1926,6 +1926,7 @@ inline void ltr(uint_<16> val)
     tr.get_orig_desc_ref().set_tss_busy(true);
 }
 
+// +
 inline void str(uint_<16> & d)
 {
     d = tr;

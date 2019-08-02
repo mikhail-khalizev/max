@@ -67,7 +67,7 @@ namespace MikhailKhalizev.Max.Dos
             {
                 if (pair.Key / 16 - findParagraph < bx.UInt16)
                 {
-                    findParagraph = (pair.Key + pair.Value + 15) / 16;
+                    findParagraph = ((int)pair.Key + pair.Value + 15) / 16;
                     continue;
                 }
 
@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Dos
                 if (maps.Count != 0)
                 {
                     var last = maps.Last();
-                    findParagraph = (last.Key + last.Value + 15) / 16;
+                    findParagraph = ((int)last.Key + last.Value + 15) / 16;
                     if (bx.UInt16 <= 0xffff - findParagraph)
                         eflags.cf = false;
                 }
@@ -148,7 +148,7 @@ namespace MikhailKhalizev.Max.Dos
 
             int next_par = 0xffff;
             if (iter < next)
-                next_par = next / 16;
+                next_par = (int)next / 16;
 
             if (next_par * 16 - es.Descriptor.Base < bx.UInt16 * 16)
             {

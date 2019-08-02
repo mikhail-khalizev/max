@@ -2523,7 +2523,10 @@
   },
   {
     "Guid": "1a3c91c9-651c-4ce0-b5d2-ea3a2a445131",
-    "Address": "0xea4b",
+    "Addresses": [
+      "0xea4b",
+      "0x14_aa7b"
+    ],
     "Mode": 16,
     "Raw": "e99efd"
   },
@@ -2535,7 +2538,10 @@
   },
   {
     "Guid": "856f19fa-7dd3-41d1-b61d-87063ba4b6ad",
-    "Address": "0xea68",
+    "Addresses": [
+      "0xea68",
+      "0x14_aa98"
+    ],
     "Mode": 16,
     "Raw": "807e12ff75dde81efee8daff7507804f2640e99005e8e3fdf647264075f4fe0eed10ebee"
   },

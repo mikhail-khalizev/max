@@ -73,7 +73,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 }
             }
 
-            var ret = physMem.Slice(address);
+            var ret = physMem.Slice((int)address);
 
             if (ret.Count < size)
                 throw new InvalidOperationException("Доступна только часть памяти.");
@@ -186,9 +186,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             return ret;
         }
 
-        /// <summary>
-        /// @note На самом деле это внутренняя функция. Она сделана "публичной" в целях отладки. */
-        /// </summary>
         public Address GetRamAddress(Address address)
         {
             if (!Processor.cr0.pg)

@@ -6306,7 +6306,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void str(Value value)
         {
-            throw new NotImplementedException();
+            value.UInt16 = tr.UInt16;
         }
 
         /// <inheritdoc />

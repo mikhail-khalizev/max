@@ -271,7 +271,7 @@ namespace MikhailKhalizev.Max.Program
             var prevCSharpFunctionDelta = Implementation.CSharpFunctionDelta;
 
             Implementation.MethodInfo = info.MethodInfo;
-            Implementation.CSharpFunctionDelta = cs[eip] - info.MethodInfo.Address;
+            Implementation.CSharpFunctionDelta = (int)(cs[eip] - info.MethodInfo.Address);
 
             add_to_used_func_list(run, (cs.db ? 32 : 16));
 
@@ -594,7 +594,7 @@ namespace MikhailKhalizev.Max.Program
             to_cxx.Save();
         }
         
-        public void add_internal_dyn_func(Action func, int mode, int address)
+        public void add_internal_dyn_func(Action func, int mode, Address address)
         {
             var myMethodInfos = funcs_by_pc.GetValues(address, false);
 
@@ -621,7 +621,7 @@ namespace MikhailKhalizev.Max.Program
                 });
         }
 
-        public void add_internal_dyn_func_if_free(Action func, int mode, int address)
+        public void add_internal_dyn_func_if_free(Action func, int mode, Address address)
         {
             if (funcs_by_pc.ContainsKey(address))
                 return;

@@ -88,7 +88,7 @@ namespace MikhailKhalizev.Max.Dos
 
                                 if (added_callback_setwindow == false)
                                 {
-                                    RawProgramMain.add_internal_dyn_func(callback_setwindow, 16, (Address)0xf0001320);
+                                    RawProgramMain.add_internal_dyn_func(callback_setwindow, 16, 0xf0001320);
                                     added_callback_setwindow = true;
                                 }
 

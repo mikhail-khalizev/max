@@ -22,5 +22,13 @@ namespace MikhailKhalizev.Processor.x86.Tests
             var u = (uint) a;
             u.Should().Be(unchecked((uint)(-20)));
         }
+
+        [Fact]
+        public void ShiftAddress()
+        {
+            Address a = 0xff00_0000;
+            var b = a >> 16;
+            b.Should().Be(0xff00);
+        }
     }
 }
