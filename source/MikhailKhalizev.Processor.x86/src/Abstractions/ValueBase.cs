@@ -188,9 +188,10 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public static Value operator +(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
         public static Value operator -(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
-
-        //public static Value.Value operator *(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 * v2.UInt64, Math.Min(v1.Bits + v2.Bits, 64));
         
+        // Необходим для 'mov(memd_a32[gs, edi + ebx * 4], eax)'
+        public static Value operator *(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 * v2.UInt64, Math.Min(v1.Bits + v2.Bits, 64));
+
         public static Value operator &(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 & v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
         public static Value operator |(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 | v2.UInt64, Math.Max(v1.Bits, v2.Bits));

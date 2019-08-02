@@ -402,6 +402,7 @@ void iret_(uint_<8> op_size);
         }                                                               \
     } while(0)
 
+// +
 #define jmpw_far_abs jmpd_far_abs
 
 // +
@@ -1951,24 +1952,28 @@ inline void stosw_a16()
     di += df ? -2 : 2;
 }
 
+// +
 inline void stosd_a16()
 {
     memd_a16(es, di) = eax;
     di += df ? -4 : 4;
 }
 
+// +
 inline void stosb_a32()
 {
     memb_a32(es, edi) = al;
     edi += df ? -1 : 1;
 }
 
+// +
 inline void stosw_a32()
 {
     memw_a32(es, edi) = ax;
     edi += df ? -2 : 2;
 }
 
+// +
 inline void stosd_a32()
 {
     memd_a32(es, edi) = eax;

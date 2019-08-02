@@ -62,7 +62,10 @@ namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
 
             for (var i = 0; i < size;)
             {
-                var availableSpace = memory.GetMinSize(address + i, 1).Slice(0, size - i);
+                var availableSpace = memory.GetMinSize(address + i, 1);
+                if (size - i < availableSpace.Count)
+                    availableSpace = availableSpace.Slice(0, size - i);
+
                 availableSpace.CopyTo(result, i);
                 i += availableSpace.Count;
             }

@@ -635,7 +635,7 @@ namespace MikhailKhalizev.Max.Dos
 
                         var file = fileHandlers[bx.Int32];
 
-                        var new_off = 0l;
+                        long new_off;
 
                         switch (al.UInt32)
                         {

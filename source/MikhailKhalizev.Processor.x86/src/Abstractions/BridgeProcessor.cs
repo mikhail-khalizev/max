@@ -1780,6 +1780,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jmpd_far_abs(int segment, Value address)
+        {
+            Implementation.jmpd_far_abs(segment, address);
+        }
+
+        /// <inheritdoc />
         public void jmpd_a16_far_ind(SegmentRegister segment, Value address)
         {
             Implementation.jmpd_a16_far_ind(segment, address);
@@ -2035,6 +2041,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool jsw(Address address, int offset)
         {
             return Implementation.jsw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jsw_func(Address address, int offset)
+        {
+            Implementation.jsw_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -4067,9 +4079,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void scasd()
+        public void scasd_a16()
         {
-            Implementation.scasd();
+            Implementation.scasd_a16();
         }
 
         /// <inheritdoc />
@@ -4271,6 +4283,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void stosb_a32()
+        {
+            Implementation.stosb_a32();
+        }
+
+        /// <inheritdoc />
         public void stosd_a16()
         {
             Implementation.stosd_a16();
@@ -4292,6 +4310,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void stosw_a16()
         {
             Implementation.stosw_a16();
+        }
+
+        /// <inheritdoc />
+        public void stosw_a32()
+        {
+            Implementation.stosw_a32();
         }
 
         /// <inheritdoc />

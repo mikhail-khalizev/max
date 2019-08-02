@@ -105,10 +105,12 @@ namespace MikhailKhalizev.Processor.x86.Core
             eip = 0x0000fff0;
 
             Memory = new Memory(this);
+            
             memb_a16 = new MemoryAccessImpl(Memory, 8, 16);
             memw_a16 = new MemoryAccessImpl(Memory, 16, 16);
             memd_a16 = new MemoryAccessImpl(Memory, 32, 16);
             memq_a16 = new MemoryAccessImpl(Memory, 64, 16);
+
             memb_a32 = new MemoryAccessImpl(Memory, 8, 32);
             memw_a32 = new MemoryAccessImpl(Memory, 16, 32);
             memd_a32 = new MemoryAccessImpl(Memory, 32, 32);
@@ -123,7 +125,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _eax;
             set => _eax.UInt64 = value.UInt64;
         }
-
         private readonly Register _eax;
 
         /// <inheritdoc />
@@ -132,7 +133,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ebx;
             set => _ebx.UInt64 = value.UInt64;
         }
-
         private readonly Register _ebx;
 
         /// <inheritdoc />
@@ -141,7 +141,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ecx;
             set => _ecx.UInt64 = value.UInt64;
         }
-
         private readonly Register _ecx;
 
         /// <inheritdoc />
@@ -150,7 +149,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _edx;
             set => _edx.UInt64 = value.UInt64;
         }
-
         private readonly Register _edx;
 
 
@@ -160,7 +158,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ax;
             set => _ax.UInt64 = value.UInt64;
         }
-
         private readonly Register _ax;
 
         /// <inheritdoc />
@@ -169,7 +166,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _bx;
             set => _bx.UInt64 = value.UInt64;
         }
-
         private readonly Register _bx;
 
         /// <inheritdoc />
@@ -178,7 +174,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _cx;
             set => _cx.UInt64 = value.UInt64;
         }
-
         private readonly Register _cx;
 
         public Register dx
@@ -186,7 +181,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _dx;
             set => _dx.UInt64 = value.UInt64;
         }
-
         private readonly Register _dx;
 
 
@@ -195,7 +189,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _al;
             set => _al.UInt64 = value.UInt64;
         }
-
         private readonly Register _al;
 
         public Register bl
@@ -203,7 +196,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _bl;
             set => _bl.UInt64 = value.UInt64;
         }
-
         private readonly Register _bl;
 
         public Register cl
@@ -211,7 +203,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _cl;
             set => _cl.UInt64 = value.UInt64;
         }
-
         private readonly Register _cl;
 
         public Register dl
@@ -219,7 +210,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _dl;
             set => _dl.UInt64 = value.UInt64;
         }
-
         private readonly Register _dl;
 
 
@@ -228,7 +218,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ah;
             set => _ah.UInt64 = value.UInt64;
         }
-
         private readonly Register _ah;
 
         public Register bh
@@ -236,7 +225,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _bh;
             set => _bh.UInt64 = value.UInt64;
         }
-
         private readonly Register _bh;
 
         public Register ch
@@ -244,7 +232,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ch;
             set => _ch.UInt64 = value.UInt64;
         }
-
         private readonly Register _ch;
 
         public Register dh
@@ -252,7 +239,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _dh;
             set => _dh.UInt64 = value.UInt64;
         }
-
         private readonly Register _dh;
 
 
@@ -261,7 +247,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _esi;
             set => _esi.UInt64 = value.UInt64;
         }
-
         private readonly Register _esi;
 
         public Register edi
@@ -269,7 +254,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _edi;
             set => _edi.UInt64 = value.UInt64;
         }
-
         private readonly Register _edi;
 
 
@@ -278,7 +262,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _si;
             set => _si.UInt64 = value.UInt64;
         }
-
         private readonly Register _si;
 
         public Register di
@@ -286,7 +269,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _di;
             set => _di.UInt64 = value.UInt64;
         }
-
         private readonly Register _di;
 
 
@@ -295,7 +277,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ebp;
             set => _ebp.UInt64 = value.UInt64;
         }
-
         private readonly Register _ebp;
 
         public Register esp
@@ -303,7 +284,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _esp;
             set => _esp.UInt64 = value.UInt64;
         }
-
         private readonly Register _esp;
 
 
@@ -312,7 +292,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _bp;
             set => _bp.UInt64 = value.UInt64;
         }
-
         private readonly Register _bp;
 
         public Register sp
@@ -320,7 +299,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _sp;
             set => _sp.UInt64 = value.UInt64;
         }
-
         private readonly Register _sp;
 
 
@@ -329,7 +307,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ds;
             set => _ds.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _ds;
 
         public SegmentRegister es
@@ -337,7 +314,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _es;
             set => _es.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _es;
 
         public SegmentRegister cs
@@ -345,7 +321,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _cs;
             set => _cs.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _cs;
 
         public SegmentRegister ss
@@ -353,7 +328,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ss;
             set => _ss.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _ss;
 
         public SegmentRegister fs
@@ -361,7 +335,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _fs;
             set => _fs.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _fs;
 
         public SegmentRegister gs
@@ -369,7 +342,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _gs;
             set => _gs.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _gs;
 
         public SegmentRegister ldtr
@@ -377,7 +349,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ldtr;
             set => _ldtr.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _ldtr;
 
         public SegmentRegister tr
@@ -385,7 +356,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _tr;
             set => _tr.UInt64 = value.UInt64;
         }
-
         private readonly SegmentRegisterImpl _tr;
 
 
@@ -394,7 +364,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _eflags;
             set => _eflags.UInt64 = value.UInt64;
         }
-
         private readonly EflagsRegister _eflags;
 
         public Ia32EferRegister ia32_efer
@@ -402,7 +371,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _ia32Efer;
             set => throw new NotImplementedException();
         }
-
         private readonly Ia32EferRegister _ia32Efer;
 
 
@@ -3320,6 +3288,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jmpd_far_abs(int segment, Value address)
+        {
+            jmpw_far_abs(segment, address);
+        }
+
+        /// <inheritdoc />
         public void jmpd_a16_far_ind(SegmentRegister segment, Value address)
         {
             jmp_far_prepare(memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
@@ -3576,6 +3550,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jsw(Address address, int offset)
         {
             return jmpw_if(eflags.sf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jsw_func(Address address, int offset)
+        {
+            jmpw_func_if(eflags.sf, address, offset);
         }
 
         /// <inheritdoc />
@@ -6006,7 +5986,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void scasd()
+        public void scasd_a16()
         {
             throw new NotImplementedException();
         }
@@ -6283,15 +6263,24 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void stosb_a32()
+        {
+            memb_a32[es, edi] = al;
+            edi += eflags.df ? -1 : 1;
+        }
+
+        /// <inheritdoc />
         public void stosd_a16()
         {
-            throw new NotImplementedException();
+            memd_a16[es, di] = eax;
+            di += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
         public void stosd_a32()
         {
-            throw new NotImplementedException();
+            memd_a32[es, edi] = eax;
+            edi += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
@@ -6305,6 +6294,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             memw_a16[es, di] = ax;
             di += eflags.df ? -2 : 2;
+        }
+
+        /// <inheritdoc />
+        public void stosw_a32()
+        {
+            memw_a32[es, edi] = ax;
+            edi += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />

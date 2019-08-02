@@ -74,8 +74,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x20:
-                    throw new NotImplementedException();
-                    //d = pic.read_command(port);
+                    value.UInt16 = (ushort)RawProgramMain.DosPic.read_command(port.UInt16);
                     break;
 
                 case 0x21:
@@ -248,8 +247,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x20:
-                    throw new NotImplementedException();
-                    //pic.write_command(port, s);
+                    RawProgramMain.DosPic.write_command(port.UInt16, s.UInt16);
                     break;
 
                 case 0x21:

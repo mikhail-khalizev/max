@@ -1624,12 +1624,6 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         void jmpw_func(Address address, int offset);
 
         /// <summary>
@@ -1637,12 +1631,6 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         void jmpw_abs(Value address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd_func(Address address, int offset);
 
         /// <summary>
         /// Jump.
@@ -1661,6 +1649,25 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void jmpw_a16_far_ind(SegmentRegister segment, Value address);
+
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        void jmpd(Address address, int offset);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        void jmpd_func(Address address, int offset);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void jmpd_far_abs(int segment, Value address);
 
         /// <summary>
         /// Call Procedure.
@@ -1914,6 +1921,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jsw(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        void jsw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -3948,7 +3961,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Scan String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
-        void scasd();
+        void scasd_a16();
 
         /// <summary>
         /// Scan String.
@@ -4152,6 +4165,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Store String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
+        void stosb_a32();
+
+        /// <summary>
+        /// Store String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stosd_a16();
 
         /// <summary>
@@ -4171,6 +4190,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stosw_a16();
+
+        /// <summary>
+        /// Store String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
+        void stosw_a32();
 
         /// <summary>
         /// Store Task Register.
