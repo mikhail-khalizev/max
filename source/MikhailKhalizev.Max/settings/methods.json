@@ -81,7 +81,8 @@
     "Addresses": [
       "0x3f19",
       "0x46c9",
-      "0x66d9"
+      "0x66d9",
+      "0x14_eb80"
     ],
     "Mode": 16,
     "Raw": "6a201f"
@@ -4166,7 +4167,10 @@
   },
   {
     "Guid": "78197613-7f4b-4018-8bea-188c72f8c58d",
-    "Address": "0x13_e020",
+    "Addresses": [
+      "0x13_e020",
+      "0x15_38c8"
+    ],
     "Mode": 16,
     "Raw": "558bec8bd61ec5760ac45e06b0ff0ac0742dac268a27433ae074f32c413c1a1ac980e12002c1044186e02c413c1a1ac980e12002c104413ac474d31ac01cff981f8bf25dcb"
   },
@@ -6041,7 +6045,10 @@
   },
   {
     "Guid": "6b26d410-8b45-430f-8738-92030b77abc4",
-    "Address": "0x15_3a50",
+    "Addresses": [
+      "0x15_3a50",
+      "0x15_3454"
+    ],
     "Mode": 16,
     "Raw": "558bec83ec0256571ec47e0a061f33c0b9fffff2aef7d149e33c49894efec47e068bdf33c0b9fffff2aef7d1498bd12b56fe76298bfb8b760aac8bfb8bcaf2ae751b8bd18bdf8b4efee304f3a675e78d47ff8cc2eb0ac446068cc2eb0333c0991f5f5e8be55dcb"
   },

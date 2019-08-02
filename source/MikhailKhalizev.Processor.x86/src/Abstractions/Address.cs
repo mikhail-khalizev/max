@@ -103,12 +103,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         public static implicit operator Value(Address address) => address._value;
 
-        public static implicit operator Address(ValueBase v)
-        {
-            if (32 < v.Bits)
-                throw new ArgumentOutOfRangeException("32 < Bits");
-            return v.UInt32;
-        }
+        public static implicit operator Address(ValueBase v) => v.UInt64;
 
         #endregion
 
