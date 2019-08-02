@@ -60,8 +60,8 @@ namespace MikhailKhalizev.Processor.x86.Core
 
 
             _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
-            _cr2 = new SimpleRegister(64);
-            _cr3 = new SimpleRegister(64);
+            _cr2 = new SimpleRegister(32);
+            _cr3 = new SimpleRegister(32);
             _cr4 = new Cr4RegisterImpl();
 
 
@@ -411,7 +411,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _cr0;
             set => _cr0.UInt64 = value.UInt64;
         }
-
         private readonly Cr0Register _cr0;
 
         /// <inheritdoc />
@@ -420,23 +419,22 @@ namespace MikhailKhalizev.Processor.x86.Core
             get => _cr2;
             set => _cr2.UInt64 = value.UInt64;
         }
-
         private readonly Register _cr2;
 
+        /// <inheritdoc />
         public Register cr3
         {
             get => _cr3;
             set => _cr3.UInt64 = value.UInt64;
         }
-
         private readonly Register _cr3;
 
+        /// <inheritdoc />
         public Cr4Register cr4
         {
             get => _cr4;
             set => throw new NotImplementedException();
         }
-
         private readonly Cr4Register _cr4;
 
 
@@ -1040,7 +1038,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             {
                 if (eflags.vm && eflags.iopl < 3 && in_interrupt_int_n)
                     throw new NotImplementedException(); // #GP(0); (* Bit 0 of error code is 0 because INT n *)
-                
+
                 /* Protected mode, IA-32e mode, or virtual-8086 mode interrupt */
                 if (ia32_efer.lma == false)
                 {
@@ -1385,6 +1383,17 @@ namespace MikhailKhalizev.Processor.x86.Core
             return false;
         }
 
+        private bool jmpd_if(bool cond, Address address, int offset)
+        {
+            if (cond)
+            {
+                jmpd(address, offset);
+                return true;
+            }
+
+            return false;
+        }
+
         private bool jmpw_func_if(bool cond, Address address, int offset)
         {
             if (cond)
@@ -1395,7 +1404,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             return false;
         }
-        
+
         private void jmpw_func_internal(Address address, int offset, bool haveReturnAfterInstruction)
         {
             var retAddr = cs[eip];
@@ -1408,7 +1417,6 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             run_irqs();
             correct_function_position(retAddr, haveReturnAfterInstruction);
-            check_mode();
         }
 
         private void __plus_sp(int s)
@@ -1440,7 +1448,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <seealso cref="eip"/>
         public Address CurrentInstructionAddress { get; set; }
 
-        public int CSharpEmulateMode => (int) MethodInfo.Mode;
+        public int CSharpEmulateMode => (int)MethodInfo.Mode;
         public int CSharpFunctionDelta { get; set; }
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
@@ -1482,10 +1490,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     Memory.GetMinSize(cs, eip, 1); // Проверим, есть ли у нас доступ к памяти.
 
                     if (toRun == returnAddress)
-                    {
-                        check_mode();
                         return;
-                    }
 
                     // Шаг первый - ищем среди уже вызванных функций.
                     var index = callReturnAddresses.LastIndexOf(toRun);
@@ -1537,12 +1542,12 @@ namespace MikhailKhalizev.Processor.x86.Core
             {
                 if (_stateLog == null)
                     _stateLog = new StreamWriter(Configuration.StateOutput);
-                
+
                 var effAddress = cs[CurrentInstructionAddress];
                 var prefix = "";
                 if (effAddress != address)
                     prefix = $"    method guid: {{{MethodInfo.Guid}}}, csharp_address: {address}{Environment.NewLine}";
-                
+
                 _stateLog.WriteLine(
                     prefix
                     + "cs[eip]: " + effAddress
@@ -1953,7 +1958,6 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             run_irqs();
             correct_function_position(retAddr);
-            check_mode();
         }
 
         /// <inheritdoc />
@@ -1969,7 +1973,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             run_irqs();
             SaveJumpInfo();
             correct_function_position(ret_addr);
-            check_mode();
         }
 
         /// <inheritdoc />
@@ -1979,7 +1982,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             call_far_prepare(16, segment, address & 0xffff);
             run_irqs();
             correct_function_position(ret_addr);
-            check_mode();
         }
 
         /// <inheritdoc />
@@ -1989,7 +1991,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
             run_irqs();
             correct_function_position(ret_addr);
-            check_mode();
         }
 
         /// <inheritdoc />
@@ -1999,7 +2000,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
             run_irqs();
             correct_function_position(ret_addr);
-            check_mode();
         }
 
         /// <inheritdoc />
@@ -2421,6 +2421,22 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void div(Value value)
         {
+            if (value.Bits == 8)
+            {
+                if (value == 0)
+                    throw new NotImplementedException(); // #DE
+
+                var w = ax.UInt16;
+
+                var t = w / value.UInt16;
+                if (0xff < t)
+                    throw new NotImplementedException(); // #DE
+
+                al = t;
+                ah = w % value.UInt16;
+                return;
+            }
+
             if (value.Bits == 16)
             {
                 if (value == 0)
@@ -3184,14 +3200,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void @int(int number)
         {
             var ret_addr = cs[eip];
-
             int_internal(number, true, true, false, 0);
-
             run_irqs();
-
             correct_function_position(ret_addr);
-
-            check_mode();
         }
 
         /// <inheritdoc />
@@ -3259,7 +3270,14 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jmpd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            eip = eip + offset;
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+            if (cs[eip] != address + CSharpFunctionDelta)
+                throw new NotImplementedException();
+
+            run_irqs();
         }
 
         /// <inheritdoc />
@@ -3279,10 +3297,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public int jmpw_abs_switch(Value address)
         {
-            eip = address & 0xffff;                                           
-            if (cs.fail_limit_check(eip))                                   
-                throw new NotImplementedException();                   
-            
+            eip = address & 0xffff;
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
             run_irqs();
             return cs[eip] - CSharpFunctionDelta;
         }
@@ -3298,6 +3316,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void jmpw_a16_far_ind(SegmentRegister segment, Value address)
         {
             jmp_far_prepare(memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            run_irqs();
+        }
+
+        /// <inheritdoc />
+        public void jmpd_a16_far_ind(SegmentRegister segment, Value address)
+        {
+            jmp_far_prepare(memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
             run_irqs();
         }
 
@@ -3340,7 +3365,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jbd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
@@ -4447,7 +4472,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void movsw_a32(SegmentRegister segment = null)
         {
-            throw new NotImplementedException();
+            memw_a32[es, edi] = memw_a32[segment ?? ds, esi];
+            edi += eflags.df ? -2 : 2;
+            esi += eflags.df ? -2 : 2;
         }
 
         /// <inheritdoc />

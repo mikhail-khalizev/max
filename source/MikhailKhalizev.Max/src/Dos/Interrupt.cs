@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Dos
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;
-            
+
             fileHandlers.Add(null); // in
             fileHandlers.Add(null); // out
             fileHandlers.Add(null); // err
@@ -130,9 +130,9 @@ namespace MikhailKhalizev.Max.Dos
                                     // out(0x3d4, 0x6a)
                                     // out(0x3d5, dl)
                                     // std::cerr << static_cast<uint>(dl) << std::endl;
-                                    
 
-                                    var curr_bank = ((Processor.x86.Core.Memory) Memory)
+
+                                    var curr_bank = ((Processor.x86.Core.Memory)Memory)
                                         .mem_phys_raw(0xa0000, 0x10000)
                                         .Slice(0, 0x10000);
 
@@ -217,8 +217,8 @@ namespace MikhailKhalizev.Max.Dos
                                         fileNum++;
                                         var pngOutput = RawProgramMain.Configuration.Dos.PngOutput;
                                         var filePath = Path.Combine(pngOutput, $"img-{fileNum:D4}.png");
-                                        
-                                        
+
+
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
                                         nimg.Save(filePath);
 
@@ -227,7 +227,7 @@ namespace MikhailKhalizev.Max.Dos
                                         //extra_log = (124 <= fileNum); /* Движение единиц. */
                                     }
 
-                                    
+
                                     var need_cpy = (curr_bank_num * 0x10000 < all_banks.Length);
 
                                     if (need_cpy)
@@ -616,14 +616,12 @@ namespace MikhailKhalizev.Max.Dos
                         var path = get_path();
                         Console.Error.WriteLine("\tDelete: " + path);
 
-                        File.Delete(path);
-
-                        var ok = 0;
-                        if (ok == 0)
+                        try
                         {
+                            File.Delete(path);
                             eflags.cf = false;
                         }
-                        else
+                        catch (Exception e)
                         {
                             eflags.cf = true;
                             ax = 2;
@@ -683,18 +681,18 @@ namespace MikhailKhalizev.Max.Dos
 
                         //try
                         //{
-                            cx = 0;
+                        cx = 0;
 
-                            if (Directory.Exists(path))
-                            {
-                                cx |= 16;
-                                eflags.cf = false;
-                            }
-                            else
-                            {
-                                ax = 2;
-                                eflags.cf = true;
-                            }
+                        if (Directory.Exists(path))
+                        {
+                            cx |= 16;
+                            eflags.cf = false;
+                        }
+                        else
+                        {
+                            ax = 2;
+                            eflags.cf = true;
+                        }
                         //}
                         //catch
                         //{
@@ -741,19 +739,20 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x5a:
-                {
-                    var path = Memory.ReadCString(ds[dx]);
+                    {
+                        var path = Memory.ReadCString(ds[dx]);
                         if (path != ".\\")
                             throw new NotImplementedException();
 
-                        var p2 = Path.GetTempPath();
+                        var tempFileName = Path.Combine(Path.GetTempPath(), $"max-{tmpNum++}.tmp");
 
-                        Console.Error.WriteLine("\tCreate temp: " + p2);
+                        Console.Error.WriteLine("\tCreate temp: " + tempFileName);
 
-                        var file = File.Open(path, FileMode.OpenOrCreate | FileMode.Truncate);
+                        var file = File.Open(tempFileName, FileMode.OpenOrCreate);
+                        file.SetLength(0);
                         fileHandlers.Add(file);
                         var fd = fileHandlers.Count - 1;
-                        
+
                         if (fd < 0 || 0xffff < fd)
                             throw new InvalidOperationException();
 
@@ -768,6 +767,8 @@ namespace MikhailKhalizev.Max.Dos
 
             syscall_iretww();
         }
+
+        private int tmpNum = 0;
 
         private void syscall_iretww()
         {
@@ -789,16 +790,16 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x4310:
-                {
-                    es.Selector = 0xc83f;
-                    bx = 0x10;
-
-                    if (xms_handler_added == false)
                     {
-                        RawProgramMain.add_internal_dyn_func(RawProgramMain.DosMemory.xms_handler, 16, es[bx]);
-                        xms_handler_added = true;
+                        es.Selector = 0xc83f;
+                        bx = 0x10;
+
+                        if (xms_handler_added == false)
+                        {
+                            RawProgramMain.add_internal_dyn_func(RawProgramMain.DosMemory.xms_handler, 16, es[bx]);
+                            xms_handler_added = true;
+                        }
                     }
-                }
                     break;
 
                 default:
@@ -885,7 +886,7 @@ namespace MikhailKhalizev.Max.Dos
             // RawProgramMain.Configuration.Max.InstalledPath;
 
             var path = Memory.ReadCString(ds[dx]);
-            
+
             if (path.StartsWith("C:\\"))
                 path = path.Substring(3);
 

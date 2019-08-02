@@ -291,6 +291,7 @@ void iret_(uint_<8> op_size);
         goto l_ ## to;                                  \
     } while (0)
 
+// +
 #define jmpd(to, off)                                   \
     do {                                                \
         eip = eip_next + (off);                         \
@@ -332,6 +333,7 @@ void iret_(uint_<8> op_size);
     if (cond)                    \
         jmpw(to, off)
 
+// +
 #define jmpd_if(cond, to, off)   \
     if (cond)                    \
         jmpd(to, off)
@@ -422,6 +424,7 @@ void iret_(uint_<8> op_size);
         return;                                                         \
     } while(0)
 
+// +
 #define jmpd_a16_far_ind(mem_seg, mem_off)                              \
     do {                                                                \
         jmp_far_prepare(                                                \
@@ -1521,6 +1524,7 @@ inline void idiv(uint_<32> s)
 void idiv(uint_<64> s);
 
 
+// +
 inline void div(uint_<8> s)
 {
     if (s == 0)
@@ -2075,6 +2079,7 @@ inline void movsw_a16()
     movsw_a16(ds);
 }
 
+// +
 inline void movsw_a32(seg_reg & seg)
 {
     memw_a32(es, edi) = memw_a32(seg, esi);
@@ -2082,6 +2087,7 @@ inline void movsw_a32(seg_reg & seg)
     esi += df ? -2 : 2;
 }
 
+// +
 inline void movsw_a32()
 {
     movsw_a32(ds);

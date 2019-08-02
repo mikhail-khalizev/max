@@ -1642,6 +1642,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        void jmpd_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         int jmpw_abs_switch(Value address);
 
         /// <summary>
@@ -1657,10 +1663,10 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         void jmpw_a16_far_ind(SegmentRegister segment, Value address);
 
         /// <summary>
-        /// Jump.
+        /// Call Procedure.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd_func(Address address, int offset);
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void jmpd_a16_far_ind(SegmentRegister segment, Value address);
 
 
         /// <summary>

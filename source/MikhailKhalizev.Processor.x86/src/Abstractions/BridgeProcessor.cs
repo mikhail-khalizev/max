@@ -1780,6 +1780,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jmpd_a16_far_ind(SegmentRegister segment, Value address)
+        {
+            Implementation.jmpd_a16_far_ind(segment, address);
+        }
+
+        /// <inheritdoc />
         public void jmpd_func(Address address, int offset)
         {
             Implementation.jmpd_func(address, offset);
