@@ -5939,15 +5939,17 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void sar(Value dst, int count)
+        public void sar(Value dst, Value count)
         {
+            var c = (int) count.UInt32;
+
             if (count == 1)
                 eflags.of = false;
 
             if (count != 0)
             {
-                eflags.cf = dst.IsBitSet(count - 1);
-                dst.Int64 = dst.Int64 >> count;
+                eflags.cf = dst.IsBitSet(c - 1);
+                dst.Int64 = dst.Int64 >> c;
                 set_sf_zf_pf(dst);
             }
         }
@@ -6015,6 +6017,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void seta(Value value)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void setae(Value value)
+        {
+            value.Int32 = eflags.cf ? 0 : 1;
         }
 
         /// <inheritdoc />

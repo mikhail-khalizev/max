@@ -4055,7 +4055,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void sar(Value dst, int count)
+        public void sar(Value dst, Value count)
         {
             Implementation.sar(dst, count);
         }
@@ -4106,6 +4106,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void seta(Value value)
         {
             Implementation.seta(value);
+        }
+
+        /// <inheritdoc />
+        public void setae(Value value)
+        {
+            Implementation.setae(value);
         }
 
         /// <inheritdoc />

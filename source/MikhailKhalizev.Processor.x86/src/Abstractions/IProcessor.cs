@@ -3940,7 +3940,7 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void sar(Value dst, int count);
+        void sar(Value dst, Value count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -3989,6 +3989,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
         void seta(Value value);
+
+        /// <summary>
+        /// Set Byte on Condition.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
+        void setae(Value value);
 
         /// <summary>
         /// Store Fence.

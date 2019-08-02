@@ -1692,6 +1692,7 @@ inline void setbe(uint_<8> & d)
         d = 0;
 }
 
+// + set ae
 inline void setnb(uint_<8> & d)
 {
     if (cf == false)
