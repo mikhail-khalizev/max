@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MikhailKhalizev.Processor.x86.Utils
 {
-    public class MySortedSet<T> : IEnumerable<T>
+    public class MySortedSet<T> : IReadOnlyCollection<T>
     {
         private readonly MyComparer _comparer;
         private readonly SortedSet<T> _set;

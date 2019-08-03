@@ -1974,6 +1974,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void calld_a32_far_ind(SegmentRegister segment, Value address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void calld_a16_far_ind(SegmentRegister segment, Value address)
         {
             var ret_addr = cs[eip];
@@ -2139,6 +2145,12 @@ namespace MikhailKhalizev.Processor.x86.Core
             cmp(memb_a16[ds, si], memb_a16[es, di]);
             di += eflags.df ? -1 : 1;
             si += eflags.df ? -1 : 1;
+        }
+
+        /// <inheritdoc />
+        public void cmpsb_a32()
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -2518,13 +2530,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fadd()
+        public void fadd(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void faddp()
+        public void faddp(int a, int b)
         {
             throw new NotImplementedException();
         }
@@ -2560,7 +2572,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fcom()
+        public void fcom(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2578,7 +2590,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fcomp()
+        public void fcomp(Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void fcomp(int a, int b)
         {
             throw new NotImplementedException();
         }
@@ -2602,25 +2620,25 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fdiv()
+        public void fdiv(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fdivp()
+        public void fdivp(int a, int b)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fdivr()
+        public void fdivr(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fdivrp()
+        public void fdivrp(int a, int b)
         {
             throw new NotImplementedException();
         }
@@ -2662,7 +2680,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fild()
+        public void fild(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2692,7 +2710,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fistp()
+        public void fistp(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2728,7 +2746,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fldcw()
+        public void fldcw(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2776,13 +2794,19 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fmul()
+        public void fmul(Value value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fmulp()
+        public void fmul(int a, int b)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void fmulp(int a, int b)
         {
             throw new NotImplementedException();
         }
@@ -2909,7 +2933,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fst()
+        public void fst(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2927,7 +2951,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fstp()
+        public void fstp(Value value)
         {
             throw new NotImplementedException();
         }
@@ -2939,13 +2963,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fsub()
+        public void fsub(int a, int b)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fsubp()
+        public void fsubp(int a, int b)
         {
             throw new NotImplementedException();
         }
@@ -3011,7 +3035,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fxch()
+        public void fxch(int a, int b)
         {
             throw new NotImplementedException();
         }
@@ -3113,6 +3137,12 @@ namespace MikhailKhalizev.Processor.x86.Core
                 return;
             }
 
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void imul(Value dst, Value src)
+        {
             throw new NotImplementedException();
         }
 
@@ -3304,6 +3334,18 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jmpd_abs(Value address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public int jmpd_abs_switch(Value address)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jmpd_far_abs(int segment, Value address)
         {
             jmpw_far_abs(segment, address);
@@ -3329,9 +3371,21 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jad(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jaw_func(Address address, int offset)
         {
             return jmpw_func_if(!eflags.cf && !eflags.zf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jad_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3341,9 +3395,21 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jaed(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jaew_func(Address address, int offset)
         {
             jmpw_func_if(eflags.cf == false, address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jaed_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3365,15 +3431,33 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jbd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jbew(Address address, int offset)
         {
             return jmpw_if(eflags.cf || eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
+        public bool jbed(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jbew_func(Address address, int offset)
         {
             jmpw_func_if(eflags.cf || eflags.zf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jbed_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3389,13 +3473,31 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jcxzd(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jcxzw_func(Address address, int offset)
         {
             jmpw_func_if(cx == 0, address, offset);
         }
 
         /// <inheritdoc />
+        public void jcxzd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jecxzw(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jecxzd_func(Address address, int offset)
         {
             throw new NotImplementedException();
         }
@@ -3431,9 +3533,27 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jged(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jlw(Address address, int offset)
         {
             return jmpw_if(eflags.sf != eflags.of, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jld(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void jld_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3533,9 +3653,21 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jnsd(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jnsw_func(Address address, int offset)
         {
             jmpw_func_if(!eflags.sf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jnsd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3557,6 +3689,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jnzd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jow(Address address, int offset)
         {
             throw new NotImplementedException();
@@ -3564,6 +3702,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         /// <inheritdoc />
         public bool jp(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jpd(Address address, int offset)
         {
             throw new NotImplementedException();
         }
@@ -3584,6 +3728,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jsw(Address address, int offset)
         {
             return jmpw_if(eflags.sf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jsd(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3608,6 +3758,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void jzw_func(Address address, int offset)
         {
             jmpw_func_if(eflags.zf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jzd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -4006,6 +4162,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void leaved()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void les(Value dst, SegmentRegister segment, Value offset)
         {
             var cache = offset.UInt32;
@@ -4020,7 +4182,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lfs()
+        public void lfs(Value dst, SegmentRegister segment, Value offset)
         {
             throw new NotImplementedException();
         }
@@ -4046,11 +4208,11 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lgs()
+        public void lgs(Value dst, SegmentRegister segment, Value offset)
         {
             throw new NotImplementedException();
         }
-
+        
         /// <inheritdoc />
         public void lidtw_a16(SegmentRegister segment, Value address)
         {
@@ -4110,6 +4272,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void lodsb_a32()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void lodsd_a16()
         {
             throw new NotImplementedException();
@@ -4147,6 +4315,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool loopd_a32(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool loopew_a16(Address address, int offset)
         {
             throw new NotImplementedException();
@@ -4166,6 +4340,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         /// <inheritdoc />
         public bool loopw_a16_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool loopd_a32_func(Address address, int offset)
         {
             throw new NotImplementedException();
         }
@@ -4694,6 +4874,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void outw(Value port, Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void outs()
         {
             throw new NotImplementedException();
@@ -4701,6 +4887,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         /// <inheritdoc />
         public void outsb_a16(SegmentRegister segment = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void outsb_a32(SegmentRegister segment = null)
         {
             throw new NotImplementedException();
         }
@@ -5833,6 +6025,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void repe_a32(Action action)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void repne_a32(Action action)
         {
             for (eflags.zf = false; ecx != 0 && !eflags.zf; ecx--)
@@ -5863,7 +6061,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void retd()
+        public void retd(int size = 0)
         {
             throw new NotImplementedException();
         }
@@ -6047,6 +6245,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void scasb_a32()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void scasd_a16()
         {
             cmp(eax, memd_a16[es, di]);
@@ -6074,9 +6278,45 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void setbe(Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void setg(Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void setge(Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void setae(Value value)
         {
             value.Int32 = eflags.cf ? 0 : 1;
+        }
+
+        /// <inheritdoc />
+        public void setle(Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void setz(Value value)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void setnz(Value value)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

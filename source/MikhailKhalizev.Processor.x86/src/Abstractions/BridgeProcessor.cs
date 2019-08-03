@@ -658,6 +658,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void calld_a32_far_ind(SegmentRegister segment, Value address)
+        {
+            Implementation.calld_a32_far_ind(segment, address);
+        }
+
+        /// <inheritdoc />
         public void calld_a16_far_ind(SegmentRegister segment, Value address)
         {
             Implementation.calld_a16_far_ind(segment, address);
@@ -769,6 +775,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void cmpsb_a16()
         {
             Implementation.cmpsb_a16();
+        }
+
+        /// <inheritdoc />
+        public void cmpsb_a32()
+        {
+            Implementation.cmpsb_a32();
         }
 
         /// <inheritdoc />
@@ -1084,15 +1096,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fadd()
+        public void fadd(Value value)
         {
-            Implementation.fadd();
+            Implementation.fadd(value);
         }
 
         /// <inheritdoc />
-        public void faddp()
+        public void faddp(int a, int b)
         {
-            Implementation.faddp();
+            Implementation.faddp(a, b);
         }
 
         /// <inheritdoc />
@@ -1126,9 +1138,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fcom()
+        public void fcom(Value value)
         {
-            Implementation.fcom();
+            Implementation.fcom(value);
         }
 
         /// <inheritdoc />
@@ -1144,9 +1156,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fcomp()
+        public void fcomp(Value value)
         {
-            Implementation.fcomp();
+            Implementation.fcomp(value);
+        }
+
+        /// <inheritdoc />
+        public void fcomp(int a, int b)
+        {
+            Implementation.fcomp(a, b);
         }
 
         /// <inheritdoc />
@@ -1168,27 +1186,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fdiv()
+        public void fdiv(Value value)
         {
-            Implementation.fdiv();
+            Implementation.fdiv(value);
         }
 
         /// <inheritdoc />
-        public void fdivp()
+        public void fdivp(int a, int b)
         {
-            Implementation.fdivp();
+            Implementation.fdivp(a, b);
         }
 
         /// <inheritdoc />
-        public void fdivr()
+        public void fdivr(Value value)
         {
-            Implementation.fdivr();
+            Implementation.fdivr(value);
         }
 
         /// <inheritdoc />
-        public void fdivrp()
+        public void fdivrp(int a, int b)
         {
-            Implementation.fdivrp();
+            Implementation.fdivrp(a, b);
         }
 
         /// <inheritdoc />
@@ -1228,9 +1246,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fild()
+        public void fild(Value value)
         {
-            Implementation.fild();
+            Implementation.fild(value);
         }
 
         /// <inheritdoc />
@@ -1258,9 +1276,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fistp()
+        public void fistp(Value value)
         {
-            Implementation.fistp();
+            Implementation.fistp(value);
         }
 
         /// <inheritdoc />
@@ -1294,9 +1312,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fldcw()
+        public void fldcw(Value value)
         {
-            Implementation.fldcw();
+            Implementation.fldcw(value);
         }
 
         /// <inheritdoc />
@@ -1342,15 +1360,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fmul()
+        public void fmul(Value value)
         {
-            Implementation.fmul();
+            Implementation.fmul(value);
         }
 
         /// <inheritdoc />
-        public void fmulp()
+        public void fmul(int a, int b)
         {
-            Implementation.fmulp();
+            Implementation.fmul(a, b);
+        }
+
+        /// <inheritdoc />
+        public void fmulp(int a, int b)
+        {
+            Implementation.fmulp(a, b);
         }
 
         /// <inheritdoc />
@@ -1468,9 +1492,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fst()
+        public void fst(Value value)
         {
-            Implementation.fst();
+            Implementation.fst(value);
         }
 
         /// <inheritdoc />
@@ -1486,9 +1510,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fstp()
+        public void fstp(Value value)
         {
-            Implementation.fstp();
+            Implementation.fstp(value);
         }
 
         /// <inheritdoc />
@@ -1498,15 +1522,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fsub()
+        public void fsub(int a, int b)
         {
-            Implementation.fsub();
+            Implementation.fsub(a, b);
         }
 
         /// <inheritdoc />
-        public void fsubp()
+        public void fsubp(int a, int b)
         {
-            Implementation.fsubp();
+            Implementation.fsubp(a, b);
         }
 
         /// <inheritdoc />
@@ -1570,9 +1594,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void fxch()
+        public void fxch(int a, int b)
         {
-            Implementation.fxch();
+            Implementation.fxch(a, b);
         }
 
         /// <inheritdoc />
@@ -1645,6 +1669,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void imul(Value value)
         {
             Implementation.imul(value);
+        }
+
+        /// <inheritdoc />
+        public void imul(Value dst, Value src)
+        {
+            Implementation.imul(dst, src);
         }
 
         /// <inheritdoc />
@@ -1762,12 +1792,6 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpd(Address address, int offset)
-        {
-            Implementation.jmpd(address, offset);
-        }
-
-        /// <inheritdoc />
         public void jmpw_func(Address address, int offset)
         {
             Implementation.jmpw_func(address, offset);
@@ -1798,6 +1822,30 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jmpd(Address address, int offset)
+        {
+            Implementation.jmpd(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jmpd_func(Address address, int offset)
+        {
+            Implementation.jmpd_func(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jmpd_abs(Value address)
+        {
+            Implementation.jmpd_abs(address);
+        }
+
+        /// <inheritdoc />
+        public int jmpd_abs_switch(Value address)
+        {
+            return Implementation.jmpd_abs_switch(address);
+        }
+
+        /// <inheritdoc />
         public void jmpd_far_abs(int segment, Value address)
         {
             Implementation.jmpd_far_abs(segment, address);
@@ -1810,15 +1858,15 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpd_func(Address address, int offset)
-        {
-            Implementation.jmpd_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jaw(Address address, int offset)
         {
             return Implementation.jaw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jad(Address address, int offset)
+        {
+            return Implementation.jad(address, offset);
         }
 
         /// <inheritdoc />
@@ -1828,15 +1876,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jad_func(Address address, int offset)
+        {
+            return Implementation.jad_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jaew(Address address, int offset)
         {
             return Implementation.jaew(address, offset);
         }
 
         /// <inheritdoc />
+        public bool jaed(Address address, int offset)
+        {
+            return Implementation.jaed(address, offset);
+        }
+
+        /// <inheritdoc />
         public void jaew_func(Address address, int offset)
         {
             Implementation.jaew_func(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jaed_func(Address address, int offset)
+        {
+            Implementation.jaed_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -1858,15 +1924,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jbd_func(Address address, int offset)
+        {
+            Implementation.jbd_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jbew(Address address, int offset)
         {
             return Implementation.jbew(address, offset);
         }
 
         /// <inheritdoc />
+        public bool jbed(Address address, int offset)
+        {
+            return Implementation.jbed(address, offset);
+        }
+
+        /// <inheritdoc />
         public void jbew_func(Address address, int offset)
         {
             Implementation.jbew_func(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jbed_func(Address address, int offset)
+        {
+            Implementation.jbed_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -1882,15 +1966,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jcxzd(Address address, int offset)
+        {
+            return Implementation.jcxzd(address, offset);
+        }
+
+        /// <inheritdoc />
         public void jcxzw_func(Address address, int offset)
         {
             Implementation.jcxzw_func(address, offset);
         }
 
         /// <inheritdoc />
+        public void jcxzd_func(Address address, int offset)
+        {
+            Implementation.jcxzd_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jecxzw(Address address, int offset)
         {
             return Implementation.jecxzw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jecxzd_func(Address address, int offset)
+        {
+            Implementation.jecxzd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -1924,9 +2026,27 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jged(Address address, int offset)
+        {
+            return Implementation.jged(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jlw(Address address, int offset)
         {
             return Implementation.jlw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jld(Address address, int offset)
+        {
+            return Implementation.jld(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jld_func(Address address, int offset)
+        {
+            Implementation.jld_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2026,9 +2146,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jnsd(Address address, int offset)
+        {
+            return Implementation.jnsd(address, offset);
+        }
+
+        /// <inheritdoc />
         public void jnsw_func(Address address, int offset)
         {
             Implementation.jnsw_func(address, offset);
+        }
+
+        /// <inheritdoc />
+        public void jnsd_func(Address address, int offset)
+        {
+            Implementation.jnsd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2050,6 +2182,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void jnzd_func(Address address, int offset)
+        {
+            Implementation.jnzd_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jow(Address address, int offset)
         {
             return Implementation.jow(address, offset);
@@ -2059,6 +2197,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool jp(Address address, int offset)
         {
             return Implementation.jp(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jpd(Address address, int offset)
+        {
+            return Implementation.jpd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2077,6 +2221,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool jsw(Address address, int offset)
         {
             return Implementation.jsw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jsd(Address address, int offset)
+        {
+            return Implementation.jsd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2103,6 +2253,11 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             Implementation.jzw_func(address, offset);
         }
 
+        /// <inheritdoc />
+        public void jzd_func(Address address, int offset)
+        {
+            Implementation.jzd_func(address, offset);
+        }
 
         /// <inheritdoc />
         public void kaddb()
@@ -2453,6 +2608,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void leaved()
+        {
+            Implementation.leaved();
+        }
+
+        /// <inheritdoc />
         public void les(Value dst, SegmentRegister segment, Value offset)
         {
             Implementation.les(dst, segment, offset);
@@ -2465,9 +2626,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void lfs()
+        public void lfs(Value dst, SegmentRegister segment, Value offset)
         {
-            Implementation.lfs();
+            Implementation.lfs(dst, segment, offset);
         }
 
         /// <inheritdoc />
@@ -2483,9 +2644,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void lgs()
+        public void lgs(Value dst, SegmentRegister segment, Value offset)
         {
-            Implementation.lgs();
+            Implementation.lgs(dst, segment, offset);
         }
 
         /// <inheritdoc />
@@ -2525,6 +2686,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void lodsb_a32()
+        {
+            Implementation.lodsb_a32();
+        }
+
+        /// <inheritdoc />
         public void lodsd_a16()
         {
             Implementation.lodsd_a16();
@@ -2555,6 +2722,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool loopd_a32(Address address, int offset)
+        {
+            return Implementation.loopd_a32(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool loopew_a16(Address address, int offset)
         {
             return Implementation.loopew_a16(address, offset);
@@ -2570,6 +2743,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool loopw_a16_func(Address address, int offset)
         {
             return Implementation.loopw_a16_func(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool loopd_a32_func(Address address, int offset)
+        {
+            return Implementation.loopd_a32_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2837,6 +3016,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void movsb_a16(SegmentRegister segment = null)
+        {
+            Implementation.movsb_a16(segment);
+        }
+
+        /// <inheritdoc />
         public void movsb_a32(SegmentRegister segment = null)
         {
             Implementation.movsb_a32(segment);
@@ -2852,12 +3037,6 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void movsw_a32(SegmentRegister segment = null)
         {
             Implementation.movsw_a32(segment);
-        }
-
-        /// <inheritdoc />
-        public void movsb_a16(SegmentRegister segment = null)
-        {
-            Implementation.movsb_a16(segment);
         }
 
         /// <inheritdoc />
@@ -3029,6 +3208,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void outw(Value port, Value value)
+        {
+            Implementation.outw(port, value);
+        }
+
+        /// <inheritdoc />
         public void outs()
         {
             Implementation.outs();
@@ -3038,6 +3223,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public void outsb_a16(SegmentRegister segment = null)
         {
             Implementation.outsb_a16(segment);
+        }
+
+        /// <inheritdoc />
+        public void outsb_a32(SegmentRegister segment = null)
+        {
+            Implementation.outsb_a32(segment);
         }
 
         /// <inheritdoc />
@@ -3983,18 +4174,6 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void rep_a32(Action action)
-        {
-            Implementation.rep_a32(action);
-        }
-
-        /// <inheritdoc />
-        public void repne_a32(Action action)
-        {
-            Implementation.repne_a32(action);
-        }
-
-        /// <inheritdoc />
         public void repe_a16(Action action)
         {
             Implementation.repe_a16(action);
@@ -4007,15 +4186,33 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void rep_a32(Action action)
+        {
+            Implementation.rep_a32(action);
+        }
+
+        /// <inheritdoc />
+        public void repe_a32(Action action)
+        {
+            Implementation.repe_a32(action);
+        }
+
+        /// <inheritdoc />
+        public void repne_a32(Action action)
+        {
+            Implementation.repne_a32(action);
+        }
+
+        /// <inheritdoc />
         public void retw(int allocSize = 0)
         {
             Implementation.retw(allocSize);
         }
 
         /// <inheritdoc />
-        public void retd()
+        public void retd(int size = 0)
         {
-            Implementation.retd();
+            Implementation.retd(size);
         }
 
         /// <inheritdoc />
@@ -4133,6 +4330,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void scasb_a32()
+        {
+            Implementation.scasb_a32();
+        }
+
+        /// <inheritdoc />
         public void scasd_a16()
         {
             Implementation.scasd_a16();
@@ -4157,9 +4360,45 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void setbe(Value value)
+        {
+            Implementation.setbe(value);
+        }
+
+        /// <inheritdoc />
+        public void setg(Value value)
+        {
+            Implementation.setg(value);
+        }
+
+        /// <inheritdoc />
+        public void setge(Value value)
+        {
+            Implementation.setge(value);
+        }
+
+        /// <inheritdoc />
         public void setae(Value value)
         {
             Implementation.setae(value);
+        }
+
+        /// <inheritdoc />
+        public void setle(Value value)
+        {
+            Implementation.setle(value);
+        }
+
+        /// <inheritdoc />
+        public void setz(Value value)
+        {
+            Implementation.setz(value);
+        }
+
+        /// <inheritdoc />
+        public void setnz(Value value)
+        {
+            Implementation.setnz(value);
         }
 
         /// <inheritdoc />
