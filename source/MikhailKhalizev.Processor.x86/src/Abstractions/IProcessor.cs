@@ -3874,13 +3874,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rol(Value dst, int count);
+        void rol(Value dst, Value count);
 
         /// <summary>
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void ror(Value dst, int count);
+        void ror(Value dst, Value count);
 
         /// <summary>
         /// Rotate Right Logical Without Affecting Flags.

@@ -5841,8 +5841,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void rol(Value dst, int count)
+        public void rol(Value dst, Value c)
         {
+            var count = (int)c.UInt32;
+
             var countMask = dst.Bits == 64 ? 0x3F : 0x1F;
             var tempCount = (count & countMask) % dst.Bits;
 
@@ -5863,8 +5865,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void ror(Value dst, int count)
+        public void ror(Value dst, Value c)
         {
+            var count = (int)c.UInt32;
+
             var countMask = dst.Bits == 64 ? 0x3F : 0x1F;
             var tempCount = (count & countMask) % dst.Bits;
 

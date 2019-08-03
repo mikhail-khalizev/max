@@ -36,10 +36,13 @@ namespace MikhailKhalizev.Processor.x86.Utils
         
         public bool Add(T item) => _set.Add(item);
 
+        public bool TryGetValue(T equalValue, out T actualValue) => _set.TryGetValue(equalValue, out actualValue);
+
         public bool Remove(T item) => _set.Remove(item);
 
         public int Count => _set.Count;
 
+        public bool Contains(T item) => _set.Contains(item);
 
         public T FirstGreaterOrDefault(T value)
         {
@@ -106,6 +109,28 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public SortedSet<T> GetViewBetween(T lowerValue, T upperValue) => _set.GetViewBetween(lowerValue, upperValue);
 
+        public T[] ToArray()
+        {
+            var arr = new T[_set.Count];
+            var i = 0;
+            foreach (var x in _set)
+                arr[i++] = x;
+            return arr;
+        }
+        
+        public List<T> ToList()
+        {
+            var list = new List<T>(_set.Count);
+            foreach (var x in _set)
+                list.Add(x);
+            return list;
+        }
+
+        /// <inheritdoc />
+        public IEnumerator<T> GetEnumerator() => _set.GetEnumerator();
+
+        /// <inheritdoc />
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_set).GetEnumerator();
 
         private class MyComparer : IComparer<T>
         {
@@ -171,11 +196,5 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 NearestFollowingSet = false;
             }
         }
-
-        /// <inheritdoc />
-        public IEnumerator<T> GetEnumerator() => _set.GetEnumerator();
-
-        /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _set).GetEnumerator();
     }
 }

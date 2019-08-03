@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     public class DecodedCode
     {
         // NOTE. Инструкции могут пересекаться.
-        private readonly SortedSet<(Address Address, Instruction Instruction)> _instructions 
-            = new SortedSet<(Address Address, Instruction Instruction)>(new CustomComparer<(Address Address, Instruction Instruction)>((a, b) => a.Address.CompareTo(b.Address)));
+        private readonly MySortedSet<(Address Address, Instruction Instruction)> _instructions 
+            = new MySortedSet<(Address Address, Instruction Instruction)>(new CustomComparer<(Address Address, Instruction Instruction)>((a, b) => a.Address.CompareTo(b.Address)));
         public UsedSpace<Address> Area { get; } = new UsedSpace<Address>();
 
         public Instruction GetInstruction(Address address)
@@ -25,8 +25,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// <returns></returns>
         public Instruction GetNextInstruction(Instruction instruction)
         {
-            return _instructions.GetViewBetween((instruction.End, null), (Address.MaxValue, null))
-                .FirstOrDefault().Instruction;
+            return _instructions.FirstNotLessOrDefault((instruction.End, null)).Instruction;
         }
 
         public bool Contains(Address address)

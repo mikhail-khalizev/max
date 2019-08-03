@@ -3989,13 +3989,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
-        public void rol(Value dst, int count)
+        public void rol(Value dst, Value count)
         {
             Implementation.rol(dst, count);
         }
 
         /// <inheritdoc />
-        public void ror(Value dst, int count)
+        public void ror(Value dst, Value count)
         {
             Implementation.ror(dst, count);
         }

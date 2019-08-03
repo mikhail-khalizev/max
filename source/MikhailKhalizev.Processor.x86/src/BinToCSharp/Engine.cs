@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// Если <see cref="ForceEndFuncs"/> делит инструкцию пополам,
         /// то эта инструкция относится к методу, расположенному с меньшим адресом.
         /// </remarks>
-        private SortedSet<Address> force_end_funcs_ { get; } = new SortedSet<Address>();
+        private MySortedSet<Address> force_end_funcs_ { get; } = new MySortedSet<Address>();
 
         public void AddForceEndFuncs(Address address)
         {
@@ -99,7 +99,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// <summary>
         /// Содержит информацию об определённых методах.
         /// </summary>
-        public SortedSet<DetectedMethod> NewDetectedMethods { get; } = new SortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
+        public MySortedSet<DetectedMethod> NewDetectedMethods { get; } = new MySortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
 
         public bool AddToNewDetectedMethods(Address address)
         {
@@ -240,10 +240,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             
             // Функция, начинающаяся с точного совпадения force_end_funcs_ может начать декодироваться.
-            var nearestForceEnd = force_end_funcs_.GetViewBetween(address, Address.MaxValue)
-                .Where(x => x != address)
-                .DefaultIfEmpty(Address.MaxValue)
-                .First();
+            var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(address);
+            if (nearestForceEnd == default)
+                nearestForceEnd = Address.MaxValue;
 
 
             while (true)
@@ -313,16 +312,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var success_count = 0;
                 var toRemove = new List<DetectedMethod>();
 
-                foreach (var detectedMethod in NewDetectedMethods.ToList())
+                foreach (var detectedMethod in NewDetectedMethods.ToArray())
                 {
                     var addr_func = detectedMethod.Begin;
 
                     // Следует ли вычислять конец этой функции или он уже вычислен.
                     if (detectedMethod.End != 0)
                     {
-                        var next = NewDetectedMethods.GetViewBetween(
-                            new DetectedMethod(addr_func + 1),
-                            new DetectedMethod(Address.MaxValue)).FirstOrDefault();
+                        var next = NewDetectedMethods.FirstGreaterOrDefault(new DetectedMethod(addr_func));
 
                         if (next != null && detectedMethod.End <= next.Begin)
                         {
@@ -349,10 +346,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // --- Посчитаем min_end - адрес конца функции, дальше которого функция точно уже не может продолжаться. ---
 
-                    var nearestForceEnd = force_end_funcs_.GetViewBetween(addr_func, Address.MaxValue)
-                        .Where(x => x != addr_func)
-                        .DefaultIfEmpty(Address.MaxValue)
-                        .First();
+                    var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(addr_func);
+                    if (nearestForceEnd == default)
+                        nearestForceEnd = Address.MaxValue;
 
                     var min_end = nearestForceEnd;
 
@@ -466,6 +462,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public void Save()
         {
             var path = Configuration.CodeOutput;
+            Directory.CreateDirectory(path);
 
             layout_funcs();
 
@@ -571,7 +568,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine($"    public partial class {Configuration.ClassName}");
             output.AppendLine("    {");
             output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
-            output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_" + fileNum : "")}()");
+            output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_v" + fileNum : "")}()");
             output.AppendLine("        {");
             
             bool skip = false; // Если нашли недостижимый код устанавливаем в true.

@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public static readonly IComparer<T> Comparer = Comparer<T>.Default;
         public static readonly IEqualityComparer<T> EqualityComparer = EqualityComparer<T>.Default;
 
-        private readonly SortedSet<Interval<T>> _spaces = new SortedSet<Interval<T>>(Interval<T>.BeginComparer);
+        private readonly MySortedSet<Interval<T>> _spaces = new MySortedSet<Interval<T>>(Interval<T>.BeginComparer);
 
         static UsedSpace()
         {
@@ -87,21 +87,17 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 throw new InvalidOperationException("Попытка добавить промежуток отрицательной длины.");
 
 
-            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(begin, default));
-            if (view.Count != 0)
+            var intervalBefore = _spaces.FirstNotGreaterOrDefault(Interval.From(begin, default));
+            if (intervalBefore != default)
             {
-                var intervalBefore = view.Reverse().First();
-
                 if (Comparer.Compare(begin, intervalBefore.End) <= 0 || EqualityComparer.Equals(intervalBefore.End, MinValue))
                     return SetEnd(intervalBefore, end);
             }
 
 
-            view = _spaces.GetViewBetween(Interval.From(begin, default), Interval.From(MaxValue, default));
-            if (view.Count != 0)
+            var intervalToCombine = _spaces.FirstNotLessOrDefault(Interval.From(begin, default));
+            if (intervalToCombine != default)
             {
-                var intervalToCombine = view.First();
-
                 if (Comparer.Compare(intervalToCombine.Begin, end) <= 0 || EqualityComparer.Equals(end, MinValue))
                 {
                     var newInterval = Interval.From(begin, intervalToCombine.End);
@@ -113,8 +109,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
 
             var interval = Interval.From(begin, end);
-            var ret = _spaces.Add(interval);
-            if (ret == false)
+            if (!_spaces.Add(interval))
                 throw new InvalidOperationException("Элемент уже существует, хотя не должен.");
 
             return interval;
@@ -155,11 +150,9 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public Interval<T> Find(T val, bool withRightBound)
         {
-            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(val, default));
-            if (view.Count == 0)
+            var interval = _spaces.FirstNotGreaterOrDefault(Interval.From(val, default));
+            if (interval == default)
                 return Interval<T>.Empty;
-
-            var interval = view.Reverse().First();
 
             if (EqualityComparer.Equals(interval.End, MinValue))
                 return interval;
@@ -185,12 +178,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public Interval<T> GetIntervalBefore(T begin)
         {
-            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(begin, default));
-
-            return view.Reverse()
-                .Where(x => Comparer.Compare(x.Begin, begin) < 0)
-                .DefaultIfEmpty(Interval<T>.Empty)
-                .First();
+            return _spaces.FirstLessOrDefault(Interval.From(begin, default));
         }
 
         /// <summary>
@@ -198,12 +186,10 @@ namespace MikhailKhalizev.Processor.x86.Utils
         /// </summary>
         public Interval<T> LowerBound(T value, bool withRightBound)
         {
-            var view = _spaces.GetViewBetween(Interval.From(MinValue, default), Interval.From(value, default));
+            var interval = _spaces.FirstNotGreaterOrDefault(Interval.From(value, default));
             
-            if (view.Count != 0)
+            if (interval != default)
             {
-                var interval = view.Reverse().First();
-
                 if (EqualityComparer.Equals(interval.End, MinValue))
                     return interval;
 
@@ -219,7 +205,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 }
             }
 
-            return _spaces.GetViewBetween(Interval.From(value, default), Interval.From(MaxValue, default)).FirstOrDefault();
+            return _spaces.FirstNotLessOrDefault(Interval.From(value, default));
         }
 
         public string ToSpacesString()
