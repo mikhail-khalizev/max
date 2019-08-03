@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public IMemory Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
-        
+
         public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
         public DecodedCode code { get; } = new DecodedCode();
 
@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         // Переходы на известные адреса.
         public SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
-        
+
         private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             CsBase = csBase;
             DsBase = dsBase;
             MethodsInfo = methodsInfo ?? MethodsInfo.Load(configuration);
-            
+
             if (csBase != 0)
                 SuppressDecode.Add(0, csBase);
 
@@ -217,7 +217,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var lowerBound = SuppressDecode.LowerBound(address, false);
             var nearestSuppressDecode = lowerBound.IsEmpty ? Address.MaxValue : lowerBound.Begin;
-            
+
             if (nearestSuppressDecode <= address)
                 return;
 
@@ -238,7 +238,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             u.inp_buf_index = (int)address;
 
-            
+
             // Функция, начинающаяся с точного совпадения force_end_funcs_ может начать декодироваться.
             var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(address);
             if (nearestForceEnd == default)
@@ -270,7 +270,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 if (cmd.IsJmpOrRet)
                     break; // Потенциальный конец функции.
-                
+
                 if (code.Contains(cmd.End))
                     break; // Следующая часть кода уже декодирована.
             }
@@ -280,7 +280,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             _addCStringToCommentPlugin.StringArea = Interval.From(begin, end);
         }
-        
+
         public void add_aligment_as_instructions()
         {
             foreach (var a in Aligment)
@@ -306,7 +306,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public void layout_funcs()
         {
             add_aligment_as_instructions();
-            
+
             while (true)
             {
                 var success_count = 0;
@@ -338,7 +338,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     }
 
                     // --- Вычисляем... ---
-                    
+
                     var first_cmd = code.GetInstruction(addr_func);
 
                     if (first_cmd == null)
@@ -437,7 +437,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     detectedMethod.End = min_end;
                     detectedMethod.RawBytes = Memory.ReadAll(detectedMethod.Begin, detectedMethod.End - detectedMethod.Begin);
                     detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
-                    
+
                     if (detectedMethod.MethodInfo?.Jumps != null)
                     {
                         var interval = Interval.From(detectedMethod.Begin, detectedMethod.End);
@@ -470,7 +470,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             {
                 if (detectedMethod.MethodInfo != null)
                     continue;
-                
+
                 var mi = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
                 if (mi == null)
                 {
@@ -489,57 +489,67 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             MethodsInfo.Save();
 
+            var uniqueDetectedMethodsByAddress = NewDetectedMethods
+                .ToLookup(x => x.MethodInfo)
+                .Select(y => y.OrderBy(x => x.MethodInfo.Addresses.IndexOf(x.Begin)).First())
+                .ToLookup(x => x.MethodInfo.Address);
+
             Parallel.ForEach(
-                NewDetectedMethods,
-                detectedMethod =>
+                uniqueDetectedMethodsByAddress,
+                detectedMethodsWithSameAddress =>
                 {
-                    var methodBegin = detectedMethod.MethodInfo.Address;
-                    var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
-
-                    if (methodBegin == methodEnd)
-                        return; // Skip empty method.
-
-
-                    // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
-                    if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
+                    foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Guid))
                     {
-                        Console.WriteLine(
-                            $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
-                        return;
+                        var methodBegin = detectedMethod.MethodInfo.Address;
+                        var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
+
+                        if (methodBegin == methodEnd)
+                            return; // Skip empty method.
+
+
+                        // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
+                        if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
+                        {
+                            Console.WriteLine(
+                                $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
+                            return;
+                        }
+
+
+                        Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
+
+
+                        var baseFileName = "z-" + methodBegin.ToString(
+                            o => o
+                                .RemoveHexPrefix()
+                                .SetTrimZero(false)
+                                .SetGroupSize(4)
+                                .SetGroupSeparator("-"));
+
+                        var ns = AddressNameConverter.GetNamespace(methodBegin);
+                        if (ns != null)
+                            baseFileName += $"-{ns}";
+
+                        var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
+                        if (kd != null)
+                            baseFileName += $"-{kd}";
+
+                        var filePath = "";
+
+                        var num = 1;
+                        while (true)
+                        {
+                            filePath = Path.Combine(path, baseFileName + (1 < num ? $".{num}" : "") + ".cs");
+                            if (!File.Exists(filePath))
+                                break;
+                            num++;
+                        }
+
+                        var output = new StringBuilder();
+                        WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
+
+                        File.WriteAllText(filePath, output.ToString());
                     }
-
-
-                    Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
-
-                    
-                    var filePath = path;
-
-                    filePath += "/z-" + methodBegin.ToString(o => o
-                        .RemoveHexPrefix()
-                        .SetTrimZero(false)
-                        .SetGroupSize(4)
-                        .SetGroupSeparator("-"));
-
-                    var ns = AddressNameConverter.GetNamespace(methodBegin);
-                    if (ns != null)
-                        filePath += $"-{ns}";
-
-                    var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
-                    if (kd != null)
-                        filePath += $"-{kd}";
-
-                    var filePathExt = filePath + ".cs";
-
-                    var num = 1 + (already_decoded_funcs_.GetValues(methodBegin, false)?.Count ?? 0);
-                    if (1 < num)
-                        filePathExt = filePath + $".{num}.cs";
-
-
-                    var output = new StringBuilder();
-                    WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
-                    
-
-                    File.WriteAllText(filePathExt, output.ToString());
                 });
         }
 
@@ -555,11 +565,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             AddressNameConverter.KnownDefinitions.TryGetValue(methodBegin, out var methodName);
             if (methodName == null)
                 methodName = $"Method_{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4))}";
-            
+
             var ns = AddressNameConverter.GetNamespace(methodBegin);
             if (ns != null)
                 ns = $"/* {ns} */ ";
-            
+
             output.AppendLine("using System;");
             output.AppendLine("using MikhailKhalizev.Processor.x86.BinToCSharp;");
             output.AppendLine("");
@@ -570,7 +580,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
             output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_v" + fileNum : "")}()");
             output.AppendLine("        {");
-            
+
             bool skip = false; // Если нашли недостижимый код устанавливаем в true.
             bool last_instr_jmp_or_ret = false;
             var last_instr_end = first_cmd.Begin;
@@ -676,7 +686,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             foreach (var s in cmd.Comments)
                 os.Append($" /* {s} */");
-            
+
             foreach (var s in comments_in_current_func)
                 os.Append($" /* {s} */");
 

@@ -1241,6 +1241,9 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html</remarks>
         void fnsavew_a16(SegmentRegister segment, Value address);
 
+        // Obsoleted instruction.
+        void fnsetpm();
+
         /// <summary>
         /// Store x87 FPU Control Word.
         /// </summary>

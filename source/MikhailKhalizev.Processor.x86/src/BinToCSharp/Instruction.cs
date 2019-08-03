@@ -114,11 +114,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 Comments.Add(str);
             }
             catch { }
-
-
-            // Obsoleted instruction.
-            if (Mnemonic == ud_mnemonic_code.UD_Ifnsetpm)
-                Mnemonic = ud_mnemonic_code.UD_Iinvalid;
         }
         
         public ud_type GetEffectiveSegmentOfOperand(ud_operand op)
@@ -552,6 +547,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 {ud_mnemonic_code.UD_Icmpsd, InstrFlags.UseAdrSizeInside},
 
                 {ud_mnemonic_code.UD_Ifninit, InstrFlags.None},
+                {ud_mnemonic_code.UD_Ifnsetpm, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ifnstsw, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ifnstcw, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ifnsave, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},

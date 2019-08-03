@@ -1366,6 +1366,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void fnsetpm()
+        {
+            Implementation.fnsetpm();
+        }
+
+        /// <inheritdoc />
         public void fnstcw(Value value)
         {
             Implementation.fnstcw(value);

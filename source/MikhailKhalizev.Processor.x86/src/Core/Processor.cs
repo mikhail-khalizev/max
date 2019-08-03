@@ -2807,6 +2807,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void fnsetpm()
+        {
+            // Obsoleted instruction. Do nothing.
+        }
+
+        /// <inheritdoc />
         public void fnstcw(Value value)
         {
             value.UInt16 = FPUControlWord;
