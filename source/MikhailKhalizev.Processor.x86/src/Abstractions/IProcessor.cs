@@ -507,7 +507,19 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void calld(Address address, int offset);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void callw_abs(Value address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void calld_abs(Value address);
 
         /// <summary>
         /// Call Procedure.
@@ -1779,6 +1791,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jgd(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jgew(Address address, int offset);
 
         /// <summary>
@@ -1792,6 +1810,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jlew(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jled(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1893,6 +1917,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jnzd(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         void jnzw_func(Address address, int offset);
 
         /// <summary>
@@ -1936,6 +1966,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jzw(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jzd(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.

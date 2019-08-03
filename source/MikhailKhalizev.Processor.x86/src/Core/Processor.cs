@@ -1929,6 +1929,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void calld(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void callw_abs(Value address)
         {
             pushw(eip);
@@ -1941,6 +1947,12 @@ namespace MikhailKhalizev.Processor.x86.Core
             run_irqs();
             SaveJumpInfo();
             correct_function_position(ret_addr);
+        }
+
+        /// <inheritdoc />
+        public void calld_abs(Value address)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3407,6 +3419,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jgd(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jgew(Address address, int offset)
         {
             return jmpw_if(eflags.sf == eflags.of, address, offset);
@@ -3422,6 +3440,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jlew(Address address, int offset)
         {
             return jmpw_if(eflags.zf || eflags.sf != eflags.of, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jled(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3521,6 +3545,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jnzd(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void jnzw_func(Address address, int offset)
         {
             jmpw_func_if(!eflags.zf, address, offset);
@@ -3566,6 +3596,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jzw(Address address, int offset)
         {
             return jmpw_if(eflags.zf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jzd(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

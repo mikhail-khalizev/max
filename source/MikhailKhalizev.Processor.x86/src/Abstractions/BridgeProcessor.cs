@@ -628,9 +628,21 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void calld(Address address, int offset)
+        {
+            Implementation.calld(address, offset);
+        }
+
+        /// <inheritdoc />
         public void callw_abs(Value address)
         {
             Implementation.callw_abs(address);
+        }
+
+        /// <inheritdoc />
+        public void calld_abs(Value address)
+        {
+            Implementation.calld_abs(address);
         }
 
         /// <inheritdoc />
@@ -1900,6 +1912,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jgd(Address address, int offset)
+        {
+            return Implementation.jgd(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jgew(Address address, int offset)
         {
             return Implementation.jgew(address, offset);
@@ -1915,6 +1933,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool jlew(Address address, int offset)
         {
             return Implementation.jlew(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jled(Address address, int offset)
+        {
+            return Implementation.jled(address, offset);
         }
 
         /// <inheritdoc />
@@ -2014,6 +2038,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jnzd(Address address, int offset)
+        {
+            return Implementation.jnzd(address, offset);
+        }
+
+        /// <inheritdoc />
         public void jnzw_func(Address address, int offset)
         {
             Implementation.jnzw_func(address, offset);
@@ -2059,6 +2089,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         public bool jzw(Address address, int offset)
         {
             return Implementation.jzw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jzd(Address address, int offset)
+        {
+            return Implementation.jzd(address, offset);
         }
 
         /// <inheritdoc />

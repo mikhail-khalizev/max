@@ -12,5 +12,7 @@
 
         public string Namespace { get; set; }
         public string ClassName { get; set; }
+
+        public int LimitDecodeSize { get; set; } = int.MaxValue;
     }
 }

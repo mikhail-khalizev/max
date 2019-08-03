@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -123,6 +124,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private readonly Switch switch_;
         private readonly AddCStringToCommentPlugin _addCStringToCommentPlugin;
         private readonly CommentDummyInstructions comment_idle; // comment dummy instruction
+        private int _limitSize;
 
 
         public Engine(BinToCSharpDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodsInfo methodsInfo = null)
@@ -141,6 +143,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             comment_idle = new CommentDummyInstructions(this);
             jmp_call_loop_simple = new JmpCallLoopSimple(this);
             switch_ = new Switch(this);
+
+            _limitSize = Configuration.LimitDecodeSize;
         }
 
         public void DecodeMethod(Address address)
@@ -215,6 +219,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (address < CsBase)
                 return;
 
+            if (_limitSize <= 0)
+                return;
+
             var lowerBound = SuppressDecode.LowerBound(address, false);
             var nearestSuppressDecode = lowerBound.IsEmpty ? Address.MaxValue : lowerBound.Begin;
 
@@ -258,6 +265,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var length = udis86.ud_disassemble(ref u);
                 if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
                     break; //throw new InvalidOperationException("Преждевременное завершение функции.");
+
+                _limitSize -= length;
 
                 var cmd = new Instruction(u);
 
@@ -305,6 +314,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public void layout_funcs()
         {
+            Console.WriteLine("Layout Methods");
+
             add_aligment_as_instructions();
 
             while (true)
@@ -494,6 +505,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 .Select(y => y.OrderBy(x => x.MethodInfo.Addresses.IndexOf(x.Begin)).First())
                 .ToLookup(x => x.MethodInfo.Address);
 
+            var toConsole = new ConcurrentQueue<string>();
+
             Parallel.ForEach(
                 uniqueDetectedMethodsByAddress,
                 detectedMethodsWithSameAddress =>
@@ -510,13 +523,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
                         if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
                         {
-                            Console.WriteLine(
+                            toConsole.Enqueue(
                                 $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
                             return;
                         }
 
 
-                        Console.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
+                        toConsole.Enqueue($"Сохранение метода '{methodBegin}' в файл.");
 
 
                         var baseFileName = "z-" + methodBegin.ToString(
@@ -551,6 +564,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         File.WriteAllText(filePath, output.ToString());
                     }
                 });
+
+            Console.WriteLine(string.Join(Environment.NewLine, toConsole));
         }
 
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)

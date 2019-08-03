@@ -26,17 +26,17 @@ namespace MikhailKhalizev.Processor.x86.Utils
         {
             var minSet = false;
             var maxSet = false;
-            
+
             var fieldInfos = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
 
             foreach (var info in fieldInfos)
             {
                 if (info.Name == "MinValue")
                 {
-                    MinValue = (T) info.GetValue(null);
+                    MinValue = (T)info.GetValue(null);
                     minSet = true;
                 }
-                else if(info.Name == "MaxValue")
+                else if (info.Name == "MaxValue")
                 {
                     MaxValue = (T)info.GetValue(null);
                     maxSet = true;
@@ -124,18 +124,19 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 throw new ArgumentOutOfRangeException("Попытка установить отрицательную длину промежутка.");
 
 
-            var view = _spaces.GetViewBetween(interval, Interval.From(MaxValue, default));
             var last = interval;
-
-            foreach (var next in view.Skip(1))
+            while (true)
             {
+                var next = _spaces.FirstGreaterOrDefault(interval);
+                if (next == default)
+                    break;
                 if (Comparer.Compare(end, next.Begin) < 0 && !EqualityComparer.Equals(end, MinValue))
                     break;
-
+                _spaces.Remove(next);
                 last = next;
             }
 
-            _spaces.GetViewBetween(interval, last).Clear();
+            _spaces.Remove(interval);
 
 
             if (EqualityComparer.Equals(interval.End, MinValue) || EqualityComparer.Equals(end, MinValue))
@@ -187,7 +188,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public Interval<T> LowerBound(T value, bool withRightBound)
         {
             var interval = _spaces.FirstNotGreaterOrDefault(Interval.From(value, default));
-            
+
             if (interval != default)
             {
                 if (EqualityComparer.Equals(interval.End, MinValue))
