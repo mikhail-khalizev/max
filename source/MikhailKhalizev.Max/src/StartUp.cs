@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,10 +58,16 @@ namespace MikhailKhalizev.Max
             
 
             // Start.
-            
-            var definitionsStr = File.ReadAllText("settings/definitions.json");
-            foreach (var x in JsonConvert.DeserializeObject<Dictionary<string, string>>(definitionsStr))
-                AddressNameConverter.KnownDefinitions[Address.Parse(x.Key)] = x.Value;
+
+            var properties = typeof(Definitions).GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.PropertyType == typeof(Address))
+                {
+                    var value = (Address)property.GetValue(null);
+                    AddressNameConverter.KnownDefinitions[value] = property.Name;
+                }
+            }
 
 
             using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))

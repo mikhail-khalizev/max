@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public static string GetResultName(Address address, bool padding, bool withNamespace)
         {
             if (KnownDefinitions.TryGetValue(address, out var str))
-                return str;
+                return "Definitions." + str;
 
             str = "";
             if (withNamespace)
