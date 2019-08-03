@@ -2795,6 +2795,12 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
         }
 
         /// <inheritdoc />
+        public void movsb_a32(SegmentRegister segment = null)
+        {
+            Implementation.movsb_a32(segment);
+        }
+
+        /// <inheritdoc />
         public void movsw_a16(SegmentRegister segment = null)
         {
             Implementation.movsw_a16(segment);

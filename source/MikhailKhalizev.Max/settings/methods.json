@@ -6028,7 +6028,10 @@
   },
   {
     "Guid": "7aee632f-30e0-4dee-a635-7bd15e01d5c5",
-    "Address": "0x15_3808",
+    "Addresses": [
+      "0x15_3808",
+      "0x13_df60"
+    ],
     "Mode": 16,
     "Raw": "32ede306d1ead1d8e2facb"
   },
@@ -7552,7 +7555,10 @@
   },
   {
     "Guid": "9f76860a-b031-462f-b03e-7d895b9eb609",
-    "Address": "0x16_0f5f",
+    "Addresses": [
+      "0x16_0f5f",
+      "0x14_0621"
+    ],
     "Mode": 16,
     "Raw": "c8000000061e565751c5760ac47e068bc78b4e0ee3318cc03b460c751a3bfe76168bc603c13bf8730e8bc703f103f94e4ffdf3a4fceb108bc7a8017402a449d1e9f3a513c9f3a48cc2595f5e1f07c9cb"
   },

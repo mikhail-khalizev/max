@@ -2003,12 +2003,14 @@ inline void scasw_a16()
     di += df ? -2 : 2;
 }
 
+// +
 inline void scasd_a16()
 {
     cmp(eax, memd_a16(es, di));
     di += df ? -4 : 4;
 }
 
+// +
 inline void scasd_a32()
 {
     cmp(eax, memd_a32(es, edi));
@@ -2061,6 +2063,7 @@ inline void movsb_a16()
     movsb_a16(ds);
 }
 
+// +
 inline void movsb_a32(seg_reg & seg)
 {
     memb_a32(es, edi) = memb_a32(seg, esi);
@@ -2068,6 +2071,7 @@ inline void movsb_a32(seg_reg & seg)
     esi += df ? -1 : 1;
 }
 
+// +
 inline void movsb_a32()
 {
     movsb_a32(ds);

@@ -3266,10 +3266,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         public int jmpw_abs_switch(Value address)
         {
             eip = address & 0xffff;
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
             run_irqs();
+            SaveJumpInfo();
             return cs[eip] - CSharpFunctionDelta;
         }
 
@@ -4439,6 +4437,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             memb_a16[es, di] = memb_a16[segment ?? ds, si];
             di += eflags.df ? -1 : 1;
             si += eflags.df ? -1 : 1;
+        }
+
+        /// <inheritdoc />
+        public void movsb_a32(SegmentRegister segment = null)
+        {
+            memb_a32[es, edi] = memb_a32[segment ?? ds, esi];
+            edi += eflags.df ? -1 : 1;
+            esi += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
@@ -5997,13 +6003,15 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void scasd_a16()
         {
-            throw new NotImplementedException();
+            cmp(eax, memd_a16[es, di]);
+            di += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
         public void scasd_a32()
         {
-            throw new NotImplementedException();
+            cmp(eax, memd_a32[es, edi]);
+            edi += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
