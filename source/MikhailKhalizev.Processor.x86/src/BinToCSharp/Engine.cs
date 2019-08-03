@@ -533,9 +533,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     var filePathExt = filePath + ".cs";
 
-                    var num = 1;
-                    while (File.Exists(filePathExt))
-                        filePathExt = filePath + $".{++num}.cs";
+                    var num = 1 + (already_decoded_funcs_.GetValues(methodBegin, false)?.Count ?? 0);
+                    if (1 < num)
+                        filePathExt = filePath + $".{num}.cs";
 
 
                     var output = new StringBuilder();
