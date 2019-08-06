@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace MikhailKhalizev.Processor.x86.InstructionDecode.Dto
+namespace MikhailKhalizev.Processor.x86.Decoder.Dto
 {
     public class InstructionItemDto
     {

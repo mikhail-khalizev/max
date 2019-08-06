@@ -4,19 +4,20 @@ using System.Linq;
 using System.Reflection;
 using Kaitai;
 using MikhailKhalizev.Max.Dos;
-using MikhailKhalizev.Processor.x86.Abstractions;
-using MikhailKhalizev.Processor.x86.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Core;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max.Program
 {
-    public class RawProgramMain : BridgeProcessor, IGetMethod
+    public class RawProgramMain : BridgeProcessor, IMethodCollection
     {
         public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
@@ -53,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             DosDma = new DosDma(implementation, this);
             DosPic = new DosPic(implementation, this);
 
-            implementation.GetMethod = this;
+            implementation.MethodCollection = this;
             implementation.runInb += (sender, tuple) => DosPort.MyInb(tuple.value, tuple.port);
             implementation.runOutb += (sender, tuple) => DosPort.MyOutb(tuple.port, tuple.value);
         }

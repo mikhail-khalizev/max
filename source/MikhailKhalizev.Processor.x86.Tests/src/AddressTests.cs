@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using MikhailKhalizev.Processor.x86.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests

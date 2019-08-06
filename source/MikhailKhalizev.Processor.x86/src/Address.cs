@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions
+namespace MikhailKhalizev.Processor.x86
 {
     [JsonConverter(typeof(AddressJsonConverter))]
     [TypeConverter(typeof(AddressTypeConverter))]
@@ -38,13 +39,13 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
 
         public bool Equals(Address other) => _value == other._value;
 
-        /// <summary>Returns a value that indicates whether the values of two <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> objects are equal.</summary>
+        /// <summary>Returns a value that indicates whether the values of two <see cref="T:MikhailKhalizev.Processor.x86.Address" /> objects are equal.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if the <paramref name="left" /> and <paramref name="right" /> parameters have the same value; otherwise, false.</returns>
         public static bool operator ==(Address left, Address right) => left.Equals(right);
 
-        /// <summary>Returns a value that indicates whether two <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> objects have different values.</summary>
+        /// <summary>Returns a value that indicates whether two <see cref="T:MikhailKhalizev.Processor.x86.Address" /> objects have different values.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, false.</returns>
@@ -73,25 +74,25 @@ namespace MikhailKhalizev.Processor.x86.Abstractions
             return copy.CompareTo(other._value);
         }
 
-        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is less than another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
+        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value is less than another <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is less than <paramref name="right" />; otherwise, false.</returns>
         public static bool operator <(Address left, Address right) => left.CompareTo(right) < 0;
 
-        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is greater than another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
+        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value is greater than another <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is greater than <paramref name="right" />; otherwise, false.</returns>
         public static bool operator >(Address left, Address right) => left.CompareTo(right) > 0;
 
-        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is less than or equal to another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
+        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value is less than or equal to another <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is less than or equal to <paramref name="right" />; otherwise, false.</returns>
         public static bool operator <=(Address left, Address right) => left.CompareTo(right) <= 0;
 
-        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value is greater than or equal to another <see cref="T:MikhailKhalizev.Processor.x86.Abstractions.Address" /> value.</summary>
+        /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value is greater than or equal to another <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value.</summary>
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>true if <paramref name="left" /> is greater than <paramref name="right" />; otherwise, false.</returns>

@@ -1,7 +1,8 @@
 // ReSharper disable InconsistentNaming
 #pragma warning disable IDE1006 // Naming Styles
 
-using MikhailKhalizev.Processor.x86.Abstractions;
+using MikhailKhalizev.Processor.x86;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
 
 namespace MikhailKhalizev.Max.Program
 {

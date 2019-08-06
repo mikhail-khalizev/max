@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions
+namespace MikhailKhalizev.Processor.x86
 {
     public class AddressJsonConverter : JsonConverter
     {

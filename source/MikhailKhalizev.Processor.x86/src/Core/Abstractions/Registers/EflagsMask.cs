@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
 {
     public static class EflagsMask
     {

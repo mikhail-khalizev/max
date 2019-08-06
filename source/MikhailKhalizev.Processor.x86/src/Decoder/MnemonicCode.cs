@@ -2,7 +2,7 @@
 // ReSharper disable IdentifierTypo
 // ReSharper disable CommentTypo
 
-namespace MikhailKhalizev.Processor.x86.InstructionDecode
+namespace MikhailKhalizev.Processor.x86.Decoder
 {
     public enum MnemonicCode
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MikhailKhalizev.Processor.x86.InstructionDecode.Dto
+namespace MikhailKhalizev.Processor.x86.Decoder.Dto
 {
     public class OperandEncodingDto
     {

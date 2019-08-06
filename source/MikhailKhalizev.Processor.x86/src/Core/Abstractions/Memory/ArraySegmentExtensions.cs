@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
     public static class ArraySegmentExtensions
     {

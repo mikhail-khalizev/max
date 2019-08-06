@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Resources;
-using System.Runtime.InteropServices;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
     public static class MemoryExtensions
     {

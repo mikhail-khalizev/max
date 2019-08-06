@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Max.Configuration
+﻿namespace MikhailKhalizev.Processor.x86.Configuration
 {
     public class ProcessorDto
     {

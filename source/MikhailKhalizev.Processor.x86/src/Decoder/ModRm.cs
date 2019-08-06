@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Processor.x86.InstructionDecode
+﻿namespace MikhailKhalizev.Processor.x86.Decoder
 {
     public class ModRm
     {

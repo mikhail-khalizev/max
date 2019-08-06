@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using MikhailKhalizev.Processor.x86.Abstractions;
+using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.Utils
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 {
     public static class AddressNameConverter
     {

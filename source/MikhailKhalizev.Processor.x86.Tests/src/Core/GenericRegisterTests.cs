@@ -1,6 +1,6 @@
 using FluentAssertions;
-using MikhailKhalizev.Max.Configuration;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.Configuration;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.Core

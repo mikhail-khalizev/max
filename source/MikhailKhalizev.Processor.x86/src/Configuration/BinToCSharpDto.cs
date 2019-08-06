@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Processor.x86.BinToCSharp
+﻿namespace MikhailKhalizev.Processor.x86.Configuration
 {
     public class BinToCSharpDto
     {

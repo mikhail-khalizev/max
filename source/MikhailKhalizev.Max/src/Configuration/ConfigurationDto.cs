@@ -1,4 +1,5 @@
 ﻿using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.Configuration;
 
 namespace MikhailKhalizev.Max.Configuration
 {

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using FluentAssertions;
-using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Xunit;
 using Xunit.Abstractions;

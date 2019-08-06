@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MikhailKhalizev.Processor.x86.InstructionDecode.Metadata
+namespace MikhailKhalizev.Processor.x86.Decoder.Metadata
 {
     public static class PrefixMetadata
     {

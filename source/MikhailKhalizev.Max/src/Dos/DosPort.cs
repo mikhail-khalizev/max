@@ -1,6 +1,6 @@
 ﻿using System;
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {

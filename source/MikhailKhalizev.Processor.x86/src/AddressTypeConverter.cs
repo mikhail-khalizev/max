@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions
+namespace MikhailKhalizev.Processor.x86
 {
     public class AddressTypeConverter : TypeConverter
     {

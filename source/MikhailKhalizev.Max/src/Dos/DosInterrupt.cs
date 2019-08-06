@@ -6,8 +6,9 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86.Abstractions;
-using MikhailKhalizev.Processor.x86.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 

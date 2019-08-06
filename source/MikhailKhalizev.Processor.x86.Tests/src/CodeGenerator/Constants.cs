@@ -1,4 +1,4 @@
-﻿using MikhailKhalizev.Processor.x86.InstructionDecode.Dto;
+﻿using MikhailKhalizev.Processor.x86.Decoder.Dto;
 
 namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 {

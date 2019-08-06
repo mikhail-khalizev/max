@@ -1,7 +1,6 @@
-﻿using JetBrains.Annotations;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+﻿using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
     public abstract class MemoryValue : ValueBase
     {

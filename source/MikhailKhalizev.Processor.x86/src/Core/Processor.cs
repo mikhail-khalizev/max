@@ -10,11 +10,11 @@ using System.Linq;
 using System.Numerics;
 using System.Reflection;
 using System.Threading.Tasks;
-using MikhailKhalizev.Max.Configuration;
-using MikhailKhalizev.Processor.x86.Abstractions;
-using MikhailKhalizev.Processor.x86.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
+using MikhailKhalizev.Processor.x86.Configuration;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Core
@@ -1422,7 +1422,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
-        public IGetMethod GetMethod { get; set; }
+        public IMethodCollection MethodCollection { get; set; }
         public event EventHandler<(Value value, Value port)> runInb;
         public event EventHandler<(Value port, Value value)> runOutb;
 
@@ -1466,7 +1466,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                         throw new GoUpException();
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
-                    GetMethod.GetMethod(out var methodInfo, out var method);
+                    MethodCollection.GetMethod(out var methodInfo, out var method);
                     
                     if (_statisticMethodCall != null)
                     {

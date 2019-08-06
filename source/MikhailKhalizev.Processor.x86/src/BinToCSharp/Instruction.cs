@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MikhailKhalizev.Processor.x86.Abstractions;
-using MikhailKhalizev.Processor.x86.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using SharpDisasm.Udis86;

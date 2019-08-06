@@ -1,7 +1,7 @@
 ﻿using System;
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 {
     /*
      * We need allow operation like:

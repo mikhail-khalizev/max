@@ -1,7 +1,7 @@
 using FluentAssertions;
-using MikhailKhalizev.Processor.x86.Abstractions;
-using MikhailKhalizev.Processor.x86.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests

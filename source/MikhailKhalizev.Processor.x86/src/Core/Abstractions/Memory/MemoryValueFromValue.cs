@@ -1,14 +1,14 @@
 using System;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
     public sealed class MemoryValueFromValue : MemoryValue
     {
         public ValueBase Value { get; }
 
         /// <inheritdoc />
-        public override int Bits => Value.Bits;
+        public override int Bits => this.Value.Bits;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal

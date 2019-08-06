@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Processor.x86.Abstractions.Memory
+﻿namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
     public static class PteMask
     {

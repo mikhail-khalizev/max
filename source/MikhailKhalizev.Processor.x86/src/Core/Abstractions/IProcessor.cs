@@ -4,11 +4,10 @@
 #pragma warning disable IDE1006 // Naming Styles
 
 using System;
-using System.ComponentModel.DataAnnotations;
-using MikhailKhalizev.Processor.x86.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 {
     public interface IProcessor
     {

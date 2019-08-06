@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SharpDisasm.Udis86;
 
-namespace MikhailKhalizev.Processor.x86.InstructionDecode
+namespace MikhailKhalizev.Processor.x86.Decoder
 {
     public class RegisterInfo
     {

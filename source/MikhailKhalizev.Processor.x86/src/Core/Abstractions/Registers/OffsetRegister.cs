@@ -1,6 +1,6 @@
 ﻿using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.Abstractions.Registers
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
 {
     public sealed class OffsetRegister : Register
     {

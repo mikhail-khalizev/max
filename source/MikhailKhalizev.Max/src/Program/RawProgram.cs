@@ -1,4 +1,4 @@
-using MikhailKhalizev.Processor.x86.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions;
 
 namespace MikhailKhalizev.Max.Program
 {
