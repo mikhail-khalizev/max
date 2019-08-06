@@ -52,10 +52,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_effe, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1010_f003, 3); cmp(eax, 0x1);                          /* cmp eax, 0x1 */
             ii(0x1010_f006, 2); if(jnzd(0x1010_f011, 0x9)) goto l_0x1010_f011; /* jnz 0x1010f011 */
-            ii(0x1010_f008, 7); mov(memd_a32[ss, ebp - 0x10], 0x101a_461e); /* mov dword [ebp-0x10], 0x101a461e */ /* "Serial Connect Menu" */
+            ii(0x1010_f008, 7); mov(memd_a32[ss, ebp - 0x10], StringDefinitions.SerialConnectMenu); /* mov dword [ebp-0x10], 0x101a461e */
             ii(0x1010_f00f, 2); jmpd(0x1010_f018, 0x7); goto l_0x1010_f018; /* jmp 0x1010f018 */
         l_0x1010_f011:
-            ii(0x1010_f011, 7); mov(memd_a32[ss, ebp - 0x10], 0x101a_4632); /* mov dword [ebp-0x10], 0x101a4632 */ /* "Modem Play Menu" */
+            ii(0x1010_f011, 7); mov(memd_a32[ss, ebp - 0x10], StringDefinitions.ModemPlayMenu); /* mov dword [ebp-0x10], 0x101a4632 */
         l_0x1010_f018:
             ii(0x1010_f018, 3); mov(edx, memd_a32[ss, ebp - 0x10]);     /* mov edx, [ebp-0x10] */
             ii(0x1010_f01b, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */

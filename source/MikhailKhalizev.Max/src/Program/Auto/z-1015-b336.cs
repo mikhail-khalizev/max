@@ -95,12 +95,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_b452, 3); mov(memd_a32[ss, ebp - 0x14], eax);     /* mov [ebp-0x14], eax */
             ii(0x1015_b455, 5); jmpd(0x1015_b704, 0x2aa); goto l_0x1015_b704; /* jmp 0x1015b704 */
         //  ii(0x1015_b45a, 330); Недостижимый код.
-l_0x1015_b5a4:
+        l_0x1015_b5a4:
             ii(0x1015_b5a4, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1015_b5a7, 7); mov(memd_a32[ds, eax + 0xa], 0x101c_afcc); /* mov dword [eax+0xa], 0x101cafcc */
             ii(0x1015_b5ae, 5); jmpd(0x1015_b725, 0x172); goto l_0x1015_b725; /* jmp 0x1015b725 */
         //  ii(0x1015_b5b3, 337); Недостижимый код.
-l_0x1015_b704:
+        l_0x1015_b704:
             ii(0x1015_b704, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x1015_b707, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
             ii(0x1015_b70a, 5); cmp(memw_a32[ss, ebp - 0x18], 0x53);    /* cmp word [ebp-0x18], 0x53 */
@@ -115,12 +115,12 @@ l_0x1015_b704:
             ii(0x1015_b72c, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */
             ii(0x1015_b72f, 5); jmpd(0x1015_bca0, 0x56c); goto l_0x1015_bca0; /* jmp 0x1015bca0 */
         //  ii(0x1015_b734, 1035); Недостижимый код.
-l_0x1015_bb3f:
+        l_0x1015_bb3f:
             ii(0x1015_bb3f, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1015_bb42, 7); mov(memd_a32[ds, eax + 0xe], 0x101b_d924); /* mov dword [eax+0xe], 0x101bd924 */
             ii(0x1015_bb49, 5); jmpd(0x1015_bcc1, 0x173); goto l_0x1015_bcc1; /* jmp 0x1015bcc1 */
         //  ii(0x1015_bb4e, 338); Недостижимый код.
-l_0x1015_bca0:
+        l_0x1015_bca0:
             ii(0x1015_bca0, 3); mov(eax, memd_a32[ss, ebp - 0x1c]);     /* mov eax, [ebp-0x1c] */
             ii(0x1015_bca3, 3); mov(memd_a32[ss, ebp - 0x20], eax);     /* mov [ebp-0x20], eax */
             ii(0x1015_bca6, 5); cmp(memw_a32[ss, ebp - 0x20], 0x53);    /* cmp word [ebp-0x20], 0x53 */

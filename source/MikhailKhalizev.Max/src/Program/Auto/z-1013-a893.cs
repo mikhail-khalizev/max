@@ -39,8 +39,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_a8e2, 2); jmpd(0x1013_a8fd, 0x19); goto l_0x1013_a8fd; /* jmp 0x1013a8fd */
         l_0x1013_a8e4:
             ii(0x1013_a8e4, 5); mov(ecx, 0xbd);                         /* mov ecx, 0xbd */
-            ii(0x1013_a8e9, 5); mov(ebx, 0x101a_cbf4);                  /* mov ebx, 0x101acbf4 */ /* "smartlst.cpp" */
-            ii(0x1013_a8ee, 5); mov(edx, 0x101a_cc01);                  /* mov edx, 0x101acc01 */ /* "index >= 0 && index < count" */
+            ii(0x1013_a8e9, 5); mov(ebx, StringDefinitions.SmartlstCpp); /* mov ebx, 0x101acbf4 */
+            ii(0x1013_a8ee, 5); mov(edx, StringDefinitions.Index0IndexCount); /* mov edx, 0x101acc01 */
             ii(0x1013_a8f3, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_a8f5, 5); calld(Definitions.sys_assert, 0x2b498); /* call 0x10165d92 */
             ii(0x1013_a8fa, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
@@ -93,7 +93,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_a977, 5); calld(0x1007_5e24, -0xc4b58);           /* call 0x10075e24 */
             ii(0x1013_a97c, 2); jmpd(0x1013_a988, 0xa); goto l_0x1013_a988; /* jmp 0x1013a988 */
         //  ii(0x1013_a97e, 10); Недостижимый код.
-l_0x1013_a988:
+        l_0x1013_a988:
             ii(0x1013_a988, 3); mov(eax, memd_a32[ss, ebp - 0x1c]);     /* mov eax, [ebp-0x1c] */
             ii(0x1013_a98b, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_a98d, 1); popd(ebp);                              /* pop ebp */

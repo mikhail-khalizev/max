@@ -33,10 +33,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_07b8, 3); dec(memw_a32[ds, eax]);                 /* dec word [eax] */
             ii(0x100a_07bb, 2); jmpd(0x100a_07e7, 0x2a); goto l_0x100a_07e7; /* jmp 0x100a07e7 */
         l_0x100a_07bd:
-            ii(0x100a_07bd, 5); mov(eax, 0x101a_0878);                  /* mov eax, 0x101a0878 */ /* "fuel" */
+            ii(0x100a_07bd, 5); mov(eax, StringDefinitions.Fuel);       /* mov eax, 0x101a0878 */
             ii(0x100a_07c2, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_07c3, 5); mov(ecx, 0x101a_087d);                  /* mov ecx, 0x101a087d */ /* "More %s needed, %s turned off.\n" */
-            ii(0x100a_07c8, 5); mov(ebx, 0x101a_089d);                  /* mov ebx, 0x101a089d */ /* "Cannot turn %s on, %s needed.\n" */
+            ii(0x100a_07c3, 5); mov(ecx, StringDefinitions.MoreSNeededSTurnedOff); /* mov ecx, 0x101a087d */
+            ii(0x100a_07c8, 5); mov(ebx, StringDefinitions.CannotTurnSOnSNeeded); /* mov ebx, 0x101a089d */
             ii(0x100a_07cd, 3); mov(edx, memd_a32[ss, ebp - 0xc]);      /* mov edx, [ebp-0xc] */
             ii(0x100a_07d0, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x100a_07d3, 5); calld(0x100a_0f77, 0x79f);              /* call 0x100a0f77 */
@@ -52,10 +52,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_07ef, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x100a_07f2, 3); cmp(dx, memw_a32[ds, eax]);             /* cmp dx, [eax] */
             ii(0x100a_07f5, 2); if(jnzd(0x100a_0827, 0x30)) goto l_0x100a_0827; /* jnz 0x100a0827 */
-            ii(0x100a_07f7, 5); mov(eax, 0x101a_08bc);                  /* mov eax, 0x101a08bc */ /* "power" */
+            ii(0x100a_07f7, 5); mov(eax, StringDefinitions.Power2);     /* mov eax, 0x101a08bc */
             ii(0x100a_07fc, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_07fd, 5); mov(ecx, 0x101a_08c2);                  /* mov ecx, 0x101a08c2 */ /* "More %s needed, %s turned on.\n" */
-            ii(0x100a_0802, 5); mov(ebx, 0x101a_08e1);                  /* mov ebx, 0x101a08e1 */ /* "Cannot turn %s off, other buildings need %s.\n" */
+            ii(0x100a_07fd, 5); mov(ecx, StringDefinitions.MoreSNeededSTurnedOn); /* mov ecx, 0x101a08c2 */
+            ii(0x100a_0802, 5); mov(ebx, StringDefinitions.CannotTurnSOffOtherBuildingsNeedS); /* mov ebx, 0x101a08e1 */
             ii(0x100a_0807, 3); mov(edx, memd_a32[ss, ebp - 0xc]);      /* mov edx, [ebp-0xc] */
             ii(0x100a_080a, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x100a_080d, 5); calld(0x100a_0f77, 0x765);              /* call 0x100a0f77 */

@@ -151,7 +151,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8645, 5); mov(ecx, 0x1);                          /* mov ecx, 0x1 */
             ii(0x1013_864a, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1013_864f, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
-            ii(0x1013_8654, 5); mov(eax, 0x101a_c834);                  /* mov eax, 0x101ac834 */ /* "Unable to load a saved game while remote play in progress." */
+            ii(0x1013_8654, 5); mov(eax, StringDefinitions.UnableToLoadASavedGameWhileRemotePlayInProgress2); /* mov eax, 0x101ac834 */
             ii(0x1013_8659, 5); calld(0x1011_5d23, -0x2293b);           /* call 0x10115d23 */
             ii(0x1013_865e, 6); mov(al, memb_a32[ss, ebp - 0x388]);     /* mov al, [ebp-0x388] */
             ii(0x1013_8664, 5); mov(memb_a32[ds, 0x101c_391e], al);     /* mov [0x101c391e], al */
@@ -497,7 +497,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8b60, 6); if(jzd(0x1013_88d0, -0x296)) goto l_0x1013_88d0; /* jz 0x101388d0 */
             ii(0x1013_8b66, 2); jmpd(0x1013_8b05, -0x63); goto l_0x1013_8b05; /* jmp 0x10138b05 */
         //  ii(0x1013_8b68, 2); Недостижимый код.
-l_0x1013_8b6a:
+        l_0x1013_8b6a:
             ii(0x1013_8b6a, 10); cmp(memd_a32[ss, ebp - 0x384], 0x3e8); /* cmp dword [ebp-0x384], 0x3e8 */
             ii(0x1013_8b74, 2); if(jbd(0x1013_8b9b, 0x25)) goto l_0x1013_8b9b; /* jb 0x10138b9b */
             ii(0x1013_8b76, 10); cmp(memd_a32[ss, ebp - 0x384], 0x3e8); /* cmp dword [ebp-0x384], 0x3e8 */
@@ -623,7 +623,7 @@ l_0x1013_8b6a:
             ii(0x1013_8d52, 5); calld(0x1013_9c8c, 0xf35);              /* call 0x10139c8c */
             ii(0x1013_8d57, 2); jmpd(0x1013_8d66, 0xd); goto l_0x1013_8d66; /* jmp 0x10138d66 */
         //  ii(0x1013_8d59, 13); Недостижимый код.
-l_0x1013_8d66:
+        l_0x1013_8d66:
             ii(0x1013_8d66, 6); mov(eax, memd_a32[ss, ebp - 0x3bc]);    /* mov eax, [ebp-0x3bc] */
             ii(0x1013_8d6c, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_8d6e, 1); popd(ebp);                              /* pop ebp */

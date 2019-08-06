@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_897a, 4); cmp(memb_a32[ss, ebp - 0x8], 0);        /* cmp byte [ebp-0x8], 0x0 */
             ii(0x1010_897e, 2); if(jzd(0x1010_8993, 0x13)) goto l_0x1010_8993; /* jz 0x10108993 */
             ii(0x1010_8980, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x1010_8985, 5); mov(eax, 0x101a_4540);                  /* mov eax, 0x101a4540 */ /* "\nPlease insert the M.A.X. CD and try again.\n\n" */
+            ii(0x1010_8985, 5); mov(eax, StringDefinitions.PleaseInsertTheMAXCdAndTryAgain); /* mov eax, 0x101a4540 */
             ii(0x1010_898a, 5); calld(0x1011_7036, 0xe6a7);             /* call 0x10117036 */
             ii(0x1010_898f, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_8991, 2); if(jnzd(0x1010_894a, -0x49)) goto l_0x1010_894a; /* jnz 0x1010894a */

@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_b3b9, 3); movsx(eax, memw_a32[ds, eax]);          /* movsx eax, word [eax] */
             ii(0x100b_b3bc, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x100b_b3bf, 4); pushd(memd_a32[ds, eax + ebp - 0x38]);  /* push dword [eax+ebp-0x38] */
-            ii(0x100b_b3c3, 5); mov(eax, 0x101a_12c6);                  /* mov eax, 0x101a12c6 */ /* "%s Computer Turn." */
+            ii(0x100b_b3c3, 5); mov(eax, StringDefinitions.SComputerTurn); /* mov eax, 0x101a12c6 */
             ii(0x100b_b3c8, 1); pushd(eax);                             /* push eax */
             ii(0x100b_b3c9, 6); lea(eax, ebp - 0x88);                   /* lea eax, [ebp-0x88] */
             ii(0x100b_b3cf, 1); pushd(eax);                             /* push eax */
@@ -294,12 +294,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_b6bd, 6); mov(memb_a32[ss, ebp - 0xb4], al);      /* mov [ebp-0xb4], al */
             ii(0x100b_b6c3, 2); jmpd(0x100b_b71c, 0x57); goto l_0x100b_b71c; /* jmp 0x100bb71c */
         //  ii(0x100b_b6c5, 48); Недостижимый код.
-l_0x100b_b6f5:
+        l_0x100b_b6f5:
             ii(0x100b_b6f5, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100b_b6f8, 4); mov(memb_a32[ds, eax + 0x2], 0x8);      /* mov byte [eax+0x2], 0x8 */
             ii(0x100b_b6fc, 2); jmpd(0x100b_b745, 0x47); goto l_0x100b_b745; /* jmp 0x100bb745 */
         //  ii(0x100b_b6fe, 30); Недостижимый код.
-l_0x100b_b71c:
+        l_0x100b_b71c:
             ii(0x100b_b71c, 6); mov(al, memb_a32[ss, ebp - 0xb4]);      /* mov al, [ebp-0xb4] */
             ii(0x100b_b722, 2); dec(al);                                /* dec al */
             ii(0x100b_b724, 6); mov(memb_a32[ss, ebp - 0xb8], al);      /* mov [ebp-0xb8], al */

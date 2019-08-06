@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_6a5f, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
             ii(0x1012_6a62, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x1012_6a66, 1); pushd(eax);                             /* push eax */
-            ii(0x1012_6a67, 5); mov(eax, 0x101a_81d2);                  /* mov eax, 0x101a81d2 */ /* "Unknown unit, id %i, referenced in remote packet." */
+            ii(0x1012_6a67, 5); mov(eax, StringDefinitions.UnknownUnitIdIReferencedInRemotePacket); /* mov eax, 0x101a81d2 */
             ii(0x1012_6a6c, 1); pushd(eax);                             /* push eax */
             ii(0x1012_6a6d, 3); lea(eax, ebp - 0x68);                   /* lea eax, [ebp-0x68] */
             ii(0x1012_6a70, 1); pushd(eax);                             /* push eax */

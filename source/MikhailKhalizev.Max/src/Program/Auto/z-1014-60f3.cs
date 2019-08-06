@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_6189, 5); calld(Definitions.my_string_dtor, -0x4664); /* call 0x10141b2a */
             ii(0x1014_618e, 2); jmpd(0x1014_61a4, 0x14); goto l_0x1014_61a4; /* jmp 0x101461a4 */
         //  ii(0x1014_6190, 20); Недостижимый код.
-l_0x1014_61a4:
+        l_0x1014_61a4:
             ii(0x1014_61a4, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_61a7, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_61a9, 1); popd(ebp);                              /* pop ebp */

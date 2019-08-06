@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6d1b, 3); mov(memd_a32[ss, ebp - 0x10], edx);     /* mov [ebp-0x10], edx */
             ii(0x1010_6d1e, 7); cmp(memd_a32[ss, ebp - 0x10], 0x3_d090); /* cmp dword [ebp-0x10], 0x3d090 */
             ii(0x1010_6d25, 2); if(jaed(0x1010_6d88, 0x61)) goto l_0x1010_6d88; /* jae 0x10106d88 */
-            ii(0x1010_6d27, 5); mov(eax, 0x101a_442e);                  /* mov eax, 0x101a442e */ /* "\n\n" */
+            ii(0x1010_6d27, 5); mov(eax, StringDefinitions.Control);    /* mov eax, 0x101a442e */
             ii(0x1010_6d2c, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6d2d, 5); calld(Definitions.sys_printf, 0x6590a); /* call 0x1016c63c */
             ii(0x1010_6d32, 3); add(esp, 0x4);                          /* add esp, 0x4 */
@@ -54,15 +54,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6d39, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_6d3c, 3); add(eax, 0x40);                         /* add eax, 0x40 */
             ii(0x1010_6d3f, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_6d40, 5); mov(eax, 0x101a_4431);                  /* mov eax, 0x101a4431 */ /* "Drive %c has only %lu bytes available.  You may have trouble saving games..\n" */
+            ii(0x1010_6d40, 5); mov(eax, StringDefinitions.DriveCHasOnlyLuBytesAvailableYouMayHaveTroubleSavingGames); /* mov eax, 0x101a4431 */
             ii(0x1010_6d45, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6d46, 5); calld(Definitions.sys_printf, 0x658f1); /* call 0x1016c63c */
             ii(0x1010_6d4b, 3); add(esp, 0xc);                          /* add esp, 0xc */
-            ii(0x1010_6d4e, 5); mov(eax, 0x101a_447e);                  /* mov eax, 0x101a447e */ /* "\nPress ESC to exit, any other key to continue..." */
+            ii(0x1010_6d4e, 5); mov(eax, StringDefinitions.PressEscToExitAnyOtherKeyToContinue); /* mov eax, 0x101a447e */
             ii(0x1010_6d53, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6d54, 5); calld(Definitions.sys_printf, 0x658e3); /* call 0x1016c63c */
             ii(0x1010_6d59, 3); add(esp, 0x4);                          /* add esp, 0x4 */
-            ii(0x1010_6d5c, 5); mov(eax, 0x101a_44af);                  /* mov eax, 0x101a44af */ /* "\n\n" */
+            ii(0x1010_6d5c, 5); mov(eax, StringDefinitions.Control2);   /* mov eax, 0x101a44af */
             ii(0x1010_6d61, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6d62, 5); calld(Definitions.sys_printf, 0x658d5); /* call 0x1016c63c */
             ii(0x1010_6d67, 3); add(esp, 0x4);                          /* add esp, 0x4 */
@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6d8a, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_6d8d, 3); add(eax, 0x40);                         /* add eax, 0x40 */
             ii(0x1010_6d90, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_6d91, 5); mov(eax, 0x101a_44b2);                  /* mov eax, 0x101a44b2 */ /* "\nError Checking Drive %c!  Run SCANDISK.\n" */
+            ii(0x1010_6d91, 5); mov(eax, StringDefinitions.ErrorCheckingDriveCRunScandisk); /* mov eax, 0x101a44b2 */
             ii(0x1010_6d96, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6d97, 5); calld(Definitions.sys_printf, 0x658a0); /* call 0x1016c63c */
             ii(0x1010_6d9c, 3); add(esp, 0x8);                          /* add esp, 0x8 */

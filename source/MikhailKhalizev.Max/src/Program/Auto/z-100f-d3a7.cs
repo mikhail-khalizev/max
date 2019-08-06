@@ -325,8 +325,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_d77c, 2); jmpd(0x100f_d79a, 0x1c); goto l_0x100f_d79a; /* jmp 0x100fd79a */
         l_0x100f_d77e:
             ii(0x100f_d77e, 5); mov(ecx, 0x191e);                       /* mov ecx, 0x191e */
-            ii(0x100f_d783, 5); mov(ebx, 0x101a_2982);                  /* mov ebx, 0x101a2982 */ /* "gamemgr.cpp" */
-            ii(0x100f_d788, 5); mov(edx, 0x101a_298e);                  /* mov edx, 0x101a298e */ /* "land_tiles.GetCount() > 0" */
+            ii(0x100f_d783, 5); mov(ebx, StringDefinitions.GamemgrCpp6); /* mov ebx, 0x101a2982 */
+            ii(0x100f_d788, 5); mov(edx, StringDefinitions.LandTilesGetcount0); /* mov edx, 0x101a298e */
             ii(0x100f_d78d, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_d78f, 5); calld(Definitions.sys_assert, 0x685fe); /* call 0x10165d92 */
             ii(0x100f_d794, 6); mov(memd_a32[ss, ebp - 0x8c], eax);     /* mov [ebp-0x8c], eax */
@@ -352,8 +352,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_d7d5, 2); jmpd(0x100f_d7f3, 0x1c); goto l_0x100f_d7f3; /* jmp 0x100fd7f3 */
         l_0x100f_d7d7:
             ii(0x100f_d7d7, 5); mov(ecx, 0x1920);                       /* mov ecx, 0x1920 */
-            ii(0x100f_d7dc, 5); mov(ebx, 0x101a_29a8);                  /* mov ebx, 0x101a29a8 */ /* "gamemgr.cpp" */
-            ii(0x100f_d7e1, 5); mov(edx, 0x101a_29b4);                  /* mov edx, 0x101a29b4 */ /* "i >= 0 && i < land_tiles.GetCount()" */
+            ii(0x100f_d7dc, 5); mov(ebx, StringDefinitions.GamemgrCpp5); /* mov ebx, 0x101a29a8 */
+            ii(0x100f_d7e1, 5); mov(edx, StringDefinitions.I0ILandTilesGetcount); /* mov edx, 0x101a29b4 */
             ii(0x100f_d7e6, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_d7e8, 5); calld(Definitions.sys_assert, 0x685a5); /* call 0x10165d92 */
             ii(0x100f_d7ed, 6); mov(memd_a32[ss, ebp - 0x90], eax);     /* mov [ebp-0x90], eax */
@@ -419,8 +419,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_d8bb, 2); jmpd(0x100f_d8d9, 0x1c); goto l_0x100f_d8d9; /* jmp 0x100fd8d9 */
         l_0x100f_d8bd:
             ii(0x100f_d8bd, 5); mov(ecx, 0x192b);                       /* mov ecx, 0x192b */
-            ii(0x100f_d8c2, 5); mov(ebx, 0x101a_29d8);                  /* mov ebx, 0x101a29d8 */ /* "gamemgr.cpp" */
-            ii(0x100f_d8c7, 5); mov(edx, 0x101a_29e4);                  /* mov edx, 0x101a29e4 */ /* "water_tiles.GetCount() > 0" */
+            ii(0x100f_d8c2, 5); mov(ebx, StringDefinitions.GamemgrCpp8); /* mov ebx, 0x101a29d8 */
+            ii(0x100f_d8c7, 5); mov(edx, StringDefinitions.WaterTilesGetcount0); /* mov edx, 0x101a29e4 */
             ii(0x100f_d8cc, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_d8ce, 5); calld(Definitions.sys_assert, 0x684bf); /* call 0x10165d92 */
             ii(0x100f_d8d3, 6); mov(memd_a32[ss, ebp - 0x9c], eax);     /* mov [ebp-0x9c], eax */
@@ -446,8 +446,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_d914, 2); jmpd(0x100f_d932, 0x1c); goto l_0x100f_d932; /* jmp 0x100fd932 */
         l_0x100f_d916:
             ii(0x100f_d916, 5); mov(ecx, 0x192d);                       /* mov ecx, 0x192d */
-            ii(0x100f_d91b, 5); mov(ebx, 0x101a_29ff);                  /* mov ebx, 0x101a29ff */ /* "gamemgr.cpp" */
-            ii(0x100f_d920, 5); mov(edx, 0x101a_2a0b);                  /* mov edx, 0x101a2a0b */ /* "i >= 0 && i < water_tiles.GetCount()" */
+            ii(0x100f_d91b, 5); mov(ebx, StringDefinitions.GamemgrCpp7); /* mov ebx, 0x101a29ff */
+            ii(0x100f_d920, 5); mov(edx, StringDefinitions.I0IWaterTilesGetcount); /* mov edx, 0x101a2a0b */
             ii(0x100f_d925, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_d927, 5); calld(Definitions.sys_assert, 0x68466); /* call 0x10165d92 */
             ii(0x100f_d92c, 6); mov(memd_a32[ss, ebp - 0xa0], eax);     /* mov [ebp-0xa0], eax */

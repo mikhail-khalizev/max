@@ -80,8 +80,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_66e0, 2); jmpd(0x1010_66fb, 0x19); goto l_0x1010_66fb; /* jmp 0x101066fb */
         l_0x1010_66e2:
             ii(0x1010_66e2, 5); mov(ecx, 0x23c);                        /* mov ecx, 0x23c */
-            ii(0x1010_66e7, 5); mov(ebx, 0x101a_3af2);                  /* mov ebx, 0x101a3af2 */ /* "inifile.cpp" */
-            ii(0x1010_66ec, 5); mov(edx, 0x101a_3afe);                  /* mov edx, 0x101a3afe */ /* "*entry < NAME_LEN" */
+            ii(0x1010_66e7, 5); mov(ebx, StringDefinitions.InifileCpp); /* mov ebx, 0x101a3af2 */
+            ii(0x1010_66ec, 5); mov(edx, StringDefinitions.EntryNameLen); /* mov edx, 0x101a3afe */
             ii(0x1010_66f1, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1010_66f3, 5); calld(Definitions.sys_assert, 0x5f69a); /* call 0x10165d92 */
             ii(0x1010_66f8, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */

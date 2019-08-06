@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_5c01, 3); mov(al, memb_a32[ds, eax + 0x27]);      /* mov al, [eax+0x27] */
             ii(0x1014_5c04, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1014_5c09, 1); pushd(eax);                             /* push eax */
-            ii(0x1014_5c0a, 5); mov(eax, 0x101a_d000);                  /* mov eax, 0x101ad000 */ /* "Expecting an '%c'" */
+            ii(0x1014_5c0a, 5); mov(eax, StringDefinitions.ExpectingAnC); /* mov eax, 0x101ad000 */
             ii(0x1014_5c0f, 1); pushd(eax);                             /* push eax */
             ii(0x1014_5c10, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_5c13, 3); pushd(memd_a32[ds, eax + 0x14]);        /* push dword [eax+0x14] */

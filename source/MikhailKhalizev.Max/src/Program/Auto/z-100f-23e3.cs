@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_2414, 3); mov(al, memb_a32[ds, eax + 0x58]);      /* mov al, [eax+0x58] */
             ii(0x100f_2417, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100f_241c, 1); pushd(eax);                             /* push eax */
-            ii(0x100f_241d, 5); mov(eax, 0x101a_23b5);                  /* mov eax, 0x101a23b5 */ /* "Turns to repair unit: %i." */
+            ii(0x100f_241d, 5); mov(eax, StringDefinitions.TurnsToRepairUnitI); /* mov eax, 0x101a23b5 */
             ii(0x100f_2422, 1); pushd(eax);                             /* push eax */
             ii(0x100f_2423, 5); mov(eax, 0xc8);                         /* mov eax, 0xc8 */
             ii(0x100f_2428, 1); pushd(eax);                             /* push eax */

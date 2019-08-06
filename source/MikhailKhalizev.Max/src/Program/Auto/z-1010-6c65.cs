@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6c8e, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_6c91, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6c92, 5); pushd(0x5b_8d80);                       /* push 0x5b8d80 */
-            ii(0x1010_6c97, 5); mov(eax, 0x101a_43d4);                  /* mov eax, 0x101a43d4 */ /* "\nNot enough Extended Memory available to run M.A.X.\nAmount Needed: %i, Amount found: %i\n\n" */
+            ii(0x1010_6c97, 5); mov(eax, StringDefinitions.NotEnoughExtendedMemoryAvailableToRunMAXAmountNeededIAmountFoundI); /* mov eax, 0x101a43d4 */
             ii(0x1010_6c9c, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6c9d, 5); calld(Definitions.sys_printf, 0x6599a); /* call 0x1016c63c */
             ii(0x1010_6ca2, 3); add(esp, 0xc);                          /* add esp, 0xc */

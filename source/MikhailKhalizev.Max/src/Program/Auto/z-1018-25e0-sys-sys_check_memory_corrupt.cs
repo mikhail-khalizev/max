@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_25eb, 3); add(eax, 0x4);                          /* add eax, 0x4 */
             ii(0x1018_25ee, 6); cmp(ecx, 0xfeed_face);                  /* cmp ecx, 0xfeedface */
             ii(0x1018_25f4, 2); if(jzd(0x1018_2603, 0xd)) goto l_0x1018_2603; /* jz 0x10182603 */
-            ii(0x1018_25f6, 5); pushd(0x101b_3384);                     /* push 0x101b3384 */ /* "Memory header stomped.\n" */
+            ii(0x1018_25f6, 5); pushd(StringDefinitions.MemoryHeaderStomped); /* push 0x101b3384 */
             ii(0x1018_25fb, 5); calld(/* sys */ 0x1018_28a8, 0x2a8);    /* call 0x101828a8 */
             ii(0x1018_2600, 3); add(esp, 0x4);                          /* add esp, 0x4 */
         l_0x1018_2603:
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_2608, 3); sub(edx, 0x4);                          /* sub edx, 0x4 */
             ii(0x1018_260b, 6); cmp(edi, 0xbeef_cafe);                  /* cmp edi, 0xbeefcafe */
             ii(0x1018_2611, 2); if(jzd(0x1018_2620, 0xd)) goto l_0x1018_2620; /* jz 0x10182620 */
-            ii(0x1018_2613, 5); pushd(0x101b_339c);                     /* push 0x101b339c */ /* "Memory footer stomped.\n" */
+            ii(0x1018_2613, 5); pushd(StringDefinitions.MemoryFooterStomped); /* push 0x101b339c */
             ii(0x1018_2618, 5); calld(/* sys */ 0x1018_28a8, 0x28b);    /* call 0x101828a8 */
             ii(0x1018_261d, 3); add(esp, 0x4);                          /* add esp, 0x4 */
         l_0x1018_2620:

@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("5a7a7b63-1c6d-448f-bf4f-11a671b0a41b")]
         public void /* sys */ Method_1019_b165()
         {
-            ii(0x1019_b165, 5); mov(eax, 0x101b_3744);                  /* mov eax, 0x101b3744 */ /* "TZ" */
+            ii(0x1019_b165, 5); mov(eax, StringDefinitions.Tz);         /* mov eax, 0x101b3744 */
             ii(0x1019_b16a, 5); calld(/* sys */ 0x1019_54bf, -0x5cb0);  /* call 0x101954bf */
             ii(0x1019_b16f, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1019_b171, 2); jzd_func(0x1019_b14d, -0x26);           /* jz 0x1019b14d */

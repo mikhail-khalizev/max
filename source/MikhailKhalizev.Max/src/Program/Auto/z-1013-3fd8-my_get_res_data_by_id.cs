@@ -31,8 +31,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_4017, 2); jmpd(0x1013_4032, 0x19); goto l_0x1013_4032; /* jmp 0x10134032 */
         l_0x1013_4019:
             ii(0x1013_4019, 5); mov(ecx, 0xb6e);                        /* mov ecx, 0xb6e */
-            ii(0x1013_401e, 5); mov(ebx, 0x101a_89a4);                  /* mov ebx, 0x101a89a4 */ /* "resrcmgr.cpp" */
-            ii(0x1013_4023, 5); mov(edx, 0x101a_89b1);                  /* mov edx, 0x101a89b1 */ /* "DIRnameID < END_MEMORY_RESOURCES" */
+            ii(0x1013_401e, 5); mov(ebx, StringDefinitions.ResrcmgrCpp2); /* mov ebx, 0x101a89a4 */
+            ii(0x1013_4023, 5); mov(edx, StringDefinitions.DirnameidEndMemoryResources); /* mov edx, 0x101a89b1 */
             ii(0x1013_4028, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_402a, 5); calld(Definitions.sys_assert, 0x31d63); /* call 0x10165d92 */
             ii(0x1013_402f, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */

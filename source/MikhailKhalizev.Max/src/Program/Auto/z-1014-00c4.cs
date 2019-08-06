@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_0142, 4); movsx(eax, memw_a32[ss, ebp - 0x18]);   /* movsx eax, word [ebp-0x18] */
             ii(0x1014_0146, 1); pushd(eax);                             /* push eax */
             ii(0x1014_0147, 4); movsx(ecx, memw_a32[ss, ebp + 0x1c]);   /* movsx ecx, word [ebp+0x1c] */
-            ii(0x1014_014b, 5); mov(ebx, 0x101a_ce09);                  /* mov ebx, 0x101ace09 */ /* "Cost" */
+            ii(0x1014_014b, 5); mov(ebx, StringDefinitions.Cost);       /* mov ebx, 0x101ace09 */
             ii(0x1014_0150, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x1014_0154, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1014_0157, 5); calld(0x1013_f4b0, -0xcac);             /* call 0x1013f4b0 */

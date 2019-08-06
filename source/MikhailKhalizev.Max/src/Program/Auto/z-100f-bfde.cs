@@ -29,10 +29,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_c013, 6); mov(edx, memd_a32[ds, eax + 0x101b_b444]); /* mov edx, [eax+0x101bb444] */
             ii(0x100f_c019, 3); lea(eax, ebp - 0xc);                    /* lea eax, [ebp-0xc] */
             ii(0x100f_c01c, 5); calld(0x1014_21cb, 0x461aa);            /* call 0x101421cb */
-            ii(0x100f_c021, 5); mov(edx, 0x101a_2965);                  /* mov edx, 0x101a2965 */ /* ":\n" */
+            ii(0x100f_c021, 5); mov(edx, StringDefinitions.Control27);  /* mov edx, 0x101a2965 */
             ii(0x100f_c026, 3); lea(eax, ebp - 0xc);                    /* lea eax, [ebp-0xc] */
             ii(0x100f_c029, 5); calld(Definitions.my_string_append_char_ptr, 0x45d11); /* call 0x10141d3f */
-            ii(0x100f_c02e, 5); mov(edx, 0x101a_2968);                  /* mov edx, 0x101a2968 */ /* "Select starting location." */
+            ii(0x100f_c02e, 5); mov(edx, StringDefinitions.SelectStartingLocation2); /* mov edx, 0x101a2968 */
             ii(0x100f_c033, 3); lea(eax, ebp - 0xc);                    /* lea eax, [ebp-0xc] */
             ii(0x100f_c036, 5); calld(Definitions.my_string_append_char_ptr, 0x45d04); /* call 0x10141d3f */
             ii(0x100f_c03b, 5); calld(0x100c_aa00, -0x31640);           /* call 0x100caa00 */

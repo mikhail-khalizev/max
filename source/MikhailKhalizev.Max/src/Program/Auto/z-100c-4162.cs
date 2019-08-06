@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_4285, 2); if(jbed(0x100c_4216, -0x71)) goto l_0x100c_4216; /* jbe 0x100c4216 */
             ii(0x100c_4287, 2); jmpd(0x100c_4263, -0x26); goto l_0x100c_4263; /* jmp 0x100c4263 */
         //  ii(0x100c_4289, 4); Недостижимый код.
-l_0x100c_428d:
+        l_0x100c_428d:
             ii(0x100c_428d, 4); cmp(memb_a32[ss, ebp - 0xc], 0x1);      /* cmp byte [ebp-0xc], 0x1 */
             ii(0x100c_4291, 2); if(jbd(0x100c_42a2, 0xf)) goto l_0x100c_42a2; /* jb 0x100c42a2 */
             ii(0x100c_4293, 4); cmp(memb_a32[ss, ebp - 0xc], 0x1);      /* cmp byte [ebp-0xc], 0x1 */

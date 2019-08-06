@@ -253,7 +253,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1a5e, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x1015_1a61, 3); imul(eax, eax, 0x33);                   /* imul eax, eax, 0x33 */
             ii(0x1015_1a64, 6); pushd(memd_a32[ds, eax + 0x101c_81d7]); /* push dword [eax+0x101c81d7] */
-            ii(0x1015_1a6a, 5); mov(eax, 0x101a_de3f);                  /* mov eax, 0x101ade3f */ /* "Cones for %s at [%i,%i] building %s prematurely deleted!" */
+            ii(0x1015_1a6a, 5); mov(eax, StringDefinitions.ConesForSAtIIBuildingSPrematurelyDeleted); /* mov eax, 0x101ade3f */
             ii(0x1015_1a6f, 1); pushd(eax);                             /* push eax */
             ii(0x1015_1a70, 6); lea(eax, ebp - 0xf4);                   /* lea eax, [ebp-0xf4] */
             ii(0x1015_1a76, 1); pushd(eax);                             /* push eax */
@@ -265,9 +265,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1a89, 2); test(al, al);                           /* test al, al */
             ii(0x1015_1a8b, 2); if(jnzd(0x1015_1aa7, 0x1a)) goto l_0x1015_1aa7; /* jnz 0x10151aa7 */
             ii(0x1015_1a8d, 5); mov(ecx, 0xd9e);                        /* mov ecx, 0xd9e */
-            ii(0x1015_1a92, 5); mov(ebx, 0x101a_de78);                  /* mov ebx, 0x101ade78 */ /* "unitinfo.cpp" */
+            ii(0x1015_1a92, 5); mov(ebx, StringDefinitions.UnitinfoCpp5); /* mov ebx, 0x101ade78 */
             ii(0x1015_1a97, 6); lea(edx, ebp - 0xf4);                   /* lea edx, [ebp-0xf4] */
-            ii(0x1015_1a9d, 5); mov(eax, 0x101a_de85);                  /* mov eax, 0x101ade85 */ /* "new_unit != 0" */
+            ii(0x1015_1a9d, 5); mov(eax, StringDefinitions.NewUnit02);  /* mov eax, 0x101ade85 */
             ii(0x1015_1aa2, 5); calld(0x100f_07d4, -0x612d3);           /* call 0x100f07d4 */
         l_0x1015_1aa7:
             ii(0x1015_1aa7, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */

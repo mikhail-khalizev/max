@@ -17,12 +17,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_9f72, 3); sub(esp, 0x10);                         /* sub esp, 0x10 */
             ii(0x1016_9f75, 2); mov(edi, eax);                          /* mov edi, eax */
             ii(0x1016_9f77, 1); pushd(eax);                             /* push eax */
-            ii(0x1016_9f78, 5); pushd(0x101b_2de4);                     /* push 0x101b2de4 */ /* "font%d.fon" */
+            ii(0x1016_9f78, 5); pushd(StringDefinitions.FontDFon);      /* push 0x101b2de4 */
             ii(0x1016_9f7d, 4); lea(eax, esp + 0x8);                    /* lea eax, [esp+0x8] */
             ii(0x1016_9f81, 1); pushd(eax);                             /* push eax */
             ii(0x1016_9f82, 5); calld(Definitions.sys_sprintf, -0x4086); /* call 0x10165f01 */
             ii(0x1016_9f87, 3); add(esp, 0xc);                          /* add esp, 0xc */
-            ii(0x1016_9f8a, 5); mov(edx, 0x101b_2df0);                  /* mov edx, 0x101b2df0 */ /* "rb" */
+            ii(0x1016_9f8a, 5); mov(edx, StringDefinitions.Rb);         /* mov edx, 0x101b2df0 */
             ii(0x1016_9f8f, 2); mov(eax, esp);                          /* mov eax, esp */
             ii(0x1016_9f91, 5); calld(Definitions.sys_fopen_internal, 0x482e); /* call 0x1016e7c4 */
             ii(0x1016_9f96, 2); mov(esi, eax);                          /* mov esi, eax */

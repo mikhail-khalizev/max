@@ -54,8 +54,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_8f9c, 2); jmpd(0x1012_8fb7, 0x19); goto l_0x1012_8fb7; /* jmp 0x10128fb7 */
         l_0x1012_8f9e:
             ii(0x1012_8f9e, 5); mov(ecx, 0xb75);                        /* mov ecx, 0xb75 */
-            ii(0x1012_8fa3, 5); mov(ebx, 0x101a_830b);                  /* mov ebx, 0x101a830b */ /* "remote.cpp" */
-            ii(0x1012_8fa8, 5); mov(edx, 0x101a_8316);                  /* mov edx, 0x101a8316 */ /* "outStream.pktHdr.pktLength <= MAXDATALEN" */
+            ii(0x1012_8fa3, 5); mov(ebx, StringDefinitions.RemoteCpp);  /* mov ebx, 0x101a830b */
+            ii(0x1012_8fa8, 5); mov(edx, StringDefinitions.OutstreamPkthdrPktlengthMaxdatalen); /* mov edx, 0x101a8316 */
             ii(0x1012_8fad, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1012_8faf, 5); calld(Definitions.sys_assert, 0x3cdde); /* call 0x10165d92 */
             ii(0x1012_8fb4, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */

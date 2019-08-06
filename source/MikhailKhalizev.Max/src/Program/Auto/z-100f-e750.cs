@@ -62,10 +62,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_e7fc, 3); mov(memb_a32[ss, ebp - 0x14], al);      /* mov [ebp-0x14], al */
             ii(0x100f_e7ff, 5); jmpd(0x100f_e90c, 0x108); goto l_0x100f_e90c; /* jmp 0x100fe90c */
         //  ii(0x100f_e804, 242); Недостижимый код.
-l_0x100f_e8f6:
+        l_0x100f_e8f6:
             ii(0x100f_e8f6, 2); jmpd(0x100f_e927, 0x2f); goto l_0x100f_e927; /* jmp 0x100fe927 */
         //  ii(0x100f_e8f8, 20); Недостижимый код.
-l_0x100f_e90c:
+        l_0x100f_e90c:
             ii(0x100f_e90c, 3); mov(al, memb_a32[ss, ebp - 0x14]);      /* mov al, [ebp-0x14] */
             ii(0x100f_e90f, 3); mov(memb_a32[ss, ebp - 0x18], al);      /* mov [ebp-0x18], al */
             ii(0x100f_e912, 4); cmp(memb_a32[ss, ebp - 0x18], 0x4);     /* cmp byte [ebp-0x18], 0x4 */
@@ -122,14 +122,14 @@ l_0x100f_e90c:
             ii(0x100f_e9a7, 4); movsx(eax, memb_a32[ss, ebp - 0x1c]);   /* movsx eax, byte [ebp-0x1c] */
             ii(0x100f_e9ab, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x100f_e9ae, 6); pushd(memd_a32[ds, eax + 0x101b_d42c]); /* push dword [eax+0x101bd42c] */
-            ii(0x100f_e9b4, 5); mov(eax, 0x101a_2a7d);                  /* mov eax, 0x101a2a7d */ /* "save10.%s" */
+            ii(0x100f_e9b4, 5); mov(eax, StringDefinitions.Save10S);    /* mov eax, 0x101a2a7d */
             ii(0x100f_e9b9, 1); pushd(eax);                             /* push eax */
             ii(0x100f_e9ba, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
             ii(0x100f_e9bd, 1); pushd(eax);                             /* push eax */
             ii(0x100f_e9be, 5); calld(Definitions.sys_sprintf, 0x6753e); /* call 0x10165f01 */
             ii(0x100f_e9c3, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x100f_e9c6, 6); pushd(memd_a32[ds, 0x101c_37dc]);       /* push dword [0x101c37dc] */
-            ii(0x100f_e9cc, 5); mov(eax, 0x101a_2a87);                  /* mov eax, 0x101a2a87 */ /* "Auto-Saved turn %i" */
+            ii(0x100f_e9cc, 5); mov(eax, StringDefinitions.AutoSavedTurnI); /* mov eax, 0x101a2a87 */
             ii(0x100f_e9d1, 1); pushd(eax);                             /* push eax */
             ii(0x100f_e9d2, 3); lea(eax, ebp - 0x4c);                   /* lea eax, [ebp-0x4c] */
             ii(0x100f_e9d5, 1); pushd(eax);                             /* push eax */

@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_08d3, 5); calld(0x100c_b5c8, -0x75310);           /* call 0x100cb5c8 */
             ii(0x1014_08d8, 1); cwde();                                 /* cwde */
             ii(0x1014_08d9, 1); pushd(eax);                             /* push eax */
-            ii(0x1014_08da, 5); mov(eax, 0x101a_ce0e);                  /* mov eax, 0x101ace0e */ /* "Task Manager (%i reminders queued)" */
+            ii(0x1014_08da, 5); mov(eax, StringDefinitions.TaskManagerIRemindersQueued); /* mov eax, 0x101ace0e */
             ii(0x1014_08df, 1); pushd(eax);                             /* push eax */
             ii(0x1014_08e0, 3); lea(eax, ebp - 0x7c);                   /* lea eax, [ebp-0x7c] */
             ii(0x1014_08e3, 1); pushd(eax);                             /* push eax */

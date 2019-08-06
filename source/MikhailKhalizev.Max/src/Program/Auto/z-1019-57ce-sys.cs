@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_581e, 5); mov(edx, 0x101c_07ca);                  /* mov edx, 0x101c07ca */
             ii(0x1019_5823, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1019_5828, 5); calld(Definitions.sys_strcpy, -0x2f95e); /* call 0x10165ecf */
-            ii(0x1019_582d, 5); mov(edx, 0x101b_3458);                  /* mov edx, 0x101b3458 */ /* "hmidrv.386" */
+            ii(0x1019_582d, 5); mov(edx, StringDefinitions.Hmidrv386);  /* mov edx, 0x101b3458 */
             ii(0x1019_5832, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1019_5837, 5); calld(Definitions.sys_strcat, -0x2f90b); /* call 0x10165f31 */
             ii(0x1019_583c, 5); pushd(0x200);                           /* push 0x200 */

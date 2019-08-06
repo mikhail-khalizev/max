@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_3627, 5); calld(0x1010_4470, 0xe44);              /* call 0x10104470 */
             ii(0x1010_362c, 2); jmpd(0x1010_3638, 0xa); goto l_0x1010_3638; /* jmp 0x10103638 */
         //  ii(0x1010_362e, 10); Недостижимый код.
-l_0x1010_3638:
+        l_0x1010_3638:
             ii(0x1010_3638, 3); mov(eax, memd_a32[ss, ebp - 0x1c]);     /* mov eax, [ebp-0x1c] */
             ii(0x1010_363b, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1010_363d, 1); popd(ebp);                              /* pop ebp */

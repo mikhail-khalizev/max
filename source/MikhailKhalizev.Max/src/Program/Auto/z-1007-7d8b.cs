@@ -172,7 +172,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_7f6c, 5); calld(0x1007_5f6c, -0x2005);            /* call 0x10075f6c */
             ii(0x1007_7f71, 2); jmpd(0x1007_7f7d, 0xa); goto l_0x1007_7f7d; /* jmp 0x10077f7d */
         //  ii(0x1007_7f73, 10); Недостижимый код.
-l_0x1007_7f7d:
+        l_0x1007_7f7d:
             ii(0x1007_7f7d, 3); mov(al, memb_a32[ss, ebp - 0x14]);      /* mov al, [ebp-0x14] */
             ii(0x1007_7f80, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1007_7f82, 1); popd(ebp);                              /* pop ebp */

@@ -32,8 +32,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_788a, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x1013_788d, 2); jmpd(0x1013_789d, 0xe); goto l_0x1013_789d; /* jmp 0x1013789d */
         l_0x1013_788f:
-            ii(0x1013_788f, 7); mov(memd_a32[ss, ebp - 0xc], 0x101a_c7d4); /* mov dword [ebp-0xc], 0x101ac7d4 */ /* "" */
-            ii(0x1013_7896, 7); mov(memd_a32[ss, ebp - 0x10], 0x101a_c7d5); /* mov dword [ebp-0x10], 0x101ac7d5 */ /* "" */
+            ii(0x1013_788f, 7); mov(memd_a32[ss, ebp - 0xc], StringDefinitions.Empty9); /* mov dword [ebp-0xc], 0x101ac7d4 */
+            ii(0x1013_7896, 7); mov(memd_a32[ss, ebp - 0x10], StringDefinitions.Empty10); /* mov dword [ebp-0x10], 0x101ac7d5 */
         l_0x1013_789d:
             ii(0x1013_789d, 2); pushd(0x5);                             /* push 0x5 */
             ii(0x1013_789f, 3); mov(ecx, memd_a32[ss, ebp - 0xc]);      /* mov ecx, [ebp-0xc] */

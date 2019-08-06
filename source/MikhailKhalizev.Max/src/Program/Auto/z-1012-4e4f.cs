@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1012_4e79:
             ii(0x1012_4e79, 5); mov(eax, 0x5e);                         /* mov eax, 0x5e */
             ii(0x1012_4e7e, 5); calld(0x1012_4dd5, -0xae);              /* call 0x10124dd5 */
-            ii(0x1012_4e83, 5); mov(eax, 0x101a_8186);                  /* mov eax, 0x101a8186 */ /* "Connect" */
+            ii(0x1012_4e83, 5); mov(eax, StringDefinitions.Connect);    /* mov eax, 0x101a8186 */
             ii(0x1012_4e88, 5); calld(0x1012_4c13, -0x27a);             /* call 0x10124c13 */
             ii(0x1012_4e8d, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
         l_0x1012_4e90:

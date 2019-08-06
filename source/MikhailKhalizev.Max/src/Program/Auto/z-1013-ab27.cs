@@ -41,8 +41,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_ab86, 2); jmpd(0x1013_aba1, 0x19); goto l_0x1013_aba1; /* jmp 0x1013aba1 */
         l_0x1013_ab88:
             ii(0x1013_ab88, 5); mov(ecx, 0x24);                         /* mov ecx, 0x24 */
-            ii(0x1013_ab8d, 5); mov(ebx, 0x101a_cc20);                  /* mov ebx, 0x101acc20 */ /* "smartptr.cpp" */
-            ii(0x1013_ab92, 5); mov(edx, 0x101a_cc2d);                  /* mov edx, 0x101acc2d */ /* "reference_count == 0" */
+            ii(0x1013_ab8d, 5); mov(ebx, StringDefinitions.SmartptrCpp); /* mov ebx, 0x101acc20 */
+            ii(0x1013_ab92, 5); mov(edx, StringDefinitions.ReferenceCount0); /* mov edx, 0x101acc2d */
             ii(0x1013_ab97, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_ab99, 5); calld(Definitions.sys_assert, 0x2b1f4); /* call 0x10165d92 */
             ii(0x1013_ab9e, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */

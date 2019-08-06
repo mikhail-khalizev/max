@@ -22,9 +22,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_3e5b, 4); cmp(memd_a32[ss, ebp - 0x4], 0);        /* cmp dword [ebp-0x4], 0x0 */
             ii(0x1010_3e5f, 2); if(jnzd(0x1010_3e7a, 0x19)) goto l_0x1010_3e7a; /* jnz 0x10103e7a */
             ii(0x1010_3e61, 5); mov(ecx, 0x193);                        /* mov ecx, 0x193 */
-            ii(0x1010_3e66, 5); mov(ebx, 0x101a_322b);                  /* mov ebx, 0x101a322b */ /* "hash.cpp" */
-            ii(0x1010_3e6b, 5); mov(edx, 0x101a_3234);                  /* mov edx, 0x101a3234 */ /* "Attempted to add NULL unit from unit hash table." */
-            ii(0x1010_3e70, 5); mov(eax, 0x101a_3265);                  /* mov eax, 0x101a3265 */ /* "unit != 0" */
+            ii(0x1010_3e66, 5); mov(ebx, StringDefinitions.HashCpp3);   /* mov ebx, 0x101a322b */
+            ii(0x1010_3e6b, 5); mov(edx, StringDefinitions.AttemptedToAddNullUnitFromUnitHashTable); /* mov edx, 0x101a3234 */
+            ii(0x1010_3e70, 5); mov(eax, StringDefinitions.Unit03);     /* mov eax, 0x101a3265 */
             ii(0x1010_3e75, 5); calld(0x100f_07d4, -0x136a6);           /* call 0x100f07d4 */
         l_0x1010_3e7a:
             ii(0x1010_3e7a, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */

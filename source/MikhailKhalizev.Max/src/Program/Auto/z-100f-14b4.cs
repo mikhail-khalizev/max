@@ -241,7 +241,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_178c, 3); movsx(ecx, ax);                         /* movsx ecx, ax */
             ii(0x100f_178f, 5); calld(0x100d_52f8, -0x1c49c);           /* call 0x100d52f8 */
             ii(0x100f_1794, 3); movsx(ebx, ax);                         /* movsx ebx, ax */
-            ii(0x100f_1797, 5); mov(edx, 0x101a_22f1);                  /* mov edx, 0x101a22f1 */ /* "Cancel" */
+            ii(0x100f_1797, 5); mov(edx, StringDefinitions.Cancel4);    /* mov edx, 0x101a22f1 */
             ii(0x100f_179c, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x100f_179f, 3); mov(eax, memd_a32[ds, eax + 0x14]);     /* mov eax, [eax+0x14] */
             ii(0x100f_17a2, 5); calld(0x100c_ef64, -0x22843);           /* call 0x100cef64 */

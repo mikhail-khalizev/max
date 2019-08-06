@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_9d19, 5); calld(0x1014_8574, 0x1e856);            /* call 0x10148574 */
             ii(0x1012_9d1e, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1012_9d20, 5); mov(edx, 0x3);                          /* mov edx, 0x3 */
-            ii(0x1012_9d25, 5); mov(eax, 0x101a_83cd);                  /* mov eax, 0x101a83cd */ /* "+++" */
+            ii(0x1012_9d25, 5); mov(eax, StringDefinitions.Control28);  /* mov eax, 0x101a83cd */
             ii(0x1012_9d2a, 5); calld(0x1012_4890, -0x549f);            /* call 0x10124890 */
             ii(0x1012_9d2f, 5); mov(eax, 0x24_69b8);                    /* mov eax, 0x2469b8 */
             ii(0x1012_9d34, 5); calld(0x1014_8574, 0x1e83b);            /* call 0x10148574 */

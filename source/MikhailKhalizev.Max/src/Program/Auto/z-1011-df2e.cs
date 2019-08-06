@@ -202,8 +202,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_e194, 2); jmpd(0x1011_e1af, 0x19); goto l_0x1011_e1af; /* jmp 0x1011e1af */
         l_0x1011_e196:
             ii(0x1011_e196, 5); mov(ecx, 0xacb);                        /* mov ecx, 0xacb */
-            ii(0x1011_e19b, 5); mov(ebx, 0x101a_7d9e);                  /* mov ebx, 0x101a7d9e */ /* "paths.cpp" */
-            ii(0x1011_e1a0, 5); mov(edx, 0x101a_7da8);                  /* mov edx, 0x101a7da8 */ /* "backward_searcher != 0" */
+            ii(0x1011_e19b, 5); mov(ebx, StringDefinitions.PathsCpp);   /* mov ebx, 0x101a7d9e */
+            ii(0x1011_e1a0, 5); mov(edx, StringDefinitions.BackwardSearcher0); /* mov edx, 0x101a7da8 */
             ii(0x1011_e1a5, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1011_e1a7, 5); calld(Definitions.sys_assert, 0x47be6); /* call 0x10165d92 */
             ii(0x1011_e1ac, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */
@@ -232,7 +232,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_e1f5, 5); calld(0x1014_85ad, 0x2a3b3);            /* call 0x101485ad */
             ii(0x1011_e1fa, 1); pushd(eax);                             /* push eax */
             ii(0x1011_e1fb, 6); pushd(memd_a32[ds, 0x101c_52e8]);       /* push dword [0x101c52e8] */
-            ii(0x1011_e201, 5); mov(eax, 0x101a_7dbf);                  /* mov eax, 0x101a7dbf */ /* "Debug: path generator evaluated %li tiles in %li msecs, max depth = %i" */
+            ii(0x1011_e201, 5); mov(eax, StringDefinitions.DebugPathGeneratorEvaluatedLiTilesInLiMsecsMaxDepthI); /* mov eax, 0x101a7dbf */
             ii(0x1011_e206, 1); pushd(eax);                             /* push eax */
             ii(0x1011_e207, 6); lea(eax, ebp - 0x9c);                   /* lea eax, [ebp-0x9c] */
             ii(0x1011_e20d, 1); pushd(eax);                             /* push eax */

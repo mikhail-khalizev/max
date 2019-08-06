@@ -45,8 +45,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_3fd1, 2); jmpd(0x100f_3fec, 0x19); goto l_0x100f_3fec; /* jmp 0x100f3fec */
         l_0x100f_3fd3:
             ii(0x100f_3fd3, 5); mov(ecx, 0x786);                        /* mov ecx, 0x786 */
-            ii(0x100f_3fd8, 5); mov(ebx, 0x101a_2511);                  /* mov ebx, 0x101a2511 */ /* "gamemgr.cpp" */
-            ii(0x100f_3fdd, 5); mov(edx, 0x101a_251d);                  /* mov edx, 0x101a251d */ /* "temp_tape != 0" */
+            ii(0x100f_3fd8, 5); mov(ebx, StringDefinitions.GamemgrCpp); /* mov ebx, 0x101a2511 */
+            ii(0x100f_3fdd, 5); mov(edx, StringDefinitions.TempTape0);  /* mov edx, 0x101a251d */
             ii(0x100f_3fe2, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_3fe4, 5); calld(Definitions.sys_assert, 0x71da9); /* call 0x10165d92 */
             ii(0x100f_3fe9, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */

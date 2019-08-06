@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_ec22, 5); calld(Definitions.sys_strcat, 0x2730a); /* call 0x10165f31 */
             ii(0x1013_ec27, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1013_ec2a, 5); calld(Definitions.sys_delete, 0x27335); /* call 0x10165f64 */
-            ii(0x1013_ec2f, 5); mov(edx, 0x101a_cd43);                  /* mov edx, 0x101acd43 */ /* "rb" */
+            ii(0x1013_ec2f, 5); mov(edx, StringDefinitions.Rb4);        /* mov edx, 0x101acd43 */
             ii(0x1013_ec34, 3); lea(eax, ebp - 0x78);                   /* lea eax, [ebp-0x78] */
             ii(0x1013_ec37, 5); calld(Definitions.my_fopen, -0x4f81d);  /* call 0x100ef41f */
             ii(0x1013_ec3c, 3); mov(memd_a32[ss, ebp - 0x7c], eax);     /* mov [ebp-0x7c], eax */
@@ -75,7 +75,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_ec7b, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1013_ec7e, 10); mov(memd_a32[ds, eax + 0xdbd], 0x4300); /* mov dword [eax+0xdbd], 0x4300 */
             ii(0x1013_ec88, 5); mov(ebx, 0x4);                          /* mov ebx, 0x4 */
-            ii(0x1013_ec8d, 5); mov(edx, 0x101a_cd46);                  /* mov edx, 0x101acd46 */ /* "RIFF" */
+            ii(0x1013_ec8d, 5); mov(edx, StringDefinitions.Riff2);      /* mov edx, 0x101acd46 */
             ii(0x1013_ec92, 6); lea(eax, ebp - 0xa0);                   /* lea eax, [ebp-0xa0] */
             ii(0x1013_ec98, 5); calld(Definitions.sys_strncmp, 0x3a4bf); /* call 0x1017915c */
             ii(0x1013_ec9d, 2); test(eax, eax);                         /* test eax, eax */
@@ -322,7 +322,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_f03d, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1013_f03f, 2); if(jzd(0x1013_f07f, 0x3e)) goto l_0x1013_f07f; /* jz 0x1013f07f */
             ii(0x1013_f041, 5); mov(ebx, 0x4);                          /* mov ebx, 0x4 */
-            ii(0x1013_f046, 5); mov(edx, 0x101a_cd4b);                  /* mov edx, 0x101acd4b */ /* "smpl" */
+            ii(0x1013_f046, 5); mov(edx, StringDefinitions.Smpl);       /* mov edx, 0x101acd4b */
             ii(0x1013_f04b, 6); lea(eax, ebp - 0xec);                   /* lea eax, [ebp-0xec] */
             ii(0x1013_f051, 5); calld(Definitions.sys_strncmp, 0x3a106); /* call 0x1017915c */
             ii(0x1013_f056, 2); test(eax, eax);                         /* test eax, eax */

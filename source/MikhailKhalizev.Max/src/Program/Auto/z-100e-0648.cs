@@ -26,8 +26,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_0672, 2); jmpd(0x100e_068d, 0x19); goto l_0x100e_068d; /* jmp 0x100e068d */
         l_0x100e_0674:
             ii(0x100e_0674, 5); mov(ecx, 0x112);                        /* mov ecx, 0x112 */
-            ii(0x100e_0679, 5); mov(ebx, 0x101a_17c4);                  /* mov ebx, 0x101a17c4 */ /* "textfile.h" */
-            ii(0x100e_067e, 5); mov(edx, 0x101a_17cf);                  /* mov edx, 0x101a17cf */ /* "ptr != 0" */
+            ii(0x100e_0679, 5); mov(ebx, StringDefinitions.TextfileH2); /* mov ebx, 0x101a17c4 */
+            ii(0x100e_067e, 5); mov(edx, StringDefinitions.Ptr016);     /* mov edx, 0x101a17cf */
             ii(0x100e_0683, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_0685, 5); calld(Definitions.sys_assert, 0x85708); /* call 0x10165d92 */
             ii(0x100e_068a, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */

@@ -39,12 +39,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_10ba, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x100a_10bd, 3); add(eax, 0x48);                         /* add eax, 0x48 */
             ii(0x100a_10c0, 5); calld(0x1008_b2a8, -0x15e1d);           /* call 0x1008b2a8 */
-            ii(0x100a_10c5, 5); mov(eax, 0x101a_0922);                  /* mov eax, 0x101a0922 */ /* "fuel" */
+            ii(0x100a_10c5, 5); mov(eax, StringDefinitions.Fuel2);      /* mov eax, 0x101a0922 */
             ii(0x100a_10ca, 1); pushd(eax);                             /* push eax */
             ii(0x100a_10cb, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x100a_10cf, 3); imul(eax, eax, 0x33);                   /* imul eax, eax, 0x33 */
             ii(0x100a_10d2, 6); pushd(memd_a32[ds, eax + 0x101c_81d7]); /* push dword [eax+0x101c81d7] */
-            ii(0x100a_10d8, 5); mov(eax, 0x101a_0927);                  /* mov eax, 0x101a0927 */ /* "Cannot turn %s on, %s needed.\n" */
+            ii(0x100a_10d8, 5); mov(eax, StringDefinitions.CannotTurnSOnSNeeded4); /* mov eax, 0x101a0927 */
             ii(0x100a_10dd, 1); pushd(eax);                             /* push eax */
             ii(0x100a_10de, 6); lea(eax, ebp - 0x138);                  /* lea eax, [ebp-0x138] */
             ii(0x100a_10e4, 1); pushd(eax);                             /* push eax */

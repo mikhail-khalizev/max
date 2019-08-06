@@ -57,7 +57,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_1ea7, 3); mov(edx, memd_a32[ss, ebp - 0x14]);     /* mov edx, [ebp-0x14] */
             ii(0x1011_1eaa, 5); mov(eax, 0x6c0);                        /* mov eax, 0x6c0 */
             ii(0x1011_1eaf, 5); calld(0x100e_8c51, -0x29263);           /* call 0x100e8c51 */
-            ii(0x1011_1eb4, 5); mov(edx, 0x101a_4714);                  /* mov edx, 0x101a4714 */ /* "Main Menu" */
+            ii(0x1011_1eb4, 5); mov(edx, StringDefinitions.MainMenu);   /* mov edx, 0x101a4714 */
             ii(0x1011_1eb9, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x1011_1ebc, 5); calld(0x1010_c628, -0x5899);            /* call 0x1010c628 */
             ii(0x1011_1ec1, 2); xor(ebx, ebx);                          /* xor ebx, ebx */

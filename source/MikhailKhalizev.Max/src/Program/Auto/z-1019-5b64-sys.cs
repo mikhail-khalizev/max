@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5b75, 1); int3();                                 /* int3 */
             ii(0x1019_5b76, 2); jmpd(0x1019_5b7e, 0x6); goto l_0x1019_5b7e; /* jmp 0x10195b7e */
         //  ii(0x1019_5b78, 6); Недостижимый код.
-l_0x1019_5b7e:
+        l_0x1019_5b7e:
             ii(0x1019_5b7e, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
             ii(0x1019_5b83, 3); add(esp, 0x8);                          /* add esp, 0x8 */
             ii(0x1019_5b86, 1); retd(); return;                         /* ret */

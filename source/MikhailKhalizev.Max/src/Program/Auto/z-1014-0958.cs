@@ -103,7 +103,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_0a6d, 3); add(eax, 0x1c);                         /* add eax, 0x1c */
             ii(0x1014_0a70, 5); calld(0x1014_159c, 0xb27);              /* call 0x1014159c */
             ii(0x1014_0a75, 2); mov(ecx, eax);                          /* mov ecx, eax */
-            ii(0x1014_0a77, 5); mov(ebx, 0x101a_ce31);                  /* mov ebx, 0x101ace31 */ /* "Parent: " */
+            ii(0x1014_0a77, 5); mov(ebx, StringDefinitions.Parent);     /* mov ebx, 0x101ace31 */
             ii(0x1014_0a7c, 4); movsx(edx, memw_a32[ss, ebp - 0x10]);   /* movsx edx, word [ebp-0x10] */
             ii(0x1014_0a80, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_0a83, 5); calld(0x1014_0845, -0x243);             /* call 0x10140845 */
@@ -120,7 +120,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_0aa3, 3); add(eax, 0x1c);                         /* add eax, 0x1c */
             ii(0x1014_0aa6, 5); calld(0x1014_159c, 0xaf1);              /* call 0x1014159c */
             ii(0x1014_0aab, 2); mov(ecx, eax);                          /* mov ecx, eax */
-            ii(0x1014_0aad, 5); mov(ebx, 0x101a_ce3a);                  /* mov ebx, 0x101ace3a */ /* "Task: " */
+            ii(0x1014_0aad, 5); mov(ebx, StringDefinitions.Task);       /* mov ebx, 0x101ace3a */
             ii(0x1014_0ab2, 4); movsx(edx, memw_a32[ss, ebp - 0x10]);   /* movsx edx, word [ebp-0x10] */
             ii(0x1014_0ab6, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_0ab9, 5); calld(0x1014_0845, -0x279);             /* call 0x10140845 */
@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_0acd, 3); add(eax, 0x1c);                         /* add eax, 0x1c */
             ii(0x1014_0ad0, 5); calld(0x1014_159c, 0xac7);              /* call 0x1014159c */
             ii(0x1014_0ad5, 2); mov(ecx, eax);                          /* mov ecx, eax */
-            ii(0x1014_0ad7, 5); mov(ebx, 0x101a_ce41);                  /* mov ebx, 0x101ace41 */ /* "Child: " */
+            ii(0x1014_0ad7, 5); mov(ebx, StringDefinitions.Child);      /* mov ebx, 0x101ace41 */
             ii(0x1014_0adc, 4); movsx(edx, memw_a32[ss, ebp - 0x10]);   /* movsx edx, word [ebp-0x10] */
             ii(0x1014_0ae0, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_0ae3, 5); calld(0x1014_0845, -0x2a3);             /* call 0x10140845 */

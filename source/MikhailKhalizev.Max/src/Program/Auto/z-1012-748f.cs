@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_74e3, 4); movsx(eax, memw_a32[ss, ebp - 0xc]);    /* movsx eax, word [ebp-0xc] */
             ii(0x1012_74e7, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x1012_74ea, 6); pushd(memd_a32[ds, eax + 0x101b_b444]); /* push dword [eax+0x101bb444] */
-            ii(0x1012_74f0, 5); mov(eax, 0x101a_822b);                  /* mov eax, 0x101a822b */ /* "%s does not respond. Terminating Connection." */
+            ii(0x1012_74f0, 5); mov(eax, StringDefinitions.SDoesNotRespondTerminatingConnection); /* mov eax, 0x101a822b */
             ii(0x1012_74f5, 1); pushd(eax);                             /* push eax */
             ii(0x1012_74f6, 5); mov(eax, 0x101c_5e74);                  /* mov eax, 0x101c5e74 */
             ii(0x1012_74fb, 1); pushd(eax);                             /* push eax */
@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_7513, 4); movsx(eax, memw_a32[ss, ebp - 0xc]);    /* movsx eax, word [ebp-0xc] */
             ii(0x1012_7517, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x1012_751a, 6); pushd(memd_a32[ds, eax + 0x101b_b444]); /* push dword [eax+0x101bb444] */
-            ii(0x1012_7520, 5); mov(eax, 0x101a_8258);                  /* mov eax, 0x101a8258 */ /* "%s has left the game." */
+            ii(0x1012_7520, 5); mov(eax, StringDefinitions.SHasLeftTheGame); /* mov eax, 0x101a8258 */
             ii(0x1012_7525, 1); pushd(eax);                             /* push eax */
             ii(0x1012_7526, 5); mov(eax, 0x101c_5e74);                  /* mov eax, 0x101c5e74 */
             ii(0x1012_752b, 1); pushd(eax);                             /* push eax */

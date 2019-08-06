@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_52ff, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
             ii(0x1019_5304, 2); jmpd(0x1019_531a, 0x14); goto l_0x1019_531a; /* jmp 0x1019531a */
         //  ii(0x1019_5306, 3); Недостижимый код.
-l_0x1019_5309:
+        l_0x1019_5309:
             ii(0x1019_5309, 3); mov(esi, memd_a32[ss, ebp + 0xc]);      /* mov esi, [ebp+0xc] */
             ii(0x1019_530c, 3); mov(memw_a32[ds, esi], dx);             /* mov [esi], dx */
             ii(0x1019_530f, 3); mov(esi, memd_a32[ss, ebp + 0x10]);     /* mov esi, [ebp+0x10] */

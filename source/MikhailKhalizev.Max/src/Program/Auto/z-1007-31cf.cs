@@ -57,8 +57,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_3267, 2); jmpd(0x1007_3282, 0x19); goto l_0x1007_3282; /* jmp 0x10073282 */
         l_0x1007_3269:
             ii(0x1007_3269, 5); mov(ecx, 0x5c2);                        /* mov ecx, 0x5c2 */
-            ii(0x1007_326e, 5); mov(ebx, 0x101a_0054);                  /* mov ebx, 0x101a0054 */ /* "access.cpp" */
-            ii(0x1007_3273, 5); mov(edx, 0x101a_005f);                  /* mov edx, 0x101a005f */ /* "enemy != 0" */
+            ii(0x1007_326e, 5); mov(ebx, StringDefinitions.AccessCpp);  /* mov ebx, 0x101a0054 */
+            ii(0x1007_3273, 5); mov(edx, StringDefinitions.Enemy0);     /* mov edx, 0x101a005f */
             ii(0x1007_3278, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1007_327a, 5); calld(Definitions.sys_assert, 0xf2b13); /* call 0x10165d92 */
             ii(0x1007_327f, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */

@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_56d6, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_56d9, 7); cmp(memb_a32[ds, eax + 0x470], 0);      /* cmp byte [eax+0x470], 0x0 */
             ii(0x1010_56e0, 2); if(jzd(0x1010_56f1, 0xf)) goto l_0x1010_56f1; /* jz 0x101056f1 */
-            ii(0x1010_56e2, 5); mov(edx, 0x101a_32f5);                  /* mov edx, 0x101a32f5 */ /* "Enter: End Turn\n\nF: Find Selected Unit. Currently selected unit will be centered on screen.\n\n-,+: Zoom In, Out\n\nG: Turns on Grid Display\n\nF1: Centers on Tagged Unit\n\nArrow Keys: Scrolls the map\n\nALT-P: Pause the game\n\nALT-F: Opens the Load/Save Game Menu\n\nALT-L: Use to quick load a game\n\nALT-S: Use to quick save a game\n\nALT-X: Exits the Game to the Main Menu\n\nALT-F5, ALT-F6, ALT-F7, ALT-F8: Saves the current window position\n\nF5, F6, F7, F8: Jumps to a previously saved window position\n\n?: Initiates HELP mode.  The cursor changes to a question mark, clicking on screen items will display help text.\n\nALT-C: Saves a screen shot of the game in PCX format.\n\nShift: Hold the Shift key while selecting units to create groups.\n\nShift-Done: Holding the Shift key while clicking on the Done button will start in motion all units that are waiting to move along a path.\n\nHot keys for unit commands:\n\nPress 1 for these functions:\n...Activate\n...Allocate\n...Auto-Survey\n...Build\n...Buy Upgrade\n...Disable\n...Place Mines\n...Reload\n...Repair\n...Research\n\nPress 2 for these functions:\n...Load\n...Start\n...Steal\n\nPress 3 for these functions:\n...Attack\n...Transfer\n\nPress 4 for the Manual function.\n\nPress 5 for these functions:\n...Enter\n...Upgrade\n\nPress 6 for the Upgrade All function.\n\nPress 7 for the Stop function.\n\nPress 8 for the Sentry function.\n\nPress 9 for the Done function.\n\nPress 0 for the Remove function.\n" */
+            ii(0x1010_56e2, 5); mov(edx, StringDefinitions.EnterEndTurnFFindSelectedUnitCurrentlySelectedUnitWillBeCenteredOnScreenZoomInOutGTurnsOnGridDisplayF1CentersOnTaggedUnitArrowKe); /* mov edx, 0x101a32f5 */
             ii(0x1010_56e7, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_56ea, 5); calld(0x1010_53e9, -0x306);             /* call 0x101053e9 */
             ii(0x1010_56ef, 2); jmpd(0x1010_570d, 0x1c); goto l_0x1010_570d; /* jmp 0x1010570d */
@@ -166,7 +166,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_5870, 2); if(jzd(0x1010_5805, -0x6d)) goto l_0x1010_5805; /* jz 0x10105805 */
             ii(0x1010_5872, 2); jmpd(0x1010_582b, -0x49); goto l_0x1010_582b; /* jmp 0x1010582b */
         //  ii(0x1010_5874, 2); Недостижимый код.
-l_0x1010_5876:
+        l_0x1010_5876:
             ii(0x1010_5876, 7); cmp(memd_a32[ss, ebp - 0x10], 0x151);   /* cmp dword [ebp-0x10], 0x151 */
             ii(0x1010_587d, 2); if(jbd(0x1010_589b, 0x1c)) goto l_0x1010_589b; /* jb 0x1010589b */
             ii(0x1010_587f, 7); cmp(memd_a32[ss, ebp - 0x10], 0x151);   /* cmp dword [ebp-0x10], 0x151 */

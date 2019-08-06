@@ -88,7 +88,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4cfe, 7); cmp(memb_a32[ds, 0x101c_5630], 0);      /* cmp byte [0x101c5630], 0x0 */
             ii(0x1012_4d05, 2); if(jnzd(0x1012_4d21, 0x1a)) goto l_0x1012_4d21; /* jnz 0x10124d21 */
             ii(0x1012_4d07, 8); add(memw_a32[ds, 0x101c_59c6], 0xc);    /* add word [0x101c59c6], 0xc */
-            ii(0x1012_4d0f, 5); mov(eax, 0x101a_8170);                  /* mov eax, 0x101a8170 */ /* "Command terminated!" */
+            ii(0x1012_4d0f, 5); mov(eax, StringDefinitions.CommandTerminated); /* mov eax, 0x101a8170 */
             ii(0x1012_4d14, 5); calld(0x1012_4b19, -0x200);             /* call 0x10124b19 */
             ii(0x1012_4d19, 8); add(memw_a32[ds, 0x101c_59c6], 0xc);    /* add word [0x101c59c6], 0xc */
         l_0x1012_4d21:

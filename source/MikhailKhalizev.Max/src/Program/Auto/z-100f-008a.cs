@@ -34,8 +34,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_00d2, 2); jmpd(0x100f_00ed, 0x19); goto l_0x100f_00ed; /* jmp 0x100f00ed */
         l_0x100f_00d4:
             ii(0x100f_00d4, 5); mov(ecx, 0x115);                        /* mov ecx, 0x115 */
-            ii(0x100f_00d9, 5); mov(ebx, 0x101a_220c);                  /* mov ebx, 0x101a220c */ /* "flicsmgr.cpp" */
-            ii(0x100f_00de, 5); mov(edx, 0x101a_2219);                  /* mov edx, 0x101a2219 */ /* "file != 0" */
+            ii(0x100f_00d9, 5); mov(ebx, StringDefinitions.FlicsmgrCpp2); /* mov ebx, 0x101a220c */
+            ii(0x100f_00de, 5); mov(edx, StringDefinitions.File0);      /* mov edx, 0x101a2219 */
             ii(0x100f_00e3, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_00e5, 5); calld(Definitions.sys_assert, 0x75ca8); /* call 0x10165d92 */
             ii(0x100f_00ea, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
@@ -66,8 +66,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_013e, 2); jmpd(0x100f_0159, 0x19); goto l_0x100f_0159; /* jmp 0x100f0159 */
         l_0x100f_0140:
             ii(0x100f_0140, 5); mov(ecx, 0x11a);                        /* mov ecx, 0x11a */
-            ii(0x100f_0145, 5); mov(ebx, 0x101a_2223);                  /* mov ebx, 0x101a2223 */ /* "flicsmgr.cpp" */
-            ii(0x100f_014a, 5); mov(edx, 0x101a_2230);                  /* mov edx, 0x101a2230 */ /* "frame->type == 0xF1FA" */
+            ii(0x100f_0145, 5); mov(ebx, StringDefinitions.FlicsmgrCpp); /* mov ebx, 0x101a2223 */
+            ii(0x100f_014a, 5); mov(edx, StringDefinitions.FrameType0xf1fa); /* mov edx, 0x101a2230 */
             ii(0x100f_014f, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_0151, 5); calld(Definitions.sys_assert, 0x75c3c); /* call 0x10165d92 */
             ii(0x100f_0156, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */

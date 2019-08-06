@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_4c4d, 1); pushd(eax);                             /* push eax */
             ii(0x1011_4c4e, 5); mov(ecx, 0x193);                        /* mov ecx, 0x193 */
             ii(0x1011_4c53, 5); mov(ebx, 0x1c);                         /* mov ebx, 0x1c */
-            ii(0x1011_4c58, 5); mov(edx, 0x101a_49b8);                  /* mov edx, 0x101a49b8 */ /* "Messages:" */
+            ii(0x1011_4c58, 5); mov(edx, StringDefinitions.Messages);   /* mov edx, 0x101a49b8 */
             ii(0x1011_4c5d, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_4c60, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
             ii(0x1011_4c62, 5); calld(0x100e_ab9d, -0x2a0ca);           /* call 0x100eab9d */

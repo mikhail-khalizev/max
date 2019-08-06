@@ -57,7 +57,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_9a7d, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1012_9a7f, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1012_9a81, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1012_9a83, 5); mov(eax, 0x101a_8394);                  /* mov eax, 0x101a8394 */ /* "Waiting for remote player\nto select starting location..." */
+            ii(0x1012_9a83, 5); mov(eax, StringDefinitions.WaitingForRemotePlayerToSelectStartingLocation); /* mov eax, 0x101a8394 */
             ii(0x1012_9a88, 5); calld(0x1011_5d23, -0x13d6a);           /* call 0x10115d23 */
             ii(0x1012_9a8d, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
             ii(0x1012_9a92, 5); calld(0x1012_0d94, -0x8d03);            /* call 0x10120d94 */

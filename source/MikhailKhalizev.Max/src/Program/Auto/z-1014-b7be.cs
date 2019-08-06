@@ -178,8 +178,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_b99f, 2); jmpd(0x1014_b92f, -0x72); goto l_0x1014_b92f; /* jmp 0x1014b92f */
         l_0x1014_b9a1:
             ii(0x1014_b9a1, 5); mov(ecx, 0x4b4);                        /* mov ecx, 0x4b4 */
-            ii(0x1014_b9a6, 5); mov(ebx, 0x101a_d2d6);                  /* mov ebx, 0x101ad2d6 */ /* "unitinfo.cpp" */
-            ii(0x1014_b9ab, 5); mov(edx, 0x101a_d2e3);                  /* mov edx, 0x101ad2e3 */ /* "FALSE" */
+            ii(0x1014_b9a6, 5); mov(ebx, StringDefinitions.UnitinfoCpp); /* mov ebx, 0x101ad2d6 */
+            ii(0x1014_b9ab, 5); mov(edx, StringDefinitions.False);      /* mov edx, 0x101ad2e3 */
             ii(0x1014_b9b0, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1014_b9b2, 5); calld(Definitions.sys_assert, 0x1a3db); /* call 0x10165d92 */
             ii(0x1014_b9b7, 7); mov(memd_a32[ss, ebp - 0x18], 0);       /* mov dword [ebp-0x18], 0x0 */

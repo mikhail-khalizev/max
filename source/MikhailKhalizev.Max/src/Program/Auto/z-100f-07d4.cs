@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_080a, 1); pushd(eax);                             /* push eax */
             ii(0x100f_080b, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x100f_080e, 1); pushd(eax);                             /* push eax */
-            ii(0x100f_080f, 5); mov(eax, 0x101a_224c);                  /* mov eax, 0x101a224c */ /* "Assertion failed: %s at line %li in file %s.\nReason: %s" */
+            ii(0x100f_080f, 5); mov(eax, StringDefinitions.AssertionFailedSAtLineLiInFileSReasonS); /* mov eax, 0x101a224c */
             ii(0x100f_0814, 1); pushd(eax);                             /* push eax */
             ii(0x100f_0815, 5); calld(Definitions.sys_printf, 0x7be22); /* call 0x1016c63c */
             ii(0x100f_081a, 3); add(esp, 0x14);                         /* add esp, 0x14 */

@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_69a3, 7); mov(memd_a32[ss, ebp - 0xc], 0x7fff);   /* mov dword [ebp-0xc], 0x7fff */
             ii(0x1010_69aa, 5); jmpd(0x1010_6a1f, 0x70); goto l_0x1010_6a1f; /* jmp 0x10106a1f */
         l_0x1010_69af:
-            ii(0x1010_69af, 5); mov(eax, 0x101a_3b57);                  /* mov eax, 0x101a3b57 */ /* "Unit Volumes" */
+            ii(0x1010_69af, 5); mov(eax, StringDefinitions.UnitVolumes); /* mov eax, 0x101a3b57 */
             ii(0x1010_69b4, 1); pushd(eax);                             /* push eax */
             ii(0x1010_69b5, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_69b8, 1); pushd(eax);                             /* push eax */

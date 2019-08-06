@@ -79,10 +79,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1305, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x100a_1308, 3); mov(edx, memd_a32[ss, ebp - 0x8]);      /* mov edx, [ebp-0x8] */
             ii(0x100a_130b, 4); sub(memw_a32[ds, edx + 0x26], ax);      /* sub [edx+0x26], ax */
-            ii(0x100a_130f, 5); mov(eax, 0x101a_0946);                  /* mov eax, 0x101a0946 */ /* "workers" */
+            ii(0x100a_130f, 5); mov(eax, StringDefinitions.Workers2);   /* mov eax, 0x101a0946 */
             ii(0x100a_1314, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_1315, 5); mov(ecx, 0x101a_094e);                  /* mov ecx, 0x101a094e */ /* "More %s needed, %s turned on.\n" */
-            ii(0x100a_131a, 5); mov(ebx, 0x101a_096d);                  /* mov ebx, 0x101a096d */ /* "Cannot turn %s off, other buildings need %s.\n" */
+            ii(0x100a_1315, 5); mov(ecx, StringDefinitions.MoreSNeededSTurnedOn2); /* mov ecx, 0x101a094e */
+            ii(0x100a_131a, 5); mov(ebx, StringDefinitions.CannotTurnSOffOtherBuildingsNeedS2); /* mov ebx, 0x101a096d */
             ii(0x100a_131f, 3); mov(edx, memd_a32[ss, ebp - 0x4]);      /* mov edx, [ebp-0x4] */
             ii(0x100a_1322, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x100a_1325, 5); calld(0x100a_0f77, -0x3b3);             /* call 0x100a0f77 */

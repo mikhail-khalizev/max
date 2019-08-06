@@ -46,10 +46,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_37bf, 3); mov(memb_a32[ss, ebp - 0x18], al);      /* mov [ebp-0x18], al */
             ii(0x1013_37c2, 5); jmpd(0x1013_3868, 0xa1); goto l_0x1013_3868; /* jmp 0x10133868 */
         //  ii(0x1013_37c7, 131); Недостижимый код.
-l_0x1013_384a:
+        l_0x1013_384a:
             ii(0x1013_384a, 2); jmpd(0x1013_3883, 0x37); goto l_0x1013_3883; /* jmp 0x10133883 */
         //  ii(0x1013_384c, 28); Недостижимый код.
-l_0x1013_3868:
+        l_0x1013_3868:
             ii(0x1013_3868, 3); mov(al, memb_a32[ss, ebp - 0x18]);      /* mov al, [ebp-0x18] */
             ii(0x1013_386b, 3); mov(memb_a32[ss, ebp - 0x24], al);      /* mov [ebp-0x24], al */
             ii(0x1013_386e, 4); cmp(memb_a32[ss, ebp - 0x24], 0x6);     /* cmp byte [ebp-0x24], 0x6 */
@@ -72,7 +72,7 @@ l_0x1013_3868:
             ii(0x1013_38a0, 5); calld(0x1007_5eec, -0xbd9b9);           /* call 0x10075eec */
             ii(0x1013_38a5, 2); jmpd(0x1013_38b1, 0xa); goto l_0x1013_38b1; /* jmp 0x101338b1 */
         //  ii(0x1013_38a7, 10); Недостижимый код.
-l_0x1013_38b1:
+        l_0x1013_38b1:
             ii(0x1013_38b1, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x1013_38b4, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_38b6, 1); popd(ebp);                              /* pop ebp */

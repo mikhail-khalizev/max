@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_4983, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1013_4985, 6); sub(esp, 0x20);                         /* sub esp, 0x20 */
             ii(0x1013_498b, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
-            ii(0x1013_498e, 5); mov(edx, 0x101a_89f9);                  /* mov edx, 0x101a89f9 */ /* "rb" */
+            ii(0x1013_498e, 5); mov(edx, StringDefinitions.Rb7);        /* mov edx, 0x101a89f9 */
             ii(0x1013_4993, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1013_4996, 5); calld(Definitions.sys_fopen, 0x3d9df);  /* call 0x1017237a */
             ii(0x1013_499b, 2); xor(edx, edx);                          /* xor edx, edx */

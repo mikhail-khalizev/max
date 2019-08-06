@@ -295,7 +295,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_6c67, 2); if(jzd(0x100e_6c09, -0x60)) goto l_0x100e_6c09; /* jz 0x100e6c09 */
             ii(0x100e_6c69, 2); jmpd(0x100e_6c4f, -0x1c); goto l_0x100e_6c4f; /* jmp 0x100e6c4f */
         //  ii(0x100e_6c6b, 2); Недостижимый код.
-l_0x100e_6c6d:
+        l_0x100e_6c6d:
             ii(0x100e_6c6d, 5); cmp(memw_a32[ss, ebp - 0x3c], 0);       /* cmp word [ebp-0x3c], 0x0 */
             ii(0x100e_6c72, 6); if(jzd(0x100e_6d18, 0xa0)) goto l_0x100e_6d18; /* jz 0x100e6d18 */
             ii(0x100e_6c78, 2); xor(eax, eax);                          /* xor eax, eax */

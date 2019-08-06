@@ -66,7 +66,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_9b04, 2); if(jzd(0x1019_9b52, 0x4c)) goto l_0x1019_9b52; /* jz 0x10199b52 */
         l_0x1019_9b06:
             ii(0x1019_9b06, 5); mov(eax, 0xa00);                        /* mov eax, 0xa00 */
-            ii(0x1019_9b0b, 5); mov(esi, 0x101b_36fc);                  /* mov esi, 0x101b36fc */ /* "RATIONAL DOS/4G" */
+            ii(0x1019_9b0b, 5); mov(esi, StringDefinitions.RationalDos4g); /* mov esi, 0x101b36fc */
             ii(0x1019_9b10, 1); pushd(es);                              /* push es */
             ii(0x1019_9b11, 2); @int(0x31);                             /* int 0x31 */
             ii(0x1019_9b13, 2); sbb(eax, eax);                          /* sbb eax, eax */

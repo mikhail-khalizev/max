@@ -95,8 +95,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_a935, 6); if(jnzd(0x1012_a889, -0xb2)) goto l_0x1012_a889; /* jnz 0x1012a889 */
         l_0x1012_a93b:
             ii(0x1012_a93b, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x1012_a93d, 5); mov(edx, 0x101a_8636);                  /* mov edx, 0x101a8636 */ /* "debug save" */
-            ii(0x1012_a942, 5); mov(eax, 0x101a_8641);                  /* mov eax, 0x101a8641 */ /* "save.dbg" */
+            ii(0x1012_a93d, 5); mov(edx, StringDefinitions.DebugSave);  /* mov edx, 0x101a8636 */
+            ii(0x1012_a942, 5); mov(eax, StringDefinitions.SaveDbg);    /* mov eax, 0x101a8641 */
             ii(0x1012_a947, 5); calld(0x1013_6e81, 0xc535);             /* call 0x10136e81 */
             ii(0x1012_a94c, 5); mov(eax, 0x46);                         /* mov eax, 0x46 */
             ii(0x1012_a951, 5); calld(0x1007_5fdc, -0xb497a);           /* call 0x10075fdc */

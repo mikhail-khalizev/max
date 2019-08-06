@@ -119,7 +119,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_e71c, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_e71e, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x100f_e723, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x100f_e725, 5); mov(eax, 0x101a_2a40);                  /* mov eax, 0x101a2a40 */ /* "Auto-save file not found. Unable to continue with this game." */
+            ii(0x100f_e725, 5); mov(eax, StringDefinitions.AutoSaveFileNotFoundUnableToContinueWithThisGame); /* mov eax, 0x101a2a40 */
             ii(0x100f_e72a, 5); calld(0x1011_5d23, 0x175f4);            /* call 0x10115d23 */
         l_0x100f_e72f:
             ii(0x100f_e72f, 2); jmpd(0x100f_e738, 0x7); goto l_0x100f_e738; /* jmp 0x100fe738 */

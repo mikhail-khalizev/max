@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_268a, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x100a_268c, 6); sub(esp, 0x8);                          /* sub esp, 0x8 */
             ii(0x100a_2692, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
-            ii(0x100a_2695, 5); mov(ebx, 0x101a_0c17);                  /* mov ebx, 0x101a0c17 */ /* "Computer" */
+            ii(0x100a_2695, 5); mov(ebx, StringDefinitions.Computer);   /* mov ebx, 0x101a0c17 */
             ii(0x100a_269a, 3); mov(al, memb_a32[ss, ebp - 0x4]);       /* mov al, [ebp-0x4] */
             ii(0x100a_269d, 2); add(al, 0x63);                          /* add al, 0x63 */
             ii(0x100a_269f, 3); movsx(edx, al);                         /* movsx edx, al */

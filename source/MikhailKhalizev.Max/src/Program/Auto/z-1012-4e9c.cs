@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4f08, 5); calld(0x1010_6281, -0x1ec8c);           /* call 0x10106281 */
             ii(0x1012_4f0d, 3); lea(eax, ebp - 0x3c);                   /* lea eax, [ebp-0x3c] */
             ii(0x1012_4f10, 5); calld(0x1012_4d8a, -0x18b);             /* call 0x10124d8a */
-            ii(0x1012_4f15, 5); mov(eax, 0x101a_818e);                  /* mov eax, 0x101a818e */ /* "Connect" */
+            ii(0x1012_4f15, 5); mov(eax, StringDefinitions.Connect2);   /* mov eax, 0x101a818e */
             ii(0x1012_4f1a, 5); calld(0x1012_4c13, -0x30c);             /* call 0x10124c13 */
             ii(0x1012_4f1f, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
         l_0x1012_4f22:

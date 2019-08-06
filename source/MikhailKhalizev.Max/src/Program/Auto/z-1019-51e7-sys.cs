@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5212, 1); popd(ds);                               /* pop ds */
             ii(0x1019_5213, 2); jmpd(0x1019_5226, 0x11); goto l_0x1019_5226; /* jmp 0x10195226 */
         //  ii(0x1019_5215, 3); Недостижимый код.
-l_0x1019_5218:
+        l_0x1019_5218:
             ii(0x1019_5218, 5); mov(ecx, 0x50);                         /* mov ecx, 0x50 */
             ii(0x1019_521d, 1); cld();                                  /* cld */
             ii(0x1019_521e, 2); repne_a32(() => movsb_a32());           /* repne movsb */

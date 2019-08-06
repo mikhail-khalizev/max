@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_5d96, 1); pushd(ecx);                             /* push ecx */
             ii(0x1016_5d97, 1); pushd(ebx);                             /* push ebx */
             ii(0x1016_5d98, 1); pushd(edx);                             /* push edx */
-            ii(0x1016_5d99, 5); pushd(0x101b_2d4c);                     /* push 0x101b2d4c */ /* "Assertion failed: %hs, file %hs, line %d\n" */
+            ii(0x1016_5d99, 5); pushd(StringDefinitions.AssertionFailedHsFileHsLineD); /* push 0x101b2d4c */
             ii(0x1016_5d9e, 5); pushd(0x101b_e5d4);                     /* push 0x101be5d4 */
             ii(0x1016_5da3, 5); calld(/* sys */ 0x1017_913b, 0x13393);  /* call 0x1017913b */
             ii(0x1016_5da8, 3); add(esp, 0x14);                         /* add esp, 0x14 */

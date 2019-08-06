@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_fb3b, 6); if(jzd(0x1013_fab5, -0x8c)) goto l_0x1013_fab5; /* jz 0x1013fab5 */
             ii(0x1013_fb41, 2); jmpd(0x1013_fad9, -0x6a); goto l_0x1013_fad9; /* jmp 0x1013fad9 */
         //  ii(0x1013_fb43, 2); Недостижимый код.
-l_0x1013_fb45:
+        l_0x1013_fb45:
             ii(0x1013_fb45, 5); cmp(memw_a32[ss, ebp - 0x20], 0x6);     /* cmp word [ebp-0x20], 0x6 */
             ii(0x1013_fb4a, 6); if(jzd(0x1013_fab5, -0x9b)) goto l_0x1013_fab5; /* jz 0x1013fab5 */
             ii(0x1013_fb50, 2); jmpd(0x1013_fad9, -0x79); goto l_0x1013_fad9; /* jmp 0x1013fad9 */
@@ -86,7 +86,7 @@ l_0x1013_fb45:
             ii(0x1013_fb7a, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x1013_fb7d, 1); pushd(eax);                             /* push eax */
             ii(0x1013_fb7e, 4); movsx(ecx, memw_a32[ss, ebp + 0x14]);   /* movsx ecx, word [ebp+0x14] */
-            ii(0x1013_fb82, 5); mov(ebx, 0x101a_cddc);                  /* mov ebx, 0x101acddc */ /* "Cargo" */
+            ii(0x1013_fb82, 5); mov(ebx, StringDefinitions.Cargo2);     /* mov ebx, 0x101acddc */
             ii(0x1013_fb87, 4); movsx(edx, memw_a32[ss, ebp - 0x8]);    /* movsx edx, word [ebp-0x8] */
             ii(0x1013_fb8b, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1013_fb8e, 5); calld(0x1013_f4b0, -0x6e3);             /* call 0x1013f4b0 */

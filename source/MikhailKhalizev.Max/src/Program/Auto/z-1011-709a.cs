@@ -108,7 +108,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_71dd, 1); pushd(eax);                             /* push eax */
             ii(0x1011_71de, 5); mov(ecx, 0x2);                          /* mov ecx, 0x2 */
             ii(0x1011_71e3, 5); mov(ebx, 0x2);                          /* mov ebx, 0x2 */
-            ii(0x1011_71e8, 5); mov(edx, 0x101a_7b1d);                  /* mov edx, 0x101a7b1d */ /* "Restart" */
+            ii(0x1011_71e8, 5); mov(edx, StringDefinitions.Restart);    /* mov edx, 0x101a7b1d */
             ii(0x1011_71ed, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_71f0, 3); mov(eax, memd_a32[ds, eax + 0x33]);     /* mov eax, [eax+0x33] */
             ii(0x1011_71f3, 5); calld(0x100c_ef64, -0x48294);           /* call 0x100cef64 */
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_721b, 1); pushd(eax);                             /* push eax */
             ii(0x1011_721c, 5); mov(ecx, 0x2);                          /* mov ecx, 0x2 */
             ii(0x1011_7221, 5); mov(ebx, 0x2);                          /* mov ebx, 0x2 */
-            ii(0x1011_7226, 5); mov(edx, 0x101a_7b25);                  /* mov edx, 0x101a7b25 */ /* "Quit" */
+            ii(0x1011_7226, 5); mov(edx, StringDefinitions.Quit2);      /* mov edx, 0x101a7b25 */
             ii(0x1011_722b, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_722e, 3); mov(eax, memd_a32[ds, eax + 0x37]);     /* mov eax, [eax+0x37] */
             ii(0x1011_7231, 5); calld(0x100c_ef64, -0x482d2);           /* call 0x100cef64 */
@@ -176,7 +176,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_72d2, 5); mov(eax, 0xe);                          /* mov eax, 0xe */
             ii(0x1011_72d7, 1); pushd(eax);                             /* push eax */
             ii(0x1011_72d8, 5); mov(ecx, 0x14);                         /* mov ecx, 0x14 */
-            ii(0x1011_72dd, 5); mov(ebx, 0x101a_7b2a);                  /* mov ebx, 0x101a7b2a */ /* "Unable to continue with next turn - remote players are no longer synchronized.\n\nPress Restart to load from last auto-saved file.\nPress Quit to exit this game." */
+            ii(0x1011_72dd, 5); mov(ebx, StringDefinitions.UnableToContinueWithNextTurnRemotePlayersAreNoLongerSynchronizedPressRestartToLoadFromLastAutoSavedFilePressQuitToExitThisGame); /* mov ebx, 0x101a7b2a */
             ii(0x1011_72e2, 3); mov(edx, memd_a32[ss, ebp - 0x4]);      /* mov edx, [ebp-0x4] */
             ii(0x1011_72e5, 3); mov(edx, memd_a32[ds, edx + 0x25]);     /* mov edx, [edx+0x25] */
             ii(0x1011_72e8, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */

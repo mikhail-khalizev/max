@@ -203,10 +203,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1919, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
             ii(0x100a_191c, 5); calld(0x1007_6600, -0x2b321);           /* call 0x10076600 */
             ii(0x100a_1921, 5); calld(0x1016_3053, 0xc172d);            /* call 0x10163053 */
-            ii(0x100a_1926, 5); mov(eax, 0x101a_0a73);                  /* mov eax, 0x101a0a73 */ /* "power" */
+            ii(0x100a_1926, 5); mov(eax, StringDefinitions.Power3);     /* mov eax, 0x101a0a73 */
             ii(0x100a_192b, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_192c, 5); mov(ecx, 0x101a_0a79);                  /* mov ecx, 0x101a0a79 */ /* "More %s needed, %s turned off.\n" */
-            ii(0x100a_1931, 5); mov(ebx, 0x101a_0a99);                  /* mov ebx, 0x101a0a99 */ /* "Cannot turn %s on, %s needed.\n" */
+            ii(0x100a_192c, 5); mov(ecx, StringDefinitions.MoreSNeededSTurnedOff2); /* mov ecx, 0x101a0a79 */
+            ii(0x100a_1931, 5); mov(ebx, StringDefinitions.CannotTurnSOnSNeeded2); /* mov ebx, 0x101a0a99 */
             ii(0x100a_1936, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
             ii(0x100a_1939, 5); calld(0x1007_6600, -0x2b33e);           /* call 0x10076600 */
             ii(0x100a_193e, 3); mov(esi, memd_a32[ss, ebp - 0x4]);      /* mov esi, [ebp-0x4] */
@@ -222,7 +222,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_195d, 5); calld(0x1007_5f6c, -0x2b9f6);           /* call 0x10075f6c */
             ii(0x100a_1962, 2); jmpd(0x100a_1978, 0x14); goto l_0x100a_1978; /* jmp 0x100a1978 */
         //  ii(0x100a_1964, 20); Недостижимый код.
-l_0x100a_1978:
+        l_0x100a_1978:
             ii(0x100a_1978, 3); mov(al, memb_a32[ss, ebp - 0x8]);       /* mov al, [ebp-0x8] */
             ii(0x100a_197b, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100a_197d, 1); popd(ebp);                              /* pop ebp */

@@ -91,7 +91,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_344d, 3); sar(edx, 0x1f);                         /* sar edx, 0x1f */
             ii(0x100f_3450, 2); idiv(ebx);                              /* idiv ebx */
             ii(0x100f_3452, 1); pushd(eax);                             /* push eax */
-            ii(0x100f_3453, 5); mov(eax, 0x101a_2478);                  /* mov eax, 0x101a2478 */ /* "%2.2i:%2.2i" */
+            ii(0x100f_3453, 5); mov(eax, StringDefinitions._22i22i);    /* mov eax, 0x101a2478 */
             ii(0x100f_3458, 1); pushd(eax);                             /* push eax */
             ii(0x100f_3459, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
             ii(0x100f_345c, 1); pushd(eax);                             /* push eax */

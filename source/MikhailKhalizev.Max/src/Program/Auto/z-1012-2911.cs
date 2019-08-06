@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_294b, 2); sbb(eax, edx);                          /* sbb eax, edx */
             ii(0x1012_294d, 3); sar(eax, 0x14);                         /* sar eax, 0x14 */
             ii(0x1012_2950, 1); pushd(eax);                             /* push eax */
-            ii(0x1012_2951, 5); mov(eax, 0x101a_7ea8);                  /* mov eax, 0x101a7ea8 */ /* "Warning: You have only %iMB XMS.  Enabling enhanced graphics will likely result in the game crashing." */
+            ii(0x1012_2951, 5); mov(eax, StringDefinitions.WarningYouHaveOnlyImbXmsEnablingEnhancedGraphicsWillLikelyResultInTheGameCrashing); /* mov eax, 0x101a7ea8 */
             ii(0x1012_2956, 1); pushd(eax);                             /* push eax */
             ii(0x1012_2957, 5); mov(eax, 0x12c);                        /* mov eax, 0x12c */
             ii(0x1012_295c, 1); pushd(eax);                             /* push eax */

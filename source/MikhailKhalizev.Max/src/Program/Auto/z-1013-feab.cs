@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_fee2, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x1013_fee5, 1); pushd(eax);                             /* push eax */
             ii(0x1013_fee6, 4); movsx(ecx, memw_a32[ss, ebp + 0x10]);   /* movsx ecx, word [ebp+0x10] */
-            ii(0x1013_feea, 5); mov(ebx, 0x101a_cdf3);                  /* mov ebx, 0x101acdf3 */ /* "Armor" */
+            ii(0x1013_feea, 5); mov(ebx, StringDefinitions.Armor);      /* mov ebx, 0x101acdf3 */
             ii(0x1013_feef, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x1013_fef3, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1013_fef6, 5); calld(0x1013_f4b0, -0xa4b);             /* call 0x1013f4b0 */
@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_ff52, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x1013_ff55, 1); pushd(eax);                             /* push eax */
             ii(0x1013_ff56, 4); movsx(ecx, memw_a32[ss, ebp + 0x10]);   /* movsx ecx, word [ebp+0x10] */
-            ii(0x1013_ff5a, 5); mov(ebx, 0x101a_cdf9);                  /* mov ebx, 0x101acdf9 */ /* "Hits" */
+            ii(0x1013_ff5a, 5); mov(ebx, StringDefinitions.Hits2);      /* mov ebx, 0x101acdf9 */
             ii(0x1013_ff5f, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x1013_ff63, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1013_ff66, 5); calld(0x1013_f4b0, -0xabb);             /* call 0x1013f4b0 */
@@ -101,7 +101,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_ffc2, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x1013_ffc5, 1); pushd(eax);                             /* push eax */
             ii(0x1013_ffc6, 4); movsx(ecx, memw_a32[ss, ebp + 0x10]);   /* movsx ecx, word [ebp+0x10] */
-            ii(0x1013_ffca, 5); mov(ebx, 0x101a_cdfe);                  /* mov ebx, 0x101acdfe */ /* "Scan" */
+            ii(0x1013_ffca, 5); mov(ebx, StringDefinitions.Scan);       /* mov ebx, 0x101acdfe */
             ii(0x1013_ffcf, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x1013_ffd3, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1013_ffd6, 5); calld(0x1013_f4b0, -0xb2b);             /* call 0x1013f4b0 */

@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_ff9a, 3); mov(edx, memd_a32[ss, ebp - 0xc]);      /* mov edx, [ebp-0xc] */
             ii(0x1010_ff9d, 5); mov(eax, 0x6c0);                        /* mov eax, 0x6c0 */
             ii(0x1010_ffa2, 5); calld(0x100e_8c51, -0x27356);           /* call 0x100e8c51 */
-            ii(0x1010_ffa7, 5); mov(edx, 0x101a_465a);                  /* mov edx, 0x101a465a */ /* "Multiplayer Menu" */
+            ii(0x1010_ffa7, 5); mov(edx, StringDefinitions.MultiplayerMenu); /* mov edx, 0x101a465a */
             ii(0x1010_ffac, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1010_ffaf, 5); calld(0x1010_c628, -0x398c);            /* call 0x1010c628 */
             ii(0x1010_ffb4, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
@@ -215,14 +215,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_01f0, 2); if(jzd(0x1011_0172, -0x80)) goto l_0x1011_0172; /* jz 0x10110172 */
             ii(0x1011_01f2, 2); jmpd(0x1011_0189, -0x6b); goto l_0x1011_0189; /* jmp 0x10110189 */
         //  ii(0x1011_01f4, 2); Недостижимый код.
-l_0x1011_01f6:
+        l_0x1011_01f6:
             ii(0x1011_01f6, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x4d);    /* cmp dword [ebp-0x1c], 0x4d */
             ii(0x1011_01fa, 6); if(jbed(0x1011_007a, -0x186)) goto l_0x1011_007a; /* jbe 0x1011007a */
             ii(0x1011_0200, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x4f);    /* cmp dword [ebp-0x1c], 0x4f */
             ii(0x1011_0204, 6); if(jzd(0x1011_00b3, -0x157)) goto l_0x1011_00b3; /* jz 0x101100b3 */
             ii(0x1011_020a, 5); jmpd(0x1011_0189, -0x86); goto l_0x1011_0189; /* jmp 0x10110189 */
         //  ii(0x1011_020f, 5); Недостижимый код.
-l_0x1011_0214:
+        l_0x1011_0214:
             ii(0x1011_0214, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x43);    /* cmp dword [ebp-0x1c], 0x43 */
             ii(0x1011_0218, 2); if(jbd(0x1011_0248, 0x2e)) goto l_0x1011_0248; /* jb 0x10110248 */
             ii(0x1011_021a, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x43);    /* cmp dword [ebp-0x1c], 0x43 */

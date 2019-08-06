@@ -24,14 +24,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1deb, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100a_1df0, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100a_1df2, 2); if(jnzd(0x100a_1e04, 0x10)) goto l_0x100a_1e04; /* jnz 0x100a1e04 */
-            ii(0x100a_1df4, 5); mov(edx, 0x101a_0b46);                  /* mov edx, 0x101a0b46 */ /* "Adjustments made:\n" */
+            ii(0x100a_1df4, 5); mov(edx, StringDefinitions.AdjustmentsMade2); /* mov edx, 0x101a0b46 */
             ii(0x100a_1df9, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1dfc, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
             ii(0x100a_1dff, 5); calld(Definitions.sys_strcpy, 0xc40cb); /* call 0x10165ecf */
         l_0x100a_1e04:
-            ii(0x100a_1e04, 5); mov(eax, 0x101a_0b59);                  /* mov eax, 0x101a0b59 */ /* "Raw material mining increased to %i.\n" */
+            ii(0x100a_1e04, 5); mov(eax, StringDefinitions.RawMaterialMiningIncreasedToI); /* mov eax, 0x101a0b59 */
             ii(0x100a_1e09, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_1e0a, 5); mov(ecx, 0x101a_0b7f);                  /* mov ecx, 0x101a0b7f */ /* "Raw material mining reduced to %i.\n" */
+            ii(0x100a_1e0a, 5); mov(ecx, StringDefinitions.RawMaterialMiningReducedToI); /* mov ecx, 0x101a0b7f */
             ii(0x100a_1e0f, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1e12, 3); mov(ebx, memd_a32[ds, eax + 0x6]);      /* mov ebx, [eax+0x6] */
             ii(0x100a_1e15, 3); sar(ebx, 0x10);                         /* sar ebx, 0x10 */
@@ -41,9 +41,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1e21, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1e24, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
             ii(0x100a_1e27, 5); calld(0x100a_1d41, -0xeb);              /* call 0x100a1d41 */
-            ii(0x100a_1e2c, 5); mov(eax, 0x101a_0ba3);                  /* mov eax, 0x101a0ba3 */ /* "Fuel mining increased to %i.\n" */
+            ii(0x100a_1e2c, 5); mov(eax, StringDefinitions.FuelMiningIncreasedToI); /* mov eax, 0x101a0ba3 */
             ii(0x100a_1e31, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_1e32, 5); mov(ecx, 0x101a_0bc1);                  /* mov ecx, 0x101a0bc1 */ /* "Fuel mining reduced to %i.\n" */
+            ii(0x100a_1e32, 5); mov(ecx, StringDefinitions.FuelMiningReducedToI); /* mov ecx, 0x101a0bc1 */
             ii(0x100a_1e37, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1e3a, 3); mov(ebx, memd_a32[ds, eax + 0x8]);      /* mov ebx, [eax+0x8] */
             ii(0x100a_1e3d, 3); sar(ebx, 0x10);                         /* sar ebx, 0x10 */
@@ -53,9 +53,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1e49, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1e4c, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
             ii(0x100a_1e4f, 5); calld(0x100a_1d41, -0x113);             /* call 0x100a1d41 */
-            ii(0x100a_1e54, 5); mov(eax, 0x101a_0bdd);                  /* mov eax, 0x101a0bdd */ /* "Gold mining increased to %i.\n" */
+            ii(0x100a_1e54, 5); mov(eax, StringDefinitions.GoldMiningIncreasedToI); /* mov eax, 0x101a0bdd */
             ii(0x100a_1e59, 1); pushd(eax);                             /* push eax */
-            ii(0x100a_1e5a, 5); mov(eax, 0x101a_0bfb);                  /* mov eax, 0x101a0bfb */ /* "Gold mining reduced to %i.\n" */
+            ii(0x100a_1e5a, 5); mov(eax, StringDefinitions.GoldMiningReducedToI); /* mov eax, 0x101a0bfb */
             ii(0x100a_1e5f, 3); mov(ecx, memd_a32[ss, ebp - 0x4]);      /* mov ecx, [ebp-0x4] */
             ii(0x100a_1e62, 3); mov(ebx, memd_a32[ds, ecx + 0x4]);      /* mov ebx, [ecx+0x4] */
             ii(0x100a_1e65, 3); sar(ebx, 0x10);                         /* sar ebx, 0x10 */

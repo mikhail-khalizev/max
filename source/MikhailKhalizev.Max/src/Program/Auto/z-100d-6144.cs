@@ -171,10 +171,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_62f7, 3); mov(memd_a32[ss, ebp - 0x48], eax);     /* mov [ebp-0x48], eax */
             ii(0x100d_62fa, 5); jmpd(0x100d_6524, 0x225); goto l_0x100d_6524; /* jmp 0x100d6524 */
         //  ii(0x100d_62ff, 513); Недостижимый код.
-l_0x100d_6500:
+        l_0x100d_6500:
             ii(0x100d_6500, 2); jmpd(0x100d_6541, 0x3f); goto l_0x100d_6541; /* jmp 0x100d6541 */
         //  ii(0x100d_6502, 34); Недостижимый код.
-l_0x100d_6524:
+        l_0x100d_6524:
             ii(0x100d_6524, 3); mov(eax, memd_a32[ss, ebp - 0x48]);     /* mov eax, [ebp-0x48] */
             ii(0x100d_6527, 3); mov(memd_a32[ss, ebp - 0x6c], eax);     /* mov [ebp-0x6c], eax */
             ii(0x100d_652a, 5); cmp(memw_a32[ss, ebp - 0x6c], 0x7);     /* cmp word [ebp-0x6c], 0x7 */

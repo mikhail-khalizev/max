@@ -64,7 +64,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_f169, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_f16b, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_f16d, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x100f_f16f, 5); mov(eax, 0x101a_2a9a);                  /* mov eax, 0x101a2a9a */ /* "Starting announcement phase..." */
+            ii(0x100f_f16f, 5); mov(eax, StringDefinitions.StartingAnnouncementPhase); /* mov eax, 0x101a2a9a */
             ii(0x100f_f174, 5); calld(0x1011_5d23, 0x16baa);            /* call 0x10115d23 */
             ii(0x100f_f179, 5); calld(0x1012_a802, 0x2b684);            /* call 0x1012a802 */
         l_0x100f_f17e:
@@ -168,7 +168,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_f29d, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_f29f, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_f2a1, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x100f_f2a3, 5); mov(eax, 0x101a_2ab9);                  /* mov eax, 0x101a2ab9 */ /* "Waiting for remote End Turn." */
+            ii(0x100f_f2a3, 5); mov(eax, StringDefinitions.WaitingForRemoteEndTurn); /* mov eax, 0x101a2ab9 */
             ii(0x100f_f2a8, 5); calld(0x1011_5d23, 0x16a76);            /* call 0x10115d23 */
             ii(0x100f_f2ad, 2); jmpd(0x100f_f2cf, 0x20); goto l_0x100f_f2cf; /* jmp 0x100ff2cf */
         l_0x100f_f2af:
@@ -179,7 +179,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_f2bf, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_f2c1, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_f2c3, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x100f_f2c5, 5); mov(eax, 0x101a_2ad6);                  /* mov eax, 0x101a2ad6 */ /* "Waiting for computer to finish turn." */
+            ii(0x100f_f2c5, 5); mov(eax, StringDefinitions.WaitingForComputerToFinishTurn); /* mov eax, 0x101a2ad6 */
             ii(0x100f_f2ca, 5); calld(0x1011_5d23, 0x16a54);            /* call 0x10115d23 */
         l_0x100f_f2cf:
             ii(0x100f_f2cf, 7); cmp(memb_a32[ds, 0x101c_391e], 0x9);    /* cmp byte [0x101c391e], 0x9 */

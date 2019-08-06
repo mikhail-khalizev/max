@@ -147,7 +147,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_5fc6, 6); if(jbed(0x100d_5f00, -0xcc)) goto l_0x100d_5f00; /* jbe 0x100d5f00 */
             ii(0x100d_5fcc, 5); jmpd(0x100d_5f21, -0xb0); goto l_0x100d_5f21; /* jmp 0x100d5f21 */
         //  ii(0x100d_5fd1, 5); Недостижимый код.
-l_0x100d_5fd6:
+        l_0x100d_5fd6:
             ii(0x100d_5fd6, 5); jmpd(0x100d_5f21, -0xba); goto l_0x100d_5f21; /* jmp 0x100d5f21 */
         l_0x100d_5fdb:
             ii(0x100d_5fdb, 4); cmp(memd_a32[ss, ebp - 0x14], 0xd);     /* cmp dword [ebp-0x14], 0xd */

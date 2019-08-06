@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_17a3, 3); mov(edx, memd_a32[ss, ebp - 0x8]);      /* mov edx, [ebp-0x8] */
             ii(0x1011_17a6, 5); mov(eax, 0x6c0);                        /* mov eax, 0x6c0 */
             ii(0x1011_17ab, 5); calld(0x100e_8c51, -0x28b5f);           /* call 0x100e8c51 */
-            ii(0x1011_17b0, 5); mov(edx, 0x101a_46cd);                  /* mov edx, 0x101a46cd */ /* "New Game Menu" */
+            ii(0x1011_17b0, 5); mov(edx, StringDefinitions.NewGameMenu); /* mov edx, 0x101a46cd */
             ii(0x1011_17b5, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_17b8, 5); calld(0x1010_c628, -0x5195);            /* call 0x1010c628 */
             ii(0x1011_17bd, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
@@ -248,7 +248,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_1a63, 6); if(jzd(0x1011_1824, -0x245)) goto l_0x1011_1824; /* jz 0x10111824 */
             ii(0x1011_1a69, 5); jmpd(0x1011_19ae, -0xc0); goto l_0x1011_19ae; /* jmp 0x101119ae */
         //  ii(0x1011_1a6e, 5); Недостижимый код.
-l_0x1011_1a73:
+        l_0x1011_1a73:
             ii(0x1011_1a73, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x43);    /* cmp dword [ebp-0x1c], 0x43 */
             ii(0x1011_1a77, 2); if(jbd(0x1011_1aa7, 0x2e)) goto l_0x1011_1aa7; /* jb 0x10111aa7 */
             ii(0x1011_1a79, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x43);    /* cmp dword [ebp-0x1c], 0x43 */

@@ -155,7 +155,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_d760, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
             ii(0x1013_d763, 4); cmp(memd_a32[ss, ebp - 0x2c], 0);       /* cmp dword [ebp-0x2c], 0x0 */
             ii(0x1013_d767, 2); if(jzd(0x1013_d7a5, 0x3c)) goto l_0x1013_d7a5; /* jz 0x1013d7a5 */
-            ii(0x1013_d769, 5); mov(edx, 0x101a_cd38);                  /* mov edx, 0x101acd38 */ /* "rb" */
+            ii(0x1013_d769, 5); mov(edx, StringDefinitions.Rb8);        /* mov edx, 0x101acd38 */
             ii(0x1013_d76e, 3); mov(eax, memd_a32[ss, ebp - 0x2c]);     /* mov eax, [ebp-0x2c] */
             ii(0x1013_d771, 5); calld(Definitions.my_fopen, -0x4e357);  /* call 0x100ef41f */
             ii(0x1013_d776, 3); mov(memd_a32[ss, ebp - 0x30], eax);     /* mov [ebp-0x30], eax */

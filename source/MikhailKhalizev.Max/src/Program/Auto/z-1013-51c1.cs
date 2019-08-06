@@ -106,7 +106,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_532e, 5); mov(eax, 0x6);                          /* mov eax, 0x6 */
             ii(0x1013_5333, 5); calld(0x100e_f3a0, -0x45f98);           /* call 0x100ef3a0 */
         l_0x1013_5338:
-            ii(0x1013_5338, 5); mov(edx, 0x101a_8a10);                  /* mov edx, 0x101a8a10 */ /* "rb" */
+            ii(0x1013_5338, 5); mov(edx, StringDefinitions.Rb9);        /* mov edx, 0x101a8a10 */
             ii(0x1013_533d, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1013_5340, 5); calld(Definitions.my_fopen, -0x45f26);  /* call 0x100ef41f */
             ii(0x1013_5345, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
@@ -119,7 +119,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1013_5360:
             ii(0x1013_5360, 7); mov(memd_a32[ss, ebp - 0x14], 0);       /* mov dword [ebp-0x14], 0x0 */
             ii(0x1013_5367, 4); or(memb_a32[ss, ebp - 0x18], 0x1);      /* or byte [ebp-0x18], 0x1 */
-            ii(0x1013_536b, 5); mov(edx, 0x101a_8a13);                  /* mov edx, 0x101a8a13 */ /* "Scanning planet surface..." */
+            ii(0x1013_536b, 5); mov(edx, StringDefinitions.ScanningPlanetSurface); /* mov edx, 0x101a8a13 */
             ii(0x1013_5370, 3); lea(eax, ebp - 0x50);                   /* lea eax, [ebp-0x50] */
             ii(0x1013_5373, 5); calld(0x1013_679b, 0x1423);             /* call 0x1013679b */
             ii(0x1013_5378, 3); mov(memd_a32[ss, ebp - 0x54], eax);     /* mov [ebp-0x54], eax */
@@ -640,7 +640,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_5be3, 6); if(jbed(0x1013_5b64, -0x85)) goto l_0x1013_5b64; /* jbe 0x10135b64 */
             ii(0x1013_5be9, 2); jmpd(0x1013_5bab, -0x40); goto l_0x1013_5bab; /* jmp 0x10135bab */
         //  ii(0x1013_5beb, 4); Недостижимый код.
-l_0x1013_5bef:
+        l_0x1013_5bef:
             ii(0x1013_5bef, 10); cmp(memd_a32[ss, ebp - 0xb8], 0x76e);  /* cmp dword [ebp-0xb8], 0x76e */
             ii(0x1013_5bf9, 6); if(jaed(0x1013_5a8c, -0x173)) goto l_0x1013_5a8c; /* jae 0x10135a8c */
             ii(0x1013_5bff, 2); jmpd(0x1013_5bab, -0x56); goto l_0x1013_5bab; /* jmp 0x10135bab */

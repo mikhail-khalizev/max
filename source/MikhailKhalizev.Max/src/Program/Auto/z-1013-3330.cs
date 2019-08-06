@@ -77,10 +77,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_3407, 3); mov(memb_a32[ss, ebp - 0x18], al);      /* mov [ebp-0x18], al */
             ii(0x1013_340a, 5); jmpd(0x1013_353c, 0x12d); goto l_0x1013_353c; /* jmp 0x1013353c */
         //  ii(0x1013_340f, 264); Недостижимый код.
-l_0x1013_3517:
+        l_0x1013_3517:
             ii(0x1013_3517, 2); jmpd(0x1013_3557, 0x3e); goto l_0x1013_3557; /* jmp 0x10133557 */
         //  ii(0x1013_3519, 35); Недостижимый код.
-l_0x1013_353c:
+        l_0x1013_353c:
             ii(0x1013_353c, 3); mov(al, memb_a32[ss, ebp - 0x18]);      /* mov al, [ebp-0x18] */
             ii(0x1013_353f, 3); mov(memb_a32[ss, ebp - 0x40], al);      /* mov [ebp-0x40], al */
             ii(0x1013_3542, 4); cmp(memb_a32[ss, ebp - 0x40], 0x7);     /* cmp byte [ebp-0x40], 0x7 */

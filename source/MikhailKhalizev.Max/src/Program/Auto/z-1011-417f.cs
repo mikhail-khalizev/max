@@ -130,7 +130,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_4338, 5); calld(0x100c_aa20, -0x4991d);           /* call 0x100caa20 */
             ii(0x1011_433d, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1011_4342, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1011_4344, 5); mov(esi, 0x101a_48ec);                  /* mov esi, 0x101a48ec */ /* "The host has selected a load file that is not compatible with the load file on your system. You will not be able to start this session until the host selects another load file or selects a new world map." */
+            ii(0x1011_4344, 5); mov(esi, StringDefinitions.TheHostHasSelectedALoadFileThatIsNotCompatibleWithTheLoadFileOnYourSystemYouWillNotBeAbleToStartThisSessionUntilTheHostSelectsAn2); /* mov esi, 0x101a48ec */
             ii(0x1011_4349, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1011_434b, 2); mov(eax, esi);                          /* mov eax, esi */
             ii(0x1011_434d, 5); calld(0x1011_5d23, 0x19d1);             /* call 0x10115d23 */

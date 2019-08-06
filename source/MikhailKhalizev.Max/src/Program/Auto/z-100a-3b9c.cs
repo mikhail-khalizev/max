@@ -40,8 +40,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_3bfb, 2); jmpd(0x100a_3c16, 0x19); goto l_0x100a_3c16; /* jmp 0x100a3c16 */
         l_0x100a_3bfd:
             ii(0x100a_3bfd, 5); mov(ecx, 0x672);                        /* mov ecx, 0x672 */
-            ii(0x100a_3c02, 5); mov(ebx, 0x101a_0c20);                  /* mov ebx, 0x101a0c20 */ /* "ai_main.cpp" */
-            ii(0x100a_3c07, 5); mov(edx, 0x101a_0c2c);                  /* mov edx, 0x101a0c2c */ /* "new_unit != 0" */
+            ii(0x100a_3c02, 5); mov(ebx, StringDefinitions.AiMainCpp);  /* mov ebx, 0x101a0c20 */
+            ii(0x100a_3c07, 5); mov(edx, StringDefinitions.NewUnit0);   /* mov edx, 0x101a0c2c */
             ii(0x100a_3c0c, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100a_3c0e, 5); calld(Definitions.sys_assert, 0xc217f); /* call 0x10165d92 */
             ii(0x100a_3c13, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */

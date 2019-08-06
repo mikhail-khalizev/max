@@ -64,7 +64,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1011, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100a_1016, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100a_1018, 2); if(jnzd(0x100a_102a, 0x10)) goto l_0x100a_102a; /* jnz 0x100a102a */
-            ii(0x100a_101a, 5); mov(edx, 0x101a_090f);                  /* mov edx, 0x101a090f */ /* "Adjustments made:\n" */
+            ii(0x100a_101a, 5); mov(edx, StringDefinitions.AdjustmentsMade); /* mov edx, 0x101a090f */
             ii(0x100a_101f, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x100a_1022, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
             ii(0x100a_1025, 5); calld(Definitions.sys_strcpy, 0xc4ea5); /* call 0x10165ecf */

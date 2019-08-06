@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_0d3f, 3); mov(eax, memd_a32[ds, edx + 0xc]);      /* mov eax, [edx+0xc] */
             ii(0x1017_0d42, 6); calld_abs(memd_a32[ds, 0x101b_e1d0]);   /* call dword [0x101be1d0] */ /* Вызов '0x1017_11b4'. */
         l_0x1017_0d48:
-            ii(0x1017_0d48, 7); mov(memd_a32[ds, edx + 0xc], 0x101b_2f00); /* mov dword [edx+0xc], 0x101b2f00 */ /* "" */
+            ii(0x1017_0d48, 7); mov(memd_a32[ds, edx + 0xc], StringDefinitions.Empty3); /* mov dword [edx+0xc], 0x101b2f00 */
             ii(0x1017_0d4f, 4); mov(memb_a32[ds, edx + 0x10], 0);       /* mov byte [edx+0x10], 0x0 */
         l_0x1017_0d53:
             ii(0x1017_0d53, 1); popd(edx);                              /* pop edx */

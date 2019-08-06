@@ -67,7 +67,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_0d0f, 1); popd(ebx);                              /* pop ebx */
             ii(0x1017_0d10, 1); retd(); return;                         /* ret */
         l_0x1017_0d11:
-            ii(0x1017_0d11, 7); mov(memd_a32[ds, ebx + 0xc], 0x101b_2f00); /* mov dword [ebx+0xc], 0x101b2f00 */ /* "" */
+            ii(0x1017_0d11, 7); mov(memd_a32[ds, ebx + 0xc], StringDefinitions.Empty3); /* mov dword [ebx+0xc], 0x101b2f00 */
         l_0x1017_0d18:
             ii(0x1017_0d18, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1017_0d1a, 1); popd(edi);                              /* pop edi */

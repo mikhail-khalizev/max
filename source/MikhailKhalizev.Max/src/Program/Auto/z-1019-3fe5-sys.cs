@@ -87,7 +87,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_40b4, 3); add(edx, memd_a32[ss, ebp - 0x2c]);     /* add edx, [ebp-0x2c] */
             ii(0x1019_40b7, 1); retd(); return;                         /* ret */
         //  ii(0x1019_40b8, 58); Недостижимый код.
-l_0x1019_40f2:
+        l_0x1019_40f2:
             ii(0x1019_40f2, 3); sub(esi, memd_a32[ss, ebp - 0x10]);     /* sub esi, [ebp-0x10] */
             ii(0x1019_40f5, 3); sub(edi, memd_a32[ss, ebp - 0x14]);     /* sub edi, [ebp-0x14] */
             ii(0x1019_40f8, 1); popd(edx);                              /* pop edx */

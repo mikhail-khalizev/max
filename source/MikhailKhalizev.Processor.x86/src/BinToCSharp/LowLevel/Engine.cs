@@ -323,7 +323,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        public void layout_funcs()
+        private void LayoutMethods()
         {
             Console.WriteLine("Layout Methods");
 
@@ -460,6 +460,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     detectedMethod.RawBytes = Memory.ReadAll(detectedMethod.Begin, detectedMethod.End - detectedMethod.Begin);
                     detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
 
+                    // TODO Собрать все Jumps воедино и учесть в рамках Process или JmpCallLoopSimple.
+                    // Чтобы layout_funcs ничего не декодировал.
                     if (detectedMethod.MethodInfo?.Jumps != null)
                     {
                         var interval = Interval.From(detectedMethod.Begin, detectedMethod.End);
@@ -485,10 +487,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             var path = Configuration.CodeOutput;
             Directory.CreateDirectory(path);
+            
+            LayoutMethods(); // Может запускать декодирование новых частей кода.
 
             OnSave?.Invoke(this, EventArgs.Empty);
-
-            layout_funcs();
 
             foreach (var detectedMethod in NewDetectedMethods)
             {

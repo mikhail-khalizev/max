@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_6b6f, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1014_6b74, 7); test(memb_a32[ds, eax + 0x101b_75c0], 0xc0); /* test byte [eax+0x101b75c0], 0xc0 */
             ii(0x1014_6b7b, 2); if(jnzd(0x1014_6b8f, 0x12)) goto l_0x1014_6b8f; /* jnz 0x10146b8f */
-            ii(0x1014_6b7d, 5); mov(eax, 0x101a_d053);                  /* mov eax, 0x101ad053 */ /* "Expected a letter" */
+            ii(0x1014_6b7d, 5); mov(eax, StringDefinitions.ExpectedALetter); /* mov eax, 0x101ad053 */
             ii(0x1014_6b82, 1); pushd(eax);                             /* push eax */
             ii(0x1014_6b83, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_6b86, 1); pushd(eax);                             /* push eax */

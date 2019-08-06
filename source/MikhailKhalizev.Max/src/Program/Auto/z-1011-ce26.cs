@@ -232,7 +232,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_d0c4, 5); calld(0x100a_9f38, -0x73191);           /* call 0x100a9f38 */
             ii(0x1011_d0c9, 2); jmpd(0x1011_d0df, 0x14); goto l_0x1011_d0df; /* jmp 0x1011d0df */
         //  ii(0x1011_d0cb, 20); Недостижимый код.
-l_0x1011_d0df:
+        l_0x1011_d0df:
             ii(0x1011_d0df, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1011_d0e2, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1011_d0e4, 1); popd(ebp);                              /* pop ebp */

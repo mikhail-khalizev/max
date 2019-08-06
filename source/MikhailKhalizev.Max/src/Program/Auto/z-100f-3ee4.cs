@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_3eeb, 5); calld(0x1013_ad71, 0x46e81);            /* call 0x1013ad71 */
             ii(0x100f_3ef0, 2); test(al, al);                           /* test al, al */
             ii(0x100f_3ef2, 2); if(jzd(0x100f_3f04, 0x10)) goto l_0x100f_3f04; /* jz 0x100f3f04 */
-            ii(0x100f_3ef4, 5); mov(edx, 0x101a_2506);                  /* mov edx, 0x101a2506 */ /* " Press F1." */
+            ii(0x100f_3ef4, 5); mov(edx, StringDefinitions.PressF1);    /* mov edx, 0x101a2506 */
             ii(0x100f_3ef9, 6); lea(eax, ebp - 0x148);                  /* lea eax, [ebp-0x148] */
             ii(0x100f_3eff, 5); calld(Definitions.sys_strcat, 0x7202d); /* call 0x10165f31 */
         l_0x100f_3f04:

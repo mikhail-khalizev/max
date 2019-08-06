@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4af2, 2); @int(0x31);                             /* int 0x31 */
             ii(0x1019_4af4, 2); jmpd(0x1019_4b20, 0x2a); goto l_0x1019_4b20; /* jmp 0x10194b20 */
         //  ii(0x1019_4af6, 3); Недостижимый код.
-l_0x1019_4af9:
+        l_0x1019_4af9:
             ii(0x1019_4af9, 4); mov(ax, 0x3508);                        /* mov ax, 0x3508 */
             ii(0x1019_4afd, 2); @int(0x21);                             /* int 0x21 */
             ii(0x1019_4aff, 6); mov(memd_a32[ds, 0x101c_0a2c], ebx);    /* mov [0x101c0a2c], ebx */

@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6785, 3); add(esp, 0x8);                          /* add esp, 0x8 */
             ii(0x1010_6788, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_678a, 2); if(jzd(0x1010_67cf, 0x43)) goto l_0x1010_67cf; /* jz 0x101067cf */
-            ii(0x1010_678c, 5); mov(eax, 0x101a_3b10);                  /* mov eax, 0x101a3b10 */ /* "Gold" */
+            ii(0x1010_678c, 5); mov(eax, StringDefinitions.Gold4);      /* mov eax, 0x101a3b10 */
             ii(0x1010_6791, 1); pushd(eax);                             /* push eax */
             ii(0x1010_6792, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_6795, 1); pushd(eax);                             /* push eax */

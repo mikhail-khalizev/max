@@ -84,7 +84,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_5a8a, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_5a8c, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_5a8e, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
-            ii(0x100f_5a93, 5); mov(eax, 0x101a_25b4);                  /* mov eax, 0x101a25b4 */ /* "Cheater!" */
+            ii(0x100f_5a93, 5); mov(eax, StringDefinitions.Cheater);    /* mov eax, 0x101a25b4 */
             ii(0x100f_5a98, 5); calld(0x1011_5d23, 0x20286);            /* call 0x10115d23 */
             ii(0x100f_5a9d, 2); jmpd(0x100f_5ad3, 0x34); goto l_0x100f_5ad3; /* jmp 0x100f5ad3 */
         l_0x100f_5a9f:
@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_5aaf, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_5ab1, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_5ab3, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
-            ii(0x100f_5ab8, 5); mov(eax, 0x101a_25bd);                  /* mov eax, 0x101a25bd */ /* "Cheater!  Prepare to pay the price." */
+            ii(0x100f_5ab8, 5); mov(eax, StringDefinitions.CheaterPrepareToPayThePrice); /* mov eax, 0x101a25bd */
             ii(0x100f_5abd, 5); calld(0x1011_5d23, 0x20261);            /* call 0x10115d23 */
             ii(0x100f_5ac2, 7); mov(memb_a32[ds, 0x101c_39b0], 0x1);    /* mov byte [0x101c39b0], 0x1 */
             ii(0x100f_5ac9, 5); mov(al, memb_a32[ds, 0x101c_37da]);     /* mov al, [0x101c37da] */

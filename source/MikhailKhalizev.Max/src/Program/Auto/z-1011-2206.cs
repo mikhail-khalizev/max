@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_2283, 5); calld(Definitions.sys_strlen, 0x5fc3f); /* call 0x10171ec7 */
             ii(0x1011_2288, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1011_228a, 2); if(jnzd(0x1011_229e, 0x12)) goto l_0x1011_229e; /* jnz 0x1011229e */
-            ii(0x1011_228c, 5); mov(edx, 0x101a_471e);                  /* mov edx, 0x101a471e */ /* "No Name" */
+            ii(0x1011_228c, 5); mov(edx, StringDefinitions.NoName);     /* mov edx, 0x101a471e */
             ii(0x1011_2291, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_2294, 5); add(eax, 0x21a);                        /* add eax, 0x21a */
             ii(0x1011_2299, 5); calld(Definitions.sys_strcpy, 0x53c31); /* call 0x10165ecf */

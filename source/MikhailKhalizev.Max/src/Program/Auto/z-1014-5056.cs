@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_5094, 1); pushd(eax);                             /* push eax */
             ii(0x1014_5095, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_5098, 1); pushd(eax);                             /* push eax */
-            ii(0x1014_5099, 5); mov(eax, 0x101a_cf88);                  /* mov eax, 0x101acf88 */ /* "Error in line %li, column %i:\n" */
+            ii(0x1014_5099, 5); mov(eax, StringDefinitions.ErrorInLineLiColumnI); /* mov eax, 0x101acf88 */
             ii(0x1014_509e, 1); pushd(eax);                             /* push eax */
             ii(0x1014_509f, 5); mov(eax, 0x50);                         /* mov eax, 0x50 */
             ii(0x1014_50a4, 1); pushd(eax);                             /* push eax */
@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_5135, 5); calld(Definitions.my_string_dtor, -0x3610); /* call 0x10141b2a */
             ii(0x1014_513a, 2); jmpd(0x1014_5146, 0xa); goto l_0x1014_5146; /* jmp 0x10145146 */
         //  ii(0x1014_513c, 10); Недостижимый код.
-l_0x1014_5146:
+        l_0x1014_5146:
             ii(0x1014_5146, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1014_5149, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_514b, 1); popd(ebp);                              /* pop ebp */

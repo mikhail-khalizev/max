@@ -60,12 +60,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_dec0, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_dec3, 4); cmp(memd_a32[ds, eax + 0xc], 0);        /* cmp dword [eax+0xc], 0x0 */
             ii(0x1010_dec7, 2); if(jzd(0x1010_ded8, 0xf)) goto l_0x1010_ded8; /* jz 0x1010ded8 */
-            ii(0x1010_dec9, 5); mov(edx, 0x101a_4584);                  /* mov edx, 0x101a4584 */ /* "Custom Game Menu" */
+            ii(0x1010_dec9, 5); mov(edx, StringDefinitions.CustomGameMenu); /* mov edx, 0x101a4584 */
             ii(0x1010_dece, 3); lea(eax, ebp - 0x74);                   /* lea eax, [ebp-0x74] */
             ii(0x1010_ded1, 5); calld(Definitions.sys_strcpy, 0x57ff9); /* call 0x10165ecf */
             ii(0x1010_ded6, 2); jmpd(0x1010_dee5, 0xd); goto l_0x1010_dee5; /* jmp 0x1010dee5 */
         l_0x1010_ded8:
-            ii(0x1010_ded8, 5); mov(edx, 0x101a_4595);                  /* mov edx, 0x101a4595 */ /* "Hot Seat Menu" */
+            ii(0x1010_ded8, 5); mov(edx, StringDefinitions.HotSeatMenu); /* mov edx, 0x101a4595 */
             ii(0x1010_dedd, 3); lea(eax, ebp - 0x74);                   /* lea eax, [ebp-0x74] */
             ii(0x1010_dee0, 5); calld(Definitions.sys_strcpy, 0x57fea); /* call 0x10165ecf */
         l_0x1010_dee5:

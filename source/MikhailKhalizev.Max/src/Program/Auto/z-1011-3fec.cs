@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_402c, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1011_402e, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1011_4033, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1011_4035, 5); mov(eax, 0x101a_4820);                  /* mov eax, 0x101a4820 */ /* "The host has selected a load file that is not compatible with the load file on your system. You will not be able to start this session until the host selects another load file or selects a new world map." */
+            ii(0x1011_4035, 5); mov(eax, StringDefinitions.TheHostHasSelectedALoadFileThatIsNotCompatibleWithTheLoadFileOnYourSystemYouWillNotBeAbleToStartThisSessionUntilTheHostSelectsAn); /* mov eax, 0x101a4820 */
             ii(0x1011_403a, 5); calld(0x1011_5d23, 0x1ce4);             /* call 0x10115d23 */
             ii(0x1011_403f, 3); mov(al, memb_a32[ss, ebp - 0x8]);       /* mov al, [ebp-0x8] */
             ii(0x1011_4042, 2); add(al, 0xd);                           /* add al, 0xd */

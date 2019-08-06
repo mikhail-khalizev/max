@@ -139,7 +139,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_788a, 5); calld(0x1007_5f6c, -0x1923);            /* call 0x10075f6c */
             ii(0x1007_788f, 2); jmpd(0x1007_789b, 0xa); goto l_0x1007_789b; /* jmp 0x1007789b */
         //  ii(0x1007_7891, 10); Недостижимый код.
-l_0x1007_789b:
+        l_0x1007_789b:
             ii(0x1007_789b, 3); mov(al, memb_a32[ss, ebp - 0x10]);      /* mov al, [ebp-0x10] */
             ii(0x1007_789e, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1007_78a0, 1); popd(ebp);                              /* pop ebp */

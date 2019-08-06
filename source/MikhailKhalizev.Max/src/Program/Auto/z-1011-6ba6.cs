@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_6bd3, 5); mov(eax, 0x27);                         /* mov eax, 0x27 */
             ii(0x1011_6bd8, 5); calld(0x1012_8897, 0x11cba);            /* call 0x10128897 */
         l_0x1011_6bdd:
-            ii(0x1011_6bdd, 5); mov(eax, 0x101a_7af0);                  /* mov eax, 0x101a7af0 */ /* "Game Paused.\nClick OK to continue." */
+            ii(0x1011_6bdd, 5); mov(eax, StringDefinitions.GamePausedClickOkToContinue); /* mov eax, 0x101a7af0 */
             ii(0x1011_6be2, 5); calld(0x1011_6b06, -0xe1);              /* call 0x10116b06 */
             ii(0x1011_6be7, 1); popd(ebp);                              /* pop ebp */
             ii(0x1011_6be8, 1); popd(edi);                              /* pop edi */

@@ -127,7 +127,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_0f05, 3); movsx(ecx, ax);                         /* movsx ecx, ax */
             ii(0x1014_0f08, 5); calld(0x100d_52f8, -0x6bc15);           /* call 0x100d52f8 */
             ii(0x1014_0f0d, 3); movsx(ebx, ax);                         /* movsx ebx, ax */
-            ii(0x1014_0f10, 5); mov(edx, 0x101a_ce49);                  /* mov edx, 0x101ace49 */ /* "Done" */
+            ii(0x1014_0f10, 5); mov(edx, StringDefinitions.Done2);      /* mov edx, 0x101ace49 */
             ii(0x1014_0f15, 3); mov(eax, memd_a32[ss, ebp - 0x50]);     /* mov eax, [ebp-0x50] */
             ii(0x1014_0f18, 5); calld(0x100c_ef64, -0x71fb9);           /* call 0x100cef64 */
             ii(0x1014_0f1d, 5); mov(eax, 0x38);                         /* mov eax, 0x38 */
@@ -350,7 +350,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_125f, 5); mov(eax, 0x7);                          /* mov eax, 0x7 */
             ii(0x1014_1264, 1); pushd(eax);                             /* push eax */
             ii(0x1014_1265, 5); mov(ecx, 0x147);                        /* mov ecx, 0x147 */
-            ii(0x1014_126a, 5); mov(ebx, 0x101a_ce4e);                  /* mov ebx, 0x101ace4e */ /* "Unit Status Screen" */
+            ii(0x1014_126a, 5); mov(ebx, StringDefinitions.UnitStatusScreen); /* mov ebx, 0x101ace4e */
             ii(0x1014_126f, 7); movsx(edx, memw_a32[ss, ebp - 0x374]);  /* movsx edx, word [ebp-0x374] */
             ii(0x1014_1276, 6); mov(eax, memd_a32[ss, ebp - 0x36e]);    /* mov eax, [ebp-0x36e] */
             ii(0x1014_127c, 5); calld(0x100e_9ae5, -0x5779c);           /* call 0x100e9ae5 */

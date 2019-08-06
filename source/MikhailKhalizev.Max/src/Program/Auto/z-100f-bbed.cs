@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_bc40, 5); calld(0x100c_aa20, -0x31225);           /* call 0x100caa20 */
             ii(0x100f_bc45, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_bc47, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x100f_bc49, 5); mov(esi, 0x101a_28b3);                  /* mov esi, 0x101a28b3 */ /* "Select starting location." */
+            ii(0x100f_bc49, 5); mov(esi, StringDefinitions.SelectStartingLocation); /* mov esi, 0x101a28b3 */
             ii(0x100f_bc4e, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_bc50, 2); mov(eax, esi);                          /* mov eax, esi */
             ii(0x100f_bc52, 5); calld(0x1011_5d23, 0x1a0cc);            /* call 0x10115d23 */
@@ -212,10 +212,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_be82, 3); mov(memb_a32[ss, ebp - 0x40], al);      /* mov [ebp-0x40], al */
             ii(0x100f_be85, 5); jmpd(0x100f_bf34, 0xaa); goto l_0x100f_bf34; /* jmp 0x100fbf34 */
         //  ii(0x100f_be8a, 139); Недостижимый код.
-l_0x100f_bf15:
+        l_0x100f_bf15:
             ii(0x100f_bf15, 2); jmpd(0x100f_bf4f, 0x38); goto l_0x100f_bf4f; /* jmp 0x100fbf4f */
         //  ii(0x100f_bf17, 29); Недостижимый код.
-l_0x100f_bf34:
+        l_0x100f_bf34:
             ii(0x100f_bf34, 3); mov(al, memb_a32[ss, ebp - 0x40]);      /* mov al, [ebp-0x40] */
             ii(0x100f_bf37, 3); mov(memb_a32[ss, ebp - 0x44], al);      /* mov [ebp-0x44], al */
             ii(0x100f_bf3a, 4); cmp(memb_a32[ss, ebp - 0x44], 0x6);     /* cmp byte [ebp-0x44], 0x6 */
@@ -263,7 +263,7 @@ l_0x100f_bf34:
             ii(0x100f_bfc1, 5); calld(0x1007_5eec, -0x860da);           /* call 0x10075eec */
             ii(0x100f_bfc6, 2); jmpd(0x100f_bfd2, 0xa); goto l_0x100f_bfd2; /* jmp 0x100fbfd2 */
         //  ii(0x100f_bfc8, 10); Недостижимый код.
-l_0x100f_bfd2:
+        l_0x100f_bfd2:
             ii(0x100f_bfd2, 3); mov(al, memb_a32[ss, ebp - 0x10]);      /* mov al, [ebp-0x10] */
             ii(0x100f_bfd5, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100f_bfd7, 1); popd(ebp);                              /* pop ebp */

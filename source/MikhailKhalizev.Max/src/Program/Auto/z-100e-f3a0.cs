@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_f3f4, 4); movsx(eax, memb_a32[ss, ebp - 0x4]);    /* movsx eax, byte [ebp-0x4] */
             ii(0x100e_f3f8, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x100e_f3fb, 6); pushd(memd_a32[ds, eax + 0x101b_868c]); /* push dword [eax+0x101b868c] */
-            ii(0x100e_f401, 5); mov(eax, 0x101a_201c);                  /* mov eax, 0x101a201c */ /* "%s" */
+            ii(0x100e_f401, 5); mov(eax, StringDefinitions.S2);         /* mov eax, 0x101a201c */
             ii(0x100e_f406, 1); pushd(eax);                             /* push eax */
             ii(0x100e_f407, 5); calld(Definitions.sys_printf, 0x7d230); /* call 0x1016c63c */
             ii(0x100e_f40c, 3); add(esp, 0x8);                          /* add esp, 0x8 */

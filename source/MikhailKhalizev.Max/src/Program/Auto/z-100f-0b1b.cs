@@ -341,7 +341,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_0fa5, 1); pushd(eax);                             /* push eax */
             ii(0x100f_0fa6, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
             ii(0x100f_0fa8, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x100f_0faa, 5); mov(edx, 0x101a_22e8);                  /* mov edx, 0x101a22e8 */ /* "End Turn" */
+            ii(0x100f_0faa, 5); mov(edx, StringDefinitions.EndTurn);    /* mov edx, 0x101a22e8 */
             ii(0x100f_0faf, 3); lea(eax, ebp - 0x7c);                   /* lea eax, [ebp-0x7c] */
             ii(0x100f_0fb2, 5); calld(0x100e_ab9d, -0x641a);            /* call 0x100eab9d */
             ii(0x100f_0fb7, 5); jmpd(0x100f_0ef0, -0xcc); goto l_0x100f_0ef0; /* jmp 0x100f0ef0 */

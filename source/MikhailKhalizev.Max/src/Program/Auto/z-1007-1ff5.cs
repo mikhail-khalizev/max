@@ -23,10 +23,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_2013, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1007_2016, 2); jmpd(0x1007_2040, 0x28); goto l_0x1007_2040; /* jmp 0x10072040 */
         //  ii(0x1007_2018, 18); Недостижимый код.
-l_0x1007_202a:
+        l_0x1007_202a:
             ii(0x1007_202a, 2); jmpd(0x1007_2060, 0x34); goto l_0x1007_2060; /* jmp 0x10072060 */
         //  ii(0x1007_202c, 20); Недостижимый код.
-l_0x1007_2040:
+        l_0x1007_2040:
             ii(0x1007_2040, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1007_2043, 3); sub(eax, 0x1c);                         /* sub eax, 0x1c */
             ii(0x1007_2046, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */

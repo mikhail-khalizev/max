@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_635a, 1); pushd(eax);                             /* push eax */
             ii(0x1011_635b, 5); mov(ecx, 0x2);                          /* mov ecx, 0x2 */
             ii(0x1011_6360, 5); mov(ebx, 0x2);                          /* mov ebx, 0x2 */
-            ii(0x1011_6365, 5); mov(edx, 0x101a_7aed);                  /* mov edx, 0x101a7aed */ /* "OK" */
+            ii(0x1011_6365, 5); mov(edx, StringDefinitions.Ok);         /* mov edx, 0x101a7aed */
             ii(0x1011_636a, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1011_636d, 3); mov(eax, memd_a32[ds, eax + 0x32]);     /* mov eax, [eax+0x32] */
             ii(0x1011_6370, 5); calld(0x100c_ef64, -0x47411);           /* call 0x100cef64 */

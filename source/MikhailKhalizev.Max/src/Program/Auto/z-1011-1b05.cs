@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_1b61, 4); movsx(eax, memw_a32[ss, ebp - 0x10]);   /* movsx eax, word [ebp-0x10] */
             ii(0x1011_1b65, 1); pushd(eax);                             /* push eax */
             ii(0x1011_1b66, 4); movsx(ecx, memw_a32[ss, ebp - 0x14]);   /* movsx ecx, word [ebp-0x14] */
-            ii(0x1011_1b6a, 5); mov(ebx, 0x101a_46db);                  /* mov ebx, 0x101a46db */ /* "Copyright 1996 Interplay Productions. v1.04" */
+            ii(0x1011_1b6a, 5); mov(ebx, StringDefinitions.Copyright1996InterplayProductionsV104); /* mov ebx, 0x101a46db */
             ii(0x1011_1b6f, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_1b72, 3); mov(edx, memd_a32[ds, eax + 0xe]);      /* mov edx, [eax+0xe] */
             ii(0x1011_1b75, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */

@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_21df, 3); mov(al, memb_a32[ds, eax + 0x45]);      /* mov al, [eax+0x45] */
             ii(0x100f_21e2, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100f_21e7, 1); pushd(eax);                             /* push eax */
-            ii(0x100f_21e8, 5); mov(eax, 0x101a_230d);                  /* mov eax, 0x101a230d */ /* "Number of turns to clear site: %i." */
+            ii(0x100f_21e8, 5); mov(eax, StringDefinitions.NumberOfTurnsToClearSiteI); /* mov eax, 0x101a230d */
             ii(0x100f_21ed, 1); pushd(eax);                             /* push eax */
             ii(0x100f_21ee, 5); mov(eax, 0x50);                         /* mov eax, 0x50 */
             ii(0x100f_21f3, 1); pushd(eax);                             /* push eax */
@@ -119,8 +119,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_22e4, 2); jmpd(0x100f_22ff, 0x19); goto l_0x100f_22ff; /* jmp 0x100f22ff */
         l_0x100f_22e6:
             ii(0x100f_22e6, 5); mov(ecx, 0x488);                        /* mov ecx, 0x488 */
-            ii(0x100f_22eb, 5); mov(ebx, 0x101a_2330);                  /* mov ebx, 0x101a2330 */ /* "gamemgr.cpp" */
-            ii(0x100f_22f0, 5); mov(edx, 0x101a_233c);                  /* mov edx, 0x101a233c */ /* "build_list.GetCount() > 0" */
+            ii(0x100f_22eb, 5); mov(ebx, StringDefinitions.GamemgrCpp4); /* mov ebx, 0x101a2330 */
+            ii(0x100f_22f0, 5); mov(edx, StringDefinitions.BuildListGetcount02); /* mov edx, 0x101a233c */
             ii(0x100f_22f5, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_22f7, 5); calld(Definitions.sys_assert, 0x73a96); /* call 0x10165d92 */
             ii(0x100f_22fc, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_2327, 3); movsx(eax, memw_a32[ds, eax]);          /* movsx eax, word [eax] */
             ii(0x100f_232a, 3); imul(eax, eax, 0x33);                   /* imul eax, eax, 0x33 */
             ii(0x100f_232d, 6); pushd(memd_a32[ds, eax + 0x101c_81d7]); /* push dword [eax+0x101c81d7] */
-            ii(0x100f_2333, 5); mov(eax, 0x101a_2356);                  /* mov eax, 0x101a2356 */ /* "Was building %s, with %i turns to completion." */
+            ii(0x100f_2333, 5); mov(eax, StringDefinitions.WasBuildingSWithITurnsToCompletion); /* mov eax, 0x101a2356 */
             ii(0x100f_2338, 1); pushd(eax);                             /* push eax */
             ii(0x100f_2339, 5); mov(eax, 0xc8);                         /* mov eax, 0xc8 */
             ii(0x100f_233e, 1); pushd(eax);                             /* push eax */
@@ -170,7 +170,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_237f, 3); movsx(eax, memw_a32[ds, eax]);          /* movsx eax, word [eax] */
             ii(0x100f_2382, 3); imul(eax, eax, 0x33);                   /* imul eax, eax, 0x33 */
             ii(0x100f_2385, 6); pushd(memd_a32[ds, eax + 0x101c_81d7]); /* push dword [eax+0x101c81d7] */
-            ii(0x100f_238b, 5); mov(eax, 0x101a_2384);                  /* mov eax, 0x101a2384 */ /* "Currently building: %s.\nTurns to completion: %i." */
+            ii(0x100f_238b, 5); mov(eax, StringDefinitions.CurrentlyBuildingSTurnsToCompletionI); /* mov eax, 0x101a2384 */
             ii(0x100f_2390, 1); pushd(eax);                             /* push eax */
             ii(0x100f_2391, 5); mov(eax, 0xc8);                         /* mov eax, 0xc8 */
             ii(0x100f_2396, 1); pushd(eax);                             /* push eax */

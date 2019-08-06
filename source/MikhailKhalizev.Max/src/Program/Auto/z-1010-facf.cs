@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_fb25, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_fb28, 5); add(eax, 0x125);                        /* add eax, 0x125 */
             ii(0x1010_fb2d, 5); calld(Definitions.sys_strcpy, 0x5639d); /* call 0x10165ecf */
-            ii(0x1010_fb32, 5); mov(edx, 0x101a_4652);                  /* mov edx, 0x101a4652 */ /* "3f8" */
+            ii(0x1010_fb32, 5); mov(edx, StringDefinitions._3f8);       /* mov edx, 0x101a4652 */
             ii(0x1010_fb37, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_fb3a, 5); add(eax, 0x125);                        /* add eax, 0x125 */
             ii(0x1010_fb3f, 5); calld(Definitions.sys_strstr, 0x694cc); /* call 0x10179010 */
@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_fb56, 5); calld(Definitions.sys_strcpy, 0x56374); /* call 0x10165ecf */
             ii(0x1010_fb5b, 2); jmpd(0x1010_fb86, 0x29); goto l_0x1010_fb86; /* jmp 0x1010fb86 */
         l_0x1010_fb5d:
-            ii(0x1010_fb5d, 5); mov(edx, 0x101a_4656);                  /* mov edx, 0x101a4656 */ /* "2f8" */
+            ii(0x1010_fb5d, 5); mov(edx, StringDefinitions._2f8);       /* mov edx, 0x101a4656 */
             ii(0x1010_fb62, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_fb65, 5); add(eax, 0x125);                        /* add eax, 0x125 */
             ii(0x1010_fb6a, 5); calld(Definitions.sys_strstr, 0x694a1); /* call 0x10179010 */

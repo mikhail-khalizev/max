@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_8932, 1); pushd(ebp);                             /* push ebp */
             ii(0x100e_8933, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x100e_8935, 6); sub(esp, 0x18);                         /* sub esp, 0x18 */
-            ii(0x100e_893b, 5); mov(ebx, 0x101a_1ef8);                  /* mov ebx, 0x101a1ef8 */ /* "" */
+            ii(0x100e_893b, 5); mov(ebx, StringDefinitions.Empty);      /* mov ebx, 0x101a1ef8 */
             ii(0x100e_8940, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100e_8942, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_8944, 5); calld(/* sys */ 0x1016_e290, 0x85947);  /* call 0x1016e290 */

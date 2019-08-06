@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_d126, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1016_d128, 3); cmp(eax, -0x1 /* 0xff */);              /* cmp eax, 0xffffffff */
             ii(0x1016_d12b, 2); if(jnzd(0x1016_d13f, 0x12)) goto l_0x1016_d13f; /* jnz 0x1016d13f */
-            ii(0x1016_d12d, 5); mov(ecx, 0x101b_2e4c);                  /* mov ecx, 0x101b2e4c */ /* "color.c: color table not found\n" */
+            ii(0x1016_d12d, 5); mov(ecx, StringDefinitions.ColorCColorTableNotFound); /* mov ecx, 0x101b2e4c */
             ii(0x1016_d132, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1016_d134, 6); mov(memd_a32[ds, 0x101b_dea0], ecx);    /* mov [0x101bdea0], ecx */
             ii(0x1016_d13a, 5); jmpd(0x1016_d2b8, 0x179); goto l_0x1016_d2b8; /* jmp 0x1016d2b8 */

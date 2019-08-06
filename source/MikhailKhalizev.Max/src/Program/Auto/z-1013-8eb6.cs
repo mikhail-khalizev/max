@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8f08, 6); pushd(memd_a32[ds, eax + 0x101b_d42c]); /* push dword [eax+0x101bd42c] */
             ii(0x1013_8f0e, 4); movsx(eax, memw_a32[ss, ebp - 0xc]);    /* movsx eax, word [ebp-0xc] */
             ii(0x1013_8f12, 1); pushd(eax);                             /* push eax */
-            ii(0x1013_8f13, 5); mov(eax, 0x101a_c87f);                  /* mov eax, 0x101ac87f */ /* "save%i.%s" */
+            ii(0x1013_8f13, 5); mov(eax, StringDefinitions.SaveIS3);    /* mov eax, 0x101ac87f */
             ii(0x1013_8f18, 1); pushd(eax);                             /* push eax */
             ii(0x1013_8f19, 6); lea(eax, ebp - 0xa0);                   /* lea eax, [ebp-0xa0] */
             ii(0x1013_8f1f, 1); pushd(eax);                             /* push eax */
@@ -102,7 +102,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8fe6, 5); mov(ecx, 0x1);                          /* mov ecx, 0x1 */
             ii(0x1013_8feb, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1013_8ff0, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
-            ii(0x1013_8ff5, 5); mov(eax, 0x101a_c889);                  /* mov eax, 0x101ac889 */ /* "Wrong save version - Can't load." */
+            ii(0x1013_8ff5, 5); mov(eax, StringDefinitions.WrongSaveVersionCanTLoad); /* mov eax, 0x101ac889 */
             ii(0x1013_8ffa, 5); calld(0x1011_5d23, -0x232dc);           /* call 0x10115d23 */
             ii(0x1013_8fff, 10); mov(memd_a32[ss, ebp - 0xa4], 0);      /* mov dword [ebp-0xa4], 0x0 */
             ii(0x1013_9009, 2); xor(edx, edx);                          /* xor edx, edx */
@@ -728,7 +728,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_9ac0, 5); calld(0x1013_b997, 0x1ed2);             /* call 0x1013b997 */
             ii(0x1013_9ac5, 2); jmpd(0x1013_9ad1, 0xa); goto l_0x1013_9ad1; /* jmp 0x10139ad1 */
         //  ii(0x1013_9ac7, 10); Недостижимый код.
-l_0x1013_9ad1:
+        l_0x1013_9ad1:
             ii(0x1013_9ad1, 6); mov(eax, memd_a32[ss, ebp - 0xa4]);     /* mov eax, [ebp-0xa4] */
             ii(0x1013_9ad7, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_9ad9, 1); popd(ebp);                              /* pop ebp */

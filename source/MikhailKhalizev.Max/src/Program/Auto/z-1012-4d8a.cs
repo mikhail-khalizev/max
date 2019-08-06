@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4db6, 5); calld(0x1012_4890, -0x52b);             /* call 0x10124890 */
             ii(0x1012_4dbb, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1012_4dbd, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x1012_4dc2, 5); mov(eax, 0x101a_8184);                  /* mov eax, 0x101a8184 */ /* "\r" */
+            ii(0x1012_4dc2, 5); mov(eax, StringDefinitions.Control29);  /* mov eax, 0x101a8184 */
             ii(0x1012_4dc7, 5); calld(0x1012_4890, -0x53c);             /* call 0x10124890 */
             ii(0x1012_4dcc, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1012_4dce, 1); popd(ebp);                              /* pop ebp */

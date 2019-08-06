@@ -61,13 +61,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_51d9, 3); mov(memb_a32[ss, ebp - 0x8], al);       /* mov [ebp-0x8], al */
             ii(0x1010_51dc, 5); jmpd(0x1010_5275, 0x94); goto l_0x1010_5275; /* jmp 0x10105275 */
         l_0x1010_51e1:
-            ii(0x1010_51e1, 5); mov(edx, 0x101a_32ee);                  /* mov edx, 0x101a32ee */ /* "[" */
+            ii(0x1010_51e1, 5); mov(edx, StringDefinitions.Control20);  /* mov edx, 0x101a32ee */
             ii(0x1010_51e6, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_51e9, 3); add(eax, 0x6f);                         /* add eax, 0x6f */
             ii(0x1010_51ec, 5); calld(Definitions.sys_strstr, 0x73e1f); /* call 0x10179010 */
             ii(0x1010_51f1, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_51f3, 2); if(jnzd(0x1010_5209, 0x14)) goto l_0x1010_5209; /* jnz 0x10105209 */
-            ii(0x1010_51f5, 5); mov(edx, 0x101a_32f0);                  /* mov edx, 0x101a32f0 */ /* "{" */
+            ii(0x1010_51f5, 5); mov(edx, StringDefinitions.Control21);  /* mov edx, 0x101a32f0 */
             ii(0x1010_51fa, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_51fd, 3); add(eax, 0x6f);                         /* add eax, 0x6f */
             ii(0x1010_5200, 5); calld(Definitions.sys_strstr, 0x73e0b); /* call 0x10179010 */
@@ -91,7 +91,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_522d, 3); mov(memb_a32[ss, ebp - 0x8], al);       /* mov [ebp-0x8], al */
             ii(0x1010_5230, 2); jmpd(0x1010_5275, 0x43); goto l_0x1010_5275; /* jmp 0x10105275 */
         l_0x1010_5232:
-            ii(0x1010_5232, 5); mov(edx, 0x101a_32f2);                  /* mov edx, 0x101a32f2 */ /* "\\p" */
+            ii(0x1010_5232, 5); mov(edx, StringDefinitions.P);          /* mov edx, 0x101a32f2 */
             ii(0x1010_5237, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_523a, 3); add(eax, 0x6f);                         /* add eax, 0x6f */
             ii(0x1010_523d, 5); calld(Definitions.sys_strstr, 0x73dce); /* call 0x10179010 */

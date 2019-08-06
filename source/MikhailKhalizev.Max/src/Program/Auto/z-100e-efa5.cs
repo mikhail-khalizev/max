@@ -166,7 +166,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100e_f19a:
             ii(0x100e_f19a, 2); jmpd(0x100e_f1a8, 0xc); goto l_0x100e_f1a8; /* jmp 0x100ef1a8 */
         l_0x100e_f19c:
-            ii(0x100e_f19c, 5); mov(eax, 0x101a_1fc4);                  /* mov eax, 0x101a1fc4 */ /* "Notice: Game will end in 10 turns!" */
+            ii(0x100e_f19c, 5); mov(eax, StringDefinitions.NoticeGameWillEndIn10Turns); /* mov eax, 0x101a1fc4 */
             ii(0x100e_f1a1, 5); calld(0x1011_6b06, 0x27960);            /* call 0x10116b06 */
             ii(0x100e_f1a6, 2); jmpd(0x100e_f1cf, 0x27); goto l_0x100e_f1cf; /* jmp 0x100ef1cf */
         l_0x100e_f1a8:

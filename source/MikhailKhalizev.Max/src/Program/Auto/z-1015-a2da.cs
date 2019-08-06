@@ -207,7 +207,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_a569, 6); if(jbed(0x1015_a4bb, -0xb4)) goto l_0x1015_a4bb; /* jbe 0x1015a4bb */
             ii(0x1015_a56f, 5); jmpd(0x1015_a4c9, -0xab); goto l_0x1015_a4c9; /* jmp 0x1015a4c9 */
         //  ii(0x1015_a574, 5); Недостижимый код.
-l_0x1015_a579:
+        l_0x1015_a579:
             ii(0x1015_a579, 5); cmp(memw_a32[ss, ebp - 0x34], 0x5);     /* cmp word [ebp-0x34], 0x5 */
             ii(0x1015_a57e, 6); if(jzd(0x1015_a474, -0x110)) goto l_0x1015_a474; /* jz 0x1015a474 */
             ii(0x1015_a584, 5); jmpd(0x1015_a4c9, -0xc0); goto l_0x1015_a4c9; /* jmp 0x1015a4c9 */
@@ -216,7 +216,7 @@ l_0x1015_a579:
             ii(0x1015_a58e, 6); if(jbed(0x1015_a487, -0x10d)) goto l_0x1015_a487; /* jbe 0x1015a487 */
             ii(0x1015_a594, 5); jmpd(0x1015_a49a, -0xff); goto l_0x1015_a49a; /* jmp 0x1015a49a */
         //  ii(0x1015_a599, 5); Недостижимый код.
-l_0x1015_a59e:
+        l_0x1015_a59e:
             ii(0x1015_a59e, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x1015_a5a2, 3); cmp(eax, 0x4);                          /* cmp eax, 0x4 */
             ii(0x1015_a5a5, 2); if(jnzd(0x1015_a5b0, 0x9)) goto l_0x1015_a5b0; /* jnz 0x1015a5b0 */

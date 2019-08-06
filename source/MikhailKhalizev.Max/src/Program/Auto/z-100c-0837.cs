@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_08c2, 5); calld(0x1007_5f6c, -0x4a95b);           /* call 0x10075f6c */
             ii(0x100c_08c7, 2); jmpd(0x100c_08d3, 0xa); goto l_0x100c_08d3; /* jmp 0x100c08d3 */
         //  ii(0x100c_08c9, 10); Недостижимый код.
-l_0x100c_08d3:
+        l_0x100c_08d3:
             ii(0x100c_08d3, 3); mov(eax, memd_a32[ss, ebp - 0x1c]);     /* mov eax, [ebp-0x1c] */
             ii(0x100c_08d6, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100c_08d8, 1); popd(ebp);                              /* pop ebp */

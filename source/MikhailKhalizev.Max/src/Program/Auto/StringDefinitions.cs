@@ -272,6 +272,7 @@ namespace MikhailKhalizev.Max.Program
         public static string PurchaseMenuString { get; } = "Purchase Menu";
         public static string QuitString { get; } = "Quit";
         public static string RangeString { get; } = "Range";
+        public static string RationalDos4gString { get; } = "RATIONAL DOS/4G";
         public static string RawMaterialMiningIncreasedToIString { get; } = "Raw material mining increased to %i.\n";
         public static string RawMaterialMiningReducedToIString { get; } = "Raw material mining reduced to %i.\n";
         public static string RawMaterialString { get; } = "raw material";
@@ -1028,6 +1029,7 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition Hmidrv386 { get; } = new StringDefinition(0x101b_3458, Hmidrv386String);
         public static StringDefinition FloatingPointSupportNotLoaded { get; } = new StringDefinition(0x101b_3464, FloatingPointSupportNotLoadedString);
         public static StringDefinition StackDataHasBeenCorrupted { get; } = new StringDefinition(0x101b_3488, StackDataHasBeenCorruptedString);
+        public static StringDefinition RationalDos4g { get; } = new StringDefinition(0x101b_36fc, RationalDos4gString);
         public static StringDefinition Tz { get; } = new StringDefinition(0x101b_3744, TzString);
         public static StringDefinition In { get; } = new StringDefinition(0x101b_37f9, InString);
         public static StringDefinition ReturnFromTerminateFunction { get; } = new StringDefinition(0x101b_3800, ReturnFromTerminateFunctionString);

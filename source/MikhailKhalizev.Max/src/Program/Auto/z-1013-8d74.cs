@@ -55,9 +55,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8dfa, 4); movsx(eax, memw_a32[ss, ebp - 0x8]);    /* movsx eax, word [ebp-0x8] */
             ii(0x1013_8dfe, 1); inc(eax);                               /* inc eax */
             ii(0x1013_8dff, 1); pushd(eax);                             /* push eax */
-            ii(0x1013_8e00, 5); mov(eax, 0x101a_c86f);                  /* mov eax, 0x101ac86f */ /* "Scenario" */
+            ii(0x1013_8e00, 5); mov(eax, StringDefinitions.Scenario);   /* mov eax, 0x101ac86f */
             ii(0x1013_8e05, 1); pushd(eax);                             /* push eax */
-            ii(0x1013_8e06, 5); mov(eax, 0x101a_c878);                  /* mov eax, 0x101ac878 */ /* "%s #%i" */
+            ii(0x1013_8e06, 5); mov(eax, StringDefinitions.SI2);        /* mov eax, 0x101ac878 */
             ii(0x1013_8e0b, 1); pushd(eax);                             /* push eax */
             ii(0x1013_8e0c, 3); lea(eax, ebp - 0x44);                   /* lea eax, [ebp-0x44] */
             ii(0x1013_8e0f, 1); pushd(eax);                             /* push eax */

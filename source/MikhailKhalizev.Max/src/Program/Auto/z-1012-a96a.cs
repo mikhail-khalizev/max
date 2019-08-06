@@ -22,11 +22,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_a989, 6); mov(edx, memd_a32[ds, 0x101c_59cc]);    /* mov edx, [0x101c59cc] */
             ii(0x1012_a98f, 4); mov(ax, memw_a32[ds, edx + 0x14]);      /* mov ax, [edx+0x14] */
             ii(0x1012_a993, 6); mov(memw_a32[ds, 0x101c_5c1d], ax);     /* mov [0x101c5c1d], ax */
-            ii(0x1012_a999, 5); mov(eax, 0x101a_864a);                  /* mov eax, 0x101a864a */ /* "v1.04" */
+            ii(0x1012_a999, 5); mov(eax, StringDefinitions.V104);       /* mov eax, 0x101a864a */
             ii(0x1012_a99e, 5); calld(Definitions.sys_strlen, 0x47524); /* call 0x10171ec7 */
             ii(0x1012_a9a3, 5); add(eax, 0x1e);                         /* add eax, 0x1e */
             ii(0x1012_a9a8, 6); mov(memw_a32[ds, 0x101c_5c1f], ax);     /* mov [0x101c5c1f], ax */
-            ii(0x1012_a9ae, 5); mov(edx, 0x101a_8650);                  /* mov edx, 0x101a8650 */ /* "v1.04" */
+            ii(0x1012_a9ae, 5); mov(edx, StringDefinitions.V1042);      /* mov edx, 0x101a8650 */
             ii(0x1012_a9b3, 5); mov(eax, 0x101c_5c21);                  /* mov eax, 0x101c5c21 */
             ii(0x1012_a9b8, 5); calld(Definitions.sys_strcpy, 0x3b512); /* call 0x10165ecf */
             ii(0x1012_a9bd, 5); mov(eax, memd_a32[ds, 0x101c_59cc]);    /* mov eax, [0x101c59cc] */

@@ -348,7 +348,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_d670, 5); calld(0x1007_5f6c, -0xe7709);           /* call 0x10075f6c */
             ii(0x1015_d675, 2); jmpd(0x1015_d681, 0xa); goto l_0x1015_d681; /* jmp 0x1015d681 */
         //  ii(0x1015_d677, 10); Недостижимый код.
-l_0x1015_d681:
+        l_0x1015_d681:
             ii(0x1015_d681, 3); mov(al, memb_a32[ss, ebp - 0xc]);       /* mov al, [ebp-0xc] */
             ii(0x1015_d684, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1015_d686, 1); popd(ebp);                              /* pop ebp */

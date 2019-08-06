@@ -45,8 +45,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_2760, 2); jmpd(0x1010_277b, 0x19); goto l_0x1010_277b; /* jmp 0x1010277b */
         l_0x1010_2762:
             ii(0x1010_2762, 5); mov(ecx, 0x2218);                       /* mov ecx, 0x2218 */
-            ii(0x1010_2767, 5); mov(ebx, 0x101a_2bf3);                  /* mov ebx, 0x101a2bf3 */ /* "gamemgr.cpp" */
-            ii(0x1010_276c, 5); mov(edx, 0x101a_2bff);                  /* mov edx, 0x101a2bff */ /* "CTinfo->TeamType != REMOTE_TEAM" */
+            ii(0x1010_2767, 5); mov(ebx, StringDefinitions.GamemgrCpp2); /* mov ebx, 0x101a2bf3 */
+            ii(0x1010_276c, 5); mov(edx, StringDefinitions.CtinfoTeamtypeRemoteTeam); /* mov edx, 0x101a2bff */
             ii(0x1010_2771, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1010_2773, 5); calld(Definitions.sys_assert, 0x6361a); /* call 0x10165d92 */
             ii(0x1010_2778, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */
@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_2835, 5); calld(0x100e_0d64, -0x21ad6);           /* call 0x100e0d64 */
             ii(0x1010_283a, 1); cwde();                                 /* cwde */
             ii(0x1010_283b, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_283c, 5); mov(eax, 0x101a_2c1f);                  /* mov eax, 0x101a2c1f */ /* "Factories in complex %i re-started." */
+            ii(0x1010_283c, 5); mov(eax, StringDefinitions.FactoriesInComplexIReStarted); /* mov eax, 0x101a2c1f */
             ii(0x1010_2841, 1); pushd(eax);                             /* push eax */
             ii(0x1010_2842, 6); lea(eax, ebp - 0xf0);                   /* lea eax, [ebp-0xf0] */
             ii(0x1010_2848, 1); pushd(eax);                             /* push eax */
@@ -166,7 +166,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_28f6, 5); calld(0x100e_043c, -0x224bf);           /* call 0x100e043c */
             ii(0x1010_28fb, 2); jmpd(0x1010_2907, 0xa); goto l_0x1010_2907; /* jmp 0x10102907 */
         //  ii(0x1010_28fd, 10); Недостижимый код.
-l_0x1010_2907:
+        l_0x1010_2907:
             ii(0x1010_2907, 3); mov(eax, memd_a32[ss, ebp - 0x28]);     /* mov eax, [ebp-0x28] */
             ii(0x1010_290a, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1010_290c, 1); popd(ebp);                              /* pop ebp */

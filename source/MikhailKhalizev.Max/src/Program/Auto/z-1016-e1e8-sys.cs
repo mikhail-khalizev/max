@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_e206, 1); pushd(edx);                             /* push edx */
             ii(0x1016_e207, 6); mov(memd_a32[ds, 0x101b_dea4], ebx);    /* mov [0x101bdea4], ebx */
             ii(0x1016_e20d, 5); calld(/* sys */ 0x1016_d67c, -0xb96);   /* call 0x1016d67c */
-            ii(0x1016_e212, 5); mov(eax, 0x101b_2ec4);                  /* mov eax, 0x101b2ec4 */ /* "color.pal" */
+            ii(0x1016_e212, 5); mov(eax, StringDefinitions.ColorPal);   /* mov eax, 0x101b2ec4 */
             ii(0x1016_e217, 5); calld(/* sys */ 0x1016_d0f4, -0x1128);  /* call 0x1016d0f4 */
             ii(0x1016_e21c, 2); cmp(eax, ebx);                          /* cmp eax, ebx */
             ii(0x1016_e21e, 2); if(jnzd(0x1016_e22f, 0xf)) goto l_0x1016_e22f; /* jnz 0x1016e22f */

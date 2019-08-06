@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_7062, 3); sar(eax, 0x18);                         /* sar eax, 0x18 */
             ii(0x100e_7065, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x100e_7068, 6); pushd(memd_a32[ds, eax + 0x101b_b4b4]); /* push dword [eax+0x101bb4b4] */
-            ii(0x100e_706e, 5); mov(eax, 0x101a_1e24);                  /* mov eax, 0x101a1e24 */ /* "%s research completed" */
+            ii(0x100e_706e, 5); mov(eax, StringDefinitions.SResearchCompleted); /* mov eax, 0x101a1e24 */
             ii(0x100e_7073, 1); pushd(eax);                             /* push eax */
             ii(0x100e_7074, 6); lea(eax, ebp - 0x194);                  /* lea eax, [ebp-0x194] */
             ii(0x100e_707a, 1); pushd(eax);                             /* push eax */

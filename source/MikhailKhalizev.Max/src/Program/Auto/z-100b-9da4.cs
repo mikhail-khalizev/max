@@ -234,7 +234,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_a07c, 5); calld(0x1008_8b7c, -0x31505);           /* call 0x10088b7c */
             ii(0x100b_a081, 2); jmpd(0x100b_a08d, 0xa); goto l_0x100b_a08d; /* jmp 0x100ba08d */
         //  ii(0x100b_a083, 10); Недостижимый код.
-l_0x100b_a08d:
+        l_0x100b_a08d:
             ii(0x100b_a08d, 3); mov(eax, memd_a32[ss, ebp - 0x18]);     /* mov eax, [ebp-0x18] */
             ii(0x100b_a090, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100b_a092, 1); popd(ebp);                              /* pop ebp */

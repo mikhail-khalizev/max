@@ -171,7 +171,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_b9c5, 5); calld(0x100b_7368, -0x64662);           /* call 0x100b7368 */
             ii(0x1011_b9ca, 2); jmpd(0x1011_b9d6, 0xa); goto l_0x1011_b9d6; /* jmp 0x1011b9d6 */
         //  ii(0x1011_b9cc, 10); Недостижимый код.
-l_0x1011_b9d6:
+        l_0x1011_b9d6:
             ii(0x1011_b9d6, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1011_b9d9, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1011_b9db, 1); popd(ebp);                              /* pop ebp */

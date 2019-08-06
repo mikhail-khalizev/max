@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_aa90, 6); add(edx, 0x21a);                        /* add edx, 0x21a */
             ii(0x1012_aa96, 5); mov(eax, 0x101c_5c21);                  /* mov eax, 0x101c5c21 */
             ii(0x1012_aa9b, 5); calld(Definitions.sys_strcpy, 0x3b42f); /* call 0x10165ecf */
-            ii(0x1012_aaa0, 5); mov(edx, 0x101a_8656);                  /* mov edx, 0x101a8656 */ /* ": " */
+            ii(0x1012_aaa0, 5); mov(edx, StringDefinitions.Control32);  /* mov edx, 0x101a8656 */
             ii(0x1012_aaa5, 5); mov(eax, 0x101c_5c21);                  /* mov eax, 0x101c5c21 */
             ii(0x1012_aaaa, 5); calld(Definitions.sys_strcat, 0x3b482); /* call 0x10165f31 */
             ii(0x1012_aaaf, 5); mov(eax, memd_a32[ds, 0x101c_59cc]);    /* mov eax, [0x101c59cc] */

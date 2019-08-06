@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_0100, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1010_0102, 4); mov(ax, memw_a32[ss, ebp - 0x8]);       /* mov ax, [ebp-0x8] */
             ii(0x1010_0106, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_0107, 5); mov(eax, 0x101a_2b25);                  /* mov eax, 0x101a2b25 */ /* "%i/%i" */
+            ii(0x1010_0107, 5); mov(eax, StringDefinitions.II);         /* mov eax, 0x101a2b25 */
             ii(0x1010_010c, 1); pushd(eax);                             /* push eax */
             ii(0x1010_010d, 3); lea(eax, ebp - 0x58);                   /* lea eax, [ebp-0x58] */
             ii(0x1010_0110, 1); pushd(eax);                             /* push eax */

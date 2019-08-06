@@ -150,7 +150,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_72b1, 2); if(jzd(0x1014_7271, -0x42)) goto l_0x1014_7271; /* jz 0x10147271 */
             ii(0x1014_72b3, 2); jmpd(0x1014_7293, -0x22); goto l_0x1014_7293; /* jmp 0x10147293 */
         l_0x1014_72b5:
-            ii(0x1014_72b5, 5); mov(eax, 0x101a_d103);                  /* mov eax, 0x101ad103 */ /* "Expecting {, =, or <" */
+            ii(0x1014_72b5, 5); mov(eax, StringDefinitions.ExpectingOr); /* mov eax, 0x101ad103 */
             ii(0x1014_72ba, 1); pushd(eax);                             /* push eax */
             ii(0x1014_72bb, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_72be, 1); pushd(eax);                             /* push eax */
@@ -164,7 +164,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_72d6, 5); calld(Definitions.my_string_dtor, -0x57b1); /* call 0x10141b2a */
             ii(0x1014_72db, 2); jmpd(0x1014_72e7, 0xa); goto l_0x1014_72e7; /* jmp 0x101472e7 */
         //  ii(0x1014_72dd, 10); Недостижимый код.
-l_0x1014_72e7:
+        l_0x1014_72e7:
             ii(0x1014_72e7, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_72ea, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_72ec, 1); popd(ebp);                              /* pop ebp */

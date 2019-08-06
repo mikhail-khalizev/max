@@ -70,8 +70,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_64e7, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x1012_64ea, 5); jmpd(0x1012_6680, 0x191); goto l_0x1012_6680; /* jmp 0x10126680 */
         //  ii(0x1012_64ef, 195); Недостижимый код.
-l_0x1012_65b2:
-            ii(0x1012_65b2, 5); mov(edx, 0x101a_8196);                  /* mov edx, 0x101a8196 */ /* "packet length array out of sync" */
+        l_0x1012_65b2:
+            ii(0x1012_65b2, 5); mov(edx, StringDefinitions.PacketLengthArrayOutOfSync); /* mov edx, 0x101a8196 */
             ii(0x1012_65b7, 5); mov(eax, 0x101c_5e74);                  /* mov eax, 0x101c5e74 */
             ii(0x1012_65bc, 5); calld(Definitions.sys_strcpy, 0x3f90e); /* call 0x10165ecf */
             ii(0x1012_65c1, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
@@ -93,7 +93,7 @@ l_0x1012_65b2:
             ii(0x1012_65f8, 2); if(jnzd(0x1012_65f0, -0xa)) goto l_0x1012_65f0; /* jnz 0x101265f0 */
             ii(0x1012_65fa, 5); jmpd(0x1012_66a1, 0xa2); goto l_0x1012_66a1; /* jmp 0x101266a1 */
         //  ii(0x1012_65ff, 129); Недостижимый код.
-l_0x1012_6680:
+        l_0x1012_6680:
             ii(0x1012_6680, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1012_6683, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x1012_6686, 5); cmp(memw_a32[ss, ebp - 0x10], 0x1f);    /* cmp word [ebp-0x10], 0x1f */
@@ -116,7 +116,7 @@ l_0x1012_6680:
             ii(0x1012_66cf, 5); cmp(eax, 0x226);                        /* cmp eax, 0x226 */
             ii(0x1012_66d4, 2); if(jled(0x1012_671e, 0x48)) goto l_0x1012_671e; /* jle 0x1012671e */
         l_0x1012_66d6:
-            ii(0x1012_66d6, 5); mov(edx, 0x101a_81b6);                  /* mov edx, 0x101a81b6 */ /* "max packet length exceeded." */
+            ii(0x1012_66d6, 5); mov(edx, StringDefinitions.MaxPacketLengthExceeded); /* mov edx, 0x101a81b6 */
             ii(0x1012_66db, 5); mov(eax, 0x101c_5e74);                  /* mov eax, 0x101c5e74 */
             ii(0x1012_66e0, 5); calld(Definitions.sys_strcpy, 0x3f7ea); /* call 0x10165ecf */
             ii(0x1012_66e5, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */

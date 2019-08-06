@@ -102,7 +102,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_ba88, 3); mov(eax, memd_a32[ds, eax + 0x27]);     /* mov eax, [eax+0x27] */
             ii(0x100e_ba8b, 6); calld_abs(memd_a32[ds, 0x101b_ddf4]);   /* call dword [0x101bddf4] */
             ii(0x100e_ba91, 2); mov(edx, eax);                          /* mov edx, eax */
-            ii(0x100e_ba93, 5); mov(eax, 0x101a_1f00);                  /* mov eax, 0x101a1f00 */ /* "|" */
+            ii(0x100e_ba93, 5); mov(eax, StringDefinitions.Control19);  /* mov eax, 0x101a1f00 */
             ii(0x100e_ba98, 6); calld_abs(memd_a32[ds, 0x101b_ddf4]);   /* call dword [0x101bddf4] */
             ii(0x100e_ba9e, 2); add(edx, eax);                          /* add edx, eax */
             ii(0x100e_baa0, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */

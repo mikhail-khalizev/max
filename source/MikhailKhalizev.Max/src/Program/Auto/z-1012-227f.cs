@@ -76,10 +76,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_2368, 3); mov(memb_a32[ss, ebp - 0x18], al);      /* mov [ebp-0x18], al */
             ii(0x1012_236b, 5); jmpd(0x1012_23fc, 0x8c); goto l_0x1012_23fc; /* jmp 0x101223fc */
         //  ii(0x1012_2370, 114); Недостижимый код.
-l_0x1012_23e2:
+        l_0x1012_23e2:
             ii(0x1012_23e2, 2); jmpd(0x1012_2419, 0x35); goto l_0x1012_2419; /* jmp 0x10122419 */
         //  ii(0x1012_23e4, 24); Недостижимый код.
-l_0x1012_23fc:
+        l_0x1012_23fc:
             ii(0x1012_23fc, 3); mov(al, memb_a32[ss, ebp - 0x18]);      /* mov al, [ebp-0x18] */
             ii(0x1012_23ff, 2); dec(al);                                /* dec al */
             ii(0x1012_2401, 3); mov(memb_a32[ss, ebp - 0x1c], al);      /* mov [ebp-0x1c], al */

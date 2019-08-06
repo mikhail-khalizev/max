@@ -83,8 +83,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_5067, 2); jmpd(0x100e_5082, 0x19); goto l_0x100e_5082; /* jmp 0x100e5082 */
         l_0x100e_5069:
             ii(0x100e_5069, 5); mov(ecx, 0x98);                         /* mov ecx, 0x98 */
-            ii(0x100e_506e, 5); mov(ebx, 0x101a_1db8);                  /* mov ebx, 0x101a1db8 */ /* "drawmap.cpp" */
-            ii(0x100e_5073, 5); mov(edx, 0x101a_1dc4);                  /* mov edx, 0x101a1dc4 */ /* "i >= 0 && i < dirty_rectangles.GetCount()" */
+            ii(0x100e_506e, 5); mov(ebx, StringDefinitions.DrawmapCpp7); /* mov ebx, 0x101a1db8 */
+            ii(0x100e_5073, 5); mov(edx, StringDefinitions.I0IDirtyRectanglesGetcount2); /* mov edx, 0x101a1dc4 */
             ii(0x100e_5078, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_507a, 5); calld(Definitions.sys_assert, 0x80d13); /* call 0x10165d92 */
             ii(0x100e_507f, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */
@@ -256,8 +256,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_524e, 2); jmpd(0x100e_5269, 0x19); goto l_0x100e_5269; /* jmp 0x100e5269 */
         l_0x100e_5250:
             ii(0x100e_5250, 5); mov(ecx, 0xd4);                         /* mov ecx, 0xd4 */
-            ii(0x100e_5255, 5); mov(ebx, 0x101a_1dee);                  /* mov ebx, 0x101a1dee */ /* "drawmap.cpp" */
-            ii(0x100e_525a, 5); mov(edx, 0x101a_1dfa);                  /* mov edx, 0x101a1dfa */ /* "i >= 0 && i < dirty_rectangles.GetCount()" */
+            ii(0x100e_5255, 5); mov(ebx, StringDefinitions.DrawmapCpp3); /* mov ebx, 0x101a1dee */
+            ii(0x100e_525a, 5); mov(edx, StringDefinitions.I0IDirtyRectanglesGetcount); /* mov edx, 0x101a1dfa */
             ii(0x100e_525f, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_5261, 5); calld(Definitions.sys_assert, 0x80b2c); /* call 0x10165d92 */
             ii(0x100e_5266, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */

@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_55b4, 5); mov(edx, 0x101c_07ca);                  /* mov edx, 0x101c07ca */
             ii(0x1019_55b9, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1019_55be, 5); calld(Definitions.sys_strcpy, -0x2f6f4); /* call 0x10165ecf */
-            ii(0x1019_55c3, 5); mov(edx, 0x101b_3458);                  /* mov edx, 0x101b3458 */ /* "hmidrv.386" */
+            ii(0x1019_55c3, 5); mov(edx, StringDefinitions.Hmidrv386);  /* mov edx, 0x101b3458 */
             ii(0x1019_55c8, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1019_55cd, 5); calld(Definitions.sys_strcat, -0x2f6a1); /* call 0x10165f31 */
             ii(0x1019_55d2, 5); pushd(0x200);                           /* push 0x200 */

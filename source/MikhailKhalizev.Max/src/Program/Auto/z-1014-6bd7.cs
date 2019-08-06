@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_6ca0, 5); calld(0x1014_6722, -0x583);             /* call 0x10146722 */
             ii(0x1014_6ca5, 2); jmpd(0x1014_6cb9, 0x12); goto l_0x1014_6cb9; /* jmp 0x10146cb9 */
         l_0x1014_6ca7:
-            ii(0x1014_6ca7, 5); mov(eax, 0x101a_d065);                  /* mov eax, 0x101ad065 */ /* "Expecting an end quote ('\"')" */
+            ii(0x1014_6ca7, 5); mov(eax, StringDefinitions.ExpectingAnEndQuote); /* mov eax, 0x101ad065 */
             ii(0x1014_6cac, 1); pushd(eax);                             /* push eax */
             ii(0x1014_6cad, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1014_6cb0, 1); pushd(eax);                             /* push eax */
@@ -129,7 +129,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_6d38, 5); calld(0x1014_6b38, -0x205);             /* call 0x10146b38 */
             ii(0x1014_6d3d, 2); test(al, al);                           /* test al, al */
             ii(0x1014_6d3f, 2); if(jnzd(0x1014_6d53, 0x12)) goto l_0x1014_6d53; /* jnz 0x10146d53 */
-            ii(0x1014_6d41, 5); mov(eax, 0x101a_d082);                  /* mov eax, 0x101ad082 */ /* "Expecting a word" */
+            ii(0x1014_6d41, 5); mov(eax, StringDefinitions.ExpectingAWord); /* mov eax, 0x101ad082 */
             ii(0x1014_6d46, 1); pushd(eax);                             /* push eax */
             ii(0x1014_6d47, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1014_6d4a, 1); pushd(eax);                             /* push eax */
@@ -185,7 +185,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_6ddf, 4); cmp(memd_a32[ds, eax + 0x1c], 0x39);    /* cmp dword [eax+0x1c], 0x39 */
             ii(0x1014_6de3, 2); if(jled(0x1014_6df7, 0x12)) goto l_0x1014_6df7; /* jle 0x10146df7 */
         l_0x1014_6de5:
-            ii(0x1014_6de5, 5); mov(eax, 0x101a_d093);                  /* mov eax, 0x101ad093 */ /* "Expecting a number or string" */
+            ii(0x1014_6de5, 5); mov(eax, StringDefinitions.ExpectingANumberOrString); /* mov eax, 0x101ad093 */
             ii(0x1014_6dea, 1); pushd(eax);                             /* push eax */
             ii(0x1014_6deb, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1014_6dee, 1); pushd(eax);                             /* push eax */
@@ -245,7 +245,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_6e88, 5); calld(Definitions.my_string_dtor, -0x5363); /* call 0x10141b2a */
             ii(0x1014_6e8d, 2); jmpd(0x1014_6ea3, 0x14); goto l_0x1014_6ea3; /* jmp 0x10146ea3 */
         //  ii(0x1014_6e8f, 20); Недостижимый код.
-l_0x1014_6ea3:
+        l_0x1014_6ea3:
             ii(0x1014_6ea3, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_6ea6, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_6ea8, 1); popd(ebp);                              /* pop ebp */

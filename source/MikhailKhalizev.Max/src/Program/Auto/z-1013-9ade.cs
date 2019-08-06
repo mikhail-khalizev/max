@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_9b19, 6); pushd(memd_a32[ds, eax + 0x101b_d42c]); /* push dword [eax+0x101bd42c] */
             ii(0x1013_9b1f, 4); movsx(eax, memw_a32[ss, ebp - 0x8]);    /* movsx eax, word [ebp-0x8] */
             ii(0x1013_9b23, 1); pushd(eax);                             /* push eax */
-            ii(0x1013_9b24, 5); mov(eax, 0x101a_c8aa);                  /* mov eax, 0x101ac8aa */ /* "save%i.%s" */
+            ii(0x1013_9b24, 5); mov(eax, StringDefinitions.SaveIS5);    /* mov eax, 0x101ac8aa */
             ii(0x1013_9b29, 1); pushd(eax);                             /* push eax */
             ii(0x1013_9b2a, 3); lea(eax, ebp - 0x38);                   /* lea eax, [ebp-0x38] */
             ii(0x1013_9b2d, 1); pushd(eax);                             /* push eax */
@@ -91,7 +91,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_9bf3, 5); calld(0x1013_b997, 0x1d9f);             /* call 0x1013b997 */
             ii(0x1013_9bf8, 2); jmpd(0x1013_9c04, 0xa); goto l_0x1013_9c04; /* jmp 0x10139c04 */
         //  ii(0x1013_9bfa, 10); Недостижимый код.
-l_0x1013_9c04:
+        l_0x1013_9c04:
             ii(0x1013_9c04, 6); mov(eax, memd_a32[ss, ebp - 0xa0]);     /* mov eax, [ebp-0xa0] */
             ii(0x1013_9c0a, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_9c0c, 1); popd(ebp);                              /* pop ebp */

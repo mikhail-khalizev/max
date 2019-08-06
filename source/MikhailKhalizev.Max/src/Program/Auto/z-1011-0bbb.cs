@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_0c83, 3); mov(edx, memd_a32[ss, ebp - 0x8]);      /* mov edx, [ebp-0x8] */
             ii(0x1011_0c86, 7); cmp(memb_a32[ds, edx + 0x143], 0x1);    /* cmp byte [edx+0x143], 0x1 */
             ii(0x1011_0c8d, 2); if(jnzd(0x1011_0ca0, 0x11)) goto l_0x1011_0ca0; /* jnz 0x10110ca0 */
-            ii(0x1011_0c8f, 5); mov(edx, 0x101a_4682);                  /* mov edx, 0x101a4682 */ /* "Training Missions" */
+            ii(0x1011_0c8f, 5); mov(edx, StringDefinitions.TrainingMissions); /* mov edx, 0x101a4682 */
             ii(0x1011_0c94, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_0c97, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
             ii(0x1011_0c99, 5); calld(0x1010_c628, -0x4676);            /* call 0x1010c628 */
@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_0ca0, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_0ca3, 7); cmp(memb_a32[ds, eax + 0x143], 0x8);    /* cmp byte [eax+0x143], 0x8 */
             ii(0x1011_0caa, 2); if(jnzd(0x1011_0cbd, 0x11)) goto l_0x1011_0cbd; /* jnz 0x10110cbd */
-            ii(0x1011_0cac, 5); mov(edx, 0x101a_4694);                  /* mov edx, 0x101a4694 */ /* "Stand Alone Missions" */
+            ii(0x1011_0cac, 5); mov(edx, StringDefinitions.StandAloneMissions); /* mov edx, 0x101a4694 */
             ii(0x1011_0cb1, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_0cb4, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
             ii(0x1011_0cb6, 5); calld(0x1010_c628, -0x4693);            /* call 0x1010c628 */
@@ -89,13 +89,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_0cbd, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_0cc0, 7); cmp(memb_a32[ds, eax + 0x143], 0x2);    /* cmp byte [eax+0x143], 0x2 */
             ii(0x1011_0cc7, 2); if(jnzd(0x1011_0cda, 0x11)) goto l_0x1011_0cda; /* jnz 0x10110cda */
-            ii(0x1011_0cc9, 5); mov(edx, 0x101a_46a9);                  /* mov edx, 0x101a46a9 */ /* "Campaign Game" */
+            ii(0x1011_0cc9, 5); mov(edx, StringDefinitions.CampaignGame); /* mov edx, 0x101a46a9 */
             ii(0x1011_0cce, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_0cd1, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
             ii(0x1011_0cd3, 5); calld(0x1010_c628, -0x46b0);            /* call 0x1010c628 */
             ii(0x1011_0cd8, 2); jmpd(0x1011_0ce9, 0xf); goto l_0x1011_0ce9; /* jmp 0x10110ce9 */
         l_0x1011_0cda:
-            ii(0x1011_0cda, 5); mov(edx, 0x101a_46b7);                  /* mov edx, 0x101a46b7 */ /* "Multiplayer Scenarios" */
+            ii(0x1011_0cda, 5); mov(edx, StringDefinitions.MultiplayerScenarios); /* mov edx, 0x101a46b7 */
             ii(0x1011_0cdf, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1011_0ce2, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
             ii(0x1011_0ce4, 5); calld(0x1010_c628, -0x46c1);            /* call 0x1010c628 */

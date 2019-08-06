@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_92f7, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1012_92f9, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1012_92fe, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
-            ii(0x1012_9303, 5); mov(eax, 0x101a_833f);                  /* mov eax, 0x101a833f */ /* "Network not available or IPX socket not found.\nUnable to continue with connection..." */
+            ii(0x1012_9303, 5); mov(eax, StringDefinitions.NetworkNotAvailableOrIpxSocketNotFoundUnableToContinueWithConnection); /* mov eax, 0x101a833f */
             ii(0x1012_9308, 5); calld(0x1011_5d23, -0x135ea);           /* call 0x10115d23 */
             ii(0x1012_930d, 7); mov(memd_a32[ss, ebp - 0x18], 0);       /* mov dword [ebp-0x18], 0x0 */
             ii(0x1012_9314, 5); jmpd(0x1012_93b9, 0xa0); goto l_0x1012_93b9; /* jmp 0x101293b9 */

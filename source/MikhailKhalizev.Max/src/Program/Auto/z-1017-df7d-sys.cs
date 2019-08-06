@@ -31,12 +31,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_dfba, 3); mov(edx, memd_a32[ss, ebp - 0x14]);     /* mov edx, [ebp-0x14] */
             ii(0x1017_dfbd, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1017_dfc2, 5); calld(Definitions.sys_strcpy, -0x180f8); /* call 0x10165ecf */
-            ii(0x1017_dfc7, 5); mov(edx, 0x101b_30dc);                  /* mov edx, 0x101b30dc */ /* "hmidet.386" */
+            ii(0x1017_dfc7, 5); mov(edx, StringDefinitions.Hmidet386);  /* mov edx, 0x101b30dc */
             ii(0x1017_dfcc, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1017_dfd1, 5); calld(Definitions.sys_strcat, -0x180a5); /* call 0x10165f31 */
             ii(0x1017_dfd6, 2); jmpd(0x1017_dfe7, 0xf); goto l_0x1017_dfe7; /* jmp 0x1017dfe7 */
         l_0x1017_dfd8:
-            ii(0x1017_dfd8, 5); mov(edx, 0x101b_30dc);                  /* mov edx, 0x101b30dc */ /* "hmidet.386" */
+            ii(0x1017_dfd8, 5); mov(edx, StringDefinitions.Hmidet386);  /* mov edx, 0x101b30dc */
             ii(0x1017_dfdd, 5); mov(eax, 0x101c_08c9);                  /* mov eax, 0x101c08c9 */
             ii(0x1017_dfe2, 5); calld(Definitions.sys_strcpy, -0x18118); /* call 0x10165ecf */
         l_0x1017_dfe7:

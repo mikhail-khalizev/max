@@ -84,8 +84,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
                 _anyChange = true;
                 _allStringDefinitions.Add(sd);
-                var propertyName = GetPropertyName(str);
-                _myStringDefinitions[sd] = (GetUniqueName(propertyName), GetOrAddStringPropertyName(propertyName, sd));
+                var name = GetPropertyName(str);
+                var propertyName = GetUniqueName(name);
+                _myStringDefinitions[sd] = (propertyName, GetOrAddStringPropertyName(name, sd));
 
                 Engine.DefinitionCollection.AddDefinitionsClass(
                     new MyType(Engine.Configuration.StringDefinitionsClassName, propertyName, sd));
@@ -99,6 +100,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (!_anyChange)
                 return;
             
+            Console.WriteLine($"Save {Engine.Configuration.StringDefinitionsClassName}");
+
             var list = new List<string>
             {
                 "using MikhailKhalizev.Processor.x86;",

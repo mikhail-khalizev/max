@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_b47d, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x100f_b481, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x100f_b484, 6); pushd(memd_a32[ds, eax + 0x101b_b444]); /* push dword [eax+0x101bb444] */
-            ii(0x100f_b48a, 5); mov(eax, 0x101a_2898);                  /* mov eax, 0x101a2898 */ /* "%s:\nBegin cargo selection." */
+            ii(0x100f_b48a, 5); mov(eax, StringDefinitions.SBeginCargoSelection); /* mov eax, 0x101a2898 */
             ii(0x100f_b48f, 1); pushd(eax);                             /* push eax */
             ii(0x100f_b490, 6); lea(eax, ebp - 0x4bc);                  /* lea eax, [ebp-0x4bc] */
             ii(0x100f_b496, 1); pushd(eax);                             /* push eax */
@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_b4da, 5); calld(0x100d_e188, -0x1d357);           /* call 0x100de188 */
             ii(0x100f_b4df, 2); jmpd(0x100f_b4ee, 0xd); goto l_0x100f_b4ee; /* jmp 0x100fb4ee */
         //  ii(0x100f_b4e1, 13); Недостижимый код.
-l_0x100f_b4ee:
+        l_0x100f_b4ee:
             ii(0x100f_b4ee, 6); mov(eax, memd_a32[ss, ebp - 0x4c0]);    /* mov eax, [ebp-0x4c0] */
             ii(0x100f_b4f4, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100f_b4f6, 1); popd(ebp);                              /* pop ebp */

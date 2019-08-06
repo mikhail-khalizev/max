@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_98c4, 2); mov(ebx, eax);                          /* mov ebx, eax */
             ii(0x1017_98c6, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_98c8, 2); if(jzd(0x1017_98fc, 0x32)) goto l_0x1017_98fc; /* jz 0x101798fc */
-            ii(0x1017_98ca, 5); mov(edx, 0x101b_2f20);                  /* mov edx, 0x101b2f20 */ /* "Interplay MVE File" */
+            ii(0x1017_98ca, 5); mov(edx, StringDefinitions.InterplayMveFile); /* mov edx, 0x101b2f20 */
             ii(0x1017_98cf, 5); calld(Definitions.sys_strcmp, -0x7144); /* call 0x10172790 */
             ii(0x1017_98d4, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_98d6, 2); if(jnzd(0x1017_98fc, 0x24)) goto l_0x1017_98fc; /* jnz 0x101798fc */

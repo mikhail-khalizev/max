@@ -110,10 +110,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_2ade, 3); mov(memb_a32[ss, ebp - 0x24], al);      /* mov [ebp-0x24], al */
             ii(0x1012_2ae1, 5); jmpd(0x1012_2c2c, 0x146); goto l_0x1012_2c2c; /* jmp 0x10122c2c */
         //  ii(0x1012_2ae6, 302); Недостижимый код.
-l_0x1012_2c14:
+        l_0x1012_2c14:
             ii(0x1012_2c14, 2); jmpd(0x1012_2c49, 0x33); goto l_0x1012_2c49; /* jmp 0x10122c49 */
         //  ii(0x1012_2c16, 22); Недостижимый код.
-l_0x1012_2c2c:
+        l_0x1012_2c2c:
             ii(0x1012_2c2c, 3); mov(al, memb_a32[ss, ebp - 0x24]);      /* mov al, [ebp-0x24] */
             ii(0x1012_2c2f, 2); dec(al);                                /* dec al */
             ii(0x1012_2c31, 3); mov(memb_a32[ss, ebp - 0x3c], al);      /* mov [ebp-0x3c], al */
@@ -183,10 +183,10 @@ l_0x1012_2c2c:
             ii(0x1012_2d0a, 3); mov(memb_a32[ss, ebp - 0x4c], al);      /* mov [ebp-0x4c], al */
             ii(0x1012_2d0d, 5); jmpd(0x1012_2ddc, 0xca); goto l_0x1012_2ddc; /* jmp 0x10122ddc */
         //  ii(0x1012_2d12, 174); Недостижимый код.
-l_0x1012_2dc0:
+        l_0x1012_2dc0:
             ii(0x1012_2dc0, 2); jmpd(0x1012_2df9, 0x37); goto l_0x1012_2df9; /* jmp 0x10122df9 */
         //  ii(0x1012_2dc2, 26); Недостижимый код.
-l_0x1012_2ddc:
+        l_0x1012_2ddc:
             ii(0x1012_2ddc, 3); mov(al, memb_a32[ss, ebp - 0x4c]);      /* mov al, [ebp-0x4c] */
             ii(0x1012_2ddf, 2); sub(al, 0x36);                          /* sub al, 0x36 */
             ii(0x1012_2de1, 3); mov(memb_a32[ss, ebp - 0x50], al);      /* mov [ebp-0x50], al */

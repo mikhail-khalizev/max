@@ -28,10 +28,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_605f, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */
             ii(0x1013_6062, 2); jmpd(0x1013_60a8, 0x44); goto l_0x1013_60a8; /* jmp 0x101360a8 */
         //  ii(0x1013_6064, 45); Недостижимый код.
-l_0x1013_6091:
+        l_0x1013_6091:
             ii(0x1013_6091, 2); jmpd(0x1013_60c5, 0x32); goto l_0x1013_60c5; /* jmp 0x101360c5 */
         //  ii(0x1013_6093, 21); Недостижимый код.
-l_0x1013_60a8:
+        l_0x1013_60a8:
             ii(0x1013_60a8, 3); mov(eax, memd_a32[ss, ebp - 0x1c]);     /* mov eax, [ebp-0x1c] */
             ii(0x1013_60ab, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */
             ii(0x1013_60ae, 5); cmp(memw_a32[ss, ebp - 0x24], 0x4);     /* cmp word [ebp-0x24], 0x4 */

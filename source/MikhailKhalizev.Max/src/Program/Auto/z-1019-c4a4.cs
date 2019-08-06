@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1019_c4d6:
             ii(0x1019_c4d6, 3); calld_abs(memd_a32[ss, esp]);           /* call dword [esp] */
             ii(0x1019_c4d9, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x1019_c4de, 5); mov(eax, 0x101b_3800);                  /* mov eax, 0x101b3800 */ /* "return from \"terminate\" function!" */
+            ii(0x1019_c4de, 5); mov(eax, StringDefinitions.ReturnFromTerminateFunction); /* mov eax, 0x101b3800 */
         l_0x1019_c4e3:
             ii(0x1019_c4e3, 5); calld(/* sys */ 0x1018_0fe0, -0x1b508); /* call 0x10180fe0 */
             ii(0x1019_c4e8, 3); add(esp, 0x4);                          /* add esp, 0x4 */
