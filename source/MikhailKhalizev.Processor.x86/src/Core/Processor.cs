@@ -3,19 +3,18 @@
 
 #pragma warning disable IDE1006 // Naming Styles
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Reflection;
-using System.Threading.Tasks;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Configuration;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Numerics;
+using System.Threading.Tasks;
 
 namespace MikhailKhalizev.Processor.x86.Core
 {
@@ -428,14 +427,48 @@ namespace MikhailKhalizev.Processor.x86.Core
         #region FPU
 
         // TODO Move to separate class?
-        ushort FPUControlWord;
-        ushort FPUStatusWord;
-        ushort FPUTagWord;
-        SegmentRegister FPUDataPointer_seg;
-        uint FPUDataPointer_off;
-        SegmentRegister FPUInstructionPointer_seg;
-        uint FPUInstructionPointer_off;
-        int FPULastInstructionOpcode;
+        private int FPUControlWord; // 16bit
+        private int FPUStatusWord; // 16bit
+        private int FPUTagWord; // 16bit
+        private readonly SegmentRegister FPUDataPointer_seg;
+        private uint FPUDataPointer_off;
+        private readonly SegmentRegister FPUInstructionPointer_seg;
+        private uint FPUInstructionPointer_off;
+        private int FPULastInstructionOpcode;
+        private readonly double[] st_regs = new double[8];
+        
+
+        private ref double ST(int num)
+        {
+            return ref st_regs[(get_top() + num) & 7];
+        }
+
+        private int get_top()
+        {
+            return ((FPUStatusWord >> 11) & 7);
+        }
+
+        private void set_top(int x)
+        {
+            FPUStatusWord = (FPUStatusWord & (~(7 << 11))) | ((x & 7) << 11);
+        }
+
+        // 0 - valid, 1 - zero, 2 - special, 3 - empty
+        private int get_tag(int num)
+        {
+            return (FPUTagWord >> (((get_top() + num) & 7) * 2)) & 3;
+        }
+
+        private void set_tag(int num, int val)
+        {
+            FPUTagWord = (FPUTagWord & (~(3 << (((get_top() + num) & 7) * 2)))) | ((val & 3) << (((get_top() + num) & 7) * 2));
+        }
+
+        private void fpu_pop()
+        {
+            set_tag(0, 3);
+            set_top(get_top() + 1);
+        }
 
         #endregion
 
@@ -1388,6 +1421,19 @@ namespace MikhailKhalizev.Processor.x86.Core
             correct_function_position(retAddr, haveReturnAfterInstruction);
         }
 
+        private void jmpd_func_internal(Address address, int offset, bool haveReturnAfterInstruction)
+        {
+            var retAddr = cs[eip];
+
+            eip = eip + offset;
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+            correct_function_position(retAddr, haveReturnAfterInstruction);
+        }
+
         private void __plus_sp(int s)
         {
             if (ss.db)
@@ -1438,10 +1484,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public void correct_function_position(Address returnAddress, bool haveReturnAfterInstruction = false)
         {
+            // TODO Call return if haveReturnAfterInstruction immediately?
+
             if (!haveReturnAfterInstruction)
                 callReturnAddresses.Add(returnAddress);
             else
-                returnAddress = 0 < callReturnAddresses.Count ? callReturnAddresses[callReturnAddresses.Count - 1] : (Address)0;
+                returnAddress = 0 < callReturnAddresses.Count ? callReturnAddresses[callReturnAddresses.Count - 1] : 0;
 
             try
             {
@@ -1467,20 +1515,20 @@ namespace MikhailKhalizev.Processor.x86.Core
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
                     MethodCollection.GetMethod(out var methodInfo, out var method);
-                    
+
                     if (_statisticMethodCall != null)
                     {
                         _statisticMethodCall.TryGetValue(methodInfo, out var count);
                         lock (_statisticMethodCall)
                             _statisticMethodCall[methodInfo] = count + 1;
                     }
-                    
+
                     var prevMethodInfo = MethodInfo;
                     var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
                     MethodInfo = methodInfo;
                     CSharpFunctionDelta = cs[eip] - methodInfo.Address;
-                    
+
                     try
                     {
                         method();
@@ -1589,7 +1637,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     _statisticIiCall[MethodInfo] = count + 1;
             }
         }
-        
+
         private string GetStatisticMethodCall()
         {
             var result = $"Method call statistic:{Environment.NewLine}";
@@ -2046,7 +2094,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void calld(Address address, int offset)
         {
-            throw new NotImplementedException();
+            var retAddr = cs[eip];
+            pushd(eip);
+
+            eip = eip + offset;
+
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+            correct_function_position(retAddr);
         }
 
         /// <inheritdoc />
@@ -2067,7 +2124,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void calld_abs(Value address)
         {
-            throw new NotImplementedException();
+            pushd(eip);
+            var ret_addr = cs[eip];
+
+            eip = address;
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+
+            run_irqs();
+            SaveJumpInfo();
+            correct_function_position(ret_addr);
         }
 
         /// <inheritdoc />
@@ -2741,9 +2807,20 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void fdiv(int a, int b)
+        {
+            if (get_tag(a) == 3)
+                throw new NotImplementedException();
+            if (get_tag(b) == 3)
+                throw new NotImplementedException();
+            ST(a) /= ST(b);
+        }
+
+        /// <inheritdoc />
         public void fdivp(int a, int b)
         {
-            throw new NotImplementedException();
+            fdiv(a, b);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -2857,13 +2934,19 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fld1()
         {
-            throw new NotImplementedException();
+            set_top(get_top() + 7); // TOP ← TOP − 1;
+
+            if (get_tag(0) != 3)
+                throw new NotImplementedException();
+
+            ST(0) = 1.0;
+            set_tag(0, 0);
         }
 
         /// <inheritdoc />
         public void fldcw(Value value)
         {
-            throw new NotImplementedException();
+            FPUControlWord = value.UInt16;
         }
 
         /// <inheritdoc />
@@ -2905,7 +2988,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fldz()
         {
-            throw new NotImplementedException();
+            set_top(get_top() + 7); // TOP ← TOP − 1;
+
+            if (get_tag(0) != 3)
+                throw new NotImplementedException();
+
+            ST(0) = 0;
+            set_tag(0, 1);
         }
 
         /// <inheritdoc />
@@ -2966,7 +3055,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fnstcw(Value value)
         {
-            value.UInt16 = FPUControlWord;
+            value.UInt16 = (ushort)FPUControlWord;
         }
 
         /// <inheritdoc />
@@ -2978,7 +3067,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fnstsw(Value value)
         {
-            value.UInt16 = FPUStatusWord;
+            value.UInt16 = (ushort)FPUStatusWord;
         }
 
         /// <inheritdoc />
@@ -3418,6 +3507,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void jmpd_func(Address address, int offset)
+        {
+            jmpd_func_internal(address, offset, true);
+        }
+
+        /// <inheritdoc />
         public void jmpw_abs(Value address)
         {
             eip = address & 0xffff;
@@ -3474,12 +3569,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void jmpd_func(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public bool jaw(Address address, int offset)
         {
             return jmpw_if(!eflags.cf && !eflags.zf, address, offset);
@@ -3488,7 +3577,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jad(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(!eflags.cf && !eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3512,7 +3601,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jaed(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(!eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3560,7 +3649,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jbed(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.cf || eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3794,7 +3883,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jnzd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(!eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3866,7 +3955,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jzd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -4389,7 +4478,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lodsb_a32()
         {
-            throw new NotImplementedException();
+            al = memb_a32[ds, esi];
+            esi += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
@@ -6125,6 +6215,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
+
         /// <inheritdoc />
         public void rep_a16(Action action)
         {
@@ -6140,22 +6231,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void repe_a32(Action action)
+        public void repe_a16(Action action)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public void repne_a32(Action action)
-        {
-            for (eflags.zf = false; ecx != 0 && !eflags.zf; ecx--)
+            for (eflags.zf = true; cx != 0 && eflags.zf; cx--)
                 action();
         }
 
         /// <inheritdoc />
-        public void repe_a16(Action action)
+        public void repe_a32(Action action)
         {
-            for (eflags.zf = true; cx != 0 && eflags.zf; cx--)
+            for (eflags.zf = true; ecx != 0 && eflags.zf; ecx--)
                 action();
         }
 
@@ -6167,18 +6252,29 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void retw(int allocSize = 0)
+        public void repne_a32(Action action)
+        {
+            for (eflags.zf = false; ecx != 0 && !eflags.zf; ecx--)
+                action();
+        }
+
+
+        /// <inheritdoc />
+        public void retw(int size = 0)
         {
             eip = popw();
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
-            __plus_sp(allocSize);
+            __plus_sp(size);
         }
 
         /// <inheritdoc />
         public void retd(int size = 0)
         {
-            throw new NotImplementedException();
+            eip = popd();
+            if (cs.fail_limit_check(eip))
+                throw new NotImplementedException();
+            __plus_sp(size);
         }
 
         /// <inheritdoc />
@@ -6578,7 +6674,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void sidt()
+        public void sidtd_a32(SegmentRegister segment, Value value)
         {
             throw new NotImplementedException();
         }
@@ -8861,7 +8957,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 if (!string.IsNullOrEmpty(Configuration.StatisticOutput))
                     WriteStatistic();
             }
-            
+
             _disposed = true;
         }
 

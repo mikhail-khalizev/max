@@ -21,6 +21,7 @@ namespace MikhailKhalizev.Max.Program
     {
         public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
+        public DefinitionCollection DefinitionCollection { get; } = new DefinitionCollection();
         public MethodsInfo MethodsInfo { get; private set; }
 
         public DosMemory DosMemory { get; }
@@ -62,6 +63,8 @@ namespace MikhailKhalizev.Max.Program
         public void Start()
         {
             MethodsInfo = MethodsInfo.Load(Configuration.BinToCSharp);
+            DefinitionCollection.AddDefinitionsClass<Definitions>();
+            DefinitionCollection.AddDefinitionsClass<StringDefinitions>();
             Implementation.MethodsInfo = MethodsInfo;
 
             LoadDecodedMethods();
@@ -71,7 +74,7 @@ namespace MikhailKhalizev.Max.Program
             
             Implementation.correct_function_position(0);
         }
-
+        
         private void LoadDecodedMethods()
         {
             foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
@@ -331,6 +334,7 @@ namespace MikhailKhalizev.Max.Program
 
             var to_cxx = new Engine(
                 Configuration.BinToCSharp,
+                DefinitionCollection,
                 Implementation.Memory,
                 seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
                 seg.Descriptor.Base,

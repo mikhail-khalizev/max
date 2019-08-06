@@ -4504,9 +4504,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void sidt()
+        public void sidtd_a32(SegmentRegister segment, Value value)
         {
-            Implementation.sidt();
+            Implementation.sidtd_a32(segment, value);
         }
 
         /// <inheritdoc />

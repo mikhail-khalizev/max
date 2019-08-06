@@ -266,6 +266,7 @@ void iret_(uint_<8> op_size);
 #define repe_a16   \
     for (zf = true; cx != 0 && zf; cx--)
 
+// +
 #define repe_a32   \
     for (zf = true; ecx != 0 && zf; ecx--)
 
@@ -318,6 +319,7 @@ void iret_(uint_<8> op_size);
         return;                                                         \
     } while(0)
 
+// +
 #define jmpd_func(to, off)                                              \
     do {                                                                \
         eip = eip_next + (off);                                         \
@@ -465,6 +467,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
+// +
 #define calld(to, off)                                    \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -1833,6 +1836,7 @@ inline void lidtw_a16(seg_reg & seg, uint_<16> off)
     idtr_base = memd_a16(seg, off + 2) & 0x00ffffff;
 }
 
+// +
 inline void sidtd_a32(seg_reg &, uint_<32>)
 {
     throw exo::exception::not_implemented();
@@ -2024,6 +2028,7 @@ inline void lodsb_a16()
     si += df ? -1 : 1;
 }
 
+// +
 inline void lodsb_a32()
 {
     al = memb_a32(ds, esi);

@@ -90,10 +90,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
                 var os =
                     "Вызов '" +
-                    AddressNameConverter.GetResultName(
-                        toAddr,
-                        false,
-                        false /* лучше true, но комментарий в комментарие.. */) +
+                    Engine.DefinitionCollection.GetAddressFullName(toAddr) +
                     "'.";
 
                 cmd.Comments.Add(os);

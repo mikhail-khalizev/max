@@ -11,7 +11,8 @@
         public string CodeOutput { get; set; }
 
         public string Namespace { get; set; }
-        public string ClassName { get; set; }
+        public string RawProgramClassName { get; set; }
+        public string StringDefinitionsClassName { get; set; }
 
         public int LimitDecodeSize { get; set; } = int.MaxValue;
     }

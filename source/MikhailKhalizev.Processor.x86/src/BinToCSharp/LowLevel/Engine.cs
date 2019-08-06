@@ -30,6 +30,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     public class Engine
     {
         public BinToCSharpDto Configuration { get; }
+        public DefinitionCollection DefinitionCollection { get; }
         public ArchitectureMode Mode { get; }
         public Address CsBase { get; }
         public Address DsBase { get; }
@@ -37,6 +38,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public IMemory Memory { get; }
 
         public event EventHandler<Instruction> InstructionDecoded;
+        public event EventHandler OnSave;
 
         public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
         public DecodedCode code { get; } = new DecodedCode();
@@ -123,14 +125,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private readonly JmpCallLoopSimple jmp_call_loop_simple; // addr_to_decode from any jmp.
         private readonly Switch switch_;
-        private readonly AddCStringToCommentPlugin _addCStringToCommentPlugin;
+        private readonly ReadCStringPlugin _readCStringPlugin;
         private readonly CommentDummyInstructions comment_idle; // comment dummy instruction
         private int _limitSize;
 
 
-        public Engine(BinToCSharpDto configuration, IMemory memory, ArchitectureMode mode, Address csBase, Address dsBase, MethodsInfo methodsInfo = null)
+        public Engine(
+            BinToCSharpDto configuration,
+            DefinitionCollection definitionCollection,
+            IMemory memory,
+            ArchitectureMode mode,
+            Address csBase,
+            Address dsBase,
+            MethodsInfo methodsInfo = null)
         {
             Configuration = configuration;
+            DefinitionCollection = definitionCollection;
             Memory = memory;
             Mode = mode;
             CsBase = csBase;
@@ -140,7 +150,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (csBase != 0)
                 SuppressDecode.Add(0, csBase);
 
-            _addCStringToCommentPlugin = new AddCStringToCommentPlugin(this);
+            _readCStringPlugin = new ReadCStringPlugin(this);
             comment_idle = new CommentDummyInstructions(this);
             jmp_call_loop_simple = new JmpCallLoopSimple(this);
             switch_ = new Switch(this);
@@ -269,7 +279,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 _limitSize -= length;
 
-                var cmd = new Instruction(u);
+                var cmd = new Instruction(DefinitionCollection, u);
 
                 // Бывают случаи, когда ud_obj незнаком с инструкцией, хотя в документации x86 она есть.
                 //        if (cmd.mnemonic == UD_Iinvalid)
@@ -288,7 +298,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public void SetCStringDataArea(Address begin, Address end)
         {
-            _addCStringToCommentPlugin.StringArea = Interval.From(begin, end);
+            _readCStringPlugin.StringArea = Interval.From(begin, end);
         }
 
         public void add_aligment_as_instructions()
@@ -476,6 +486,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var path = Configuration.CodeOutput;
             Directory.CreateDirectory(path);
 
+            OnSave?.Invoke(this, EventArgs.Empty);
+
             layout_funcs();
 
             foreach (var detectedMethod in NewDetectedMethods)
@@ -544,7 +556,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         if (ns != null)
                             baseFileName += $"-{ns}";
 
-                        var kd = AddressNameConverter.KnownDefinitions.GetValueOrDefault(methodBegin);
+                        var kd = DefinitionCollection.GetAddressFullName(methodBegin, new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
                         if (kd != null)
                             baseFileName += $"-{kd}";
 
@@ -578,7 +590,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var first_cmd = detectedMethod.Instructions.First();
 
-            AddressNameConverter.KnownDefinitions.TryGetValue(methodBegin, out var methodName);
+            var methodName = DefinitionCollection.GetAddressFullName(methodBegin, new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
             if (methodName == null)
                 methodName = $"Method_{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4))}";
 
@@ -591,7 +603,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine("");
             output.AppendLine($"namespace {Configuration.Namespace}");
             output.AppendLine("{");
-            output.AppendLine($"    public partial class {Configuration.ClassName}");
+            output.AppendLine($"    public partial class {Configuration.RawProgramClassName}");
             output.AppendLine("    {");
             output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
             output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_v" + fileNum : "")}()");

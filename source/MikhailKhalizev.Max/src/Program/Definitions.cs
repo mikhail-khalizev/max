@@ -2,11 +2,11 @@
 #pragma warning disable IDE1006 // Naming Styles
 
 using MikhailKhalizev.Processor.x86;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
 {
-    public partial class Definitions
+    public partial class Definitions : IDefinitionGroup
     {
         #region My
         
@@ -118,6 +118,15 @@ namespace MikhailKhalizev.Max.Program
         public static Address my_2_get_count { get; } = 0x1008b368;
         public static Address my_3_get_count { get; } = 0x1008b480;
         public static Address my__get_unit { get; } = 0x100b801c;
+
+        #endregion
+
+        #region File mve (video)
+
+        public static Address mve_1 { get; } = 0x1018ea30;
+        public static Address mve_2 { get; } = 0x1018ece8;
+        public static Address mve_3 { get; } = 0x1018f284;
+        public static Address mve_4 { get; } = 0x1018f938;
 
         #endregion
 

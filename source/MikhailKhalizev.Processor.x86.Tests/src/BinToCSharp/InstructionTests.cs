@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
@@ -60,7 +61,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
             length.Should().BeGreaterOrEqualTo(0);
             u.error.Should().Be(0);
 
-            var cmd = new Instruction(u);
+            var cmd = new Instruction(new DefinitionCollection(), u);
             var str = cmd.ToCodeString();
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);

@@ -924,19 +924,19 @@ uint_<32> FPUInstructionPointer_off;
 // +
 typename uint_ge<11>::type FPULastInstructionOpcode;
 
+// +
 __float80 /* typename exo::math::fixed_ge<80>::utype */ st_regs[8];
 
-
-
+// +
 static uint_<8> get_top()
 {
     return ((FPUStatusWord >> 11) & 7);
 }
 
+// +
 static void set_top(uint_<8> x)
 {
     FPUStatusWord = (FPUStatusWord & (~(7 << 11))) | ((x & 7) << 11);
-
 }
 
 /** @remark cf */
@@ -984,22 +984,26 @@ static bool get_invalid_flag()
 //    }
 //}
 
+// +
 static __float80 & ST(uint_<8> num)
 {
     return st_regs[(get_top() + num) & 7];
 }
 
+// +
 /** 0 - valid, 1 - zero, 2 - special, 3 - empty */
 static uint_<8> get_tag(uint_<8> num)
 {
     return (FPUTagWord >> (((get_top() + num) & 7) * 2)) & 3;
 }
 
+// +
 static void set_tag(uint_<8> num, uint_<8> val)
 {
     FPUTagWord = (FPUTagWord & (~(3 << (((get_top() + num) & 7) * 2)))) | ((val & 3) << (((get_top() + num) & 7) * 2));
 }
 
+// +
 static void fpu_pop()
 {
     set_tag(0, 3);
@@ -1032,6 +1036,7 @@ void fnstcw(uint_<16> & DEST)
     DEST = FPUControlWord;
 }
 
+// +
 void fldcw(uint_<16> SRC)
 {
     FPUControlWord = SRC;
@@ -1058,6 +1063,7 @@ void fnsavew_a16(seg_reg & seg, uint_<16> off)
     fninit();
 }
 
+// +
 void fldz()
 {
     set_top(get_top() + 7); // TOP ← TOP − 1;
@@ -1069,6 +1075,7 @@ void fldz()
     set_tag(0, 1);
 }
 
+// +
 void fld1()
 {
     set_top(get_top() + 7); // TOP ← TOP − 1;
@@ -1182,7 +1189,7 @@ void faddp(int a, int b)
     fpu_pop();
 }
 
-
+// +
 void fdiv(int a, int b)
 {
     if (get_tag(a) == 3)
@@ -1201,6 +1208,7 @@ void fdiv(uint_<64> & val_)
     ST(0) /= val;
 }
 
+// +
 void fdivp(int a, int b)
 {
     fdiv(a, b);

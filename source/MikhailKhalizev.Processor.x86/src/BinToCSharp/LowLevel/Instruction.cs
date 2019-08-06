@@ -11,6 +11,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     public class Instruction
     {
+        public DefinitionCollection DefinitionCollection { get; } // TODO Remove?
         public Address Begin { get; set; }
         public Address End { get; set; }
 
@@ -66,10 +67,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 Comments = new List<string> { comment };
         }
 
-        public Instruction(ud ud)
+        public Instruction(DefinitionCollection definitionCollection, ud ud)
         {
             if (ud == null)
                 throw new ArgumentNullException(nameof(ud));
+            DefinitionCollection = definitionCollection;
 
             WriteCmd = (e, dm, index, func, offset) => ToCodeString(offset: offset);
 
@@ -230,6 +232,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
             else
                 needWriteNamespace = true;
+            
+            var options = new DefinitionCollection.Options { WithNamespace = needWriteNamespace };
 
 
             sb.Append(cmdSuffix);
@@ -362,7 +366,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             else
                             {
                                 sb.Append(isNextOperation ? " + " : "");
-                                sb.Append(AddressNameConverter.GetResultName(val, false, needWriteNamespace));
+                                sb.Append(DefinitionCollection.GetAddressFullName(val, options));
                             }
 
                             isNextOperation = true;
@@ -407,10 +411,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             }
 
                             case 16:
-                                sb.Append(AddressNameConverter.GetResultName(op.lval.uword, false, needWriteNamespace));
+                                sb.Append(DefinitionCollection.GetAddressFullName(op.lval.uword, options));
                                 break;
                             case 32:
-                                sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, needWriteNamespace));
+                                sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
                                 break;
                             default:
                                 throw new NotImplementedException();
@@ -433,7 +437,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             default: throw new NotImplementedException();
                         }
 
-                        sb.Append(AddressNameConverter.GetResultName(End + val + offset, false, needWriteNamespace));
+                        sb.Append(DefinitionCollection.GetAddressFullName(End + val + offset, options));
                         sb.Append(", ");
 
                         sb.Append(
@@ -443,7 +447,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         break;
 
                     case ud_type.UD_OP_CONST:
-                        sb.Append(AddressNameConverter.GetResultName(op.lval.udword, false, needWriteNamespace));
+                        sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
                         break;
 
                     case ud_type.UD_OP_PTR:

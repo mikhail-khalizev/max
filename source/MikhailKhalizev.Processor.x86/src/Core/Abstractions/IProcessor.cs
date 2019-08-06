@@ -4387,7 +4387,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SIDT.html</remarks>
-        void sidt();
+        void sidtd_a32(SegmentRegister segment, Value value);
 
         /// <summary>
         /// Store Local Descriptor Table Register.

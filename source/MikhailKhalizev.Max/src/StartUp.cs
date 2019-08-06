@@ -59,18 +59,7 @@ namespace MikhailKhalizev.Max
             
 
             // Start.
-
-            var properties = typeof(Definitions).GetProperties();
-            foreach (var property in properties)
-            {
-                if (property.PropertyType == typeof(Address))
-                {
-                    var value = (Address)property.GetValue(null);
-                    AddressNameConverter.KnownDefinitions[value] = property.Name;
-                }
-            }
-
-
+            
             using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
             {
                 var rp = new RawProgramMain(p, ConfigurationDto);
