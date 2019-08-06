@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1013_422f:
             ii(0x1013_422f, 5); mov(ecx, 0xbac);                        /* mov ecx, 0xbac */
             ii(0x1013_4234, 5); mov(ebx, StringDefinitions.ResrcmgrCpp); /* mov ebx, 0x101a89d2 */
-            ii(0x1013_4239, 5); mov(edx, StringDefinitions.IdEndMemoryResources); /* mov edx, 0x101a89df */
+            ii(0x1013_4239, 5); mov(edx, StringDefinitions.IdGreaterEndMemoryResources); /* mov edx, 0x101a89df */
             ii(0x1013_423e, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_4240, 5); calld(Definitions.sys_assert, 0x31b4d); /* call 0x10165d92 */
             ii(0x1013_4245, 3); mov(memd_a32[ss, ebp - 0x14], eax);     /* mov [ebp-0x14], eax */

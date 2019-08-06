@@ -137,7 +137,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_2d9b:
             ii(0x100f_2d9b, 5); mov(ecx, 0x592);                        /* mov ecx, 0x592 */
             ii(0x100f_2da0, 5); mov(ebx, StringDefinitions.GamemgrCpp3); /* mov ebx, 0x101a23d8 */
-            ii(0x100f_2da5, 5); mov(edx, StringDefinitions.StrlenNewChunkStrlenMessageSizeofMessage1); /* mov edx, 0x101a23e4 */
+            ii(0x100f_2da5, 5); mov(edx, StringDefinitions.StrlenNewChunkStrlenMessageLessSizeofMessage1); /* mov edx, 0x101a23e4 */
             ii(0x100f_2daa, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_2dac, 5); calld(Definitions.sys_assert, 0x72fe1); /* call 0x10165d92 */
             ii(0x100f_2db1, 6); mov(memd_a32[ss, ebp - 0xd78], eax);    /* mov [ebp-0xd78], eax */

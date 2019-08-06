@@ -110,7 +110,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1011_5a39:
             ii(0x1011_5a39, 5); mov(ecx, 0x71);                         /* mov ecx, 0x71 */
             ii(0x1011_5a3e, 5); mov(ebx, StringDefinitions.MssgsmgrCpp); /* mov ebx, 0x101a7ac4 */
-            ii(0x1011_5a43, 5); mov(edx, StringDefinitions.MssglenSizeofMssgbfr); /* mov edx, 0x101a7ad1 */
+            ii(0x1011_5a43, 5); mov(edx, StringDefinitions.MssglenLessSizeofMssgbfr); /* mov edx, 0x101a7ad1 */
             ii(0x1011_5a48, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1011_5a4a, 5); calld(Definitions.sys_assert, 0x50343); /* call 0x10165d92 */
             ii(0x1011_5a4f, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */

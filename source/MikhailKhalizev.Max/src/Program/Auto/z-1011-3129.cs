@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_3156, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1011_315b, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1011_315d, 2); if(jzd(0x1011_31c1, 0x62)) goto l_0x1011_31c1; /* jz 0x101131c1 */
-            ii(0x1011_315f, 5); mov(edx, StringDefinitions.Control30);  /* mov edx, 0x101a4812 */
+            ii(0x1011_315f, 5); mov(edx, StringDefinitions.Less);       /* mov edx, 0x101a4812 */
             ii(0x1011_3164, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x1011_3168, 3); imul(eax, eax, 0x1e);                   /* imul eax, eax, 0x1e */
             ii(0x1011_316b, 3); mov(ebx, memd_a32[ss, ebp - 0x8]);      /* mov ebx, [ebp-0x8] */
@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_3196, 6); add(ebx, 0x338);                        /* add ebx, 0x338 */
             ii(0x1011_319c, 2); add(eax, ebx);                          /* add eax, ebx */
             ii(0x1011_319e, 5); calld(Definitions.sys_strcat, 0x52d8e); /* call 0x10165f31 */
-            ii(0x1011_31a3, 5); mov(edx, StringDefinitions.Control31);  /* mov edx, 0x101a4814 */
+            ii(0x1011_31a3, 5); mov(edx, StringDefinitions.Greater);    /* mov edx, 0x101a4814 */
             ii(0x1011_31a8, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x1011_31ac, 3); imul(eax, eax, 0x1e);                   /* imul eax, eax, 0x1e */
             ii(0x1011_31af, 3); mov(ebx, memd_a32[ss, ebp - 0x8]);      /* mov ebx, [ebp-0x8] */

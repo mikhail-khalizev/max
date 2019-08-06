@@ -150,7 +150,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_72b1, 2); if(jzd(0x1014_7271, -0x42)) goto l_0x1014_7271; /* jz 0x10147271 */
             ii(0x1014_72b3, 2); jmpd(0x1014_7293, -0x22); goto l_0x1014_7293; /* jmp 0x10147293 */
         l_0x1014_72b5:
-            ii(0x1014_72b5, 5); mov(eax, StringDefinitions.ExpectingOr); /* mov eax, 0x101ad103 */
+            ii(0x1014_72b5, 5); mov(eax, StringDefinitions.ExpectingOrLess); /* mov eax, 0x101ad103 */
             ii(0x1014_72ba, 1); pushd(eax);                             /* push eax */
             ii(0x1014_72bb, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_72be, 1); pushd(eax);                             /* push eax */

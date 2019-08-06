@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1013_bd0f:
             ii(0x1013_bd0f, 5); mov(ecx, 0xb7);                         /* mov ecx, 0xb7 */
             ii(0x1013_bd14, 5); mov(ebx, StringDefinitions.SmrtfileCpp3); /* mov ebx, 0x101acc63 */
-            ii(0x1013_bd19, 5); mov(edx, StringDefinitions.ObjectIndexReadObjectsGetcount1); /* mov edx, 0x101acc70 */
+            ii(0x1013_bd19, 5); mov(edx, StringDefinitions.ObjectIndexEqualReadObjectsGetcount1); /* mov edx, 0x101acc70 */
             ii(0x1013_bd1e, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_bd20, 5); calld(Definitions.sys_assert, 0x2a06d); /* call 0x10165d92 */
             ii(0x1013_bd25, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1013_bd47:
             ii(0x1013_bd47, 5); mov(ecx, 0xbf);                         /* mov ecx, 0xbf */
             ii(0x1013_bd4c, 5); mov(ebx, StringDefinitions.SmrtfileCpp2); /* mov ebx, 0x101acc9c */
-            ii(0x1013_bd51, 5); mov(edx, StringDefinitions.TypeIndex0); /* mov edx, 0x101acca9 */
+            ii(0x1013_bd51, 5); mov(edx, StringDefinitions.TypeIndexNotEqual0); /* mov edx, 0x101acca9 */
             ii(0x1013_bd56, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_bd58, 5); calld(Definitions.sys_assert, 0x2a035); /* call 0x10165d92 */
             ii(0x1013_bd5d, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */
@@ -86,7 +86,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1013_bd79:
             ii(0x1013_bd79, 5); mov(ecx, 0xc0);                         /* mov ecx, 0xc0 */
             ii(0x1013_bd7e, 5); mov(ebx, StringDefinitions.SmrtfileCpp); /* mov ebx, 0x101accb9 */
-            ii(0x1013_bd83, 5); mov(edx, StringDefinitions.TypeIndexRegisteredClassesGetcount); /* mov edx, 0x101accc6 */
+            ii(0x1013_bd83, 5); mov(edx, StringDefinitions.TypeIndexLessOrEqualRegisteredClassesGetcount); /* mov edx, 0x101accc6 */
             ii(0x1013_bd88, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_bd8a, 5); calld(Definitions.sys_assert, 0x2a003); /* call 0x10165d92 */
             ii(0x1013_bd8f, 3); mov(memd_a32[ss, ebp - 0x20], eax);     /* mov [ebp-0x20], eax */

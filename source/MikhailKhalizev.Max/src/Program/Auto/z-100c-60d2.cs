@@ -99,7 +99,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100c_61ee:
             ii(0x100c_61ee, 5); mov(ecx, 0x10c4);                       /* mov ecx, 0x10c4 */
             ii(0x100c_61f3, 5); mov(ebx, StringDefinitions.AiPlayrCpp2); /* mov ebx, 0x101a12ec */
-            ii(0x100c_61f8, 5); mov(edx, StringDefinitions.InfoMap0);   /* mov edx, 0x101a12f9 */
+            ii(0x100c_61f8, 5); mov(edx, StringDefinitions.InfoMapEqual0); /* mov edx, 0x101a12f9 */
             ii(0x100c_61fd, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100c_61ff, 5); calld(Definitions.sys_assert, 0x9fb8e); /* call 0x10165d92 */
             ii(0x100c_6204, 3); mov(memd_a32[ss, ebp - 0x28], eax);     /* mov [ebp-0x28], eax */
@@ -178,7 +178,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100c_62e9:
             ii(0x100c_62e9, 5); mov(ecx, 0x10d1);                       /* mov ecx, 0x10d1 */
             ii(0x100c_62ee, 5); mov(ebx, StringDefinitions.AiPlayrCpp); /* mov ebx, 0x101a1307 */
-            ii(0x100c_62f3, 5); mov(edx, StringDefinitions.MineMap0);   /* mov edx, 0x101a1314 */
+            ii(0x100c_62f3, 5); mov(edx, StringDefinitions.MineMapEqual0); /* mov edx, 0x101a1314 */
             ii(0x100c_62f8, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100c_62fa, 5); calld(Definitions.sys_assert, 0x9fa93); /* call 0x10165d92 */
             ii(0x100c_62ff, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */

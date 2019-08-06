@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_3775, 5); mov(ecx, 0x106);                        /* mov ecx, 0x106 */
             ii(0x1010_377a, 5); mov(ebx, StringDefinitions.HashCpp2);   /* mov ebx, 0x101a319f */
             ii(0x1010_377f, 5); mov(edx, StringDefinitions.AttemptedToRemoveNullUnitFromMapHashTable); /* mov edx, 0x101a31a8 */
-            ii(0x1010_3784, 5); mov(eax, StringDefinitions.Unit02);     /* mov eax, 0x101a31db */
+            ii(0x1010_3784, 5); mov(eax, StringDefinitions.UnitNotEqual02); /* mov eax, 0x101a31db */
             ii(0x1010_3789, 5); calld(0x100f_07d4, -0x12fba);           /* call 0x100f07d4 */
         l_0x1010_378e:
             ii(0x1010_378e, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */

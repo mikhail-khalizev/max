@@ -346,7 +346,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1015_b306:
             ii(0x1015_b306, 5); mov(ecx, 0xf51);                        /* mov ecx, 0xf51 */
             ii(0x1015_b30b, 5); mov(ebx, StringDefinitions.UnitsmgrCpp2); /* mov ebx, 0x101b275f */
-            ii(0x1015_b310, 5); mov(edx, StringDefinitions.TotalSizeDestResult); /* mov edx, 0x101b276c */
+            ii(0x1015_b310, 5); mov(edx, StringDefinitions.TotalSizeEqualDestResult); /* mov edx, 0x101b276c */
             ii(0x1015_b315, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1015_b317, 5); calld(Definitions.sys_assert, 0xaa76);  /* call 0x10165d92 */
             ii(0x1015_b31c, 3); mov(memd_a32[ss, ebp - 0x4c], eax);     /* mov [ebp-0x4c], eax */

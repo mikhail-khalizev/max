@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1014_22c8:
             ii(0x1014_22c8, 5); mov(ecx, 0x115);                        /* mov ecx, 0x115 */
             ii(0x1014_22cd, 5); mov(ebx, StringDefinitions.StrobjCpp2); /* mov ebx, 0x101aceae */
-            ii(0x1014_22d2, 5); mov(edx, StringDefinitions.PosPtrGetsize); /* mov edx, 0x101aceb9 */
+            ii(0x1014_22d2, 5); mov(edx, StringDefinitions.PosLessPtrGetsize); /* mov edx, 0x101aceb9 */
             ii(0x1014_22d7, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1014_22d9, 5); calld(Definitions.sys_assert, 0x23ab4); /* call 0x10165d92 */
             ii(0x1014_22de, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */

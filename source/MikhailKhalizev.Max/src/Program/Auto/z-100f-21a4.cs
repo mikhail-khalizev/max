@@ -120,7 +120,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_22e6:
             ii(0x100f_22e6, 5); mov(ecx, 0x488);                        /* mov ecx, 0x488 */
             ii(0x100f_22eb, 5); mov(ebx, StringDefinitions.GamemgrCpp4); /* mov ebx, 0x101a2330 */
-            ii(0x100f_22f0, 5); mov(edx, StringDefinitions.BuildListGetcount02); /* mov edx, 0x101a233c */
+            ii(0x100f_22f0, 5); mov(edx, StringDefinitions.BuildListGetcountGreater02); /* mov edx, 0x101a233c */
             ii(0x100f_22f5, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100f_22f7, 5); calld(Definitions.sys_assert, 0x73a96); /* call 0x10165d92 */
             ii(0x100f_22fc, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */

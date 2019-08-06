@@ -160,6 +160,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (name == "")
                 return "Empty";
 
+            name = name
+                .Replace("!=", " Not Equal ")
+                .Replace("==", " Equal ")
+                .Replace("<=", " Less Or Equal ")
+                .Replace(">=", " Greater Or Equal ")
+                .Replace("->", " ")
+                .Replace(">", " Greater ")
+                .Replace("<", " Less ");
+
             var parts = new List<string>();
             var index = 0;
             while (index < name.Length)

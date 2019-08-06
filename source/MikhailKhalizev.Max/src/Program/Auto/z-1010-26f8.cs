@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1010_2762:
             ii(0x1010_2762, 5); mov(ecx, 0x2218);                       /* mov ecx, 0x2218 */
             ii(0x1010_2767, 5); mov(ebx, StringDefinitions.GamemgrCpp2); /* mov ebx, 0x101a2bf3 */
-            ii(0x1010_276c, 5); mov(edx, StringDefinitions.CtinfoTeamtypeRemoteTeam); /* mov edx, 0x101a2bff */
+            ii(0x1010_276c, 5); mov(edx, StringDefinitions.CtinfoTeamtypeNotEqualRemoteTeam); /* mov edx, 0x101a2bff */
             ii(0x1010_2771, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1010_2773, 5); calld(Definitions.sys_assert, 0x6361a); /* call 0x10165d92 */
             ii(0x1010_2778, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */

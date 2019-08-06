@@ -203,7 +203,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1011_e196:
             ii(0x1011_e196, 5); mov(ecx, 0xacb);                        /* mov ecx, 0xacb */
             ii(0x1011_e19b, 5); mov(ebx, StringDefinitions.PathsCpp);   /* mov ebx, 0x101a7d9e */
-            ii(0x1011_e1a0, 5); mov(edx, StringDefinitions.BackwardSearcher0); /* mov edx, 0x101a7da8 */
+            ii(0x1011_e1a0, 5); mov(edx, StringDefinitions.BackwardSearcherNotEqual0); /* mov edx, 0x101a7da8 */
             ii(0x1011_e1a5, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1011_e1a7, 5); calld(Definitions.sys_assert, 0x47be6); /* call 0x10165d92 */
             ii(0x1011_e1ac, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */

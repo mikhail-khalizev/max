@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100d_6b0d:
             ii(0x100d_6b0d, 5); mov(ecx, 0x9a);                         /* mov ecx, 0x9a */
             ii(0x100d_6b12, 5); mov(ebx, StringDefinitions.CommoCpp2);  /* mov ebx, 0x101a17d8 */
-            ii(0x100d_6b17, 5); mov(edx, StringDefinitions.WindowId0);  /* mov edx, 0x101a17e2 */
+            ii(0x100d_6b17, 5); mov(edx, StringDefinitions.WindowIdEqual0); /* mov edx, 0x101a17e2 */
             ii(0x100d_6b1c, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100d_6b1e, 5); calld(Definitions.sys_assert, 0x8f26f); /* call 0x10165d92 */
             ii(0x100d_6b23, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */

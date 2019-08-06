@@ -267,7 +267,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1a8d, 5); mov(ecx, 0xd9e);                        /* mov ecx, 0xd9e */
             ii(0x1015_1a92, 5); mov(ebx, StringDefinitions.UnitinfoCpp5); /* mov ebx, 0x101ade78 */
             ii(0x1015_1a97, 6); lea(edx, ebp - 0xf4);                   /* lea edx, [ebp-0xf4] */
-            ii(0x1015_1a9d, 5); mov(eax, StringDefinitions.NewUnit02);  /* mov eax, 0x101ade85 */
+            ii(0x1015_1a9d, 5); mov(eax, StringDefinitions.NewUnitNotEqual02); /* mov eax, 0x101ade85 */
             ii(0x1015_1aa2, 5); calld(0x100f_07d4, -0x612d3);           /* call 0x100f07d4 */
         l_0x1015_1aa7:
             ii(0x1015_1aa7, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */

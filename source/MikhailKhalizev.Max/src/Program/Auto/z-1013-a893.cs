@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1013_a8e4:
             ii(0x1013_a8e4, 5); mov(ecx, 0xbd);                         /* mov ecx, 0xbd */
             ii(0x1013_a8e9, 5); mov(ebx, StringDefinitions.SmartlstCpp); /* mov ebx, 0x101acbf4 */
-            ii(0x1013_a8ee, 5); mov(edx, StringDefinitions.Index0IndexCount); /* mov edx, 0x101acc01 */
+            ii(0x1013_a8ee, 5); mov(edx, StringDefinitions.IndexGreaterOrEqual0IndexLessCount); /* mov edx, 0x101acc01 */
             ii(0x1013_a8f3, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1013_a8f5, 5); calld(Definitions.sys_assert, 0x2b498); /* call 0x10165d92 */
             ii(0x1013_a8fa, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */

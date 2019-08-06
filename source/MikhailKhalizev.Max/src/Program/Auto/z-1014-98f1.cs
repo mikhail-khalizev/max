@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1014_991d:
             ii(0x1014_991d, 5); mov(ecx, 0x169);                        /* mov ecx, 0x169 */
             ii(0x1014_9922, 5); mov(ebx, StringDefinitions.UnitinfoCpp3); /* mov ebx, 0x101ad245 */
-            ii(0x1014_9927, 5); mov(edx, StringDefinitions.Data0);      /* mov edx, 0x101ad252 */
+            ii(0x1014_9927, 5); mov(edx, StringDefinitions.DataNotEqual0); /* mov edx, 0x101ad252 */
             ii(0x1014_992c, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1014_992e, 5); calld(Definitions.sys_assert, 0x1c45f); /* call 0x10165d92 */
             ii(0x1014_9933, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1014_995a:
             ii(0x1014_995a, 5); mov(ecx, 0x16b);                        /* mov ecx, 0x16b */
             ii(0x1014_995f, 5); mov(ebx, StringDefinitions.UnitinfoCpp2); /* mov ebx, 0x101ad25c */
-            ii(0x1014_9964, 5); mov(edx, StringDefinitions.Index0IndexAnglesUnitangletotal); /* mov edx, 0x101ad269 */
+            ii(0x1014_9964, 5); mov(edx, StringDefinitions.IndexGreaterOrEqual0IndexLessAnglesUnitangletotal); /* mov edx, 0x101ad269 */
             ii(0x1014_9969, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1014_996b, 5); calld(Definitions.sys_assert, 0x1c422); /* call 0x10165d92 */
             ii(0x1014_9970, 3); mov(memd_a32[ss, ebp - 0x14], eax);     /* mov [ebp-0x14], eax */

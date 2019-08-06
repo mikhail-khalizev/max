@@ -118,7 +118,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100e_7dc4:
             ii(0x100e_7dc4, 5); mov(ecx, 0x546);                        /* mov ecx, 0x546 */
             ii(0x100e_7dc9, 5); mov(ebx, StringDefinitions.DrawmapCpp); /* mov ebx, 0x101a1e3a */
-            ii(0x100e_7dce, 5); mov(edx, StringDefinitions.RectUlx0RectUly0RectLrx640RectLry480); /* mov edx, 0x101a1e46 */
+            ii(0x100e_7dce, 5); mov(edx, StringDefinitions.RectUlxGreaterOrEqual0RectUlyGreaterOrEqual0RectLrxLess640RectLryLess480); /* mov edx, 0x101a1e46 */
             ii(0x100e_7dd3, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_7dd5, 5); calld(Definitions.sys_assert, 0x7dfb8); /* call 0x10165d92 */
             ii(0x100e_7dda, 3); mov(memd_a32[ss, ebp - 0x34], eax);     /* mov [ebp-0x34], eax */
@@ -137,7 +137,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100e_7df8:
             ii(0x100e_7df8, 5); mov(ecx, 0x547);                        /* mov ecx, 0x547 */
             ii(0x100e_7dfd, 5); mov(ebx, StringDefinitions.DrawmapCpp2); /* mov ebx, 0x101a1e89 */
-            ii(0x100e_7e02, 5); mov(edx, StringDefinitions.RectUlxRectLrxRectUlyRectLry); /* mov edx, 0x101a1e95 */
+            ii(0x100e_7e02, 5); mov(edx, StringDefinitions.RectUlxLessOrEqualRectLrxRectUlyLessOrEqualRectLry); /* mov edx, 0x101a1e95 */
             ii(0x100e_7e07, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_7e09, 5); calld(Definitions.sys_assert, 0x7df84); /* call 0x10165d92 */
             ii(0x100e_7e0e, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */

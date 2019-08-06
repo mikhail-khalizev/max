@@ -399,88 +399,6 @@ namespace MikhailKhalizev.Max.Program
 
             code = code.remove_prefix(1);
         }
-
-        // extra
-        to_cxx.decode_func(0x101481d4);
-        to_cxx.decode_func(0x10165d4a);
-        to_cxx.decode_func(0x10165eee);
-        to_cxx.decode_func(0x1016609c);
-        to_cxx.decode_func(0x10166114);
-        to_cxx.decode_func(0x10168624);
-        to_cxx.decode_func(0x10168690);
-        to_cxx.decode_func(0x10168698);
-        to_cxx.decode_func(0x1016a21c);
-        to_cxx.decode_func(0x1016a320);
-        to_cxx.decode_func(0x1016a4c4);
-        to_cxx.decode_func(0x1016a4d0);
-        to_cxx.decode_func(0x1016a514);
-        to_cxx.decode_func(0x1016a568);
-        to_cxx.decode_func(0x1016c9d0);
-        to_cxx.decode_func(0x1016c9dc);
-        to_cxx.decode_func(0x101712d0);
-        to_cxx.decode_func(0x101714e0);
-        to_cxx.decode_func(0x10171680);
-        to_cxx.decode_func(0x10171810);
-        to_cxx.decode_func(0x10171834);
-        to_cxx.decode_func(0x10171c5c);
-        to_cxx.decode_func(0x10172d9c);
-        to_cxx.decode_func(0x10179690);
-        to_cxx.decode_func(0x10179a00);
-        to_cxx.decode_func(0x10179b80);
-        to_cxx.decode_func(0x1017de6f);
-        to_cxx.decode_func(0x1017df39);
-        to_cxx.decode_func(0x10181cc4);
-        to_cxx.decode_func(0x10181cc8);
-        to_cxx.decode_func(0x10181ce1);
-        to_cxx.decode_func(0x10181ce6);
-        to_cxx.decode_func(0x10181f92);
-        to_cxx.decode_func(0x10181fae);
-        to_cxx.decode_func(0x10181fde);
-        to_cxx.decode_func(0x101820a9);
-        to_cxx.decode_func(0x101820c6);
-        to_cxx.decode_func(0x10182113);
-        to_cxx.decode_func(0x10182212);
-        to_cxx.decode_func(0x1018224d);
-        to_cxx.decode_func(0x10187ac2);
-        to_cxx.decode_func(0x10187ad4);
-        to_cxx.decode_func(0x10187b25);
-        to_cxx.decode_func(0x10187b2b);
-        to_cxx.decode_func(0x1018c980);
-        to_cxx.decode_func(0x1018ca00);
-        to_cxx.decode_func(0x1018cda8);
-        to_cxx.decode_func(0x1018cdf4);
-        to_cxx.decode_func(0x1018d034);
-        to_cxx.decode_func(0x1018d304);
-        to_cxx.decode_func(0x1018d9dc);
-        to_cxx.decode_func(0x1018da9d);
-        to_cxx.decode_func(0x1018dc3c);
-        to_cxx.decode_func(0x1018dc67);
-        to_cxx.decode_func(0x1018dd02);
-        to_cxx.decode_func(0x1018dd5b);
-        to_cxx.decode_func(0x1018e8dc);
-        to_cxx.decode_func(0x1018e8e4);
-        to_cxx.decode_func(0x1018e91c);
-        to_cxx.decode_func(0x1018e924);
-        to_cxx.decode_func(0x1018e928);
-        to_cxx.decode_func(0x1018e935);
-        to_cxx.decode_func(0x1018e948);
-        to_cxx.decode_func(0x1018e95c);
-        to_cxx.decode_func(0x1018e96c);
-        to_cxx.decode_func(0x1018e9b0);
-        to_cxx.decode_func(0x101900c4);
-        to_cxx.decode_func(0x10190138);
-        to_cxx.decode_func(0x101901f0);
-        to_cxx.decode_func(0x1019026c);
-        to_cxx.decode_func(0x10190280);
-        to_cxx.decode_func(0x10194718);
-        to_cxx.decode_func(0x101949bd);
-        to_cxx.decode_func(0x10194c19);
-        to_cxx.decode_func(0x1019661d);
-        to_cxx.decode_func(0x10199a8a);
-        to_cxx.decode_func(0x10199bb8);
-        to_cxx.decode_func(0x1019a9b3);
-        to_cxx.decode_func(0x1019aa71);
-        to_cxx.decode_func(0x1019c3cd);
     }
 #endif
 
@@ -501,7 +419,7 @@ namespace MikhailKhalizev.Max.Program
                 }
 #endif
 
-            Console.WriteLine($"Запуск декодирования функции '{fullAddress}'.");
+            Console.WriteLine($"Запуск декодирования метода '{fullAddress}'.");
 
             to_cxx.DecodeMethod(fullAddress);
             to_cxx.Save();
