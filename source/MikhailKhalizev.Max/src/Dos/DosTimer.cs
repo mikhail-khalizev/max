@@ -3,11 +3,11 @@ using MikhailKhalizev.Processor.x86.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class Timer : BridgeProcessor
+    public class DosTimer : BridgeProcessor
     {
         public RawProgramMain RawProgramMain { get; }
 
-        public Timer(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosTimer(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;

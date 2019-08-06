@@ -6,11 +6,11 @@ using MikhailKhalizev.Processor.x86.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class Memory : BridgeProcessor
+    public class DosMemory : BridgeProcessor
     {
         public RawProgramMain RawProgramMain { get; }
 
-        public Memory(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosMemory(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;

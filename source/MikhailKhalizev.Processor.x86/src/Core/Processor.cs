@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using System.Threading.Tasks;
 using MikhailKhalizev.Max.Configuration;
 using MikhailKhalizev.Processor.x86.Abstractions;
 using MikhailKhalizev.Processor.x86.Abstractions.Memory;
@@ -105,7 +106,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             eip = 0x0000fff0;
 
             Memory = new Memory(this);
-            
+
             memb_a16 = new MemoryAccessImpl(Memory, 8, 16);
             memw_a16 = new MemoryAccessImpl(Memory, 16, 16);
             memd_a16 = new MemoryAccessImpl(Memory, 32, 16);
@@ -1421,8 +1422,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
-        // todo rename ExecuteSubMethod
-        public event EventHandler<EventArgs> run_func;
+        public IGetMethod GetMethod { get; set; }
         public event EventHandler<(Value value, Value port)> runInb;
         public event EventHandler<(Value port, Value value)> runOutb;
 
@@ -1466,13 +1466,33 @@ namespace MikhailKhalizev.Processor.x86.Core
                         throw new GoUpException();
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
+                    GetMethod.GetMethod(out var methodInfo, out var method);
+                    
+                    if (_statisticMethodCall != null)
+                    {
+                        _statisticMethodCall.TryGetValue(methodInfo, out var count);
+                        lock (_statisticMethodCall)
+                            _statisticMethodCall[methodInfo] = count + 1;
+                    }
+                    
+                    var prevMethodInfo = MethodInfo;
+                    var prevCSharpFunctionDelta = CSharpFunctionDelta;
+
+                    MethodInfo = methodInfo;
+                    CSharpFunctionDelta = cs[eip] - methodInfo.Address;
+                    
                     try
                     {
-                        run_func?.Invoke(this, null);
+                        method();
                     }
                     catch (GoUpException)
                     {
                         // Ignore.
+                    }
+                    finally
+                    {
+                        MethodInfo = prevMethodInfo;
+                        CSharpFunctionDelta = prevCSharpFunctionDelta;
                     }
                 }
             }
@@ -1487,6 +1507,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         { }
 
         private StreamWriter _stateLog;
+        private Dictionary<MethodInfoDto, int> _statisticIiCall;
+        private Dictionary<MethodInfoDto, int> _statisticMethodCall;
 
         public void ii(Address address, uint length)
         {
@@ -1506,10 +1528,20 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (!cs.db && (0xffff < eip || 0xffff < CurrentInstructionAddress))
                 throw new Exception("Bad eip");
 
+
             if (!string.IsNullOrEmpty(Configuration.StateOutput))
             {
                 if (_stateLog == null)
+                {
+                    if (File.Exists(Configuration.StateOutput))
+                    {
+                        var bak = Configuration.StateOutput + ".bak";
+                        File.Delete(bak);
+                        File.Move(Configuration.StateOutput, bak);
+                    }
+
                     _stateLog = new StreamWriter(Configuration.StateOutput);
+                }
 
                 var effAddress = cs[CurrentInstructionAddress];
                 var prefix = "";
@@ -1536,16 +1568,99 @@ namespace MikhailKhalizev.Processor.x86.Core
                     + ", gs: " + gs + " " + (Address)gs.Descriptor.Base);
             }
 
-            //if (memw_a32[0x13_0000] == 0xcccc)
-            //{
-            //    var debug = 0;
-            //}
+            if (!string.IsNullOrEmpty(Configuration.StatisticOutput))
+            {
+                if (_statisticIiCall == null)
+                {
+                    if (File.Exists(Configuration.StatisticOutput))
+                    {
+                        var bak = Configuration.StatisticOutput + ".bak";
+                        File.Delete(bak);
+                        File.Move(Configuration.StatisticOutput, bak);
+                    }
 
-            //if (cs[eip] == 0x14_db21 && eax == 0xcccc)
-            //{
-            //    var debug = 0;
-            //}
+                    _statisticIiCall = new Dictionary<MethodInfoDto, int>();
+                    _statisticMethodCall = new Dictionary<MethodInfoDto, int>();
+                    WriteStatisticPeriodicly();
+                }
+
+                _statisticIiCall.TryGetValue(MethodInfo, out var count);
+                lock (_statisticIiCall)
+                    _statisticIiCall[MethodInfo] = count + 1;
+            }
         }
+        
+        private string GetStatisticMethodCall()
+        {
+            var result = $"Method call statistic:{Environment.NewLine}";
+            var padding = 0;
+
+            List<KeyValuePair<MethodInfoDto, int>> pairs;
+            lock (_statisticMethodCall)
+                pairs = _statisticMethodCall.OrderByDescending(x => x.Value).Take(10).ToList();
+
+            foreach (var (methodInfo, count) in pairs)
+            {
+                if (padding == 0)
+                {
+                    padding = Math.Max("Count".Length, count.ToString().Length);
+                    result += $"    {"Count".PadLeft(padding)}  Guid                                    Address{Environment.NewLine}";
+                }
+
+                result += $"    {count.ToString().PadLeft(padding)}  {{{methodInfo.Guid}}}  {methodInfo.Address}{Environment.NewLine}";
+            }
+
+            return result;
+        }
+
+        private string GetStatisticIiCall()
+        {
+            var result = $"'ii' method call statistic:{Environment.NewLine}";
+            var padding = 0;
+
+            List<KeyValuePair<MethodInfoDto, int>> pairs;
+            lock (_statisticIiCall)
+                pairs = _statisticIiCall.OrderByDescending(x => x.Value).Take(10).ToList();
+
+            foreach (var (methodInfo, count) in pairs)
+            {
+                if (padding == 0)
+                {
+                    padding = Math.Max("Count".Length, count.ToString().Length);
+                    result += $"    {"Count".PadLeft(padding)}  Guid                                    Address{Environment.NewLine}";
+                }
+
+                result += $"    {count.ToString().PadLeft(padding)}  {{{methodInfo.Guid}}}  {methodInfo.Address}{Environment.NewLine}";
+            }
+
+            return result;
+        }
+
+        private void WriteStatistic()
+        {
+            var str = GetStatisticMethodCall() + Environment.NewLine + GetStatisticIiCall();
+            File.WriteAllText(Configuration.StatisticOutput, str);
+        }
+
+        private async void WriteStatisticPeriodicly()
+        {
+            while (!_disposing)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                if (_disposing)
+                    return;
+
+                try
+                {
+                    WriteStatistic();
+                }
+                catch (Exception)
+                {
+                    // ignore
+                }
+            }
+        }
+
 
         /// <inheritdoc />
         public void invalid()
@@ -4212,7 +4327,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             throw new NotImplementedException();
         }
-        
+
         /// <inheritdoc />
         public void lidtw_a16(SegmentRegister segment, Value address)
         {
@@ -6191,7 +6306,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void sar(Value dst, Value count)
         {
-            var c = (int) count.UInt32;
+            var c = (int)count.UInt32;
 
             if (count == 1)
                 eflags.of = false;
@@ -8732,12 +8847,22 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         #region IDisposable
 
+        private bool _disposing;
+        private bool _disposed;
+
         protected virtual void Dispose(bool disposing)
         {
+            _disposing = true;
+
             if (disposing)
             {
                 _stateLog?.Dispose();
+
+                if (!string.IsNullOrEmpty(Configuration.StatisticOutput))
+                    WriteStatistic();
             }
+            
+            _disposed = true;
         }
 
         /// <inheritdoc />

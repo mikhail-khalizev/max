@@ -616,6 +616,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     var os = new StringBuilder();
                     write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin, offset);
                     output.AppendLine($"//  {os}Недостижимый код.");
+                    output.Append("        ");
                 }
 
 

@@ -6,19 +6,19 @@ namespace MikhailKhalizev.Max.Dos
 {
     // http://bochs.sourceforge.net/techspec/PORTS.LST
 
-    public class Port : BridgeProcessor
+    public class DosPort : BridgeProcessor
     {
         int cmos_reg;
         bool cmos_nmi;
         public RawProgramMain RawProgramMain { get; }
 
-        public Port(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosPort(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;
         }
 
-        public void inb(Value value, Value port)
+        public void MyInb(Value value, Value port)
         {
             value.UInt32 = 0;
             switch (port.UInt32)
@@ -192,7 +192,7 @@ namespace MikhailKhalizev.Max.Dos
             }
         }
 
-        public void outb(Value port, Value s)
+        public void MyOutb(Value port, Value s)
         {
             switch (port.UInt32)
             {

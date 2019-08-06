@@ -107,8 +107,6 @@ namespace MikhailKhalizev.Processor.x86.Utils
         }
 
 
-        public SortedSet<T> GetViewBetween(T lowerValue, T upperValue) => _set.GetViewBetween(lowerValue, upperValue);
-
         public T[] ToArray()
         {
             var arr = new T[_set.Count];

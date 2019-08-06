@@ -45,8 +45,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         /// </summary>
         public string Raw { get; set; }
 
+
         [JsonExtensionData]
         private IDictionary<string, JToken> AdditionalData { get; set; }
+
 
         [JsonIgnore]
         public byte[] RawBytes
@@ -54,7 +56,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             get => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Raw));
             set => Raw = HexHelper.ToString(value, o => o.RemoveHexPrefix().SetGroupSize(0));
         }
-
         private byte[] _rawBytes;
 
         [JsonIgnore]

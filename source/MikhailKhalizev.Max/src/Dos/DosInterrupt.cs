@@ -13,11 +13,11 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class Interrupt : BridgeProcessor
+    public class DosInterrupt : BridgeProcessor
     {
         public RawProgramMain RawProgramMain { get; }
 
-        public Interrupt(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosInterrupt(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;
@@ -900,7 +900,7 @@ namespace MikhailKhalizev.Max.Dos
 
         private List<Stream> fileHandlers = new List<Stream>();
 
-        public void install_std_ints()
+        public void InitializeInterrupts()
         {
             var intFunc = new (int num, Action func)[]
             {

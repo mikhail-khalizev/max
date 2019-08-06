@@ -5,7 +5,7 @@ using MikhailKhalizev.Processor.x86.Abstractions;
 
 namespace MikhailKhalizev.Max.Program
 {
-    public static partial class Definitions
+    public partial class Definitions
     {
         #region My
         

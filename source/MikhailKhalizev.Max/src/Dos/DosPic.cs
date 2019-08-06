@@ -3,11 +3,11 @@ using MikhailKhalizev.Processor.x86.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class Pic : BridgeProcessor
+    public class DosPic : BridgeProcessor
     {
         public RawProgramMain RawProgramMain { get; }
 
-        public Pic(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosPic(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;

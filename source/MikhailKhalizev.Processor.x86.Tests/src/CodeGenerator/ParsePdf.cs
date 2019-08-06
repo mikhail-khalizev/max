@@ -324,11 +324,6 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
                 }
             }
 
-            if (instruction.Mnemonics == "PADDSB/PADDSW")
-            {
-                var debug = 0;
-            }
-
             foreach (var itemNode in opcodesTable.RowList.Skip(1))
             {
                 var item = new InstructionItemDto();

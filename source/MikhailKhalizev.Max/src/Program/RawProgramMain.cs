@@ -9,24 +9,25 @@ using MikhailKhalizev.Processor.x86.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
+using MikhailKhalizev.Processor.x86.Core;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max.Program
 {
-    public class RawProgramMain : BridgeProcessor
+    public class RawProgramMain : BridgeProcessor, IGetMethod
     {
         public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
         public MethodsInfo MethodsInfo { get; private set; }
 
-        public Memory DosMemory { get; }
-        public Interrupt DosInterrupt { get; }
-        public Timer DosTimer { get; }
-        public Port DosPort { get; }
-        public Dma DosDma { get; }
-        public Pic DosPic { get; }
+        public DosMemory DosMemory { get; }
+        public DosInterrupt DosInterrupt { get; }
+        public DosTimer DosTimer { get; }
+        public DosPort DosPort { get; }
+        public DosDma DosDma { get; }
+        public DosPic DosPic { get; }
 
         public MultiValueDictionary<Address, MyMethodInfo> funcs_by_pc = new MultiValueDictionary<Address, MyMethodInfo>();
 
@@ -45,35 +46,36 @@ namespace MikhailKhalizev.Max.Program
             Implementation = implementation;
             Configuration = configuration;
 
-            DosMemory = new Memory(implementation, this);
-            DosInterrupt = new Interrupt(implementation, this);
-            DosTimer = new Timer(implementation, this);
-            DosPort = new Port(implementation, this);
-            DosDma = new Dma(implementation, this);
-            DosPic = new Pic(implementation, this);
+            DosMemory = new DosMemory(implementation, this);
+            DosInterrupt = new DosInterrupt(implementation, this);
+            DosTimer = new DosTimer(implementation, this);
+            DosPort = new DosPort(implementation, this);
+            DosDma = new DosDma(implementation, this);
+            DosPic = new DosPic(implementation, this);
 
-            implementation.run_func += ExecuteSubMethod;
-            implementation.runInb += (sender, tuple) => DosPort.inb(tuple.value, tuple.port);
-            implementation.runOutb += (sender, tuple) => DosPort.outb(tuple.port, tuple.value);
+            implementation.GetMethod = this;
+            implementation.runInb += (sender, tuple) => DosPort.MyInb(tuple.value, tuple.port);
+            implementation.runOutb += (sender, tuple) => DosPort.MyOutb(tuple.port, tuple.value);
         }
 
         public void Start()
         {
             MethodsInfo = MethodsInfo.Load(Configuration.BinToCSharp);
-            LoadMethods();
-            DosInterrupt.install_std_ints();
-            init_x86_dos_prog();
+            Implementation.MethodsInfo = MethodsInfo;
+
+            LoadDecodedMethods();
+
+            DosInterrupt.InitializeInterrupts();
+            InitializeX86DosProgram();
+            
             Implementation.correct_function_position(0);
         }
 
-        private void LoadMethods()
+        private void LoadDecodedMethods()
         {
-            var callActionGenericMethodInfo = GetType().GetTypeInfo().GetDeclaredMethod(nameof(CallAction));
-
             foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
             {
                 object instance = null;
-                var callActionMethodInfo = callActionGenericMethodInfo.MakeGenericMethod(bridgeProcessor);
 
                 foreach (var methodInfo in bridgeProcessor.GetMethods(BindingFlags.Instance | BindingFlags.Public))
                 {
@@ -90,23 +92,17 @@ namespace MikhailKhalizev.Max.Program
                     fi.MethodInfo = mi;
                     fi.Name = methodInfo.Name;
 
-                    var methodDelegate = methodInfo.CreateDelegate(typeof(Action<>).MakeGenericType(bridgeProcessor));
-                    var callMethodDelegate = (Action<object>)callActionMethodInfo.CreateDelegate(typeof(Action<object>), methodDelegate);
+                    var methodDelegate = (Action)methodInfo.CreateDelegate(typeof(Action), instance);
 
-                    fi.Action = () => callMethodDelegate(instance);
+                    fi.Action = methodDelegate;
 
                     foreach (var address in mi.Addresses)
                         funcs_by_pc.Add(address, fi);
                 }
             }
         }
-
-        private static void CallAction<T>(Action<T> setter, object value)
-        {
-            setter((T)value);
-        }
-
-        public void init_x86_dos_prog()
+        
+        public void InitializeX86DosProgram()
         {
             var exeBytes = File.ReadAllBytes(Path.Combine(Configuration.Max.InstalledPath, Configuration.Max.ExeFileName));
             var dosMz = new DosMz(exeBytes);
@@ -232,80 +228,18 @@ namespace MikhailKhalizev.Max.Program
 
             DosTimer.timers_init();
         }
-
-        public void ExecuteSubMethod(object sender, EventArgs e)
+        
+        /// <inheritdoc />
+        public void GetMethod(out MethodInfoDto methodInfo, out Action method)
         {
-            var run = cs[eip];
-
-            // "--on-run-func={none, dump-reg}"
-            var on_run_func__dump_reg = false;
-
-            if (on_run_func__dump_reg)
-            {
-                Console.WriteLine(
-                    $"before run {run:x}" +
-                    $", eax: 0x{eax.UInt32:x}" +
-                    $", ebx: 0x{ebx.UInt32:x}" +
-                    $", ecx: 0x{ecx.UInt32:x}" +
-                    $", edx: 0x{edx.UInt32:x}" +
-                    $", esi: 0x{esi.UInt32:x}" +
-                    $", edi: 0x{edi.UInt32:x}" +
-                    $", esp: 0x{esp.UInt32:x}" +
-                    $", ebp: 0x{ebp.UInt32:x}" +
-                    $", ds: 0x{ds.Selector:x}" +
-                    $", es: 0x{es.Selector:x}" +
-                    $", cs: 0x{cs.Selector:x}" +
-                    $", ss: 0x{ss.Selector:x}" +
-                    $", fs: 0x{fs.Selector:x}" +
-                    $", gs: 0x{gs.Selector:x}");
-            }
-
             var info = get_func(cs, eip);
-
             if (extra_log)
                 Console.WriteLine($"Run {info.Name} {{{info.MethodInfo.Guid}}}");
 
-            Implementation.MethodsInfo = MethodsInfo;
-
-            var prevMethodInfo = Implementation.MethodInfo;
-            var prevCSharpFunctionDelta = Implementation.CSharpFunctionDelta;
-
-            Implementation.MethodInfo = info.MethodInfo;
-            Implementation.CSharpFunctionDelta = (int)(cs[eip] - info.MethodInfo.Address);
-
-            add_to_used_func_list(run, (cs.db ? 32 : 16));
-
-            try
-            {
-                info.Action();
-            }
-            finally
-            {
-                Implementation.MethodInfo = prevMethodInfo;
-                Implementation.CSharpFunctionDelta = prevCSharpFunctionDelta;
-            }
-            
-            if (on_run_func__dump_reg)
-            {
-                Console.WriteLine(
-                    $"after run {run:x}" +
-                    $", eax: 0x{eax.UInt32:x}" +
-                    $", ebx: 0x{ebx.UInt32:x}" +
-                    $", ecx: 0x{ecx.UInt32:x}" +
-                    $", edx: 0x{edx.UInt32:x}" +
-                    $", esi: 0x{esi.UInt32:x}" +
-                    $", edi: 0x{edi.UInt32:x}" +
-                    $", esp: 0x{esp.UInt32:x}" +
-                    $", ebp: 0x{ebp.UInt32:x}" +
-                    $", ds: 0x{ds.Selector:x}" +
-                    $", es: 0x{es.Selector:x}" +
-                    $", cs: 0x{cs.Selector:x}" +
-                    $", ss: 0x{ss.Selector:x}" +
-                    $", fs: 0x{fs.Selector:x}" +
-                    $", gs: 0x{gs.Selector:x}");
-            }
+            methodInfo = info.MethodInfo;
+            method = info.Action;
         }
-
+        
         private MyMethodInfo get_func(SegmentRegister seg, Address address)
         {
             if (seg[address] == 0)
@@ -386,32 +320,6 @@ namespace MikhailKhalizev.Max.Program
             }
 
             return null;
-        }
-
-        private void add_to_used_func_list(Address full_addr, int mode)
-        {
-            // TODO
-
-            //static std::map<uint_<32>, uint_<8>> used_funcs; // <addr, bit mode>
-
-            //if (used_funcs.empty())
-            //    for (auto i = std::begin(used_funcs_known); i != std::end(used_funcs_known); i++)
-            //        used_funcs.insert(std::make_pair(i->first, i->second));
-
-            //auto ret = used_funcs.insert(std::make_pair(full_addr, mode));
-            //ret.first->second = mode;
-            //if (ret.second)
-            //{
-            //    std::fstream file("program/info/funcs_any_time_runs.hpp", std::ios_base::out);
-            //    file << std::hex << std::showbase;
-            //    for (auto & i : used_funcs)
-            //    {
-            //        file << "INFO(";
-            //        /*bin_to_cxx::*/
-            //        write_addr(file, i.first);
-            //        file << ", " << static_cast < uint_ < 32 >> (i.second) << ")\n";
-            //    }
-            //}
         }
 
         private void DecodeNewMethod(SegmentRegister seg, Address address)
