@@ -48,7 +48,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
             using (var sw = new StreamWriter(fs))
             {
-                var allText = JsonConvert.SerializeObject(_methodByGuid.Values.Where(x => !x.IgnoreSave).OrderBy(x => x.Address), Formatting.Indented);
+                var allText = JsonConvert.SerializeObject(
+                    _methodByGuid.Values.Where(x => !x.IgnoreSave).OrderBy(x => x.Address),
+                    new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        DefaultValueHandling = DefaultValueHandling.Ignore
+                    });
                 sw.Write(allText);
                 sw.Flush();
                 fs.SetLength(fs.Position);

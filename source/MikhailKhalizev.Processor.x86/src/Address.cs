@@ -139,9 +139,11 @@ namespace MikhailKhalizev.Processor.x86
 
         #endregion
 
-        #region Operators
+        #region Arithmetic Operators
 
         public static int operator -(Address a1, Address a2) => (int)a1 - (int)a2;
+        public static Address operator +(Address a1, int offset) => (int)a1 + offset;
+        public static Address operator -(Address a1, int offset) => (int)a1 - offset;
 
         #endregion
     }

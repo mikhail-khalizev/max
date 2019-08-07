@@ -123,10 +123,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
-        private readonly JmpCallLoopSimple jmp_call_loop_simple; // addr_to_decode from any jmp.
-        private readonly Switch switch_;
+        private readonly JmpCallLoopSimplePlugin _jmpCallLoopSimplePlugin; // addr_to_decode from any jmp.
+        private readonly SwitchPlugin _switchPlugin;
         private readonly ReadCStringPlugin _readCStringPlugin;
-        private readonly CommentDummyInstructions comment_idle; // comment dummy instruction
+        private readonly CommentDummyInstructionsPlugin comment_idle; // comment dummy instruction
         private int _limitSize;
 
 
@@ -151,9 +151,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 SuppressDecode.Add(0, csBase);
 
             _readCStringPlugin = new ReadCStringPlugin(this);
-            comment_idle = new CommentDummyInstructions(this);
-            jmp_call_loop_simple = new JmpCallLoopSimple(this);
-            switch_ = new Switch(this);
+            comment_idle = new CommentDummyInstructionsPlugin(this);
+            _jmpCallLoopSimplePlugin = new JmpCallLoopSimplePlugin(this);
+            _switchPlugin = new SwitchPlugin(this);
 
             _limitSize = Configuration.LimitDecodeSize;
         }
@@ -581,6 +581,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 });
 
             Console.WriteLine(string.Join(Environment.NewLine, toConsole));
+            
+            MethodsInfo.Save();
         }
 
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)

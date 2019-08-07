@@ -5,19 +5,21 @@ using System.Text;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Decoder;
+using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 {
-    public class Switch : PluginBase
+    public class SwitchPlugin : PluginBase
     {
         private int state;
         private RegisterInfo reg;
         private ud_operand op;
+        private Address addr_area_begin;
         private int size_of_addr_area;
 
         /// <inheritdoc />
-        public Switch(Engine engine)
+        public SwitchPlugin(Engine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
@@ -89,8 +91,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
     II(0x001577df, 0x1)   xchg(bx, ax);                         /* xchg bx, ax */
     II(0x001577e0, 0x5)   jmpw_abs(memw_a16(cs, bx + 0x23c5));  /* jmp word near [cs:bx+0x23c5] */
 #endif
-
-
+            
             switch (state)
             {
                 case 2:
@@ -284,6 +285,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 return;
 
             Address addrOfAddrs = Engine.CsBase + cmd.Operands[0].lval.udword;
+            addr_area_begin = addrOfAddrs;
 
             if ((addrOfAddrs & ((int)Engine.Mode / 8 - 1)) == 0)
                 Engine.Aligment[addrOfAddrs] = (int)Engine.Mode / 8;
@@ -336,6 +338,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
         private string WriteCmd(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
         {
+            var addrsInterval = Interval.From(addr_area_begin, addr_area_begin + size_of_addr_area);
+            var methodInterval = Interval.From(dm.MethodInfo.Address + offset, dm.MethodInfo.Address + offset + dm.RawBytes.Length / 2);
+
+            var exists = Enumerable.Empty<Interval<Address>>().Append(methodInterval);
+            if (dm.MethodInfo.ExtraRaw != null)
+                exists = exists.Concat(dm.MethodInfo.ExtraRaw.Select(x => Interval.From(x.Key, x.Key + x.Value.Length / 2)));
+
+            foreach (var interval in addrsInterval.Subtract(exists).SelectMany(x => x.Split(methodInterval)))
+            {
+                if (dm.MethodInfo.ExtraRaw == null)
+                    dm.MethodInfo.ExtraRaw = new Dictionary<Address, string>();
+                
+                var raw = Engine.Memory.ReadAll(interval.Begin, interval.Begin - interval.End);
+                var rawString = HexHelper.ToString(raw, o => o.RemoveHexPrefix().SetGroupSize(0));
+
+                if (methodInterval.Contains(interval)) // Alwaus false.
+                    dm.MethodInfo.ExtraRaw[interval.Begin - offset] = rawString;
+                else
+                    dm.MethodInfo.ExtraRaw[interval.Begin] = rawString;
+            }
+
+
             Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var curJmp);
             if (curJmp == null)
                 throw new NotImplementedException();

@@ -44,7 +44,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         /// Исходный бинарный код функции.
         /// </summary>
         public string Raw { get; set; }
-
+        
+        public Dictionary<Address, string> ExtraRaw { get; set; }
 
         [JsonExtensionData]
         private IDictionary<string, JToken> AdditionalData { get; set; }

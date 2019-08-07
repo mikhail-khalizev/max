@@ -1680,7 +1680,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        int jmpw_abs_switch(Value address);
+        Address jmpw_abs_switch(Value address);
 
         /// <summary>
         /// Jump.

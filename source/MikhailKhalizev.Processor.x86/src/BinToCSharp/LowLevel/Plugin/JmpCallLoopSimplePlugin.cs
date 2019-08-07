@@ -10,10 +10,10 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 {
-    public class JmpCallLoopSimple : PluginBase
+    public class JmpCallLoopSimplePlugin : PluginBase
     {
         /// <inheritdoc />
-        public JmpCallLoopSimple(Engine engine)
+        public JmpCallLoopSimplePlugin(Engine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;

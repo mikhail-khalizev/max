@@ -1804,7 +1804,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public int jmpw_abs_switch(Value address)
+        public Address jmpw_abs_switch(Value address)
         {
             return Implementation.jmpw_abs_switch(address);
         }

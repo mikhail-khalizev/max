@@ -6,10 +6,10 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 {
-    public class CommentDummyInstructions : PluginBase
+    public class CommentDummyInstructionsPlugin : PluginBase
     {
         /// <inheritdoc />
-        public CommentDummyInstructions(Engine engine)
+        public CommentDummyInstructionsPlugin(Engine engine)
             : base(engine)
         {
             // NOTE. Ignore this plugin.
