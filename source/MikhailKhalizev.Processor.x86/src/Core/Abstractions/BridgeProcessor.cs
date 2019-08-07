@@ -1198,6 +1198,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
+        public void fdiv(FpuStackRegister a, FpuStackRegister b)
+        {
+            Implementation.fdiv(a, b);
+        }
+
+        /// <inheritdoc />
         public void fdivp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fdivp(a, b);

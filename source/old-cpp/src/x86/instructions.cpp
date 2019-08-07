@@ -939,6 +939,7 @@ static void set_top(uint_<8> x)
     FPUStatusWord = (FPUStatusWord & (~(7 << 11))) | ((x & 7) << 11);
 }
 
+// +
 /** @remark cf */
 static void set_c0(bool v)
 {
@@ -950,18 +951,21 @@ static void set_c0(bool v)
 //    FPUStatusWord = (FPUStatusWord & (~(1 << 9))) | ((v ? 1 : 0) << 9);
 //}
 
+// +
 /** @remark pf */
 static void set_c2(bool v)
 {
     FPUStatusWord = (FPUStatusWord & (~(1 << 10))) | ((v ? 1 : 0) << 10);
 }
 
+// +
 /** @remark zf */
 static void set_c3(bool v)
 {
     FPUStatusWord = (FPUStatusWord & (~(1 << 14))) | ((v ? 1 : 0) << 14);
 }
 
+// +
 static bool get_invalid_flag()
 {
     return ((FPUStatusWord & 1) != 0);
@@ -1109,6 +1113,7 @@ void fldl2e()
     set_tag(0, 0);
 }
 
+// +
 void fld(int src_n, int dst_n)
 {
     auto save = ST(dst_n);
@@ -1154,6 +1159,7 @@ void fld(uint_<80> &)
 }
 
 
+// +
 void fchs()
 {
     if (get_tag(0) == 3)
@@ -1329,6 +1335,7 @@ void fcom(uint_<64> & val_)
     set_c3(c3);
 }
 
+// +
 void fcom(int a, int b)
 {
     if (get_tag(a) == 3)
@@ -1363,11 +1370,13 @@ void fcom(int a, int b)
     set_c3(c3);
 }
 
+// +
 void fcom()
 {
     fcom(0, 1);
 }
 
+// +
 void fcomp()
 {
     fcom();
@@ -1386,6 +1395,7 @@ void fcomp(int a, int b)
     fpu_pop();
 }
 
+// +
 void fcompp()
 {
     fcomp();

@@ -2182,6 +2182,7 @@ inline void outsb_a32()
     esi += df ? -1 : 1;
 }
 
+// +
 /**
  * @brief Store AH into Flags.
  * Loads SF, ZF, AF, PF, and CF from AH into EFLAGS register.

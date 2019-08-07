@@ -449,6 +449,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             return ref st_regs[(get_top() + num) & 7];
         }
         
+        // TODO create property TOP.
         private int get_top()
         {
             return ((FPUStatusWord >> 11) & 7);
@@ -474,6 +475,34 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             set_tag(0, 3);
             set_top(get_top() + 1);
+        }
+        
+        // @remark cf
+        private void set_c0(bool v)
+        {
+            FPUStatusWord = (FPUStatusWord & (~(1 << 8))) | ((v ? 1 : 0) << 8);
+        }
+
+        //static void set_c1(bool v)
+        //{
+        //    FPUStatusWord = (FPUStatusWord & (~(1 << 9))) | ((v ? 1 : 0) << 9);
+        //}
+
+        // @remark pf
+        private void set_c2(bool v)
+        {
+            FPUStatusWord = (FPUStatusWord & (~(1 << 10))) | ((v ? 1 : 0) << 10);
+        }
+
+        // @remark zf
+        private void set_c3(bool v)
+        {
+            FPUStatusWord = (FPUStatusWord & (~(1 << 14))) | ((v ? 1 : 0) << 14);
+        }
+
+        private bool get_invalid_flag()
+        {
+            return ((FPUStatusWord & 1) != 0);
         }
 
         #endregion
@@ -2743,7 +2772,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fchs()
         {
-            throw new NotImplementedException();
+            if (get_tag(0) == 3)
+                throw new NotImplementedException();
+            MyST(0) = -MyST(0);
         }
 
         /// <inheritdoc />
@@ -2756,6 +2787,48 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void fcmovcc()
         {
             throw new NotImplementedException();
+        }
+        
+        /// <inheritdoc />
+        public void fcom()
+        {
+            fcom(ST(0), ST(1));
+        }
+
+        /// <inheritdoc />
+        public void fcom(FpuStackRegister a, FpuStackRegister b)
+        {
+            if (get_tag(a.Number) == 3)
+                throw new NotImplementedException();
+            if (get_tag(b.Number) == 3)
+                throw new NotImplementedException();
+
+            bool c0, c2, c3;
+            if (MyST(a.Number) < MyST(b.Number))
+            {
+                c0 = true;
+                c2 = c3 = false;
+            }
+            // ReSharper disable once CompareOfFloatsByEqualityOperator
+            else if (MyST(a.Number) == MyST(b.Number))
+            {
+                c3 = true;
+                c0 = c2 = false;
+            }
+            else if (MyST(a.Number) > MyST(b.Number))
+            {
+                c0 = c2 = c3 = false;
+            }
+            else
+            {
+                if (get_invalid_flag())
+                    throw new NotImplementedException();
+                c0 = c2 = c3 = true;
+            }
+
+            set_c0(c0);
+            set_c2(c2);
+            set_c3(c3);
         }
 
         /// <inheritdoc />
@@ -2777,6 +2850,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void fcomp()
+        {
+            fcom();
+            fpu_pop();
+        }
+        
+        /// <inheritdoc />
         public void fcomp(Value value)
         {
             throw new NotImplementedException();
@@ -2791,7 +2871,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fcompp()
         {
-            throw new NotImplementedException();
+            fcomp();
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -2934,7 +3015,15 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fld(Value value)
         {
-            throw new NotImplementedException();
+            var save = value.Double;
+
+            set_top(get_top() + 7); // TOP ← TOP − 1;
+
+            if (get_tag(0) != 3)
+                throw new NotImplementedException();
+
+            MyST(0) = save;
+            set_tag(0, 0);
         }
 
         /// <inheritdoc />
@@ -6392,11 +6481,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             throw new NotImplementedException();
         }
-
+        
         /// <inheritdoc />
         public void sahf()
         {
-            throw new NotImplementedException();
+            var mask = EflagsMask.sf | EflagsMask.zf | EflagsMask.af | EflagsMask.pf | EflagsMask.cf;
+            eflags.UInt32 = (eflags.UInt32 & (~mask)) | (ah.UInt32 & mask);
         }
 
         /// <inheritdoc />

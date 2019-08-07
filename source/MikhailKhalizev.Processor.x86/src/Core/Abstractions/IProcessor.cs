@@ -1072,6 +1072,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FDIV:FDIVP:FIDIV.html</remarks>
+        void fdiv(FpuStackRegister a, FpuStackRegister b);
+
+        /// <summary>
+        /// Divide.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FDIV:FDIVP:FIDIV.html</remarks>
         void fdivp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
