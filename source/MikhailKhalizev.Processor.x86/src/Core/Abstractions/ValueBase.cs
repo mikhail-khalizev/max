@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
                     throw new InvalidOperationException();
 
                 var mask = BinaryHelper.Mask(Bits);
-                return (uint) (UInt64Internal & mask);
+                return (uint)(UInt64Internal & mask);
             }
             set
             {
@@ -171,6 +171,20 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
                         throw new NotSupportedException($"value.Bits: {Bits}");
                 }
             }
+            set
+            {
+                switch (Bits)
+                {
+                    case 32:
+                        Int32 = BitConverter.SingleToInt32Bits((float)value);
+                        break;
+                    case 64:
+                        Int64 = BitConverter.DoubleToInt64Bits(value);
+                        break;
+                    default:
+                        throw new NotSupportedException($"value.Bits: {Bits}");
+                }
+            }
         }
 
 
@@ -204,7 +218,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public static Value operator +(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
         public static Value operator -(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
-        
+
         // Необходим для 'mov(memd_a32[gs, edi + ebx * 4], eax)'
         public static Value operator *(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 * v2.UInt64, Math.Max(v1.Bits, v1.Bits));
 
@@ -217,11 +231,11 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public static Value operator >>(ValueBase v1, int v2) => new NumericValue(v1.UInt64 >> v2, v1.Bits);
 
         public static Value operator <<(ValueBase v1, int v2) => new NumericValue(v1.UInt64 << v2, v1.Bits);
-        
+
         public static Value operator ++(ValueBase v) => ++v.UInt64;
-        
+
         public static Value operator --(ValueBase v) => --v.UInt64;
-        
+
         #endregion
 
         #region IEquatable<ValueBase>

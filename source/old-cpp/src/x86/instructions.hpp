@@ -1704,6 +1704,7 @@ inline void setnb(uint_<8> & d)
         d = 0;
 }
 
+// +
 inline void setz(uint_<8> & d)
 {
     if (zf)
@@ -1712,6 +1713,7 @@ inline void setz(uint_<8> & d)
         d = 0;
 }
 
+// +
 inline void setnz(uint_<8> & d)
 {
     if (zf == false)

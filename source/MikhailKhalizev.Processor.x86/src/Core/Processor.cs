@@ -444,7 +444,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             return new FpuStackRegisterImpl(this, num);
         }
 
-        public ref double MyST(int num)
+        internal ref double RawST(int num)
         {
             return ref st_regs[(get_top() + num) & 7];
         }
@@ -461,7 +461,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         // 0 - valid, 1 - zero, 2 - special, 3 - empty
-        private int get_tag(int num)
+        internal int get_tag(int num)
         {
             return (FPUTagWord >> (((get_top() + num) & 7) * 2)) & 3;
         }
@@ -1436,6 +1436,17 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cond)
             {
                 jmpw_func_internal(address, offset, false);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool jmpd_func_if(bool cond, Address address, int offset)
+        {
+            if (cond)
+            {
+                jmpd_func_internal(address, offset, false);
                 return true;
             }
 
@@ -2772,9 +2783,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fchs()
         {
-            if (get_tag(0) == 3)
-                throw new NotImplementedException();
-            MyST(0) = -MyST(0);
+            ST(0).Double = -ST(0).Double;
         }
 
         /// <inheritdoc />
@@ -2798,24 +2807,19 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fcom(FpuStackRegister a, FpuStackRegister b)
         {
-            if (get_tag(a.Number) == 3)
-                throw new NotImplementedException();
-            if (get_tag(b.Number) == 3)
-                throw new NotImplementedException();
-
             bool c0, c2, c3;
-            if (MyST(a.Number) < MyST(b.Number))
+            if (a.Double < b.Double)
             {
                 c0 = true;
                 c2 = c3 = false;
             }
             // ReSharper disable once CompareOfFloatsByEqualityOperator
-            else if (MyST(a.Number) == MyST(b.Number))
+            else if (a.Double == b.Double)
             {
                 c3 = true;
                 c0 = c2 = false;
             }
-            else if (MyST(a.Number) > MyST(b.Number))
+            else if (a.Double > b.Double)
             {
                 c0 = c2 = c3 = false;
             }
@@ -2834,7 +2838,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fcom(Value value)
         {
-            throw new NotImplementedException();
+            fcom(ST(0), value);
         }
 
         /// <inheritdoc />
@@ -2859,7 +2863,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fcomp(Value value)
         {
-            throw new NotImplementedException();
+            fcom(value);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -2896,11 +2901,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fdiv(FpuStackRegister a, FpuStackRegister b)
         {
-            if (get_tag(a.Number) == 3)
-                throw new NotImplementedException();
-            if (get_tag(b.Number) == 3)
-                throw new NotImplementedException();
-            MyST(a.Number) /= MyST(b.Number);
+            a.Double /= b.Double;
         }
 
         /// <inheritdoc />
@@ -3022,7 +3023,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (get_tag(0) != 3)
                 throw new NotImplementedException();
 
-            MyST(0) = save;
+            RawST(0) = save;
             set_tag(0, 0);
         }
 
@@ -3034,7 +3035,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (get_tag(0) != 3)
                 throw new NotImplementedException();
 
-            MyST(0) = 1.0;
+            RawST(0) = 1.0;
             set_tag(0, 0);
         }
 
@@ -3088,7 +3089,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (get_tag(0) != 3)
                 throw new NotImplementedException();
 
-            MyST(0) = 0;
+            RawST(0) = 0;
             set_tag(0, 1);
         }
 
@@ -3101,13 +3102,14 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fmul(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            a.Double *= b.Double;
         }
 
         /// <inheritdoc />
         public void fmulp(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            fmul(a, b);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -3264,13 +3266,14 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fsub(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            a.Double -= b.Double;
         }
 
         /// <inheritdoc />
         public void fsubp(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            fsub(a, b);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -3336,7 +3339,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fxch(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            var d = a.Double;
+            a.Double = b.Double;
+            b.Double = d;
+
+            var tag = get_tag(a.Number);
+            set_tag(a.Number, get_tag(b.Number));
+            set_tag(b.Number, tag);
         }
 
         /// <inheritdoc />
@@ -3756,7 +3765,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jbed_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            jmpd_func_if(eflags.cf || eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -3846,7 +3855,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jld(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4062,7 +4071,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void jzd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            jmpd_func_if(eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
@@ -6617,13 +6626,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void setz(Value value)
         {
-            throw new NotImplementedException();
+            value.Int32 = eflags.zf ? 1 : 0;
         }
 
         /// <inheritdoc />
         public void setnz(Value value)
         {
-            throw new NotImplementedException();
+            value.Int32 = eflags.zf ? 0 : 1;
         }
 
         /// <inheritdoc />

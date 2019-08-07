@@ -1261,6 +1261,7 @@ void fmul(uint_<64> & x)
     ST(0) *= val;
 }
 
+// +
 void fmul(int a, int b)
 {
     if (get_tag(a) == 3)
@@ -1270,12 +1271,14 @@ void fmul(int a, int b)
     ST(a) *= ST(b);
 }
 
+// +
 void fmulp(int a, int b)
 {
     fmul(a, b);
     fpu_pop();
 }
 
+// +
 void fsub(int a, int b)
 {
     if (get_tag(a) == 3)
@@ -1285,6 +1288,7 @@ void fsub(int a, int b)
     ST(a) -= ST(b);
 }
 
+// +
 void fsubp(int a, int b)
 {
     fsub(a, b);
@@ -1301,6 +1305,7 @@ void fsubr(uint_<64> & x_)
     ST(0) = x - ST(0);
 }
 
+// +
 void fcom(uint_<64> & val_)
 {
     double val = reinterpret_cast<double&>(val_);
@@ -1383,6 +1388,7 @@ void fcomp()
     fpu_pop();
 }
 
+// +
 void fcomp(uint_<64> & val)
 {
     fcom(val);
@@ -1408,6 +1414,7 @@ void ftst()
     fcom(reinterpret_cast<uint_<64>&>(val));
 }
 
+// +
 void fxch(int src_n, int dst_n)
 {
     std::swap(ST(src_n), ST(dst_n));
