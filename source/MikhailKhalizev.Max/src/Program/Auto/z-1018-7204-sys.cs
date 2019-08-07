@@ -41,17 +41,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7246, 2); jmpd(0x1018_725c, 0x14); goto l_0x1018_725c; /* jmp 0x1018725c */
         l_0x1018_7248:
             ii(0x1018_7248, 2); fldl2e();                               /* fldl2e */
-            ii(0x1018_724a, 2); fmulp(1 /* st1 */, 0 /* st0 */);        /* fmulp st1, st0 */
-            ii(0x1018_724c, 2); fld(0 /* st0 */);                       /* fld st0 */
+            ii(0x1018_724a, 2); fmulp(ST(1), ST(0));                    /* fmulp st1, st0 */
+            ii(0x1018_724c, 2); fld(ST(0));                             /* fld st0 */
             ii(0x1018_724e, 2); frndint();                              /* frndint */
-            ii(0x1018_7250, 2); fxch(0 /* st0 */, 1 /* st1 */);         /* fxch st0, st1 */
-            ii(0x1018_7252, 2); fsub(0 /* st0 */, 1 /* st1 */);         /* fsub st0, st1 */
+            ii(0x1018_7250, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */
+            ii(0x1018_7252, 2); fsub(ST(0), ST(1));                     /* fsub st0, st1 */
             ii(0x1018_7254, 2); f2xm1();                                /* f2xm1 */
             ii(0x1018_7256, 2); fld1();                                 /* fld1 */
-            ii(0x1018_7258, 2); faddp(1 /* st1 */, 0 /* st0 */);        /* faddp st1, st0 */
+            ii(0x1018_7258, 2); faddp(ST(1), ST(0));                    /* faddp st1, st0 */
             ii(0x1018_725a, 2); fscale();                               /* fscale */
         l_0x1018_725c:
-            ii(0x1018_725c, 2); fstp(1 /* st1 */);                      /* fstp st1 */
+            ii(0x1018_725c, 2); fstp(ST(1));                            /* fstp st1 */
             ii(0x1018_725e, 2); mov(al, 0);                             /* mov al, 0x0 */
             ii(0x1018_7260, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1018_7262, 1); popd(ebp);                              /* pop ebp */

@@ -159,6 +159,8 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <seealso cref="eip"/>
         Address CurrentInstructionAddress { get; set; }
 
+        FpuStackRegister ST(int num);
+
         #endregion
 
         #region Memory
@@ -950,7 +952,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Make Stack Frame for Procedure Parameters.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ENTER.html</remarks>
-        void enterw(int allocSize, int nestingLevel);
+        void enterw(int size, int nestingLevel);
 
         /// <summary>
         /// Extract Packed Floating-Point Values.
@@ -980,7 +982,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Add.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FADD:FADDP:FIADD.html</remarks>
-        void faddp(int a, int b);
+        void faddp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Load Binary Coded Decimal.
@@ -1040,7 +1042,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Compare Floating Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FCOM:FCOMP:FCOMPP.html</remarks>
-        void fcomp(int a, int b);
+        void fcomp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Compare Floating Point Values.
@@ -1070,7 +1072,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FDIV:FDIVP:FIDIV.html</remarks>
-        void fdivp(int a, int b);
+        void fdivp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Reverse Divide.
@@ -1082,7 +1084,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Reverse Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FDIVR:FDIVRP:FIDIVR.html</remarks>
-        void fdivrp(int a, int b);
+        void fdivrp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Free Floating-Point Register.
@@ -1244,13 +1246,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FMUL:FMULP:FIMUL.html</remarks>
-        void fmul(int a, int b);
+        void fmul(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FMUL:FMULP:FIMUL.html</remarks>
-        void fmulp(int a, int b);
+        void fmulp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Clear Exceptions.
@@ -1397,13 +1399,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSUB:FSUBP:FISUB.html</remarks>
-        void fsub(int a, int b);
+        void fsub(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSUB:FSUBP:FISUB.html</remarks>
-        void fsubp(int a, int b);
+        void fsubp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Reverse Subtract.
@@ -1469,7 +1471,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Exchange Register Contents.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FXCH.html</remarks>
-        void fxch(int a, int b);
+        void fxch(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
         /// Restore x87 FPU, MMX, XMM, and MXCSR State.
@@ -1717,7 +1719,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        int jmpd_abs_switch(Value address);
+        Address jmpd_abs_switch(Value address);
 
         /// <summary>
         /// Call Procedure.

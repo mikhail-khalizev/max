@@ -33,9 +33,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_828e, 3); fild(memw_a32[ss, ebp - 0x8]);          /* fild word [ebp-0x8] */
             ii(0x100d_8291, 3); fdiv(memq_a32[ss, ebp - 0x1c]);         /* fdiv qword [ebp-0x1c] */
             ii(0x100d_8294, 6); fld(memq_a32[ds, 0x101b_5d98]);         /* fld qword [0x101b5d98] */
-            ii(0x100d_829a, 2); fxch(0 /* st0 */, 1 /* st1 */);         /* fxch st0, st1 */
+            ii(0x100d_829a, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */
             ii(0x100d_829c, 5); calld(/* sys */ 0x1016_c4a0, 0x941ff);  /* call 0x1016c4a0 */
-            ii(0x100d_82a1, 2); fmulp(1 /* st1 */, 0 /* st0 */);        /* fmulp st1, st0 */
+            ii(0x100d_82a1, 2); fmulp(ST(1), ST(0));                    /* fmulp st1, st0 */
             ii(0x100d_82a3, 5); calld(Definitions.sys_round, 0x8ddd6);  /* call 0x1016607e */
             ii(0x100d_82a8, 3); fistp(memd_a32[ss, ebp - 0x14]);        /* fistp dword [ebp-0x14] */
             ii(0x100d_82ab, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
@@ -54,9 +54,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_82d1, 3); fild(memw_a32[ss, ebp - 0x8]);          /* fild word [ebp-0x8] */
             ii(0x100d_82d4, 3); fdivr(memq_a32[ss, ebp - 0x1c]);        /* fdivr qword [ebp-0x1c] */
             ii(0x100d_82d7, 6); fld(memq_a32[ds, 0x101b_5d98]);         /* fld qword [0x101b5d98] */
-            ii(0x100d_82dd, 2); fxch(0 /* st0 */, 1 /* st1 */);         /* fxch st0, st1 */
+            ii(0x100d_82dd, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */
             ii(0x100d_82df, 5); calld(/* sys */ 0x1016_c4a0, 0x941bc);  /* call 0x1016c4a0 */
-            ii(0x100d_82e4, 2); fmulp(1 /* st1 */, 0 /* st0 */);        /* fmulp st1, st0 */
+            ii(0x100d_82e4, 2); fmulp(ST(1), ST(0));                    /* fmulp st1, st0 */
             ii(0x100d_82e6, 5); calld(Definitions.sys_round, 0x8dd93);  /* call 0x1016607e */
             ii(0x100d_82eb, 3); fistp(memd_a32[ss, ebp - 0x14]);        /* fistp dword [ebp-0x14] */
             ii(0x100d_82ee, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */

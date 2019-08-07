@@ -40,12 +40,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_bf1f, 7); movsx(eax, memw_a32[ds, 0x101c_fba4]);  /* movsx eax, word [0x101cfba4] */
             ii(0x1016_bf26, 6); fld(memq_a32[ds, 0x101b_de70]);         /* fld qword [0x101bde70] */
             ii(0x1016_bf2c, 3); fild(memd_a32[ss, esp]);                /* fild dword [esp] */
-            ii(0x1016_bf2f, 2); fmul(0 /* st0 */, 1 /* st1 */);         /* fmul st0, st1 */
+            ii(0x1016_bf2f, 2); fmul(ST(0), ST(1));                     /* fmul st0, st1 */
             ii(0x1016_bf31, 4); mov(memd_a32[ss, esp + 0x4], eax);      /* mov [esp+0x4], eax */
             ii(0x1016_bf35, 5); calld(Definitions.sys_round, -0x5ebc);  /* call 0x1016607e */
             ii(0x1016_bf3a, 3); fistp(memd_a32[ss, esp]);               /* fistp dword [esp] */
             ii(0x1016_bf3d, 4); fild(memd_a32[ss, esp + 0x4]);          /* fild dword [esp+0x4] */
-            ii(0x1016_bf41, 2); fmulp(1 /* st1 */, 0 /* st0 */);        /* fmulp st1, st0 */
+            ii(0x1016_bf41, 2); fmulp(ST(1), ST(0));                    /* fmulp st1, st0 */
             ii(0x1016_bf43, 6); mov(esi, memd_a32[ds, 0x101b_e85c]);    /* mov esi, [0x101be85c] */
             ii(0x1016_bf49, 5); calld(Definitions.sys_round, -0x5ed0);  /* call 0x1016607e */
             ii(0x1016_bf4e, 4); fistp(memd_a32[ss, esp + 0x4]);         /* fistp dword [esp+0x4] */

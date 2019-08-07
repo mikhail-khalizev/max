@@ -1,3 +1,5 @@
+using System;
+
 namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 {
     public abstract class Value : ValueBase

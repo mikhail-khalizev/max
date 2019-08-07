@@ -157,6 +157,22 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             set => UInt64 = (ulong)value;
         }
 
+        public double Double
+        {
+            get
+            {
+                switch (Bits)
+                {
+                    case 32:
+                        return BitConverter.Int32BitsToSingle(Int32);
+                    case 64:
+                        return BitConverter.Int64BitsToDouble(Int64);
+                    default:
+                        throw new NotSupportedException($"value.Bits: {Bits}");
+                }
+            }
+        }
+
 
         public bool IsNegative => IsBitSet(Bits - 1);
         public bool IsPositive => !IsNegative;

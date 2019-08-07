@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public IEnumerable<Interval<T>> Subtract(IEnumerable<Interval<T>> subs)
         {
-            var result = new List<Interval<T>>();
+            var result = new List<Interval<T>> { this };
             foreach (var interval in subs)
             {
                 result = result.SelectMany(x => x.Subtract(interval)).ToList();

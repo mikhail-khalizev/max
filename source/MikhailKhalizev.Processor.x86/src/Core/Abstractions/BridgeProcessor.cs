@@ -278,6 +278,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         #region Memory
 
         /// <inheritdoc />
+        public FpuStackRegister ST(int num)
+        {
+            return Implementation.ST(num);
+        }
+
+        /// <inheritdoc />
         public IMemory Memory => Implementation.Memory;
 
         /// <inheritdoc />
@@ -1072,9 +1078,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void enterw(int allocSize, int nestingLevel)
+        public void enterw(int size, int nestingLevel)
         {
-            Implementation.enterw(allocSize, nestingLevel);
+            Implementation.enterw(size, nestingLevel);
         }
 
         /// <inheritdoc />
@@ -1102,7 +1108,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void faddp(int a, int b)
+        public void faddp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.faddp(a, b);
         }
@@ -1162,7 +1168,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fcomp(int a, int b)
+        public void fcomp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fcomp(a, b);
         }
@@ -1192,7 +1198,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fdivp(int a, int b)
+        public void fdivp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fdivp(a, b);
         }
@@ -1204,7 +1210,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fdivrp(int a, int b)
+        public void fdivrp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fdivrp(a, b);
         }
@@ -1366,13 +1372,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fmul(int a, int b)
+        public void fmul(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fmul(a, b);
         }
 
         /// <inheritdoc />
-        public void fmulp(int a, int b)
+        public void fmulp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fmulp(a, b);
         }
@@ -1522,13 +1528,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fsub(int a, int b)
+        public void fsub(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fsub(a, b);
         }
 
         /// <inheritdoc />
-        public void fsubp(int a, int b)
+        public void fsubp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fsubp(a, b);
         }
@@ -1594,7 +1600,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fxch(int a, int b)
+        public void fxch(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fxch(a, b);
         }
@@ -1840,7 +1846,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public int jmpd_abs_switch(Value address)
+        public Address jmpd_abs_switch(Value address)
         {
             return Implementation.jmpd_abs_switch(address);
         }

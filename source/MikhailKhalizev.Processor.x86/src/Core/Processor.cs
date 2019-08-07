@@ -437,12 +437,18 @@ namespace MikhailKhalizev.Processor.x86.Core
         private int FPULastInstructionOpcode;
         private readonly double[] st_regs = new double[8];
         
+        
+        /// <inheritdoc />
+        public FpuStackRegister ST(int num)
+        {
+            return new FpuStackRegisterImpl(this, num);
+        }
 
-        private ref double ST(int num)
+        public ref double MyST(int num)
         {
             return ref st_regs[(get_top() + num) & 7];
         }
-
+        
         private int get_top()
         {
             return ((FPUStatusWord >> 11) & 7);
@@ -2673,7 +2679,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void enterw(int allocSize, int nestingLevel)
+        public void enterw(int size, int nestingLevel)
         {
             if (nestingLevel != 0)
                 throw new NotImplementedException();
@@ -2683,12 +2689,12 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (ss.db)
             {
                 ebp = esp;
-                esp -= allocSize;
+                esp -= size;
             }
             else
             {
                 bp = sp;
-                sp -= allocSize;
+                sp -= size;
             }
         }
 
@@ -2717,7 +2723,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void faddp(int a, int b)
+        public void faddp(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
@@ -2777,7 +2783,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fcomp(int a, int b)
+        public void fcomp(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
@@ -2807,17 +2813,17 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fdiv(int a, int b)
+        public void fdiv(FpuStackRegister a, FpuStackRegister b)
         {
-            if (get_tag(a) == 3)
+            if (get_tag(a.Number) == 3)
                 throw new NotImplementedException();
-            if (get_tag(b) == 3)
+            if (get_tag(b.Number) == 3)
                 throw new NotImplementedException();
-            ST(a) /= ST(b);
+            MyST(a.Number) /= MyST(b.Number);
         }
 
         /// <inheritdoc />
-        public void fdivp(int a, int b)
+        public void fdivp(FpuStackRegister a, FpuStackRegister b)
         {
             fdiv(a, b);
             fpu_pop();
@@ -2830,7 +2836,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fdivrp(int a, int b)
+        public void fdivrp(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
@@ -2939,7 +2945,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (get_tag(0) != 3)
                 throw new NotImplementedException();
 
-            ST(0) = 1.0;
+            MyST(0) = 1.0;
             set_tag(0, 0);
         }
 
@@ -2993,7 +2999,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (get_tag(0) != 3)
                 throw new NotImplementedException();
 
-            ST(0) = 0;
+            MyST(0) = 0;
             set_tag(0, 1);
         }
 
@@ -3004,13 +3010,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fmul(int a, int b)
+        public void fmul(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fmulp(int a, int b)
+        public void fmulp(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
@@ -3167,13 +3173,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fsub(int a, int b)
+        public void fsub(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void fsubp(int a, int b)
+        public void fsubp(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
@@ -3239,7 +3245,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fxch(int a, int b)
+        public void fxch(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
         }
@@ -3550,7 +3556,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public int jmpd_abs_switch(Value address)
+        public Address jmpd_abs_switch(Value address)
         {
             throw new NotImplementedException();
         }

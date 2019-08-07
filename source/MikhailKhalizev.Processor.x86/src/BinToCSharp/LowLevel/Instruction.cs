@@ -261,8 +261,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     case ud_type.UD_OP_REG:
                         if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
-                            sb.Append(
-                                $"{op.@base - ud_type.UD_R_ST0} /* {syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]} */");
+                            sb.Append($"ST({op.@base - ud_type.UD_R_ST0})");
                         else
                             sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
                         break;

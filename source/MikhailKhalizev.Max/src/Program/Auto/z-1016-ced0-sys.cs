@@ -106,7 +106,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_cfe3, 6); fadd(memq_a32[ds, 0x101b_2e44]);        /* fadd qword [0x101b2e44] */
             ii(0x1016_cfe9, 6); fmul(memq_a32[ds, 0x101b_2e34]);        /* fmul qword [0x101b2e34] */
             ii(0x1016_cfef, 2); fld1();                                 /* fld1 */
-            ii(0x1016_cff1, 2); faddp(1 /* st1 */, 0 /* st0 */);        /* faddp st1, st0 */
+            ii(0x1016_cff1, 2); faddp(ST(1), ST(0));                    /* faddp st1, st0 */
             ii(0x1016_cff3, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1016_cff5, 6); fmul(memq_a32[ds, 0x101b_2e3c]);        /* fmul qword [0x101b2e3c] */
             ii(0x1016_cffb, 2); mov(dl, al);                            /* mov dl, al */

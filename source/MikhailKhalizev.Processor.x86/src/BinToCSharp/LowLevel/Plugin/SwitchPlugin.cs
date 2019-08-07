@@ -333,13 +333,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             Engine.code.Insert(new Instruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
 
-            cmd.WriteCmd = WriteCmd;
+            var copy_addr_area_begin = addr_area_begin;
+            var copy_size_of_addr_area = size_of_addr_area;
+            cmd.WriteCmd = (engine, dm, index, func, offset) => WriteCmd(copy_addr_area_begin, copy_size_of_addr_area, engine, dm, index, func, offset);
         }
 
-        private string WriteCmd(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
+        private static string WriteCmd(
+            Address addr_area_begin, int size_of_addr_area,
+            Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
         {
             var addrsInterval = Interval.From(addr_area_begin, addr_area_begin + size_of_addr_area);
-            var methodInterval = Interval.From(dm.MethodInfo.Address + offset, dm.MethodInfo.Address + offset + dm.RawBytes.Length / 2);
+            var methodInterval = Interval.From(dm.MethodInfo.Address + offset, dm.MethodInfo.Address + offset + dm.RawBytes.Length);
 
             var exists = Enumerable.Empty<Interval<Address>>().Append(methodInterval);
             if (dm.MethodInfo.ExtraRaw != null)
@@ -350,17 +354,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 if (dm.MethodInfo.ExtraRaw == null)
                     dm.MethodInfo.ExtraRaw = new Dictionary<Address, string>();
                 
-                var raw = Engine.Memory.ReadAll(interval.Begin, interval.Begin - interval.End);
+                var raw = engine.Memory.ReadAll(interval.Begin, interval.End - interval.Begin);
                 var rawString = HexHelper.ToString(raw, o => o.RemoveHexPrefix().SetGroupSize(0));
+                
+                if (dm.MethodInfo.Guid == Guid.Parse("4dc4a774-9182-4652-9a94-16c214c34f44"))
+                {
+                    var debug = 0;
+                }
 
-                if (methodInterval.Contains(interval)) // Alwaus false.
+                if (methodInterval.Contains(interval)) // Always false.
                     dm.MethodInfo.ExtraRaw[interval.Begin - offset] = rawString;
                 else
                     dm.MethodInfo.ExtraRaw[interval.Begin] = rawString;
             }
 
 
-            Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var curJmp);
+            engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var curJmp);
             if (curJmp == null)
                 throw new NotImplementedException();
 

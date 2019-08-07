@@ -13,8 +13,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_9bbb, 2); fninit();                               /* fninit */
             ii(0x1019_9bbd, 2); fld1();                                 /* fld1 */
             ii(0x1019_9bbf, 2); fldz();                                 /* fldz */
-            ii(0x1019_9bc1, 2); fdivp(1 /* st1 */, 0 /* st0 */);        /* fdivp st1, st0 */
-            ii(0x1019_9bc3, 2); fld(0 /* st0 */);                       /* fld st0 */
+            ii(0x1019_9bc1, 2); fdivp(ST(1), ST(0));                    /* fdivp st1, st0 */
+            ii(0x1019_9bc3, 2); fld(ST(0));                             /* fld st0 */
             ii(0x1019_9bc5, 2); fchs();                                 /* fchs */
             ii(0x1019_9bc7, 2); fcompp();                               /* fcompp */
             ii(0x1019_9bc9, 2); fnstsw(ax);                             /* fnstsw ax */
