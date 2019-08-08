@@ -31,8 +31,8 @@ namespace MikhailKhalizev.Max.Program
         l_0x15_8a07:
             ii(0x15_8a07, 3); mov(ax, 0);                               /* mov ax, 0x0 */
             ii(0x15_8a0a, 3); jmpw(0x15_8a86, 0x79); goto l_0x15_8a86;  /* jmp 0x8a86 */
-        //  ii(0x15_8a0d, 3); Недостижимый код.
-l_0x15_8a10:
+        //    ii(0x15_8a0d, 3); jmpw(0x15_8a2f, 0x1f); goto l_0x15_8a2f;  /* jmp 0x8a2f */
+        l_0x15_8a10:
             ii(0x15_8a10, 3); sub(ax, 0x34);                            /* sub ax, 0x34 */
             ii(0x15_8a13, 2); if(jgew(0x15_8a18, 0x3)) goto l_0x15_8a18; /* jge 0x8a18 */
             ii(0x15_8a15, 3); jmpw(0x15_8a07, -0x11); goto l_0x15_8a07; /* jmp 0x8a07 */

@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_f1d9, 1); leavew();                                 /* leave */
             ii(0x13_f1da, 1); retfw(); return;                          /* retf */
         //  ii(0x13_f1db, 1); Недостижимый код.
-l_0x13_f1dc:
+        l_0x13_f1dc:
             ii(0x13_f1dc, 3); mov(ax, memw_a16[ss, bp + 0x6]);          /* mov ax, [bp+0x6] */
             ii(0x13_f1df, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x13_f1e2, 5); mov(memw_a16[ss, bp - 0x6], 0x700);       /* mov word [bp-0x6], 0x700 */

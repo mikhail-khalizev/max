@@ -92,8 +92,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_c631, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x13_c634, 3); mov(memw_a16[ss, bp - 0x6], dx);          /* mov [bp-0x6], dx */
             ii(0x13_c637, 2); jmpw(0x13_c675, 0x3c); goto l_0x13_c675;  /* jmp 0xc675 */
-        //  ii(0x13_c639, 1); Недостижимый код.
-l_0x13_c63a:
+        //    ii(0x13_c639, 1); nop();                                    /* nop */
+        l_0x13_c63a:
             ii(0x13_c63a, 3); mov(ax, memw_a16[ss, bp + 0x6]);          /* mov ax, [bp+0x6] */
             ii(0x13_c63d, 3); mov(dx, memw_a16[ss, bp + 0x8]);          /* mov dx, [bp+0x8] */
             ii(0x13_c640, 3); add(ax, 0);                               /* add ax, 0x0 */

@@ -32,11 +32,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_cff7, 3); callw(0x13_cf26, -0xd4);                  /* call 0xcf26 */
             ii(0x13_cffa, 2); popd(ebx);                                /* pop ebx */
             ii(0x13_cffc, 2); or(ax, ax);                               /* or ax, ax */
-            ii(0x13_cffe, 4); jnzw_func(0x13_d0ab, 0xa9);               /* jnz 0xd0ab */
-            ii(0x13_d002, 3); jmpw_func(0x13_d0b0, 0xab); return;       /* jmp 0xd0b0 */
+            ii(0x13_cffe, 4); if(jnzw_func(0x13_d0ab, 0xa9)) return;    /* jnz 0xd0ab */
+            ii(0x13_d002, 3); if(jmpw_func(0x13_d0b0, 0xab)) return;    /* jmp 0xd0b0 */
         l_0x13_d005:
             ii(0x13_d005, 2); popd(ebx);                                /* pop ebx */
-            ii(0x13_d007, 5); jmpw_a16_far_ind(cs, -0x7984); return;    /* jmp far word [cs:0x867c] */
+            ii(0x13_d007, 5); if(jmpw_a16_far_ind(cs, -0x7984)) return; /* jmp far word [cs:0x867c] */
         }
     }
 }

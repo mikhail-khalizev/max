@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -29,15 +30,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_6d9d, 5); mov(memw_a16[ss, bp - 0x7e], 0x451);      /* mov word [bp-0x7e], 0x451 */
             ii(0x13_6da2, 3); mov(memw_a16[ss, bp - 0x7c], ds);         /* mov [bp-0x7c], ds */
             ii(0x13_6da5, 2); jmpw(0x13_6db0, 0x9); goto l_0x13_6db0;   /* jmp 0x6db0 */
-        //  ii(0x13_6da7, 1); Недостижимый код.
-l_0x13_6da8:
+        //    ii(0x13_6da7, 1); nop();                                    /* nop */
+        l_0x13_6da8:
             ii(0x13_6da8, 3); mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x13_6dab, 1); popw(ds);                                 /* pop ds */
             ii(0x13_6dac, 1); popw(si);                                 /* pop si */
             ii(0x13_6dad, 1); leavew();                                 /* leave */
             ii(0x13_6dae, 1); retfw(); return;                          /* retf */
         //  ii(0x13_6daf, 1); Недостижимый код.
-l_0x13_6db0:
+        l_0x13_6db0:
             ii(0x13_6db0, 3); mov(ax, memw_a16[ss, bp - 0x7e]);         /* mov ax, [bp-0x7e] */
             ii(0x13_6db3, 3); mov(dx, memw_a16[ss, bp - 0x7c]);         /* mov dx, [bp-0x7c] */
             ii(0x13_6db6, 3); mov(memw_a16[ss, bp - 0x66], ax);         /* mov [bp-0x66], ax */
@@ -121,8 +122,8 @@ l_0x13_6db0:
             ii(0x13_6e5b, 3); mov(memw_a16[ss, bp - 0x4], ax);          /* mov [bp-0x4], ax */
             ii(0x13_6e5e, 3); mov(memw_a16[ss, bp - 0x2], ss);          /* mov [bp-0x2], ss */
             ii(0x13_6e61, 2); jmpw(0x13_6e67, 0x4); goto l_0x13_6e67;   /* jmp 0x6e67 */
-        //  ii(0x13_6e63, 1); Недостижимый код.
-l_0x13_6e64:
+        //    ii(0x13_6e63, 1); nop();                                    /* nop */
+        l_0x13_6e64:
             ii(0x13_6e64, 3); inc(memw_a16[ss, bp - 0x4]);              /* inc word [bp-0x4] */
         l_0x13_6e67:
             ii(0x13_6e67, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
@@ -134,15 +135,15 @@ l_0x13_6e64:
             ii(0x13_6e76, 5); test(memb_a16[ds, bx + 0x1ca1], 0x8);     /* test byte [bx+0x1ca1], 0x8 */
             ii(0x13_6e7b, 2); if(jzw(0x13_6e80, 0x3)) goto l_0x13_6e80; /* jz 0x6e80 */
             ii(0x13_6e7d, 2); jmpw(0x13_6e64, -0x1b); goto l_0x13_6e64; /* jmp 0x6e64 */
-        //  ii(0x13_6e7f, 1); Недостижимый код.
-l_0x13_6e80:
+        //    ii(0x13_6e7f, 1); nop();                                    /* nop */
+        l_0x13_6e80:
             ii(0x13_6e80, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x13_6e83, 2); mov(dx, es);                              /* mov dx, es */
             ii(0x13_6e85, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x13_6e88, 3); mov(memw_a16[ss, bp - 0x6], dx);          /* mov [bp-0x6], dx */
             ii(0x13_6e8b, 2); jmpw(0x13_6e91, 0x4); goto l_0x13_6e91;   /* jmp 0x6e91 */
-        //  ii(0x13_6e8d, 1); Недостижимый код.
-l_0x13_6e8e:
+        //    ii(0x13_6e8d, 1); nop();                                    /* nop */
+        l_0x13_6e8e:
             ii(0x13_6e8e, 3); inc(memw_a16[ss, bp - 0x8]);              /* inc word [bp-0x8] */
         l_0x13_6e91:
             ii(0x13_6e91, 3); les(bx, ss, bp - 0x8);                    /* les bx, [bp-0x8] */
@@ -184,8 +185,8 @@ l_0x13_6e8e:
             ii(0x13_6ee7, 2); if(jnzw(0x13_6eec, 0x3)) goto l_0x13_6eec; /* jnz 0x6eec */
         l_0x13_6ee9:
             ii(0x13_6ee9, 2); jmpw(0x13_6ec4, -0x27); goto l_0x13_6ec4; /* jmp 0x6ec4 */
-        //  ii(0x13_6eeb, 1); Недостижимый код.
-l_0x13_6eec:
+        //    ii(0x13_6eeb, 1); nop();                                    /* nop */
+        l_0x13_6eec:
             ii(0x13_6eec, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x13_6eef, 3); mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */
             ii(0x13_6ef2, 3); cmp(memw_a16[ss, bp - 0x8], ax);          /* cmp [bp-0x8], ax */
@@ -193,8 +194,8 @@ l_0x13_6eec:
             ii(0x13_6ef7, 3); cmp(memw_a16[ss, bp - 0x6], dx);          /* cmp [bp-0x6], dx */
             ii(0x13_6efa, 2); if(jnzw(0x13_6f00, 0x4)) goto l_0x13_6f00; /* jnz 0x6f00 */
             ii(0x13_6efc, 3); jmpw(0x13_6e28, -0xd7); goto l_0x13_6e28; /* jmp 0x6e28 */
-        //  ii(0x13_6eff, 1); Недостижимый код.
-l_0x13_6f00:
+        //    ii(0x13_6eff, 1); nop();                                    /* nop */
+        l_0x13_6f00:
             ii(0x13_6f00, 5); mov(memw_a16[ss, bp - 0x62], 0xa);        /* mov word [bp-0x62], 0xa */
         l_0x13_6f05:
             ii(0x13_6f05, 3); mov(bx, memw_a16[ss, bp - 0x62]);         /* mov bx, [bp-0x62] */
@@ -220,16 +221,16 @@ l_0x13_6f00:
             ii(0x13_6f31, 3); dec(memw_a16[ss, bp - 0x62]);             /* dec word [bp-0x62] */
             ii(0x13_6f34, 2); if(jnsw(0x13_6f3a, 0x4)) goto l_0x13_6f3a; /* jns 0x6f3a */
             ii(0x13_6f36, 3); jmpw(0x13_6fea, 0xb1); goto l_0x13_6fea;  /* jmp 0x6fea */
-        //  ii(0x13_6f39, 1); Недостижимый код.
-l_0x13_6f3a:
+        //    ii(0x13_6f39, 1); nop();                                    /* nop */
+        l_0x13_6f3a:
             ii(0x13_6f3a, 2); jmpw(0x13_6f05, -0x37); goto l_0x13_6f05; /* jmp 0x6f05 */
         l_0x13_6f3c:
             ii(0x13_6f3c, 3); mov(bx, memw_a16[ss, bp - 0x62]);         /* mov bx, [bp-0x62] */
             ii(0x13_6f3f, 4); mov(al, memb_a16[ds, bx + 0x472]);        /* mov al, [bx+0x472] */
             ii(0x13_6f43, 1); cbw();                                    /* cbw */
             ii(0x13_6f44, 3); jmpw(0x13_6fd4, 0x8d); goto l_0x13_6fd4;  /* jmp 0x6fd4 */
-        //  ii(0x13_6f47, 1); Недостижимый код.
-l_0x13_6f48:
+        //    ii(0x13_6f47, 1); nop();                                    /* nop */
+        l_0x13_6f48:
             ii(0x13_6f48, 3); mov(bx, memw_a16[ss, bp - 0x62]);         /* mov bx, [bp-0x62] */
             ii(0x13_6f4b, 2); shl(bx, 0x1);                             /* shl bx, 1 */
             ii(0x13_6f4d, 4); mov(ax, memw_a16[ds, bx + 0x47e]);        /* mov ax, [bx+0x47e] */
@@ -251,8 +252,8 @@ l_0x13_6f48:
             ii(0x13_6f7a, 3); mov(al, memb_a16[ss, bp - 0x62]);         /* mov al, [bp-0x62] */
             ii(0x13_6f7d, 2); sub(al, 0x20);                            /* sub al, 0x20 */
             ii(0x13_6f7f, 2); jmpw(0x13_6f85, 0x4); goto l_0x13_6f85;   /* jmp 0x6f85 */
-        //  ii(0x13_6f81, 1); Недостижимый код.
-l_0x13_6f82:
+        //    ii(0x13_6f81, 1); nop();                                    /* nop */
+        l_0x13_6f82:
             ii(0x13_6f82, 3); mov(al, memb_a16[ss, bp - 0x62]);         /* mov al, [bp-0x62] */
         l_0x13_6f85:
             ii(0x13_6f85, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
@@ -263,8 +264,8 @@ l_0x13_6f82:
             ii(0x13_6f90, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
             ii(0x13_6f93, 4); mov(memb_a16[es, bx], 0);                 /* mov byte [es:bx], 0x0 */
             ii(0x13_6f97, 2); jmpw(0x13_6fea, 0x51); goto l_0x13_6fea;  /* jmp 0x6fea */
-        //  ii(0x13_6f99, 1); Недостижимый код.
-l_0x13_6f9a:
+        //    ii(0x13_6f99, 1); nop();                                    /* nop */
+        l_0x13_6f9a:
             ii(0x13_6f9a, 3); pushw(memw_a16[ss, bp - 0x6]);            /* push word [bp-0x6] */
             ii(0x13_6f9d, 3); pushw(memw_a16[ss, bp - 0x8]);            /* push word [bp-0x8] */
             ii(0x13_6fa0, 1); nop();                                    /* nop */
@@ -276,8 +277,8 @@ l_0x13_6f9a:
             ii(0x13_6fae, 2); mov(memw_a16[ds, bx], ax);                /* mov [bx], ax */
             ii(0x13_6fb0, 3); mov(memw_a16[ds, bx + 0x2], dx);          /* mov [bx+0x2], dx */
             ii(0x13_6fb3, 2); jmpw(0x13_6fea, 0x35); goto l_0x13_6fea;  /* jmp 0x6fea */
-        //  ii(0x13_6fb5, 1); Недостижимый код.
-l_0x13_6fb6:
+        //    ii(0x13_6fb5, 1); nop();                                    /* nop */
+        l_0x13_6fb6:
             ii(0x13_6fb6, 3); mov(bx, memw_a16[ss, bp - 0x62]);         /* mov bx, [bp-0x62] */
             ii(0x13_6fb9, 2); shl(bx, 0x1);                             /* shl bx, 1 */
             ii(0x13_6fbb, 4); mov(bx, memw_a16[ds, bx + 0x47e]);        /* mov bx, [bx+0x47e] */
@@ -290,8 +291,8 @@ l_0x13_6fb6:
             ii(0x13_6fcd, 3); mov(memb_a16[ds, bx], 0);                 /* mov byte [bx], 0x0 */
         l_0x13_6fd0:
             ii(0x13_6fd0, 2); jmpw(0x13_6fea, 0x18); goto l_0x13_6fea;  /* jmp 0x6fea */
-        //  ii(0x13_6fd2, 2); Недостижимый код.
-l_0x13_6fd4:
+        //    ii(0x13_6fd2, 2); jmpw(0x13_6fea, 0x16); goto l_0x13_6fea;  /* jmp 0x6fea */
+        l_0x13_6fd4:
             ii(0x13_6fd4, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x13_6fd6, 2); if(jzw(0x13_6fc4, -0x14)) goto l_0x13_6fc4; /* jz 0x6fc4 */
             ii(0x13_6fd8, 1); dec(ax);                                  /* dec ax */
@@ -305,11 +306,11 @@ l_0x13_6fd4:
             ii(0x13_6fe4, 3); jmpw(0x13_6f48, -0x9f); goto l_0x13_6f48; /* jmp 0x6f48 */
         l_0x13_6fe7:
             ii(0x13_6fe7, 2); jmpw(0x13_6fea, 0x1); goto l_0x13_6fea;   /* jmp 0x6fea */
-        //  ii(0x13_6fe9, 1); Недостижимый код.
-l_0x13_6fea:
+        //    ii(0x13_6fe9, 1); nop();                                    /* nop */
+        l_0x13_6fea:
             ii(0x13_6fea, 3); jmpw(0x13_6e28, -0x1c5); goto l_0x13_6e28; /* jmp 0x6e28 */
-        //  ii(0x13_6fed, 1); Недостижимый код.
-l_0x13_6fee:
+        //    ii(0x13_6fed, 1); nop();                                    /* nop */
+        l_0x13_6fee:
             ii(0x13_6fee, 3); pushw(memw_a16[ss, bp - 0x5c]);           /* push word [bp-0x5c] */
             ii(0x13_6ff1, 1); nop();                                    /* nop */
             ii(0x13_6ff2, 1); pushw(cs);                                /* push cs */
@@ -334,8 +335,8 @@ l_0x13_6fee:
             ii(0x13_701b, 3); mov(memw_a16[ss, bp - 0x4], ax);          /* mov [bp-0x4], ax */
             ii(0x13_701e, 3); mov(memw_a16[ss, bp - 0x2], ss);          /* mov [bp-0x2], ss */
             ii(0x13_7021, 2); jmpw(0x13_7027, 0x4); goto l_0x13_7027;   /* jmp 0x7027 */
-        //  ii(0x13_7023, 1); Недостижимый код.
-l_0x13_7024:
+        //    ii(0x13_7023, 1); nop();                                    /* nop */
+        l_0x13_7024:
             ii(0x13_7024, 3); inc(memw_a16[ss, bp - 0x4]);              /* inc word [bp-0x4] */
         l_0x13_7027:
             ii(0x13_7027, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
@@ -347,15 +348,15 @@ l_0x13_7024:
             ii(0x13_7036, 5); test(memb_a16[ds, bx + 0x1ca1], 0x8);     /* test byte [bx+0x1ca1], 0x8 */
             ii(0x13_703b, 2); if(jzw(0x13_7040, 0x3)) goto l_0x13_7040; /* jz 0x7040 */
             ii(0x13_703d, 2); jmpw(0x13_7024, -0x1b); goto l_0x13_7024; /* jmp 0x7024 */
-        //  ii(0x13_703f, 1); Недостижимый код.
-l_0x13_7040:
+        //    ii(0x13_703f, 1); nop();                                    /* nop */
+        l_0x13_7040:
             ii(0x13_7040, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x13_7043, 2); mov(dx, es);                              /* mov dx, es */
             ii(0x13_7045, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x13_7048, 3); mov(memw_a16[ss, bp - 0x6], dx);          /* mov [bp-0x6], dx */
             ii(0x13_704b, 2); jmpw(0x13_7051, 0x4); goto l_0x13_7051;   /* jmp 0x7051 */
-        //  ii(0x13_704d, 1); Недостижимый код.
-l_0x13_704e:
+        //    ii(0x13_704d, 1); nop();                                    /* nop */
+        l_0x13_704e:
             ii(0x13_704e, 3); inc(memw_a16[ss, bp - 0x8]);              /* inc word [bp-0x8] */
         l_0x13_7051:
             ii(0x13_7051, 3); les(bx, ss, bp - 0x8);                    /* les bx, [bp-0x8] */
@@ -396,8 +397,8 @@ l_0x13_704e:
             ii(0x13_709f, 3); cmp(memw_a16[ss, bp - 0x6], dx);          /* cmp [bp-0x6], dx */
             ii(0x13_70a2, 2); if(jnzw(0x13_70a8, 0x4)) goto l_0x13_70a8; /* jnz 0x70a8 */
             ii(0x13_70a4, 3); jmpw(0x13_6ff9, -0xae); goto l_0x13_6ff9; /* jmp 0x6ff9 */
-        //  ii(0x13_70a7, 1); Недостижимый код.
-l_0x13_70a8:
+        //    ii(0x13_70a7, 1); nop();                                    /* nop */
+        l_0x13_70a8:
             ii(0x13_70a8, 5); mov(memw_a16[ss, bp - 0x62], 0xa);        /* mov word [bp-0x62], 0xa */
         l_0x13_70ad:
             ii(0x13_70ad, 3); mov(bx, memw_a16[ss, bp - 0x62]);         /* mov bx, [bp-0x62] */
@@ -430,8 +431,8 @@ l_0x13_70a8:
             ii(0x13_70e5, 4); mov(al, memb_a16[ds, bx + 0x472]);        /* mov al, [bx+0x472] */
             ii(0x13_70e9, 1); cbw();                                    /* cbw */
             ii(0x13_70ea, 3); jmpw(0x13_7224, 0x137); goto l_0x13_7224; /* jmp 0x7224 */
-        //  ii(0x13_70ed, 1); Недостижимый код.
-l_0x13_70ee:
+        //    ii(0x13_70ed, 1); nop();                                    /* nop */
+        l_0x13_70ee:
             ii(0x13_70ee, 3); mov(bx, memw_a16[ss, bp - 0x62]);         /* mov bx, [bp-0x62] */
             ii(0x13_70f1, 2); shl(bx, 0x1);                             /* shl bx, 1 */
             ii(0x13_70f3, 4); mov(ax, memw_a16[ds, bx + 0x47e]);        /* mov ax, [bx+0x47e] */
@@ -448,8 +449,8 @@ l_0x13_70ee:
             ii(0x13_710f, 3); add(memw_a16[ss, bp - 0x7e], ax);         /* add [bp-0x7e], ax */
             ii(0x13_7112, 5); mov(memw_a16[ss, bp - 0x5a], 0);          /* mov word [bp-0x5a], 0x0 */
             ii(0x13_7117, 2); jmpw(0x13_711d, 0x4); goto l_0x13_711d;   /* jmp 0x711d */
-        //  ii(0x13_7119, 1); Недостижимый код.
-l_0x13_711a:
+        //    ii(0x13_7119, 1); nop();                                    /* nop */
+        l_0x13_711a:
             ii(0x13_711a, 3); inc(memw_a16[ss, bp - 0x5a]);             /* inc word [bp-0x5a] */
         l_0x13_711d:
             ii(0x13_711d, 4); cmp(memw_a16[ss, bp - 0x5a], 0x3);        /* cmp word [bp-0x5a], 0x3 */
@@ -463,8 +464,8 @@ l_0x13_711a:
             ii(0x13_712d, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x13_712f, 2); if(jzw(0x13_7134, 0x3)) goto l_0x13_7134; /* jz 0x7134 */
             ii(0x13_7131, 2); jmpw(0x13_714c, 0x19); goto l_0x13_714c;  /* jmp 0x714c */
-        //  ii(0x13_7133, 1); Недостижимый код.
-l_0x13_7134:
+        //    ii(0x13_7133, 1); nop();                                    /* nop */
+        l_0x13_7134:
             ii(0x13_7134, 3); lea(ax, bp - 0x58);                       /* lea ax, [bp-0x58] */
             ii(0x13_7137, 1); pushw(ss);                                /* push ss */
             ii(0x13_7138, 1); pushw(ax);                                /* push ax */
@@ -475,8 +476,8 @@ l_0x13_7134:
             ii(0x13_7143, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x13_7146, 3); add(memw_a16[ss, bp - 0x7e], ax);         /* add [bp-0x7e], ax */
             ii(0x13_7149, 2); jmpw(0x13_711a, -0x31); goto l_0x13_711a; /* jmp 0x711a */
-        //  ii(0x13_714b, 1); Недостижимый код.
-l_0x13_714c:
+        //    ii(0x13_714b, 1); nop();                                    /* nop */
+        l_0x13_714c:
             ii(0x13_714c, 3); lea(ax, bp - 0x58);                       /* lea ax, [bp-0x58] */
             ii(0x13_714f, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x13_7152, 3); mov(memw_a16[ss, bp - 0x6], ss);          /* mov [bp-0x6], ss */
@@ -496,8 +497,8 @@ l_0x13_714c:
             ii(0x13_7178, 3); mov(al, memb_a16[ss, bp - 0x62]);         /* mov al, [bp-0x62] */
             ii(0x13_717b, 2); sub(al, 0x20);                            /* sub al, 0x20 */
             ii(0x13_717d, 2); jmpw(0x13_7183, 0x4); goto l_0x13_7183;   /* jmp 0x7183 */
-        //  ii(0x13_717f, 1); Недостижимый код.
-l_0x13_7180:
+        //    ii(0x13_717f, 1); nop();                                    /* nop */
+        l_0x13_7180:
             ii(0x13_7180, 3); mov(al, memb_a16[ss, bp - 0x62]);         /* mov al, [bp-0x62] */
         l_0x13_7183:
             ii(0x13_7183, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
@@ -534,8 +535,8 @@ l_0x13_7180:
             ii(0x13_71c7, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x13_71c9, 2); if(jzw(0x13_71ce, 0x3)) goto l_0x13_71ce; /* jz 0x71ce */
             ii(0x13_71cb, 2); jmpw(0x13_71e6, 0x19); goto l_0x13_71e6;  /* jmp 0x71e6 */
-        //  ii(0x13_71cd, 1); Недостижимый код.
-l_0x13_71ce:
+        //    ii(0x13_71cd, 1); nop();                                    /* nop */
+        l_0x13_71ce:
             ii(0x13_71ce, 3); lea(ax, bp - 0x58);                       /* lea ax, [bp-0x58] */
             ii(0x13_71d1, 1); pushw(ss);                                /* push ss */
             ii(0x13_71d2, 1); pushw(ax);                                /* push ax */
@@ -546,8 +547,8 @@ l_0x13_71ce:
             ii(0x13_71dd, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x13_71e0, 3); add(memw_a16[ss, bp - 0x7e], ax);         /* add [bp-0x7e], ax */
             ii(0x13_71e3, 2); jmpw(0x13_71b4, -0x31); goto l_0x13_71b4; /* jmp 0x71b4 */
-        //  ii(0x13_71e5, 1); Недостижимый код.
-l_0x13_71e6:
+        //    ii(0x13_71e5, 1); nop();                                    /* nop */
+        l_0x13_71e6:
             ii(0x13_71e6, 3); lea(ax, bp - 0x58);                       /* lea ax, [bp-0x58] */
             ii(0x13_71e9, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x13_71ec, 3); mov(memw_a16[ss, bp - 0x6], ss);          /* mov [bp-0x6], ss */
@@ -575,8 +576,8 @@ l_0x13_71e6:
             ii(0x13_721d, 3); mov(memb_a16[ds, bx], 0);                 /* mov byte [bx], 0x0 */
         l_0x13_7220:
             ii(0x13_7220, 2); jmpw(0x13_723c, 0x1a); goto l_0x13_723c;  /* jmp 0x723c */
-        //  ii(0x13_7222, 2); Недостижимый код.
-l_0x13_7224:
+        //    ii(0x13_7222, 2); jmpw(0x13_723c, 0x18); goto l_0x13_723c;  /* jmp 0x723c */
+        l_0x13_7224:
             ii(0x13_7224, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x13_7226, 2); if(jzw(0x13_7214, -0x14)) goto l_0x13_7214; /* jz 0x7214 */
             ii(0x13_7228, 1); dec(ax);                                  /* dec ax */
@@ -594,8 +595,8 @@ l_0x13_7224:
             ii(0x13_723a, 2); jmpw(0x13_723c, 0); goto l_0x13_723c;     /* jmp 0x723c */
         l_0x13_723c:
             ii(0x13_723c, 3); jmpw(0x13_6ff9, -0x246); goto l_0x13_6ff9; /* jmp 0x6ff9 */
-        //  ii(0x13_723f, 1); Недостижимый код.
-l_0x13_7240:
+        //    ii(0x13_723f, 1); nop();                                    /* nop */
+        l_0x13_7240:
             ii(0x13_7240, 5); cmp(memw_a16[ds, 0x1ea6], 0);             /* cmp word [0x1ea6], 0x0 */
             ii(0x13_7245, 2); if(jzw(0x13_724c, 0x5)) goto l_0x13_724c; /* jz 0x724c */
             ii(0x13_7247, 5); or(memb_a16[ds, 0x19a2], 0x1);            /* or byte [0x19a2], 0x1 */

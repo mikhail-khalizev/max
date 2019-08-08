@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -9,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x14_e0a9, 4); mov(si, memw_a32[ss, ebp + 0x1c]);        /* mov si, [ebp+0x1c] */
             ii(0x14_e0ad, 2); or(si, si);                               /* or si, si */
-            ii(0x14_e0af, 2); jlew_func(0x14_e062, -0x4f);              /* jle 0xe062 */
+            ii(0x14_e0af, 2); if(jlew_func(0x14_e062, -0x4f)) return;   /* jle 0xe062 */
             ii(0x14_e0b1, 3); pushw(0x4547);                            /* push 0x4547 */
             ii(0x14_e0b4, 2); pushw(0x20);                              /* push 0x20 */
             ii(0x14_e0b6, 1); popw(es);                                 /* pop es */
@@ -83,7 +84,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_e148, 2); if(jbw(0x14_e14d, 0x3)) goto l_0x14_e14d; /* jb 0xe14d */
             ii(0x14_e14a, 3); jmpw(0x14_e0ba, -0x93); goto l_0x14_e0ba; /* jmp 0xe0ba */
         l_0x14_e14d:
-            ii(0x14_e14d, 3); jmpw_func(0x14_e062, -0xee); return;      /* jmp 0xe062 */
+            ii(0x14_e14d, 3); if(jmpw_func(0x14_e062, -0xee)) return;   /* jmp 0xe062 */
         l_0x14_e150:
             ii(0x14_e150, 5); cmp(memw_a16[ds, 0x2], 0x10);             /* cmp word [0x2], 0x10 */
             ii(0x14_e155, 2); if(jbew(0x14_e14d, -0xa)) goto l_0x14_e14d; /* jbe 0xe14d */

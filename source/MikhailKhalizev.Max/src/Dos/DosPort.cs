@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x0f:
                     throw new NotImplementedException();
                     // d = dma_controllers[0].read_controller_reg(port);
-                    break;
+                    //break;
 
                 case 0x81:
                 case 0x82:
@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x8b:
                     throw new NotImplementedException();
                     // d = dma_read_p8x(port);
-                    break;
+                    //break;
 
                 case 0xc0:
                 case 0xc2:
@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0xde:
                     throw new NotImplementedException();
                     //d = dma_controllers[1].read_controller_reg((port - 0xc0) / 2);
-                    break;
+                    //break;
 
                 case 0x20:
                     value.UInt16 = (ushort)RawProgramMain.DosPic.read_command(port.UInt16);
@@ -80,26 +80,26 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x21:
                     throw new NotImplementedException();
                     //d = pic.read_data(port);
-                    break;
+                    //break;
 
                 case 0x40:
                 case 0x41:
                 case 0x42:
                     throw new NotImplementedException();
                     //d = timer_read_latch(port);
-                    break;
+                    //break;
 
                 case 0x60:
                     throw new NotImplementedException();
                     //d = static_cast < typename uint_ < 8 >::type > (key_pressed);
                     //key_pressed = kbd_keys::none;
-                    break;
+                    //break;
 
                 case 0x61:
                     throw new NotImplementedException();
                     //p61data ^= 0x30;
                     //d = p61data;
-                    break;
+                    //break;
 
                 case 0x64: // Keyboard Controller
                     value.UInt32 = 0x1c;// TODO | (p60_change ? 0x1 : 0);
@@ -116,7 +116,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x224:
                     throw new NotImplementedException();
                     //d = sb_mixer_index;
-                    break;
+                    //break;
 
                 case 0x225:
                     throw new NotImplementedException();
@@ -131,7 +131,7 @@ namespace MikhailKhalizev.Max.Dos
                     //    default:
                     //        throw exo::exception::not_implemented();
                     //}
-                    break;
+                    //break;
 
                 case 0x22a: // sb read_data
                     throw new NotImplementedException();
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Dos
                     //    dsp_rd_index %= count_of(dsp_data);
                     //}
                     //d = dsp_last_rd_val;
-                    break;
+                    //break;
 
                 case 0x22c: // sb write_data
                     value.UInt32 = 0x7f; // ?
@@ -159,7 +159,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x3cc:
                     throw new NotImplementedException();
                     //d = vga_misc_output;
-                    break;
+                    //break;
 
                 case 0x3d5:
                     throw new NotImplementedException();
@@ -181,7 +181,7 @@ namespace MikhailKhalizev.Max.Dos
                     //        throw exo::exception::not_implemented();
                     //        break;
                     //}
-                    break;
+                    //break;
 
                 case 0x214:
                     // @todo Пока игнорируем.
@@ -214,7 +214,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x0f:
                     throw new NotImplementedException();
                     //dma_controllers[0].write_controller_reg(port, s);
-                    break;
+                    //break;
 
                 case 0x81:
                 case 0x82:
@@ -224,7 +224,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x8b:
                     throw new NotImplementedException();
                     //dma_write_p8x(port, s);
-                    break;
+                    //break;
 
                 case 0xc0:
                 case 0xc2:
@@ -244,7 +244,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0xde:
                     throw new NotImplementedException();
                     //dma_controllers[1].write_controller_reg((port - 0xc0) / 2, s);
-                    break;
+                    //break;
 
                 case 0x20:
                     RawProgramMain.DosPic.write_command(port.UInt16, s.UInt16);
@@ -253,18 +253,18 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x21:
                     throw new NotImplementedException();
                     //pic.write_data(port, s);
-                    break;
+                    //break;
 
                 case 0x40:
                 case 0x42:
                     throw new NotImplementedException();
                     //timer_write_latch(port, s);
-                    break;
+                    //break;
 
                 case 0x43:
                     throw new NotImplementedException();
                     //timer_write_p43(s);
-                    break;
+                    // break;
 
                 case 0x61:
                     throw new NotImplementedException();
@@ -272,7 +272,7 @@ namespace MikhailKhalizev.Max.Dos
                     //    ((p61data ^ s) & 1) != 0)
                     //    TIMER_SetGate2(0 != (s & 1));
                     //p61data = s;
-                    break;
+                    //break;
 
                 /*    case 0x60:
                         switch (keyb_cmd)
@@ -327,7 +327,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x224: // Mixer index
                     throw new NotImplementedException();
                     //sb_mixer_index = s;
-                    break;
+                    //break;
 
                 case 0x225: // Mixer data
                     throw new NotImplementedException();
@@ -344,17 +344,16 @@ namespace MikhailKhalizev.Max.Dos
                     //    default:
                     //        throw exo::exception::not_implemented();
                     //}
-                    break;
+                    //break;
 
                 case 0x226:    // DSP_Reset
                     throw new NotImplementedException();
                     //dsp_data[dsp_wr_index] = 0xaa;
                     //dsp_wr_index++;
                     //dsp_wr_index %= count_of(dsp_data);
-                    break;
+                    //break;
 
                 case 0x22c:    // DSP_WriteData
-
                     throw new NotImplementedException();
                     //if (dsp_cmd == 0)
                     //{
@@ -401,7 +400,7 @@ namespace MikhailKhalizev.Max.Dos
                     //    dsp_cmd = 0;
                     //    dsp_cmd_data = 0;
                     //}
-                    break;
+                    //break;
 
                 case 0x3c2:
                     throw new NotImplementedException();
@@ -414,13 +413,13 @@ namespace MikhailKhalizev.Max.Dos
                     //        else
                     //            std::cout << "base addr 0x3b?"; // this
                     //        std::cout << std::endl;
-                    break;
+                    //break;
 
                 case 0x3c8:
                     throw new NotImplementedException();
                     //pal_index = s;
                     //pal_rgb = 0;
-                    break;
+                    //break;
 
                 case 0x3c9:
                     throw new NotImplementedException();
@@ -432,16 +431,16 @@ namespace MikhailKhalizev.Max.Dos
                     //    pal_index++;
                     //    pal_rgb = 0;
                     //}
-                    break;
+                    //break;
 
                 case 0x3d4:
                     throw new NotImplementedException();
                     //vga_crtc_index = s;
-                    break;
+                    //break;
 
                 case 0x214:
                 case 0x215:
-                    // TODO Временно игнорируем.
+                    // TODO Пока игнорируем.
                     break;
 
                 default:

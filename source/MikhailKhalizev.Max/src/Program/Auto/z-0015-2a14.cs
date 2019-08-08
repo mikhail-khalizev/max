@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -163,8 +164,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_2b2e, 2); or(al, al);                               /* or al, al */
             ii(0x15_2b30, 2); if(jnzw(0x15_2b35, 0x3)) goto l_0x15_2b35; /* jnz 0x2b35 */
             ii(0x15_2b32, 2); jmpw(0x15_2bb2, 0x7e); goto l_0x15_2bb2;  /* jmp 0x2bb2 */
-        //  ii(0x15_2b34, 1); Недостижимый код.
-l_0x15_2b35:
+        //    ii(0x15_2b34, 1); nop();                                    /* nop */
+        l_0x15_2b35:
             ii(0x15_2b35, 3); mov(memw_a16[ss, bx], di);                /* mov [ss:bx], di */
             ii(0x15_2b38, 4); mov(memw_a16[ss, bx + 0x2], ss);          /* mov [ss:bx+0x2], ss */
             ii(0x15_2b3c, 3); add(bx, 0x4);                             /* add bx, 0x4 */
@@ -248,7 +249,7 @@ l_0x15_2b35:
             ii(0x15_2bb3, 1); popw(ds);                                 /* pop ds */
             ii(0x15_2bb4, 4); mov(memw_a16[ds, bx], 0);                 /* mov word [bx], 0x0 */
             ii(0x15_2bb8, 5); mov(memw_a16[ds, bx + 0x2], 0);           /* mov word [bx+0x2], 0x0 */
-            ii(0x15_2bbd, 4); jmpw_a16_far_ind(ds, 0x3c50); return;     /* jmp far word [0x3c50] */
+            ii(0x15_2bbd, 4); if(jmpw_a16_far_ind(ds, 0x3c50)) return;  /* jmp far word [0x3c50] */
         }
     }
 }

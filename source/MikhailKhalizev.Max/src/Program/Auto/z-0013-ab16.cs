@@ -22,8 +22,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_ab39, 2); if(jzw(0x13_ab44, 0x9)) goto l_0x13_ab44; /* jz 0xab44 */
             ii(0x13_ab3b, 5); mov(memw_a16[ss, bp - 0xa], 0x8023);      /* mov word [bp-0xa], 0x8023 */
             ii(0x13_ab40, 3); jmpw(0x13_ac16, 0xd3); goto l_0x13_ac16;  /* jmp 0xac16 */
-        //  ii(0x13_ab43, 1); Недостижимый код.
-l_0x13_ab44:
+        //    ii(0x13_ab43, 1); nop();                                    /* nop */
+        l_0x13_ab44:
             ii(0x13_ab44, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x13_ab47, 4); mov(ax, memw_a16[es, bx + 0x8]);          /* mov ax, [es:bx+0x8] */
             ii(0x13_ab4b, 3); mov(memw_a16[ss, bp - 0x14], ax);         /* mov [bp-0x14], ax */
@@ -39,8 +39,8 @@ l_0x13_ab44:
             ii(0x13_ab63, 2); if(jnzw(0x13_ab6e, 0x9)) goto l_0x13_ab6e; /* jnz 0xab6e */
             ii(0x13_ab65, 5); mov(memw_a16[ss, bp - 0xa], 0x8023);      /* mov word [bp-0xa], 0x8023 */
             ii(0x13_ab6a, 3); jmpw(0x13_ac16, 0xa9); goto l_0x13_ac16;  /* jmp 0xac16 */
-        //  ii(0x13_ab6d, 1); Недостижимый код.
-l_0x13_ab6e:
+        //    ii(0x13_ab6d, 1); nop();                                    /* nop */
+        l_0x13_ab6e:
             ii(0x13_ab6e, 3); add(ax, 0);                               /* add ax, 0x0 */
             ii(0x13_ab71, 3); adc(dx, 0x1);                             /* adc dx, 0x1 */
             ii(0x13_ab74, 2); mov(dh, dl);                              /* mov dh, dl */
@@ -71,8 +71,8 @@ l_0x13_ab6e:
             ii(0x13_abb3, 4); add(memw_a16[ss, bp - 0xe], 0x1);         /* add word [bp-0xe], 0x1 */
             ii(0x13_abb7, 4); adc(memw_a16[ss, bp - 0xc], 0);           /* adc word [bp-0xc], 0x0 */
             ii(0x13_abbb, 2); jmpw(0x13_ab92, -0x2b); goto l_0x13_ab92; /* jmp 0xab92 */
-        //  ii(0x13_abbd, 1); Недостижимый код.
-l_0x13_abbe:
+        //    ii(0x13_abbd, 1); nop();                                    /* nop */
+        l_0x13_abbe:
             ii(0x13_abbe, 3); mov(ax, memw_a16[ss, bp - 0x6]);          /* mov ax, [bp-0x6] */
             ii(0x13_abc1, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x13_abc4, 4); mov(memw_a16[es, bx + 0x14], ax);         /* mov [es:bx+0x14], ax */

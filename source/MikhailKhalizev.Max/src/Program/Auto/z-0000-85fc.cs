@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -20,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8611, 1);    popw(bx);                                 /* pop bx */
             ii(0x8612, 2);    jmpw(0x861b, 0x7); goto l_0x861b;         /* jmp 0x861b */
         //  ii(0x8614, 7);    Недостижимый код.
-l_0x861b:
+        l_0x861b:
             ii(0x861b, 5);    cmp(memb_a16[ds, 0x11f0], 0);             /* cmp byte [0x11f0], 0x0 */
             ii(0x8620, 2);    if(jnzw(0x862c, 0xa)) goto l_0x862c;      /* jnz 0x862c */
             ii(0x8622, 2);    mov(al, 0xf);                             /* mov al, 0xf */
@@ -50,7 +51,7 @@ l_0x861b:
             ii(0x8660, 2);    and(ax, cx);                              /* and ax, cx */
             ii(0x8662, 1);    popw(cx);                                 /* pop cx */
             ii(0x8663, 3);    mov(cr0, eax);                            /* mov cr0, eax */
-            ii(0x8666, 5);    jmpw_far_abs(0x5db, 0x28bb); return;      /* jmp word 0x5db:0x28bb */
+            ii(0x8666, 5);    if(jmpw_far_abs(0x5db, 0x28bb)) return;   /* jmp word 0x5db:0x28bb */
         }
     }
 }

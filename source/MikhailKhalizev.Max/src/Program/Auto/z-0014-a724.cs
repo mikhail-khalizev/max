@@ -10,8 +10,8 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x14_a724, 3); mov(ax, 0x22bb);                          /* mov ax, 0x22bb */
             ii(0x14_a727, 2); jmpw(0x14_a72c, 0x3); goto l_0x14_a72c;   /* jmp 0xa72c */
-        //  ii(0x14_a729, 3); Недостижимый код.
-l_0x14_a72c:
+        //    ii(0x14_a729, 3); mov(ax, 0x24f0);                          /* mov ax, 0x24f0 */
+        l_0x14_a72c:
             ii(0x14_a72c, 2); mov(bx, sp);                              /* mov bx, sp */
             ii(0x14_a72e, 1); pushw(ds);                                /* push ds */
             ii(0x14_a72f, 5); mov(ds, memw_a16[cs, 0x5680]);            /* mov ds, [cs:0x5680] */

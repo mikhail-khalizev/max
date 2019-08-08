@@ -141,7 +141,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x15_873a:
             ii(0x15_873a, 5); cmp(memb_a16[ds, 0xd7f], 0);              /* cmp byte [0xd7f], 0x0 */
             ii(0x15_873f, 2); if(jnzw(0x15_8744, 0x3)) goto l_0x15_8744; /* jnz 0x8744 */
-            ii(0x15_8741, 3); jmpw_func(0x15_8749, 0x5); return;        /* jmp 0x8749 */
+            ii(0x15_8741, 3); if(jmpw_func(0x15_8749, 0x5)) return;     /* jmp 0x8749 */
         l_0x15_8744:
             ii(0x15_8744, 1); int3();                                   /* int3 */
             ii(0x15_8745, 2); outb(0x99, al);                           /* out 0x99, al */

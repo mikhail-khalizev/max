@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_9fa3, 5); lar(ebx, memw_a16[ss, bp + 0x2]);         /* lar ebx, word [bp+0x2] */
             ii(0x14_9fa8, 5); bt(ebx, 0x16);                            /* bt ebx, 0x16 */
             ii(0x14_9fad, 6); mov(ebx, 0);                              /* mov ebx, 0x0 */
-            ii(0x14_9fb3, 2); jaew_func(0x14_9fb6, 0x1);                /* jae 0x9fb6 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x14_9fb3, 2); if(jaew_func(0x14_9fb6, 0x1)) return;     /* jae 0x9fb6 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x14_9fb5, 4); mov(ebx, memd_a16[ss, bp + 0x2a]);        /* mov ebx, [bp+0x2a] */
             ii(0x14_9fb9, 5); popd(memd_a32[ds, ebx - 0x4]);            /* pop dword [ebx-0x4] */
             ii(0x14_9fbe, 4); mov(eax, memd_a16[ss, bp + 0x1e]);        /* mov eax, [bp+0x1e] */

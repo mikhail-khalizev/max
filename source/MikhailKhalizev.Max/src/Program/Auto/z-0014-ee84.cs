@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_ee8b, 2); mov(bp, ss);                              /* mov bp, ss */
             ii(0x14_ee8d, 4); lar(ebp, bp);                             /* lar ebp, bp */
             ii(0x14_ee91, 4); shr(ebp, 0x17);                           /* shr ebp, 0x17 */
-            ii(0x14_ee95, 2); jaew_func(0x14_ee98, 0x1);                /* jae 0xee98 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x14_ee95, 2); if(jaew_func(0x14_ee98, 0x1)) return;     /* jae 0xee98 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x14_ee97, 3); mov(ebp, esp);                            /* mov ebp, esp */
             ii(0x14_ee9a, 5); mov(eax, memd_a32[ss, ebp + 0xc]);        /* mov eax, [ebp+0xc] */
             ii(0x14_ee9f, 5); mov(ebp, memd_a32[ss, ebp + 0x10]);       /* mov ebp, [ebp+0x10] */
@@ -129,7 +129,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_efc0, 1); popw(di);                                 /* pop di */
             ii(0x14_efc1, 2); retfd(); return;                          /* o32 retf */
         //  ii(0x14_efc3, 9); Недостижимый код.
-l_0x14_efcc:
+        l_0x14_efcc:
             ii(0x14_efcc, 6); sub(memw_a16[ds, 0xc16], 0x400);          /* sub word [0xc16], 0x400 */
         l_0x14_efd2:
             ii(0x14_efd2, 5); add(memw_a32[ss, ebp + 0x24], -0xd /* 0xf3 */); /* add word [ebp+0x24], 0xfff3 */

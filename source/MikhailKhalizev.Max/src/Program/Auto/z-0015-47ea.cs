@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -27,8 +28,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_4811, 3); mov(ax, memw_a16[ss, bp - 0x12]);         /* mov ax, [bp-0x12] */
             ii(0x15_4814, 3); mov(memw_a16[ss, bp + 0x8], ax);          /* mov [bp+0x8], ax */
             ii(0x15_4817, 2); jmpw(0x15_4822, 0x9); goto l_0x15_4822;   /* jmp 0x4822 */
-        //  ii(0x15_4819, 1); Недостижимый код.
-l_0x15_481a:
+        //    ii(0x15_4819, 1); nop();                                    /* nop */
+        l_0x15_481a:
             ii(0x15_481a, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x15_481c, 3); mov(memw_a16[ss, bp + 0x8], ax);          /* mov [bp+0x8], ax */
             ii(0x15_481f, 3); mov(memw_a16[ss, bp + 0x6], ax);          /* mov [bp+0x6], ax */

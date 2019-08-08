@@ -135,7 +135,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_7771, 1); leavew();                                 /* leave */
             ii(0x13_7772, 1); retfw(); return;                          /* retf */
         //  ii(0x13_7773, 1); Недостижимый код.
-l_0x13_7774:
+        l_0x13_7774:
             ii(0x13_7774, 1); pusha();                                  /* pusha */
             ii(0x13_7775, 1); sti();                                    /* sti */
             ii(0x13_7776, 1); nop();                                    /* nop */
@@ -223,8 +223,8 @@ l_0x13_7774:
             ii(0x13_7837, 3); mov(memw_a16[ss, bp - 0xa], ax);          /* mov [bp-0xa], ax */
             ii(0x13_783a, 3); mov(memw_a16[ss, bp - 0x8], dx);          /* mov [bp-0x8], dx */
             ii(0x13_783d, 2); jmpw(0x13_7854, 0x15); goto l_0x13_7854;  /* jmp 0x7854 */
-        //  ii(0x13_783f, 1); Недостижимый код.
-l_0x13_7840:
+        //    ii(0x13_783f, 1); nop();                                    /* nop */
+        l_0x13_7840:
             ii(0x13_7840, 3); les(bx, ss, bp + 0xa);                    /* les bx, [bp+0xa] */
             ii(0x13_7843, 4); mov(ax, memw_a16[es, bx + 0x38]);         /* mov ax, [es:bx+0x38] */
             ii(0x13_7847, 2); sub(dx, dx);                              /* sub dx, dx */

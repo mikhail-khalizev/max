@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -37,8 +38,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_3fe2, 3); callw(0x15_401e, 0x39);                   /* call 0x401e */
             ii(0x15_3fe5, 1); clc();                                    /* clc */
             ii(0x15_3fe6, 2); jmpw(0x15_3fe9, 0x1); goto l_0x15_3fe9;   /* jmp 0x3fe9 */
-        //  ii(0x15_3fe8, 1); Недостижимый код.
-l_0x15_3fe9:
+        //    ii(0x15_3fe8, 1); stc();                                    /* stc */
+        l_0x15_3fe9:
             ii(0x15_3fe9, 1); retw(); return;                           /* ret */
         }
     }

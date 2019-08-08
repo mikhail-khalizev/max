@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -46,7 +47,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa46f, 3);    mov(memw_a16[ds, 0x17c2], ax);            /* mov [0x17c2], ax */
             ii(0xa472, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0xa475, 5);    callw_far_abs(0x35f, 0x6dc2);             /* call word 0x35f:0x6dc2 */
-            ii(0xa47a, 2);    jbw_func(0xa3fd, -0x7f);                  /* jb 0xa3fd */
+            ii(0xa47a, 2);    if(jbw_func(0xa3fd, -0x7f)) return;       /* jb 0xa3fd */
             ii(0xa47c, 1);    cld();                                    /* cld */
             ii(0xa47d, 7);    mov(memw_a16[ss, 0xac2], 0x71fc);         /* mov word [ss:0xac2], 0x71fc */
             ii(0xa484, 5);    mov(memw_a16[ss, 0xc32], ds);             /* mov [ss:0xc32], ds */
@@ -301,8 +302,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa714, 2);    @int(0x21);                               /* int 0x21 */
             ii(0xa716, 4);    if(jaew(0xa71d, 0x3)) goto l_0xa71d;      /* jae 0xa71d */
             ii(0xa71a, 2);    jmpw(0xa74b, 0x2f); goto l_0xa74b;        /* jmp 0xa74b */
-        //  ii(0xa71c, 1);    Недостижимый код.
-l_0xa71d:
+        //    ii(0xa71c, 1);    nop();                                    /* nop */
+        l_0xa71d:
             ii(0xa71d, 3);    mov(memw_a16[ds, 0xc4c], ax);             /* mov [0xc4c], ax */
             ii(0xa720, 4);    mov(memb_a16[ds, 0x980], dl);             /* mov [0x980], dl */
             ii(0xa724, 2);    mov(es, ax);                              /* mov es, ax */

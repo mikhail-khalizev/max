@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_6177, 1); leavew();                                 /* leave */
             ii(0x13_6178, 1); retfw(); return;                          /* retf */
         //  ii(0x13_6179, 1); Недостижимый код.
-l_0x13_617a:
+        l_0x13_617a:
             ii(0x13_617a, 1); pushw(ax);                                /* push ax */
             ii(0x13_617b, 1); nop();                                    /* nop */
             ii(0x13_617c, 1); pushw(cs);                                /* push cs */

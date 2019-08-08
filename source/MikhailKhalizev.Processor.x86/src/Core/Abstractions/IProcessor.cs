@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 
         SegmentRegister fs { get; set; }
         SegmentRegister gs { get; set; }
-        
+
         /// <summary>
         /// Local descriptor table register.
         /// </summary>
@@ -104,12 +104,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// </summary>
         /// <remarks>
         /// Contains the physical address of the base of the paging-structure hierarchy and two flags (PCD and PWT).
-        /// Only the most-significant bits (less the lower 12 bits) of the base address are specified; the lower 12 bits of the address are assumed to be 0. 
-        /// 
+        /// Only the most-significant bits (less the lower 12 bits) of the base address are specified; the lower 12 bits of the address are assumed to be 0.
+        ///
         /// PCD Page-level Cache Disable (bit 4 of CR3) — Controls the memory type used to access the first paging
         /// structure of the current paging-structure hierarchy.See Section 4.9, “Paging and Memory Typing”. This bit
         /// is not used if paging is disabled, with PAE paging, or with IA-32e paging if CR4.PCIDE= 1.
-        /// 
+        ///
         /// PWT Page-level Write-Through (bit 3 of CR3) — Controls the memory type used to access the first paging
         /// structure of the current paging-structure hierarchy.See Section 4.9, “Paging and Memory Typing”. This bit
         /// is not used if paging is disabled, with PAE paging, or with IA-32e paging if CR4.PCIDE= 1.
@@ -135,7 +135,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Global Descriptor Table Register (GDTR) Base Limit.
         /// </summary>
         ushort gdtr_limit { get; set; }
-        
+
         /// <summary>
         /// IDTR Interrupt Descriptor Table Register Base Address.
         /// </summary>
@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// IDTR Interrupt Descriptor Table Register Limit.
         /// </summary>
         ushort idtr_limit { get; set; }
-        
+
         /// <summary>
         /// EIP (instruction pointer) register.
         /// </summary>
@@ -166,12 +166,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         #region Memory
 
         IMemory Memory { get; }
-        
+
         MemoryAccess memb_a16 { get; }
         MemoryAccess memw_a16 { get; }
         MemoryAccess memd_a16 { get; }
         MemoryAccess memq_a16 { get; }
-        
+
         MemoryAccess memb_a32 { get; }
         MemoryAccess memw_a32 { get; }
         MemoryAccess memd_a32 { get; }
@@ -1645,7 +1645,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Invalidate TLB Entries.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INVLPG.html</remarks>
-        void invlpg();
+        void invlpg(MemoryValue value);
 
         /// <summary>
         /// Invalidate Process-Context Identifier.
@@ -1676,13 +1676,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpw_func(Address address, int offset);
+        bool jmpw_func(Address address, int offset);
 
         /// <summary>
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpw_abs(Value address);
+        bool jmpw_abs(Value address);
 
         /// <summary>
         /// Jump.
@@ -1694,13 +1694,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpw_far_abs(int segment, Address address);
+        bool jmpw_far_abs(int segment, Address address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void jmpw_a16_far_ind(SegmentRegister segment, Value address);
+        bool jmpw_a16_far_ind(SegmentRegister segment, Value address);
 
 
         /// <summary>
@@ -1713,13 +1713,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd_func(Address address, int offset);
+        bool jmpd_func(Address address, int offset);
 
         /// <summary>
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd_abs(Value address);
+        bool jmpd_abs(Value address);
 
         /// <summary>
         /// Jump.
@@ -1731,13 +1731,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void jmpd_far_abs(int segment, Value address);
+        bool jmpd_far_abs(int segment, Address address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void jmpd_a16_far_ind(SegmentRegister segment, Value address);
+        bool jmpd_a16_far_ind(SegmentRegister segment, Value address);
 
 
         /// <summary>
@@ -1780,13 +1780,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jaew_func(Address address, int offset);
+        bool jaew_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jaed_func(Address address, int offset);
+        bool jaed_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1804,13 +1804,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jbw_func(Address address, int offset);
+        bool jbw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jbd_func(Address address, int offset);
+        bool jbd_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1828,13 +1828,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jbew_func(Address address, int offset);
+        bool jbew_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jbed_func(Address address, int offset);
+        bool jbed_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1858,13 +1858,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jcxzw_func(Address address, int offset);
+        bool jcxzw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jcxzd_func(Address address, int offset);
+        bool jcxzd_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1876,7 +1876,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jecxzd_func(Address address, int offset);
+        bool jecxzd_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1930,7 +1930,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jld_func(Address address, int offset);
+        bool jld_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1948,7 +1948,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jlew_func(Address address, int offset);
+        bool jlew_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2038,13 +2038,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jnsw_func(Address address, int offset);
+        bool jnsw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jnsd_func(Address address, int offset);
+        bool jnsd_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2062,13 +2062,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jnzw_func(Address address, int offset);
+        bool jnzw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jnzd_func(Address address, int offset);
+        bool jnzd_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2116,7 +2116,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jsw_func(Address address, int offset);
+        bool jsw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2134,13 +2134,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jzw_func(Address address, int offset);
+        bool jzw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        void jzd_func(Address address, int offset);
+        bool jzd_func(Address address, int offset);
 
 
         /// <summary>
@@ -2598,13 +2598,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
         void lodsw_a16();
-        
+
         /// <summary>
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopw_a16(Address address, int offset);
-        
+
         /// <summary>
         /// Loop According to ECX Counter.
         /// </summary>

@@ -2637,19 +2637,19 @@
     "Arch": 16,
     "Addr": "0x0001001b",
     "Raw": "2eff20",
-    "Dec": "jmpw_abs(memw_a16[cs, bx + si]); return;"
+    "Dec": "jmpw_abs(memw_a16[cs, bx + si]);"
   },
   {
     "Arch": 16,
     "Addr": "0x000040d7",
     "Raw": "2eff26fa02",
-    "Dec": "jmpw_abs(memw_a16[cs, 0x2fa]); return;"
+    "Dec": "jmpw_abs(memw_a16[cs, 0x2fa]);"
   },
   {
     "Arch": 16,
     "Addr": "0x0000a14a",
     "Raw": "2eff2ebe17",
-    "Dec": "jmpw_a16_far_ind(cs, 0x17be); return;"
+    "Dec": "jmpw_a16_far_ind(cs, 0x17be);"
   },
   {
     "Arch": 16,
@@ -2661,7 +2661,7 @@
     "Arch": 16,
     "Addr": "0x0001001e",
     "Raw": "2eff6cfa",
-    "Dec": "jmpw_a16_far_ind(cs, si - 0x6); return;"
+    "Dec": "jmpw_a16_far_ind(cs, si - 0x6);"
   },
   {
     "Arch": 16,
@@ -2673,7 +2673,7 @@
     "Arch": 16,
     "Addr": "0x0000e7e7",
     "Raw": "2effa56a06",
-    "Dec": "jmpw_abs(memw_a16[cs, di + 0x66a]); return;"
+    "Dec": "jmpw_abs(memw_a16[cs, di + 0x66a]);"
   },
   {
     "Arch": 16,
@@ -3171,7 +3171,7 @@
     "Arch": 16,
     "Addr": "0x00005488",
     "Raw": "3eff2ef20a",
-    "Dec": "jmpw_a16_far_ind(ds, 0xaf2); return;"
+    "Dec": "jmpw_a16_far_ind(ds, 0xaf2);"
   },
   {
     "Arch": 16,
@@ -3717,7 +3717,7 @@
     "Arch": 16,
     "Addr": "0x0015d97f",
     "Raw": "6665ff6e06",
-    "Dec": "jmpd_a16_far_ind(gs, bp + 0x6); return;"
+    "Dec": "jmpd_a16_far_ind(gs, bp + 0x6);"
   },
   {
     "Arch": 16,
@@ -4167,25 +4167,25 @@
     "Arch": 16,
     "Addr": "0x0014a04e",
     "Raw": "66ca0400",
-    "Dec": "retfd(0x4); return;"
+    "Dec": "retfd(0x4);"
   },
   {
     "Arch": 16,
     "Addr": "0x0000a13b",
     "Raw": "66cb",
-    "Dec": "retfd(); return;"
+    "Dec": "retfd();"
   },
   {
     "Arch": 16,
     "Addr": "0x0000387e",
     "Raw": "66cf",
-    "Dec": "iretd(); return;"
+    "Dec": "iretd();"
   },
   {
     "Arch": 16,
     "Addr": "0x0014de3d",
     "Raw": "66ea200000008000",
-    "Dec": "jmpd_far_abs(0x80, 0x20); return;"
+    "Dec": "jmpd_far_abs(0x80, 0x20);"
   },
   {
     "Arch": 16,
@@ -4215,7 +4215,7 @@
     "Arch": 16,
     "Addr": "0x0014fe3a",
     "Raw": "66ff2f",
-    "Dec": "jmpd_a16_far_ind(ds, bx); return;"
+    "Dec": "jmpd_a16_far_ind(ds, bx);"
   },
   {
     "Arch": 16,
@@ -7143,13 +7143,13 @@
     "Arch": 16,
     "Addr": "0x000097b3",
     "Raw": "c20400",
-    "Dec": "retw(0x4); return;"
+    "Dec": "retw(0x4);"
   },
   {
     "Arch": 16,
     "Addr": "0x0000375b",
     "Raw": "c3",
-    "Dec": "retw(); return;"
+    "Dec": "retw();"
   },
   {
     "Arch": 16,
@@ -7443,13 +7443,13 @@
     "Arch": 16,
     "Addr": "0x0013d86c",
     "Raw": "ca0200",
-    "Dec": "retfw(0x2); return;"
+    "Dec": "retfw(0x2);"
   },
   {
     "Arch": 16,
     "Addr": "0x00002581",
     "Raw": "cb",
-    "Dec": "retfw(); return;"
+    "Dec": "retfw();"
   },
   {
     "Arch": 16,
@@ -7479,7 +7479,7 @@
     "Arch": 16,
     "Addr": "0x00003621",
     "Raw": "cf",
-    "Dec": "iretw(); return;"
+    "Dec": "iretw();"
   },
   {
     "Arch": 16,
@@ -7671,61 +7671,61 @@
     "Arch": 16,
     "Addr": "0x001504c9",
     "Raw": "e90000",
-    "Dec": "jmpw(0x1504cc, 0); return;"
+    "Dec": "jmpw(0x1504cc, 0);"
   },
   {
     "Arch": 16,
     "Addr": "0x0000262a",
     "Raw": "e950ff",
-    "Dec": "jmpw(0x257d, -0xb0); return;"
+    "Dec": "jmpw(0x257d, -0xb0);"
   },
   {
     "Arch": 16,
     "Addr": "0x0013e318",
     "Raw": "ea1f9b583e",
-    "Dec": "jmpw_far_abs(0x3e58, 0x9b1f); return;"
+    "Dec": "jmpw_far_abs(0x3e58, 0x9b1f);"
   },
   {
     "Arch": 16,
     "Addr": "0x00153ca6",
     "Raw": "ea2f488000",
-    "Dec": "jmpw_far_abs(0x80, 0x482f); return;"
+    "Dec": "jmpw_far_abs(0x80, 0x482f);"
   },
   {
     "Arch": 16,
     "Addr": "0x000040cd",
     "Raw": "ea34031800",
-    "Dec": "jmpw_far_abs(0x18, 0x334); return;"
+    "Dec": "jmpw_far_abs(0x18, 0x334);"
   },
   {
     "Arch": 16,
     "Addr": "0x00005674",
     "Raw": "ea93557000",
-    "Dec": "jmpw_far_abs(0x70, 0x5593); return;"
+    "Dec": "jmpw_far_abs(0x70, 0x5593);"
   },
   {
     "Arch": 16,
     "Addr": "0x00006656",
     "Raw": "eabb28da03",
-    "Dec": "jmpw_far_abs(0x3da, 0x28bb); return;"
+    "Dec": "jmpw_far_abs(0x3da, 0x28bb);"
   },
   {
     "Arch": 16,
     "Addr": "0x00008666",
     "Raw": "eabb28db05",
-    "Dec": "jmpw_far_abs(0x5db, 0x28bb); return;"
+    "Dec": "jmpw_far_abs(0x5db, 0x28bb);"
   },
   {
     "Arch": 16,
     "Addr": "0x000036fb",
     "Raw": "eb00",
-    "Dec": "jmpw(0x36fd, 0); return;"
+    "Dec": "jmpw(0x36fd, 0);"
   },
   {
     "Arch": 16,
     "Addr": "0x0000369c",
     "Raw": "ebda",
-    "Dec": "jmpw(0x3678, -0x26); return;"
+    "Dec": "jmpw(0x3678, -0x26);"
   },
   {
     "Arch": 16,
@@ -8187,13 +8187,13 @@
     "Arch": 16,
     "Addr": "0x000038a1",
     "Raw": "ff26c209",
-    "Dec": "jmpw_abs(memw_a16[ds, 0x9c2]); return;"
+    "Dec": "jmpw_abs(memw_a16[ds, 0x9c2]);"
   },
   {
     "Arch": 16,
     "Addr": "0x00005489",
     "Raw": "ff2ef20a",
-    "Dec": "jmpw_a16_far_ind(ds, 0xaf2); return;"
+    "Dec": "jmpw_a16_far_ind(ds, 0xaf2);"
   },
   {
     "Arch": 16,
@@ -8325,13 +8325,13 @@
     "Arch": 16,
     "Addr": "0x00009d4a",
     "Raw": "ffe3",
-    "Dec": "jmpw_abs(bx); return;"
+    "Dec": "jmpw_abs(bx);"
   },
   {
     "Arch": 16,
     "Addr": "0x0014e7a8",
     "Raw": "ffe5",
-    "Dec": "jmpw_abs(bp); return;"
+    "Dec": "jmpw_abs(bp);"
   },
   {
     "Arch": 16,
@@ -11613,7 +11613,7 @@
     "Arch": 32,
     "Addr": "0x00161e4b",
     "Raw": "66cb",
-    "Dec": "retfw(); return;"
+    "Dec": "retfw();"
   },
   {
     "Arch": 32,
@@ -14631,13 +14631,13 @@
     "Arch": 32,
     "Addr": "0x100702b6",
     "Raw": "c20400",
-    "Dec": "retd(0x4); return;"
+    "Dec": "retd(0x4);"
   },
   {
     "Arch": 32,
     "Addr": "0x10070a28",
     "Raw": "c3",
-    "Dec": "retd(); return;"
+    "Dec": "retd();"
   },
   {
     "Arch": 32,
@@ -15045,7 +15045,7 @@
     "Arch": 32,
     "Addr": "0x1016c9f4",
     "Raw": "cb",
-    "Dec": "retfd(); return;"
+    "Dec": "retfd();"
   },
   {
     "Arch": 32,
@@ -15063,7 +15063,7 @@
     "Arch": 32,
     "Addr": "0x10148293",
     "Raw": "cf",
-    "Dec": "iretd(); return;"
+    "Dec": "iretd();"
   },
   {
     "Arch": 32,
@@ -15615,19 +15615,19 @@
     "Arch": 32,
     "Addr": "0x100700da",
     "Raw": "e9cf010000",
-    "Dec": "jmpd(0x100702ae, 0x1cf); return;"
+    "Dec": "jmpd(0x100702ae, 0x1cf);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018dd62",
     "Raw": "eb00",
-    "Dec": "jmpd(0x1018dd64, 0); return;"
+    "Dec": "jmpd(0x1018dd64, 0);"
   },
   {
     "Arch": 32,
     "Addr": "0x100700ad",
     "Raw": "eb0e",
-    "Dec": "jmpd(0x100700bd, 0xe); return;"
+    "Dec": "jmpd(0x100700bd, 0xe);"
   },
   {
     "Arch": 32,
@@ -16209,7 +16209,7 @@
     "Arch": 32,
     "Addr": "0x1018738a",
     "Raw": "ff248580301c10",
-    "Dec": "jmpd_abs(memd_a32[ds, eax * 4 + 0x101c3080]); return;"
+    "Dec": "jmpd_abs(memd_a32[ds, eax * 4 + 0x101c3080]);"
   },
   {
     "Arch": 32,

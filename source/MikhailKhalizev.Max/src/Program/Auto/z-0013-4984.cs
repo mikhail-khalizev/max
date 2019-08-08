@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_49f7, 1); leavew();                                 /* leave */
             ii(0x13_49f8, 1); retfw(); return;                          /* retf */
         //  ii(0x13_49f9, 5); Недостижимый код.
-l_0x13_49fe:
+        l_0x13_49fe:
             ii(0x13_49fe, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x13_4a00, 1); popw(ds);                                 /* pop ds */
             ii(0x13_4a01, 1); popw(si);                                 /* pop si */

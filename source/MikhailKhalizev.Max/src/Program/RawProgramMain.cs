@@ -341,6 +341,8 @@ namespace MikhailKhalizev.Max.Program
                 ds.Descriptor.Base,
                 MethodsInfo);
 
+            to_cxx.AddMethodInfoJumpsToDecode = 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
+
             if (seg.Descriptor.Base != 0)
                 to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
 
@@ -419,7 +421,7 @@ namespace MikhailKhalizev.Max.Program
                 }
 #endif
 
-            Console.WriteLine($"Запуск декодирования метода '{fullAddress}'.");
+            Console.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
 
             to_cxx.DecodeMethod(fullAddress);
             to_cxx.Save();

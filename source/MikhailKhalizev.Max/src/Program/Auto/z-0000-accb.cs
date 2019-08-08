@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -53,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xad3e, 1);    popw(si);                                 /* pop si */
             ii(0xad3f, 1);    retw(); return;                           /* ret */
         //  ii(0xad40, 1);    Недостижимый код.
-l_0xad41:
+        l_0xad41:
             ii(0xad41, 3);    callw(0x9cc4, -0x1080);                   /* call 0x9cc4 */
             ii(0xad44, 2);    if(jzw(0xad30, -0x16)) goto l_0xad30;     /* jz 0xad30 */
         l_0xad46:
@@ -125,7 +126,7 @@ l_0xad41:
             ii(0xae0c, 5);    test(memb_a16[ds, 0x47], 0x80);           /* test byte [0x47], 0x80 */
             ii(0xae11, 2);    if(jnzw(0xae62, 0x4f)) goto l_0xae62;     /* jnz 0xae62 */
         l_0xae13:
-            ii(0xae13, 3);    jmpw_func(0xaec1, 0xab); return;          /* jmp 0xaec1 */
+            ii(0xae13, 3);    if(jmpw_func(0xaec1, 0xab)) return;       /* jmp 0xaec1 */
         l_0xae16:
             ii(0xae16, 1);    pushw(ss);                                /* push ss */
             ii(0xae17, 1);    popw(ds);                                 /* pop ds */
@@ -179,7 +180,7 @@ l_0xad41:
             ii(0xae8d, 3);    callw(0x9bb3, -0x12dd);                   /* call 0x9bb3 */
             ii(0xae90, 1);    popw(cx);                                 /* pop cx */
             ii(0xae91, 3);    cmp(ax, 0xffff);                          /* cmp ax, 0xffff */
-            ii(0xae94, 2);    jnzw_func(0xae9b, 0x5);                   /* jnz 0xae9b */
+            ii(0xae94, 2);    if(jnzw_func(0xae9b, 0x5)) return;        /* jnz 0xae9b */
         }
     }
 }

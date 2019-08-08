@@ -54,8 +54,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_00de, 5); lea(ecx, 0xc7a);                          /* lea ecx, [0xc7a] */
             ii(0x15_00e3, 1); pushw(cx);                                /* push cx */
             ii(0x15_00e4, 2); jmpw(0x15_0104, 0x1e); goto l_0x15_0104;  /* jmp 0x104 */
-        //  ii(0x15_00e6, 2); Недостижимый код.
-l_0x15_00e8:
+        //    ii(0x15_00e6, 2); xchg(bx, bx);                             /* xchg bx, bx */
+        l_0x15_00e8:
             ii(0x15_00e8, 2); mov(cx, ds);                              /* mov cx, ds */
             ii(0x15_00ea, 2); pushd(ecx);                               /* push ecx */
             ii(0x15_00ec, 2); pushd(esi);                               /* push esi */
@@ -72,7 +72,7 @@ l_0x15_00e8:
             ii(0x15_0106, 2); pushd(eax);                               /* push eax */
             ii(0x15_0108, 2); retfd(); return;                          /* o32 retf */
         //  ii(0x15_010a, 22); Недостижимый код.
-l_0x15_0120:
+        l_0x15_0120:
             ii(0x15_0120, 1); popw(ds);                                 /* pop ds */
             ii(0x15_0121, 1); popw(di);                                 /* pop di */
             ii(0x15_0122, 1); popw(si);                                 /* pop si */

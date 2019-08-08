@@ -148,7 +148,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
             return interval;
         }
 
-        public Interval<T> Find(T val, bool withRightBound)
+        public Interval<T> FindIntervalThatContainsValue(T val, bool withRightBound)
         {
             var interval = _spaces.FirstNotGreaterOrDefault(Interval.From(val, default));
             if (interval == default)
@@ -173,7 +173,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public bool Contains(T val, bool withRightBound)
         {
-            return !Find(val, withRightBound).IsEmpty;
+            return !FindIntervalThatContainsValue(val, withRightBound).IsEmpty;
         }
 
         public Interval<T> GetIntervalBefore(T begin)

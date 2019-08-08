@@ -15,8 +15,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_4829, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x13_482b, 2); sub(si, si);                              /* sub si, si */
             ii(0x13_482d, 2); jmpw(0x13_4831, 0x2); goto l_0x13_4831;   /* jmp 0x4831 */
-        //  ii(0x13_482f, 1); Недостижимый код.
-l_0x13_4830:
+        //    ii(0x13_482f, 1); nop();                                    /* nop */
+        l_0x13_4830:
             ii(0x13_4830, 1); inc(si);                                  /* inc si */
         l_0x13_4831:
             ii(0x13_4831, 3); cmp(si, 0x8);                             /* cmp si, 0x8 */

@@ -288,7 +288,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             addr_area_begin = addrOfAddrs;
 
             if ((addrOfAddrs & ((int)Engine.Mode / 8 - 1)) == 0)
-                Engine.Aligment[addrOfAddrs] = (int)Engine.Mode / 8;
+                Engine.Alignment[addrOfAddrs] = (int)Engine.Mode / 8;
 
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. {");
@@ -331,7 +331,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             os.Append("}.");
 
-            Engine.code.Insert(new Instruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
+            Engine.DecodedCode.Insert(new Instruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
 
             var copy_addr_area_begin = addr_area_begin;
             var copy_size_of_addr_area = size_of_addr_area;
@@ -357,11 +357,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 var raw = engine.Memory.ReadAll(interval.Begin, interval.End - interval.Begin);
                 var rawString = HexHelper.ToString(raw, o => o.RemoveHexPrefix().SetGroupSize(0));
                 
-                if (dm.MethodInfo.Guid == Guid.Parse("4dc4a774-9182-4652-9a94-16c214c34f44"))
-                {
-                    var debug = 0;
-                }
-
                 if (methodInterval.Contains(interval)) // Always false.
                     dm.MethodInfo.ExtraRaw[interval.Begin - offset] = rawString;
                 else
@@ -387,7 +382,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 throw new NotImplementedException();
             var funcSuffix = "_switch";
 
-            var str = dm.Instructions[cmd_index].ToCodeString(funcSuffix, "", offset: offset, isJmpOutside: false);
+            dm.Instructions[cmd_index].IsLocalBranch = true;
+            var str = dm.Instructions[cmd_index].ToCodeString(funcSuffix, "", offset: offset);
 
             var lines = new[]
                 {

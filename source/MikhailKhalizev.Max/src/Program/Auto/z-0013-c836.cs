@@ -57,8 +57,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_c8a1, 5); mov(memw_a16[ss, bp - 0x8], 0);           /* mov word [bp-0x8], 0x0 */
             ii(0x13_c8a6, 5); mov(memw_a16[ss, bp - 0x6], 0);           /* mov word [bp-0x6], 0x0 */
             ii(0x13_c8ab, 2); jmpw(0x13_c8b4, 0x7); goto l_0x13_c8b4;   /* jmp 0xc8b4 */
-        //  ii(0x13_c8ad, 1); Недостижимый код.
-l_0x13_c8ae:
+        //    ii(0x13_c8ad, 1); nop();                                    /* nop */
+        l_0x13_c8ae:
             ii(0x13_c8ae, 3); inc(memw_a16[ss, bp - 0x6]);              /* inc word [bp-0x6] */
             ii(0x13_c8b1, 3); inc(memw_a16[ss, bp - 0x4]);              /* inc word [bp-0x4] */
         l_0x13_c8b4:
@@ -75,8 +75,8 @@ l_0x13_c8ae:
             ii(0x13_c8cf, 3); callw(0x13_91e3, -0x36ef);                /* call 0x91e3 */
             ii(0x13_c8d2, 3); add(sp, 0xa);                             /* add sp, 0xa */
             ii(0x13_c8d5, 2); jmpw(0x13_c8ae, -0x29); goto l_0x13_c8ae; /* jmp 0xc8ae */
-        //  ii(0x13_c8d7, 1); Недостижимый код.
-l_0x13_c8d8:
+        //    ii(0x13_c8d7, 1); nop();                                    /* nop */
+        l_0x13_c8d8:
             ii(0x13_c8d8, 3); mov(ax, memw_a16[ss, bp - 0xa]);          /* mov ax, [bp-0xa] */
             ii(0x13_c8db, 3); mov(dx, memw_a16[ss, bp - 0x8]);          /* mov dx, [bp-0x8] */
             ii(0x13_c8de, 1); popw(ds);                                 /* pop ds */

@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_7f81, 1); leavew();                                 /* leave */
             ii(0x13_7f82, 1); retfw(); return;                          /* retf */
         //  ii(0x13_7f83, 1); Недостижимый код.
-l_0x13_7f84:
+        l_0x13_7f84:
             ii(0x13_7f84, 2); jmpw(0x13_7f4c, -0x3a); goto l_0x13_7f4c; /* jmp 0x7f4c */
         l_0x13_7f86:
             ii(0x13_7f86, 1); popw(ds);                                 /* pop ds */

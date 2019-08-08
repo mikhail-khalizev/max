@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -8,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0014_aae3()
         {
             ii(0x14_aae3, 5); cmp(memb_a16[ds, 0x2e], 0);               /* cmp byte [0x2e], 0x0 */
-            ii(0x14_aae8, 2); jzw_func(0x14_aad5, -0x15);               /* jz 0xaad5 */
+            ii(0x14_aae8, 2); if(jzw_func(0x14_aad5, -0x15)) return;    /* jz 0xaad5 */
             ii(0x14_aaea, 1); pushw(es);                                /* push es */
             ii(0x14_aaeb, 3); mov(ax, 0x8);                             /* mov ax, 0x8 */
             ii(0x14_aaee, 2); mov(es, ax);                              /* mov es, ax */

@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x14_e395, 4); mov(bl, memb_a32[ss, ebp + 0x14]);        /* mov bl, [ebp+0x14] */
             ii(0x14_e399, 3); cmp(bl, 0x10);                            /* cmp bl, 0x10 */
-            ii(0x14_e39c, 2); jaw_func(0x14_e392, -0xc);                /* ja 0xe392 */
+            ii(0x14_e39c, 2); if(jaw_func(0x14_e392, -0xc)) return;     /* ja 0xe392 */
             ii(0x14_e39e, 2); pushw(0x20);                              /* push 0x20 */
             ii(0x14_e3a0, 1); popw(ds);                                 /* pop ds */
             ii(0x14_e3a1, 2); xor(bh, bh);                              /* xor bh, bh */

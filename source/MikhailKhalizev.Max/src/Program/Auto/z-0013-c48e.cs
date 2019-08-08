@@ -83,8 +83,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_c552, 3); callw(0x13_9235, -0x3320);                /* call 0x9235 */
             ii(0x13_c555, 3); add(sp, 0xc);                             /* add sp, 0xc */
             ii(0x13_c558, 3); jmpw(0x13_c4cc, -0x8f); goto l_0x13_c4cc; /* jmp 0xc4cc */
-        //  ii(0x13_c55b, 1); Недостижимый код.
-l_0x13_c55c:
+        //    ii(0x13_c55b, 1); nop();                                    /* nop */
+        l_0x13_c55c:
             ii(0x13_c55c, 1); popw(ds);                                 /* pop ds */
             ii(0x13_c55d, 1); leavew();                                 /* leave */
             ii(0x13_c55e, 1); retfw(); return;                          /* retf */

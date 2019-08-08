@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -18,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x52b3, 3);    mov(ax, memw_a16[ss, bp + 0x6]);          /* mov ax, [bp+0x6] */
             ii(0x52b6, 3);    mov(dx, memw_a16[ss, bp + 0x8]);          /* mov dx, [bp+0x8] */
             ii(0x52b9, 2);    mov(cl, 0xc);                             /* mov cl, 0xc */
-            ii(0x52bb, 3);    callw(0x5da0, 0xae2);                     /* call 0x6550 */
+            ii(0x52bb, 3);    callw(0x5da0, 0xae2);                     /* call 0x5da0 */
             ii(0x52be, 3);    mov(memb_a16[ss, bp - 0x4], al);          /* mov [bp-0x4], al */
             ii(0x52c1, 3);    mov(ax, memw_a16[ss, bp + 0x8]);          /* mov ax, [bp+0x8] */
             ii(0x52c4, 3);    sar(ax, 0x4);                             /* sar ax, 0x4 */
@@ -35,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x52e0, 4);    adc(dx, memw_a16[ds, 0x990]);             /* adc dx, [0x990] */
             ii(0x52e4, 1);    pushw(dx);                                /* push dx */
             ii(0x52e5, 1);    pushw(ax);                                /* push ax */
-            ii(0x52e6, 3);    callw(0x4812, -0xad7);                    /* call 0x4fc2 */
+            ii(0x52e6, 3);    callw(0x4812, -0xad7);                    /* call 0x4812 */
             ii(0x52e9, 1);    leavew();                                 /* leave */
             ii(0x52ea, 1);    retw(); return;                           /* ret */
         }

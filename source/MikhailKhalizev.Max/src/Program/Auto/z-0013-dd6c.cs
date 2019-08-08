@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_dd6f, 3); mov(dx, memw_a16[ss, bp + 0x6]);          /* mov dx, [bp+0x6] */
             ii(0x13_dd72, 2); mov(ah, 0x41);                            /* mov ah, 0x41 */
             ii(0x13_dd74, 2); @int(0x21);                               /* int 0x21 */
-            ii(0x13_dd76, 3); jmpw_func(0x13_d8a6, -0x4d3); return;     /* jmp 0xd8a6 */
+            ii(0x13_dd76, 3); if(jmpw_func(0x13_d8a6, -0x4d3)) return;  /* jmp 0xd8a6 */
         }
     }
 }

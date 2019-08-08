@@ -111,8 +111,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_b02e, 3); add(sp, 0x2);                             /* add sp, 0x2 */
         l_0x13_b031:
             ii(0x13_b031, 2); jmpw(0x13_aff0, -0x43); goto l_0x13_aff0; /* jmp 0xaff0 */
-        //  ii(0x13_b033, 1); Недостижимый код.
-l_0x13_b034:
+        //    ii(0x13_b033, 1); nop();                                    /* nop */
+        l_0x13_b034:
             ii(0x13_b034, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x13_b037, 5); and(memb_a16[es, bx + 0x2c], -0x2 /* 0xfe */); /* and byte [es:bx+0x2c], 0xfe */
             ii(0x13_b03c, 1); popw(ds);                                 /* pop ds */

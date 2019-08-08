@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_e148, 2); if(jbw(0x14_e14d, 0x3)) goto l_0x14_e14d; /* jb 0xe14d */
             ii(0x14_e14a, 3); jmpw(0x14_e0ba, -0x93); goto l_0x14_e0ba; /* jmp 0xe0ba */
         l_0x14_e14d:
-            ii(0x14_e14d, 3); jmpw_func(0x14_e062, -0xee); return;      /* jmp 0xe062 */
+            ii(0x14_e14d, 3); if(jmpw_func(0x14_e062, -0xee)) return;   /* jmp 0xe062 */
         l_0x14_e150:
             ii(0x14_e150, 5); cmp(memw_a16[ds, 0x2], 0x10);             /* cmp word [0x2], 0x10 */
             ii(0x14_e155, 2); if(jbew(0x14_e14d, -0xa)) goto l_0x14_e14d; /* jbe 0xe14d */

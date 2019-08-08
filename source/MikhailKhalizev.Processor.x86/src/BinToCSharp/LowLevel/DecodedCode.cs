@@ -18,6 +18,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return actual.Instruction;
         }
 
+        public Instruction GetInstructionBefore(Address address)
+        {
+            return _instructions.FirstLessOrDefault((address, null)).Instruction;
+        }
+
         /// <summary>
         /// Возвращает инструкцию, следующую за заданной.
         /// </summary>

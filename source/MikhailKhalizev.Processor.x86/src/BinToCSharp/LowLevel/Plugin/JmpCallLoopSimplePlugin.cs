@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             
             Address toAddr = 0; // prediction address.
 
-            if ((cmd.IsAnyJump || cmd.IsAnyLoop || cmd.IsCall) && (op.type == ud_type.UD_OP_JIMM))
+            if ((cmd.IsJmpOrJcc || cmd.IsLoopOrLoopcc || cmd.IsCall) && (op.type == ud_type.UD_OP_JIMM))
             {
                 switch (op.size)
                 {
@@ -148,7 +148,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     comments_in_current_func.Add("Адрес перехода делит инструкцию в этой функции пополам.");
             }
 
-            return dm.Instructions[cmd_index].ToCodeString(suffix, isJmpOutside: jmpOutside, offset: offset);
+            dm.Instructions[cmd_index].IsLocalBranch = !jmpOutside;
+            return dm.Instructions[cmd_index].ToCodeString(suffix, offset: offset);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -17,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_746d, 1); popw(ds);                                 /* pop ds */
             ii(0x13_746e, 1); retfw(); return;                          /* retf */
         //  ii(0x13_746f, 1); Недостижимый код.
-l_0x13_7470:
+        l_0x13_7470:
             ii(0x13_7470, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x13_7472, 1); popw(ds);                                 /* pop ds */
             ii(0x13_7473, 1); retfw(); return;                          /* retf */

@@ -161,8 +161,9 @@ namespace MikhailKhalizev.Max.Program
         l_0x15_809f:
             ii(0x15_809f, 3); mov(ax, 0);                               /* mov ax, 0x0 */
             ii(0x15_80a2, 3); jmpw(0x15_80da, 0x35); goto l_0x15_80da;  /* jmp 0x80da */
-        //  ii(0x15_80a5, 6); Недостижимый код.
-l_0x15_80ab:
+        //    ii(0x15_80a5, 3); jmpw(0x15_80d4, 0x2c); goto l_0x15_80d4;  /* jmp 0x80d4 */
+        //    ii(0x15_80a8, 3); jmpw(0x15_80d4, 0x29); goto l_0x15_80d4;  /* jmp 0x80d4 */
+        l_0x15_80ab:
             ii(0x15_80ab, 3); sub(ax, 0x429);                           /* sub ax, 0x429 */
             ii(0x15_80ae, 2); if(jnzw(0x15_80b3, 0x3)) goto l_0x15_80b3; /* jnz 0x80b3 */
             ii(0x15_80b0, 3); jmpw(0x15_7f33, -0x180); goto l_0x15_7f33; /* jmp 0x7f33 */

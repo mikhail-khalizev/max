@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -8,10 +9,10 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0001_2130()
         {
             ii(0x1_2130, 3);  callw(0x1_2040, -0xf3);                   /* call 0x2040 */
-            ii(0x1_2133, 2);  jbw_func(0x1_211d, -0x18);                /* jb 0x211d */
-            ii(0x1_2135, 2);  jcxzw_func(0x1_211d, -0x1a);              /* jcxz 0x211d */
+            ii(0x1_2133, 2);  if(jbw_func(0x1_211d, -0x18)) return;     /* jb 0x211d */
+            ii(0x1_2135, 2);  if(jcxzw_func(0x1_211d, -0x1a)) return;   /* jcxz 0x211d */
             ii(0x1_2137, 4);  cmp(bx, 0x80);                            /* cmp bx, 0x80 */
-            ii(0x1_213b, 2);  jbw_func(0x1_211d, -0x20);                /* jb 0x211d */
+            ii(0x1_213b, 2);  if(jbw_func(0x1_211d, -0x20)) return;     /* jb 0x211d */
             ii(0x1_213d, 2);  xor(ax, ax);                              /* xor ax, ax */
             ii(0x1_213f, 3);  mov(memb_a16[ds, bx + 0x5], al);          /* mov [bx+0x5], al */
             ii(0x1_2142, 2);  pushw(0x50);                              /* push 0x50 */
@@ -42,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1_2180, 4);  if(jnzw(0x1_2186, 0x2)) goto l_0x1_2186;  /* jnz 0x2186 */
             ii(0x1_2184, 2);  mov(gs, cx);                              /* mov gs, cx */
         l_0x1_2186:
-            ii(0x1_2186, 3);  jmpw_func(0x1_2037, -0x152); return;      /* jmp 0x2037 */
+            ii(0x1_2186, 3);  if(jmpw_func(0x1_2037, -0x152)) return;   /* jmp 0x2037 */
         }
     }
 }

@@ -18,7 +18,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var item = NamespaceByAddress.FirstOrDefault(x => x.Interval.Contains(interval));
 
             if (!item.Interval.IsEmpty)
+            {
+                if (item.Interval == interval && item.Namespace == @namespace)
+                    return;
                 throw new InvalidOperationException($"Already have internal {item.Interval} with namespace '{item.Namespace}'.");
+            }
 
             NamespaceByAddress.Add((interval, @namespace));
         }

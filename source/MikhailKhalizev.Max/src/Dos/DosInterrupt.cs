@@ -159,8 +159,8 @@ namespace MikhailKhalizev.Max.Dos
 
                                     if (dl == 0)
                                     {
-                                        var height = 480;
-                                        var width = 640;
+                                        //var width = 640;
+                                        //var height = 480;
 
 #if false
                         const int line_y1 = 15; // Вписан.
@@ -622,7 +622,7 @@ namespace MikhailKhalizev.Max.Dos
                             File.Delete(path);
                             eflags.cf = false;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             eflags.cf = true;
                             ax = 2;
@@ -805,7 +805,6 @@ namespace MikhailKhalizev.Max.Dos
 
                 default:
                     throw new NotImplementedException();
-                    break;
             }
 
             syscall_iretww();

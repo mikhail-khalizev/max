@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_008d, 4); mov(es, memw_a16[ds, 0x124]);             /* mov es, [0x124] */
             ii(0x15_0091, 3); mov(al, memb_a16[es, di]);                /* mov al, [es:di] */
             ii(0x15_0094, 2); and(al, 0x3);                             /* and al, 0x3 */
-            ii(0x15_0096, 4); jzw_func(0x15_0120, 0x86);                /* jz 0x120 */
+            ii(0x15_0096, 4); if(jzw_func(0x15_0120, 0x86)) return;     /* jz 0x120 */
             ii(0x15_009a, 4); mov(bl, memb_a16[es, di + 0x1]);          /* mov bl, [es:di+0x1] */
             ii(0x15_009e, 3); mov(memb_a16[ds, si + 0x38], bl);         /* mov [si+0x38], bl */
             ii(0x15_00a1, 3); movzx(bx, bl);                            /* movzx bx, bl */
@@ -46,8 +46,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_00de, 5); lea(ecx, 0xc7a);                          /* lea ecx, [0xc7a] */
             ii(0x15_00e3, 1); pushw(cx);                                /* push cx */
             ii(0x15_00e4, 2); jmpw(0x15_0104, 0x1e); goto l_0x15_0104;  /* jmp 0x104 */
-        //  ii(0x15_00e6, 2); Недостижимый код.
-l_0x15_00e8:
+        //    ii(0x15_00e6, 2); xchg(bx, bx);                             /* xchg bx, bx */
+        l_0x15_00e8:
             ii(0x15_00e8, 2); mov(cx, ds);                              /* mov cx, ds */
             ii(0x15_00ea, 2); pushd(ecx);                               /* push ecx */
             ii(0x15_00ec, 2); pushd(esi);                               /* push esi */

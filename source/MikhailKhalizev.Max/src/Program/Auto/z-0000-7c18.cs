@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -13,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7c1f, 2);    add(al, dh);                              /* add al, dh */
             ii(0x7c21, 2);    and(al, 0xe8);                            /* and al, 0xe8 */
             ii(0x7c23, 2);    adc(memw_a16[ds, bx + si], ax);           /* adc [bx+si], ax */
-            ii(0x7c25, 2);    loopw_a16_func(0x7c48, 0x21);             /* loop 0x5c38 */
+            ii(0x7c25, 2);    if(loopw_a16_func(0x7c48, 0x21)) return;  /* loop 0x5c38 */
         }
     }
 }

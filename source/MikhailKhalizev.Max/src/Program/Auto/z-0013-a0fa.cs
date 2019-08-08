@@ -27,8 +27,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_a12f, 2); if(jzw(0x13_a13a, 0x9)) goto l_0x13_a13a; /* jz 0xa13a */
             ii(0x13_a131, 5); mov(memw_a16[ss, bp - 0xa], 0x8023);      /* mov word [bp-0xa], 0x8023 */
             ii(0x13_a136, 3); jmpw(0x13_a262, 0x129); goto l_0x13_a262; /* jmp 0xa262 */
-        //  ii(0x13_a139, 1); Недостижимый код.
-l_0x13_a13a:
+        //    ii(0x13_a139, 1); nop();                                    /* nop */
+        l_0x13_a13a:
             ii(0x13_a13a, 4); mov(ax, memw_a16[es, bx + 0x8]);          /* mov ax, [es:bx+0x8] */
             ii(0x13_a13e, 3); mov(memw_a16[ss, bp - 0x20], ax);         /* mov [bp-0x20], ax */
             ii(0x13_a141, 1); pushw(ax);                                /* push ax */
@@ -121,8 +121,8 @@ l_0x13_a13a:
             ii(0x13_a224, 2); if(jnzw(0x13_a22c, 0x6)) goto l_0x13_a22c; /* jnz 0xa22c */
             ii(0x13_a226, 3); mov(si, 0x1a);                            /* mov si, 0x1a */
             ii(0x13_a229, 2); jmpw(0x13_a23b, 0x10); goto l_0x13_a23b;  /* jmp 0xa23b */
-        //  ii(0x13_a22b, 1); Недостижимый код.
-l_0x13_a22c:
+        //    ii(0x13_a22b, 1); nop();                                    /* nop */
+        l_0x13_a22c:
             ii(0x13_a22c, 3); mov(al, memb_a16[ds, 0x51b5]);            /* mov al, [0x51b5] */
             ii(0x13_a22f, 2); sub(ah, ah);                              /* sub ah, ah */
             ii(0x13_a231, 3); cmp(ax, memw_a16[ss, bp - 0x22]);         /* cmp ax, [bp-0x22] */

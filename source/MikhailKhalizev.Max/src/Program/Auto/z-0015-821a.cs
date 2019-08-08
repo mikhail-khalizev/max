@@ -29,8 +29,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_824b, 3); jmpw(0x15_825b, 0xd); goto l_0x15_825b;   /* jmp 0x825b */
         l_0x15_824e:
             ii(0x15_824e, 3); jmpw(0x15_825b, 0xa); goto l_0x15_825b;   /* jmp 0x825b */
-        //  ii(0x15_8251, 10); Недостижимый код.
-l_0x15_825b:
+        //    ii(0x15_8251, 1); pushw(ds);                                /* push ds */
+        //    ii(0x15_8252, 3); pushw(0x16bc);                            /* push 0x16bc */
+        //    ii(0x15_8255, 3); callw(0x15_1066, -0x71f2);                /* call 0x1066 */
+        //    ii(0x15_8258, 3); add(sp, 0x4);                             /* add sp, 0x4 */
+        l_0x15_825b:
             ii(0x15_825b, 3); mov(ax, memw_a16[ds, 0x16d6]);            /* mov ax, [0x16d6] */
             ii(0x15_825e, 4); or(ax, memw_a16[ds, 0x16d4]);             /* or ax, [0x16d4] */
             ii(0x15_8262, 2); if(jnzw(0x15_8267, 0x3)) goto l_0x15_8267; /* jnz 0x8267 */

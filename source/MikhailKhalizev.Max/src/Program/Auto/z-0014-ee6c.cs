@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0014_ee6c()
         {
             ii(0x14_ee6c, 5); test(memb_a16[ds, 0x1582], 0x1);          /* test byte [0x1582], 0x1 */
-            ii(0x14_ee71, 2); jnzw_func(0x14_ee44, -0x2f);              /* jnz 0xee44 */
+            ii(0x14_ee71, 2); if(jnzw_func(0x14_ee44, -0x2f)) return;   /* jnz 0xee44 */
             ii(0x14_ee73, 2); mov(al, 0xb);                             /* mov al, 0xb */
             ii(0x14_ee75, 1); outb(dx, al);                             /* out dx, al */
             ii(0x14_ee76, 1); popw(ds);                                 /* pop ds */
@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_ee7c, 1); popw(dx);                                 /* pop dx */
             ii(0x14_ee7d, 2); test(ch, al);                             /* test ch, al */
             ii(0x14_ee7f, 1); popw(ax);                                 /* pop ax */
-            ii(0x14_ee80, 2); jzw_func(0x14_ee84, 0x2);                 /* jz 0xee84 */
+            ii(0x14_ee80, 2); if(jzw_func(0x14_ee84, 0x2)) return;      /* jz 0xee84 */
             ii(0x14_ee82, 1); retw(); return;                           /* ret */
         }
     }

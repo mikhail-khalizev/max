@@ -43,10 +43,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public bool BrFar { get; set; }
 
         public bool IsCall { get; set; }
-        public bool IsAnyLoop { get; set; }
-        public bool IsAnyJump { get; set; }
-        public bool IsAnyRet { get; set; }
-        public bool IsJmpOrRet { get; set; }
+        public bool IsLoopOrLoopcc { get; set; }
+        public bool IsRet { get; set; }
+        public bool IsJmp { get; set; }
+        public bool IsJmpOrRet => IsJmp || IsRet;
+        public bool IsJmpOrJcc { get; set; }
+        public bool IsLocalBranch { get; set; }
 
         public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset);
 
@@ -90,12 +92,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             PfxAddress = ud.pfx_adr != 0;
             PfxOpr = ud.pfx_opr != 0;
 
+            IsJmp = ud.mnemonic == ud_mnemonic_code.UD_Ijmp;
             IsCall = ud.mnemonic == ud_mnemonic_code.UD_Icall;
-            IsAnyLoop = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");
-            IsAnyJump = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("j");
-            IsAnyRet = 0 <= ud.mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
-            IsJmpOrRet = ud.mnemonic == ud_mnemonic_code.UD_Ijmp || IsAnyRet;
-
+            IsJmpOrJcc = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("j");
+            IsLoopOrLoopcc = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");
+            IsRet = 0 <= ud.mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
+            
             if (ud.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
                 throw new NotImplementedException();
 
@@ -103,7 +105,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 .TakeWhile(x => x.type != ud_type.UD_NONE)
                 .ToList();
 
-            if ((IsAnyJump || IsAnyLoop || IsCall) && Operands[0].type == ud_type.UD_OP_PTR)
+            if ((IsJmpOrJcc || IsLoopOrLoopcc || IsCall) && Operands[0].type == ud_type.UD_OP_PTR)
                 BrFar = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
 
             AddrMode = ud.adr_mode;
@@ -132,26 +134,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return ToCodeString();
         }
 
-        public string ToCodeString(string cmdSuffix = "", string funcAddArg = "", bool isJmpOutside = true, int offset = 0)
+        public string ToCodeString(
+            string cmdSuffix = "",
+            string funcAddArg = "",
+            int offset = 0,
+            bool onlyRawCmd = false)
         {
-            var gotoLabelConditional = 
-                (IsAnyJump || IsAnyLoop) && Operands[0].type == ud_type.UD_OP_JIMM && !isJmpOutside && Mnemonic != ud_mnemonic_code.UD_Ijmp;
-            var gotoLabel = 
-                IsAnyJump && Operands[0].type == ud_type.UD_OP_JIMM && !isJmpOutside && Mnemonic == ud_mnemonic_code.UD_Ijmp;
-
-            var addIf = gotoLabelConditional;
-            var addGotoLabel = gotoLabelConditional || gotoLabel;
-            var addReturn = isJmpOutside && new[]
-            {
-                ud_mnemonic_code.UD_Ijmp,
-                ud_mnemonic_code.UD_Iret,
-                ud_mnemonic_code.UD_Iretf,
-                ud_mnemonic_code.UD_Iiretw,
-                ud_mnemonic_code.UD_Iiretd,
-                ud_mnemonic_code.UD_Iiretq
-            }.Contains(Mnemonic);
-
-
+            var addIf = !onlyRawCmd && (IsJmpOrJcc || IsLoopOrLoopcc) && (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
+            var addGotoLabel = !onlyRawCmd && IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
+            var addReturn = !onlyRawCmd && !IsLocalBranch && (
+                addIf ||
+                new[]
+                {
+                    ud_mnemonic_code.UD_Ijmp,
+                    ud_mnemonic_code.UD_Iret,
+                    ud_mnemonic_code.UD_Iretf,
+                    ud_mnemonic_code.UD_Iiretw,
+                    ud_mnemonic_code.UD_Iiretd,
+                    ud_mnemonic_code.UD_Iiretq
+                }.Contains(Mnemonic)
+            );
+            
             var sb = new StringBuilder();
 
             var flags = _knownInstr[Mnemonic];
@@ -217,7 +220,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 sb.Append("_far");
 
             var needWriteNamespace = IsCall;
-            if (IsAnyJump || IsAnyLoop || IsCall)
+            if (IsJmpOrJcc || IsLoopOrLoopcc || IsCall)
             {
                 if (Operands[0].type == ud_type.UD_OP_PTR)
                 {
@@ -520,7 +523,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return sb.ToString();
         }
         
-        #region KnownInstr
+        #region Known Instructions
 
         [Flags]
         private enum InstrFlags
@@ -748,6 +751,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 {ud_mnemonic_code.UD_Iverr, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ilahf, InstrFlags.None},
                 {ud_mnemonic_code.UD_Isalc, InstrFlags.None},
+                
+                {ud_mnemonic_code.UD_Iinvlpg, InstrFlags.None},
 
                 //        {ud_mnemonic_code.UD_Isysenter, InstrFlags.None},
                 //        {ud_mnemonic_code.UD_Imovups, InstrFlags.None},

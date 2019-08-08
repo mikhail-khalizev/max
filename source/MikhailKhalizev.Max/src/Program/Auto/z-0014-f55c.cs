@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_f57d, 4); add(memw_a16[ds, si], 0xe83b);            /* add word [si], 0xe83b */
             ii(0x14_f581, 2); if(jgew(0x14_f587, 0x4)) goto l_0x14_f587; /* jge 0xf587 */
             ii(0x14_f583, 2); cmp(al, -0x18 /* 0xe8 */);                /* cmp al, 0xe8 */
-            ii(0x14_f585, 2); jnsw_func(0x14_f58b, 0x4);                /* jns 0xf58b */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x14_f585, 2); if(jnsw_func(0x14_f58b, 0x4)) return;     /* jns 0xf58b */ /* Адрес перехода делит инструкцию в этой функции пополам. */
         l_0x14_f587:
             ii(0x14_f587, 3); cmp(ax, 0x75e8);                          /* cmp ax, 0x75e8 */
             ii(0x14_f58a, 2); add(al, 0x3e);                            /* add al, 0x3e */

@@ -122,7 +122,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_efc0, 1); popw(di);                                 /* pop di */
             ii(0x14_efc1, 2); retfd(); return;                          /* o32 retf */
         //  ii(0x14_efc3, 9); Недостижимый код.
-l_0x14_efcc:
+        l_0x14_efcc:
             ii(0x14_efcc, 6); sub(memw_a16[ds, 0xc16], 0x400);          /* sub word [0xc16], 0x400 */
         l_0x14_efd2:
             ii(0x14_efd2, 5); add(memw_a32[ss, ebp + 0x24], -0xd /* 0xf3 */); /* add word [ebp+0x24], 0xfff3 */

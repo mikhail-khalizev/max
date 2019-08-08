@@ -78,7 +78,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_9afa, 1); leavew();                                 /* leave */
             ii(0x13_9afb, 1); retfw(); return;                          /* retf */
         //  ii(0x13_9afc, 2); Недостижимый код.
-l_0x13_9afe:
+        l_0x13_9afe:
             ii(0x13_9afe, 3); mov(ax, memw_a16[ss, bp - 0xc]);          /* mov ax, [bp-0xc] */
             ii(0x13_9b01, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x13_9b04, 4); mov(memw_a16[es, bx + 0x14], ax);         /* mov [es:bx+0x14], ax */

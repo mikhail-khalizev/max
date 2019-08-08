@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_4f77, 1); leavew();                                 /* leave */
             ii(0x13_4f78, 1); retfw(); return;                          /* retf */
         //  ii(0x13_4f79, 1); Недостижимый код.
-l_0x13_4f7a:
+        l_0x13_4f7a:
             ii(0x13_4f7a, 4); mov(al, memb_a16[es, 0x51]);              /* mov al, [es:0x51] */
             ii(0x13_4f7e, 3); mov(memb_a16[ss, bp - 0x2], al);          /* mov [bp-0x2], al */
             ii(0x13_4f81, 2); cmp(al, 0xe);                             /* cmp al, 0xe */

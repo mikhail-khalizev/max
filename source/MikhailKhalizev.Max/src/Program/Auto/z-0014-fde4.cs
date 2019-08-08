@@ -36,9 +36,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_fe31, 3); pushw(0x9ad);                             /* push 0x9ad */
             ii(0x14_fe34, 3); mov(ax, 0x902);                           /* mov ax, 0x902 */
             ii(0x14_fe37, 3); mov(bx, 0x2ca);                           /* mov bx, 0x2ca */
-            ii(0x14_fe3a, 3); jmpd_a16_far_ind(ds, bx); return;         /* jmp far dword [bx] */
-        //  ii(0x14_fe3d, 11); Недостижимый код.
-l_0x14_fe48:
+            ii(0x14_fe3a, 3); if(jmpd_a16_far_ind(ds, bx)) return;      /* jmp far dword [bx] */
+            ii(0x14_fe3d, 2); popd(ebx);                                /* pop ebx */
+            ii(0x14_fe3f, 3); and(bh, 0xfd);                            /* and bh, 0xfd */
+            ii(0x14_fe42, 2); shl(al, 0x1);                             /* shl al, 1 */
+            ii(0x14_fe44, 2); or(bh, al);                               /* or bh, al */
+            ii(0x14_fe46, 2); pushd(ebx);                               /* push ebx */
+        l_0x14_fe48:
             ii(0x14_fe48, 2); popd(ebx);                                /* pop ebx */
             ii(0x14_fe4a, 3); mov(al, memb_a16[ds, si + 0x3b]);         /* mov al, [si+0x3b] */
             ii(0x14_fe4d, 2); and(al, 0x5);                             /* and al, 0x5 */

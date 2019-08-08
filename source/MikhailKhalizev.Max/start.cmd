@@ -1,3 +1,3 @@
 :begin
-    dotnet run
+    dotnet run -c Release
     if %errorlevel% == 5 goto begin

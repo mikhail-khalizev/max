@@ -33,11 +33,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_da6b, 1); lahf();                                   /* lahf */
             ii(0x13_da6c, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x13_da6f, 4); cmp(memw_a16[ss, bp - 0x2], 0);           /* cmp word [bp-0x2], 0x0 */
-            ii(0x13_da73, 2); jnzw_func(0x13_da94, 0x1f);               /* jnz 0xda94 */
+            ii(0x13_da73, 2); if(jnzw_func(0x13_da94, 0x1f)) return;    /* jnz 0xda94 */
             ii(0x13_da75, 1); sahf();                                   /* sahf */
             ii(0x13_da76, 2); if(jaew(0x13_da7c, 0x4)) goto l_0x13_da7c; /* jae 0xda7c */
             ii(0x13_da78, 2); mov(ah, 0x9);                             /* mov ah, 0x9 */
-            ii(0x13_da7a, 2); jmpw_func(0x13_da9a, 0x1e); return;       /* jmp 0xda9a */
+            ii(0x13_da7a, 2); if(jmpw_func(0x13_da9a, 0x1e)) return;    /* jmp 0xda9a */
         l_0x13_da7c:
             ii(0x13_da7c, 5); test(memb_a16[ds, bx + 0x1c5d], 0x40);    /* test byte [bx+0x1c5d], 0x40 */
             ii(0x13_da81, 2); if(jzw(0x13_da8e, 0xb)) goto l_0x13_da8e; /* jz 0xda8e */
@@ -45,11 +45,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_da86, 3); cmp(memb_a16[ds, bx], 0x1a);              /* cmp byte [bx], 0x1a */
             ii(0x13_da89, 2); if(jnzw(0x13_da8e, 0x3)) goto l_0x13_da8e; /* jnz 0xda8e */
             ii(0x13_da8b, 1); clc();                                    /* clc */
-            ii(0x13_da8c, 2); jmpw_func(0x13_da9a, 0xc); return;        /* jmp 0xda9a */
+            ii(0x13_da8c, 2); if(jmpw_func(0x13_da9a, 0xc)) return;     /* jmp 0xda9a */
         l_0x13_da8e:
             ii(0x13_da8e, 1); stc();                                    /* stc */
             ii(0x13_da8f, 3); mov(ax, 0x1c00);                          /* mov ax, 0x1c00 */
-            ii(0x13_da92, 2); jmpw_func(0x13_da9a, 0x6); return;        /* jmp 0xda9a */
+            ii(0x13_da92, 2); if(jmpw_func(0x13_da9a, 0x6)) return;     /* jmp 0xda9a */
         }
     }
 }

@@ -1774,9 +1774,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void invlpg()
+        public void invlpg(MemoryValue value)
         {
-            Implementation.invlpg();
+            Implementation.invlpg(value);
         }
 
         /// <inheritdoc />
@@ -1804,15 +1804,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpw_func(Address address, int offset)
+        public bool jmpw_func(Address address, int offset)
         {
-            Implementation.jmpw_func(address, offset);
+            return Implementation.jmpw_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jmpw_abs(Value address)
+        public bool jmpw_abs(Value address)
         {
-            Implementation.jmpw_abs(address);
+            return Implementation.jmpw_abs(address);
         }
 
         /// <inheritdoc />
@@ -1822,15 +1822,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpw_far_abs(int segment, Address address)
+        public bool jmpw_far_abs(int segment, Address address)
         {
-            Implementation.jmpw_far_abs(segment, address);
+            return Implementation.jmpw_far_abs(segment, address);
         }
 
         /// <inheritdoc />
-        public void jmpw_a16_far_ind(SegmentRegister segment, Value address)
+        public bool jmpw_a16_far_ind(SegmentRegister segment, Value address)
         {
-            Implementation.jmpw_a16_far_ind(segment, address);
+            return Implementation.jmpw_a16_far_ind(segment, address);
         }
 
         /// <inheritdoc />
@@ -1840,15 +1840,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpd_func(Address address, int offset)
+        public bool jmpd_func(Address address, int offset)
         {
-            Implementation.jmpd_func(address, offset);
+            return Implementation.jmpd_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jmpd_abs(Value address)
+        public bool jmpd_abs(Value address)
         {
-            Implementation.jmpd_abs(address);
+            return Implementation.jmpd_abs(address);
         }
 
         /// <inheritdoc />
@@ -1858,15 +1858,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpd_far_abs(int segment, Value address)
+        public bool jmpd_far_abs(int segment, Address address)
         {
-            Implementation.jmpd_far_abs(segment, address);
+            return Implementation.jmpd_far_abs(segment, address);
         }
 
         /// <inheritdoc />
-        public void jmpd_a16_far_ind(SegmentRegister segment, Value address)
+        public bool jmpd_a16_far_ind(SegmentRegister segment, Value address)
         {
-            Implementation.jmpd_a16_far_ind(segment, address);
+            return Implementation.jmpd_a16_far_ind(segment, address);
         }
 
         /// <inheritdoc />
@@ -1906,15 +1906,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jaew_func(Address address, int offset)
+        public bool jaew_func(Address address, int offset)
         {
-            Implementation.jaew_func(address, offset);
+            return Implementation.jaew_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jaed_func(Address address, int offset)
+        public bool jaed_func(Address address, int offset)
         {
-            Implementation.jaed_func(address, offset);
+            return Implementation.jaed_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -1930,15 +1930,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jbw_func(Address address, int offset)
+        public bool jbw_func(Address address, int offset)
         {
-            Implementation.jbw_func(address, offset);
+            return Implementation.jbw_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jbd_func(Address address, int offset)
+        public bool jbd_func(Address address, int offset)
         {
-            Implementation.jbd_func(address, offset);
+            return Implementation.jbd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -1954,15 +1954,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jbew_func(Address address, int offset)
+        public bool jbew_func(Address address, int offset)
         {
-            Implementation.jbew_func(address, offset);
+            return Implementation.jbew_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jbed_func(Address address, int offset)
+        public bool jbed_func(Address address, int offset)
         {
-            Implementation.jbed_func(address, offset);
+            return Implementation.jbed_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -1984,15 +1984,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jcxzw_func(Address address, int offset)
+        public bool jcxzw_func(Address address, int offset)
         {
-            Implementation.jcxzw_func(address, offset);
+            return Implementation.jcxzw_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jcxzd_func(Address address, int offset)
+        public bool jcxzd_func(Address address, int offset)
         {
-            Implementation.jcxzd_func(address, offset);
+            return Implementation.jcxzd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2002,9 +2002,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jecxzd_func(Address address, int offset)
+        public bool jecxzd_func(Address address, int offset)
         {
-            Implementation.jecxzd_func(address, offset);
+            return Implementation.jecxzd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2056,9 +2056,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jld_func(Address address, int offset)
+        public bool jld_func(Address address, int offset)
         {
-            Implementation.jld_func(address, offset);
+            return Implementation.jld_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2074,9 +2074,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jlew_func(Address address, int offset)
+        public bool jlew_func(Address address, int offset)
         {
-            Implementation.jlew_func(address, offset);
+            return Implementation.jlew_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2164,15 +2164,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jnsw_func(Address address, int offset)
+        public bool jnsw_func(Address address, int offset)
         {
-            Implementation.jnsw_func(address, offset);
+            return Implementation.jnsw_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jnsd_func(Address address, int offset)
+        public bool jnsd_func(Address address, int offset)
         {
-            Implementation.jnsd_func(address, offset);
+            return Implementation.jnsd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2188,15 +2188,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jnzw_func(Address address, int offset)
+        public bool jnzw_func(Address address, int offset)
         {
-            Implementation.jnzw_func(address, offset);
+            return Implementation.jnzw_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jnzd_func(Address address, int offset)
+        public bool jnzd_func(Address address, int offset)
         {
-            Implementation.jnzd_func(address, offset);
+            return Implementation.jnzd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2242,9 +2242,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jsw_func(Address address, int offset)
+        public bool jsw_func(Address address, int offset)
         {
-            Implementation.jsw_func(address, offset);
+            return Implementation.jsw_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2260,15 +2260,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void jzw_func(Address address, int offset)
+        public bool jzw_func(Address address, int offset)
         {
-            Implementation.jzw_func(address, offset);
+            return Implementation.jzw_func(address, offset);
         }
 
         /// <inheritdoc />
-        public void jzd_func(Address address, int offset)
+        public bool jzd_func(Address address, int offset)
         {
-            Implementation.jzd_func(address, offset);
+            return Implementation.jzd_func(address, offset);
         }
 
         /// <inheritdoc />

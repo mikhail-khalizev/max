@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_c6e3, 1); leavew();                                 /* leave */
             ii(0x13_c6e4, 1); retfw(); return;                          /* retf */
         //  ii(0x13_c6e5, 1); Недостижимый код.
-l_0x13_c6e6:
+        l_0x13_c6e6:
             ii(0x13_c6e6, 2); jmpw(0x13_c6c4, -0x24); goto l_0x13_c6c4; /* jmp 0xc6c4 */
         l_0x13_c6e8:
             ii(0x13_c6e8, 2); mov(al, 0xff);                            /* mov al, 0xff */

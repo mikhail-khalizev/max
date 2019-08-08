@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -40,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa087, 2);    if(jzw(0xa095, 0xc)) goto l_0xa095;       /* jz 0xa095 */
             ii(0xa089, 5);    mov(memw_a16[es, bx], 0x10);              /* mov word [es:bx], 0x10 */
             ii(0xa08e, 4);    mov(memw_a16[es, bx + 0x2], cs);          /* mov [es:bx+0x2], cs */
-            ii(0xa092, 3);    jmpw_func(0x3ff1, -0x60a4); return;       /* jmp 0x3ff1 */
+            ii(0xa092, 3);    if(jmpw_func(0x3ff1, -0x60a4)) return;    /* jmp 0x3ff1 */
         l_0xa095:
             ii(0xa095, 3);    callw(0xb030, 0xf98);                     /* call 0xb030 */
             ii(0xa098, 1);    pusha();                                  /* pusha */

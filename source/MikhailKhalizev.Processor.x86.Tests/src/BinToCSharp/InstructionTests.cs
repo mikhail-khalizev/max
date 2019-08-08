@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
             u.error.Should().Be(0);
 
             var cmd = new Instruction(new DefinitionCollection(), u);
-            var str = cmd.ToCodeString();
+            var str = cmd.ToCodeString(onlyRawCmd: true);
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 

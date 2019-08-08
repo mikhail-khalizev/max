@@ -41,7 +41,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public event EventHandler OnSave;
 
         public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
-        public DecodedCode code { get; } = new DecodedCode();
+        public DecodedCode DecodedCode { get; } = new DecodedCode();
+
+        public bool AddMethodInfoJumpsToDecode { get; set; } = true;
 
 
 
@@ -63,22 +65,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         }
 
 
-        private MultiValueDictionary<Address, MethodInfoDto> already_decoded_funcs_ { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
+        private MultiValueDictionary<Address, MethodInfoDto> AlreadyDecodedMethods { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
 
         public void AddAlreadyDecodedFunc(MethodInfoDto model)
         {
             foreach (var address in model.Addresses)
-                already_decoded_funcs_.Add(address, model);
+                AlreadyDecodedMethods.Add(address, model);
         }
 
         public void RemoveAlreadyDecodedFunc(Address address)
         {
-            already_decoded_funcs_.Remove(address);
+            AlreadyDecodedMethods.Remove(address);
         }
 
-        public bool already_decoded_funcs_check(Address address)
+        public bool HaveAlreadyDecodedMethodStartedWith(Address address)
         {
-            if (!already_decoded_funcs_.TryGetValue(address, out var models))
+            if (!AlreadyDecodedMethods.TryGetValue(address, out var models))
                 return false;
 
             foreach (var model in models)
@@ -92,7 +94,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private bool AlreadyDecodedContainsMethodInfo(MethodInfoDto methodInfoDto)
         {
-            return already_decoded_funcs_.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
+            return AlreadyDecodedMethods.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return NewDetectedMethods.Add(new DetectedMethod(address));
         }
 
-        public Dictionary<Address, int> Aligment { get; } = new Dictionary<Address, int>(); // <addr of start, aligment>
+        public Dictionary<Address, int> Alignment { get; } = new Dictionary<Address, int>(); // <addr of start, aligment>
 
         // Переходы на известные адреса.
         public SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
@@ -224,7 +226,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void Process(Address address)
         {
-            if (code.Contains(address))
+            if (DecodedCode.Contains(address))
                 return; // Код включающий этот адрес уже декодирован.
 
             if (address < CsBase)
@@ -265,13 +267,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             while (true)
             {
-                var eip = u.pc;
-                if (nearestForceEnd <= eip || nearestSuppressDecode <= eip)
+                var pc = u.pc;
+                if (nearestForceEnd <= pc || nearestSuppressDecode <= pc)
                     break;
 
-                if (already_decoded_funcs_check(eip))
+                if (HaveAlreadyDecodedMethodStartedWith(pc))
                     break; // Нашли среди декодированных.
-
 
                 var length = udis86.ud_disassemble(ref u);
                 if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
@@ -280,18 +281,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 _limitSize -= length;
 
                 var cmd = new Instruction(DefinitionCollection, u);
-
-                // Бывают случаи, когда ud_obj незнаком с инструкцией, хотя в документации x86 она есть.
-                //        if (cmd.mnemonic == UD_Iinvalid)
-                //            throw exo::exception::not_implemented();
-
-                code.Insert(cmd);
+                
+                DecodedCode.Insert(cmd);
                 InstructionDecoded?.Invoke(this, cmd);
 
                 if (cmd.IsJmpOrRet)
                     break; // Потенциальный конец функции.
 
-                if (code.Contains(cmd.End))
+                if (DecodedCode.Contains(cmd.End))
                     break; // Следующая часть кода уже декодирована.
             }
         }
@@ -300,59 +297,60 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             _readCStringPlugin.StringArea = Interval.From(begin, end);
         }
-
-        public void add_aligment_as_instructions()
+        
+        // Добавляет инструкции выравнивания чтобы заполнить "дыры".
+        public void AddAlignmentAsInstructions()
         {
-            foreach (var a in Aligment)
+            foreach (var (address, size) in Alignment)
             {
-                var iter_area = code.Area.Find(a.Key, false);
-                if (iter_area.IsEmpty)
+                var interval = DecodedCode.Area.FindIntervalThatContainsValue(address, false);
+                if (interval.IsEmpty)
                     throw new InvalidOperationException();
 
-                if (iter_area.Begin < a.Key)
+                if (interval.Begin < address)
                     continue; // Выравнивание не требуется, т.к. до нас уже что-то есть.
 
-                if (iter_area != code.Area.First())
+                if (interval != DecodedCode.Area.First())
                 {
-                    var i = code.Area.GetIntervalBefore(a.Key);
-                    var prev_addr = i.End;
+                    var intervalBefore = DecodedCode.Area.GetIntervalBefore(address);
+                    var prevAddress = intervalBefore.End;
 
-                    if (a.Key < prev_addr + a.Value)
-                        code.Insert(new Instruction(prev_addr, a.Key, "Выравнивание."));
+                    if (address < prevAddress + size)
+                        DecodedCode.Insert(new Instruction(prevAddress, address, "Выравнивание."));
                 }
             }
         }
 
         private void LayoutMethods()
         {
-            Console.WriteLine("Layout Methods");
+            Console.WriteLine("Разбиение кода на методы.");
 
-            add_aligment_as_instructions();
+            AddAlignmentAsInstructions();
 
             while (true)
             {
-                var success_count = 0;
+                var successCount = 0;
                 var toRemove = new List<DetectedMethod>();
 
                 foreach (var detectedMethod in NewDetectedMethods.ToArray())
                 {
-                    var addr_func = detectedMethod.Begin;
+                    var methodBegin = detectedMethod.Begin;
 
                     // Следует ли вычислять конец этой функции или он уже вычислен.
                     if (detectedMethod.End != 0)
                     {
-                        var next = NewDetectedMethods.FirstGreaterOrDefault(new DetectedMethod(addr_func));
+                        var next = NewDetectedMethods.FirstGreaterOrDefault(new DetectedMethod(methodBegin));
 
                         if (next != null && detectedMethod.End <= next.Begin)
                         {
-                            success_count++;
+                            successCount++;
                             continue;
                         }
 
                         detectedMethod.End = 0;
                     }
 
-                    if (!code.Contains(addr_func))
+                    if (!DecodedCode.Contains(methodBegin))
                     {
                         // Вообще не декодировали этот адрес. Видимо он либо alredy_decoded или suppress.
                         toRemove.Add(detectedMethod);
@@ -361,110 +359,104 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // --- Вычисляем... ---
 
-                    var first_cmd = code.GetInstruction(addr_func);
+                    var firstCmd = DecodedCode.GetInstruction(methodBegin);
 
-                    if (first_cmd == null)
+                    if (firstCmd == null)
                         throw new InvalidOperationException("Начало функции делит инструкцию пополам.");
 
                     // --- Посчитаем min_end - адрес конца функции, дальше которого функция точно уже не может продолжаться. ---
 
-                    var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(addr_func);
+                    var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(methodBegin);
                     if (nearestForceEnd == default)
                         nearestForceEnd = Address.MaxValue;
 
-                    var min_end = nearestForceEnd;
+                    var methodEnd = nearestForceEnd;
 
                     // Учтём, что инструкции в decoded_code могут пересекаться. Найдём 'верную дорожку'.
 
-                    var instr = new List<Instruction>();
-                    var last_instr_end = first_cmd.Begin;
-                    //var may_be_end_of_func = new List<Address>();
+                    var instructions = new List<Instruction>();
+                    var lastInstrEnd = firstCmd.Begin;
 
-                    for (var cmd = first_cmd; cmd != null; cmd = code.GetNextInstruction(cmd))
+                    for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
                     {
-                        if (min_end <= cmd.Begin)
+                        if (methodEnd <= cmd.Begin)
                             break;
 
-                        if (2 * (last_instr_end - first_cmd.Begin) < cmd.Begin - last_instr_end)
-                            break; // Не допускаем большие "дыры".
+                        // Не допускаем большие "дыры".
+                        if (2 * (lastInstrEnd - firstCmd.Begin) < cmd.Begin - lastInstrEnd)
+                            break;
 
-                        // Проверим на принадлежность к new_detected_funcs.
-
-                        if (cmd != first_cmd && NewDetectedMethods.Contains(new DetectedMethod(cmd.Begin)))
+                        // Проверим на принадлежность к NewDetectedMethods.
+                        if (cmd != firstCmd && NewDetectedMethods.Contains(new DetectedMethod(cmd.Begin)))
                         {
-                            // Т.к. эта инструкция является new_detected_funcs, то предыдущая - конец функции.
+                            // Т.к. эта инструкция является NewDetectedMethods, то предыдущая - конец функции.
                             break;
                         }
 
-                        // Проверим на принадлежность к already_decoded_funcs_.
+                        // Всегда false, т.к. мы не декодируем методы из AlreadyDecodedMethods.
+                        //// Проверим на принадлежность к AlreadyDecodedMethods.
+                        //if (HaveAlreadyDecodedMethodStartedWith(cmd.Begin))
+                        //{
+                        //    // Нашли среди декодированных.
+                        //    break;
+                        //}
 
-                        if (already_decoded_funcs_check(cmd.Begin))
-                        {
-                            // Нашли среди декодированных.
+                        instructions.Add(cmd);
+                        lastInstrEnd = cmd.End;
+
+                        if (HaveAlreadyDecodedMethodStartedWith(lastInstrEnd))
                             break;
-                        }
-
-                        //if (cmd.IsJmpOrRet)
-                        //    may_be_end_of_func.Add(cmd.End);
-
-                        instr.Add(cmd);
-                        last_instr_end = cmd.End;
                     }
 
                     // Убираем конечные закомментированные инструкции.
+                    while (instructions.Count != 0 && instructions[instructions.Count - 1].CommentThis)
+                        instructions.RemoveAt(instructions.Count - 1);
 
-                    while (instr.Count != 0)
-                    {
-                        if (instr[instr.Count - 1].CommentThis == false)
-                            break;
-
-                        instr.RemoveAt(instr.Count - 1);
-                    }
-
-                    min_end = instr[instr.Count - 1].End;
+                    methodEnd = instructions[instructions.Count - 1].End;
 
                     // Заполняем label.
 
                     detectedMethod.Labels.Clear();
 
-                    foreach (var i in jmp_to_known_addr.GetViewBetween(new JumpsToKnownAddresses(addr_func), new JumpsToKnownAddresses(min_end)))
+                    foreach (var i in jmp_to_known_addr.GetViewBetween(new JumpsToKnownAddresses(methodBegin), new JumpsToKnownAddresses(methodEnd)))
                     {
                         foreach (var to in i.To)
                         {
-                            if (addr_func <= to && to < min_end)
+                            if (methodBegin <= to && to < methodEnd)
                             {
                                 // Ссылка внутрь функции.
 
-                                var index = instr.BinarySearch(new Instruction(to), Instruction.BeginComparer);
+                                var index = instructions.BinarySearch(new Instruction(to), Instruction.BeginComparer);
 
                                 if (0 <= index)
                                     detectedMethod.Labels.Add(to);
                                 else
                                 {
+                                    // @todo Улучшить логику обработки подобных ситуаций.
                                     Console.Error.WriteLine($"Предупреждение: Метка '{to}' делит инструкцию пополам.");
 
-                                    // @todo Улучшить.
                                     AddToNewDetectedMethods(to); // create if not exist.
                                 }
                             }
                             else
                             {
-                                if (code.Contains(to))
+                                if (DecodedCode.Contains(to))
                                     AddToNewDetectedMethods(to); // create if not exist.
                             }
                         }
                     }
 
-                    detectedMethod.Instructions = instr;
-                    detectedMethod.End = min_end;
+                    detectedMethod.Instructions = instructions;
+                    detectedMethod.End = methodEnd;
                     detectedMethod.RawBytes = Memory.ReadAll(detectedMethod.Begin, detectedMethod.End - detectedMethod.Begin);
                     detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
 
                     // TODO Собрать все Jumps воедино и учесть в рамках Process или JmpCallLoopSimple.
                     // Чтобы layout_funcs ничего не декодировал.
-                    if (detectedMethod.MethodInfo?.Jumps != null)
+                    if (AddMethodInfoJumpsToDecode && detectedMethod.MethodInfo?.Jumps != null)
                     {
                         var interval = Interval.From(detectedMethod.Begin, detectedMethod.End);
+
                         foreach (var externalJump in detectedMethod.MethodInfo.Jumps.Values.SelectMany(x => x)
                             .Where(x => !interval.Contains(x)))
                         {
@@ -472,14 +464,39 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         }
                     }
 
-                    success_count++;
+                    successCount++;
                 }
 
                 foreach (var detectedMethod in toRemove)
                     NewDetectedMethods.Remove(detectedMethod);
 
-                if (success_count == NewDetectedMethods.Count)
-                    break;
+                if (successCount == NewDetectedMethods.Count)
+                {
+                    // Проверяем код на "дыры" после jmp и jcc. В Dos коде нередко происходит возврат обратно на иструкцию непосредственно за jmp.
+
+                    foreach (var method in NewDetectedMethods.ToArray())
+                    {
+                        var prev = method.Instructions.First();
+                        foreach (var instruction in method.Instructions.Skip(1))
+                        {
+                            var decodeStart = prev.End;
+
+                            while (decodeStart != 0 && decodeStart < instruction.Begin && DecodedCode.GetInstructionBefore(decodeStart).IsJmpOrJcc)
+                            {
+                                method.End = 0; // Заново пересчитываем метод.
+                                successCount = 0;
+
+                                Decode(decodeStart);
+                                decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false).End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
+                            }
+                            
+                            prev = instruction;
+                        }
+                    }
+
+                    if (successCount == NewDetectedMethods.Count)
+                        break;
+                }
             }
         }
 
@@ -635,24 +652,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     output.AppendLine($"//  {os}Недостижимый код.");
                     output.Append("        ");
                 }
-
-
+                
                 if (haveLabel)
                 {
-                    output.AppendLine($"l_{(Address)(cmd.Begin + offset)}:");
+                    output.AppendLine($"l_{cmd.Begin + offset}:");
                     output.Append("        ");
                     skip = false;
                 }
 
-
-                // instruction_to_string может изменить comment_this. Поэтому вызывается раньше.
-                var instr = instruction_to_string(detectedMethod, cmd_index, offset);
+                // InstructionToString может изменить comment_this. Поэтому вызывается раньше.
+                var instr = InstructionToString(detectedMethod, cmd_index, offset);
 
 
                 if (skip || cmd.CommentThis)
                     output.Append("//"); // Комментируем недостижимый код.
 
-                if (cmd.IsJmpOrRet)
+                if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
                     skip = true;
 
 
@@ -698,7 +713,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             os.Append($"ii({(Address)(begin + offset)}, {end - begin});");
         }
 
-        private string instruction_to_string(DetectedMethod df, int cmdIndex, int offset)
+        private string InstructionToString(DetectedMethod df, int cmdIndex, int offset)
         {
             var os = new StringBuilder();
 

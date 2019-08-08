@@ -34,8 +34,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_f09b, 3); add(sp, 0xc);                             /* add sp, 0xc */
             ii(0x13_f09e, 3); mov(memw_a16[ss, bp + 0x6], ax);          /* mov [bp+0x6], ax */
             ii(0x13_f0a1, 2); jmpw(0x13_f0d5, 0x32); goto l_0x13_f0d5;  /* jmp 0xf0d5 */
-        //  ii(0x13_f0a3, 1); Недостижимый код.
-l_0x13_f0a4:
+        //    ii(0x13_f0a3, 1); nop();                                    /* nop */
+        l_0x13_f0a4:
             ii(0x13_f0a4, 3); mov(ax, memw_a16[ds, 0x1412]);            /* mov ax, [0x1412] */
             ii(0x13_f0a7, 3); mov(memw_a16[ss, bp - 0x1a], ax);         /* mov [bp-0x1a], ax */
             ii(0x13_f0aa, 5); mov(memw_a16[ss, bp - 0x1c], 0);          /* mov word [bp-0x1c], 0x0 */

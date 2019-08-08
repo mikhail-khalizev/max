@@ -1,10 +1,11 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("5c53f5f9-ea4f-4857-8968-f6e74410bb4f")]
+        [MethodInfo("24da0677-d3a1-4679-ab67-4bb654c636db")]
         public void Method_0015_412f()
         {
             ii(0x15_412f, 1); pushw(bp);                                /* push bp */
@@ -32,22 +33,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_4161, 1); pushw(bx);                                /* push bx */
             ii(0x15_4162, 1); pushw(ds);                                /* push ds */
             ii(0x15_4163, 3); lds(bx, ss, bp + 0x8);                    /* lds bx, [bp+0x8] */
-            ii(0x15_4166, 2); popw(memw_a16[ds, bx]);                   /* pop word [bx] */
-            ii(0x15_4168, 3); mov(memw_a16[ds, bx + 0x2], es);          /* mov [bx+0x2], es */
-            ii(0x15_416b, 3); mov(memw_a16[ds, bx + 0x4], di);          /* mov [bx+0x4], di */
-            ii(0x15_416e, 3); mov(memw_a16[ds, bx + 0x6], si);          /* mov [bx+0x6], si */
-            ii(0x15_4171, 3); mov(memw_a16[ds, bx + 0xe], dx);          /* mov [bx+0xe], dx */
-            ii(0x15_4174, 3); mov(memw_a16[ds, bx + 0x10], cx);         /* mov [bx+0x10], cx */
-            ii(0x15_4177, 3); popw(memw_a16[ds, bx + 0xc]);             /* pop word [bx+0xc] */
-            ii(0x15_417a, 3); mov(memw_a16[ds, bx + 0x12], ax);         /* mov [bx+0x12], ax */
-            ii(0x15_417d, 1); popw(ds);                                 /* pop ds */
-            ii(0x15_417e, 1); popw(di);                                 /* pop di */
-            ii(0x15_417f, 1); popw(si);                                 /* pop si */
-            ii(0x15_4180, 3); mov(ax, 0);                               /* mov ax, 0x0 */
-            ii(0x15_4183, 1); cmc();                                    /* cmc */
-            ii(0x15_4184, 2); rcl(ax, 0x1);                             /* rcl ax, 1 */
-            ii(0x15_4186, 1); popw(bp);                                 /* pop bp */
-            ii(0x15_4187, 1); retfw(); return;                          /* retf */
         }
     }
 }

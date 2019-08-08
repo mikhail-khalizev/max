@@ -55,8 +55,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_82e3, 3); mov(ax, 0);                               /* mov ax, 0x0 */
         l_0x15_82e6:
             ii(0x15_82e6, 3); jmpw(0x15_8305, 0x1c); goto l_0x15_8305;  /* jmp 0x8305 */
-        //  ii(0x15_82e9, 3); Недостижимый код.
-l_0x15_82ec:
+        //    ii(0x15_82e9, 3); jmpw(0x15_82f2, 0x6); goto l_0x15_82f2;   /* jmp 0x82f2 */
+        l_0x15_82ec:
             ii(0x15_82ec, 3); mov(ax, 0);                               /* mov ax, 0x0 */
             ii(0x15_82ef, 3); jmpw(0x15_8305, 0x13); goto l_0x15_8305;  /* jmp 0x8305 */
         l_0x15_82f2:

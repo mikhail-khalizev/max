@@ -1,3 +1,4 @@
+using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 
 namespace MikhailKhalizev.Max.Program
@@ -8,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_b252()
         {
             ii(0xb252, 5);    cmp(memb_a16[ds, 0xe00], 0);              /* cmp byte [0xe00], 0x0 */
-            ii(0xb257, 2);    jzw_func(0xb251, -0x8);                   /* jz 0xb251 */
+            ii(0xb257, 2);    if(jzw_func(0xb251, -0x8)) return;        /* jz 0xb251 */
             ii(0xb259, 3);    callw(0x4f8a, -0x62d2);                   /* call 0x4f8a */
             ii(0xb25c, 3);    callw(0x375c, -0x7b03);                   /* call 0x375c */
             ii(0xb25f, 5);    cmp(memb_a16[ds, 0xdff], 0);              /* cmp byte [0xdff], 0x0 */
@@ -18,13 +19,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb26e, 3);    shr(cx, 0xc);                             /* shr cx, 0xc */
             ii(0xb271, 1);    inc(cx);                                  /* inc cx */
             ii(0xb272, 5);    test(memb_a16[ds, 0x47], 0x80);           /* test byte [0x47], 0x80 */
-            ii(0xb277, 2);    jzw_func(0xb21b, -0x5e);                  /* jz 0xb21b */
-            ii(0xb279, 3);    jmpw_func(0xafec, -0x290); return;        /* jmp 0xafec */
+            ii(0xb277, 2);    if(jzw_func(0xb21b, -0x5e)) return;       /* jz 0xb21b */
+            ii(0xb279, 3);    if(jmpw_func(0xafec, -0x290)) return;     /* jmp 0xafec */
         l_0xb27c:
             ii(0xb27c, 4);    mov(cx, memw_a16[ds, 0xdfa]);             /* mov cx, [0xdfa] */
-            ii(0xb280, 2);    jcxzw_func(0xb251, -0x31);                /* jcxz 0xb251 */
+            ii(0xb280, 2);    if(jcxzw_func(0xb251, -0x31)) return;     /* jcxz 0xb251 */
             ii(0xb282, 5);    cmp(memw_a16[ds, 0xadc], 0);              /* cmp word [0xadc], 0x0 */
-            ii(0xb287, 2);    jzw_func(0xb251, -0x38);                  /* jz 0xb251 */
+            ii(0xb287, 2);    if(jzw_func(0xb251, -0x38)) return;       /* jz 0xb251 */
             ii(0xb289, 1);    pushw(si);                                /* push si */
             ii(0xb28a, 1);    pushw(di);                                /* push di */
             ii(0xb28b, 6);    movzx(eax, memw_a16[ds, 0xeca]);          /* movzx eax, word [0xeca] */

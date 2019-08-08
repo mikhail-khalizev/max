@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0014_ee48()
         {
             ii(0x14_ee48, 3); test(cl, 0xc0);                           /* test cl, 0xc0 */
-            ii(0x14_ee4b, 2); jzw_func(0x14_ee84, 0x37);                /* jz 0xee84 */
+            ii(0x14_ee4b, 2); if(jzw_func(0x14_ee84, 0x37)) return;     /* jz 0xee84 */
             ii(0x14_ee4d, 1); pushw(ax);                                /* push ax */
             ii(0x14_ee4e, 2); mov(al, cl);                              /* mov al, cl */
             ii(0x14_ee50, 1); pushw(dx);                                /* push dx */
@@ -18,11 +18,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_ee56, 1); pushw(ds);                                /* push ds */
             ii(0x14_ee57, 2); mov(ds, dx);                              /* mov ds, dx */
             ii(0x14_ee59, 4); cmp(al, memb_a16[ds, 0x8]);               /* cmp al, [0x8] */
-            ii(0x14_ee5d, 2); jzw_func(0x14_ee44, -0x1b);               /* jz 0xee44 */
+            ii(0x14_ee5d, 2); if(jzw_func(0x14_ee44, -0x1b)) return;    /* jz 0xee44 */
             ii(0x14_ee5f, 3); mov(ax, 0x20);                            /* mov ax, 0x20 */
             ii(0x14_ee62, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x14_ee64, 2); test(cl, cl);                             /* test cl, cl */
-            ii(0x14_ee66, 2); jsw_func(0x14_ee3e, -0x2a);               /* js 0xee3e */
+            ii(0x14_ee66, 2); if(jsw_func(0x14_ee3e, -0x2a)) return;    /* js 0xee3e */
             ii(0x14_ee68, 4); mov(dx, memw_a16[ds, 0x4a]);              /* mov dx, [0x4a] */
         }
     }

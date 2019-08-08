@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_fedc, 2); popd(eax);                                /* pop eax */
             ii(0x14_fede, 4); if(jzw(0x14_fee7, 0x5)) goto l_0x14_fee7; /* jz 0xfee7 */
             ii(0x14_fee2, 2); popd(ebp);                                /* pop ebp */
-            ii(0x14_fee4, 3); jmpw_func(0x14_f880, -0x667); return;     /* jmp 0xf880 */
+            ii(0x14_fee4, 3); if(jmpw_func(0x14_f880, -0x667)) return;  /* jmp 0xf880 */
         l_0x14_fee7:
             ii(0x14_fee7, 5); and(memb_a32[ss, ebp + 0xd], -0x2 /* 0xfe */); /* and byte [ebp+0xd], 0xfe */
             ii(0x14_feec, 2); popd(ebp);                                /* pop ebp */

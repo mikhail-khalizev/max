@@ -62,50 +62,50 @@ namespace MikhailKhalizev.Processor.x86.Tests.Utils
             var us = new UsedSpace<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
             us.ToSpacesString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
 
-            us.Find(0, false).Should().Be(Interval<uint>.Empty);
-            us.Find(0, true).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(0, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(0, true).Should().Be(Interval<uint>.Empty);
 
-            us.Find(1, false).Should().Be(Interval<uint>.Empty);
-            us.Find(1, true).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(1, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(1, true).Should().Be(Interval<uint>.Empty);
 
-            us.Find(3, false).Should().Be(Interval.From<uint>(3, 5));
-            us.Find(3, true).Should().Be(Interval.From<uint>(3, 5));
+            us.FindIntervalThatContainsValue(3, false).Should().Be(Interval.From<uint>(3, 5));
+            us.FindIntervalThatContainsValue(3, true).Should().Be(Interval.From<uint>(3, 5));
 
-            us.Find(4, false).Should().Be(Interval.From<uint>(3, 5));
-            us.Find(4, true).Should().Be(Interval.From<uint>(3, 5));
+            us.FindIntervalThatContainsValue(4, false).Should().Be(Interval.From<uint>(3, 5));
+            us.FindIntervalThatContainsValue(4, true).Should().Be(Interval.From<uint>(3, 5));
 
-            us.Find(5, false).Should().Be(Interval<uint>.Empty);
-            us.Find(5, true).Should().Be(Interval.From<uint>(3, 5));
+            us.FindIntervalThatContainsValue(5, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(5, true).Should().Be(Interval.From<uint>(3, 5));
 
-            us.Find(6, false).Should().Be(Interval<uint>.Empty);
-            us.Find(6, true).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(6, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(6, true).Should().Be(Interval<uint>.Empty);
 
-            us.Find(9, false).Should().Be(Interval<uint>.Empty);
-            us.Find(9, true).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(9, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(9, true).Should().Be(Interval<uint>.Empty);
 
-            us.Find(10, false).Should().Be(Interval.From<uint>(10, 12));
-            us.Find(10, true).Should().Be(Interval.From<uint>(10, 12));
+            us.FindIntervalThatContainsValue(10, false).Should().Be(Interval.From<uint>(10, 12));
+            us.FindIntervalThatContainsValue(10, true).Should().Be(Interval.From<uint>(10, 12));
 
-            us.Find(11, false).Should().Be(Interval.From<uint>(10, 12));
-            us.Find(11, true).Should().Be(Interval.From<uint>(10, 12));
+            us.FindIntervalThatContainsValue(11, false).Should().Be(Interval.From<uint>(10, 12));
+            us.FindIntervalThatContainsValue(11, true).Should().Be(Interval.From<uint>(10, 12));
 
-            us.Find(12, false).Should().Be(Interval<uint>.Empty);
-            us.Find(12, true).Should().Be(Interval.From<uint>(10, 12));
+            us.FindIntervalThatContainsValue(12, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(12, true).Should().Be(Interval.From<uint>(10, 12));
 
-            us.Find(13, false).Should().Be(Interval<uint>.Empty);
-            us.Find(13, true).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(13, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(13, true).Should().Be(Interval<uint>.Empty);
 
-            us.Find(19, false).Should().Be(Interval<uint>.Empty);
-            us.Find(19, true).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(19, false).Should().Be(Interval<uint>.Empty);
+            us.FindIntervalThatContainsValue(19, true).Should().Be(Interval<uint>.Empty);
 
-            us.Find(20, false).Should().Be(Interval.From<uint>(20, 0));
-            us.Find(20, true).Should().Be(Interval.From<uint>(20, 0));
+            us.FindIntervalThatContainsValue(20, false).Should().Be(Interval.From<uint>(20, 0));
+            us.FindIntervalThatContainsValue(20, true).Should().Be(Interval.From<uint>(20, 0));
 
-            us.Find(21, false).Should().Be(Interval.From<uint>(20, 0));
-            us.Find(21, true).Should().Be(Interval.From<uint>(20, 0));
+            us.FindIntervalThatContainsValue(21, false).Should().Be(Interval.From<uint>(20, 0));
+            us.FindIntervalThatContainsValue(21, true).Should().Be(Interval.From<uint>(20, 0));
 
-            us.Find(uint.MaxValue, false).Should().Be(Interval.From<uint>(20, 0));
-            us.Find(uint.MaxValue, true).Should().Be(Interval.From<uint>(20, 0));
+            us.FindIntervalThatContainsValue(uint.MaxValue, false).Should().Be(Interval.From<uint>(20, 0));
+            us.FindIntervalThatContainsValue(uint.MaxValue, true).Should().Be(Interval.From<uint>(20, 0));
         }
         
         [Fact]
