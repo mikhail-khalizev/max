@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_a4a1()
         {
             ii(0x1010_a4a1, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1010_a4a6, 5); calld(Definitions.sys_check_available_stack_size, 0x5b8a7); /* call 0x10165d52 */
+            ii(0x1010_a4a6, 5); calld(Definitions.sys_check_available_stack_size, 0x5_b8a7); /* call 0x10165d52 */
             ii(0x1010_a4ab, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_a4ac, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_a4ad, 1); pushd(edx);                             /* push edx */
@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_a508, 2); jmpd(0x1010_a4d0, -0x3a); goto l_0x1010_a4d0; /* jmp 0x1010a4d0 */
         l_0x1010_a50a:
             ii(0x1010_a50a, 5); mov(eax, 0x48);                         /* mov eax, 0x48 */
-            ii(0x1010_a50f, 5); calld(0x1007_5fdc, -0x94538);           /* call 0x10075fdc */
+            ii(0x1010_a50f, 5); calld(0x1007_5fdc, -0x9_4538);          /* call 0x10075fdc */
             ii(0x1010_a514, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1010_a517, 7); mov(memd_a32[ss, ebp - 0xc], 0x6);      /* mov dword [ebp-0xc], 0x6 */
         l_0x1010_a51e:
@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_a52c, 3); add(eax, 0x25);                         /* add eax, 0x25 */
             ii(0x1010_a52f, 3); imul(eax, eax, 0x14);                   /* imul eax, eax, 0x14 */
             ii(0x1010_a532, 6); mov(eax, memd_a32[ds, eax + 0x101b_a5bc]); /* mov eax, [eax+0x101ba5bc] */
-            ii(0x1010_a538, 5); calld(/* sys */ 0x1017_90ce, 0x6eb91);  /* call 0x101790ce */
+            ii(0x1010_a538, 5); calld(/* sys */ 0x1017_90ce, 0x6_eb91); /* call 0x101790ce */
             ii(0x1010_a53d, 4); movsx(edx, memw_a32[ss, ebp - 0x8]);    /* movsx edx, word [ebp-0x8] */
             ii(0x1010_a541, 2); cmp(edx, eax);                          /* cmp edx, eax */
             ii(0x1010_a543, 2); if(jld(0x1010_a51e, -0x27)) goto l_0x1010_a51e; /* jl 0x1010a51e */

@@ -89,7 +89,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_bc2f, 6); if(jled(0x1018_bce2, 0xad)) goto l_0x1018_bce2; /* jle 0x1018bce2 */
         l_0x1018_bc35:
             ii(0x1018_bc35, 2); mov(eax, edi);                          /* mov eax, edi */
-            ii(0x1018_bc37, 5); calld(/* sys */ 0x1017_1f05, -0x19d37); /* call 0x10171f05 */
+            ii(0x1018_bc37, 5); calld(/* sys */ 0x1017_1f05, -0x1_9d37); /* call 0x10171f05 */
             ii(0x1018_bc3c, 3); cmp(eax, -0x1 /* 0xff */);              /* cmp eax, 0xffffffff */
             ii(0x1018_bc3f, 6); if(jzd(0x1018_bceb, 0xa6)) goto l_0x1018_bceb; /* jz 0x1018bceb */
             ii(0x1018_bc45, 3); lea(edx, eax + 0x1);                    /* lea edx, [eax+0x1] */
@@ -104,7 +104,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_bc5f, 6); if(jzd(0x1018_bce6, 0x81)) goto l_0x1018_bce6; /* jz 0x1018bce6 */
             ii(0x1018_bc65, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1018_bc67, 2); mov(ebx, edi);                          /* mov ebx, edi */
-            ii(0x1018_bc69, 5); calld(/* sys */ 0x1017_8fa7, -0x12cc7); /* call 0x10178fa7 */
+            ii(0x1018_bc69, 5); calld(/* sys */ 0x1017_8fa7, -0x1_2cc7); /* call 0x10178fa7 */
             ii(0x1018_bc6e, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1018_bc70, 6); if(jzd(0x1018_bce6, 0x70)) goto l_0x1018_bce6; /* jz 0x1018bce6 */
             ii(0x1018_bc76, 3); mov(eax, memd_a32[ds, esi + 0xc]);      /* mov eax, [esi+0xc] */
@@ -134,7 +134,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_bcb8, 2); mov(ecx, edi);                          /* mov ecx, edi */
             ii(0x1018_bcba, 3); mov(edx, memd_a32[ds, esi + 0xc]);      /* mov edx, [esi+0xc] */
             ii(0x1018_bcbd, 4); mov(eax, memd_a32[ds, eax + ebp + 0x4]); /* mov eax, [eax+ebp+0x4] */
-            ii(0x1018_bcc1, 5); calld(Definitions.sys_fread, -0x1975a); /* call 0x1017256c */
+            ii(0x1018_bcc1, 5); calld(Definitions.sys_fread, -0x1_975a); /* call 0x1017256c */
             ii(0x1018_bcc6, 3); cmp(eax, 0x1);                          /* cmp eax, 0x1 */
             ii(0x1018_bcc9, 2); if(jnzd(0x1018_bce6, 0x1b)) goto l_0x1018_bce6; /* jnz 0x1018bce6 */
         l_0x1018_bccb:

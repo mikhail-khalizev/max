@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100f_7312()
         {
             ii(0x100f_7312, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x100f_7317, 5); calld(Definitions.sys_check_available_stack_size, 0x6ea36); /* call 0x10165d52 */
+            ii(0x100f_7317, 5); calld(Definitions.sys_check_available_stack_size, 0x6_ea36); /* call 0x10165d52 */
             ii(0x100f_731c, 1); pushd(esi);                             /* push esi */
             ii(0x100f_731d, 1); pushd(edi);                             /* push edi */
             ii(0x100f_731e, 1); pushd(ebp);                             /* push ebp */
@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_732d, 3); mov(memd_a32[ss, ebp - 0x8], ebx);      /* mov [ebp-0x8], ebx */
             ii(0x100f_7330, 3); mov(memd_a32[ss, ebp - 0x4], ecx);      /* mov [ebp-0x4], ecx */
             ii(0x100f_7333, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
-            ii(0x100f_7336, 5); calld(0x1007_611c, -0x8121f);           /* call 0x1007611c */
+            ii(0x100f_7336, 5); calld(0x1007_611c, -0x8_121f);          /* call 0x1007611c */
             ii(0x100f_733b, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
             ii(0x100f_733e, 4); movsx(ebx, memw_a32[ss, ebp - 0x8]);    /* movsx ebx, word [ebp-0x8] */
             ii(0x100f_7342, 4); movsx(edx, memw_a32[ss, ebp - 0xc]);    /* movsx edx, word [ebp-0xc] */
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_736e, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x100f_7371, 3); mov(eax, memd_a32[ds, eax + 0x6]);      /* mov eax, [eax+0x6] */
             ii(0x100f_7374, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
-            ii(0x100f_7377, 5); calld(0x1007_02b9, -0x870c3);           /* call 0x100702b9 */
+            ii(0x100f_7377, 5); calld(0x1007_02b9, -0x8_70c3);          /* call 0x100702b9 */
             ii(0x100f_737c, 3); test(ax, ax);                           /* test ax, ax */
             ii(0x100f_737f, 2); if(jzd(0x100f_73d8, 0x57)) goto l_0x100f_73d8; /* jz 0x100f73d8 */
             ii(0x100f_7381, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */

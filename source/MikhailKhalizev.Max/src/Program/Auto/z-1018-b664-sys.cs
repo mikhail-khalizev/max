@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_b6c0, 5); mov(ebx, 0x24);                         /* mov ebx, 0x24 */
             ii(0x1018_b6c5, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1018_b6c7, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1018_b6c9, 5); calld(Definitions.sys_memset, -0x258ee); /* call 0x10165de0 */
+            ii(0x1018_b6c9, 5); calld(Definitions.sys_memset, -0x2_58ee); /* call 0x10165de0 */
             ii(0x1018_b6ce, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1018_b6d0, 2); jmpd(0x1018_b6d7, 0x5); goto l_0x1018_b6d7; /* jmp 0x1018b6d7 */
         l_0x1018_b6d2:

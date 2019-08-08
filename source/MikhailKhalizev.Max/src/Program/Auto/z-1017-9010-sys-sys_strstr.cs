@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_901f, 2); if(jnzd(0x1017_9028, 0x7)) goto l_0x1017_9028; /* jnz 0x10179028 */
         l_0x1017_9021:
             ii(0x1017_9021, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1017_9023, 5); jmpd_func(0x1017_90c5, 0x9d); return;   /* jmp 0x101790c5 */
+            ii(0x1017_9023, 5); if(jmpd_func(0x1017_90c5, 0x9d)) return; /* jmp 0x101790c5 */
         l_0x1017_9028:
             ii(0x1017_9028, 4); cmp(memb_a32[ds, edx + 0x1], 0);        /* cmp byte [edx+0x1], 0x0 */
             ii(0x1017_902c, 2); if(jnzd(0x1017_904a, 0x1c)) goto l_0x1017_904a; /* jnz 0x1017904a */
@@ -47,11 +47,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_904f, 2); mov(edi, esi);                          /* mov edi, esi */
             ii(0x1017_9051, 2); xor(al, al);                            /* xor al, al */
             ii(0x1017_9053, 1); pushd(es);                              /* push es */
-            ii(0x1017_9054, 2); jecxzd_func(0x1017_9061, 0xb);          /* jecxz 0x10179061 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x1017_9054, 2); if(jecxzd_func(0x1017_9061, 0xb)) return; /* jecxz 0x10179061 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x1017_9056, 2); mov(edx, ds);                           /* mov edx, ds */
             ii(0x1017_9058, 2); mov(es, edx);                           /* mov es, edx */
             ii(0x1017_905a, 2); repne_a32(() => scasb_a32());           /* repne scasb */
-            ii(0x1017_905c, 2); jnzd_func(0x1017_9061, 0x3);            /* jnz 0x10179061 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x1017_905c, 2); if(jnzd_func(0x1017_9061, 0x3)) return; /* jnz 0x10179061 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x1017_905e, 1); dec(edi);                               /* dec edi */
             ii(0x1017_905f, 4); test(ax, 0xcf89);                       /* test ax, 0xcf89 */
             ii(0x1017_9063, 1); popd(es);                               /* pop es */

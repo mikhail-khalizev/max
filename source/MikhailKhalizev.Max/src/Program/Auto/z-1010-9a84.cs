@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_9a84()
         {
             ii(0x1010_9a84, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x1010_9a89, 5); calld(Definitions.sys_check_available_stack_size, 0x5c2c4); /* call 0x10165d52 */
+            ii(0x1010_9a89, 5); calld(Definitions.sys_check_available_stack_size, 0x5_c2c4); /* call 0x10165d52 */
             ii(0x1010_9a8e, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_9a8f, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_9a90, 1); pushd(edx);                             /* push edx */
@@ -31,13 +31,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_9ac1, 2); if(jged(0x1010_9aca, 0x7)) goto l_0x1010_9aca; /* jge 0x10109aca */
             ii(0x1010_9ac3, 7); mov(memd_a32[ss, ebp - 0x8], 0);        /* mov dword [ebp-0x8], 0x0 */
         l_0x1010_9aca:
-            ii(0x1010_9aca, 5); calld(0x1014_82f4, 0x3e825);            /* call 0x101482f4 */
+            ii(0x1010_9aca, 5); calld(0x1014_82f4, 0x3_e825);           /* call 0x101482f4 */
             ii(0x1010_9acf, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x1010_9ad2, 7); dec(memw_a32[ds, 0x101c_4dea]);         /* dec word [0x101c4dea] */
             ii(0x1010_9ad9, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_9adc, 5); calld(0x1010_96e0, -0x401);             /* call 0x101096e0 */
         l_0x1010_9ae1:
-            ii(0x1010_9ae1, 5); calld(0x1014_82f4, 0x3e80e);            /* call 0x101482f4 */
+            ii(0x1010_9ae1, 5); calld(0x1014_82f4, 0x3_e80e);           /* call 0x101482f4 */
             ii(0x1010_9ae6, 3); sub(eax, memd_a32[ss, ebp - 0xc]);      /* sub eax, [ebp-0xc] */
             ii(0x1010_9ae9, 5); cmp(eax, 0x308c);                       /* cmp eax, 0x308c */
             ii(0x1010_9aee, 2); if(jbd(0x1010_9ae1, -0xf)) goto l_0x1010_9ae1; /* jb 0x10109ae1 */

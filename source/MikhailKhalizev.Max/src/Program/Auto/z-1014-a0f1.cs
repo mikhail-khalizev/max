@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_a0f1()
         {
             ii(0x1014_a0f1, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1014_a0f6, 5); calld(Definitions.sys_check_available_stack_size, 0x1bc57); /* call 0x10165d52 */
+            ii(0x1014_a0f6, 5); calld(Definitions.sys_check_available_stack_size, 0x1_bc57); /* call 0x10165d52 */
             ii(0x1014_a0fb, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_a0fc, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_a0fd, 1); pushd(edx);                             /* push edx */
@@ -84,7 +84,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_a1c8, 5); cmp(memw_a32[ss, ebp - 0x10], 0x15);    /* cmp word [ebp-0x10], 0x15 */
             ii(0x1014_a1cd, 6); if(jzd(0x1014_a126, -0xad)) goto l_0x1014_a126; /* jz 0x1014a126 */
             ii(0x1014_a1d3, 5); jmpd(0x1014_a141, -0x97); goto l_0x1014_a141; /* jmp 0x1014a141 */
-        //  ii(0x1014_a1d8, 5); Недостижимый код.
+        //    ii(0x1014_a1d8, 5); jmpd(0x1014_a141, -0x9c); goto l_0x1014_a141; /* jmp 0x1014a141 */
         l_0x1014_a1dd:
             ii(0x1014_a1dd, 5); cmp(memw_a32[ss, ebp - 0x10], 0xd);     /* cmp word [ebp-0x10], 0xd */
             ii(0x1014_a1e2, 2); if(jbd(0x1014_a1f4, 0x10)) goto l_0x1014_a1f4; /* jb 0x1014a1f4 */

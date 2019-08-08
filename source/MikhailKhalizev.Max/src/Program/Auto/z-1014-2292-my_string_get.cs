@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_string_get()
         {
             ii(0x1014_2292, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x1014_2297, 5); calld(Definitions.sys_check_available_stack_size, 0x23ab6); /* call 0x10165d52 */
+            ii(0x1014_2297, 5); calld(Definitions.sys_check_available_stack_size, 0x2_3ab6); /* call 0x10165d52 */
             ii(0x1014_229c, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_229d, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_229e, 1); pushd(esi);                             /* push esi */
@@ -31,12 +31,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_22cd, 5); mov(ebx, StringDefinitions.StrobjCpp2); /* mov ebx, 0x101aceae */
             ii(0x1014_22d2, 5); mov(edx, StringDefinitions.PosLessPtrGetsize); /* mov edx, 0x101aceb9 */
             ii(0x1014_22d7, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1014_22d9, 5); calld(Definitions.sys_assert, 0x23ab4); /* call 0x10165d92 */
+            ii(0x1014_22d9, 5); calld(Definitions.sys_assert, 0x2_3ab4); /* call 0x10165d92 */
             ii(0x1014_22de, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
         l_0x1014_22e1:
             ii(0x1014_22e1, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_22e4, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
-            ii(0x1014_22e6, 5); calld(Definitions.my_strobj_c_str, -0xb8aef); /* call 0x100897fc */
+            ii(0x1014_22e6, 5); calld(Definitions.my_strobj_c_str, -0xb_8aef); /* call 0x100897fc */
             ii(0x1014_22eb, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x1014_22ef, 2); add(eax, edx);                          /* add eax, edx */
             ii(0x1014_22f1, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */

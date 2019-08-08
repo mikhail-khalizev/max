@@ -75,7 +75,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_65af, 1); inc(edx);                               /* inc edx */
             ii(0x1016_65b0, 1); inc(eax);                               /* inc eax */
             ii(0x1016_65b1, 3); imul(eax, edx);                         /* imul eax, edx */
-            ii(0x1016_65b4, 5); calld(Definitions.sys_malloc_internal, 0x1bd37); /* call 0x101822f0 */
+            ii(0x1016_65b4, 5); calld(Definitions.sys_malloc_internal, 0x1_bd37); /* call 0x101822f0 */
             ii(0x1016_65b9, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1016_65bb, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_65bd, 2); if(jnzd(0x1016_65c6, 0x7)) goto l_0x1016_65c6; /* jnz 0x101665c6 */
@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_65c4, 2); jmpd(0x1016_65d6, 0x10); goto l_0x1016_65d6; /* jmp 0x101665d6 */
         l_0x1016_65c6:
             ii(0x1016_65c6, 5); mov(eax, memd_a32[ds, 0x101b_ddd8]);    /* mov eax, [0x101bddd8] */
-            ii(0x1016_65cb, 5); calld(Definitions.sys_free_internal, 0x1be84); /* call 0x10182454 */
+            ii(0x1016_65cb, 5); calld(Definitions.sys_free_internal, 0x1_be84); /* call 0x10182454 */
             ii(0x1016_65d0, 6); mov(memd_a32[ds, 0x101b_ddd8], edx);    /* mov [0x101bddd8], edx */
         l_0x1016_65d6:
             ii(0x1016_65d6, 2); test(edi, edi);                         /* test edi, edi */

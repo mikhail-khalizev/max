@@ -85,7 +85,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_6caf, 1); inc(edi);                               /* inc edi */
             ii(0x1018_6cb0, 3); add(eax, 0x4);                          /* add eax, 0x4 */
             ii(0x1018_6cb3, 3); mov(memd_a32[ds, ebx + 0x18], edi);     /* mov [ebx+0x18], edi */
-            ii(0x1018_6cb6, 5); calld(Definitions.sys_free, -0x1bbfa);  /* call 0x1016b0c1 */
+            ii(0x1018_6cb6, 5); calld(Definitions.sys_free, -0x1_bbfa); /* call 0x1016b0c1 */
             ii(0x1018_6cbb, 2); jmpd(0x1018_6cc0, 0x3); goto l_0x1018_6cc0; /* jmp 0x10186cc0 */
         l_0x1018_6cbd:
             ii(0x1018_6cbd, 3); or(memb_a32[ds, eax], 0x1);             /* or byte [eax], 0x1 */

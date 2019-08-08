@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_6c65()
         {
             ii(0x1010_6c65, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1010_6c6a, 5); calld(Definitions.sys_check_available_stack_size, 0x5f0e3); /* call 0x10165d52 */
+            ii(0x1010_6c6a, 5); calld(Definitions.sys_check_available_stack_size, 0x5_f0e3); /* call 0x10165d52 */
             ii(0x1010_6c6f, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_6c70, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_6c71, 1); pushd(edx);                             /* push edx */
@@ -27,10 +27,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6c92, 5); pushd(0x5b_8d80);                       /* push 0x5b8d80 */
             ii(0x1010_6c97, 5); mov(eax, StringDefinitions.NotEnoughExtendedMemoryAvailableToRunMAXAmountNeededIAmountFoundI); /* mov eax, 0x101a43d4 */
             ii(0x1010_6c9c, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_6c9d, 5); calld(Definitions.sys_printf, 0x6599a); /* call 0x1016c63c */
+            ii(0x1010_6c9d, 5); calld(Definitions.sys_printf, 0x6_599a); /* call 0x1016c63c */
             ii(0x1010_6ca2, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x1010_6ca5, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
-            ii(0x1010_6caa, 5); calld(Definitions.sys_exit, 0x659b0);   /* call 0x1016c65f */
+            ii(0x1010_6caa, 5); calld(Definitions.sys_exit, 0x6_59b0);  /* call 0x1016c65f */
         l_0x1010_6caf:
             ii(0x1010_6caf, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1010_6cb1, 1); popd(ebp);                              /* pop ebp */

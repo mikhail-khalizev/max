@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_ctor_c19()
         {
             ii(0x100d_7c5e, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x100d_7c63, 5); calld(Definitions.sys_check_available_stack_size, 0x8e0ea); /* call 0x10165d52 */
+            ii(0x100d_7c63, 5); calld(Definitions.sys_check_available_stack_size, 0x8_e0ea); /* call 0x10165d52 */
             ii(0x100d_7c68, 1); pushd(esi);                             /* push esi */
             ii(0x100d_7c69, 1); pushd(edi);                             /* push edi */
             ii(0x100d_7c6a, 1); pushd(ebp);                             /* push ebp */
@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_7c79, 3); mov(memd_a32[ss, ebp - 0x8], ebx);      /* mov [ebp-0x8], ebx */
             ii(0x100d_7c7c, 3); mov(memd_a32[ss, ebp - 0x4], ecx);      /* mov [ebp-0x4], ecx */
             ii(0x100d_7c7f, 4); movsx(eax, memw_a32[ss, ebp - 0xc]);    /* movsx eax, word [ebp-0xc] */
-            ii(0x100d_7c83, 5); calld(Definitions.my_get_res_data_by_id, 0x5c350); /* call 0x10133fd8 */
+            ii(0x100d_7c83, 5); calld(Definitions.my_get_res_data_by_id, 0x5_c350); /* call 0x10133fd8 */
             ii(0x100d_7c88, 3); mov(memd_a32[ss, ebp - 0x14], eax);     /* mov [ebp-0x14], eax */
             ii(0x100d_7c8b, 4); cmp(memd_a32[ss, ebp - 0x14], 0);       /* cmp dword [ebp-0x14], 0x0 */
             ii(0x100d_7c8f, 2); if(jzd(0x100d_7c9a, 0x9)) goto l_0x100d_7c9a; /* jz 0x100d7c9a */
@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_7c9f, 5); mov(ebx, StringDefinitions.CommoCpp);   /* mov ebx, 0x101a17f4 */
             ii(0x100d_7ca4, 5); mov(edx, StringDefinitions.SpriteNotEqual0); /* mov edx, 0x101a17fe */
             ii(0x100d_7ca9, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_7cab, 5); calld(Definitions.sys_assert, 0x8e0e2); /* call 0x10165d92 */
+            ii(0x100d_7cab, 5); calld(Definitions.sys_assert, 0x8_e0e2); /* call 0x10165d92 */
             ii(0x100d_7cb0, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
         l_0x100d_7cb3:
             ii(0x100d_7cb3, 4); movsx(eax, memw_a32[ss, ebp - 0x8]);    /* movsx eax, word [ebp-0x8] */

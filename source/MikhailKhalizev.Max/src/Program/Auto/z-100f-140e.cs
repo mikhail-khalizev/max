@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100f_140e()
         {
             ii(0x100f_140e, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x100f_1413, 5); calld(Definitions.sys_check_available_stack_size, 0x7493a); /* call 0x10165d52 */
+            ii(0x100f_1413, 5); calld(Definitions.sys_check_available_stack_size, 0x7_493a); /* call 0x10165d52 */
             ii(0x100f_1418, 1); pushd(ebx);                             /* push ebx */
             ii(0x100f_1419, 1); pushd(ecx);                             /* push ecx */
             ii(0x100f_141a, 1); pushd(edx);                             /* push edx */
@@ -29,8 +29,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_143f, 2); if(jzd(0x100f_1455, 0x14)) goto l_0x100f_1455; /* jz 0x100f1455 */
             ii(0x100f_1441, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100f_1443, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x100f_1446, 5); calld(Definitions.my_dtor_d3, -0x19718); /* call 0x100d7d33 */
-            ii(0x100f_144b, 5); calld(Definitions.sys_delete, 0x74b14); /* call 0x10165f64 */
+            ii(0x100f_1446, 5); calld(Definitions.my_dtor_d3, -0x1_9718); /* call 0x100d7d33 */
+            ii(0x100f_144b, 5); calld(Definitions.sys_delete, 0x7_4b14); /* call 0x10165f64 */
             ii(0x100f_1450, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x100f_1453, 2); jmpd(0x100f_145c, 0x7); goto l_0x100f_145c; /* jmp 0x100f145c */
         l_0x100f_1455:
@@ -46,8 +46,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_1472, 2); if(jzd(0x100f_1488, 0x14)) goto l_0x100f_1488; /* jz 0x100f1488 */
             ii(0x100f_1474, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100f_1476, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
-            ii(0x100f_1479, 5); calld(Definitions.my_dtor_d3, -0x1974b); /* call 0x100d7d33 */
-            ii(0x100f_147e, 5); calld(Definitions.sys_delete, 0x74ae1); /* call 0x10165f64 */
+            ii(0x100f_1479, 5); calld(Definitions.my_dtor_d3, -0x1_974b); /* call 0x100d7d33 */
+            ii(0x100f_147e, 5); calld(Definitions.sys_delete, 0x7_4ae1); /* call 0x10165f64 */
             ii(0x100f_1483, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x100f_1486, 2); jmpd(0x100f_148f, 0x7); goto l_0x100f_148f; /* jmp 0x100f148f */
         l_0x100f_1488:

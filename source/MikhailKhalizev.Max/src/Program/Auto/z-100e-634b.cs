@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100e_634b()
         {
             ii(0x100e_634b, 5); pushd(0x3c);                            /* push 0x3c */
-            ii(0x100e_6350, 5); calld(Definitions.sys_check_available_stack_size, 0x7f9fd); /* call 0x10165d52 */
+            ii(0x100e_6350, 5); calld(Definitions.sys_check_available_stack_size, 0x7_f9fd); /* call 0x10165d52 */
             ii(0x100e_6355, 1); pushd(ebx);                             /* push ebx */
             ii(0x100e_6356, 1); pushd(ecx);                             /* push ecx */
             ii(0x100e_6357, 1); pushd(edx);                             /* push edx */
@@ -82,7 +82,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_6431, 3); sub(eax, 0x2);                          /* sub eax, 0x2 */
             ii(0x100e_6434, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x100e_6437, 5); mov(eax, 0x1fd);                        /* mov eax, 0x1fd */
-            ii(0x100e_643c, 5); calld(Definitions.my_get_res_data_by_id, 0x4db97); /* call 0x10133fd8 */
+            ii(0x100e_643c, 5); calld(Definitions.my_get_res_data_by_id, 0x4_db97); /* call 0x10133fd8 */
             ii(0x100e_6441, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
             ii(0x100e_6444, 7); cmp(memd_a32[ds, 0x101c_38c0], 0x40);   /* cmp dword [0x101c38c0], 0x40 */
             ii(0x100e_644b, 2); if(jzd(0x100e_645e, 0x11)) goto l_0x100e_645e; /* jz 0x100e645e */
@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_6481, 7); cmp(memd_a32[ds, 0x101c_38c0], 0x40);   /* cmp dword [0x101c38c0], 0x40 */
             ii(0x100e_6488, 2); if(jzd(0x100e_6492, 0x8)) goto l_0x100e_6492; /* jz 0x100e6492 */
             ii(0x100e_648a, 3); mov(eax, memd_a32[ss, ebp - 0x18]);     /* mov eax, [ebp-0x18] */
-            ii(0x100e_648d, 5); calld(Definitions.sys_free, 0x84c2f);   /* call 0x1016b0c1 */
+            ii(0x100e_648d, 5); calld(Definitions.sys_free, 0x8_4c2f);  /* call 0x1016b0c1 */
         l_0x100e_6492:
             ii(0x100e_6492, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100e_6494, 1); popd(ebp);                              /* pop ebp */

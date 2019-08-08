@@ -29,10 +29,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_90b6, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_90b8, 2); if(jnzd(0x1017_90be, 0x4)) goto l_0x1017_90be; /* jnz 0x101790be */
             ii(0x1017_90ba, 2); mov(eax, edx);                          /* mov eax, edx */
-            ii(0x1017_90bc, 2); jmpd_func(0x1017_90c5, 0x7); return;    /* jmp 0x101790c5 */
+            ii(0x1017_90bc, 2); if(jmpd_func(0x1017_90c5, 0x7)) return; /* jmp 0x101790c5 */
         l_0x1017_90be:
             ii(0x1017_90be, 3); lea(esi, edx + 0x1);                    /* lea esi, [edx+0x1] */
-            ii(0x1017_90c1, 2); jmpd_func(0x1017_907b, -0x48); return;  /* jmp 0x1017907b */
+            ii(0x1017_90c1, 2); if(jmpd_func(0x1017_907b, -0x48)) return; /* jmp 0x1017907b */
         l_0x1017_90c3:
             ii(0x1017_90c3, 2); xor(eax, eax);                          /* xor eax, eax */
         }

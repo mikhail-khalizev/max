@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1f78, 3); lea(edx, ebp + 0x8);                    /* lea edx, [ebp+0x8] */
             ii(0x1018_1f7b, 2); mov(eax, ebx);                          /* mov eax, ebx */
         l_0x1018_1f7d:
-            ii(0x1018_1f7d, 5); calld(/* sys */ 0x1019_6628, 0x146a6);  /* call 0x10196628 */
+            ii(0x1018_1f7d, 5); calld(/* sys */ 0x1019_6628, 0x1_46a6); /* call 0x10196628 */
             ii(0x1018_1f82, 3); fstp(memq_a32[ss, ebp - 0x14]);         /* fstp qword [ebp-0x14] */
         l_0x1018_1f85:
             ii(0x1018_1f85, 3); fld(memq_a32[ss, ebp - 0x14]);          /* fld qword [ebp-0x14] */

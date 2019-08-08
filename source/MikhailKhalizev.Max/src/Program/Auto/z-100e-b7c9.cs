@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100e_b7c9()
         {
             ii(0x100e_b7c9, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x100e_b7ce, 5); calld(Definitions.sys_check_available_stack_size, 0x7a57f); /* call 0x10165d52 */
+            ii(0x100e_b7ce, 5); calld(Definitions.sys_check_available_stack_size, 0x7_a57f); /* call 0x10165d52 */
             ii(0x100e_b7d3, 1); pushd(ebx);                             /* push ebx */
             ii(0x100e_b7d4, 1); pushd(ecx);                             /* push ecx */
             ii(0x100e_b7d5, 1); pushd(esi);                             /* push esi */
@@ -32,13 +32,13 @@ namespace MikhailKhalizev.Max.Program
         l_0x100e_b80b:
             ii(0x100e_b80b, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x100e_b80e, 3); mov(eax, memd_a32[ds, eax + 0x23]);     /* mov eax, [eax+0x23] */
-            ii(0x100e_b811, 5); calld(Definitions.sys_strlen, 0x866b1); /* call 0x10171ec7 */
+            ii(0x100e_b811, 5); calld(Definitions.sys_strlen, 0x8_66b1); /* call 0x10171ec7 */
             ii(0x100e_b816, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x100e_b81a, 2); cmp(edx, eax);                          /* cmp edx, eax */
             ii(0x100e_b81c, 2); if(jbed(0x100e_b82c, 0xe)) goto l_0x100e_b82c; /* jbe 0x100eb82c */
             ii(0x100e_b81e, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x100e_b821, 3); mov(eax, memd_a32[ds, eax + 0x23]);     /* mov eax, [eax+0x23] */
-            ii(0x100e_b824, 5); calld(Definitions.sys_strlen, 0x8669e); /* call 0x10171ec7 */
+            ii(0x100e_b824, 5); calld(Definitions.sys_strlen, 0x8_669e); /* call 0x10171ec7 */
             ii(0x100e_b829, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
         l_0x100e_b82c:
             ii(0x100e_b82c, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */

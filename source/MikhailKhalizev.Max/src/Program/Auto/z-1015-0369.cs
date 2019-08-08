@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1015_0369()
         {
             ii(0x1015_0369, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1015_036e, 5); calld(Definitions.sys_check_available_stack_size, 0x159df); /* call 0x10165d52 */
+            ii(0x1015_036e, 5); calld(Definitions.sys_check_available_stack_size, 0x1_59df); /* call 0x10165d52 */
             ii(0x1015_0373, 1); pushd(ebx);                             /* push ebx */
             ii(0x1015_0374, 1); pushd(ecx);                             /* push ecx */
             ii(0x1015_0375, 1); pushd(edx);                             /* push edx */
@@ -25,9 +25,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_038d, 3); imul(eax, eax, 0xa);                    /* imul eax, eax, 0xa */
             ii(0x1015_0390, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x1015_0393, 3); fild(memd_a32[ss, ebp - 0x10]);         /* fild dword [ebp-0x10] */
-            ii(0x1015_0396, 5); calld(Definitions.sys_sqrt, 0x15cab);   /* call 0x10166046 */
+            ii(0x1015_0396, 5); calld(Definitions.sys_sqrt, 0x1_5cab);  /* call 0x10166046 */
             ii(0x1015_039b, 6); fadd(memq_a32[ds, 0x101a_dde9]);        /* fadd qword [0x101adde9] */
-            ii(0x1015_03a1, 5); calld(Definitions.sys_round, 0x15cd8);  /* call 0x1016607e */
+            ii(0x1015_03a1, 5); calld(Definitions.sys_round, 0x1_5cd8); /* call 0x1016607e */
             ii(0x1015_03a6, 3); fistp(memd_a32[ss, ebp - 0x10]);        /* fistp dword [ebp-0x10] */
             ii(0x1015_03a9, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x1015_03ac, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */

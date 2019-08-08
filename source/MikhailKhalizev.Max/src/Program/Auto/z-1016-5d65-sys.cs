@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1016_5d76:
             ii(0x1016_5d76, 3); mov(ax, ss);                            /* mov ax, ss */
             ii(0x1016_5d79, 7); cmp(ax, memw_a32[ds, 0x101b_dd94]);     /* cmp ax, [0x101bdd94] */
-            ii(0x1016_5d80, 2); jzd_func(0x1016_5d83, 0x1);             /* jz 0x10165d83 */
+            ii(0x1016_5d80, 2); if(jzd_func(0x1016_5d83, 0x1)) return;  /* jz 0x10165d83 */
             ii(0x1016_5d82, 1); retd(); return;                         /* ret */
         }
     }

@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_9377, 2); if(jged(0x1017_9385, 0xc)) goto l_0x1017_9385; /* jge 0x10179385 */
             ii(0x1017_9379, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1017_937b, 3); mov(ax, dx);                            /* mov ax, dx */
-            ii(0x1017_937e, 5); calld(/* sys */ 0x1018_dbb7, 0x14834);  /* call 0x1018dbb7 */
+            ii(0x1017_937e, 5); calld(/* sys */ 0x1018_dbb7, 0x1_4834); /* call 0x1018dbb7 */
             ii(0x1017_9383, 1); popd(edx);                              /* pop edx */
             ii(0x1017_9384, 1); retd(); return;                         /* ret */
         l_0x1017_9385:

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1007_2388()
         {
             ii(0x1007_2388, 5); pushd(0x38);                            /* push 0x38 */
-            ii(0x1007_238d, 5); calld(Definitions.sys_check_available_stack_size, 0xf39c0); /* call 0x10165d52 */
+            ii(0x1007_238d, 5); calld(Definitions.sys_check_available_stack_size, 0xf_39c0); /* call 0x10165d52 */
             ii(0x1007_2392, 1); pushd(ecx);                             /* push ecx */
             ii(0x1007_2393, 1); pushd(esi);                             /* push esi */
             ii(0x1007_2394, 1); pushd(edi);                             /* push edi */
@@ -156,7 +156,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1007_2537:
             ii(0x1007_2537, 3); mov(ebx, memd_a32[ss, ebp - 0x8]);      /* mov ebx, [ebp-0x8] */
             ii(0x1007_253a, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x1007_253d, 5); calld(0x1015_14ef, 0xdefad);            /* call 0x101514ef */
+            ii(0x1007_253d, 5); calld(0x1015_14ef, 0xd_efad);           /* call 0x101514ef */
             ii(0x1007_2542, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x1007_2545, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1007_2548, 3); mov(eax, memd_a32[ds, eax + 0x6]);      /* mov eax, [eax+0x6] */
@@ -208,7 +208,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_25e1, 5); jmpd(0x1007_2558, -0x8e); goto l_0x1007_2558; /* jmp 0x10072558 */
         l_0x1007_25e6:
             ii(0x1007_25e6, 5); jmpd(0x1007_2500, -0xeb); goto l_0x1007_2500; /* jmp 0x10072500 */
-        //  ii(0x1007_25eb, 5); Недостижимый код.
+        //    ii(0x1007_25eb, 5); jmpd(0x1007_2558, -0x98); goto l_0x1007_2558; /* jmp 0x10072558 */
         l_0x1007_25f0:
             ii(0x1007_25f0, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1007_25f3, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */

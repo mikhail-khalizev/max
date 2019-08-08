@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100b_a6d6()
         {
             ii(0x100b_a6d6, 5); pushd(0x38);                            /* push 0x38 */
-            ii(0x100b_a6db, 5); calld(Definitions.sys_check_available_stack_size, 0xab672); /* call 0x10165d52 */
+            ii(0x100b_a6db, 5); calld(Definitions.sys_check_available_stack_size, 0xa_b672); /* call 0x10165d52 */
             ii(0x100b_a6e0, 1); pushd(ebx);                             /* push ebx */
             ii(0x100b_a6e1, 1); pushd(ecx);                             /* push ecx */
             ii(0x100b_a6e2, 1); pushd(edx);                             /* push edx */
@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_a6f1, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100b_a6f4, 3); mov(al, memb_a32[ds, eax + 0x2]);       /* mov al, [eax+0x2] */
             ii(0x100b_a6f7, 3); mov(memb_a32[ss, ebp - 0x8], al);       /* mov [ebp-0x8], al */
-            ii(0x100b_a6fa, 5); jmpd_func(0x100b_a99c, 0x29d); return;  /* jmp 0x100ba99c */
+            ii(0x100b_a6fa, 5); if(jmpd_func(0x100b_a99c, 0x29d)) return; /* jmp 0x100ba99c */
         }
     }
 }

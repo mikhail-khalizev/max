@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_cfa0, 3); cmp(edi, -0x1 /* 0xff */);              /* cmp edi, 0xffffffff */
             ii(0x1017_cfa3, 6); if(jzd(0x1017_d016, 0x6d)) goto l_0x1017_d016; /* jz 0x1017d016 */
             ii(0x1017_cfa9, 2); mov(eax, edi);                          /* mov eax, edi */
-            ii(0x1017_cfab, 5); calld(/* sys */ 0x1019_467e, 0x176ce);  /* call 0x1019467e */
+            ii(0x1017_cfab, 5); calld(/* sys */ 0x1019_467e, 0x1_76ce); /* call 0x1019467e */
             ii(0x1017_cfb0, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_cfb2, 2); if(jnzd(0x1017_d016, 0x62)) goto l_0x1017_d016; /* jnz 0x1017d016 */
             ii(0x1017_cfb4, 5); test(memb_a32[ss, esp + 0x29], 0x4);    /* test byte [esp+0x29], 0x4 */
@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_cfc6, 2); rcl(eax, 0x1);                          /* rcl eax, 1 */
             ii(0x1017_cfc8, 2); ror(eax, 0x1);                          /* ror eax, 1 */
             ii(0x1017_cfca, 5); mov(eax, 0x7);                          /* mov eax, 0x7 */
-            ii(0x1017_cfcf, 5); calld(/* sys */ 0x1018_d3bf, 0x103eb);  /* call 0x1018d3bf */
+            ii(0x1017_cfcf, 5); calld(/* sys */ 0x1018_d3bf, 0x1_03eb); /* call 0x1018d3bf */
             ii(0x1017_cfd4, 5); mov(eax, 0xffff_ffff);                  /* mov eax, 0xffffffff */
             ii(0x1017_cfd9, 5); jmpd(0x1017_d129, 0x14b); goto l_0x1017_d129; /* jmp 0x1017d129 */
         l_0x1017_cfde:
@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1017_d006:
             ii(0x1017_d006, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1017_d008, 4); mov(ax, memw_a32[ss, esp]);             /* mov ax, [esp] */
-            ii(0x1017_d00c, 5); calld(/* sys */ 0x1018_dbb7, 0x10ba6);  /* call 0x1018dbb7 */
+            ii(0x1017_d00c, 5); calld(/* sys */ 0x1018_dbb7, 0x1_0ba6); /* call 0x1018dbb7 */
             ii(0x1017_d011, 5); jmpd(0x1017_d129, 0x113); goto l_0x1017_d129; /* jmp 0x1017d129 */
         l_0x1017_d016:
             ii(0x1017_d016, 3); cmp(edi, -0x1 /* 0xff */);              /* cmp edi, 0xffffffff */
@@ -146,11 +146,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d0b4, 4); mov(di, memw_a32[ss, esp]);             /* mov di, [esp] */
         l_0x1017_d0b8:
             ii(0x1017_d0b8, 2); mov(eax, edi);                          /* mov eax, edi */
-            ii(0x1017_d0ba, 5); calld(/* sys */ 0x1019_46a5, 0x175e6);  /* call 0x101946a5 */
+            ii(0x1017_d0ba, 5); calld(/* sys */ 0x1019_46a5, 0x1_75e6); /* call 0x101946a5 */
             ii(0x1017_d0bf, 2); and(al, 0x3c);                          /* and al, 0x3c */
             ii(0x1017_d0c1, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1017_d0c3, 2); mov(eax, edi);                          /* mov eax, edi */
-            ii(0x1017_d0c5, 5); calld(/* sys */ 0x1019_467e, 0x175b4);  /* call 0x1019467e */
+            ii(0x1017_d0c5, 5); calld(/* sys */ 0x1019_467e, 0x1_75b4); /* call 0x1019467e */
             ii(0x1017_d0ca, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_d0cc, 2); if(jzd(0x1017_d0d1, 0x3)) goto l_0x1017_d0d1; /* jz 0x1017d0d1 */
             ii(0x1017_d0ce, 3); or(dh, 0x20);                           /* or dh, 0x20 */
@@ -187,7 +187,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d11e, 2); mov(edx, eax);                          /* mov edx, eax */
         l_0x1017_d120:
             ii(0x1017_d120, 2); mov(eax, edi);                          /* mov eax, edi */
-            ii(0x1017_d122, 5); calld(/* sys */ 0x1019_46fa, 0x175d3);  /* call 0x101946fa */
+            ii(0x1017_d122, 5); calld(/* sys */ 0x1019_46fa, 0x1_75d3); /* call 0x101946fa */
             ii(0x1017_d127, 2); mov(eax, edi);                          /* mov eax, edi */
         l_0x1017_d129:
             ii(0x1017_d129, 3); add(esp, 0xc);                          /* add esp, 0xc */

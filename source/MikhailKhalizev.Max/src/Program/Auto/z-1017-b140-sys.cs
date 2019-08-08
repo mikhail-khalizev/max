@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_b20c, 2); or(ebx, edi);                           /* or ebx, edi */
             ii(0x1017_b20e, 3); mov(memb_a32[ss, ebp - 0x23], dl);      /* mov [ebp-0x23], dl */
             ii(0x1017_b211, 3); mov(memb_a32[ss, ebp - 0x2f], bl);      /* mov [ebp-0x2f], bl */
-            ii(0x1017_b214, 5); calld(/* sys */ 0x1019_4286, 0x1906d);  /* call 0x10194286 */
+            ii(0x1017_b214, 5); calld(/* sys */ 0x1019_4286, 0x1_906d); /* call 0x10194286 */
             ii(0x1017_b219, 3); add(esp, 0x8);                          /* add esp, 0x8 */
             ii(0x1017_b21c, 3); lea(esp, ebp - 0x8);                    /* lea esp, [ebp-0x8] */
             ii(0x1017_b21f, 1); popd(edi);                              /* pop edi */

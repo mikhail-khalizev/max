@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_ctor_0x101b4184()
         {
             ii(0x1007_6af0, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1007_6af5, 5); calld(Definitions.sys_check_available_stack_size, 0xef258); /* call 0x10165d52 */
+            ii(0x1007_6af5, 5); calld(Definitions.sys_check_available_stack_size, 0xe_f258); /* call 0x10165d52 */
             ii(0x1007_6afa, 1); pushd(ebx);                             /* push ebx */
             ii(0x1007_6afb, 1); pushd(ecx);                             /* push ecx */
             ii(0x1007_6afc, 1); pushd(edx);                             /* push edx */

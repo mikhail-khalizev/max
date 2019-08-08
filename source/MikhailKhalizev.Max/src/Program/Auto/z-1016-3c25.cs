@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_3c2a, 5); mov(ebx, StringDefinitions.UnitsmgrCpp); /* mov ebx, 0x101b2b0d */
             ii(0x1016_3c2f, 5); mov(edx, StringDefinitions.UnitvaluesGetattributeCalledWithInvalidIndex); /* mov edx, 0x101b2b1a */
             ii(0x1016_3c34, 5); mov(eax, StringDefinitions.False2);     /* mov eax, 0x101b2b4e */
-            ii(0x1016_3c39, 5); calld(0x100f_07d4, -0x7346a);           /* call 0x100f07d4 */
+            ii(0x1016_3c39, 5); calld(0x100f_07d4, -0x7_346a);          /* call 0x100f07d4 */
             ii(0x1016_3c3e, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1016_3c41, 3); add(eax, 0xa);                          /* add eax, 0xa */
             ii(0x1016_3c44, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */

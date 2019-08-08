@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c005, 3); setz(al);                               /* setz al */
             ii(0x1016_c008, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1016_c00d, 2); if(jzd(0x1016_c014, 0x5)) goto l_0x1016_c014; /* jz 0x1016c014 */
-            ii(0x1016_c00f, 5); calld(/* sys */ 0x1018_66ac, 0x1a698);  /* call 0x101866ac */
+            ii(0x1016_c00f, 5); calld(/* sys */ 0x1018_66ac, 0x1_a698); /* call 0x101866ac */
         l_0x1016_c014:
             ii(0x1016_c014, 6); mov(esi, memd_a32[ds, 0x101b_e858]);    /* mov esi, [0x101be858] */
             ii(0x1016_c01a, 7); lea(eax, esi * 4 + 0);                  /* lea eax, [esi*4] */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1013_fa8c()
         {
             ii(0x1013_fa8c, 5); pushd(0x40);                            /* push 0x40 */
-            ii(0x1013_fa91, 5); calld(Definitions.sys_check_available_stack_size, 0x262bc); /* call 0x10165d52 */
+            ii(0x1013_fa91, 5); calld(Definitions.sys_check_available_stack_size, 0x2_62bc); /* call 0x10165d52 */
             ii(0x1013_fa96, 1); pushd(esi);                             /* push esi */
             ii(0x1013_fa97, 1); pushd(edi);                             /* push edi */
             ii(0x1013_fa98, 1); pushd(ebp);                             /* push ebp */
@@ -67,7 +67,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_fb36, 5); cmp(memw_a32[ss, ebp - 0x20], 0x31);    /* cmp word [ebp-0x20], 0x31 */
             ii(0x1013_fb3b, 6); if(jzd(0x1013_fab5, -0x8c)) goto l_0x1013_fab5; /* jz 0x1013fab5 */
             ii(0x1013_fb41, 2); jmpd(0x1013_fad9, -0x6a); goto l_0x1013_fad9; /* jmp 0x1013fad9 */
-        //  ii(0x1013_fb43, 2); Недостижимый код.
+        //    ii(0x1013_fb43, 2); jmpd(0x1013_fad9, -0x6c); goto l_0x1013_fad9; /* jmp 0x1013fad9 */
         l_0x1013_fb45:
             ii(0x1013_fb45, 5); cmp(memw_a32[ss, ebp - 0x20], 0x6);     /* cmp word [ebp-0x20], 0x6 */
             ii(0x1013_fb4a, 6); if(jzd(0x1013_fab5, -0x9b)) goto l_0x1013_fab5; /* jz 0x1013fab5 */
@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_fb56, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x1013_fb5a, 6); imul(eax, eax, 0x247);                  /* imul eax, eax, 0x247 */
             ii(0x1013_fb60, 6); mov(eax, memd_a32[ds, eax + 0x101c_a562]); /* mov eax, [eax+0x101ca562] */
-            ii(0x1013_fb66, 5); calld(0x100c_b6b0, -0x744bb);           /* call 0x100cb6b0 */
+            ii(0x1013_fb66, 5); calld(0x100c_b6b0, -0x7_44bb);          /* call 0x100cb6b0 */
             ii(0x1013_fb6b, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */
             ii(0x1013_fb6e, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
             ii(0x1013_fb73, 1); pushd(eax);                             /* push eax */

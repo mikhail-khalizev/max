@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_542f()
         {
             ii(0x1014_542f, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1014_5434, 5); calld(Definitions.sys_check_available_stack_size, 0x20919); /* call 0x10165d52 */
+            ii(0x1014_5434, 5); calld(Definitions.sys_check_available_stack_size, 0x2_0919); /* call 0x10165d52 */
             ii(0x1014_5439, 1); pushd(esi);                             /* push esi */
             ii(0x1014_543a, 1); pushd(edi);                             /* push edi */
             ii(0x1014_543b, 1); pushd(ebp);                             /* push ebp */

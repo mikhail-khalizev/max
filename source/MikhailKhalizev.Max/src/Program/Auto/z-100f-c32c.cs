@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100f_c32c()
         {
             ii(0x100f_c32c, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100f_c331, 5); calld(Definitions.sys_check_available_stack_size, 0x69a1c); /* call 0x10165d52 */
+            ii(0x100f_c331, 5); calld(Definitions.sys_check_available_stack_size, 0x6_9a1c); /* call 0x10165d52 */
             ii(0x100f_c336, 1); pushd(ebx);                             /* push ebx */
             ii(0x100f_c337, 1); pushd(ecx);                             /* push ecx */
             ii(0x100f_c338, 1); pushd(edx);                             /* push edx */
@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_c352, 3); movsx(edx, memw_a32[ds, edx]);          /* movsx edx, word [edx] */
             ii(0x100f_c355, 2); sub(eax, edx);                          /* sub eax, edx */
             ii(0x100f_c357, 2); mov(edx, eax);                          /* mov edx, eax */
-            ii(0x100f_c359, 5); calld(/* sys */ 0x1016_5e9b, 0x69b3d);  /* call 0x10165e9b */
+            ii(0x100f_c359, 5); calld(/* sys */ 0x1016_5e9b, 0x6_9b3d); /* call 0x10165e9b */
             ii(0x100f_c35e, 1); inc(edx);                               /* inc edx */
             ii(0x100f_c35f, 3); imul(eax, edx);                         /* imul eax, edx */
             ii(0x100f_c362, 3); shr(eax, 0xf);                          /* shr eax, 0xf */
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_c375, 3); mov(edx, memd_a32[ss, ebp - 0x4]);      /* mov edx, [ebp-0x4] */
             ii(0x100f_c378, 3); movsx(eax, memw_a32[ds, edx]);          /* movsx eax, word [edx] */
             ii(0x100f_c37b, 2); sub(ebx, eax);                          /* sub ebx, eax */
-            ii(0x100f_c37d, 5); calld(/* sys */ 0x1016_5e9b, 0x69b19);  /* call 0x10165e9b */
+            ii(0x100f_c37d, 5); calld(/* sys */ 0x1016_5e9b, 0x6_9b19); /* call 0x10165e9b */
             ii(0x100f_c382, 1); inc(ebx);                               /* inc ebx */
             ii(0x100f_c383, 3); imul(eax, ebx);                         /* imul eax, ebx */
             ii(0x100f_c386, 3); shr(eax, 0xf);                          /* shr eax, 0xf */

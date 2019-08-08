@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100a_92fd()
         {
             ii(0x100a_92fd, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100a_9302, 5); calld(Definitions.sys_check_available_stack_size, 0xbca4b); /* call 0x10165d52 */
+            ii(0x100a_9302, 5); calld(Definitions.sys_check_available_stack_size, 0xb_ca4b); /* call 0x10165d52 */
             ii(0x100a_9307, 1); pushd(ebx);                             /* push ebx */
             ii(0x100a_9308, 1); pushd(ecx);                             /* push ecx */
             ii(0x100a_9309, 1); pushd(edx);                             /* push edx */
@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100a_935f:
             ii(0x100a_935f, 4); movsx(edx, memw_a32[ss, ebp - 0x8]);    /* movsx edx, word [ebp-0x8] */
             ii(0x100a_9363, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x100a_9366, 5); calld(0x1007_6074, -0x332f7);           /* call 0x10076074 */
+            ii(0x100a_9366, 5); calld(0x1007_6074, -0x3_32f7);          /* call 0x10076074 */
             ii(0x100a_936b, 2); test(al, al);                           /* test al, al */
             ii(0x100a_936d, 2); if(jnzd(0x100a_9371, 0x2)) goto l_0x100a_9371; /* jnz 0x100a9371 */
         l_0x100a_936f:
@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_9378, 6); imul(eax, eax, 0xc5);                   /* imul eax, eax, 0xc5 */
             ii(0x100a_937e, 5); mov(ebx, 0x101c_31c4);                  /* mov ebx, 0x101c31c4 */
             ii(0x100a_9383, 2); add(eax, ebx);                          /* add eax, ebx */
-            ii(0x100a_9385, 5); calld(0x100c_2be5, 0x1985b);            /* call 0x100c2be5 */
+            ii(0x100a_9385, 5); calld(0x100c_2be5, 0x1_985b);           /* call 0x100c2be5 */
         l_0x100a_938a:
             ii(0x100a_938a, 2); jmpd(0x100a_9321, -0x6b); goto l_0x100a_9321; /* jmp 0x100a9321 */
         l_0x100a_938c:

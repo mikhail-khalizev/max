@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1011_6ba6()
         {
             ii(0x1011_6ba6, 5); pushd(0x1c);                            /* push 0x1c */
-            ii(0x1011_6bab, 5); calld(Definitions.sys_check_available_stack_size, 0x4f1a2); /* call 0x10165d52 */
+            ii(0x1011_6bab, 5); calld(Definitions.sys_check_available_stack_size, 0x4_f1a2); /* call 0x10165d52 */
             ii(0x1011_6bb0, 1); pushd(ebx);                             /* push ebx */
             ii(0x1011_6bb1, 1); pushd(ecx);                             /* push ecx */
             ii(0x1011_6bb2, 1); pushd(edx);                             /* push edx */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_6bcb, 5); mov(al, memb_a32[ds, 0x101c_37da]);     /* mov al, [0x101c37da] */
             ii(0x1011_6bd0, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x1011_6bd3, 5); mov(eax, 0x27);                         /* mov eax, 0x27 */
-            ii(0x1011_6bd8, 5); calld(0x1012_8897, 0x11cba);            /* call 0x10128897 */
+            ii(0x1011_6bd8, 5); calld(0x1012_8897, 0x1_1cba);           /* call 0x10128897 */
         l_0x1011_6bdd:
             ii(0x1011_6bdd, 5); mov(eax, StringDefinitions.GamePausedClickOkToContinue); /* mov eax, 0x101a7af0 */
             ii(0x1011_6be2, 5); calld(0x1011_6b06, -0xe1);              /* call 0x10116b06 */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_string_reserve()
         {
             ii(0x1014_1b62, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1014_1b67, 5); calld(Definitions.sys_check_available_stack_size, 0x241e6); /* call 0x10165d52 */
+            ii(0x1014_1b67, 5); calld(Definitions.sys_check_available_stack_size, 0x2_41e6); /* call 0x10165d52 */
             ii(0x1014_1b6c, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_1b6d, 1); pushd(esi);                             /* push esi */
             ii(0x1014_1b6e, 1); pushd(edi);                             /* push edi */

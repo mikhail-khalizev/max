@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100d_4b64()
         {
             ii(0x100d_4b64, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x100d_4b69, 5); calld(Definitions.sys_check_available_stack_size, 0x911e4); /* call 0x10165d52 */
+            ii(0x100d_4b69, 5); calld(Definitions.sys_check_available_stack_size, 0x9_11e4); /* call 0x10165d52 */
             ii(0x100d_4b6e, 1); pushd(ebx);                             /* push ebx */
             ii(0x100d_4b6f, 1); pushd(ecx);                             /* push ecx */
             ii(0x100d_4b70, 1); pushd(esi);                             /* push esi */
@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_4b7b, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x100d_4b7e, 3); mov(memd_a32[ss, ebp - 0x4], edx);      /* mov [ebp-0x4], edx */
             ii(0x100d_4b81, 5); mov(eax, 0x4);                          /* mov eax, 0x4 */
-            ii(0x100d_4b86, 5); calld(0x1007_5fdc, -0x5ebaf);           /* call 0x10075fdc */
+            ii(0x100d_4b86, 5); calld(0x1007_5fdc, -0x5_ebaf);          /* call 0x10075fdc */
             ii(0x100d_4b8b, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100d_4b8d, 2); if(jzd(0x100d_4b9b, 0xc)) goto l_0x100d_4b9b; /* jz 0x100d4b9b */
             ii(0x100d_4b8f, 7); mov(memd_a32[ss, ebp - 0x10], 0x1);     /* mov dword [ebp-0x10], 0x1 */
@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_4bd8, 5); jmpd(0x100d_4c5e, 0x81); goto l_0x100d_4c5e; /* jmp 0x100d4c5e */
         l_0x100d_4bdd:
             ii(0x100d_4bdd, 5); mov(eax, 0x4c);                         /* mov eax, 0x4c */
-            ii(0x100d_4be2, 5); calld(0x1007_5fdc, -0x5ec0b);           /* call 0x10075fdc */
+            ii(0x100d_4be2, 5); calld(0x1007_5fdc, -0x5_ec0b);          /* call 0x10075fdc */
             ii(0x100d_4be7, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
             ii(0x100d_4bea, 2); jmpd(0x100d_4c3c, 0x50); goto l_0x100d_4c3c; /* jmp 0x100d4c3c */
         l_0x100d_4bec:

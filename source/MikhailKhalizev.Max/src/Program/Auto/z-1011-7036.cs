@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1011_7036()
         {
             ii(0x1011_7036, 5); pushd(0x68);                            /* push 0x68 */
-            ii(0x1011_703b, 5); calld(Definitions.sys_check_available_stack_size, 0x4ed12); /* call 0x10165d52 */
+            ii(0x1011_703b, 5); calld(Definitions.sys_check_available_stack_size, 0x4_ed12); /* call 0x10165d52 */
             ii(0x1011_7040, 1); pushd(ebx);                             /* push ebx */
             ii(0x1011_7041, 1); pushd(ecx);                             /* push ecx */
             ii(0x1011_7042, 1); pushd(esi);                             /* push esi */
@@ -34,7 +34,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_707b, 3); lea(eax, ebp - 0x48);                   /* lea eax, [ebp-0x48] */
             ii(0x1011_707e, 5); calld(0x1011_6e81, -0x202);             /* call 0x10116e81 */
             ii(0x1011_7083, 2); jmpd(0x1011_708f, 0xa); goto l_0x1011_708f; /* jmp 0x1011708f */
-        //  ii(0x1011_7085, 10); Недостижимый код.
+        //    ii(0x1011_7085, 2); xor(edx, edx);                          /* xor edx, edx */
+        //    ii(0x1011_7087, 3); lea(eax, ebp - 0x48);                   /* lea eax, [ebp-0x48] */
+        //    ii(0x1011_708a, 5); calld(0x1011_6e81, -0x20e);             /* call 0x10116e81 */
         l_0x1011_708f:
             ii(0x1011_708f, 3); mov(eax, memd_a32[ss, ebp - 0x50]);     /* mov eax, [ebp-0x50] */
             ii(0x1011_7092, 2); mov(esp, ebp);                          /* mov esp, ebp */

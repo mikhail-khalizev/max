@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100f_927b()
         {
             ii(0x100f_927b, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x100f_9280, 5); calld(Definitions.sys_check_available_stack_size, 0x6cacd); /* call 0x10165d52 */
+            ii(0x100f_9280, 5); calld(Definitions.sys_check_available_stack_size, 0x6_cacd); /* call 0x10165d52 */
             ii(0x100f_9285, 1); pushd(esi);                             /* push esi */
             ii(0x100f_9286, 1); pushd(edi);                             /* push edi */
             ii(0x100f_9287, 1); pushd(ebp);                             /* push ebp */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_92a4, 4); movsx(ebx, memw_a32[ss, ebp - 0x4]);    /* movsx ebx, word [ebp-0x4] */
             ii(0x100f_92a8, 4); movsx(edx, memw_a32[ss, ebp - 0x8]);    /* movsx edx, word [ebp-0x8] */
             ii(0x100f_92ac, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
-            ii(0x100f_92af, 5); calld(0x1007_284b, -0x86a69);           /* call 0x1007284b */
+            ii(0x100f_92af, 5); calld(0x1007_284b, -0x8_6a69);          /* call 0x1007284b */
             ii(0x100f_92b4, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x100f_92b7, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
             ii(0x100f_92ba, 3); cmp(eax, memd_a32[ss, ebp - 0xc]);      /* cmp eax, [ebp-0xc] */
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_92c9, 5); mov(al, memb_a32[ds, 0x101c_37da]);     /* mov al, [0x101c37da] */
             ii(0x100f_92ce, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x100f_92d1, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x100f_92d4, 5); calld(0x1007_6074, -0x83265);           /* call 0x10076074 */
+            ii(0x100f_92d4, 5); calld(0x1007_6074, -0x8_3265);          /* call 0x10076074 */
             ii(0x100f_92d9, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100f_92de, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100f_92e0, 2); if(jnzd(0x100f_92e4, 0x2)) goto l_0x100f_92e4; /* jnz 0x100f92e4 */

@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a5d3, 6); mov(memd_a32[ds, 0x1020_9c90], edx);    /* mov [0x10209c90], edx */
             ii(0x1017_a5d9, 6); mov(memd_a32[ds, 0x101b_e448], edx);    /* mov [0x101be448], edx */
             ii(0x1017_a5df, 6); mov(memd_a32[ds, Definitions.video_win_len], ecx); /* mov [0x10209ca0], ecx */
-            ii(0x1017_a5e5, 5); calld(/* sys */ 0x1019_43d0, 0x19de6);  /* call 0x101943d0 */
+            ii(0x1017_a5e5, 5); calld(/* sys */ 0x1019_43d0, 0x1_9de6); /* call 0x101943d0 */
             ii(0x1017_a5ea, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1017_a5ec, 5); mov(memd_a32[ds, Definitions.video_win_start], eax); /* mov [0x10209ca8], eax */
             ii(0x1017_a5f1, 6); mov(memd_a32[ds, Definitions.video_win_granularity], ecx); /* mov [0x10209ca4], ecx */

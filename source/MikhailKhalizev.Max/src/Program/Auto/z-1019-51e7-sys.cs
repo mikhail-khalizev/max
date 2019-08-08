@@ -33,7 +33,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5210, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1019_5212, 1); popd(ds);                               /* pop ds */
             ii(0x1019_5213, 2); jmpd(0x1019_5226, 0x11); goto l_0x1019_5226; /* jmp 0x10195226 */
-        //  ii(0x1019_5215, 3); Недостижимый код.
+        //    ii(0x1019_5215, 1); nop();                                  /* nop */
+        //    ii(0x1019_5216, 1); nop();                                  /* nop */
+        //    ii(0x1019_5217, 1); nop();                                  /* nop */
         l_0x1019_5218:
             ii(0x1019_5218, 5); mov(ecx, 0x50);                         /* mov ecx, 0x50 */
             ii(0x1019_521d, 1); cld();                                  /* cld */

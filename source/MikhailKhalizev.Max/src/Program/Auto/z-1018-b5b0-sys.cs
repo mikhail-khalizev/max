@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("93947b25-18b1-440d-98f0-4c88e94a95f2")]
         public void /* sys */ Method_1018_b5b0()
         {
-            ii(0x1018_b5b0, 5); jmpd_func(Definitions.sys_malloc, -0x205d7); return; /* jmp 0x1016afde */
+            ii(0x1018_b5b0, 5); if(jmpd_func(Definitions.sys_malloc, -0x2_05d7)) return; /* jmp 0x1016afde */
         }
     }
 }

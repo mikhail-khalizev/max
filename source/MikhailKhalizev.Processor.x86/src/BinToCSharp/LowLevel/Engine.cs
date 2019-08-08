@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -100,7 +101,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// <summary>
         /// Набор адресов начиная с которых необходимо произвести декодирование.
         /// </summary>
-        public HashSet<Address> AddressesToDecode = new HashSet<Address>();
+        private HashSet<Address> _addressesToDecode = new HashSet<Address>();
 
         /// <summary>
         /// Содержит информацию об определённых методах.
@@ -109,11 +110,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public bool AddToNewDetectedMethods(Address address)
         {
-            //if (0xaccb < address && address <= 0xae95)
-            //{
-            //    var debug = 0;
-            //}
-
             return NewDetectedMethods.Add(new DetectedMethod(address));
         }
 
@@ -160,28 +156,32 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             _limitSize = Configuration.LimitDecodeSize;
         }
 
+        public void AddToDecode(Address address)
+        {
+            _addressesToDecode.Add(address);
+        }
+
         public void DecodeMethod(Address address)
         {
             if (AddToNewDetectedMethods(address))
                 Decode(address);
         }
 
-        private void Decode(Address address)
+        public void Decode(Address address)
         {
-            AddressesToDecode.Add(address);
-            Process();
+            AddToDecode(address);
+            ProcessDecode();
         }
 
-        private void Process()
+        public void ProcessDecode()
         {
-            while (AddressesToDecode.Count != 0)
+            while (_addressesToDecode.Count != 0)
             {
-                var address = AddressesToDecode.First();
-                AddressesToDecode.Remove(address);
-                Process(address);
+                var address = _addressesToDecode.First();
+                _addressesToDecode.Remove(address);
+                ProcessStep(address);
             }
         }
-
 
         private class AssemblyCode : IAssemblyCode
         {
@@ -224,7 +224,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             public int Length => int.MaxValue;
         }
 
-        private void Process(Address address)
+        private void ProcessStep(Address address)
         {
             if (DecodedCode.Contains(address))
                 return; // Код включающий этот адрес уже декодирован.
@@ -325,7 +325,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         {
             Console.WriteLine("Разбиение кода на методы.");
 
+            if (_addressesToDecode.Count != 0)
+                ProcessDecode();
+
             AddAlignmentAsInstructions();
+            AddToNewDetectedMethods(DecodedCode.Area.First().Begin);
 
             while (true)
             {
@@ -452,15 +456,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
 
                     // TODO Собрать все Jumps воедино и учесть в рамках Process или JmpCallLoopSimple.
-                    // Чтобы layout_funcs ничего не декодировал.
+                    // Чтобы LayoutMethods ничего не декодировал.
                     if (AddMethodInfoJumpsToDecode && detectedMethod.MethodInfo?.Jumps != null)
                     {
                         var interval = Interval.From(detectedMethod.Begin, detectedMethod.End);
 
-                        foreach (var externalJump in detectedMethod.MethodInfo.Jumps.Values.SelectMany(x => x)
-                            .Where(x => !interval.Contains(x)))
+                        foreach (var externalJump in detectedMethod.MethodInfo.Jumps
+                            .SelectMany(x => x.Value)
+                            .Where(x => !interval.Contains(x.Address)))
                         {
-                            DecodeMethod(externalJump);
+                            DecodeMethod(externalJump.Address);
                         }
                     }
 
@@ -472,7 +477,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 if (successCount == NewDetectedMethods.Count)
                 {
-                    // Проверяем код на "дыры" после jmp и jcc. В Dos коде нередко происходит возврат обратно на иструкцию непосредственно за jmp.
+                    // Проверяем код на "дыры" после jmp и jcc. В Dos коде нередко происходит возврат обратно на инструкцию непосредственно за jmp.
 
                     foreach (var method in NewDetectedMethods.ToArray())
                     {
@@ -483,11 +488,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                             while (decodeStart != 0 && decodeStart < instruction.Begin && DecodedCode.GetInstructionBefore(decodeStart).IsJmpOrJcc)
                             {
-                                method.End = 0; // Заново пересчитываем метод.
-                                successCount = 0;
-
                                 Decode(decodeStart);
+                                if (!DecodedCode.Area.Contains(decodeStart, false))
+                                    break; // Decode fail. Skip this hole.
+
                                 decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false).End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
+                                
+                                // Заново пересчитываем метод.
+                                method.End = 0;
+                                successCount = 0;
                             }
                             
                             prev = instruction;
@@ -539,6 +548,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var toConsole = new ConcurrentQueue<string>();
 
+            var exList = new List<Exception>();
+
             Parallel.ForEach(
                 uniqueDetectedMethodsByAddress,
                 detectedMethodsWithSameAddress =>
@@ -546,60 +557,73 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Guid))
                     {
                         var methodBegin = detectedMethod.MethodInfo.Address;
-                        var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
-
-                        if (methodBegin == methodEnd)
-                            return; // Skip empty method.
-
-
-                        // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
-                        if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
+                        try
                         {
-                            toConsole.Enqueue(
-                                $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
-                            return;
+                            var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
+
+                            if (methodBegin == methodEnd)
+                                return; // Skip empty method.
+
+
+                            // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
+                            if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
+                            {
+                                toConsole.Enqueue(
+                                    $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
+                                return;
+                            }
+
+
+                            toConsole.Enqueue($"Сохранение метода '{methodBegin}' в файл.");
+
+
+                            var baseFileName = "z-" + methodBegin.ToString(
+                                o => o
+                                    .RemoveHexPrefix()
+                                    .SetTrimZero(false)
+                                    .SetGroupSize(4)
+                                    .SetGroupSeparator("-"));
+
+                            var ns = AddressNameConverter.GetNamespace(methodBegin);
+                            if (ns != null)
+                                baseFileName += $"-{ns}";
+
+                            var kd = DefinitionCollection.GetAddressFullName(
+                                methodBegin,
+                                new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
+                            if (kd != null)
+                                baseFileName += $"-{kd}";
+
+                            var filePath = "";
+
+                            var num = 1;
+                            while (true)
+                            {
+                                filePath = Path.Combine(path, baseFileName + (1 < num ? $".{num}" : "") + ".cs");
+                                if (!File.Exists(filePath))
+                                    break;
+                                num++;
+                            }
+
+                            var output = new StringBuilder();
+                            WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
+
+                            File.WriteAllText(filePath, output.ToString());
                         }
-
-
-                        toConsole.Enqueue($"Сохранение метода '{methodBegin}' в файл.");
-
-
-                        var baseFileName = "z-" + methodBegin.ToString(
-                            o => o
-                                .RemoveHexPrefix()
-                                .SetTrimZero(false)
-                                .SetGroupSize(4)
-                                .SetGroupSeparator("-"));
-
-                        var ns = AddressNameConverter.GetNamespace(methodBegin);
-                        if (ns != null)
-                            baseFileName += $"-{ns}";
-
-                        var kd = DefinitionCollection.GetAddressFullName(methodBegin, new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
-                        if (kd != null)
-                            baseFileName += $"-{kd}";
-
-                        var filePath = "";
-
-                        var num = 1;
-                        while (true)
+                        catch (Exception ex)
                         {
-                            filePath = Path.Combine(path, baseFileName + (1 < num ? $".{num}" : "") + ".cs");
-                            if (!File.Exists(filePath))
-                                break;
-                            num++;
+                            exList.Add(ex);
+                            toConsole.Enqueue($"Ошибка при сохранении метода '{methodBegin}' в файл: {ex.Message.TrimEnd('.')}.");
                         }
-
-                        var output = new StringBuilder();
-                        WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
-
-                        File.WriteAllText(filePath, output.ToString());
                     }
                 });
 
             Console.WriteLine(string.Join(Environment.NewLine, toConsole));
             
             MethodsInfo.Save();
+
+            if (exList.Count != 0)
+                throw new AggregateException(exList);
         }
 
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)
@@ -643,13 +667,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 if (last_instr_end != cmd.Begin) // Обнаружен не декодированный код.
                 {
-                    // Случай когда перед недостижимым кодом нет ret или jmp. Пока достаточно генерировать исключение.
-                    if (last_instr_jmp_or_ret == false)
-                        throw new NotImplementedException();
-
                     var os = new StringBuilder();
                     write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin, offset);
-                    output.AppendLine($"//  {os}Недостижимый код.");
+
+                    output.AppendLine(
+                        last_instr_jmp_or_ret
+                            ? $"//  {os}Недостижимый (и не декодированный) код."
+                            : $"    {os}throw new InvalidOperationException(\"Не декодированный код.\");");
                     output.Append("        ");
                 }
                 
@@ -710,7 +734,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void WriteInstructionPosition(StringBuilder os, Address begin, Address end, int offset)
         {
-            os.Append($"ii({(Address)(begin + offset)}, {end - begin});");
+            os.Append($"ii({begin + offset}, {end - begin});");
         }
 
         private string InstructionToString(DetectedMethod df, int cmdIndex, int offset)

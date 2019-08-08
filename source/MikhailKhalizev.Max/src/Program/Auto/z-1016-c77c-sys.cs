@@ -184,9 +184,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c977, 5); mov(memd_a32[ds, 0x101b_e564], eax);    /* mov [0x101be564], eax */
             ii(0x1016_c97c, 6); mov(memd_a32[ds, 0x101b_e568], esi);    /* mov [0x101be568], esi */
             ii(0x1016_c982, 5); mov(eax, 0xff);                         /* mov eax, 0xff */
-            ii(0x1016_c987, 5); calld(/* sys */ 0x1018_7e72, 0x1b4e6);  /* call 0x10187e72 */
+            ii(0x1016_c987, 5); calld(/* sys */ 0x1018_7e72, 0x1_b4e6); /* call 0x10187e72 */
             ii(0x1016_c98c, 2); sub(ebp, ebp);                          /* sub ebp, ebp */
-            ii(0x1016_c98e, 5); calld(/* sys */ 0x1018_7e22, 0x1b48f);  /* call 0x10187e22 */
+            ii(0x1016_c98e, 5); calld(/* sys */ 0x1018_7e22, 0x1_b48f); /* call 0x10187e22 */
         }
     }
 }

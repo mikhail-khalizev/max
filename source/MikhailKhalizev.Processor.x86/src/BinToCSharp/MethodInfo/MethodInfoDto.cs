@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         public Dictionary<Address, string> ExtraRaw { get; set; }
 
         [JsonExtensionData]
-        private IDictionary<string, JToken> AdditionalData { get; set; }
+        public IDictionary<string, JToken> AdditionalData { get; set; }
 
 
         [JsonIgnore]
@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         private byte[] _rawBytes;
 
         [JsonIgnore]
-        public Dictionary<Address /* from */, HashSet<Address /* to */>> Jumps { get; set; } = new Dictionary<Address, HashSet<Address>>();
+        public Dictionary<Address /* from */, HashSet<JumpDestinationInfoDto>> Jumps { get; set; }
 
         [JsonIgnore]
         public bool IgnoreSave { get; set; }

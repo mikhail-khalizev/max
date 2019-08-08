@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_247d, 4); test(memb_a32[ds, ecx + 0xd], 0x10);    /* test byte [ecx+0xd], 0x10 */
             ii(0x1017_2481, 2); if(jzd(0x1017_24a9, 0x26)) goto l_0x1017_24a9; /* jz 0x101724a9 */
             ii(0x1017_2483, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1017_2485, 5); calld(/* sys */ 0x1018_d5d9, 0x1b14f);  /* call 0x1018d5d9 */
+            ii(0x1017_2485, 5); calld(/* sys */ 0x1018_d5d9, 0x1_b14f); /* call 0x1018d5d9 */
             ii(0x1017_248a, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_248c, 2); if(jzd(0x1017_24bd, 0x2f)) goto l_0x1017_24bd; /* jz 0x101724bd */
             ii(0x1017_248e, 2); test(ebx, ebx);                         /* test ebx, ebx */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_2494, 2); if(jged(0x1017_24a0, 0xa)) goto l_0x1017_24a0; /* jge 0x101724a0 */
         l_0x1017_2496:
             ii(0x1017_2496, 5); mov(eax, 0x9);                          /* mov eax, 0x9 */
-            ii(0x1017_249b, 5); calld(/* sys */ 0x1018_d3bf, 0x1af1f);  /* call 0x1018d3bf */
+            ii(0x1017_249b, 5); calld(/* sys */ 0x1018_d3bf, 0x1_af1f); /* call 0x1018d3bf */
         l_0x1017_24a0:
             ii(0x1017_24a0, 5); mov(eax, 0xffff_ffff);                  /* mov eax, 0xffffffff */
             ii(0x1017_24a5, 1); popd(edi);                              /* pop edi */
@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_2510, 1); retd(); return;                         /* ret */
         l_0x1017_2511:
             ii(0x1017_2511, 3); mov(eax, memd_a32[ds, ecx + 0x10]);     /* mov eax, [ecx+0x10] */
-            ii(0x1017_2514, 5); calld(/* sys */ 0x1018_d71d, 0x1b204);  /* call 0x1018d71d */
+            ii(0x1017_2514, 5); calld(/* sys */ 0x1018_d71d, 0x1_b204); /* call 0x1018d71d */
             ii(0x1017_2519, 3); mov(edx, memd_a32[ds, ecx + 0x4]);      /* mov edx, [ecx+0x4] */
             ii(0x1017_251c, 2); mov(edi, esi);                          /* mov edi, esi */
             ii(0x1017_251e, 2); sub(eax, edx);                          /* sub eax, edx */

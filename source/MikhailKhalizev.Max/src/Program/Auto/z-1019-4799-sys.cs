@@ -18,9 +18,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_47ab, 5); calld(/* sys */ 0x1019_47c1, 0x11);     /* call 0x101947c1 */
             ii(0x1019_47b0, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1019_47b2, 2); test(eax, eax);                         /* test eax, eax */
-            ii(0x1019_47b4, 6); jnzd_func(0x1019_4950, 0x196);          /* jnz 0x10194950 */
+            ii(0x1019_47b4, 6); if(jnzd_func(0x1019_4950, 0x196)) return; /* jnz 0x10194950 */
             ii(0x1019_47ba, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1019_47bc, 5); jmpd_func(0x1019_49b1, 0x1f0); return;  /* jmp 0x101949b1 */
+            ii(0x1019_47bc, 5); if(jmpd_func(0x1019_49b1, 0x1f0)) return; /* jmp 0x101949b1 */
         }
     }
 }

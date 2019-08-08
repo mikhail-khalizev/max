@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_2c26, 1); popd(ecx);                              /* pop ecx */
             ii(0x1017_2c27, 1); retd(); return;                         /* ret */
         l_0x1017_2c28:
-            ii(0x1017_2c28, 5); calld(/* sys */ 0x1018_d7ae, 0x1ab81);  /* call 0x1018d7ae */
+            ii(0x1017_2c28, 5); calld(/* sys */ 0x1018_d7ae, 0x1_ab81); /* call 0x1018d7ae */
             ii(0x1017_2c2d, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_2c2f, 2); if(jzd(0x1017_2c38, 0x7)) goto l_0x1017_2c38; /* jz 0x10172c38 */
             ii(0x1017_2c31, 5); calld(/* sys */ 0x1017_9285, 0x664f);   /* call 0x10179285 */

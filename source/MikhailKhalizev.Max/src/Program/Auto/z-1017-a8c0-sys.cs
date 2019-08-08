@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a977, 3); shr(eax, 0x4);                          /* shr eax, 0x4 */
             ii(0x1017_a97a, 1); pushd(eax);                             /* push eax */
             ii(0x1017_a97b, 2); pushd(0);                               /* push 0x0 */
-            ii(0x1017_a97d, 5); calld(/* sys */ 0x1019_3cae, 0x1932c);  /* call 0x10193cae */
+            ii(0x1017_a97d, 5); calld(/* sys */ 0x1019_3cae, 0x1_932c); /* call 0x10193cae */
             ii(0x1017_a982, 2); jmpd(0x1017_a9c1, 0x3d); goto l_0x1017_a9c1; /* jmp 0x1017a9c1 */
         l_0x1017_a984:
             ii(0x1017_a984, 1); pushd(eax);                             /* push eax */
@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a9b6, 3); shr(eax, 0x3);                          /* shr eax, 0x3 */
             ii(0x1017_a9b9, 1); pushd(eax);                             /* push eax */
             ii(0x1017_a9ba, 2); pushd(0);                               /* push 0x0 */
-            ii(0x1017_a9bc, 5); calld(/* sys */ 0x1019_385b, 0x18e9a);  /* call 0x1019385b */
+            ii(0x1017_a9bc, 5); calld(/* sys */ 0x1019_385b, 0x1_8e9a); /* call 0x1019385b */
         l_0x1017_a9c1:
             ii(0x1017_a9c1, 3); add(esp, 0x20);                         /* add esp, 0x20 */
             ii(0x1017_a9c4, 3); lea(esp, ebp - 0x8);                    /* lea esp, [ebp-0x8] */

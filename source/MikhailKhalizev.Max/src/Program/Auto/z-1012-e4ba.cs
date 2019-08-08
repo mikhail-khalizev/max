@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1012_e4ba()
         {
             ii(0x1012_e4ba, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1012_e4bf, 5); calld(Definitions.sys_check_available_stack_size, 0x3788e); /* call 0x10165d52 */
+            ii(0x1012_e4bf, 5); calld(Definitions.sys_check_available_stack_size, 0x3_788e); /* call 0x10165d52 */
             ii(0x1012_e4c4, 1); pushd(ebx);                             /* push ebx */
             ii(0x1012_e4c5, 1); pushd(ecx);                             /* push ecx */
             ii(0x1012_e4c6, 1); pushd(edx);                             /* push edx */
@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_e4d2, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
             ii(0x1012_e4d5, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1012_e4d8, 3); add(eax, 0x26);                         /* add eax, 0x26 */
-            ii(0x1012_e4db, 5); calld(Definitions.my_1_get_count, -0x83008); /* call 0x100ab4d8 */
+            ii(0x1012_e4db, 5); calld(Definitions.my_1_get_count, -0x8_3008); /* call 0x100ab4d8 */
             ii(0x1012_e4e0, 1); cwde();                                 /* cwde */
             ii(0x1012_e4e1, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1012_e4e3, 2); if(jzd(0x1012_e54b, 0x66)) goto l_0x1012_e54b; /* jz 0x1012e54b */
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_e4f4, 2); if(jzd(0x1012_e507, 0x11)) goto l_0x1012_e507; /* jz 0x1012e507 */
             ii(0x1012_e4f6, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1012_e4f9, 3); add(eax, 0x26);                         /* add eax, 0x26 */
-            ii(0x1012_e4fc, 5); calld(Definitions.my_1_get_count, -0x83029); /* call 0x100ab4d8 */
+            ii(0x1012_e4fc, 5); calld(Definitions.my_1_get_count, -0x8_3029); /* call 0x100ab4d8 */
             ii(0x1012_e501, 1); inc(eax);                               /* inc eax */
             ii(0x1012_e502, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1012_e505, 2); jmpd(0x1012_e51f, 0x18); goto l_0x1012_e51f; /* jmp 0x1012e51f */

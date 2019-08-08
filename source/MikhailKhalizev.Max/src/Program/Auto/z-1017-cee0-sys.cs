@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_cef7, 1); popd(es);                               /* pop es */
             ii(0x1017_cef8, 1); inc(ecx);                               /* inc ecx */
             ii(0x1017_cef9, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1017_cefb, 5); calld(Definitions.sys_malloc, -0x11f22); /* call 0x1016afde */
+            ii(0x1017_cefb, 5); calld(Definitions.sys_malloc, -0x1_1f22); /* call 0x1016afde */
             ii(0x1017_cf00, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1017_cf02, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_cf04, 2); if(jzd(0x1017_cf1e, 0x18)) goto l_0x1017_cf1e; /* jz 0x1017cf1e */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100c_120a()
         {
             ii(0x100c_120a, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100c_120f, 5); calld(Definitions.sys_check_available_stack_size, 0xa4b3e); /* call 0x10165d52 */
+            ii(0x100c_120f, 5); calld(Definitions.sys_check_available_stack_size, 0xa_4b3e); /* call 0x10165d52 */
             ii(0x100c_1214, 1); pushd(ecx);                             /* push ecx */
             ii(0x100c_1215, 1); pushd(esi);                             /* push esi */
             ii(0x100c_1216, 1); pushd(edi);                             /* push edi */
@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_1263, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x100c_1266, 3); mov(eax, memd_a32[ds, eax + 0x6]);      /* mov eax, [eax+0x6] */
             ii(0x100c_1269, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
-            ii(0x100c_126c, 5); calld(0x1007_49d4, -0x4c89d);           /* call 0x100749d4 */
+            ii(0x100c_126c, 5); calld(0x1007_49d4, -0x4_c89d);          /* call 0x100749d4 */
             ii(0x100c_1271, 2); test(al, al);                           /* test al, al */
             ii(0x100c_1273, 2); if(jnzd(0x100c_127b, 0x6)) goto l_0x100c_127b; /* jnz 0x100c127b */
         l_0x100c_1275:
@@ -74,7 +74,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100c_12a9:
             ii(0x100c_12a9, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x100c_12ad, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x100c_12b0, 5); calld(0x1007_6074, -0x4b241);           /* call 0x10076074 */
+            ii(0x100c_12b0, 5); calld(0x1007_6074, -0x4_b241);          /* call 0x10076074 */
             ii(0x100c_12b5, 2); test(al, al);                           /* test al, al */
             ii(0x100c_12b7, 2); if(jnzd(0x100c_12bf, 0x6)) goto l_0x100c_12bf; /* jnz 0x100c12bf */
             ii(0x100c_12b9, 4); mov(memb_a32[ss, ebp - 0x10], 0);       /* mov byte [ebp-0x10], 0x0 */

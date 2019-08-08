@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_f9cf()
         {
             ii(0x1014_f9cf, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x1014_f9d4, 5); calld(Definitions.sys_check_available_stack_size, 0x16379); /* call 0x10165d52 */
+            ii(0x1014_f9d4, 5); calld(Definitions.sys_check_available_stack_size, 0x1_6379); /* call 0x10165d52 */
             ii(0x1014_f9d9, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_f9da, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_f9db, 1); pushd(esi);                             /* push esi */
@@ -35,14 +35,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_fa1b, 1); pushd(eax);                             /* push eax */
             ii(0x1014_fa1c, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_fa1f, 1); pushd(eax);                             /* push eax */
-            ii(0x1014_fa20, 5); calld(Definitions.sys_sprintf, 0x164dc); /* call 0x10165f01 */
+            ii(0x1014_fa20, 5); calld(Definitions.sys_sprintf, 0x1_64dc); /* call 0x10165f01 */
             ii(0x1014_fa25, 3); add(esp, 0x10);                         /* add esp, 0x10 */
             ii(0x1014_fa28, 2); jmpd(0x1014_fa3b, 0x11); goto l_0x1014_fa3b; /* jmp 0x1014fa3b */
         l_0x1014_fa2a:
             ii(0x1014_fa2a, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_fa2d, 6); mov(edx, memd_a32[ds, eax + 0xa7]);     /* mov edx, [eax+0xa7] */
             ii(0x1014_fa33, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x1014_fa36, 5); calld(Definitions.sys_strcpy, 0x16494); /* call 0x10165ecf */
+            ii(0x1014_fa36, 5); calld(Definitions.sys_strcpy, 0x1_6494); /* call 0x10165ecf */
         l_0x1014_fa3b:
             ii(0x1014_fa3b, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_fa3d, 1); popd(ebp);                              /* pop ebp */

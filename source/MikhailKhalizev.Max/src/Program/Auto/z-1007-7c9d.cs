@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1007_7c9d()
         {
             ii(0x1007_7c9d, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x1007_7ca2, 5); calld(Definitions.sys_check_available_stack_size, 0xee0ab); /* call 0x10165d52 */
+            ii(0x1007_7ca2, 5); calld(Definitions.sys_check_available_stack_size, 0xe_e0ab); /* call 0x10165d52 */
             ii(0x1007_7ca7, 1); pushd(ebx);                             /* push ebx */
             ii(0x1007_7ca8, 1); pushd(ecx);                             /* push ecx */
             ii(0x1007_7ca9, 1); pushd(esi);                             /* push esi */
@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_7ce3, 3); mov(edx, memd_a32[ds, eax + 0x18]);     /* mov edx, [eax+0x18] */
             ii(0x1007_7ce6, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */
             ii(0x1007_7ce9, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x1007_7cec, 5); calld(0x100a_30a2, 0x2b3b1);            /* call 0x100a30a2 */
+            ii(0x1007_7cec, 5); calld(0x100a_30a2, 0x2_b3b1);           /* call 0x100a30a2 */
             ii(0x1007_7cf1, 2); test(al, al);                           /* test al, al */
             ii(0x1007_7cf3, 2); if(jnzd(0x1007_7cf7, 0x2)) goto l_0x1007_7cf7; /* jnz 0x10077cf7 */
         l_0x1007_7cf5:
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_7cf7, 5); mov(ebx, 0x19);                         /* mov ebx, 0x19 */
             ii(0x1007_7cfc, 3); mov(edx, memd_a32[ss, ebp - 0x4]);      /* mov edx, [ebp-0x4] */
             ii(0x1007_7cff, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x1007_7d02, 5); calld(0x1015_c75a, 0xe4a53);            /* call 0x1015c75a */
+            ii(0x1007_7d02, 5); calld(0x1015_c75a, 0xe_4a53);           /* call 0x1015c75a */
             ii(0x1007_7d07, 1); cwde();                                 /* cwde */
             ii(0x1007_7d08, 3); cmp(eax, 0x55);                         /* cmp eax, 0x55 */
             ii(0x1007_7d0b, 2); if(jled(0x1007_7d16, 0x9)) goto l_0x1007_7d16; /* jle 0x10077d16 */

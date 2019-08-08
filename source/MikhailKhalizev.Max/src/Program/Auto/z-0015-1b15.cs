@@ -5,6 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
+        // fprintf ?
         [MethodInfo("81591826-1a0f-4d0a-a839-a9eefe60031b")]
         public void Method_0015_1b15()
         {

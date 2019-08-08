@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c4b9, 3); fstp(memq_a32[ss, ebp - 0x10]);         /* fstp qword [ebp-0x10] */
             ii(0x1016_c4bc, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1016_c4bf, 3); mov(memd_a32[ss, ebp - 0x4], edx);      /* mov [ebp-0x4], edx */
-            ii(0x1016_c4c2, 5); calld(/* sys */ 0x1018_7170, 0x1aca9);  /* call 0x10187170 */
+            ii(0x1016_c4c2, 5); calld(/* sys */ 0x1018_7170, 0x1_aca9); /* call 0x10187170 */
             ii(0x1016_c4c7, 3); sub(esp, 0x8);                          /* sub esp, 0x8 */
             ii(0x1016_c4ca, 5); jmpd(0x1016_c5c8, 0xf9); goto l_0x1016_c5c8; /* jmp 0x1016c5c8 */
         l_0x1016_c4cf:
@@ -101,7 +101,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c573, 2); jmpd(0x1016_c57f, 0xa); goto l_0x1016_c57f; /* jmp 0x1016c57f */
         l_0x1016_c575:
             ii(0x1016_c575, 5); mov(eax, 0xf);                          /* mov eax, 0xf */
-            ii(0x1016_c57a, 5); calld(/* sys */ 0x1018_7387, 0x1ae08);  /* call 0x10187387 */
+            ii(0x1016_c57a, 5); calld(/* sys */ 0x1018_7387, 0x1_ae08); /* call 0x10187387 */
         l_0x1016_c57f:
             ii(0x1016_c57f, 3); fst(memq_a32[ss, ebp - 0x8]);           /* fst qword [ebp-0x8] */
             ii(0x1016_c582, 1); wait();                                 /* wait */
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c5af, 2); fabs();                                 /* fabs */
             ii(0x1016_c5b1, 2); fyl2x();                                /* fyl2x */
             ii(0x1016_c5b3, 2); mov(al, 0x7);                           /* mov al, 0x7 */
-            ii(0x1016_c5b5, 5); calld(/* sys */ 0x1018_7204, 0x1ac4a);  /* call 0x10187204 */
+            ii(0x1016_c5b5, 5); calld(/* sys */ 0x1018_7204, 0x1_ac4a); /* call 0x10187204 */
             ii(0x1016_c5ba, 2); cmp(al, 0);                             /* cmp al, 0x0 */
             ii(0x1016_c5bc, 2); if(jnzd(0x1016_c59e, -0x20)) goto l_0x1016_c59e; /* jnz 0x1016c59e */
             ii(0x1016_c5be, 3); mov(ah, memb_a32[ss, ebp - 0x7]);       /* mov ah, [ebp-0x7] */

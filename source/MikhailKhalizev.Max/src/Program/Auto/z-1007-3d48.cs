@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1007_3d48()
         {
             ii(0x1007_3d48, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1007_3d4d, 5); calld(Definitions.sys_check_available_stack_size, 0xf2000); /* call 0x10165d52 */
+            ii(0x1007_3d4d, 5); calld(Definitions.sys_check_available_stack_size, 0xf_2000); /* call 0x10165d52 */
             ii(0x1007_3d52, 1); pushd(ebx);                             /* push ebx */
             ii(0x1007_3d53, 1); pushd(ecx);                             /* push ecx */
             ii(0x1007_3d54, 1); pushd(esi);                             /* push esi */
@@ -35,14 +35,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_3d8b, 4); movsx(ebx, memw_a32[ss, ebp - 0x4]);    /* movsx ebx, word [ebp-0x4] */
             ii(0x1007_3d8f, 4); movsx(edx, memw_a32[ss, ebp - 0x8]);    /* movsx edx, word [ebp-0x8] */
             ii(0x1007_3d93, 5); mov(eax, 0x101c_39b8);                  /* mov eax, 0x101c39b8 */
-            ii(0x1007_3d98, 5); calld(0x1010_3541, 0x8f7a4);            /* call 0x10103541 */
+            ii(0x1007_3d98, 5); calld(0x1010_3541, 0x8_f7a4);           /* call 0x10103541 */
             ii(0x1007_3d9d, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1007_3d9f, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
             ii(0x1007_3da2, 5); calld(0x1007_64b8, 0x2711);             /* call 0x100764b8 */
         l_0x1007_3da7:
             ii(0x1007_3da7, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1007_3da9, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
-            ii(0x1007_3dac, 5); calld(0x1013_ad71, 0xc6fc0);            /* call 0x1013ad71 */
+            ii(0x1007_3dac, 5); calld(0x1013_ad71, 0xc_6fc0);           /* call 0x1013ad71 */
             ii(0x1007_3db1, 2); test(al, al);                           /* test al, al */
             ii(0x1007_3db3, 2); if(jzd(0x1007_3de6, 0x31)) goto l_0x1007_3de6; /* jz 0x10073de6 */
             ii(0x1007_3db5, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */

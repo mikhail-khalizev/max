@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_1f0b, 4); test(memb_a32[ds, eax + 0xc], 0x1);     /* test byte [eax+0xc], 0x1 */
             ii(0x1017_1f0f, 2); if(jnzd(0x1017_1f2b, 0x1a)) goto l_0x1017_1f2b; /* jnz 0x10171f2b */
             ii(0x1017_1f11, 5); mov(eax, 0x4);                          /* mov eax, 0x4 */
-            ii(0x1017_1f16, 5); calld(/* sys */ 0x1018_d3bf, 0x1b4a4);  /* call 0x1018d3bf */
+            ii(0x1017_1f16, 5); calld(/* sys */ 0x1018_d3bf, 0x1_b4a4); /* call 0x1018d3bf */
             ii(0x1017_1f1b, 3); mov(bl, memb_a32[ds, edx + 0xc]);       /* mov bl, [edx+0xc] */
             ii(0x1017_1f1e, 3); or(bl, 0x20);                           /* or bl, 0x20 */
             ii(0x1017_1f21, 5); mov(eax, 0xffff_ffff);                  /* mov eax, 0xffffffff */

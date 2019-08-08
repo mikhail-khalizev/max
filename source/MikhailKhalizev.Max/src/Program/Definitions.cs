@@ -224,7 +224,7 @@ namespace MikhailKhalizev.Max.Program
 
         #endregion
 
-        #region Some variable
+        #region Video
 
         public static Address ptr_to_pallete { get; } = 0x101c9464;
 
@@ -244,6 +244,12 @@ namespace MikhailKhalizev.Max.Program
         public static Address video_win_end { get; } = 0x10209cac; // 0xb0000 = video_win_start + video_win_len
         public static Address ptr_of_fd_table_ { get; } = 0x101c0a24;
 
+        #endregion
+
+        #region Misc
+        
+        public static Address int_paging_fault { get; } = 0x13_94f6;
+        
         #endregion
     }
 }

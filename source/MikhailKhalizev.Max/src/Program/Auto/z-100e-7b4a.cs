@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100e_7b4a()
         {
             ii(0x100e_7b4a, 5); pushd(0x44);                            /* push 0x44 */
-            ii(0x100e_7b4f, 5); calld(Definitions.sys_check_available_stack_size, 0x7e1fe); /* call 0x10165d52 */
+            ii(0x100e_7b4f, 5); calld(Definitions.sys_check_available_stack_size, 0x7_e1fe); /* call 0x10165d52 */
             ii(0x100e_7b54, 1); pushd(ebx);                             /* push ebx */
             ii(0x100e_7b55, 1); pushd(ecx);                             /* push ecx */
             ii(0x100e_7b56, 1); pushd(edx);                             /* push edx */
@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_7b5c, 6); sub(esp, 0x28);                         /* sub esp, 0x28 */
             ii(0x100e_7b62, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
             ii(0x100e_7b65, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x100e_7b68, 5); calld(Definitions.my_ctor_0x101b4184, -0x7107d); /* call 0x10076af0 */
+            ii(0x100e_7b68, 5); calld(Definitions.my_ctor_0x101b4184, -0x7_107d); /* call 0x10076af0 */
             ii(0x100e_7b6d, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100e_7b70, 5); calld(0x100e_87ac, 0xc37);              /* call 0x100e87ac */
             ii(0x100e_7b75, 3); lea(edi, ebp - 0x28);                   /* lea edi, [ebp-0x28] */
@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_7c5b, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100e_7c5d, 5); mov(al, memb_a32[ds, 0x101c_37da]);     /* mov al, [0x101c37da] */
             ii(0x100e_7c62, 1); cwde();                                 /* cwde */
-            ii(0x100e_7c63, 5); calld(0x1014_2930, 0x5acc8);            /* call 0x10142930 */
+            ii(0x100e_7c63, 5); calld(0x1014_2930, 0x5_acc8);           /* call 0x10142930 */
         l_0x100e_7c68:
             ii(0x100e_7c68, 5); jmpd(0x100e_7bc1, -0xac); goto l_0x100e_7bc1; /* jmp 0x100e7bc1 */
         l_0x100e_7c6d:

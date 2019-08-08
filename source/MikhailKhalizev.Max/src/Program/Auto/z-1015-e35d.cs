@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_e3ac, 3); imul(edx, eax, 0xa);                    /* imul edx, eax, 0xa */
             ii(0x1015_e3af, 5); mov(eax, 0x101c_9480);                  /* mov eax, 0x101c9480 */
             ii(0x1015_e3b4, 2); add(eax, edx);                          /* add eax, edx */
-            ii(0x1015_e3b6, 5); calld(0x1013_a6f4, -0x23cc7);           /* call 0x1013a6f4 */
+            ii(0x1015_e3b6, 5); calld(0x1013_a6f4, -0x2_3cc7);          /* call 0x1013a6f4 */
             ii(0x1015_e3bb, 2); jmpd(0x1015_e399, -0x24); goto l_0x1015_e399; /* jmp 0x1015e399 */
         l_0x1015_e3bd:
             ii(0x1015_e3bd, 2); mov(esp, ebp);                          /* mov esp, ebp */

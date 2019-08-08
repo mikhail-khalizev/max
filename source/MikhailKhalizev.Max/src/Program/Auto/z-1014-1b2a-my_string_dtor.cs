@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_string_dtor()
         {
             ii(0x1014_1b2a, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1014_1b2f, 5); calld(Definitions.sys_check_available_stack_size, 0x2421e); /* call 0x10165d52 */
+            ii(0x1014_1b2f, 5); calld(Definitions.sys_check_available_stack_size, 0x2_421e); /* call 0x10165d52 */
             ii(0x1014_1b34, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_1b35, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_1b36, 1); pushd(esi);                             /* push esi */

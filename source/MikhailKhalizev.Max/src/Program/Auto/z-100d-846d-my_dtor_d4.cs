@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_dtor_d4()
         {
             ii(0x100d_846d, 5); pushd(0x34);                            /* push 0x34 */
-            ii(0x100d_8472, 5); calld(Definitions.sys_check_available_stack_size, 0x8d8db); /* call 0x10165d52 */
+            ii(0x100d_8472, 5); calld(Definitions.sys_check_available_stack_size, 0x8_d8db); /* call 0x10165d52 */
             ii(0x100d_8477, 1); pushd(ebx);                             /* push ebx */
             ii(0x100d_8478, 1); pushd(ecx);                             /* push ecx */
             ii(0x100d_8479, 1); pushd(esi);                             /* push esi */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_8499, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100d_849b, 3); mov(eax, memd_a32[ss, ebp - 0x18]);     /* mov eax, [ebp-0x18] */
             ii(0x100d_849e, 5); calld(Definitions.my_dtor_d2, -0x9f6b); /* call 0x100ce538 */
-            ii(0x100d_84a3, 5); calld(Definitions.sys_delete, 0x8dabc); /* call 0x10165f64 */
+            ii(0x100d_84a3, 5); calld(Definitions.sys_delete, 0x8_dabc); /* call 0x10165f64 */
             ii(0x100d_84a8, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x100d_84ab, 2); jmpd(0x100d_84b4, 0x7); goto l_0x100d_84b4; /* jmp 0x100d84b4 */
         l_0x100d_84ad:
@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_84c3, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100d_84c5, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x100d_84c8, 5); calld(Definitions.my_dtor_d2, -0x9f95); /* call 0x100ce538 */
-            ii(0x100d_84cd, 5); calld(Definitions.sys_delete, 0x8da92); /* call 0x10165f64 */
+            ii(0x100d_84cd, 5); calld(Definitions.sys_delete, 0x8_da92); /* call 0x10165f64 */
             ii(0x100d_84d2, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x100d_84d5, 2); jmpd(0x100d_84de, 0x7); goto l_0x100d_84de; /* jmp 0x100d84de */
         l_0x100d_84d7:

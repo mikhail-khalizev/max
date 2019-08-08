@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1007_76f3()
         {
             ii(0x1007_76f3, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x1007_76f8, 5); calld(Definitions.sys_check_available_stack_size, 0xee655); /* call 0x10165d52 */
+            ii(0x1007_76f8, 5); calld(Definitions.sys_check_available_stack_size, 0xe_e655); /* call 0x10165d52 */
             ii(0x1007_76fd, 1); pushd(ecx);                             /* push ecx */
             ii(0x1007_76fe, 1); pushd(esi);                             /* push esi */
             ii(0x1007_76ff, 1); pushd(edi);                             /* push edi */
@@ -92,7 +92,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1007_77f5:
             ii(0x1007_77f5, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1007_77f7, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
-            ii(0x1007_77fa, 5); calld(0x1013_ad71, 0xc3572);            /* call 0x1013ad71 */
+            ii(0x1007_77fa, 5); calld(0x1013_ad71, 0xc_3572);           /* call 0x1013ad71 */
             ii(0x1007_77ff, 2); test(al, al);                           /* test al, al */
             ii(0x1007_7801, 6); if(jzd(0x1007_7881, 0x7a)) goto l_0x1007_7881; /* jz 0x10077881 */
             ii(0x1007_7807, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
@@ -138,7 +138,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_7887, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
             ii(0x1007_788a, 5); calld(0x1007_5f6c, -0x1923);            /* call 0x10075f6c */
             ii(0x1007_788f, 2); jmpd(0x1007_789b, 0xa); goto l_0x1007_789b; /* jmp 0x1007789b */
-        //  ii(0x1007_7891, 10); Недостижимый код.
+        //    ii(0x1007_7891, 2); xor(edx, edx);                          /* xor edx, edx */
+        //    ii(0x1007_7893, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
+        //    ii(0x1007_7896, 5); calld(0x1007_5f6c, -0x192f);            /* call 0x10075f6c */
         l_0x1007_789b:
             ii(0x1007_789b, 3); mov(al, memb_a32[ss, ebp - 0x10]);      /* mov al, [ebp-0x10] */
             ii(0x1007_789e, 2); mov(esp, ebp);                          /* mov esp, ebp */

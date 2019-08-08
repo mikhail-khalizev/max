@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_1_get_count()
         {
             ii(0x100a_b4d8, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100a_b4dd, 5); calld(Definitions.sys_check_available_stack_size, 0xba870); /* call 0x10165d52 */
+            ii(0x100a_b4dd, 5); calld(Definitions.sys_check_available_stack_size, 0xb_a870); /* call 0x10165d52 */
             ii(0x100a_b4e2, 1); pushd(ebx);                             /* push ebx */
             ii(0x100a_b4e3, 1); pushd(ecx);                             /* push ecx */
             ii(0x100a_b4e4, 1); pushd(edx);                             /* push edx */

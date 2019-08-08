@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,13 +23,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
             path = Path.Combine(configuration.SettingsDirectory, configuration.JumpInfosFile);
             allText = File.Exists(path) ? File.ReadAllText(path) : "";
-            var jumps = JsonConvert.DeserializeObject<List<JumpsInfoDto>>(allText) ?? new List<JumpsInfoDto>();
+            var jumpsInfos = JsonConvert.DeserializeObject<List<JumpsInfoDto>>(allText) ?? new List<JumpsInfoDto>();
 
-            foreach (var jump in jumps)
+            foreach (var jumpsInfo in jumpsInfos)
             {
-                methods.TryGetValue(jump.Guid, out var method);
+                methods.TryGetValue(jumpsInfo.Guid, out var method);
                 if (method != null)
-                    method.Jumps = jump.Jumps.ToDictionary(x => x.Key, x => x.Value.ToHashSet());
+                {
+                    if (method.Jumps == null)
+                        method.Jumps = new Dictionary<Address, HashSet<JumpDestinationInfoDto>>();
+
+                    if (jumpsInfo.Jumps != null)
+                        foreach (var (from, to) in jumpsInfo.Jumps)
+                            method.Jumps[from] = to.ToHashSet();
+                }
             }
 
             return new MethodsInfo(configuration, methods);
@@ -41,46 +48,55 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             _methodByGuid = methodByGuid;
         }
 
-        public void Save()
+        public void Save(bool methodsJson = true, bool methodJumpsJson = true)
         {
-            var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile);
-
-            using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
-            using (var sw = new StreamWriter(fs))
+            if (methodsJson)
             {
-                var allText = JsonConvert.SerializeObject(
-                    _methodByGuid.Values.Where(x => !x.IgnoreSave).OrderBy(x => x.Address),
-                    new JsonSerializerSettings
-                    {
-                        Formatting = Formatting.Indented,
-                        DefaultValueHandling = DefaultValueHandling.Ignore
-                    });
-                sw.Write(allText);
-                sw.Flush();
-                fs.SetLength(fs.Position);
+                var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile);
+
+                using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                using (var sw = new StreamWriter(fs))
+                {
+                    var allText = JsonConvert.SerializeObject(
+                        _methodByGuid.Values.Where(x => !x.IgnoreSave).OrderBy(x => x.Address),
+                        new JsonSerializerSettings
+                        {
+                            Formatting = Formatting.Indented,
+                            DefaultValueHandling = DefaultValueHandling.Ignore
+                        });
+                    sw.Write(allText);
+                    sw.Flush();
+                    fs.SetLength(fs.Position);
+                }
             }
 
-
-            path = Path.Combine(_configuration.SettingsDirectory, _configuration.JumpInfosFile);
-
-            using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
-            using (var sw = new StreamWriter(fs))
+            if (methodJumpsJson)
             {
-                var allText = JsonConvert.SerializeObject(
-                    _methodByGuid.Values
-                        .Where(x => !x.IgnoreSave && 0 < x.Jumps?.Count)
-                        .OrderBy(x => x.Address)
-                        .Select(
-                            x => new JumpsInfoDto
-                            {
-                                Guid = x.Guid,
-                                Address = x.Address,
-                                Jumps = x.Jumps.ToDictionary(y => y.Key, y => y.Value.OrderBy(z => z).ToList())
-                            }),
-                    Formatting.Indented);
-                sw.Write(allText);
-                sw.Flush();
-                fs.SetLength(fs.Position);
+                var path = Path.Combine(_configuration.SettingsDirectory, _configuration.JumpInfosFile);
+
+                using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                using (var sw = new StreamWriter(fs))
+                {
+                    var allText = JsonConvert.SerializeObject(
+                        _methodByGuid.Values
+                            .Where(x => !x.IgnoreSave && 0 < x.Jumps?.Count)
+                            .OrderBy(x => x.Address)
+                            .Select(
+                                x => new JumpsInfoDto
+                                {
+                                    Guid = x.Guid,
+                                    Address = x.Address,
+                                    Jumps = x.Jumps.ToDictionary(y => y.Key, y => y.Value.OrderBy(z => z.Address).ToList())
+                                }),
+                        new JsonSerializerSettings
+                        {
+                            Formatting = Formatting.Indented,
+                            DefaultValueHandling = DefaultValueHandling.Ignore
+                        });
+                    sw.Write(allText);
+                    sw.Flush();
+                    fs.SetLength(fs.Position);
+                }
             }
         }
         
@@ -102,30 +118,42 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             _methodByGuid.Add(method.Guid, method);
         }
 
-        public void AddJumpAndSave(MethodInfoDto method, Address from, Address to, int cSharpFunctionDelta)
+        public void AddJumpAndSave(
+            MethodInfoDto fromMethod, Address fromAddress,
+            MethodInfoDto toMethod, Address toAddress,
+            int cSharpFunctionDelta)
         {
-            from -= cSharpFunctionDelta;
+            fromAddress -= cSharpFunctionDelta;
 
             if (Interval.From(
-                    method.Address + cSharpFunctionDelta,
-                    method.Address + cSharpFunctionDelta + method.RawBytes.Length)
-                .Contains(to))
-                to -= cSharpFunctionDelta;
+                    fromMethod.Address + cSharpFunctionDelta,
+                    fromMethod.Address + cSharpFunctionDelta + fromMethod.RawBytes.Length)
+                .Contains(toAddress))
+                toAddress -= cSharpFunctionDelta;
 
 
-            if (method.Jumps == null)
-                method.Jumps = new Dictionary<Address, HashSet<Address>>();
+            if (fromMethod.Jumps == null)
+                fromMethod.Jumps = new Dictionary<Address, HashSet<JumpDestinationInfoDto>>();
             
-            if (!method.Jumps.TryGetValue(from, out var tos))
+            if (!fromMethod.Jumps.TryGetValue(fromAddress, out var tos))
             {
-                tos = new HashSet<Address>();
-                method.Jumps[from] = tos;
+                tos = new HashSet<JumpDestinationInfoDto>();
+                fromMethod.Jumps[fromAddress] = tos;
             }
 
-            var added = tos.Add(to);
+            var added = tos.Add(new JumpDestinationInfoDto { Address = toAddress, Guid = toMethod.Guid });
+            if (!added)
+            {
+                tos.TryGetValue(new JumpDestinationInfoDto { Address = toAddress }, out var actual);
+                if (actual.Guid != toMethod.Guid)
+                {
+                    actual.Guid = toMethod.Guid;
+                    added = true;
+                }
+            }
 
-            if (added && !method.IgnoreSave)
-                Save();
+            if (added && !fromMethod.IgnoreSave)
+                Save(methodsJson: false);
         }
     }
 }

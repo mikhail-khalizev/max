@@ -16,11 +16,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_9084, 2); mov(edi, esi);                          /* mov edi, esi */
             ii(0x1017_9086, 2); mov(al, memb_a32[ds, ebx]);             /* mov al, [ebx] */
             ii(0x1017_9088, 1); pushd(es);                              /* push es */
-            ii(0x1017_9089, 2); jecxzd_func(0x1017_9096, 0xb);          /* jecxz 0x10179096 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x1017_9089, 2); if(jecxzd_func(0x1017_9096, 0xb)) return; /* jecxz 0x10179096 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x1017_908b, 2); mov(edx, ds);                           /* mov edx, ds */
             ii(0x1017_908d, 2); mov(es, edx);                           /* mov es, edx */
             ii(0x1017_908f, 2); repne_a32(() => scasb_a32());           /* repne scasb */
-            ii(0x1017_9091, 2); jnzd_func(0x1017_9096, 0x3);            /* jnz 0x10179096 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x1017_9091, 2); if(jnzd_func(0x1017_9096, 0x3)) return; /* jnz 0x10179096 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x1017_9093, 1); dec(edi);                               /* dec edi */
             ii(0x1017_9094, 4); test(ax, 0xcf89);                       /* test ax, 0xcf89 */
             ii(0x1017_9098, 1); popd(es);                               /* pop es */
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_90b6, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_90b8, 2); if(jnzd(0x1017_90be, 0x4)) goto l_0x1017_90be; /* jnz 0x101790be */
             ii(0x1017_90ba, 2); mov(eax, edx);                          /* mov eax, edx */
-            ii(0x1017_90bc, 2); jmpd_func(0x1017_90c5, 0x7); return;    /* jmp 0x101790c5 */
+            ii(0x1017_90bc, 2); if(jmpd_func(0x1017_90c5, 0x7)) return; /* jmp 0x101790c5 */
         l_0x1017_90be:
             ii(0x1017_90be, 3); lea(esi, edx + 0x1);                    /* lea esi, [edx+0x1] */
             ii(0x1017_90c1, 2); jmpd(0x1017_907b, -0x48); goto l_0x1017_907b; /* jmp 0x1017907b */

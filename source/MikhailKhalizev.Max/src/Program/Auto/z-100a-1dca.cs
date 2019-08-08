@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100a_1dca()
         {
             ii(0x100a_1dca, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100a_1dcf, 5); calld(Definitions.sys_check_available_stack_size, 0xc3f7e); /* call 0x10165d52 */
+            ii(0x100a_1dcf, 5); calld(Definitions.sys_check_available_stack_size, 0xc_3f7e); /* call 0x10165d52 */
             ii(0x100a_1dd4, 1); pushd(ebx);                             /* push ebx */
             ii(0x100a_1dd5, 1); pushd(ecx);                             /* push ecx */
             ii(0x100a_1dd6, 1); pushd(edx);                             /* push edx */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1df4, 5); mov(edx, StringDefinitions.AdjustmentsMade2); /* mov edx, 0x101a0b46 */
             ii(0x100a_1df9, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1dfc, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
-            ii(0x100a_1dff, 5); calld(Definitions.sys_strcpy, 0xc40cb); /* call 0x10165ecf */
+            ii(0x100a_1dff, 5); calld(Definitions.sys_strcpy, 0xc_40cb); /* call 0x10165ecf */
         l_0x100a_1e04:
             ii(0x100a_1e04, 5); mov(eax, StringDefinitions.RawMaterialMiningIncreasedToI); /* mov eax, 0x101a0b59 */
             ii(0x100a_1e09, 1); pushd(eax);                             /* push eax */
@@ -74,7 +74,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_1e8a, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
             ii(0x100a_1e8f, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_1e92, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
-            ii(0x100a_1e95, 5); calld(0x1011_5d23, 0x73e89);            /* call 0x10115d23 */
+            ii(0x100a_1e95, 5); calld(0x1011_5d23, 0x7_3e89);           /* call 0x10115d23 */
             ii(0x100a_1e9a, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100a_1e9c, 1); popd(ebp);                              /* pop ebp */
             ii(0x100a_1e9d, 1); popd(edi);                              /* pop edi */

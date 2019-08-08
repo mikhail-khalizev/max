@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_play_video_company()
         {
             ii(0x1011_57ff, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1011_5804, 5); calld(Definitions.sys_check_available_stack_size, 0x50549); /* call 0x10165d52 */
+            ii(0x1011_5804, 5); calld(Definitions.sys_check_available_stack_size, 0x5_0549); /* call 0x10165d52 */
             ii(0x1011_5809, 1); pushd(ebx);                             /* push ebx */
             ii(0x1011_580a, 1); pushd(ecx);                             /* push ecx */
             ii(0x1011_580b, 1); pushd(edx);                             /* push edx */

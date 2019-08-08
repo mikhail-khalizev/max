@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100a_8bbd()
         {
             ii(0x100a_8bbd, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x100a_8bc2, 5); calld(Definitions.sys_check_available_stack_size, 0xbd18b); /* call 0x10165d52 */
+            ii(0x100a_8bc2, 5); calld(Definitions.sys_check_available_stack_size, 0xb_d18b); /* call 0x10165d52 */
             ii(0x100a_8bc7, 1); pushd(ebx);                             /* push ebx */
             ii(0x100a_8bc8, 1); pushd(ecx);                             /* push ecx */
             ii(0x100a_8bc9, 1); pushd(edx);                             /* push edx */
@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_8c45, 6); imul(eax, eax, 0xc5);                   /* imul eax, eax, 0xc5 */
             ii(0x100a_8c4b, 5); mov(edx, 0x101c_31c4);                  /* mov edx, 0x101c31c4 */
             ii(0x100a_8c50, 2); add(eax, edx);                          /* add eax, edx */
-            ii(0x100a_8c52, 5); calld(0x100b_e436, 0x157df);            /* call 0x100be436 */
+            ii(0x100a_8c52, 5); calld(0x100b_e436, 0x1_57df);           /* call 0x100be436 */
             ii(0x100a_8c57, 2); test(al, al);                           /* test al, al */
             ii(0x100a_8c59, 6); if(jnzd(0x100a_8d03, 0xa4)) goto l_0x100a_8d03; /* jnz 0x100a8d03 */
         l_0x100a_8c5f:
@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_8cef, 6); imul(eax, eax, 0xc5);                   /* imul eax, eax, 0xc5 */
             ii(0x100a_8cf5, 5); mov(edx, 0x101c_31c4);                  /* mov edx, 0x101c31c4 */
             ii(0x100a_8cfa, 2); add(eax, edx);                          /* add eax, edx */
-            ii(0x100a_8cfc, 5); calld(0x100b_e436, 0x15735);            /* call 0x100be436 */
+            ii(0x100a_8cfc, 5); calld(0x100b_e436, 0x1_5735);           /* call 0x100be436 */
             ii(0x100a_8d01, 2); test(al, al);                           /* test al, al */
         l_0x100a_8d03:
             ii(0x100a_8d03, 2); mov(esp, ebp);                          /* mov esp, ebp */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_346f()
         {
             ii(0x1010_346f, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1010_3474, 5); calld(Definitions.sys_check_available_stack_size, 0x628d9); /* call 0x10165d52 */
+            ii(0x1010_3474, 5); calld(Definitions.sys_check_available_stack_size, 0x6_28d9); /* call 0x10165d52 */
             ii(0x1010_3479, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_347a, 1); pushd(esi);                             /* push esi */
             ii(0x1010_347b, 1); pushd(edi);                             /* push edi */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_3499, 5); mov(ebx, StringDefinitions.HashCpp4);   /* mov ebx, 0x101a315e */
             ii(0x1010_349e, 5); mov(edx, StringDefinitions.AttemptedToAddNullUnitToMapHashTable); /* mov edx, 0x101a3167 */
             ii(0x1010_34a3, 5); mov(eax, StringDefinitions.UnitNotEqual04); /* mov eax, 0x101a3195 */
-            ii(0x1010_34a8, 5); calld(0x100f_07d4, -0x12cd9);           /* call 0x100f07d4 */
+            ii(0x1010_34a8, 5); calld(0x100f_07d4, -0x1_2cd9);          /* call 0x100f07d4 */
         l_0x1010_34ad:
             ii(0x1010_34ad, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_34b0, 4); mov(ax, memw_a32[ds, eax + 0x1a]);      /* mov ax, [eax+0x1a] */

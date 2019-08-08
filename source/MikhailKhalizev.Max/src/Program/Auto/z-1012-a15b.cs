@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1012_a15b()
         {
             ii(0x1012_a15b, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1012_a160, 5); calld(Definitions.sys_check_available_stack_size, 0x3bbed); /* call 0x10165d52 */
+            ii(0x1012_a160, 5); calld(Definitions.sys_check_available_stack_size, 0x3_bbed); /* call 0x10165d52 */
             ii(0x1012_a165, 1); pushd(ebx);                             /* push ebx */
             ii(0x1012_a166, 1); pushd(ecx);                             /* push ecx */
             ii(0x1012_a167, 1); pushd(esi);                             /* push esi */
@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_a17c, 2); if(jnzd(0x1012_a18d, 0xf)) goto l_0x1012_a18d; /* jnz 0x1012a18d */
             ii(0x1012_a17e, 5); mov(edx, StringDefinitions.None);       /* mov edx, 0x101a83d7 */
             ii(0x1012_a183, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x1012_a186, 5); calld(Definitions.sys_strcpy, 0x3bd44); /* call 0x10165ecf */
+            ii(0x1012_a186, 5); calld(Definitions.sys_strcpy, 0x3_bd44); /* call 0x10165ecf */
             ii(0x1012_a18b, 2); jmpd(0x1012_a1a9, 0x1c); goto l_0x1012_a1a9; /* jmp 0x1012a1a9 */
         l_0x1012_a18d:
             ii(0x1012_a18d, 3); mov(ebx, memd_a32[ss, ebp - 0x4]);      /* mov ebx, [ebp-0x4] */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_5944()
         {
             ii(0x1018_5944, 5); mov(eax, /* sys */ 0x1018_5b08);        /* mov eax, 0x10185b08 */
-            ii(0x1018_5949, 5); calld(/* sys */ 0x1016_b42c, -0x1a522); /* call 0x1016b42c */
+            ii(0x1018_5949, 5); calld(/* sys */ 0x1016_b42c, -0x1_a522); /* call 0x1016b42c */
             ii(0x1018_594e, 7); cmp(memd_a32[ds, 0x1020_a2a4], -0x1 /* 0xff */); /* cmp dword [0x1020a2a4], 0xffffffff */
             ii(0x1018_5955, 2); if(jzd(0x1018_5965, 0xe)) goto l_0x1018_5965; /* jz 0x10185965 */
         l_0x1018_5957:

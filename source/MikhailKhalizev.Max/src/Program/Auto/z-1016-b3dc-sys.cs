@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_b402, 2); if(jnzd(0x1016_b3e8, -0x1c)) goto l_0x1016_b3e8; /* jnz 0x1016b3e8 */
         l_0x1016_b404:
             ii(0x1016_b404, 5); mov(eax, 0xc);                          /* mov eax, 0xc */
-            ii(0x1016_b409, 5); calld(Definitions.sys_malloc_internal, 0x16ee2); /* call 0x101822f0 */
+            ii(0x1016_b409, 5); calld(Definitions.sys_malloc_internal, 0x1_6ee2); /* call 0x101822f0 */
             ii(0x1016_b40e, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_b410, 2); if(jzd(0x1016_b429, 0x17)) goto l_0x1016_b429; /* jz 0x1016b429 */
             ii(0x1016_b412, 6); mov(memd_a32[ds, eax], 0);              /* mov dword [eax], 0x0 */

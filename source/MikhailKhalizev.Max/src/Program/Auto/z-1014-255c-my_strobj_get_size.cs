@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_strobj_get_size()
         {
             ii(0x1014_255c, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1014_2561, 5); calld(Definitions.sys_check_available_stack_size, 0x237ec); /* call 0x10165d52 */
+            ii(0x1014_2561, 5); calld(Definitions.sys_check_available_stack_size, 0x2_37ec); /* call 0x10165d52 */
             ii(0x1014_2566, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_2567, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_2568, 1); pushd(edx);                             /* push edx */

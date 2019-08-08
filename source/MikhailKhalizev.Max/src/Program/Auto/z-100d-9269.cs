@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100d_9269()
         {
             ii(0x100d_9269, 5); pushd(0x8c);                            /* push 0x8c */
-            ii(0x100d_926e, 5); calld(Definitions.sys_check_available_stack_size, 0x8cadf); /* call 0x10165d52 */
+            ii(0x100d_926e, 5); calld(Definitions.sys_check_available_stack_size, 0x8_cadf); /* call 0x10165d52 */
             ii(0x100d_9273, 1); pushd(ebx);                             /* push ebx */
             ii(0x100d_9274, 1); pushd(ecx);                             /* push ecx */
             ii(0x100d_9275, 1); pushd(edx);                             /* push edx */
@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_929e, 5); mov(ebx, StringDefinitions.CommoCpp17); /* mov ebx, 0x101a1827 */
             ii(0x100d_92a3, 5); mov(edx, StringDefinitions.StatsBackgroundNotEqual0); /* mov edx, 0x101a1831 */
             ii(0x100d_92a8, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_92aa, 5); calld(Definitions.sys_assert, 0x8cae3); /* call 0x10165d92 */
+            ii(0x100d_92aa, 5); calld(Definitions.sys_assert, 0x8_cae3); /* call 0x10165d92 */
             ii(0x100d_92af, 3); mov(memd_a32[ss, ebp - 0x60], eax);     /* mov [ebp-0x60], eax */
         l_0x100d_92b2:
             ii(0x100d_92b2, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_92cc, 5); mov(ebx, StringDefinitions.CommoCpp16); /* mov ebx, 0x101a1847 */
             ii(0x100d_92d1, 5); mov(edx, StringDefinitions.CostBackgroundNotEqual0); /* mov edx, 0x101a1851 */
             ii(0x100d_92d6, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_92d8, 5); calld(Definitions.sys_assert, 0x8cab5); /* call 0x10165d92 */
+            ii(0x100d_92d8, 5); calld(Definitions.sys_assert, 0x8_cab5); /* call 0x10165d92 */
             ii(0x100d_92dd, 3); mov(memd_a32[ss, ebp - 0x5c], eax);     /* mov [ebp-0x5c], eax */
         l_0x100d_92e0:
             ii(0x100d_92e0, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_92fa, 5); mov(ebx, StringDefinitions.CommoCpp15); /* mov ebx, 0x101a1866 */
             ii(0x100d_92ff, 5); mov(edx, StringDefinitions.GoldBackgroundNotEqual0); /* mov edx, 0x101a1870 */
             ii(0x100d_9304, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9306, 5); calld(Definitions.sys_assert, 0x8ca87); /* call 0x10165d92 */
+            ii(0x100d_9306, 5); calld(Definitions.sys_assert, 0x8_ca87); /* call 0x10165d92 */
             ii(0x100d_930b, 3); mov(memd_a32[ss, ebp - 0x58], eax);     /* mov [ebp-0x58], eax */
         l_0x100d_930e:
             ii(0x100d_930e, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_9328, 5); mov(ebx, StringDefinitions.CommoCpp14); /* mov ebx, 0x101a1885 */
             ii(0x100d_932d, 5); mov(edx, StringDefinitions.ButtonBackgroundNotEqual0); /* mov edx, 0x101a188f */
             ii(0x100d_9332, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9334, 5); calld(Definitions.sys_assert, 0x8ca59); /* call 0x10165d92 */
+            ii(0x100d_9334, 5); calld(Definitions.sys_assert, 0x8_ca59); /* call 0x10165d92 */
             ii(0x100d_9339, 3); mov(memd_a32[ss, ebp - 0x54], eax);     /* mov [ebp-0x54], eax */
         l_0x100d_933c:
             ii(0x100d_933c, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_9356, 5); mov(ebx, StringDefinitions.CommoCpp13); /* mov ebx, 0x101a18a6 */
             ii(0x100d_935b, 5); mov(edx, StringDefinitions.ScrollUpNotEqual0); /* mov edx, 0x101a18b0 */
             ii(0x100d_9360, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9362, 5); calld(Definitions.sys_assert, 0x8ca2b); /* call 0x10165d92 */
+            ii(0x100d_9362, 5); calld(Definitions.sys_assert, 0x8_ca2b); /* call 0x10165d92 */
             ii(0x100d_9367, 3); mov(memd_a32[ss, ebp - 0x50], eax);     /* mov [ebp-0x50], eax */
         l_0x100d_936a:
             ii(0x100d_936a, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -94,7 +94,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_9384, 5); mov(ebx, StringDefinitions.CommoCpp12); /* mov ebx, 0x101a18bf */
             ii(0x100d_9389, 5); mov(edx, StringDefinitions.ScrollDownNotEqual0); /* mov edx, 0x101a18c9 */
             ii(0x100d_938e, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9390, 5); calld(Definitions.sys_assert, 0x8c9fd); /* call 0x10165d92 */
+            ii(0x100d_9390, 5); calld(Definitions.sys_assert, 0x8_c9fd); /* call 0x10165d92 */
             ii(0x100d_9395, 3); mov(memd_a32[ss, ebp - 0x4c], eax);     /* mov [ebp-0x4c], eax */
         l_0x100d_9398:
             ii(0x100d_9398, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -107,7 +107,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_93b2, 5); mov(ebx, StringDefinitions.CommoCpp11); /* mov ebx, 0x101a18da */
             ii(0x100d_93b7, 5); mov(edx, StringDefinitions.DoneButtonNotEqual0); /* mov edx, 0x101a18e4 */
             ii(0x100d_93bc, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_93be, 5); calld(Definitions.sys_assert, 0x8c9cf); /* call 0x10165d92 */
+            ii(0x100d_93be, 5); calld(Definitions.sys_assert, 0x8_c9cf); /* call 0x10165d92 */
             ii(0x100d_93c3, 3); mov(memd_a32[ss, ebp - 0x48], eax);     /* mov [ebp-0x48], eax */
         l_0x100d_93c6:
             ii(0x100d_93c6, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -120,7 +120,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_93e0, 5); mov(ebx, StringDefinitions.CommoCpp10); /* mov ebx, 0x101a18f5 */
             ii(0x100d_93e5, 5); mov(edx, StringDefinitions.HelpButtonNotEqual0); /* mov edx, 0x101a18ff */
             ii(0x100d_93ea, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_93ec, 5); calld(Definitions.sys_assert, 0x8c9a1); /* call 0x10165d92 */
+            ii(0x100d_93ec, 5); calld(Definitions.sys_assert, 0x8_c9a1); /* call 0x10165d92 */
             ii(0x100d_93f1, 3); mov(memd_a32[ss, ebp - 0x44], eax);     /* mov [ebp-0x44], eax */
         l_0x100d_93f4:
             ii(0x100d_93f4, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_940e, 5); mov(ebx, StringDefinitions.CommoCpp9);  /* mov ebx, 0x101a1910 */
             ii(0x100d_9413, 5); mov(edx, StringDefinitions.CancelButtonNotEqual0); /* mov edx, 0x101a191a */
             ii(0x100d_9418, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_941a, 5); calld(Definitions.sys_assert, 0x8c973); /* call 0x10165d92 */
+            ii(0x100d_941a, 5); calld(Definitions.sys_assert, 0x8_c973); /* call 0x10165d92 */
             ii(0x100d_941f, 3); mov(memd_a32[ss, ebp - 0x40], eax);     /* mov [ebp-0x40], eax */
         l_0x100d_9422:
             ii(0x100d_9422, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -146,7 +146,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_943c, 5); mov(ebx, StringDefinitions.CommoCpp8);  /* mov ebx, 0x101a192d */
             ii(0x100d_9441, 5); mov(edx, StringDefinitions.GroundButtonNotEqual0); /* mov edx, 0x101a1937 */
             ii(0x100d_9446, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9448, 5); calld(Definitions.sys_assert, 0x8c945); /* call 0x10165d92 */
+            ii(0x100d_9448, 5); calld(Definitions.sys_assert, 0x8_c945); /* call 0x10165d92 */
             ii(0x100d_944d, 3); mov(memd_a32[ss, ebp - 0x3c], eax);     /* mov [ebp-0x3c], eax */
         l_0x100d_9450:
             ii(0x100d_9450, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -159,7 +159,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_946a, 5); mov(ebx, StringDefinitions.CommoCpp7);  /* mov ebx, 0x101a194a */
             ii(0x100d_946f, 5); mov(edx, StringDefinitions.AirButtonNotEqual0); /* mov edx, 0x101a1954 */
             ii(0x100d_9474, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9476, 5); calld(Definitions.sys_assert, 0x8c917); /* call 0x10165d92 */
+            ii(0x100d_9476, 5); calld(Definitions.sys_assert, 0x8_c917); /* call 0x10165d92 */
             ii(0x100d_947b, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */
         l_0x100d_947e:
             ii(0x100d_947e, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -172,7 +172,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_9498, 5); mov(ebx, StringDefinitions.CommoCpp6);  /* mov ebx, 0x101a1964 */
             ii(0x100d_949d, 5); mov(edx, StringDefinitions.SeaButtonNotEqual0); /* mov edx, 0x101a196e */
             ii(0x100d_94a2, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_94a4, 5); calld(Definitions.sys_assert, 0x8c8e9); /* call 0x10165d92 */
+            ii(0x100d_94a4, 5); calld(Definitions.sys_assert, 0x8_c8e9); /* call 0x10165d92 */
             ii(0x100d_94a9, 3); mov(memd_a32[ss, ebp - 0x34], eax);     /* mov [ebp-0x34], eax */
         l_0x100d_94ac:
             ii(0x100d_94ac, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -185,7 +185,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_94c6, 5); mov(ebx, StringDefinitions.CommoCpp5);  /* mov ebx, 0x101a197e */
             ii(0x100d_94cb, 5); mov(edx, StringDefinitions.BuildingButtonNotEqual0); /* mov edx, 0x101a1988 */
             ii(0x100d_94d0, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_94d2, 5); calld(Definitions.sys_assert, 0x8c8bb); /* call 0x10165d92 */
+            ii(0x100d_94d2, 5); calld(Definitions.sys_assert, 0x8_c8bb); /* call 0x10165d92 */
             ii(0x100d_94d7, 3); mov(memd_a32[ss, ebp - 0x30], eax);     /* mov [ebp-0x30], eax */
         l_0x100d_94da:
             ii(0x100d_94da, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -198,7 +198,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_94f4, 5); mov(ebx, StringDefinitions.CommoCpp4);  /* mov ebx, 0x101a199d */
             ii(0x100d_94f9, 5); mov(edx, StringDefinitions.CombatButtonNotEqual0); /* mov edx, 0x101a19a7 */
             ii(0x100d_94fe, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_9500, 5); calld(Definitions.sys_assert, 0x8c88d); /* call 0x10165d92 */
+            ii(0x100d_9500, 5); calld(Definitions.sys_assert, 0x8_c88d); /* call 0x10165d92 */
             ii(0x100d_9505, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
         l_0x100d_9508:
             ii(0x100d_9508, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -211,7 +211,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_9522, 5); mov(ebx, StringDefinitions.CommoCpp3);  /* mov ebx, 0x101a19ba */
             ii(0x100d_9527, 5); mov(edx, StringDefinitions.DescriptionButtonNotEqual0); /* mov edx, 0x101a19c4 */
             ii(0x100d_952c, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x100d_952e, 5); calld(Definitions.sys_assert, 0x8c85f); /* call 0x10165d92 */
+            ii(0x100d_952e, 5); calld(Definitions.sys_assert, 0x8_c85f); /* call 0x10165d92 */
             ii(0x100d_9533, 3); mov(memd_a32[ss, ebp - 0x28], eax);     /* mov [ebp-0x28], eax */
         l_0x100d_9536:
             ii(0x100d_9536, 5); mov(edx, 0x11c);                        /* mov edx, 0x11c */

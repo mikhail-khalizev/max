@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1012_1078()
         {
             ii(0x1012_1078, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1012_107d, 5); calld(Definitions.sys_check_available_stack_size, 0x44cd0); /* call 0x10165d52 */
+            ii(0x1012_107d, 5); calld(Definitions.sys_check_available_stack_size, 0x4_4cd0); /* call 0x10165d52 */
             ii(0x1012_1082, 1); pushd(ecx);                             /* push ecx */
             ii(0x1012_1083, 1); pushd(esi);                             /* push esi */
             ii(0x1012_1084, 1); pushd(edi);                             /* push edi */
@@ -30,13 +30,13 @@ namespace MikhailKhalizev.Max.Program
         l_0x1012_10ae:
             ii(0x1012_10ae, 4); movsx(ecx, memb_a32[ss, ebp - 0x4]);    /* movsx ecx, byte [ebp-0x4] */
             ii(0x1012_10b2, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x1012_10b5, 5); calld(0x1007_623c, -0xaae7e);           /* call 0x1007623c */
+            ii(0x1012_10b5, 5); calld(0x1007_623c, -0xa_ae7e);          /* call 0x1007623c */
             ii(0x1012_10ba, 3); mov(esi, memd_a32[ds, eax + 0x8]);      /* mov esi, [eax+0x8] */
             ii(0x1012_10bd, 3); sar(esi, 0x10);                         /* sar esi, 0x10 */
             ii(0x1012_10c0, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1012_10c2, 3); mov(edx, memd_a32[ss, ebp - 0x8]);      /* mov edx, [ebp-0x8] */
             ii(0x1012_10c5, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x1012_10c8, 5); calld(0x1015_d211, 0x3c144);            /* call 0x1015d211 */
+            ii(0x1012_10c8, 5); calld(0x1015_d211, 0x3_c144);           /* call 0x1015d211 */
             ii(0x1012_10cd, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x1012_10d0, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1012_10d3, 3); mov(al, memb_a32[ds, eax + 0x4d]);      /* mov al, [eax+0x4d] */

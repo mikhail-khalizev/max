@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1012_3398()
         {
             ii(0x1012_3398, 5); pushd(0x18);                            /* push 0x18 */
-            ii(0x1012_339d, 5); calld(Definitions.sys_check_available_stack_size, 0x429b0); /* call 0x10165d52 */
+            ii(0x1012_339d, 5); calld(Definitions.sys_check_available_stack_size, 0x4_29b0); /* call 0x10165d52 */
             ii(0x1012_33a2, 1); pushd(ebx);                             /* push ebx */
             ii(0x1012_33a3, 1); pushd(esi);                             /* push esi */
             ii(0x1012_33a4, 1); pushd(edi);                             /* push edi */
@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_33ae, 3); mov(eax, memd_a32[ss, ebp + 0x14]);     /* mov eax, [ebp+0x14] */
             ii(0x1012_33b1, 4); mov(memb_a32[ds, eax + 0x4], 0);        /* mov byte [eax+0x4], 0x0 */
             ii(0x1012_33b5, 4); movsx(eax, memw_a32[ss, ebp + 0x18]);   /* movsx eax, word [ebp+0x18] */
-            ii(0x1012_33b9, 5); calld(0x1013_433e, 0x10f80);            /* call 0x1013433e */
+            ii(0x1012_33b9, 5); calld(0x1013_433e, 0x1_0f80);           /* call 0x1013433e */
             ii(0x1012_33be, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1012_33c0, 3); mov(eax, memd_a32[ss, ebp + 0x14]);     /* mov eax, [ebp+0x14] */
             ii(0x1012_33c3, 6); mov(memd_a32[ds, eax + 0x88], edx);     /* mov [eax+0x88], edx */
@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_33d2, 3); mov(eax, memd_a32[ss, ebp + 0x14]);     /* mov eax, [ebp+0x14] */
             ii(0x1012_33d5, 6); mov(memd_a32[ds, eax + 0x8c], edx);     /* mov [eax+0x8c], edx */
             ii(0x1012_33db, 4); movsx(eax, memw_a32[ss, ebp + 0x18]);   /* movsx eax, word [ebp+0x18] */
-            ii(0x1012_33df, 5); calld(Definitions.my_get_res_data_by_id_malloc, 0x10e07); /* call 0x101341eb */
+            ii(0x1012_33df, 5); calld(Definitions.my_get_res_data_by_id_malloc, 0x1_0e07); /* call 0x101341eb */
             ii(0x1012_33e4, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1012_33e6, 3); mov(eax, memd_a32[ss, ebp + 0x14]);     /* mov eax, [ebp+0x14] */
             ii(0x1012_33e9, 6); mov(memd_a32[ds, eax + 0x84], edx);     /* mov [eax+0x84], edx */

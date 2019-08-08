@@ -18,11 +18,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d4ff, 2); mov(edi, ebp);                          /* mov edi, ebp */
             ii(0x1017_d501, 2); xor(al, al);                            /* xor al, al */
             ii(0x1017_d503, 1); pushd(es);                              /* push es */
-            ii(0x1017_d504, 2); jecxzd_func(0x1017_d511, 0xb);          /* jecxz 0x1017d511 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x1017_d504, 2); if(jecxzd_func(0x1017_d511, 0xb)) return; /* jecxz 0x1017d511 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x1017_d506, 2); mov(edx, ds);                           /* mov edx, ds */
             ii(0x1017_d508, 2); mov(es, edx);                           /* mov es, edx */
             ii(0x1017_d50a, 2); repne_a32(() => scasb_a32());           /* repne scasb */
-            ii(0x1017_d50c, 2); jnzd_func(0x1017_d511, 0x3);            /* jnz 0x1017d511 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
+            ii(0x1017_d50c, 2); if(jnzd_func(0x1017_d511, 0x3)) return; /* jnz 0x1017d511 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
             ii(0x1017_d50e, 1); dec(edi);                               /* dec edi */
             ii(0x1017_d50f, 4); test(ax, 0xcf89);                       /* test ax, 0xcf89 */
             ii(0x1017_d513, 1); popd(es);                               /* pop es */

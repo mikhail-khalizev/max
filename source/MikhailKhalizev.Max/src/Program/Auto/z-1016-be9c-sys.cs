@@ -66,7 +66,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_bf80, 2); if(jzd(0x1016_bf93, 0x11)) goto l_0x1016_bf93; /* jz 0x1016bf93 */
         l_0x1016_bf82:
             ii(0x1016_bf82, 10); mov(memd_a32[ds, 0x101b_e86c], 0x2);   /* mov dword [0x101be86c], 0x2 */
-            ii(0x1016_bf8c, 5); calld(/* sys */ 0x1018_62e4, 0x1a353);  /* call 0x101862e4 */
+            ii(0x1016_bf8c, 5); calld(/* sys */ 0x1018_62e4, 0x1_a353); /* call 0x101862e4 */
             ii(0x1016_bf91, 2); jmpd(0x1016_bfad, 0x1a); goto l_0x1016_bfad; /* jmp 0x1016bfad */
         l_0x1016_bf93:
             ii(0x1016_bf93, 6); mov(ebx, memd_a32[ds, 0x101b_de7c]);    /* mov ebx, [0x101bde7c] */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1011_3fec()
         {
             ii(0x1011_3fec, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1011_3ff1, 5); calld(Definitions.sys_check_available_stack_size, 0x51d5c); /* call 0x10165d52 */
+            ii(0x1011_3ff1, 5); calld(Definitions.sys_check_available_stack_size, 0x5_1d5c); /* call 0x10165d52 */
             ii(0x1011_3ff6, 1); pushd(ebx);                             /* push ebx */
             ii(0x1011_3ff7, 1); pushd(ecx);                             /* push ecx */
             ii(0x1011_3ff8, 1); pushd(edx);                             /* push edx */
@@ -26,10 +26,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_4013, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_4016, 4); cmp(memb_a32[ds, eax + 0x13], 0);       /* cmp byte [eax+0x13], 0x0 */
             ii(0x1011_401a, 2); if(jzd(0x1011_4060, 0x44)) goto l_0x1011_4060; /* jz 0x10114060 */
-            ii(0x1011_401c, 5); calld(0x100c_aa00, -0x49621);           /* call 0x100caa00 */
+            ii(0x1011_401c, 5); calld(0x100c_aa00, -0x4_9621);          /* call 0x100caa00 */
             ii(0x1011_4021, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1011_4026, 1); pushd(eax);                             /* push eax */
-            ii(0x1011_4027, 5); calld(0x100c_aa20, -0x4960c);           /* call 0x100caa20 */
+            ii(0x1011_4027, 5); calld(0x100c_aa20, -0x4_960c);          /* call 0x100caa20 */
             ii(0x1011_402c, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1011_402e, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1011_4033, 2); xor(edx, edx);                          /* xor edx, edx */
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_404d, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x1011_4050, 3); add(eax, memd_a32[ss, ebp - 0x4]);      /* add eax, [ebp-0x4] */
             ii(0x1011_4053, 3); mov(eax, memd_a32[ds, eax + 0x16]);     /* mov eax, [eax+0x16] */
-            ii(0x1011_4056, 5); calld(0x100c_fb73, -0x444e8);           /* call 0x100cfb73 */
+            ii(0x1011_4056, 5); calld(0x100c_fb73, -0x4_44e8);          /* call 0x100cfb73 */
             ii(0x1011_405b, 5); jmpd(0x1011_4110, 0xb0); goto l_0x1011_4110; /* jmp 0x10114110 */
         l_0x1011_4060:
             ii(0x1011_4060, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
@@ -66,7 +66,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_4098, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_409b, 5); add(eax, 0x338);                        /* add eax, 0x338 */
             ii(0x1011_40a0, 2); add(eax, ebx);                          /* add eax, ebx */
-            ii(0x1011_40a2, 5); calld(Definitions.sys_strcpy, 0x51e28); /* call 0x10165ecf */
+            ii(0x1011_40a2, 5); calld(Definitions.sys_strcpy, 0x5_1e28); /* call 0x10165ecf */
             ii(0x1011_40a7, 3); mov(edx, memd_a32[ss, ebp - 0x8]);      /* mov edx, [ebp-0x8] */
             ii(0x1011_40aa, 2); add(edx, edx);                          /* add edx, edx */
             ii(0x1011_40ac, 3); add(edx, memd_a32[ss, ebp - 0x4]);      /* add edx, [ebp-0x4] */
@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_40fc, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_40ff, 4); mov(memb_a32[ds, eax + 0xb], 0x1);      /* mov byte [eax+0xb], 0x1 */
         l_0x1011_4103:
-            ii(0x1011_4103, 5); calld(0x1012_ab2f, 0x16a27);            /* call 0x1012ab2f */
+            ii(0x1011_4103, 5); calld(0x1012_ab2f, 0x1_6a27);           /* call 0x1012ab2f */
             ii(0x1011_4108, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1011_410b, 5); calld(0x1011_390d, -0x803);             /* call 0x1011390d */
         l_0x1011_4110:

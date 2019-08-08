@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1007_2f25()
         {
             ii(0x1007_2f25, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x1007_2f2a, 5); calld(Definitions.sys_check_available_stack_size, 0xf2e23); /* call 0x10165d52 */
+            ii(0x1007_2f2a, 5); calld(Definitions.sys_check_available_stack_size, 0xf_2e23); /* call 0x10165d52 */
             ii(0x1007_2f2f, 1); pushd(ebx);                             /* push ebx */
             ii(0x1007_2f30, 1); pushd(ecx);                             /* push ecx */
             ii(0x1007_2f31, 1); pushd(esi);                             /* push esi */
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1007_2f71:
             ii(0x1007_2f71, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1007_2f73, 3); lea(eax, ebp - 0x10);                   /* lea eax, [ebp-0x10] */
-            ii(0x1007_2f76, 5); calld(0x1013_ad71, 0xc7df6);            /* call 0x1013ad71 */
+            ii(0x1007_2f76, 5); calld(0x1013_ad71, 0xc_7df6);           /* call 0x1013ad71 */
             ii(0x1007_2f7b, 2); test(al, al);                           /* test al, al */
             ii(0x1007_2f7d, 6); if(jzd(0x1007_3068, 0xe5)) goto l_0x1007_3068; /* jz 0x10073068 */
             ii(0x1007_2f83, 3); lea(eax, ebp - 0x10);                   /* lea eax, [ebp-0x10] */
@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_3053, 3); sar(edx, 0x18);                         /* sar edx, 0x18 */
             ii(0x1007_3056, 3); lea(eax, ebp - 0x10);                   /* lea eax, [ebp-0x10] */
             ii(0x1007_3059, 5); calld(0x1007_63d4, 0x3376);             /* call 0x100763d4 */
-            ii(0x1007_305e, 5); calld(0x1016_3053, 0xefff0);            /* call 0x10163053 */
+            ii(0x1007_305e, 5); calld(0x1016_3053, 0xe_fff0);           /* call 0x10163053 */
         l_0x1007_3063:
             ii(0x1007_3063, 5); jmpd(0x1007_2f69, -0xff); goto l_0x1007_2f69; /* jmp 0x10072f69 */
         l_0x1007_3068:

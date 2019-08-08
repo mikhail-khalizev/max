@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_697a()
         {
             ii(0x1010_697a, 5); pushd(0x38);                            /* push 0x38 */
-            ii(0x1010_697f, 5); calld(Definitions.sys_check_available_stack_size, 0x5f3ce); /* call 0x10165d52 */
+            ii(0x1010_697f, 5); calld(Definitions.sys_check_available_stack_size, 0x5_f3ce); /* call 0x10165d52 */
             ii(0x1010_6984, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_6985, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_6986, 1); pushd(esi);                             /* push esi */
@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_69b4, 1); pushd(eax);                             /* push eax */
             ii(0x1010_69b5, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_69b8, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_69b9, 5); calld(0x1012_36fa, 0x1cd3c);            /* call 0x101236fa */
+            ii(0x1010_69b9, 5); calld(0x1012_36fa, 0x1_cd3c);           /* call 0x101236fa */
             ii(0x1010_69be, 3); add(esp, 0x8);                          /* add esp, 0x8 */
             ii(0x1010_69c1, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_69c3, 2); if(jzd(0x1010_6a18, 0x53)) goto l_0x1010_6a18; /* jz 0x10106a18 */
@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_69ed, 6); pushd(memd_a32[ds, eax + 0x101b_b520]); /* push dword [eax+0x101bb520] */
             ii(0x1010_69f3, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_69f6, 1); pushd(eax);                             /* push eax */
-            ii(0x1010_69f7, 5); calld(0x1012_4113, 0x1d717);            /* call 0x10124113 */
+            ii(0x1010_69f7, 5); calld(0x1012_4113, 0x1_d717);           /* call 0x10124113 */
             ii(0x1010_69fc, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x1010_69ff, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_6a01, 2); if(jzd(0x1010_6a18, 0x15)) goto l_0x1010_6a18; /* jz 0x10106a18 */

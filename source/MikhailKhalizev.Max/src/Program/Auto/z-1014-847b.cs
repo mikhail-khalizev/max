@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_847b()
         {
             ii(0x1014_847b, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1014_8480, 5); calld(Definitions.sys_check_available_stack_size, 0x1d8cd); /* call 0x10165d52 */
+            ii(0x1014_8480, 5); calld(Definitions.sys_check_available_stack_size, 0x1_d8cd); /* call 0x10165d52 */
             ii(0x1014_8485, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_8486, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_8487, 1); pushd(edx);                             /* push edx */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1014_84a5:
             ii(0x1014_84a5, 5); calld(0x1014_837e, -0x12c);             /* call 0x1014837e */
             ii(0x1014_84aa, 5); mov(eax, 0x8);                          /* mov eax, 0x8 */
-            ii(0x1014_84af, 5); calld(/* sys */ 0x1017_92be, 0x30e0a);  /* call 0x101792be */
+            ii(0x1014_84af, 5); calld(/* sys */ 0x1017_92be, 0x3_0e0a); /* call 0x101792be */
             ii(0x1014_84b4, 2); mov(ebx, edx);                          /* mov ebx, edx */
             ii(0x1014_84b6, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1014_84b8, 7); mov(memw_a32[ds, 0x101c_8128], bx);     /* mov [0x101c8128], bx */
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_84d5, 2); mov(ecx, ebx);                          /* mov ecx, ebx */
             ii(0x1014_84d7, 2); mov(ebx, eax);                          /* mov ebx, eax */
             ii(0x1014_84d9, 2); mov(eax, edx);                          /* mov eax, edx */
-            ii(0x1014_84db, 5); calld(/* sys */ 0x1017_92f0, 0x30e10);  /* call 0x101792f0 */
+            ii(0x1014_84db, 5); calld(/* sys */ 0x1017_92f0, 0x3_0e10); /* call 0x101792f0 */
             ii(0x1014_84e0, 5); mov(eax, 0x4000);                       /* mov eax, 0x4000 */
             ii(0x1014_84e5, 5); calld(0x1014_8415, -0xd5);              /* call 0x10148415 */
             ii(0x1014_84ea, 10); mov(memd_a32[ds, 0x101c_8138], 0x1);   /* mov dword [0x101c8138], 0x1 */

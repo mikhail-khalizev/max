@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1016_7f9f:
             ii(0x1016_7f9f, 4); cmp(esi, memd_a32[ds, ebx + eax + 0x28]); /* cmp esi, [ebx+eax+0x28] */
             ii(0x1016_7fa3, 2); if(jnzd(0x1016_7fae, 0x9)) goto l_0x1016_7fae; /* jnz 0x10167fae */
-            ii(0x1016_7fa5, 5); calld(/* sys */ 0x1018_4dd0, 0x1ce26);  /* call 0x10184dd0 */
+            ii(0x1016_7fa5, 5); calld(/* sys */ 0x1018_4dd0, 0x1_ce26); /* call 0x10184dd0 */
             ii(0x1016_7faa, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1016_7fac, 2); jmpd(0x1016_7fc0, 0x12); goto l_0x1016_7fc0; /* jmp 0x10167fc0 */
         l_0x1016_7fae:

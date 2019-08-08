@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100c_fa7c()
         {
             ii(0x100c_fa7c, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100c_fa81, 5); calld(Definitions.sys_check_available_stack_size, 0x962cc); /* call 0x10165d52 */
+            ii(0x100c_fa81, 5); calld(Definitions.sys_check_available_stack_size, 0x9_62cc); /* call 0x10165d52 */
             ii(0x100c_fa86, 1); pushd(ecx);                             /* push ecx */
             ii(0x100c_fa87, 1); pushd(esi);                             /* push esi */
             ii(0x100c_fa88, 1); pushd(edi);                             /* push edi */
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_fac6, 2); if(jzd(0x100c_faf8, 0x30)) goto l_0x100c_faf8; /* jz 0x100cfaf8 */
             ii(0x100c_fac8, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x100c_facb, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
-            ii(0x100c_facd, 5); calld(Definitions.sys_display_draw_3, 0x99d42); /* call 0x10169814 */
+            ii(0x100c_facd, 5); calld(Definitions.sys_display_draw_3, 0x9_9d42); /* call 0x10169814 */
             ii(0x100c_fad2, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100c_fad4, 3); mov(al, memb_a32[ss, ebp - 0x4]);       /* mov al, [ebp-0x4] */
             ii(0x100c_fad7, 1); pushd(eax);                             /* push eax */
@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_faec, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x100c_faee, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x100c_faf1, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
-            ii(0x100c_faf3, 5); calld(Definitions.sys_display_draw_2, 0x98ff8); /* call 0x10168af0 */
+            ii(0x100c_faf3, 5); calld(Definitions.sys_display_draw_2, 0x9_8ff8); /* call 0x10168af0 */
         l_0x100c_faf8:
             ii(0x100c_faf8, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x100c_fafb, 4); mov(memb_a32[ds, eax + 0x28], 0x1);     /* mov byte [eax+0x28], 0x1 */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_f432()
         {
             ii(0x1014_f432, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1014_f437, 5); calld(Definitions.sys_check_available_stack_size, 0x16916); /* call 0x10165d52 */
+            ii(0x1014_f437, 5); calld(Definitions.sys_check_available_stack_size, 0x1_6916); /* call 0x10165d52 */
             ii(0x1014_f43c, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_f43d, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_f43e, 1); pushd(esi);                             /* push esi */
@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_f456, 7); cmp(memb_a32[ds, eax + 0xb0], 0);       /* cmp byte [eax+0xb0], 0x0 */
             ii(0x1014_f45d, 2); if(jnzd(0x1014_f48f, 0x30)) goto l_0x1014_f48f; /* jnz 0x1014f48f */
             ii(0x1014_f45f, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x1014_f462, 5); calld(0x1016_433b, 0x14ed4);            /* call 0x1016433b */
+            ii(0x1014_f462, 5); calld(0x1016_433b, 0x1_4ed4);           /* call 0x1016433b */
             ii(0x1014_f467, 2); test(al, al);                           /* test al, al */
             ii(0x1014_f469, 2); if(jnzd(0x1014_f475, 0xa)) goto l_0x1014_f475; /* jnz 0x1014f475 */
             ii(0x1014_f46b, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_f49b, 5); jmpd(0x1014_f53c, 0x9c); goto l_0x1014_f53c; /* jmp 0x1014f53c */
         l_0x1014_f4a0:
             ii(0x1014_f4a0, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x1014_f4a3, 5); calld(0x1016_433b, 0x14e93);            /* call 0x1016433b */
+            ii(0x1014_f4a3, 5); calld(0x1016_433b, 0x1_4e93);           /* call 0x1016433b */
             ii(0x1014_f4a8, 2); test(al, al);                           /* test al, al */
             ii(0x1014_f4aa, 2); if(jzd(0x1014_f4e8, 0x3c)) goto l_0x1014_f4e8; /* jz 0x1014f4e8 */
             ii(0x1014_f4ac, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100f_edfc()
         {
             ii(0x100f_edfc, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x100f_ee01, 5); calld(Definitions.sys_check_available_stack_size, 0x66f4c); /* call 0x10165d52 */
+            ii(0x100f_ee01, 5); calld(Definitions.sys_check_available_stack_size, 0x6_6f4c); /* call 0x10165d52 */
             ii(0x100f_ee06, 1); pushd(ebx);                             /* push ebx */
             ii(0x100f_ee07, 1); pushd(ecx);                             /* push ecx */
             ii(0x100f_ee08, 1); pushd(edx);                             /* push edx */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_ee25, 6); mov(ebx, memd_a32[ds, edx + 0x101c_a562]); /* mov ebx, [edx+0x101ca562] */
             ii(0x100f_ee2b, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x100f_ee2d, 2); mov(eax, ebx);                          /* mov eax, ebx */
-            ii(0x100f_ee2f, 5); calld(0x100d_f3dc, -0x1fa58);           /* call 0x100df3dc */
+            ii(0x100f_ee2f, 5); calld(0x100d_f3dc, -0x1_fa58);          /* call 0x100df3dc */
             ii(0x100f_ee34, 5); mov(edx, 0x101c_8184);                  /* mov edx, 0x101c8184 */
             ii(0x100f_ee39, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x100f_ee3d, 5); calld(0x100f_ecf6, -0x14c);             /* call 0x100fecf6 */
@@ -73,7 +73,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_eed2, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100f_eed4, 4); movsx(edx, memb_a32[ss, ebp - 0x8]);    /* movsx edx, byte [ebp-0x8] */
             ii(0x100f_eed8, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
-            ii(0x100f_eedc, 5); calld(0x1013_322d, 0x3434c);            /* call 0x1013322d */
+            ii(0x100f_eedc, 5); calld(0x1013_322d, 0x3_434c);           /* call 0x1013322d */
         l_0x100f_eee1:
             ii(0x100f_eee1, 2); jmpd(0x100f_ee92, -0x51); goto l_0x100f_ee92; /* jmp 0x100fee92 */
         l_0x100f_eee3:

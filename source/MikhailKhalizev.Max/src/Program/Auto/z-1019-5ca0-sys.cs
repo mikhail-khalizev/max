@@ -25,9 +25,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5cc3, 3); mov(ax, memw_a32[ds, ebx]);             /* mov ax, [ebx] */
             ii(0x1019_5cc6, 4); cmp(ax, 0x1);                           /* cmp ax, 0x1 */
             ii(0x1019_5cca, 2); if(jbd(0x1019_5cd4, 0x8)) goto l_0x1019_5cd4; /* jb 0x10195cd4 */
-            ii(0x1019_5ccc, 2); jbed_func(0x1019_5ce4, 0x16);           /* jbe 0x10195ce4 */
+            ii(0x1019_5ccc, 2); if(jbed_func(0x1019_5ce4, 0x16)) return; /* jbe 0x10195ce4 */
             ii(0x1019_5cce, 4); cmp(ax, 0x5);                           /* cmp ax, 0x5 */
-            ii(0x1019_5cd2, 2); jzd_func(0x1019_5ce9, 0x15);            /* jz 0x10195ce9 */
+            ii(0x1019_5cd2, 2); if(jzd_func(0x1019_5ce9, 0x15)) return; /* jz 0x10195ce9 */
         l_0x1019_5cd4:
             ii(0x1019_5cd4, 3); mov(memd_a32[ds, esi + 0x4], ecx);      /* mov [esi+0x4], ecx */
         }

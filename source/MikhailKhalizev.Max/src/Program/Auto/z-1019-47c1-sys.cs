@@ -158,7 +158,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4936, 3); inc(memd_a32[ds, esi + 0x18]);          /* inc dword [esi+0x18] */
             ii(0x1019_4939, 4); mov(eax, memd_a32[ss, esp + 0x4]);      /* mov eax, [esp+0x4] */
             ii(0x1019_493d, 3); add(eax, 0x4);                          /* add eax, 0x4 */
-            ii(0x1019_4940, 5); calld(Definitions.sys_free, -0x29884);  /* call 0x1016b0c1 */
+            ii(0x1019_4940, 5); calld(Definitions.sys_free, -0x2_9884); /* call 0x1016b0c1 */
         l_0x1019_4945:
             ii(0x1019_4945, 2); xor(ebp, ebp);                          /* xor ebp, ebp */
         l_0x1019_4947:

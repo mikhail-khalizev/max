@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
@@ -154,7 +155,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     ud_mnemonic_code.UD_Iiretq
                 }.Contains(Mnemonic)
             );
-            
+
             var sb = new StringBuilder();
 
             var flags = _knownInstr[Mnemonic];
@@ -752,9 +753,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 {ud_mnemonic_code.UD_Isalc, InstrFlags.None},
                 
                 {ud_mnemonic_code.UD_Iinvlpg, InstrFlags.None},
-
-                //        {ud_mnemonic_code.UD_Isysenter, InstrFlags.None},
-                //        {ud_mnemonic_code.UD_Imovups, InstrFlags.None},
+                {ud_mnemonic_code.UD_Isysenter, InstrFlags.None},
+                {ud_mnemonic_code.UD_Imovups, InstrFlags.None}
             };
 
         #endregion

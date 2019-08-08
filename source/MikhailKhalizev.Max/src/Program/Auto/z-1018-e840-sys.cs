@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_e8f9, 3); and(eax, 0xf);                          /* and eax, 0xf */
             ii(0x1018_e8fc, 5); pushd(/* sys */ 0x1018_e8e4);           /* push 0x1018e8e4 */
             ii(0x1018_e901, 7); pushd(memd_a32[ds, ebx * 4 + 0x101b_f910]); /* push dword [ebx*4+0x101bf910] */
-            ii(0x1018_e908, 7); jmpd_abs(memd_a32[ds, eax * 4 + 0x101b_f910]); return; /* jmp dword [eax*4+0x101bf910] */
+            ii(0x1018_e908, 7); if(jmpd_abs(memd_a32[ds, eax * 4 + 0x101b_f910])) return; /* jmp dword [eax*4+0x101bf910] */
         l_0x1018_e90f:
             ii(0x1018_e90f, 3); add(edi, memd_a32[ss, ebp - 0x8]);      /* add edi, [ebp-0x8] */
             ii(0x1018_e912, 3); dec(memd_a32[ss, ebp + 0x1c]);          /* dec dword [ebp+0x1c] */

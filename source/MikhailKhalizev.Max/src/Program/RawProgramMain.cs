@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -341,13 +341,17 @@ namespace MikhailKhalizev.Max.Program
                 ds.Descriptor.Base,
                 MethodsInfo);
 
-            to_cxx.AddMethodInfoJumpsToDecode = 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
+            to_cxx.AddMethodInfoJumpsToDecode =
+                false; // Код активно загружается в процессе работы, поэтому преждевременное декодирование приводит к ошибкам.
+                // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
 
             if (seg.Descriptor.Base != 0)
                 to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
 
             if (seg.Descriptor.Base + seg.Descriptor.Limit + 1 != 0)
                 to_cxx.SuppressDecode.Add(seg.Descriptor.Base + seg.Descriptor.Limit + 1 + 1, 0);
+                
+            to_cxx.SuppressDecode.Add(0x14f0_0000, 0);
 
 
             /* Аргументы следующим методам установлены опытным путём. */

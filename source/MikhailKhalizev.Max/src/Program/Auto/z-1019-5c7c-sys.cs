@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5c89, 2); test(edi, edi);                         /* test edi, edi */
             ii(0x1019_5c8b, 2); if(jnzd(0x1019_5c95, 0x8)) goto l_0x1019_5c95; /* jnz 0x10195c95 */
             ii(0x1019_5c8d, 3); mov(memd_a32[ss, esp], edi);            /* mov [esp], edi */
-            ii(0x1019_5c90, 5); jmpd_func(0x1019_5cd7, 0x42); return;   /* jmp 0x10195cd7 */
+            ii(0x1019_5c90, 5); if(jmpd_func(0x1019_5cd7, 0x42)) return; /* jmp 0x10195cd7 */
         l_0x1019_5c95:
             ii(0x1019_5c95, 3); mov(ecx, memd_a32[ds, eax + 0x4]);      /* mov ecx, [eax+0x4] */
             ii(0x1019_5c98, 2); test(ecx, ecx);                         /* test ecx, ecx */

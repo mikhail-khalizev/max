@@ -326,7 +326,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 os.Append(to.ToString());
 
                 jtka.To.Add(to);
-                Engine.AddressesToDecode.Add(to);
+                Engine.AddToDecode(to);
             }
 
             os.Append("}.");

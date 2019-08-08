@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1009_2f1e()
         {
             ii(0x1009_2f1e, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x1009_2f23, 5); calld(Definitions.sys_check_available_stack_size, 0xd2e2a); /* call 0x10165d52 */
+            ii(0x1009_2f23, 5); calld(Definitions.sys_check_available_stack_size, 0xd_2e2a); /* call 0x10165d52 */
             ii(0x1009_2f28, 1); pushd(ecx);                             /* push ecx */
             ii(0x1009_2f29, 1); pushd(esi);                             /* push esi */
             ii(0x1009_2f2a, 1); pushd(edi);                             /* push edi */
@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_2f56, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x1009_2f59, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1009_2f5c, 3); add(eax, 0x13);                         /* add eax, 0x13 */
-            ii(0x1009_2f5f, 5); calld(Definitions.my_ctor_0x101b4184, -0x1c474); /* call 0x10076af0 */
+            ii(0x1009_2f5f, 5); calld(Definitions.my_ctor_0x101b4184, -0x1_c474); /* call 0x10076af0 */
             ii(0x1009_2f64, 3); sub(eax, 0x13);                         /* sub eax, 0x13 */
             ii(0x1009_2f67, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x1009_2f6a, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_2f95, 3); mov(memd_a32[ss, ebp - 0x18], eax);     /* mov [ebp-0x18], eax */
             ii(0x1009_2f98, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1009_2f9b, 3); add(eax, 0x2b);                         /* add eax, 0x2b */
-            ii(0x1009_2f9e, 5); calld(0x1007_20b1, -0x20ef2);           /* call 0x100720b1 */
+            ii(0x1009_2f9e, 5); calld(0x1007_20b1, -0x2_0ef2);          /* call 0x100720b1 */
             ii(0x1009_2fa3, 3); sub(eax, 0x2b);                         /* sub eax, 0x2b */
             ii(0x1009_2fa6, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x1009_2fa9, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */

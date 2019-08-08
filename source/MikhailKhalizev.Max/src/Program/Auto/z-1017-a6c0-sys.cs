@@ -92,7 +92,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a7b0, 1); pushd(edx);                             /* push edx */
             ii(0x1017_a7b1, 6); mov(ebx, memd_a32[ds, 0x1020_9cc8]);    /* mov ebx, [0x10209cc8] */
             ii(0x1017_a7b7, 1); pushd(ebx);                             /* push ebx */
-            ii(0x1017_a7b8, 5); calld(/* sys */ 0x1019_33cd, 0x18c10);  /* call 0x101933cd */
+            ii(0x1017_a7b8, 5); calld(/* sys */ 0x1019_33cd, 0x1_8c10); /* call 0x101933cd */
             ii(0x1017_a7bd, 3); add(esp, 0x28);                         /* add esp, 0x28 */
             ii(0x1017_a7c0, 2); jmpd(0x1017_a82e, 0x6c); goto l_0x1017_a82e; /* jmp 0x1017a82e */
         l_0x1017_a7c2:

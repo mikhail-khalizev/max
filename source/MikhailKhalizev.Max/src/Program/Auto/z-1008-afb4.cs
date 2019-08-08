@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1008_afb4()
         {
             ii(0x1008_afb4, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1008_afb9, 5); calld(Definitions.sys_check_available_stack_size, 0xdad94); /* call 0x10165d52 */
+            ii(0x1008_afb9, 5); calld(Definitions.sys_check_available_stack_size, 0xd_ad94); /* call 0x10165d52 */
             ii(0x1008_afbe, 1); pushd(ebx);                             /* push ebx */
             ii(0x1008_afbf, 1); pushd(ecx);                             /* push ecx */
             ii(0x1008_afc0, 1); pushd(edx);                             /* push edx */

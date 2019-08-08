@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_b04b, 6); and(edx, 0xffff);                       /* and edx, 0xffff */
             ii(0x1016_b051, 2); mov(ebx, ecx);                          /* mov ebx, ecx */
             ii(0x1016_b053, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1016_b055, 5); calld(/* sys */ 0x1018_6978, 0x1b91e);  /* call 0x10186978 */
+            ii(0x1016_b055, 5); calld(/* sys */ 0x1018_6978, 0x1_b91e); /* call 0x10186978 */
             ii(0x1016_b05a, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1016_b05c, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_b05e, 2); if(jnzd(0x1016_b0a8, 0x48)) goto l_0x1016_b0a8; /* jnz 0x1016b0a8 */
@@ -75,12 +75,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_b079, 4); cmp(memb_a32[ss, esp], 0);              /* cmp byte [esp], 0x0 */
             ii(0x1016_b07d, 2); if(jnzd(0x1016_b08a, 0xb)) goto l_0x1016_b08a; /* jnz 0x1016b08a */
             ii(0x1016_b07f, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1016_b081, 5); calld(/* sys */ 0x1018_6f1c, 0x1be96);  /* call 0x10186f1c */
+            ii(0x1016_b081, 5); calld(/* sys */ 0x1018_6f1c, 0x1_be96); /* call 0x10186f1c */
             ii(0x1016_b086, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_b088, 2); if(jnzd(0x1016_b09f, 0x15)) goto l_0x1016_b09f; /* jnz 0x1016b09f */
         l_0x1016_b08a:
             ii(0x1016_b08a, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1016_b08c, 5); calld(/* sys */ 0x1018_70e5, 0x1c054);  /* call 0x101870e5 */
+            ii(0x1016_b08c, 5); calld(/* sys */ 0x1018_70e5, 0x1_c054); /* call 0x101870e5 */
             ii(0x1016_b091, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_b093, 2); if(jzd(0x1016_b0a8, 0x13)) goto l_0x1016_b0a8; /* jz 0x1016b0a8 */
             ii(0x1016_b095, 2); xor(cl, cl);                            /* xor cl, cl */

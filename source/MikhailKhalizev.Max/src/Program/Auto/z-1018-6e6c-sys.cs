@@ -18,14 +18,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_6e79, 2); if(jnzd(0x1018_6e7f, 0x4)) goto l_0x1018_6e7f; /* jnz 0x10186e7f */
         l_0x1018_6e7b:
             ii(0x1018_6e7b, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1018_6e7d, 2); jmpd_func(0x1018_6e63, -0x1c); return;  /* jmp 0x10186e63 */
+            ii(0x1018_6e7d, 2); if(jmpd_func(0x1018_6e63, -0x1c)) return; /* jmp 0x10186e63 */
         l_0x1018_6e7f:
             ii(0x1018_6e7f, 7); cmp(memd_a32[ds, 0x101b_e560], -0x2 /* 0xfe */); /* cmp dword [0x101be560], 0xfffffffe */
             ii(0x1018_6e86, 2); if(jzd(0x1018_6e7b, -0xd)) goto l_0x1018_6e7b; /* jz 0x10186e7b */
             ii(0x1018_6e88, 2); mov(eax, esp);                          /* mov eax, esp */
             ii(0x1018_6e8a, 5); calld(/* sys */ 0x1018_7068, 0x1d9);    /* call 0x10187068 */
             ii(0x1018_6e8f, 2); test(eax, eax);                         /* test eax, eax */
-            ii(0x1018_6e91, 2); jzd_func(0x1018_6e63, -0x30);           /* jz 0x10186e63 */
+            ii(0x1018_6e91, 2); if(jzd_func(0x1018_6e63, -0x30)) return; /* jz 0x10186e63 */
             ii(0x1018_6e93, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1018_6e95, 5); mov(al, memb_a32[ds, 0x101b_e58e]);     /* mov al, [0x101be58e] */
             ii(0x1018_6e9a, 3); cmp(eax, 0x1);                          /* cmp eax, 0x1 */
@@ -73,9 +73,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_6f06, 1); inc(edi);                               /* inc edi */
             ii(0x1018_6f07, 3); lea(eax, ebx + 0x4);                    /* lea eax, [ebx+0x4] */
             ii(0x1018_6f0a, 3); mov(memd_a32[ds, edx + 0x18], edi);     /* mov [edx+0x18], edi */
-            ii(0x1018_6f0d, 5); calld(Definitions.sys_free, -0x1be51);  /* call 0x1016b0c1 */
+            ii(0x1018_6f0d, 5); calld(Definitions.sys_free, -0x1_be51); /* call 0x1016b0c1 */
             ii(0x1018_6f12, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
-            ii(0x1018_6f17, 5); jmpd_func(0x1018_6e63, -0xb9); return;  /* jmp 0x10186e63 */
+            ii(0x1018_6f17, 5); if(jmpd_func(0x1018_6e63, -0xb9)) return; /* jmp 0x10186e63 */
         }
     }
 }

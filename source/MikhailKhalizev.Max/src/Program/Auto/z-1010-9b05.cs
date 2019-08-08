@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_9b05()
         {
             ii(0x1010_9b05, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x1010_9b0a, 5); calld(Definitions.sys_check_available_stack_size, 0x5c243); /* call 0x10165d52 */
+            ii(0x1010_9b0a, 5); calld(Definitions.sys_check_available_stack_size, 0x5_c243); /* call 0x10165d52 */
             ii(0x1010_9b0f, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_9b10, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_9b11, 1); pushd(edx);                             /* push edx */
@@ -32,13 +32,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_9b45, 7); add(ax, memw_a32[ds, 0x101c_4de8]);     /* add ax, [0x101c4de8] */
             ii(0x1010_9b4c, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
         l_0x1010_9b4f:
-            ii(0x1010_9b4f, 5); calld(0x1014_82f4, 0x3e7a0);            /* call 0x101482f4 */
+            ii(0x1010_9b4f, 5); calld(0x1014_82f4, 0x3_e7a0);           /* call 0x101482f4 */
             ii(0x1010_9b54, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x1010_9b57, 7); inc(memw_a32[ds, 0x101c_4dea]);         /* inc word [0x101c4dea] */
             ii(0x1010_9b5e, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1010_9b61, 5); calld(0x1010_96e0, -0x486);             /* call 0x101096e0 */
         l_0x1010_9b66:
-            ii(0x1010_9b66, 5); calld(0x1014_82f4, 0x3e789);            /* call 0x101482f4 */
+            ii(0x1010_9b66, 5); calld(0x1014_82f4, 0x3_e789);           /* call 0x101482f4 */
             ii(0x1010_9b6b, 3); sub(eax, memd_a32[ss, ebp - 0xc]);      /* sub eax, [ebp-0xc] */
             ii(0x1010_9b6e, 5); cmp(eax, 0x308c);                       /* cmp eax, 0x308c */
             ii(0x1010_9b73, 2); if(jbd(0x1010_9b66, -0xf)) goto l_0x1010_9b66; /* jb 0x10109b66 */

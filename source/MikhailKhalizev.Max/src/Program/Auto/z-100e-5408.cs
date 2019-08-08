@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100e_5408()
         {
             ii(0x100e_5408, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100e_540d, 5); calld(Definitions.sys_check_available_stack_size, 0x80940); /* call 0x10165d52 */
+            ii(0x100e_540d, 5); calld(Definitions.sys_check_available_stack_size, 0x8_0940); /* call 0x10165d52 */
             ii(0x100e_5412, 1); pushd(ebx);                             /* push ebx */
             ii(0x100e_5413, 1); pushd(ecx);                             /* push ecx */
             ii(0x100e_5414, 1); pushd(esi);                             /* push esi */
@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_5427, 5); mov(al, memb_a32[ds, 0x101c_37da]);     /* mov al, [0x101c37da] */
             ii(0x100e_542c, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x100e_542f, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x100e_5432, 5); calld(0x1007_6074, -0x6f3c3);           /* call 0x10076074 */
+            ii(0x100e_5432, 5); calld(0x1007_6074, -0x6_f3c3);          /* call 0x10076074 */
             ii(0x100e_5437, 2); test(al, al);                           /* test al, al */
             ii(0x100e_5439, 2); if(jnzd(0x100e_5444, 0x9)) goto l_0x100e_5444; /* jnz 0x100e5444 */
             ii(0x100e_543b, 7); cmp(memb_a32[ds, 0x101c_3980], 0);      /* cmp byte [0x101c3980], 0x0 */
@@ -47,7 +47,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100e_5465:
             ii(0x100e_5465, 3); mov(edx, memd_a32[ss, ebp - 0x4]);      /* mov edx, [ebp-0x4] */
             ii(0x100e_5468, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x100e_546b, 5); calld(0x1015_2bea, 0x6d77a);            /* call 0x10152bea */
+            ii(0x100e_546b, 5); calld(0x1015_2bea, 0x6_d77a);           /* call 0x10152bea */
             ii(0x100e_5470, 3); mov(memb_a32[ss, ebp - 0xc], al);       /* mov [ebp-0xc], al */
             ii(0x100e_5473, 2); jmpd(0x100e_5479, 0x4); goto l_0x100e_5479; /* jmp 0x100e5479 */
         l_0x100e_5475:

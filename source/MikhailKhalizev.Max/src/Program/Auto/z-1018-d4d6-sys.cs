@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_d505, 4); test(memb_a32[ds, ecx + 0xc], 0x3);     /* test byte [ecx+0xc], 0x3 */
             ii(0x1018_d509, 2); if(jnzd(0x1018_d522, 0x17)) goto l_0x1018_d522; /* jnz 0x1018d522 */
             ii(0x1018_d50b, 5); mov(eax, 0x8);                          /* mov eax, 0x8 */
-            ii(0x1018_d510, 5); calld(Definitions.sys_malloc, -0x22537); /* call 0x1016afde */
+            ii(0x1018_d510, 5); calld(Definitions.sys_malloc, -0x2_2537); /* call 0x1016afde */
             ii(0x1018_d515, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1018_d517, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1018_d519, 2); if(jzd(0x1018_d56a, 0x4f)) goto l_0x1018_d56a; /* jz 0x1018d56a */
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_d52b, 2); if(jbd(0x1018_d505, -0x28)) goto l_0x1018_d505; /* jb 0x1018d505 */
             ii(0x1018_d52d, 5); mov(eax, 0x22);                         /* mov eax, 0x22 */
             ii(0x1018_d532, 5); mov(edi, 0x4003);                       /* mov edi, 0x4003 */
-            ii(0x1018_d537, 5); calld(Definitions.sys_malloc, -0x2255e); /* call 0x1016afde */
+            ii(0x1018_d537, 5); calld(Definitions.sys_malloc, -0x2_255e); /* call 0x1016afde */
             ii(0x1018_d53c, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1018_d53e, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1018_d540, 2); if(jzd(0x1018_d56a, 0x28)) goto l_0x1018_d56a; /* jz 0x1018d56a */
@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_d545, 5); mov(ebx, 0x1a);                         /* mov ebx, 0x1a */
             ii(0x1018_d54a, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1018_d54c, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1018_d54e, 5); calld(Definitions.sys_memset, -0x27773); /* call 0x10165de0 */
+            ii(0x1018_d54e, 5); calld(Definitions.sys_memset, -0x2_7773); /* call 0x10165de0 */
             ii(0x1018_d553, 3); mov(memd_a32[ds, ecx + 0xc], edi);      /* mov [ecx+0xc], edi */
             ii(0x1018_d556, 5); mov(eax, memd_a32[ds, 0x1020_b70c]);    /* mov eax, [0x1020b70c] */
             ii(0x1018_d55b, 3); mov(memd_a32[ds, esi + 0x4], ecx);      /* mov [esi+0x4], ecx */

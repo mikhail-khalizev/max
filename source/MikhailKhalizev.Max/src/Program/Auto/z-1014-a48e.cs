@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_a48e()
         {
             ii(0x1014_a48e, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1014_a493, 5); calld(Definitions.sys_check_available_stack_size, 0x1b8ba); /* call 0x10165d52 */
+            ii(0x1014_a493, 5); calld(Definitions.sys_check_available_stack_size, 0x1_b8ba); /* call 0x10165d52 */
             ii(0x1014_a498, 1); pushd(esi);                             /* push esi */
             ii(0x1014_a499, 1); pushd(edi);                             /* push edi */
             ii(0x1014_a49a, 1); pushd(ebp);                             /* push ebp */
@@ -62,11 +62,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_a52c, 2); mov(bl, al);                            /* mov bl, al */
             ii(0x1014_a52e, 3); mov(edx, memd_a32[ss, ebp - 0x10]);     /* mov edx, [ebp-0x10] */
             ii(0x1014_a531, 5); mov(eax, 0x101c_39b8);                  /* mov eax, 0x101c39b8 */
-            ii(0x1014_a536, 5); calld(0x1010_346f, -0x470cc);           /* call 0x1010346f */
+            ii(0x1014_a536, 5); calld(0x1010_346f, -0x4_70cc);          /* call 0x1010346f */
             ii(0x1014_a53b, 4); cmp(memb_a32[ss, ebp - 0x4], 0);        /* cmp byte [ebp-0x4], 0x0 */
             ii(0x1014_a53f, 2); if(jnzd(0x1014_a56b, 0x2a)) goto l_0x1014_a56b; /* jnz 0x1014a56b */
             ii(0x1014_a541, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
-            ii(0x1014_a544, 5); calld(0x1007_6154, -0xd43f5);           /* call 0x10076154 */
+            ii(0x1014_a544, 5); calld(0x1007_6154, -0xd_43f5);          /* call 0x10076154 */
             ii(0x1014_a549, 5); and(eax, 0xffff);                       /* and eax, 0xffff */
             ii(0x1014_a54e, 5); cmp(eax, 0xffff);                       /* cmp eax, 0xffff */
             ii(0x1014_a553, 2); if(jnzd(0x1014_a55e, 0x9)) goto l_0x1014_a55e; /* jnz 0x1014a55e */
@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1014_a55e:
             ii(0x1014_a55e, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
             ii(0x1014_a563, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */
-            ii(0x1014_a566, 5); calld(0x1007_1838, -0xd8d33);           /* call 0x10071838 */
+            ii(0x1014_a566, 5); calld(0x1007_1838, -0xd_8d33);          /* call 0x10071838 */
         l_0x1014_a56b:
             ii(0x1014_a56b, 5); calld(0x1015_50bc, 0xab4c);             /* call 0x101550bc */
             ii(0x1014_a570, 3); mov(ebx, memd_a32[ss, ebp - 0x10]);     /* mov ebx, [ebp-0x10] */

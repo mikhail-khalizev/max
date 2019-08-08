@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_string_add_ref()
         {
             ii(0x1014_2464, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1014_2469, 5); calld(Definitions.sys_check_available_stack_size, 0x238e4); /* call 0x10165d52 */
+            ii(0x1014_2469, 5); calld(Definitions.sys_check_available_stack_size, 0x2_38e4); /* call 0x10165d52 */
             ii(0x1014_246e, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_246f, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_2470, 1); pushd(edx);                             /* push edx */

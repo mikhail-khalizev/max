@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("766d77b6-69d6-4e91-964b-d88f65760980")]
         public void /* sys */ Method_1016_c704()
         {
-            ii(0x1016_c704, 2); jmpd_func(0x1016_c77c, 0x76); return;   /* jmp 0x1016c77c */
+            ii(0x1016_c704, 2); if(jmpd_func(0x1016_c77c, 0x76)) return; /* jmp 0x1016c77c */
         }
     }
 }

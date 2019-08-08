@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1012_4f2e()
         {
             ii(0x1012_4f2e, 5); pushd(0x40);                            /* push 0x40 */
-            ii(0x1012_4f33, 5); calld(Definitions.sys_check_available_stack_size, 0x40e1a); /* call 0x10165d52 */
+            ii(0x1012_4f33, 5); calld(Definitions.sys_check_available_stack_size, 0x4_0e1a); /* call 0x10165d52 */
             ii(0x1012_4f38, 1); pushd(ebx);                             /* push ebx */
             ii(0x1012_4f39, 1); pushd(ecx);                             /* push ecx */
             ii(0x1012_4f3a, 1); pushd(esi);                             /* push esi */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4f5e, 3); lea(ebx, ebp - 0x24);                   /* lea ebx, [ebp-0x24] */
             ii(0x1012_4f61, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
             ii(0x1012_4f64, 5); mov(eax, 0x31);                         /* mov eax, 0x31 */
-            ii(0x1012_4f69, 5); calld(/* sys */ 0x1016_c606, 0x47698);  /* call 0x1016c606 */
+            ii(0x1012_4f69, 5); calld(/* sys */ 0x1016_c606, 0x4_7698); /* call 0x1016c606 */
             ii(0x1012_4f6e, 4); cmp(memd_a32[ss, ebp - 0xc], 0);        /* cmp dword [ebp-0xc], 0x0 */
             ii(0x1012_4f72, 2); if(jzd(0x1012_4f7d, 0x9)) goto l_0x1012_4f7d; /* jz 0x10124f7d */
             ii(0x1012_4f74, 7); mov(memd_a32[ss, ebp - 0x28], 0);       /* mov dword [ebp-0x28], 0x0 */

@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_303e, 4); cmp(memb_a32[ss, ebp - 0x10], 0);       /* cmp byte [ebp-0x10], 0x0 */
             ii(0x1016_3042, 2); if(jzd(0x1016_304c, 0x8)) goto l_0x1016_304c; /* jz 0x1016304c */
             ii(0x1016_3044, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x1016_3047, 5); calld(0x1011_fe27, -0x43225);           /* call 0x1011fe27 */
+            ii(0x1016_3047, 5); calld(0x1011_fe27, -0x4_3225);          /* call 0x1011fe27 */
         l_0x1016_304c:
             ii(0x1016_304c, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1016_304e, 1); popd(ebp);                              /* pop ebp */

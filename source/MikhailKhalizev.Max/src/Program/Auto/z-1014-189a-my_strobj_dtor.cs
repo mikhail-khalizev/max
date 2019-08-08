@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_strobj_dtor()
         {
             ii(0x1014_189a, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x1014_189f, 5); calld(Definitions.sys_check_available_stack_size, 0x244ae); /* call 0x10165d52 */
+            ii(0x1014_189f, 5); calld(Definitions.sys_check_available_stack_size, 0x2_44ae); /* call 0x10165d52 */
             ii(0x1014_18a4, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_18a5, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_18a6, 1); pushd(esi);                             /* push esi */
@@ -29,12 +29,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_18ce, 5); mov(ebx, StringDefinitions.StrobjCpp);  /* mov ebx, 0x101ace94 */
             ii(0x1014_18d3, 5); mov(edx, StringDefinitions.RefCountEqual0); /* mov edx, 0x101ace9f */
             ii(0x1014_18d8, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1014_18da, 5); calld(Definitions.sys_assert, 0x244b3); /* call 0x10165d92 */
+            ii(0x1014_18da, 5); calld(Definitions.sys_assert, 0x2_44b3); /* call 0x10165d92 */
             ii(0x1014_18df, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
         l_0x1014_18e2:
             ii(0x1014_18e2, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_18e5, 2); mov(eax, memd_a32[ds, eax]);            /* mov eax, [eax] */
-            ii(0x1014_18e7, 5); calld(Definitions.sys_delete_arr, 0x246ec); /* call 0x10165fd8 */
+            ii(0x1014_18e7, 5); calld(Definitions.sys_delete_arr, 0x2_46ec); /* call 0x10165fd8 */
             ii(0x1014_18ec, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_18ef, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
             ii(0x1014_18f2, 3); mov(eax, memd_a32[ss, ebp - 0x10]);     /* mov eax, [ebp-0x10] */

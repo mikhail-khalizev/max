@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_5cbc()
         {
             ii(0x1014_5cbc, 5); pushd(0x2c);                            /* push 0x2c */
-            ii(0x1014_5cc1, 5); calld(Definitions.sys_check_available_stack_size, 0x2008c); /* call 0x10165d52 */
+            ii(0x1014_5cc1, 5); calld(Definitions.sys_check_available_stack_size, 0x2_008c); /* call 0x10165d52 */
             ii(0x1014_5cc6, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_5cc7, 1); pushd(esi);                             /* push esi */
             ii(0x1014_5cc8, 1); pushd(edi);                             /* push edi */
@@ -31,11 +31,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_5cf7, 4); mov(memb_a32[ss, ebp - 0x10], 0);       /* mov byte [ebp-0x10], 0x0 */
             ii(0x1014_5cfb, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1014_5cfd, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x1014_5d00, 5); calld(0x100e_03bc, -0x65949);           /* call 0x100e03bc */
+            ii(0x1014_5d00, 5); calld(0x100e_03bc, -0x6_5949);          /* call 0x100e03bc */
             ii(0x1014_5d05, 2); jmpd(0x1014_5d3f, 0x38); goto l_0x1014_5d3f; /* jmp 0x10145d3f */
         l_0x1014_5d07:
             ii(0x1014_5d07, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x1014_5d0a, 5); calld(0x100e_0760, -0x655af);           /* call 0x100e0760 */
+            ii(0x1014_5d0a, 5); calld(0x100e_0760, -0x6_55af);          /* call 0x100e0760 */
             ii(0x1014_5d0f, 3); mov(memd_a32[ss, ebp - 0x14], eax);     /* mov [ebp-0x14], eax */
             ii(0x1014_5d12, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x1014_5d15, 3); mov(edx, memd_a32[ds, eax + 0x2]);      /* mov edx, [eax+0x2] */
@@ -47,9 +47,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_5d25, 4); mov(memb_a32[ss, ebp - 0x10], 0x1);     /* mov byte [ebp-0x10], 0x1 */
             ii(0x1014_5d29, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1014_5d2b, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x1014_5d2e, 5); calld(0x100e_03bc, -0x65977);           /* call 0x100e03bc */
+            ii(0x1014_5d2e, 5); calld(0x100e_03bc, -0x6_5977);          /* call 0x100e03bc */
             ii(0x1014_5d33, 2); jmpd(0x1014_5d3f, 0xa); goto l_0x1014_5d3f; /* jmp 0x10145d3f */
-        //  ii(0x1014_5d35, 10); Недостижимый код.
+        //    ii(0x1014_5d35, 2); xor(edx, edx);                          /* xor edx, edx */
+        //    ii(0x1014_5d37, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+        //    ii(0x1014_5d3a, 5); calld(0x100e_03bc, -0x6_5983);          /* call 0x100e03bc */
         l_0x1014_5d3f:
             ii(0x1014_5d3f, 3); mov(al, memb_a32[ss, ebp - 0x10]);      /* mov al, [ebp-0x10] */
             ii(0x1014_5d42, 2); mov(esp, ebp);                          /* mov esp, ebp */

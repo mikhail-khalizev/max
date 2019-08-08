@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_67a5, 2); cmp(ecx, eax);                          /* cmp ecx, eax */
             ii(0x1016_67a7, 2); if(jgd(0x1016_67c6, 0x1d)) goto l_0x1016_67c6; /* jg 0x101667c6 */
             ii(0x1016_67a9, 5); mov(eax, 0x44);                         /* mov eax, 0x44 */
-            ii(0x1016_67ae, 5); calld(Definitions.sys_malloc_internal, 0x1bb3d); /* call 0x101822f0 */
+            ii(0x1016_67ae, 5); calld(Definitions.sys_malloc_internal, 0x1_bb3d); /* call 0x101822f0 */
             ii(0x1016_67b3, 6); mov(esi, memd_a32[ds, 0x101c_b2d8]);    /* mov esi, [0x101cb2d8] */
             ii(0x1016_67b9, 7); mov(memd_a32[ds, esi * 4 + 0x101c_b1fc], eax); /* mov [esi*4+0x101cb1fc], eax */
             ii(0x1016_67c0, 2); mov(esi, eax);                          /* mov esi, eax */
@@ -44,13 +44,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_67d0, 2); mov(edi, eax);                          /* mov edi, eax */
             ii(0x1016_67d2, 2); mov(eax, edx);                          /* mov eax, edx */
             ii(0x1016_67d4, 3); imul(eax, ecx);                         /* imul eax, ecx */
-            ii(0x1016_67d7, 5); calld(Definitions.sys_malloc_internal, 0x1bb14); /* call 0x101822f0 */
+            ii(0x1016_67d7, 5); calld(Definitions.sys_malloc_internal, 0x1_bb14); /* call 0x101822f0 */
             ii(0x1016_67dc, 3); mov(memd_a32[ds, esi + 0x2c], eax);     /* mov [esi+0x2c], eax */
             ii(0x1016_67df, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_67e1, 2); if(jnzd(0x1016_67fa, 0x17)) goto l_0x1016_67fa; /* jnz 0x101667fa */
             ii(0x1016_67e3, 2); mov(eax, esi);                          /* mov eax, esi */
             ii(0x1016_67e5, 5); mov(ebx, 0xffff_ffff);                  /* mov ebx, 0xffffffff */
-            ii(0x1016_67ea, 5); calld(Definitions.sys_free_internal, 0x1bc65); /* call 0x10182454 */
+            ii(0x1016_67ea, 5); calld(Definitions.sys_free_internal, 0x1_bc65); /* call 0x10182454 */
             ii(0x1016_67ef, 2); mov(eax, ebx);                          /* mov eax, ebx */
             ii(0x1016_67f1, 3); add(esp, 0x8);                          /* add esp, 0x8 */
             ii(0x1016_67f4, 1); popd(ebp);                              /* pop ebp */

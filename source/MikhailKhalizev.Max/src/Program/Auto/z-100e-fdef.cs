@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100e_fdef()
         {
             ii(0x100e_fdef, 5); pushd(0x38);                            /* push 0x38 */
-            ii(0x100e_fdf4, 5); calld(Definitions.sys_check_available_stack_size, 0x75f59); /* call 0x10165d52 */
+            ii(0x100e_fdf4, 5); calld(Definitions.sys_check_available_stack_size, 0x7_5f59); /* call 0x10165d52 */
             ii(0x100e_fdf9, 1); pushd(ebx);                             /* push ebx */
             ii(0x100e_fdfa, 1); pushd(ecx);                             /* push ecx */
             ii(0x100e_fdfb, 1); pushd(esi);                             /* push esi */
@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_fe7f, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100e_fe82, 3); mov(eax, memd_a32[ds, eax + 0x4c]);     /* mov eax, [eax+0x4c] */
             ii(0x100e_fe85, 3); add(eax, memd_a32[ss, ebp - 0x10]);     /* add eax, [ebp-0x10] */
-            ii(0x100e_fe88, 5); calld(Definitions.sys_memset, 0x75f53); /* call 0x10165de0 */
+            ii(0x100e_fe88, 5); calld(Definitions.sys_memset, 0x7_5f53); /* call 0x10165de0 */
             ii(0x100e_fe8d, 2); jmpd(0x100e_feae, 0x1f); goto l_0x100e_feae; /* jmp 0x100efeae */
         l_0x100e_fe8f:
             ii(0x100e_fe8f, 3); neg(memb_a32[ss, ebp - 0xc]);           /* neg byte [ebp-0xc] */
@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_fe99, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100e_fe9c, 3); mov(eax, memd_a32[ds, eax + 0x4c]);     /* mov eax, [eax+0x4c] */
             ii(0x100e_fe9f, 3); add(eax, memd_a32[ss, ebp - 0x10]);     /* add eax, [ebp-0x10] */
-            ii(0x100e_fea2, 5); calld(Definitions.sys_memcpy, 0x75fa4); /* call 0x10165e4b */
+            ii(0x100e_fea2, 5); calld(Definitions.sys_memcpy, 0x7_5fa4); /* call 0x10165e4b */
             ii(0x100e_fea7, 4); movsx(eax, memb_a32[ss, ebp - 0xc]);    /* movsx eax, byte [ebp-0xc] */
             ii(0x100e_feab, 3); add(memd_a32[ss, ebp - 0x14], eax);     /* add [ebp-0x14], eax */
         l_0x100e_feae:

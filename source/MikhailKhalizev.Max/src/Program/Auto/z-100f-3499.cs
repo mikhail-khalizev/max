@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100f_3499()
         {
             ii(0x100f_3499, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x100f_349e, 5); calld(Definitions.sys_check_available_stack_size, 0x728af); /* call 0x10165d52 */
+            ii(0x100f_349e, 5); calld(Definitions.sys_check_available_stack_size, 0x7_28af); /* call 0x10165d52 */
             ii(0x100f_34a3, 1); pushd(ebx);                             /* push ebx */
             ii(0x100f_34a4, 1); pushd(ecx);                             /* push ecx */
             ii(0x100f_34a5, 1); pushd(edx);                             /* push edx */
@@ -20,12 +20,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_34ab, 6); sub(esp, 0xc);                          /* sub esp, 0xc */
             ii(0x100f_34b1, 3); mov(memd_a32[ss, ebp - 0x4], eax);      /* mov [ebp-0x4], eax */
             ii(0x100f_34b4, 5); mov(eax, 0x300);                        /* mov eax, 0x300 */
-            ii(0x100f_34b9, 5); calld(Definitions.sys_malloc, 0x77b20); /* call 0x1016afde */
+            ii(0x100f_34b9, 5); calld(Definitions.sys_malloc, 0x7_7b20); /* call 0x1016afde */
             ii(0x100f_34be, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x100f_34c1, 5); mov(ebx, 0x300);                        /* mov ebx, 0x300 */
             ii(0x100f_34c6, 6); mov(edx, memd_a32[ds, Definitions.ptr_to_pallete]); /* mov edx, [0x101c9464] */
             ii(0x100f_34cc, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x100f_34cf, 5); calld(Definitions.sys_memcpy, 0x72977); /* call 0x10165e4b */
+            ii(0x100f_34cf, 5); calld(Definitions.sys_memcpy, 0x7_2977); /* call 0x10165e4b */
             ii(0x100f_34d4, 5); calld(0x100f_2955, -0xb84);             /* call 0x100f2955 */
             ii(0x100f_34d9, 4); movsx(eax, memw_a32[ss, ebp - 0x4]);    /* movsx eax, word [ebp-0x4] */
             ii(0x100f_34dd, 5); calld(0x100e_93d0, -0xa112);            /* call 0x100e93d0 */

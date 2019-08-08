@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100d_8248()
         {
             ii(0x100d_8248, 5); pushd(0x30);                            /* push 0x30 */
-            ii(0x100d_824d, 5); calld(Definitions.sys_check_available_stack_size, 0x8db00); /* call 0x10165d52 */
+            ii(0x100d_824d, 5); calld(Definitions.sys_check_available_stack_size, 0x8_db00); /* call 0x10165d52 */
             ii(0x100d_8252, 1); pushd(esi);                             /* push esi */
             ii(0x100d_8253, 1); pushd(edi);                             /* push edi */
             ii(0x100d_8254, 1); pushd(ebp);                             /* push ebp */
@@ -34,9 +34,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_8291, 3); fdiv(memq_a32[ss, ebp - 0x1c]);         /* fdiv qword [ebp-0x1c] */
             ii(0x100d_8294, 6); fld(memq_a32[ds, 0x101b_5d98]);         /* fld qword [0x101b5d98] */
             ii(0x100d_829a, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */
-            ii(0x100d_829c, 5); calld(/* sys */ 0x1016_c4a0, 0x941ff);  /* call 0x1016c4a0 */
+            ii(0x100d_829c, 5); calld(/* sys */ 0x1016_c4a0, 0x9_41ff); /* call 0x1016c4a0 */
             ii(0x100d_82a1, 2); fmulp(ST(1), ST(0));                    /* fmulp st1, st0 */
-            ii(0x100d_82a3, 5); calld(Definitions.sys_round, 0x8ddd6);  /* call 0x1016607e */
+            ii(0x100d_82a3, 5); calld(Definitions.sys_round, 0x8_ddd6); /* call 0x1016607e */
             ii(0x100d_82a8, 3); fistp(memd_a32[ss, ebp - 0x14]);        /* fistp dword [ebp-0x14] */
             ii(0x100d_82ab, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x100d_82ae, 3); mov(memd_a32[ss, ebp - 0x20], eax);     /* mov [ebp-0x20], eax */
@@ -55,9 +55,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_82d4, 3); fdivr(memq_a32[ss, ebp - 0x1c]);        /* fdivr qword [ebp-0x1c] */
             ii(0x100d_82d7, 6); fld(memq_a32[ds, 0x101b_5d98]);         /* fld qword [0x101b5d98] */
             ii(0x100d_82dd, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */
-            ii(0x100d_82df, 5); calld(/* sys */ 0x1016_c4a0, 0x941bc);  /* call 0x1016c4a0 */
+            ii(0x100d_82df, 5); calld(/* sys */ 0x1016_c4a0, 0x9_41bc); /* call 0x1016c4a0 */
             ii(0x100d_82e4, 2); fmulp(ST(1), ST(0));                    /* fmulp st1, st0 */
-            ii(0x100d_82e6, 5); calld(Definitions.sys_round, 0x8dd93);  /* call 0x1016607e */
+            ii(0x100d_82e6, 5); calld(Definitions.sys_round, 0x8_dd93); /* call 0x1016607e */
             ii(0x100d_82eb, 3); fistp(memd_a32[ss, ebp - 0x14]);        /* fistp dword [ebp-0x14] */
             ii(0x100d_82ee, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x100d_82f1, 3); mov(memd_a32[ss, ebp - 0x20], eax);     /* mov [ebp-0x20], eax */

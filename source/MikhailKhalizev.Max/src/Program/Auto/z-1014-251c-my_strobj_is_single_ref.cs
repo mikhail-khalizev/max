@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_strobj_is_single_ref()
         {
             ii(0x1014_251c, 5); pushd(0x28);                            /* push 0x28 */
-            ii(0x1014_2521, 5); calld(Definitions.sys_check_available_stack_size, 0x2382c); /* call 0x10165d52 */
+            ii(0x1014_2521, 5); calld(Definitions.sys_check_available_stack_size, 0x2_382c); /* call 0x10165d52 */
             ii(0x1014_2526, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_2527, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_2528, 1); pushd(edx);                             /* push edx */

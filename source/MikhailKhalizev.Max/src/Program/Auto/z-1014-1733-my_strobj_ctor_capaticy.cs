@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_strobj_ctor_capaticy()
         {
             ii(0x1014_1733, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1014_1738, 5); calld(Definitions.sys_check_available_stack_size, 0x24615); /* call 0x10165d52 */
+            ii(0x1014_1738, 5); calld(Definitions.sys_check_available_stack_size, 0x2_4615); /* call 0x10165d52 */
             ii(0x1014_173d, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_173e, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_173f, 1); pushd(esi);                             /* push esi */
@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_175d, 3); mov(eax, memd_a32[ds, eax + 0x2]);      /* mov eax, [eax+0x2] */
             ii(0x1014_1760, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x1014_1763, 1); inc(eax);                               /* inc eax */
-            ii(0x1014_1764, 5); calld(Definitions.sys_new_arr, 0x248a7); /* call 0x10166010 */
+            ii(0x1014_1764, 5); calld(Definitions.sys_new_arr, 0x2_48a7); /* call 0x10166010 */
             ii(0x1014_1769, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1014_176b, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1014_176e, 2); mov(memd_a32[ds, eax], edx);            /* mov [eax], edx */

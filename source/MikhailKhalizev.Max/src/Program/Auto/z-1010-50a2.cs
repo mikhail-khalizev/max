@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_50a2()
         {
             ii(0x1010_50a2, 5); pushd(0x34);                            /* push 0x34 */
-            ii(0x1010_50a7, 5); calld(Definitions.sys_check_available_stack_size, 0x60ca6); /* call 0x10165d52 */
+            ii(0x1010_50a7, 5); calld(Definitions.sys_check_available_stack_size, 0x6_0ca6); /* call 0x10165d52 */
             ii(0x1010_50ac, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_50ad, 1); pushd(esi);                             /* push esi */
             ii(0x1010_50ae, 1); pushd(edi);                             /* push edi */
@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_50d6, 5); mov(edx, StringDefinitions.Control22);  /* mov edx, 0x101a32ea */
             ii(0x1010_50db, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1010_50de, 3); add(eax, 0x6f);                         /* add eax, 0x6f */
-            ii(0x1010_50e1, 5); calld(Definitions.sys_strstr, 0x73f2a); /* call 0x10179010 */
+            ii(0x1010_50e1, 5); calld(Definitions.sys_strstr, 0x7_3f2a); /* call 0x10179010 */
             ii(0x1010_50e6, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_50e8, 2); if(jzd(0x1010_50f0, 0x6)) goto l_0x1010_50f0; /* jz 0x101050f0 */
             ii(0x1010_50ea, 4); mov(memb_a32[ss, ebp - 0x10], 0);       /* mov byte [ebp-0x10], 0x0 */
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_50f0, 5); mov(edx, StringDefinitions.Control23);  /* mov edx, 0x101a32ec */
             ii(0x1010_50f5, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1010_50f8, 3); add(eax, 0x6f);                         /* add eax, 0x6f */
-            ii(0x1010_50fb, 5); calld(Definitions.sys_strstr, 0x73f10); /* call 0x10179010 */
+            ii(0x1010_50fb, 5); calld(Definitions.sys_strstr, 0x7_3f10); /* call 0x10179010 */
             ii(0x1010_5100, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_5102, 2); if(jzd(0x1010_5141, 0x3d)) goto l_0x1010_5141; /* jz 0x10105141 */
             ii(0x1010_5104, 3); lea(ebx, ebp - 0x20);                   /* lea ebx, [ebp-0x20] */

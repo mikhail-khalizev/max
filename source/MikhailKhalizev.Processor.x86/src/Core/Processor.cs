@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
 
 #pragma warning disable IDE1006 // Naming Styles
@@ -11,6 +11,7 @@ using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -1389,7 +1390,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void paging_fault(Address address)
         {
             cr2 = address;
-
+            
             var curSave = CurrentInstructionAddress;
             var eipSave = eip;
             var mode = cs.db ? 32 : 16;
@@ -1398,7 +1399,16 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             int_internal(0xe, true, false, true, 0);
 
+            if (!string.IsNullOrEmpty(Configuration.StateOutput))
+            {
+                InitStateLogIfNeed();
+                _stateLog.WriteLine($"    paging_fault begin: cr2: {cr2}");
+            }
+
             correct_function_position(returnAddress);
+            
+            if (!string.IsNullOrEmpty(Configuration.StateOutput))
+                _stateLog.WriteLine($"    paging_fault end: cr2: {cr2}");
 
             check_mode(mode);
             CurrentInstructionAddress = curSave;
@@ -1460,11 +1470,8 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            if (saveJumpInfo)
-                SaveJumpInfo();
-
             run_irqs();
-            return correct_function_position(retAddr, true);
+            return correct_function_position(retAddr, true, true);
         }
 
         private bool jmpd_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
@@ -1478,12 +1485,9 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
-
-            if (saveJumpInfo)
-                SaveJumpInfo();
-
+            
             run_irqs();
-            return correct_function_position(retAddr, true);
+            return correct_function_position(retAddr, true, saveJumpInfo);
         }
 
         private void __plus_sp(int s)
@@ -1493,16 +1497,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             else
                 sp += s;
         }
-
-        private void SaveJumpInfo()
-        {
-            // TODO Save dest method guid?
-            var from = cs[CurrentInstructionAddress];
-            var to = cs[eip];
-            if (!callReturnAddresses.Contains(to))
-                MethodsInfo.AddJumpAndSave(MethodInfo, from, to, CSharpFunctionDelta);
-        }
-
+        
         #endregion
 
         #region C# emulate specific
@@ -1536,7 +1531,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         // For ConditionReturn return true if need return. Or false - continue without return.
-        public bool correct_function_position(Address returnAddress, bool haveConditionReturnAfterInstruction = false)
+        public bool correct_function_position(Address returnAddress, bool haveConditionReturnAfterInstruction = false, bool saveJumpInfo = false)
         {
             callReturnAddresses.Add(returnAddress);
 
@@ -1571,16 +1566,33 @@ namespace MikhailKhalizev.Processor.x86.Core
 
                     if (_statisticMethodCall != null)
                     {
-                        _statisticMethodCall.TryGetValue(methodInfo, out var count);
                         lock (_statisticMethodCall)
+                        {
+                            _statisticMethodCall.TryGetValue(methodInfo, out var count);
                             _statisticMethodCall[methodInfo] = count + 1;
+                        }
                     }
 
+                    if (saveJumpInfo)
+                    {
+                        saveJumpInfo = false;
+                        
+                        var from = cs[CurrentInstructionAddress];
+                        //if (!callReturnAddresses.Contains(toRun))
+                        MethodsInfo.AddJumpAndSave(MethodInfo, from, methodInfo, toRun, CSharpFunctionDelta);
+                    }
+                    
                     var prevMethodInfo = MethodInfo;
                     var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
                     MethodInfo = methodInfo;
                     CSharpFunctionDelta = cs[eip] - methodInfo.Address;
+
+                    if (!string.IsNullOrEmpty(Configuration.StateOutput))
+                    {
+                        InitStateLogIfNeed();
+                        _stateLog.WriteLine($"    method guid: {{{MethodInfo.Guid}}}, delta: {CSharpFunctionDelta}, name: {method.Method.Name}");
+                    }
 
                     try
                     {
@@ -1631,31 +1643,11 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (!string.IsNullOrEmpty(Configuration.StateOutput))
             {
-                if (_stateLog == null)
-                {
-                    if (File.Exists(Configuration.StateOutput))
-                    {
-                        var bak = Configuration.StateOutput + ".bak";
-                        File.Delete(bak);
-                        File.Move(Configuration.StateOutput, bak);
-                    }
-
-                    var byteBufferSize = 10 * 1024 * 1024;
-                    var charBufferSize = 10 * 1024;
-
-                    var fileStream = new FileStream(Configuration.StateOutput, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, byteBufferSize, FileOptions.SequentialScan);
-                    fileStream.SetLength(0);
-                    _stateLog = new StreamWriter(fileStream, Encoding.UTF8, charBufferSize, false);
-                }
-
+                InitStateLogIfNeed();
                 var effAddress = cs[CurrentInstructionAddress];
-                var prefix = "";
-                if (effAddress != address)
-                    prefix = $"    method guid: {{{MethodInfo.Guid}}}, csharp_address: {address}{Environment.NewLine}";
 
                 _stateLog.WriteLine(
-                    prefix
-                    + "cs[eip]: " + effAddress
+                    "cs[eip]: " + effAddress
                     + ", eax: " + eax
                     + ", ebx: " + ebx
                     + ", ecx: " + ecx
@@ -1695,6 +1687,26 @@ namespace MikhailKhalizev.Processor.x86.Core
                     _statisticIiCall[MethodInfo] = count + 1;
                 }
             }
+        }
+
+        private void InitStateLogIfNeed()
+        {
+            if (_stateLog != null)
+                return;
+
+            if (File.Exists(Configuration.StateOutput))
+            {
+                var bak = Configuration.StateOutput + ".bak";
+                File.Delete(bak);
+                File.Move(Configuration.StateOutput, bak);
+            }
+
+            var byteBufferSize = 10 * 1024 * 1024;
+            var charBufferSize = 10 * 1024;
+
+            var fileStream = new FileStream(Configuration.StateOutput, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, byteBufferSize, FileOptions.SequentialScan);
+            fileStream.SetLength(0);
+            _stateLog = new StreamWriter(fileStream, Encoding.UTF8, charBufferSize, false);
         }
 
         private string GetStatisticMethodCall()
@@ -2179,8 +2191,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new NotImplementedException();
 
             run_irqs();
-            SaveJumpInfo();
-            correct_function_position(ret_addr);
+            correct_function_position(ret_addr, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
@@ -2194,8 +2205,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 throw new NotImplementedException();
 
             run_irqs();
-            SaveJumpInfo();
-            correct_function_position(ret_addr);
+            correct_function_position(ret_addr, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
@@ -3643,7 +3653,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             eip = address & 0xffff;
             run_irqs();
-            SaveJumpInfo();
             return cs[eip] - CSharpFunctionDelta;
         }
 

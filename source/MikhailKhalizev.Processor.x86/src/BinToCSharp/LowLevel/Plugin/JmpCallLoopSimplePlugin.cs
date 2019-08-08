@@ -107,7 +107,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             var notSuppressed = !Engine.SuppressDecode.Contains(toAddr, false);
             if (notSuppressed)
-                Engine.AddressesToDecode.Add(toAddr);
+                Engine.AddToDecode(toAddr);
 
             if (cmd.IsCall || op.type != ud_type.UD_OP_JIMM)
             {

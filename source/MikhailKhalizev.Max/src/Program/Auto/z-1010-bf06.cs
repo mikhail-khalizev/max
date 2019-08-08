@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_bf06()
         {
             ii(0x1010_bf06, 5); pushd(0x3c0);                           /* push 0x3c0 */
-            ii(0x1010_bf0b, 5); calld(Definitions.sys_check_available_stack_size, 0x59e42); /* call 0x10165d52 */
+            ii(0x1010_bf0b, 5); calld(Definitions.sys_check_available_stack_size, 0x5_9e42); /* call 0x10165d52 */
             ii(0x1010_bf10, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_bf11, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_bf12, 1); pushd(edx);                             /* push edx */
@@ -27,9 +27,9 @@ namespace MikhailKhalizev.Max.Program
         l_0x1010_bf39:
             ii(0x1010_bf39, 7); cmp(memb_a32[ds, 0x101c_5630], 0x1);    /* cmp byte [0x101c5630], 0x1 */
             ii(0x1010_bf40, 2); if(jnzd(0x1010_bf47, 0x5)) goto l_0x1010_bf47; /* jnz 0x1010bf47 */
-            ii(0x1010_bf42, 5); calld(0x1012_ac94, 0x1ed4d);            /* call 0x1012ac94 */
+            ii(0x1010_bf42, 5); calld(0x1012_ac94, 0x1_ed4d);           /* call 0x1012ac94 */
         l_0x1010_bf47:
-            ii(0x1010_bf47, 5); calld(/* sys */ 0x1016_b208, 0x5f2bc);  /* call 0x1016b208 */
+            ii(0x1010_bf47, 5); calld(/* sys */ 0x1016_b208, 0x5_f2bc); /* call 0x1016b208 */
             ii(0x1010_bf4c, 6); mov(memd_a32[ss, ebp - 0x38b], eax);    /* mov [ebp-0x38b], eax */
             ii(0x1010_bf52, 7); cmp(memd_a32[ss, ebp - 0x38b], 0);      /* cmp dword [ebp-0x38b], 0x0 */
             ii(0x1010_bf59, 2); if(jled(0x1010_bf67, 0xc)) goto l_0x1010_bf67; /* jle 0x1010bf67 */
@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_bf71, 6); if(jzd(0x1010_bffc, 0x85)) goto l_0x1010_bffc; /* jz 0x1010bffc */
             ii(0x1010_bf77, 6); mov(edx, memd_a32[ss, ebp - 0x38b]);    /* mov edx, [ebp-0x38b] */
             ii(0x1010_bf7d, 3); mov(eax, memd_a32[ss, ebp - 0x57]);     /* mov eax, [ebp-0x57] */
-            ii(0x1010_bf80, 5); calld(0x100e_b283, -0x20d02);           /* call 0x100eb283 */
+            ii(0x1010_bf80, 5); calld(0x100e_b283, -0x2_0d02);          /* call 0x100eb283 */
             ii(0x1010_bf85, 2); test(al, al);                           /* test al, al */
             ii(0x1010_bf87, 2); if(jzd(0x1010_bfd6, 0x4d)) goto l_0x1010_bfd6; /* jz 0x1010bfd6 */
             ii(0x1010_bf89, 7); cmp(memd_a32[ss, ebp - 0x38b], 0x1b);   /* cmp dword [ebp-0x38b], 0x1b */
@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_bfdd, 2); if(jled(0x1010_bffc, 0x1d)) goto l_0x1010_bffc; /* jle 0x1010bffc */
             ii(0x1010_bfdf, 5); mov(edx, 0xd);                          /* mov edx, 0xd */
             ii(0x1010_bfe4, 3); mov(eax, memd_a32[ss, ebp - 0x57]);     /* mov eax, [ebp-0x57] */
-            ii(0x1010_bfe7, 5); calld(0x100e_b283, -0x20d69);           /* call 0x100eb283 */
+            ii(0x1010_bfe7, 5); calld(0x100e_b283, -0x2_0d69);          /* call 0x100eb283 */
             ii(0x1010_bfec, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
             ii(0x1010_bff1, 6); lea(eax, ebp - 0x398);                  /* lea eax, [ebp-0x398] */
             ii(0x1010_bff7, 5); calld(0x1010_b523, -0xad9);             /* call 0x1010b523 */
@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_c07e, 6); mov(eax, memd_a32[ss, ebp - 0x3a0]);    /* mov eax, [ebp-0x3a0] */
             ii(0x1010_c084, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
             ii(0x1010_c087, 7); mov(eax, memd_a32[ds, eax + ebp - 0x123]); /* mov eax, [eax+ebp-0x123] */
-            ii(0x1010_c08e, 5); calld(0x100c_fbbe, -0x3c4d5);           /* call 0x100cfbbe */
+            ii(0x1010_c08e, 5); calld(0x100c_fbbe, -0x3_c4d5);          /* call 0x100cfbbe */
         l_0x1010_c093:
             ii(0x1010_c093, 4); mov(memb_a32[ss, ebp - 0x8], 0x1);      /* mov byte [ebp-0x8], 0x1 */
             ii(0x1010_c097, 10); add(memd_a32[ss, ebp - 0x38b], 0xffff_fc18); /* add dword [ebp-0x38b], 0xfffffc18 */

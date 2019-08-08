@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100e_6e2e()
         {
             ii(0x100e_6e2e, 5); pushd(0x64);                            /* push 0x64 */
-            ii(0x100e_6e33, 5); calld(Definitions.sys_check_available_stack_size, 0x7ef1a); /* call 0x10165d52 */
+            ii(0x100e_6e33, 5); calld(Definitions.sys_check_available_stack_size, 0x7_ef1a); /* call 0x10165d52 */
             ii(0x100e_6e38, 1); pushd(ecx);                             /* push ecx */
             ii(0x100e_6e39, 1); pushd(esi);                             /* push esi */
             ii(0x100e_6e3a, 1); pushd(edi);                             /* push edi */
@@ -129,17 +129,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_6faf, 4); cmp(memd_a32[ss, ebp - 0x24], 0x2a);    /* cmp dword [ebp-0x24], 0x2a */
             ii(0x100e_6fb3, 2); if(jld(0x100e_6fc1, 0xc)) goto l_0x100e_6fc1; /* jl 0x100e6fc1 */
             ii(0x100e_6fb5, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
-            ii(0x100e_6fba, 5); calld(/* sys */ 0x1016_a24c, 0x8328d);  /* call 0x1016a24c */
+            ii(0x100e_6fba, 5); calld(/* sys */ 0x1016_a24c, 0x8_328d); /* call 0x1016a24c */
             ii(0x100e_6fbf, 2); jmpd(0x100e_6fdd, 0x1c); goto l_0x100e_6fdd; /* jmp 0x100e6fdd */
         l_0x100e_6fc1:
             ii(0x100e_6fc1, 4); cmp(memd_a32[ss, ebp - 0x24], 0x18);    /* cmp dword [ebp-0x24], 0x18 */
             ii(0x100e_6fc5, 2); if(jld(0x100e_6fd3, 0xc)) goto l_0x100e_6fd3; /* jl 0x100e6fd3 */
             ii(0x100e_6fc7, 5); mov(eax, 0x5);                          /* mov eax, 0x5 */
-            ii(0x100e_6fcc, 5); calld(/* sys */ 0x1016_a24c, 0x8327b);  /* call 0x1016a24c */
+            ii(0x100e_6fcc, 5); calld(/* sys */ 0x1016_a24c, 0x8_327b); /* call 0x1016a24c */
             ii(0x100e_6fd1, 2); jmpd(0x100e_6fdd, 0xa); goto l_0x100e_6fdd; /* jmp 0x100e6fdd */
         l_0x100e_6fd3:
             ii(0x100e_6fd3, 5); mov(eax, 0x2);                          /* mov eax, 0x2 */
-            ii(0x100e_6fd8, 5); calld(/* sys */ 0x1016_a24c, 0x8326f);  /* call 0x1016a24c */
+            ii(0x100e_6fd8, 5); calld(/* sys */ 0x1016_a24c, 0x8_326f); /* call 0x1016a24c */
         l_0x100e_6fdd:
             ii(0x100e_6fdd, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
             ii(0x100e_6fe2, 1); pushd(eax);                             /* push eax */

@@ -21,36 +21,36 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_9725, 2); test(ebx, ebx);                         /* test ebx, ebx */
             ii(0x1016_9727, 2); if(jzd(0x1016_9730, 0x7)) goto l_0x1016_9730; /* jz 0x10169730 */
             ii(0x1016_9729, 2); mov(eax, ebx);                          /* mov eax, ebx */
-            ii(0x1016_972b, 5); calld(Definitions.sys_free_internal, 0x18d24); /* call 0x10182454 */
+            ii(0x1016_972b, 5); calld(Definitions.sys_free_internal, 0x1_8d24); /* call 0x10182454 */
         l_0x1016_9730:
             ii(0x1016_9730, 3); mov(ecx, memd_a32[ds, edx + 0x34]);     /* mov ecx, [edx+0x34] */
             ii(0x1016_9733, 2); test(ecx, ecx);                         /* test ecx, ecx */
             ii(0x1016_9735, 2); if(jzd(0x1016_973e, 0x7)) goto l_0x1016_973e; /* jz 0x1016973e */
             ii(0x1016_9737, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1016_9739, 5); calld(Definitions.sys_free_internal, 0x18d16); /* call 0x10182454 */
+            ii(0x1016_9739, 5); calld(Definitions.sys_free_internal, 0x1_8d16); /* call 0x10182454 */
         l_0x1016_973e:
             ii(0x1016_973e, 3); mov(esi, memd_a32[ds, edx + 0x38]);     /* mov esi, [edx+0x38] */
             ii(0x1016_9741, 2); test(esi, esi);                         /* test esi, esi */
             ii(0x1016_9743, 2); if(jzd(0x1016_974c, 0x7)) goto l_0x1016_974c; /* jz 0x1016974c */
             ii(0x1016_9745, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1016_9747, 5); calld(Definitions.sys_free_internal, 0x18d08); /* call 0x10182454 */
+            ii(0x1016_9747, 5); calld(Definitions.sys_free_internal, 0x1_8d08); /* call 0x10182454 */
         l_0x1016_974c:
             ii(0x1016_974c, 3); mov(edi, memd_a32[ds, edx + 0x3c]);     /* mov edi, [edx+0x3c] */
             ii(0x1016_974f, 2); test(edi, edi);                         /* test edi, edi */
             ii(0x1016_9751, 2); if(jzd(0x1016_975a, 0x7)) goto l_0x1016_975a; /* jz 0x1016975a */
             ii(0x1016_9753, 2); mov(eax, edi);                          /* mov eax, edi */
-            ii(0x1016_9755, 5); calld(Definitions.sys_free_internal, 0x18cfa); /* call 0x10182454 */
+            ii(0x1016_9755, 5); calld(Definitions.sys_free_internal, 0x1_8cfa); /* call 0x10182454 */
         l_0x1016_975a:
             ii(0x1016_975a, 3); mov(ebp, memd_a32[ds, edx + 0x40]);     /* mov ebp, [edx+0x40] */
             ii(0x1016_975d, 2); test(ebp, ebp);                         /* test ebp, ebp */
             ii(0x1016_975f, 2); if(jzd(0x1016_9768, 0x7)) goto l_0x1016_9768; /* jz 0x10169768 */
             ii(0x1016_9761, 2); mov(eax, ebp);                          /* mov eax, ebp */
-            ii(0x1016_9763, 5); calld(Definitions.sys_free_internal, 0x18cec); /* call 0x10182454 */
+            ii(0x1016_9763, 5); calld(Definitions.sys_free_internal, 0x1_8cec); /* call 0x10182454 */
         l_0x1016_9768:
             ii(0x1016_9768, 3); mov(eax, memd_a32[ds, edx + 0x44]);     /* mov eax, [edx+0x44] */
             ii(0x1016_976b, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_976d, 2); if(jzd(0x1016_9774, 0x5)) goto l_0x1016_9774; /* jz 0x10169774 */
-            ii(0x1016_976f, 5); calld(Definitions.sys_free_internal, 0x18ce0); /* call 0x10182454 */
+            ii(0x1016_976f, 5); calld(Definitions.sys_free_internal, 0x1_8ce0); /* call 0x10182454 */
         l_0x1016_9774:
             ii(0x1016_9774, 4); cmp(memd_a32[ds, edx + 0x68], 0);       /* cmp dword [edx+0x68], 0x0 */
             ii(0x1016_9778, 2); if(jzd(0x1016_97bf, 0x45)) goto l_0x1016_97bf; /* jz 0x101697bf */
@@ -87,7 +87,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_97bd, 2); jmpd(0x1016_97c6, 0x7); goto l_0x1016_97c6; /* jmp 0x101697c6 */
         l_0x1016_97bf:
             ii(0x1016_97bf, 2); mov(eax, edx);                          /* mov eax, edx */
-            ii(0x1016_97c1, 5); calld(Definitions.sys_free_internal, 0x18c8e); /* call 0x10182454 */
+            ii(0x1016_97c1, 5); calld(Definitions.sys_free_internal, 0x1_8c8e); /* call 0x10182454 */
         l_0x1016_97c6:
             ii(0x1016_97c6, 1); popd(ebp);                              /* pop ebp */
             ii(0x1016_97c7, 1); popd(edi);                              /* pop edi */

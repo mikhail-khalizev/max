@@ -168,7 +168,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_197d:
             ii(0x1018_197d, 2); mov(edx, edi);                          /* mov edx, edi */
             ii(0x1018_197f, 2); mov(eax, ebp);                          /* mov eax, ebp */
-            ii(0x1018_1981, 5); calld(/* sys */ 0x1019_5c0b, 0x14285);  /* call 0x10195c0b */
+            ii(0x1018_1981, 5); calld(/* sys */ 0x1019_5c0b, 0x1_4285); /* call 0x10195c0b */
         l_0x1018_1986:
             ii(0x1018_1986, 4); cmp(memd_a32[ds, esi + 0x8], 0);        /* cmp dword [esi+0x8], 0x0 */
             ii(0x1018_198a, 2); if(jnzd(0x1018_1999, 0xd)) goto l_0x1018_1999; /* jnz 0x10181999 */
@@ -195,7 +195,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_19c1, 3); mov(eax, memd_a32[ds, edx - 0x4]);      /* mov eax, [edx-0x4] */
             ii(0x1018_19c4, 2); mov(edx, edi);                          /* mov edx, edi */
         l_0x1018_19c6:
-            ii(0x1018_19c6, 5); calld(/* sys */ 0x1019_5c0b, 0x14240);  /* call 0x10195c0b */
+            ii(0x1018_19c6, 5); calld(/* sys */ 0x1019_5c0b, 0x1_4240); /* call 0x10195c0b */
             ii(0x1018_19cb, 2); jmpd(0x1018_1986, -0x47); goto l_0x1018_1986; /* jmp 0x10181986 */
         l_0x1018_19cd:
             ii(0x1018_19cd, 3); mov(dl, memb_a32[ds, esi + 0x14]);      /* mov dl, [esi+0x14] */
@@ -315,7 +315,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_1ae9:
             ii(0x1018_1ae9, 2); mov(edx, edi);                          /* mov edx, edi */
             ii(0x1018_1aeb, 2); mov(eax, ebp);                          /* mov eax, ebp */
-            ii(0x1018_1aed, 5); calld(/* sys */ 0x1019_5bc1, 0x140cf);  /* call 0x10195bc1 */
+            ii(0x1018_1aed, 5); calld(/* sys */ 0x1019_5bc1, 0x1_40cf); /* call 0x10195bc1 */
             ii(0x1018_1af2, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1018_1af4, 3); mov(al, memb_a32[ds, esi + 0x15]);      /* mov al, [esi+0x15] */
             ii(0x1018_1af7, 3); cmp(eax, 0x58);                         /* cmp eax, 0x58 */

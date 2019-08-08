@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_100a_0774()
         {
             ii(0x100a_0774, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x100a_0779, 5); calld(Definitions.sys_check_available_stack_size, 0xc55d4); /* call 0x10165d52 */
+            ii(0x100a_0779, 5); calld(Definitions.sys_check_available_stack_size, 0xc_55d4); /* call 0x10165d52 */
             ii(0x100a_077e, 1); pushd(esi);                             /* push esi */
             ii(0x100a_077f, 1); pushd(edi);                             /* push edi */
             ii(0x100a_0780, 1); pushd(ebp);                             /* push ebp */
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_07d8, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100a_07da, 5); mov(edx, 0x8);                          /* mov edx, 0x8 */
             ii(0x100a_07df, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x100a_07e2, 5); calld(0x1016_3053, 0xc286c);            /* call 0x10163053 */
+            ii(0x100a_07e2, 5); calld(0x1016_3053, 0xc_286c);           /* call 0x10163053 */
         l_0x100a_07e7:
             ii(0x100a_07e7, 2); jmpd(0x100a_0827, 0x3e); goto l_0x100a_0827; /* jmp 0x100a0827 */
         l_0x100a_07e9:
@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_0812, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x100a_0814, 5); mov(edx, 0x7);                          /* mov edx, 0x7 */
             ii(0x100a_0819, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
-            ii(0x100a_081c, 5); calld(0x1016_3053, 0xc2832);            /* call 0x10163053 */
+            ii(0x100a_081c, 5); calld(0x1016_3053, 0xc_2832);           /* call 0x10163053 */
             ii(0x100a_0821, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100a_0824, 3); dec(memw_a32[ds, eax]);                 /* dec word [eax] */
         l_0x100a_0827:

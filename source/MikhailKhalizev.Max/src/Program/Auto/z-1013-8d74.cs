@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1013_8d74()
         {
             ii(0x1013_8d74, 5); pushd(0x68);                            /* push 0x68 */
-            ii(0x1013_8d79, 5); calld(Definitions.sys_check_available_stack_size, 0x2cfd4); /* call 0x10165d52 */
+            ii(0x1013_8d79, 5); calld(Definitions.sys_check_available_stack_size, 0x2_cfd4); /* call 0x10165d52 */
             ii(0x1013_8d7e, 1); pushd(ecx);                             /* push ecx */
             ii(0x1013_8d7f, 1); pushd(esi);                             /* push esi */
             ii(0x1013_8d80, 1); pushd(edi);                             /* push edi */
@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8e0b, 1); pushd(eax);                             /* push eax */
             ii(0x1013_8e0c, 3); lea(eax, ebp - 0x44);                   /* lea eax, [ebp-0x44] */
             ii(0x1013_8e0f, 1); pushd(eax);                             /* push eax */
-            ii(0x1013_8e10, 5); calld(Definitions.sys_sprintf, 0x2d0ec); /* call 0x10165f01 */
+            ii(0x1013_8e10, 5); calld(Definitions.sys_sprintf, 0x2_d0ec); /* call 0x10165f01 */
             ii(0x1013_8e15, 3); add(esp, 0x10);                         /* add esp, 0x10 */
             ii(0x1013_8e18, 3); lea(eax, ebp - 0x44);                   /* lea eax, [ebp-0x44] */
             ii(0x1013_8e1b, 3); mov(memd_a32[ss, ebp - 0x10], eax);     /* mov [ebp-0x10], eax */
@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8e24, 3); mov(edx, memd_a32[ss, ebp - 0x10]);     /* mov edx, [ebp-0x10] */
             ii(0x1013_8e27, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1013_8e2a, 3); add(eax, 0x3);                          /* add eax, 0x3 */
-            ii(0x1013_8e2d, 5); calld(Definitions.sys_strcpy, 0x2d09d); /* call 0x10165ecf */
+            ii(0x1013_8e2d, 5); calld(Definitions.sys_strcpy, 0x2_d09d); /* call 0x10165ecf */
         l_0x1013_8e32:
             ii(0x1013_8e32, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_8e34, 1); popd(ebp);                              /* pop ebp */

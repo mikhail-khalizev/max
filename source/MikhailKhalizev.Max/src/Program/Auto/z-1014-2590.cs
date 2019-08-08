@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_2590()
         {
             ii(0x1014_2590, 5); pushd(0x40);                            /* push 0x40 */
-            ii(0x1014_2595, 5); calld(Definitions.sys_check_available_stack_size, 0x237b8); /* call 0x10165d52 */
+            ii(0x1014_2595, 5); calld(Definitions.sys_check_available_stack_size, 0x2_37b8); /* call 0x10165d52 */
             ii(0x1014_259a, 1); pushd(esi);                             /* push esi */
             ii(0x1014_259b, 1); pushd(edi);                             /* push edi */
             ii(0x1014_259c, 1); pushd(ebp);                             /* push ebp */
@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_25ba, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1014_25bd, 5); and(eax, 0x1f);                         /* and eax, 0x1f */
             ii(0x1014_25c2, 1); cwde();                                 /* cwde */
-            ii(0x1014_25c3, 5); calld(Definitions.my_min, -0xb8e44);    /* call 0x10089784 */
+            ii(0x1014_25c3, 5); calld(Definitions.my_min, -0xb_8e44);   /* call 0x10089784 */
             ii(0x1014_25c8, 3); mov(memd_a32[ss, ebp - 0x20], eax);     /* mov [ebp-0x20], eax */
             ii(0x1014_25cb, 7); test(memd_a32[ss, ebp - 0x4], 0x40);    /* test dword [ebp-0x4], 0x40 */
             ii(0x1014_25d2, 2); if(jzd(0x1014_25ec, 0x18)) goto l_0x1014_25ec; /* jz 0x101425ec */
@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_2642, 2); if(jzd(0x1014_2659, 0x15)) goto l_0x1014_2659; /* jz 0x10142659 */
             ii(0x1014_2644, 6); mov(edx, memd_a32[ds, 0x101c_38c4]);    /* mov edx, [0x101c38c4] */
             ii(0x1014_264a, 3); mov(eax, memd_a32[ss, ebp - 0x24]);     /* mov eax, [ebp-0x24] */
-            ii(0x1014_264d, 5); calld(0x100e_8f38, -0x5971a);           /* call 0x100e8f38 */
+            ii(0x1014_264d, 5); calld(0x100e_8f38, -0x5_971a);          /* call 0x100e8f38 */
             ii(0x1014_2652, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */
             ii(0x1014_2655, 4); mov(memb_a32[ss, ebp - 0x14], 0x1);     /* mov byte [ebp-0x14], 0x1 */
         l_0x1014_2659:
@@ -84,7 +84,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_2696, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
             ii(0x1014_2699, 3); mov(edx, memd_a32[ss, ebp - 0x2c]);     /* mov edx, [ebp-0x2c] */
             ii(0x1014_269c, 3); mov(eax, memd_a32[ss, ebp - 0x24]);     /* mov eax, [ebp-0x24] */
-            ii(0x1014_269f, 5); calld(0x100e_8f38, -0x5976c);           /* call 0x100e8f38 */
+            ii(0x1014_269f, 5); calld(0x100e_8f38, -0x5_976c);          /* call 0x100e8f38 */
             ii(0x1014_26a4, 3); mov(memd_a32[ss, ebp - 0x24], eax);     /* mov [ebp-0x24], eax */
             ii(0x1014_26a7, 4); mov(memb_a32[ss, ebp - 0x14], 0x1);     /* mov byte [ebp-0x14], 0x1 */
         l_0x1014_26ab:
@@ -116,11 +116,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_26fd, 2); sub(eax, edx);                          /* sub eax, edx */
             ii(0x1014_26ff, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x1014_2702, 3); mov(eax, memd_a32[ss, ebp - 0x24]);     /* mov eax, [ebp-0x24] */
-            ii(0x1014_2705, 5); calld(0x100e_8d1e, -0x599ec);           /* call 0x100e8d1e */
+            ii(0x1014_2705, 5); calld(0x100e_8d1e, -0x5_99ec);          /* call 0x100e8d1e */
             ii(0x1014_270a, 4); cmp(memb_a32[ss, ebp - 0x14], 0);       /* cmp byte [ebp-0x14], 0x0 */
             ii(0x1014_270e, 2); if(jzd(0x1014_2718, 0x8)) goto l_0x1014_2718; /* jz 0x10142718 */
             ii(0x1014_2710, 3); mov(eax, memd_a32[ss, ebp - 0x24]);     /* mov eax, [ebp-0x24] */
-            ii(0x1014_2713, 5); calld(Definitions.sys_free, 0x289a9);   /* call 0x1016b0c1 */
+            ii(0x1014_2713, 5); calld(Definitions.sys_free, 0x2_89a9);  /* call 0x1016b0c1 */
         l_0x1014_2718:
             ii(0x1014_2718, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_271a, 1); popd(ebp);                              /* pop ebp */

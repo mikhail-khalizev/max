@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_1374()
         {
             ii(0x1010_1374, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1010_1379, 5); calld(Definitions.sys_check_available_stack_size, 0x649d4); /* call 0x10165d52 */
+            ii(0x1010_1379, 5); calld(Definitions.sys_check_available_stack_size, 0x6_49d4); /* call 0x10165d52 */
             ii(0x1010_137e, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_137f, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_1380, 1); pushd(edx);                             /* push edx */
@@ -24,13 +24,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_1399, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1010_139b, 3); mov(bl, memb_a32[ss, ebp - 0x4]);       /* mov bl, [ebp-0x4] */
             ii(0x1010_139e, 5); mov(eax, 0x101c_37bc);                  /* mov eax, 0x101c37bc */
-            ii(0x1010_13a3, 5); calld(0x1007_6600, -0x8ada8);           /* call 0x10076600 */
+            ii(0x1010_13a3, 5); calld(0x1007_6600, -0x8_ada8);          /* call 0x10076600 */
             ii(0x1010_13a8, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
             ii(0x1010_13aa, 6); mov(cl, memb_a32[ds, 0x101c_37da]);     /* mov cl, [0x101c37da] */
             ii(0x1010_13b0, 3); movsx(ecx, cx);                         /* movsx ecx, cx */
             ii(0x1010_13b3, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1010_13b5, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1010_13b7, 5); calld(0x1007_2c3a, -0x8e782);           /* call 0x10072c3a */
+            ii(0x1010_13b7, 5); calld(0x1007_2c3a, -0x8_e782);          /* call 0x10072c3a */
             ii(0x1010_13bc, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1010_13bf, 4); cmp(memd_a32[ss, ebp - 0x8], 0);        /* cmp dword [ebp-0x8], 0x0 */
             ii(0x1010_13c3, 2); if(jnzd(0x1010_13d5, 0x10)) goto l_0x1010_13d5; /* jnz 0x101013d5 */

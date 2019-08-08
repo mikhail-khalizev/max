@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_b1ec, 2); if(jzd(0x1016_b1fc, 0xe)) goto l_0x1016_b1fc; /* jz 0x1016b1fc */
         l_0x1016_b1ee:
             ii(0x1016_b1ee, 3); mov(edx, memd_a32[ds, eax + 0x8]);      /* mov edx, [eax+0x8] */
-            ii(0x1016_b1f1, 5); calld(Definitions.sys_free_internal, 0x1725e); /* call 0x10182454 */
+            ii(0x1016_b1f1, 5); calld(Definitions.sys_free_internal, 0x1_725e); /* call 0x10182454 */
             ii(0x1016_b1f6, 2); mov(eax, edx);                          /* mov eax, edx */
             ii(0x1016_b1f8, 2); test(edx, edx);                         /* test edx, edx */
             ii(0x1016_b1fa, 2); if(jnzd(0x1016_b1ee, -0xe)) goto l_0x1016_b1ee; /* jnz 0x1016b1ee */

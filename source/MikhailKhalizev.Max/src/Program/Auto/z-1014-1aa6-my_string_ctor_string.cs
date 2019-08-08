@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void my_string_ctor_string()
         {
             ii(0x1014_1aa6, 5); pushd(0x24);                            /* push 0x24 */
-            ii(0x1014_1aab, 5); calld(Definitions.sys_check_available_stack_size, 0x242a2); /* call 0x10165d52 */
+            ii(0x1014_1aab, 5); calld(Definitions.sys_check_available_stack_size, 0x2_42a2); /* call 0x10165d52 */
             ii(0x1014_1ab0, 1); pushd(ebx);                             /* push ebx */
             ii(0x1014_1ab1, 1); pushd(ecx);                             /* push ecx */
             ii(0x1014_1ab2, 1); pushd(esi);                             /* push esi */

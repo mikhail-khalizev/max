@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1010_312d()
         {
             ii(0x1010_312d, 5); pushd(0x20);                            /* push 0x20 */
-            ii(0x1010_3132, 5); calld(Definitions.sys_check_available_stack_size, 0x62c1b); /* call 0x10165d52 */
+            ii(0x1010_3132, 5); calld(Definitions.sys_check_available_stack_size, 0x6_2c1b); /* call 0x10165d52 */
             ii(0x1010_3137, 1); pushd(ebx);                             /* push ebx */
             ii(0x1010_3138, 1); pushd(ecx);                             /* push ecx */
             ii(0x1010_3139, 1); pushd(esi);                             /* push esi */
@@ -23,12 +23,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_314d, 3); mov(edx, memd_a32[ds, eax + 0xe]);      /* mov edx, [eax+0xe] */
             ii(0x1010_3150, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */
             ii(0x1010_3153, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x1010_3156, 5); calld(0x1013_c0fa, 0x38f9f);            /* call 0x1013c0fa */
+            ii(0x1010_3156, 5); calld(0x1013_c0fa, 0x3_8f9f);           /* call 0x1013c0fa */
             ii(0x1010_315b, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_315e, 3); mov(edx, memd_a32[ds, eax + 0x10]);     /* mov edx, [eax+0x10] */
             ii(0x1010_3161, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */
             ii(0x1010_3164, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x1010_3167, 5); calld(0x1013_c0fa, 0x38f8e);            /* call 0x1013c0fa */
+            ii(0x1010_3167, 5); calld(0x1013_c0fa, 0x3_8f8e);           /* call 0x1013c0fa */
             ii(0x1010_316c, 3); mov(edx, memd_a32[ss, ebp - 0x4]);      /* mov edx, [ebp-0x4] */
             ii(0x1010_316f, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1010_3172, 3); add(eax, 0x6);                          /* add eax, 0x6 */
