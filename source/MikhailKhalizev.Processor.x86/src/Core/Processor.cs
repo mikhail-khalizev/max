@@ -1806,8 +1806,9 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
+        /// <param name="value"></param>
         /// <inheritdoc />
-        public void aam()
+        public void aam(Value value)
         {
             throw new NotImplementedException();
         }
@@ -1996,8 +1997,10 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         /// <inheritdoc />
-        public void arpl()
+        public void arpl(Value a, Value b)
         {
             throw new NotImplementedException();
         }
@@ -2789,6 +2792,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void fadd(FpuStackRegister a, FpuStackRegister b)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void faddp(FpuStackRegister a, FpuStackRegister b)
         {
             throw new NotImplementedException();
@@ -3290,6 +3299,12 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void fsub(Value a)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public void fsub(FpuStackRegister a, FpuStackRegister b)
         {
             a.Double -= b.Double;
@@ -3529,7 +3544,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void insd()
+        public void insd_a32()
         {
             throw new NotImplementedException();
         }
@@ -3855,9 +3870,21 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool jgd_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         public bool jgew(Address address, int offset)
         {
             return jmpw_if(eflags.sf == eflags.of, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jged_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -4675,6 +4702,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         /// <inheritdoc />
         public bool loopd_a32_func(Address address, int offset)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool loopned_a32_func(Address address, int offset)
         {
             throw new NotImplementedException();
         }

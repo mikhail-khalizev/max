@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
 // ReSharper disable CommentTypo
 #pragma warning disable IDE1006 // Naming Styles
@@ -207,8 +207,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <summary>
         /// ASCII Adjust AX After Multiply.
         /// </summary>
+        /// <param name="value"></param>
         /// <remarks>https://www.felixcloutier.com/x86/AAM.html</remarks>
-        void aam();
+        void aam(Value value);
 
         /// <summary>
         /// ASCII Adjust AL After Subtraction.
@@ -351,8 +352,10 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <summary>
         /// Adjust RPL Field of Segment Selector.
         /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         /// <remarks>https://www.felixcloutier.com/x86/ARPL.html</remarks>
-        void arpl();
+        void arpl(Value a, Value b);
 
         /// <summary>
         /// Bit Field Extract.
@@ -982,6 +985,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Add.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FADD:FADDP:FIADD.html</remarks>
+        void fadd(FpuStackRegister a, FpuStackRegister b);
+
+        /// <summary>
+        /// Add.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FADD:FADDP:FIADD.html</remarks>
         void faddp(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
@@ -1405,6 +1414,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSUB:FSUBP:FISUB.html</remarks>
+        void fsub(Value a);
+
+        /// <summary>
+        /// Subtract.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FSUB:FSUBP:FISUB.html</remarks>
         void fsub(FpuStackRegister a, FpuStackRegister b);
 
         /// <summary>
@@ -1597,7 +1612,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Input from Port to String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INS:INSB:INSW:INSD.html</remarks>
-        void insd();
+        void insd_a32();
 
         /// <summary>
         /// Insert Scalar Single-Precision Floating-Point Value.
@@ -1906,7 +1921,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jgd_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jgew(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jged_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2634,6 +2661,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopd_a32_func(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopned_a32_func(Address address, int offset);
 
         /// <summary>
         /// Load Segment Limit.

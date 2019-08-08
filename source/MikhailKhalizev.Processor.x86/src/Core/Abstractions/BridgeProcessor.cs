@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 // ReSharper disable IdentifierTypo
 #pragma warning disable IDE1006 // Naming Styles
 
@@ -333,10 +333,11 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             Implementation.aad();
         }
 
+        /// <param name="value"></param>
         /// <inheritdoc />
-        public void aam()
+        public void aam(Value value)
         {
-            Implementation.aam();
+            Implementation.aam(value);
         }
 
         /// <inheritdoc />
@@ -477,10 +478,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             Implementation.andps();
         }
 
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         /// <inheritdoc />
-        public void arpl()
+        public void arpl(Value a, Value b)
         {
-            Implementation.arpl();
+            Implementation.arpl(a, b);
         }
 
         /// <inheritdoc />
@@ -1108,6 +1111,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
+        public void fadd(FpuStackRegister a, FpuStackRegister b)
+        {
+            Implementation.fadd(a, b);
+        }
+
+        /// <inheritdoc />
         public void faddp(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.faddp(a, b);
@@ -1534,6 +1543,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
+        public void fsub(Value a)
+        {
+            Implementation.fsub(a);
+        }
+
+        /// <inheritdoc />
         public void fsub(FpuStackRegister a, FpuStackRegister b)
         {
             Implementation.fsub(a, b);
@@ -1726,9 +1741,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void insd()
+        public void insd_a32()
         {
-            Implementation.insd();
+            Implementation.insd_a32();
         }
 
         /// <inheritdoc />
@@ -2032,9 +2047,21 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
+        public bool jgd_func(Address address, int offset)
+        {
+            return Implementation.jgd_func(address, offset);
+        }
+
+        /// <inheritdoc />
         public bool jgew(Address address, int offset)
         {
             return Implementation.jgew(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jged_func(Address address, int offset)
+        {
+            return Implementation.jged_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2761,6 +2788,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public bool loopd_a32_func(Address address, int offset)
         {
             return Implementation.loopd_a32_func(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool loopned_a32_func(Address address, int offset)
+        {
+            return Implementation.loopned_a32_func(address, offset);
         }
 
         /// <inheritdoc />
