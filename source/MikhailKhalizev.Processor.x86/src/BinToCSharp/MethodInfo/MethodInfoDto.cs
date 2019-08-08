@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         public byte[] RawBytes
         {
             get => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Raw));
-            set => Raw = HexHelper.ToString(value, o => o.RemoveHexPrefix().SetGroupSize(0));
+            set => Raw = HexHelper.ToHexWithoutPrefix(value);
         }
         private byte[] _rawBytes;
 

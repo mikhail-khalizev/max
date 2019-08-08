@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86
 
         public override string ToString() => ToShortString();
         public string ToString(Func<HexHelper.Options, HexHelper.Options> setupOptions) => HexHelper.ToString(_value, setupOptions);
-        public string ToShortString() => HexHelper.ToString(_value, o => o.SetTrimZero(true).SetGroupSize(4));
+        public string ToShortString() => HexHelper.ToShortGrouped4Hex(_value);
         public string ToFullString() => HexHelper.ToString(_value, o => o.SetTrimZero(false).SetGroupSize(4));
 
         #region IEquatable
