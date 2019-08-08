@@ -355,7 +355,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     dm.MethodInfo.ExtraRaw = new Dictionary<Address, string>();
                 
                 var raw = engine.Memory.ReadAll(interval.Begin, interval.End - interval.Begin);
-                var rawString = HexHelper.ToString(raw, o => o.RemoveHexPrefix().SetGroupSize(0));
+                var rawString = HexHelper.ToHexWithoutPrefix(raw);
                 
                 if (methodInterval.Contains(interval)) // Always false.
                     dm.MethodInfo.ExtraRaw[interval.Begin - offset] = rawString;

@@ -197,7 +197,10 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <inheritdoc />
         public override string ToString()
         {
-            return HexHelper.ToString(UInt64, o => o.SetTrimZero().SetGroupSize(4));
+            if (Bits <= 32)
+                return HexHelper.ToShortGrouped4Hex(UInt32);
+            else
+                return HexHelper.ToShortGrouped4Hex(UInt64);
         }
 
         #region Cast from Numeric Operators

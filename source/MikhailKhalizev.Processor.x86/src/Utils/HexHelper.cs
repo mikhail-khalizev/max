@@ -239,5 +239,99 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
             public Options Clone() => (Options) MemberwiseClone();
         }
+
+        #region Fast
+        
+        private static readonly char[] Hex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+
+        public static string ToShortGrouped4Hex(ulong value) => ToShortGrouped4Hex((long) value);
+
+        public static unsafe string ToShortGrouped4Hex(long value)
+        {
+            if (value == 0)
+                return "0";
+            if ((value >> 32) == 0)
+                return ToShortGrouped4Hex((int) value);
+
+            var len = 21;
+            var buffer = stackalloc char[len];
+            
+            buffer[2] = Hex[(value >> 60) & 0xf];
+            buffer[3] = Hex[(value >> 56) & 0xf];
+            buffer[4] = Hex[(value >> 52) & 0xf];
+            buffer[5] = Hex[(value >> 48) & 0xf];
+            buffer[6] = '_';
+            buffer[7] = Hex[(value >> 44) & 0xf];
+            buffer[8] = Hex[(value >> 40) & 0xf];
+            buffer[9] = Hex[(value >> 36) & 0xf];
+            buffer[10] = Hex[(value >> 32) & 0xf];
+            buffer[11] = '_';
+            buffer[12] = Hex[(value >> 28) & 0xf];
+            buffer[13] = Hex[(value >> 24) & 0xf];
+            buffer[14] = Hex[(value >> 20) & 0xf];
+            buffer[15] = Hex[(value >> 16) & 0xf];
+            buffer[16] = '_';
+            buffer[17] = Hex[(value >> 12) & 0xf];
+            buffer[18] = Hex[(value >> 8) & 0xf];
+            buffer[19] = Hex[(value >> 4) & 0xf];
+            buffer[20] = Hex[(value >> 0) & 0xf];
+
+            var firstNonZero = 2;
+            for (var i = 2; i < len; i++)
+            {
+                if (buffer[i] == '0' || buffer[i] == '_')
+                    continue;
+
+                firstNonZero = i;
+                break;
+            }
+            
+            buffer[firstNonZero - 2] = '0';
+            buffer[firstNonZero - 1] = 'x';
+            return new string(buffer, firstNonZero - 2, len - firstNonZero + 2);
+        }
+
+        public static string ToShortGrouped4Hex(uint value) => ToShortGrouped4Hex((int) value);
+
+        public static unsafe string ToShortGrouped4Hex(int value)
+        {
+            if (value == 0)
+                return "0";
+
+            var len = 11;
+            var buffer = stackalloc char[len];
+            
+            buffer[2] = Hex[(value >> 60) & 0xf];
+            buffer[3] = Hex[(value >> 56) & 0xf];
+            buffer[4] = Hex[(value >> 52) & 0xf];
+            buffer[5] = Hex[(value >> 48) & 0xf];
+            buffer[6] = '_';
+            buffer[7] = Hex[(value >> 44) & 0xf];
+            buffer[8] = Hex[(value >> 40) & 0xf];
+            buffer[9] = Hex[(value >> 36) & 0xf];
+            buffer[10] = Hex[(value >> 32) & 0xf];
+
+            var firstNonZero = 2;
+            for (var i = 2; i < len; i++)
+            {
+                if (buffer[i] == '0' || buffer[i] == '_')
+                    continue;
+
+                firstNonZero = i;
+                break;
+            }
+            
+            buffer[firstNonZero - 2] = '0';
+            buffer[firstNonZero - 1] = 'x';
+            return new string(buffer, firstNonZero - 2, len - firstNonZero + 2);
+        }
+
+        public static string ToHexWithoutPrefix(byte[] data)
+        {
+            // TODO Optimize
+            return HexHelper.ToString(data, o => o.RemoveHexPrefix().SetGroupSize(0));
+        }
+
+        #endregion
     }
 }

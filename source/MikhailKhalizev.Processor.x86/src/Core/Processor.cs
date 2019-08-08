@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MikhailKhalizev.Processor.x86.Core
@@ -1639,7 +1640,12 @@ namespace MikhailKhalizev.Processor.x86.Core
                         File.Move(Configuration.StateOutput, bak);
                     }
 
-                    _stateLog = new StreamWriter(Configuration.StateOutput);
+                    var byteBufferSize = 10 * 1024 * 1024;
+                    var charBufferSize = 10 * 1024;
+
+                    var fileStream = new FileStream(Configuration.StateOutput, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, byteBufferSize, FileOptions.SequentialScan);
+                    fileStream.SetLength(0);
+                    _stateLog = new StreamWriter(fileStream, Encoding.UTF8, charBufferSize, false);
                 }
 
                 var effAddress = cs[CurrentInstructionAddress];

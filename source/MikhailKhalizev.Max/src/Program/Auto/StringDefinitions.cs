@@ -235,6 +235,7 @@ namespace MikhailKhalizev.Max.Program
         public static string NoneString { get; } = "none";
         public static string NoObjectStructureString { get; } = "No Object structure.";
         public static string NotEnoughExtendedMemoryAvailableToRunMAXAmountNeededIAmountFoundIString { get; } = "\nNot enough Extended Memory available to run M.A.X.\nAmount Needed: %i, Amount found: %i\n\n";
+        public static string NotEnoughMemoryToAllocateFileStructuresString { get; } = "Not enough memory to allocate file structures\r\n";
         public static string NoticeGameWillEndIn10TurnsString { get; } = "Notice: Game will end in 10 turns!";
         public static string NumberOfTurnsToClearSiteIString { get; } = "Number of turns to clear site: %i.";
         public static string ObjectIndexEqualReadObjectsGetcount1String { get; } = "object_index == read_objects.GetCount() + 1";
@@ -1030,6 +1031,7 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition FloatingPointSupportNotLoaded { get; } = new StringDefinition(0x101b_3464, FloatingPointSupportNotLoadedString);
         public static StringDefinition StackDataHasBeenCorrupted { get; } = new StringDefinition(0x101b_3488, StackDataHasBeenCorruptedString);
         public static StringDefinition RationalDos4g { get; } = new StringDefinition(0x101b_36fc, RationalDos4gString);
+        public static StringDefinition NotEnoughMemoryToAllocateFileStructures { get; } = new StringDefinition(0x101b_3714, NotEnoughMemoryToAllocateFileStructuresString);
         public static StringDefinition Tz { get; } = new StringDefinition(0x101b_3744, TzString);
         public static StringDefinition In { get; } = new StringDefinition(0x101b_37f9, InString);
         public static StringDefinition ReturnFromTerminateFunction { get; } = new StringDefinition(0x101b_3800, ReturnFromTerminateFunctionString);

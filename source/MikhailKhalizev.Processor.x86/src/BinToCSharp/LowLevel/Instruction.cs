@@ -406,9 +406,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                                 if (val < 0 && needSignExtend)
                                     sb.Append(
-                                        $"-{HexHelper.ToString(-val, o => o.SetTrimZero())} /* {HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero())} */");
+                                        $"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
                                 else
-                                    sb.Append(HexHelper.ToString(op.lval.ubyte, o => o.SetTrimZero()));
+                                    sb.Append(HexHelper.ToShortGrouped4Hex(op.lval.ubyte));
                                 break;
                             }
 
@@ -444,8 +444,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                         sb.Append(
                             val < 0
-                                ? $"-{HexHelper.ToString(-val, o => o.SetTrimZero())}"
-                                : HexHelper.ToString(val, o => o.SetTrimZero()));
+                                ? $"-{HexHelper.ToShortGrouped4Hex(-val)}"
+                                : HexHelper.ToShortGrouped4Hex(val));
                         break;
 
                     case ud_type.UD_OP_CONST:
@@ -453,8 +453,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         break;
 
                     case ud_type.UD_OP_PTR:
-                        sb.Append(
-                            $"{HexHelper.ToString(op.lval.ptr_seg, o => o.SetTrimZero())}, {HexHelper.ToString(op.lval.ptr_off, o => o.SetTrimZero())}");
+                        sb.Append($"{HexHelper.ToShortGrouped4Hex(op.lval.ptr_seg)}, {HexHelper.ToShortGrouped4Hex(op.lval.ptr_off)}");
                         break;
 
                     default:
