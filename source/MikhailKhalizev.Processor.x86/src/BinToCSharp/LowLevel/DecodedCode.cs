@@ -8,17 +8,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     public class DecodedCode
     {
         // NOTE. Инструкции могут пересекаться.
-        private readonly MySortedSet<(Address Address, Instruction Instruction)> _instructions 
-            = new MySortedSet<(Address Address, Instruction Instruction)>(new CustomComparer<(Address Address, Instruction Instruction)>((a, b) => a.Address.CompareTo(b.Address)));
+        private readonly MySortedSet<(Address Address, CSharpInstruction Instruction)> _instructions 
+            = new MySortedSet<(Address Address, CSharpInstruction Instruction)>(new CustomComparer<(Address Address, CSharpInstruction Instruction)>((a, b) => a.Address.CompareTo(b.Address)));
         public UsedSpace<Address> Area { get; } = new UsedSpace<Address>();
 
-        public Instruction GetInstruction(Address address)
+        public CSharpInstruction GetInstruction(Address address)
         {
             _instructions.TryGetValue((address, null), out var actual);
             return actual.Instruction;
         }
 
-        public Instruction GetInstructionBefore(Address address)
+        public CSharpInstruction GetInstructionBefore(Address address)
         {
             return _instructions.FirstLessOrDefault((address, null)).Instruction;
         }
@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// </summary>
         /// <param name="instruction">Инструкция, для которой необходимо определить следующую инструкцию.</param>
         /// <returns></returns>
-        public Instruction GetNextInstruction(Instruction instruction)
+        public CSharpInstruction GetNextInstruction(CSharpInstruction instruction)
         {
             return _instructions.FirstNotLessOrDefault((instruction.End, null)).Instruction;
         }
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return _instructions.Contains((address, null));
         }
 
-        public void Insert(Instruction instruction)
+        public void Insert(CSharpInstruction instruction)
         {
             _instructions.Add((instruction.Begin, instruction));
             Area.Add(instruction.Begin, instruction.End);

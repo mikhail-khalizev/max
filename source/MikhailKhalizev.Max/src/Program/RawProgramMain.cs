@@ -56,8 +56,9 @@ namespace MikhailKhalizev.Max.Program
             DosPic = new DosPic(implementation, this);
 
             implementation.MethodCollection = this;
-            implementation.runInb += (sender, tuple) => DosPort.MyInb(tuple.value, tuple.port);
-            implementation.runOutb += (sender, tuple) => DosPort.MyOutb(tuple.port, tuple.value);
+            implementation.runInb += (sender, args) => DosPort.MyInb(args.value, args.port);
+            implementation.runOutb += (sender, args) => DosPort.MyOutb(args.port, args.value);
+            implementation.runIrqs += (sender, args) => DosPic.RunIrqs();
         }
 
         public void Start()
@@ -71,17 +72,17 @@ namespace MikhailKhalizev.Max.Program
 
             DosInterrupt.InitializeInterrupts();
             InitializeX86DosProgram();
-            
+
             Implementation.correct_function_position(0);
         }
-        
+
         private void LoadDecodedMethods()
         {
-            foreach (var bridgeProcessor in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
+            foreach (var bridgeProcessorType in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
             {
                 object instance = null;
 
-                foreach (var methodInfo in bridgeProcessor.GetMethods(BindingFlags.Instance | BindingFlags.Public))
+                foreach (var methodInfo in bridgeProcessorType.GetMethods(BindingFlags.Instance | BindingFlags.Public))
                 {
                     var a = methodInfo.GetCustomAttribute<MethodInfoAttribute>();
                     if (a == null)
@@ -90,7 +91,11 @@ namespace MikhailKhalizev.Max.Program
                     var mi = MethodsInfo.GetByGuid(a.Guid);
 
                     if (instance == null)
-                        instance = Activator.CreateInstance(bridgeProcessor, Implementation);
+                    {
+                        instance = Activator.CreateInstance(bridgeProcessorType, Implementation);
+                        foreach (var pi in bridgeProcessorType.GetProperties(BindingFlags.Instance | BindingFlags.Public).Where(x => x.PropertyType == typeof(RawProgramMain)))
+                            pi.SetValue(instance, this);
+                    }
 
                     var fi = new MyMethodInfo();
                     fi.MethodInfo = mi;
@@ -105,12 +110,14 @@ namespace MikhailKhalizev.Max.Program
                 }
             }
         }
-        
+
         public void InitializeX86DosProgram()
         {
+            cr0.UInt32 = 0x0010;
+
             var exeBytes = File.ReadAllBytes(Path.Combine(Configuration.Max.InstalledPath, Configuration.Max.ExeFileName));
             var dosMz = new DosMz(exeBytes);
-            
+
             if (!dosMz.IsCorrect)
                 throw new Exception();
 
@@ -204,7 +211,7 @@ namespace MikhailKhalizev.Max.Program
             // memw_a16(ds, 0x3) = 0x1346 - 0x191;
             memw_a16[ds, 0x3] = 0xc02 - 0x191;
 
-            
+
 
             // Устанавливаем начальные значения в регистры.
 
@@ -232,7 +239,7 @@ namespace MikhailKhalizev.Max.Program
 
             DosTimer.timers_init();
         }
-        
+
         /// <inheritdoc />
         public void GetMethod(out MethodInfoDto methodInfo, out Action method)
         {
@@ -243,24 +250,25 @@ namespace MikhailKhalizev.Max.Program
             methodInfo = info.MethodInfo;
             method = info.Action;
         }
-        
+
         private MyMethodInfo get_func(SegmentRegister seg, Address address)
         {
-            if (seg[address] == 0)
+            var fullAddress = seg[address];
+
+            if (fullAddress == 0)
                 throw new InvalidOperationException("Запрос функции по нулевому указателю.");
 
-            var ret = find_func_exact(seg, address);
+            var ret = find_func_exact(fullAddress);
             if (ret != null)
                 return ret;
 
-            ret = find_func_from_known_and_remember_it(seg, address);
+            ret = find_func_from_known_and_remember_it(fullAddress);
             if (ret != null)
                 return ret;
 
             // Всё-таки декодируем.
             DecodeNewMethod(seg, address);
-            
-            // TODO Update comment: Use in bash:  ERR=5 ; while [ $ERR == 5 ] ; do make -j8 && { rm /tmp/*.png ; time ./openmax ; } ; ERR=$? ; done
+
             (Implementation as IDisposable)?.Dispose();
             Environment.Exit(5);
 
@@ -268,9 +276,9 @@ namespace MikhailKhalizev.Max.Program
             throw new InvalidOperationException("Функция не найдена.");
         }
 
-        private MyMethodInfo find_func_exact(SegmentRegister seg, Address address)
+        private MyMethodInfo find_func_exact(Address fullAddress)
         {
-            var infos = funcs_by_pc.GetValues(seg[address], false);
+            var infos = funcs_by_pc.GetValues(fullAddress, false);
             if (infos == null)
                 return null;
 
@@ -279,14 +287,14 @@ namespace MikhailKhalizev.Max.Program
                 if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
                     continue;
 
-                if (Implementation.Memory.Equals(seg[address], info.MethodInfo.RawBytes))
+                if (Implementation.Memory.Equals(fullAddress, info.MethodInfo.RawBytes))
                     return info;
             }
 
             return null;
         }
 
-        private MyMethodInfo find_func_from_known_and_remember_it(SegmentRegister seg, Address address)
+        private MyMethodInfo find_func_from_known_and_remember_it(Address fullAddress)
         {
             // Попробуем найти её среди известных.
 
@@ -308,11 +316,10 @@ namespace MikhailKhalizev.Max.Program
             {
                 if (string.IsNullOrEmpty(info.Name))
                     throw new InvalidOperationException("Код у функции есть, а его имя неизвестно.");
-                
-                var fullAddress = seg[address];
+
                 if (!Implementation.Memory.Equals(fullAddress, info.MethodInfo.RawBytes))
                     continue;
-                
+
                 // Всё хорошо. Запомним её, а затем сохраним в файл, чтоб в следующий раз не пришлось искать.
 
                 funcs_by_pc.Add(fullAddress, info);
@@ -350,7 +357,7 @@ namespace MikhailKhalizev.Max.Program
 
             if (seg.Descriptor.Base + seg.Descriptor.Limit + 1 != 0)
                 to_cxx.SuppressDecode.Add(seg.Descriptor.Base + seg.Descriptor.Limit + 1 + 1, 0);
-                
+
             to_cxx.SuppressDecode.Add(0x14f0_0000, 0);
 
 
@@ -364,7 +371,7 @@ namespace MikhailKhalizev.Max.Program
             to_cxx.AddForceEndFuncs(0x14f8ef);
             to_cxx.AddForceEndFuncs(0x158748);
 
-            
+
             AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys");
 
 
@@ -430,7 +437,7 @@ namespace MikhailKhalizev.Max.Program
             to_cxx.DecodeMethod(fullAddress);
             to_cxx.Save();
         }
-        
+
         public void add_internal_dyn_func(Action func, int mode, Address address)
         {
             var myMethodInfos = funcs_by_pc.GetValues(address, false);

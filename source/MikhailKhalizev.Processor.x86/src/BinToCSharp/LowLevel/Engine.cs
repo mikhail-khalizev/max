@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public MethodsInfo MethodsInfo { get; }
         public IMemory Memory { get; }
 
-        public event EventHandler<Instruction> InstructionDecoded;
+        public event EventHandler<CSharpInstruction> InstructionDecoded;
         public event EventHandler OnSave;
 
         public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
@@ -280,7 +280,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 _limitSize -= length;
 
-                var cmd = new Instruction(DefinitionCollection, u);
+                var cmd = new CSharpInstruction(DefinitionCollection, u);
                 
                 DecodedCode.Insert(cmd);
                 InstructionDecoded?.Invoke(this, cmd);
@@ -316,7 +316,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     var prevAddress = intervalBefore.End;
 
                     if (address < prevAddress + size)
-                        DecodedCode.Insert(new Instruction(prevAddress, address, "Выравнивание."));
+                        DecodedCode.Insert(new CSharpInstruction(prevAddress, address, "Выравнивание."));
                 }
             }
         }
@@ -378,7 +378,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // Учтём, что инструкции в decoded_code могут пересекаться. Найдём 'верную дорожку'.
 
-                    var instructions = new List<Instruction>();
+                    var instructions = new List<CSharpInstruction>();
                     var lastInstrEnd = firstCmd.Begin;
 
                     for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
@@ -430,7 +430,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             {
                                 // Ссылка внутрь функции.
 
-                                var index = instructions.BinarySearch(new Instruction(to), Instruction.BeginComparer);
+                                var index = instructions.BinarySearch(new CSharpInstruction(to), CSharpInstruction.BeginComparer);
 
                                 if (0 <= index)
                                     detectedMethod.Labels.Add(to);

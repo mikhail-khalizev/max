@@ -1,107 +1,119 @@
 
 
+using MikhailKhalizev.Processor.x86.Utils;
+
 namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
 {
-    public abstract class Cr0Register : Register
+    public class Cr0Register : Register
     {
         /// <summary>
         /// Paging.
         /// </summary>
-        public abstract bool pg { get; set; }
+        public virtual bool pg
+        {
+            get => BinaryHelper.IsSet(Value, 31);
+            set => BinaryHelper.Set(ref Value, value, 31);
+        }
 
         /// <summary>
         /// Cache Disable.
         /// </summary>
-        public abstract bool cd { get; set; }
+        public virtual bool cd
+        {
+            get => BinaryHelper.IsSet(Value, 30);
+            set => BinaryHelper.Set(ref Value, value, 30);
+        }
 
         /// <summary>
         /// Not Write-through.
         /// </summary>
-        public abstract bool nw { get; set; }
+        public virtual bool nw
+        {
+            get => BinaryHelper.IsSet(Value, 29);
+            set => BinaryHelper.Set(ref Value, value, 29);
+        }
 
         /// <summary>
         /// Alignment Mask.
         /// </summary>
-        public abstract bool am { get; set; }
+        public virtual bool am
+        {
+            get => BinaryHelper.IsSet(Value, 18);
+            set => BinaryHelper.Set(ref Value, value, 18);
+        }
 
         /// <summary>
         /// Write Protect.
         /// </summary>
-        public abstract bool wp { get; set; }
+        public virtual bool wp
+        {
+            get => BinaryHelper.IsSet(Value, 16);
+            set => BinaryHelper.Set(ref Value, value, 16);
+        }
 
         /// <summary>
         /// Numeric Error.
         /// </summary>
-        public abstract bool ne { get; set; }
+        public virtual bool ne
+        {
+            get => BinaryHelper.IsSet(Value, 5);
+            set => BinaryHelper.Set(ref Value, value, 5);
+        }
 
         /// <summary>
         /// Extension Type.
         /// </summary>
-        public abstract bool et { get; set; }
+        public virtual bool et
+        {
+            get => BinaryHelper.IsSet(Value, 4);
+            set => BinaryHelper.Set(ref Value, value, 4);
+        }
 
         /// <summary>
         /// Task Switched.
         /// </summary>
-        public abstract bool ts { get; set; }
+        public virtual bool ts
+        {
+            get => BinaryHelper.IsSet(Value, 3);
+            set => BinaryHelper.Set(ref Value, value, 3);
+        }
 
         /// <summary>
         /// Emulation.
         /// </summary>
-        public abstract bool em { get; set; }
+        public virtual bool em
+        {
+            get => BinaryHelper.IsSet(Value, 2);
+            set => BinaryHelper.Set(ref Value, value, 2);
+        }
 
         /// <summary>
         /// Monitor Coprocessor.
         /// </summary>
-        public abstract bool mp { get; set; }
+        public virtual bool mp
+        {
+            get => BinaryHelper.IsSet(Value, 1);
+            set => BinaryHelper.Set(ref Value, value, 1);
+        }
 
         /// <summary>
         /// Protection Enable.
         /// </summary>
-        public abstract bool pe { get; set; }
-
-
+        public virtual bool pe
+        {
+            get => BinaryHelper.IsSet(Value, 0);
+            set => BinaryHelper.Set(ref Value, value, 0);
+        }
+        
         /// <inheritdoc />
         public override int Bits => 32;
-
+        
         /// <inheritdoc />
         protected override ulong UInt64Internal
         {
-            get
-            {
-                ulong ret = 0;
-
-                ret |= pe ? 0x1 : 0u;
-                ret |= mp ? 0x2 : 0u;
-                ret |= em ? 0x4 : 0u;
-                ret |= ts ? 0x8 : 0u;
-                ret |= et ? 0x10 : 0u;
-                ret |= ne ? 0x20 : 0u;
-
-                ret |= wp ? (1 << 16) : 0u;
-                ret |= am ? (1 << 18) : 0u;
-
-                ret |= nw ? (1 << 29) : 0u;
-                ret |= cd ? (1 << 30) : 0u;
-                ret |= pg ? (1u << 31) : 0u;
-
-                return ret;
-            }
-            set
-            {
-                pe = (value & 0x1) != 0;
-                mp = (value & 0x2) != 0;
-                em = (value & 0x4) != 0;
-                ts = (value & 0x8) != 0;
-                et = (value & 0x10) != 0;
-                ne = (value & 0x20) != 0;
-
-                wp = (value & (1 << 16)) != 0;
-                am = (value & (1 << 18)) != 0;
-
-                nw = (value & (1 << 29)) != 0;
-                cd = (value & (1 << 30)) != 0;
-                pg = (value & (1u << 31)) != 0;
-            }
+            get => Value;
+            set => Value = (uint) value;
         }
+        protected uint Value;
     }
 }

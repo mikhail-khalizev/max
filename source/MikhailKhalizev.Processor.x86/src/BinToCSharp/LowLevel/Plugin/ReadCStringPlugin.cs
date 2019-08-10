@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             }
         }
 
-        private void EngineOnInstructionDecoded(object sender, Instruction cmd)
+        private void EngineOnInstructionDecoded(object sender, CSharpInstruction cmd)
         {
             for (var i = 0; i < cmd.Operands.Count; i++)
             {

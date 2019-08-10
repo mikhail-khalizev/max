@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -505,14 +505,17 @@ namespace MikhailKhalizev.Max.Dos
 
                         var fileMode = FileMode.Open;
                         FileAccess fileAccess;
+                        FileShare fileShare;
 
                         switch (al.UInt32)
                         {
                             case 0:
                                 fileAccess = FileAccess.Read;
+                                fileShare = FileShare.Read;
                                 break;
                             case 2:
                                 fileAccess = FileAccess.ReadWrite;
+                                fileShare = FileShare.Read;
                                 break;
                             default:
                                 throw new NotImplementedException();
@@ -520,7 +523,7 @@ namespace MikhailKhalizev.Max.Dos
 
                         try
                         {
-                            var file = File.Open(path, fileMode, fileAccess);
+                            var file = File.Open(path, fileMode, fileAccess, fileShare);
                             fileHandlers.Add(file);
                             var fd = fileHandlers.Count - 1;
 
@@ -1023,7 +1026,7 @@ namespace MikhailKhalizev.Max.Dos
                 0x64, 0x0, // 0x64
                 0x65, 0x0, // 0x65
                 0x66, 0x0, // 0x66
-                0x67, 0x0, // 0x67
+                0x4, 0xc84b, // 0x67
             };
 
             for (var i = 0; i < intFunc.Length; i++)

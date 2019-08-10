@@ -1,155 +1,177 @@
-﻿namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
+// ReSharper disable InconsistentNaming
+// ReSharper disable IdentifierTypo
+#pragma warning disable IDE1006 // Naming Styles
+
+using MikhailKhalizev.Processor.x86.Utils;
+
+namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
 {
-    public abstract class EflagsRegister : Register
+    public class EflagsRegister : Register
     {
         /// <summary>
         /// Carry flag.
         /// </summary>
-        public abstract bool cf { get; set; }
+        public virtual bool cf
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.cf);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.cf);
+        }
 
         /// <summary>
         /// Parity flag.
         /// </summary>
-        public abstract bool pf { get; set; }
+        public virtual bool pf
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.pf);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.pf);
+        }
 
         /// <summary>
         /// Adjust flag.
         /// </summary>
-        public abstract bool af { get; set; }
+        public virtual bool af
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.af);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.af);
+        }
 
         /// <summary>
         /// Zero flag.
         /// </summary>
-        public abstract bool zf { get; set; }
+        public virtual bool zf
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.zf);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.zf);
+        }
 
         /// <summary>
         /// Sign flag.
         /// </summary>
-        public abstract bool sf { get; set; }
+        public virtual bool sf
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.sf);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.sf);
+        }
 
         /// <summary>
         /// Trap Flag.
         /// </summary>
-        public abstract bool tf { get; set; }
+        public virtual bool tf
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.tf);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.tf);
+        }
 
         /// <summary>
         /// Interrupt Enable Flag.
         /// </summary>
-        public abstract bool @if { get; set; }
+        public virtual bool @if
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.@if);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.@if);
+        }
 
         /// <summary>
         /// Direction flag.
         /// </summary>
-        public abstract bool df { get; set; }
+        public virtual bool df
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.df);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.df);
+        }
 
         /// <summary>
         /// Overflow flag.
         /// </summary>
-        public abstract bool of { get; set; }
+        public virtual bool of
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.of);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.of);
+        }
 
         /// <summary>
         /// I/O Privilege Level.
         /// </summary>
-        public abstract int iopl { get; set; }
+        public virtual int iopl
+        {
+            get => (int) ((Value & EflagsMask.iopl) >> 12);
+            set => Value = (uint) ((Value & ~EflagsMask.iopl) | ((value << 12) & EflagsMask.iopl));
+        }
 
         /// <summary>
         /// Nested Task Flag.
         /// </summary>
-        public abstract bool nt { get; set; }
+        public virtual bool nt
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.nt);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.nt);
+        }
 
         /// <summary>
         /// Resume Flag.
         /// </summary>
-        public abstract bool rf { get; set; }
+        public virtual bool rf
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.rf);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.rf);
+        }
 
         /// <summary>
         /// Virtual-8086 Mode.
         /// </summary>
-        public abstract bool vm { get; set; }
+        public virtual bool vm
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.vm);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.vm);
+        }
 
         /// <summary>
         /// Alignment Check.
         /// </summary>
-        public abstract bool ac { get; set; }
+        public virtual bool ac
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.ac);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.ac);
+        }
 
         /// <summary>
         /// Virtual Interrupt Flag.
         /// </summary>
-        public abstract bool vif { get; set; }
+        public virtual bool vif
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.vif);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.vif);
+        }
 
         /// <summary>
         /// Virtual Interrupt Pending.
         /// </summary>
-        public abstract bool vip { get; set; }
+        public virtual bool vip
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.vip);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.vip);
+        }
 
         /// <summary>
         /// Identification Flag.
         /// </summary>
         /// <remarks>Indicates support for the CPUID instruction.</remarks>
-        public abstract bool id { get; set; }
+        public virtual bool id
+        {
+            get => BinaryHelper.IsSetByMask(Value, EflagsMask.id);
+            set => BinaryHelper.SetByMask(ref Value, value, EflagsMask.id);
+        }
 
 
         /// <inheritdoc />
         public override int Bits => 32;
-
+        
         /// <inheritdoc />
         protected override ulong UInt64Internal
         {
-            get
-            {
-                uint ret = 0;
-
-                ret |= cf ? EflagsMask.cf : 0;
-                ret |= 0x02; // Always set.
-                ret |= pf ? EflagsMask.pf : 0;
-
-                ret |= af ? EflagsMask.af : 0;
-                ret |= zf ? EflagsMask.zf : 0;
-                ret |= sf ? EflagsMask.sf : 0;
-
-                ret |= tf ? EflagsMask.tf : 0;
-                ret |= @if ? EflagsMask.@if : 0;
-                ret |= df ? EflagsMask.df : 0;
-                ret |= of ? EflagsMask.of : 0;
-
-                ret |= (uint)(iopl << 12) & EflagsMask.iopl;
-                ret |= nt ? EflagsMask.nt : 0;
-
-                ret |= rf ? EflagsMask.rf : 0;
-                ret |= vm ? EflagsMask.vm : 0;
-                ret |= ac ? EflagsMask.ac : 0;
-                ret |= vif ? EflagsMask.vif : 0;
-
-                ret |= vip ? EflagsMask.vip : 0;
-                ret |= id ? EflagsMask.id : 0;
-
-                return ret;
-            }
-            set
-            {
-                cf = (value & EflagsMask.cf) != 0;
-                pf = (value & EflagsMask.pf) != 0;
-
-                af = (value & EflagsMask.af) != 0;
-                zf = (value & EflagsMask.zf) != 0;
-                sf = (value & EflagsMask.sf) != 0;
-
-                tf = (value & EflagsMask.tf) != 0;
-                @if = (value & EflagsMask.@if) != 0;
-                df = (value & EflagsMask.df) != 0;
-                of = (value & EflagsMask.of) != 0;
-
-                iopl = (int) ((value & EflagsMask.iopl) >> 12);
-                nt = (value & EflagsMask.nt) != 0;
-
-                rf = (value & EflagsMask.rf) != 0;
-                vm = (value & EflagsMask.vm) != 0;
-                ac = (value & EflagsMask.ac) != 0;
-                vif = (value & EflagsMask.vif) != 0;
-
-                vip = (value & EflagsMask.vip) != 0;
-                id = (value & EflagsMask.id) != 0;
-            }
+            get => Value;
+            set => Value = (uint) value;
         }
+        protected uint Value;
     }
 }

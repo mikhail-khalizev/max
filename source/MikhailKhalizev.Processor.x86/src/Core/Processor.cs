@@ -61,10 +61,10 @@ namespace MikhailKhalizev.Processor.x86.Core
             _sp = new OffsetRegister(_esp, 0, 16);
 
 
-            _cr0 = new Cr0RegisterImpl { UInt64 = 0x6000_0010 };
+            _cr0 = new Cr0Register { UInt64 = 0x6000_0010 };
             _cr2 = new SimpleRegister(32);
             _cr3 = new SimpleRegister(32);
-            _cr4 = new Cr4RegisterImpl();
+            _cr4 = new Cr4Register();
 
 
             _ds = new SegmentRegisterImpl(this);
@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             FPUInstructionPointer_seg = new SegmentRegisterImpl(this);
 
 
-            _eflags = new EflagsRegisterImpl { UInt64 = 0x0000_0002 };
+            _eflags = new EflagsRegister { UInt64 = 0x0000_0002 };
             _ia32Efer = new Ia32EferRegisterImpl();
 
             gdtr_base = 0;
@@ -1390,7 +1390,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void paging_fault(Address address)
         {
             cr2 = address;
-            
+
             var curSave = CurrentInstructionAddress;
             var eipSave = eip;
             var mode = cs.db ? 32 : 16;
@@ -1406,7 +1406,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             }
 
             correct_function_position(returnAddress);
-            
+
             if (!string.IsNullOrEmpty(Configuration.StateOutput))
                 _stateLog.WriteLine($"    paging_fault end: cr2: {cr2}");
 
@@ -1417,7 +1417,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         private void run_irqs()
         {
-            // TODO dos::pic.run_irqs();
+            runIrqs?.Invoke(this, EventArgs.Empty);
         }
 
 
@@ -1470,7 +1470,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            run_irqs();
             return correct_function_position(retAddr, true, true);
         }
 
@@ -1485,8 +1484,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
-            
-            run_irqs();
+
             return correct_function_position(retAddr, true, saveJumpInfo);
         }
 
@@ -1497,7 +1495,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             else
                 sp += s;
         }
-        
+
         #endregion
 
         #region C# emulate specific
@@ -1519,6 +1517,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         public IMethodCollection MethodCollection { get; set; }
         public event EventHandler<(Value value, Value port)> runInb;
         public event EventHandler<(Value port, Value value)> runOutb;
+        public event EventHandler runIrqs;
 
         public void check_mode() => check_mode(CSharpEmulateMode);
 
@@ -1533,6 +1532,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         // For ConditionReturn return true if need return. Or false - continue without return.
         public bool correct_function_position(Address returnAddress, bool haveConditionReturnAfterInstruction = false, bool saveJumpInfo = false)
         {
+            run_irqs();
             callReturnAddresses.Add(returnAddress);
 
             try
@@ -1576,12 +1576,12 @@ namespace MikhailKhalizev.Processor.x86.Core
                     if (saveJumpInfo)
                     {
                         saveJumpInfo = false;
-                        
+
                         var from = cs[CurrentInstructionAddress];
                         //if (!callReturnAddresses.Contains(toRun))
                         MethodsInfo.AddJumpAndSave(MethodInfo, from, methodInfo, toRun, CSharpFunctionDelta);
                     }
-                    
+
                     var prevMethodInfo = MethodInfo;
                     var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
@@ -1606,6 +1606,12 @@ namespace MikhailKhalizev.Processor.x86.Core
                     {
                         MethodInfo = prevMethodInfo;
                         CSharpFunctionDelta = prevCSharpFunctionDelta;
+
+                        if (!string.IsNullOrEmpty(Configuration.StateOutput))
+                        {
+                            InitStateLogIfNeed();
+                            _stateLog.WriteLine($"    return to method guid: {{{MethodInfo.Guid}}}, delta: {CSharpFunctionDelta}");
+                        }
                     }
                 }
             }
@@ -2164,7 +2170,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            run_irqs();
             correct_function_position(retAddr);
         }
 
@@ -2179,7 +2184,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            run_irqs();
             correct_function_position(retAddr);
         }
 
@@ -2193,7 +2197,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            run_irqs();
             correct_function_position(ret_addr, saveJumpInfo: true);
         }
 
@@ -2207,7 +2210,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            run_irqs();
             correct_function_position(ret_addr, saveJumpInfo: true);
         }
 
@@ -2216,7 +2218,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, segment, address & 0xffff);
-            run_irqs();
             correct_function_position(ret_addr);
         }
 
@@ -2225,7 +2226,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
-            run_irqs();
             correct_function_position(ret_addr);
         }
 
@@ -2240,7 +2240,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
-            run_irqs();
             correct_function_position(ret_addr);
         }
 
@@ -3566,7 +3565,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             int_internal(number, true, true, false, 0);
-            run_irqs();
             correct_function_position(ret_addr);
         }
 

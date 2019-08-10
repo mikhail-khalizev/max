@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Max.Program;
@@ -41,9 +41,9 @@ namespace MikhailKhalizev.Max.Dos
             physMem[0xc8421] = 0x30;
         }
 
-        
+
         SortedDictionary<Address /* phys_addr */, int /* size */> maps = new SortedDictionary<Address, int>();
-        
+
         /** int 0x48
          * input:
          * bx - number of paragraphs
@@ -162,7 +162,7 @@ namespace MikhailKhalizev.Max.Dos
                 throw new Exception("std::bad_alloc()");
 
             eflags.cf = false;
-            ax = es; /* Необязятельно, но более реалистично. */
+            ax = es; /* Необязательно, но более реалистично. */
             maps[es.Descriptor.Base] = bx.UInt16 * 16;
         }
 
@@ -197,11 +197,12 @@ namespace MikhailKhalizev.Max.Dos
                     dx = 1; // handle
                     ax = 1; // success
 
-                    if (Memory.Length < handle_1_size + 0x130000)
+                    handle_iter = 0x13_0000;
+
+                    if (Memory.Length < handle_1_size + handle_iter)
                         throw new Exception("std::bad_alloc()");
 
-                    maps.Add(0x130000, handle_1_size);
-                    handle_iter = 0x130000;
+                    maps.Add(handle_iter, handle_1_size);
                 }
                     break;
 
@@ -222,7 +223,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0xc: // lock
                     ax = 1; // success
                     bx = 0; // addr
-                    dx = 0x13; // addr >> 16
+                    dx = handle_iter >> 16;
                     break;
 
                 case 0xd: // unlock

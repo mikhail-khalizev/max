@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86;
-using MikhailKhalizev.Processor.x86.BinToCSharp;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Utils;
-using Newtonsoft.Json;
-using SharpDisasm;
-using SharpDisasm.Udis86;
 using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
-using Instruction = SharpDisasm.Instruction;
 
 namespace MikhailKhalizev.Max
 {
@@ -56,10 +44,10 @@ namespace MikhailKhalizev.Max
 
             var serviceCollection = new ServiceCollection();
             Services = serviceCollection.BuildServiceProvider();
-            
+
 
             // Start.
-            
+
             using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
             {
                 var rp = new RawProgramMain(p, ConfigurationDto);

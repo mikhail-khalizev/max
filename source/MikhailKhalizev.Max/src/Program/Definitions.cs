@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
     public partial class Definitions : IDefinitionGroup
     {
         #region My
-        
+
         public static Address my_main { get; } = 0x1010883e;
         public static Address my_min { get; } = 0x10089784;
         public static Address my_fopen { get; } = 0x100ef41f;
@@ -247,9 +247,10 @@ namespace MikhailKhalizev.Max.Program
         #endregion
 
         #region Misc
-        
-        public static Address int_paging_fault { get; } = 0x13_94f6;
-        
+
+        public static Address max_int_21 { get; } = 0x14_f514;
+        public static Address max_int_paging_fault { get; } = 0x13_94f6;
+
         #endregion
     }
 }

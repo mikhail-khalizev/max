@@ -32,6 +32,19 @@ namespace MikhailKhalizev.Processor.x86.Utils
             return ((value >> bit) & 1) != 0;
         }
 
+        public static bool IsSet(uint value, int bit)
+        {
+            if (bit < 0)
+                return false;
+
+            return ((value >> bit) & 1) != 0;
+        }
+
+        public static bool IsSetByMask(uint value, uint mask)
+        {
+            return (value & mask) != 0;
+        }
+
         public static bool IsSet(ulong value, int bit)
         {
             if (bit < 0)
@@ -39,6 +52,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
             return ((value >> bit) & 1) != 0;
         }
+
 
         public static int GetInt(byte target, int bits = 8, int targetOffset = 0)
         {
@@ -56,6 +70,17 @@ namespace MikhailKhalizev.Processor.x86.Utils
         {
             var mask = Mask(1, targetOffset);
             target = (byte) ((target & ~mask) | (source ? mask : 0));
+        }
+
+        public static void Set(ref uint target, bool source, int targetOffset)
+        {
+            var mask = Mask(1, targetOffset);
+            target = (uint) ((target & ~mask) | (source ? mask : 0));
+        }
+
+        public static void SetByMask(ref uint target, bool source, uint mask)
+        {
+            target = (uint) ((target & ~mask) | (source ? mask : 0));
         }
 
         public static void Set(byte target, ref uint source, int sourceOffset = 0, int bits = 8, int targetOffset = 0)

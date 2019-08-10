@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
         }
 
-        private void EngineOnInstructionDecoded(object sender, Instruction cmd)
+        private void EngineOnInstructionDecoded(object sender, CSharpInstruction cmd)
         {
 #if false
     /* Pattern for: */
@@ -279,7 +279,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             }
         }
 
-        private void add_switch_at(Instruction cmd)
+        private void add_switch_at(CSharpInstruction cmd)
         {
             if (cmd.BrFar)
                 return;
@@ -331,7 +331,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             os.Append("}.");
 
-            Engine.DecodedCode.Insert(new Instruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
+            Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
 
             var copy_addr_area_begin = addr_area_begin;
             var copy_size_of_addr_area = size_of_addr_area;
