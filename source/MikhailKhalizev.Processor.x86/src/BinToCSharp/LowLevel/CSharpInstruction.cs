@@ -10,7 +10,7 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
-    public class Instruction
+    public class CSharpInstruction
     {
         public DefinitionCollection DefinitionCollection { get; } // TODO Remove?
         public Address Begin { get; set; }
@@ -55,13 +55,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public WriteCmdDelegate WriteCmd { get; set; }
 
-        public Instruction(Address address)
+        public CSharpInstruction(Address address)
         {
             Begin = address;
             End = address;
         }
 
-        public Instruction(Address begin, Address end, string comment = null)
+        public CSharpInstruction(Address begin, Address end, string comment = null)
         {
             Begin = begin;
             End = end;
@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 Comments = new List<string> { comment };
         }
 
-        public Instruction(DefinitionCollection definitionCollection, ud ud)
+        public CSharpInstruction(DefinitionCollection definitionCollection, ud ud)
         {
             if (ud == null)
                 throw new ArgumentNullException(nameof(ud));
@@ -759,13 +759,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         #endregion
 
-        public static IEqualityComparer<Instruction> BeginEqualityComparer =>
-            new CustomEqualityComparer<Instruction>(
+        public static IEqualityComparer<CSharpInstruction> BeginEqualityComparer =>
+            new CustomEqualityComparer<CSharpInstruction>(
                 (x, y) => x.Begin == y.Begin,
                 x => x.Begin.GetHashCode());
 
-        public static IComparer<Instruction> BeginComparer =>
-            new CustomComparer<Instruction>(
+        public static IComparer<CSharpInstruction> BeginComparer =>
+            new CustomComparer<CSharpInstruction>(
                 (x, y) => x.Begin.CompareTo(y.Begin));
     }
 }
