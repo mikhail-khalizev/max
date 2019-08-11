@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +25,9 @@ namespace MikhailKhalizev.Max
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
                 .AddJsonFile("appsettings.json", optional: true)
+                .AddJsonFile("appsettings.user.json", optional: true)
                 .AddJsonFile("settings/appsettings.json", optional: true)
-                .AddUserSecrets<StartUp>()
+                .AddJsonFile("settings/appsettings.user.json", optional: true)
                 .AddEnvironmentVariables()
                 .AddCommandLine(args)
                 .Build();

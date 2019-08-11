@@ -5,6 +5,7 @@
 
 # My
 *.diff
+*.user.json
 
 # User-specific files
 *.rsuser
