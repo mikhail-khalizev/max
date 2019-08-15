@@ -2668,40 +2668,53 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void div(Value value)
         {
-            if (value.Bits == 8)
+            if (value == 0)
+                throw new NotImplementedException(); // #DE
+
+            switch (value.Bits)
             {
-                if (value == 0)
-                    throw new NotImplementedException(); // #DE
+                case 8:
+                    {
+                        var w = ax.UInt16;
 
-                var w = ax.UInt16;
+                        var t = w / value.UInt16;
+                        if (0xff < t)
+                            throw new NotImplementedException(); // #DE
 
-                var t = w / value.UInt16;
-                if (0xff < t)
-                    throw new NotImplementedException(); // #DE
+                        al = t;
+                        ah = w % value.UInt16;
+                        break;
+                    }
 
-                al = t;
-                ah = w % value.UInt16;
-                return;
+                case 16:
+                    {
+                        var w = (dx.UInt16 << 16) + ax.UInt16;
+
+                        var t = w / value.UInt16;
+                        if (0xffff < t)
+                            throw new NotImplementedException(); // #DE
+
+                        ax = t;
+                        dx = w % value.UInt16;
+                        break;
+                    }
+
+                case 32:
+                    {
+                        var w = ((ulong)edx.UInt32 << 32) + eax.UInt32;
+
+                        var t = w / value.UInt32;
+                        if (0xffffffff < t)
+                            throw new NotImplementedException(); // #DE
+
+                        eax = t;
+                        edx = w % value.UInt32;
+                        break;
+                    }
+
+                default:
+                    throw new NotImplementedException();
             }
-
-            if (value.Bits == 16)
-            {
-                if (value == 0)
-                    throw new NotImplementedException(); // #DE
-
-                var w = (dx.UInt16 << 16) + ax.UInt16;
-
-                var t = w / value.UInt16;
-                if (0xffff < t)
-                    throw new NotImplementedException(); // #DE
-
-                ax = t;
-                dx = w % value.UInt16;
-
-                return;
-            }
-
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3670,7 +3683,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             run_irqs();
             return cs[eip] - CSharpFunctionDelta;
         }
-        
+
         /// <inheritdoc />
         public Address jmpd_abs_switch(Value address)
         {

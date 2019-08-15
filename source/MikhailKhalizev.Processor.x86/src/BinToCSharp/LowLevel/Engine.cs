@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
-        private readonly JmpCallLoopSimplePlugin _jmpCallLoopSimplePlugin; // addr_to_decode from any jmp.
+        private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
         private readonly SwitchPlugin _switchPlugin;
         private readonly ReadCStringPlugin _readCStringPlugin;
         private readonly CommentDummyInstructionsPlugin comment_idle; // comment dummy instruction
@@ -150,7 +150,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             _readCStringPlugin = new ReadCStringPlugin(this);
             comment_idle = new CommentDummyInstructionsPlugin(this);
-            _jmpCallLoopSimplePlugin = new JmpCallLoopSimplePlugin(this);
+            _simpleBranchPlugin = new SimpleBranchPlugin(this);
             _switchPlugin = new SwitchPlugin(this);
 
             _limitSize = Configuration.LimitDecodeSize;
@@ -509,10 +509,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        public void Save()
+        // return file pathes.
+        public List<string> Save()
         {
             var path = Configuration.CodeOutput;
-            Directory.CreateDirectory(path);
+            var directoryInfo = Directory.CreateDirectory(path);
             
             LayoutMethods(); // Может запускать декодирование новых частей кода.
 
@@ -549,6 +550,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var toConsole = new ConcurrentQueue<string>();
 
             var exList = new List<Exception>();
+            var fileConcurrentBag = new ConcurrentBag<string>();
 
             Parallel.ForEach(
                 uniqueDetectedMethodsByAddress,
@@ -611,6 +613,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
 
                             File.WriteAllText(filePath, output.ToString());
+                            fileConcurrentBag.Add(filePath);
                         }
                         catch (Exception ex)
                         {
@@ -626,6 +629,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (exList.Count != 0)
                 throw new AggregateException(exList);
+
+            return fileConcurrentBag.ToList();
         }
 
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)

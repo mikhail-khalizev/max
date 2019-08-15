@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Decoder;
 using MikhailKhalizev.Processor.x86.Utils;

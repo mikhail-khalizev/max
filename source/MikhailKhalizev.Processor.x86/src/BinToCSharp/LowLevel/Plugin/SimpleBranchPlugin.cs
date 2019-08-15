@@ -1,19 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 {
-    public class JmpCallLoopSimplePlugin : PluginBase
+    public class SimpleBranchPlugin : PluginBase
     {
         /// <inheritdoc />
-        public JmpCallLoopSimplePlugin(Engine engine)
+        public SimpleBranchPlugin(Engine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
@@ -45,7 +42,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 && op.@base == ud_type.UD_NONE
                 && op.index == ud_type.UD_NONE
                 && op.offset != 0
-                // Support only flat model (without segments) to increase accuracy.
+                // Support only 32bit+ flat model (without segments) to increase accuracy.
                 && Engine.Mode != ArchitectureMode.x86_16
                 && Engine.CsBase == 0
                 && Engine.DsBase == 0)
@@ -58,20 +55,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     case 32: where = op.lval.sdword; break;
                     default: throw new NotImplementedException();
                 }
-
-                //switch (cmd.GetEffectiveSegmentOfOperand(cmd.Operands[0]))
-                //{
-                //    case ud_type.UD_R_CS:
-                //        where += Engine.CsBase;
-                //        break;
-                //    case ud_type.UD_R_DS:
-                //        where += Engine.DsBase;
-                //        break;
-                //    case ud_type.UD_R_SS:
-                //        return;
-                //    default:
-                //        throw new NotImplementedException();
-                //}
 
                 switch (op.size)
                 {

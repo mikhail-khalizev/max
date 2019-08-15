@@ -1,8 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Kaitai;
+using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
+using Microsoft.CSharp;
 using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
@@ -68,7 +73,7 @@ namespace MikhailKhalizev.Max.Program
             DefinitionCollection.AddDefinitionsClass<StringDefinitions>();
             Implementation.MethodsInfo = MethodsInfo;
 
-            LoadDecodedMethods();
+            ConnectDecodedMethods(GetType().Assembly);
             DosInterrupt.Initialize();
             InitializeX86DosProgram();
             DosTimer.InitializeAndStart();
@@ -76,9 +81,9 @@ namespace MikhailKhalizev.Max.Program
             Implementation.CorrectMethodPosition(0);
         }
 
-        private void LoadDecodedMethods()
+        private void ConnectDecodedMethods(Assembly assembly)
         {
-            foreach (var bridgeProcessorType in GetType().Assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
+            foreach (var bridgeProcessorType in assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
             {
                 object instance = null;
 
@@ -236,33 +241,111 @@ namespace MikhailKhalizev.Max.Program
         /// <inheritdoc />
         public void GetMethod(out MethodInfoDto methodInfo, out Action method)
         {
-            var info = get_func(cs, eip);
-            methodInfo = info.MethodInfo;
-            method = info.Action;
+            while (true)
+            {
+                var fullAddress = cs[eip];
+                if (fullAddress == 0)
+                    throw new InvalidOperationException("Запрос метода по нулевому указателю.");
+
+                var info = find_func_exact(fullAddress);
+                if (info != null)
+                {
+                    methodInfo = info.MethodInfo;
+                    method = info.Action;
+                    return;
+                }
+
+                info = find_func_from_known_and_remember_it(fullAddress);
+                if (info != null)
+                {
+                    methodInfo = info.MethodInfo;
+                    method = info.Action;
+                    return;
+                }
+
+                // Всё-таки декодируем.
+                var files = DecodeNewMethod(cs, eip);
+
+                // Compile and load
+                try
+                {
+                    Console.WriteLine($"Компилирование новых методов.");
+                    var dllPath = Compile(files);
+
+                    Console.WriteLine($"Загрузка '{dllPath}'.");
+                    var assembly = Assembly.LoadFile(dllPath);
+                    ConnectDecodedMethods(assembly);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+
+                    (Implementation as IDisposable)?.Dispose();
+                    Environment.Exit(5);
+
+                    throw;
+                }
+            }
+
+            //throw new InvalidOperationException("Метод не найдена.");
         }
 
-        private MyMethodInfo get_func(SegmentRegister seg, Address address)
+        private int _compileNum;
+
+        private string Compile(IEnumerable<string> files)
         {
-            var fullAddress = seg[address];
-            if (fullAddress == 0)
-                throw new InvalidOperationException("Запрос метода по нулевому указателю.");
+            _compileNum++;
+            var assemblyName = $"{GetType().Assembly.GetName().Name}.RawProgram.{_compileNum}";
+            var assemblyDllPath = Path.Combine(Path.GetTempPath(), assemblyName + ".dll");
+            var assemblyPdbPath = Path.Combine(Path.GetTempPath(), assemblyName + ".pdb");
 
-            var ret = find_func_exact(fullAddress);
-            if (ret != null)
-                return ret;
+            var syntaxTrees = files.Append(@"src\Program\RawProgram.cs")
+                .Select(
+                    file =>
+                    {
+                        var source = File.ReadAllText(file);
+                        var stringText = SourceText.From(source, Encoding.UTF8);
+                        var parsedSyntaxTree = SyntaxFactory.ParseSyntaxTree(
+                            stringText,
+                            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Latest),
+                            file);
+                        return parsedSyntaxTree;
+                    })
+                .ToList();
 
-            ret = find_func_from_known_and_remember_it(fullAddress);
-            if (ret != null)
-                return ret;
+            var defaultReferences =
+                AppDomain.CurrentDomain.GetAssemblies()
+                    .Select(
+                        x =>
+                        {
+                            try
+                            {
+                                return MetadataReference.CreateFromFile(x.Location);
+                            }
+                            catch (NotSupportedException)
+                            {
+                                // In memory modules not supported Location.
+                                return null;
+                            }
+                        })
+                    .Where(x => x != null)
+                    .ToList();
 
-            // Всё-таки декодируем.
-            DecodeNewMethod(seg, address);
+            var defaultCompilationOptions =
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+                    //.WithOverflowChecks(true)
+                    .WithOptimizationLevel(OptimizationLevel.Release);
 
-            (Implementation as IDisposable)?.Dispose();
-            Environment.Exit(5);
+            var compilation = CSharpCompilation.Create(assemblyName, syntaxTrees, defaultReferences, defaultCompilationOptions);
 
-            // Просто так. На всякий случай.
-            throw new InvalidOperationException("Метод не найдена.");
+            var result = compilation.Emit(assemblyDllPath, assemblyPdbPath);
+            if (!result.Success)
+            {
+                var str = string.Join(Environment.NewLine, result.Diagnostics.Where(x => x.DefaultSeverity == DiagnosticSeverity.Error));
+                throw new InvalidOperationException(str);
+            }
+
+            return assemblyDllPath;
         }
 
         private MyMethodInfo find_func_exact(Address fullAddress)
@@ -319,7 +402,7 @@ namespace MikhailKhalizev.Max.Program
             return null;
         }
 
-        private void DecodeNewMethod(SegmentRegister seg, Address address)
+        private List<string> DecodeNewMethod(SegmentRegister seg, Address address)
         {
             //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
 
@@ -336,7 +419,7 @@ namespace MikhailKhalizev.Max.Program
 
             to_cxx.AddMethodInfoJumpsToDecode =
                 false; // Код активно загружается в процессе работы, поэтому преждевременное декодирование приводит к ошибкам.
-                // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
+                       // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
 
             if (seg.Descriptor.Base != 0)
                 to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
@@ -366,8 +449,8 @@ namespace MikhailKhalizev.Max.Program
 
 
             foreach (var pair in funcs_by_pc)
-            foreach (var info in pair.Value)
-                to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
+                foreach (var info in pair.Value)
+                    to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
             to_cxx.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
 
 #if true
@@ -409,7 +492,7 @@ namespace MikhailKhalizev.Max.Program
             Console.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
 
             to_cxx.DecodeMethod(fullAddress);
-            to_cxx.Save();
+            return to_cxx.Save();
         }
 
         private bool its_first = true;
@@ -434,7 +517,7 @@ namespace MikhailKhalizev.Max.Program
                     {
                         Guid = Guid.NewGuid(),
                         Address = address,
-                        Mode = (ArchitectureMode) mode,
+                        Mode = (ArchitectureMode)mode,
                         IgnoreSave = true
                     },
                 });

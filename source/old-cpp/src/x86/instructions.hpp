@@ -1561,6 +1561,7 @@ inline void div(uint_<16> s)
     dx = w % s;
 }
 
+// +
 inline void div(uint_<32> s)
 {
     if (s == 0)
