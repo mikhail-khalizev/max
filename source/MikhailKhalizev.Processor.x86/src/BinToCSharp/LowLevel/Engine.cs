@@ -509,7 +509,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        // return file pathes.
+        // return file paths.
         public List<string> Save()
         {
             var path = Configuration.CodeOutput;

@@ -468,7 +468,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             return (FPUTagWord >> (((get_top() + num) & 7) * 2)) & 3;
         }
 
-        private void set_tag(int num, int val)
+        internal void set_tag(int num, int val)
         {
             FPUTagWord = (FPUTagWord & (~(3 << (((get_top() + num) & 7) * 2)))) | ((val & 3) << (((get_top() + num) & 7) * 2));
         }
@@ -903,7 +903,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     no_mod_mask = 0xffff0000;
                     break;
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"operandSize: {operandSize}");
             }
 
 
@@ -2713,7 +2713,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     }
 
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"Bits: {value.Bits}");
             }
         }
 
@@ -2800,19 +2800,20 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fadd(Value value)
         {
-            throw new NotImplementedException();
+            ST(0).Double += value.Double;
         }
 
         /// <inheritdoc />
         public void fadd(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            a.Double += b.Double;
         }
 
         /// <inheritdoc />
         public void faddp(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            fadd(a, b);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -2917,7 +2918,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fcomp(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            fcom(a, b);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -3009,7 +3011,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fild(Value value)
         {
-            throw new NotImplementedException();
+            switch (value.Bits)
+            {
+                case 32:
+                    set_top(get_top() + 7); // TOP ← TOP − 1;
+                    ST(0).Double = value.Int32;
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Bits: {value.Bits}");
+            }
         }
 
         /// <inheritdoc />
@@ -3039,7 +3050,23 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fistp(Value value)
         {
-            throw new NotImplementedException();
+            switch (value.Bits)
+            {
+                case 32:
+                    if (get_tag(0) == 3)
+                        throw new NotImplementedException();
+
+                    value.Int64 = (long)ST(0).Double;
+
+                    if (value.Int64 != ST(0).Double)
+                        throw new NotImplementedException(); // #IA
+
+                    fpu_pop();
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Bits: {value.Bits}");
+            }
         }
 
         /// <inheritdoc />
@@ -3066,24 +3093,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             var save = value.Double;
 
             set_top(get_top() + 7); // TOP ← TOP − 1;
-
-            if (get_tag(0) != 3)
-                throw new NotImplementedException();
-
-            RawST(0) = save;
-            set_tag(0, 0);
+            ST(0).Double = save;
         }
 
         /// <inheritdoc />
         public void fld1()
         {
             set_top(get_top() + 7); // TOP ← TOP − 1;
-
-            if (get_tag(0) != 3)
-                throw new NotImplementedException();
-
-            RawST(0) = 1.0;
-            set_tag(0, 0);
+            ST(0).Double = 1.0;
         }
 
         /// <inheritdoc />
@@ -3132,18 +3149,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         public void fldz()
         {
             set_top(get_top() + 7); // TOP ← TOP − 1;
-
-            if (get_tag(0) != 3)
-                throw new NotImplementedException();
-
-            RawST(0) = 0;
-            set_tag(0, 1);
+            ST(0).Double = 0;
         }
 
         /// <inheritdoc />
         public void fmul(Value value)
         {
-            throw new NotImplementedException();
+            ST(0).Double *= value.Double;
         }
 
         /// <inheritdoc />
@@ -3241,7 +3253,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void frndint()
         {
-            throw new NotImplementedException();
+            ST(0).Double = Math.Round(ST(0).Double);
         }
 
         /// <inheritdoc />
@@ -3283,7 +3295,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fst(Value value)
         {
-            throw new NotImplementedException();
+            value.Double = ST(0).Double;
         }
 
         /// <inheritdoc />
@@ -3301,7 +3313,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fstp(Value value)
         {
-            throw new NotImplementedException();
+            fst(value);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -3344,7 +3357,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void ftst()
         {
-            throw new NotImplementedException();
+            fcom(0.0);
         }
 
         /// <inheritdoc />
@@ -3480,8 +3493,9 @@ namespace MikhailKhalizev.Processor.x86.Core
                     ax = t;
                     dx = w % value.Int16;
                     break;
+
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"Bits: {value.Bits}");
             }
         }
 
@@ -6250,7 +6264,8 @@ namespace MikhailKhalizev.Processor.x86.Core
                 case 64:
                     tempCount = count & 0x3f;
                     break;
-                default: throw new NotImplementedException();
+                default:
+                    throw new NotImplementedException($"Bits: {dst.Bits}");
             }
 
             var d = dst.UInt64;
@@ -6305,7 +6320,8 @@ namespace MikhailKhalizev.Processor.x86.Core
                 case 64:
                     tempCount = count & 0x3F;
                     break;
-                default: throw new NotImplementedException();
+                default:
+                    throw new NotImplementedException($"Bits: {dst.Bits}");
             }
 
             var d = dst.UInt64;

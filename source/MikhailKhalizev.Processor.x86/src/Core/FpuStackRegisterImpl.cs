@@ -28,11 +28,10 @@ namespace MikhailKhalizev.Processor.x86.Core
             }
             set
             {
-                if (Processor.get_tag(Number) == 3)
-                    throw new NotImplementedException();
-                Processor.RawST(Number) = BitConverter.Int64BitsToDouble((long) value);
+                var d = BitConverter.Int64BitsToDouble((long) value);
+                Processor.RawST(Number) = d;
+                Processor.set_tag(0, d == 0 ? 1 : 0);
             }
         }
     }
 }
-    

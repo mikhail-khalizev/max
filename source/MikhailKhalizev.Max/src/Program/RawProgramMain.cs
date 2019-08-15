@@ -266,7 +266,7 @@ namespace MikhailKhalizev.Max.Program
                 // Всё-таки декодируем.
                 var files = DecodeNewMethod(cs, eip);
 
-                // Compile and load
+                // Compile and load.
                 try
                 {
                     Console.WriteLine($"Компилирование новых методов.");
@@ -279,10 +279,6 @@ namespace MikhailKhalizev.Max.Program
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-
-                    (Implementation as IDisposable)?.Dispose();
-                    Environment.Exit(5);
-
                     throw;
                 }
             }

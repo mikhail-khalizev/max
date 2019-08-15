@@ -139,8 +139,8 @@ namespace MikhailKhalizev.Max.Dos
                             //expressActiveIrq = true;
                         }
 
-                        if (wait < TimeSpan.FromSeconds(1))
-                            wait = TimeSpan.FromSeconds(1);
+                        if (wait < TimeSpan.FromSeconds(0.2))
+                            wait = TimeSpan.FromSeconds(0.2);
                         
                         Monitor.Exit(pit_0_mutex);
                         locked = false;

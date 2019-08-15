@@ -276,7 +276,7 @@ namespace MikhailKhalizev.Max.Dos
         }
 
 
-        pal_struct[] pal = new pal_struct[256];
+        public pal_struct[] pal = new pal_struct[256];
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
         public unsafe struct pal_struct
@@ -370,7 +370,29 @@ namespace MikhailKhalizev.Max.Dos
             syscall_iretww();
         }
 
-        public void int_16() { throw new NotImplementedException(); }
+        public void int_16()
+        {
+            switch (ah.UInt32)
+            {
+                case 0x2: // Get shift flags
+                    /* 0x01 - right shift
+                     * 0x02 - left shift
+                     * 0x04 - ctrl
+                     * 0x08 - alt
+                     * 0x10 - scroll lock
+                     * 0x20 - num lock
+                     * 0x40 - caps lock
+                     * 0x80 - insert */
+                    al = 0;
+                    // al = mem_pg_raw(0x417, 1).get<uint_<8>>();
+                    break;
+
+                default:
+                    throw new NotImplementedException();
+            }
+
+            syscall_iretww();
+        }
 
         public void int_1c()
         {

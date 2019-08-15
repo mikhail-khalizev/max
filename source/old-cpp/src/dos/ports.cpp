@@ -26,15 +26,13 @@ static uint_<8> p60;
 static bool p60_change;
 */
 
-static uint_<8> cmos_reg;
-static bool cmos_nmi;
+static uint_<8> cmos_reg; // +
+static bool cmos_nmi; // +
 
+pal_struct pal[256]; // +
 
-
-pal_struct pal[256];
-
-static uint_<8> pal_index = 0;
-static uint_<8> pal_rgb = 0;
+static uint_<8> pal_index = 0; // +
+static uint_<8> pal_rgb = 0; // +
 
 static uint_<16> vga_seq_index = 0;
 static uint_<16> vga_crtc_index = 0;

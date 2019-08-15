@@ -1167,7 +1167,7 @@ void fchs()
     ST(0) = -ST(0);
 }
 
-
+// +
 void fadd(uint_<64> & x)
 {
     if (get_tag(0) == 3)
@@ -1178,6 +1178,7 @@ void fadd(uint_<64> & x)
     ST(0) += val;
 }
 
+// +
 void fadd(int a, int b)
 {
     if (get_tag(a) == 3)
@@ -1189,6 +1190,7 @@ void fadd(int a, int b)
     ST(a) += ST(b);
 }
 
+// +
 void faddp(int a, int b)
 {
     fadd(a, b);
@@ -1395,6 +1397,7 @@ void fcomp(uint_<64> & val)
     fpu_pop();
 }
 
+// +
 void fcomp(int a, int b)
 {
     fcom(a, b);
@@ -1439,6 +1442,7 @@ void fild(uint_<16> & x)
     set_tag(0, 0);
 }
 
+// +
 /**
  * @brief Load Integer.
  * Push <...> onto the FPU register stack.
@@ -1469,6 +1473,7 @@ void fild(uint_<64> & x)
     set_tag(0, 0);
 }
 
+//+
 /**
  * @brief Store Integer.
  * Store ST(0) in <...> and pop register stack.
@@ -1505,6 +1510,7 @@ void fistp(uint_<64> & x_)
     fpu_pop();
 }
 
+//+
 /**
  * @brief Store Real.
  * Copy ST(0) to <...>.
@@ -1517,6 +1523,7 @@ void fst(uint_<32> & x)
     reinterpret_cast<float&>(x) = ST(0);
 }
 
+//+
 /**
  * @brief Store Real.
  * Copy ST(0) to <...>.
@@ -1529,6 +1536,7 @@ void fst(uint_<64> & x)
     reinterpret_cast<double&>(x) = ST(0);
 }
 
+//+
 /**
  * @brief Store Real.
  * Copy ST(0) to <...> and pop register stack.
@@ -1539,6 +1547,7 @@ void fstp(uint_<32> & x)
     fpu_pop();
 }
 
+//+
 /**
  * @brief Store Real.
  * Copy ST(0) to <...> and pop register stack.
@@ -1608,6 +1617,7 @@ void fprem()
     ST(0) = result;
 }
 
+// +
 /**
  * @brief Round to Integer.
  * Round ST(0) to an integer.

@@ -10,5 +10,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public static implicit operator Value(uint value) => new NumericValue(value);
         public static implicit operator Value(long value) => new NumericValue(value);
         public static implicit operator Value(ulong value) => new NumericValue(value);
+
+        public static implicit operator Value(double value) => new NumericValue(BitConverter.DoubleToInt64Bits(value));
     }
 }
