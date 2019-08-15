@@ -19,6 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4724, 2); mov(ebx, eax);                          /* mov ebx, eax */
 
             Console.WriteLine("Wait 1 sec.");
+
         l_0x1019_4726:
             ii(0x1019_4726, 2); mov(ah, 0x2c);                          /* mov ah, 0x2c */
             ii(0x1019_4728, 2); @int(0x21);                             /* int 0x21 */
@@ -26,6 +27,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_472c, 2); mov(al, dh);                            /* mov al, dh */
             ii(0x1019_472e, 2); cmp(ebx, eax);                          /* cmp ebx, eax */
             ii(0x1019_4730, 2); if(jzd(0x1019_4726, -0xc)) goto l_0x1019_4726; /* jz 0x10194726 */
+
+            Console.WriteLine("Continue.");
 
             ii(0x1019_4732, 2); xor(esi, esi);                          /* xor esi, esi */
             ii(0x1019_4734, 2); mov(bl, al);                            /* mov bl, al */

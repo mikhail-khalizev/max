@@ -1432,7 +1432,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Reverse Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSUBR:FSUBRP:FISUBR.html</remarks>
-        void fsubr();
+        void fsubr(Value value);
 
         /// <summary>
         /// Reverse Subtract.

@@ -202,7 +202,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 else if (effOprSize == 32)
                     sb.Append('d');
                 else if (effOprSize != 0)
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException($"effOprSize: {effOprSize}");
             }
 
             if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
@@ -303,7 +303,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             else if (oprSize == 80)
                                 sb.Append("memt");
                             else
-                                throw new NotImplementedException();
+                                throw new NotImplementedException($"oprSize: {oprSize}");
                             sb.Append($"{adrModeStr}[");
                         }
 
@@ -352,7 +352,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 case 32:
                                     val = op.lval.sdword;
                                     break;
-                                default: throw new NotImplementedException();
+                                default: throw new NotImplementedException($"op.offset: {op.offset}");
                             }
 
                             if (val < 0)
@@ -414,7 +414,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
                                 break;
                             default:
-                                throw new NotImplementedException();
+                                throw new NotImplementedException($"oprSize: {oprSize}");
                         }
 
                         break;
@@ -431,7 +431,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             case 32:
                                 val = op.lval.sdword;
                                 break;
-                            default: throw new NotImplementedException();
+                            default: throw new NotImplementedException($"oprSize: {oprSize}");
                         }
 
                         sb.Append(DefinitionCollection.GetAddressFullName(End + val + offset, options));
@@ -452,7 +452,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         break;
 
                     default:
-                        throw new NotImplementedException();
+                        throw new NotImplementedException($"op.type: {op.type}");
                 }
             }
 
@@ -506,7 +506,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     case 32:
                         val = op.lval.sdword;
                         break;
-                    default: throw new NotImplementedException();
+                    default: throw new NotImplementedException($"oprSize: {oprSize}");
                 }
 
                 sb.Append($" goto l_{(Address)(End + val + offset)};");

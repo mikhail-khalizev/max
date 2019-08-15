@@ -3317,7 +3317,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fsubr()
+        public void fsubr(Value value)
         {
             throw new NotImplementedException();
         }

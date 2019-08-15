@@ -370,46 +370,49 @@ namespace MikhailKhalizev.Max.Program
                 to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
             to_cxx.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
 
-#if false
-    // Замечено, что многие функции начинаются со следующих двух команд.
+#if true
+            // Замечено, что многие функции начинаются со следующих двух команд.
 
-    // {0x68, 0x28, 0, 0, 0,  0xe8, 0x90, 0xa1, 0xb, 0}
-    // II(0x100abbb8, 0x5)   pushd(0x28);                          /* push dword 0x28 */
-    // II(0x100abbbd, 0x5)   calld(sys_check_available_stack_size, 0xb_a190); /* call 0x10165d52 */
+            // {0x68, 0x28, 0, 0, 0,  0xe8, 0x90, 0xa1, 0xb, 0}
+            // II(0x100abbb8, 0x5)   pushd(0x28);                          /* push dword 0x28 */
+            // II(0x100abbbd, 0x5)   calld(sys_check_available_stack_size, 0xb_a190); /* call 0x10165d52 */
 
-    // Весь код MAXRUN.EXE
-    const Address code_start = 0x1007_0000;
-    const Address code_end = 0x1016_5d52;
+            // Весь код MAXRUN.EXE
+            Address code_start = 0x1007_0000;
+            Address code_end = 0x1016_5d52;
 
-    static bool its_first = true;
-    if (cs.Descriptor.Base == 0 && cs.db && its_first)
-    {
-        its_first = false;
-
-        memory_space_const code;
-        for (addr_type i = code_start; i < code_end; i++)
-        {
-            if (code.is_empty())
-                code = mem_seg_pg_raw(seg, i, 1);
-
-            if (code.get<uint_<8>>() == 0x68)
+            if (cs.Descriptor.Base == 0 && cs.db && its_first && !funcs_by_pc.ContainsKey(0x1007_0010) && !funcs_by_pc.ContainsKey(0x1016_4ad4))
             {
-                code = mem_seg_pg_raw(seg, i, 10);
-                if (code.get<uint_<8>>(0, 5) == 0xe8 && (code.get<uint_<32>>(0, 6) + i + 10 == 0x1016_5d52)
-                        && funcs_by_pc.find(i) == funcs_by_pc.end())
-                    to_cxx.decode_func(i);
-            }
+                its_first = false;
+                Console.WriteLine("Декодирования всего пользовательского кода MAX.");
 
-            code = code.remove_prefix(1);
-        }
-    }
+                var code = ArraySegment<byte>.Empty;
+                for (var i = code_start; i < code_end; i++)
+                {
+                    if (code.Count == 0)
+                        code = Memory.GetMinSize(i, 1);
+
+                    if (code[0] == 0x68)
+                    {
+                        if (code.Count < 10)
+                            code = Memory.GetMinSize(i, 10);
+
+                        if (code[5] == 0xe8 && code.GetUInt32(6) + i + 10 == 0x1016_5d52 && !funcs_by_pc.ContainsKey(i))
+                            to_cxx.DecodeMethod(i);
+                    }
+
+                    code = code.Slice(1);
+                }
+            }
 #endif
-            
+
             Console.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
 
             to_cxx.DecodeMethod(fullAddress);
             to_cxx.Save();
         }
+
+        private bool its_first = true;
 
         public void add_internal_dyn_func(Action func, int mode, Address address)
         {

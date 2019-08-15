@@ -496,8 +496,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var path = get_path();
 
-                        // @todo
-                        Console.Error.WriteLine("\tCreate: " + path);
+                        Console.Error.WriteLine("    Create: " + path);
 
                         var file = File.Open(path, FileMode.OpenOrCreate);
                         file.SetLength(0);
@@ -521,7 +520,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var path = get_path();
 
-                        Console.Error.WriteLine("\tOpen: " + path);
+                        Console.Error.WriteLine("    Open: " + path);
 
                         var fileMode = FileMode.Open;
                         FileAccess fileAccess;
@@ -638,7 +637,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x41: // delete
                     {
                         var path = get_path();
-                        Console.Error.WriteLine("\tDelete: " + path);
+                        Console.Error.WriteLine("    Delete: " + path);
 
                         try
                         {
@@ -770,7 +769,7 @@ namespace MikhailKhalizev.Max.Dos
 
                         var tempFileName = Path.Combine(Path.GetTempPath(), $"max-{tmpNum++}.tmp");
 
-                        Console.Error.WriteLine("\tCreate temp: " + tempFileName);
+                        Console.Error.WriteLine("    Create temp: " + tempFileName);
 
                         var file = File.Open(tempFileName, FileMode.OpenOrCreate);
                         file.SetLength(0);

@@ -1561,9 +1561,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fsubr()
+        public void fsubr(Value value)
         {
-            Implementation.fsubr();
+            Implementation.fsubr(value);
         }
 
         /// <inheritdoc />
