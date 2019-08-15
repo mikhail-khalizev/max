@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_8f6c, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1008_8f6e, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1008_8f71, 3); add(eax, 0x19);                         /* add eax, 0x19 */
-            ii(0x1008_8f74, 5); calld(Definitions.my_dtor_0x101b56fc, -0x33d); /* call 0x10088c3c */
+            ii(0x1008_8f74, 5); calld(Definitions.my_dtor_0x101b_56fc, -0x33d); /* call 0x10088c3c */
             ii(0x1008_8f79, 3); sub(eax, 0x19);                         /* sub eax, 0x19 */
             ii(0x1008_8f7c, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1008_8f7f, 2); xor(edx, edx);                          /* xor edx, edx */

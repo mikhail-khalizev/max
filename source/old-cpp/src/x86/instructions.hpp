@@ -1472,7 +1472,7 @@ inline void imul(uint_<16> s)
 void imul(uint_<32> s);
 void imul(uint_<64> s);
 
-
+// +
 template<exo::abstract_int L>
 void imul(uint_<L> & d, uint_<L> s)
 {

@@ -585,17 +585,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     .SetGroupSeparator("-"));
 
                             var ns = AddressNameConverter.GetNamespace(methodBegin);
-                            if (ns != null)
-                                baseFileName += $"-{ns}";
-
+                            
                             var kd = DefinitionCollection.GetAddressFullName(
                                 methodBegin,
                                 new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
+
+                            if (ns != null && (kd == null || !kd.StartsWith(ns)))
+                                baseFileName += $"-{ns}";
+
                             if (kd != null)
                                 baseFileName += $"-{kd}";
 
-                            var filePath = "";
 
+                            var filePath = "";
                             var num = 1;
                             while (true)
                             {

@@ -187,7 +187,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_55f4, 3); mov(memb_a32[ds, eax], 0);              /* mov byte [eax], 0x0 */
         l_0x1008_55f7:
             ii(0x1008_55f7, 3); lea(eax, ebp - 0x48);                   /* lea eax, [ebp-0x48] */
-            ii(0x1008_55fa, 5); calld(Definitions.my_ctor_0x101b4184, -0xeb0f); /* call 0x10076af0 */
+            ii(0x1008_55fa, 5); calld(Definitions.my_ctor_0x101b_4184, -0xeb0f); /* call 0x10076af0 */
             ii(0x1008_55ff, 3); lea(edx, ebp - 0x44);                   /* lea edx, [ebp-0x44] */
             ii(0x1008_5602, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1008_5605, 5); calld(0x1008_527a, -0x390);             /* call 0x1008527a */

@@ -37,9 +37,9 @@ namespace MikhailKhalizev.Max.Program
         l_0x1009_e538:
             ii(0x1009_e538, 4); mov(memb_a32[ss, ebp - 0xc], 0);        /* mov byte [ebp-0xc], 0x0 */
             ii(0x1009_e53c, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x1009_e53f, 5); calld(Definitions.my_ctor_0x101b4184, -0x2_7a54); /* call 0x10076af0 */
+            ii(0x1009_e53f, 5); calld(Definitions.my_ctor_0x101b_4184, -0x2_7a54); /* call 0x10076af0 */
             ii(0x1009_e544, 3); lea(eax, ebp - 0x30);                   /* lea eax, [ebp-0x30] */
-            ii(0x1009_e547, 5); calld(Definitions.my_ctor_0x101b4184, -0x2_7a5c); /* call 0x10076af0 */
+            ii(0x1009_e547, 5); calld(Definitions.my_ctor_0x101b_4184, -0x2_7a5c); /* call 0x10076af0 */
             ii(0x1009_e54c, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1009_e54f, 3); mov(eax, memd_a32[ds, eax + 0x7]);      /* mov eax, [eax+0x7] */
             ii(0x1009_e552, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */

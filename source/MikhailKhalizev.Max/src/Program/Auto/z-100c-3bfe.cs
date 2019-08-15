@@ -78,9 +78,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_3cd2, 5); calld(0x100c_b198, 0x74c1);             /* call 0x100cb198 */
             ii(0x100c_3cd7, 7); mov(memd_a32[ss, ebp - 0x34], 0);       /* mov dword [ebp-0x34], 0x0 */
             ii(0x100c_3cde, 3); lea(eax, ebp - 0x30);                   /* lea eax, [ebp-0x30] */
-            ii(0x100c_3ce1, 5); calld(Definitions.my_ctor_0x101b4184, -0x4_d1f6); /* call 0x10076af0 */
+            ii(0x100c_3ce1, 5); calld(Definitions.my_ctor_0x101b_4184, -0x4_d1f6); /* call 0x10076af0 */
             ii(0x100c_3ce6, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x100c_3ce9, 5); calld(Definitions.my_ctor_0x101b4184, -0x4_d1fe); /* call 0x10076af0 */
+            ii(0x100c_3ce9, 5); calld(Definitions.my_ctor_0x101b_4184, -0x4_d1fe); /* call 0x10076af0 */
             ii(0x100c_3cee, 2); jmpd(0x100c_3cf8, 0x8); goto l_0x100c_3cf8; /* jmp 0x100c3cf8 */
         l_0x100c_3cf0:
             ii(0x100c_3cf0, 3); lea(eax, ebp - 0x38);                   /* lea eax, [ebp-0x38] */

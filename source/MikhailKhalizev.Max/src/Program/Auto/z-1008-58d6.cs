@@ -64,7 +64,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_596a, 5); jmpd(0x1008_5cd1, 0x362); goto l_0x1008_5cd1; /* jmp 0x10085cd1 */
         l_0x1008_596f:
             ii(0x1008_596f, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x1008_5972, 5); calld(Definitions.my_ctor_0x101b4184, -0xee87); /* call 0x10076af0 */
+            ii(0x1008_5972, 5); calld(Definitions.my_ctor_0x101b_4184, -0xee87); /* call 0x10076af0 */
             ii(0x1008_5977, 3); lea(edx, ebp - 0x1c);                   /* lea edx, [ebp-0x1c] */
             ii(0x1008_597a, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */
             ii(0x1008_597d, 3); add(eax, 0x2a);                         /* add eax, 0x2a */

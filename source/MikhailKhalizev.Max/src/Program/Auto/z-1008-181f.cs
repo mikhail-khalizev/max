@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_19b8, 3); lea(eax, ebp - 0x5c);                   /* lea eax, [ebp-0x5c] */
             ii(0x1008_19bb, 5); calld(0x1008_9be4, 0x8224);             /* call 0x10089be4 */
             ii(0x1008_19c0, 3); lea(eax, ebp - 0x4c);                   /* lea eax, [ebp-0x4c] */
-            ii(0x1008_19c3, 5); calld(Definitions.my_ctor_0x101b4184, -0xaed8); /* call 0x10076af0 */
+            ii(0x1008_19c3, 5); calld(Definitions.my_ctor_0x101b_4184, -0xaed8); /* call 0x10076af0 */
             ii(0x1008_19c8, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1008_19ca, 1); pushd(eax);                             /* push eax */
             ii(0x1008_19cb, 2); xor(ecx, ecx);                          /* xor ecx, ecx */

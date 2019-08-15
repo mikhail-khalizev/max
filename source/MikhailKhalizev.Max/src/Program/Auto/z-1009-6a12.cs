@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_6a6b, 5); jmpd(0x1009_6b80, 0x110); goto l_0x1009_6b80; /* jmp 0x10096b80 */
         l_0x1009_6a70:
             ii(0x1009_6a70, 3); lea(eax, ebp - 0x24);                   /* lea eax, [ebp-0x24] */
-            ii(0x1009_6a73, 5); calld(Definitions.my_ctor_0x101b4184, -0x1_ff88); /* call 0x10076af0 */
+            ii(0x1009_6a73, 5); calld(Definitions.my_ctor_0x101b_4184, -0x1_ff88); /* call 0x10076af0 */
             ii(0x1009_6a78, 5); calld(0x100e_a7e7, 0x5_3d6a);           /* call 0x100ea7e7 */
             ii(0x1009_6a7d, 4); mov(memb_a32[ss, ebp - 0x10], 0);       /* mov byte [ebp-0x10], 0x0 */
             ii(0x1009_6a81, 6); mov(memw_a32[ss, ebp - 0x24], 0x1);     /* mov word [ebp-0x24], 0x1 */

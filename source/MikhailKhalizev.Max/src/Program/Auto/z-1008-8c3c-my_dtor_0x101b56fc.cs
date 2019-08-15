@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
     public partial class RawProgram
     {
         [MethodInfo("1272bae9-2187-472f-91db-3aaa22d0f983")]
-        public void my_dtor_0x101b56fc()
+        public void my_dtor_0x101b_56fc()
         {
             ii(0x1008_8c3c, 5); pushd(0x24);                            /* push 0x24 */
             ii(0x1008_8c41, 5); calld(Definitions.sys_check_available_stack_size, 0xd_d10c); /* call 0x10165d52 */

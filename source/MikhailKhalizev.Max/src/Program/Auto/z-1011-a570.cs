@@ -174,7 +174,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_a777, 6); if(jnzd(0x1011_a8a0, 0x123)) goto l_0x1011_a8a0; /* jnz 0x1011a8a0 */
             ii(0x1011_a77d, 4); or(memb_a32[ss, ebp - 0x10], 0x1);      /* or byte [ebp-0x10], 0x1 */
             ii(0x1011_a781, 3); lea(eax, ebp - 0x44);                   /* lea eax, [ebp-0x44] */
-            ii(0x1011_a784, 5); calld(Definitions.my_ctor_0x101b38f8, -0xa_4099); /* call 0x100766f0 */
+            ii(0x1011_a784, 5); calld(Definitions.my_ctor_0x101b_38f8, -0xa_4099); /* call 0x100766f0 */
             ii(0x1011_a789, 3); mov(memd_a32[ss, ebp - 0x48], eax);     /* mov [ebp-0x48], eax */
             ii(0x1011_a78c, 4); and(memb_a32[ss, ebp - 0x10], -0x2 /* 0xfe */); /* and byte [ebp-0x10], 0xfe */
             ii(0x1011_a790, 4); movsx(ebx, memw_a32[ss, ebp - 0x34]);   /* movsx ebx, word [ebp-0x34] */

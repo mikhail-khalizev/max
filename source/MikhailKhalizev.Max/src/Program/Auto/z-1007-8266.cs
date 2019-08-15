@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_8302, 6); mov(al, memb_a32[ds, edx + 0x101c_81d4]); /* mov al, [edx+0x101c81d4] */
             ii(0x1007_8308, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */
             ii(0x1007_830b, 3); lea(eax, ebp - 0x3c);                   /* lea eax, [ebp-0x3c] */
-            ii(0x1007_830e, 5); calld(Definitions.my_ctor_0x101b4184, -0x1823); /* call 0x10076af0 */
+            ii(0x1007_830e, 5); calld(Definitions.my_ctor_0x101b_4184, -0x1823); /* call 0x10076af0 */
             ii(0x1007_8313, 3); lea(edx, ebp - 0x44);                   /* lea edx, [ebp-0x44] */
             ii(0x1007_8316, 4); movsx(eax, memw_a32[ss, ebp - 0x24]);   /* movsx eax, word [ebp-0x24] */
             ii(0x1007_831a, 5); calld(0x1007_8137, -0x1e8);             /* call 0x10078137 */

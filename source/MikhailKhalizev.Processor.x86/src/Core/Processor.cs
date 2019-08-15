@@ -3491,7 +3491,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void imul(Value dst, Value src)
         {
-            throw new NotImplementedException();
+            var r = dst.Int64 * src.Int64;
+            dst.Int64 = r;
+            eflags.cf = eflags.of = (r != dst.Int64);
         }
 
         /// <inheritdoc />
@@ -3668,6 +3670,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             run_irqs();
             return cs[eip] - CSharpFunctionDelta;
         }
+        
+        /// <inheritdoc />
+        public Address jmpd_abs_switch(Value address)
+        {
+            eip = address;
+            run_irqs();
+            return cs[eip] - CSharpFunctionDelta;
+        }
 
         /// <inheritdoc />
         public bool jmpw_far_abs(int segment, Address address)
@@ -3685,12 +3695,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         public bool jmpd_abs(Value address)
         {
             return jmpd_func_internal(address, saveJumpInfo: true);
-        }
-
-        /// <inheritdoc />
-        public Address jmpd_abs_switch(Value address)
-        {
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -3840,7 +3844,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jecxzd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(ecx == 0, address, offset);
         }
 
         /// <inheritdoc />
@@ -3864,7 +3868,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jgd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -3888,7 +3892,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jged(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -3918,7 +3922,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jled(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4023,6 +4027,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
+
         /// <inheritdoc />
         public bool jnzw(Address address, int offset)
         {
@@ -4044,8 +4049,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jnzd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(!eflags.zf, address, offset);
         }
+
 
         /// <inheritdoc />
         public bool jow(Address address, int offset)
@@ -6614,7 +6620,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void scasb_a32()
         {
-            throw new NotImplementedException();
+            cmp(al, memb_a32[es, edi]);
+            edi += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />

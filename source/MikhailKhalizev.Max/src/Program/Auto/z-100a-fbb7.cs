@@ -106,7 +106,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_fcce, 3); lea(eax, ebp - 0x20);                   /* lea eax, [ebp-0x20] */
             ii(0x100a_fcd1, 5); calld(0x1007_6aac, -0x3_922a);          /* call 0x10076aac */
             ii(0x100a_fcd6, 3); lea(eax, ebp - 0x24);                   /* lea eax, [ebp-0x24] */
-            ii(0x100a_fcd9, 5); calld(Definitions.my_ctor_0x101b4184, -0x3_91ee); /* call 0x10076af0 */
+            ii(0x100a_fcd9, 5); calld(Definitions.my_ctor_0x101b_4184, -0x3_91ee); /* call 0x10076af0 */
             ii(0x100a_fcde, 7); mov(memd_a32[ss, ebp - 0x28], 0);       /* mov dword [ebp-0x28], 0x0 */
             ii(0x100a_fce5, 3); lea(edx, ebp - 0x2c);                   /* lea edx, [ebp-0x2c] */
             ii(0x100a_fce8, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */

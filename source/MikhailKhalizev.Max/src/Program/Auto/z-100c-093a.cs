@@ -20,9 +20,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_0955, 3); mov(memd_a32[ss, ebp - 0x4], ebx);      /* mov [ebp-0x4], ebx */
             ii(0x100c_0958, 3); mov(memd_a32[ss, ebp - 0x8], ecx);      /* mov [ebp-0x8], ecx */
             ii(0x100c_095b, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
-            ii(0x100c_095e, 5); calld(Definitions.my_ctor_0x101b4184, -0x4_9e73); /* call 0x10076af0 */
+            ii(0x100c_095e, 5); calld(Definitions.my_ctor_0x101b_4184, -0x4_9e73); /* call 0x10076af0 */
             ii(0x100c_0963, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x100c_0966, 5); calld(Definitions.my_ctor_0x101b4184, -0x4_9e7b); /* call 0x10076af0 */
+            ii(0x100c_0966, 5); calld(Definitions.my_ctor_0x101b_4184, -0x4_9e7b); /* call 0x10076af0 */
             ii(0x100c_096b, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x100c_096e, 4); imul(eax, memd_a32[ss, ebp - 0x4]);     /* imul eax, [ebp-0x4] */
             ii(0x100c_0972, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */

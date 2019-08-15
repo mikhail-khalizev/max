@@ -502,7 +502,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_5aad, 5); calld(0x1008_ae70, -0x1_ac42);          /* call 0x1008ae70 */
             ii(0x100a_5ab2, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */
             ii(0x100a_5ab6, 6); lea(eax, ebp - 0x1a0);                  /* lea eax, [ebp-0x1a0] */
-            ii(0x100a_5abc, 5); calld(Definitions.my_ctor_0x101b3b58, -0x1_aa1d); /* call 0x1008b0a4 */
+            ii(0x100a_5abc, 5); calld(Definitions.my_ctor_0x101b_3b58, -0x1_aa1d); /* call 0x1008b0a4 */
             ii(0x100a_5ac1, 6); mov(memd_a32[ss, ebp - 0x1a4], eax);    /* mov [ebp-0x1a4], eax */
             ii(0x100a_5ac7, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x100a_5acb, 2); jmpd(0x100a_5ad8, 0xb); goto l_0x100a_5ad8; /* jmp 0x100a5ad8 */

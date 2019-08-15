@@ -93,12 +93,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_bdef, 6); if(jzd(0x1007_c151, 0x35c)) goto l_0x1007_c151; /* jz 0x1007c151 */
             ii(0x1007_bdf5, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */
             ii(0x1007_bdf9, 3); lea(eax, ebp - 0x40);                   /* lea eax, [ebp-0x40] */
-            ii(0x1007_bdfc, 5); calld(Definitions.my_ctor_0x101b38f8, -0x5711); /* call 0x100766f0 */
+            ii(0x1007_bdfc, 5); calld(Definitions.my_ctor_0x101b_38f8, -0x5711); /* call 0x100766f0 */
             ii(0x1007_be01, 3); mov(memd_a32[ss, ebp - 0x44], eax);     /* mov [ebp-0x44], eax */
             ii(0x1007_be04, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x1007_be08, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */
             ii(0x1007_be0c, 3); lea(eax, ebp - 0x48);                   /* lea eax, [ebp-0x48] */
-            ii(0x1007_be0f, 5); calld(Definitions.my_ctor_0x101b38f8, -0x5724); /* call 0x100766f0 */
+            ii(0x1007_be0f, 5); calld(Definitions.my_ctor_0x101b_38f8, -0x5724); /* call 0x100766f0 */
             ii(0x1007_be14, 3); mov(memd_a32[ss, ebp - 0x4c], eax);     /* mov [ebp-0x4c], eax */
             ii(0x1007_be17, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x1007_be1b, 4); cmp(memb_a32[ss, ebp - 0x8], 0);        /* cmp byte [ebp-0x8], 0x0 */
@@ -390,7 +390,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_c1b2, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x1007_c1b6, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */
             ii(0x1007_c1ba, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x1007_c1bd, 5); calld(Definitions.my_ctor_0x101b38f8, -0x5ad2); /* call 0x100766f0 */
+            ii(0x1007_c1bd, 5); calld(Definitions.my_ctor_0x101b_38f8, -0x5ad2); /* call 0x100766f0 */
             ii(0x1007_c1c2, 3); mov(memd_a32[ss, ebp - 0x28], eax);     /* mov [ebp-0x28], eax */
             ii(0x1007_c1c5, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x1007_c1c9, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */

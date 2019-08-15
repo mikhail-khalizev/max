@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_b715, 2); if(jzd(0x1014_b72b, 0x14)) goto l_0x1014_b72b; /* jz 0x1014b72b */
             ii(0x1014_b717, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1014_b719, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
-            ii(0x1014_b71c, 5); calld(Definitions.my_dtor_0x101b56fc, -0xc_2ae5); /* call 0x10088c3c */
+            ii(0x1014_b71c, 5); calld(Definitions.my_dtor_0x101b_56fc, -0xc_2ae5); /* call 0x10088c3c */
             ii(0x1014_b721, 5); calld(Definitions.sys_delete, 0x1_a83e); /* call 0x10165f64 */
             ii(0x1014_b726, 3); mov(memd_a32[ss, ebp - 0xc], eax);      /* mov [ebp-0xc], eax */
             ii(0x1014_b729, 2); jmpd(0x1014_b732, 0x7); goto l_0x1014_b732; /* jmp 0x1014b732 */

@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_50e4, 3); mov(memd_a32[ss, ebp - 0x38], eax);     /* mov [ebp-0x38], eax */
             ii(0x100c_50e7, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x100c_50eb, 3); lea(eax, ebp - 0x3c);                   /* lea eax, [ebp-0x3c] */
-            ii(0x100c_50ee, 5); calld(Definitions.my_ctor_0x101b4184, -0x4_e603); /* call 0x10076af0 */
+            ii(0x100c_50ee, 5); calld(Definitions.my_ctor_0x101b_4184, -0x4_e603); /* call 0x10076af0 */
             ii(0x100c_50f3, 7); mov(memd_a32[ss, ebp - 0x20], 0);       /* mov dword [ebp-0x20], 0x0 */
             ii(0x100c_50fa, 6); mov(memw_a32[ss, ebp - 0x3c], 0);       /* mov word [ebp-0x3c], 0x0 */
             ii(0x100c_5100, 2); jmpd(0x100c_5109, 0x7); goto l_0x100c_5109; /* jmp 0x100c5109 */

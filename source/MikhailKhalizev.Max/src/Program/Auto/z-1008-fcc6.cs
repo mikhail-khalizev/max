@@ -130,7 +130,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_fe17, 6); if(jzd(0x1008_ff42, 0x125)) goto l_0x1008_ff42; /* jz 0x1008ff42 */
         l_0x1008_fe1d:
             ii(0x1008_fe1d, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */
-            ii(0x1008_fe20, 5); calld(Definitions.my_ctor_0x101b4184, -0x1_9335); /* call 0x10076af0 */
+            ii(0x1008_fe20, 5); calld(Definitions.my_ctor_0x101b_4184, -0x1_9335); /* call 0x10076af0 */
             ii(0x1008_fe25, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
             ii(0x1008_fe28, 3); add(eax, 0x2b);                         /* add eax, 0x2b */
             ii(0x1008_fe2b, 5); calld(0x1007_6b90, -0x1_92a0);          /* call 0x10076b90 */

@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_cf48, 4); and(memb_a32[ss, ebp - 0x8], -0x2 /* 0xfe */); /* and byte [ebp-0x8], 0xfe */
             ii(0x100b_cf4c, 4); or(memb_a32[ss, ebp - 0x8], 0x1);       /* or byte [ebp-0x8], 0x1 */
             ii(0x100b_cf50, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x100b_cf53, 5); calld(Definitions.my_ctor_0x101b56fc, -0x3_42dc); /* call 0x10088c7c */
+            ii(0x100b_cf53, 5); calld(Definitions.my_ctor_0x101b_56fc, -0x3_42dc); /* call 0x10088c7c */
             ii(0x100b_cf58, 3); mov(memd_a32[ss, ebp - 0x30], eax);     /* mov [ebp-0x30], eax */
             ii(0x100b_cf5b, 4); and(memb_a32[ss, ebp - 0x8], -0x2 /* 0xfe */); /* and byte [ebp-0x8], 0xfe */
             ii(0x100b_cf5f, 5); mov(eax, 0x101c_819c);                  /* mov eax, 0x101c819c */
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_cf6b, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
             ii(0x100b_cf6e, 5); calld(0x1007_64b8, -0x4_6abb);          /* call 0x100764b8 */
             ii(0x100b_cf73, 3); lea(eax, ebp - 0x10);                   /* lea eax, [ebp-0x10] */
-            ii(0x100b_cf76, 5); calld(Definitions.my_ctor_0x101b4184, -0x4_648b); /* call 0x10076af0 */
+            ii(0x100b_cf76, 5); calld(Definitions.my_ctor_0x101b_4184, -0x4_648b); /* call 0x10076af0 */
             ii(0x100b_cf7b, 6); mov(memw_a32[ss, ebp - 0x10], 0);       /* mov word [ebp-0x10], 0x0 */
             ii(0x100b_cf81, 2); jmpd(0x100b_cf8a, 0x7); goto l_0x100b_cf8a; /* jmp 0x100bcf8a */
         l_0x100b_cf83:
@@ -387,7 +387,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_d376, 5); calld(0x1007_5f6c, -0x4_740f);          /* call 0x10075f6c */
             ii(0x100b_d37b, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100b_d37d, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x100b_d380, 5); calld(Definitions.my_dtor_0x101b56fc, -0x3_4749); /* call 0x10088c3c */
+            ii(0x100b_d380, 5); calld(Definitions.my_dtor_0x101b_56fc, -0x3_4749); /* call 0x10088c3c */
             ii(0x100b_d385, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100b_d387, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */
             ii(0x100b_d38a, 5); calld(0x1008_bc9f, -0x3_16f0);          /* call 0x1008bc9f */

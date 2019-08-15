@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_11ed, 7); test(memd_a32[ss, ebp - 0xc], 0x10);    /* test dword [ebp-0xc], 0x10 */
             ii(0x1015_11f4, 6); if(jzd(0x1015_12db, 0xe1)) goto l_0x1015_12db; /* jz 0x101512db */
             ii(0x1015_11fa, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x1015_11fd, 5); calld(Definitions.my_ctor_0x101b4184, -0xd_a712); /* call 0x10076af0 */
+            ii(0x1015_11fd, 5); calld(Definitions.my_ctor_0x101b_4184, -0xd_a712); /* call 0x10076af0 */
             ii(0x1015_1202, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x1015_1205, 4); mov(memw_a32[ss, ebp - 0x18], ax);      /* mov [ebp-0x18], ax */
             ii(0x1015_1209, 2); jmpd(0x1015_1212, 0x7); goto l_0x1015_1212; /* jmp 0x10151212 */

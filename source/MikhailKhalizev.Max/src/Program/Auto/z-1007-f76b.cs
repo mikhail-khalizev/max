@@ -648,7 +648,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_fee2, 5); jmpd(0x1008_0399, 0x4b2); goto l_0x1008_0399; /* jmp 0x10080399 */
         l_0x1007_fee7:
             ii(0x1007_fee7, 6); lea(eax, ebp - 0x84);                   /* lea eax, [ebp-0x84] */
-            ii(0x1007_feed, 5); calld(Definitions.my_ctor_0x101b4184, -0x9402); /* call 0x10076af0 */
+            ii(0x1007_feed, 5); calld(Definitions.my_ctor_0x101b_4184, -0x9402); /* call 0x10076af0 */
             ii(0x1007_fef2, 3); mov(eax, memd_a32[ss, ebp - 0x40]);     /* mov eax, [ebp-0x40] */
             ii(0x1007_fef5, 5); calld(0x1007_623c, -0x9cbe);            /* call 0x1007623c */
             ii(0x1007_fefa, 4); cmp(memb_a32[ds, eax + 0x16], 0);       /* cmp byte [eax+0x16], 0x0 */

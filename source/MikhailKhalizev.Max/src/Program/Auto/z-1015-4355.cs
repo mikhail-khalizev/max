@@ -152,7 +152,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_44f2, 6); if(jzd(0x1015_4674, 0x17c)) goto l_0x1015_4674; /* jz 0x10154674 */
             ii(0x1015_44f8, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */
             ii(0x1015_44fc, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
-            ii(0x1015_44ff, 5); calld(Definitions.my_ctor_0x101b38f8, -0xd_de14); /* call 0x100766f0 */
+            ii(0x1015_44ff, 5); calld(Definitions.my_ctor_0x101b_38f8, -0xd_de14); /* call 0x100766f0 */
             ii(0x1015_4504, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */
             ii(0x1015_4507, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x1015_450b, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */

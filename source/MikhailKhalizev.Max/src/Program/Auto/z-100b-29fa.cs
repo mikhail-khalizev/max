@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_2ad5, 5); calld(0x1008_a520, -0x2_85ba);          /* call 0x1008a520 */
             ii(0x100b_2ada, 5); calld(0x100a_ca34, -0x60ab);            /* call 0x100aca34 */
             ii(0x100b_2adf, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */
-            ii(0x100b_2ae2, 5); calld(Definitions.my_ctor_0x101b4184, -0x3_bff7); /* call 0x10076af0 */
+            ii(0x100b_2ae2, 5); calld(Definitions.my_ctor_0x101b_4184, -0x3_bff7); /* call 0x10076af0 */
             ii(0x100b_2ae7, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
             ii(0x100b_2aea, 5); calld(0x1007_65d0, -0x3_c51f);          /* call 0x100765d0 */
             ii(0x100b_2aef, 5); calld(0x100a_2edb, -0xfc19);            /* call 0x100a2edb */

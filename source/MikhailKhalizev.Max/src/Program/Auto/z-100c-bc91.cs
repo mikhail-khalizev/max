@@ -176,7 +176,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100c_be83:
             ii(0x100c_be83, 4); or(memb_a32[ss, ebp - 0xc], 0x1);       /* or byte [ebp-0xc], 0x1 */
             ii(0x100c_be87, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x100c_be8a, 5); calld(Definitions.my_ctor_0x101b3b58, -0x4_0deb); /* call 0x1008b0a4 */
+            ii(0x100c_be8a, 5); calld(Definitions.my_ctor_0x101b_3b58, -0x4_0deb); /* call 0x1008b0a4 */
             ii(0x100c_be8f, 3); mov(memd_a32[ss, ebp - 0x30], eax);     /* mov [ebp-0x30], eax */
             ii(0x100c_be92, 4); and(memb_a32[ss, ebp - 0xc], -0x2 /* 0xfe */); /* and byte [ebp-0xc], 0xfe */
             ii(0x100c_be96, 5); mov(eax, 0x1e);                         /* mov eax, 0x1e */

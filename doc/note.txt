@@ -23,11 +23,5 @@ mov(esp, ebp);
 
 ----
 
-example
-0x10074395  with 2 push arg1
-0x10070ca1  simple func with 2 reg args in total
-
-----
-
 call
 push(eip)
