@@ -20,6 +20,7 @@ namespace dos {
 /** Кол-во тактов в секунду. */
 static const uint_<32> PIT_TICK_RATE = 1193182;
 
+// +
 struct pit_block
 {
     uint_<32> cntr;
@@ -80,6 +81,7 @@ static uint_<64> get_total_nsec()
 }
 
 
+// +
 static void pit0_event()
 {
 //    pthread_cond_t pit_0_change;
@@ -155,6 +157,7 @@ static void pit0_event()
     }
 }
 
+// +
 static bool counter_output(int counter)
 {
     pit_block * p = &pit[counter];
@@ -194,6 +197,7 @@ static bool counter_output(int counter)
     }
 }
 
+// +
 static void status_latch(int counter)
 {
     // the timer status can not be overwritten until it is read or the timer was reprogrammed.
@@ -235,6 +239,7 @@ static void status_latch(int counter)
     latched_timerstatus_locked = true;
 }
 
+// +
 static void counter_latch(int counter)
 {
     /* Fill the read_latch of the selected counter with current count */
@@ -302,7 +307,7 @@ static void counter_latch(int counter)
     }
 }
 
-
+// +
 void timer_write_latch(uint_<32> port, uint_<8> val)
 {
     uint_<32> counter = port - 0x40;
@@ -382,6 +387,7 @@ void timer_write_latch(uint_<32> port, uint_<8> val)
     }
 }
 
+// +
 uint_<8> timer_read_latch(uint_<32> port)
 {
     uint_<32> counter = port - 0x40;
@@ -436,6 +442,7 @@ uint_<8> timer_read_latch(uint_<32> port)
     return ret;
 }
 
+// +
 void timer_write_p43(uint_<8> val)
 {
     boost::unique_lock<boost::mutex> ul(pit_0_mutex, boost::defer_lock_t());
@@ -523,7 +530,7 @@ void timer_write_p43(uint_<8> val)
     }
 }
 
-
+// +
 void TIMER_SetGate2(bool in)
 {
     //No changes if gate doesn't change
@@ -571,7 +578,7 @@ void TIMER_SetGate2(bool in)
     gate2 = in; // Set it here so the counter_latch above works
 }
 
-
+// +
 void timers_init()
 {
     /* Setup Timer 0 */

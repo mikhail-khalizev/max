@@ -1405,7 +1405,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 _stateLog.WriteLine($"    paging_fault begin: cr2: {cr2}");
             }
 
-            correct_function_position(returnAddress);
+            CorrectMethodPosition(returnAddress);
 
             if (!string.IsNullOrEmpty(Configuration.StateOutput))
                 _stateLog.WriteLine($"    paging_fault end: cr2: {cr2}");
@@ -1470,7 +1470,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            return correct_function_position(retAddr, true, true);
+            return CorrectMethodPosition(retAddr, true, true);
         }
 
         private bool jmpd_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
@@ -1485,7 +1485,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            return correct_function_position(retAddr, true, saveJumpInfo);
+            return CorrectMethodPosition(retAddr, true, saveJumpInfo);
         }
 
         private void __plus_sp(int s)
@@ -1530,7 +1530,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         // For ConditionReturn return true if need return. Or false - continue without return.
-        public bool correct_function_position(Address returnAddress, bool haveConditionReturnAfterInstruction = false, bool saveJumpInfo = false)
+        public bool CorrectMethodPosition(Address returnAddress, bool haveConditionReturnAfterInstruction = false, bool saveJumpInfo = false)
         {
             run_irqs();
             callReturnAddresses.Add(returnAddress);
@@ -2170,7 +2170,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            correct_function_position(retAddr);
+            CorrectMethodPosition(retAddr);
         }
 
         /// <inheritdoc />
@@ -2184,7 +2184,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            correct_function_position(retAddr);
+            CorrectMethodPosition(retAddr);
         }
 
         /// <inheritdoc />
@@ -2197,7 +2197,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            correct_function_position(ret_addr, saveJumpInfo: true);
+            CorrectMethodPosition(ret_addr, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
@@ -2210,7 +2210,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            correct_function_position(ret_addr, saveJumpInfo: true);
+            CorrectMethodPosition(ret_addr, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
@@ -2218,7 +2218,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, segment, address & 0xffff);
-            correct_function_position(ret_addr);
+            CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
@@ -2226,7 +2226,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
-            correct_function_position(ret_addr);
+            CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
@@ -2240,7 +2240,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
-            correct_function_position(ret_addr);
+            CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
@@ -3565,7 +3565,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var ret_addr = cs[eip];
             int_internal(number, true, true, false, 0);
-            correct_function_position(ret_addr);
+            CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />

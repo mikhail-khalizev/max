@@ -69,11 +69,11 @@ namespace MikhailKhalizev.Max.Program
             Implementation.MethodsInfo = MethodsInfo;
 
             LoadDecodedMethods();
-
-            DosInterrupt.InitializeInterrupts();
+            DosInterrupt.Initialize();
             InitializeX86DosProgram();
+            DosTimer.InitializeAndStart();
 
-            Implementation.correct_function_position(0);
+            Implementation.CorrectMethodPosition(0);
         }
 
         private void LoadDecodedMethods()
@@ -99,11 +99,7 @@ namespace MikhailKhalizev.Max.Program
 
                     var fi = new MyMethodInfo();
                     fi.MethodInfo = mi;
-                    fi.Name = methodInfo.Name;
-
-                    var methodDelegate = (Action)methodInfo.CreateDelegate(typeof(Action), instance);
-
-                    fi.Action = methodDelegate;
+                    fi.Action = (Action)methodInfo.CreateDelegate(typeof(Action), instance);
 
                     foreach (var address in mi.Addresses)
                         funcs_by_pc.Add(address, fi);
@@ -235,18 +231,12 @@ namespace MikhailKhalizev.Max.Program
             ebp = 0x91c;
 
             eflags.UInt32 = 0x7202;
-
-
-            DosTimer.timers_init();
         }
 
         /// <inheritdoc />
         public void GetMethod(out MethodInfoDto methodInfo, out Action method)
         {
             var info = get_func(cs, eip);
-            if (extra_log)
-                Console.WriteLine($"Run {info.Name} {{{info.MethodInfo.Guid}}}");
-
             methodInfo = info.MethodInfo;
             method = info.Action;
         }
@@ -254,9 +244,8 @@ namespace MikhailKhalizev.Max.Program
         private MyMethodInfo get_func(SegmentRegister seg, Address address)
         {
             var fullAddress = seg[address];
-
             if (fullAddress == 0)
-                throw new InvalidOperationException("Запрос функции по нулевому указателю.");
+                throw new InvalidOperationException("Запрос метода по нулевому указателю.");
 
             var ret = find_func_exact(fullAddress);
             if (ret != null)
@@ -273,7 +262,7 @@ namespace MikhailKhalizev.Max.Program
             Environment.Exit(5);
 
             // Просто так. На всякий случай.
-            throw new InvalidOperationException("Функция не найдена.");
+            throw new InvalidOperationException("Метод не найдена.");
         }
 
         private MyMethodInfo find_func_exact(Address fullAddress)
@@ -314,9 +303,6 @@ namespace MikhailKhalizev.Max.Program
 
             foreach (var info in infos)
             {
-                if (string.IsNullOrEmpty(info.Name))
-                    throw new InvalidOperationException("Код у функции есть, а его имя неизвестно.");
-
                 if (!Implementation.Memory.Equals(fullAddress, info.MethodInfo.RawBytes))
                     continue;
 
@@ -359,17 +345,21 @@ namespace MikhailKhalizev.Max.Program
                 to_cxx.SuppressDecode.Add(seg.Descriptor.Base + seg.Descriptor.Limit + 1 + 1, 0);
 
             to_cxx.SuppressDecode.Add(0x14f0_0000, 0);
-
+            //    to_cxx.add_region_to_suppress_decode(0x10289000, 0); // Чтоб не выходил за пределы MAXRUN.EXE
 
             /* Аргументы следующим методам установлены опытным путём. */
 
             to_cxx.SetCStringDataArea(0x101a0003, 0x101b384d);
 
-            to_cxx.AddForceEndFuncs(0x14b5b5);
-            to_cxx.AddForceEndFuncs(0x14edfc);
-            to_cxx.AddForceEndFuncs(0x14f88b);
-            to_cxx.AddForceEndFuncs(0x14f8ef);
-            to_cxx.AddForceEndFuncs(0x158748);
+            to_cxx.AddForceEndFuncs(0xbb03);
+            to_cxx.AddForceEndFuncs(0xbb6f);
+            to_cxx.AddForceEndFuncs(0xbb73);
+            to_cxx.AddForceEndFuncs(0x14_f4c7);
+            to_cxx.AddForceEndFuncs(0x14_b5b5);
+            to_cxx.AddForceEndFuncs(0x14_edfc);
+            to_cxx.AddForceEndFuncs(0x14_f88b);
+            to_cxx.AddForceEndFuncs(0x14_f8ef);
+            to_cxx.AddForceEndFuncs(0x15_8748);
 
 
             AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys");
@@ -380,7 +370,6 @@ namespace MikhailKhalizev.Max.Program
                 to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
             to_cxx.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
 
-            // TODO
 #if false
     // Замечено, что многие функции начинаются со следующих двух команд.
 
@@ -388,6 +377,7 @@ namespace MikhailKhalizev.Max.Program
     // II(0x100abbb8, 0x5)   pushd(0x28);                          /* push dword 0x28 */
     // II(0x100abbbd, 0x5)   calld(sys_check_available_stack_size, 0xb_a190); /* call 0x10165d52 */
 
+    // Весь код MAXRUN.EXE
     const Address code_start = 0x1007_0000;
     const Address code_end = 0x1016_5d52;
 
@@ -414,24 +404,7 @@ namespace MikhailKhalizev.Max.Program
         }
     }
 #endif
-
-
-            //#define PREDICTABLE_DECODE
-            //    to_cxx.add_region_to_suppress_decode(0x10289000, 0); // Чтоб не выходил за пределы MAXRUN.EXE
-            //    to_cxx.decode_area(code_start, code_end); // Весь код MAXRUN.EXE
-
-            // TODO
-#if false // PREDICTABLE_DECODE
-            // Функции, когда либо запускавшиеся.
-            for (auto i = std::begin(used_funcs_known); i != std::end(used_funcs_known); i++)
-                if (i->second == (seg.get_db() ? 32 : 16)
-                        && seg.fail_limit_check(i->first, 1) == false)
-                {
-                    std::cout << "Запуск декодирования функции '" << std::hex << std::showbase << i->first << "'." << std::endl;
-                    to_cxx.decode(i->first);
-                }
-#endif
-
+            
             Console.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
 
             to_cxx.DecodeMethod(fullAddress);
@@ -454,7 +427,6 @@ namespace MikhailKhalizev.Max.Program
                 new MyMethodInfo
                 {
                     Action = func,
-                    Name = func.Method.Name,
                     MethodInfo = new MethodInfoDto
                     {
                         Guid = Guid.NewGuid(),
@@ -477,8 +449,6 @@ namespace MikhailKhalizev.Max.Program
     public class MyMethodInfo
     {
         public MethodInfoDto MethodInfo { get; set; }
-
-        public string Name { get; set; }
 
         public Action Action { get; set; }
     }

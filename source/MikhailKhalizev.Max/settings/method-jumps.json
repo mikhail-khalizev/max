@@ -494,7 +494,8 @@
           "Address": "0x14_ad5f"
         },
         {
-          "Address": "0x14_afbb"
+          "Address": "0x14_afbb",
+          "Guid": "c1774b60-0c1a-416b-85a7-a130523c3e73"
         },
         {
           "Address": "0x14_b046",
@@ -538,6 +539,30 @@
       "0xffec_b002": [
         {
           "Address": "0x6e9e"
+        }
+      ]
+    }
+  },
+  {
+    "Guid": "a5aef62d-f1f6-4f75-970a-b3de0266f6ff",
+    "Address": "0xef65",
+    "Jumps": {
+      "0xef65": [
+        {
+          "Address": "0x14_a838",
+          "Guid": "c821926e-7c9c-4660-bdbb-b0d6e95fca8c"
+        }
+      ]
+    }
+  },
+  {
+    "Guid": "c1774b60-0c1a-416b-85a7-a130523c3e73",
+    "Address": "0xef8b",
+    "Jumps": {
+      "0xefe1": [
+        {
+          "Address": "0x14_af95",
+          "Guid": "a5aef62d-f1f6-4f75-970a-b3de0266f6ff"
         }
       ]
     }
@@ -654,6 +679,26 @@
         {
           "Address": "0x14_db2d",
           "Guid": "8a65e91a-f958-4646-a4ae-f05ee4014e1d"
+        }
+      ]
+    }
+  },
+  {
+    "Guid": "0dc48074-a30e-41e8-80fe-580b7a62f8e8",
+    "Address": "0xfdf5",
+    "Jumps": {
+      "0xfdfd": [
+        {
+          "Address": "0xbb00",
+          "Guid": "441f0542-fb46-4b9e-bef0-f534f92bc0bf"
+        },
+        {
+          "Address": "0xdb10",
+          "Guid": "441f0542-fb46-4b9e-bef0-f534f92bc0bf"
+        },
+        {
+          "Address": "0x14_9b40",
+          "Guid": "441f0542-fb46-4b9e-bef0-f534f92bc0bf"
         }
       ]
     }
@@ -953,6 +998,16 @@
     "Address": "0x14_9f20",
     "Jumps": {
       "0x6227": [
+        {
+          "Address": "0x66dc",
+          "Guid": "a6d15bd0-2bcb-4ba0-a968-3113f6b6ec12"
+        }
+      ],
+      "0x14_2257": [
+        {
+          "Address": "0x46cc",
+          "Guid": "a6d15bd0-2bcb-4ba0-a968-3113f6b6ec12"
+        },
         {
           "Address": "0x66dc",
           "Guid": "a6d15bd0-2bcb-4ba0-a968-3113f6b6ec12"
@@ -1330,6 +1385,18 @@
         {
           "Address": "0x14_db07",
           "Guid": "ab8ee1fa-9005-4c2e-887a-b396482965f3"
+        }
+      ]
+    }
+  },
+  {
+    "Guid": "2a6795d4-6c65-459c-b7aa-d7cb3c5a3b31",
+    "Address": "0x14_de35",
+    "Jumps": {
+      "0x15_37ad": [
+        {
+          "Address": "0x14_f4b0",
+          "Guid": "4d8ff360-6869-4c36-8719-d66cb038e9d2"
         }
       ]
     }
@@ -1725,31 +1792,40 @@
     "Jumps": {
       "0x1018_7eaf": [
         {
-          "Address": "0x1016_609c"
+          "Address": "0x1016_609c",
+          "Guid": "0bf1285e-b9e1-4e39-bee7-1c6df5675490"
         },
         {
-          "Address": "0x1016_6114"
+          "Address": "0x1016_6114",
+          "Guid": "2c9347a5-9878-4e4d-8198-5c7a9bd98c24"
         },
         {
-          "Address": "0x1018_1ce6"
+          "Address": "0x1018_1ce6",
+          "Guid": "f237c65a-4725-46f5-89f1-e08b03c02d4b"
         },
         {
-          "Address": "0x1018_224d"
+          "Address": "0x1018_224d",
+          "Guid": "00718943-e197-4296-a175-707fa5f75df7"
         },
         {
-          "Address": "0x1019_4718"
+          "Address": "0x1019_4718",
+          "Guid": "9f5c99c9-b85d-4916-9999-8a933cf4fb02"
         },
         {
-          "Address": "0x1019_661d"
+          "Address": "0x1019_661d",
+          "Guid": "830e32b8-fc1c-441a-b357-fafe6adddb99"
         },
         {
-          "Address": "0x1019_a9b3"
+          "Address": "0x1019_a9b3",
+          "Guid": "490158d9-33d5-40b3-8591-9ea0b9e2c028"
         },
         {
-          "Address": "0x1019_aa71"
+          "Address": "0x1019_aa71",
+          "Guid": "55264207-c013-4125-b283-ba30082f1657"
         },
         {
-          "Address": "0x1019_c3cd"
+          "Address": "0x1019_c3cd",
+          "Guid": "2d265218-3273-4c47-9a65-625b8b688ae2"
         }
       ]
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 
@@ -247,7 +247,7 @@ namespace MikhailKhalizev.Max.Dos
                     //break;
 
                 case 0x20:
-                    RawProgramMain.DosPic.write_command(port.UInt16, s.UInt16);
+                    RawProgramMain.DosPic.write_command(port.Int32, (int)s.UInt32);
                     break;
 
                 case 0x21:

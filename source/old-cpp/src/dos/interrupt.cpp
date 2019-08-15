@@ -87,6 +87,7 @@ struct mode_info
 
 static void callback_setwindow() {}
 
+// +
 void int_08()
 {
     const uint_<32> BIOS_TIMER = 0x46c;
@@ -426,6 +427,7 @@ void int_16()
     syscall_iretww();
 }
 
+// +
 void int_1c()
 {
     iret_(16);

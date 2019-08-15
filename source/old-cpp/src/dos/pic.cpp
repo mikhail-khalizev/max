@@ -12,6 +12,7 @@ extern bool extra_log;
 
 namespace dos {
 
+// file +
 
 using namespace x86;
 
@@ -19,6 +20,7 @@ using namespace x86;
 pic_general & pic = * new pic_general();
 
 
+// +
 void pic_general::_write_command(uint_<16> port, uint_<8> val)
 {
     PIC_Controller * pic_ctr = &pics[(port == 0x20) ? 0 : 1];
@@ -120,6 +122,7 @@ void pic_general::_write_command(uint_<16> port, uint_<8> val)
     }
 }
 
+// +
 void pic_general::_write_data(uint_<16> port, uint_<8> val)
 {
     PIC_Controller * pic_ctr = &pics[port == 0x21 ? 0 : 1];
@@ -205,7 +208,7 @@ void pic_general::_write_data(uint_<16> port, uint_<8> val)
     }
 }
 
-
+// +
 uint_<8> pic_general::_read_command(uint_<16> port)
 {
     PIC_Controller * pic_ctr = &pics[(port == 0x20) ? 0 : 1];
@@ -239,6 +242,7 @@ uint_<8> pic_general::_read_command(uint_<16> port)
     return ret;
 }
 
+// +
 uint_<8> pic_general::_read_data(uint_<16> port)
 {
     int irq_base = (port == 0x21) ? 0 : 8;
@@ -255,7 +259,7 @@ uint_<8> pic_general::_read_data(uint_<16> port)
     return ret;
 }
 
-
+// +
 void pic_general::_activate_irq(int irq)
 {
     if (irq < 8)
@@ -273,6 +277,7 @@ void pic_general::_activate_irq(int irq)
     }
 }
 
+// +
 void pic_general::_deactivate_irq(int irq)
 {
     if (irq < 16)
@@ -283,7 +288,7 @@ void pic_general::_deactivate_irq(int irq)
     }
 }
 
-
+// +
 void pic_general::start_irq(int i)
 {
     /* irqs on second pic only if irq 2 isn't masked */
@@ -304,6 +309,7 @@ void pic_general::start_irq(int i)
         throw exo::exception::not_implemented(); // E_Exit("rotate on auto EOI not handled");
 }
 
+// +
 int pic_general::_run_irqs(void)
 {
     if (if_ == false)
@@ -362,6 +368,7 @@ int pic_general::_run_irqs(void)
     return -1;
 }
 
+// +
 void pic_general::_set_irq_mask(uint_<32> irq, bool masked)
 {
     if (irqs[irq].masked == masked)
@@ -397,7 +404,7 @@ void pic_general::_set_irq_mask(uint_<32> irq, bool masked)
     }
 }
 
-
+// +
 pic_general::pic_general()
 : PIC_IRQCheck(0)
 , PIC_IRQOnSecondPicActive(0)
@@ -445,31 +452,35 @@ pic_general::pic_general()
 //        }
 }
 
-
+// +
 void pic_general::write_command(uint_<16> port, uint_<8> val)
 {
     boost::lock_guard<boost::mutex> lock(mutex);
     _write_command(port, val);
 }
 
+// +
 void pic_general::write_data(uint_<16> port, uint_<8> val)
 {
     boost::lock_guard<boost::mutex> lock(mutex);
     _write_data(port, val);
 }
 
+// +
 uint_<8> pic_general::read_command(uint_<16> port)
 {
     boost::lock_guard<boost::mutex> lock(mutex);
     return _read_command(port);
 }
 
+// +
 uint_<8> pic_general::read_data(uint_<16> port)
 {
     boost::lock_guard<boost::mutex> lock(mutex);
     return _read_data(port);
 }
 
+// +
 // @todo Внедрить внутрь correct_function_position для повышения производительности?
 void pic_general::run_irqs()
 {
@@ -517,18 +528,21 @@ void pic_general::run_irqs()
     }
 }
 
+// +
 void pic_general::activate_irq(int irq)
 {
     boost::lock_guard<boost::mutex> lock(mutex);
     _activate_irq(irq);
 }
 
+// +
 void pic_general::deactivate_irq(int irq)
 {
     boost::lock_guard<boost::mutex> lock(mutex);
     _deactivate_irq(irq);
 }
 
+// +
 void pic_general::set_irq_mask(uint_<32> irq, bool masked)
 {
     boost::lock_guard<boost::mutex> lock(mutex);

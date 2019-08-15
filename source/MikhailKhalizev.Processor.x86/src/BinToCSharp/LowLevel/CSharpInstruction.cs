@@ -158,19 +158,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var sb = new StringBuilder();
 
-            var flags = _knownInstr[Mnemonic];
-            //auto meta = get_meta(mnemonic);
-            //if (meta.first == false)
-            //{
-            //    std::ostringstream err;
-            //    err << std::hex << std::showbase << "Unknown instruction at ";
-            //    write_addr(err, begin);
-            //    err << ':';
-            //    for (auto s : comments)
-            //        err << " '" << s << '\'';
-            //    err << '.';
-            //    throw std::logic_error(err.str());
-            //}
+            if (!_knownInstr.TryGetValue(Mnemonic, out var flags))
+            {
+                if (!PfxAddress && !PfxOpr && PfxSeg == ud_type.UD_NONE)
+                    flags = InstrFlags.None;
+                else
+                    throw new NotImplementedException($"Unknown instruction at {Begin}: {Mnemonic} {(string.Join(", ", Comments))}");
+            }
 
             var adrModeStr = $"_a{AddrMode}";
 

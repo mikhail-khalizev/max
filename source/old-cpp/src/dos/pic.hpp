@@ -7,8 +7,11 @@
 namespace raw_program {
 namespace dos {
 
+// file +
+
 class pic_general
 {
+    // +
     struct IRQ_Block
     {
         bool masked;
@@ -24,6 +27,7 @@ class pic_general
         {}
     };
 
+    // +
     struct PIC_Controller
     {
         uint_<32> icw_words;

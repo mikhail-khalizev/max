@@ -16,11 +16,13 @@ namespace MikhailKhalizev.Max.Dos
 {
     public class DosInterrupt : BridgeProcessor
     {
+        public Processor.x86.Core.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
-        public DosInterrupt(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosInterrupt(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
+            Implementation = implementation;
             RawProgramMain = rawProgramMain;
 
             fileHandlers.Add(null); // in
@@ -30,7 +32,21 @@ namespace MikhailKhalizev.Max.Dos
             fileHandlers.Add(null); // dummy (from dosbox)
         }
 
-        public void int_08() { throw new NotImplementedException(); }
+        public void int_08()
+        {
+            var BIOS_TIMER = 0x46c;
+
+            var bios_timer_ms = Implementation.Memory.mem_phys_raw(BIOS_TIMER, 4);
+
+            var bios_timer_value = bios_timer_ms.GetInt32();
+            bios_timer_value++;
+            bios_timer_ms.SetInt32(bios_timer_value);
+            
+            @int(0x1c);
+
+            outb(0x20, 0x20);
+            iretw();
+        }
 
         public unsafe void int_10()
         {
@@ -355,7 +371,11 @@ namespace MikhailKhalizev.Max.Dos
         }
 
         public void int_16() { throw new NotImplementedException(); }
-        public void int_1c() { throw new NotImplementedException(); }
+
+        public void int_1c()
+        {
+            iretw();
+        }
 
 
         /* ctrl-break control */
@@ -903,7 +923,7 @@ namespace MikhailKhalizev.Max.Dos
 
         private List<Stream> fileHandlers = new List<Stream>();
 
-        public void InitializeInterrupts()
+        public void Initialize()
         {
             var intFunc = new (int num, Action func)[]
             {
