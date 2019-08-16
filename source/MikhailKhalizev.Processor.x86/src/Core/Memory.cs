@@ -40,8 +40,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// </summary>
         public ArraySegment<byte> mem_phys_raw(Address address, int size)
         {
-            var physMem = new ArraySegment<byte>(Ram);
-
             if (!A20Gate)
                 address &= 0xf_ffff;
 
@@ -49,7 +47,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             for (var i = 0; i < 2; i++)
             {
-                if (cache_ena[i] == false)
+                if (!cache_ena[i])
                     continue;
 
                 var cacheRegion = Interval.From(cache_map[i], cache_map[i] + 0x1000);
@@ -72,7 +70,8 @@ namespace MikhailKhalizev.Processor.x86.Core
                     cache_ena[i] = false;
                 }
             }
-
+            
+            var physMem = new ArraySegment<byte>(Ram);
             var ret = physMem.Slice((int)address);
 
             if (ret.Count < size)

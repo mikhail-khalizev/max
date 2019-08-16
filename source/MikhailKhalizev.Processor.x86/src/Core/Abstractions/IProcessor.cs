@@ -207,9 +207,8 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <summary>
         /// ASCII Adjust AX After Multiply.
         /// </summary>
-        /// <param name="value"></param>
         /// <remarks>https://www.felixcloutier.com/x86/AAM.html</remarks>
-        void aam(Value value);
+        void aam(ValueBase value);
 
         /// <summary>
         /// ASCII Adjust AL After Subtraction.
@@ -221,7 +220,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Add with Carry.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ADC.html</remarks>
-        void adc(Value dst, Value src);
+        void adc(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Unsigned Integer Addition of Two Operands with Carry Flag.
@@ -233,7 +232,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Add.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ADD.html</remarks>
-        void add(Value dst, Value src);
+        void add(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Add Packed Double-Precision Floating-Point Values.
@@ -317,7 +316,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Logical AND.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/AND.html</remarks>
-        void and(Value dst, Value src);
+        void and(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Logical AND NOT.
@@ -352,10 +351,8 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <summary>
         /// Adjust RPL Field of Segment Selector.
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
         /// <remarks>https://www.felixcloutier.com/x86/ARPL.html</remarks>
-        void arpl(Value a, Value b);
+        void arpl(ValueBase a, ValueBase b);
 
         /// <summary>
         /// Bit Field Extract.
@@ -475,19 +472,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Bit Test.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BT.html</remarks>
-        void bt(Value dst, Value src);
+        void bt(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Bit Test and Complement.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BTC.html</remarks>
-        void btc(Value dst, Value src);
+        void btc(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Bit Test and Reset.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BTR.html</remarks>
-        void btr(Value dst, Value src);
+        void btr(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Bit Test and Set.
@@ -501,13 +498,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/BZHI.html</remarks>
         void bzhi();
 
-        
+
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void callw(Address address, int offset);
-        
+
         /// <summary>
         /// Call Procedure.
         /// </summary>
@@ -524,19 +521,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void callw_abs(Value address);
+        void callw_abs(ValueBase address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool callw_abs_up(Value address);
+        bool callw_abs_up(ValueBase address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_abs(Value address);
+        void calld_abs(ValueBase address);
 
         /// <summary>
         /// Call Procedure.
@@ -548,19 +545,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void callw_a16_far_ind(SegmentRegister segment, Value address);
+        void callw_a16_far_ind(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_a32_far_ind(SegmentRegister segment, Value address);
+        void calld_a32_far_ind(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_a16_far_ind(SegmentRegister segment, Value address);
+        void calld_a16_far_ind(SegmentRegister segment, ValueBase address);
 
 
         /// <summary>
@@ -645,7 +642,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Compare Two Operands.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMP.html</remarks>
-        void cmp(Value a, Value b);
+        void cmp(ValueBase a, ValueBase b);
 
         /// <summary>
         /// Compare Packed Double-Precision Floating-Point Values.
@@ -915,13 +912,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Decrement by 1.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DEC.html</remarks>
-        void dec(Value value);
+        void dec(ValueBase value);
 
         /// <summary>
         /// Unsigned Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/DIV.html</remarks>
-        void div(Value value);
+        void div(ValueBase value);
 
         /// <summary>
         /// Divide Packed Double-Precision Floating-Point Values.
@@ -993,7 +990,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Add.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FADD:FADDP:FIADD.html</remarks>
-        void fadd(Value value);
+        void fadd(ValueBase value);
 
         /// <summary>
         /// Add.
@@ -1041,7 +1038,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Compare Floating Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FCOM:FCOMP:FCOMPP.html</remarks>
-        void fcom(Value value);
+        void fcom(ValueBase value);
 
         /// <summary>
         /// Compare Floating Point Values and Set EFLAGS.
@@ -1059,7 +1056,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Compare Floating Point Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FCOM:FCOMP:FCOMPP.html</remarks>
-        void fcomp(Value value);
+        void fcomp(ValueBase value);
 
         /// <summary>
         /// Compare Floating Point Values.
@@ -1089,7 +1086,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FDIV:FDIVP:FIDIV.html</remarks>
-        void fdiv(Value value);
+        void fdiv(ValueBase value);
 
         /// <summary>
         /// Divide.
@@ -1107,7 +1104,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Reverse Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FDIVR:FDIVRP:FIDIVR.html</remarks>
-        void fdivr(Value value);
+        void fdivr(ValueBase value);
 
         /// <summary>
         /// Reverse Divide.
@@ -1155,7 +1152,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FILD.html</remarks>
-        void fild(Value value);
+        void fild(ValueBase value);
 
         /// <summary>
         /// Multiply.
@@ -1185,7 +1182,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Integer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FIST:FISTP.html</remarks>
-        void fistp(Value value);
+        void fistp(ValueBase value);
 
         /// <summary>
         /// Store Integer with Truncation.
@@ -1209,7 +1206,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Floating Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FLD.html</remarks>
-        void fld(Value value);
+        void fld(ValueBase value);
 
         /// <summary>
         /// Load Constant.
@@ -1221,7 +1218,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load x87 FPU Control Word.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FLDCW.html</remarks>
-        void fldcw(Value value);
+        void fldcw(ValueBase value);
 
         /// <summary>
         /// Load x87 FPU Environment.
@@ -1269,7 +1266,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FMUL:FMULP:FIMUL.html</remarks>
-        void fmul(Value value);
+        void fmul(ValueBase value);
 
         /// <summary>
         /// Multiply.
@@ -1305,7 +1302,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store x87 FPU State.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html</remarks>
-        void fnsavew_a16(SegmentRegister segment, Value address);
+        void fnsavew_a16(SegmentRegister segment, ValueBase address);
 
         // Obsoleted instruction.
         void fnsetpm();
@@ -1314,7 +1311,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store x87 FPU Control Word.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSTCW:FNSTCW.html</remarks>
-        void fnstcw(Value value);
+        void fnstcw(ValueBase value);
 
         /// <summary>
         /// Store x87 FPU Environment.
@@ -1326,7 +1323,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store x87 FPU Status Word.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSTSW:FNSTSW.html</remarks>
-        void fnstsw(Value value);
+        void fnstsw(ValueBase value);
 
         /// <summary>
         /// Partial Arctangent.
@@ -1398,7 +1395,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Floating Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FST:FSTP.html</remarks>
-        void fst(Value value);
+        void fst(ValueBase value);
 
         /// <summary>
         /// Store x87 FPU Control Word.
@@ -1416,7 +1413,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Floating Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FST:FSTP.html</remarks>
-        void fstp(Value value);
+        void fstp(ValueBase value);
 
         /// <summary>
         /// Store x87 FPU Status Word.
@@ -1428,7 +1425,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSUB:FSUBP:FISUB.html</remarks>
-        void fsub(Value a);
+        void fsub(ValueBase a);
 
         /// <summary>
         /// Subtract.
@@ -1446,7 +1443,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Reverse Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSUBR:FSUBRP:FISUBR.html</remarks>
-        void fsubr(Value value);
+        void fsubr(ValueBase value);
 
         /// <summary>
         /// Reverse Subtract.
@@ -1572,43 +1569,43 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Signed Divide.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IDIV.html</remarks>
-        void idiv(Value value);
+        void idiv(ValueBase value);
 
         /// <summary>
         /// Signed Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IMUL.html</remarks>
-        void imul(Value value);
+        void imul(ValueBase value);
 
         /// <summary>
         /// Signed Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IMUL.html</remarks>
-        void imul(Value dst, Value src);
+        void imul(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Signed Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IMUL.html</remarks>
-        void imul(Value dst, Value src, int c);
+        void imul(ValueBase dst, ValueBase src, int c);
 
         /// <summary>
         /// Input from Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IN.html</remarks>
-        void inb(Value dst, Value port);
+        void inb(ValueBase dst, ValueBase port);
 
         /// <summary>
         /// Input from Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/IN.html</remarks>
-        void inw(Value dst, Value port);
+        void inw(ValueBase dst, ValueBase port);
 
         /// <summary>
         /// Increment by 1.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/INC.html</remarks>
-        void inc(Value value);
+        void inc(ValueBase value);
 
         /// <summary>
         /// Input from Port to String.
@@ -1711,13 +1708,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_abs(Value address);
+        bool jmpw_abs(ValueBase address);
 
         /// <summary>
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        Address jmpw_abs_switch(Value address);
+        Address jmpw_abs_switch(ValueBase address);
 
         /// <summary>
         /// Jump.
@@ -1729,7 +1726,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpw_a16_far_ind(SegmentRegister segment, Value address);
+        bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address);
 
 
         /// <summary>
@@ -1748,13 +1745,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_abs(Value address);
+        bool jmpd_abs(ValueBase address);
 
         /// <summary>
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        Address jmpd_abs_switch(Value address);
+        Address jmpd_abs_switch(ValueBase address);
 
         /// <summary>
         /// Call Procedure.
@@ -1766,7 +1763,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpd_a16_far_ind(SegmentRegister segment, Value address);
+        bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address);
 
 
         /// <summary>
@@ -2500,7 +2497,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Access Rights Byte.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LAR.html</remarks>
-        void lar(Value dst, Value src);
+        void lar(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Load Unaligned Integer 128 Bits.
@@ -2518,13 +2515,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lds(Value dst, SegmentRegister segment, Value offset);
+        void lds(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
         /// Load Effective Address.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LEA.html</remarks>
-        void lea(Value dst, Value src);
+        void lea(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// High Level Procedure Exit.
@@ -2542,7 +2539,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void les(Value dst, SegmentRegister segment, Value offset);
+        void les(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
         /// Load Fence.
@@ -2554,43 +2551,43 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lfs(Value dst, SegmentRegister segment, Value offset);
+        void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtw_a16(SegmentRegister segment, Value address);
+        void lgdtw_a16(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd_a16(SegmentRegister segment, Value address);
+        void lgdtd_a16(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lgs(Value dst, SegmentRegister segment, Value offset);
+        void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lidtw_a16(SegmentRegister segment, Value address);
+        void lidtw_a16(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Load Local Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LLDT.html</remarks>
-        void lldt(Value value);
+        void lldt(ValueBase value);
 
         /// <summary>
         /// Load Machine Status Word.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LMSW.html</remarks>
-        void lmsw(Value value);
+        void lmsw(ValueBase value);
 
         /// <summary>
         /// Assert LOCK# Signal Prefix.
@@ -2686,19 +2683,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Load Segment Limit.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LSL.html</remarks>
-        void lsl(Value dst, Value selector);
+        void lsl(ValueBase dst, ValueBase selector);
 
         /// <summary>
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lss(Value dst, SegmentRegister segment, Value offset);
+        void lss(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
         /// Load Task Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LTR.html</remarks>
-        void ltr(Value value);
+        void ltr(ValueBase value);
 
         /// <summary>
         /// Count the Number of Leading Zero Bits.
@@ -2782,7 +2779,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Move.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOV.html</remarks>
-        void mov(Value dst, Value src);
+        void mov(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Move to/from Control Registers.
@@ -3022,7 +3019,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Move with Sign-Extension.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVSX:MOVSXD.html</remarks>
-        void movsx(Value dst, Value src);
+        void movsx(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Move with Sign-Extension.
@@ -3046,7 +3043,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Move with Zero-Extend.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVZX.html</remarks>
-        void movzx(Value dst, Value src);
+        void movzx(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Compute Multiple Packed Sums of Absolute Difference.
@@ -3058,7 +3055,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Unsigned Multiply.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MUL.html</remarks>
-        void mul(Value value);
+        void mul(ValueBase value);
 
         /// <summary>
         /// Multiply Packed Double-Precision Floating-Point Values.
@@ -3100,7 +3097,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Two's Complement Negation.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/NEG.html</remarks>
-        void neg(Value value);
+        void neg(ValueBase value);
 
         /// <summary>
         /// No Operation.
@@ -3112,13 +3109,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// One's Complement Negation.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/NOT.html</remarks>
-        void not(Value value);
+        void not(ValueBase value);
 
         /// <summary>
         /// Logical Inclusive OR.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/OR.html</remarks>
-        void or(Value dst, Value src);
+        void or(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Bitwise Logical OR of Packed Double Precision Floating-Point Values.
@@ -3136,13 +3133,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Output to Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/OUT.html</remarks>
-        void outb(Value port, Value value);
+        void outb(ValueBase port, ValueBase value);
 
         /// <summary>
         /// Output to Port.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/OUT.html</remarks>
-        void outw(Value port, Value value);
+        void outw(ValueBase port, ValueBase value);
 
         /// <summary>
         /// Output String to Port.
@@ -3676,13 +3673,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Pop a Value from the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
-        ushort popw(Value d = null);
+        ushort popw(ValueBase d = null);
 
         /// <summary>
         /// Pop a Value from the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
-        uint popd(Value d = null);
+        uint popd(ValueBase d = null);
 
         /// <summary>
         /// Pop All General-Purpose Registers.
@@ -3970,13 +3967,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Push Word, Doubleword or Quadword Onto the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSH.html</remarks>
-        void pushw(Value s);
+        void pushw(ValueBase s);
 
         /// <summary>
         /// Push Word, Doubleword or Quadword Onto the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSH.html</remarks>
-        void pushd(Value s);
+        void pushd(ValueBase s);
 
         /// <summary>
         /// Push All General-Purpose Registers.
@@ -4018,7 +4015,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rcl(Value dst, int count);
+        void rcl(ValueBase dst, int count);
 
         /// <summary>
         /// Compute Reciprocals of Packed Single-Precision Floating-Point Values.
@@ -4036,7 +4033,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rcr(Value dst, int count);
+        void rcr(ValueBase dst, int count);
 
         /// <summary>
         /// Read FS/GS Segment Base.
@@ -4165,13 +4162,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void rol(Value dst, Value count);
+        void rol(ValueBase dst, ValueBase count);
 
         /// <summary>
         /// Rotate.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RCL:RCR:ROL:ROR.html</remarks>
-        void ror(Value dst, Value count);
+        void ror(ValueBase dst, ValueBase count);
 
         /// <summary>
         /// Rotate Right Logical Without Affecting Flags.
@@ -4237,7 +4234,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void sar(Value dst, Value count);
+        void sar(ValueBase dst, ValueBase count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -4249,7 +4246,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Integer Subtraction with Borrow.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SBB.html</remarks>
-        void sbb(Value dst, Value src);
+        void sbb(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Scan String.
@@ -4292,49 +4289,49 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void seta(Value value);
+        void seta(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setbe(Value value);
+        void setbe(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setg(Value value);
+        void setg(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setge(Value value);
+        void setge(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setae(Value value);
+        void setae(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setle(Value value);
+        void setle(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setz(Value value);
+        void setz(ValueBase value);
 
         /// <summary>
         /// Set Byte on Condition.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SETcc.html</remarks>
-        void setnz(Value value);
+        void setnz(ValueBase value);
 
         /// <summary>
         /// Store Fence.
@@ -4394,13 +4391,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void shl(Value dst, Value count);
+        void shl(ValueBase dst, ValueBase count);
 
         /// <summary>
         /// Double Precision Shift Left.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SHLD.html</remarks>
-        void shld(Value dst, Value src, int count);
+        void shld(ValueBase dst, ValueBase src, int count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -4412,13 +4409,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Shift.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SAL:SAR:SHL:SHR.html</remarks>
-        void shr(Value dst, Value count);
+        void shr(ValueBase dst, ValueBase count);
 
         /// <summary>
         /// Double Precision Shift Right.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SHRD.html</remarks>
-        void shrd(Value dst, Value src, int count);
+        void shrd(ValueBase dst, ValueBase src, int count);
 
         /// <summary>
         /// Shift Without Affecting Flags.
@@ -4442,7 +4439,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SIDT.html</remarks>
-        void sidtd_a32(SegmentRegister segment, Value value);
+        void sidtd_a32(SegmentRegister segment, ValueBase value);
 
         /// <summary>
         /// Store Local Descriptor Table Register.
@@ -4454,7 +4451,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Machine Status Word.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SMSW.html</remarks>
-        void smsw(Value value);
+        void smsw(ValueBase value);
 
         /// <summary>
         /// Square Root of Double-Precision Floating-Point Values.
@@ -4562,13 +4559,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Store Task Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STR.html</remarks>
-        void str(Value value);
+        void str(ValueBase value);
 
         /// <summary>
         /// Subtract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SUB.html</remarks>
-        void sub(Value dst, Value src);
+        void sub(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Subtract Packed Double-Precision Floating-Point Values.
@@ -4628,7 +4625,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Logical Compare.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/TEST.html</remarks>
-        void test(Value a, Value b);
+        void test(ValueBase a, ValueBase b);
 
         /// <summary>
         /// Count the Number of Trailing Zero Bits.
@@ -6560,7 +6557,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Exchange Register/Memory with Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/XCHG.html</remarks>
-        void xchg(Value a, Value b);
+        void xchg(ValueBase a, ValueBase b);
 
         /// <summary>
         /// Transactional End.
@@ -6590,7 +6587,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Logical Exclusive OR.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/XOR.html</remarks>
-        void xor(Value dst, Value src);
+        void xor(ValueBase dst, ValueBase src);
 
         /// <summary>
         /// Bitwise Logical XOR of Packed Double Precision Floating-Point Values.

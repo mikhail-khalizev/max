@@ -335,7 +335,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 
         /// <param name="value"></param>
         /// <inheritdoc />
-        public void aam(Value value)
+        public void aam(ValueBase value)
         {
             Implementation.aam(value);
         }
@@ -347,7 +347,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void adc(Value dst, Value src)
+        public void adc(ValueBase dst, ValueBase src)
         {
             Implementation.adc(dst, src);
         }
@@ -359,7 +359,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void add(Value dst, Value src)
+        public void add(ValueBase dst, ValueBase src)
         {
             Implementation.add(dst, src);
         }
@@ -443,7 +443,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void and(Value dst, Value src)
+        public void and(ValueBase dst, ValueBase src)
         {
             Implementation.and(dst, src);
         }
@@ -481,7 +481,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <inheritdoc />
-        public void arpl(Value a, Value b)
+        public void arpl(ValueBase a, ValueBase b)
         {
             Implementation.arpl(a, b);
         }
@@ -601,19 +601,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void bt(Value dst, Value src)
+        public void bt(ValueBase dst, ValueBase src)
         {
             Implementation.bt(dst, src);
         }
 
         /// <inheritdoc />
-        public void btc(Value dst, Value src)
+        public void btc(ValueBase dst, ValueBase src)
         {
             Implementation.btc(dst, src);
         }
 
         /// <inheritdoc />
-        public void btr(Value dst, Value src)
+        public void btr(ValueBase dst, ValueBase src)
         {
             Implementation.btr(dst, src);
         }
@@ -650,19 +650,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void callw_abs(Value address)
+        public void callw_abs(ValueBase address)
         {
             Implementation.callw_abs(address);
         }
 
         /// <inheritdoc />
-        public bool callw_abs_up(Value address)
+        public bool callw_abs_up(ValueBase address)
         {
             return Implementation.callw_abs_up(address);
         }
 
         /// <inheritdoc />
-        public void calld_abs(Value address)
+        public void calld_abs(ValueBase address)
         {
             Implementation.calld_abs(address);
         }
@@ -674,19 +674,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void callw_a16_far_ind(SegmentRegister segment, Value address)
+        public void callw_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             Implementation.callw_a16_far_ind(segment, address);
         }
 
         /// <inheritdoc />
-        public void calld_a32_far_ind(SegmentRegister segment, Value address)
+        public void calld_a32_far_ind(SegmentRegister segment, ValueBase address)
         {
             Implementation.calld_a32_far_ind(segment, address);
         }
 
         /// <inheritdoc />
-        public void calld_a16_far_ind(SegmentRegister segment, Value address)
+        public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             Implementation.calld_a16_far_ind(segment, address);
         }
@@ -770,7 +770,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void cmp(Value a, Value b)
+        public void cmp(ValueBase a, ValueBase b)
         {
             Implementation.cmp(a, b);
         }
@@ -1040,13 +1040,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void dec(Value value)
+        public void dec(ValueBase value)
         {
             Implementation.dec(value);
         }
 
         /// <inheritdoc />
-        public void div(Value value)
+        public void div(ValueBase value)
         {
             Implementation.div(value);
         }
@@ -1118,7 +1118,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fadd(Value value)
+        public void fadd(ValueBase value)
         {
             Implementation.fadd(value);
         }
@@ -1166,7 +1166,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fcom(Value value)
+        public void fcom(ValueBase value)
         {
             Implementation.fcom(value);
         }
@@ -1184,7 +1184,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fcomp(Value value)
+        public void fcomp(ValueBase value)
         {
             Implementation.fcomp(value);
         }
@@ -1214,7 +1214,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fdiv(Value value)
+        public void fdiv(ValueBase value)
         {
             Implementation.fdiv(value);
         }
@@ -1232,7 +1232,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fdivr(Value value)
+        public void fdivr(ValueBase value)
         {
             Implementation.fdivr(value);
         }
@@ -1280,7 +1280,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fild(Value value)
+        public void fild(ValueBase value)
         {
             Implementation.fild(value);
         }
@@ -1310,7 +1310,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fistp(Value value)
+        public void fistp(ValueBase value)
         {
             Implementation.fistp(value);
         }
@@ -1334,7 +1334,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fld(Value value)
+        public void fld(ValueBase value)
         {
             Implementation.fld(value);
         }
@@ -1346,7 +1346,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fldcw(Value value)
+        public void fldcw(ValueBase value)
         {
             Implementation.fldcw(value);
         }
@@ -1394,7 +1394,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fmul(Value value)
+        public void fmul(ValueBase value)
         {
             Implementation.fmul(value);
         }
@@ -1430,7 +1430,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fnsavew_a16(SegmentRegister segment, Value address)
+        public void fnsavew_a16(SegmentRegister segment, ValueBase address)
         {
             Implementation.fnsavew_a16(segment, address);
         }
@@ -1442,7 +1442,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fnstcw(Value value)
+        public void fnstcw(ValueBase value)
         {
             Implementation.fnstcw(value);
         }
@@ -1454,7 +1454,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fnstsw(Value value)
+        public void fnstsw(ValueBase value)
         {
             Implementation.fnstsw(value);
         }
@@ -1526,7 +1526,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fst(Value value)
+        public void fst(ValueBase value)
         {
             Implementation.fst(value);
         }
@@ -1544,7 +1544,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fstp(Value value)
+        public void fstp(ValueBase value)
         {
             Implementation.fstp(value);
         }
@@ -1556,7 +1556,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fsub(Value a)
+        public void fsub(ValueBase a)
         {
             Implementation.fsub(a);
         }
@@ -1574,7 +1574,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void fsubr(Value value)
+        public void fsubr(ValueBase value)
         {
             Implementation.fsubr(value);
         }
@@ -1700,43 +1700,43 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void idiv(Value value)
+        public void idiv(ValueBase value)
         {
             Implementation.idiv(value);
         }
 
         /// <inheritdoc />
-        public void imul(Value value)
+        public void imul(ValueBase value)
         {
             Implementation.imul(value);
         }
 
         /// <inheritdoc />
-        public void imul(Value dst, Value src)
+        public void imul(ValueBase dst, ValueBase src)
         {
             Implementation.imul(dst, src);
         }
 
         /// <inheritdoc />
-        public void imul(Value dst, Value src, int c)
+        public void imul(ValueBase dst, ValueBase src, int c)
         {
             Implementation.imul(dst, src, c);
         }
 
         /// <inheritdoc />
-        public void inb(Value dst, Value port)
+        public void inb(ValueBase dst, ValueBase port)
         {
             Implementation.inb(dst, port);
         }
 
         /// <inheritdoc />
-        public void inw(Value dst, Value port)
+        public void inw(ValueBase dst, ValueBase port)
         {
             Implementation.inw(dst, port);
         }
 
         /// <inheritdoc />
-        public void inc(Value value)
+        public void inc(ValueBase value)
         {
             Implementation.inc(value);
         }
@@ -1838,13 +1838,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jmpw_abs(Value address)
+        public bool jmpw_abs(ValueBase address)
         {
             return Implementation.jmpw_abs(address);
         }
 
         /// <inheritdoc />
-        public Address jmpw_abs_switch(Value address)
+        public Address jmpw_abs_switch(ValueBase address)
         {
             return Implementation.jmpw_abs_switch(address);
         }
@@ -1856,7 +1856,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jmpw_a16_far_ind(SegmentRegister segment, Value address)
+        public bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             return Implementation.jmpw_a16_far_ind(segment, address);
         }
@@ -1874,13 +1874,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jmpd_abs(Value address)
+        public bool jmpd_abs(ValueBase address)
         {
             return Implementation.jmpd_abs(address);
         }
 
         /// <inheritdoc />
-        public Address jmpd_abs_switch(Value address)
+        public Address jmpd_abs_switch(ValueBase address)
         {
             return Implementation.jmpd_abs_switch(address);
         }
@@ -1892,7 +1892,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jmpd_a16_far_ind(SegmentRegister segment, Value address)
+        public bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             return Implementation.jmpd_a16_far_ind(segment, address);
         }
@@ -2624,7 +2624,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void lar(Value dst, Value src)
+        public void lar(ValueBase dst, ValueBase src)
         {
             Implementation.lar(dst, src);
         }
@@ -2642,13 +2642,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void lds(Value dst, SegmentRegister segment, Value offset)
+        public void lds(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             Implementation.lds(dst, segment, offset);
         }
 
         /// <inheritdoc />
-        public void lea(Value dst, Value src)
+        public void lea(ValueBase dst, ValueBase src)
         {
             Implementation.lea(dst, src);
         }
@@ -2666,7 +2666,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void les(Value dst, SegmentRegister segment, Value offset)
+        public void les(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             Implementation.les(dst, segment, offset);
         }
@@ -2678,43 +2678,43 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void lfs(Value dst, SegmentRegister segment, Value offset)
+        public void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             Implementation.lfs(dst, segment, offset);
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(SegmentRegister segment, Value address)
+        public void lgdtw_a16(SegmentRegister segment, ValueBase address)
         {
             Implementation.lgdtw_a16(segment, address);
         }
 
         /// <inheritdoc />
-        public void lgdtd_a16(SegmentRegister segment, Value address)
+        public void lgdtd_a16(SegmentRegister segment, ValueBase address)
         {
             Implementation.lgdtd_a16(segment, address);
         }
 
         /// <inheritdoc />
-        public void lgs(Value dst, SegmentRegister segment, Value offset)
+        public void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             Implementation.lgs(dst, segment, offset);
         }
 
         /// <inheritdoc />
-        public void lidtw_a16(SegmentRegister segment, Value address)
+        public void lidtw_a16(SegmentRegister segment, ValueBase address)
         {
             Implementation.lidtw_a16(segment, address);
         }
 
         /// <inheritdoc />
-        public void lldt(Value value)
+        public void lldt(ValueBase value)
         {
             Implementation.lldt(value);
         }
 
         /// <inheritdoc />
-        public void lmsw(Value value)
+        public void lmsw(ValueBase value)
         {
             Implementation.lmsw(value);
         }
@@ -2810,19 +2810,19 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void lsl(Value dst, Value selector)
+        public void lsl(ValueBase dst, ValueBase selector)
         {
             Implementation.lsl(dst, selector);
         }
 
         /// <inheritdoc />
-        public void lss(Value dst, SegmentRegister segment, Value offset)
+        public void lss(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             Implementation.lss(dst, segment, offset);
         }
 
         /// <inheritdoc />
-        public void ltr(Value value)
+        public void ltr(ValueBase value)
         {
             Implementation.ltr(value);
         }
@@ -2906,7 +2906,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void mov(Value dst, Value src)
+        public void mov(ValueBase dst, ValueBase src)
         {
             Implementation.mov(dst, src);
         }
@@ -3146,7 +3146,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void movsx(Value dst, Value src)
+        public void movsx(ValueBase dst, ValueBase src)
         {
             Implementation.movsx(dst, src);
         }
@@ -3170,7 +3170,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void movzx(Value dst, Value src)
+        public void movzx(ValueBase dst, ValueBase src)
         {
             Implementation.movzx(dst, src);
         }
@@ -3182,7 +3182,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void mul(Value value)
+        public void mul(ValueBase value)
         {
             Implementation.mul(value);
         }
@@ -3224,7 +3224,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void neg(Value value)
+        public void neg(ValueBase value)
         {
             Implementation.neg(value);
         }
@@ -3236,13 +3236,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void not(Value value)
+        public void not(ValueBase value)
         {
             Implementation.not(value);
         }
 
         /// <inheritdoc />
-        public void or(Value dst, Value src)
+        public void or(ValueBase dst, ValueBase src)
         {
             Implementation.or(dst, src);
         }
@@ -3260,13 +3260,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void outb(Value port, Value value)
+        public void outb(ValueBase port, ValueBase value)
         {
             Implementation.outb(port, value);
         }
 
         /// <inheritdoc />
-        public void outw(Value port, Value value)
+        public void outw(ValueBase port, ValueBase value)
         {
             Implementation.outw(port, value);
         }
@@ -3800,13 +3800,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public ushort popw(Value d = null)
+        public ushort popw(ValueBase d = null)
         {
             return Implementation.popw(d);
         }
 
         /// <inheritdoc />
-        public uint popd(Value d = null)
+        public uint popd(ValueBase d = null)
         {
             return Implementation.popd(d);
         }
@@ -4094,13 +4094,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void pushw(Value s)
+        public void pushw(ValueBase s)
         {
             Implementation.pushw(s);
         }
 
         /// <inheritdoc />
-        public void pushd(Value s)
+        public void pushd(ValueBase s)
         {
             Implementation.pushd(s);
         }
@@ -4142,7 +4142,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void rcl(Value dst, int count)
+        public void rcl(ValueBase dst, int count)
         {
             Implementation.rcl(dst, count);
         }
@@ -4160,7 +4160,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void rcr(Value dst, int count)
+        public void rcr(ValueBase dst, int count)
         {
             Implementation.rcr(dst, count);
         }
@@ -4286,13 +4286,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void rol(Value dst, Value count)
+        public void rol(ValueBase dst, ValueBase count)
         {
             Implementation.rol(dst, count);
         }
 
         /// <inheritdoc />
-        public void ror(Value dst, Value count)
+        public void ror(ValueBase dst, ValueBase count)
         {
             Implementation.ror(dst, count);
         }
@@ -4358,7 +4358,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void sar(Value dst, Value count)
+        public void sar(ValueBase dst, ValueBase count)
         {
             Implementation.sar(dst, count);
         }
@@ -4370,7 +4370,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void sbb(Value dst, Value src)
+        public void sbb(ValueBase dst, ValueBase src)
         {
             Implementation.sbb(dst, src);
         }
@@ -4412,49 +4412,49 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void seta(Value value)
+        public void seta(ValueBase value)
         {
             Implementation.seta(value);
         }
 
         /// <inheritdoc />
-        public void setbe(Value value)
+        public void setbe(ValueBase value)
         {
             Implementation.setbe(value);
         }
 
         /// <inheritdoc />
-        public void setg(Value value)
+        public void setg(ValueBase value)
         {
             Implementation.setg(value);
         }
 
         /// <inheritdoc />
-        public void setge(Value value)
+        public void setge(ValueBase value)
         {
             Implementation.setge(value);
         }
 
         /// <inheritdoc />
-        public void setae(Value value)
+        public void setae(ValueBase value)
         {
             Implementation.setae(value);
         }
 
         /// <inheritdoc />
-        public void setle(Value value)
+        public void setle(ValueBase value)
         {
             Implementation.setle(value);
         }
 
         /// <inheritdoc />
-        public void setz(Value value)
+        public void setz(ValueBase value)
         {
             Implementation.setz(value);
         }
 
         /// <inheritdoc />
-        public void setnz(Value value)
+        public void setnz(ValueBase value)
         {
             Implementation.setnz(value);
         }
@@ -4514,13 +4514,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void shl(Value dst, Value count)
+        public void shl(ValueBase dst, ValueBase count)
         {
             Implementation.shl(dst, count);
         }
 
         /// <inheritdoc />
-        public void shld(Value dst, Value src, int count)
+        public void shld(ValueBase dst, ValueBase src, int count)
         {
             Implementation.shld(dst, src, count);
         }
@@ -4532,13 +4532,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void shr(Value dst, Value count)
+        public void shr(ValueBase dst, ValueBase count)
         {
             Implementation.shr(dst, count);
         }
 
         /// <inheritdoc />
-        public void shrd(Value dst, Value src, int count)
+        public void shrd(ValueBase dst, ValueBase src, int count)
         {
             Implementation.shrd(dst, src, count);
         }
@@ -4562,7 +4562,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void sidtd_a32(SegmentRegister segment, Value value)
+        public void sidtd_a32(SegmentRegister segment, ValueBase value)
         {
             Implementation.sidtd_a32(segment, value);
         }
@@ -4574,7 +4574,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void smsw(Value value)
+        public void smsw(ValueBase value)
         {
             Implementation.smsw(value);
         }
@@ -4682,13 +4682,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void str(Value value)
+        public void str(ValueBase value)
         {
             Implementation.str(value);
         }
 
         /// <inheritdoc />
-        public void sub(Value dst, Value src)
+        public void sub(ValueBase dst, ValueBase src)
         {
             Implementation.sub(dst, src);
         }
@@ -4748,7 +4748,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void test(Value a, Value b)
+        public void test(ValueBase a, ValueBase b)
         {
             Implementation.test(a, b);
         }
@@ -6680,7 +6680,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void xchg(Value a, Value b)
+        public void xchg(ValueBase a, ValueBase b)
         {
             Implementation.xchg(a, b);
         }
@@ -6710,7 +6710,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void xor(Value dst, Value src)
+        public void xor(ValueBase dst, ValueBase src)
         {
             Implementation.xor(dst, src);
         }

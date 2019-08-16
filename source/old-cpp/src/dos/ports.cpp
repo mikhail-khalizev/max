@@ -46,17 +46,19 @@ static uint_<8> vga_crtc_maximum_scan_line = 0;
 kbd_keys key_pressed = kbd_keys::none;
 static uint_<8> p61data = 0;
 
-
+// +
 static uint_<8> sb_mixer_index = 0;
 static uint_<8> sb_master_volume = 0xff;
 static uint_<8> sb_unknown_3f = 0xff;
 static uint_<16> sb_freq = 0;
 
+// +
 static uint_<8>::type dsp_data[64];
 static uint_<8> dsp_wr_index = 0;
 static uint_<8> dsp_rd_index = 0;
 static uint_<8> dsp_last_rd_val = 0;
 
+// +
 static uint_<8> dsp_cmd = 0;
 static uint_<8> dsp_cmd_len = 0;
 static uint_<32> dsp_cmd_data = 0;

@@ -14,6 +14,20 @@ namespace MikhailKhalizev.Max.Dos
         int pal_index;
         int pal_rgb;
 
+        int sb_mixer_index = 0;
+        int sb_master_volume = 0xff;
+        int sb_unknown_3f = 0xff;
+        int sb_freq = 0;
+
+        byte[] dsp_data = new byte[64];
+        int dsp_wr_index = 0;
+        int dsp_rd_index = 0;
+        int dsp_last_rd_val = 0;
+
+        int dsp_cmd = 0;
+        int dsp_cmd_len = 0;
+        int dsp_cmd_data = 0;
+
         public DosPort(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
@@ -117,24 +131,22 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x224:
-                    throw new NotImplementedException();
-                    //d = sb_mixer_index;
-                    //break;
+                    value.Int32 = sb_mixer_index;
+                    break;
 
                 case 0x225:
-                    throw new NotImplementedException();
-                    //switch (sb_mixer_index)
-                    //{
-                    //    case 0x22:
-                    //        d = sb_master_volume; // @todo error
-                    //        break;
-                    //    case 0x3f:
-                    //        d = sb_unknown_3f;
-                    //        break;
-                    //    default:
-                    //        throw exo::exception::not_implemented();
-                    //}
-                    //break;
+                    switch (sb_mixer_index)
+                    {
+                        case 0x22:
+                            value.Int32 = sb_master_volume; // @todo error
+                            break;
+                        case 0x3f:
+                            value.Int32 = sb_unknown_3f;
+                            break;
+                        default:
+                            throw new NotImplementedException($"sb_mixer_index: {sb_mixer_index}");
+                    }
+                    break;
 
                 case 0x22a: // sb read_data
                     throw new NotImplementedException();
@@ -320,10 +332,9 @@ namespace MikhailKhalizev.Max.Dos
                     // Ignore.
                     break;
 
-                //case 0x224: // Mixer index
-                //    throw new NotImplementedException();
-                //sb_mixer_index = s;
-                //break;
+                case 0x224: // Mixer index
+                    sb_mixer_index = (int)s.UInt32;
+                    break;
 
                 //case 0x225: // Mixer data
                 //    throw new NotImplementedException();

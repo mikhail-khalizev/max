@@ -17,6 +17,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         static NonBlockingConsole()
         {
+            _tcs.TrySetResult(0);
+
             var thread = new Thread(
                 () =>
                 {

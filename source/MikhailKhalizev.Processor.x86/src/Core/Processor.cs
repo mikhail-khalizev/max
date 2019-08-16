@@ -106,7 +106,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             idtr_limit = 0xffff;
 
             eip = 0x0000fff0;
-            
+
             Memory = new Memory(this);
 
             memb_a16 = new MemoryAccessImpl(Memory, 8, 16);
@@ -529,7 +529,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         #region Helpers
 
-        public void set_sf_zf_pf(Value dst)
+        public void set_sf_zf_pf(ValueBase dst)
         {
             eflags.sf = dst.IsNegative;
             eflags.zf = dst.UInt64 == 0;
@@ -1513,8 +1513,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
         public ICompiledMethodCollection CompiledMethodCollection { get; set; }
-        public event EventHandler<(Value value, Value port)> runInb;
-        public event EventHandler<(Value port, Value value)> runOutb;
+        public event EventHandler<(ValueBase value, ValueBase port)> runInb;
+        public event EventHandler<(ValueBase port, ValueBase value)> runOutb;
         public event EventHandler runIrqs;
 
         public void check_mode() => check_mode(CSharpEmulateMode);
@@ -1595,7 +1595,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                         var from = cs[CurrentInstructionAddress];
                         MethodInfoCollection.AddJumpAndSave(MethodInfo, from, nextMethodInfo, toRun, CSharpFunctionDelta);
                     }
-                    
+
                     var prevMethodInfo = MethodInfo;
                     var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
@@ -1826,9 +1826,8 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
-        /// <param name="value"></param>
         /// <inheritdoc />
-        public void aam(Value value)
+        public void aam(ValueBase value)
         {
             throw new NotImplementedException();
         }
@@ -1840,7 +1839,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void adc(Value dst, Value src)
+        public void adc(ValueBase dst, ValueBase src)
         {
             src = new NumericValue(src.UInt64, dst.Bits);
 
@@ -1867,7 +1866,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void add(Value dst, Value src)
+        public void add(ValueBase dst, ValueBase src)
         {
             src = new NumericValue(src.UInt64, dst.Bits);
 
@@ -1978,7 +1977,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void and(Value dst, Value src)
+        public void and(ValueBase dst, ValueBase src)
         {
             dst.UInt64 &= src.UInt64;
 
@@ -2017,10 +2016,8 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
-        /// <param name="a"></param>
-        /// <param name="b"></param>
         /// <inheritdoc />
-        public void arpl(Value a, Value b)
+        public void arpl(ValueBase a, ValueBase b)
         {
             throw new NotImplementedException();
         }
@@ -2140,13 +2137,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void bt(Value dst, Value src)
+        public void bt(ValueBase dst, ValueBase src)
         {
             eflags.cf = 0 != ((dst.UInt32 >> (int)(src.UInt32 % dst.Bits)) & 1);
         }
 
         /// <inheritdoc />
-        public void btc(Value dst, Value src)
+        public void btc(ValueBase dst, ValueBase src)
         {
             bt(dst, src);
             var x = (1u << (int)(src.UInt32 % dst.Bits));
@@ -2154,7 +2151,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void btr(Value dst, Value src)
+        public void btr(ValueBase dst, ValueBase src)
         {
             bt(dst, src);
             dst.Int32 &= ~(1 << (int)(src.UInt32 % 32));
@@ -2203,7 +2200,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void callw_abs(Value address)
+        public void callw_abs(ValueBase address)
         {
             pushw(eip);
             var ret_addr = cs[eip];
@@ -2212,7 +2209,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool callw_abs_up(Value address)
+        public bool callw_abs_up(ValueBase address)
         {
             pushw(eip);
             var ret_addr = cs[eip];
@@ -2221,7 +2218,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void calld_abs(Value address)
+        public void calld_abs(ValueBase address)
         {
             pushd(eip);
             var ret_addr = cs[eip];
@@ -2238,7 +2235,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void callw_a16_far_ind(SegmentRegister segment, Value address)
+        public void callw_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
@@ -2246,7 +2243,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void calld_a16_far_ind(SegmentRegister segment, Value address)
+        public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             var ret_addr = cs[eip];
             call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
@@ -2254,7 +2251,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void calld_a32_far_ind(SegmentRegister segment, Value address)
+        public void calld_a32_far_ind(SegmentRegister segment, ValueBase address)
         {
             throw new NotImplementedException();
         }
@@ -2369,7 +2366,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void cmp(Value a, Value b)
+        public void cmp(ValueBase a, ValueBase b)
         {
             eflags.cf = a.UInt64 < b.UInt64;
 
@@ -2668,7 +2665,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void dec(Value value)
+        public void dec(ValueBase value)
         {
             var r = new NumericValue(value.UInt64 - 1, value.Bits);
             var ds = value.IsPositive;
@@ -2683,7 +2680,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void div(Value value)
+        public void div(ValueBase value)
         {
             if (value == 0)
                 throw new NotImplementedException(); // #DE
@@ -2815,7 +2812,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fadd(Value value)
+        public void fadd(ValueBase value)
         {
             ST(0).Double += value.Double;
         }
@@ -2870,7 +2867,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fcom(FpuStackRegister a, FpuStackRegister b)
+        public void fcom(ValueBase a, ValueBase b)
         {
             bool c0, c2, c3;
             if (a.Double < b.Double)
@@ -2901,7 +2898,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fcom(Value value)
+        public void fcom(ValueBase value)
         {
             fcom(ST(0), value);
         }
@@ -2926,7 +2923,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fcomp(Value value)
+        public void fcomp(ValueBase value)
         {
             fcom(value);
             fpu_pop();
@@ -2959,7 +2956,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fdiv(Value value)
+        public void fdiv(ValueBase value)
         {
             throw new NotImplementedException();
         }
@@ -2978,7 +2975,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fdivr(Value value)
+        public void fdivr(ValueBase value)
         {
             throw new NotImplementedException();
         }
@@ -3026,7 +3023,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fild(Value value)
+        public void fild(ValueBase value)
         {
             switch (value.Bits)
             {
@@ -3065,7 +3062,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fistp(Value value)
+        public void fistp(ValueBase value)
         {
             switch (value.Bits)
             {
@@ -3105,7 +3102,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fld(Value value)
+        public void fld(ValueBase value)
         {
             var save = value.Double;
 
@@ -3121,7 +3118,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fldcw(Value value)
+        public void fldcw(ValueBase value)
         {
             FPUControlWord = value.UInt16;
         }
@@ -3170,7 +3167,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fmul(Value value)
+        public void fmul(ValueBase value)
         {
             ST(0).Double *= value.Double;
         }
@@ -3214,7 +3211,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fnsavew_a16(SegmentRegister segment, Value address)
+        public void fnsavew_a16(SegmentRegister segment, ValueBase address)
         {
             throw new NotImplementedException();
         }
@@ -3226,7 +3223,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fnstcw(Value value)
+        public void fnstcw(ValueBase value)
         {
             value.UInt16 = (ushort)FPUControlWord;
         }
@@ -3238,7 +3235,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fnstsw(Value value)
+        public void fnstsw(ValueBase value)
         {
             value.UInt16 = (ushort)FPUStatusWord;
         }
@@ -3310,7 +3307,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fst(Value value)
+        public void fst(ValueBase value)
         {
             value.Double = ST(0).Double;
         }
@@ -3328,7 +3325,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fstp(Value value)
+        public void fstp(ValueBase value)
         {
             fst(value);
             fpu_pop();
@@ -3341,7 +3338,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fsub(Value a)
+        public void fsub(ValueBase a)
         {
             throw new NotImplementedException();
         }
@@ -3360,7 +3357,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void fsubr(Value value)
+        public void fsubr(ValueBase value)
         {
             throw new NotImplementedException();
         }
@@ -3492,24 +3489,38 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void idiv(Value value)
+        public void idiv(ValueBase value)
         {
+            if (value == 0)
+                throw new NotImplementedException(); // #DE
+
             switch (value.Bits)
             {
                 case 16:
+                    {
+                        var w = (dx.UInt16 << 16) + ax.UInt16;
 
-                    if (value == 0)
-                        throw new NotImplementedException(); // #DE
+                        var t = w / value.Int16;
+                        if (short.MaxValue < t || t < short.MinValue)
+                            throw new NotImplementedException(); // #DE
 
-                    int w = (dx.UInt16 << 16) + ax.UInt16;
+                        ax = t;
+                        dx = w % value.Int16;
+                        break;
+                    }
 
-                    int t = w / value.Int16;
-                    if (short.MaxValue < t || t < short.MinValue)
-                        throw new NotImplementedException(); // #DE
+                case 32:
+                    {
+                        var w = ((long)edx.UInt32 << 32) + eax.UInt32;
 
-                    ax = t;
-                    dx = w % value.Int16;
-                    break;
+                        var t = w / value.Int32;
+                        if (int.MaxValue < t || t < int.MinValue)
+                            throw new NotImplementedException(); // #DE
+
+                        eax = t;
+                        edx = w % value.Int32;
+                        break;
+                    }
 
                 default:
                     throw new NotImplementedException($"Bits: {value.Bits}");
@@ -3517,7 +3528,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void imul(Value value)
+        public void imul(ValueBase value)
         {
             if (value.Bits == 16)
             {
@@ -3533,7 +3544,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void imul(Value dst, Value src)
+        public void imul(ValueBase dst, ValueBase src)
         {
             var r = dst.Int64 * src.Int64;
             dst.Int64 = r;
@@ -3541,7 +3552,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void imul(Value dst, Value src, int c)
+        public void imul(ValueBase dst, ValueBase src, int c)
         {
             var r = src.Int32 * c;
             dst.Int32 = r;
@@ -3549,19 +3560,19 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void inb(Value dst, Value port)
+        public void inb(ValueBase dst, ValueBase port)
         {
             runInb?.Invoke(this, (dst, port));
         }
 
         /// <inheritdoc />
-        public void inw(Value dst, Value port)
+        public void inw(ValueBase dst, ValueBase port)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void inc(Value value)
+        public void inc(ValueBase value)
         {
             var r = new NumericValue(value.UInt64 + 1, value.Bits);
 
@@ -3702,13 +3713,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool jmpw_abs(Value address)
+        public bool jmpw_abs(ValueBase address)
         {
             return jmpw_func_internal(address, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
-        public Address jmpw_abs_switch(Value address)
+        public Address jmpw_abs_switch(ValueBase address)
         {
             eip = address & 0xffff;
             run_irqs();
@@ -3716,7 +3727,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public Address jmpd_abs_switch(Value address)
+        public Address jmpd_abs_switch(ValueBase address)
         {
             eip = address;
             run_irqs();
@@ -3730,13 +3741,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool jmpw_a16_far_ind(SegmentRegister segment, Value address)
+        public bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             return jmpw_func_internal(memw_a16[segment, address].UInt16, segmentSelector: memw_a16[segment, address + 2].UInt16);
         }
 
         /// <inheritdoc />
-        public bool jmpd_abs(Value address)
+        public bool jmpd_abs(ValueBase address)
         {
             return jmpd_func_internal(address, saveJumpInfo: true);
         }
@@ -3748,7 +3759,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool jmpd_a16_far_ind(SegmentRegister segment, Value address)
+        public bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             return jmpd_func_internal(memd_a16[segment, address].UInt32, segmentSelector: memw_a16[segment, address + 4].UInt16);
         }
@@ -4482,7 +4493,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lar(Value dst, Value src)
+        public void lar(ValueBase dst, ValueBase src)
         {
             var seg = new SegmentRegisterImpl(this);
             seg.Selector = src.UInt16;
@@ -4538,7 +4549,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lds(Value dst, SegmentRegister segment, Value offset)
+        public void lds(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             var cache = offset.UInt32;
             dst.UInt32 = memd_a32[segment, cache].UInt32;
@@ -4546,7 +4557,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lea(Value dst, Value src)
+        public void lea(ValueBase dst, ValueBase src)
         {
             // MemoryValue src
             // dst.UInt64 = src.Address;
@@ -4571,7 +4582,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void les(Value dst, SegmentRegister segment, Value offset)
+        public void les(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             var cache = offset.UInt32;
             dst.UInt32 = memd_a32[segment, cache].UInt32;
@@ -4585,13 +4596,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lfs(Value dst, SegmentRegister segment, Value offset)
+        public void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(SegmentRegister segment, Value address)
+        public void lgdtw_a16(SegmentRegister segment, ValueBase address)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
@@ -4601,7 +4612,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lgdtd_a16(SegmentRegister segment, Value address)
+        public void lgdtd_a16(SegmentRegister segment, ValueBase address)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
@@ -4611,13 +4622,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lgs(Value dst, SegmentRegister segment, Value offset)
+        public void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void lidtw_a16(SegmentRegister segment, Value address)
+        public void lidtw_a16(SegmentRegister segment, ValueBase address)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
@@ -4627,7 +4638,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lldt(Value value)
+        public void lldt(ValueBase value)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
@@ -4648,7 +4659,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lmsw(Value value)
+        public void lmsw(ValueBase value)
         {
             var t = cr0.UInt32;
             t = (t & 0xffff0000) | value.UInt32;
@@ -4761,7 +4772,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lsl(Value dst, Value selector)
+        public void lsl(ValueBase dst, ValueBase selector)
         {
             SegmentRegister seg = new SegmentRegisterImpl(this);
             seg.UInt32 = selector.UInt32;
@@ -4791,7 +4802,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void lss(Value dst, SegmentRegister segment, Value offset)
+        public void lss(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
             var cache = offset.UInt32;
             dst.UInt32 = memd_a32[segment, cache].UInt32;
@@ -4799,7 +4810,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void ltr(Value val)
+        public void ltr(ValueBase val)
         {
             if ((val & 0x4) != 0)
                 throw new NotImplementedException(); // #GP(segment selector)
@@ -4896,7 +4907,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void mov(Value dst, Value src)
+        public void mov(ValueBase dst, ValueBase src)
         {
             dst.UInt64 = src.UInt64;
         }
@@ -5148,7 +5159,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void movsx(Value dst, Value src)
+        public void movsx(ValueBase dst, ValueBase src)
         {
             dst.Int64 = src.Int64;
         }
@@ -5172,7 +5183,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void movzx(Value dst, Value src)
+        public void movzx(ValueBase dst, ValueBase src)
         {
             dst.UInt64 = src.UInt64;
         }
@@ -5184,7 +5195,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void mul(Value value)
+        public void mul(ValueBase value)
         {
             if (value.Bits == 16)
             {
@@ -5236,7 +5247,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void neg(Value value)
+        public void neg(ValueBase value)
         {
             eflags.cf = value.UInt64 != 0;
             value.UInt64 = 0 - value.UInt64;
@@ -5250,13 +5261,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         { }
 
         /// <inheritdoc />
-        public void not(Value value)
+        public void not(ValueBase value)
         {
             value.UInt64 = ~value.UInt64;
         }
 
         /// <inheritdoc />
-        public void or(Value dst, Value src)
+        public void or(ValueBase dst, ValueBase src)
         {
             dst.UInt64 |= src.UInt64;
 
@@ -5278,13 +5289,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void outb(Value port, Value value)
+        public void outb(ValueBase port, ValueBase value)
         {
             runOutb?.Invoke(this, (port, value));
         }
 
         /// <inheritdoc />
-        public void outw(Value port, Value value)
+        public void outw(ValueBase port, ValueBase value)
         {
             throw new NotImplementedException();
         }
@@ -5818,7 +5829,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public ushort popw(Value d = null)
+        public ushort popw(ValueBase d = null)
         {
             ushort value;
             if (ss.db)
@@ -5839,7 +5850,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public uint popd(Value d = null)
+        public uint popd(ValueBase d = null)
         {
             uint value;
             if (ss.db)
@@ -6166,7 +6177,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void pushw(Value s)
+        public void pushw(ValueBase s)
         {
             // todo Join popw, popd in one method push ?
             // todo Join pushw, pushd in one method push ?
@@ -6190,7 +6201,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void pushd(Value s)
+        public void pushd(ValueBase s)
         {
             var value = s.UInt32;
 
@@ -6263,7 +6274,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void rcl(Value dst, int count)
+        public void rcl(ValueBase dst, int count)
         {
             int tempCount;
 
@@ -6319,7 +6330,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void rcr(Value dst, int count)
+        public void rcr(ValueBase dst, int count)
         {
             int tempCount;
 
@@ -6499,7 +6510,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void rol(Value dst, Value c)
+        public void rol(ValueBase dst, ValueBase c)
         {
             var count = (int)c.UInt32;
 
@@ -6523,7 +6534,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void ror(Value dst, Value c)
+        public void ror(ValueBase dst, ValueBase c)
         {
             var count = (int)c.UInt32;
 
@@ -6608,7 +6619,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void sar(Value dst, Value count)
+        public void sar(ValueBase dst, ValueBase count)
         {
             var c = (int)count.UInt32;
 
@@ -6630,7 +6641,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void sbb(Value dst, Value src)
+        public void sbb(ValueBase dst, ValueBase src)
         {
             src = new NumericValue(src.UInt64, dst.Bits);
 
@@ -6692,49 +6703,49 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void seta(Value value)
+        public void seta(ValueBase value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void setbe(Value value)
+        public void setbe(ValueBase value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void setg(Value value)
+        public void setg(ValueBase value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void setge(Value value)
+        public void setge(ValueBase value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void setae(Value value)
+        public void setae(ValueBase value)
         {
             value.Int32 = eflags.cf ? 0 : 1;
         }
 
         /// <inheritdoc />
-        public void setle(Value value)
+        public void setle(ValueBase value)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public void setz(Value value)
+        public void setz(ValueBase value)
         {
             value.Int32 = eflags.zf ? 1 : 0;
         }
 
         /// <inheritdoc />
-        public void setnz(Value value)
+        public void setnz(ValueBase value)
         {
             value.Int32 = eflags.zf ? 0 : 1;
         }
@@ -6794,7 +6805,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void shl(Value dst, Value count_)
+        public void shl(ValueBase dst, ValueBase count_)
         {
             var count = count_.Int32;
             var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
@@ -6811,7 +6822,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void shld(Value dst, Value src, int count)
+        public void shld(ValueBase dst, ValueBase src, int count)
         {
             if (dst.Bits == 64)
                 count = count % 64;
@@ -6833,7 +6844,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void shr(Value dst, Value count)
+        public void shr(ValueBase dst, ValueBase count)
         {
             var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
 
@@ -6849,7 +6860,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void shrd(Value dst, Value src, int count)
+        public void shrd(ValueBase dst, ValueBase src, int count)
         {
             if (dst.Bits == 64)
                 count = count % 64;
@@ -6883,7 +6894,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void sidtd_a32(SegmentRegister segment, Value value)
+        public void sidtd_a32(SegmentRegister segment, ValueBase value)
         {
             throw new NotImplementedException();
         }
@@ -6895,7 +6906,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void smsw(Value value)
+        public void smsw(ValueBase value)
         {
             value.UInt32 = cr0.UInt32;
         }
@@ -7039,13 +7050,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void str(Value value)
+        public void str(ValueBase value)
         {
             value.UInt16 = tr.UInt16;
         }
 
         /// <inheritdoc />
-        public void sub(Value dst, Value src)
+        public void sub(ValueBase dst, ValueBase src)
         {
             src = new NumericValue(src.UInt64, dst.Bits);
             cmp(dst, src);
@@ -7107,7 +7118,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void test(Value a, Value b)
+        public void test(ValueBase a, ValueBase b)
         {
             set_sf_zf_pf(a & b);
             eflags.cf = false;
@@ -9041,7 +9052,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void xchg(Value a, Value b)
+        public void xchg(ValueBase a, ValueBase b)
         {
             var x = a.UInt64;
             a.UInt64 = b.UInt64;
@@ -9073,7 +9084,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void xor(Value dst, Value src)
+        public void xor(ValueBase dst, ValueBase src)
         {
             dst.UInt64 ^= src.UInt64;
 

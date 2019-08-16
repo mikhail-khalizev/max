@@ -1,7 +1,12 @@
+using System;
+
 namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
 {
-    public sealed class RegisterFromValue : Register
+    public sealed class FpuStackRegisterFromValue : FpuStackRegister
     {
+        /// <inheritdoc />
+        public override int Number => throw new NotSupportedException();
+
         public ValueBase Value { get; }
 
         /// <inheritdoc />
@@ -14,7 +19,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
             set => Value.UInt64 = value;
         }
         
-        public RegisterFromValue(ValueBase value)
+        public FpuStackRegisterFromValue(ValueBase value)
         {
             Value = value;
         }

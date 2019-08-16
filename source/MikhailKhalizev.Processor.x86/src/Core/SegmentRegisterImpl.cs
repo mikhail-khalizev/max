@@ -1,4 +1,4 @@
-﻿using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.Core
 {
@@ -31,8 +31,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         private int _rpl;
 
 
-        public bool In64BitMode => Processor.InIa32eMode && l && !db;
-        public bool InCompatibilityMode => Processor.InIa32eMode && !l;
+        public bool In64BitMode => l && !db && Processor.InIa32eMode;
+        public bool InCompatibilityMode => !l && Processor.InIa32eMode;
 
         public SegmentRegisterImpl(Processor processor)
         {

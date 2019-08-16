@@ -204,11 +204,15 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         #region Cast from Numeric Operators
-
+        
+        public static implicit operator ValueBase(short value) => (Value)value;
+        public static implicit operator ValueBase(ushort value) => (Value)value;
         public static implicit operator ValueBase(int value) => (Value)value;
         public static implicit operator ValueBase(uint value) => (Value)value;
         public static implicit operator ValueBase(long value) => (Value)value;
         public static implicit operator ValueBase(ulong value) => (Value)value;
+
+        public static implicit operator ValueBase(double value) => (Value)value;
 
         #endregion
 

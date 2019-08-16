@@ -1511,6 +1511,7 @@ inline void idiv(uint_<16> s)
     dx = w % sint_<16>(s);
 }
 
+// +
 inline void idiv(uint_<32> s)
 {
     if (s == 0)
