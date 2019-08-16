@@ -38,7 +38,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_9bfc, 1); popw(ds);                                 /* pop ds */
             ii(0x13_9bfd, 1); leavew();                                 /* leave */
             ii(0x13_9bfe, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_9bff, 3); Недостижимый код.
+        //    ii(0x13_9bff, 1); popw(ds);                                 /* pop ds */
+        //    ii(0x13_9c00, 1); leavew();                                 /* leave */
+        //    ii(0x13_9c01, 1); retfw(); return;                          /* retf */
         l_0x13_9c02:
             ii(0x13_9c02, 3); pushw(memw_a16[ss, bp - 0x4]);            /* push word [bp-0x4] */
             ii(0x13_9c05, 1); pushw(cs);                                /* push cs */

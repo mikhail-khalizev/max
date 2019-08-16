@@ -240,7 +240,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_4cc4, 1); popw(ds);                                 /* pop ds */
             ii(0x13_4cc5, 1); leavew();                                 /* leave */
             ii(0x13_4cc6, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_4cc7, 1); Недостижимый код.
+        //    ii(0x13_4cc7, 1); nop();                                    /* nop */
         l_0x13_4cc8:
             ii(0x13_4cc8, 1); pushw(cs);                                /* push cs */
             ii(0x13_4cc9, 3); callw(0x13_4f2e, 0x262);                  /* call 0x4f2e */
@@ -263,7 +263,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_4cee, 1); popw(ds);                                 /* pop ds */
             ii(0x13_4cef, 1); leavew();                                 /* leave */
             ii(0x13_4cf0, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_4cf1, 1); Недостижимый код.
+        //    ii(0x13_4cf1, 1); nop();                                    /* nop */
         l_0x13_4cf2:
             ii(0x13_4cf2, 1); nop();                                    /* nop */
             ii(0x13_4cf3, 1); pushw(cs);                                /* push cs */
@@ -287,7 +287,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_4d20, 1); popw(ds);                                 /* pop ds */
             ii(0x13_4d21, 1); leavew();                                 /* leave */
             ii(0x13_4d22, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_4d23, 1); Недостижимый код.
+        //    ii(0x13_4d23, 1); nop();                                    /* nop */
         l_0x13_4d24:
             ii(0x13_4d24, 1); pushw(ds);                                /* push ds */
             ii(0x13_4d25, 3); pushw(0x122);                             /* push 0x122 */

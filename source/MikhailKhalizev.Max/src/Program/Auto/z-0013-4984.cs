@@ -59,7 +59,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_49f6, 1); popw(si);                                 /* pop si */
             ii(0x13_49f7, 1); leavew();                                 /* leave */
             ii(0x13_49f8, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_49f9, 5); Недостижимый код.
+        //    ii(0x13_49f9, 1); popw(ds);                                 /* pop ds */
+        //    ii(0x13_49fa, 1); popw(si);                                 /* pop si */
+        //    ii(0x13_49fb, 1); leavew();                                 /* leave */
+        //    ii(0x13_49fc, 1); retfw(); return;                          /* retf */
+        //    ii(0x13_49fd, 1); nop();                                    /* nop */
         l_0x13_49fe:
             ii(0x13_49fe, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x13_4a00, 1); popw(ds);                                 /* pop ds */

@@ -167,7 +167,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_9e84, 1); popw(si);                                 /* pop si */
             ii(0x13_9e85, 1); leavew();                                 /* leave */
             ii(0x13_9e86, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_9e87, 1); Недостижимый код.
+        //    ii(0x13_9e87, 1); nop();                                    /* nop */
         l_0x13_9e88:
             ii(0x13_9e88, 6); cmp(memw_a16[es, bx + 0x16], 0x1000);     /* cmp word [es:bx+0x16], 0x1000 */
             ii(0x13_9e8e, 2); if(jbw(0x13_9ece, 0x3e)) goto l_0x13_9ece; /* jb 0x9ece */
@@ -380,7 +380,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_a0a2, 1); popw(si);                                 /* pop si */
             ii(0x13_a0a3, 1); leavew();                                 /* leave */
             ii(0x13_a0a4, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_a0a5, 1); Недостижимый код.
+        //    ii(0x13_a0a5, 1); nop();                                    /* nop */
         l_0x13_a0a6:
             ii(0x13_a0a6, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x13_a0a9, 3); mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */

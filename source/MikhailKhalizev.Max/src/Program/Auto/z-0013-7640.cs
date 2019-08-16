@@ -134,7 +134,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_7770, 1); popw(di);                                 /* pop di */
             ii(0x13_7771, 1); leavew();                                 /* leave */
             ii(0x13_7772, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_7773, 1); Недостижимый код.
+        //    ii(0x13_7773, 1); nop();                                    /* nop */
         l_0x13_7774:
             ii(0x13_7774, 1); pusha();                                  /* pusha */
             ii(0x13_7775, 1); sti();                                    /* sti */

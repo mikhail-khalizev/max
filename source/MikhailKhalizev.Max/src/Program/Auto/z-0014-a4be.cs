@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_a529, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
             ii(0x14_a52d, 3); pushw(0x47b2);                            /* push 0x47b2 */
             ii(0x14_a530, 1); retfw(); return;                          /* retf */
-        //  ii(0x14_a531, 58); Недостижимый код.
+        //  ii(0x14_a531, 58); Недостижимый (и не декодированный) код.
         l_0x14_a56b:
             ii(0x14_a56b, 3); if(jmpw_func(0x14_a838, 0x2ca)) return;   /* jmp 0xa838 */
         }

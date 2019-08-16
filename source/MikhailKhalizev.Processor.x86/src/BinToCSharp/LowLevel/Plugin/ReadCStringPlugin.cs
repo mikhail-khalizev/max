@@ -98,7 +98,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (!_anyChange)
                 return;
             
-            Console.WriteLine($"Save {Engine.Configuration.StringDefinitionsClassName}");
+            NonBlockingConsole.WriteLine($"Save {Engine.Configuration.StringDefinitionsClassName}");
 
             var list = new List<string>
             {

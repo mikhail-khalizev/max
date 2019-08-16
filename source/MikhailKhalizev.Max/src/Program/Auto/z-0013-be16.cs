@@ -89,7 +89,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_bee1, 1); popw(ds);                                 /* pop ds */
             ii(0x13_bee2, 1); leavew();                                 /* leave */
             ii(0x13_bee3, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_bee4, 4); Недостижимый код.
+        //    ii(0x13_bee4, 1); popw(ds);                                 /* pop ds */
+        //    ii(0x13_bee5, 1); leavew();                                 /* leave */
+        //    ii(0x13_bee6, 1); retfw(); return;                          /* retf */
+        //    ii(0x13_bee7, 1); nop();                                    /* nop */
         l_0x13_bee8:
             ii(0x13_bee8, 3); mov(ax, 0x8023);                          /* mov ax, 0x8023 */
             ii(0x13_beeb, 1); popw(ds);                                 /* pop ds */

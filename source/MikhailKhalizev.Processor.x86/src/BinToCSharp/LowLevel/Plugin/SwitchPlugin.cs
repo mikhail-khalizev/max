@@ -293,12 +293,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             os.Append("Служебная область с абсолютными адресами переходов. {");
 
 
-            Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(cmd.Begin), out var jtka);
+            Engine.BrunchesInfo.TryGetValue(new BrunchInfo(cmd.Begin), out var jtka);
             if (jtka == null)
             {
-                jtka = new JumpsToKnownAddresses(cmd.Begin);
+                jtka = new BrunchInfo(cmd.Begin);
                 jtka.To = new SortedSet<Address>();
-                Engine.jmp_to_known_addr.Add(jtka);
+                Engine.BrunchesInfo.Add(jtka);
             }
             
             var notFirst = false;
@@ -341,29 +341,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             Address addr_area_begin, int size_of_addr_area,
             Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
         {
-            var addrsInterval = Interval.From(addr_area_begin, addr_area_begin + size_of_addr_area);
-            var methodInterval = Interval.From(dm.MethodInfo.Address + offset, dm.MethodInfo.Address + offset + dm.RawBytes.Length);
+            var raw = engine.Memory.ReadAll(addr_area_begin, size_of_addr_area);
+            engine.MethodsInfo.AddExtraRaw(dm.MethodInfo, addr_area_begin, raw, offset);
 
-            var exists = Enumerable.Empty<Interval<Address>>().Append(methodInterval);
-            if (dm.MethodInfo.ExtraRaw != null)
-                exists = exists.Concat(dm.MethodInfo.ExtraRaw.Select(x => Interval.From(x.Key, x.Key + x.Value.Length / 2)));
-
-            foreach (var interval in addrsInterval.Subtract(exists).SelectMany(x => x.Split(methodInterval)))
-            {
-                if (dm.MethodInfo.ExtraRaw == null)
-                    dm.MethodInfo.ExtraRaw = new Dictionary<Address, string>();
-                
-                var raw = engine.Memory.ReadAll(interval.Begin, interval.End - interval.Begin);
-                var rawString = HexHelper.ToHexWithoutPrefix(raw);
-                
-                if (methodInterval.Contains(interval)) // Always false.
-                    dm.MethodInfo.ExtraRaw[interval.Begin - offset] = rawString;
-                else
-                    dm.MethodInfo.ExtraRaw[interval.Begin] = rawString;
-            }
-
-
-            engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var curJmp);
+            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmd_index].Begin), out var curJmp);
             if (curJmp == null)
                 throw new NotImplementedException();
 

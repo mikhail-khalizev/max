@@ -350,7 +350,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_5dda, 1); popw(di);                                 /* pop di */
             ii(0x13_5ddb, 1); leavew();                                 /* leave */
             ii(0x13_5ddc, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_5ddd, 1); Недостижимый код.
+        //    ii(0x13_5ddd, 1); nop();                                    /* nop */
         l_0x13_5dde:
             ii(0x13_5dde, 3); mov(bx, memw_a16[ss, bp - 0x1a]);         /* mov bx, [bp-0x1a] */
             ii(0x13_5de1, 3); shl(bx, 0x2);                             /* shl bx, 0x2 */

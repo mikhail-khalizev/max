@@ -66,7 +66,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_bc91, 1); popw(ds);                                 /* pop ds */
             ii(0x13_bc92, 1); leavew();                                 /* leave */
             ii(0x13_bc93, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_bc94, 2); Недостижимый код.
+        //    ii(0x13_bc94, 1); nop();                                    /* nop */
+        //    ii(0x13_bc95, 1); nop();                                    /* nop */
         l_0x13_bc96:
             ii(0x13_bc96, 2); jmpw(0x13_bcaa, 0x12); goto l_0x13_bcaa;  /* jmp 0xbcaa */
         l_0x13_bc98:

@@ -136,7 +136,22 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_b1ff, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
             ii(0x14_b203, 3); pushw(0x7591);                            /* push 0x7591 */
             ii(0x14_b206, 1); retfw(); return;                          /* retf */
-        //  ii(0x14_b207, 39); Недостижимый код.
+        //    ii(0x14_b207, 3); mov(di, 0x400);                           /* mov di, 0x400 */
+        //    ii(0x14_b20a, 1); pushw(cs);                                /* push cs */
+        //    ii(0x14_b20b, 3); pushw(0x16f6);                            /* push 0x16f6 */
+        //    ii(0x14_b20e, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
+        //    ii(0x14_b212, 3); pushw(0x7606);                            /* push 0x7606 */
+        //    ii(0x14_b215, 1); retfw(); return;                          /* retf */
+        //    ii(0x14_b216, 1); popw(es);                                 /* pop es */
+        //    ii(0x14_b217, 1); pushw(ds);                                /* push ds */
+        //    ii(0x14_b218, 4); mov(ds, memw_a16[ds, 0xc32]);             /* mov ds, [0xc32] */
+        //    ii(0x14_b21c, 5); mov(edx, memd_a16[ds, 0x6d66]);           /* mov edx, [0x6d66] */
+        //    ii(0x14_b221, 4); mov(cx, memw_a16[ds, 0x6d6a]);            /* mov cx, [0x6d6a] */
+        //    ii(0x14_b225, 2); mov(bl, 0x21);                            /* mov bl, 0x21 */
+        //    ii(0x14_b227, 3); mov(ax, 0x205);                           /* mov ax, 0x205 */
+        //    ii(0x14_b22a, 2); @int(0x31);                               /* int 0x31 */
+        //    ii(0x14_b22c, 1); popw(ds);                                 /* pop ds */
+        //    ii(0x14_b22d, 1); popw(ax);                                 /* pop ax */
         l_0x14_b22e:
             ii(0x14_b22e, 4); mov(bx, memw_a16[ds, 0x996]);             /* mov bx, [0x996] */
             ii(0x14_b232, 3); mov(memw_a16[ds, bx + 0x6], ax);          /* mov [bx+0x6], ax */
@@ -160,7 +175,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_b261, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
             ii(0x14_b265, 3); pushw(0x7639);                            /* push 0x7639 */
             ii(0x14_b268, 1); retfw(); return;                          /* retf */
-        //  ii(0x14_b269, 19); Недостижимый код.
+        //    ii(0x14_b269, 2); xor(di, di);                              /* xor di, di */
+        //    ii(0x14_b26b, 1); pushw(cs);                                /* push cs */
+        //    ii(0x14_b26c, 3); pushw(0x1757);                            /* push 0x1757 */
+        //    ii(0x14_b26f, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
+        //    ii(0x14_b273, 3); pushw(0x75c6);                            /* push 0x75c6 */
+        //    ii(0x14_b276, 1); retfw(); return;                          /* retf */
+        //    ii(0x14_b277, 2); mov(ah, 0x49);                            /* mov ah, 0x49 */
+        //    ii(0x14_b279, 2); @int(0x21);                               /* int 0x21 */
+        //    ii(0x14_b27b, 1); popw(bx);                                 /* pop bx */
         l_0x14_b27c:
             ii(0x14_b27c, 1); pushw(ds);                                /* push ds */
             ii(0x14_b27d, 2); mov(ah, 0x1a);                            /* mov ah, 0x1a */

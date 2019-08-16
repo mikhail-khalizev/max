@@ -9,6 +9,7 @@ using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Utils;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
@@ -239,7 +240,7 @@ namespace MikhailKhalizev.Max.Dos
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
                                         nimg.Save(filePath);
 
-                                        Console.WriteLine($"draw {fileNum}.png");
+                                        NonBlockingConsole.WriteLine($"draw {fileNum}.png");
 
                                         //extra_log = (124 <= fileNum); /* Движение единиц. */
                                     }

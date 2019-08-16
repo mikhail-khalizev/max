@@ -442,7 +442,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_b8a6, 1); popw(di);                                 /* pop di */
             ii(0x13_b8a7, 1); leavew();                                 /* leave */
             ii(0x13_b8a8, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_b8a9, 1); Недостижимый код.
+        //    ii(0x13_b8a9, 1); nop();                                    /* nop */
         l_0x13_b8aa:
             ii(0x13_b8aa, 3); mov(ax, memw_a16[ss, bp - 0xa]);          /* mov ax, [bp-0xa] */
             ii(0x13_b8ad, 3); mov(dx, memw_a16[ss, bp - 0x8]);          /* mov dx, [bp-0x8] */

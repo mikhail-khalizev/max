@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -9,6 +9,37 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
     public static class MemoryExtensions
     {
+        public static ArraySegment<byte> GetMinSize(this IMemory memory, SegmentRegister seg, Address address, int minSize)
+        {
+            if (seg.Descriptor.Present == false /* @todo || seg.is_null() */)
+                throw new NotImplementedException();
+
+            if (seg.fail_limit_check(address, minSize))
+                throw new NotImplementedException();
+
+            var ret = memory.GetMinSize(seg[address], minSize);
+
+
+            // correct size with segment limit
+
+            Address end = address + ret.Count;
+
+            if (seg.Descriptor.Limit + 1 != 0)
+            {
+                if (end == 0)
+                    end = seg.Descriptor.Limit + 1; // todo can't understand
+                else
+                    end = Math.Min(end, seg.Descriptor.Limit + 1);
+            }
+
+            if (end <= address)
+                throw new NotImplementedException();
+
+            ret = ret.Slice(0, end - address);
+
+            return ret;
+        }
+
         public static ArraySegment<byte> GetFixSize(this IMemory memory, Address address, int size)
         {
             return memory.GetMinSize(address, size).Slice(0, size);

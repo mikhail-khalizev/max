@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,6 +14,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
     public class MethodInfoDto
     {
         public Guid Guid { get; set; }
+        
+        public Address CsBase { get; set; }
+        
+        public bool ShouldSerializeCsBase() => CsBase != 0;
 
         public Address Address
         {

@@ -24,6 +24,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             
             Address toAddr = 0; // prediction address.
 
+            Address extraStart = 0;
+            byte[] extraBytes = null;
+
             if ((cmd.IsJmpOrJcc || cmd.IsLoopOrLoopcc || cmd.IsCall) && (op.type == ud_type.UD_OP_JIMM))
             {
                 switch (op.size)
@@ -56,13 +59,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     default: throw new NotImplementedException();
                 }
 
+                extraStart = where;
+                extraBytes = Engine.Memory.ReadAll(extraStart, op.size / 8);
+
                 switch (op.size)
                 {
                     case 16:
-                        toAddr = Engine.Memory.GetStruct<ushort>(where);
+                        toAddr = BitConverter.ToUInt16(extraBytes);
                         break;
                     case 32:
-                        toAddr = Engine.Memory.GetStruct<uint>(where);
+                        toAddr = BitConverter.ToUInt32(extraBytes);
                         break;
                     default:
                         throw new NotImplementedException();
@@ -96,25 +102,38 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             {
                 if (notSuppressed)
                     Engine.AddToNewDetectedMethods(toAddr); // create if not exist.
+
+                if (extraBytes != null)
+                {
+                    var orig = cmd.WriteCmd;
+                    cmd.WriteCmd = (engine, dm, index, func, offset) =>
+                    {
+                        engine.MethodsInfo.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
+                        return orig(engine, dm, index, func, offset);
+                    };
+                }
             }
             else
             {
-                Engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(cmd.Begin), out var actual);
+                Engine.BrunchesInfo.TryGetValue(new BrunchInfo(cmd.Begin), out var actual);
                 if (actual == null)
                 {
-                    actual = new JumpsToKnownAddresses(cmd.Begin);
+                    actual = new BrunchInfo(cmd.Begin);
                     actual.To = new SortedSet<Address>();
-                    Engine.jmp_to_known_addr.Add(actual);
+                    Engine.BrunchesInfo.Add(actual);
                 }
 
                 actual.To.Add(toAddr);
-                cmd.WriteCmd = on_cmd_write;
+                cmd.WriteCmd = (engine, dm, index, func, offset) => on_cmd_write(engine, dm, index, func, offset, extraStart, extraBytes);
             }
         }
 
-        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
+        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset, Address extraStart, byte[] extraBytes)
         {
-            engine.jmp_to_known_addr.TryGetValue(new JumpsToKnownAddresses(dm.Instructions[cmd_index].Begin), out var cur_jmp);
+            if (extraBytes != null)
+                engine.MethodsInfo.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
+
+            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmd_index].Begin), out var cur_jmp);
             if (cur_jmp == null)
                 throw new InvalidOperationException();
 

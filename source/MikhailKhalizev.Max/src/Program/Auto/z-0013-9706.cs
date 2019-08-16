@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Max.Program
                 default:
                     throw new NotImplementedException();
             } /* jmp word [cs:bx+0x4ff6] */
-        //    ii(0x13_9815, 1); /* Выравнивание. */
+        //    ii(0x13_9815, 1); nop();                                    /* nop */
         //    ii(0x13_9816, 22); /* Служебная область с абсолютными адресами переходов. {0x13_971e, 0x13_9734, 0x13_974a, 0x13_9760, 0x13_9776, 0x13_978c, 0x13_97a2, 0x13_97b6, 0x13_97ca, 0x13_97de, 0x13_97f2}. */
         l_0x13_982c:
             ii(0x13_982c, 3); mov(ax, memw_a16[ss, bp - 0x2]);          /* mov ax, [bp-0x2] */

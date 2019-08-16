@@ -1564,6 +1564,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
                     MethodCollection.GetMethod(out var methodInfo, out var method);
 
+
                     if (_statisticMethodCall != null)
                     {
                         lock (_statisticMethodCall)
@@ -1578,15 +1579,21 @@ namespace MikhailKhalizev.Processor.x86.Core
                         saveJumpInfo = false;
 
                         var from = cs[CurrentInstructionAddress];
-                        //if (!callReturnAddresses.Contains(toRun))
                         MethodsInfo.AddJumpAndSave(MethodInfo, from, methodInfo, toRun, CSharpFunctionDelta);
                     }
-
+                    
                     var prevMethodInfo = MethodInfo;
                     var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
                     MethodInfo = methodInfo;
                     CSharpFunctionDelta = cs[eip] - methodInfo.Address;
+                    
+                    //var expectedMethodInfoCsBase = cs[0] - CSharpFunctionDelta;
+                    //if (methodInfo.CsBase != expectedMethodInfoCsBase)
+                    //{
+                    //    methodInfo.CsBase = expectedMethodInfoCsBase;
+                    //    MethodsInfo.Save(true, false, true);
+                    //}
 
                     if (!string.IsNullOrEmpty(Configuration.StateOutput))
                     {

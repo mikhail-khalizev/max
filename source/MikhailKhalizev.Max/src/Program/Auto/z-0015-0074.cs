@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x15_0104, 2); pushd(edx);                               /* push edx */
             ii(0x15_0106, 2); pushd(eax);                               /* push eax */
             ii(0x15_0108, 2); retfd(); return;                          /* o32 retf */
-        //  ii(0x15_010a, 22); Недостижимый код.
+        //  ii(0x15_010a, 22); Недостижимый (и не декодированный) код.
         l_0x15_0120:
             ii(0x15_0120, 1); popw(ds);                                 /* pop ds */
             ii(0x15_0121, 1); popw(di);                                 /* pop di */

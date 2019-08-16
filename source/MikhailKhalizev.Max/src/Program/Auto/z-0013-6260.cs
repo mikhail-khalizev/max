@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_62c4, 1); popw(si);                                 /* pop si */
             ii(0x13_62c5, 1); leavew();                                 /* leave */
             ii(0x13_62c6, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_62c7, 1); Недостижимый код.
+        //    ii(0x13_62c7, 1); nop();                                    /* nop */
         l_0x13_62c8:
             ii(0x13_62c8, 3); mov(ax, memw_a16[ss, bp + 0x6]);          /* mov ax, [bp+0x6] */
             ii(0x13_62cb, 3); shl(ax, 0x2);                             /* shl ax, 0x2 */

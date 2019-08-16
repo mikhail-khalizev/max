@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_c048()
         {
             ii(0xc048, 5);    test(memw_a16[ss, bp + 0x26], 0x200);     /* test word [bp+0x26], 0x200 */
-            ii(0xc04d, 2);    if(jzw(0xc050, 0x1)) goto l_0xc050;       /* jz 0xe810 */
+            ii(0xc04d, 2);    if(jzw(0xc050, 0x1)) goto l_0xc050;       /* jz 0xc050 */
             ii(0xc04f, 1);    sti();                                    /* sti */
         l_0xc050:
             ii(0xc050, 3);    lea(sp, bp - 0x4);                        /* lea sp, [bp-0x4] */

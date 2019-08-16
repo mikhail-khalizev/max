@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_bcd8, 1); popw(ds);                                 /* pop ds */
             ii(0x13_bcd9, 1); leavew();                                 /* leave */
             ii(0x13_bcda, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_bcdb, 1); Недостижимый код.
+        //    ii(0x13_bcdb, 1); nop();                                    /* nop */
         l_0x13_bcdc:
             ii(0x13_bcdc, 3); mov(ax, memw_a16[ds, 0x1a]);              /* mov ax, [0x1a] */
             ii(0x13_bcdf, 4); or(ax, memw_a16[ds, 0x18]);               /* or ax, [0x18] */
@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_bd3c, 1); popw(ds);                                 /* pop ds */
             ii(0x13_bd3d, 1); leavew();                                 /* leave */
             ii(0x13_bd3e, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_bd3f, 1); Недостижимый код.
+        //    ii(0x13_bd3f, 1); nop();                                    /* nop */
         l_0x13_bd40:
             ii(0x13_bd40, 3); pushw(memw_a16[ss, bp + 0x8]);            /* push word [bp+0x8] */
             ii(0x13_bd43, 3); pushw(memw_a16[ss, bp + 0x6]);            /* push word [bp+0x6] */
@@ -143,13 +143,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_bdff, 1); popw(ds);                                 /* pop ds */
             ii(0x13_be00, 1); leavew();                                 /* leave */
             ii(0x13_be01, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_be02, 2); Недостижимый код.
+        //    ii(0x13_be02, 2); jmpw(0x13_be0a, 0x6); goto l_0x13_be0a;   /* jmp 0xbe0a */
         l_0x13_be04:
             ii(0x13_be04, 3); mov(ax, 0x8016);                          /* mov ax, 0x8016 */
             ii(0x13_be07, 1); popw(ds);                                 /* pop ds */
             ii(0x13_be08, 1); leavew();                                 /* leave */
             ii(0x13_be09, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_be0a, 2); Недостижимый код.
+        l_0x13_be0a:
+            ii(0x13_be0a, 2); if(jmpw_func(0x13_be12, 0x6)) return;     /* jmp 0xbe12 */
         l_0x13_be0c:
             ii(0x13_be0c, 3); mov(ax, 0x8013);                          /* mov ax, 0x8013 */
             ii(0x13_be0f, 1); popw(ds);                                 /* pop ds */

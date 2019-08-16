@@ -23,10 +23,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     /// до тех пор пока не встретится потенциальный конец функции (ret или jmp). После
     /// чего декодирование части заканчивается и начинается декодирование других частей,
     /// выявленных по операциям ветвления (jcc, jmp, loop, call).
-    /// 
-    /// Алгоритм устроен так, что без необходимости, ничего лишнего он не декодирует.
-    ///
-    /// (Возможно описание устарело) 
     /// </summary>
     public class Engine
     {
@@ -45,9 +41,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public DecodedCode DecodedCode { get; } = new DecodedCode();
 
         public bool AddMethodInfoJumpsToDecode { get; set; } = true;
-
-
-
+        public int LimitDecodeTotalLength { get; set; }
+        
         /// <summary>
         /// Список адресов на которых происходит принудительное завершение декодирования.
         /// Это требуется при декодировании 'странного' кода. Например когда в функции,
@@ -55,38 +50,90 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// требуется принудительно остановить декодирование после данного call.
         /// </summary>
         /// <remarks>
-        /// Если <see cref="ForceEndFuncs"/> делит инструкцию пополам,
+        /// Если <see cref="ForceEndMethod"/> делит инструкцию пополам,
         /// то эта инструкция относится к методу, расположенному с меньшим адресом.
         /// </remarks>
-        private MySortedSet<Address> force_end_funcs_ { get; } = new MySortedSet<Address>();
-
-        public void AddForceEndFuncs(Address address)
-        {
-            force_end_funcs_.Add(address);
-        }
-
+        private MySortedSet<Address> ForceEndMethod { get; } = new MySortedSet<Address>();
 
         private MultiValueDictionary<Address, MethodInfoDto> AlreadyDecodedMethods { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
 
+        /// <summary>
+        /// Набор адресов начиная с которых необходимо произвести декодирование.
+        /// </summary>
+        private readonly HashSet<Address> _addressesToDecode = new HashSet<Address>();
+        
+        /// <summary>
+        /// Содержит информацию об определённых методах.
+        /// </summary>
+        public MySortedSet<DetectedMethod> NewDetectedMethods { get; } = new MySortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
+        
+        public Dictionary<Address, int> Alignment { get; } = new Dictionary<Address, int>(); // <addr of start, aligment>
+
+        // Переходы на известные адреса.
+        public SortedSet<BrunchInfo> BrunchesInfo = new SortedSet<BrunchInfo>(BrunchInfo.BeginComparer);
+
+        private const int LineCmdOffset = 18;
+        private const int LineCommentOffset = 60;
+
+        private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
+        private readonly SwitchPlugin _switchPlugin;
+        private readonly ReadCStringPlugin _readCStringPlugin;
+        private readonly CommentDummyInstructionsPlugin comment_idle; // comment dummy instruction
+        
+
+        public Engine(
+            BinToCSharpDto configuration,
+            DefinitionCollection definitionCollection,
+            IMemory memory,
+            ArchitectureMode mode,
+            Address csBase,
+            Address dsBase,
+            MethodsInfo methodsInfo)
+        {
+            Configuration = configuration;
+            DefinitionCollection = definitionCollection;
+            Memory = memory;
+            Mode = mode;
+            CsBase = csBase;
+            DsBase = dsBase;
+            MethodsInfo = methodsInfo;
+
+            if (csBase != 0)
+                SuppressDecode.Add(0, csBase);
+
+            _readCStringPlugin = new ReadCStringPlugin(this);
+            comment_idle = new CommentDummyInstructionsPlugin(this);
+            _simpleBranchPlugin = new SimpleBranchPlugin(this);
+            _switchPlugin = new SwitchPlugin(this);
+
+            LimitDecodeTotalLength = Configuration.LimitDecodeSize;
+        }
+
+        
+        public void AddForceEndMethod(Address fullAddress)
+        {
+            ForceEndMethod.Add(fullAddress);
+        }
+        
         public void AddAlreadyDecodedFunc(MethodInfoDto model)
         {
             foreach (var address in model.Addresses)
                 AlreadyDecodedMethods.Add(address, model);
         }
 
-        public void RemoveAlreadyDecodedFunc(Address address)
+        public void RemoveAlreadyDecodedFunc(Address fullAddress)
         {
-            AlreadyDecodedMethods.Remove(address);
+            AlreadyDecodedMethods.Remove(fullAddress);
         }
 
-        public bool HaveAlreadyDecodedMethodStartedWith(Address address)
+        public bool HaveAlreadyDecodedMethodStartedWith(Address fullAddress)
         {
-            if (!AlreadyDecodedMethods.TryGetValue(address, out var models))
+            if (!AlreadyDecodedMethods.TryGetValue(fullAddress, out var models))
                 return false;
 
             foreach (var model in models)
             {
-                if (Memory.Equals(address, model.RawBytes))
+                if (Memory.Equals(fullAddress, model.RawBytes))
                     return true;
             }
 
@@ -98,73 +145,41 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return AlreadyDecodedMethods.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
         }
 
-        /// <summary>
-        /// Набор адресов начиная с которых необходимо произвести декодирование.
-        /// </summary>
-        private HashSet<Address> _addressesToDecode = new HashSet<Address>();
-
-        /// <summary>
-        /// Содержит информацию об определённых методах.
-        /// </summary>
-        public MySortedSet<DetectedMethod> NewDetectedMethods { get; } = new MySortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
-
         public bool AddToNewDetectedMethods(Address address)
         {
             return NewDetectedMethods.Add(new DetectedMethod(address));
         }
-
-        public Dictionary<Address, int> Alignment { get; } = new Dictionary<Address, int>(); // <addr of start, aligment>
-
-        // Переходы на известные адреса.
-        public SortedSet<JumpsToKnownAddresses> jmp_to_known_addr = new SortedSet<JumpsToKnownAddresses>(JumpsToKnownAddresses.BeginComparer);
-
-        private const int LineCmdOffset = 18;
-        private const int LineCommentOffset = 60;
-
-        private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
-        private readonly SwitchPlugin _switchPlugin;
-        private readonly ReadCStringPlugin _readCStringPlugin;
-        private readonly CommentDummyInstructionsPlugin comment_idle; // comment dummy instruction
-        private int _limitSize;
-
-
-        public Engine(
-            BinToCSharpDto configuration,
-            DefinitionCollection definitionCollection,
-            IMemory memory,
-            ArchitectureMode mode,
-            Address csBase,
-            Address dsBase,
-            MethodsInfo methodsInfo = null)
-        {
-            Configuration = configuration;
-            DefinitionCollection = definitionCollection;
-            Memory = memory;
-            Mode = mode;
-            CsBase = csBase;
-            DsBase = dsBase;
-            MethodsInfo = methodsInfo ?? MethodsInfo.Load(configuration);
-
-            if (csBase != 0)
-                SuppressDecode.Add(0, csBase);
-
-            _readCStringPlugin = new ReadCStringPlugin(this);
-            comment_idle = new CommentDummyInstructionsPlugin(this);
-            _simpleBranchPlugin = new SimpleBranchPlugin(this);
-            _switchPlugin = new SwitchPlugin(this);
-
-            _limitSize = Configuration.LimitDecodeSize;
-        }
+        
 
         public void AddToDecode(Address address)
         {
             _addressesToDecode.Add(address);
         }
 
-        public void DecodeMethod(Address address)
+        public void DecodeMethod(Address start)
         {
-            if (AddToNewDetectedMethods(address))
-                Decode(address);
+            if (AddToNewDetectedMethods(start))
+                Decode(start);
+        }
+
+        public void DecodeMethod(Address start, Address end)
+        {
+            DecodeMethod(start);
+
+            var interval = DecodedCode.Area.FindIntervalThatContainsValue(start, false);
+            if (!interval.Contains(start))
+                throw new InvalidOperationException();
+
+            while (!interval.Contains(end, true))
+            {
+                Decode(interval.End);
+
+                var newInterval = DecodedCode.Area.FindIntervalThatContainsValue(start, false);
+                if (interval.End == newInterval.End)
+                    return;
+
+                interval = newInterval;
+            }
         }
 
         public void Decode(Address address)
@@ -182,6 +197,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 ProcessStep(address);
             }
         }
+
 
         private class AssemblyCode : IAssemblyCode
         {
@@ -232,7 +248,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (address < CsBase)
                 return;
 
-            if (_limitSize <= 0)
+            if (LimitDecodeTotalLength <= 0)
                 return;
 
             var lowerBound = SuppressDecode.LowerBound(address, false);
@@ -260,7 +276,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
 
             // Функция, начинающаяся с точного совпадения force_end_funcs_ может начать декодироваться.
-            var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(address);
+            var nearestForceEnd = ForceEndMethod.FirstGreaterOrDefault(address);
             if (nearestForceEnd == default)
                 nearestForceEnd = Address.MaxValue;
 
@@ -278,7 +294,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
                     break; //throw new InvalidOperationException("Преждевременное завершение функции.");
 
-                _limitSize -= length;
+                LimitDecodeTotalLength -= length;
 
                 var cmd = new CSharpInstruction(DefinitionCollection, u);
                 
@@ -323,7 +339,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         private void LayoutMethods()
         {
-            Console.WriteLine("Разбиение кода на методы.");
+            //NonBlockingConsole.WriteLine("Разбиение кода на методы.");
 
             if (_addressesToDecode.Count != 0)
                 ProcessDecode();
@@ -370,7 +386,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // --- Посчитаем min_end - адрес конца функции, дальше которого функция точно уже не может продолжаться. ---
 
-                    var nearestForceEnd = force_end_funcs_.FirstGreaterOrDefault(methodBegin);
+                    var nearestForceEnd = ForceEndMethod.FirstGreaterOrDefault(methodBegin);
                     if (nearestForceEnd == default)
                         nearestForceEnd = Address.MaxValue;
 
@@ -396,25 +412,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             // Т.к. эта инструкция является NewDetectedMethods, то предыдущая - конец функции.
                             break;
                         }
-
-                        // Всегда false, т.к. мы не декодируем методы из AlreadyDecodedMethods.
-                        //// Проверим на принадлежность к AlreadyDecodedMethods.
-                        //if (HaveAlreadyDecodedMethodStartedWith(cmd.Begin))
-                        //{
-                        //    // Нашли среди декодированных.
-                        //    break;
-                        //}
+                        
+                        // Проверим на принадлежность к AlreadyDecodedMethods.
+                        if (HaveAlreadyDecodedMethodStartedWith(lastInstrEnd))
+                        {
+                            // Нашли среди декодированных.
+                            break;
+                        }
 
                         instructions.Add(cmd);
                         lastInstrEnd = cmd.End;
-
-                        if (HaveAlreadyDecodedMethodStartedWith(lastInstrEnd))
-                            break;
                     }
 
                     // Убираем конечные закомментированные инструкции.
                     while (instructions.Count != 0 && instructions[instructions.Count - 1].CommentThis)
                         instructions.RemoveAt(instructions.Count - 1);
+
+                    if (instructions.Count == 0)
+                    {
+                        toRemove.Add(detectedMethod);
+                        continue;
+                    }
 
                     methodEnd = instructions[instructions.Count - 1].End;
 
@@ -422,7 +440,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     detectedMethod.Labels.Clear();
 
-                    foreach (var i in jmp_to_known_addr.GetViewBetween(new JumpsToKnownAddresses(methodBegin), new JumpsToKnownAddresses(methodEnd)))
+                    foreach (var i in BrunchesInfo.GetViewBetween(new BrunchInfo(methodBegin), new BrunchInfo(methodEnd)))
                     {
                         foreach (var to in i.To)
                         {
@@ -521,21 +539,42 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             foreach (var detectedMethod in NewDetectedMethods)
             {
+                Address expectedMethodInfoCsBase;
                 if (detectedMethod.MethodInfo != null)
+                {
+                    expectedMethodInfoCsBase = CsBase == 0 ? 0 : CsBase - (detectedMethod.Begin - detectedMethod.MethodInfo.Address);
+                    if (detectedMethod.MethodInfo.CsBase != expectedMethodInfoCsBase)
+                    {
+                        detectedMethod.MethodInfo.CsBase = expectedMethodInfoCsBase;
+                        MethodsInfo.SetDirty();
+                    }
+
                     continue;
+                }
 
                 var mi = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
                 if (mi == null)
                 {
                     mi = new MethodInfoDto();
                     mi.Guid = Guid.NewGuid();
+                    mi.CsBase = CsBase;
                     mi.Address = detectedMethod.Begin;
                     mi.Mode = Mode;
                     mi.RawBytes = detectedMethod.RawBytes;
                     MethodsInfo.Add(mi);
                 }
                 else if (!mi.Addresses.Contains(detectedMethod.Begin))
+                {
                     mi.Addresses.Add(detectedMethod.Begin);
+                    MethodsInfo.SetDirty();
+                }
+
+                expectedMethodInfoCsBase = CsBase == 0 ? 0 : CsBase - (detectedMethod.Begin - mi.Address);
+                if (mi.CsBase != expectedMethodInfoCsBase)
+                {
+                    mi.CsBase = expectedMethodInfoCsBase;
+                    MethodsInfo.SetDirty();
+                }
 
                 detectedMethod.MethodInfo = mi;
             }
@@ -546,8 +585,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 .ToLookup(x => x.MethodInfo)
                 .Select(y => y.OrderBy(x => x.MethodInfo.Addresses.IndexOf(x.Begin)).First())
                 .ToLookup(x => x.MethodInfo.Address);
-
-            var toConsole = new ConcurrentQueue<string>();
 
             var exList = new List<Exception>();
             var fileConcurrentBag = new ConcurrentBag<string>();
@@ -570,13 +607,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
                             if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
                             {
-                                toConsole.Enqueue(
+                                NonBlockingConsole.WriteLine(
                                     $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
                                 return;
                             }
 
 
-                            toConsole.Enqueue($"Сохранение метода '{methodBegin}' в файл.");
+                            NonBlockingConsole.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
 
 
                             var baseFileName = "z-" + methodBegin.ToString(
@@ -618,12 +655,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         catch (Exception ex)
                         {
                             exList.Add(ex);
-                            toConsole.Enqueue($"Ошибка при сохранении метода '{methodBegin}' в файл: {ex.Message.TrimEnd('.')}.");
+                            NonBlockingConsole.WriteLine($"Ошибка при сохранении метода '{methodBegin}' в файл: {ex.Message.TrimEnd('.')}.");
                         }
                     }
                 });
-
-            Console.WriteLine(string.Join(Environment.NewLine, toConsole));
             
             MethodsInfo.Save();
 
@@ -632,6 +667,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             return fileConcurrentBag.ToList();
         }
+
 
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)
         {

@@ -223,7 +223,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_b426, 1); popw(di);                                 /* pop di */
             ii(0x13_b427, 1); leavew();                                 /* leave */
             ii(0x13_b428, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_b429, 1); Недостижимый код.
+        //    ii(0x13_b429, 1); nop();                                    /* nop */
         l_0x13_b42a:
             ii(0x13_b42a, 3); jmpw(0x13_b302, -0x12b); goto l_0x13_b302; /* jmp 0xb302 */
         //    ii(0x13_b42d, 1); nop();                                    /* nop */

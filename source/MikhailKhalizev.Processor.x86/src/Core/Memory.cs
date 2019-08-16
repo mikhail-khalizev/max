@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (!A20Gate)
                 address &= 0xf_ffff;
 
-            var input = new Interval<Address>(address, address + size);
+            var input = new Interval<Address>(address, address + size); // TODO mask end address with 0xf_ffff.
 
             for (var i = 0; i < 2; i++)
             {
@@ -152,38 +152,6 @@ namespace MikhailKhalizev.Processor.x86.Core
                 cache,
                 physAddresses[0] - cache_map[0],
                 0x2000 - (physAddresses[0] - cache_map[0]));
-        }
-
-        /// <inheritdoc />
-        public ArraySegment<byte> GetMinSize(SegmentRegister seg, Address address, int minSize)
-        {
-            if (seg.Descriptor.Present == false /* @todo || seg.is_null() */)
-                throw new NotImplementedException();
-
-            if (seg.fail_limit_check(address, minSize))
-                throw new NotImplementedException();
-
-            var ret = GetMinSize(seg[address], minSize);
-
-
-            // correct size with segment limit
-
-            Address end = address + ret.Count;
-
-            if (seg.Descriptor.Limit + 1 != 0)
-            {
-                if (end == 0)
-                    end = seg.Descriptor.Limit + 1; // todo can't understand
-                else
-                    end = Math.Min(end, seg.Descriptor.Limit + 1);
-            }
-
-            if (end <= address)
-                throw new NotImplementedException();
-
-            ret = ret.Slice(0, end - address);
-
-            return ret;
         }
 
         public Address GetRamAddress(Address address)

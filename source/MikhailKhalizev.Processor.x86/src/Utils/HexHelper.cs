@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -327,6 +327,12 @@ namespace MikhailKhalizev.Processor.x86.Utils
         }
 
         public static string ToHexWithoutPrefix(byte[] data)
+        {
+            // TODO Optimize
+            return HexHelper.ToString(data, o => o.RemoveHexPrefix().SetGroupSize(0));
+        }
+
+        public static string ToHexWithoutPrefix(ArraySegment<byte> data)
         {
             // TODO Optimize
             return HexHelper.ToString(data, o => o.RemoveHexPrefix().SetGroupSize(0));

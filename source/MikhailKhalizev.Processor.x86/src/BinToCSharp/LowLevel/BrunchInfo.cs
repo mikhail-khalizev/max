@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
-    public class JumpsToKnownAddresses
+    public class BrunchInfo
     {
         public Address From { get; set; }
         public SortedSet<Address> To { get; set; }
 
-        public JumpsToKnownAddresses(Address from)
+        public BrunchInfo(Address from)
         {
             From = from;
         }
 
-        public static IComparer<JumpsToKnownAddresses> BeginComparer =>
-            new CustomComparer<JumpsToKnownAddresses>(
+        public static IComparer<BrunchInfo> BeginComparer =>
+            new CustomComparer<BrunchInfo>(
                 (x, y) => x.From.CompareTo(y.From));
     }
 }

@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_c758, 1); popw(ds);                                 /* pop ds */
             ii(0x13_c759, 1); leavew();                                 /* leave */
             ii(0x13_c75a, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_c75b, 1); Недостижимый код.
+        //    ii(0x13_c75b, 1); nop();                                    /* nop */
         l_0x13_c75c:
             ii(0x13_c75c, 2); jmpw(0x13_c726, -0x38); goto l_0x13_c726; /* jmp 0xc726 */
         l_0x13_c75e:

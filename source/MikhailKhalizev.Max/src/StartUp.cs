@@ -1,8 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Program;
+using MikhailKhalizev.Processor.x86;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
+using MikhailKhalizev.Processor.x86.Utils;
 using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max
@@ -49,9 +55,24 @@ namespace MikhailKhalizev.Max
 
             // Start.
 
+            var methodsInfo = MethodsInfo.Load(ConfigurationDto.BinToCSharp);
+            var definitionCollection = new DefinitionCollection();
+            definitionCollection.AddDefinitionsClass<Definitions>();
+            definitionCollection.AddDefinitionsClass<StringDefinitions>();
+
+            AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
+
+            if (args.Contains("--redecode"))
+            {
+                Console.WriteLine("Start Redecode.");
+                var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
+                redecode.Start(GetType().Assembly);
+                return;
+            }
+
             using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
             {
-                var rp = new RawProgramMain(p, ConfigurationDto);
+                var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
                 rp.Start();
             }
         }

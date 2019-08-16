@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5c78, 1);    pushw(ss);                                /* push ss */
             ii(0x5c79, 1);    popw(ds);                                 /* pop ds */
             ii(0x5c7a, 1);    pushw(bx);                                /* push bx */
-            ii(0x5c7b, 3);    callw(0x5cce, 0x50);                      /* call 0x551e */
+            ii(0x5c7b, 3);    callw(0x5cce, 0x50);                      /* call 0x5cce */
             ii(0x5c7e, 1);    popw(cx);                                 /* pop cx */
             ii(0x5c7f, 3);    shl(cx, 0x3);                             /* shl cx, 0x3 */
         l_0x5c82:
@@ -57,7 +57,7 @@ namespace MikhailKhalizev.Max.Program
         //    ii(0x5cbb, 3);    shl(cx, 0x4);                             /* shl cx, 0x4 */
         //    ii(0x5cbe, 2);    sub(cx, di);                              /* sub cx, di */
         //    ii(0x5cc0, 2);    shr(cx, 0x1);                             /* shr cx, 1 */
-        //    ii(0x5cc2, 2);    jmpw(0x5c82, -0x42); goto l_0x5c82;       /* jmp 0x54d2 */
+        //    ii(0x5cc2, 2);    jmpw(0x5c82, -0x42); goto l_0x5c82;       /* jmp 0x5c82 */
         }
     }
 }

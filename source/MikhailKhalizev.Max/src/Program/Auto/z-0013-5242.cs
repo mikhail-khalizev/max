@@ -123,7 +123,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_5346, 1); popw(ds);                                 /* pop ds */
             ii(0x13_5347, 1); leavew();                                 /* leave */
             ii(0x13_5348, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_5349, 1); Недостижимый код.
+        //    ii(0x13_5349, 1); nop();                                    /* nop */
         l_0x13_534a:
             ii(0x13_534a, 1); pushw(ds);                                /* push ds */
             ii(0x13_534b, 3); pushw(0x2f6);                             /* push 0x2f6 */
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_536e, 1); popw(ds);                                 /* pop ds */
             ii(0x13_536f, 1); leavew();                                 /* leave */
             ii(0x13_5370, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_5371, 1); Недостижимый код.
+        //    ii(0x13_5371, 1); nop();                                    /* nop */
         l_0x13_5372:
             ii(0x13_5372, 1); pushw(ds);                                /* push ds */
             ii(0x13_5373, 3); pushw(0x306);                             /* push 0x306 */
@@ -161,7 +161,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_5396, 1); popw(ds);                                 /* pop ds */
             ii(0x13_5397, 1); leavew();                                 /* leave */
             ii(0x13_5398, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_5399, 1); Недостижимый код.
+        //    ii(0x13_5399, 1); nop();                                    /* nop */
         l_0x13_539a:
             ii(0x13_539a, 1); pushw(ds);                                /* push ds */
             ii(0x13_539b, 3); pushw(0x314);                             /* push 0x314 */
@@ -180,7 +180,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_53be, 1); popw(ds);                                 /* pop ds */
             ii(0x13_53bf, 1); leavew();                                 /* leave */
             ii(0x13_53c0, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_53c1, 1); Недостижимый код.
+        //    ii(0x13_53c1, 1); nop();                                    /* nop */
         l_0x13_53c2:
             ii(0x13_53c2, 1); pushw(ds);                                /* push ds */
             ii(0x13_53c3, 3); pushw(0x31c);                             /* push 0x31c */

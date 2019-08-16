@@ -26,8 +26,8 @@ namespace MikhailKhalizev.Max.Program
     {
         public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
-        public DefinitionCollection DefinitionCollection { get; } = new DefinitionCollection();
-        public MethodsInfo MethodsInfo { get; private set; }
+        public DefinitionCollection DefinitionCollection { get; }
+        public MethodsInfo MethodsInfo { get; }
 
         public DosMemory DosMemory { get; }
         public DosInterrupt DosInterrupt { get; }
@@ -42,17 +42,19 @@ namespace MikhailKhalizev.Max.Program
 
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
         public const ushort pspseg = image_load_seg - 16; // 0x192
-
-        public RawProgramMain(ConfigurationDto configuration)
-            : this(new Processor.x86.Core.Processor(configuration.Processor), configuration)
-        { }
-
-        public RawProgramMain(Processor.x86.Core.Processor implementation, ConfigurationDto configuration)
+        
+        public RawProgramMain(
+            Processor.x86.Core.Processor implementation,
+            ConfigurationDto configuration,
+            MethodsInfo methodsInfo,
+            DefinitionCollection definitionCollection)
             : base(implementation)
         {
-            Implementation = implementation;
+            MethodsInfo = methodsInfo;
             Configuration = configuration;
-
+            Implementation = implementation;
+            DefinitionCollection = definitionCollection;
+            
             DosMemory = new DosMemory(implementation, this);
             DosInterrupt = new DosInterrupt(implementation, this);
             DosTimer = new DosTimer(implementation, this);
@@ -60,6 +62,7 @@ namespace MikhailKhalizev.Max.Program
             DosDma = new DosDma(implementation, this);
             DosPic = new DosPic(implementation, this);
 
+            Implementation.MethodsInfo = MethodsInfo;
             implementation.MethodCollection = this;
             implementation.runInb += (sender, args) => DosPort.MyInb(args.value, args.port);
             implementation.runOutb += (sender, args) => DosPort.MyOutb(args.port, args.value);
@@ -68,11 +71,6 @@ namespace MikhailKhalizev.Max.Program
 
         public void Start()
         {
-            MethodsInfo = MethodsInfo.Load(Configuration.BinToCSharp);
-            DefinitionCollection.AddDefinitionsClass<Definitions>();
-            DefinitionCollection.AddDefinitionsClass<StringDefinitions>();
-            Implementation.MethodsInfo = MethodsInfo;
-
             ConnectDecodedMethods(GetType().Assembly);
             DosInterrupt.Initialize();
             InitializeX86DosProgram();
@@ -89,11 +87,13 @@ namespace MikhailKhalizev.Max.Program
 
                 foreach (var methodInfo in bridgeProcessorType.GetMethods(BindingFlags.Instance | BindingFlags.Public))
                 {
-                    var a = methodInfo.GetCustomAttribute<MethodInfoAttribute>();
-                    if (a == null)
+                    var attribute = methodInfo.GetCustomAttribute<MethodInfoAttribute>();
+                    if (attribute == null)
                         continue;
 
-                    var mi = MethodsInfo.GetByGuid(a.Guid);
+                    var mi = MethodsInfo.GetByGuidOrNull(attribute.Guid);
+                    if (mi == null)
+                        continue;
 
                     if (instance == null)
                     {
@@ -264,21 +264,21 @@ namespace MikhailKhalizev.Max.Program
                 }
 
                 // Всё-таки декодируем.
-                var files = DecodeNewMethod(cs, eip);
+                var files = DecodeCurrentMethod();
 
                 // Compile and load.
                 try
                 {
-                    Console.WriteLine($"Компилирование новых методов.");
+                    NonBlockingConsole.WriteLine($"Компилирование новых методов.");
                     var dllPath = Compile(files);
 
-                    Console.WriteLine($"Загрузка '{dllPath}'.");
+                    NonBlockingConsole.WriteLine($"Загрузка '{dllPath}'.");
                     var assembly = Assembly.LoadFile(dllPath);
                     ConnectDecodedMethods(assembly);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                    NonBlockingConsole.WriteLine(ex);
                     throw;
                 }
             }
@@ -398,56 +398,56 @@ namespace MikhailKhalizev.Max.Program
             return null;
         }
 
-        private List<string> DecodeNewMethod(SegmentRegister seg, Address address)
+        public static void ConfigureEngine(Engine engine)
         {
-            //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
-
-            var fullAddress = seg[address];
-
-            var to_cxx = new Engine(
-                Configuration.BinToCSharp,
-                DefinitionCollection,
-                Implementation.Memory,
-                seg.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
-                seg.Descriptor.Base,
-                ds.Descriptor.Base,
-                MethodsInfo);
-
-            to_cxx.AddMethodInfoJumpsToDecode =
+            engine.AddMethodInfoJumpsToDecode =
                 false; // Код активно загружается в процессе работы, поэтому преждевременное декодирование приводит к ошибкам.
-                       // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
+            // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
 
-            if (seg.Descriptor.Base != 0)
-                to_cxx.SuppressDecode.Add(0, seg.Descriptor.Base);
-
-            if (seg.Descriptor.Base + seg.Descriptor.Limit + 1 != 0)
-                to_cxx.SuppressDecode.Add(seg.Descriptor.Base + seg.Descriptor.Limit + 1 + 1, 0);
-
-            to_cxx.SuppressDecode.Add(0x14f0_0000, 0);
+            engine.SuppressDecode.Add(0x14f0_0000, 0);
             //    to_cxx.add_region_to_suppress_decode(0x10289000, 0); // Чтоб не выходил за пределы MAXRUN.EXE
 
             /* Аргументы следующим методам установлены опытным путём. */
 
-            to_cxx.SetCStringDataArea(0x101a0003, 0x101b384d);
+            engine.SetCStringDataArea(0x101a0003, 0x101b384d);
 
-            to_cxx.AddForceEndFuncs(0xbb03);
-            to_cxx.AddForceEndFuncs(0xbb6f);
-            to_cxx.AddForceEndFuncs(0xbb73);
-            to_cxx.AddForceEndFuncs(0x14_f4c7);
-            to_cxx.AddForceEndFuncs(0x14_b5b5);
-            to_cxx.AddForceEndFuncs(0x14_edfc);
-            to_cxx.AddForceEndFuncs(0x14_f88b);
-            to_cxx.AddForceEndFuncs(0x14_f8ef);
-            to_cxx.AddForceEndFuncs(0x15_8748);
+            engine.AddForceEndMethod(0xbb03);
+            engine.AddForceEndMethod(0xbb6f);
+            engine.AddForceEndMethod(0xbb73);
+            engine.AddForceEndMethod(0x14_f4c7);
+            engine.AddForceEndMethod(0x14_b5b5);
+            engine.AddForceEndMethod(0x14_edfc);
+            engine.AddForceEndMethod(0x14_f88b);
+            engine.AddForceEndMethod(0x14_f8ef);
+            engine.AddForceEndMethod(0x15_8748);
+        }
+
+        private List<string> DecodeCurrentMethod()
+        {
+            //    exit(1); // TODO "--on-unknown-func={decode-and-exit, exit}"
+
+            var fullAddress = cs[eip];
+
+            var engine = new Engine(
+                Configuration.BinToCSharp,
+                DefinitionCollection,
+                Implementation.Memory,
+                cs.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
+                cs.Descriptor.Base,
+                ds.Descriptor.Base,
+                MethodsInfo);
 
 
-            AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys");
+            ConfigureEngine(engine);
 
-
+            if (cs.Descriptor.Base + cs.Descriptor.Limit + 1 != 0)
+                engine.SuppressDecode.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
+            
             foreach (var pair in funcs_by_pc)
                 foreach (var info in pair.Value)
-                    to_cxx.AddAlreadyDecodedFunc(info.MethodInfo);
-            to_cxx.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
+                    engine.AddAlreadyDecodedFunc(info.MethodInfo);
+            engine.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
+
 
 #if true
             // Замечено, что многие функции начинаются со следующих двух команд.
@@ -463,7 +463,7 @@ namespace MikhailKhalizev.Max.Program
             if (cs.Descriptor.Base == 0 && cs.db && its_first && !funcs_by_pc.ContainsKey(0x1007_0010) && !funcs_by_pc.ContainsKey(0x1016_4ad4))
             {
                 its_first = false;
-                Console.WriteLine("Декодирования всего пользовательского кода MAX.");
+                NonBlockingConsole.WriteLine("Декодирования всего пользовательского кода MAX.");
 
                 var code = ArraySegment<byte>.Empty;
                 for (var i = code_start; i < code_end; i++)
@@ -477,7 +477,7 @@ namespace MikhailKhalizev.Max.Program
                             code = Memory.GetMinSize(i, 10);
 
                         if (code[5] == 0xe8 && code.GetUInt32(6) + i + 10 == 0x1016_5d52 && !funcs_by_pc.ContainsKey(i))
-                            to_cxx.DecodeMethod(i);
+                            engine.DecodeMethod(i);
                     }
 
                     code = code.Slice(1);
@@ -485,10 +485,10 @@ namespace MikhailKhalizev.Max.Program
             }
 #endif
 
-            Console.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
+            NonBlockingConsole.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
 
-            to_cxx.DecodeMethod(fullAddress);
-            return to_cxx.Save();
+            engine.DecodeMethod(fullAddress);
+            return engine.Save();
         }
 
         private bool its_first = true;

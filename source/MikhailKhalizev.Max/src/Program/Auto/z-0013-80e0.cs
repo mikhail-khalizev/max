@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x13_80f8, 1); popw(ds);                                 /* pop ds */
             ii(0x13_80f9, 1); leavew();                                 /* leave */
             ii(0x13_80fa, 1); retfw(); return;                          /* retf */
-        //  ii(0x13_80fb, 1); Недостижимый код.
+        //    ii(0x13_80fb, 1); nop();                                    /* nop */
         l_0x13_80fc:
             ii(0x13_80fc, 2); mov(ah, 0x51);                            /* mov ah, 0x51 */
             ii(0x13_80fe, 2); @int(0x21);                               /* int 0x21 */

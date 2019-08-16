@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.Configuration;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json;
+using Polly;
 using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
@@ -14,6 +14,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
     {
         private readonly BinToCSharpDto _configuration;
         private readonly Dictionary<Guid, MethodInfoDto> _methodByGuid;
+        private bool _dirty;
 
         public static MethodsInfo Load(BinToCSharpDto configuration)
         {
@@ -48,59 +49,81 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             _methodByGuid = methodByGuid;
         }
 
-        public void Save(bool methodsJson = true, bool methodJumpsJson = true)
+        public void SetDirty()
         {
+            _dirty = true;
+        }
+
+        public void Save(bool methodsJson = true, bool methodJumpsJson = true, bool force = false)
+        {
+            if (!_dirty && !force)
+                return;
+            if (methodsJson && methodJumpsJson)
+                _dirty = false;
+
+            var policy = Policy
+                .Handle<IOException>()
+                .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(1));
+
             if (methodsJson)
             {
                 var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile);
 
-                using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
-                using (var sw = new StreamWriter(fs))
-                {
-                    var allText = JsonConvert.SerializeObject(
-                        _methodByGuid.Values.Where(x => !x.IgnoreSave).OrderBy(x => x.Address),
-                        new JsonSerializerSettings
+                policy.Execute(
+                    () =>
+                    {
+                        using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                        using (var sw = new StreamWriter(fs))
                         {
-                            Formatting = Formatting.Indented,
-                            DefaultValueHandling = DefaultValueHandling.Ignore
-                        });
-                    sw.Write(allText);
-                    sw.Flush();
-                    fs.SetLength(fs.Position);
-                }
+                            var allText = JsonConvert.SerializeObject(
+                                _methodByGuid.Values.Where(x => !x.IgnoreSave).OrderBy(x => x.Address),
+                                new JsonSerializerSettings
+                                {
+                                    Formatting = Formatting.Indented,
+                                    DefaultValueHandling = DefaultValueHandling.Ignore
+                                });
+                            sw.Write(allText);
+                            sw.Flush();
+                            fs.SetLength(fs.Position);
+                        }
+                    });
             }
 
             if (methodJumpsJson)
             {
                 var path = Path.Combine(_configuration.SettingsDirectory, _configuration.JumpInfosFile);
 
-                using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
-                using (var sw = new StreamWriter(fs))
-                {
-                    var allText = JsonConvert.SerializeObject(
-                        _methodByGuid.Values
-                            .Where(x => !x.IgnoreSave && 0 < x.Jumps?.Count)
-                            .OrderBy(x => x.Address)
-                            .Select(
-                                x => new JumpsInfoDto
-                                {
-                                    Guid = x.Guid,
-                                    Address = x.Address,
-                                    Jumps = x.Jumps.ToDictionary(y => y.Key, y => y.Value.OrderBy(z => z.Address).ToList())
-                                }),
-                        new JsonSerializerSettings
+                policy.Execute(
+                    () =>
+                    {
+                        using (var fs = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                        using (var sw = new StreamWriter(fs))
                         {
-                            Formatting = Formatting.Indented,
-                            DefaultValueHandling = DefaultValueHandling.Ignore
-                        });
-                    sw.Write(allText);
-                    sw.Flush();
-                    fs.SetLength(fs.Position);
-                }
+                            var allText = JsonConvert.SerializeObject(
+                                _methodByGuid.Values
+                                    .Where(x => !x.IgnoreSave && 0 < x.Jumps?.Count)
+                                    .OrderBy(x => x.Address)
+                                    .Select(
+                                        x => new JumpsInfoDto
+                                        {
+                                            Guid = x.Guid,
+                                            Address = x.Address,
+                                            Jumps = x.Jumps.ToDictionary(y => y.Key, y => y.Value.OrderBy(z => z.Address).ToList())
+                                        }),
+                                new JsonSerializerSettings
+                                {
+                                    Formatting = Formatting.Indented,
+                                    DefaultValueHandling = DefaultValueHandling.Ignore
+                                });
+                            sw.Write(allText);
+                            sw.Flush();
+                            fs.SetLength(fs.Position);
+                        }
+                    });
             }
         }
-        
-        public MethodInfoDto GetByGuid(Guid guid)
+
+        public MethodInfoDto GetByGuidOrNull(Guid guid)
         {
             _methodByGuid.TryGetValue(guid, out var method);
             return method;
@@ -116,6 +139,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             if (_methodByGuid.Values.Any(x => x.Guid == method.Guid || (x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes))))
                 throw new InvalidOperationException("Duplicated item");
             _methodByGuid.Add(method.Guid, method);
+            SetDirty();
         }
 
         public void AddJumpAndSave(
@@ -134,7 +158,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
             if (fromMethod.Jumps == null)
                 fromMethod.Jumps = new Dictionary<Address, HashSet<JumpDestinationInfoDto>>();
-            
+
             if (!fromMethod.Jumps.TryGetValue(fromAddress, out var tos))
             {
                 tos = new HashSet<JumpDestinationInfoDto>();
@@ -153,7 +177,29 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             }
 
             if (added && !fromMethod.IgnoreSave)
-                Save(methodsJson: false);
+                Save(methodsJson: false, force: true);
+        }
+
+        public void AddExtraRaw(MethodInfoDto methodInfo, Address extraBeginAddress, byte[] extraBytes, int methodOffset)
+        {
+            var extraInterval = Interval.From(extraBeginAddress, extraBeginAddress + extraBytes.Length);
+            var methodInterval = Interval.From(methodInfo.Address + methodOffset, methodInfo.Address + methodOffset + methodInfo.RawBytes.Length);
+
+            var exists = Enumerable.Empty<Interval<Address>>().Append(methodInterval);
+            if (methodInfo.ExtraRaw != null)
+                exists = exists.Concat(methodInfo.ExtraRaw.Select(x => Interval.From(x.Key, x.Key + x.Value.Length / 2)));
+
+            foreach (var interval in extraInterval.Subtract(exists).SelectMany(x => x.Split(methodInterval)))
+            {
+                if (methodInfo.ExtraRaw == null)
+                    methodInfo.ExtraRaw = new Dictionary<Address, string>();
+                
+                var raw = new ArraySegment<byte>(extraBytes).Slice(interval.Begin - extraBeginAddress, interval.End - interval.Begin);
+                var rawString = HexHelper.ToHexWithoutPrefix(raw);
+
+                methodInfo.ExtraRaw[interval.Begin] = rawString;
+                SetDirty();
+            }
         }
     }
 }
