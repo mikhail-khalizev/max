@@ -28,12 +28,8 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
         {
             get
             {
-                uint limit = 0;
-
-                BinaryHelper.Set(Bytes[0], ref limit, 0);
-                BinaryHelper.Set(Bytes[1], ref limit, 8);
-                BinaryHelper.Set(Bytes[6], ref limit, 16, 4);
-
+                var limit = BinaryHelper.FromBytes(Bytes[6] & 0x0f, Bytes[1], Bytes[0]);
+                
                 if (G)
                     limit = (limit << 12) | 0xfff;
 
@@ -192,12 +188,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
         /// Is the descriptor type is a system descriptor.
         /// </summary>
         /// <remarks>
-        /// • Local descriptor-table (LDT) segment descriptor.
-        /// • Task-state segment (TSS) descriptor.
-        /// • Call-gate descriptor.
-        /// • Interrupt-gate descriptor.
-        /// • Trap-gate descriptor.
-        /// • Task-gate descriptor.
+        /// â€¢ Local descriptor-table (LDT) segment descriptor.
+        /// â€¢ Task-state segment (TSS) descriptor.
+        /// â€¢ Call-gate descriptor.
+        /// â€¢ Interrupt-gate descriptor.
+        /// â€¢ Trap-gate descriptor.
+        /// â€¢ Task-gate descriptor.
         /// </remarks>
         public bool IsTypeSystem => !S;
         

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -11,9 +11,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         /// <summary>
         /// Пространство имён по умолчанию, используемое у функций с заданным диапазонов адресов.
         /// </summary>
-        private static List<(Interval<Address> Interval, string Namespace)> NamespaceByAddress { get; } = new List<(Interval<Address>, string)>();
+        private static List<(Interval<Address, Address.Comparer> Interval, string Namespace)> NamespaceByAddress { get; } = new List<(Interval<Address, Address.Comparer>, string)>();
 
-        public static void AddNamespace(Interval<Address> interval, string @namespace)
+        public static void AddNamespace(Interval<Address, Address.Comparer> interval, string @namespace)
         {
             var item = NamespaceByAddress.FirstOrDefault(x => x.Interval.Contains(interval));
 

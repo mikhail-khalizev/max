@@ -45,14 +45,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (!A20Gate)
                 address &= 0xf_ffff;
 
-            var input = new Interval<Address>(address, address + size); // TODO mask end address with 0xf_ffff.
+            var input = Interval.From(address, address + size); // TODO mask end address with 0xf_ffff.
 
             for (var i = 0; i < 2; i++)
             {
                 if (cache_ena[i] == false)
                     continue;
 
-                var cacheRegion = new Interval<Address>(cache_map[i], cache_map[i] + 0x1000);
+                var cacheRegion = Interval.From(cache_map[i], cache_map[i] + 0x1000);
 
                 if (!cacheRegion.IsIntersects(input, false))
                     continue;
@@ -168,7 +168,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                 var pti = (address >> 12) & 0x3ff;
                 var off = address & 0xfff;
 
-                var pde = mem_phys_raw((Processor.cr3 & 0xffff_f000) + 4 * pdi, 4).GetUInt32();
+                var pde = mem_phys_raw((Processor.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).GetUInt32();
 
                 if (Processor.cr4.pse && (pde & PdeMask.ps) != 0) // 4Mb page
                     throw new NotImplementedException();

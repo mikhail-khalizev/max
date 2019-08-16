@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.Core.Abstractions
@@ -191,7 +191,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public bool IsNegative => IsBitSet(Bits - 1);
         public bool IsPositive => !IsNegative;
 
-        public virtual bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
+        public bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
 
 
         /// <inheritdoc />

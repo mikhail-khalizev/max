@@ -1405,6 +1405,13 @@
     }
   },
   {
+    "Guid": "be8c6cb5-e375-46ef-b446-2c2547368b9d",
+    "Address": "0x14_a01a",
+    "IsGoUp": [
+      "0x14_a060"
+    ]
+  },
+  {
     "Guid": "cd4cbd46-70d1-4c0e-92bf-14aa404901cf",
     "Address": "0x14_a3d4",
     "Jumps": {
@@ -2234,6 +2241,13 @@
     "Address": "0x14_f4d0",
     "IsGoUp": [
       "0x14_f4d3"
+    ]
+  },
+  {
+    "Guid": "0e350242-8a65-4e16-99dd-093078a2392c",
+    "Address": "0x14_f4e8",
+    "IsGoUp": [
+      "0x14_f4eb"
     ]
   },
   {

@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 {
     public class ReadCStringPlugin : PluginBase
     {
-        public Interval<Address> StringArea { get; set; }
+        public Interval<Address, Address.Comparer> StringArea { get; set; }
         private HashSet<StringDefinition> _allStringDefinitions;
 
         private bool _anyChange;

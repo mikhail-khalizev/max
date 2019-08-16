@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
@@ -10,6 +11,15 @@ namespace MikhailKhalizev.Processor.x86
     [TypeConverter(typeof(AddressTypeConverter))]
     public struct Address : IEquatable<Address>, IComparable<Address>, IComparable
     {
+        public struct Comparer : IComparer<Address>
+        {
+            public int Compare(Address x, Address y)
+            {
+                return x._value.CompareTo(y._value);
+            }
+        }
+
+
         public static Address MinValue { get; } = uint.MinValue;
         public static Address MaxValue { get; } = uint.MaxValue;
         public static Address Parse(string str) => HexHelper.ToUInt32(str);

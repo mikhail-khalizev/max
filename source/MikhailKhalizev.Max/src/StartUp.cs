@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Max
                 definitionCollection.AddDefinitionsClass<Definitions>();
                 definitionCollection.AddDefinitionsClass<StringDefinitions>();
 
-                AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
+                AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
 
                 if (args.Contains("--redecode"))
                 {

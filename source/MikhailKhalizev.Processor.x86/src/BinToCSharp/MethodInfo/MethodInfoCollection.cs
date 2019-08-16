@@ -200,7 +200,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             var extraInterval = Interval.From(extraBeginAddress, extraBeginAddress + extraBytes.Length);
             var methodInterval = Interval.From(methodInfo.Address + methodOffset, methodInfo.Address + methodOffset + methodInfo.RawBytes.Length);
 
-            var exists = Enumerable.Empty<Interval<Address>>().Append(methodInterval);
+            var exists = Enumerable.Empty<Interval<Address, Address.Comparer>>().Append(methodInterval);
             if (methodInfo.ExtraRaw != null)
                 exists = exists.Concat(methodInfo.ExtraRaw.Select(x => Interval.From(x.Key, x.Key + x.Value.Length / 2)));
 
