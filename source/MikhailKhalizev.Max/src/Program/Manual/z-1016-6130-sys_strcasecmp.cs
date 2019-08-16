@@ -1,5 +1,6 @@
 using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
 
 namespace MikhailKhalizev.Max.Program
 {
@@ -8,6 +9,12 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("afefcc71-1290-46d3-b66a-9acdae191698")]
         public void /* sys */ sys_strcasecmp()
         {
+            var s1 = Memory.ReadCString(ds[eax]);
+            var s2 = Memory.ReadCString(ds[edx]);
+            eax = StringComparer.OrdinalIgnoreCase.Compare(s1, s2);
+            retd();
+            return;
+
             ii(0x1016_6130, 1); pushd(ebx);                             /* push ebx */
             ii(0x1016_6131, 1); pushd(ecx);                             /* push ecx */
             ii(0x1016_6132, 2); mov(ebx, eax);                          /* mov ebx, eax */

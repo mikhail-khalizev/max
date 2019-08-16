@@ -64,9 +64,31 @@ namespace MikhailKhalizev.Max.Program
 
             Implementation.MethodInfoCollection = MethodInfoCollection;
             implementation.CompiledMethodCollection = this;
-            implementation.runInb += (sender, args) => DosPort.MyInb(args.value, args.port);
-            implementation.runOutb += (sender, args) => DosPort.MyOutb(args.port, args.value);
             implementation.runIrqs += (sender, args) => DosPic.RunIrqs();
+            implementation.runInb += (sender, args) =>
+            {
+                try
+                {
+                    DosPort.MyInb(args.value, args.port);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"inb, value: {args.value}, port: {args.port}");
+                    throw;
+                }
+            };
+            implementation.runOutb += (sender, args) =>
+            {
+                try
+                {
+                    DosPort.MyOutb(args.port, args.value);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
+                    throw;
+                }
+            };
         }
 
         public void Start()

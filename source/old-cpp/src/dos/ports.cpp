@@ -44,7 +44,7 @@ static uint_<8> vga_crtc_maximum_scan_line = 0;
 
 
 kbd_keys key_pressed = kbd_keys::none;
-static uint_<8> p61data = 0;
+static uint_<8> p61data = 0; // +
 
 // +
 static uint_<8> sb_mixer_index = 0;

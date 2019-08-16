@@ -22,7 +22,7 @@ extern pal_struct pal[256];
 /** Bit 6-7 indicates the number of lines on the display: 1:  400, 2: 350, 3: 480. */
 extern uint_<8> vga_misc_output;
 
-
+// +
 enum class kbd_keys
 {
     none = 0,

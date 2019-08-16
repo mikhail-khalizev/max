@@ -26,14 +26,40 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             get
             {
-                var bytes = new byte[8];
-                MemorySpace.Slice(0, Bits / 8).CopyTo(bytes);
-                return BitConverter.ToUInt64(bytes);
+                switch (Bits)
+                {
+                    case 8:
+                        return MemorySpace[0];
+                    case 16:
+                        return BitConverter.ToUInt16(MemorySpace.AsSpan(0, 2));
+                    case 32:
+                        return BitConverter.ToUInt32(MemorySpace.AsSpan(0, 4));
+                    case 64:
+                        return BitConverter.ToUInt64(MemorySpace.AsSpan(0, 8));
+                    default:
+                        throw new NotImplementedException($"Bits: {Bits}");
+                }
             }
             set
             {
-                var bytes = BitConverter.GetBytes(value);
-                bytes.AsSpan().Slice(0, Bits / 8).CopyTo(MemorySpace);
+                var ms = MemorySpace;
+                switch (Bits)
+                {
+                    case 8:
+                        ms[0] = (byte)value;
+                        break;
+                    case 16:
+                        BitConverter.TryWriteBytes(ms.AsSpan(0, 2), (ushort)value);
+                        break;
+                    case 32:
+                        BitConverter.TryWriteBytes(ms.AsSpan(0, 4), (uint)value);
+                        break;
+                    case 64:
+                        BitConverter.TryWriteBytes(ms.AsSpan(0, 8), value);
+                        break;
+                    default:
+                        throw new NotImplementedException($"Bits: {Bits}");
+                }
             }
         }
 

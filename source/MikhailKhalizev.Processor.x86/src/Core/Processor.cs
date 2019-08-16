@@ -531,13 +531,15 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public void set_sf_zf_pf(ValueBase dst)
         {
+            var dstValue = dst.UInt64;
+
             eflags.sf = dst.IsNegative;
-            eflags.zf = dst.UInt64 == 0;
+            eflags.zf = dstValue == 0;
 
             // pf - Сумма единиц в младшем байте + 1.
 
             var pf = true;
-            var x = dst.UInt64;
+            var x = dstValue;
             for (var i = 0; i < 8; i++)
             {
                 pf ^= 0 != (x & 1);
@@ -1841,7 +1843,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void adc(ValueBase dst, ValueBase src)
         {
-            src = new NumericValue(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.Bits);
 
             var ss = src.IsPositive;
             var ds = dst.IsPositive;
@@ -1868,7 +1870,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void add(ValueBase dst, ValueBase src)
         {
-            src = new NumericValue(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.Bits);
 
             var ss = src.IsPositive;
             var ds = dst.IsPositive;
@@ -2368,9 +2370,11 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void cmp(ValueBase a, ValueBase b)
         {
-            eflags.cf = a.UInt64 < b.UInt64;
+            var aValue = a.UInt64;
+            var bValue = b.UInt64;
+            eflags.cf = aValue < bValue;
 
-            var r = new NumericValue(a.UInt64 - b.UInt64, a.Bits);
+            var r = NumericValue.From(aValue - bValue, a.Bits);
             var ds = a.IsPositive;
             var ss = b.IsPositive;
             var rs = r.IsPositive;
@@ -2667,7 +2671,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void dec(ValueBase value)
         {
-            var r = new NumericValue(value.UInt64 - 1, value.Bits);
+            var r = NumericValue.From(value.UInt64 - 1, value.Bits);
             var ds = value.IsPositive;
             var ss = true;
             var rs = r.IsPositive;
@@ -3574,7 +3578,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void inc(ValueBase value)
         {
-            var r = new NumericValue(value.UInt64 + 1, value.Bits);
+            var r = NumericValue.From(value.UInt64 + 1, value.Bits);
 
             var ds = value.IsPositive;
             var ss = true;
@@ -5855,13 +5859,15 @@ namespace MikhailKhalizev.Processor.x86.Core
             uint value;
             if (ss.db)
             {
-                esp += 4;
-                value = memd_a32[ss, esp - 4].UInt32;
+                var espCache = esp.UInt32;
+                esp.UInt32 = espCache + 4;
+                value = memd_a32[ss, espCache].UInt32;
             }
             else
             {
-                sp += 4;
-                value = memd_a16[ss, sp - 4].UInt32;
+                var spCache = sp.UInt16;
+                sp.UInt16 = (ushort)(spCache + 4);
+                value = memd_a16[ss, spCache].UInt32;
             }
 
             if (d != null)
@@ -6643,9 +6649,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void sbb(ValueBase dst, ValueBase src)
         {
-            src = new NumericValue(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.Bits);
 
-            var r = new NumericValue(dst.UInt64 - src.UInt64 - (eflags.cf ? 1u : 0), dst.Bits);
+            var r = NumericValue.From(dst.UInt64 - src.UInt64 - (eflags.cf ? 1u : 0), dst.Bits);
             var ds = dst.IsPositive;
             var ss = src.IsPositive;
             var rs = r.IsPositive;
@@ -7058,7 +7064,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void sub(ValueBase dst, ValueBase src)
         {
-            src = new NumericValue(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.Bits);
             cmp(dst, src);
             dst.UInt64 = dst.UInt64 - src.UInt64;
         }

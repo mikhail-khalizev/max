@@ -136,8 +136,8 @@ namespace MikhailKhalizev.Max.Dos
                             wait = pit[0].start + pit[0].delay - timeNow;
                         }
 
-                        if (wait < TimeSpan.FromSeconds(0.2))
-                            wait = TimeSpan.FromSeconds(0.2);
+                        if (wait < TimeSpan.FromSeconds(1))
+                            wait = TimeSpan.FromSeconds(1);
                         
                         Monitor.Exit(pit_0_mutex);
                         locked = false;

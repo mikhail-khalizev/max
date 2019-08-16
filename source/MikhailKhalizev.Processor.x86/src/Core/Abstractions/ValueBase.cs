@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         protected abstract ulong UInt64Internal { get; set; }
 
 
-        public ushort UInt16
+        public virtual ushort UInt16
         {
             get
             {
@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             }
         }
 
-        public short Int16
+        public virtual short Int16
         {
             get
             {
@@ -87,7 +87,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             set => UInt16 = (ushort)value;
         }
 
-        public uint UInt32
+        public virtual uint UInt32
         {
             get
             {
@@ -107,7 +107,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             }
         }
 
-        public int Int32
+        public virtual int Int32
         {
             get
             {
@@ -122,7 +122,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             set => UInt32 = (uint)value;
         }
 
-        public ulong UInt64
+        public virtual ulong UInt64
         {
             get
             {
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             }
         }
 
-        public long Int64
+        public virtual long Int64
         {
             get
             {
@@ -157,7 +157,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             set => UInt64 = (ulong)value;
         }
 
-        public double Double
+        public virtual double Double
         {
             get
             {
@@ -188,10 +188,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
 
-        public bool IsNegative => IsBitSet(Bits - 1);
-        public bool IsPositive => !IsNegative;
-
-        public bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
+        public virtual bool IsNegative => BinaryHelper.IsSet(UInt64, Bits - 1);
+        public virtual bool IsPositive => !BinaryHelper.IsSet(UInt64, Bits - 1);
+        public virtual bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
 
 
         /// <inheritdoc />
@@ -222,22 +221,22 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
 
         public static Value operator ~(ValueBase v1) => ~v1.UInt64;
 
-        public static Value operator +(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator +(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value operator -(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator -(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
         // Необходим для 'mov(memd_a32[gs, edi + ebx * 4], eax)'
-        public static Value operator *(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 * v2.UInt64, Math.Max(v1.Bits, v1.Bits));
+        public static Value operator *(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 * v2.UInt64, Math.Max(v1.Bits, v1.Bits));
 
-        public static Value operator &(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 & v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator &(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 & v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value operator |(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 | v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator |(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 | v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value operator ^(ValueBase v1, ValueBase v2) => new NumericValue(v1.UInt64 ^ v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator ^(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 ^ v2.UInt64, Math.Max(v1.Bits, v2.Bits));
 
-        public static Value operator >>(ValueBase v1, int v2) => new NumericValue(v1.UInt64 >> v2, v1.Bits);
+        public static Value operator >>(ValueBase v1, int v2) => NumericValue.From(v1.UInt64 >> v2, v1.Bits);
 
-        public static Value operator <<(ValueBase v1, int v2) => new NumericValue(v1.UInt64 << v2, v1.Bits);
+        public static Value operator <<(ValueBase v1, int v2) => NumericValue.From(v1.UInt64 << v2, v1.Bits);
 
         public static Value operator ++(ValueBase v) => ++v.UInt64;
 

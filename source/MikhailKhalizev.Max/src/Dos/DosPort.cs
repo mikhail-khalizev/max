@@ -1,6 +1,6 @@
-using System;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using System;
 
 namespace MikhailKhalizev.Max.Dos
 {
@@ -8,25 +8,145 @@ namespace MikhailKhalizev.Max.Dos
 
     public class DosPort : BridgeProcessor
     {
-        public Processor.x86.Core.Processor Implementation { get; }
+        public new Processor.x86.Core.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
-        int pal_index;
-        int pal_rgb;
+        public enum kbd_keys
+        {
+            none = 0,
 
-        int sb_mixer_index = 0;
-        int sb_master_volume = 0xff;
-        int sb_unknown_3f = 0xff;
-        int sb_freq = 0;
+            esc = 1,
+            _1 = 2,
+            _2 = 3,
+            _3 = 4,
+            _4 = 5,
+            _5 = 6,
+            _6 = 7,
+            _7 = 8,
+            _8 = 9,
+            _9 = 10,
+            _0 = 11,
+            period = 52,
+            minus = 12,
+            equals = 13,
 
-        byte[] dsp_data = new byte[64];
-        int dsp_wr_index = 0;
-        int dsp_rd_index = 0;
-        int dsp_last_rd_val = 0;
+            q = 16,
+            w = 17,
+            e = 18,
+            r = 19,
+            t = 20,
+            y = 21,
+            u = 22,
+            i = 23,
+            o = 24,
+            p = 25,
 
-        int dsp_cmd = 0;
-        int dsp_cmd_len = 0;
-        int dsp_cmd_data = 0;
+            a = 30,
+            s = 31,
+            d = 32,
+            f = 33,
+            g = 34,
+            h = 35,
+            j = 36,
+            k = 37,
+            l = 38,
+
+            z = 44,
+            x = 45,
+            c = 46,
+            v = 47,
+            b = 48,
+            n = 49,
+            m = 50,
+
+            backspace = 14,
+            tab = 15,
+            leftbracket = 26,
+            rightbracket = 27,
+            enter = 28,
+
+            leftalt = 56,
+            leftctrl = 29,
+            leftshift = 42,
+            rightshift = 54,
+
+            semicolon = 39,
+            quote = 40,
+            grave = 41,
+            backslash = 43,
+            comma = 51,
+            slash = 53,
+            space = 57,
+            capslock = 58,
+            numlock = 69,
+            scrolllock = 70,
+
+            f1 = 59,
+            f2 = 60,
+            f3 = 61,
+            f4 = 62,
+            f5 = 63,
+            f6 = 64,
+            f7 = 65,
+            f8 = 66,
+            f9 = 67,
+            f10 = 68,
+            f11 = 87,
+            f12 = 88,
+
+            kp0 = 82,
+            kp1 = 79,
+            kp2 = 80,
+            kp3 = 81,
+            kp4 = 75,
+            kp5 = 76,
+            kp6 = 77,
+            kp7 = 71,
+            kp8 = 72,
+            kp9 = 73,
+
+            kpminus = 74,
+            kpplus = 78,
+            kpmultiply = 55,
+            kpperiod = 83,
+
+            extra_lt_gt = 86,
+
+            /*
+             * kpenter,
+             * rightctrl,
+             * kpdivide,
+             * rightalt,
+             * home,
+             * up,
+             * pageup,
+             * left,
+             * right,
+             * end,
+             * down,
+             * pagedown,
+             * insert,
+             * delete,
+             * pause,
+             * printscreen
+             */
+        };
+
+        private kbd_keys key_pressed = kbd_keys.none;
+        private int p61data = 0;
+        private int pal_index;
+        private int pal_rgb;
+        private int sb_mixer_index = 0;
+        private int sb_master_volume = 0xff;
+        private int sb_unknown_3f = 0xff;
+        private int sb_freq = 0;
+        private byte[] dsp_data = new byte[64];
+        private int dsp_wr_index = 0;
+        private int dsp_rd_index = 0;
+        private int dsp_last_rd_val = 0;
+        private int dsp_cmd = 0;
+        private int dsp_cmd_len = 0;
+        private int dsp_cmd_data = 0;
 
         public DosPort(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
@@ -40,88 +160,85 @@ namespace MikhailKhalizev.Max.Dos
             value.UInt32 = 0;
             switch (port.UInt32)
             {
-                case 0x00:
-                case 0x01:
-                case 0x02:
-                case 0x03:
-                case 0x04:
-                case 0x05:
-                case 0x06:
-                case 0x07:
-                case 0x08:
-                case 0x09:
-                case 0x0a:
-                case 0x0b:
-                case 0x0c:
-                case 0x0d:
-                case 0x0e:
-                case 0x0f:
-                    throw new NotImplementedException();
-                    // d = dma_controllers[0].read_controller_reg(port);
-                    //break;
+                //case 0x00:
+                //case 0x01:
+                //case 0x02:
+                //case 0x03:
+                //case 0x04:
+                //case 0x05:
+                //case 0x06:
+                //case 0x07:
+                //case 0x08:
+                //case 0x09:
+                //case 0x0a:
+                //case 0x0b:
+                //case 0x0c:
+                //case 0x0d:
+                //case 0x0e:
+                //case 0x0f:
+                //    throw new NotImplementedException();
+                // d = dma_controllers[0].read_controller_reg(port);
+                //break;
 
-                case 0x81:
-                case 0x82:
-                case 0x83:
-                case 0x89:
-                case 0x8a:
-                case 0x8b:
-                    throw new NotImplementedException();
-                    // d = dma_read_p8x(port);
-                    //break;
+                //case 0x81:
+                //case 0x82:
+                //case 0x83:
+                //case 0x89:
+                //case 0x8a:
+                //case 0x8b:
+                //    throw new NotImplementedException();
+                // d = dma_read_p8x(port);
+                //break;
 
-                case 0xc0:
-                case 0xc2:
-                case 0xc4:
-                case 0xc6:
-                case 0xc8:
-                case 0xca:
-                case 0xcc:
-                case 0xce:
-                case 0xd0:
-                case 0xd2:
-                case 0xd4:
-                case 0xd6:
-                case 0xd8:
-                case 0xda:
-                case 0xdc:
-                case 0xde:
-                    throw new NotImplementedException();
-                    //d = dma_controllers[1].read_controller_reg((port - 0xc0) / 2);
-                    //break;
+                //case 0xc0:
+                //case 0xc2:
+                //case 0xc4:
+                //case 0xc6:
+                //case 0xc8:
+                //case 0xca:
+                //case 0xcc:
+                //case 0xce:
+                //case 0xd0:
+                //case 0xd2:
+                //case 0xd4:
+                //case 0xd6:
+                //case 0xd8:
+                //case 0xda:
+                //case 0xdc:
+                //case 0xde:
+                //    throw new NotImplementedException();
+                //d = dma_controllers[1].read_controller_reg((port - 0xc0) / 2);
+                //break;
 
                 case 0x20:
                     value.UInt16 = (ushort)RawProgramMain.DosPic.read_command(port.UInt16);
                     break;
 
                 case 0x21:
-                    throw new NotImplementedException();
-                    //d = pic.read_data(port);
-                    //break;
+                    value.UInt32 = (uint)RawProgramMain.DosPic.read_data((int)port.UInt32);
+                    break;
 
                 case 0x40:
                 case 0x41:
                 case 0x42:
-                    throw new NotImplementedException();
-                    //d = timer_read_latch(port);
-                    //break;
+                    value.UInt32 = (uint)RawProgramMain.DosTimer.timer_read_latch((int)port.UInt32);
+                    break;
 
                 case 0x60:
                     throw new NotImplementedException();
-                    //d = static_cast < typename uint_ < 8 >::type > (key_pressed);
-                    //key_pressed = kbd_keys::none;
-                    //break;
+                //d = static_cast < typename uint_ < 8 >::type > (key_pressed);
+                //key_pressed = kbd_keys::none;
+                //break;
 
                 case 0x61:
-                    throw new NotImplementedException();
-                    //p61data ^= 0x30;
-                    //d = p61data;
-                    //break;
+                    p61data ^= 0x30;
+                    value.Int32 = p61data;
+                    break;
 
                 case 0x64: // Keyboard Controller
                     value.UInt32 = 0x1c;// TODO | (p60_change ? 0x1 : 0);
                     break;
-                    
+
                 case 0x92:
                     value.Int32 = ((Processor.x86.Core.Memory)Memory).A20Gate ? 0x2 : 0;
                     break;
@@ -150,14 +267,14 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x22a: // sb read_data
                     throw new NotImplementedException();
-                    //if (dsp_rd_index != dsp_wr_index)
-                    //{
-                    //    dsp_last_rd_val = dsp_data[dsp_rd_index];
-                    //    dsp_rd_index++;
-                    //    dsp_rd_index %= count_of(dsp_data);
-                    //}
-                    //d = dsp_last_rd_val;
-                    //break;
+                //if (dsp_rd_index != dsp_wr_index)
+                //{
+                //    dsp_last_rd_val = dsp_data[dsp_rd_index];
+                //    dsp_rd_index++;
+                //    dsp_rd_index %= count_of(dsp_data);
+                //}
+                //d = dsp_last_rd_val;
+                //break;
 
                 case 0x22c: // sb write_data
                     value.UInt32 = 0x7f; // ?
@@ -173,30 +290,30 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x3cc:
                     throw new NotImplementedException();
-                    //d = vga_misc_output;
-                    //break;
+                //d = vga_misc_output;
+                //break;
 
                 case 0x3d5:
                     throw new NotImplementedException();
-                    //switch (vga_crtc_index)
-                    //{
-                    //    case 0x3:
-                    //        d = vga_crtc_end_horizontal_blanking;
-                    //        break;
-                    //    case 0x7:
-                    //        d = vga_crtc_overflow;
-                    //        break;
-                    //    case 0x9:
-                    //        d = vga_crtc_maximum_scan_line;
-                    //        break;
-                    //    case 0x11:
-                    //        d = vga_crtc_vertical_retrace_end;
-                    //        break;
-                    //    default:
-                    //        throw exo::exception::not_implemented();
-                    //        break;
-                    //}
-                    //break;
+                //switch (vga_crtc_index)
+                //{
+                //    case 0x3:
+                //        d = vga_crtc_end_horizontal_blanking;
+                //        break;
+                //    case 0x7:
+                //        d = vga_crtc_overflow;
+                //        break;
+                //    case 0x9:
+                //        d = vga_crtc_maximum_scan_line;
+                //        break;
+                //    case 0x11:
+                //        d = vga_crtc_vertical_retrace_end;
+                //        break;
+                //    default:
+                //        throw exo::exception::not_implemented();
+                //        break;
+                //}
+                //break;
 
                 case 0x214:
                     // @todo Пока игнорируем.
@@ -228,8 +345,8 @@ namespace MikhailKhalizev.Max.Dos
                 //case 0x0e:
                 //case 0x0f:
                 //    throw new NotImplementedException();
-                    //dma_controllers[0].write_controller_reg(port, s);
-                    //break;
+                //dma_controllers[0].write_controller_reg(port, s);
+                //break;
 
                 //case 0x81:
                 //case 0x82:
@@ -238,8 +355,8 @@ namespace MikhailKhalizev.Max.Dos
                 //case 0x8a:
                 //case 0x8b:
                 //    throw new NotImplementedException();
-                    //dma_write_p8x(port, s);
-                    //break;
+                //dma_write_p8x(port, s);
+                //break;
 
                 //case 0xc0:
                 //case 0xc2:
@@ -258,17 +375,16 @@ namespace MikhailKhalizev.Max.Dos
                 //case 0xdc:
                 //case 0xde:
                 //    throw new NotImplementedException();
-                    //dma_controllers[1].write_controller_reg((port - 0xc0) / 2, s);
-                    //break;
+                //dma_controllers[1].write_controller_reg((port - 0xc0) / 2, s);
+                //break;
 
                 case 0x20:
-                    RawProgramMain.DosPic.write_command(port.Int32, (int)s.UInt32);
+                    RawProgramMain.DosPic.write_command((int)port.UInt32, (int)s.UInt32);
                     break;
 
-                //case 0x21:
-                //    throw new NotImplementedException();
-                    //pic.write_data(port, s);
-                    //break;
+                case 0x21:
+                    RawProgramMain.DosPic.write_data((int)port.UInt32, (int)s.UInt32);
+                    break;
 
                 case 0x40:
                 case 0x42:
@@ -279,13 +395,11 @@ namespace MikhailKhalizev.Max.Dos
                     RawProgramMain.DosTimer.timer_write_p43((int)s.UInt32);
                     break;
 
-                //case 0x61:
-                //    throw new NotImplementedException();
-                    //if (((p61data ^ s) & 3) != 0 &&
-                    //    ((p61data ^ s) & 1) != 0)
-                    //    TIMER_SetGate2(0 != (s & 1));
-                    //p61data = s;
-                    //break;
+                case 0x61:
+                    if (((p61data ^ s) & 3) != 0 && ((p61data ^ s) & 1) != 0)
+                        RawProgramMain.DosTimer.TIMER_SetGate2(0 != (s & 1));
+                    p61data = (int)s.UInt32;
+                    break;
 
                 /*    case 0x60:
                         switch (keyb_cmd)
