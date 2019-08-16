@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Max.Dos
             RawProgramMain = rawProgramMain;
         }
 
-        public void MyInb(Value value, Value port)
+        public void MyInb(ValueBase value, ValueBase port)
         {
             value.UInt32 = 0;
             switch (port.UInt32)
@@ -207,7 +207,7 @@ namespace MikhailKhalizev.Max.Dos
             }
         }
 
-        public unsafe void MyOutb(Value port, Value s)
+        public unsafe void MyOutb(ValueBase port, ValueBase s)
         {
             switch (port.UInt32)
             {
