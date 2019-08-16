@@ -86,7 +86,35 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3c5e, 3); add(ebx, memd_a32[ss, ebp - 0x2c]);     /* add ebx, [ebp-0x2c] */
             ii(0x1019_3c61, 3); add(edx, memd_a32[ss, ebp - 0x2c]);     /* add edx, [ebp-0x2c] */
             ii(0x1019_3c64, 1); retd(); return;                         /* ret */
-        //  ii(0x1019_3c65, 58); Недостижимый (и не декодированный) код.
+        //    ii(0x1019_3c65, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c67, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c69, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c6b, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c6d, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c6f, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c71, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c73, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c75, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c77, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c79, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c7b, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c7d, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c7f, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c81, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c83, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c85, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c87, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c89, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c8b, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c8d, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c8f, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c91, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c93, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c95, 2); rep_a32(() => movsd_a32());             /* rep movsd */
+        //    ii(0x1019_3c97, 2); mov(ecx, eax);                          /* mov ecx, eax */
+        //    ii(0x1019_3c99, 2); add(esi, ebx);                          /* add esi, ebx */
+        //    ii(0x1019_3c9b, 2); add(edi, edx);                          /* add edi, edx */
+        //    ii(0x1019_3c9d, 2); rep_a32(() => movsd_a32());             /* rep movsd */
         l_0x1019_3c9f:
             ii(0x1019_3c9f, 3); sub(esi, memd_a32[ss, ebp - 0x10]);     /* sub esi, [ebp-0x10] */
             ii(0x1019_3ca2, 3); sub(edi, memd_a32[ss, ebp - 0x14]);     /* sub edi, [ebp-0x14] */

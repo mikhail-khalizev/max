@@ -54,26 +54,32 @@ namespace MikhailKhalizev.Max
 
 
             // Start.
-
-            var methodsInfo = MethodsInfo.Load(ConfigurationDto.BinToCSharp);
-            var definitionCollection = new DefinitionCollection();
-            definitionCollection.AddDefinitionsClass<Definitions>();
-            definitionCollection.AddDefinitionsClass<StringDefinitions>();
-
-            AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
-
-            if (args.Contains("--redecode"))
+            try
             {
-                Console.WriteLine("Start Redecode.");
-                var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
-                redecode.Start(GetType().Assembly);
-                return;
+                var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
+                var definitionCollection = new DefinitionCollection();
+                definitionCollection.AddDefinitionsClass<Definitions>();
+                definitionCollection.AddDefinitionsClass<StringDefinitions>();
+
+                AddressNameConverter.AddNamespace(new Interval<Address>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
+
+                if (args.Contains("--redecode"))
+                {
+                    NonBlockingConsole.WriteLine("Start Redecode.");
+                    var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
+                    redecode.Start(GetType().Assembly);
+                    return;
+                }
+
+                using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
+                {
+                    var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
+                    rp.Start();
+                }
             }
-
-            using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
+            finally
             {
-                var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
-                rp.Start();
+                NonBlockingConsole.AllWritten.Wait();
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
@@ -12,7 +12,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             = new MySortedSet<(Address Address, CSharpInstruction Instruction)>(new CustomComparer<(Address Address, CSharpInstruction Instruction)>((a, b) => a.Address.CompareTo(b.Address)));
         public UsedSpace<Address> Area { get; } = new UsedSpace<Address>();
 
-        public CSharpInstruction GetInstruction(Address address)
+        public void Clear()
+        {
+            _instructions.Clear();
+            Area.Clear();
+        }
+
+        public CSharpInstruction GetInstructionOrNull(Address address)
         {
             _instructions.TryGetValue((address, null), out var actual);
             return actual.Instruction;

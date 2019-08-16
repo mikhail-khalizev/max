@@ -61,6 +61,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
                 extraStart = where;
                 extraBytes = Engine.Memory.ReadAll(extraStart, op.size / 8);
+                
+                var orig = cmd.WriteCmd;
+                cmd.WriteCmd = (engine, dm, index, func, offset) =>
+                {
+                    engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
+                    return orig(engine, dm, index, func, offset);
+                };
 
                 switch (op.size)
                 {
@@ -77,10 +84,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 if (toAddr == 0)
                     return;
 
-                var os =
-                    "Вызов '" +
-                    Engine.DefinitionCollection.GetAddressFullName(toAddr) +
-                    "'.";
+                var os = "Вызов '" + Engine.DefinitionCollection.GetAddressFullName(toAddr) + "'.";
 
                 cmd.Comments.Add(os);
             }
@@ -102,16 +106,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             {
                 if (notSuppressed)
                     Engine.AddToNewDetectedMethods(toAddr); // create if not exist.
-
-                if (extraBytes != null)
-                {
-                    var orig = cmd.WriteCmd;
-                    cmd.WriteCmd = (engine, dm, index, func, offset) =>
-                    {
-                        engine.MethodsInfo.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
-                        return orig(engine, dm, index, func, offset);
-                    };
-                }
             }
             else
             {
@@ -131,7 +125,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
         private string on_cmd_write(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset, Address extraStart, byte[] extraBytes)
         {
             if (extraBytes != null)
-                engine.MethodsInfo.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
+                engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
 
             engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmd_index].Begin), out var cur_jmp);
             if (cur_jmp == null)

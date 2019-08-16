@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MikhailKhalizev.Processor.x86.Utils
@@ -33,6 +33,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
             _set = new SortedSet<T>(collection, _comparer);
         }
 
+
+        public void Clear() => _set.Clear();
         
         public bool Add(T item) => _set.Add(item);
 

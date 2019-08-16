@@ -1501,7 +1501,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         #region C# emulate specific
 
         public MethodInfoDto MethodInfo { get; set; }
-        public MethodsInfo MethodsInfo { get; set; }
+        public MethodInfoCollection MethodInfoCollection { get; set; } // Extract interface IMethodInfoCollection.
 
         /// <summary>
         /// Gets or sets address of current executing instruction.
@@ -1579,7 +1579,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                         saveJumpInfo = false;
 
                         var from = cs[CurrentInstructionAddress];
-                        MethodsInfo.AddJumpAndSave(MethodInfo, from, methodInfo, toRun, CSharpFunctionDelta);
+                        MethodInfoCollection.AddJumpAndSave(MethodInfo, from, methodInfo, toRun, CSharpFunctionDelta);
                     }
                     
                     var prevMethodInfo = MethodInfo;
@@ -1592,7 +1592,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     //if (methodInfo.CsBase != expectedMethodInfoCsBase)
                     //{
                     //    methodInfo.CsBase = expectedMethodInfoCsBase;
-                    //    MethodsInfo.Save(true, false, true);
+                    //    MethodInfoCollection.Save(true, false, true);
                     //}
 
                     if (!string.IsNullOrEmpty(Configuration.StateOutput))

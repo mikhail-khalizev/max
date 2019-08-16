@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3916, 2); mov(edi, edx);                          /* mov edi, edx */
             ii(0x1019_3918, 6); add(edi, memd_a32[ds, Definitions.video_win_start]); /* add edi, [0x10209ca8] */
             ii(0x1019_391e, 7); cmp(memd_a32[ds, 0x1020_9c90], 0);      /* cmp dword [0x10209c90], 0x0 */
-            ii(0x1019_3925, 2); if(jzd(0x1019_3938, 0x11)) goto l_0x1019_3938; /* jz 0x10193d8b */
+            ii(0x1019_3925, 2); if(jzd(0x1019_3938, 0x11)) goto l_0x1019_3938; /* jz 0x10193938 */
             ii(0x1019_3927, 2); mov(bh, 0);                             /* mov bh, 0x0 */
             ii(0x1019_3929, 6); mov(bl, memb_a32[ds, 0x1020_9cb0]);     /* mov bl, [0x10209cb0] */
             ii(0x1019_392f, 3); mov(edx, memd_a32[ss, ebp - 0x28]);     /* mov edx, [ebp-0x28] */

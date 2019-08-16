@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Dos
 {
     public class DosInterrupt : BridgeProcessor
     {
-        public Processor.x86.Core.Processor Implementation { get; }
+        public new Processor.x86.Core.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         public DosInterrupt(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)

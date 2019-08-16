@@ -8,7 +8,6 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("2835730b-5ec5-4bc5-8075-5159dd29ac0d")]
         public void Method_1013_3517()
         {
-        l_0x1013_3517:
             ii(0x1013_3517, 2); if(jmpd_func(0x1013_3557, 0x3e)) return; /* jmp 0x10133557 */
             ii(0x1013_3519, 3); lea(eax, eax + 0);                      /* lea eax, [eax] */
             ii(0x1013_351c, 2); sysenter();                             /* sysenter */

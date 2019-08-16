@@ -13,9 +13,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
     public class ReadCStringPlugin : PluginBase
     {
         public Interval<Address> StringArea { get; set; }
-        private readonly HashSet<StringDefinition> _allStringDefinitions = new HashSet<StringDefinition>();
+        private HashSet<StringDefinition> _allStringDefinitions;
 
-        private bool _anyChange = false;
+        private bool _anyChange;
         private readonly HashSet<string> _myNames = new HashSet<string>();
         private readonly Dictionary<string /* Value */, string /* PropertyName */> _myStrings = new Dictionary<string, string>();
         private readonly Dictionary<StringDefinition, (string ProperyName, string StringPropertyName)> _myStringDefinitions =
@@ -29,11 +29,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
             Engine.OnSave += OnSave;
 
-            Type myType = null;
+            InitializeIfNeed();
+        }
 
+        private void InitializeIfNeed()
+        {
+            if (_allStringDefinitions != null)
+                return;
+            _allStringDefinitions = new HashSet<StringDefinition>();
+            
+            Type myType = null;
+            
             foreach (var propertyInfo in Engine.DefinitionCollection.GetAllStringDefinition())
             {
-                var sd = (StringDefinition)propertyInfo.GetValue(null);
+                var sd = (StringDefinition) propertyInfo.GetValue(null);
                 _allStringDefinitions.Add(sd);
 
                 if (myType == null && propertyInfo.DeclaringType.Name == Engine.Configuration.StringDefinitionsClassName)
@@ -49,12 +58,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     _myNames.Add(propertyInfo.Name);
                     if (typeof(string).IsAssignableFrom(propertyInfo.PropertyType))
                     {
-                        var value = (string)propertyInfo.GetValue(null);
+                        var value = (string) propertyInfo.GetValue(null);
                         _myStrings[value] = propertyInfo.Name;
                     }
                     else if (typeof(StringDefinition).IsAssignableFrom(propertyInfo.PropertyType))
                     {
-                        var value = (StringDefinition)propertyInfo.GetValue(null);
+                        var value = (StringDefinition) propertyInfo.GetValue(null);
                         stringDefinitions.Add((propertyInfo.Name, value));
                     }
                 }
@@ -73,6 +82,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             {
                 if (cmd.Operands[i].type != ud_type.UD_OP_IMM || !StringArea.Contains(cmd.Operands[i].lval.uqword))
                     continue;
+
+                InitializeIfNeed();
 
                 var address = (Address)cmd.Operands[i].lval.uqword;
                 var str = Engine.Memory.ReadCString(address);

@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
         public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
-        public MethodsInfo MethodsInfo { get; }
+        public MethodInfoCollection MethodInfoCollection { get; }
 
         public DosMemory DosMemory { get; }
         public DosInterrupt DosInterrupt { get; }
@@ -46,11 +46,11 @@ namespace MikhailKhalizev.Max.Program
         public RawProgramMain(
             Processor.x86.Core.Processor implementation,
             ConfigurationDto configuration,
-            MethodsInfo methodsInfo,
+            MethodInfoCollection methodInfoCollection,
             DefinitionCollection definitionCollection)
             : base(implementation)
         {
-            MethodsInfo = methodsInfo;
+            MethodInfoCollection = methodInfoCollection;
             Configuration = configuration;
             Implementation = implementation;
             DefinitionCollection = definitionCollection;
@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             DosDma = new DosDma(implementation, this);
             DosPic = new DosPic(implementation, this);
 
-            Implementation.MethodsInfo = MethodsInfo;
+            Implementation.MethodInfoCollection = MethodInfoCollection;
             implementation.MethodCollection = this;
             implementation.runInb += (sender, args) => DosPort.MyInb(args.value, args.port);
             implementation.runOutb += (sender, args) => DosPort.MyOutb(args.port, args.value);
@@ -91,7 +91,7 @@ namespace MikhailKhalizev.Max.Program
                     if (attribute == null)
                         continue;
 
-                    var mi = MethodsInfo.GetByGuidOrNull(attribute.Guid);
+                    var mi = MethodInfoCollection.GetByGuidOrNull(attribute.Guid);
                     if (mi == null)
                         continue;
 
@@ -390,7 +390,7 @@ namespace MikhailKhalizev.Max.Program
                 funcs_by_pc.Add(fullAddress, info);
 
                 info.MethodInfo.Addresses.Add(fullAddress);
-                MethodsInfo.Save();
+                MethodInfoCollection.Save();
 
                 return info;
             }
@@ -431,12 +431,12 @@ namespace MikhailKhalizev.Max.Program
             var engine = new Engine(
                 Configuration.BinToCSharp,
                 DefinitionCollection,
-                Implementation.Memory,
-                cs.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16,
-                cs.Descriptor.Base,
-                ds.Descriptor.Base,
-                MethodsInfo);
+                MethodInfoCollection);
 
+            engine.Memory = Implementation.Memory;
+            engine.Mode = cs.db ? ArchitectureMode.x86_32 : ArchitectureMode.x86_16;
+            engine.CsBase = cs.Descriptor.Base;
+            engine.DsBase = ds.Descriptor.Base;
 
             ConfigureEngine(engine);
 

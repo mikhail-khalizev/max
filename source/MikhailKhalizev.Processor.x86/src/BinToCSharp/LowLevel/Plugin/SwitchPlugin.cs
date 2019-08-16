@@ -342,7 +342,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
         {
             var raw = engine.Memory.ReadAll(addr_area_begin, size_of_addr_area);
-            engine.MethodsInfo.AddExtraRaw(dm.MethodInfo, addr_area_begin, raw, offset);
+            engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addr_area_begin, raw, offset);
 
             engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmd_index].Begin), out var curJmp);
             if (curJmp == null)

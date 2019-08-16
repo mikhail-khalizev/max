@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,15 +19,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     public class Redecode
     {
         public BinToCSharpDto Configuration { get; }
-        public MethodsInfo _methodsInfo;
+        public MethodInfoCollection MethodInfoCollection;
         private readonly DefinitionCollection _definitionCollection;
 
         public Redecode(
             BinToCSharpDto configuration,
-            MethodsInfo methodsInfo,
+            MethodInfoCollection methodInfoCollection,
             DefinitionCollection definitionCollection)
         {
-            _methodsInfo = methodsInfo;
+            MethodInfoCollection = methodInfoCollection;
             _definitionCollection = definitionCollection;
             Configuration = configuration;
         }
@@ -39,7 +40,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     bridgeProcessorType => bridgeProcessorType.GetMethods(BindingFlags.Instance | BindingFlags.Public),
                     (bridgeProcessorType, methodInfo) => methodInfo.GetCustomAttribute<MethodInfoAttribute>())
                 .Where(attribute => attribute != null)
-                .Select(attribute => _methodsInfo.GetByGuidOrNull(attribute.Guid))
+                .Select(attribute => MethodInfoCollection.GetByGuidOrNull(attribute.Guid))
                 .Where(methodInfo => methodInfo != null)
                 .ToList();
 
@@ -65,11 +66,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var guidString = text.Substring(startIndex, endIndex - startIndex);
                 var guid = Guid.Parse(guidString);
 
-                var mi = _methodsInfo.GetByGuidOrNull(guid);
+                var mi = MethodInfoCollection.GetByGuidOrNull(guid);
                 if (mi != null)
                     methodsWithPath.Add((mi, filePath));
             }
-
 
             var policy = Policy
                 .Handle<IOException>()
@@ -77,48 +77,79 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             var exList = new List<Exception>();
 
+            var engineCache = new ConcurrentBag<Engine>();
+
             Parallel.ForEach(
-                methodsWithPath,
-                new ParallelOptions { MaxDegreeOfParallelism = 1 }, // TODO Remove?
+                methodsWithPath.ToLookup(x => x.MethodInfo.Address),
+                // new ParallelOptions { MaxDegreeOfParallelism = 1 }, // TODO Remove?
                 x =>
                 {
-                    var (mi, filePath) = x;
-                    
-                    try
+                    foreach (var (mi, filePath) in x.OrderBy(y => y.MethodInfo.Guid))
                     {
-                        var csBase = mi.CsBase;
-                        if (mi.Mode == ArchitectureMode.x86_16 && csBase + 0xffff < mi.Address + mi.RawBytes.Length || mi.Address < csBase)
-                            csBase = mi.Address;
-
-                        var engine = new Engine(Configuration, _definitionCollection, new MemoryFromMethodInfo(mi), mi.Mode, csBase, 0, _methodsInfo);
-                        engine.SuppressDecode.Add(0, mi.Address);
-                        engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
-                        foreach (var methodInfo in allDecodedMethodInfos)
-                            engine.AddAlreadyDecodedFunc(methodInfo);
-                        engine.RemoveAlreadyDecodedFunc(mi.Address);
-
-                        engine.DecodeMethod(mi.Address, mi.Address + mi.RawBytes.Length);
-
-                        var fileBakPath = filePath + ".bak";
-                        policy.Execute(() => File.Delete(fileBakPath));
-                        policy.Execute(() => File.Move(filePath, fileBakPath));
+                        engineCache.TryTake(out var engine);
 
                         try
                         {
-                            engine.Save();
-                        }
-                        catch
-                        {
-                            policy.Execute(() => File.Move(fileBakPath, filePath));
-                            throw;
-                        }
+                            var csBase = mi.CsBase;
+                            if (mi.Address < csBase ||
+                                mi.Mode == ArchitectureMode.x86_16 && csBase + 0xffff < mi.Address + mi.RawBytes.Length)
+                                csBase = mi.Address;
 
-                        policy.Execute(() => File.Delete(fileBakPath));
-                    }
-                    catch (Exception ex)
-                    {
-                        exList.Add(ex);
-                        NonBlockingConsole.WriteLine($"Ошибка при сохранении метода {{{mi.Guid}}} в файл: {ex.Message.TrimEnd('.')}.");
+
+                            if (engine == null)
+                            {
+                                engine = new Engine(
+                                    Configuration,
+                                    _definitionCollection,
+                                    MethodInfoCollection);
+                                
+                                foreach (var methodInfo in allDecodedMethodInfos)
+                                    engine.AddAlreadyDecodedFunc(methodInfo);
+                            }
+
+                            engine.ClearDecoded();
+
+                            engine.Memory = new MemoryFromMethodInfo(mi);
+                            engine.CsBase = csBase;
+                            engine.Mode = mi.Mode;
+
+                            engine.SuppressDecode.Clear();
+                            engine.SuppressDecode.Add(0, mi.Address);
+                            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
+                            
+                            engine.RemoveAlreadyDecodedFunc(mi.Address);
+                            
+                            engine.DecodeMethod(mi.Address, mi.Address + mi.RawBytes.Length);
+
+                            var fileBakPath = filePath + ".bak";
+                            policy.Execute(() => File.Delete(fileBakPath));
+                            policy.Execute(() => File.Move(filePath, fileBakPath));
+
+                            try
+                            {
+                                engine.Save(false);
+                            }
+                            catch
+                            {
+                                policy.Execute(() => File.Move(fileBakPath, filePath));
+                                throw;
+                            }
+
+                            policy.Execute(() => File.Delete(fileBakPath));
+                        }
+                        catch (Exception ex)
+                        {
+                            exList.Add(ex);
+                            NonBlockingConsole.WriteLine($"Ошибка при сохранении метода {{{mi.Guid}}} в файл: {ex.Message.TrimEnd('.')}.");
+                        }
+                        finally
+                        {
+                            if (engine != null)
+                            {
+                                engine.AddAlreadyDecodedFunc(mi);
+                                engineCache.Add(engine);
+                            }
+                        }
                     }
                 });
 

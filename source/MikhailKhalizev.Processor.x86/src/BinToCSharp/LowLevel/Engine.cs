@@ -28,11 +28,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     {
         public BinToCSharpDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
-        public ArchitectureMode Mode { get; }
-        public Address CsBase { get; }
-        public Address DsBase { get; }
-        public MethodsInfo MethodsInfo { get; }
-        public IMemory Memory { get; }
+        public ArchitectureMode Mode { get; set; }
+        public Address CsBase { get; set; }
+        public Address DsBase { get; set; }
+        public MethodInfoCollection MethodInfoCollection { get; }
+        public IMemory Memory { get; set; }
 
         public event EventHandler<CSharpInstruction> InstructionDecoded;
         public event EventHandler OnSave;
@@ -84,23 +84,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public Engine(
             BinToCSharpDto configuration,
             DefinitionCollection definitionCollection,
-            IMemory memory,
-            ArchitectureMode mode,
-            Address csBase,
-            Address dsBase,
-            MethodsInfo methodsInfo)
+            MethodInfoCollection methodInfoCollection)
         {
             Configuration = configuration;
             DefinitionCollection = definitionCollection;
-            Memory = memory;
-            Mode = mode;
-            CsBase = csBase;
-            DsBase = dsBase;
-            MethodsInfo = methodsInfo;
-
-            if (csBase != 0)
-                SuppressDecode.Add(0, csBase);
-
+            MethodInfoCollection = methodInfoCollection;
+            
             _readCStringPlugin = new ReadCStringPlugin(this);
             comment_idle = new CommentDummyInstructionsPlugin(this);
             _simpleBranchPlugin = new SimpleBranchPlugin(this);
@@ -109,6 +98,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             LimitDecodeTotalLength = Configuration.LimitDecodeSize;
         }
 
+        public void ClearDecoded()
+        {
+            Alignment.Clear();
+            DecodedCode.Clear();
+            BrunchesInfo.Clear();
+            _addressesToDecode.Clear();
+            NewDetectedMethods.Clear();
+        }
         
         public void AddForceEndMethod(Address fullAddress)
         {
@@ -344,7 +341,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (_addressesToDecode.Count != 0)
                 ProcessDecode();
 
-            AddAlignmentAsInstructions();
+            //AddAlignmentAsInstructions();
             AddToNewDetectedMethods(DecodedCode.Area.First().Begin);
 
             while (true)
@@ -379,7 +376,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // --- Вычисляем... ---
 
-                    var firstCmd = DecodedCode.GetInstruction(methodBegin);
+                    var firstCmd = DecodedCode.GetInstructionOrNull(methodBegin);
 
                     if (firstCmd == null)
                         throw new InvalidOperationException("Начало функции делит инструкцию пополам.");
@@ -454,9 +451,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     detectedMethod.Labels.Add(to);
                                 else
                                 {
-                                    // @todo Улучшить логику обработки подобных ситуаций.
-                                    Console.Error.WriteLine($"Предупреждение: Метка '{to}' делит инструкцию пополам.");
+                                    // TODO Улучшить логику обработки подобных ситуаций.
+                                    // Впрочем, не надо - довольно редкий специфический случай.
 
+                                    NonBlockingConsole.WriteLine($"Предупреждение: Метка '{to}' делит инструкцию пополам.");
                                     AddToNewDetectedMethods(to); // create if not exist.
                                 }
                             }
@@ -471,7 +469,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     detectedMethod.Instructions = instructions;
                     detectedMethod.End = methodEnd;
                     detectedMethod.RawBytes = Memory.ReadAll(detectedMethod.Begin, detectedMethod.End - detectedMethod.Begin);
-                    detectedMethod.MethodInfo = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
+                    detectedMethod.MethodInfo = MethodInfoCollection.GetByRawBytes(Mode, detectedMethod.RawBytes);
 
                     // TODO Собрать все Jumps воедино и учесть в рамках Process или JmpCallLoopSimple.
                     // Чтобы LayoutMethods ничего не декодировал.
@@ -507,7 +505,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             while (decodeStart != 0 && decodeStart < instruction.Begin && DecodedCode.GetInstructionBefore(decodeStart).IsJmpOrJcc)
                             {
                                 Decode(decodeStart);
-                                if (!DecodedCode.Area.Contains(decodeStart, false))
+                                if (DecodedCode.GetInstructionOrNull(decodeStart) == null)
                                     break; // Decode fail. Skip this hole.
 
                                 decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false).End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
@@ -528,10 +526,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         }
 
         // return file paths.
-        public List<string> Save()
+        public List<string> Save(bool inParallel = true)
         {
             var path = Configuration.CodeOutput;
-            var directoryInfo = Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path);
             
             LayoutMethods(); // Может запускать декодирование новых частей кода.
 
@@ -546,13 +544,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     if (detectedMethod.MethodInfo.CsBase != expectedMethodInfoCsBase)
                     {
                         detectedMethod.MethodInfo.CsBase = expectedMethodInfoCsBase;
-                        MethodsInfo.SetDirty();
+                        MethodInfoCollection.SetDirty();
                     }
 
                     continue;
                 }
 
-                var mi = MethodsInfo.GetByRawBytes(Mode, detectedMethod.RawBytes);
+                var mi = MethodInfoCollection.GetByRawBytes(Mode, detectedMethod.RawBytes);
                 if (mi == null)
                 {
                     mi = new MethodInfoDto();
@@ -561,111 +559,149 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     mi.Address = detectedMethod.Begin;
                     mi.Mode = Mode;
                     mi.RawBytes = detectedMethod.RawBytes;
-                    MethodsInfo.Add(mi);
+                    MethodInfoCollection.Add(mi);
                 }
                 else if (!mi.Addresses.Contains(detectedMethod.Begin))
                 {
                     mi.Addresses.Add(detectedMethod.Begin);
-                    MethodsInfo.SetDirty();
+                    MethodInfoCollection.SetDirty();
                 }
 
                 expectedMethodInfoCsBase = CsBase == 0 ? 0 : CsBase - (detectedMethod.Begin - mi.Address);
                 if (mi.CsBase != expectedMethodInfoCsBase)
                 {
                     mi.CsBase = expectedMethodInfoCsBase;
-                    MethodsInfo.SetDirty();
+                    MethodInfoCollection.SetDirty();
                 }
 
                 detectedMethod.MethodInfo = mi;
             }
 
-            MethodsInfo.Save();
+            MethodInfoCollection.Save();
 
-            var uniqueDetectedMethodsByAddress = NewDetectedMethods
-                .ToLookup(x => x.MethodInfo)
-                .Select(y => y.OrderBy(x => x.MethodInfo.Addresses.IndexOf(x.Begin)).First())
-                .ToLookup(x => x.MethodInfo.Address);
-
-            var exList = new List<Exception>();
-            var fileConcurrentBag = new ConcurrentBag<string>();
-
-            Parallel.ForEach(
-                uniqueDetectedMethodsByAddress,
-                detectedMethodsWithSameAddress =>
+            if (!inParallel || NewDetectedMethods.Count < 4)
+            {
+                var files = new List<string>();
+                var exList = new List<Exception>();
+                
+                foreach (var detectedMethod in NewDetectedMethods.OrderBy(x => x.MethodInfo.Guid))
                 {
-                    foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Guid))
+                    try
                     {
-                        var methodBegin = detectedMethod.MethodInfo.Address;
-                        try
-                        {
-                            var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
-
-                            if (methodBegin == methodEnd)
-                                return; // Skip empty method.
-
-
-                            // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
-                            if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
-                            {
-                                NonBlockingConsole.WriteLine(
-                                    $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
-                                return;
-                            }
-
-
-                            NonBlockingConsole.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
-
-
-                            var baseFileName = "z-" + methodBegin.ToString(
-                                o => o
-                                    .RemoveHexPrefix()
-                                    .SetTrimZero(false)
-                                    .SetGroupSize(4)
-                                    .SetGroupSeparator("-"));
-
-                            var ns = AddressNameConverter.GetNamespace(methodBegin);
-                            
-                            var kd = DefinitionCollection.GetAddressFullName(
-                                methodBegin,
-                                new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
-
-                            if (ns != null && (kd == null || !kd.StartsWith(ns)))
-                                baseFileName += $"-{ns}";
-
-                            if (kd != null)
-                                baseFileName += $"-{kd}";
-
-
-                            var filePath = "";
-                            var num = 1;
-                            while (true)
-                            {
-                                filePath = Path.Combine(path, baseFileName + (1 < num ? $".{num}" : "") + ".cs");
-                                if (!File.Exists(filePath))
-                                    break;
-                                num++;
-                            }
-
-                            var output = new StringBuilder();
-                            WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
-
-                            File.WriteAllText(filePath, output.ToString());
-                            fileConcurrentBag.Add(filePath);
-                        }
-                        catch (Exception ex)
-                        {
-                            exList.Add(ex);
-                            NonBlockingConsole.WriteLine($"Ошибка при сохранении метода '{methodBegin}' в файл: {ex.Message.TrimEnd('.')}.");
-                        }
+                        var filePath = SaveMethod(detectedMethod);
+                        if (filePath != null)
+                            files.Add(filePath);
                     }
-                });
-            
-            MethodsInfo.Save();
+                    catch (Exception ex)
+                    {
+                        exList.Add(ex);
+                        NonBlockingConsole.WriteLine($"Ошибка при сохранении метода '{detectedMethod.MethodInfo.Address}' в файл: {ex.Message.TrimEnd('.')}.");
+                    }
+                }
+                
+                MethodInfoCollection.Save();
 
-            if (exList.Count != 0)
-                throw new AggregateException(exList);
+                if (exList.Count != 0)
+                    throw new AggregateException(exList);
 
-            return fileConcurrentBag.ToList();
+                return files;
+            }
+            else
+            {
+                var files = new ConcurrentBag<string>();
+                var exList = new ConcurrentBag<Exception>();
+                
+                var uniqueDetectedMethodsByAddress = NewDetectedMethods
+                    .ToLookup(x => x.MethodInfo)
+                    .Select(y => y.OrderBy(x => x.MethodInfo.Addresses.IndexOf(x.Begin)).First())
+                    .ToLookup(x => x.MethodInfo.Address);
+                
+                Parallel.ForEach(
+                    uniqueDetectedMethodsByAddress,
+                    detectedMethodsWithSameAddress =>
+                    {
+                        foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Guid))
+                        {
+                            try
+                            {
+                                var filePath = SaveMethod(detectedMethod);
+                                if (filePath != null)
+                                    files.Add(filePath);
+                            }
+                            catch (Exception ex)
+                            {
+                                exList.Add(ex);
+                                NonBlockingConsole.WriteLine($"Ошибка при сохранении метода '{detectedMethod.MethodInfo.Address}' в файл: {ex.Message.TrimEnd('.')}.");
+                            }
+                        }
+                    });
+                
+                MethodInfoCollection.Save();
+
+                if (exList.Count != 0)
+                    throw new AggregateException(exList);
+
+                return files.ToList();
+            }
+        }
+
+        private string SaveMethod(DetectedMethod detectedMethod)
+        {
+            var methodBegin = detectedMethod.MethodInfo.Address;
+            var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
+
+            // Skip empty method.
+            if (methodBegin == methodEnd)
+                return null;
+
+
+            // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
+            if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
+            {
+                NonBlockingConsole.WriteLine(
+                    $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
+                return null;
+            }
+
+
+            NonBlockingConsole.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
+
+
+            var baseFileName = "z-" + methodBegin.ToString(
+                o => o
+                    .RemoveHexPrefix()
+                    .SetTrimZero(false)
+                    .SetGroupSize(4)
+                    .SetGroupSeparator("-"));
+
+            var ns = AddressNameConverter.GetNamespace(methodBegin);
+
+            var kd = DefinitionCollection.GetAddressFullName(
+                methodBegin,
+                new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
+
+            if (ns != null && (kd == null || !kd.StartsWith(ns)))
+                baseFileName += $"-{ns}";
+
+            if (kd != null)
+                baseFileName += $"-{kd}";
+
+
+            var filePath = "";
+            var num = 1;
+            while (true)
+            {
+                filePath = Path.Combine(Configuration.CodeOutput, baseFileName + (1 < num ? $".{num}" : "") + ".cs");
+                if (!File.Exists(filePath))
+                    break;
+                num++;
+            }
+
+            var output = new StringBuilder();
+            WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
+
+            File.WriteAllText(filePath, output.ToString());
+            return filePath;
         }
 
 

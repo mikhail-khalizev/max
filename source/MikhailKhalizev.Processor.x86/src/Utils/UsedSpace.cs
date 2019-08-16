@@ -74,6 +74,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
             throw new NotImplementedException($"UsedSpace<T> for type {typeof(T)} not implemented.");
         }
 
+        public void Clear() => _spaces.Clear();
+
         /// <summary>
         /// Добавляет область [begin, end).
         /// </summary>

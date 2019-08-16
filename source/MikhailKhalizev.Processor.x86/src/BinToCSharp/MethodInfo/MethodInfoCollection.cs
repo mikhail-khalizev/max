@@ -10,13 +10,13 @@ using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
-    public class MethodsInfo
+    public class MethodInfoCollection
     {
         private readonly BinToCSharpDto _configuration;
         private readonly Dictionary<Guid, MethodInfoDto> _methodByGuid;
         private bool _dirty;
 
-        public static MethodsInfo Load(BinToCSharpDto configuration)
+        public static MethodInfoCollection Load(BinToCSharpDto configuration)
         {
             var path = Path.Combine(configuration.SettingsDirectory, configuration.MethodInfosFile);
             var allText = File.Exists(path) ? File.ReadAllText(path) : "";
@@ -40,10 +40,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 }
             }
 
-            return new MethodsInfo(configuration, methods);
+            return new MethodInfoCollection(configuration, methods);
         }
 
-        private MethodsInfo(BinToCSharpDto configuration, Dictionary<Guid, MethodInfoDto> methodByGuid)
+        private MethodInfoCollection(BinToCSharpDto configuration, Dictionary<Guid, MethodInfoDto> methodByGuid)
         {
             _configuration = configuration;
             _methodByGuid = methodByGuid;

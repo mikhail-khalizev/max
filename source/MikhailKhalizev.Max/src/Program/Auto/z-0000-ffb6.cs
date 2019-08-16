@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("c853c5a6-96dc-4307-abc8-cd5d0fcfd52a")]
+        [MethodInfo("6045c2b8-6a6e-4b6b-8cec-50d88ea4354e")]
         public void Method_0000_ffb6()
         {
             ii(0xffb6, 2);    pushad();                                 /* pushad */
@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xffe9, 5);    and(esi, memd_a32[ss, ebp - 0x4]);        /* and esi, [ebp-0x4] */
             ii(0xffee, 5);    and(edi, memd_a32[ss, ebp - 0x4]);        /* and edi, [ebp-0x4] */
             ii(0xfff3, 3);    cmp(ah, 0xf);                             /* cmp ah, 0xf */
-            ii(0xfff6, 2);    if(jaew(0x1_0022, 0x2a)) goto l_0x1_0022; /* jae 0x22 */
+            ii(0xfff6, 2);    if(jaew_func(0x1_0022, 0x2a)) return;     /* jae 0x22 */
             ii(0xfff8, 5);    and(memb_a32[ss, ebp + 0x2c], -0x2 /* 0xfe */); /* and byte [ebp+0x2c], 0xfe */
             ii(0xfffd, 2);    xor(bx, bx);                              /* xor bx, bx */
             ii(0xffff, 2);    mov(bl, ah);                              /* mov bl, ah */
@@ -44,19 +44,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1_0010, 2);  test(al, al);                             /* test al, al */
             ii(0x1_0012, 2);  if(jsw(0x1_001e, 0xa)) goto l_0x1_001e;   /* js 0x1e */
             ii(0x1_0014, 2);  cmp(bl, ah);                              /* cmp bl, ah */
-            ii(0x1_0016, 2);  if(jaew(0x1_0022, 0xa)) goto l_0x1_0022;  /* jae 0x22 */
+            ii(0x1_0016, 2);  if(jaew_func(0x1_0022, 0xa)) return;      /* jae 0x22 */
             ii(0x1_0018, 2);  shl(bx, 0x1);                             /* shl bx, 1 */
             ii(0x1_001a, 1);  cld();                                    /* cld */
             ii(0x1_001b, 3);  if(jmpw_abs(memw_a16[cs, bx + si])) return; /* jmp word [cs:bx+si] */
         l_0x1_001e:
             ii(0x1_001e, 4);  if(jmpw_a16_far_ind(cs, si - 0x6)) return; /* jmp far word [cs:si-0x6] */
-        l_0x1_0022:
-            ii(0x1_0022, 5);  or(memb_a32[ss, ebp + 0x2c], 0x1);        /* or byte [ebp+0x2c], 0x1 */
-            ii(0x1_0027, 3);  mov(esp, ebp);                            /* mov esp, ebp */
-            ii(0x1_002a, 1);  popw(ds);                                 /* pop ds */
-            ii(0x1_002b, 1);  popw(es);                                 /* pop es */
-            ii(0x1_002c, 2);  popad();                                  /* popad */
-            ii(0x1_002e, 2);  iretd(); return;                          /* iretd */
         }
     }
 }
