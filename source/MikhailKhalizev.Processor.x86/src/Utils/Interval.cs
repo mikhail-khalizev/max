@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
     /// Интервал начиная с <see cref="Begin"/> и заканчивая <see cref="End"/> не включая последний.
     /// Другими словами [Begin, End).
     /// </summary>
-    public struct Interval<T, TComparer> : IEquatable<Interval<T>>
+    public struct Interval<T, TComparer> : IEquatable<Interval<T, TComparer>>
         where TComparer : IComparer<T>
     {
         private static readonly TComparer Comparer;
@@ -161,10 +161,10 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public override bool Equals(object obj)
         {
             if (obj is null) return false;
-            return obj is Interval<T> interval && Equals(interval);
+            return obj is Interval<T, TComparer> interval && Equals(interval);
         }
 
-        public bool Equals(Interval<T> other)
+        public bool Equals(Interval<T, TComparer> other)
         {
             return Begin.Equals(other.Begin) && End.Equals(other.End);
         }
