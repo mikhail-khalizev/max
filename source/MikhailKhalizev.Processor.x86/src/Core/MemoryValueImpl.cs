@@ -63,6 +63,35 @@ namespace MikhailKhalizev.Processor.x86.Core
             }
         }
 
+        /// <inheritdoc />
+        public override long Int64
+        {
+            get
+            {
+                switch (Bits)
+                {
+                    case 8:
+                        return (sbyte)MemorySpace[0];
+                    case 16:
+                        return BitConverter.ToInt16(MemorySpace.AsSpan(0, 2));
+                    case 32:
+                        return BitConverter.ToInt32(MemorySpace.AsSpan(0, 4));
+                    case 64:
+                        return BitConverter.ToInt64(MemorySpace.AsSpan(0, 8));
+                    default:
+                        throw new NotImplementedException($"Bits: {Bits}");
+                }
+            }
+            set => UInt64Internal = (ulong)value;
+        }
+
+        /// <inheritdoc />
+        public override ulong UInt64
+        {
+            get => UInt64Internal;
+            set => UInt64Internal = value;
+        }
+
         public MemoryValueImpl(MemoryAccessImpl memoryAccess, [CanBeNull] SegmentRegister segment, Address address)
         {
             MemoryAccess = memoryAccess;

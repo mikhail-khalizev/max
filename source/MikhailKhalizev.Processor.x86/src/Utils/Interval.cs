@@ -91,8 +91,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public bool IsIntersects(Interval<T, TComparer> b, bool considerTouch = true)
         {
             return considerTouch
-                ? (Comparer.Compare(Begin, b.End) <= 0) & (Comparer.Compare(End, b.Begin) >= 0)
-                : (Comparer.Compare(Begin, b.End) < 0) & (Comparer.Compare(End, b.Begin) > 0);
+                ? (Comparer.Compare(Begin, b.End) <= 0) && (Comparer.Compare(End, b.Begin) >= 0)
+                : (Comparer.Compare(Begin, b.End) < 0) && (Comparer.Compare(End, b.Begin) > 0);
         }
 
         public IEnumerable<Interval<T, TComparer>> Subtract(Interval<T, TComparer> sub)

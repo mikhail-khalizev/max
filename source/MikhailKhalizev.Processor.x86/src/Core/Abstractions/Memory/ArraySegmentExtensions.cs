@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
 {
@@ -36,7 +36,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
         }
 
         
-        public static uint GetUInt32(this ArraySegment<byte> bytes, int byteOffset = 0)
+        public static uint GetUInt32(this ArraySegment<byte> bytes)
+        {
+            return BitConverter.ToUInt32(bytes.AsSpan());
+        }
+        
+        public static uint GetUInt32(this ArraySegment<byte> bytes, int byteOffset)
         {
             return BitConverter.ToUInt32(bytes.Slice(byteOffset).AsSpan());
         }
@@ -62,6 +67,21 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Memory
         {
             // 8 bytes.
             return BitConverter.ToDouble(bytes.Slice(byteOffset).AsSpan());
+        }
+        
+        
+        public static bool SequenceEqual(this ArraySegment<byte> b1, ArraySegment<byte> b2)
+        {
+            if (b1.Count != b2.Count)
+                return false;
+
+            for (var i = 0; i < b1.Count; i++)
+            {
+                if (b1[i] != b2[i])
+                    return false;
+            }
+
+            return true;
         }
     }
 }

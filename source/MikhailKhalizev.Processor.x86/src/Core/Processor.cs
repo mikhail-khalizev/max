@@ -6213,17 +6213,19 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (ss.db)
             {
-                esp -= 4;
+                var espCache = esp.UInt32;
+                esp = espCache - 4;
                 if (ss.fail_limit_check(esp, 4))
                     throw new NotImplementedException(); // #SS(0)
-                memd_a32[ss, esp] = value;
+                memd_a32[ss, espCache - 4] = value;
             }
             else
             {
-                sp -= 4;
+                var spCache = sp.UInt16;
+                sp = spCache - 4;
                 if (ss.fail_limit_check(sp, 4))
                     throw new NotImplementedException(); // #SS(0)
-                memd_a16[ss, sp] = value;
+                memd_a16[ss, spCache - 4] = value;
             }
         }
 

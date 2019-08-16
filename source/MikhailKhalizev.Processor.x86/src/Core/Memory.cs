@@ -15,10 +15,12 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         private Processor Processor { get; }
 
+        private const int cacheLineSize = 0x1000; // 4kb.
+
         /* Two pages cache. */
-        private readonly byte[] cache = new byte[0x2000];
+        private readonly byte[] cache = new byte[2 * cacheLineSize];
         private readonly bool[] cache_ena = new bool[2];
-        private readonly Address[] cache_map = new Address[2];
+        private readonly uint[] cache_map = new uint[2];
 
         private GCHandle _handleRam;
         private GCHandle _handleCache;
@@ -40,39 +42,43 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// </summary>
         public ArraySegment<byte> mem_phys_raw(Address address, int size)
         {
-            if (!A20Gate)
-                address &= 0xf_ffff;
+            var a = (uint) address;
 
-            var input = Interval.From(address, address + size); // TODO mask end address with 0xf_ffff.
+            if (!A20Gate)
+                a &= 0xf_ffff;
+
+            var inputBegin = a;
+            var inputEnd = (uint) (a + size); // TODO mask end address with 0xf_ffff and check.
 
             for (var i = 0; i < 2; i++)
             {
                 if (!cache_ena[i])
                     continue;
 
-                var cacheRegion = Interval.From(cache_map[i], cache_map[i] + 0x1000);
+                var cacheRegionBegin = cache_map[i];
+                var cacheRegionEnd = cache_map[i] + cacheLineSize;
 
-                if (!cacheRegion.IsIntersects(input, false))
+                if (inputEnd <= cacheRegionBegin || cacheRegionEnd <= inputBegin) // !IsIntersects
                     continue;
 
-                if (cacheRegion.Contains(input))
+                if (cacheRegionBegin <= inputBegin && inputEnd <= cacheRegionEnd) // Contains
                 {
                     // Запрашиваемый регион полностью содержится в кеше.
                     return new ArraySegment<byte>(
                         cache,
-                        i * 0x1000 + address - cache_map[i],
-                        0x1000 - (address - cache_map[i]));
+                        (int)(i * cacheLineSize + inputBegin - cacheRegionBegin),
+                        (int)(cacheRegionEnd - inputBegin));
                 }
                 else
                 {
                     // Выгружаем страницу обратно.
-                    Array.Copy(cache, i * 0x1000, Ram, cache_map[i], 0x1000);
+                    Array.Copy(cache, i * cacheLineSize, Ram, cache_map[i], cacheLineSize);
                     cache_ena[i] = false;
                 }
             }
             
             var physMem = new ArraySegment<byte>(Ram);
-            var ret = physMem.Slice((int)address);
+            var ret = physMem.Slice((int)inputBegin);
 
             if (ret.Count < size)
                 throw new InvalidOperationException("Доступна только часть памяти.");
@@ -86,37 +92,38 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (!Processor.cr0.pg)
                 return mem_phys_raw(address, minSize);
 
-            var physAddresses = new Address[2]; // { current, current + page }
+            var physAddresses = new uint[2]; // { current, current + page }
             physAddresses[0] = GetRamAddress(address);
 
-            Address firstPageBase = physAddresses[0] & ~0xfffu;
-            Address lastPageBase = (physAddresses[0] + (minSize == 0 ? 0 : minSize - 1)) & ~0xfffu;
+            var firstPageBase = physAddresses[0] & ~0xfffu;
+            var lastPageBase = (uint) ((physAddresses[0] + (minSize == 0 ? 0 : minSize - 1)) & ~0xfffu);
 
             // Одна страница.
 
             if (firstPageBase == lastPageBase)
+            {
+                // Ограничим размер страницей в которой находится область.
                 return mem_phys_raw(physAddresses[0], minSize)
-                    .Slice(0,
-                        lastPageBase + 0x1000 -
-                        physAddresses[0]); /* Ограничим размер страницей в которой находится область. */
+                    .Slice(0, (int) (lastPageBase + cacheLineSize - physAddresses[0]));
+            }
 
             // Более двух страниц.
 
-            if (firstPageBase + 0x1000 != lastPageBase)
+            if (firstPageBase + cacheLineSize != lastPageBase)
                 throw new NotImplementedException();
 
             // Две страницы.
 
             // Страницы идут последовательно.
 
-            physAddresses[1] = GetRamAddress(address + 0x1000);
+            physAddresses[1] = GetRamAddress(address + cacheLineSize);
 
-            if (physAddresses[0] + 0x1000 == physAddresses[1])
+            if (physAddresses[0] + cacheLineSize == physAddresses[1])
+            {
+                // Ограничим размер страницами в которых находится область.
                 return mem_phys_raw(physAddresses[0], minSize)
-                    .Slice(
-                        0,
-                        lastPageBase + 0x1000 -
-                        physAddresses[0]); // Ограничим размер страницами в которых находится область.
+                    .Slice(0, (int) (lastPageBase + cacheLineSize - physAddresses[0])); 
+            }
 
             // Не идут последовательно -> загружаем в кэш.
 
@@ -132,7 +139,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     if ((cache_map[i] | 0xfff) != (physAddresses[i] | 0xfff))
                     {
                         // Выгружаем страницу обратно.
-                        Array.Copy(cache, i * 0x1000, Ram, cache_map[i], 0x1000);
+                        Array.Copy(cache, i * cacheLineSize, Ram, cache_map[i], cacheLineSize);
                         cache_ena[i] = false;
                     }
                 }
@@ -142,15 +149,15 @@ namespace MikhailKhalizev.Processor.x86.Core
                 {
                     // Загружаем страницу.
                     cache_map[i] = physAddresses[i] & ~0xfffu;
-                    Array.Copy(Ram, cache_map[i], cache, i * 0x1000, 0x1000);
+                    Array.Copy(Ram, cache_map[i], cache, i * cacheLineSize, cacheLineSize);
                     cache_ena[i] = true;
                 }
             }
 
             return new ArraySegment<byte>(
                 cache,
-                physAddresses[0] - cache_map[0],
-                0x2000 - (physAddresses[0] - cache_map[0]));
+                (int)(physAddresses[0] - cache_map[0]),
+                (int)(2 * cacheLineSize - physAddresses[0] + cache_map[0]));
         }
 
         public Address GetRamAddress(Address address)
@@ -158,14 +165,16 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (!Processor.cr0.pg)
                 return address;
 
+            var a = (uint) address;
+
+            var pdi = a >> 22;
+            var pti = (a >> 12) & 0x3ff;
+            var off = a & 0xfff;
+
             while (true)
             {
                 if (Processor.cr4.pae)
                     throw new NotImplementedException();
-
-                var pdi = address >> 22;
-                var pti = (address >> 12) & 0x3ff;
-                var off = address & 0xfff;
 
                 var pde = mem_phys_raw((Processor.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).GetUInt32();
 
