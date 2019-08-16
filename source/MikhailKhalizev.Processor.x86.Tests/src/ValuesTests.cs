@@ -7,18 +7,25 @@ using Xunit;
 namespace MikhailKhalizev.Processor.x86.Tests
 {
     public class ValuesTests
-    { 
+    {
+        [Fact]
+        public void CheckInt16ValueNegative()
+        {
+            var v = (Value)((short)-1);
+            v.UInt64.Should().Be(0xffff);
+        }
+
         [Fact]
         public void CheckInt32ValueNegative()
         {
-            var v = new NumericValue(-1);
+            var v = (Value)(-1);
             v.UInt64.Should().Be(0xffff_ffff);
         }
 
         [Fact]
         public void CheckInt64ValueNegative()
         {
-            var v = new NumericValue(-1L);
+            var v = (Value)(-1L);
             v.UInt64.Should().Be(0xffff_ffff_ffff_ffff);
         }
 
