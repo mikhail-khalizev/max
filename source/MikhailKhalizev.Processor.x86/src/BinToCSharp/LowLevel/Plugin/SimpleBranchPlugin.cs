@@ -21,7 +21,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (cmd.Operands.Count < 1)
                 return;
             var op = cmd.Operands[0];
+
             
+            if (cmd.IsCall)
+            {
+                var orig = cmd.WriteCmd;
+
+                cmd.WriteCmd = (engine, dm, index, func, offset) =>
+                {
+                    if (dm.MethodInfo.JumpsInfo?.IsGoUp?.Contains(cmd.End - offset) == true)
+                        cmd.IsCallUp = true;
+
+                    return orig(engine, dm, index, func, offset);
+                };
+            }
+
+
             Address toAddr = 0; // prediction address.
 
             Address extraStart = 0;

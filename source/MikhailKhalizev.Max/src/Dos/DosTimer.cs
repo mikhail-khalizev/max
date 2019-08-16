@@ -127,8 +127,6 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     else
                     {
-                        //var expressActiveIrq = false;
-
                         var timeNow = get_total_nsec();
                         var wait = pit[0].start + pit[0].delay - timeNow;
 
@@ -136,7 +134,6 @@ namespace MikhailKhalizev.Max.Dos
                         {
                             pit[0].start += (int)((timeNow - pit[0].start) / pit[0].delay) * pit[0].delay;
                             wait = pit[0].start + pit[0].delay - timeNow;
-                            //expressActiveIrq = true;
                         }
 
                         if (wait < TimeSpan.FromSeconds(0.2))
@@ -145,7 +142,6 @@ namespace MikhailKhalizev.Max.Dos
                         Monitor.Exit(pit_0_mutex);
                         locked = false;
 
-                        //if (!expressActiveIrq)
                         await Task.Delay(wait);
                         RawProgramMain.DosPic.activate_irq(0);
 

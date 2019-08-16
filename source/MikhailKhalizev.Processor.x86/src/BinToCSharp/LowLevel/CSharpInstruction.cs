@@ -44,6 +44,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public bool BrFar { get; set; }
 
         public bool IsCall { get; set; }
+        public bool IsCallUp { get; set; }
         public bool IsLoopOrLoopcc { get; set; }
         public bool IsRet { get; set; }
         public bool IsJmp { get; set; }
@@ -141,7 +142,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             int offset = 0,
             bool onlyRawCmd = false)
         {
-            var addIf = !onlyRawCmd && (IsJmpOrJcc || IsLoopOrLoopcc) && (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
+            if (IsCallUp)
+                cmdSuffix += "_up";
+
+            var addIf = !onlyRawCmd && (IsCallUp || IsJmpOrJcc || IsLoopOrLoopcc) && (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
             var addGotoLabel = !onlyRawCmd && IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
             var addReturn = !onlyRawCmd && !IsLocalBranch && (
                 addIf ||

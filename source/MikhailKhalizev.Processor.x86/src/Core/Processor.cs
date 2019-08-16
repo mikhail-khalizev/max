@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,7 +106,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             idtr_limit = 0xffff;
 
             eip = 0x0000fff0;
-
+            
             Memory = new Memory(this);
 
             memb_a16 = new MemoryAccessImpl(Memory, 8, 16);
@@ -1100,9 +1101,6 @@ namespace MikhailKhalizev.Processor.x86.Core
                         throw new NotImplementedException(); // #NP(error_code(vector_number,1,EXT));
 
 
-                    var size_of_stack_frame_pushes = 0;
-
-
                     if (desc.SystemSegmentTypeIn32BitMode == SystemSegmentTypeIn32BitMode.TaskGate)
                     {
                         // TASK-GATE
@@ -1113,7 +1111,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                             throw new NotImplementedException(); // #GP(error_code(TSS selector,0,EXT))
 
                         var tss_new_desc = get_desc_ref(gdtr_base, gdtr_limit, tss_new_selector);
-                        size_of_stack_frame_pushes = tss_new_desc.get_system_segment_size;
+                        var size_of_stack_frame_pushes = tss_new_desc.get_system_segment_size;
 
                         if (tss_new_desc.IsTssBusy)
                             throw new NotImplementedException(); // #GP(TSS selector,0,EXT))
@@ -1514,7 +1512,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
 
-        public IMethodCollection MethodCollection { get; set; }
+        public ICompiledMethodCollection CompiledMethodCollection { get; set; }
         public event EventHandler<(Value value, Value port)> runInb;
         public event EventHandler<(Value port, Value value)> runOutb;
         public event EventHandler runIrqs;
@@ -1532,6 +1530,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         // For ConditionReturn return true if need return. Or false - continue without return.
         public bool CorrectMethodPosition(Address returnAddress, bool haveConditionReturnAfterInstruction = false, bool saveJumpInfo = false)
         {
+            var mi = MethodInfo;
+
             run_irqs();
             callReturnAddresses.Add(returnAddress);
 
@@ -1541,6 +1541,9 @@ namespace MikhailKhalizev.Processor.x86.Core
 
                 while (true)
                 {
+                    if (cs.fail_limit_check(eip))
+                        throw new NotImplementedException();
+
                     var toRun = cs[eip];
                     hist.Add(toRun);
 
@@ -1558,52 +1561,56 @@ namespace MikhailKhalizev.Processor.x86.Core
                     {
                         if (haveConditionReturnAfterInstruction)
                             return true;
+
+                        if (mi.JumpsInfo == null)
+                            mi.JumpsInfo = new JumpsInfoDto();
+                        if (mi.JumpsInfo.IsGoUp == null)
+                            mi.JumpsInfo.IsGoUp = new List<Address>();
+
+                        if (!mi.JumpsInfo.IsGoUp.Contains(returnAddress - CSharpFunctionDelta))
+                        {
+                            mi.JumpsInfo.IsGoUp.Add(returnAddress - CSharpFunctionDelta);
+                            MethodInfoCollection.Save(false, true, true);
+                        }
+
                         throw new GoUpException();
                     }
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
-                    MethodCollection.GetMethod(out var methodInfo, out var method);
+                    CompiledMethodCollection.GetMethod(out var nextMethodInfo, out var nextMethod);
 
 
                     if (_statisticMethodCall != null)
                     {
                         lock (_statisticMethodCall)
                         {
-                            _statisticMethodCall.TryGetValue(methodInfo, out var count);
-                            _statisticMethodCall[methodInfo] = count + 1;
+                            _statisticMethodCall.TryGetValue(nextMethodInfo, out var count);
+                            _statisticMethodCall[nextMethodInfo] = count + 1;
                         }
                     }
 
                     if (saveJumpInfo)
                     {
                         saveJumpInfo = false;
-
                         var from = cs[CurrentInstructionAddress];
-                        MethodInfoCollection.AddJumpAndSave(MethodInfo, from, methodInfo, toRun, CSharpFunctionDelta);
+                        MethodInfoCollection.AddJumpAndSave(MethodInfo, from, nextMethodInfo, toRun, CSharpFunctionDelta);
                     }
                     
                     var prevMethodInfo = MethodInfo;
                     var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
-                    MethodInfo = methodInfo;
-                    CSharpFunctionDelta = cs[eip] - methodInfo.Address;
-                    
-                    //var expectedMethodInfoCsBase = cs[0] - CSharpFunctionDelta;
-                    //if (methodInfo.CsBase != expectedMethodInfoCsBase)
-                    //{
-                    //    methodInfo.CsBase = expectedMethodInfoCsBase;
-                    //    MethodInfoCollection.Save(true, false, true);
-                    //}
+                    MethodInfo = nextMethodInfo;
+                    CSharpFunctionDelta = cs[eip] - nextMethodInfo.Address;
 
                     if (!string.IsNullOrEmpty(Configuration.StateOutput))
                     {
                         InitStateLogIfNeed();
-                        _stateLog.WriteLine($"    method guid: {{{MethodInfo.Guid}}}, delta: {CSharpFunctionDelta}, name: {method.Method.Name}");
+                        _stateLog.WriteLine($"    method guid: {{{MethodInfo.Guid}}}, delta: {CSharpFunctionDelta}, name: {nextMethod.Method.Name}");
                     }
 
                     try
                     {
-                        method();
+                        nextMethod();
                     }
                     catch (GoUpException)
                     {
@@ -2165,19 +2172,25 @@ namespace MikhailKhalizev.Processor.x86.Core
             throw new NotImplementedException();
         }
 
+
         /// <inheritdoc />
         public void callw(Address address, int offset)
         {
             var retAddr = cs[eip];
             pushw(eip);
-
             eip = eip + offset;
             eip &= 0xffff;
-
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
             CorrectMethodPosition(retAddr);
+        }
+
+        /// <inheritdoc />
+        public bool callw_up(Address address, int offset)
+        {
+            var retAddr = cs[eip];
+            pushw(eip);
+            eip = eip + offset;
+            eip &= 0xffff;
+            return CorrectMethodPosition(retAddr, true);
         }
 
         /// <inheritdoc />
@@ -2185,12 +2198,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var retAddr = cs[eip];
             pushd(eip);
-
             eip = eip + offset;
-
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
             CorrectMethodPosition(retAddr);
         }
 
@@ -2199,12 +2207,17 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             pushw(eip);
             var ret_addr = cs[eip];
-
             eip = address & 0xffff;
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
             CorrectMethodPosition(ret_addr, saveJumpInfo: true);
+        }
+
+        /// <inheritdoc />
+        public bool callw_abs_up(Value address)
+        {
+            pushw(eip);
+            var ret_addr = cs[eip];
+            eip = address & 0xffff;
+            return CorrectMethodPosition(ret_addr, true, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
@@ -2212,11 +2225,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             pushd(eip);
             var ret_addr = cs[eip];
-
             eip = address;
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
             CorrectMethodPosition(ret_addr, saveJumpInfo: true);
         }
 
@@ -2237,18 +2246,19 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void calld_a32_far_ind(SegmentRegister segment, Value address)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public void calld_a16_far_ind(SegmentRegister segment, Value address)
         {
             var ret_addr = cs[eip];
             call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
             CorrectMethodPosition(ret_addr);
         }
+
+        /// <inheritdoc />
+        public void calld_a32_far_ind(SegmentRegister segment, Value address)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /// <inheritdoc />
         public void cbw()

@@ -630,10 +630,17 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             Implementation.bzhi();
         }
 
+
         /// <inheritdoc />
         public void callw(Address address, int offset)
         {
             Implementation.callw(address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool callw_up(Address address, int offset)
+        {
+            return Implementation.callw_up(address, offset);
         }
 
         /// <inheritdoc />
@@ -646,6 +653,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public void callw_abs(Value address)
         {
             Implementation.callw_abs(address);
+        }
+
+        /// <inheritdoc />
+        public bool callw_abs_up(Value address)
+        {
+            return Implementation.callw_abs_up(address);
         }
 
         /// <inheritdoc />

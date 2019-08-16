@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public bool ShouldSerializeAddress() => 1 == Addresses.Count;
 
-        public List<Address> Addresses { get; set; } = new List<Address>();
+        public List<Address> Addresses { get; set; } = new List<Address>(); // TODO Удалить поддержку дублирующих методов. Только хлопоты добавляет. А в реальном человеческом коде дублей нет.
 
         public bool ShouldSerializeAddresses() => 1 < Addresses.Count;
 
@@ -62,6 +62,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             set => Raw = HexHelper.ToHexWithoutPrefix(value);
         }
         private byte[] _rawBytes;
+
+        [JsonIgnore]
+        public JumpsInfoDto JumpsInfo { get; set; }
 
         [JsonIgnore]
         public Dictionary<Address /* from */, HashSet<JumpDestinationInfoDto>> Jumps { get; set; }

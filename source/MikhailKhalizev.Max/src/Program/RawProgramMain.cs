@@ -22,7 +22,7 @@ using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max.Program
 {
-    public class RawProgramMain : BridgeProcessor, IMethodCollection
+    public class RawProgramMain : BridgeProcessor, ICompiledMethodCollection
     {
         public new Processor.x86.Core.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
@@ -63,7 +63,7 @@ namespace MikhailKhalizev.Max.Program
             DosPic = new DosPic(implementation, this);
 
             Implementation.MethodInfoCollection = MethodInfoCollection;
-            implementation.MethodCollection = this;
+            implementation.CompiledMethodCollection = this;
             implementation.runInb += (sender, args) => DosPort.MyInb(args.value, args.port);
             implementation.runOutb += (sender, args) => DosPort.MyOutb(args.port, args.value);
             implementation.runIrqs += (sender, args) => DosPic.RunIrqs();

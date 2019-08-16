@@ -31,6 +31,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 methods.TryGetValue(jumpsInfo.Guid, out var method);
                 if (method != null)
                 {
+                    method.JumpsInfo = jumpsInfo;
+
                     if (method.Jumps == null)
                         method.Jumps = new Dictionary<Address, HashSet<JumpDestinationInfoDto>>();
 
@@ -101,14 +103,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                         {
                             var allText = JsonConvert.SerializeObject(
                                 _methodByGuid.Values
-                                    .Where(x => !x.IgnoreSave && 0 < x.Jumps?.Count)
+                                    .Where(x => !x.IgnoreSave && (0 < x.Jumps?.Count || 0 < x.JumpsInfo?.IsGoUp?.Count))
                                     .OrderBy(x => x.Address)
                                     .Select(
-                                        x => new JumpsInfoDto
+                                        x =>
                                         {
-                                            Guid = x.Guid,
-                                            Address = x.Address,
-                                            Jumps = x.Jumps.ToDictionary(y => y.Key, y => y.Value.OrderBy(z => z.Address).ToList())
+                                            var ji = x.JumpsInfo ?? new JumpsInfoDto();
+
+                                            ji.Guid = x.Guid;
+                                            ji.Address = x.Address;
+
+                                            if (ji.IsGoUp != null && 0 < ji.IsGoUp.Count)
+                                                ji.IsGoUp.Sort();
+                                            else
+                                                ji.IsGoUp = null;
+
+                                            if (x.Jumps != null && 0 < x.Jumps.Count)
+                                                ji.Jumps = x.Jumps.ToDictionary(y => y.Key, y => y.Value.OrderBy(z => z.Address).ToList());
+                                            else
+                                                ji.Jumps = null;
+
+                                            return ji;
                                         }),
                                 new JsonSerializerSettings
                                 {

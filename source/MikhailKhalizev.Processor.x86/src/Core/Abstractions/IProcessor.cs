@@ -501,11 +501,18 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/BZHI.html</remarks>
         void bzhi();
 
+        
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void callw(Address address, int offset);
+        
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool callw_up(Address address, int offset);
 
         /// <summary>
         /// Call Procedure.
@@ -518,6 +525,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void callw_abs(Value address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool callw_abs_up(Value address);
 
         /// <summary>
         /// Call Procedure.
@@ -548,6 +561,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void calld_a16_far_ind(SegmentRegister segment, Value address);
+
 
         /// <summary>
         /// Convert Byte to Word/Convert Word to Doubleword/Convert Doubleword to Quadword.
