@@ -197,7 +197,7 @@ namespace MikhailKhalizev.Max.Dos
                     dx = 1; // handle
                     ax = 1; // success
 
-                    handle_iter = 0x13_0000;
+                    handle_iter = 0x17_0000;
 
                     if (Memory.Length < handle_1_size + handle_iter)
                         throw new Exception("std::bad_alloc()");

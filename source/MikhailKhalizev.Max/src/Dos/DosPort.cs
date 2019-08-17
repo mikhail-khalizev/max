@@ -413,7 +413,7 @@ namespace MikhailKhalizev.Max.Dos
                             break;
                         }
                         break;
-                  
+
 
                 case 0x64:
                         switch (s)
@@ -428,7 +428,7 @@ namespace MikhailKhalizev.Max.Dos
                             throw new NotImplementedException();
                             break;
                         }
-                        break;      
+                        break;
                 */
 
                 case 0x70:
@@ -450,29 +450,27 @@ namespace MikhailKhalizev.Max.Dos
                     sb_mixer_index = (int)s.UInt32;
                     break;
 
-                //case 0x225: // Mixer data
-                //    throw new NotImplementedException();
-                //switch (sb_mixer_index)
-                //{
-                //    case 0x22:
-                //        sb_master_volume = s; // @todo error
-                //        break;
-                //    case 0x3f:
-                //        sb_unknown_3f = s;
-                //        break;
-                //    case 0x83:
-                //        break;
-                //    default:
-                //        throw exo::exception::not_implemented();
-                //}
-                //break;
+                case 0x225: // Mixer data
+                    switch (sb_mixer_index)
+                    {
+                        case 0x22:
+                            sb_master_volume = (int)s.UInt32; // @todo error
+                            break;
+                        case 0x3f:
+                            sb_unknown_3f = (int)s.UInt32;
+                            break;
+                        case 0x83:
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                    break;
 
-                //case 0x226:    // DSP_Reset
-                //    throw new NotImplementedException();
-                //dsp_data[dsp_wr_index] = 0xaa;
-                //dsp_wr_index++;
-                //dsp_wr_index %= count_of(dsp_data);
-                //break;
+                case 0x226:    // DSP_Reset
+                    dsp_data[dsp_wr_index] = 0xaa;
+                    dsp_wr_index++;
+                    dsp_wr_index %= dsp_data.Length;
+                    break;
 
                 //case 0x22c:    // DSP_WriteData
                 //    throw new NotImplementedException();

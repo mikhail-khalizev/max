@@ -644,6 +644,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
+        public bool calld_up(Address address, int offset)
+        {
+            return Implementation.calld_up(address, offset);
+        }
+
+        /// <inheritdoc />
         public void calld(Address address, int offset)
         {
             Implementation.calld(address, offset);

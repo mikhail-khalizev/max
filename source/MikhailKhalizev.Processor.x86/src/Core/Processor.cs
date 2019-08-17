@@ -2194,6 +2194,15 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool calld_up(Address address, int offset)
+        {
+            var retAddr = cs[eip];
+            pushd(eip);
+            eip = eip + offset;
+            return CorrectMethodPosition(retAddr, true);
+        }
+
+        /// <inheritdoc />
         public void calld(Address address, int offset)
         {
             var retAddr = cs[eip];
@@ -3810,13 +3819,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jaew_func(Address address, int offset)
         {
-            return jmpw_func_if(eflags.cf == false, address, offset);
+            return jmpw_func_if(!eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
         public bool jaed_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(!eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
@@ -4609,7 +4618,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
-            throw new NotImplementedException();
+            var cache = offset.UInt32;
+            dst.UInt32 = memd_a32[segment, cache].UInt32;
+            fs.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -4635,7 +4646,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset)
         {
-            throw new NotImplementedException();
+            var cache = offset.UInt32;
+            dst.UInt32 = memd_a32[segment, cache].UInt32;
+            gs.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -4743,7 +4756,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool loopd_a32(Address address, int offset)
         {
-            throw new NotImplementedException();
+            if (--ecx != 0)
+            {
+                jmpd(address, offset);
+                return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />

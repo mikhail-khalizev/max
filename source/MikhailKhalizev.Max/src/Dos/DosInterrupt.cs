@@ -31,6 +31,7 @@ namespace MikhailKhalizev.Max.Dos
             fileHandlers.Add(null); // err
             fileHandlers.Add(null); // dummy (from dosbox)
             fileHandlers.Add(null); // dummy (from dosbox)
+            fileHandlersPreserve = 5;
         }
 
         public void int_08()
@@ -566,8 +567,15 @@ namespace MikhailKhalizev.Max.Dos
                         try
                         {
                             var file = File.Open(path, fileMode, fileAccess, fileShare);
-                            fileHandlers.Add(file);
-                            var fd = fileHandlers.Count - 1;
+
+                            var fd = fileHandlers.IndexOf(null, fileHandlersPreserve);
+                            if (fd < 0)
+                            {
+                                fileHandlers.Add(file);
+                                fd = fileHandlers.Count - 1;
+                            }
+                            else
+                                fileHandlers[fd] = file;
 
                             NonBlockingConsole.WriteLine($"    Open: '{path}', Access: {fileAccess}, Handle: {fd}.");
 
@@ -648,7 +656,7 @@ namespace MikhailKhalizev.Max.Dos
                         var ms = Memory.GetFixSize(ds, dx, cx.Int32);
 
                         if (bx.Int32 == 1 || bx.Int32 == 2)
-                            Console.Error.Write(ms.Select(x => (char)x).ToArray());
+                            Console.Write(ms.Select(x => (char)x).ToArray());
                         else
                             fileHandlers[bx.Int32].Write(ms.AsSpan());
 
@@ -973,6 +981,7 @@ namespace MikhailKhalizev.Max.Dos
             return path;
         }
 
+        private int fileHandlersPreserve;
         private List<Stream> fileHandlers = new List<Stream>();
 
         public void Initialize()
