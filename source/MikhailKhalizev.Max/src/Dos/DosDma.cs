@@ -101,7 +101,7 @@ namespace MikhailKhalizev.Max.Dos
 
         public int read(ArraySegment<byte> buffer)
         {
-            var want = buffer.Count;
+            var want = buffer.Count >> DMA16;
             var done = 0;
             curraddr &= dma_wrapping;
 
@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Max.Dos
 
         public int write(ArraySegment<byte> buffer)
         {
-            var want = buffer.Count;
+            var want = buffer.Count >> DMA16;
             var done = 0;
             curraddr &= dma_wrapping;
 
@@ -402,7 +402,7 @@ namespace MikhailKhalizev.Max.Dos
     {
         public RawProgramMain RawProgramMain { get; }
 
-        dma_controller[] dma_controllers = new dma_controller[2];
+        public dma_controller[] dma_controllers = new dma_controller[2];
 
         public DosDma(IProcessor implementation, RawProgramMain rawProgramMain)
             : base(implementation)

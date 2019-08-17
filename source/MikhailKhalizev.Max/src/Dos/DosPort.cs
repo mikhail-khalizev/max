@@ -190,74 +190,71 @@ namespace MikhailKhalizev.Max.Dos
             value.Int32 = 0;
             switch (port.UInt32)
             {
-                //case 0x00:
-                //case 0x01:
-                //case 0x02:
-                //case 0x03:
-                //case 0x04:
-                //case 0x05:
-                //case 0x06:
-                //case 0x07:
-                //case 0x08:
-                //case 0x09:
-                //case 0x0a:
-                //case 0x0b:
-                //case 0x0c:
-                //case 0x0d:
-                //case 0x0e:
-                //case 0x0f:
-                //    throw new NotImplementedException();
-                // d = dma_controllers[0].read_controller_reg(port);
-                //break;
+                case 0x00:
+                case 0x01:
+                case 0x02:
+                case 0x03:
+                case 0x04:
+                case 0x05:
+                case 0x06:
+                case 0x07:
+                case 0x08:
+                case 0x09:
+                case 0x0a:
+                case 0x0b:
+                case 0x0c:
+                case 0x0d:
+                case 0x0e:
+                case 0x0f:
+                    value.UInt32AsInt = RawProgramMain.DosDma.dma_controllers[0].read_controller_reg(port.UInt32AsInt);
+                    break;
 
-                //case 0x81:
-                //case 0x82:
-                //case 0x83:
-                //case 0x89:
-                //case 0x8a:
-                //case 0x8b:
-                //    throw new NotImplementedException();
-                // d = dma_read_p8x(port);
-                //break;
+                case 0x81:
+                case 0x82:
+                case 0x83:
+                case 0x89:
+                case 0x8a:
+                case 0x8b:
+                    value.UInt32AsInt = RawProgramMain.DosDma.dma_read_p8x(port.UInt32AsInt);
+                    break;
 
-                //case 0xc0:
-                //case 0xc2:
-                //case 0xc4:
-                //case 0xc6:
-                //case 0xc8:
-                //case 0xca:
-                //case 0xcc:
-                //case 0xce:
-                //case 0xd0:
-                //case 0xd2:
-                //case 0xd4:
-                //case 0xd6:
-                //case 0xd8:
-                //case 0xda:
-                //case 0xdc:
-                //case 0xde:
-                //    throw new NotImplementedException();
-                //d = dma_controllers[1].read_controller_reg((port - 0xc0) / 2);
-                //break;
+                case 0xc0:
+                case 0xc2:
+                case 0xc4:
+                case 0xc6:
+                case 0xc8:
+                case 0xca:
+                case 0xcc:
+                case 0xce:
+                case 0xd0:
+                case 0xd2:
+                case 0xd4:
+                case 0xd6:
+                case 0xd8:
+                case 0xda:
+                case 0xdc:
+                case 0xde:
+                    value.UInt32AsInt = RawProgramMain.DosDma.dma_controllers[1].read_controller_reg((port.UInt32AsInt - 0xc0) / 2);
+                    break;
 
                 case 0x20:
-                    value.UInt16 = (ushort)RawProgramMain.DosPic.read_command(port.UInt16);
+                    value.UInt32AsInt = RawProgramMain.DosPic.read_command(port.UInt16);
                     break;
 
                 case 0x21:
-                    value.UInt32 = (uint)RawProgramMain.DosPic.read_data(port.UInt32AsInt);
+                    value.UInt32AsInt = RawProgramMain.DosPic.read_data(port.UInt32AsInt);
                     break;
 
                 case 0x40:
                 case 0x41:
                 case 0x42:
-                    value.UInt32 = (uint)RawProgramMain.DosTimer.timer_read_latch(port.UInt32AsInt);
+                    value.UInt32AsInt = RawProgramMain.DosTimer.timer_read_latch(port.UInt32AsInt);
                     break;
 
-                //case 0x60:
-                //d = static_cast < typename uint_ < 8 >::type > (key_pressed);
-                //key_pressed = kbd_keys::none;
-                //break;
+                case 0x60:
+                    value.UInt32AsInt = (int)(key_pressed);
+                    key_pressed = kbd_keys.none;
+                    break;
 
                 case 0x61:
                     p61data ^= 0x30;
@@ -320,26 +317,25 @@ namespace MikhailKhalizev.Max.Dos
                     value.UInt32AsInt = vga_misc_output;
                     break;
 
-                //case 0x3d5:
-                //switch (vga_crtc_index)
-                //{
-                //    case 0x3:
-                //        d = vga_crtc_end_horizontal_blanking;
-                //        break;
-                //    case 0x7:
-                //        d = vga_crtc_overflow;
-                //        break;
-                //    case 0x9:
-                //        d = vga_crtc_maximum_scan_line;
-                //        break;
-                //    case 0x11:
-                //        d = vga_crtc_vertical_retrace_end;
-                //        break;
-                //    default:
-                //        throw new NotImplementedException();
-                //        break;
-                //}
-                //break;
+                case 0x3d5:
+                    switch (vga_crtc_index)
+                    {
+                        case 0x3:
+                            value.UInt32AsInt = vga_crtc_end_horizontal_blanking;
+                            break;
+                        case 0x7:
+                            value.UInt32AsInt = vga_crtc_overflow;
+                            break;
+                        case 0x9:
+                            value.UInt32AsInt = vga_crtc_maximum_scan_line;
+                            break;
+                        case 0x11:
+                            value.UInt32AsInt = vga_crtc_vertical_retrace_end;
+                            break;
+                        default:
+                            throw new NotImplementedException();
+                    }
+                    break;
 
                 case 0x214:
                     // @todo Пока игнорируем.
@@ -350,81 +346,78 @@ namespace MikhailKhalizev.Max.Dos
             }
         }
 
-        public unsafe void MyOutb(ValueBase port, ValueBase s)
+        public unsafe void MyOutb(ValueBase port, ValueBase value)
         {
             switch (port.UInt32)
             {
-                //case 0x00:
-                //case 0x01:
-                //case 0x02:
-                //case 0x03:
-                //case 0x04:
-                //case 0x05:
-                //case 0x06:
-                //case 0x07:
-                //case 0x08:
-                //case 0x09:
-                //case 0x0a:
-                //case 0x0b:
-                //case 0x0c:
-                //case 0x0d:
-                //case 0x0e:
-                //case 0x0f:
-                //    throw new NotImplementedException();
-                //dma_controllers[0].write_controller_reg(port, s);
-                //break;
+                case 0x00:
+                case 0x01:
+                case 0x02:
+                case 0x03:
+                case 0x04:
+                case 0x05:
+                case 0x06:
+                case 0x07:
+                case 0x08:
+                case 0x09:
+                case 0x0a:
+                case 0x0b:
+                case 0x0c:
+                case 0x0d:
+                case 0x0e:
+                case 0x0f:
+                    RawProgramMain.DosDma.dma_controllers[0].write_controller_reg(port.UInt32AsInt, value.UInt32AsInt);
+                    break;
 
-                //case 0x81:
-                //case 0x82:
-                //case 0x83:
-                //case 0x89:
-                //case 0x8a:
-                //case 0x8b:
-                //    throw new NotImplementedException();
-                //dma_write_p8x(port, s);
-                //break;
+                case 0x81:
+                case 0x82:
+                case 0x83:
+                case 0x89:
+                case 0x8a:
+                case 0x8b:
+                    RawProgramMain.DosDma.dma_write_p8x(port.UInt32AsInt, value.UInt32AsInt);
+                    break;
 
-                //case 0xc0:
-                //case 0xc2:
-                //case 0xc4:
-                //case 0xc6:
-                //case 0xc8:
-                //case 0xca:
-                //case 0xcc:
-                //case 0xce:
-                //case 0xd0:
-                //case 0xd2:
-                //case 0xd4:
-                //case 0xd6:
-                //case 0xd8:
-                //case 0xda:
-                //case 0xdc:
-                //case 0xde:
-                //    throw new NotImplementedException();
-                //dma_controllers[1].write_controller_reg((port - 0xc0) / 2, s);
-                //break;
+                case 0xc0:
+                case 0xc2:
+                case 0xc4:
+                case 0xc6:
+                case 0xc8:
+                case 0xca:
+                case 0xcc:
+                case 0xce:
+                case 0xd0:
+                case 0xd2:
+                case 0xd4:
+                case 0xd6:
+                case 0xd8:
+                case 0xda:
+                case 0xdc:
+                case 0xde:
+                    RawProgramMain.DosDma.dma_controllers[1].write_controller_reg((port.UInt32AsInt - 0xc0) / 2, value.UInt32AsInt);
+                    break;
 
                 case 0x20:
-                    RawProgramMain.DosPic.write_command(port.UInt32AsInt, s.UInt32AsInt);
+                    RawProgramMain.DosPic.write_command(port.UInt32AsInt, value.UInt32AsInt);
                     break;
 
                 case 0x21:
-                    RawProgramMain.DosPic.write_data(port.UInt32AsInt, s.UInt32AsInt);
+                    RawProgramMain.DosPic.write_data(port.UInt32AsInt, value.UInt32AsInt);
                     break;
 
                 case 0x40:
                 case 0x42:
-                    RawProgramMain.DosTimer.timer_write_latch(port.UInt32AsInt, s.UInt32AsInt);
+                    RawProgramMain.DosTimer.timer_write_latch(port.UInt32AsInt, value.UInt32AsInt);
                     break;
 
                 case 0x43:
-                    RawProgramMain.DosTimer.timer_write_p43(s.UInt32AsInt);
+                    RawProgramMain.DosTimer.timer_write_p43(value.UInt32AsInt);
                     break;
 
                 case 0x61:
-                    if (((p61data ^ s) & 3) != 0 && ((p61data ^ s) & 1) != 0)
-                        RawProgramMain.DosTimer.TIMER_SetGate2(0 != (s & 1));
-                    p61data = s.UInt32AsInt;
+                    if (((p61data ^ value) & 3) != 0 && ((p61data ^ value) & 1) != 0)
+                        RawProgramMain.DosTimer.TIMER_SetGate2(0 != (value & 1));
+                    p61data = value.UInt32AsInt;
                     break;
 
                 /*    case 0x60:
@@ -463,7 +456,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x92:
-                    Implementation.Memory.A20Gate = 0 != (s.Int32 & 0x2);
+                    Implementation.Memory.A20Gate = 0 != (value.Int32 & 0x2);
                     break;
 
 
@@ -473,17 +466,17 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x224: // Mixer index
-                    sb_mixer_index = (int)s.UInt32;
+                    sb_mixer_index = (int)value.UInt32;
                     break;
 
                 case 0x225: // Mixer data
                     switch (sb_mixer_index)
                     {
                         case 0x22:
-                            sb_master_volume = s.UInt32AsInt; // @todo error
+                            sb_master_volume = value.UInt32AsInt; // @todo error
                             break;
                         case 0x3f:
-                            sb_unknown_3f = s.UInt32AsInt;
+                            sb_unknown_3f = value.UInt32AsInt;
                             break;
                         case 0x83:
                             break;
@@ -501,13 +494,13 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x22c:    // DSP_WriteData
                     if (dsp_cmd == 0)
                     {
-                        dsp_cmd = s.UInt32AsInt;
+                        dsp_cmd = value.UInt32AsInt;
                         dsp_cmd_len = dsp_cmd_lens[dsp_cmd];
                         dsp_cmd_data = 0;
                     }
                     else if (dsp_cmd_len != 0)
                     {
-                        dsp_cmd_data = (dsp_cmd_data << 8) | s.UInt32AsInt;
+                        dsp_cmd_data = (dsp_cmd_data << 8) | value.UInt32AsInt;
                         dsp_cmd_len--;
                     }
 
@@ -546,26 +539,24 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     break;
 
-                //case 0x3c2:
-                //    throw new NotImplementedException();
-                //vga_misc_output = s;
+                case 0x3c2:
+                    vga_misc_output = value.UInt32AsInt;
 
-                //        std::cerr << "\tvga_misc_output >> 6: " << static_cast<uint_<32>>(vga_misc_output >> 6) << std::endl;
+                    Console.WriteLine($"    vga_misc_output >> 6: {(vga_misc_output >> 6)}");
 
-                //        if (s & 1)
-                //            std::cout << "base addr 0x3d?";
-                //        else
-                //            std::cout << "base addr 0x3b?"; // this
-                //        std::cout << std::endl;
-                //break;
+                    if ((value & 1) != 0)
+                        Console.WriteLine("base addr 0x3d?");
+                    else
+                        Console.WriteLine("base addr 0x3b?"); // this
+                    break;
 
                 case 0x3c8:
-                    pal_index = s.UInt32AsInt;
+                    pal_index = value.UInt32AsInt;
                     pal_rgb = 0;
                     break;
 
                 case 0x3c9:
-                    var v = s.UInt32 & 0x3f; // 6 bit color
+                    var v = value.UInt32 & 0x3f; // 6 bit color
                     RawProgramMain.DosInterrupt.pal[pal_index].rgb[pal_rgb] = (byte)((v << 2) | (v >> 4)); // round color to 8 bit
                     pal_rgb++;
                     if (3 <= pal_rgb)
@@ -575,10 +566,9 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     break;
 
-                //case 0x3d4:
-                //    throw new NotImplementedException();
-                //vga_crtc_index = s;
-                //break;
+                case 0x3d4:
+                    vga_crtc_index = value.UInt32AsInt;
+                    break;
 
                 case 0x214:
                 case 0x215:
@@ -586,7 +576,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 default:
-                    throw new NotImplementedException($"Port: 0x{port.UInt64:x}, value: 0x{s.UInt64:x}");
+                    throw new NotImplementedException($"Port: 0x{port.UInt64:x}, value: 0x{value.UInt64:x}");
             }
         }
     }
