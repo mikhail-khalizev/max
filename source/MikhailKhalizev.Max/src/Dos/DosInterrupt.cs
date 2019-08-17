@@ -612,7 +612,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x3e: // close file
-                    NonBlockingConsole.WriteLine($"    Close. Handle: {bx.UInt32}.");
+                    NonBlockingConsole.WriteLine($"    Close. Handle: {bx.Int32}.");
 
                     if (bx.UInt32 <= 0x7FFF)
                     {

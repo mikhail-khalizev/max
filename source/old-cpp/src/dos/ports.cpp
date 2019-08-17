@@ -34,6 +34,7 @@ pal_struct pal[256]; // +
 static uint_<8> pal_index = 0; // +
 static uint_<8> pal_rgb = 0; // +
 
+// +
 static uint_<16> vga_seq_index = 0;
 static uint_<16> vga_crtc_index = 0;
 uint_<8> vga_misc_output = 0;
@@ -43,7 +44,7 @@ static uint_<8> vga_crtc_overflow = 0;
 static uint_<8> vga_crtc_maximum_scan_line = 0;
 
 
-kbd_keys key_pressed = kbd_keys::none;
+kbd_keys key_pressed = kbd_keys::none; // +
 static uint_<8> p61data = 0; // +
 
 // +
@@ -63,7 +64,7 @@ static uint_<8> dsp_cmd = 0;
 static uint_<8> dsp_cmd_len = 0;
 static uint_<32> dsp_cmd_data = 0;
 
-
+// +
 static uint_<8>::type dsp_cmd_lens[256] = {
   0,0,0,0, 1,2,0,0, 1,0,0,0, 0,0,2,1,  // 0x00
   1,0,0,0, 2,2,2,2, 0,0,0,0, 0,0,0,0,  // 0x10

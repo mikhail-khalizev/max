@@ -107,6 +107,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
             }
         }
 
+        public virtual int UInt32AsInt
+        {
+            get => (int) UInt32;
+            set => UInt32 = (uint)value;
+        }
+
         public virtual int Int32
         {
             get

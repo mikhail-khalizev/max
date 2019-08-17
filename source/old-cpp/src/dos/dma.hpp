@@ -6,7 +6,9 @@
 namespace raw_program {
 namespace dos {
 
+// file +
 
+// +
 enum class dma_event
 {
     reached_tc,
@@ -18,6 +20,7 @@ enum class dma_event
 class dma_channel;
 typedef void (* dma_callback)(dma_channel * chan, dma_event event);
 
+// +
 class dma_channel
 {
 private:
@@ -60,6 +63,7 @@ public:
     uint_<32> write(uint_<8> * buffer, uint_<32> size);
 };
 
+// +
 class dma_controller
 {
 private:
