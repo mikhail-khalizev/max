@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
                 {
                     DosPort.MyInb(args.value, args.port);
                 }
-                catch (Exception e)
+                catch
                 {
                     Console.WriteLine($"inb, value: {args.value}, port: {args.port}");
                     throw;
@@ -79,15 +79,27 @@ namespace MikhailKhalizev.Max.Program
             };
             implementation.runOutb += (sender, args) =>
             {
-                // try
-                // {
+                try
+                {
                     DosPort.MyOutb(args.port, args.value);
-                // }
-                // catch (Exception e)
-                // {
-                //     Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
-                //     throw;
-                // }
+                }
+                catch
+                {
+                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
+                    throw;
+                }
+            };
+            implementation.runOutw += (sender, args) =>
+            {
+                try
+                {
+                    DosPort.MyOutw(args.port, args.value);
+                }
+                catch
+                {
+                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
+                    throw;
+                }
             };
         }
 

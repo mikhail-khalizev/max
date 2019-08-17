@@ -2192,9 +2192,9 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jno(Address address, int offset)
+        public bool jnod(Address address, int offset)
         {
-            return Implementation.jno(address, offset);
+            return Implementation.jnod(address, offset);
         }
 
         /// <inheritdoc />

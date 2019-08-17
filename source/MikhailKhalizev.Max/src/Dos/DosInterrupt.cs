@@ -32,6 +32,8 @@ namespace MikhailKhalizev.Max.Dos
             fileHandlers.Add(null); // dummy (from dosbox)
             fileHandlers.Add(null); // dummy (from dosbox)
             fileHandlersPreserve = 5;
+
+            Directory.CreateDirectory(RawProgramMain.Configuration.Dos.PngOutput);
         }
 
         public void int_08()

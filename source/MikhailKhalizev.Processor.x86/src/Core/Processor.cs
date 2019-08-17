@@ -1517,6 +1517,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         public ICompiledMethodCollection CompiledMethodCollection { get; set; }
         public event EventHandler<(ValueBase value, ValueBase port)> runInb;
         public event EventHandler<(ValueBase port, ValueBase value)> runOutb;
+        public event EventHandler<(ValueBase port, ValueBase value)> runOutw;
         public event EventHandler runIrqs;
 
         public void check_mode() => check_mode(CSharpEmulateMode);
@@ -4074,9 +4075,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool jno(Address address, int offset)
+        public bool jnod(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(!eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4094,7 +4095,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jnsd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(!eflags.sf, address, offset);
         }
 
         /// <inheritdoc />
@@ -4106,7 +4107,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jnsd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(!eflags.sf, address, offset);
         }
 
 
@@ -4174,7 +4175,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jsd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(eflags.sf, address, offset);
         }
 
         /// <inheritdoc />
@@ -5240,12 +5241,19 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             switch (value.Bits)
             {
+                case 8:
+                {
+                    var r = al.UInt32 * value.UInt32;
+                    ax = r;
+                    eflags.cf = eflags.of = ((r >> 8) != 0);
+                    break;
+                }
+
                 case 16:
                 {
                     var r = ax.UInt32 * value.UInt32;
                     ax.UInt32 = r;
                     dx.UInt32 = (r >> 16);
-
                     eflags.cf = eflags.of = ((r >> 16) != 0);
                     break;
                 }
@@ -5255,7 +5263,6 @@ namespace MikhailKhalizev.Processor.x86.Core
                     var r = eax.UInt64 * value.UInt64;
                     eax.UInt64 = r;
                     edx.UInt64 = (r >> 32);
-
                     eflags.cf = eflags.of = ((r >> 32) != 0);
                     break;
                 }
@@ -5352,7 +5359,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void outw(ValueBase port, ValueBase value)
         {
-            throw new NotImplementedException();
+            runOutw?.Invoke(this, (port, value));
         }
 
         /// <inheritdoc />
@@ -9231,7 +9238,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         #region IDisposable
 
         private bool _disposing;
-        private bool _disposed;
 
         protected virtual void Dispose(bool disposing)
         {
@@ -9244,8 +9250,6 @@ namespace MikhailKhalizev.Processor.x86.Core
                 if (!string.IsNullOrEmpty(Configuration.StatisticOutput))
                     WriteStatistic();
             }
-
-            _disposed = true;
         }
 
         /// <inheritdoc />

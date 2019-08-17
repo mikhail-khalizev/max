@@ -48,7 +48,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
             var offset = hex.Length % 2;
             if (offset == 1)
-                ret[0] = byte.Parse(hex.Substring(0, 1), NumberStyles.HexNumber);
+                //ret[0] = byte.Parse(hex.Substring(0, 1), NumberStyles.HexNumber);
+                throw new InvalidOperationException("string length not multiple 2");
 
             for (var i = offset; i < ret.Length; i++)
                 ret[i] = byte.Parse(hex.Substring(i * 2 - offset, 2), NumberStyles.HexNumber);

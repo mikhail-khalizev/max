@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Program;
@@ -17,7 +18,28 @@ namespace MikhailKhalizev.Max
     {
         static void Main(string[] args)
         {
-            new StartUp(args);
+            Exception exception = null;
+
+            // Increase stack size.
+            var thread = new Thread(
+                () =>
+                {
+                    try
+                    {
+                        new StartUp(args);
+                    }
+                    catch (Exception e)
+                    {
+                        exception = e;
+                        throw;
+                    }
+                }, 50 * 1024 * 1024);
+
+            thread.Start();
+            thread.Join();
+
+            if (exception != null)
+                throw exception;
         }
 
         public IServiceProvider Services { get; set; }

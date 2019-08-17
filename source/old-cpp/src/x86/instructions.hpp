@@ -191,6 +191,7 @@ void iret_(uint_<8> op_size);
 #define jod(...)    \
     jmpd_if(of == true, __VA_ARGS__)
 
+//+
 #define jnod(...)   \
     jmpd_if(of == false, __VA_ARGS__)
 

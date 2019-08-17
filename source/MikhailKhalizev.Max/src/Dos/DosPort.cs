@@ -341,10 +341,17 @@ namespace MikhailKhalizev.Max.Dos
                     // @todo Пока игнорируем.
                     break;
 
+                case 0x3da: // wait vertical sync.
+                    value.UInt32AsInt = verticalSync ? 8 : 0;
+                    verticalSync = !verticalSync;
+                    break;
+
                 default:
-                    throw new NotImplementedException($"Port: 0x{port.UInt64:x}.");
+                    throw new NotImplementedException($"Port: {port}.");
             }
         }
+
+        private bool verticalSync;
 
         public unsafe void MyOutb(ValueBase port, ValueBase value)
         {
@@ -542,12 +549,12 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x3c2:
                     vga_misc_output = value.UInt32AsInt;
 
-                    Console.WriteLine($"    vga_misc_output >> 6: {(vga_misc_output >> 6)}");
+                    //Console.WriteLine($"    vga_misc_output >> 6: {(vga_misc_output >> 6)}");
 
-                    if ((value & 1) != 0)
-                        Console.WriteLine("base addr 0x3d?");
-                    else
-                        Console.WriteLine("base addr 0x3b?"); // this
+                    //if ((value & 1) != 0)
+                    //    Console.WriteLine("base addr 0x3d?");
+                    //else
+                    //    Console.WriteLine("base addr 0x3b?"); // this
                     break;
 
                 case 0x3c8:
@@ -576,7 +583,39 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 default:
-                    throw new NotImplementedException($"Port: 0x{port.UInt64:x}, value: 0x{value.UInt64:x}");
+                    throw new NotImplementedException($"Port: {port}, value: {value}");
+            }
+        }
+
+        public void MyOutw(ValueBase port, ValueBase s)
+        {
+            switch (port.UInt32AsInt)
+            {
+                //    case 0x00 ... 0x07:
+                //        dma_controllers[0].write_controller_reg(port, s);
+                //        break;
+                //
+                //    case 0xc0:
+                //    case 0xc2:
+                //    case 0xc4:
+                //    case 0xc6:
+                //    case 0xc8:
+                //    case 0xca:
+                //    case 0xcc:
+                //    case 0xce:
+                //        dma_controllers[1].write_controller_reg((port - 0xc0) / 2, s);
+                //        break;
+
+                case 0x3c4:
+                    vga_seq_index = s.UInt32AsInt;
+                    break;
+
+                case 0x3d4:
+                    vga_crtc_index = s.UInt32AsInt;
+                    break;
+
+                default:
+                    throw new NotImplementedException($"Port: {port}, value: {s}");
             }
         }
     }

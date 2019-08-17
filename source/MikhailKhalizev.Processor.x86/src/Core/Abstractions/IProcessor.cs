@@ -2064,7 +2064,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jno(Address address, int offset);
+        bool jnod(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.

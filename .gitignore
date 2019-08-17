@@ -6,6 +6,7 @@
 # My
 *.diff
 *.user.json
+source/MikhailKhalizev.Max/png
 
 # User-specific files
 *.rsuser

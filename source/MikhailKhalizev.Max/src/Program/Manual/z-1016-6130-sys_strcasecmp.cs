@@ -15,6 +15,7 @@ namespace MikhailKhalizev.Max.Program
             retd();
             return;
 
+#if false
             ii(0x1016_6130, 1); pushd(ebx);                             /* push ebx */
             ii(0x1016_6131, 1); pushd(ecx);                             /* push ecx */
             ii(0x1016_6132, 2); mov(ebx, eax);                          /* mov ebx, eax */
@@ -54,6 +55,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_6174, 1); popd(ecx);                              /* pop ecx */
             ii(0x1016_6175, 1); popd(ebx);                              /* pop ebx */
             ii(0x1016_6176, 1); retd(); return;                         /* ret */
+#endif
         }
     }
 }
