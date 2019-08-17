@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Dos
             var bios_timer_value = bios_timer_ms.GetInt32();
             bios_timer_value++;
             bios_timer_ms.SetInt32(bios_timer_value);
-            
+
             @int(0x1c);
 
             outb(0x20, 0x20);
@@ -515,11 +515,11 @@ namespace MikhailKhalizev.Max.Dos
                     bx = 1;
                     break;
 
-                case 0x3c: // create_file
+                case 0x3c: // create file
                     {
                         var path = get_path();
 
-                        Console.Error.WriteLine("    Create: " + path);
+                        NonBlockingConsole.WriteLine($"    Create: '{path}'.");
 
                         var file = File.Open(path, FileMode.OpenOrCreate);
                         file.SetLength(0);
@@ -539,23 +539,23 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     break;
 
-                case 0x3d: // open_file
+                case 0x3d: // open file
                     {
                         var path = get_path();
 
-                        Console.Error.WriteLine("    Open: " + path);
-
-                        var fileMode = FileMode.Open;
+                        FileMode fileMode;
                         FileAccess fileAccess;
                         FileShare fileShare;
 
                         switch (al.UInt32)
                         {
                             case 0:
+                                fileMode = FileMode.Open;
                                 fileAccess = FileAccess.Read;
                                 fileShare = FileShare.Read;
                                 break;
                             case 2:
+                                fileMode = FileMode.Open;
                                 fileAccess = FileAccess.ReadWrite;
                                 fileShare = FileShare.Read;
                                 break;
@@ -569,6 +569,8 @@ namespace MikhailKhalizev.Max.Dos
                             fileHandlers.Add(file);
                             var fd = fileHandlers.Count - 1;
 
+                            NonBlockingConsole.WriteLine($"    Open: '{path}', Access: {fileAccess}, Handle: {fd}.");
+
                             eflags.cf = false;
                             if (0x7fff < fd)
                                 throw new InvalidOperationException();
@@ -577,39 +579,48 @@ namespace MikhailKhalizev.Max.Dos
                         }
                         catch (FileNotFoundException)
                         {
+                            NonBlockingConsole.WriteLine($"    Open: '{path}', File not found.");
+
                             eflags.cf = true;
                             ax = 2;
                         }
+                        catch (UnauthorizedAccessException)
+                        {
+                            NonBlockingConsole.WriteLine($"    Open: '{path}', Access denied (hint: check read attribute on file).");
+
+                            eflags.cf = true;
+                            ax = 5;
+                        }
                         catch
                         {
+                            NonBlockingConsole.WriteLine($"    Open: '{path}', Unknown exception.");
+
                             eflags.cf = true;
-                            //switch (errno)
-                            //{
-                            //    case EACCES: ax = 5; break;
-                            //    case ENOENT: ax = 2; break;
-                            //    default: ax = 1; break;
-                            //}
+                            ax = 1;
 
                             throw;
                         }
                     }
                     break;
 
-                case 0x3e: // close_file
+                case 0x3e: // close file
+                    NonBlockingConsole.WriteLine($"    Close. Handle: {bx.UInt32}.");
+
                     if (bx.UInt32 <= 0x7FFF)
                     {
-                        fileHandlers[bx.Int32].Dispose();
-
-                        //int fd = close(bx);
-                        //if (fd == 0)
+                        if (fileHandlers[bx.Int32] != null)
                         {
-                            eflags.cf = false;
-                            break;
+                            fileHandlers[bx.Int32].Dispose();
+                            fileHandlers[bx.Int32] = null;
                         }
-                    }
 
-                    eflags.cf = true;
-                    ax = 6;
+                        eflags.cf = false;
+                    }
+                    else
+                    {
+                        eflags.cf = true;
+                        ax = 6;
+                    }
                     break;
 
                 case 0x3f: // read
@@ -636,7 +647,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var ms = Memory.GetFixSize(ds, dx, cx.Int32);
 
-                        if (bx.Int32 == 2)
+                        if (bx.Int32 == 1 || bx.Int32 == 2)
                             Console.Error.Write(ms.Select(x => (char)x).ToArray());
                         else
                             fileHandlers[bx.Int32].Write(ms.AsSpan());
@@ -660,7 +671,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x41: // delete
                     {
                         var path = get_path();
-                        Console.Error.WriteLine("    Delete: " + path);
+                        NonBlockingConsole.WriteLine($"    Delete: '{path}'.");
 
                         try
                         {
@@ -679,7 +690,25 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var to_seek = (int)((cx.UInt32 << 16) + dx.UInt32);
 
+                        // if (bx.Int32 <= 4)
+                        // {
+                        //     eflags.cf = false;
+                        //     ax = 0;
+                        //     dx = 0;
+                        //     break;
+                        // }
+
                         var file = fileHandlers[bx.Int32];
+                        if (file == null)
+                        {
+                            NonBlockingConsole.WriteLine($"    Lseek. Handle: {bx.Int32} (already closed), to_seek: {to_seek}, whence: {al.UInt32}.");
+
+                            eflags.cf = true;
+                            ax = 6;
+                            break;
+                        }
+
+                        // NonBlockingConsole.WriteLine($"    Lseek. Handle: {bx.Int32}."); // Noisily.
 
                         long new_off;
 
@@ -717,7 +746,7 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     break;
 
-                case 0x43:
+                case 0x43: // dir exists
                     {
                         var path = get_path();
                         if (al != 0)
@@ -748,6 +777,8 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x44: // ioctl
+                    // NonBlockingConsole.WriteLine($"    Ioctl. Handle: {bx.Int32}."); // Noisily.
+
                     if (bx.UInt32 <= 4) // "CON"
                         if (al == 0)
                         {
@@ -757,7 +788,6 @@ namespace MikhailKhalizev.Max.Dos
                         }
 
                     ax = dx = 0x2;
-                    // throw new NotImplementedException();
                     break;
 
                 case 0x48:

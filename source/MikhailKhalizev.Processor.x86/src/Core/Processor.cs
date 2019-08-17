@@ -1540,6 +1540,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             try
             {
                 var hist = new List<Address>(); // for debug
+                var histMi = new List<MethodInfoDto>(); // for debug
 
                 while (true)
                 {
@@ -1580,7 +1581,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
                     CompiledMethodCollection.GetMethod(out var nextMethodInfo, out var nextMethod);
-
+                    histMi.Add(nextMethodInfo);
 
                     if (_statisticMethodCall != null)
                     {
@@ -2255,7 +2256,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void calld_a32_far_ind(SegmentRegister segment, ValueBase address)
         {
-            throw new NotImplementedException();
+            var ret_addr = cs[eip];
+            call_far_prepare(32, memw_a32[segment, address + 4].UInt16, memd_a32[segment, address].UInt32);
+            CorrectMethodPosition(ret_addr);
         }
 
 
@@ -4582,7 +4585,11 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void leaved()
         {
-            throw new NotImplementedException();
+            if (ss.db)
+                esp = ebp;
+            else
+                sp = bp;
+            popd(ebp);
         }
 
         /// <inheritdoc />
@@ -6445,8 +6452,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void rep_a16(Action action)
         {
-            for (; cx != 0; cx--)
-                action();
+            var cxCache = cx.UInt16;
+            try
+            {
+                for (; cxCache != 0; cxCache--)
+                    action();
+            }
+            finally
+            {
+                cx.UInt16 = cxCache;
+            }
         }
 
         /// <inheritdoc />

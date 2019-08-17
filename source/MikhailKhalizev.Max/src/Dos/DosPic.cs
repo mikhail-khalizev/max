@@ -2,6 +2,7 @@ using System;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Max.Dos
 {
@@ -10,10 +11,11 @@ namespace MikhailKhalizev.Max.Dos
         public new Processor.x86.Core.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
+        private const bool logging = false;
+
         private int PIC_IRQCheck;
         private int PIC_IRQOnSecondPicActive;
         private int PIC_IRQActive = -1;
-
 
         private IRQ_Block[] irqs = new IRQ_Block[16];
         private PIC_Controller[] pics = new PIC_Controller[2];
@@ -21,6 +23,7 @@ namespace MikhailKhalizev.Max.Dos
 
         private object mutex = new object();
         private bool in_run_irqs = false;
+
 
         public DosPic(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
@@ -70,7 +73,8 @@ namespace MikhailKhalizev.Max.Dos
 
         public void set_irq_mask(int irq, bool masked)
         {
-            // Console.WriteLine($"\tset_irq_mask. irq: 0x{irq:x}, masked: {masked}");
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic set_irq_mask. irq: 0x{irq:x}, masked: {masked}");
 
             lock (mutex)
                 _set_irq_mask(irq, masked);
@@ -78,19 +82,26 @@ namespace MikhailKhalizev.Max.Dos
 
         public void activate_irq(int irq)
         {
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic activate_irq. irq: 0x{irq:x}");
+
             lock(mutex)
                 _activate_irq(irq);
         }
 
         public void deactivate_irq(int irq)
         {
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic deactivate_irq. irq: 0x{irq:x}");
+
             lock (mutex)
                 _deactivate_irq(irq);
         }
 
         public void write_command(int port, int value)
         {
-            //Console.WriteLine($"\twrite_command. port: 0x{port:x}, value: 0x{value:x}");
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic write_command. port: 0x{port:x}, value: 0x{value:x}");
 
             lock (mutex)
                 _write_command(port, value);
@@ -98,22 +109,35 @@ namespace MikhailKhalizev.Max.Dos
 
         public void write_data(int port, int value)
         {
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic write_data. port: 0x{port:x}, value: 0x{value:x}");
+
             lock (mutex)
                 _write_data(port, value);
         }
 
         public int read_command(int port)
         {
-            // Console.WriteLine($"\tread_command. port: 0x{port:x}");
-
+            int value;
             lock (mutex)
-                return _read_command(port);
+                value = _read_command(port);
+
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic read_command. port: 0x{port:x}, value: 0x{value:x}");
+
+            return value;
         }
 
         public int read_data(int port)
         {
+            int value;
             lock (mutex)
-                return _read_data(port);
+                value = _read_data(port);
+
+            if (logging)
+                NonBlockingConsole.WriteLine($"pic read_data. port: 0x{port:x}, value: 0x{value:x}");
+
+            return value;
         }
 
         public void RunIrqs()
@@ -225,7 +249,10 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     else // nonspecific EOI
                     {
-                        if (PIC_IRQActive < (irq_base + 8))
+                        // If there is no irq in service, ignore the call,
+                        // some games send an eoi to both pics when a sound irq happens (regardless of the irq).
+
+                        if (0 <= PIC_IRQActive && PIC_IRQActive < (irq_base + 8))
                         {
                             irqs[PIC_IRQActive].inservice = false;
                             PIC_IRQActive = -1;

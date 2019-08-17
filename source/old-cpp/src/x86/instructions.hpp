@@ -562,6 +562,7 @@ void iret_(uint_<8> op_size);
         check_mode();                                     \
     } while(0)
 
+// +
 #define calld_a32_far_ind(mem_seg, mem_off)               \
     do {                                                  \
         uint_<32> ret_addr = cs.get_base() + eip_next;    \
@@ -1611,6 +1612,7 @@ inline void leavew()
     popw(bp);
 }
 
+// +
 inline void leaved()
 {
     if (ss.get_db())

@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
 
         public const ushort image_load_seg = 0x1a2; // Const from dosbox.
         public const ushort pspseg = image_load_seg - 16; // 0x192
-        
+
         public RawProgramMain(
             Processor.x86.Core.Processor implementation,
             ConfigurationDto configuration,
@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             Configuration = configuration;
             Implementation = implementation;
             DefinitionCollection = definitionCollection;
-            
+
             DosMemory = new DosMemory(implementation, this);
             DosInterrupt = new DosInterrupt(implementation, this);
             DosTimer = new DosTimer(implementation, this);
@@ -79,15 +79,15 @@ namespace MikhailKhalizev.Max.Program
             };
             implementation.runOutb += (sender, args) =>
             {
-                try
-                {
+                // try
+                // {
                     DosPort.MyOutb(args.port, args.value);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
-                    throw;
-                }
+                // }
+                // catch (Exception e)
+                // {
+                //     Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
+                //     throw;
+                // }
             };
         }
 
@@ -464,7 +464,7 @@ namespace MikhailKhalizev.Max.Program
 
             if (cs.Descriptor.Base + cs.Descriptor.Limit + 1 != 0)
                 engine.SuppressDecode.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
-            
+
             foreach (var pair in funcs_by_pc)
                 foreach (var info in pair.Value)
                     engine.AddAlreadyDecodedFunc(info.MethodInfo);
