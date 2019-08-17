@@ -20,7 +20,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         {
             var path = Path.Combine(configuration.SettingsDirectory, configuration.MethodInfosFile);
             var allText = File.Exists(path) ? File.ReadAllText(path) : "";
-            var methods = (JsonConvert.DeserializeObject<List<MethodInfoDto>>(allText) ?? new List<MethodInfoDto>()).ToDictionary(x => x.Guid, x => x);
+            var methods = (JsonConvert.DeserializeObject<List<MethodInfoDto>>(allText) ?? new List<MethodInfoDto>())
+                .Where(x => x.Raw.Length % 2 == 0)
+                .ToDictionary(x => x.Guid, x => x);
 
             path = Path.Combine(configuration.SettingsDirectory, configuration.JumpInfosFile);
             allText = File.Exists(path) ? File.ReadAllText(path) : "";
@@ -208,7 +210,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             {
                 if (methodInfo.ExtraRaw == null)
                     methodInfo.ExtraRaw = new Dictionary<Address, string>();
-                
+
                 var raw = new ArraySegment<byte>(extraBytes).Slice(interval.Begin - extraBeginAddress, interval.End - interval.Begin);
                 var rawString = HexHelper.ToHexWithoutPrefix(raw);
 

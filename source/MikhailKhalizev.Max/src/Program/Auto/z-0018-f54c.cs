@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("a4bf74ca-a452-4719-99a2-2ec31b07d5c8")]
         public void Method_0018_f54c()
         {
-            ii(0x18_f54c, 3); callw(0x18_fa00, 0x4b1);                  /* call 0xfa00 */
+            ii(0x18_f54c, 3); if(callw_up(0x18_fa00, 0x4b1)) return;    /* call 0xfa00 */
             ii(0x18_f54f, 1); das();                                    /* das */
             ii(0x18_f550, 3); callw(0x18_fa00, 0x4ad);                  /* call 0xfa00 */
             ii(0x18_f553, 2); xor(al, ch);                              /* xor al, ch */

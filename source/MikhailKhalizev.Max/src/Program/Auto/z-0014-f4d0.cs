@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("d407be47-60e0-4b43-b3e9-239a3bc341ba")]
         public void Method_0014_f4d0()
         {
-            ii(0x14_f4d0, 3); if(callw_up(0x14_fa00, 0x52d)) return;    /* call 0xfa00 */
+            ii(0x14_f4d0, 3); callw(0x14_fa00, 0x52d);                  /* call 0xfa00 */
             ii(0x14_f4d3, 2); adc(al, ch);                              /* adc al, ch */
             ii(0x14_f4d5, 2); sub(memw_a16[ds, di], ax);                /* sub [di], ax */
             ii(0x14_f4d7, 2); adc(ax, bp);                              /* adc ax, bp */

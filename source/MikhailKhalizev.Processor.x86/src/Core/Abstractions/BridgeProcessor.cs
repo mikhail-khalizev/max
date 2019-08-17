@@ -692,6 +692,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
+        public bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address)
+        {
+            return Implementation.calld_a32_far_ind_up(segment, address);
+        }
+
+        /// <inheritdoc />
         public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             Implementation.calld_a16_far_ind(segment, address);

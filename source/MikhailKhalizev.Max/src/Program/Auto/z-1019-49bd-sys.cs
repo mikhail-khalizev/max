@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_49f1, 6); mov(memd_a32[ds, 0x101c_0a4a], esp);    /* mov [0x101c0a4a], esp */
             ii(0x1019_49f7, 7); mov(memw_a32[ds, 0x101c_0a4e], ss);     /* mov [0x101c0a4e], ss */
             ii(0x1019_49fe, 7); lss(esp, ds, 0x101c_0a42);              /* lss esp, [0x101c0a42] */
-            ii(0x1019_4a05, 6); calld_a32_far_ind(ds, 0x101c_0a38);     /* call far dword [0x101c0a38] */
+            ii(0x1019_4a05, 6); if(calld_a32_far_ind_up(ds, 0x101c_0a38)) return; /* call far dword [0x101c0a38] */
             ii(0x1019_4a0b, 1); cli();                                  /* cli */
             ii(0x1019_4a0c, 7); lss(esp, ds, 0x101c_0a4a);              /* lss esp, [0x101c0a4a] */
             ii(0x1019_4a13, 2); mov(al, 0x20);                          /* mov al, 0x20 */

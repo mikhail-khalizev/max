@@ -2270,6 +2270,14 @@ namespace MikhailKhalizev.Processor.x86.Core
             CorrectMethodPosition(ret_addr);
         }
 
+        /// <inheritdoc />
+        public bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(32, memw_a32[segment, address + 4].UInt16, memd_a32[segment, address].UInt32);
+            return CorrectMethodPosition(ret_addr, true);
+        }
+
 
         /// <inheritdoc />
         public void cbw()
@@ -3546,17 +3554,20 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void imul(ValueBase value)
         {
-            if (value.Bits == 16)
+            switch (value.Bits)
             {
-                var r = ax.Int32 * value.Int32;
-                ax = r;
-                dx = r >> 16;
+                case 16:
+                {
+                    var r = ax.Int32 * value.Int32;
+                    ax = r;
+                    dx = r >> 16;
 
-                eflags.cf = eflags.of = (ax != r);
-                return;
+                    eflags.cf = eflags.of = (ax != r);
+                    break;
+                }
+                default:
+                    throw new NotImplementedException($"Bits: {value.Bits}");
             }
-
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -5227,17 +5238,31 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void mul(ValueBase value)
         {
-            if (value.Bits == 16)
+            switch (value.Bits)
             {
-                var r = ax.UInt32 * value.UInt32;
-                ax.UInt32 = r;
-                dx.UInt32 = (r >> 16);
+                case 16:
+                {
+                    var r = ax.UInt32 * value.UInt32;
+                    ax.UInt32 = r;
+                    dx.UInt32 = (r >> 16);
 
-                eflags.cf = eflags.of = (dx != 0);
-                return;
+                    eflags.cf = eflags.of = ((r >> 16) != 0);
+                    break;
+                }
+
+                case 32:
+                {
+                    var r = eax.UInt64 * value.UInt64;
+                    eax.UInt64 = r;
+                    edx.UInt64 = (r >> 32);
+
+                    eflags.cf = eflags.of = ((r >> 32) != 0);
+                    break;
+                }
+
+                default:
+                    throw new NotImplementedException($"Bits: {value.Bits}");
             }
-
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x14_a059, 3); pushw(0x541);                             /* push 0x541 */
         l_0x14_a05c:
             ii(0x14_a05c, 1); cli();                                    /* cli */
-            ii(0x14_a05d, 3); callw(0x14_9f20, -0x140);                 /* call 0x9f20 */
+            ii(0x14_a05d, 3); if(callw_up(0x14_9f20, -0x140)) return;   /* call 0x9f20 */
             ii(0x14_a060, 1); pushw(ss);                                /* push ss */
             ii(0x14_a061, 2); if(jzw(0x14_a04c, -0x17)) goto l_0x14_a04c; /* jz 0xa04c */
             ii(0x14_a063, 4); dec(memb_a16[ds, 0x10ed]);                /* dec byte [0x10ed] */

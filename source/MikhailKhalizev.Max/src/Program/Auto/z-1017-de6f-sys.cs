@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_df15, 5); mov(memb_a32[ds, 0x101c_07c9], al);     /* mov [0x101c07c9], al */
         l_0x1017_df1a:
             ii(0x1017_df1a, 7); imul(eax, memd_a32[ds, 0x1020_a0d8], 0x6); /* imul eax, [0x1020a0d8], 0x6 */
-            ii(0x1017_df21, 6); calld_a32_far_ind(ds, eax + 0x101c_0699); /* call far dword [eax+0x101c0699] */
+            ii(0x1017_df21, 6); if(calld_a32_far_ind_up(ds, eax + 0x101c_0699)) return; /* call far dword [eax+0x101c0699] */
         l_0x1017_df27:
             ii(0x1017_df27, 5); jmpd(0x1017_de9b, -0x91); goto l_0x1017_de9b; /* jmp 0x1017de9b */
         l_0x1017_df2c:

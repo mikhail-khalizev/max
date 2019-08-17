@@ -59,8 +59,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         public byte[] RawBytes
         {
             get => _rawBytes ?? (_rawBytes = HexHelper.ToBytes(Raw));
-            set => Raw = HexHelper.ToHexWithoutPrefix(value);
+            set
+            {
+                _rawBytes = null;
+                Raw = HexHelper.ToHexWithoutPrefix(value);
+                if (Raw.Length % 2 != 0)
+                    throw new InvalidOperationException("Raw.Length % 2 != 0");
+            }
         }
+
         private byte[] _rawBytes;
 
         [JsonIgnore]
