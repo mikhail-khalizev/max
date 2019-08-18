@@ -151,9 +151,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             return _methodByGuid.Values.FirstOrDefault(x => x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
         }
 
+        public MethodInfoDto GetByRawBytes(ArchitectureMode mode, byte[] rawBytes, Address address)
+        {
+            return _methodByGuid.Values.FirstOrDefault(x => x.Address == address && x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
+        }
+
         public void Add(MethodInfoDto method)
         {
-            if (_methodByGuid.Values.Any(x => x.Guid == method.Guid || (x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes))))
+            var exists = _methodByGuid.Values.Any(x =>
+                x.Guid == method.Guid ||
+                (x.Address == method.Address && x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes)));
+
+            if (exists)
                 throw new InvalidOperationException("Duplicated item");
             _methodByGuid.Add(method.Guid, method);
             SetDirty();

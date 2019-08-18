@@ -1735,6 +1735,7 @@ inline void setg(uint_<8> & d)
         d = 0;
 }
 
+// +
 inline void setge(uint_<8> & d)
 {
     if (sf == of)
@@ -1743,6 +1744,7 @@ inline void setge(uint_<8> & d)
         d = 0;
 }
 
+// +
 inline void setle(uint_<8> & d)
 {
     if (zf || sf != of)

@@ -448,12 +448,12 @@ namespace MikhailKhalizev.Max.Program
             engine.AddForceEndMethod(0xbb03);
             engine.AddForceEndMethod(0xbb6f);
             engine.AddForceEndMethod(0xbb73);
-            engine.AddForceEndMethod(0x14_f4c7);
-            engine.AddForceEndMethod(0x14_b5b5);
-            engine.AddForceEndMethod(0x14_edfc);
-            engine.AddForceEndMethod(0x14_f88b);
-            engine.AddForceEndMethod(0x14_f8ef);
-            engine.AddForceEndMethod(0x15_8748);
+            engine.AddForceEndMethod(0x18_f4c7);
+            engine.AddForceEndMethod(0x18_b5b5);
+            engine.AddForceEndMethod(0x18_edfc);
+            engine.AddForceEndMethod(0x18_f88b);
+            engine.AddForceEndMethod(0x18_f8ef);
+            engine.AddForceEndMethod(0x19_8748);
         }
 
         private List<string> DecodeCurrentMethod()
@@ -494,7 +494,7 @@ namespace MikhailKhalizev.Max.Program
             Address code_start = 0x1007_0000;
             Address code_end = 0x1016_5d52;
 
-            if (cs.Descriptor.Base == 0 && cs.db && its_first && !funcs_by_pc.ContainsKey(0x1007_0010) && !funcs_by_pc.ContainsKey(0x1016_4ad4))
+            if (cs[0] == 0 && cs.db && its_first && !funcs_by_pc.ContainsKey(0x1007_0010) && !funcs_by_pc.ContainsKey(0x1016_4ad4))
             {
                 its_first = false;
                 NonBlockingConsole.WriteLine("Декодирования всего пользовательского кода MAX.");

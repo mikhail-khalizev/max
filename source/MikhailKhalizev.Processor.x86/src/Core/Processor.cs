@@ -6824,7 +6824,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void setge(ValueBase value)
         {
-            throw new NotImplementedException();
+            value.Int32 = eflags.sf == eflags.of ? 1 : 0;
         }
 
         /// <inheritdoc />
@@ -6836,7 +6836,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void setle(ValueBase value)
         {
-            throw new NotImplementedException();
+            if (eflags.zf || eflags.sf != eflags.of)
+                value.Int32 = 1;
+            else
+                value.Int32 = 0;
         }
 
         /// <inheritdoc />

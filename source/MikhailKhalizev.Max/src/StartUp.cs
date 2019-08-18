@@ -16,9 +16,20 @@ namespace MikhailKhalizev.Max
 {
     public class StartUp
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            new StartUp(args);
+            try
+            {
+                new StartUp(args);
+                NonBlockingConsole.AllWritten.Wait();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                NonBlockingConsole.AllWritten.Wait();
+                Console.WriteLine(ex);
+                return -1;
+            }
         }
 
         public IServiceProvider Services { get; set; }
@@ -55,32 +66,25 @@ namespace MikhailKhalizev.Max
 
 
             // Start.
-            try
+            var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
+            var definitionCollection = new DefinitionCollection();
+            definitionCollection.AddDefinitionsClass<Definitions>();
+            definitionCollection.AddDefinitionsClass<StringDefinitions>();
+
+            AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
+
+            if (args.Contains("--redecode"))
             {
-                var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
-                var definitionCollection = new DefinitionCollection();
-                definitionCollection.AddDefinitionsClass<Definitions>();
-                definitionCollection.AddDefinitionsClass<StringDefinitions>();
-
-                AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
-
-                if (args.Contains("--redecode"))
-                {
-                    NonBlockingConsole.WriteLine("Start Redecode.");
-                    var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
-                    redecode.Start(GetType().Assembly);
-                    return;
-                }
-
-                using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
-                {
-                    var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
-                    rp.Start();
-                }
+                NonBlockingConsole.WriteLine("Start Redecode.");
+                var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
+                redecode.Start(GetType().Assembly);
+                return;
             }
-            finally
+
+            using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
             {
-                NonBlockingConsole.AllWritten.Wait();
+                var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
+                rp.Start();
             }
         }
     }
