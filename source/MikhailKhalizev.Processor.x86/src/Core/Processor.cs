@@ -1422,7 +1422,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var now = DateTime.UtcNow;
 
-            if (RunIrqInstructionCount + 25000 < InstructionCount || TimeSpan.FromSeconds(1) < now - RunIrqTimestamp)
+            if (RunIrqInstructionCount + 25000 < InstructionCount || TimeSpan.FromSeconds(0.2) < now - RunIrqTimestamp)
             {
                 RunIrqTimestamp = now;
                 RunIrqInstructionCount = InstructionCount;
@@ -1526,6 +1526,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         public int CSharpFunctionDelta { get; set; }
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
+        public List<MethodInfoDto> callMethodInfos { get; set; } = new List<MethodInfoDto>();
 
         public ICompiledMethodCollection CompiledMethodCollection { get; set; }
         public event EventHandler<(ValueBase value, ValueBase port)> runInb;
@@ -1550,6 +1551,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             run_irqs();
             callReturnAddresses.Add(returnAddress);
+            callMethodInfos.Add(MethodInfo);
 
             try
             {
@@ -1572,9 +1574,18 @@ namespace MikhailKhalizev.Processor.x86.Core
                     if (toRun == returnAddress)
                         return false;
 
+                    MethodInfoDto nextMethodInfo = null;
+                    Action nextMethod = null;
+
                     // Шаг первый - ищем среди уже вызванных функций.
-                    var index = callReturnAddresses.LastIndexOf(toRun);
-                    if (0 <= index)
+                    var goUp = callReturnAddresses.Contains(toRun);
+                    if (!goUp)
+                    {
+                        CompiledMethodCollection.GetMethod(out nextMethodInfo, out nextMethod);
+                        goUp = haveConditionReturnAfterInstruction && callMethodInfos.Contains(nextMethodInfo);
+                    }
+
+                    if (goUp)
                     {
                         if (haveConditionReturnAfterInstruction)
                             return true;
@@ -1594,7 +1605,6 @@ namespace MikhailKhalizev.Processor.x86.Core
                     }
 
                     // Шаг второй - если не нашли - значит вызываем новую функцию.
-                    CompiledMethodCollection.GetMethod(out var nextMethodInfo, out var nextMethod);
                     histMi.Add(nextMethodInfo);
 
                     if (_statisticMethodCall != null)
@@ -1649,6 +1659,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             finally
             {
                 callReturnAddresses.RemoveAt(callReturnAddresses.Count - 1);
+                callMethodInfos.RemoveAt(callMethodInfos.Count - 1);
             }
         }
 
@@ -5392,7 +5403,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void outsb_a32(SegmentRegister segment = null)
         {
-            throw new NotImplementedException();
+            runOutb?.Invoke(this, (dx, memb_a32[segment ?? ds, esi]));
+            esi += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />

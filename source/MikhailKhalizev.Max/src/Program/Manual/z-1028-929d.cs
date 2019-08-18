@@ -14,7 +14,8 @@ namespace MikhailKhalizev.Max.Program
         //     ii(0x1028_92a3, 1); nop();                                  /* nop */
         //     ii(0x1028_92a4, 2); if(loopd_a32(0x1028_92a3, -0x3)) goto l_0x1028_92a3; /* loop 0x102892a3 */
         //     ii(0x1028_92a6, 1); popd(ecx);                              /* pop ecx */
-            ii(0x1028_92a7, 1); retd(); return;                         /* ret */
+
+            retd();
         }
     }
 }

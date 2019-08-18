@@ -2149,6 +2149,18 @@
     }
   },
   {
+    "Guid": "b4889cf4-d8f0-4d0d-a433-ccab0c915ad8",
+    "Address": "0x1017_aa80",
+    "Jumps": {
+      "0x1017_aa95": [
+        {
+          "Address": "0x1019_4101",
+          "Guid": "e733bc53-ec27-4e93-b137-0e075c7a47ef"
+        }
+      ]
+    }
+  },
+  {
     "Guid": "1e1780f8-f76f-4fab-a4ef-4a3e4f10edad",
     "Address": "0x1017_de6f",
     "IsGoUp": [
@@ -2431,6 +2443,10 @@
     "Address": "0x1018_e8e4",
     "Jumps": {
       "0x1018_e908": [
+        {
+          "Address": "0x1018_e948",
+          "Guid": "316f46df-ec9e-4e8b-9fb7-935b44544f65"
+        },
         {
           "Address": "0x1019_00c4",
           "Guid": "ef44e033-7ee9-49f1-bb1c-1e17fa7767fd"

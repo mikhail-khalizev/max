@@ -2182,6 +2182,7 @@ inline void insb_a16()
     di += df ? -1 : 1;
 }
 
+// +
 inline void outsb_a32()
 {
     // @todo check permission
