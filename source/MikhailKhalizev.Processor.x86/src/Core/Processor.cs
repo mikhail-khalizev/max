@@ -1415,9 +1415,20 @@ namespace MikhailKhalizev.Processor.x86.Core
             eip = eipSave;
         }
 
+        private long RunIrqInstructionCount;
+        private DateTime RunIrqTimestamp;
+
         private void run_irqs()
         {
-            runIrqs?.Invoke(this, EventArgs.Empty);
+            var now = DateTime.UtcNow;
+
+            if (RunIrqInstructionCount + 25000 < InstructionCount || TimeSpan.FromSeconds(1) < now - RunIrqTimestamp)
+            {
+                RunIrqTimestamp = now;
+                RunIrqInstructionCount = InstructionCount;
+
+                runIrqs?.Invoke(this, EventArgs.Empty);
+            }
         }
 
 
@@ -1508,6 +1519,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// </summary>
         /// <seealso cref="eip"/>
         public Address CurrentInstructionAddress { get; set; }
+
+        public long InstructionCount { get; set; }
 
         public int CSharpEmulateMode => MethodInfo == null ? 16 : (int)MethodInfo.Mode;
         public int CSharpFunctionDelta { get; set; }
@@ -1648,6 +1661,8 @@ namespace MikhailKhalizev.Processor.x86.Core
 
         public void ii(Address address, uint length)
         {
+            InstructionCount++;
+
             check_mode();
 
             if (cs.fail_limit_check(eip))

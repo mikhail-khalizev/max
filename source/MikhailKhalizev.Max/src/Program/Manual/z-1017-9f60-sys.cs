@@ -8,6 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("2b18ef74-75a5-45e2-aec9-484f0015759c")]
         public void /* sys */ Method_1017_9f60()
         {
+            var chan = RawProgramMain.DosDma.dma_get_channel(5);
+
             ii(0x1017_9f60, 1); pushd(ebp);                             /* push ebp */
             ii(0x1017_9f61, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1017_9f63, 1); pushd(ebx);                             /* push ebx */
@@ -52,6 +54,15 @@ namespace MikhailKhalizev.Max.Program
         l_0x1017_9fe1:
             ii(0x1017_9fe1, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
         l_0x1017_9fe3:
+
+            // Работа с аудио. Загрука данных из файла в память?
+
+            if (chan.masked == false)
+            {
+                var buf = new byte[2];
+                chan.read(buf);
+            }
+
             ii(0x1017_9fe3, 6); mov(edx, memd_a32[ds, 0x101b_e434]);    /* mov edx, [0x101be434] */
             ii(0x1017_9fe9, 3); cmp(edx, -0x1 /* 0xff */);              /* cmp edx, 0xffffffff */
             ii(0x1017_9fec, 3); setnz(al);                              /* setnz al */
@@ -134,6 +145,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a12b, 5); calld(/* sys */ 0x1017_fd5d, 0x5c2d);   /* call 0x1017fd5d */
             ii(0x1017_a130, 5); mov(memd_a32[ds, 0x101b_e434], eax);    /* mov [0x101be434], eax */
         l_0x1017_a135:
+
+            if (chan.masked == false)
+            {
+                var buf = new byte[2];
+                chan.read(buf);
+            //        if (chan.currcnt == 0xffff)
+            //            pic.activate_irq(7);
+            }
+
             ii(0x1017_a135, 6); mov(edx, memd_a32[ds, 0x101b_e434]);    /* mov edx, [0x101be434] */
             ii(0x1017_a13b, 3); cmp(edx, -0x1 /* 0xff */);              /* cmp edx, 0xffffffff */
             ii(0x1017_a13e, 3); setnz(al);                              /* setnz al */

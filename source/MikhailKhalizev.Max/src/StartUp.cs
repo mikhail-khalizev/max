@@ -18,28 +18,7 @@ namespace MikhailKhalizev.Max
     {
         static void Main(string[] args)
         {
-            Exception exception = null;
-
-            // Increase stack size.
-            var thread = new Thread(
-                () =>
-                {
-                    try
-                    {
-                        new StartUp(args);
-                    }
-                    catch (Exception e)
-                    {
-                        exception = e;
-                        throw;
-                    }
-                }, 50 * 1024 * 1024);
-
-            thread.Start();
-            thread.Join();
-
-            if (exception != null)
-                throw exception;
+            new StartUp(args);
         }
 
         public IServiceProvider Services { get; set; }

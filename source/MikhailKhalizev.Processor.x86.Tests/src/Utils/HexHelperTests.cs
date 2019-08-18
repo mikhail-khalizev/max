@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+using System;
+using FluentAssertions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Xunit;
 
@@ -7,7 +8,6 @@ namespace MikhailKhalizev.Processor.x86.Tests.Utils
     public class HexHelperTests
     {
         [Theory]
-        [InlineData("123", new byte[] { 0x01, 0x23 })]
         [InlineData("1234", new byte[] { 0x12, 0x34 })]
         [InlineData("0x000_102_030_405", new byte[] { 0, 1, 2, 3, 4, 5 })]
         public void HexConvertToBytes(string hex, byte[] expected)
@@ -17,6 +17,13 @@ namespace MikhailKhalizev.Processor.x86.Tests.Utils
 
             bytes = HexHelper.ToBytes(hex, o => o.SetBigEndian());
             bytes.Should().Equal(expected);
+        }
+
+        [Fact]
+        public void HexIncorrectSizeConvertToBytes()
+        {
+            Action toBytes = () => HexHelper.ToBytes("123", o => o.SetLittleEndian());
+            toBytes.Should().Throw<Exception>();
         }
 
         [Theory]
