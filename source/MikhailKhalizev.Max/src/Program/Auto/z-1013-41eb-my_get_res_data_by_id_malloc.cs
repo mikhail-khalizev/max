@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("a88fd08e-1975-402c-8014-9b9aea7bab73")]
+        [MethodInfo("1d94779a-16d9-4dfa-b696-7d20f91e232a")]
         public void my_get_res_data_by_id_malloc()
         {
             ii(0x1013_41eb, 5); pushd(0x34);                            /* push 0x34 */

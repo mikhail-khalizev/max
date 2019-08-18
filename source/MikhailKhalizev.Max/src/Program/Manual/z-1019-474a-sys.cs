@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("fa50be9d-ffbf-4681-9570-46a3f40ae41a")]
+        [MethodInfo("9587379f-6dac-4d85-89ad-819b8027e29a")]
         public void /* sys */ Method_1019_474a()
         {
             // Wait eax seconds? Skip.

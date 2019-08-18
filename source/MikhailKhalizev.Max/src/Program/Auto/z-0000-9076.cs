@@ -5,1364 +5,577 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0f755296-56e4-40c5-bade-413648913771")]
+        [MethodInfo("177c6e96-bb04-4bcc-b30e-1040a795807d")]
         public void Method_0000_9076()
         {
-            ii(0x9076, 1);    int3();                                   /* int3 */
-            ii(0x9077, 1);    int3();                                   /* int3 */
-            ii(0x9078, 1);    int3();                                   /* int3 */
-            ii(0x9079, 1);    int3();                                   /* int3 */
-            ii(0x907a, 1);    int3();                                   /* int3 */
-            ii(0x907b, 1);    int3();                                   /* int3 */
-            ii(0x907c, 1);    int3();                                   /* int3 */
-            ii(0x907d, 1);    int3();                                   /* int3 */
-            ii(0x907e, 1);    int3();                                   /* int3 */
-            ii(0x907f, 1);    int3();                                   /* int3 */
-            ii(0x9080, 1);    int3();                                   /* int3 */
-            ii(0x9081, 1);    int3();                                   /* int3 */
-            ii(0x9082, 1);    int3();                                   /* int3 */
-            ii(0x9083, 1);    int3();                                   /* int3 */
-            ii(0x9084, 1);    int3();                                   /* int3 */
-            ii(0x9085, 1);    int3();                                   /* int3 */
-            ii(0x9086, 1);    int3();                                   /* int3 */
-            ii(0x9087, 1);    int3();                                   /* int3 */
-            ii(0x9088, 1);    int3();                                   /* int3 */
-            ii(0x9089, 1);    int3();                                   /* int3 */
-            ii(0x908a, 1);    int3();                                   /* int3 */
-            ii(0x908b, 1);    int3();                                   /* int3 */
-            ii(0x908c, 1);    int3();                                   /* int3 */
-            ii(0x908d, 1);    int3();                                   /* int3 */
-            ii(0x908e, 1);    int3();                                   /* int3 */
-            ii(0x908f, 1);    int3();                                   /* int3 */
-            ii(0x9090, 1);    int3();                                   /* int3 */
-            ii(0x9091, 1);    int3();                                   /* int3 */
-            ii(0x9092, 1);    int3();                                   /* int3 */
-            ii(0x9093, 1);    int3();                                   /* int3 */
-            ii(0x9094, 1);    int3();                                   /* int3 */
-            ii(0x9095, 1);    int3();                                   /* int3 */
-            ii(0x9096, 1);    int3();                                   /* int3 */
-            ii(0x9097, 1);    int3();                                   /* int3 */
-            ii(0x9098, 1);    int3();                                   /* int3 */
-            ii(0x9099, 1);    int3();                                   /* int3 */
-            ii(0x909a, 1);    int3();                                   /* int3 */
-            ii(0x909b, 1);    int3();                                   /* int3 */
-            ii(0x909c, 1);    int3();                                   /* int3 */
-            ii(0x909d, 1);    int3();                                   /* int3 */
-            ii(0x909e, 1);    int3();                                   /* int3 */
-            ii(0x909f, 1);    int3();                                   /* int3 */
-            ii(0x90a0, 1);    int3();                                   /* int3 */
-            ii(0x90a1, 1);    int3();                                   /* int3 */
-            ii(0x90a2, 1);    int3();                                   /* int3 */
-            ii(0x90a3, 1);    int3();                                   /* int3 */
-            ii(0x90a4, 1);    int3();                                   /* int3 */
-            ii(0x90a5, 1);    int3();                                   /* int3 */
-            ii(0x90a6, 1);    int3();                                   /* int3 */
-            ii(0x90a7, 1);    int3();                                   /* int3 */
-            ii(0x90a8, 1);    int3();                                   /* int3 */
-            ii(0x90a9, 1);    int3();                                   /* int3 */
-            ii(0x90aa, 1);    int3();                                   /* int3 */
-            ii(0x90ab, 1);    int3();                                   /* int3 */
-            ii(0x90ac, 1);    int3();                                   /* int3 */
-            ii(0x90ad, 1);    int3();                                   /* int3 */
-            ii(0x90ae, 1);    int3();                                   /* int3 */
-            ii(0x90af, 1);    int3();                                   /* int3 */
-            ii(0x90b0, 1);    int3();                                   /* int3 */
-            ii(0x90b1, 1);    int3();                                   /* int3 */
-            ii(0x90b2, 1);    int3();                                   /* int3 */
-            ii(0x90b3, 1);    int3();                                   /* int3 */
-            ii(0x90b4, 1);    int3();                                   /* int3 */
-            ii(0x90b5, 1);    int3();                                   /* int3 */
-            ii(0x90b6, 1);    int3();                                   /* int3 */
-            ii(0x90b7, 1);    int3();                                   /* int3 */
-            ii(0x90b8, 1);    int3();                                   /* int3 */
-            ii(0x90b9, 1);    int3();                                   /* int3 */
-            ii(0x90ba, 1);    int3();                                   /* int3 */
-            ii(0x90bb, 1);    int3();                                   /* int3 */
-            ii(0x90bc, 1);    int3();                                   /* int3 */
-            ii(0x90bd, 1);    int3();                                   /* int3 */
-            ii(0x90be, 1);    int3();                                   /* int3 */
-            ii(0x90bf, 1);    int3();                                   /* int3 */
-            ii(0x90c0, 1);    int3();                                   /* int3 */
-            ii(0x90c1, 1);    int3();                                   /* int3 */
-            ii(0x90c2, 1);    int3();                                   /* int3 */
-            ii(0x90c3, 1);    int3();                                   /* int3 */
-            ii(0x90c4, 1);    int3();                                   /* int3 */
-            ii(0x90c5, 1);    int3();                                   /* int3 */
-            ii(0x90c6, 1);    int3();                                   /* int3 */
-            ii(0x90c7, 1);    int3();                                   /* int3 */
-            ii(0x90c8, 1);    int3();                                   /* int3 */
-            ii(0x90c9, 1);    int3();                                   /* int3 */
-            ii(0x90ca, 1);    int3();                                   /* int3 */
-            ii(0x90cb, 1);    int3();                                   /* int3 */
-            ii(0x90cc, 1);    int3();                                   /* int3 */
-            ii(0x90cd, 1);    int3();                                   /* int3 */
-            ii(0x90ce, 1);    int3();                                   /* int3 */
-            ii(0x90cf, 1);    int3();                                   /* int3 */
-            ii(0x90d0, 1);    int3();                                   /* int3 */
-            ii(0x90d1, 1);    int3();                                   /* int3 */
-            ii(0x90d2, 1);    int3();                                   /* int3 */
-            ii(0x90d3, 1);    int3();                                   /* int3 */
-            ii(0x90d4, 1);    int3();                                   /* int3 */
-            ii(0x90d5, 1);    int3();                                   /* int3 */
-            ii(0x90d6, 1);    int3();                                   /* int3 */
-            ii(0x90d7, 1);    int3();                                   /* int3 */
-            ii(0x90d8, 1);    int3();                                   /* int3 */
-            ii(0x90d9, 1);    int3();                                   /* int3 */
-            ii(0x90da, 1);    int3();                                   /* int3 */
-            ii(0x90db, 1);    int3();                                   /* int3 */
-            ii(0x90dc, 1);    int3();                                   /* int3 */
-            ii(0x90dd, 1);    int3();                                   /* int3 */
-            ii(0x90de, 1);    int3();                                   /* int3 */
-            ii(0x90df, 1);    int3();                                   /* int3 */
-            ii(0x90e0, 1);    int3();                                   /* int3 */
-            ii(0x90e1, 1);    int3();                                   /* int3 */
-            ii(0x90e2, 1);    int3();                                   /* int3 */
-            ii(0x90e3, 1);    int3();                                   /* int3 */
-            ii(0x90e4, 1);    int3();                                   /* int3 */
-            ii(0x90e5, 1);    int3();                                   /* int3 */
-            ii(0x90e6, 1);    int3();                                   /* int3 */
-            ii(0x90e7, 1);    int3();                                   /* int3 */
-            ii(0x90e8, 1);    int3();                                   /* int3 */
-            ii(0x90e9, 1);    int3();                                   /* int3 */
-            ii(0x90ea, 1);    int3();                                   /* int3 */
-            ii(0x90eb, 1);    int3();                                   /* int3 */
-            ii(0x90ec, 1);    int3();                                   /* int3 */
-            ii(0x90ed, 1);    int3();                                   /* int3 */
-            ii(0x90ee, 1);    int3();                                   /* int3 */
-            ii(0x90ef, 1);    int3();                                   /* int3 */
-            ii(0x90f0, 1);    int3();                                   /* int3 */
-            ii(0x90f1, 1);    int3();                                   /* int3 */
-            ii(0x90f2, 1);    int3();                                   /* int3 */
-            ii(0x90f3, 1);    int3();                                   /* int3 */
-            ii(0x90f4, 1);    int3();                                   /* int3 */
-            ii(0x90f5, 1);    int3();                                   /* int3 */
-            ii(0x90f6, 1);    int3();                                   /* int3 */
-            ii(0x90f7, 1);    int3();                                   /* int3 */
-            ii(0x90f8, 1);    int3();                                   /* int3 */
-            ii(0x90f9, 1);    int3();                                   /* int3 */
-            ii(0x90fa, 1);    int3();                                   /* int3 */
-            ii(0x90fb, 1);    int3();                                   /* int3 */
-            ii(0x90fc, 1);    int3();                                   /* int3 */
-            ii(0x90fd, 1);    int3();                                   /* int3 */
-            ii(0x90fe, 1);    int3();                                   /* int3 */
-            ii(0x90ff, 1);    int3();                                   /* int3 */
-            ii(0x9100, 1);    int3();                                   /* int3 */
-            ii(0x9101, 1);    int3();                                   /* int3 */
-            ii(0x9102, 1);    int3();                                   /* int3 */
-            ii(0x9103, 1);    int3();                                   /* int3 */
-            ii(0x9104, 1);    int3();                                   /* int3 */
-            ii(0x9105, 1);    int3();                                   /* int3 */
-            ii(0x9106, 1);    int3();                                   /* int3 */
-            ii(0x9107, 1);    int3();                                   /* int3 */
-            ii(0x9108, 1);    int3();                                   /* int3 */
-            ii(0x9109, 1);    int3();                                   /* int3 */
-            ii(0x910a, 1);    int3();                                   /* int3 */
-            ii(0x910b, 1);    int3();                                   /* int3 */
-            ii(0x910c, 1);    int3();                                   /* int3 */
-            ii(0x910d, 1);    int3();                                   /* int3 */
-            ii(0x910e, 1);    int3();                                   /* int3 */
-            ii(0x910f, 1);    int3();                                   /* int3 */
-            ii(0x9110, 1);    int3();                                   /* int3 */
-            ii(0x9111, 1);    int3();                                   /* int3 */
-            ii(0x9112, 1);    int3();                                   /* int3 */
-            ii(0x9113, 1);    int3();                                   /* int3 */
-            ii(0x9114, 1);    int3();                                   /* int3 */
-            ii(0x9115, 1);    int3();                                   /* int3 */
-            ii(0x9116, 1);    int3();                                   /* int3 */
-            ii(0x9117, 1);    int3();                                   /* int3 */
-            ii(0x9118, 1);    int3();                                   /* int3 */
-            ii(0x9119, 1);    int3();                                   /* int3 */
-            ii(0x911a, 1);    int3();                                   /* int3 */
-            ii(0x911b, 1);    int3();                                   /* int3 */
-            ii(0x911c, 1);    int3();                                   /* int3 */
-            ii(0x911d, 1);    int3();                                   /* int3 */
-            ii(0x911e, 1);    int3();                                   /* int3 */
-            ii(0x911f, 1);    int3();                                   /* int3 */
-            ii(0x9120, 1);    int3();                                   /* int3 */
-            ii(0x9121, 1);    int3();                                   /* int3 */
-            ii(0x9122, 1);    int3();                                   /* int3 */
-            ii(0x9123, 1);    int3();                                   /* int3 */
-            ii(0x9124, 1);    int3();                                   /* int3 */
-            ii(0x9125, 1);    int3();                                   /* int3 */
-            ii(0x9126, 1);    int3();                                   /* int3 */
-            ii(0x9127, 1);    int3();                                   /* int3 */
-            ii(0x9128, 1);    int3();                                   /* int3 */
-            ii(0x9129, 1);    int3();                                   /* int3 */
-            ii(0x912a, 1);    int3();                                   /* int3 */
-            ii(0x912b, 1);    int3();                                   /* int3 */
-            ii(0x912c, 1);    int3();                                   /* int3 */
-            ii(0x912d, 1);    int3();                                   /* int3 */
-            ii(0x912e, 1);    int3();                                   /* int3 */
-            ii(0x912f, 1);    int3();                                   /* int3 */
-            ii(0x9130, 1);    int3();                                   /* int3 */
-            ii(0x9131, 1);    int3();                                   /* int3 */
-            ii(0x9132, 1);    int3();                                   /* int3 */
-            ii(0x9133, 1);    int3();                                   /* int3 */
-            ii(0x9134, 1);    int3();                                   /* int3 */
-            ii(0x9135, 1);    int3();                                   /* int3 */
-            ii(0x9136, 1);    int3();                                   /* int3 */
-            ii(0x9137, 1);    int3();                                   /* int3 */
-            ii(0x9138, 1);    int3();                                   /* int3 */
-            ii(0x9139, 1);    int3();                                   /* int3 */
-            ii(0x913a, 1);    int3();                                   /* int3 */
-            ii(0x913b, 1);    int3();                                   /* int3 */
-            ii(0x913c, 1);    int3();                                   /* int3 */
-            ii(0x913d, 1);    int3();                                   /* int3 */
-            ii(0x913e, 1);    int3();                                   /* int3 */
-            ii(0x913f, 1);    int3();                                   /* int3 */
-            ii(0x9140, 1);    int3();                                   /* int3 */
-            ii(0x9141, 1);    int3();                                   /* int3 */
-            ii(0x9142, 1);    int3();                                   /* int3 */
-            ii(0x9143, 1);    int3();                                   /* int3 */
-            ii(0x9144, 1);    int3();                                   /* int3 */
-            ii(0x9145, 1);    int3();                                   /* int3 */
-            ii(0x9146, 1);    int3();                                   /* int3 */
-            ii(0x9147, 1);    int3();                                   /* int3 */
-            ii(0x9148, 1);    int3();                                   /* int3 */
-            ii(0x9149, 1);    int3();                                   /* int3 */
-            ii(0x914a, 1);    int3();                                   /* int3 */
-            ii(0x914b, 1);    int3();                                   /* int3 */
-            ii(0x914c, 1);    int3();                                   /* int3 */
-            ii(0x914d, 1);    int3();                                   /* int3 */
-            ii(0x914e, 1);    int3();                                   /* int3 */
-            ii(0x914f, 1);    int3();                                   /* int3 */
-            ii(0x9150, 1);    int3();                                   /* int3 */
-            ii(0x9151, 1);    int3();                                   /* int3 */
-            ii(0x9152, 1);    int3();                                   /* int3 */
-            ii(0x9153, 1);    int3();                                   /* int3 */
-            ii(0x9154, 1);    int3();                                   /* int3 */
-            ii(0x9155, 1);    int3();                                   /* int3 */
-            ii(0x9156, 1);    int3();                                   /* int3 */
-            ii(0x9157, 1);    int3();                                   /* int3 */
-            ii(0x9158, 1);    int3();                                   /* int3 */
-            ii(0x9159, 1);    int3();                                   /* int3 */
-            ii(0x915a, 1);    int3();                                   /* int3 */
-            ii(0x915b, 1);    int3();                                   /* int3 */
-            ii(0x915c, 1);    int3();                                   /* int3 */
-            ii(0x915d, 1);    int3();                                   /* int3 */
-            ii(0x915e, 1);    int3();                                   /* int3 */
-            ii(0x915f, 1);    int3();                                   /* int3 */
-            ii(0x9160, 1);    int3();                                   /* int3 */
-            ii(0x9161, 1);    int3();                                   /* int3 */
-            ii(0x9162, 1);    int3();                                   /* int3 */
-            ii(0x9163, 1);    int3();                                   /* int3 */
-            ii(0x9164, 1);    int3();                                   /* int3 */
-            ii(0x9165, 1);    int3();                                   /* int3 */
-            ii(0x9166, 1);    int3();                                   /* int3 */
-            ii(0x9167, 1);    int3();                                   /* int3 */
-            ii(0x9168, 1);    int3();                                   /* int3 */
-            ii(0x9169, 1);    int3();                                   /* int3 */
-            ii(0x916a, 1);    int3();                                   /* int3 */
-            ii(0x916b, 1);    int3();                                   /* int3 */
-            ii(0x916c, 1);    int3();                                   /* int3 */
-            ii(0x916d, 1);    int3();                                   /* int3 */
-            ii(0x916e, 1);    int3();                                   /* int3 */
-            ii(0x916f, 1);    int3();                                   /* int3 */
-            ii(0x9170, 1);    int3();                                   /* int3 */
-            ii(0x9171, 1);    int3();                                   /* int3 */
-            ii(0x9172, 1);    int3();                                   /* int3 */
-            ii(0x9173, 1);    int3();                                   /* int3 */
-            ii(0x9174, 1);    int3();                                   /* int3 */
-            ii(0x9175, 1);    int3();                                   /* int3 */
-            ii(0x9176, 1);    int3();                                   /* int3 */
-            ii(0x9177, 1);    int3();                                   /* int3 */
-            ii(0x9178, 1);    int3();                                   /* int3 */
-            ii(0x9179, 1);    int3();                                   /* int3 */
-            ii(0x917a, 1);    int3();                                   /* int3 */
-            ii(0x917b, 1);    int3();                                   /* int3 */
-            ii(0x917c, 1);    int3();                                   /* int3 */
-            ii(0x917d, 1);    int3();                                   /* int3 */
-            ii(0x917e, 1);    int3();                                   /* int3 */
-            ii(0x917f, 1);    int3();                                   /* int3 */
-            ii(0x9180, 1);    int3();                                   /* int3 */
-            ii(0x9181, 1);    int3();                                   /* int3 */
-            ii(0x9182, 1);    int3();                                   /* int3 */
-            ii(0x9183, 1);    int3();                                   /* int3 */
-            ii(0x9184, 1);    int3();                                   /* int3 */
-            ii(0x9185, 1);    int3();                                   /* int3 */
-            ii(0x9186, 1);    int3();                                   /* int3 */
-            ii(0x9187, 1);    int3();                                   /* int3 */
-            ii(0x9188, 1);    int3();                                   /* int3 */
-            ii(0x9189, 1);    int3();                                   /* int3 */
-            ii(0x918a, 1);    int3();                                   /* int3 */
-            ii(0x918b, 1);    int3();                                   /* int3 */
-            ii(0x918c, 1);    int3();                                   /* int3 */
-            ii(0x918d, 1);    int3();                                   /* int3 */
-            ii(0x918e, 1);    int3();                                   /* int3 */
-            ii(0x918f, 1);    int3();                                   /* int3 */
-            ii(0x9190, 1);    int3();                                   /* int3 */
-            ii(0x9191, 1);    int3();                                   /* int3 */
-            ii(0x9192, 1);    int3();                                   /* int3 */
-            ii(0x9193, 1);    int3();                                   /* int3 */
-            ii(0x9194, 1);    int3();                                   /* int3 */
-            ii(0x9195, 1);    int3();                                   /* int3 */
-            ii(0x9196, 1);    int3();                                   /* int3 */
-            ii(0x9197, 1);    int3();                                   /* int3 */
-            ii(0x9198, 1);    int3();                                   /* int3 */
-            ii(0x9199, 1);    int3();                                   /* int3 */
-            ii(0x919a, 1);    int3();                                   /* int3 */
-            ii(0x919b, 1);    int3();                                   /* int3 */
-            ii(0x919c, 1);    int3();                                   /* int3 */
-            ii(0x919d, 1);    int3();                                   /* int3 */
-            ii(0x919e, 1);    int3();                                   /* int3 */
-            ii(0x919f, 1);    int3();                                   /* int3 */
-            ii(0x91a0, 1);    int3();                                   /* int3 */
-            ii(0x91a1, 1);    int3();                                   /* int3 */
-            ii(0x91a2, 1);    int3();                                   /* int3 */
-            ii(0x91a3, 1);    int3();                                   /* int3 */
-            ii(0x91a4, 1);    int3();                                   /* int3 */
-            ii(0x91a5, 1);    int3();                                   /* int3 */
-            ii(0x91a6, 1);    int3();                                   /* int3 */
-            ii(0x91a7, 1);    int3();                                   /* int3 */
-            ii(0x91a8, 1);    int3();                                   /* int3 */
-            ii(0x91a9, 1);    int3();                                   /* int3 */
-            ii(0x91aa, 1);    int3();                                   /* int3 */
-            ii(0x91ab, 1);    int3();                                   /* int3 */
-            ii(0x91ac, 1);    int3();                                   /* int3 */
-            ii(0x91ad, 1);    int3();                                   /* int3 */
-            ii(0x91ae, 1);    int3();                                   /* int3 */
-            ii(0x91af, 1);    int3();                                   /* int3 */
-            ii(0x91b0, 1);    int3();                                   /* int3 */
-            ii(0x91b1, 1);    int3();                                   /* int3 */
-            ii(0x91b2, 1);    int3();                                   /* int3 */
-            ii(0x91b3, 1);    int3();                                   /* int3 */
-            ii(0x91b4, 1);    int3();                                   /* int3 */
-            ii(0x91b5, 1);    int3();                                   /* int3 */
-            ii(0x91b6, 1);    int3();                                   /* int3 */
-            ii(0x91b7, 1);    int3();                                   /* int3 */
-            ii(0x91b8, 1);    int3();                                   /* int3 */
-            ii(0x91b9, 1);    int3();                                   /* int3 */
-            ii(0x91ba, 1);    int3();                                   /* int3 */
-            ii(0x91bb, 1);    int3();                                   /* int3 */
-            ii(0x91bc, 1);    int3();                                   /* int3 */
-            ii(0x91bd, 1);    int3();                                   /* int3 */
-            ii(0x91be, 1);    int3();                                   /* int3 */
-            ii(0x91bf, 1);    int3();                                   /* int3 */
-            ii(0x91c0, 1);    int3();                                   /* int3 */
-            ii(0x91c1, 1);    int3();                                   /* int3 */
-            ii(0x91c2, 1);    int3();                                   /* int3 */
-            ii(0x91c3, 1);    int3();                                   /* int3 */
-            ii(0x91c4, 1);    int3();                                   /* int3 */
-            ii(0x91c5, 1);    int3();                                   /* int3 */
-            ii(0x91c6, 1);    int3();                                   /* int3 */
-            ii(0x91c7, 1);    int3();                                   /* int3 */
-            ii(0x91c8, 1);    int3();                                   /* int3 */
-            ii(0x91c9, 1);    int3();                                   /* int3 */
-            ii(0x91ca, 1);    int3();                                   /* int3 */
-            ii(0x91cb, 1);    int3();                                   /* int3 */
-            ii(0x91cc, 1);    int3();                                   /* int3 */
-            ii(0x91cd, 1);    int3();                                   /* int3 */
-            ii(0x91ce, 1);    int3();                                   /* int3 */
-            ii(0x91cf, 1);    int3();                                   /* int3 */
-            ii(0x91d0, 1);    int3();                                   /* int3 */
-            ii(0x91d1, 1);    int3();                                   /* int3 */
-            ii(0x91d2, 1);    int3();                                   /* int3 */
-            ii(0x91d3, 1);    int3();                                   /* int3 */
-            ii(0x91d4, 1);    int3();                                   /* int3 */
-            ii(0x91d5, 1);    int3();                                   /* int3 */
-            ii(0x91d6, 1);    int3();                                   /* int3 */
-            ii(0x91d7, 1);    int3();                                   /* int3 */
-            ii(0x91d8, 1);    int3();                                   /* int3 */
-            ii(0x91d9, 1);    int3();                                   /* int3 */
-            ii(0x91da, 1);    int3();                                   /* int3 */
-            ii(0x91db, 1);    int3();                                   /* int3 */
-            ii(0x91dc, 1);    int3();                                   /* int3 */
-            ii(0x91dd, 1);    int3();                                   /* int3 */
-            ii(0x91de, 1);    int3();                                   /* int3 */
-            ii(0x91df, 1);    int3();                                   /* int3 */
-            ii(0x91e0, 1);    int3();                                   /* int3 */
-            ii(0x91e1, 1);    int3();                                   /* int3 */
-            ii(0x91e2, 1);    int3();                                   /* int3 */
-            ii(0x91e3, 1);    int3();                                   /* int3 */
-            ii(0x91e4, 1);    int3();                                   /* int3 */
-            ii(0x91e5, 1);    int3();                                   /* int3 */
-            ii(0x91e6, 1);    int3();                                   /* int3 */
-            ii(0x91e7, 1);    int3();                                   /* int3 */
-            ii(0x91e8, 1);    int3();                                   /* int3 */
-            ii(0x91e9, 1);    int3();                                   /* int3 */
-            ii(0x91ea, 1);    int3();                                   /* int3 */
-            ii(0x91eb, 1);    int3();                                   /* int3 */
-            ii(0x91ec, 1);    int3();                                   /* int3 */
-            ii(0x91ed, 1);    int3();                                   /* int3 */
-            ii(0x91ee, 1);    int3();                                   /* int3 */
-            ii(0x91ef, 1);    int3();                                   /* int3 */
-            ii(0x91f0, 1);    int3();                                   /* int3 */
-            ii(0x91f1, 1);    int3();                                   /* int3 */
-            ii(0x91f2, 1);    int3();                                   /* int3 */
-            ii(0x91f3, 1);    int3();                                   /* int3 */
-            ii(0x91f4, 1);    int3();                                   /* int3 */
-            ii(0x91f5, 1);    int3();                                   /* int3 */
-            ii(0x91f6, 1);    int3();                                   /* int3 */
-            ii(0x91f7, 1);    int3();                                   /* int3 */
-            ii(0x91f8, 1);    int3();                                   /* int3 */
-            ii(0x91f9, 1);    int3();                                   /* int3 */
-            ii(0x91fa, 1);    int3();                                   /* int3 */
-            ii(0x91fb, 1);    int3();                                   /* int3 */
-            ii(0x91fc, 1);    int3();                                   /* int3 */
-            ii(0x91fd, 1);    int3();                                   /* int3 */
-            ii(0x91fe, 1);    int3();                                   /* int3 */
-            ii(0x91ff, 1);    int3();                                   /* int3 */
-            ii(0x9200, 1);    int3();                                   /* int3 */
-            ii(0x9201, 1);    int3();                                   /* int3 */
-            ii(0x9202, 1);    int3();                                   /* int3 */
-            ii(0x9203, 1);    int3();                                   /* int3 */
-            ii(0x9204, 1);    int3();                                   /* int3 */
-            ii(0x9205, 1);    int3();                                   /* int3 */
-            ii(0x9206, 1);    int3();                                   /* int3 */
-            ii(0x9207, 1);    int3();                                   /* int3 */
-            ii(0x9208, 1);    int3();                                   /* int3 */
-            ii(0x9209, 1);    int3();                                   /* int3 */
-            ii(0x920a, 1);    int3();                                   /* int3 */
-            ii(0x920b, 1);    int3();                                   /* int3 */
-            ii(0x920c, 1);    int3();                                   /* int3 */
-            ii(0x920d, 1);    int3();                                   /* int3 */
-            ii(0x920e, 1);    int3();                                   /* int3 */
-            ii(0x920f, 1);    int3();                                   /* int3 */
-            ii(0x9210, 1);    int3();                                   /* int3 */
-            ii(0x9211, 1);    int3();                                   /* int3 */
-            ii(0x9212, 1);    int3();                                   /* int3 */
-            ii(0x9213, 1);    int3();                                   /* int3 */
-            ii(0x9214, 1);    int3();                                   /* int3 */
-            ii(0x9215, 1);    int3();                                   /* int3 */
-            ii(0x9216, 1);    int3();                                   /* int3 */
-            ii(0x9217, 1);    int3();                                   /* int3 */
-            ii(0x9218, 1);    int3();                                   /* int3 */
-            ii(0x9219, 1);    int3();                                   /* int3 */
-            ii(0x921a, 1);    int3();                                   /* int3 */
-            ii(0x921b, 1);    int3();                                   /* int3 */
-            ii(0x921c, 1);    int3();                                   /* int3 */
-            ii(0x921d, 1);    int3();                                   /* int3 */
-            ii(0x921e, 1);    int3();                                   /* int3 */
-            ii(0x921f, 1);    int3();                                   /* int3 */
-            ii(0x9220, 1);    int3();                                   /* int3 */
-            ii(0x9221, 1);    int3();                                   /* int3 */
-            ii(0x9222, 1);    int3();                                   /* int3 */
-            ii(0x9223, 1);    int3();                                   /* int3 */
-            ii(0x9224, 1);    int3();                                   /* int3 */
-            ii(0x9225, 1);    int3();                                   /* int3 */
-            ii(0x9226, 1);    int3();                                   /* int3 */
-            ii(0x9227, 1);    int3();                                   /* int3 */
-            ii(0x9228, 1);    int3();                                   /* int3 */
-            ii(0x9229, 1);    int3();                                   /* int3 */
-            ii(0x922a, 1);    int3();                                   /* int3 */
-            ii(0x922b, 1);    int3();                                   /* int3 */
-            ii(0x922c, 1);    int3();                                   /* int3 */
-            ii(0x922d, 1);    int3();                                   /* int3 */
-            ii(0x922e, 1);    int3();                                   /* int3 */
-            ii(0x922f, 1);    int3();                                   /* int3 */
-            ii(0x9230, 1);    int3();                                   /* int3 */
-            ii(0x9231, 1);    int3();                                   /* int3 */
-            ii(0x9232, 1);    int3();                                   /* int3 */
-            ii(0x9233, 1);    int3();                                   /* int3 */
-            ii(0x9234, 1);    int3();                                   /* int3 */
-            ii(0x9235, 1);    int3();                                   /* int3 */
-            ii(0x9236, 1);    int3();                                   /* int3 */
-            ii(0x9237, 1);    int3();                                   /* int3 */
-            ii(0x9238, 1);    int3();                                   /* int3 */
-            ii(0x9239, 1);    int3();                                   /* int3 */
-            ii(0x923a, 1);    int3();                                   /* int3 */
-            ii(0x923b, 1);    int3();                                   /* int3 */
-            ii(0x923c, 1);    int3();                                   /* int3 */
-            ii(0x923d, 1);    int3();                                   /* int3 */
-            ii(0x923e, 1);    int3();                                   /* int3 */
-            ii(0x923f, 1);    int3();                                   /* int3 */
-            ii(0x9240, 1);    int3();                                   /* int3 */
-            ii(0x9241, 1);    int3();                                   /* int3 */
-            ii(0x9242, 1);    int3();                                   /* int3 */
-            ii(0x9243, 1);    int3();                                   /* int3 */
-            ii(0x9244, 1);    int3();                                   /* int3 */
-            ii(0x9245, 1);    int3();                                   /* int3 */
-            ii(0x9246, 1);    int3();                                   /* int3 */
-            ii(0x9247, 1);    int3();                                   /* int3 */
-            ii(0x9248, 1);    int3();                                   /* int3 */
-            ii(0x9249, 1);    int3();                                   /* int3 */
-            ii(0x924a, 1);    int3();                                   /* int3 */
-            ii(0x924b, 1);    int3();                                   /* int3 */
-            ii(0x924c, 1);    int3();                                   /* int3 */
-            ii(0x924d, 1);    int3();                                   /* int3 */
-            ii(0x924e, 1);    int3();                                   /* int3 */
-            ii(0x924f, 1);    int3();                                   /* int3 */
-            ii(0x9250, 1);    int3();                                   /* int3 */
-            ii(0x9251, 1);    int3();                                   /* int3 */
-            ii(0x9252, 1);    int3();                                   /* int3 */
-            ii(0x9253, 1);    int3();                                   /* int3 */
-            ii(0x9254, 1);    int3();                                   /* int3 */
-            ii(0x9255, 1);    int3();                                   /* int3 */
-            ii(0x9256, 1);    int3();                                   /* int3 */
-            ii(0x9257, 1);    int3();                                   /* int3 */
-            ii(0x9258, 1);    int3();                                   /* int3 */
-            ii(0x9259, 1);    int3();                                   /* int3 */
-            ii(0x925a, 1);    int3();                                   /* int3 */
-            ii(0x925b, 1);    int3();                                   /* int3 */
-            ii(0x925c, 1);    int3();                                   /* int3 */
-            ii(0x925d, 1);    int3();                                   /* int3 */
-            ii(0x925e, 1);    int3();                                   /* int3 */
-            ii(0x925f, 1);    int3();                                   /* int3 */
-            ii(0x9260, 1);    int3();                                   /* int3 */
-            ii(0x9261, 1);    int3();                                   /* int3 */
-            ii(0x9262, 1);    int3();                                   /* int3 */
-            ii(0x9263, 1);    int3();                                   /* int3 */
-            ii(0x9264, 1);    int3();                                   /* int3 */
-            ii(0x9265, 1);    int3();                                   /* int3 */
-            ii(0x9266, 1);    int3();                                   /* int3 */
-            ii(0x9267, 1);    int3();                                   /* int3 */
-            ii(0x9268, 1);    int3();                                   /* int3 */
-            ii(0x9269, 1);    int3();                                   /* int3 */
-            ii(0x926a, 1);    int3();                                   /* int3 */
-            ii(0x926b, 1);    int3();                                   /* int3 */
-            ii(0x926c, 1);    int3();                                   /* int3 */
-            ii(0x926d, 1);    int3();                                   /* int3 */
-            ii(0x926e, 1);    int3();                                   /* int3 */
-            ii(0x926f, 1);    int3();                                   /* int3 */
-            ii(0x9270, 1);    int3();                                   /* int3 */
-            ii(0x9271, 1);    int3();                                   /* int3 */
-            ii(0x9272, 1);    int3();                                   /* int3 */
-            ii(0x9273, 1);    int3();                                   /* int3 */
-            ii(0x9274, 1);    int3();                                   /* int3 */
-            ii(0x9275, 1);    int3();                                   /* int3 */
-            ii(0x9276, 1);    int3();                                   /* int3 */
-            ii(0x9277, 1);    int3();                                   /* int3 */
-            ii(0x9278, 1);    int3();                                   /* int3 */
-            ii(0x9279, 1);    int3();                                   /* int3 */
-            ii(0x927a, 1);    int3();                                   /* int3 */
-            ii(0x927b, 1);    int3();                                   /* int3 */
-            ii(0x927c, 1);    int3();                                   /* int3 */
-            ii(0x927d, 1);    int3();                                   /* int3 */
-            ii(0x927e, 1);    int3();                                   /* int3 */
-            ii(0x927f, 1);    int3();                                   /* int3 */
-            ii(0x9280, 1);    int3();                                   /* int3 */
-            ii(0x9281, 1);    int3();                                   /* int3 */
-            ii(0x9282, 1);    int3();                                   /* int3 */
-            ii(0x9283, 1);    int3();                                   /* int3 */
-            ii(0x9284, 1);    int3();                                   /* int3 */
-            ii(0x9285, 1);    int3();                                   /* int3 */
-            ii(0x9286, 1);    int3();                                   /* int3 */
-            ii(0x9287, 1);    int3();                                   /* int3 */
-            ii(0x9288, 1);    int3();                                   /* int3 */
-            ii(0x9289, 1);    int3();                                   /* int3 */
-            ii(0x928a, 1);    int3();                                   /* int3 */
-            ii(0x928b, 1);    int3();                                   /* int3 */
-            ii(0x928c, 1);    int3();                                   /* int3 */
-            ii(0x928d, 1);    int3();                                   /* int3 */
-            ii(0x928e, 1);    int3();                                   /* int3 */
-            ii(0x928f, 1);    int3();                                   /* int3 */
-            ii(0x9290, 1);    int3();                                   /* int3 */
-            ii(0x9291, 1);    int3();                                   /* int3 */
-            ii(0x9292, 1);    int3();                                   /* int3 */
-            ii(0x9293, 1);    int3();                                   /* int3 */
-            ii(0x9294, 1);    int3();                                   /* int3 */
-            ii(0x9295, 1);    int3();                                   /* int3 */
-            ii(0x9296, 1);    int3();                                   /* int3 */
-            ii(0x9297, 1);    int3();                                   /* int3 */
-            ii(0x9298, 1);    int3();                                   /* int3 */
-            ii(0x9299, 1);    int3();                                   /* int3 */
-            ii(0x929a, 1);    int3();                                   /* int3 */
-            ii(0x929b, 1);    int3();                                   /* int3 */
-            ii(0x929c, 1);    int3();                                   /* int3 */
-            ii(0x929d, 1);    int3();                                   /* int3 */
-            ii(0x929e, 1);    int3();                                   /* int3 */
-            ii(0x929f, 1);    int3();                                   /* int3 */
-            ii(0x92a0, 1);    int3();                                   /* int3 */
-            ii(0x92a1, 1);    int3();                                   /* int3 */
-            ii(0x92a2, 1);    int3();                                   /* int3 */
-            ii(0x92a3, 1);    int3();                                   /* int3 */
-            ii(0x92a4, 1);    int3();                                   /* int3 */
-            ii(0x92a5, 1);    int3();                                   /* int3 */
-            ii(0x92a6, 1);    int3();                                   /* int3 */
-            ii(0x92a7, 1);    int3();                                   /* int3 */
-            ii(0x92a8, 1);    int3();                                   /* int3 */
-            ii(0x92a9, 1);    int3();                                   /* int3 */
-            ii(0x92aa, 1);    int3();                                   /* int3 */
-            ii(0x92ab, 1);    int3();                                   /* int3 */
-            ii(0x92ac, 1);    int3();                                   /* int3 */
-            ii(0x92ad, 1);    int3();                                   /* int3 */
-            ii(0x92ae, 1);    int3();                                   /* int3 */
-            ii(0x92af, 1);    int3();                                   /* int3 */
-            ii(0x92b0, 1);    int3();                                   /* int3 */
-            ii(0x92b1, 1);    int3();                                   /* int3 */
-            ii(0x92b2, 1);    int3();                                   /* int3 */
-            ii(0x92b3, 1);    int3();                                   /* int3 */
-            ii(0x92b4, 1);    int3();                                   /* int3 */
-            ii(0x92b5, 1);    int3();                                   /* int3 */
-            ii(0x92b6, 1);    int3();                                   /* int3 */
-            ii(0x92b7, 1);    int3();                                   /* int3 */
-            ii(0x92b8, 1);    int3();                                   /* int3 */
-            ii(0x92b9, 1);    int3();                                   /* int3 */
-            ii(0x92ba, 1);    int3();                                   /* int3 */
-            ii(0x92bb, 1);    int3();                                   /* int3 */
-            ii(0x92bc, 1);    int3();                                   /* int3 */
-            ii(0x92bd, 1);    int3();                                   /* int3 */
-            ii(0x92be, 1);    int3();                                   /* int3 */
-            ii(0x92bf, 1);    int3();                                   /* int3 */
-            ii(0x92c0, 1);    int3();                                   /* int3 */
-            ii(0x92c1, 1);    int3();                                   /* int3 */
-            ii(0x92c2, 1);    int3();                                   /* int3 */
-            ii(0x92c3, 1);    int3();                                   /* int3 */
-            ii(0x92c4, 1);    int3();                                   /* int3 */
-            ii(0x92c5, 1);    int3();                                   /* int3 */
-            ii(0x92c6, 1);    int3();                                   /* int3 */
-            ii(0x92c7, 1);    int3();                                   /* int3 */
-            ii(0x92c8, 1);    int3();                                   /* int3 */
-            ii(0x92c9, 1);    int3();                                   /* int3 */
-            ii(0x92ca, 1);    int3();                                   /* int3 */
-            ii(0x92cb, 1);    int3();                                   /* int3 */
-            ii(0x92cc, 1);    int3();                                   /* int3 */
-            ii(0x92cd, 1);    int3();                                   /* int3 */
-            ii(0x92ce, 1);    int3();                                   /* int3 */
-            ii(0x92cf, 1);    int3();                                   /* int3 */
-            ii(0x92d0, 1);    int3();                                   /* int3 */
-            ii(0x92d1, 1);    int3();                                   /* int3 */
-            ii(0x92d2, 1);    int3();                                   /* int3 */
-            ii(0x92d3, 1);    int3();                                   /* int3 */
-            ii(0x92d4, 1);    int3();                                   /* int3 */
-            ii(0x92d5, 1);    int3();                                   /* int3 */
-            ii(0x92d6, 1);    int3();                                   /* int3 */
-            ii(0x92d7, 1);    int3();                                   /* int3 */
-            ii(0x92d8, 1);    int3();                                   /* int3 */
-            ii(0x92d9, 1);    int3();                                   /* int3 */
-            ii(0x92da, 1);    int3();                                   /* int3 */
-            ii(0x92db, 1);    int3();                                   /* int3 */
-            ii(0x92dc, 1);    int3();                                   /* int3 */
-            ii(0x92dd, 1);    int3();                                   /* int3 */
-            ii(0x92de, 1);    int3();                                   /* int3 */
-            ii(0x92df, 1);    int3();                                   /* int3 */
-            ii(0x92e0, 1);    int3();                                   /* int3 */
-            ii(0x92e1, 1);    int3();                                   /* int3 */
-            ii(0x92e2, 1);    int3();                                   /* int3 */
-            ii(0x92e3, 1);    int3();                                   /* int3 */
-            ii(0x92e4, 1);    int3();                                   /* int3 */
-            ii(0x92e5, 1);    int3();                                   /* int3 */
-            ii(0x92e6, 1);    int3();                                   /* int3 */
-            ii(0x92e7, 1);    int3();                                   /* int3 */
-            ii(0x92e8, 1);    int3();                                   /* int3 */
-            ii(0x92e9, 1);    int3();                                   /* int3 */
-            ii(0x92ea, 1);    int3();                                   /* int3 */
-            ii(0x92eb, 1);    int3();                                   /* int3 */
-            ii(0x92ec, 1);    int3();                                   /* int3 */
-            ii(0x92ed, 1);    int3();                                   /* int3 */
-            ii(0x92ee, 1);    int3();                                   /* int3 */
-            ii(0x92ef, 1);    int3();                                   /* int3 */
-            ii(0x92f0, 1);    int3();                                   /* int3 */
-            ii(0x92f1, 1);    int3();                                   /* int3 */
-            ii(0x92f2, 1);    int3();                                   /* int3 */
-            ii(0x92f3, 1);    int3();                                   /* int3 */
-            ii(0x92f4, 1);    int3();                                   /* int3 */
-            ii(0x92f5, 1);    int3();                                   /* int3 */
-            ii(0x92f6, 1);    int3();                                   /* int3 */
-            ii(0x92f7, 1);    int3();                                   /* int3 */
-            ii(0x92f8, 1);    int3();                                   /* int3 */
-            ii(0x92f9, 1);    int3();                                   /* int3 */
-            ii(0x92fa, 1);    int3();                                   /* int3 */
-            ii(0x92fb, 1);    int3();                                   /* int3 */
-            ii(0x92fc, 1);    int3();                                   /* int3 */
-            ii(0x92fd, 1);    int3();                                   /* int3 */
-            ii(0x92fe, 1);    int3();                                   /* int3 */
-            ii(0x92ff, 1);    int3();                                   /* int3 */
-            ii(0x9300, 1);    int3();                                   /* int3 */
-            ii(0x9301, 1);    int3();                                   /* int3 */
-            ii(0x9302, 1);    int3();                                   /* int3 */
-            ii(0x9303, 1);    int3();                                   /* int3 */
-            ii(0x9304, 1);    int3();                                   /* int3 */
-            ii(0x9305, 1);    int3();                                   /* int3 */
-            ii(0x9306, 1);    int3();                                   /* int3 */
-            ii(0x9307, 1);    int3();                                   /* int3 */
-            ii(0x9308, 1);    int3();                                   /* int3 */
-            ii(0x9309, 1);    int3();                                   /* int3 */
-            ii(0x930a, 1);    int3();                                   /* int3 */
-            ii(0x930b, 1);    int3();                                   /* int3 */
-            ii(0x930c, 1);    int3();                                   /* int3 */
-            ii(0x930d, 1);    int3();                                   /* int3 */
-            ii(0x930e, 1);    int3();                                   /* int3 */
-            ii(0x930f, 1);    int3();                                   /* int3 */
-            ii(0x9310, 1);    int3();                                   /* int3 */
-            ii(0x9311, 1);    int3();                                   /* int3 */
-            ii(0x9312, 1);    int3();                                   /* int3 */
-            ii(0x9313, 1);    int3();                                   /* int3 */
-            ii(0x9314, 1);    int3();                                   /* int3 */
-            ii(0x9315, 1);    int3();                                   /* int3 */
-            ii(0x9316, 1);    int3();                                   /* int3 */
-            ii(0x9317, 1);    int3();                                   /* int3 */
-            ii(0x9318, 1);    int3();                                   /* int3 */
-            ii(0x9319, 1);    int3();                                   /* int3 */
-            ii(0x931a, 1);    int3();                                   /* int3 */
-            ii(0x931b, 1);    int3();                                   /* int3 */
-            ii(0x931c, 1);    int3();                                   /* int3 */
-            ii(0x931d, 1);    int3();                                   /* int3 */
-            ii(0x931e, 1);    int3();                                   /* int3 */
-            ii(0x931f, 1);    int3();                                   /* int3 */
-            ii(0x9320, 1);    int3();                                   /* int3 */
-            ii(0x9321, 1);    int3();                                   /* int3 */
-            ii(0x9322, 1);    int3();                                   /* int3 */
-            ii(0x9323, 1);    int3();                                   /* int3 */
-            ii(0x9324, 1);    int3();                                   /* int3 */
-            ii(0x9325, 1);    int3();                                   /* int3 */
-            ii(0x9326, 1);    int3();                                   /* int3 */
-            ii(0x9327, 1);    int3();                                   /* int3 */
-            ii(0x9328, 1);    int3();                                   /* int3 */
-            ii(0x9329, 1);    int3();                                   /* int3 */
-            ii(0x932a, 1);    int3();                                   /* int3 */
-            ii(0x932b, 1);    int3();                                   /* int3 */
-            ii(0x932c, 1);    int3();                                   /* int3 */
-            ii(0x932d, 1);    int3();                                   /* int3 */
-            ii(0x932e, 1);    int3();                                   /* int3 */
-            ii(0x932f, 1);    int3();                                   /* int3 */
-            ii(0x9330, 1);    int3();                                   /* int3 */
-            ii(0x9331, 1);    int3();                                   /* int3 */
-            ii(0x9332, 1);    int3();                                   /* int3 */
-            ii(0x9333, 1);    int3();                                   /* int3 */
-            ii(0x9334, 1);    int3();                                   /* int3 */
-            ii(0x9335, 1);    int3();                                   /* int3 */
-            ii(0x9336, 1);    int3();                                   /* int3 */
-            ii(0x9337, 1);    int3();                                   /* int3 */
-            ii(0x9338, 1);    int3();                                   /* int3 */
-            ii(0x9339, 1);    int3();                                   /* int3 */
-            ii(0x933a, 1);    int3();                                   /* int3 */
-            ii(0x933b, 1);    int3();                                   /* int3 */
-            ii(0x933c, 1);    int3();                                   /* int3 */
-            ii(0x933d, 1);    int3();                                   /* int3 */
-            ii(0x933e, 1);    int3();                                   /* int3 */
-            ii(0x933f, 1);    int3();                                   /* int3 */
-            ii(0x9340, 1);    int3();                                   /* int3 */
-            ii(0x9341, 1);    int3();                                   /* int3 */
-            ii(0x9342, 1);    int3();                                   /* int3 */
-            ii(0x9343, 1);    int3();                                   /* int3 */
-            ii(0x9344, 1);    int3();                                   /* int3 */
-            ii(0x9345, 1);    int3();                                   /* int3 */
-            ii(0x9346, 1);    int3();                                   /* int3 */
-            ii(0x9347, 1);    int3();                                   /* int3 */
-            ii(0x9348, 1);    int3();                                   /* int3 */
-            ii(0x9349, 1);    int3();                                   /* int3 */
-            ii(0x934a, 1);    int3();                                   /* int3 */
-            ii(0x934b, 1);    int3();                                   /* int3 */
-            ii(0x934c, 1);    int3();                                   /* int3 */
-            ii(0x934d, 1);    int3();                                   /* int3 */
-            ii(0x934e, 1);    int3();                                   /* int3 */
-            ii(0x934f, 1);    int3();                                   /* int3 */
-            ii(0x9350, 1);    int3();                                   /* int3 */
-            ii(0x9351, 1);    int3();                                   /* int3 */
-            ii(0x9352, 1);    int3();                                   /* int3 */
-            ii(0x9353, 1);    int3();                                   /* int3 */
-            ii(0x9354, 1);    int3();                                   /* int3 */
-            ii(0x9355, 1);    int3();                                   /* int3 */
-            ii(0x9356, 1);    int3();                                   /* int3 */
-            ii(0x9357, 1);    int3();                                   /* int3 */
-            ii(0x9358, 1);    int3();                                   /* int3 */
-            ii(0x9359, 1);    int3();                                   /* int3 */
-            ii(0x935a, 1);    int3();                                   /* int3 */
-            ii(0x935b, 1);    int3();                                   /* int3 */
-            ii(0x935c, 1);    int3();                                   /* int3 */
-            ii(0x935d, 1);    int3();                                   /* int3 */
-            ii(0x935e, 1);    int3();                                   /* int3 */
-            ii(0x935f, 1);    int3();                                   /* int3 */
-            ii(0x9360, 1);    int3();                                   /* int3 */
-            ii(0x9361, 1);    int3();                                   /* int3 */
-            ii(0x9362, 1);    int3();                                   /* int3 */
-            ii(0x9363, 1);    int3();                                   /* int3 */
-            ii(0x9364, 1);    int3();                                   /* int3 */
-            ii(0x9365, 1);    int3();                                   /* int3 */
-            ii(0x9366, 1);    int3();                                   /* int3 */
-            ii(0x9367, 1);    int3();                                   /* int3 */
-            ii(0x9368, 1);    int3();                                   /* int3 */
-            ii(0x9369, 1);    int3();                                   /* int3 */
-            ii(0x936a, 1);    int3();                                   /* int3 */
-            ii(0x936b, 1);    int3();                                   /* int3 */
-            ii(0x936c, 1);    int3();                                   /* int3 */
-            ii(0x936d, 1);    int3();                                   /* int3 */
-            ii(0x936e, 1);    int3();                                   /* int3 */
-            ii(0x936f, 1);    int3();                                   /* int3 */
-            ii(0x9370, 1);    int3();                                   /* int3 */
-            ii(0x9371, 1);    int3();                                   /* int3 */
-            ii(0x9372, 1);    int3();                                   /* int3 */
-            ii(0x9373, 1);    int3();                                   /* int3 */
-            ii(0x9374, 1);    int3();                                   /* int3 */
-            ii(0x9375, 1);    int3();                                   /* int3 */
-            ii(0x9376, 1);    int3();                                   /* int3 */
-            ii(0x9377, 1);    int3();                                   /* int3 */
-            ii(0x9378, 1);    int3();                                   /* int3 */
-            ii(0x9379, 1);    int3();                                   /* int3 */
-            ii(0x937a, 1);    int3();                                   /* int3 */
-            ii(0x937b, 1);    int3();                                   /* int3 */
-            ii(0x937c, 1);    int3();                                   /* int3 */
-            ii(0x937d, 1);    int3();                                   /* int3 */
-            ii(0x937e, 1);    int3();                                   /* int3 */
-            ii(0x937f, 1);    int3();                                   /* int3 */
-            ii(0x9380, 1);    int3();                                   /* int3 */
-            ii(0x9381, 1);    int3();                                   /* int3 */
-            ii(0x9382, 1);    int3();                                   /* int3 */
-            ii(0x9383, 1);    int3();                                   /* int3 */
-            ii(0x9384, 1);    int3();                                   /* int3 */
-            ii(0x9385, 1);    int3();                                   /* int3 */
-            ii(0x9386, 1);    int3();                                   /* int3 */
-            ii(0x9387, 1);    int3();                                   /* int3 */
-            ii(0x9388, 1);    int3();                                   /* int3 */
-            ii(0x9389, 1);    int3();                                   /* int3 */
-            ii(0x938a, 1);    int3();                                   /* int3 */
-            ii(0x938b, 1);    int3();                                   /* int3 */
-            ii(0x938c, 1);    int3();                                   /* int3 */
-            ii(0x938d, 1);    int3();                                   /* int3 */
-            ii(0x938e, 1);    int3();                                   /* int3 */
-            ii(0x938f, 1);    int3();                                   /* int3 */
-            ii(0x9390, 1);    int3();                                   /* int3 */
-            ii(0x9391, 1);    int3();                                   /* int3 */
-            ii(0x9392, 1);    int3();                                   /* int3 */
-            ii(0x9393, 1);    int3();                                   /* int3 */
-            ii(0x9394, 1);    int3();                                   /* int3 */
-            ii(0x9395, 1);    int3();                                   /* int3 */
-            ii(0x9396, 1);    int3();                                   /* int3 */
-            ii(0x9397, 1);    int3();                                   /* int3 */
-            ii(0x9398, 1);    int3();                                   /* int3 */
-            ii(0x9399, 1);    int3();                                   /* int3 */
-            ii(0x939a, 1);    int3();                                   /* int3 */
-            ii(0x939b, 1);    int3();                                   /* int3 */
-            ii(0x939c, 1);    int3();                                   /* int3 */
-            ii(0x939d, 1);    int3();                                   /* int3 */
-            ii(0x939e, 1);    int3();                                   /* int3 */
-            ii(0x939f, 1);    int3();                                   /* int3 */
-            ii(0x93a0, 1);    int3();                                   /* int3 */
-            ii(0x93a1, 1);    int3();                                   /* int3 */
-            ii(0x93a2, 1);    int3();                                   /* int3 */
-            ii(0x93a3, 1);    int3();                                   /* int3 */
-            ii(0x93a4, 1);    int3();                                   /* int3 */
-            ii(0x93a5, 1);    int3();                                   /* int3 */
-            ii(0x93a6, 1);    int3();                                   /* int3 */
-            ii(0x93a7, 1);    int3();                                   /* int3 */
-            ii(0x93a8, 1);    int3();                                   /* int3 */
-            ii(0x93a9, 1);    int3();                                   /* int3 */
-            ii(0x93aa, 1);    int3();                                   /* int3 */
-            ii(0x93ab, 1);    int3();                                   /* int3 */
-            ii(0x93ac, 1);    int3();                                   /* int3 */
-            ii(0x93ad, 1);    int3();                                   /* int3 */
-            ii(0x93ae, 1);    int3();                                   /* int3 */
-            ii(0x93af, 1);    int3();                                   /* int3 */
-            ii(0x93b0, 1);    int3();                                   /* int3 */
-            ii(0x93b1, 1);    int3();                                   /* int3 */
-            ii(0x93b2, 1);    int3();                                   /* int3 */
-            ii(0x93b3, 1);    int3();                                   /* int3 */
-            ii(0x93b4, 1);    int3();                                   /* int3 */
-            ii(0x93b5, 1);    int3();                                   /* int3 */
-            ii(0x93b6, 1);    int3();                                   /* int3 */
-            ii(0x93b7, 1);    int3();                                   /* int3 */
-            ii(0x93b8, 1);    int3();                                   /* int3 */
-            ii(0x93b9, 1);    int3();                                   /* int3 */
-            ii(0x93ba, 1);    int3();                                   /* int3 */
-            ii(0x93bb, 1);    int3();                                   /* int3 */
-            ii(0x93bc, 1);    int3();                                   /* int3 */
-            ii(0x93bd, 1);    int3();                                   /* int3 */
-            ii(0x93be, 1);    int3();                                   /* int3 */
-            ii(0x93bf, 1);    int3();                                   /* int3 */
-            ii(0x93c0, 1);    int3();                                   /* int3 */
-            ii(0x93c1, 1);    int3();                                   /* int3 */
-            ii(0x93c2, 1);    int3();                                   /* int3 */
-            ii(0x93c3, 1);    int3();                                   /* int3 */
-            ii(0x93c4, 1);    int3();                                   /* int3 */
-            ii(0x93c5, 1);    int3();                                   /* int3 */
-            ii(0x93c6, 1);    int3();                                   /* int3 */
-            ii(0x93c7, 1);    int3();                                   /* int3 */
-            ii(0x93c8, 1);    int3();                                   /* int3 */
-            ii(0x93c9, 1);    int3();                                   /* int3 */
-            ii(0x93ca, 1);    int3();                                   /* int3 */
-            ii(0x93cb, 1);    int3();                                   /* int3 */
-            ii(0x93cc, 1);    int3();                                   /* int3 */
-            ii(0x93cd, 1);    int3();                                   /* int3 */
-            ii(0x93ce, 1);    int3();                                   /* int3 */
-            ii(0x93cf, 1);    int3();                                   /* int3 */
-            ii(0x93d0, 1);    int3();                                   /* int3 */
-            ii(0x93d1, 1);    int3();                                   /* int3 */
-            ii(0x93d2, 1);    int3();                                   /* int3 */
-            ii(0x93d3, 1);    int3();                                   /* int3 */
-            ii(0x93d4, 1);    int3();                                   /* int3 */
-            ii(0x93d5, 1);    int3();                                   /* int3 */
-            ii(0x93d6, 1);    int3();                                   /* int3 */
-            ii(0x93d7, 1);    int3();                                   /* int3 */
-            ii(0x93d8, 1);    int3();                                   /* int3 */
-            ii(0x93d9, 1);    int3();                                   /* int3 */
-            ii(0x93da, 1);    int3();                                   /* int3 */
-            ii(0x93db, 1);    int3();                                   /* int3 */
-            ii(0x93dc, 1);    int3();                                   /* int3 */
-            ii(0x93dd, 1);    int3();                                   /* int3 */
-            ii(0x93de, 1);    int3();                                   /* int3 */
-            ii(0x93df, 1);    int3();                                   /* int3 */
-            ii(0x93e0, 1);    int3();                                   /* int3 */
-            ii(0x93e1, 1);    int3();                                   /* int3 */
-            ii(0x93e2, 1);    int3();                                   /* int3 */
-            ii(0x93e3, 1);    int3();                                   /* int3 */
-            ii(0x93e4, 1);    int3();                                   /* int3 */
-            ii(0x93e5, 1);    int3();                                   /* int3 */
-            ii(0x93e6, 1);    int3();                                   /* int3 */
-            ii(0x93e7, 1);    int3();                                   /* int3 */
-            ii(0x93e8, 1);    int3();                                   /* int3 */
-            ii(0x93e9, 1);    int3();                                   /* int3 */
-            ii(0x93ea, 1);    int3();                                   /* int3 */
-            ii(0x93eb, 1);    int3();                                   /* int3 */
-            ii(0x93ec, 1);    int3();                                   /* int3 */
-            ii(0x93ed, 1);    int3();                                   /* int3 */
-            ii(0x93ee, 1);    int3();                                   /* int3 */
-            ii(0x93ef, 1);    int3();                                   /* int3 */
-            ii(0x93f0, 1);    int3();                                   /* int3 */
-            ii(0x93f1, 1);    int3();                                   /* int3 */
-            ii(0x93f2, 1);    int3();                                   /* int3 */
-            ii(0x93f3, 1);    int3();                                   /* int3 */
-            ii(0x93f4, 1);    int3();                                   /* int3 */
-            ii(0x93f5, 1);    int3();                                   /* int3 */
-            ii(0x93f6, 1);    int3();                                   /* int3 */
-            ii(0x93f7, 1);    int3();                                   /* int3 */
-            ii(0x93f8, 1);    int3();                                   /* int3 */
-            ii(0x93f9, 1);    int3();                                   /* int3 */
-            ii(0x93fa, 1);    int3();                                   /* int3 */
-            ii(0x93fb, 1);    int3();                                   /* int3 */
-            ii(0x93fc, 1);    int3();                                   /* int3 */
-            ii(0x93fd, 1);    int3();                                   /* int3 */
-            ii(0x93fe, 1);    int3();                                   /* int3 */
-            ii(0x93ff, 1);    int3();                                   /* int3 */
-            ii(0x9400, 1);    int3();                                   /* int3 */
-            ii(0x9401, 1);    int3();                                   /* int3 */
-            ii(0x9402, 1);    int3();                                   /* int3 */
-            ii(0x9403, 1);    int3();                                   /* int3 */
-            ii(0x9404, 1);    int3();                                   /* int3 */
-            ii(0x9405, 1);    int3();                                   /* int3 */
-            ii(0x9406, 1);    int3();                                   /* int3 */
-            ii(0x9407, 1);    int3();                                   /* int3 */
-            ii(0x9408, 1);    int3();                                   /* int3 */
-            ii(0x9409, 1);    int3();                                   /* int3 */
-            ii(0x940a, 1);    int3();                                   /* int3 */
-            ii(0x940b, 1);    int3();                                   /* int3 */
-            ii(0x940c, 1);    int3();                                   /* int3 */
-            ii(0x940d, 1);    int3();                                   /* int3 */
-            ii(0x940e, 1);    int3();                                   /* int3 */
-            ii(0x940f, 1);    int3();                                   /* int3 */
-            ii(0x9410, 1);    int3();                                   /* int3 */
-            ii(0x9411, 1);    int3();                                   /* int3 */
-            ii(0x9412, 1);    int3();                                   /* int3 */
-            ii(0x9413, 1);    int3();                                   /* int3 */
-            ii(0x9414, 1);    int3();                                   /* int3 */
-            ii(0x9415, 1);    int3();                                   /* int3 */
-            ii(0x9416, 1);    int3();                                   /* int3 */
-            ii(0x9417, 1);    int3();                                   /* int3 */
-            ii(0x9418, 1);    int3();                                   /* int3 */
-            ii(0x9419, 1);    int3();                                   /* int3 */
-            ii(0x941a, 1);    int3();                                   /* int3 */
-            ii(0x941b, 1);    int3();                                   /* int3 */
-            ii(0x941c, 1);    int3();                                   /* int3 */
-            ii(0x941d, 1);    int3();                                   /* int3 */
-            ii(0x941e, 1);    int3();                                   /* int3 */
-            ii(0x941f, 1);    int3();                                   /* int3 */
-            ii(0x9420, 1);    int3();                                   /* int3 */
-            ii(0x9421, 1);    int3();                                   /* int3 */
-            ii(0x9422, 1);    int3();                                   /* int3 */
-            ii(0x9423, 1);    int3();                                   /* int3 */
-            ii(0x9424, 1);    int3();                                   /* int3 */
-            ii(0x9425, 1);    int3();                                   /* int3 */
-            ii(0x9426, 1);    int3();                                   /* int3 */
-            ii(0x9427, 1);    int3();                                   /* int3 */
-            ii(0x9428, 1);    int3();                                   /* int3 */
-            ii(0x9429, 1);    int3();                                   /* int3 */
-            ii(0x942a, 1);    int3();                                   /* int3 */
-            ii(0x942b, 1);    int3();                                   /* int3 */
-            ii(0x942c, 1);    int3();                                   /* int3 */
-            ii(0x942d, 1);    int3();                                   /* int3 */
-            ii(0x942e, 1);    int3();                                   /* int3 */
-            ii(0x942f, 1);    int3();                                   /* int3 */
-            ii(0x9430, 1);    int3();                                   /* int3 */
-            ii(0x9431, 1);    int3();                                   /* int3 */
-            ii(0x9432, 1);    int3();                                   /* int3 */
-            ii(0x9433, 1);    int3();                                   /* int3 */
-            ii(0x9434, 1);    int3();                                   /* int3 */
-            ii(0x9435, 1);    int3();                                   /* int3 */
-            ii(0x9436, 1);    int3();                                   /* int3 */
-            ii(0x9437, 1);    int3();                                   /* int3 */
-            ii(0x9438, 1);    int3();                                   /* int3 */
-            ii(0x9439, 1);    int3();                                   /* int3 */
-            ii(0x943a, 1);    int3();                                   /* int3 */
-            ii(0x943b, 1);    int3();                                   /* int3 */
-            ii(0x943c, 1);    int3();                                   /* int3 */
-            ii(0x943d, 1);    int3();                                   /* int3 */
-            ii(0x943e, 1);    int3();                                   /* int3 */
-            ii(0x943f, 1);    int3();                                   /* int3 */
-            ii(0x9440, 1);    int3();                                   /* int3 */
-            ii(0x9441, 1);    int3();                                   /* int3 */
-            ii(0x9442, 1);    int3();                                   /* int3 */
-            ii(0x9443, 1);    int3();                                   /* int3 */
-            ii(0x9444, 1);    int3();                                   /* int3 */
-            ii(0x9445, 1);    int3();                                   /* int3 */
-            ii(0x9446, 1);    int3();                                   /* int3 */
-            ii(0x9447, 1);    int3();                                   /* int3 */
-            ii(0x9448, 1);    int3();                                   /* int3 */
-            ii(0x9449, 1);    int3();                                   /* int3 */
-            ii(0x944a, 1);    int3();                                   /* int3 */
-            ii(0x944b, 1);    int3();                                   /* int3 */
-            ii(0x944c, 1);    int3();                                   /* int3 */
-            ii(0x944d, 1);    int3();                                   /* int3 */
-            ii(0x944e, 1);    int3();                                   /* int3 */
-            ii(0x944f, 1);    int3();                                   /* int3 */
-            ii(0x9450, 1);    int3();                                   /* int3 */
-            ii(0x9451, 1);    int3();                                   /* int3 */
-            ii(0x9452, 1);    int3();                                   /* int3 */
-            ii(0x9453, 1);    int3();                                   /* int3 */
-            ii(0x9454, 1);    int3();                                   /* int3 */
-            ii(0x9455, 1);    int3();                                   /* int3 */
-            ii(0x9456, 1);    int3();                                   /* int3 */
-            ii(0x9457, 1);    int3();                                   /* int3 */
-            ii(0x9458, 1);    int3();                                   /* int3 */
-            ii(0x9459, 1);    int3();                                   /* int3 */
-            ii(0x945a, 1);    int3();                                   /* int3 */
-            ii(0x945b, 1);    int3();                                   /* int3 */
-            ii(0x945c, 1);    int3();                                   /* int3 */
-            ii(0x945d, 1);    int3();                                   /* int3 */
-            ii(0x945e, 1);    int3();                                   /* int3 */
-            ii(0x945f, 1);    int3();                                   /* int3 */
-            ii(0x9460, 1);    int3();                                   /* int3 */
-            ii(0x9461, 1);    int3();                                   /* int3 */
-            ii(0x9462, 1);    int3();                                   /* int3 */
-            ii(0x9463, 1);    int3();                                   /* int3 */
-            ii(0x9464, 1);    int3();                                   /* int3 */
-            ii(0x9465, 1);    int3();                                   /* int3 */
-            ii(0x9466, 1);    int3();                                   /* int3 */
-            ii(0x9467, 1);    int3();                                   /* int3 */
-            ii(0x9468, 1);    int3();                                   /* int3 */
-            ii(0x9469, 1);    int3();                                   /* int3 */
-            ii(0x946a, 1);    int3();                                   /* int3 */
-            ii(0x946b, 1);    int3();                                   /* int3 */
-            ii(0x946c, 1);    int3();                                   /* int3 */
-            ii(0x946d, 1);    int3();                                   /* int3 */
-            ii(0x946e, 1);    int3();                                   /* int3 */
-            ii(0x946f, 1);    int3();                                   /* int3 */
-            ii(0x9470, 1);    int3();                                   /* int3 */
-            ii(0x9471, 1);    int3();                                   /* int3 */
-            ii(0x9472, 1);    int3();                                   /* int3 */
-            ii(0x9473, 1);    int3();                                   /* int3 */
-            ii(0x9474, 1);    int3();                                   /* int3 */
-            ii(0x9475, 1);    int3();                                   /* int3 */
-            ii(0x9476, 1);    int3();                                   /* int3 */
-            ii(0x9477, 1);    int3();                                   /* int3 */
-            ii(0x9478, 1);    int3();                                   /* int3 */
-            ii(0x9479, 1);    int3();                                   /* int3 */
-            ii(0x947a, 1);    int3();                                   /* int3 */
-            ii(0x947b, 1);    int3();                                   /* int3 */
-            ii(0x947c, 1);    int3();                                   /* int3 */
-            ii(0x947d, 1);    int3();                                   /* int3 */
-            ii(0x947e, 1);    int3();                                   /* int3 */
-            ii(0x947f, 1);    int3();                                   /* int3 */
-            ii(0x9480, 1);    int3();                                   /* int3 */
-            ii(0x9481, 1);    int3();                                   /* int3 */
-            ii(0x9482, 1);    int3();                                   /* int3 */
-            ii(0x9483, 1);    int3();                                   /* int3 */
-            ii(0x9484, 1);    int3();                                   /* int3 */
-            ii(0x9485, 1);    int3();                                   /* int3 */
-            ii(0x9486, 1);    int3();                                   /* int3 */
-            ii(0x9487, 1);    int3();                                   /* int3 */
-            ii(0x9488, 1);    int3();                                   /* int3 */
-            ii(0x9489, 1);    int3();                                   /* int3 */
-            ii(0x948a, 1);    int3();                                   /* int3 */
-            ii(0x948b, 1);    int3();                                   /* int3 */
-            ii(0x948c, 1);    int3();                                   /* int3 */
-            ii(0x948d, 1);    int3();                                   /* int3 */
-            ii(0x948e, 1);    int3();                                   /* int3 */
-            ii(0x948f, 1);    int3();                                   /* int3 */
-            ii(0x9490, 1);    int3();                                   /* int3 */
-            ii(0x9491, 1);    int3();                                   /* int3 */
-            ii(0x9492, 1);    int3();                                   /* int3 */
-            ii(0x9493, 1);    int3();                                   /* int3 */
-            ii(0x9494, 1);    int3();                                   /* int3 */
-            ii(0x9495, 1);    int3();                                   /* int3 */
-            ii(0x9496, 1);    int3();                                   /* int3 */
-            ii(0x9497, 1);    int3();                                   /* int3 */
-            ii(0x9498, 1);    int3();                                   /* int3 */
-            ii(0x9499, 1);    int3();                                   /* int3 */
-            ii(0x949a, 1);    int3();                                   /* int3 */
-            ii(0x949b, 1);    int3();                                   /* int3 */
-            ii(0x949c, 1);    int3();                                   /* int3 */
-            ii(0x949d, 1);    int3();                                   /* int3 */
-            ii(0x949e, 1);    int3();                                   /* int3 */
-            ii(0x949f, 1);    int3();                                   /* int3 */
-            ii(0x94a0, 1);    int3();                                   /* int3 */
-            ii(0x94a1, 1);    int3();                                   /* int3 */
-            ii(0x94a2, 1);    int3();                                   /* int3 */
-            ii(0x94a3, 1);    int3();                                   /* int3 */
-            ii(0x94a4, 1);    int3();                                   /* int3 */
-            ii(0x94a5, 1);    int3();                                   /* int3 */
-            ii(0x94a6, 1);    int3();                                   /* int3 */
-            ii(0x94a7, 1);    int3();                                   /* int3 */
-            ii(0x94a8, 1);    int3();                                   /* int3 */
-            ii(0x94a9, 1);    int3();                                   /* int3 */
-            ii(0x94aa, 1);    int3();                                   /* int3 */
-            ii(0x94ab, 1);    int3();                                   /* int3 */
-            ii(0x94ac, 1);    int3();                                   /* int3 */
-            ii(0x94ad, 1);    int3();                                   /* int3 */
-            ii(0x94ae, 1);    int3();                                   /* int3 */
-            ii(0x94af, 1);    int3();                                   /* int3 */
-            ii(0x94b0, 1);    int3();                                   /* int3 */
-            ii(0x94b1, 1);    int3();                                   /* int3 */
-            ii(0x94b2, 1);    int3();                                   /* int3 */
-            ii(0x94b3, 1);    int3();                                   /* int3 */
-            ii(0x94b4, 1);    int3();                                   /* int3 */
-            ii(0x94b5, 1);    int3();                                   /* int3 */
-            ii(0x94b6, 1);    int3();                                   /* int3 */
-            ii(0x94b7, 1);    int3();                                   /* int3 */
-            ii(0x94b8, 1);    int3();                                   /* int3 */
-            ii(0x94b9, 1);    int3();                                   /* int3 */
-            ii(0x94ba, 1);    int3();                                   /* int3 */
-            ii(0x94bb, 1);    int3();                                   /* int3 */
-            ii(0x94bc, 1);    int3();                                   /* int3 */
-            ii(0x94bd, 1);    int3();                                   /* int3 */
-            ii(0x94be, 1);    int3();                                   /* int3 */
-            ii(0x94bf, 1);    int3();                                   /* int3 */
-            ii(0x94c0, 1);    int3();                                   /* int3 */
-            ii(0x94c1, 1);    int3();                                   /* int3 */
-            ii(0x94c2, 1);    int3();                                   /* int3 */
-            ii(0x94c3, 1);    int3();                                   /* int3 */
-            ii(0x94c4, 1);    int3();                                   /* int3 */
-            ii(0x94c5, 1);    int3();                                   /* int3 */
-            ii(0x94c6, 1);    int3();                                   /* int3 */
-            ii(0x94c7, 1);    int3();                                   /* int3 */
-            ii(0x94c8, 1);    int3();                                   /* int3 */
-            ii(0x94c9, 1);    int3();                                   /* int3 */
-            ii(0x94ca, 1);    int3();                                   /* int3 */
-            ii(0x94cb, 1);    int3();                                   /* int3 */
-            ii(0x94cc, 1);    int3();                                   /* int3 */
-            ii(0x94cd, 1);    int3();                                   /* int3 */
-            ii(0x94ce, 1);    int3();                                   /* int3 */
-            ii(0x94cf, 1);    int3();                                   /* int3 */
-            ii(0x94d0, 1);    int3();                                   /* int3 */
-            ii(0x94d1, 1);    int3();                                   /* int3 */
-            ii(0x94d2, 1);    int3();                                   /* int3 */
-            ii(0x94d3, 1);    int3();                                   /* int3 */
-            ii(0x94d4, 1);    int3();                                   /* int3 */
-            ii(0x94d5, 1);    int3();                                   /* int3 */
-            ii(0x94d6, 1);    int3();                                   /* int3 */
-            ii(0x94d7, 1);    int3();                                   /* int3 */
-            ii(0x94d8, 1);    int3();                                   /* int3 */
-            ii(0x94d9, 1);    int3();                                   /* int3 */
-            ii(0x94da, 1);    int3();                                   /* int3 */
-            ii(0x94db, 1);    int3();                                   /* int3 */
-            ii(0x94dc, 1);    int3();                                   /* int3 */
-            ii(0x94dd, 1);    int3();                                   /* int3 */
-            ii(0x94de, 1);    int3();                                   /* int3 */
-            ii(0x94df, 1);    int3();                                   /* int3 */
-            ii(0x94e0, 1);    int3();                                   /* int3 */
-            ii(0x94e1, 1);    int3();                                   /* int3 */
-            ii(0x94e2, 1);    int3();                                   /* int3 */
-            ii(0x94e3, 1);    int3();                                   /* int3 */
-            ii(0x94e4, 1);    int3();                                   /* int3 */
-            ii(0x94e5, 1);    int3();                                   /* int3 */
-            ii(0x94e6, 1);    int3();                                   /* int3 */
-            ii(0x94e7, 1);    int3();                                   /* int3 */
-            ii(0x94e8, 1);    int3();                                   /* int3 */
-            ii(0x94e9, 1);    int3();                                   /* int3 */
-            ii(0x94ea, 1);    int3();                                   /* int3 */
-            ii(0x94eb, 1);    int3();                                   /* int3 */
-            ii(0x94ec, 1);    int3();                                   /* int3 */
-            ii(0x94ed, 1);    int3();                                   /* int3 */
-            ii(0x94ee, 1);    int3();                                   /* int3 */
-            ii(0x94ef, 1);    int3();                                   /* int3 */
-            ii(0x94f0, 1);    int3();                                   /* int3 */
-            ii(0x94f1, 1);    int3();                                   /* int3 */
-            ii(0x94f2, 1);    int3();                                   /* int3 */
-            ii(0x94f3, 1);    int3();                                   /* int3 */
-            ii(0x94f4, 1);    int3();                                   /* int3 */
-            ii(0x94f5, 1);    int3();                                   /* int3 */
-            ii(0x94f6, 1);    int3();                                   /* int3 */
-            ii(0x94f7, 1);    int3();                                   /* int3 */
-            ii(0x94f8, 1);    int3();                                   /* int3 */
-            ii(0x94f9, 1);    int3();                                   /* int3 */
-            ii(0x94fa, 1);    int3();                                   /* int3 */
-            ii(0x94fb, 1);    int3();                                   /* int3 */
-            ii(0x94fc, 1);    int3();                                   /* int3 */
-            ii(0x94fd, 1);    int3();                                   /* int3 */
-            ii(0x94fe, 1);    int3();                                   /* int3 */
-            ii(0x94ff, 1);    int3();                                   /* int3 */
-            ii(0x9500, 1);    int3();                                   /* int3 */
-            ii(0x9501, 1);    int3();                                   /* int3 */
-            ii(0x9502, 1);    int3();                                   /* int3 */
-            ii(0x9503, 1);    int3();                                   /* int3 */
-            ii(0x9504, 1);    int3();                                   /* int3 */
-            ii(0x9505, 1);    int3();                                   /* int3 */
-            ii(0x9506, 1);    int3();                                   /* int3 */
-            ii(0x9507, 1);    int3();                                   /* int3 */
-            ii(0x9508, 1);    int3();                                   /* int3 */
-            ii(0x9509, 1);    int3();                                   /* int3 */
-            ii(0x950a, 1);    int3();                                   /* int3 */
-            ii(0x950b, 1);    int3();                                   /* int3 */
-            ii(0x950c, 1);    int3();                                   /* int3 */
-            ii(0x950d, 1);    int3();                                   /* int3 */
-            ii(0x950e, 1);    int3();                                   /* int3 */
-            ii(0x950f, 1);    int3();                                   /* int3 */
-            ii(0x9510, 1);    int3();                                   /* int3 */
-            ii(0x9511, 1);    int3();                                   /* int3 */
-            ii(0x9512, 1);    int3();                                   /* int3 */
-            ii(0x9513, 1);    int3();                                   /* int3 */
-            ii(0x9514, 1);    int3();                                   /* int3 */
-            ii(0x9515, 1);    int3();                                   /* int3 */
-            ii(0x9516, 1);    int3();                                   /* int3 */
-            ii(0x9517, 1);    int3();                                   /* int3 */
-            ii(0x9518, 1);    int3();                                   /* int3 */
-            ii(0x9519, 1);    int3();                                   /* int3 */
-            ii(0x951a, 1);    int3();                                   /* int3 */
-            ii(0x951b, 1);    int3();                                   /* int3 */
-            ii(0x951c, 1);    int3();                                   /* int3 */
-            ii(0x951d, 1);    int3();                                   /* int3 */
-            ii(0x951e, 1);    int3();                                   /* int3 */
-            ii(0x951f, 1);    int3();                                   /* int3 */
-            ii(0x9520, 1);    int3();                                   /* int3 */
-            ii(0x9521, 1);    int3();                                   /* int3 */
-            ii(0x9522, 1);    int3();                                   /* int3 */
-            ii(0x9523, 1);    int3();                                   /* int3 */
-            ii(0x9524, 1);    int3();                                   /* int3 */
-            ii(0x9525, 1);    int3();                                   /* int3 */
-            ii(0x9526, 1);    int3();                                   /* int3 */
-            ii(0x9527, 1);    int3();                                   /* int3 */
-            ii(0x9528, 1);    int3();                                   /* int3 */
-            ii(0x9529, 1);    int3();                                   /* int3 */
-            ii(0x952a, 1);    int3();                                   /* int3 */
-            ii(0x952b, 1);    int3();                                   /* int3 */
-            ii(0x952c, 1);    int3();                                   /* int3 */
-            ii(0x952d, 1);    int3();                                   /* int3 */
-            ii(0x952e, 1);    int3();                                   /* int3 */
-            ii(0x952f, 1);    int3();                                   /* int3 */
-            ii(0x9530, 1);    int3();                                   /* int3 */
-            ii(0x9531, 1);    int3();                                   /* int3 */
-            ii(0x9532, 1);    int3();                                   /* int3 */
-            ii(0x9533, 1);    int3();                                   /* int3 */
-            ii(0x9534, 1);    int3();                                   /* int3 */
-            ii(0x9535, 1);    int3();                                   /* int3 */
-            ii(0x9536, 1);    int3();                                   /* int3 */
-            ii(0x9537, 1);    int3();                                   /* int3 */
-            ii(0x9538, 1);    int3();                                   /* int3 */
-            ii(0x9539, 1);    int3();                                   /* int3 */
-            ii(0x953a, 1);    int3();                                   /* int3 */
-            ii(0x953b, 1);    int3();                                   /* int3 */
-            ii(0x953c, 1);    int3();                                   /* int3 */
-            ii(0x953d, 1);    int3();                                   /* int3 */
-            ii(0x953e, 1);    int3();                                   /* int3 */
-            ii(0x953f, 1);    int3();                                   /* int3 */
-            ii(0x9540, 1);    int3();                                   /* int3 */
-            ii(0x9541, 1);    int3();                                   /* int3 */
-            ii(0x9542, 1);    int3();                                   /* int3 */
-            ii(0x9543, 1);    int3();                                   /* int3 */
-            ii(0x9544, 1);    int3();                                   /* int3 */
-            ii(0x9545, 1);    int3();                                   /* int3 */
-            ii(0x9546, 1);    int3();                                   /* int3 */
-            ii(0x9547, 1);    int3();                                   /* int3 */
-            ii(0x9548, 1);    int3();                                   /* int3 */
-            ii(0x9549, 1);    int3();                                   /* int3 */
-            ii(0x954a, 1);    int3();                                   /* int3 */
-            ii(0x954b, 1);    int3();                                   /* int3 */
-            ii(0x954c, 1);    int3();                                   /* int3 */
-            ii(0x954d, 1);    int3();                                   /* int3 */
-            ii(0x954e, 1);    int3();                                   /* int3 */
-            ii(0x954f, 1);    int3();                                   /* int3 */
-            ii(0x9550, 1);    int3();                                   /* int3 */
-            ii(0x9551, 1);    int3();                                   /* int3 */
-            ii(0x9552, 1);    int3();                                   /* int3 */
-            ii(0x9553, 1);    int3();                                   /* int3 */
-            ii(0x9554, 1);    int3();                                   /* int3 */
-            ii(0x9555, 1);    int3();                                   /* int3 */
-            ii(0x9556, 1);    int3();                                   /* int3 */
-            ii(0x9557, 1);    int3();                                   /* int3 */
-            ii(0x9558, 1);    int3();                                   /* int3 */
-            ii(0x9559, 1);    int3();                                   /* int3 */
-            ii(0x955a, 1);    int3();                                   /* int3 */
-            ii(0x955b, 1);    int3();                                   /* int3 */
-            ii(0x955c, 1);    int3();                                   /* int3 */
-            ii(0x955d, 1);    int3();                                   /* int3 */
-            ii(0x955e, 1);    int3();                                   /* int3 */
-            ii(0x955f, 1);    int3();                                   /* int3 */
-            ii(0x9560, 1);    int3();                                   /* int3 */
-            ii(0x9561, 1);    int3();                                   /* int3 */
-            ii(0x9562, 1);    int3();                                   /* int3 */
-            ii(0x9563, 1);    int3();                                   /* int3 */
-            ii(0x9564, 1);    int3();                                   /* int3 */
-            ii(0x9565, 1);    int3();                                   /* int3 */
-            ii(0x9566, 1);    int3();                                   /* int3 */
-            ii(0x9567, 1);    int3();                                   /* int3 */
-            ii(0x9568, 1);    int3();                                   /* int3 */
-            ii(0x9569, 1);    int3();                                   /* int3 */
-            ii(0x956a, 1);    int3();                                   /* int3 */
-            ii(0x956b, 1);    int3();                                   /* int3 */
-            ii(0x956c, 1);    int3();                                   /* int3 */
-            ii(0x956d, 1);    int3();                                   /* int3 */
-            ii(0x956e, 1);    int3();                                   /* int3 */
-            ii(0x956f, 1);    int3();                                   /* int3 */
-            ii(0x9570, 1);    int3();                                   /* int3 */
-            ii(0x9571, 1);    int3();                                   /* int3 */
-            ii(0x9572, 1);    int3();                                   /* int3 */
-            ii(0x9573, 1);    int3();                                   /* int3 */
-            ii(0x9574, 1);    int3();                                   /* int3 */
-            ii(0x9575, 1);    int3();                                   /* int3 */
-            ii(0x9576, 1);    int3();                                   /* int3 */
-            ii(0x9577, 1);    int3();                                   /* int3 */
-            ii(0x9578, 1);    int3();                                   /* int3 */
-            ii(0x9579, 1);    int3();                                   /* int3 */
-            ii(0x957a, 1);    int3();                                   /* int3 */
-            ii(0x957b, 1);    int3();                                   /* int3 */
-            ii(0x957c, 1);    int3();                                   /* int3 */
-            ii(0x957d, 1);    int3();                                   /* int3 */
-            ii(0x957e, 1);    int3();                                   /* int3 */
-            ii(0x957f, 1);    int3();                                   /* int3 */
-            ii(0x9580, 1);    int3();                                   /* int3 */
-            ii(0x9581, 1);    int3();                                   /* int3 */
-            ii(0x9582, 1);    int3();                                   /* int3 */
-            ii(0x9583, 1);    int3();                                   /* int3 */
-            ii(0x9584, 1);    int3();                                   /* int3 */
-            ii(0x9585, 1);    int3();                                   /* int3 */
-            ii(0x9586, 1);    int3();                                   /* int3 */
-            ii(0x9587, 1);    int3();                                   /* int3 */
-            ii(0x9588, 1);    int3();                                   /* int3 */
-            ii(0x9589, 1);    int3();                                   /* int3 */
-            ii(0x958a, 1);    int3();                                   /* int3 */
-            ii(0x958b, 1);    int3();                                   /* int3 */
-            ii(0x958c, 1);    int3();                                   /* int3 */
-            ii(0x958d, 1);    int3();                                   /* int3 */
-            ii(0x958e, 1);    int3();                                   /* int3 */
-            ii(0x958f, 1);    int3();                                   /* int3 */
-            ii(0x9590, 1);    int3();                                   /* int3 */
-            ii(0x9591, 1);    int3();                                   /* int3 */
-            ii(0x9592, 1);    int3();                                   /* int3 */
-            ii(0x9593, 1);    int3();                                   /* int3 */
-            ii(0x9594, 1);    int3();                                   /* int3 */
-            ii(0x9595, 1);    int3();                                   /* int3 */
-            ii(0x9596, 1);    int3();                                   /* int3 */
-            ii(0x9597, 1);    int3();                                   /* int3 */
-            ii(0x9598, 1);    int3();                                   /* int3 */
-            ii(0x9599, 1);    int3();                                   /* int3 */
-            ii(0x959a, 1);    int3();                                   /* int3 */
-            ii(0x959b, 1);    int3();                                   /* int3 */
-            ii(0x959c, 1);    int3();                                   /* int3 */
-            ii(0x959d, 1);    int3();                                   /* int3 */
-            ii(0x959e, 1);    int3();                                   /* int3 */
-            ii(0x959f, 1);    int3();                                   /* int3 */
-            ii(0x95a0, 1);    int3();                                   /* int3 */
-            ii(0x95a1, 1);    int3();                                   /* int3 */
-            ii(0x95a2, 1);    int3();                                   /* int3 */
-            ii(0x95a3, 1);    int3();                                   /* int3 */
-            ii(0x95a4, 1);    int3();                                   /* int3 */
-            ii(0x95a5, 1);    int3();                                   /* int3 */
-            ii(0x95a6, 1);    int3();                                   /* int3 */
-            ii(0x95a7, 1);    int3();                                   /* int3 */
-            ii(0x95a8, 1);    int3();                                   /* int3 */
-            ii(0x95a9, 1);    int3();                                   /* int3 */
-            ii(0x95aa, 1);    int3();                                   /* int3 */
-            ii(0x95ab, 1);    int3();                                   /* int3 */
-            ii(0x95ac, 1);    int3();                                   /* int3 */
-            ii(0x95ad, 1);    int3();                                   /* int3 */
-            ii(0x95ae, 1);    int3();                                   /* int3 */
-            ii(0x95af, 1);    int3();                                   /* int3 */
-            ii(0x95b0, 1);    int3();                                   /* int3 */
-            ii(0x95b1, 1);    int3();                                   /* int3 */
-            ii(0x95b2, 1);    int3();                                   /* int3 */
-            ii(0x95b3, 1);    int3();                                   /* int3 */
-            ii(0x95b4, 1);    int3();                                   /* int3 */
-            ii(0x95b5, 1);    int3();                                   /* int3 */
-            ii(0x95b6, 1);    int3();                                   /* int3 */
-            ii(0x95b7, 1);    int3();                                   /* int3 */
-            ii(0x95b8, 1);    int3();                                   /* int3 */
-            ii(0x95b9, 1);    int3();                                   /* int3 */
-            ii(0x95ba, 1);    int3();                                   /* int3 */
-            ii(0x95bb, 1);    int3();                                   /* int3 */
-            ii(0x95bc, 1);    int3();                                   /* int3 */
-            ii(0x95bd, 1);    int3();                                   /* int3 */
-            ii(0x95be, 1);    int3();                                   /* int3 */
-            ii(0x95bf, 1);    int3();                                   /* int3 */
-            ii(0x95c0, 3);    test(memw_a16[ds, si - 0x1], bx);         /* test [si-0x1], bx */
+            ii(0x9076, 4);    enterw(0x4a, 0);                          /* enter 0x4a, 0x0 */
+            ii(0x907a, 1);    pushw(di);                                /* push di */
+            ii(0x907b, 1);    pushw(si);                                /* push si */
+            ii(0x907c, 5);    mov(memw_a16[ss, bp - 0x1e], 0);          /* mov word [bp-0x1e], 0x0 */
+            ii(0x9081, 5);    mov(memw_a16[ss, bp - 0x44], 0);          /* mov word [bp-0x44], 0x0 */
+        l_0x9086:
+            ii(0x9086, 2);    pushw(0x1c);                              /* push 0x1c */
+            ii(0x9088, 2);    pushw(0x1);                               /* push 0x1 */
+            ii(0x908a, 3);    lea(ax, bp - 0x3c);                       /* lea ax, [bp-0x3c] */
+            ii(0x908d, 1);    pushw(ax);                                /* push ax */
+            ii(0x908e, 3);    callw(0x8dff, -0x292);                    /* call 0x8dff */
+            ii(0x9091, 3);    add(sp, 0x6);                             /* add sp, 0x6 */
+            ii(0x9094, 2);    pushw(0x4);                               /* push 0x4 */
+            ii(0x9096, 3);    pushw(0x11f4);                            /* push 0x11f4 */
+            ii(0x9099, 3);    callw(0xbd92, 0x2cf6);                    /* call 0xbd92 */
+            ii(0x909c, 1);    popw(bx);                                 /* pop bx */
+            ii(0x909d, 1);    popw(bx);                                 /* pop bx */
+            ii(0x909e, 5);    add(memw_a16[ds, 0x11da], 0x30);          /* add word [0x11da], 0x30 */
+            ii(0x90a3, 5);    adc(memw_a16[ds, 0x11dc], 0);             /* adc word [0x11dc], 0x0 */
+            ii(0x90a8, 4);    pushw(memw_a16[ds, 0x11dc]);              /* push word [0x11dc] */
+            ii(0x90ac, 4);    pushw(memw_a16[ds, 0x11da]);              /* push word [0x11da] */
+            ii(0x90b0, 3);    callw(0xbd7a, 0x2cc7);                    /* call 0xbd7a */
+            ii(0x90b3, 1);    popw(bx);                                 /* pop bx */
+            ii(0x90b4, 1);    popw(bx);                                 /* pop bx */
+            ii(0x90b5, 2);    pushw(0x10);                              /* push 0x10 */
+            ii(0x90b7, 3);    lea(ax, bp - 0x16);                       /* lea ax, [bp-0x16] */
+            ii(0x90ba, 1);    pushw(ax);                                /* push ax */
+            ii(0x90bb, 3);    callw(0xbd92, 0x2cd4);                    /* call 0xbd92 */
+            ii(0x90be, 1);    popw(bx);                                 /* pop bx */
+            ii(0x90bf, 1);    popw(bx);                                 /* pop bx */
+            ii(0x90c0, 5);    cmp(memb_a16[ds, 0x11f1], 0);             /* cmp byte [0x11f1], 0x0 */
+            ii(0x90c5, 2);    if(jzw(0x90ce, 0x7)) goto l_0x90ce;       /* jz 0x90ce */
+            ii(0x90c7, 3);    callw(0x901c, -0xae);                     /* call 0x901c */
+            ii(0x90ca, 2);    or(ax, ax);                               /* or ax, ax */
+            ii(0x90cc, 2);    if(jnzw(0x9086, -0x48)) goto l_0x9086;    /* jnz 0x9086 */
+        l_0x90ce:
+            ii(0x90ce, 4);    cmp(memw_a16[ss, bp - 0x8], 0);           /* cmp word [bp-0x8], 0x0 */
+            ii(0x90d2, 2);    if(jzw(0x90e1, 0xd)) goto l_0x90e1;       /* jz 0x90e1 */
+            ii(0x90d4, 5);    cmp(memw_a16[ds, 0xa], 0);                /* cmp word [0xa], 0x0 */
+            ii(0x90d9, 2);    if(jnzw(0x90e1, 0x6)) goto l_0x90e1;      /* jnz 0x90e1 */
+            ii(0x90db, 3);    mov(ax, memw_a16[ss, bp - 0x8]);          /* mov ax, [bp-0x8] */
+            ii(0x90de, 3);    mov(memw_a16[ds, 0xe], ax);               /* mov [0xe], ax */
+        l_0x90e1:
+            ii(0x90e1, 3);    mov(ax, memw_a16[ss, bp - 0xe]);          /* mov ax, [bp-0xe] */
+            ii(0x90e4, 3);    mov(memw_a16[ss, bp - 0x3e], ax);         /* mov [bp-0x3e], ax */
+            ii(0x90e7, 4);    cmp(ax, memw_a16[ds, 0x97c]);             /* cmp ax, [0x97c] */
+            ii(0x90eb, 2);    if(jbew(0x90f3, 0x6)) goto l_0x90f3;      /* jbe 0x90f3 */
+            ii(0x90ed, 3);    add(ah, 0x2);                             /* add ah, 0x2 */
+            ii(0x90f0, 3);    mov(memw_a16[ds, 0x97c], ax);             /* mov [0x97c], ax */
+        l_0x90f3:
+            ii(0x90f3, 3);    mov(ax, memw_a16[ds, 0x97c]);             /* mov ax, [0x97c] */
+            ii(0x90f6, 3);    cmp(memw_a16[ss, bp - 0x3e], ax);         /* cmp [bp-0x3e], ax */
+            ii(0x90f9, 2);    if(jbew(0x9101, 0x6)) goto l_0x9101;      /* jbe 0x9101 */
+            ii(0x90fb, 6);    mov(memw_a16[ds, 0x97c], 0xffff);         /* mov word [0x97c], 0xffff */
+        l_0x9101:
+            ii(0x9101, 3);    mov(ax, memw_a16[ss, bp - 0xc]);          /* mov ax, [bp-0xc] */
+            ii(0x9104, 3);    mov(memw_a16[ds, 0x11f2], ax);            /* mov [0x11f2], ax */
+            ii(0x9107, 3);    cmp(ax, 0x80);                            /* cmp ax, 0x80 */
+            ii(0x910a, 2);    if(jaew(0x9112, 0x6)) goto l_0x9112;      /* jae 0x9112 */
+            ii(0x910c, 6);    mov(memw_a16[ds, 0x11f2], 0x80);          /* mov word [0x11f2], 0x80 */
+        l_0x9112:
+            ii(0x9112, 4);    cmp(memw_a16[ss, bp + 0x4], 0);           /* cmp word [bp+0x4], 0x0 */
+            ii(0x9116, 2);    if(jnzw(0x912f, 0x17)) goto l_0x912f;     /* jnz 0x912f */
+            ii(0x9118, 3);    callw(0x78ba, -0x1861);                   /* call 0x78ba */
+            ii(0x911b, 3);    mov(ax, memw_a16[ss, bp - 0x24]);         /* mov ax, [bp-0x24] */
+            ii(0x911e, 3);    mov(memw_a16[ds, 0x97c], ax);             /* mov [0x97c], ax */
+            ii(0x9121, 3);    callw(0x9736, 0x612);                     /* call 0x9736 */
+            ii(0x9124, 3);    mov(al, memb_a16[ss, bp - 0xa]);          /* mov al, [bp-0xa] */
+            ii(0x9127, 3);    mov(memb_a16[ds, 0x980], al);             /* mov [0x980], al */
+            ii(0x912a, 3);    callw(0xb436, 0x2309);                    /* call 0xb436 */
+            ii(0x912d, 2);    jmpw(0x9132, 0x3); goto l_0x9132;         /* jmp 0x9132 */
+        l_0x912f:
+            ii(0x912f, 3);    callw(0x9736, 0x604);                     /* call 0x9736 */
+        l_0x9132:
+            ii(0x9132, 4);    cmp(memw_a16[ss, bp + 0x4], 0);           /* cmp word [bp+0x4], 0x0 */
+            ii(0x9136, 2);    if(jgew(0x9142, 0xa)) goto l_0x9142;      /* jge 0x9142 */
+            ii(0x9138, 5);    mov(memw_a16[ss, bp + 0x4], 0);           /* mov word [bp+0x4], 0x0 */
+            ii(0x913d, 5);    and(memb_a16[ds, 0x14], -0x9 /* 0xf7 */); /* and byte [0x14], 0xf7 */
+        l_0x9142:
+            ii(0x9142, 4);    test(memb_a16[ss, bp - 0x12], 0x2);       /* test byte [bp-0x12], 0x2 */
+            ii(0x9146, 2);    if(jzw(0x9152, 0xa)) goto l_0x9152;       /* jz 0x9152 */
+            ii(0x9148, 5);    mov(memw_a16[ss, bp + 0x4], 0xffff);      /* mov word [bp+0x4], 0xffff */
+            ii(0x914d, 5);    or(memb_a16[ds, 0x14], 0x8);              /* or byte [0x14], 0x8 */
+        l_0x9152:
+            ii(0x9152, 4);    cmp(memw_a16[ss, bp + 0x4], 0);           /* cmp word [bp+0x4], 0x0 */
+            ii(0x9156, 2);    if(jzw(0x9199, 0x41)) goto l_0x9199;      /* jz 0x9199 */
+            ii(0x9158, 3);    mov(ax, memw_a16[ds, 0x11f2]);            /* mov ax, [0x11f2] */
+            ii(0x915b, 2);    neg(ax);                                  /* neg ax */
+            ii(0x915d, 3);    mov(memw_a16[ss, bp - 0x44], ax);         /* mov [bp-0x44], ax */
+            ii(0x9160, 4);    test(memb_a16[ss, bp - 0x12], 0x1);       /* test byte [bp-0x12], 0x1 */
+            ii(0x9164, 2);    if(jzw(0x918a, 0x24)) goto l_0x918a;      /* jz 0x918a */
+            ii(0x9166, 3);    mov(ax, memw_a16[ss, bp - 0x3e]);         /* mov ax, [bp-0x3e] */
+            ii(0x9169, 1);    inc(ax);                                  /* inc ax */
+            ii(0x916a, 3);    shr(ax, 0x3);                             /* shr ax, 0x3 */
+            ii(0x916d, 3);    mul(memw_a16[ss, bp + 0x4]);              /* mul word [bp+0x4] */
+            ii(0x9170, 2);    neg(ax);                                  /* neg ax */
+            ii(0x9172, 1);    pushw(ax);                                /* push ax */
+            ii(0x9173, 3);    callw(0x997c, 0x806);                     /* call 0x997c */
+            ii(0x9176, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9177, 3);    shl(ax, 0x3);                             /* shl ax, 0x3 */
+            ii(0x917a, 3);    mov(memw_a16[ds, 0x11f2], ax);            /* mov [0x11f2], ax */
+            ii(0x917d, 3);    mov(bx, memw_a16[ss, bp + 0x6]);          /* mov bx, [bp+0x6] */
+            ii(0x9180, 3);    mov(memw_a16[ds, bx + 0x8], ax);          /* mov [bx+0x8], ax */
+            ii(0x9183, 2);    or(ax, ax);                               /* or ax, ax */
+            ii(0x9185, 2);    if(jnzw(0x918a, 0x3)) goto l_0x918a;      /* jnz 0x918a */
+            ii(0x9187, 3);    jmpw(0x95c9, 0x43f); goto l_0x95c9;       /* jmp 0x95c9 */
+        l_0x918a:
+            ii(0x918a, 3);    mov(ax, memw_a16[ds, 0x11f2]);            /* mov ax, [0x11f2] */
+            ii(0x918d, 3);    add(memw_a16[ss, bp - 0x44], ax);         /* add [bp-0x44], ax */
+            ii(0x9190, 3);    mov(ax, memw_a16[ss, bp - 0x44]);         /* mov ax, [bp-0x44] */
+            ii(0x9193, 3);    add(memw_a16[ss, bp - 0x2e], ax);         /* add [bp-0x2e], ax */
+            ii(0x9196, 3);    add(memw_a16[ss, bp - 0x26], ax);         /* add [bp-0x26], ax */
+        l_0x9199:
+            ii(0x9199, 3);    mov(ax, memw_a16[ss, bp - 0x16]);         /* mov ax, [bp-0x16] */
+            ii(0x919c, 4);    or(memw_a16[ds, 0x14], ax);               /* or [0x14], ax */
+            ii(0x91a0, 3);    mov(ax, memw_a16[ds, 0x11da]);            /* mov ax, [0x11da] */
+            ii(0x91a3, 4);    mov(dx, memw_a16[ds, 0x11dc]);            /* mov dx, [0x11dc] */
+            ii(0x91a7, 3);    add(ax, 0x80);                            /* add ax, 0x80 */
+            ii(0x91aa, 3);    adc(dx, 0);                               /* adc dx, 0x0 */
+            ii(0x91ad, 1);    pushw(dx);                                /* push dx */
+            ii(0x91ae, 1);    pushw(ax);                                /* push ax */
+            ii(0x91af, 3);    callw(0xbd7a, 0x2bc8);                    /* call 0xbd7a */
+            ii(0x91b2, 1);    popw(bx);                                 /* pop bx */
+            ii(0x91b3, 1);    popw(bx);                                 /* pop bx */
+            ii(0x91b4, 3);    callw(0x773a, -0x1a7d);                   /* call 0x773a */
+            ii(0x91b7, 3);    mov(ax, memw_a16[ss, bp - 0x3e]);         /* mov ax, [bp-0x3e] */
+            ii(0x91ba, 3);    sub(ax, 0x7f);                            /* sub ax, 0x7f */
+            ii(0x91bd, 3);    mov(memw_a16[ds, 0x11ee], ax);            /* mov [0x11ee], ax */
+            ii(0x91c0, 1);    pushw(ax);                                /* push ax */
+            ii(0x91c1, 4);    pushw(memw_a16[ds, 0x11f2]);              /* push word [0x11f2] */
+            ii(0x91c5, 2);    pushw(0x8);                               /* push 0x8 */
+            ii(0x91c7, 3);    callw(0x9839, 0x66f);                     /* call 0x9839 */
+            ii(0x91ca, 3);    add(sp, 0x6);                             /* add sp, 0x6 */
+            ii(0x91cd, 3);    mov(ax, memw_a16[ds, 0x11f2]);            /* mov ax, [0x11f2] */
+            ii(0x91d0, 4);    add(memw_a16[ds, 0x11ee], ax);            /* add [0x11ee], ax */
+            ii(0x91d4, 5);    mov(memw_a16[ss, bp - 0x6], 0);           /* mov word [bp-0x6], 0x0 */
+            ii(0x91d9, 5);    mov(memw_a16[ss, bp - 0x4], 0x8);         /* mov word [bp-0x4], 0x8 */
+            ii(0x91de, 5);    mov(memw_a16[ss, bp - 0x42], 0);          /* mov word [bp-0x42], 0x0 */
+            ii(0x91e3, 5);    mov(memw_a16[ss, bp - 0x40], 0x50);       /* mov word [bp-0x40], 0x50 */
+            ii(0x91e8, 3);    mov(es, memw_a16[ss, bp - 0x4]);          /* mov es, [bp-0x4] */
+        l_0x91eb:
+            ii(0x91eb, 5);    sub(memw_a16[ds, 0x11ee], 0x8);           /* sub word [0x11ee], 0x8 */
+            ii(0x91f0, 4);    mov(bx, memw_a16[ds, 0x11ee]);            /* mov bx, [0x11ee] */
+            ii(0x91f4, 3);    and(bl, 0xf8);                            /* and bl, 0xf8 */
+            ii(0x91f7, 3);    add(bx, memw_a16[ss, bp - 0x6]);          /* add bx, [bp-0x6] */
+            ii(0x91fa, 5);    cmp(memb_a16[es, bx + 0x5], 0);           /* cmp byte [es:bx+0x5], 0x0 */
+            ii(0x91ff, 2);    if(jzw(0x91eb, -0x16)) goto l_0x91eb;     /* jz 0x91eb */
+            ii(0x9201, 3);    mov(ax, memw_a16[ds, 0x11f2]);            /* mov ax, [0x11f2] */
+            ii(0x9204, 3);    mov(memw_a16[ss, bp - 0x18], ax);         /* mov [bp-0x18], ax */
+        l_0x9207:
+            ii(0x9207, 3);    mov(ax, memw_a16[ss, bp - 0x18]);         /* mov ax, [bp-0x18] */
+            ii(0x920a, 3);    mov(memw_a16[ss, bp - 0x1c], ax);         /* mov [bp-0x1c], ax */
+            ii(0x920d, 2);    and(al, 0xf8);                            /* and al, 0xf8 */
+            ii(0x920f, 3);    add(ax, memw_a16[ss, bp - 0x6]);          /* add ax, [bp-0x6] */
+            ii(0x9212, 3);    mov(dx, memw_a16[ss, bp - 0x4]);          /* mov dx, [bp-0x4] */
+            ii(0x9215, 3);    mov(bx, 0x11e4);                          /* mov bx, 0x11e4 */
+            ii(0x9218, 1);    pushw(si);                                /* push si */
+            ii(0x9219, 1);    pushw(di);                                /* push di */
+            ii(0x921a, 1);    pushw(ds);                                /* push ds */
+            ii(0x921b, 2);    mov(di, bx);                              /* mov di, bx */
+            ii(0x921d, 2);    mov(si, ax);                              /* mov si, ax */
+            ii(0x921f, 1);    pushw(ds);                                /* push ds */
+            ii(0x9220, 1);    popw(es);                                 /* pop es */
+            ii(0x9221, 2);    mov(ds, dx);                              /* mov ds, dx */
+            ii(0x9223, 1);    movsw_a16();                              /* movsw */
+            ii(0x9224, 1);    movsw_a16();                              /* movsw */
+            ii(0x9225, 1);    movsw_a16();                              /* movsw */
+            ii(0x9226, 1);    movsw_a16();                              /* movsw */
+            ii(0x9227, 1);    popw(ds);                                 /* pop ds */
+            ii(0x9228, 1);    popw(di);                                 /* pop di */
+            ii(0x9229, 1);    popw(si);                                 /* pop si */
+            ii(0x922a, 4);    mov(si, memw_a16[ds, 0x11e4]);            /* mov si, [0x11e4] */
+            ii(0x922e, 3);    mov(al, memb_a16[ds, 0x11e9]);            /* mov al, [0x11e9] */
+            ii(0x9231, 2);    sub(ah, ah);                              /* sub ah, ah */
+            ii(0x9233, 3);    mov(memw_a16[ss, bp - 0x2], ax);          /* mov [bp-0x2], ax */
+            ii(0x9236, 2);    or(ax, ax);                               /* or ax, ax */
+            ii(0x9238, 2);    if(jnzw(0x923d, 0x3)) goto l_0x923d;      /* jnz 0x923d */
+            ii(0x923a, 3);    jmpw(0x945f, 0x222); goto l_0x945f;       /* jmp 0x945f */
+        l_0x923d:
+            ii(0x923d, 3);    mov(ax, memw_a16[ds, 0x11ea]);            /* mov ax, [0x11ea] */
+            ii(0x9240, 3);    and(ah, 0x1f);                            /* and ah, 0x1f */
+            ii(0x9243, 3);    mov(memw_a16[ss, bp - 0x4a], ax);         /* mov [bp-0x4a], ax */
+            ii(0x9246, 2);    sub(di, di);                              /* sub di, di */
+            ii(0x9248, 2);    or(si, si);                               /* or si, si */
+            ii(0x924a, 2);    if(jzw(0x9253, 0x7)) goto l_0x9253;       /* jz 0x9253 */
+            ii(0x924c, 1);    pushw(si);                                /* push si */
+            ii(0x924d, 3);    callw(0x6f8d, -0x22c3);                   /* call 0x6f8d */
+            ii(0x9250, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9251, 2);    mov(di, ax);                              /* mov di, ax */
+        l_0x9253:
+            ii(0x9253, 5);    test(memb_a16[ds, 0x11eb], 0x20);         /* test byte [0x11eb], 0x20 */
+            ii(0x9258, 2);    if(jzw(0x925c, 0x2)) goto l_0x925c;       /* jz 0x925c */
+            ii(0x925a, 2);    sub(si, si);                              /* sub si, si */
+        l_0x925c:
+            ii(0x925c, 3);    cmp(memw_a16[ss, bp - 0x4a], di);         /* cmp [bp-0x4a], di */
+            ii(0x925f, 2);    if(jbew(0x9264, 0x3)) goto l_0x9264;      /* jbe 0x9264 */
+            ii(0x9261, 3);    mov(di, memw_a16[ss, bp - 0x4a]);         /* mov di, [bp-0x4a] */
+        l_0x9264:
+            ii(0x9264, 2);    sub(ax, ax);                              /* sub ax, ax */
+            ii(0x9266, 3);    mov(memw_a16[ds, 0x1204], ax);            /* mov [0x1204], ax */
+            ii(0x9269, 3);    mov(memw_a16[ds, 0x1202], ax);            /* mov [0x1202], ax */
+            ii(0x926c, 2);    or(di, di);                               /* or di, di */
+            ii(0x926e, 2);    if(jnzw(0x9273, 0x3)) goto l_0x9273;      /* jnz 0x9273 */
+            ii(0x9270, 3);    jmpw(0x9378, 0x105); goto l_0x9378;       /* jmp 0x9378 */
+        l_0x9273:
+            ii(0x9273, 5);    test(memb_a16[ds, 0x11eb], 0x80);         /* test byte [0x11eb], 0x80 */
+            ii(0x9278, 2);    if(jnzw(0x927d, 0x3)) goto l_0x927d;      /* jnz 0x927d */
+            ii(0x927a, 3);    jmpw(0x935b, 0xde); goto l_0x935b;        /* jmp 0x935b */
+        l_0x927d:
+            ii(0x927d, 3);    mov(ax, memw_a16[ss, bp - 0x2e]);         /* mov ax, [bp-0x2e] */
+            ii(0x9280, 3);    cmp(memw_a16[ss, bp - 0x18], ax);         /* cmp [bp-0x18], ax */
+            ii(0x9283, 2);    if(jzw(0x928e, 0x9)) goto l_0x928e;       /* jz 0x928e */
+            ii(0x9285, 3);    mov(al, memb_a16[ss, bp - 0x2]);          /* mov al, [bp-0x2] */
+            ii(0x9288, 2);    and(al, 0x18);                            /* and al, 0x18 */
+            ii(0x928a, 2);    cmp(al, 0x18);                            /* cmp al, 0x18 */
+            ii(0x928c, 2);    if(jnzw(0x9295, 0x7)) goto l_0x9295;      /* jnz 0x9295 */
+        l_0x928e:
+            ii(0x928e, 5);    mov(memw_a16[ss, bp - 0x20], 0x7);        /* mov word [bp-0x20], 0x7 */
+            ii(0x9293, 2);    jmpw(0x929e, 0x9); goto l_0x929e;         /* jmp 0x929e */
+        l_0x9295:
+            ii(0x9295, 5);    mov(memw_a16[ss, bp - 0x20], 0);          /* mov word [bp-0x20], 0x0 */
+            ii(0x929a, 4);    or(memb_a16[ss, bp - 0x2], 0x60);         /* or byte [bp-0x2], 0x60 */
+        l_0x929e:
+            ii(0x929e, 3);    callw(0x6f71, -0x2330);                   /* call 0x6f71 */
+            ii(0x92a1, 3);    mov(ax, memw_a16[ss, bp - 0x20]);         /* mov ax, [bp-0x20] */
+            ii(0x92a4, 2);    add(ax, di);                              /* add ax, di */
+            ii(0x92a6, 3);    mov(memw_a16[ss, bp - 0x1a], ax);         /* mov [bp-0x1a], ax */
+            ii(0x92a9, 3);    cmp(ax, 0x8);                             /* cmp ax, 0x8 */
+            ii(0x92ac, 2);    if(jaew(0x92b3, 0x5)) goto l_0x92b3;      /* jae 0x92b3 */
+            ii(0x92ae, 5);    mov(memw_a16[ss, bp - 0x1a], 0x8);        /* mov word [bp-0x1a], 0x8 */
+        l_0x92b3:
+            ii(0x92b3, 3);    pushw(memw_a16[ss, bp - 0x1a]);           /* push word [bp-0x1a] */
+            ii(0x92b6, 3);    callw(0x970c, 0x453);                     /* call 0x970c */
+            ii(0x92b9, 1);    popw(bx);                                 /* pop bx */
+            ii(0x92ba, 3);    mov(memw_a16[ds, 0x1202], ax);            /* mov [0x1202], ax */
+            ii(0x92bd, 4);    mov(memw_a16[ds, 0x1204], dx);            /* mov [0x1204], dx */
+            ii(0x92c1, 3);    mov(memw_a16[ss, bp - 0x1a], ax);         /* mov [bp-0x1a], ax */
+            ii(0x92c4, 2);    or(ax, ax);                               /* or ax, ax */
+            ii(0x92c6, 2);    if(jnzw(0x92ce, 0x6)) goto l_0x92ce;      /* jnz 0x92ce */
+            ii(0x92c8, 2);    pushw(0x3);                               /* push 0x3 */
+            ii(0x92ca, 3);    callw(0x805d, -0x1270);                   /* call 0x805d */
+            ii(0x92cd, 1);    popw(bx);                                 /* pop bx */
+        l_0x92ce:
+            ii(0x92ce, 3);    mov(ax, memw_a16[ds, 0x1202]);            /* mov ax, [0x1202] */
+            ii(0x92d1, 3);    add(ax, memw_a16[ss, bp - 0x20]);         /* add ax, [bp-0x20] */
+            ii(0x92d4, 3);    mov(cx, memw_a16[ss, bp - 0x20]);         /* mov cx, [bp-0x20] */
+            ii(0x92d7, 2);    not(cx);                                  /* not cx */
+            ii(0x92d9, 2);    and(cx, ax);                              /* and cx, ax */
+            ii(0x92db, 2);    sub(ax, ax);                              /* sub ax, ax */
+            ii(0x92dd, 4);    mov(memw_a16[ds, 0x1202], cx);            /* mov [0x1202], cx */
+            ii(0x92e1, 3);    mov(memw_a16[ds, 0x1204], ax);            /* mov [0x1204], ax */
+            ii(0x92e4, 3);    mov(memw_a16[ss, bp - 0x1c], cx);         /* mov [bp-0x1c], cx */
+            ii(0x92e7, 4);    cmp(cx, memw_a16[ds, 0x97c]);             /* cmp cx, [0x97c] */
+            ii(0x92eb, 2);    if(jbw(0x92f3, 0x6)) goto l_0x92f3;       /* jb 0x92f3 */
+        l_0x92ed:
+            ii(0x92ed, 2);    pushw(0x4);                               /* push 0x4 */
+            ii(0x92ef, 3);    callw(0x805d, -0x1295);                   /* call 0x805d */
+            ii(0x92f2, 1);    popw(bx);                                 /* pop bx */
+        l_0x92f3:
+            ii(0x92f3, 3);    pushw(memw_a16[ss, bp - 0x1c]);           /* push word [bp-0x1c] */
+            ii(0x92f6, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x92f9, 3);    callw(0xbd5c, 0x2a60);                    /* call 0xbd5c */
+            ii(0x92fc, 1);    popw(bx);                                 /* pop bx */
+            ii(0x92fd, 1);    popw(bx);                                 /* pop bx */
+            ii(0x92fe, 3);    mov(cx, 0x1210);                          /* mov cx, 0x1210 */
+            ii(0x9301, 3);    add(cx, 0x64);                            /* add cx, 0x64 */
+            ii(0x9304, 2);    cmp(ax, cx);                              /* cmp ax, cx */
+            ii(0x9306, 2);    if(jgw(0x930e, 0x6)) goto l_0x930e;       /* jg 0x930e */
+            ii(0x9308, 2);    pushw(0x5);                               /* push 0x5 */
+            ii(0x930a, 3);    callw(0xbdcd, 0x2ac0);                    /* call 0xbdcd */
+            ii(0x930d, 1);    popw(bx);                                 /* pop bx */
+        l_0x930e:
+            ii(0x930e, 3);    callw(0x773a, -0x1bd7);                   /* call 0x773a */
+            ii(0x9311, 3);    mov(bx, memw_a16[ss, bp - 0x1c]);         /* mov bx, [bp-0x1c] */
+            ii(0x9314, 3);    and(bl, 0xf8);                            /* and bl, 0xf8 */
+            ii(0x9317, 3);    add(bx, memw_a16[ss, bp - 0x6]);          /* add bx, [bp-0x6] */
+            ii(0x931a, 3);    mov(es, memw_a16[ss, bp - 0x4]);          /* mov es, [bp-0x4] */
+            ii(0x931d, 5);    cmp(memb_a16[es, bx + 0x5], 0);           /* cmp byte [es:bx+0x5], 0x0 */
+            ii(0x9322, 2);    if(jzw(0x9329, 0x5)) goto l_0x9329;       /* jz 0x9329 */
+            ii(0x9324, 3);    callw(0x6f71, -0x23b6);                   /* call 0x6f71 */
+            ii(0x9327, 2);    jmpw(0x92ed, -0x3c); goto l_0x92ed;       /* jmp 0x92ed */
+        l_0x9329:
+            ii(0x9329, 4);    cmp(memw_a16[ss, bp - 0x20], 0);          /* cmp word [bp-0x20], 0x0 */
+            ii(0x932d, 2);    if(jzw(0x9356, 0x27)) goto l_0x9356;      /* jz 0x9356 */
+            ii(0x932f, 3);    mov(ax, memw_a16[ss, bp - 0x2e]);         /* mov ax, [bp-0x2e] */
+            ii(0x9332, 3);    cmp(memw_a16[ss, bp - 0x18], ax);         /* cmp [bp-0x18], ax */
+            ii(0x9335, 2);    if(jnzw(0x933d, 0x6)) goto l_0x933d;      /* jnz 0x933d */
+            ii(0x9337, 3);    mov(ax, memw_a16[ss, bp - 0x1c]);         /* mov ax, [bp-0x1c] */
+            ii(0x933a, 3);    mov(memw_a16[ss, bp - 0x2e], ax);         /* mov [bp-0x2e], ax */
+        l_0x933d:
+            ii(0x933d, 3);    mov(ax, memw_a16[ss, bp - 0x26]);         /* mov ax, [bp-0x26] */
+            ii(0x9340, 3);    cmp(memw_a16[ss, bp - 0x18], ax);         /* cmp [bp-0x18], ax */
+            ii(0x9343, 2);    if(jnzw(0x934b, 0x6)) goto l_0x934b;      /* jnz 0x934b */
+            ii(0x9345, 3);    mov(ax, memw_a16[ss, bp - 0x1c]);         /* mov ax, [bp-0x1c] */
+            ii(0x9348, 3);    mov(memw_a16[ss, bp - 0x26], ax);         /* mov [bp-0x26], ax */
+        l_0x934b:
+            ii(0x934b, 3);    pushw(memw_a16[ss, bp - 0x1a]);           /* push word [bp-0x1a] */
+            ii(0x934e, 3);    pushw(memw_a16[ss, bp - 0x1c]);           /* push word [bp-0x1c] */
+            ii(0x9351, 3);    callw(0x7c31, -0x1723);                   /* call 0x7c31 */
+            ii(0x9354, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9355, 1);    popw(bx);                                 /* pop bx */
+        l_0x9356:
+            ii(0x9356, 3);    inc(memw_a16[ss, bp - 0x1e]);             /* inc word [bp-0x1e] */
+            ii(0x9359, 2);    jmpw(0x9378, 0x1d); goto l_0x9378;        /* jmp 0x9378 */
+        l_0x935b:
+            ii(0x935b, 1);    pushw(di);                                /* push di */
+            ii(0x935c, 3);    callw(0x96b1, 0x352);                     /* call 0x96b1 */
+            ii(0x935f, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9360, 3);    mov(memw_a16[ds, 0x1202], ax);            /* mov [0x1202], ax */
+            ii(0x9363, 4);    mov(memw_a16[ds, 0x1204], dx);            /* mov [0x1204], dx */
+            ii(0x9367, 2);    mov(ax, dx);                              /* mov ax, dx */
+            ii(0x9369, 4);    or(ax, memw_a16[ds, 0x1202]);             /* or ax, [0x1202] */
+            ii(0x936d, 2);    if(jnzw(0x9378, 0x9)) goto l_0x9378;      /* jnz 0x9378 */
+            ii(0x936f, 3);    callw(0x6f71, -0x2401);                   /* call 0x6f71 */
+            ii(0x9372, 2);    pushw(0x6);                               /* push 0x6 */
+            ii(0x9374, 3);    callw(0x805d, -0x131a);                   /* call 0x805d */
+            ii(0x9377, 1);    popw(bx);                                 /* pop bx */
+        l_0x9378:
+            ii(0x9378, 5);    mov(memb_a16[ds, 0x11e9], 0xf2);          /* mov byte [0x11e9], 0xf2 */
+            ii(0x937d, 6);    mov(memw_a16[ds, 0x11e4], 0);             /* mov word [0x11e4], 0x0 */
+            ii(0x9383, 2);    or(di, di);                               /* or di, di */
+            ii(0x9385, 2);    if(jzw(0x93a0, 0x19)) goto l_0x93a0;      /* jz 0x93a0 */
+            ii(0x9387, 2);    mov(ax, di);                              /* mov ax, di */
+            ii(0x9389, 3);    shl(ax, 0x4);                             /* shl ax, 0x4 */
+            ii(0x938c, 1);    dec(ax);                                  /* dec ax */
+            ii(0x938d, 3);    mov(memw_a16[ds, 0x11e4], ax);            /* mov [0x11e4], ax */
+            ii(0x9390, 3);    mov(bx, memw_a16[ss, bp - 0x1c]);         /* mov bx, [bp-0x1c] */
+            ii(0x9393, 3);    shr(bx, 0x3);                             /* shr bx, 0x3 */
+            ii(0x9396, 3);    add(bx, memw_a16[ss, bp - 0x42]);         /* add bx, [bp-0x42] */
+            ii(0x9399, 3);    mov(es, memw_a16[ss, bp - 0x40]);         /* mov es, [bp-0x40] */
+            ii(0x939c, 4);    mov(memb_a16[es, bx], 0x1);               /* mov byte [es:bx], 0x1 */
+        l_0x93a0:
+            ii(0x93a0, 5);    test(memb_a16[ds, 0x11eb], 0x40);         /* test byte [0x11eb], 0x40 */
+            ii(0x93a5, 2);    if(jzw(0x93b7, 0x10)) goto l_0x93b7;      /* jz 0x93b7 */
+            ii(0x93a7, 3);    mov(bx, memw_a16[ss, bp - 0x1c]);         /* mov bx, [bp-0x1c] */
+            ii(0x93aa, 3);    shr(bx, 0x3);                             /* shr bx, 0x3 */
+            ii(0x93ad, 3);    add(bx, memw_a16[ss, bp - 0x42]);         /* add bx, [bp-0x42] */
+            ii(0x93b0, 3);    mov(es, memw_a16[ss, bp - 0x40]);         /* mov es, [bp-0x40] */
+            ii(0x93b3, 4);    or(memb_a16[es, bx], 0x2);                /* or byte [es:bx], 0x2 */
+        l_0x93b7:
+            ii(0x93b7, 3);    mov(ax, memw_a16[ds, 0x1202]);            /* mov ax, [0x1202] */
+            ii(0x93ba, 3);    shl(ax, 0x4);                             /* shl ax, 0x4 */
+            ii(0x93bd, 3);    mov(memw_a16[ds, 0x11e6], ax);            /* mov [0x11e6], ax */
+            ii(0x93c0, 3);    mov(ax, memw_a16[ds, 0x1202]);            /* mov ax, [0x1202] */
+            ii(0x93c3, 4);    mov(dx, memw_a16[ds, 0x1204]);            /* mov dx, [0x1204] */
+            ii(0x93c7, 2);    mov(cl, 0xc);                             /* mov cl, 0xc */
+            ii(0x93c9, 3);    callw(0x8560, -0xe6c);                    /* call 0x8560 */
+            ii(0x93cc, 3);    mov(memb_a16[ds, 0x11e8], al);            /* mov [0x11e8], al */
+            ii(0x93cf, 3);    mov(ax, memw_a16[ds, 0x1204]);            /* mov ax, [0x1204] */
+            ii(0x93d2, 3);    sar(ax, 0x4);                             /* sar ax, 0x4 */
+            ii(0x93d5, 2);    mov(ah, al);                              /* mov ah, al */
+            ii(0x93d7, 2);    sub(al, al);                              /* sub al, al */
+            ii(0x93d9, 3);    mov(memw_a16[ds, 0x11ea], ax);            /* mov [0x11ea], ax */
+            ii(0x93dc, 3);    mov(ax, memw_a16[ss, bp - 0x1c]);         /* mov ax, [bp-0x1c] */
+            ii(0x93df, 2);    and(al, 0xf8);                            /* and al, 0xf8 */
+            ii(0x93e1, 3);    add(ax, memw_a16[ss, bp - 0x6]);          /* add ax, [bp-0x6] */
+            ii(0x93e4, 3);    mov(dx, memw_a16[ss, bp - 0x4]);          /* mov dx, [bp-0x4] */
+            ii(0x93e7, 1);    pushw(si);                                /* push si */
+            ii(0x93e8, 1);    pushw(di);                                /* push di */
+            ii(0x93e9, 2);    mov(di, ax);                              /* mov di, ax */
+            ii(0x93eb, 3);    mov(si, 0x11e4);                          /* mov si, 0x11e4 */
+            ii(0x93ee, 2);    mov(es, dx);                              /* mov es, dx */
+            ii(0x93f0, 1);    movsw_a16();                              /* movsw */
+            ii(0x93f1, 1);    movsw_a16();                              /* movsw */
+            ii(0x93f2, 1);    movsw_a16();                              /* movsw */
+            ii(0x93f3, 1);    movsw_a16();                              /* movsw */
+            ii(0x93f4, 1);    popw(di);                                 /* pop di */
+            ii(0x93f5, 1);    popw(si);                                 /* pop si */
+            ii(0x93f6, 2);    or(si, si);                               /* or si, si */
+            ii(0x93f8, 2);    if(jzw(0x940d, 0x13)) goto l_0x940d;      /* jz 0x940d */
+            ii(0x93fa, 4);    test(si, 0xf);                            /* test si, 0xf */
+            ii(0x93fe, 2);    if(jzw(0x9401, 0x1)) goto l_0x9401;       /* jz 0x9401 */
+            ii(0x9400, 1);    inc(si);                                  /* inc si */
+        l_0x9401:
+            ii(0x9401, 1);    pushw(si);                                /* push si */
+            ii(0x9402, 2);    pushw(0);                                 /* push 0x0 */
+            ii(0x9404, 3);    pushw(memw_a16[ss, bp - 0x1c]);           /* push word [bp-0x1c] */
+            ii(0x9407, 3);    callw(0x9839, 0x42f);                     /* call 0x9839 */
+            ii(0x940a, 3);    add(sp, 0x6);                             /* add sp, 0x6 */
+        l_0x940d:
+            ii(0x940d, 4);    cmp(memw_a16[ss, bp - 0x4a], 0);          /* cmp word [bp-0x4a], 0x0 */
+            ii(0x9411, 2);    if(jzw(0x942a, 0x17)) goto l_0x942a;      /* jz 0x942a */
+            ii(0x9413, 3);    mov(di, memw_a16[ss, bp - 0x4a]);         /* mov di, [bp-0x4a] */
+            ii(0x9416, 3);    shl(di, 0x4);                             /* shl di, 0x4 */
+            ii(0x9419, 2);    sub(di, si);                              /* sub di, si */
+            ii(0x941b, 2);    if(jzw(0x942a, 0xd)) goto l_0x942a;       /* jz 0x942a */
+            ii(0x941d, 2);    pushw(0);                                 /* push 0x0 */
+            ii(0x941f, 1);    pushw(di);                                /* push di */
+            ii(0x9420, 1);    pushw(si);                                /* push si */
+            ii(0x9421, 3);    pushw(memw_a16[ss, bp - 0x1c]);           /* push word [bp-0x1c] */
+            ii(0x9424, 3);    callw(0x7c27, -0x1800);                   /* call 0x7c27 */
+            ii(0x9427, 3);    add(sp, 0x8);                             /* add sp, 0x8 */
+        l_0x942a:
+            ii(0x942a, 3);    mov(al, memb_a16[ss, bp - 0x2]);          /* mov al, [bp-0x2] */
+            ii(0x942d, 3);    mov(memb_a16[ds, 0x11e9], al);            /* mov [0x11e9], al */
+            ii(0x9430, 3);    mov(bx, memw_a16[ss, bp - 0x1c]);         /* mov bx, [bp-0x1c] */
+            ii(0x9433, 3);    and(bl, 0xf8);                            /* and bl, 0xf8 */
+            ii(0x9436, 3);    add(bx, memw_a16[ss, bp - 0x6]);          /* add bx, [bp-0x6] */
+            ii(0x9439, 3);    mov(es, memw_a16[ss, bp - 0x4]);          /* mov es, [bp-0x4] */
+            ii(0x943c, 4);    mov(memb_a16[es, bx + 0x5], al);          /* mov [es:bx+0x5], al */
+            ii(0x9440, 3);    mov(ax, memw_a16[ss, bp - 0x18]);         /* mov ax, [bp-0x18] */
+            ii(0x9443, 3);    cmp(memw_a16[ss, bp - 0x1c], ax);         /* cmp [bp-0x1c], ax */
+            ii(0x9446, 2);    if(jzw(0x945f, 0x17)) goto l_0x945f;      /* jz 0x945f */
+            ii(0x9448, 2);    and(al, 0xf8);                            /* and al, 0xf8 */
+            ii(0x944a, 3);    add(ax, memw_a16[ss, bp - 0x6]);          /* add ax, [bp-0x6] */
+            ii(0x944d, 3);    mov(dx, memw_a16[ss, bp - 0x4]);          /* mov dx, [bp-0x4] */
+            ii(0x9450, 1);    pushw(si);                                /* push si */
+            ii(0x9451, 1);    pushw(di);                                /* push di */
+            ii(0x9452, 2);    mov(di, ax);                              /* mov di, ax */
+            ii(0x9454, 3);    mov(si, 0x11e4);                          /* mov si, 0x11e4 */
+            ii(0x9457, 2);    mov(es, dx);                              /* mov es, dx */
+            ii(0x9459, 1);    movsw_a16();                              /* movsw */
+            ii(0x945a, 1);    movsw_a16();                              /* movsw */
+            ii(0x945b, 1);    movsw_a16();                              /* movsw */
+            ii(0x945c, 1);    movsw_a16();                              /* movsw */
+            ii(0x945d, 1);    popw(di);                                 /* pop di */
+            ii(0x945e, 1);    popw(si);                                 /* pop si */
+        l_0x945f:
+            ii(0x945f, 3);    mov(ax, memw_a16[ds, 0x11ee]);            /* mov ax, [0x11ee] */
+            ii(0x9462, 4);    add(memw_a16[ss, bp - 0x18], 0x8);        /* add word [bp-0x18], 0x8 */
+            ii(0x9466, 3);    cmp(memw_a16[ss, bp - 0x18], ax);         /* cmp [bp-0x18], ax */
+            ii(0x9469, 2);    if(jaw(0x946e, 0x3)) goto l_0x946e;       /* ja 0x946e */
+            ii(0x946b, 3);    jmpw(0x9207, -0x267); goto l_0x9207;      /* jmp 0x9207 */
+        l_0x946e:
+            ii(0x946e, 4);    cmp(memw_a16[ss, bp + 0x4], 0);           /* cmp word [bp+0x4], 0x0 */
+            ii(0x9472, 2);    if(jgw(0x947e, 0xa)) goto l_0x947e;       /* jg 0x947e */
+            ii(0x9474, 3);    shr(ax, 0x3);                             /* shr ax, 0x3 */
+            ii(0x9477, 3);    les(bx, ss, bp - 0x6);                    /* les bx, [bp-0x6] */
+            ii(0x947a, 4);    mov(memw_a16[es, bx + 0x2], ax);          /* mov [es:bx+0x2], ax */
+        l_0x947e:
+            ii(0x947e, 3);    mov(ax, memw_a16[ss, bp - 0x2c]);         /* mov ax, [bp-0x2c] */
+            ii(0x9481, 3);    sub(ax, 0xc);                             /* sub ax, 0xc */
+            ii(0x9484, 2);    and(al, 0xfe);                            /* and al, 0xfe */
+            ii(0x9486, 3);    mov(bx, memw_a16[ss, bp + 0x6]);          /* mov bx, [bp+0x6] */
+            ii(0x9489, 3);    mov(memw_a16[ds, bx + 0xe], ax);          /* mov [bx+0xe], ax */
+            ii(0x948c, 3);    mov(ax, memw_a16[ss, bp - 0x2e]);         /* mov ax, [bp-0x2e] */
+            ii(0x948f, 3);    mov(memw_a16[ds, bx + 0x2], ax);          /* mov [bx+0x2], ax */
+            ii(0x9492, 3);    mov(ax, memw_a16[ss, bp - 0x26]);         /* mov ax, [bp-0x26] */
+            ii(0x9495, 3);    mov(memw_a16[ds, bx + 0x22], ax);         /* mov [bx+0x22], ax */
+            ii(0x9498, 3);    mov(ax, memw_a16[ss, bp - 0x28]);         /* mov ax, [bp-0x28] */
+            ii(0x949b, 3);    mov(memw_a16[ds, bx + 0x1e], ax);         /* mov [bx+0x1e], ax */
+            ii(0x949e, 3);    mov(ax, memw_a16[ds, 0x11f2]);            /* mov ax, [0x11f2] */
+            ii(0x94a1, 3);    mov(memw_a16[ds, bx + 0xa], ax);          /* mov [bx+0xa], ax */
+            ii(0x94a4, 3);    mov(ax, memw_a16[ss, bp - 0x18]);         /* mov ax, [bp-0x18] */
+            ii(0x94a7, 3);    sub(ax, 0x18);                            /* sub ax, 0x18 */
+            ii(0x94aa, 3);    mov(memw_a16[ds, bx + 0x8], ax);          /* mov [bx+0x8], ax */
+            ii(0x94ad, 3);    callw(0x6f71, -0x253f);                   /* call 0x6f71 */
+            ii(0x94b0, 3);    pushw(memw_a16[ss, bp + 0x6]);            /* push word [bp+0x6] */
+            ii(0x94b3, 3);    pushw(memw_a16[ss, bp + 0x4]);            /* push word [bp+0x4] */
+            ii(0x94b6, 3);    callw(0x8d54, -0x765);                    /* call 0x8d54 */
+            ii(0x94b9, 1);    popw(bx);                                 /* pop bx */
+            ii(0x94ba, 1);    popw(bx);                                 /* pop bx */
+            ii(0x94bb, 4);    cmp(memw_a16[ss, bp + 0x4], 0);           /* cmp word [bp+0x4], 0x0 */
+            ii(0x94bf, 2);    if(jlw(0x94ce, 0xd)) goto l_0x94ce;       /* jl 0x94ce */
+            ii(0x94c1, 3);    callw(0xbda7, 0x28e3);                    /* call 0xbda7 */
+            ii(0x94c4, 2);    sub(ax, ax);                              /* sub ax, ax */
+            ii(0x94c6, 3);    mov(memw_a16[ds, 0x11dc], ax);            /* mov [0x11dc], ax */
+            ii(0x94c9, 3);    mov(memw_a16[ds, 0x11da], ax);            /* mov [0x11da], ax */
+            ii(0x94cc, 2);    jmpw(0x94dc, 0xe); goto l_0x94dc;         /* jmp 0x94dc */
+        l_0x94ce:
+            ii(0x94ce, 3);    mov(ax, memw_a16[ds, 0x11f4]);            /* mov ax, [0x11f4] */
+            ii(0x94d1, 4);    mov(dx, memw_a16[ds, 0x11f6]);            /* mov dx, [0x11f6] */
+            ii(0x94d5, 3);    mov(memw_a16[ds, 0x11da], ax);            /* mov [0x11da], ax */
+            ii(0x94d8, 4);    mov(memw_a16[ds, 0x11dc], dx);            /* mov [0x11dc], dx */
+        l_0x94dc:
+            ii(0x94dc, 4);    sub(memw_a16[ss, bp - 0x18], 0x8);        /* sub word [bp-0x18], 0x8 */
+            ii(0x94e0, 4);    cmp(memw_a16[ss, bp - 0x2a], 0);          /* cmp word [bp-0x2a], 0x0 */
+            ii(0x94e4, 2);    if(jzw(0x9537, 0x51)) goto l_0x9537;      /* jz 0x9537 */
+            ii(0x94e6, 3);    callw(0x773a, -0x1daf);                   /* call 0x773a */
+            ii(0x94e9, 2);    pushw(0x1);                               /* push 0x1 */
+            ii(0x94eb, 3);    callw(0x7016, -0x24d8);                   /* call 0x7016 */
+            ii(0x94ee, 1);    popw(bx);                                 /* pop bx */
+            ii(0x94ef, 4);    cmp(memw_a16[ss, bp - 0x44], 0);          /* cmp word [bp-0x44], 0x0 */
+            ii(0x94f3, 2);    if(jzw(0x951a, 0x25)) goto l_0x951a;      /* jz 0x951a */
+            ii(0x94f5, 3);    pushw(memw_a16[ss, bp - 0x44]);           /* push word [bp-0x44] */
+            ii(0x94f8, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x94fb, 3);    mov(ax, memw_a16[ss, bp - 0x44]);         /* mov ax, [bp-0x44] */
+            ii(0x94fe, 3);    add(memw_a16[ss, bp - 0x2a], ax);         /* add [bp-0x2a], ax */
+            ii(0x9501, 3);    pushw(memw_a16[ss, bp - 0x2a]);           /* push word [bp-0x2a] */
+            ii(0x9504, 3);    callw(0x9b30, 0x629);                     /* call 0x9b30 */
+            ii(0x9507, 3);    add(sp, 0x6);                             /* add sp, 0x6 */
+            ii(0x950a, 2);    jmpw(0x951a, 0xe); goto l_0x951a;         /* jmp 0x951a */
+        l_0x950c:
+            ii(0x950c, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x950f, 3);    pushw(memw_a16[ss, bp - 0x2a]);           /* push word [bp-0x2a] */
+            ii(0x9512, 3);    callw(0x9bc9, 0x6b4);                     /* call 0x9bc9 */
+            ii(0x9515, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9516, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9517, 3);    callw(0xbd63, 0x2849);                    /* call 0xbd63 */
+        l_0x951a:
+            ii(0x951a, 3);    dec(memw_a16[ss, bp - 0x1e]);             /* dec word [bp-0x1e] */
+            ii(0x951d, 2);    if(jnsw(0x950c, -0x13)) goto l_0x950c;    /* jns 0x950c */
+            ii(0x951f, 3);    pushw(memw_a16[ss, bp - 0x2a]);           /* push word [bp-0x2a] */
+            ii(0x9522, 3);    callw(0x7836, -0x1cef);                   /* call 0x7836 */
+            ii(0x9525, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9526, 3);    mov(ax, memw_a16[ss, bp - 0x2a]);         /* mov ax, [bp-0x2a] */
+            ii(0x9529, 3);    sub(ax, 0x8);                             /* sub ax, 0x8 */
+            ii(0x952c, 3);    mov(bx, memw_a16[ss, bp + 0x6]);          /* mov bx, [bp+0x6] */
+            ii(0x952f, 3);    mov(memw_a16[ds, bx + 0x8], ax);          /* mov [bx+0x8], ax */
+            ii(0x9532, 3);    callw(0x6f71, -0x25c4);                   /* call 0x6f71 */
+            ii(0x9535, 2);    jmpw(0x957c, 0x45); goto l_0x957c;        /* jmp 0x957c */
+        l_0x9537:
+            ii(0x9537, 4);    cmp(memw_a16[ss, bp - 0x44], 0);          /* cmp word [bp-0x44], 0x0 */
+            ii(0x953b, 2);    if(jzw(0x9548, 0xb)) goto l_0x9548;       /* jz 0x9548 */
+            ii(0x953d, 3);    pushw(memw_a16[ss, bp - 0x44]);           /* push word [bp-0x44] */
+            ii(0x9540, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x9543, 3);    callw(0x98d1, 0x38b);                     /* call 0x98d1 */
+            ii(0x9546, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9547, 1);    popw(bx);                                 /* pop bx */
+        l_0x9548:
+            ii(0x9548, 4);    cmp(memw_a16[ss, bp - 0x1e], 0);          /* cmp word [bp-0x1e], 0x0 */
+            ii(0x954c, 2);    if(jlew(0x957c, 0x2e)) goto l_0x957c;     /* jle 0x957c */
+            ii(0x954e, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x9551, 3);    callw(0x79ef, -0x1b65);                   /* call 0x79ef */
+            ii(0x9554, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9555, 3);    mov(al, memb_a16[ds, 0x11e9]);            /* mov al, [0x11e9] */
+            ii(0x9558, 2);    and(al, 0x18);                            /* and al, 0x18 */
+            ii(0x955a, 2);    cmp(al, 0x10);                            /* cmp al, 0x10 */
+            ii(0x955c, 2);    if(jzw(0x9564, 0x6)) goto l_0x9564;       /* jz 0x9564 */
+            ii(0x955e, 2);    pushw(0x7);                               /* push 0x7 */
+            ii(0x9560, 3);    callw(0x805d, -0x1506);                   /* call 0x805d */
+            ii(0x9563, 1);    popw(bx);                                 /* pop bx */
+        l_0x9564:
+            ii(0x9564, 5);    cmp(memw_a16[ds, 0x11e4], 0);             /* cmp word [0x11e4], 0x0 */
+            ii(0x9569, 2);    if(jzw(0x957c, 0x11)) goto l_0x957c;      /* jz 0x957c */
+            ii(0x956b, 2);    jmpw(0x9577, 0xa); goto l_0x9577;         /* jmp 0x9577 */
+        l_0x956d:
+            ii(0x956d, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x9570, 3);    callw(0x9a4d, 0x4da);                     /* call 0x9a4d */
+            ii(0x9573, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9574, 3);    callw(0xbd63, 0x27ec);                    /* call 0xbd63 */
+        l_0x9577:
+            ii(0x9577, 3);    dec(memw_a16[ss, bp - 0x1e]);             /* dec word [bp-0x1e] */
+            ii(0x957a, 2);    if(jnsw(0x956d, -0xf)) goto l_0x956d;     /* jns 0x956d */
+        l_0x957c:
+            ii(0x957c, 4);    cmp(memw_a16[ss, bp - 0x1e], 0);          /* cmp word [bp-0x1e], 0x0 */
+            ii(0x9580, 2);    if(jlw(0x9588, 0x6)) goto l_0x9588;       /* jl 0x9588 */
+            ii(0x9582, 4);    test(memb_a16[ss, bp - 0x12], 0x1);       /* test byte [bp-0x12], 0x1 */
+            ii(0x9586, 2);    if(jzw(0x9595, 0xd)) goto l_0x9595;       /* jz 0x9595 */
+        l_0x9588:
+            ii(0x9588, 4);    cmp(memw_a16[ss, bp - 0x2a], 0);          /* cmp word [bp-0x2a], 0x0 */
+            ii(0x958c, 2);    if(jnzw(0x9595, 0x7)) goto l_0x9595;      /* jnz 0x9595 */
+            ii(0x958e, 3);    pushw(memw_a16[ss, bp - 0x18]);           /* push word [bp-0x18] */
+            ii(0x9591, 3);    callw(0x9b12, 0x57e);                     /* call 0x9b12 */
+            ii(0x9594, 1);    popw(bx);                                 /* pop bx */
+        l_0x9595:
+            ii(0x9595, 3);    mov(ax, 0x28);                            /* mov ax, 0x28 */
+            ii(0x9598, 3);    mov(bx, memw_a16[ss, bp + 0x6]);          /* mov bx, [bp+0x6] */
+            ii(0x959b, 3);    mov(memw_a16[ds, bx + 0x4], ax);          /* mov [bx+0x4], ax */
+            ii(0x959e, 3);    mov(memw_a16[ds, bx + 0x6], ax);          /* mov [bx+0x6], ax */
+            ii(0x95a1, 5);    mov(memw_a16[ds, bx + 0x26], 0x200);      /* mov word [bx+0x26], 0x200 */
+            ii(0x95a6, 4);    cmp(memw_a16[ss, bp + 0x4], 0);           /* cmp word [bp+0x4], 0x0 */
+            ii(0x95aa, 2);    if(jgw(0x95c9, 0x1d)) goto l_0x95c9;      /* jg 0x95c9 */
+            ii(0x95ac, 3);    callw(0x8d77, -0x838);                    /* call 0x8d77 */
+            ii(0x95af, 3);    mov(ax, memw_a16[ds, 0xcec]);             /* mov ax, [0xcec] */
+            ii(0x95b2, 3);    mov(memw_a16[ds, 0x97e], ax);             /* mov [0x97e], ax */
+            ii(0x95b5, 3);    mov(cx, 0x2c);                            /* mov cx, 0x2c */
+            ii(0x95b8, 2);    mov(dx, ax);                              /* mov dx, ax */
+            ii(0x95ba, 3);    mov(memw_a16[ss, bp - 0x48], cx);         /* mov [bp-0x48], cx */
+            ii(0x95bd, 3);    mov(memw_a16[ss, bp - 0x46], dx);         /* mov [bp-0x46], dx */
+            ii(0x95c0, 2);    mov(es, ax);                              /* mov es, ax */
+            ii(0x95c2, 2);    mov(bx, cx);                              /* mov bx, cx */
+            ii(0x95c4, 5);    mov(memw_a16[es, bx], 0x30);              /* mov word [es:bx], 0x30 */
+        l_0x95c9:
+            ii(0x95c9, 1);    popw(si);                                 /* pop si */
+            ii(0x95ca, 1);    popw(di);                                 /* pop di */
+            ii(0x95cb, 1);    leavew();                                 /* leave */
+            ii(0x95cc, 1);    retw(); return;                           /* ret */
         }
     }
 }

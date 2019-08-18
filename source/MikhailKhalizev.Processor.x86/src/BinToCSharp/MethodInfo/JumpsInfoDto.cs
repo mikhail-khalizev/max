@@ -10,6 +10,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
     [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
     public class JumpsInfoDto
     {
+        public string Id { get; set; }
+
         public Guid Guid { get; set; }
 
         public Address Address { get; set; }

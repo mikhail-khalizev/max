@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("89d38bc6-6c09-4a71-ab9c-b2f97788f587")]
+        [MethodInfo("4998453c-26f8-4289-a733-11ed5afc8f92")]
         public void my_play_video_company()
         {
             ii(0x1011_57ff, 5); pushd(0x24);                            /* push 0x24 */

@@ -24,6 +24,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 .Where(x => x.Raw.Length % 2 == 0)
                 .ToDictionary(x => x.Guid, x => x);
 
+            foreach (var (_, methodInfoDto) in methods)
+            {
+                if (methodInfoDto.Id == null)
+                    methodInfoDto.Id = MethodInfoDto.GenerateId(methodInfoDto.Address, methodInfoDto.RawBytes);
+            }
+
             path = Path.Combine(configuration.SettingsDirectory, configuration.JumpInfosFile);
             allText = File.Exists(path) ? File.ReadAllText(path) : "";
             var jumpsInfos = JsonConvert.DeserializeObject<List<JumpsInfoDto>>(allText) ?? new List<JumpsInfoDto>();
@@ -112,6 +118,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                                         {
                                             var ji = x.JumpsInfo ?? new JumpsInfoDto();
 
+                                            ji.Id = x.Id;
                                             ji.Guid = x.Guid;
                                             ji.Address = x.Address;
 
@@ -142,29 +149,34 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public MethodInfoDto GetByGuidOrNull(Guid guid)
         {
-            _methodByGuid.TryGetValue(guid, out var method);
-            return method;
+            lock (_methodByGuid)
+            {
+                _methodByGuid.TryGetValue(guid, out var method);
+                return method;
+            }
         }
-
-        public MethodInfoDto GetByRawBytes(ArchitectureMode mode, byte[] rawBytes)
-        {
-            return _methodByGuid.Values.FirstOrDefault(x => x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
-        }
-
+        
         public MethodInfoDto GetByRawBytes(ArchitectureMode mode, byte[] rawBytes, Address address)
         {
-            return _methodByGuid.Values.FirstOrDefault(x => x.Address == address && x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
+            lock (_methodByGuid)
+                return _methodByGuid.Values.FirstOrDefault(x => x.Address == address && x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
         }
 
         public void Add(MethodInfoDto method)
         {
-            var exists = _methodByGuid.Values.Any(x =>
-                x.Guid == method.Guid ||
-                (x.Address == method.Address && x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes)));
+            lock (_methodByGuid)
+            {
+                var exists = _methodByGuid.Values.Any(
+                    x =>
+                        x.Guid == method.Guid ||
+                        (x.Address == method.Address && x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes)));
 
-            if (exists)
-                throw new InvalidOperationException("Duplicated item");
-            _methodByGuid.Add(method.Guid, method);
+                if (exists)
+                    throw new InvalidOperationException("Duplicated item");
+
+                _methodByGuid.Add(method.Guid, method);
+            }
+
             SetDirty();
         }
 
@@ -195,6 +207,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             if (!added)
             {
                 tos.TryGetValue(new JumpDestinationInfoDto { Address = toAddress }, out var actual);
+
+                if (actual.Id != toMethod.Id)
+                {
+                    actual.Id = toMethod.Id;
+                    added = true;
+                }
+
                 if (actual.Guid != toMethod.Guid)
                 {
                     actual.Guid = toMethod.Guid;

@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("7d80c410-847a-417f-97a1-3c5f9838da8c")]
+        [MethodInfo("272a0b89-62e4-44d1-9f63-b774b0dd79e8")]
         public void my_string_tolower()
         {
             ii(0x1014_1f63, 5); pushd(0x28);                            /* push 0x28 */

@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("b59c3ac1-1f53-4155-a740-a7e7cc0cbb18")]
+        [MethodInfo("c0eb0daa-7297-4732-8e27-c8e02ba858a6")]
         public void /* sys */ Method_1018_dc38()
         {
             ii(0x1018_dc38, 2); sub(eax, eax);                          /* sub eax, eax */

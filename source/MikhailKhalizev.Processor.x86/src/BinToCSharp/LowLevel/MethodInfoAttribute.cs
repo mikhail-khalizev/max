@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     public class MethodInfoAttribute : Attribute
     {
-        private readonly string _guid;
+        public string _id { get; }
 
-        public MethodInfoAttribute(string guid)
+        public MethodInfoAttribute(string id)
         {
-            _guid = guid;
+            _id = id;
         }
 
-        public Guid Guid => Guid.Parse(_guid);
+        public Guid Guid => Guid.Parse(_id);
     }
 }

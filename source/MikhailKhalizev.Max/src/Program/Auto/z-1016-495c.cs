@@ -1,0 +1,31 @@
+using System;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+
+namespace MikhailKhalizev.Max.Program
+{
+    public partial class RawProgram
+    {
+        [MethodInfo("65443fcb-c979-453c-bcec-7726e7081eb9")]
+        public void Method_1016_495c()
+        {
+            ii(0x1016_495c, 1); pushd(ebx);                             /* push ebx */
+            ii(0x1016_495d, 1); pushd(ecx);                             /* push ecx */
+            ii(0x1016_495e, 1); pushd(edx);                             /* push edx */
+            ii(0x1016_495f, 1); pushd(esi);                             /* push esi */
+            ii(0x1016_4960, 1); pushd(edi);                             /* push edi */
+            ii(0x1016_4961, 1); pushd(ebp);                             /* push ebp */
+            ii(0x1016_4962, 2); mov(ebp, esp);                          /* mov ebp, esp */
+            ii(0x1016_4964, 6); sub(esp, 0x4);                          /* sub esp, 0x4 */
+            ii(0x1016_496a, 7); mov(memd_a32[ss, ebp - 0x4], 0x7fff);   /* mov dword [ebp-0x4], 0x7fff */
+            ii(0x1016_4971, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+            ii(0x1016_4974, 2); mov(esp, ebp);                          /* mov esp, ebp */
+            ii(0x1016_4976, 1); popd(ebp);                              /* pop ebp */
+            ii(0x1016_4977, 1); popd(edi);                              /* pop edi */
+            ii(0x1016_4978, 1); popd(esi);                              /* pop esi */
+            ii(0x1016_4979, 1); popd(edx);                              /* pop edx */
+            ii(0x1016_497a, 1); popd(ecx);                              /* pop ecx */
+            ii(0x1016_497b, 1); popd(ebx);                              /* pop ebx */
+            ii(0x1016_497c, 1); retd(); return;                         /* ret */
+        }
+    }
+}

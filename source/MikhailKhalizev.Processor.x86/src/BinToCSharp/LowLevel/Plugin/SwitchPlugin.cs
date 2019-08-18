@@ -308,10 +308,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 switch ((int)Engine.Mode)
                 {
                     case 16:
-                        to = Engine.Memory.GetStruct<ushort>(addrOfAddrs + i);
+                        to = Engine.Memory.GetFixSize(addrOfAddrs + i, 2).GetUInt16();
                         break;
                     case 32:
-                        to = Engine.Memory.GetStruct<uint>(addrOfAddrs + i);
+                        to = Engine.Memory.GetFixSize(addrOfAddrs + i, 4).GetUInt32();
                         break;
                     default:
                         throw new NotImplementedException();

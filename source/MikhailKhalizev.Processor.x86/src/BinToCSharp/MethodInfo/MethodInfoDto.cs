@@ -13,10 +13,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
     [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
     public class MethodInfoDto
     {
+        public static string GenerateId(Address address, byte[] raw)
+        {
+            var rawHash = 0;
+            for (var i = 0; i < raw.Length; i++)
+                rawHash = (((rawHash << 5) + rawHash) ^ raw[i]);
+            return $"{address}-{rawHash:x}";
+        }
+
+        public string Id { get; set; }
+
         public Guid Guid { get; set; }
-        
+
         public Address CsBase { get; set; }
-        
+
         public bool ShouldSerializeCsBase() => CsBase != 0;
 
         public Address Address
@@ -48,7 +58,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         /// Исходный бинарный код функции.
         /// </summary>
         public string Raw { get; set; }
-        
+
         public Dictionary<Address, string> ExtraRaw { get; set; }
 
         [JsonExtensionData]
@@ -62,7 +72,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             set
             {
                 _rawBytes = null;
+
                 Raw = HexHelper.ToHexWithoutPrefix(value);
+
                 if (Raw.Length % 2 != 0)
                     throw new InvalidOperationException("Raw.Length % 2 != 0");
             }

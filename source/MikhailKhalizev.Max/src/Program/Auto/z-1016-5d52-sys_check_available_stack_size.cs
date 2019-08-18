@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("dc9cd35b-7ccb-46d7-bf17-7f0656d92ec0")]
+        [MethodInfo("cafa2d03-23d6-4bb0-853d-a4de2120e458")]
         public void /* sys */ sys_check_available_stack_size()
         {
             ii(0x1016_5d52, 4); xchg(memd_a32[ss, esp + 0x4], eax);     /* xchg [esp+0x4], eax */

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -8,6 +8,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
     public class JumpDestinationInfoDto : IEquatable<JumpDestinationInfoDto>
     {
         public Address Address { get; set; }
+
+        public string Id { get; set; }
 
         public Guid Guid { get; set; }
 

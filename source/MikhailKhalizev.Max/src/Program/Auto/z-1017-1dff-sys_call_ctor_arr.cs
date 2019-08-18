@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("be46d01e-d770-4bc0-a475-a8090952a5cb")]
+        [MethodInfo("ea60fa1c-f0eb-4a1e-a594-b6fa57766d89")]
         public void /* sys */ sys_call_ctor_arr()
         {
             ii(0x1017_1dff, 1); pushd(ecx);                             /* push ecx */

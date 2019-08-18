@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("c0f4bdde-2827-46b7-a33b-d0444f52d295")]
+        [MethodInfo("e6399194-bbf2-48d8-b404-ea3e28ad49bf")]
         public void /* sys */ sys_display_copy_to_video_memory_1()
         {
             ii(0x1018_cdf4, 1); pushd(ebp);                             /* push ebp */

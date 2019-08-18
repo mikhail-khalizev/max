@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("d4f19dc3-70be-4130-840f-5b1eacc9d33a")]
+        [MethodInfo("fdb8d8f6-43e6-4521-8aea-75e8454e1db9")]
         public void my_strobj_dtor()
         {
             ii(0x1014_189a, 5); pushd(0x28);                            /* push 0x28 */

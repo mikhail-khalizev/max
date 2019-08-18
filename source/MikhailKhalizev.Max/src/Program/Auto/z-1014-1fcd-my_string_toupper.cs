@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("eed821b0-ab0a-43bd-bb55-d3d0194e80b2")]
+        [MethodInfo("f0c859cb-27d1-49c6-bbdd-b4e35ddcd235")]
         public void my_string_toupper()
         {
             ii(0x1014_1fcd, 5); pushd(0x28);                            /* push 0x28 */

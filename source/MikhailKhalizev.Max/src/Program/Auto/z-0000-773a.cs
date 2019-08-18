@@ -1,0 +1,20 @@
+using System;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+
+namespace MikhailKhalizev.Max.Program
+{
+    public partial class RawProgram
+    {
+        [MethodInfo("f8441cc7-7126-4477-bd83-bbc71384df02")]
+        public void Method_0000_773a()
+        {
+            ii(0x773a, 2);    pushw(0x20);                              /* push 0x20 */
+            ii(0x773c, 2);    pushw(0x20);                              /* push 0x20 */
+            ii(0x773e, 2);    pushw(0x20);                              /* push 0x20 */
+            ii(0x7740, 2);    pushw(0x18);                              /* push 0x18 */
+            ii(0x7742, 4);    callw_a16_far_ind(ds, 0x1e);              /* call far word [0x1e] */
+            ii(0x7746, 3);    add(sp, 0x8);                             /* add sp, 0x8 */
+            ii(0x7749, 1);    retw(); return;                           /* ret */
+        }
+    }
+}

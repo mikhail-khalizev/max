@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("bd360704-25de-4ff7-8b70-d6a287a57372")]
+        [MethodInfo("4e70eac2-9f13-4154-8425-eeb61c7038a3")]
         public void /* sys */ Method_1018_e8e4()
         {
             ii(0x1018_e8e4, 3); dec(memd_a32[ss, ebp - 0x14]);          /* dec dword [ebp-0x14] */

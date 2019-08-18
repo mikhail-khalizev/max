@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("a0996311-7e7a-4789-b441-4530f5332868")]
+        [MethodInfo("0fa6f6bf-b810-4f54-808a-9917d5e62d98")]
         public void /* sys */ sys_memset()
         {
             ii(0x1016_5de0, 1); pushd(eax);                             /* push eax */

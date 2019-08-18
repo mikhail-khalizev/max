@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("14fc3199-a069-4070-a8be-5ca1c803216f")]
+        [MethodInfo("64f2fd91-d7c9-4b4d-8f26-48fc162b72a7")]
         public void my_string_strstr_char_ptr()
         {
             ii(0x1014_1e92, 5); pushd(0x24);                            /* push 0x24 */

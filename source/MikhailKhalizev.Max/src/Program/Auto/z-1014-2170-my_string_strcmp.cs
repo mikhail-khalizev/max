@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("b63cd685-4d7c-4af4-85a7-c40296b3317b")]
+        [MethodInfo("7dc6e937-27a6-47cd-a46e-68d6a395ad0f")]
         public void my_string_strcmp()
         {
             ii(0x1014_2170, 5); pushd(0x24);                            /* push 0x24 */

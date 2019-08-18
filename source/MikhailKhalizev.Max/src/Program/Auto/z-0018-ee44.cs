@@ -1,0 +1,17 @@
+using System;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+
+namespace MikhailKhalizev.Max.Program
+{
+    public partial class RawProgram
+    {
+        [MethodInfo("90ae5051-9fa0-4923-b1ba-913bbc2f1c43")]
+        public void Method_0018_ee44()
+        {
+            ii(0x18_ee44, 1); popw(ds);                                 /* pop ds */
+            ii(0x18_ee45, 1); popw(dx);                                 /* pop dx */
+            ii(0x18_ee46, 1); popw(ax);                                 /* pop ax */
+            ii(0x18_ee47, 1); retw(); return;                           /* ret */
+        }
+    }
+}

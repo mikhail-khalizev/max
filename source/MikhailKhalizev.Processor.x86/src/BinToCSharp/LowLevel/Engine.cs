@@ -18,6 +18,8 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
+    // TODO Разделить класс на два класса - одни разбивает код на части. Другой преобразовывает в C#.
+
     /// <summary>
     /// Алгоритм декодирует код по частям. Каждую часть декодируется последовательно
     /// до тех пор пока не встретится потенциальный конец функции (ret или jmp). После
@@ -130,6 +132,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             foreach (var model in models)
             {
+                if (SuppressDecode.Contains(model.Address + model.RawBytes.Length, false))
+                    continue;
+
                 if (Memory.Equals(fullAddress, model.RawBytes))
                     return true;
             }
@@ -144,6 +149,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public bool AddToNewDetectedMethods(Address address)
         {
+            if (HaveAlreadyDecodedMethodStartedWith(address))
+                return false;
             return NewDetectedMethods.Add(new DetectedMethod(address));
         }
 
@@ -167,8 +174,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (!interval.Contains(start))
                 throw new InvalidOperationException();
 
+            // Проверяем код на "дыры" после jmp и jcc. В Dos коде нередко происходит возврат обратно на инструкцию непосредственно за jmp.
+
             while (!interval.Contains(end, true))
             {
+                var lastCmd = DecodedCode.GetInstructionBefore(interval.End);
+                if (lastCmd == null || !lastCmd.IsJmpOrJcc)
+                    break;
+
                 Decode(interval.End);
 
                 var newInterval = DecodedCode.Area.FindIntervalThatContainsValue(start, false);
@@ -242,9 +255,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (DecodedCode.Contains(address))
                 return; // Код включающий этот адрес уже декодирован.
 
-            if (HaveAlreadyDecodedMethodStartedWith(address))
-                return; // Нашли среди декодированных.
-
             if (address < CsBase)
                 return;
 
@@ -256,7 +266,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (nearestSuppressDecode <= address)
                 return;
-
 
             // Decode.
 
@@ -280,7 +289,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 nearestForceEnd = Address.MaxValue;
 
 
-            CSharpInstruction cmd = null;
+            var cmd = DecodedCode.GetInstructionBefore(address);
+            if (cmd != null && cmd.End != address)
+                cmd = null;
+
             while (true)
             {
                 var pc = u.pc;
@@ -419,7 +431,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         // Проверим на принадлежность к AlreadyDecodedMethods.
                         // Разрешим методам пересекаться при отсутствии ret в конце метода.
                         // Так выполнение кода может быть быстрее (при циклах), т.к. нет постоянных вызовов других методов.
-                        if ((lastInstr == null || lastInstr.IsRet) && HaveAlreadyDecodedMethodStartedWith(lastInstrEnd))
+                        if ((lastInstr == null || (lastInstr.End != cmd.Begin) || (lastInstr.End == cmd.Begin && lastInstr.IsRet)) &&
+                            HaveAlreadyDecodedMethodStartedWith(lastInstrEnd))
                         {
                             // Нашли среди декодированных.
                             break;
@@ -568,6 +581,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     mi.Address = detectedMethod.Begin;
                     mi.Mode = Mode;
                     mi.RawBytes = detectedMethod.RawBytes;
+                    mi.Id = MethodInfoDto.GenerateId(mi.Address, mi.RawBytes);
                     MethodInfoCollection.Add(mi);
                 }
 

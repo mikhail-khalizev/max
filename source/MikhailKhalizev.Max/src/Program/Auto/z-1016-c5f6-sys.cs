@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("6985de63-b327-4eb8-9252-49642429e07e")]
+        [MethodInfo("106d5a2c-40fe-4f83-9a6e-e3dd1413099f")]
         public void /* sys */ Method_1016_c5f6()
         {
             ii(0x1016_c5f6, 4); fld(memq_a32[ss, esp + 0xc]);           /* fld qword [esp+0xc] */

@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("db47860b-6b41-4457-9577-b13dd0c704fe")]
+        [MethodInfo("e6130f1a-07af-4ca2-9e21-010717a00822")]
         public void /* sys */ Method_1016_5df8()
         {
             ii(0x1016_5df8, 2); test(eax, eax);                         /* test eax, eax */

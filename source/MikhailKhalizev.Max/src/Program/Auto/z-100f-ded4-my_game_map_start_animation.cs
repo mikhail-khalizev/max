@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("cbcaf708-a7ec-4ea7-bf06-8b1307dbbbd3")]
+        [MethodInfo("ba978b24-b5af-48a9-98dc-0881e9a46778")]
         public void my_game_map_start_animation()
         {
             ii(0x100f_ded4, 5); pushd(0x48);                            /* push 0x48 */

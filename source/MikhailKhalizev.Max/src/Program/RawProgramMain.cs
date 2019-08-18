@@ -436,14 +436,13 @@ namespace MikhailKhalizev.Max.Program
         {
             engine.AddMethodInfoJumpsToDecode =
                 false; // Код активно загружается в процессе работы, поэтому преждевременное декодирование приводит к ошибкам.
-            // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
+                // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
 
-            engine.SuppressDecode.Add(0x14f0_0000, 0);
-            //    to_cxx.add_region_to_suppress_decode(0x10289000, 0); // Чтоб не выходил за пределы MAXRUN.EXE
+            // Аргументы следующим методам установлены опытным путём.
 
-            /* Аргументы следующим методам установлены опытным путём. */
+            engine.SuppressDecode.Add(0x1030_0000, 0);
 
-            engine.SetCStringDataArea(0x101a0003, 0x101b384d);
+            engine.SetCStringDataArea(0x101a_0003, 0x101b_384d);
 
             engine.AddForceEndMethod(0xbb03);
             engine.AddForceEndMethod(0xbb6f);

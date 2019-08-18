@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             Parallel.ForEach(
                 methodsWithPath.ToLookup(x => x.MethodInfo.Address),
-                // new ParallelOptions { MaxDegreeOfParallelism = 1 }, // TODO Remove?
+                // new ParallelOptions { MaxDegreeOfParallelism = 1 }, // For debug.
                 x =>
                 {
                     foreach (var (mi, filePath) in x.OrderBy(y => y.MethodInfo.Guid))
@@ -103,8 +103,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     _definitionCollection,
                                     MethodInfoCollection);
                                 
-                                foreach (var methodInfo in allDecodedMethodInfos)
-                                    engine.AddAlreadyDecodedFunc(methodInfo);
+                                //foreach (var methodInfo in allDecodedMethodInfos)
+                                //    engine.AddAlreadyDecodedFunc(methodInfo);
                             }
 
                             engine.ClearDecoded();
@@ -112,12 +112,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             engine.Memory = new MemoryFromMethodInfo(mi);
                             engine.CsBase = csBase;
                             engine.Mode = mi.Mode;
-
+                            
+                            engine.LimitDecodeTotalLength = mi.RawBytes.Length;
                             engine.SuppressDecode.Clear();
                             engine.SuppressDecode.Add(0, mi.Address);
                             engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
                             
-                            engine.RemoveAlreadyDecodedFunc(mi.Address);
+                            //engine.RemoveAlreadyDecodedFunc(mi.Address);
                             
                             engine.DecodeMethod(mi.Address, mi.Address + mi.RawBytes.Length);
 

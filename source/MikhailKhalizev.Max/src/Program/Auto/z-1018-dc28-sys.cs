@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("bbdc5d2e-e479-4398-abe1-9ba72e8af1a5")]
+        [MethodInfo("bf707d1b-2089-4b6f-8bff-87792212a495")]
         public void /* sys */ Method_1018_dc28()
         {
             ii(0x1018_dc28, 2); if(jaed_func(0x1018_dc38, 0xe)) return; /* jae 0x1018dc38 */

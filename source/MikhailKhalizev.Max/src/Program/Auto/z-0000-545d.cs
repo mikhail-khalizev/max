@@ -5,10 +5,10 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("de110473-3c80-494e-814e-1503def9f92f")]
+        [MethodInfo("3557597c-3ea3-4248-8790-d85ae70bfece")]
         public void Method_0000_545d()
         {
-            ii(0x545d, 3);    if(callw_up(0x5476, 0x16)) return;        /* call 0x5476 */
+            ii(0x545d, 3);    callw(0x5476, 0x16);                      /* call 0x5476 */
             ii(0x5460, 3);    and(al, 0xe8);                            /* lock and al, 0xe8 */
             ii(0x5463, 2);    adc(memw_a16[ds, bx + si], ax);           /* adc [bx+si], ax */
             ii(0x5465, 2);    if(loopw_a16_func(0x5488, 0x21)) return;  /* loop 0x5488 */ /* Адрес перехода делит инструкцию в этой функции пополам. */

@@ -1,0 +1,33 @@
+using System;
+using MikhailKhalizev.Processor.x86.BinToCSharp;
+
+namespace MikhailKhalizev.Max.Program
+{
+    public partial class RawProgram
+    {
+        [MethodInfo("4e259e0b-78c3-4118-98cd-cb97ebc2522c")]
+        public void Method_0018_dad3()
+        {
+            ii(0x18_dad3, 1); pushw(bp);                                /* push bp */
+            ii(0x18_dad4, 2); mov(bp, sp);                              /* mov bp, sp */
+            ii(0x18_dad6, 1); pushw(es);                                /* push es */
+            ii(0x18_dad7, 1); pushw(di);                                /* push di */
+            ii(0x18_dad8, 3); mov(es, memw_a16[ss, bp + 0x4]);          /* mov es, [bp+0x4] */
+            ii(0x18_dadb, 3); mov(di, memw_a16[ss, bp + 0x6]);          /* mov di, [bp+0x6] */
+            ii(0x18_dade, 3); mov(cx, memw_a16[ss, bp + 0x8]);          /* mov cx, [bp+0x8] */
+            ii(0x18_dae1, 3); mov(al, memb_a16[ss, bp + 0xa]);          /* mov al, [bp+0xa] */
+            ii(0x18_dae4, 2); mov(ah, al);                              /* mov ah, al */
+            ii(0x18_dae6, 1); cld();                                    /* cld */
+            ii(0x18_dae7, 3); sub(cx, 0x1);                             /* sub cx, 0x1 */
+            ii(0x18_daea, 1); inc(cx);                                  /* inc cx */
+            ii(0x18_daeb, 2); rcr(cx, 0x1);                             /* rcr cx, 1 */
+            ii(0x18_daed, 2); rep_a16(() => stosw_a16());               /* rep stosw */
+            ii(0x18_daef, 2); rcl(cx, 0x1);                             /* rcl cx, 1 */
+            ii(0x18_daf1, 2); rep_a16(() => stosb_a16());               /* rep stosb */
+            ii(0x18_daf3, 1); popw(di);                                 /* pop di */
+            ii(0x18_daf4, 1); popw(es);                                 /* pop es */
+            ii(0x18_daf5, 1); popw(bp);                                 /* pop bp */
+            ii(0x18_daf6, 1); retw(); return;                           /* ret */
+        }
+    }
+}
