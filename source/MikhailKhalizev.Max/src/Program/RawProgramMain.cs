@@ -108,7 +108,7 @@ namespace MikhailKhalizev.Max.Program
             ConnectDecodedMethods(GetType().Assembly);
             DosInterrupt.Initialize();
             InitializeX86DosProgram();
-            DosTimer.InitializeAndStart();
+            DosTimer.Initialize();
 
             Implementation.CorrectMethodPosition(0);
         }
@@ -387,6 +387,7 @@ namespace MikhailKhalizev.Max.Program
             return null;
         }
 
+
         public static void ConfigureEngine(Engine engine)
         {
             engine.AddMethodInfoJumpsToDecode =
@@ -402,6 +403,8 @@ namespace MikhailKhalizev.Max.Program
             engine.AddForceEndMethod(0xbb03);
             engine.AddForceEndMethod(0xbb6f);
             engine.AddForceEndMethod(0xbb73);
+            engine.AddForceEndMethod(0xdb13);
+            engine.AddForceEndMethod(0x18_9b43);
             engine.AddForceEndMethod(0x18_f4c7);
             engine.AddForceEndMethod(0x18_b5b5);
             engine.AddForceEndMethod(0x18_edfc);
@@ -499,7 +502,7 @@ namespace MikhailKhalizev.Max.Program
                     Action = func,
                     MethodInfo = new MethodInfoDto
                     {
-                        Guid = Guid.NewGuid(),
+                        Id = func.Method.Name,
                         Address = address,
                         Mode = (ArchitectureMode)mode,
                         IgnoreSave = true

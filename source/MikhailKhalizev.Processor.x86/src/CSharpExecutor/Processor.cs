@@ -1534,7 +1534,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         public long InstructionCount { get; set; }
 
         public int CSharpEmulateMode => MethodInfo == null ? 16 : (int)MethodInfo.Mode;
-        public int CSharpFunctionDelta { get; set; }
 
         public List<Address> callReturnAddresses { get; set; } = new List<Address>();
         public List<MethodInfoDto> callMethodInfos { get; set; } = new List<MethodInfoDto>();
@@ -1606,9 +1605,9 @@ namespace MikhailKhalizev.Processor.x86.Core
                         if (mi.JumpsInfo.IsGoUp == null)
                             mi.JumpsInfo.IsGoUp = new List<Address>();
 
-                        if (!mi.JumpsInfo.IsGoUp.Contains(returnAddress - CSharpFunctionDelta))
+                        if (!mi.JumpsInfo.IsGoUp.Contains(returnAddress))
                         {
-                            mi.JumpsInfo.IsGoUp.Add(returnAddress - CSharpFunctionDelta);
+                            mi.JumpsInfo.IsGoUp.Add(returnAddress);
                             MethodInfoCollection.Save(false, true, true);
                         }
 
@@ -1631,19 +1630,17 @@ namespace MikhailKhalizev.Processor.x86.Core
                     {
                         saveJumpInfo = false;
                         var from = cs[CurrentInstructionAddress];
-                        MethodInfoCollection.AddJumpAndSave(MethodInfo, from, nextMethodInfo, toRun, CSharpFunctionDelta);
+                        MethodInfoCollection.AddJumpAndSave(MethodInfo, from, nextMethodInfo, toRun);
                     }
 
                     var prevMethodInfo = MethodInfo;
-                    var prevCSharpFunctionDelta = CSharpFunctionDelta;
 
                     MethodInfo = nextMethodInfo;
-                    CSharpFunctionDelta = cs[eip] - nextMethodInfo.Address;
 
                     if (!string.IsNullOrEmpty(Configuration.StateOutput))
                     {
                         InitStateLogIfNeed();
-                        _stateLog.WriteLine($"    method guid: {{{MethodInfo.Guid}}}, delta: {CSharpFunctionDelta}, name: {nextMethod.Method.Name}");
+                        _stateLog.WriteLine($"    method id: '{MethodInfo.Id}', name: {nextMethod.Method.Name}");
                     }
 
                     try
@@ -1657,12 +1654,11 @@ namespace MikhailKhalizev.Processor.x86.Core
                     finally
                     {
                         MethodInfo = prevMethodInfo;
-                        CSharpFunctionDelta = prevCSharpFunctionDelta;
 
                         if (!string.IsNullOrEmpty(Configuration.StateOutput))
                         {
                             InitStateLogIfNeed();
-                            _stateLog.WriteLine($"    return to method guid: {{{MethodInfo.Guid}}}, delta: {CSharpFunctionDelta}");
+                            _stateLog.WriteLine($"    return to method guid: '{MethodInfo.Id}'");
                         }
                     }
                 }
@@ -1690,7 +1686,7 @@ namespace MikhailKhalizev.Processor.x86.Core
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
 
-            var cur = address + CSharpFunctionDelta - cs.Descriptor.Base;
+            var cur = address - cs.Descriptor.Base;
 
             if (eip != cur)
                 throw new InvalidOperationException("Ожидается инструкция по другому адресу.");
@@ -1787,7 +1783,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     result += $"    {"Count".PadLeft(padding)}  Guid                                    Address{Environment.NewLine}";
                 }
 
-                result += $"    {count.ToString().PadLeft(padding)}  {{{methodInfo.Guid}}}  {methodInfo.Address}{Environment.NewLine}";
+                result += $"    {count.ToString().PadLeft(padding)}  '{methodInfo.Id}'{Environment.NewLine}";
             }
 
             return result;
@@ -1810,7 +1806,7 @@ namespace MikhailKhalizev.Processor.x86.Core
                     result += $"    {"Count".PadLeft(padding)}  Guid                                    Address{Environment.NewLine}";
                 }
 
-                result += $"    {count.ToString().PadLeft(padding)}  {{{methodInfo.Guid}}}  {methodInfo.Address}{Environment.NewLine}";
+                result += $"    {count.ToString().PadLeft(padding)}  '{methodInfo.Id}'{Environment.NewLine}";
             }
 
             return result;
@@ -3752,7 +3748,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
-            if (cs[eip] != address + CSharpFunctionDelta)
+            if (cs[eip] != address)
                 throw new NotImplementedException();
 
             run_irqs();
@@ -3765,7 +3761,7 @@ namespace MikhailKhalizev.Processor.x86.Core
 
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
-            if (cs[eip] != address + CSharpFunctionDelta)
+            if (cs[eip] != address)
                 throw new NotImplementedException();
 
             run_irqs();
@@ -3794,7 +3790,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             eip = address & 0xffff;
             run_irqs();
-            return cs[eip] - CSharpFunctionDelta;
+            return cs[eip];
         }
 
         /// <inheritdoc />
@@ -3802,7 +3798,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             eip = address;
             run_irqs();
-            return cs[eip] - CSharpFunctionDelta;
+            return cs[eip];
         }
 
         /// <inheritdoc />

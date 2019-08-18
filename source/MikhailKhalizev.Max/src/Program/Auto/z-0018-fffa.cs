@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("d3278b9a-5fbf-45e6-beb1-b3c80d2f6e5a")]
+        [MethodInfo("0x18_fffa-2f2c2074")]
         public void Method_0018_fffa()
         {
             ii(0x18_fffa, 3); les(si, ss, bp + 0x8);                    /* les si, [bp+0x8] */

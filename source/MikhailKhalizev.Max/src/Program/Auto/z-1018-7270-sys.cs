@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("5cf9a5a9-1393-4fe5-b1f0-980464fe23db")]
+        [MethodInfo("0x1018_7270-1f1a0c05")]
         public void /* sys */ Method_1018_7270()
         {
             ii(0x1018_7270, 4); fld(memt_a32[ss, esp + 0x10]);          /* fld tword [esp+0x10] */

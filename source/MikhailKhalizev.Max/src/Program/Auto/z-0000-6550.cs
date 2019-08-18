@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("f23f4b19-ce1a-4565-a7bc-38fea410fc40")]
+        [MethodInfo("0x6550-a165b933")]
         public void Method_0000_6550()
         {
             ii(0x6550, 2);    xor(ch, ch);                              /* xor ch, ch */

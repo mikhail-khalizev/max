@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("23563651-f434-4136-a19e-be424c3c1f9f")]
+        [MethodInfo("0x1014_23d8-1f1940b1")]
         public void my_string_compute_capacity_from_length()
         {
             ii(0x1014_23d8, 5); pushd(0x24);                            /* push 0x24 */

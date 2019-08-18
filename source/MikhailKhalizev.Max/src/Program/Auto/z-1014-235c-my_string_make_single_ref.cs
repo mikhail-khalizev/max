@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("7d4501be-6509-467d-a5d0-fc3a4a45b415")]
+        [MethodInfo("0x1014_235c-8f5d36e8")]
         public void my_string_make_single_ref()
         {
             ii(0x1014_235c, 5); pushd(0x30);                            /* push 0x30 */

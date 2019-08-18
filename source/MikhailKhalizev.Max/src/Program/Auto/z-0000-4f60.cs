@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x4f60-cf")]
+        [MethodInfo("0x4f60-2df")]
         public void Method_0000_4f60()
         {
             ii(0x4f60, 1);    iretw(); return;                          /* iretw */

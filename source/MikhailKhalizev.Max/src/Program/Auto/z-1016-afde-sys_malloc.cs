@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("685a6201-01bc-4e52-a6ea-8fb34fbf6b04")]
+        [MethodInfo("0x1016_afde-69497942")]
         public void /* sys */ sys_malloc()
         {
             ii(0x1016_afde, 1); pushd(ebx);                             /* push ebx */

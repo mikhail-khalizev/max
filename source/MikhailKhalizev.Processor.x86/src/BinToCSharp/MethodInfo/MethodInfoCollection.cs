@@ -22,19 +22,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             var allText = File.Exists(path) ? File.ReadAllText(path) : "";
             var methods = (JsonConvert.DeserializeObject<List<MethodInfoDto>>(allText) ?? new List<MethodInfoDto>());
 
-            var methodById = new Dictionary<string, MethodInfoDto>();
-
-            foreach (var method in methods)
-            {
-                if (method.Raw.Length % 2 != 0)
-                    continue;
-
-                if (method.Id == null)
-                    method.Id = MethodInfoDto.GenerateId(method.Address, method.Mode, method.RawBytes);
-
-                methodById[method.Id] = method;
-                methodById[method.Guid.ToString()] = method;
-            }
+            var methodById = methods
+                .Where(method => method.Raw.Length % 2 == 0)
+                .ToDictionary(x => x.Id);
 
             path = Path.Combine(configuration.SettingsDirectory, configuration.JumpInfosFile);
             allText = File.Exists(path) ? File.ReadAllText(path) : "";
@@ -125,8 +115,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                                             var ji = x.JumpsInfo ?? new JumpsInfoDto();
 
                                             ji.Id = x.Id;
-                                            ji.Guid = x.Guid;
-                                            ji.Address = x.Address;
 
                                             if (ji.IsGoUp != null && 0 < ji.IsGoUp.Count)
                                                 ji.IsGoUp.Sort();
@@ -175,7 +163,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 var exists = _methodById.Values.Any(
                     x =>
                         x.Id == method.Id ||
-                        x.Guid == method.Guid ||
                         (x.Address == method.Address && x.Mode == method.Mode && x.RawBytes.SequenceEqual(method.RawBytes)));
 
                 if (exists)
@@ -189,18 +176,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public void AddJumpAndSave(
             MethodInfoDto fromMethod, Address fromAddress,
-            MethodInfoDto toMethod, Address toAddress,
-            int cSharpFunctionDelta)
+            MethodInfoDto toMethod, Address toAddress)
         {
-            fromAddress -= cSharpFunctionDelta;
-
-            if (Interval.From(
-                    fromMethod.Address + cSharpFunctionDelta,
-                    fromMethod.Address + cSharpFunctionDelta + fromMethod.RawBytes.Length)
-                .Contains(toAddress))
-                toAddress -= cSharpFunctionDelta;
-
-
             if (fromMethod.Jumps == null)
                 fromMethod.Jumps = new Dictionary<Address, HashSet<JumpDestinationInfoDto>>();
 
@@ -210,7 +187,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 fromMethod.Jumps[fromAddress] = tos;
             }
 
-            var added = tos.Add(new JumpDestinationInfoDto { Address = toAddress, Guid = toMethod.Guid });
+            var added = tos.Add(new JumpDestinationInfoDto { Address = toAddress, Id = toMethod.Id });
             if (!added)
             {
                 tos.TryGetValue(new JumpDestinationInfoDto { Address = toAddress }, out var actual);
@@ -218,12 +195,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 if (actual.Id != toMethod.Id)
                 {
                     actual.Id = toMethod.Id;
-                    added = true;
-                }
-
-                if (actual.Guid != toMethod.Guid)
-                {
-                    actual.Guid = toMethod.Guid;
                     added = true;
                 }
             }

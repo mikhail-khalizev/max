@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("5e2bba61-d946-40b0-ab49-a32e3874e3d2")]
+        [MethodInfo("0x100b_c505-17f26a95")]
         public void Method_100b_c505()
         {
             ii(0x100b_c505, 6); lea(edx, ebp - 0x1a4);                  /* lea edx, [ebp-0x1a4] */

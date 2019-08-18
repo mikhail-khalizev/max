@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("d62d35b4-60a0-4cf9-8fa5-e4a101def0ad")]
+        [MethodInfo("0x1014_86b6-833580e8")]
         public void Method_1014_86b6()
         {
             ii(0x1014_86b6, 5); pushd(0x28);                            /* push 0x28 */

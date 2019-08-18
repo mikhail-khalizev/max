@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("5736caf7-0610-423e-b723-f756d15a2c7a")]
+        [MethodInfo("0x100c_e538-20d83f8")]
         public void my_dtor_d2()
         {
             ii(0x100c_e538, 5); pushd(0x80);                            /* push 0x80 */

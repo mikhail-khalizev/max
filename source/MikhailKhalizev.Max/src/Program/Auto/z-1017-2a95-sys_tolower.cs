@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("be6c6fa4-e466-485a-8f84-393c2f45b378")]
+        [MethodInfo("0x1017_2a95-8fa2a3fb")]
         public void /* sys */ sys_tolower()
         {
             ii(0x1017_2a95, 3); cmp(eax, 0x61);                         /* cmp eax, 0x61 */

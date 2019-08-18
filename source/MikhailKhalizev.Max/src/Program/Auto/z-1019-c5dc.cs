@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("5c65aaca-3441-4621-96c3-963a93706d61")]
+        [MethodInfo("0x1019_c5dc-da13707")]
         public void Method_1019_c5dc()
         {
             ii(0x1019_c5dc, 2); ftst();                                 /* ftst */

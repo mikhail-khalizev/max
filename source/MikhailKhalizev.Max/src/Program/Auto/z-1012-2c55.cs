@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("39280c34-fe92-45d3-aad9-4adbb705bb07")]
+        [MethodInfo("0x1012_2c55-5fb8d1a")]
         public void Method_1012_2c55()
         {
             ii(0x1012_2c55, 3); rol(memd_a32[ds, esi], 0x75);           /* rol dword [esi], 0x75 */

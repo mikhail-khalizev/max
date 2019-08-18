@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("e2afa800-6fde-4ed0-91bf-0118db9d1ea9")]
+        [MethodInfo("0x19_e398-129a624")]
         public void Method_0019_e398()
         {
             ii(0x19_e398, 3); lldt(ax);                                 /* lldt ax */

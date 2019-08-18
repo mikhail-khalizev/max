@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("f545db5f-8e6f-4ea7-a59d-66fd202684a9")]
+        [MethodInfo("0x5a50-f39c2584")]
         public void Method_0000_5a50()
         {
             ii(0x5a50, 4);    popw(memw_a16[ds, 0xd10]);                /* pop word [0xd10] */

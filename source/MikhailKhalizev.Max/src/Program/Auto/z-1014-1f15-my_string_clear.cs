@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("c0085813-df2a-469b-b03d-cfd9ded974bd")]
+        [MethodInfo("0x1014_1f15-7dec20ac")]
         public void my_string_clear()
         {
             ii(0x1014_1f15, 5); pushd(0x24);                            /* push 0x24 */

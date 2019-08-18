@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                         return new ArraySegment<byte>(HexHelper.ToBytes(eHex)).Slice(address - eAddress);
                 }
 
-            throw new NotSupportedException($"Access to {address} in {{{MethodInfo.Guid}}} not supported.");
+            throw new NotSupportedException($"Access to {address} in '{MethodInfo.Id} is not supported.");
         }
     }
 }

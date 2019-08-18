@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x499b-3c015713")]
+        [MethodInfo("0x499b-3f14dd03")]
         public void Method_0000_499b()
         {
             ii(0x499b, 2);    inb(al, 0x92);                            /* in al, 0x92 */

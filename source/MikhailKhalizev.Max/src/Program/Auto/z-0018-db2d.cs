@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("15b5d03b-ac55-4a71-8baa-9d5b0da79424")]
+        [MethodInfo("0x18_db2d-747d7594")]
         public void Method_0018_db2d()
         {
             ii(0x18_db2d, 2); pushd(edi);                               /* push edi */

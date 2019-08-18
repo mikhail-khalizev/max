@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Dos
             RawProgramMain = rawProgramMain;
         }
 
-        public void InitializeAndStart()
+        public void Initialize()
         {
             /* Setup Timer 0 */
             pit[0].cntr = 0x10000;
@@ -71,8 +71,13 @@ namespace MikhailKhalizev.Max.Dos
 
             latched_timerstatus_locked = false;
             gate2 = false;
-
-            var forgot = pit0_event();
+        }
+        
+        private Task _start;
+        public void Start()
+        {
+            if (_start == null)
+                _start = pit0_event();
         }
 
         private TimeSpan get_total_nsec()

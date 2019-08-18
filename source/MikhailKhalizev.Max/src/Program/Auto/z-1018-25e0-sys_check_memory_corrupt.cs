@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("8101962c-e688-4df7-b06d-6c94085dda5d")]
+        [MethodInfo("0x1018_25e0-5ab4444d")]
         public void /* sys */ sys_check_memory_corrupt()
         {
             ii(0x1018_25e0, 1); pushd(ebx);                             /* push ebx */

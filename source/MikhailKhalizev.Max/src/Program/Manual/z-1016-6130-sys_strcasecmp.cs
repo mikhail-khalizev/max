@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("c065f14e-74ba-4388-a6f2-91c798f1586f")]
+        [MethodInfo("0x1016_6130-63cf5e5f")]
         public void /* sys */ sys_strcasecmp()
         {
             var s1 = Memory.ReadCString(ds[eax]);

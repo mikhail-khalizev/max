@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("493290d8-b8d0-4325-8c58-73ffcac47649")]
+        [MethodInfo("0x18_dc28-75339fc4")]
         public void Method_0018_dc28()
         {
             ii(0x18_dc28, 2); mov(bx, sp);                              /* mov bx, sp */
@@ -57,6 +57,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_dc85, 2); rcl(ax, 0x1);                             /* rcl ax, 1 */
             ii(0x18_dc87, 1); sti();                                    /* sti */
             ii(0x18_dc88, 2); if(jmpw_abs(cx)) return;                  /* jmp cx */
+            ii(0x18_dc8a, 1); popw(si);                                 /* pop si */
+            ii(0x18_dc8b, 2); xor(ax, ax);                              /* xor ax, ax */
+            ii(0x18_dc8d, 1); retw(); return;                           /* ret */
         }
     }
 }

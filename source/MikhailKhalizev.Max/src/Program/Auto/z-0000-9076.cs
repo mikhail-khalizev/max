@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("177c6e96-bb04-4bcc-b30e-1040a795807d")]
+        [MethodInfo("0x9076-f5cac34c")]
         public void Method_0000_9076()
         {
             ii(0x9076, 4);    enterw(0x4a, 0);                          /* enter 0x4a, 0x0 */
@@ -576,6 +576,66 @@ namespace MikhailKhalizev.Max.Program
             ii(0x95ca, 1);    popw(di);                                 /* pop di */
             ii(0x95cb, 1);    leavew();                                 /* leave */
             ii(0x95cc, 1);    retw(); return;                           /* ret */
+        //  ii(0x95cd, 228);  Недостижимый (и не декодированный) код.
+        //    ii(0x96b1, 4);    enterw(0x4, 0);                           /* enter 0x4, 0x0 */
+        //    ii(0x96b5, 5);    cmp(memb_a16[ds, 0x980], 0x1);            /* cmp byte [0x980], 0x1 */
+        //    ii(0x96ba, 2);    if(jzw(0x96df, 0x23)) goto l_0x96df;      /* jz 0x96df */
+        //    ii(0x96bc, 5);    cmp(memb_a16[ds, 0x980], 0x3);            /* cmp byte [0x980], 0x3 */
+        //    ii(0x96c1, 2);    if(jgew(0x96df, 0x1c)) goto l_0x96df;     /* jge 0x96df */
+        //    ii(0x96c3, 2);    pushw(0);                                 /* push 0x0 */
+        //    ii(0x96c5, 3);    pushw(memw_a16[ss, bp + 0x4]);            /* push word [bp+0x4] */
+        //    ii(0x96c8, 3);    callw(0x7c18, -0x1ab3);                   /* call 0x7c18 */
+        //    ii(0x96cb, 1);    popw(bx);                                 /* pop bx */
+        //    ii(0x96cc, 1);    popw(bx);                                 /* pop bx */
+        //    ii(0x96cd, 3);    mov(memw_a16[ss, bp - 0x4], ax);          /* mov [bp-0x4], ax */
+        //    ii(0x96d0, 3);    mov(memw_a16[ss, bp - 0x2], dx);          /* mov [bp-0x2], dx */
+        //    ii(0x96d3, 2);    or(dx, ax);                               /* or dx, ax */
+        //    ii(0x96d5, 2);    if(jzw(0x96df, 0x8)) goto l_0x96df;       /* jz 0x96df */
+        l_0x96d7:
+            ii(0x96d7, 3);    mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
+            ii(0x96da, 3);    mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */
+            ii(0x96dd, 1);    leavew();                                 /* leave */
+            ii(0x96de, 1);    retw(); return;                           /* ret */
+        l_0x96df:
+            ii(0x96df, 3);    callw(0x6f71, -0x2771);                   /* call 0x6f71 */
+            ii(0x96e2, 3);    pushw(memw_a16[ss, bp + 0x4]);            /* push word [bp+0x4] */
+            ii(0x96e5, 3);    callw(0x970c, 0x24);                      /* call 0x970c */
+            ii(0x96e8, 1);    popw(bx);                                 /* pop bx */
+            ii(0x96e9, 3);    mov(memw_a16[ss, bp - 0x4], ax);          /* mov [bp-0x4], ax */
+            ii(0x96ec, 3);    mov(memw_a16[ss, bp - 0x2], dx);          /* mov [bp-0x2], dx */
+            ii(0x96ef, 3);    callw(0x773a, -0x1fb8);                   /* call 0x773a */
+            ii(0x96f2, 3);    mov(ax, memw_a16[ss, bp - 0x2]);          /* mov ax, [bp-0x2] */
+            ii(0x96f5, 3);    or(ax, memw_a16[ss, bp - 0x4]);           /* or ax, [bp-0x4] */
+            ii(0x96f8, 2);    if(jnzw(0x96d7, -0x23)) goto l_0x96d7;    /* jnz 0x96d7 */
+            ii(0x96fa, 2);    pushw(0);                                 /* push 0x0 */
+            ii(0x96fc, 3);    pushw(memw_a16[ss, bp + 0x4]);            /* push word [bp+0x4] */
+            ii(0x96ff, 3);    callw(0x7c18, -0x1aea);                   /* call 0x7c18 */
+            ii(0x9702, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9703, 1);    popw(bx);                                 /* pop bx */
+            ii(0x9704, 3);    mov(memw_a16[ss, bp - 0x4], ax);          /* mov [bp-0x4], ax */
+            ii(0x9707, 3);    mov(memw_a16[ss, bp - 0x2], dx);          /* mov [bp-0x2], dx */
+            ii(0x970a, 2);    jmpw(0x96d7, -0x35); goto l_0x96d7;       /* jmp 0x96d7 */
+        //    ii(0x970c, 4);    enterw(0x18, 0);                          /* enter 0x18, 0x0 */
+        //    ii(0x9710, 4);    mov(memb_a16[ss, bp - 0xd], 0x48);        /* mov byte [bp-0xd], 0x48 */
+        //    ii(0x9714, 3);    mov(ax, memw_a16[ss, bp + 0x4]);          /* mov ax, [bp+0x4] */
+        //    ii(0x9717, 3);    mov(memw_a16[ss, bp - 0xc], ax);          /* mov [bp-0xc], ax */
+        //    ii(0x971a, 3);    lea(ax, bp - 0xe);                        /* lea ax, [bp-0xe] */
+        //    ii(0x971d, 1);    pushw(ax);                                /* push ax */
+        //    ii(0x971e, 1);    pushw(ax);                                /* push ax */
+        //    ii(0x971f, 3);    callw(0x8480, -0x12a2);                   /* call 0x8480 */
+        //    ii(0x9722, 1);    popw(bx);                                 /* pop bx */
+        //    ii(0x9723, 1);    popw(bx);                                 /* pop bx */
+        //    ii(0x9724, 4);    test(memb_a16[ss, bp - 0x2], 0x1);        /* test byte [bp-0x2], 0x1 */
+        //    ii(0x9728, 2);    if(jzw(0x972f, 0x5)) goto l_0x972f;       /* jz 0x972f */
+        //    ii(0x972a, 2);    sub(ax, ax);                              /* sub ax, ax */
+        //    ii(0x972c, 1);    cwd();                                    /* cwd */
+        //    ii(0x972d, 1);    leavew();                                 /* leave */
+        //    ii(0x972e, 1);    retw(); return;                           /* ret */
+        l_0x972f:
+            ii(0x972f, 3);    mov(ax, memw_a16[ss, bp - 0xe]);          /* mov ax, [bp-0xe] */
+            ii(0x9732, 2);    sub(dx, dx);                              /* sub dx, dx */
+            ii(0x9734, 1);    leavew();                                 /* leave */
+            ii(0x9735, 1);    retw(); return;                           /* ret */
         }
     }
 }

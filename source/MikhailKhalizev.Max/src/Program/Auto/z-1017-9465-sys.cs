@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("a7739b74-7726-4c07-bb4b-d5c97adfd790")]
+        [MethodInfo("0x1017_9465-e257f255")]
         public void /* sys */ Method_1017_9465()
         {
             ii(0x1017_9465, 1); xchg(edx, eax);                         /* xchg edx, eax */

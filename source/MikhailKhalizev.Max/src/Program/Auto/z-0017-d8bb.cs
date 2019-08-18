@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("b0206bff-9bd6-42b2-ab5b-e4d985c3de7d")]
+        [MethodInfo("0x17_d8bb-9d77fc5")]
         public void Method_0017_d8bb()
         {
             ii(0x17_d8bb, 2); if(jaew(0x17_d8c4, 0x7)) goto l_0x17_d8c4; /* jae 0xd8c4 */

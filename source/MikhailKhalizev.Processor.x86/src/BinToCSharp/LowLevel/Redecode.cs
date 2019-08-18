@@ -85,10 +85,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             Parallel.ForEach(
                 methodsWithPath.ToLookup(x => x.MethodInfo.Address),
-                // new ParallelOptions { MaxDegreeOfParallelism = 1 }, // For debug.
+                new ParallelOptions { MaxDegreeOfParallelism = 1 }, // For debug.
                 x =>
                 {
-                    foreach (var (mi, filePath) in x.OrderBy(y => y.MethodInfo.Guid))
+                    foreach (var (mi, filePath) in x.OrderBy(y => y.MethodInfo))
                     {
                         engineCache.TryTake(out var engine);
 
@@ -123,7 +123,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
                             
                             //engine.RemoveAlreadyDecodedFunc(mi.Address);
-                            
+
+                            if (mi.Address == 0x545d)
+                            {
+                                var debug = 0;
+                            }
+
                             engine.DecodeMethod(mi.Address, mi.Address + mi.RawBytes.Length);
 
                             var fileBakPath = filePath + ".bak";

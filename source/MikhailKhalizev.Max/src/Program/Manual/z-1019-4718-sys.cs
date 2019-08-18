@@ -5,9 +5,11 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("02810383-102f-474e-9f06-c0d7dc8f6db3")]
+        [MethodInfo("0x1019_4718-4def7ee9")]
         public void /* sys */ Method_1019_4718()
         {
+            RawProgramMain.DosTimer.Start();
+
             mov(memd_a32[ds, 0x1020_bc5c], 1);
             retd();
 

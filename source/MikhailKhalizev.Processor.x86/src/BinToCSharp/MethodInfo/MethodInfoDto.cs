@@ -11,7 +11,7 @@ using SharpDisasm;
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
     [DebuggerDisplay("Id = {Id}")]
-    public class MethodInfoDto : IEquatable<MethodInfoDto>
+    public class MethodInfoDto : IEquatable<MethodInfoDto>, IComparable<MethodInfoDto>, IComparable
     {
         public static string GenerateId(Address address, ArchitectureMode mode, byte[] raw)
         {
@@ -24,29 +24,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public string Id { get; set; }
 
-        public Guid Guid { get; set; }
-
         public Address CsBase { get; set; }
 
         public bool ShouldSerializeCsBase() => CsBase != 0;
 
-        public Address Address
-        {
-            get => Addresses.FirstOrDefault();
-            set
-            {
-                if (Addresses.Count == 0)
-                    Addresses.Add(value);
-                else if (Addresses.Count == 1)
-                    Addresses[0] = value;
-                else
-                    throw new InvalidOperationException("Multiple addresses associated with function.");
-            }
-        }
-
-        public List<Address> Addresses { get; set; } = new List<Address>(); // TODO Удалить поддержку дублирующих методов. Только хлопоты добавляет. А в реальном человеческом коде дублей нет.
-
-        public bool ShouldSerializeAddresses() => 1 < Addresses.Count;
+        public Address Address { get; set; }
 
         /// <summary>
         /// Разрядность декодируемого кода. 16 или 32 бит.
@@ -54,10 +36,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         public ArchitectureMode Mode { get; set; }
 
         /// <summary>
-        /// Исходный бинарный код функции.
+        /// Исходный бинарный код метода.
         /// </summary>
         public string Raw { get; set; }
-
+        
+        /// <summary>
+        /// Дополнительный код.
+        /// </summary>
         public Dictionary<Address, string> ExtraRaw { get; set; }
 
         [JsonExtensionData]
@@ -110,6 +95,33 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         public override int GetHashCode()
         {
             return (Id != null ? Id.GetHashCode() : 0);
+        }
+
+        #endregion
+        
+        #region IComparable
+
+        /// <inheritdoc />
+        public int CompareTo(MethodInfoDto other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+
+            var addressComparison = Address.CompareTo(other.Address);
+            if (addressComparison != 0) return addressComparison;
+
+            return string.Compare(Id, other.Id, StringComparison.Ordinal);
+        }
+
+        /// <inheritdoc />
+        public int CompareTo(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return 1;
+            if (ReferenceEquals(this, obj)) return 0;
+
+            return obj is MethodInfoDto other
+                ? CompareTo(other)
+                : throw new ArgumentException($"Object must be of type {nameof(MethodInfoDto)}");
         }
 
         #endregion

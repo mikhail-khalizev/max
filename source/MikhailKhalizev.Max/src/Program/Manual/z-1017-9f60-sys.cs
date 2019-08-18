@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("187a8602-24c9-4668-8fdf-3833b24ff597")]
+        [MethodInfo("0x1017_9f60-4aef5b11")]
         public void /* sys */ Method_1017_9f60()
         {
             var chan = RawProgramMain.DosDma.dma_get_channel(5);

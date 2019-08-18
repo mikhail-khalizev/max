@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("45e51443-953f-4f2e-873e-38be7d674d03")]
+        [MethodInfo("0x1016_6046-dcde97c1")]
         public void /* sys */ sys_sqrt()
         {
             ii(0x1016_6046, 2); mov(al, 0x3);                           /* mov al, 0x3 */

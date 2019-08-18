@@ -11,8 +11,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public string Id { get; set; }
 
-        public Guid Guid { get; set; }
-
         [JsonExtensionData]
         public IDictionary<string, JToken> AdditionalData { get; set; }
         

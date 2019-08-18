@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("aacf6f72-4ad1-4b4a-92a4-e4a4d8f00192")]
+        [MethodInfo("0x1016_c65f-76283757")]
         public void /* sys */ sys_exit()
         {
             throw new InvalidOperationException("sys_exit.");

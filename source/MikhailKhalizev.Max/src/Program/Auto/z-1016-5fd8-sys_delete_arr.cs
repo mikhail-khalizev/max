@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("c464f44b-d2d3-4235-8029-4b946c2fdeec")]
+        [MethodInfo("0x1016_5fd8-56566631")]
         public void /* sys */ sys_delete_arr()
         {
             ii(0x1016_5fd8, 5); if(jmpd_func(Definitions.sys_delete, -0x79)) return; /* jmp 0x10165f64 */

@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("4bfa0341-b988-4bb5-bc03-aa44ee83e673")]
+        [MethodInfo("0x1014_179c-a95ecfd4")]
         public void my_strobj_ctor_char_ptr()
         {
             ii(0x1014_179c, 5); pushd(0x24);                            /* push 0x24 */

@@ -579,7 +579,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (mi == null)
                 {
                     mi = new MethodInfoDto();
-                    mi.Guid = Guid.NewGuid();
                     mi.CsBase = CsBase;
                     mi.Address = detectedMethod.Begin;
                     mi.Mode = Mode;
@@ -605,7 +604,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var files = new List<string>();
                 var exList = new List<Exception>();
 
-                foreach (var detectedMethod in NewDetectedMethods.OrderBy(x => x.MethodInfo.Guid))
+                foreach (var detectedMethod in NewDetectedMethods.OrderBy(x => x.MethodInfo))
                 {
                     try
                     {
@@ -638,7 +637,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     uniqueDetectedMethodsByAddress,
                     detectedMethodsWithSameAddress =>
                     {
-                        foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Id))
+                        foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo))
                         {
                             try
                             {
@@ -671,20 +670,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             // Skip empty method.
             if (methodBegin == methodEnd)
                 return null;
-
-
-            // Бывает среди _вновь_ декодированных встречаются абсолютно одинаковые функции. Исключаем эти дубликаты.
-            if (AlreadyDecodedContainsMethodInfo(detectedMethod.MethodInfo))
-            {
-                NonBlockingConsole.WriteLine(
-                    $"Метод '{detectedMethod.Begin}' эквивалентен уже существующему {{{detectedMethod.MethodInfo.Guid}}} по адресу '{detectedMethod.MethodInfo.Address}'.");
-                return null;
-            }
-
-
-            NonBlockingConsole.WriteLine($"Сохранение метода '{methodBegin}' в файл.");
-
-
+            
             var baseFileName = "z-" + methodBegin.ToString(
                 o => o
                     .RemoveHexPrefix()
@@ -714,6 +700,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     break;
                 num++;
             }
+
+            
+            NonBlockingConsole.WriteLine($"Сохранение метода '{methodBegin}' в файл '{Path.GetFileName(filePath)}'.");
+
 
             var output = new StringBuilder();
             WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
@@ -790,7 +780,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 catch (Exception ex)
                 {
                     throw new InvalidOperationException(
-                        $"Instuction address: {cmd.Begin}, Method address: {detectedMethod.MethodInfo.Address}, Method Guid: {{{detectedMethod.MethodInfo.Guid}}}", ex);
+                        $"Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
                 }
 
 

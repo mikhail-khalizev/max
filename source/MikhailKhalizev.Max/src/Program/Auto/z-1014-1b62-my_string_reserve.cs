@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("9e9d048d-61ab-42c2-b6d7-1af07d2874ef")]
+        [MethodInfo("0x1014_1b62-d75937e4")]
         public void my_string_reserve()
         {
             ii(0x1014_1b62, 5); pushd(0x20);                            /* push 0x20 */
