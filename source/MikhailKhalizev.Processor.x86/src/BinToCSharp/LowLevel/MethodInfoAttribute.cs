@@ -4,13 +4,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {
     public class MethodInfoAttribute : Attribute
     {
-        public string _id { get; }
+        public string Id { get; }
 
         public MethodInfoAttribute(string id)
         {
-            _id = id;
+            Id = id;
         }
-
-        public Guid Guid => Guid.Parse(_id);
     }
 }

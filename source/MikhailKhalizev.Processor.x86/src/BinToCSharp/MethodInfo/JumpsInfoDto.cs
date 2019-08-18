@@ -7,8 +7,8 @@ using Newtonsoft.Json.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
-    [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
-    public class JumpsInfoDto
+    [DebuggerDisplay("Id = {Id}")]
+    public class JumpsInfoDto : IEquatable<JumpsInfoDto>
     {
         public string Id { get; set; }
 
@@ -22,5 +22,30 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         [JsonExtensionData]
         public IDictionary<string, JToken> AdditionalData { get; set; }
+
+
+        #region JumpsInfoDto
+
+        /// <inheritdoc />
+        public bool Equals(JumpsInfoDto other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Id == other.Id;
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj) || obj is JumpsInfoDto other && Equals(other);
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return (Id != null ? Id.GetHashCode() : 0);
+        }
+
+        #endregion
     }
 }

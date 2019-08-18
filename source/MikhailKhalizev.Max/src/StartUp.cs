@@ -73,10 +73,15 @@ namespace MikhailKhalizev.Max
 
             AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
 
-            if (args.Contains("--redecode"))
+            var redecodeArgIndex = args.IndexOf("--redecode");
+            if (0 <= redecodeArgIndex)
             {
                 NonBlockingConsole.WriteLine("Start Redecode.");
                 var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
+
+                if (redecodeArgIndex + 1 < args.Length)
+                    redecode.LimitFiles = int.Parse(args[redecodeArgIndex + 1]);
+
                 redecode.Start(GetType().Assembly);
                 return;
             }

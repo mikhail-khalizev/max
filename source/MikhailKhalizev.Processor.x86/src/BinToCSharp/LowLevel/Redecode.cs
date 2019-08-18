@@ -22,6 +22,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public MethodInfoCollection MethodInfoCollection;
         private readonly DefinitionCollection _definitionCollection;
 
+        public int LimitFiles { get; set; } = int.MaxValue;
+
         public Redecode(
             BinToCSharpDto configuration,
             MethodInfoCollection methodInfoCollection,
@@ -40,7 +42,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     bridgeProcessorType => bridgeProcessorType.GetMethods(BindingFlags.Instance | BindingFlags.Public),
                     (bridgeProcessorType, methodInfo) => methodInfo.GetCustomAttribute<MethodInfoAttribute>())
                 .Where(attribute => attribute != null)
-                .Select(attribute => MethodInfoCollection.GetByGuidOrNull(attribute.Guid))
+                .Select(attribute => MethodInfoCollection.GetByIdOrNull(attribute.Id))
                 .Where(methodInfo => methodInfo != null)
                 .ToList();
 
@@ -49,6 +51,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var methodsWithPath = new List<(MethodInfoDto MethodInfo, string Path)>();
             foreach (var filePath in Directory.EnumerateFiles(directory))
             {
+                if (LimitFiles <= methodsWithPath.Count)
+                    break;
+
                 var extension = Path.GetExtension(filePath);
                 if (extension != ".cs")
                     continue;
@@ -63,10 +68,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (endIndex < 0)
                     continue;
 
-                var guidString = text.Substring(startIndex, endIndex - startIndex);
-                var guid = Guid.Parse(guidString);
+                var id = text.Substring(startIndex, endIndex - startIndex);
 
-                var mi = MethodInfoCollection.GetByGuidOrNull(guid);
+                var mi = MethodInfoCollection.GetByIdOrNull(id);
                 if (mi != null)
                     methodsWithPath.Add((mi, filePath));
             }
@@ -74,7 +78,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var policy = Policy
                 .Handle<IOException>()
                 .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(1));
-
+            
             var exList = new List<Exception>();
 
             var engineCache = new ConcurrentBag<Engine>();
@@ -141,7 +145,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         catch (Exception ex)
                         {
                             exList.Add(ex);
-                            NonBlockingConsole.WriteLine($"Ошибка при сохранении метода {{{mi.Guid}}} в файл: {ex.Message.TrimEnd('.')}.");
+                            NonBlockingConsole.WriteLine($"Ошибка при сохранении метода {{{mi.Id}}} в файл: {ex.Message.TrimEnd('.')}.");
                         }
                         finally
                         {

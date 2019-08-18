@@ -10,16 +10,17 @@ using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
-    [DebuggerDisplay("Guid = {Guid}, Address = {Address}")]
-    public class MethodInfoDto
+    [DebuggerDisplay("Id = {Id}")]
+    public class MethodInfoDto : IEquatable<MethodInfoDto>
     {
-        public static string GenerateId(Address address, byte[] raw)
+        public static string GenerateId(Address address, ArchitectureMode mode, byte[] raw)
         {
-            var rawHash = 0;
+            var rawHash = (int)mode;
             for (var i = 0; i < raw.Length; i++)
                 rawHash = (((rawHash << 5) + rawHash) ^ raw[i]);
             return $"{address}-{rawHash:x}";
         }
+
 
         public string Id { get; set; }
 
@@ -42,8 +43,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                     throw new InvalidOperationException("Multiple addresses associated with function.");
             }
         }
-
-        public bool ShouldSerializeAddress() => 1 == Addresses.Count;
 
         public List<Address> Addresses { get; set; } = new List<Address>(); // TODO Удалить поддержку дублирующих методов. Только хлопоты добавляет. А в реальном человеческом коде дублей нет.
 
@@ -79,7 +78,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                     throw new InvalidOperationException("Raw.Length % 2 != 0");
             }
         }
-
         private byte[] _rawBytes;
 
         [JsonIgnore]
@@ -91,20 +89,29 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         [JsonIgnore]
         public bool IgnoreSave { get; set; }
 
+        
+        #region IEquatable
+        
+        /// <inheritdoc />
+        public bool Equals(MethodInfoDto other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Id == other.Id;
+        }
 
-        public static IEqualityComparer<MethodInfoDto> BodyEqualityComparer =>
-            new CustomEqualityComparer<MethodInfoDto>(
-                (x, y) => x.Mode == y.Mode && x.Raw == y.Raw,
-                x => Tuple.Create(x.Mode, x.Raw).GetHashCode());
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj) || obj is MethodInfoDto other && Equals(other);
+        }
 
-        public static IEqualityComparer<MethodInfoDto> GuidEqualityComparer =>
-            new CustomEqualityComparer<MethodInfoDto>(
-                (x, y) => x.Guid == y.Guid,
-                x => x.Guid.GetHashCode());
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return (Id != null ? Id.GetHashCode() : 0);
+        }
 
-        public static IEqualityComparer<MethodInfoDto> AddressAndModeEqualityComparer =>
-            new CustomEqualityComparer<MethodInfoDto>(
-                (x, y) => x.Mode == y.Mode && x.Address == y.Address,
-                x => Tuple.Create(x.Mode, x.Address).GetHashCode());
+        #endregion
     }
 }

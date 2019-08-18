@@ -125,7 +125,7 @@ namespace MikhailKhalizev.Max.Program
                     if (attribute == null)
                         continue;
 
-                    var mi = MethodInfoCollection.GetByGuidOrNull(attribute.Guid);
+                    var mi = MethodInfoCollection.GetByIdOrNull(attribute.Id);
                     if (mi == null)
                         continue;
 
@@ -140,8 +140,7 @@ namespace MikhailKhalizev.Max.Program
                     fi.MethodInfo = mi;
                     fi.Action = (Action)methodInfo.CreateDelegate(typeof(Action), instance);
 
-                    foreach (var address in mi.Addresses)
-                        funcs_by_pc.Add(address, fi);
+                    funcs_by_pc.Add(mi.Address, fi);
                 }
             }
         }
@@ -289,14 +288,6 @@ namespace MikhailKhalizev.Max.Program
                     return;
                 }
 
-                info = find_func_from_known_and_remember_it(fullAddress);
-                if (info != null)
-                {
-                    methodInfo = info.MethodInfo;
-                    method = info.Action;
-                    return;
-                }
-
                 // Всё-таки декодируем.
                 var files = DecodeCurrentMethod();
 
@@ -391,42 +382,6 @@ namespace MikhailKhalizev.Max.Program
 
                 if (Implementation.Memory.Equals(fullAddress, info.MethodInfo.RawBytes))
                     return info;
-            }
-
-            return null;
-        }
-
-        private MyMethodInfo find_func_from_known_and_remember_it(Address fullAddress)
-        {
-            // Попробуем найти её среди известных.
-
-            var infos = funcs_by_pc
-                .SelectMany(x => x.Value)
-                .Where(
-                    info =>
-                    {
-                        var code = info.MethodInfo.RawBytes;
-                        if (code.Length == 0)
-                            return false;
-                        if ((int)info.MethodInfo.Mode != (cs.db ? 32 : 16))
-                            return false;
-                        return true;
-                    })
-                .OrderByDescending(x => x.MethodInfo.RawBytes.Length);
-
-            foreach (var info in infos)
-            {
-                if (!Implementation.Memory.Equals(fullAddress, info.MethodInfo.RawBytes))
-                    continue;
-
-                // Всё хорошо. Запомним её, а затем сохраним в файл, чтоб в следующий раз не пришлось искать.
-
-                funcs_by_pc.Add(fullAddress, info);
-
-                info.MethodInfo.Addresses.Add(fullAddress);
-                MethodInfoCollection.Save();
-
-                return info;
             }
 
             return null;

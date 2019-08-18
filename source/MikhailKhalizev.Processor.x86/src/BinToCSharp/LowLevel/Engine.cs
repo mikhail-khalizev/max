@@ -116,8 +116,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public void AddAlreadyDecodedFunc(MethodInfoDto model)
         {
-            foreach (var address in model.Addresses.Take(1))
-                AlreadyDecodedMethods.Add(address, model);
+            AlreadyDecodedMethods.Add(model.Address, model);
         }
 
         public void RemoveAlreadyDecodedFunc(Address fullAddress)
@@ -149,8 +148,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public bool AddToNewDetectedMethods(Address address)
         {
+            if (SuppressDecode.Contains(address, false))
+                return false;
+
             if (HaveAlreadyDecodedMethodStartedWith(address))
                 return false;
+
             return NewDetectedMethods.Add(new DetectedMethod(address));
         }
 
@@ -581,7 +584,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     mi.Address = detectedMethod.Begin;
                     mi.Mode = Mode;
                     mi.RawBytes = detectedMethod.RawBytes;
-                    mi.Id = MethodInfoDto.GenerateId(mi.Address, mi.RawBytes);
+                    mi.Id = MethodInfoDto.GenerateId(mi.Address, mi.Mode, mi.RawBytes);
                     MethodInfoCollection.Add(mi);
                 }
 
@@ -629,16 +632,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 var files = new ConcurrentBag<string>();
                 var exList = new ConcurrentBag<Exception>();
 
-                var uniqueDetectedMethodsByAddress = NewDetectedMethods
-                    .ToLookup(x => x.MethodInfo)
-                    .Select(y => y.OrderBy(x => x.MethodInfo.Addresses.IndexOf(x.Begin)).First())
-                    .ToLookup(x => x.MethodInfo.Address);
+                var uniqueDetectedMethodsByAddress = NewDetectedMethods.ToLookup(x => x.MethodInfo.Address);
 
                 Parallel.ForEach(
                     uniqueDetectedMethodsByAddress,
                     detectedMethodsWithSameAddress =>
                     {
-                        foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Guid))
+                        foreach (var detectedMethod in detectedMethodsWithSameAddress.OrderBy(x => x.MethodInfo.Id))
                         {
                             try
                             {
@@ -747,7 +747,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine("{");
             output.AppendLine($"    public partial class {Configuration.RawProgramClassName}");
             output.AppendLine("    {");
-            output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Guid}\")]");
+            output.AppendLine($"        [MethodInfo(\"{detectedMethod.MethodInfo.Id}\")]");
             output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_v" + fileNum : "")}()");
             output.AppendLine("        {");
 
