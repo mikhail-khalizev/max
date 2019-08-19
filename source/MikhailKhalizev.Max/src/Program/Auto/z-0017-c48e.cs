@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_c552, 3); callw(0x17_9235, -0x3320);                /* call 0x9235 */
             ii(0x17_c555, 3); add(sp, 0xc);                             /* add sp, 0xc */
             ii(0x17_c558, 3); jmpw(0x17_c4cc, -0x8f); goto l_0x17_c4cc; /* jmp 0xc4cc */
-        //    ii(0x17_c55b, 1); nop();                                    /* nop */
+        //  ii(0x17_c55b, 1); Недостижимый код.
         l_0x17_c55c:
             ii(0x17_c55c, 1); popw(ds);                                 /* pop ds */
             ii(0x17_c55d, 1); leavew();                                 /* leave */

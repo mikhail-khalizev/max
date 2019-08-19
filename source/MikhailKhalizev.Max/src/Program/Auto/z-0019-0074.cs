@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_00de, 5); lea(ecx, 0xc7a);                          /* lea ecx, [0xc7a] */
             ii(0x19_00e3, 1); pushw(cx);                                /* push cx */
             ii(0x19_00e4, 2); jmpw(0x19_0104, 0x1e); goto l_0x19_0104;  /* jmp 0x104 */
-        //    ii(0x19_00e6, 2); xchg(bx, bx);                             /* xchg bx, bx */
+        //  ii(0x19_00e6, 2); Недостижимый код.
         l_0x19_00e8:
             ii(0x19_00e8, 2); mov(cx, ds);                              /* mov cx, ds */
             ii(0x19_00ea, 2); pushd(ecx);                               /* push ecx */
@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0104, 2); pushd(edx);                               /* push edx */
             ii(0x19_0106, 2); pushd(eax);                               /* push eax */
             ii(0x19_0108, 2); retfd(); return;                          /* o32 retf */
-        //  ii(0x19_010a, 22); Недостижимый (и не декодированный) код.
+        //  ii(0x19_010a, 22); Недостижимый код.
         l_0x19_0120:
             ii(0x19_0120, 1); popw(ds);                                 /* pop ds */
             ii(0x19_0121, 1); popw(di);                                 /* pop di */

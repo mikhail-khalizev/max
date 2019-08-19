@@ -787,7 +787,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_89a2, 8); cmp(memw_a32[ss, ebp - 0xa4], 0xb);     /* cmp word [ebp-0xa4], 0xb */
             ii(0x100f_89aa, 6); if(jzd(0x100f_88d8, -0xd8)) goto l_0x100f_88d8; /* jz 0x100f88d8 */
             ii(0x100f_89b0, 2); jmpd(0x100f_8972, -0x40); goto l_0x100f_8972; /* jmp 0x100f8972 */
-        //    ii(0x100f_89b2, 2); jmpd(0x100f_8972, -0x42); goto l_0x100f_8972; /* jmp 0x100f8972 */
+        //  ii(0x100f_89b2, 2); Недостижимый код.
         l_0x100f_89b4:
             ii(0x100f_89b4, 8); cmp(memw_a32[ss, ebp - 0xa4], 0x3);     /* cmp word [ebp-0xa4], 0x3 */
             ii(0x100f_89bc, 6); if(jzd(0x100f_8820, -0x1a2)) goto l_0x100f_8820; /* jz 0x100f8820 */

@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7628, 2); if(jgw(0x17_7630, 0x6)) goto l_0x17_7630; /* jg 0x7630 */
             ii(0x17_762a, 3); inc(memw_a16[ss, bp + 0x6]);              /* inc word [bp+0x6] */
             ii(0x17_762d, 2); jmpw(0x17_75fd, -0x32); goto l_0x17_75fd; /* jmp 0x75fd */
-        //    ii(0x17_762f, 1); nop();                                    /* nop */
+        //  ii(0x17_762f, 1); Недостижимый код.
         l_0x17_7630:
             ii(0x17_7630, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x17_7633, 4); mov(memb_a16[es, bx], 0);                 /* mov byte [es:bx], 0x0 */

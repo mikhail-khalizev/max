@@ -164,7 +164,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_2b2e, 2); or(al, al);                               /* or al, al */
             ii(0x19_2b30, 2); if(jnzw(0x19_2b35, 0x3)) goto l_0x19_2b35; /* jnz 0x2b35 */
             ii(0x19_2b32, 2); jmpw(0x19_2bb2, 0x7e); goto l_0x19_2bb2;  /* jmp 0x2bb2 */
-        //    ii(0x19_2b34, 1); nop();                                    /* nop */
+        //  ii(0x19_2b34, 1); Недостижимый код.
         l_0x19_2b35:
             ii(0x19_2b35, 3); mov(memw_a16[ss, bx], di);                /* mov [ss:bx], di */
             ii(0x19_2b38, 4); mov(memw_a16[ss, bx + 0x2], ss);          /* mov [ss:bx+0x2], ss */

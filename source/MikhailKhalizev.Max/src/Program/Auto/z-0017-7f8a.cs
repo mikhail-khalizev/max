@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_800a, 1); popw(di);                                 /* pop di */
             ii(0x17_800b, 1); leavew();                                 /* leave */
             ii(0x17_800c, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_800d, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_800d, 1); Недостижимый код.
         l_0x17_800e:
             ii(0x17_800e, 1); nop();                                    /* nop */
             ii(0x17_800f, 1); pushw(cs);                                /* push cs */

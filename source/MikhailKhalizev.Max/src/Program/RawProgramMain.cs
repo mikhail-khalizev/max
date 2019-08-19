@@ -390,10 +390,6 @@ namespace MikhailKhalizev.Max.Program
 
         public static void ConfigureEngine(Engine engine)
         {
-            engine.AddMethodInfoJumpsToDecode =
-                false; // Код активно загружается в процессе работы, поэтому преждевременное декодирование приводит к ошибкам.
-                // 32 <= Implementation.CSharpEmulateMode && cs.Descriptor.Base == 0; // Flat 32bit+ mode.
-
             // Аргументы следующим методам установлены опытным путём.
 
             engine.SuppressDecode.Add(0x1030_0000, 0);

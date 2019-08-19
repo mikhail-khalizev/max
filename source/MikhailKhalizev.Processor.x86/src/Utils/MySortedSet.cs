@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -42,9 +43,12 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public bool Remove(T item) => _set.Remove(item);
 
+        public int RemoveWhere(Predicate<T> match) => _set.RemoveWhere(match);
+
         public int Count => _set.Count;
 
         public bool Contains(T item) => _set.Contains(item);
+
 
         public T FirstGreaterOrDefault(T value)
         {
@@ -60,6 +64,36 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 _comparer.Reset();
             }
         }
+        
+        public T FirstGreaterOrDefault(T value, T @default)
+        {
+            var v = FirstGreaterOrDefault(value);
+            return EqualityComparer<T>.Default.Equals(v, default) ? @default : v;
+        }
+
+        public IEnumerable<T> GreaterThat(T value)
+        {
+            var i = value;
+            while (true)
+            {
+                _comparer.SearchNearest = true;
+                _comparer.SearchNearestGreater = true;
+                try
+                {
+                    _set.TryGetValue(i, out var dummy);
+                    if (!_comparer.NearestFollowingSet)
+                        yield break;
+
+                    i = _comparer.NearestFollowing;
+                    yield return i;
+                }
+                finally
+                {
+                    _comparer.Reset();
+                }
+            }
+        }
+
 
         // GreaterOrEqual
         public T FirstNotLessOrDefault(T value)
@@ -143,8 +177,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
             public T NearestPreceeding;
             public T NearestFollowing;
             
-            private bool NearestPreceedingSet;
-            private bool NearestFollowingSet;
+            public bool NearestPreceedingSet;
+            public bool NearestFollowingSet;
 
 
             public MyComparer()

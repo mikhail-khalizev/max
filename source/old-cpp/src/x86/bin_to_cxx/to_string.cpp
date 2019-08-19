@@ -254,7 +254,7 @@ void bin_to_cxx::write_cxx_func_to_stream(std::ostream & output, decltype(new_de
             break;
 
 
-        if (last_instr_end != cmd.begin) // Обнаружен не декодированный код.
+        if (last_instr_end != cmd.begin) // Обнаружен недекодированный код.
         {
             if (last_instr_jmp_or_ret == false)
                 throw exo::exception::not_implemented(); // Случай когда перед недостижимым кодом нет ret или jmp. Пока достаточно генерировать исключение.

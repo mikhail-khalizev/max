@@ -275,35 +275,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_571a, 3); mov(eax, memd_a32[ss, ebp - 0x24]);     /* mov eax, [ebp-0x24] */
             ii(0x1008_571d, 3); mov(memd_a32[ss, ebp - 0x68], eax);     /* mov [ebp-0x68], eax */
             ii(0x1008_5720, 2); jmpd(0x1008_5760, 0x3e); goto l_0x1008_5760; /* jmp 0x10085760 */
-        //    ii(0x1008_5722, 3); mov(eax, memd_a32[ss, ebp - 0x28]);     /* mov eax, [ebp-0x28] */
-        //    ii(0x1008_5725, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
-        //    ii(0x1008_5728, 2); jmpd(0x1008_577d, 0x53); goto l_0x1008_577d; /* jmp 0x1008577d */
-        //    ii(0x1008_572a, 3); mov(eax, memd_a32[ss, ebp - 0x28]);     /* mov eax, [ebp-0x28] */
-        //    ii(0x1008_572d, 2); add(eax, eax);                          /* add eax, eax */
-        //    ii(0x1008_572f, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
-        //    ii(0x1008_5732, 2); jmpd(0x1008_577d, 0x49); goto l_0x1008_577d; /* jmp 0x1008577d */
-        //    ii(0x1008_5734, 3); mov(eax, memd_a32[ss, ebp - 0x28]);     /* mov eax, [ebp-0x28] */
-        //    ii(0x1008_5737, 2); add(eax, eax);                          /* add eax, eax */
-        //    ii(0x1008_5739, 1); inc(eax);                               /* inc eax */
-        //    ii(0x1008_573a, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
-        //    ii(0x1008_573d, 2); jmpd(0x1008_577d, 0x3e); goto l_0x1008_577d; /* jmp 0x1008577d */
-        //    ii(0x1008_573f, 3); mov(eax, memd_a32[ss, ebp - 0x28]);     /* mov eax, [ebp-0x28] */
-        //    ii(0x1008_5742, 1); inc(eax);                               /* inc eax */
-        //    ii(0x1008_5743, 3); mov(memd_a32[ss, ebp - 0x2c], eax);     /* mov [ebp-0x2c], eax */
-        //    ii(0x1008_5746, 2); jmpd(0x1008_577d, 0x35); goto l_0x1008_577d; /* jmp 0x1008577d */
+        //  ii(0x1008_5722, 38); Недостижимый код.
         l_0x1008_5748:
             ii(0x1008_5748, 2); jmpd(0x1008_577d, 0x33); goto l_0x1008_577d; /* jmp 0x1008577d */
-        //    ii(0x1008_574a, 2); mov(eax, eax);                          /* mov eax, eax */
-        //    ii(0x1008_574c, 3); and(dl, memb_a32[ds, edi + 0x8]);       /* and dl, [edi+0x8] */
-        //    ii(0x1008_574f, 2); adc(memb_a32[ds, edx], ch);             /* adc [edx], ch */
-        //    ii(0x1008_5751, 1); pushd(edi);                             /* push edi */
-        //    ii(0x1008_5752, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //    ii(0x1008_5754, 3); sub(dl, memb_a32[ds, edi + 0x8]);       /* sub dl, [edi+0x8] */
-        //    ii(0x1008_5757, 3); adc(memb_a32[ds, edi + edx * 2], dh);   /* adc [edi+edx*2], dh */
-        //    ii(0x1008_575a, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //    ii(0x1008_575c, 1); aas();                                  /* aas */
-        //    ii(0x1008_575d, 1); pushd(edi);                             /* push edi */
-        //    ii(0x1008_575e, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
+        //  ii(0x1008_574a, 22); Недостижимый код.
         l_0x1008_5760:
             ii(0x1008_5760, 3); mov(eax, memd_a32[ss, ebp - 0x68]);     /* mov eax, [ebp-0x68] */
             ii(0x1008_5763, 3); mov(memd_a32[ss, ebp - 0x6c], eax);     /* mov [ebp-0x6c], eax */

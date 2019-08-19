@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x18_d672-e0e865cb")]
+        [MethodInfo("0x18_d672-2f65ab06")]
         public void Method_0018_d672()
         {
             ii(0x18_d672, 4); enterw(0x14, 0);                          /* enter 0x14, 0x0 */
@@ -186,46 +186,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_d82f, 3); jmpw(0x18_d698, -0x19a); goto l_0x18_d698; /* jmp 0xd698 */
         l_0x18_d832:
             ii(0x18_d832, 3); jmpw(0x18_d6bd, -0x178); goto l_0x18_d6bd; /* jmp 0xd6bd */
-        //    ii(0x18_d835, 4); enterw(0x4, 0);                           /* enter 0x4, 0x0 */
-        //    ii(0x18_d839, 1); pushw(si);                                /* push si */
-        //    ii(0x18_d83a, 3); callw(0x18_f39c, 0x1b5f);                 /* call 0xf39c */
-        //    ii(0x18_d83d, 2); or(ax, ax);                               /* or ax, ax */
-        //    ii(0x18_d83f, 2); if(jzw(0x18_d847, 0x6)) goto l_0x18_d847; /* jz 0xd847 */
-        //    ii(0x18_d841, 2); sub(ax, ax);                              /* sub ax, ax */
-        //    ii(0x18_d843, 1); cwd();                                    /* cwd */
-        //    ii(0x18_d844, 1); popw(si);                                 /* pop si */
-        //    ii(0x18_d845, 1); leavew();                                 /* leave */
-        //    ii(0x18_d846, 1); retw(); return;                           /* ret */
-        l_0x18_d847:
-            ii(0x18_d847, 5); cmp(memw_a16[ds, 0xadc], 0);              /* cmp word [0xadc], 0x0 */
-            ii(0x18_d84c, 2); if(jzw(0x18_d85e, 0x10)) goto l_0x18_d85e; /* jz 0xd85e */
-            ii(0x18_d84e, 3); callw(0x18_d945, 0xf4);                   /* call 0xd945 */
-            ii(0x18_d851, 3); mov(memw_a16[ss, bp - 0x2], dx);          /* mov [bp-0x2], dx */
-            ii(0x18_d854, 2); or(dx, ax);                               /* or dx, ax */
-            ii(0x18_d856, 2); if(jzw(0x18_d85e, 0x6)) goto l_0x18_d85e; /* jz 0xd85e */
-            ii(0x18_d858, 3); mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */
-            ii(0x18_d85b, 1); popw(si);                                 /* pop si */
-            ii(0x18_d85c, 1); leavew();                                 /* leave */
-            ii(0x18_d85d, 1); retw(); return;                           /* ret */
-        l_0x18_d85e:
-            ii(0x18_d85e, 4); pushw(memw_a16[ds, 0xae]);                /* push word [0xae] */
-            ii(0x18_d862, 4); pushw(memw_a16[ds, 0xac]);                /* push word [0xac] */
-            ii(0x18_d866, 3); callw(0x18_dbd7, 0x36e);                  /* call 0xdbd7 */
-            ii(0x18_d869, 1); popw(bx);                                 /* pop bx */
-            ii(0x18_d86a, 1); popw(bx);                                 /* pop bx */
-            ii(0x18_d86b, 4); mov(cx, memw_a16[ds, 0xece]);             /* mov cx, [0xece] */
-            ii(0x18_d86f, 3); shr(cx, 0x6);                             /* shr cx, 0x6 */
-            ii(0x18_d872, 2); mov(bx, ax);                              /* mov bx, ax */
-            ii(0x18_d874, 2); mov(si, dx);                              /* mov si, dx */
-            ii(0x18_d876, 2); mov(dx, cx);                              /* mov dx, cx */
-            ii(0x18_d878, 4); mov(cx, memw_a16[ds, 0xece]);             /* mov cx, [0xece] */
-            ii(0x18_d87c, 3); shl(cx, 0xa);                             /* shl cx, 0xa */
-            ii(0x18_d87f, 2); mov(ax, cx);                              /* mov ax, cx */
-            ii(0x18_d881, 2); sub(ax, bx);                              /* sub ax, bx */
-            ii(0x18_d883, 2); sbb(dx, si);                              /* sbb dx, si */
-            ii(0x18_d885, 1); popw(si);                                 /* pop si */
-            ii(0x18_d886, 1); leavew();                                 /* leave */
-            ii(0x18_d887, 1); retw(); return;                           /* ret */
         }
     }
 }

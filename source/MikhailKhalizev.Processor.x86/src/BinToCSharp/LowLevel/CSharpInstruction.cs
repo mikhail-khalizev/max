@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using SharpDisasm.Udis86;
@@ -765,5 +766,71 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public static IComparer<CSharpInstruction> BeginComparer =>
             new CustomComparer<CSharpInstruction>(
                 (x, y) => x.Begin.CompareTo(y.Begin));
+
+
+        public static IEnumerable<CSharpInstruction> DecodeCode(
+            IMemory memory,
+            Address address,
+            ArchitectureMode mode,
+            DefinitionCollection definitionCollection)
+        {
+            var u = new ud();
+            var ac = new AssemblyCode(memory, u);
+            udis86.ud_init(ref u);
+            udis86.ud_set_pc(ref u, address);
+            udis86.ud_set_mode(ref u, (byte)mode);
+            udis86.ud_set_vendor(ref u, (int)Vendor.Any);
+            udis86.ud_set_syntax(ref u, new syn_intel().ud_translate_intel);
+            udis86.ud_set_input_buffer(ref u, ac);
+
+            u.inp_buf_index = (int)address;
+
+            while (true)
+            {
+                var length = udis86.ud_disassemble(ref u);
+                if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
+                    break; // throw new InvalidOperationException("Преждевременное завершение функции.");
+
+                var cmd = new CSharpInstruction(definitionCollection, u);
+                yield return cmd;
+            }
+        }
+
+        
+        private class AssemblyCode : IAssemblyCode
+        {
+            private readonly IMemory _memory;
+            private readonly ud _ud;
+
+            public AssemblyCode(IMemory memory, ud ud)
+            {
+                _memory = memory;
+                _ud = ud;
+            }
+
+            /// <inheritdoc />
+            public byte this[int index]
+            {
+                get
+                {
+                    // @todo Проверять suppress_decode.
+                    try
+                    {
+                        return _memory.GetMinSize(index, 1)[0];
+                    }
+                    catch (Exception)
+                    {
+                        _ud.inp_end = 1;
+                        _ud.error = 1;
+                        _ud.errorMessage = "byte expected, eoi received";
+                        return 0;
+                    }
+                }
+            }
+
+            /// <inheritdoc />
+            public int Length => int.MaxValue;
+        }
+
     }
 }

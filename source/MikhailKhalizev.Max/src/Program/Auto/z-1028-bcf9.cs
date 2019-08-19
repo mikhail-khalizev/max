@@ -48,9 +48,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_bd5b:
             ii(0x1028_bd5b, 1); stosb_a32();                            /* stosb */
             ii(0x1028_bd5c, 2); jmpd(0x1028_bd6e, 0x10); goto l_0x1028_bd6e; /* jmp 0x1028bd6e */
-        //    ii(0x1028_bd5e, 1); nop();                                  /* nop */
-        //    ii(0x1028_bd5f, 1); nop();                                  /* nop */
-        //    ii(0x1028_bd60, 1); nop();                                  /* nop */
+        //  ii(0x1028_bd5e, 3); Недостижимый код.
         l_0x1028_bd61:
             ii(0x1028_bd61, 2); mov(al, 0xf);                           /* mov al, 0xf */
             ii(0x1028_bd63, 6); test(memw_a32[ds, esi + 0x30], 0x400);  /* test word [esi+0x30], 0x400 */
@@ -93,9 +91,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_bdc5:
             ii(0x1028_bdc5, 1); stosb_a32();                            /* stosb */
             ii(0x1028_bdc6, 2); jmpd(0x1028_bdd8, 0x10); goto l_0x1028_bdd8; /* jmp 0x1028bdd8 */
-        //    ii(0x1028_bdc8, 1); nop();                                  /* nop */
-        //    ii(0x1028_bdc9, 1); nop();                                  /* nop */
-        //    ii(0x1028_bdca, 1); nop();                                  /* nop */
+        //  ii(0x1028_bdc8, 3); Недостижимый код.
         l_0x1028_bdcb:
             ii(0x1028_bdcb, 2); mov(al, 0x10);                          /* mov al, 0x10 */
             ii(0x1028_bdcd, 6); test(memw_a32[ds, esi + 0x30], 0x400);  /* test word [esi+0x30], 0x400 */
@@ -140,9 +136,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_be31:
             ii(0x1028_be31, 1); stosb_a32();                            /* stosb */
             ii(0x1028_be32, 2); jmpd(0x1028_be44, 0x10); goto l_0x1028_be44; /* jmp 0x1028be44 */
-        //    ii(0x1028_be34, 1); nop();                                  /* nop */
-        //    ii(0x1028_be35, 1); nop();                                  /* nop */
-        //    ii(0x1028_be36, 1); nop();                                  /* nop */
+        //  ii(0x1028_be34, 3); Недостижимый код.
         l_0x1028_be37:
             ii(0x1028_be37, 2); mov(al, 0x6);                           /* mov al, 0x6 */
             ii(0x1028_be39, 6); test(memw_a32[ds, esi + 0x30], 0x400);  /* test word [esi+0x30], 0x400 */
@@ -202,9 +196,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_bec5:
             ii(0x1028_bec5, 1); stosb_a32();                            /* stosb */
             ii(0x1028_bec6, 2); jmpd(0x1028_bed8, 0x10); goto l_0x1028_bed8; /* jmp 0x1028bed8 */
-        //    ii(0x1028_bec8, 1); nop();                                  /* nop */
-        //    ii(0x1028_bec9, 1); nop();                                  /* nop */
-        //    ii(0x1028_beca, 1); nop();                                  /* nop */
+        //  ii(0x1028_bec8, 3); Недостижимый код.
         l_0x1028_becb:
             ii(0x1028_becb, 2); mov(al, 0xf);                           /* mov al, 0xf */
             ii(0x1028_becd, 6); test(memw_a32[ds, esi + 0x30], 0x400);  /* test word [esi+0x30], 0x400 */
@@ -247,9 +239,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_bf2f:
             ii(0x1028_bf2f, 1); stosb_a32();                            /* stosb */
             ii(0x1028_bf30, 2); jmpd(0x1028_bf42, 0x10); goto l_0x1028_bf42; /* jmp 0x1028bf42 */
-        //    ii(0x1028_bf32, 1); nop();                                  /* nop */
-        //    ii(0x1028_bf33, 1); nop();                                  /* nop */
-        //    ii(0x1028_bf34, 1); nop();                                  /* nop */
+        //  ii(0x1028_bf32, 3); Недостижимый код.
         l_0x1028_bf35:
             ii(0x1028_bf35, 2); mov(al, 0x10);                          /* mov al, 0x10 */
             ii(0x1028_bf37, 6); test(memw_a32[ds, esi + 0x30], 0x400);  /* test word [esi+0x30], 0x400 */
@@ -294,9 +284,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_bf9b:
             ii(0x1028_bf9b, 1); stosb_a32();                            /* stosb */
             ii(0x1028_bf9c, 2); jmpd(0x1028_bfae, 0x10); goto l_0x1028_bfae; /* jmp 0x1028bfae */
-        //    ii(0x1028_bf9e, 1); nop();                                  /* nop */
-        //    ii(0x1028_bf9f, 1); nop();                                  /* nop */
-        //    ii(0x1028_bfa0, 1); nop();                                  /* nop */
+        //  ii(0x1028_bf9e, 3); Недостижимый код.
         l_0x1028_bfa1:
             ii(0x1028_bfa1, 2); mov(al, 0x6);                           /* mov al, 0x6 */
             ii(0x1028_bfa3, 6); test(memw_a32[ds, esi + 0x30], 0x400);  /* test word [esi+0x30], 0x400 */

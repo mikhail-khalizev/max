@@ -128,7 +128,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_efbc, 4); movzx(esp, di);                           /* movzx esp, di */
             ii(0x18_efc0, 1); popw(di);                                 /* pop di */
             ii(0x18_efc1, 2); retfd(); return;                          /* o32 retf */
-        //  ii(0x18_efc3, 9); Недостижимый (и не декодированный) код.
+        //  ii(0x18_efc3, 9); Недостижимый код.
         l_0x18_efcc:
             ii(0x18_efcc, 6); sub(memw_a16[ds, 0xc16], 0x400);          /* sub word [0xc16], 0x400 */
         l_0x18_efd2:

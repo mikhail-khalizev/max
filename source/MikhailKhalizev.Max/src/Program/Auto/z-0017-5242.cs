@@ -123,7 +123,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_5346, 1); popw(ds);                                 /* pop ds */
             ii(0x17_5347, 1); leavew();                                 /* leave */
             ii(0x17_5348, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_5349, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_5349, 1); Недостижимый код.
         l_0x17_534a:
             ii(0x17_534a, 1); pushw(ds);                                /* push ds */
             ii(0x17_534b, 3); pushw(0x2f6);                             /* push 0x2f6 */
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_536e, 1); popw(ds);                                 /* pop ds */
             ii(0x17_536f, 1); leavew();                                 /* leave */
             ii(0x17_5370, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_5371, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_5371, 1); Недостижимый код.
         l_0x17_5372:
             ii(0x17_5372, 1); pushw(ds);                                /* push ds */
             ii(0x17_5373, 3); pushw(0x306);                             /* push 0x306 */
@@ -161,7 +161,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_5396, 1); popw(ds);                                 /* pop ds */
             ii(0x17_5397, 1); leavew();                                 /* leave */
             ii(0x17_5398, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_5399, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_5399, 1); Недостижимый код.
         l_0x17_539a:
             ii(0x17_539a, 1); pushw(ds);                                /* push ds */
             ii(0x17_539b, 3); pushw(0x314);                             /* push 0x314 */
@@ -180,7 +180,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_53be, 1); popw(ds);                                 /* pop ds */
             ii(0x17_53bf, 1); leavew();                                 /* leave */
             ii(0x17_53c0, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_53c1, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_53c1, 1); Недостижимый код.
         l_0x17_53c2:
             ii(0x17_53c2, 1); pushw(ds);                                /* push ds */
             ii(0x17_53c3, 3); pushw(0x31c);                             /* push 0x31c */

@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_80f8, 1); popw(ds);                                 /* pop ds */
             ii(0x17_80f9, 1); leavew();                                 /* leave */
             ii(0x17_80fa, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_80fb, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_80fb, 1); Недостижимый код.
         l_0x17_80fc:
             ii(0x17_80fc, 2); mov(ah, 0x51);                            /* mov ah, 0x51 */
             ii(0x17_80fe, 2); @int(0x21);                               /* int 0x21 */

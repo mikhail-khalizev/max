@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_b2c6, 2); jmpd(0x1010_b300, 0x38); goto l_0x1010_b300; /* jmp 0x1010b300 */
         l_0x1010_b2c8:
             ii(0x1010_b2c8, 2); jmpd(0x1010_b300, 0x36); goto l_0x1010_b300; /* jmp 0x1010b300 */
-        //    ii(0x1010_b2ca, 2); mov(eax, eax);                          /* mov eax, eax */
+        //  ii(0x1010_b2ca, 2); Недостижимый код.
         //    ii(0x1010_b2cc, 24); /* Служебная область с абсолютными адресами переходов. {0x1010_b262, 0x1010_b275, 0x1010_b288, 0x1010_b298, 0x1010_b2a8, 0x1010_b2b8}. */
         l_0x1010_b2e4:
             ii(0x1010_b2e4, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */

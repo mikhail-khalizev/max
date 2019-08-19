@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x7c4f-7dfcc72a")]
+        [MethodInfo("0x7c4f-fabebabb")]
         public void Method_0000_7c4f()
         {
             ii(0x7c4f, 2);    mov(bx, sp);                              /* mov bx, sp */
@@ -71,10 +71,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7cce, 2);    sub(cx, di);                              /* sub cx, di */
             ii(0x7cd0, 2);    shr(cx, 0x1);                             /* shr cx, 1 */
             ii(0x7cd2, 2);    jmpw(0x7c92, -0x42); goto l_0x7c92;       /* jmp 0x7c92 */
-        //    ii(0x7cd4, 3);    mov(ax, 0x10ca);                          /* mov ax, 0x10ca */
-        //    ii(0x7cd7, 3);    sub(ax, 0xb33);                           /* sub ax, 0xb33 */
-        //    ii(0x7cda, 3);    shl(ax, 0x4);                             /* shl ax, 0x4 */
-        //    ii(0x7cdd, 1);    retw(); return;                           /* ret */
         }
     }
 }

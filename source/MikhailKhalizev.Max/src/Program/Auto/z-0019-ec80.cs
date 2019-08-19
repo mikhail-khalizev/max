@@ -290,7 +290,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_ef78, 6); mov(memw_a16[es, bx + 0x2a], 0);          /* mov word [es:bx+0x2a], 0x0 */
             ii(0x19_ef7e, 3); mov(ax, 0);                               /* mov ax, 0x0 */
             ii(0x19_ef81, 3); jmpw(0x19_efd0, 0x4c); goto l_0x19_efd0;  /* jmp 0xefd0 */
-        //    ii(0x19_ef84, 3); jmpw(0x19_efca, 0x43); goto l_0x19_efca;  /* jmp 0xefca */
+        //  ii(0x19_ef84, 3); Недостижимый код.
         l_0x19_ef87:
             ii(0x19_ef87, 3); sub(ax, 0x9);                             /* sub ax, 0x9 */
             ii(0x19_ef8a, 3); cmp(ax, 0x17);                            /* cmp ax, 0x17 */

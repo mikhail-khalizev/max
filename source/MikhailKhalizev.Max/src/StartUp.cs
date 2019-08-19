@@ -67,29 +67,36 @@ namespace MikhailKhalizev.Max
 
             // Start.
             var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
-            var definitionCollection = new DefinitionCollection();
-            definitionCollection.AddDefinitionsClass<Definitions>();
-            definitionCollection.AddDefinitionsClass<StringDefinitions>();
-
-            AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
-
-            var redecodeArgIndex = args.IndexOf("--redecode");
-            if (0 <= redecodeArgIndex)
+            try
             {
-                NonBlockingConsole.WriteLine("Start Redecode.");
-                var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
+                var definitionCollection = new DefinitionCollection();
+                definitionCollection.AddDefinitionsClass<Definitions>();
+                definitionCollection.AddDefinitionsClass<StringDefinitions>();
 
-                if (redecodeArgIndex + 1 < args.Length)
-                    redecode.LimitFiles = int.Parse(args[redecodeArgIndex + 1]);
+                AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
 
-                redecode.Start(GetType().Assembly);
-                return;
+                var redecodeArgIndex = args.IndexOf("--redecode");
+                if (0 <= redecodeArgIndex)
+                {
+                    NonBlockingConsole.WriteLine("Start Redecode.");
+                    var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
+
+                    if (redecodeArgIndex + 1 < args.Length)
+                        redecode.LimitFiles = int.Parse(args[redecodeArgIndex + 1]);
+
+                    redecode.Start(GetType().Assembly);
+                    return;
+                }
+
+                using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
+                {
+                    var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
+                    rp.Start();
+                }
             }
-
-            using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
+            finally
             {
-                var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
-                rp.Start();
+                methodsInfo.Save();
             }
         }
     }

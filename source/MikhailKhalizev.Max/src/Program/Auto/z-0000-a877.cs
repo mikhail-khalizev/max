@@ -70,28 +70,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa8f4, 4);    cmp(memw_a16[ss, bp + 0x18], 0xd);        /* cmp word [bp+0x18], 0xd */
             ii(0xa8f8, 2);    if(jzw(0xa96d, 0x73)) goto l_0xa96d;      /* jz 0xa96d */
             ii(0xa8fa, 5);    if(jmpw_a16_far_ind(cs, 0x17be)) return;  /* jmp far word [cs:0x17be] */
-            ii(0xa8ff, 2);    jmpw(0xa917, 0x16); goto l_0xa917;        /* jmp 0xa917 */
-        //    ii(0xa901, 2);    pushd(edx);                               /* push edx */
-        //    ii(0xa903, 6);    mov(edx, memd_a16[cs, 0x6d66]);           /* mov edx, [cs:0x6d66] */
-        //    ii(0xa909, 5);    mov(cx, memw_a16[cs, 0x6d6a]);            /* mov cx, [cs:0x6d6a] */
-        //    ii(0xa90e, 2);    mov(bl, 0x21);                            /* mov bl, 0x21 */
-        //    ii(0xa910, 3);    mov(ax, 0x205);                           /* mov ax, 0x205 */
-        //    ii(0xa913, 2);    @int(0x31);                               /* int 0x31 */
-        //    ii(0xa915, 2);    popd(edx);                                /* pop edx */
-        l_0xa917:
-            ii(0xa917, 4);    mov(ax, memw_a16[cs, 0x208e]);            /* mov ax, [cs:0x208e] */
-            ii(0xa91b, 2);    mov(ds, ax);                              /* mov ds, ax */
-            ii(0xa91d, 4);    dec(memb_a16[ds, 0xa9e]);                 /* dec byte [0xa9e] */
-            ii(0xa921, 2);    if(jzw(0xa934, 0x11)) goto l_0xa934;      /* jz 0xa934 */
-            ii(0xa923, 4);    mov(memw_a16[ds, 0x996], sp);             /* mov [0x996], sp */
-            ii(0xa927, 2);    mov(cx, ss);                              /* mov cx, ss */
-            ii(0xa929, 2);    cmp(ax, cx);                              /* cmp ax, cx */
-            ii(0xa92b, 2);    if(jzw(0xa931, 0x4)) goto l_0xa931;       /* jz 0xa931 */
-            ii(0xa92d, 4);    mov(sp, memw_a16[ds, 0xf50]);             /* mov sp, [0xf50] */
-        l_0xa931:
-            ii(0xa931, 3);    callw(0x5e40, -0x4af4);                   /* call 0x5e40 */
-        l_0xa934:
-            ii(0xa934, 3);    if(jmpw_func(0xaf9c, 0x665)) return;      /* jmp 0xaf9c */
+        //  ii(0xa8ff, 56);   Недостижимый код.
         l_0xa937:
             ii(0xa937, 3);    mov(si, memw_a16[ss, bp + 0x1e]);         /* mov si, [bp+0x1e] */
             ii(0xa93a, 3);    mov(ds, memw_a16[ss, bp + 0x22]);         /* mov ds, [bp+0x22] */

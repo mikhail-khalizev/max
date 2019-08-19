@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_4ed6, 1); popw(ds);                                 /* pop ds */
             ii(0x17_4ed7, 1); leavew();                                 /* leave */
             ii(0x17_4ed8, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_4ed9, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_4ed9, 1); Недостижимый код.
         l_0x17_4eda:
             ii(0x17_4eda, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x17_4edc, 1); popw(ds);                                 /* pop ds */

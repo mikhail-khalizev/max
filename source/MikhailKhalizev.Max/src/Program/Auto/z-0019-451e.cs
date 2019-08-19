@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_455b, 3); les(bx, ss, bp + 0x8);                    /* les bx, [bp+0x8] */
             ii(0x19_455e, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x19_4561, 2); jmpw(0x19_4589, 0x26); goto l_0x19_4589;  /* jmp 0x4589 */
-        //    ii(0x19_4563, 1); nop();                                    /* nop */
+        //  ii(0x19_4563, 1); Недостижимый код.
         l_0x19_4564:
             ii(0x19_4564, 3); mov(ax, memw_a16[ds, 0x3b7e]);            /* mov ax, [0x3b7e] */
             ii(0x19_4567, 3); mov(memw_a16[ss, bp - 0x16], ax);         /* mov [bp-0x16], ax */

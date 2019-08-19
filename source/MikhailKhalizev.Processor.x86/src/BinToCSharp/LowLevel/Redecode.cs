@@ -81,55 +81,30 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             
             var exList = new List<Exception>();
 
-            var engineCache = new ConcurrentBag<Engine>();
-
             Parallel.ForEach(
                 methodsWithPath.ToLookup(x => x.MethodInfo.Address),
-                new ParallelOptions { MaxDegreeOfParallelism = 1 }, // For debug.
-                x =>
+                // new ParallelOptions { MaxDegreeOfParallelism = 1 }, // For debug.
+                grouping =>
                 {
-                    foreach (var (mi, filePath) in x.OrderBy(y => y.MethodInfo))
+                    foreach (var (mi, filePath) in grouping.OrderBy(y => y.MethodInfo))
                     {
-                        engineCache.TryTake(out var engine);
-
                         try
                         {
-                            var csBase = mi.CsBase;
-                            if (mi.Address < csBase ||
-                                mi.Mode == ArchitectureMode.x86_16 && csBase + 0xffff < mi.Address + mi.RawBytes.Length)
-                                csBase = mi.Address;
-
-
-                            if (engine == null)
-                            {
-                                engine = new Engine(
-                                    Configuration,
-                                    _definitionCollection,
-                                    MethodInfoCollection);
-                                
-                                //foreach (var methodInfo in allDecodedMethodInfos)
-                                //    engine.AddAlreadyDecodedFunc(methodInfo);
-                            }
-
-                            engine.ClearDecoded();
+                            var engine = new Engine(
+                                Configuration,
+                                _definitionCollection,
+                                MethodInfoCollection);
 
                             engine.Memory = new MemoryFromMethodInfo(mi);
-                            engine.CsBase = csBase;
+                            engine.CsBase = mi.CsBase;
                             engine.Mode = mi.Mode;
                             
-                            engine.LimitDecodeTotalLength = mi.RawBytes.Length;
-                            engine.SuppressDecode.Clear();
                             engine.SuppressDecode.Add(0, mi.Address);
                             engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
                             
-                            //engine.RemoveAlreadyDecodedFunc(mi.Address);
-
-                            if (mi.Address == 0x545d)
-                            {
-                                var debug = 0;
-                            }
-
-                            engine.DecodeMethod(mi.Address, mi.Address + mi.RawBytes.Length);
+                            engine.DecodeMethod(mi.Address);
+                            engine.DetectMethods();
+                            engine.NewDetectedMethods.RemoveWhere(x => x.Begin != mi.Address);
 
                             var fileBakPath = filePath + ".bak";
                             policy.Execute(() => File.Delete(fileBakPath));
@@ -137,7 +112,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                             try
                             {
-                                engine.Save(false);
+                                engine.Save(false, false);
                             }
                             catch
                             {
@@ -151,14 +126,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         {
                             exList.Add(ex);
                             NonBlockingConsole.WriteLine($"Ошибка при сохранении метода {{{mi.Id}}} в файл: {ex.Message.TrimEnd('.')}.");
-                        }
-                        finally
-                        {
-                            if (engine != null)
-                            {
-                                engine.AddAlreadyDecodedFunc(mi);
-                                engineCache.Add(engine);
-                            }
                         }
                     }
                 });

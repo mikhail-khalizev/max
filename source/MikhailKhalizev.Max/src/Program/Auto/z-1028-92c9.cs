@@ -46,9 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_931c, 2); if(jnzd(0x1028_92d3, -0x4b)) goto l_0x1028_92d3; /* jnz 0x102892d3 */
             ii(0x1028_931e, 4); mov(ax, 0);                             /* mov ax, 0x0 */
             ii(0x1028_9322, 2); jmpd(0x1028_9396, 0x72); goto l_0x1028_9396; /* jmp 0x10289396 */
-        //    ii(0x1028_9324, 1); nop();                                  /* nop */
-        //    ii(0x1028_9325, 1); nop();                                  /* nop */
-        //    ii(0x1028_9326, 1); nop();                                  /* nop */
+        //  ii(0x1028_9324, 3); Недостижимый код.
         l_0x1028_9327:
             ii(0x1028_9327, 3); mov(dx, memw_a32[ds, ebx]);             /* mov dx, [ebx] */
             ii(0x1028_932a, 4); add(dx, 0x4);                           /* add dx, 0x4 */

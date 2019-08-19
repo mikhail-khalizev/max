@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x17_ea4c-516c238b")]
+        [MethodInfo("0x17_ea4c-737a92eb")]
         public void Method_0017_ea4c()
         {
             ii(0x17_ea4c, 4); enterw(0x8, 0);                           /* enter 0x8, 0x0 */
@@ -43,19 +43,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_eab9, 1); popw(ds);                                 /* pop ds */
             ii(0x17_eaba, 1); leavew();                                 /* leave */
             ii(0x17_eabb, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_eabc, 31); Недостижимый (и не декодированный) код.
-        //    ii(0x17_eadb, 1); nop();                                    /* nop */
-        //    ii(0x17_eadc, 2); xor(ax, ax);                              /* xor ax, ax */
-        //    ii(0x17_eade, 3); lar(ax, cx);                              /* lar ax, cx */
-        //    ii(0x17_eae1, 2); jmpw(0x17_eae3, 0); goto l_0x17_eae3;     /* jmp 0xeae3 */
-        l_0x17_eae3:
-            ii(0x17_eae3, 2); if(jnzw(0x17_eaea, 0x5)) goto l_0x17_eaea; /* jnz 0xeaea */
-            ii(0x17_eae5, 3); test(ah, 0x10);                           /* test ah, 0x10 */
-            ii(0x17_eae8, 2); if(jnzw(0x17_eaec, 0x2)) goto l_0x17_eaec; /* jnz 0xeaec */
-        l_0x17_eaea:
-            ii(0x17_eaea, 2); xor(cx, cx);                              /* xor cx, cx */
-        l_0x17_eaec:
-            ii(0x17_eaec, 1); retw(); return;                           /* ret */
         }
     }
 }

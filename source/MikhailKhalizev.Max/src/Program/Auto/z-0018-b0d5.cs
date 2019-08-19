@@ -136,7 +136,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_b1ff, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
             ii(0x18_b203, 3); pushw(0x7591);                            /* push 0x7591 */
             ii(0x18_b206, 1); retfw(); return;                          /* retf */
-        //  ii(0x18_b207, 39); Недостижимый (и не декодированный) код.
+        //  ii(0x18_b207, 39); Недостижимый код.
         l_0x18_b22e:
             ii(0x18_b22e, 4); mov(bx, memw_a16[ds, 0x996]);             /* mov bx, [0x996] */
             ii(0x18_b232, 3); mov(memw_a16[ds, bx + 0x6], ax);          /* mov [bx+0x6], ax */
@@ -160,7 +160,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_b261, 4); pushw(memw_a16[ds, 0xc26]);               /* push word [0xc26] */
             ii(0x18_b265, 3); pushw(0x7639);                            /* push 0x7639 */
             ii(0x18_b268, 1); retfw(); return;                          /* retf */
-        //  ii(0x18_b269, 19); Недостижимый (и не декодированный) код.
+        //  ii(0x18_b269, 19); Недостижимый код.
         l_0x18_b27c:
             ii(0x18_b27c, 1); pushw(ds);                                /* push ds */
             ii(0x18_b27d, 2); mov(ah, 0x1a);                            /* mov ah, 0x1a */

@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b503, 4); mov(memw_a16[es, bx + 0x1e], dx);         /* mov [es:bx+0x1e], dx */
             ii(0x17_b507, 5); or(memb_a16[es, bx + 0x2c], 0x1);         /* or byte [es:bx+0x2c], 0x1 */
             ii(0x17_b50c, 3); jmpw(0x17_b92e, 0x41f); goto l_0x17_b92e; /* jmp 0xb92e */
-        //    ii(0x17_b50f, 1); nop();                                    /* nop */
+        //  ii(0x17_b50f, 1); Недостижимый код.
         l_0x17_b510:
             ii(0x17_b510, 4); les(bx, ds, 0x4f9c);                      /* les bx, [0x4f9c] */
             ii(0x17_b514, 2); mov(si, ax);                              /* mov si, ax */
@@ -165,7 +165,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b603, 3); callw(0x17_e758, 0x3152);                 /* call 0xe758 */
             ii(0x17_b606, 3); add(sp, 0x4);                             /* add sp, 0x4 */
             ii(0x17_b609, 2); jmpw(0x17_b655, 0x4a); goto l_0x17_b655;  /* jmp 0xb655 */
-        //    ii(0x17_b60b, 1); nop();                                    /* nop */
+        //  ii(0x17_b60b, 1); Недостижимый код.
         l_0x17_b60c:
             ii(0x17_b60c, 2); mov(bx, si);                              /* mov bx, si */
             ii(0x17_b60e, 5); mov(ax, memw_a16[es, bx + 0xf00]);        /* mov ax, [es:bx+0xf00] */
@@ -294,7 +294,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b743, 3); inc(memw_a16[ss, bp - 0x22]);             /* inc word [bp-0x22] */
         l_0x17_b746:
             ii(0x17_b746, 3); jmpw(0x17_b66b, -0xde); goto l_0x17_b66b; /* jmp 0xb66b */
-        //    ii(0x17_b749, 1); nop();                                    /* nop */
+        //  ii(0x17_b749, 1); Недостижимый код.
         l_0x17_b74a:
             ii(0x17_b74a, 4); cmp(memw_a16[ss, bp - 0x22], 0);          /* cmp word [bp-0x22], 0x0 */
             ii(0x17_b74e, 2); if(jnzw(0x17_b772, 0x22)) goto l_0x17_b772; /* jnz 0xb772 */
@@ -362,7 +362,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b7db, 3); mov(memw_a16[ss, bp - 0x8], dx);          /* mov [bp-0x8], dx */
             ii(0x17_b7de, 5); mov(memw_a16[ss, bp - 0x22], 0);          /* mov word [bp-0x22], 0x0 */
             ii(0x17_b7e3, 2); jmpw(0x17_b7e9, 0x4); goto l_0x17_b7e9;   /* jmp 0xb7e9 */
-        //    ii(0x17_b7e5, 1); nop();                                    /* nop */
+        //  ii(0x17_b7e5, 1); Недостижимый код.
         l_0x17_b7e6:
             ii(0x17_b7e6, 3); inc(memw_a16[ss, bp - 0x22]);             /* inc word [bp-0x22] */
         l_0x17_b7e9:
@@ -442,7 +442,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b8a6, 1); popw(di);                                 /* pop di */
             ii(0x17_b8a7, 1); leavew();                                 /* leave */
             ii(0x17_b8a8, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_b8a9, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_b8a9, 1); Недостижимый код.
         l_0x17_b8aa:
             ii(0x17_b8aa, 3); mov(ax, memw_a16[ss, bp - 0xa]);          /* mov ax, [bp-0xa] */
             ii(0x17_b8ad, 3); mov(dx, memw_a16[ss, bp - 0x8]);          /* mov dx, [bp-0x8] */

@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x5c60-ca80e841")]
+        [MethodInfo("0x5c60-2b40e281")]
         public void Method_0000_5c60()
         {
             ii(0x5c60, 1);    pushw(ds);                                /* push ds */
@@ -26,7 +26,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5c7b, 3);    callw(0x5cce, 0x50);                      /* call 0x5cce */
             ii(0x5c7e, 1);    popw(cx);                                 /* pop cx */
             ii(0x5c7f, 3);    shl(cx, 0x3);                             /* shl cx, 0x3 */
-        l_0x5c82:
             ii(0x5c82, 1);    pushw(cs);                                /* push cs */
             ii(0x5c83, 1);    popw(es);                                 /* pop es */
             ii(0x5c84, 3);    mov(ax, 0xcccc);                          /* mov ax, 0xcccc */
@@ -47,17 +46,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5ca7, 1);    popw(sp);                                 /* pop sp */
             ii(0x5ca8, 1);    popw(bp);                                 /* pop bp */
             ii(0x5ca9, 1);    retw(); return;                           /* ret */
-        //    ii(0x5caa, 4);    mov(cx, memw_a16[ds, 0xcec]);             /* mov cx, [0xcec] */
-        //    ii(0x5cae, 1);    dec(cx);                                  /* dec cx */
-        //    ii(0x5caf, 2);    mov(es, cx);                              /* mov es, cx */
-        //    ii(0x5cb1, 5);    add(cx, memw_a16[es, 0x3]);               /* add cx, [es:0x3] */
-        //    ii(0x5cb6, 1);    inc(cx);                                  /* inc cx */
-        //    ii(0x5cb7, 2);    mov(ax, cs);                              /* mov ax, cs */
-        //    ii(0x5cb9, 2);    sub(cx, ax);                              /* sub cx, ax */
-        //    ii(0x5cbb, 3);    shl(cx, 0x4);                             /* shl cx, 0x4 */
-        //    ii(0x5cbe, 2);    sub(cx, di);                              /* sub cx, di */
-        //    ii(0x5cc0, 2);    shr(cx, 0x1);                             /* shr cx, 1 */
-        //    ii(0x5cc2, 2);    jmpw(0x5c82, -0x42); goto l_0x5c82;       /* jmp 0x5c82 */
         }
     }
 }

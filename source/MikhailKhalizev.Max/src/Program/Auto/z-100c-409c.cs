@@ -65,8 +65,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_4139, 4); cmp(memb_a32[ss, ebp - 0xc], 0x9);      /* cmp byte [ebp-0xc], 0x9 */
             ii(0x100c_413d, 2); if(jbed(0x100c_40dc, -0x63)) goto l_0x100c_40dc; /* jbe 0x100c40dc */
             ii(0x100c_413f, 2); jmpd(0x100c_4116, -0x2b); goto l_0x100c_4116; /* jmp 0x100c4116 */
-        //    ii(0x100c_4141, 2); jmpd(0x100c_4116, -0x2d); goto l_0x100c_4116; /* jmp 0x100c4116 */
-        //    ii(0x100c_4143, 2); jmpd(0x100c_4116, -0x2f); goto l_0x100c_4116; /* jmp 0x100c4116 */
+        //  ii(0x100c_4141, 4); Недостижимый код.
         l_0x100c_4145:
             ii(0x100c_4145, 4); cmp(memb_a32[ss, ebp - 0xc], 0x1);      /* cmp byte [ebp-0xc], 0x1 */
             ii(0x100c_4149, 2); if(jbd(0x100c_4157, 0xc)) goto l_0x100c_4157; /* jb 0x100c4157 */

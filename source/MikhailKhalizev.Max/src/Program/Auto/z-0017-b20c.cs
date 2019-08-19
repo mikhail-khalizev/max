@@ -109,7 +109,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b2f9, 3); mov(memw_a16[ss, bp - 0x16], ax);         /* mov [bp-0x16], ax */
             ii(0x17_b2fc, 3); mov(memw_a16[ss, bp - 0x18], ax);         /* mov [bp-0x18], ax */
             ii(0x17_b2ff, 2); jmpw(0x17_b312, 0x11); goto l_0x17_b312;  /* jmp 0xb312 */
-        //    ii(0x17_b301, 1); nop();                                    /* nop */
+        //  ii(0x17_b301, 1); Недостижимый код.
         l_0x17_b302:
             ii(0x17_b302, 4); add(memw_a16[ss, bp - 0x18], 0x1);        /* add word [bp-0x18], 0x1 */
             ii(0x17_b306, 4); adc(memw_a16[ss, bp - 0x16], 0);          /* adc word [bp-0x16], 0x0 */
@@ -212,7 +212,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b408, 5); mov(memw_a16[ss, bp - 0x20], 0x1);        /* mov word [bp-0x20], 0x1 */
         l_0x17_b40d:
             ii(0x17_b40d, 2); jmpw(0x17_b42a, 0x1b); goto l_0x17_b42a;  /* jmp 0xb42a */
-        //    ii(0x17_b40f, 1); nop();                                    /* nop */
+        //  ii(0x17_b40f, 1); Недостижимый код.
         l_0x17_b410:
             ii(0x17_b410, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x17_b413, 5); or(memb_a16[es, bx + 0x2c], 0x1);         /* or byte [es:bx+0x2c], 0x1 */
@@ -223,10 +223,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_b426, 1); popw(di);                                 /* pop di */
             ii(0x17_b427, 1); leavew();                                 /* leave */
             ii(0x17_b428, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_b429, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_b429, 1); Недостижимый код.
         l_0x17_b42a:
             ii(0x17_b42a, 3); jmpw(0x17_b302, -0x12b); goto l_0x17_b302; /* jmp 0xb302 */
-        //    ii(0x17_b42d, 1); nop();                                    /* nop */
+        //  ii(0x17_b42d, 1); Недостижимый код.
         l_0x17_b42e:
             ii(0x17_b42e, 4); cmp(memw_a16[ss, bp - 0x20], 0);          /* cmp word [bp-0x20], 0x0 */
             ii(0x17_b432, 2); if(jzw(0x17_b43a, 0x6)) goto l_0x17_b43a; /* jz 0xb43a */

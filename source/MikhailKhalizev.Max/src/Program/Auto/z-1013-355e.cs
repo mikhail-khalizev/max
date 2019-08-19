@@ -45,23 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_35cb, 5); calld(0x1007_6e7c, -0xb_c754);          /* call 0x10076e7c */
             ii(0x1013_35d0, 3); mov(memd_a32[ss, ebp - 0x48], eax);     /* mov [ebp-0x48], eax */
             ii(0x1013_35d3, 2); jmpd(0x1013_360a, 0x35); goto l_0x1013_360a; /* jmp 0x1013360a */
-        //    ii(0x1013_35d5, 4); movsx(edx, memw_a32[ss, ebp - 0xc]);    /* movsx edx, word [ebp-0xc] */
-        //    ii(0x1013_35d9, 4); movsx(eax, memw_a32[ss, ebp - 0x38]);   /* movsx eax, word [ebp-0x38] */
-        //    ii(0x1013_35dd, 1); dec(edx);                               /* dec edx */
-        //    ii(0x1013_35de, 3); imul(edx, eax);                         /* imul edx, eax */
-        //    ii(0x1013_35e1, 5); mov(ebx, 0xa);                          /* mov ebx, 0xa */
-        //    ii(0x1013_35e6, 2); mov(eax, edx);                          /* mov eax, edx */
-        //    ii(0x1013_35e8, 3); sar(edx, 0x1f);                         /* sar edx, 0x1f */
-        //    ii(0x1013_35eb, 2); idiv(ebx);                              /* idiv ebx */
-        //    ii(0x1013_35ed, 3); mov(memd_a32[ss, ebp - 0x48], eax);     /* mov [ebp-0x48], eax */
-        //    ii(0x1013_35f0, 4); movsx(eax, memw_a32[ss, ebp - 0x38]);   /* movsx eax, word [ebp-0x38] */
-        //    ii(0x1013_35f4, 4); movsx(edx, memw_a32[ss, ebp - 0xc]);    /* movsx edx, word [ebp-0xc] */
-        //    ii(0x1013_35f8, 3); imul(edx, eax);                         /* imul edx, eax */
-        //    ii(0x1013_35fb, 5); mov(ebx, 0xa);                          /* mov ebx, 0xa */
-        //    ii(0x1013_3600, 2); mov(eax, edx);                          /* mov eax, edx */
-        //    ii(0x1013_3602, 3); sar(edx, 0x1f);                         /* sar edx, 0x1f */
-        //    ii(0x1013_3605, 2); idiv(ebx);                              /* idiv ebx */
-        //    ii(0x1013_3607, 3); mov(memd_a32[ss, ebp - 0x44], eax);     /* mov [ebp-0x44], eax */
+        //  ii(0x1013_35d5, 53); Недостижимый код.
         l_0x1013_360a:
             ii(0x1013_360a, 3); mov(eax, memd_a32[ss, ebp - 0x44]);     /* mov eax, [ebp-0x44] */
             ii(0x1013_360d, 4); cmp(ax, memw_a32[ss, ebp - 0x48]);      /* cmp ax, [ebp-0x48] */

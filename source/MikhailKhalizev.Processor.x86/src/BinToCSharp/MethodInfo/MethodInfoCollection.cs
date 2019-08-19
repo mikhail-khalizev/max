@@ -10,7 +10,14 @@ using SharpDisasm;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
-    public class MethodInfoCollection
+    public interface IMethodInfoCollection
+    {
+        void Add(MethodInfoDto method);
+        MethodInfoDto GetForMethod(ArchitectureMode mode, byte[] rawBytes, Address address);
+        void AddExtraRaw(MethodInfoDto methodInfo, Address extraBeginAddress, byte[] extraBytes);
+    }
+
+    public class MethodInfoCollection : IMethodInfoCollection
     {
         private readonly BinToCSharpDto _configuration;
         private readonly Dictionary<string, MethodInfoDto> _methodById;
@@ -150,7 +157,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
             }
         }
         
-        public MethodInfoDto GetByRawBytes(ArchitectureMode mode, byte[] rawBytes, Address address)
+        public MethodInfoDto GetForMethod(ArchitectureMode mode, byte[] rawBytes, Address address)
         {
             lock (_methodById)
                 return _methodById.Values.FirstOrDefault(x => x.Address == address && x.Mode == mode && x.RawBytes.SequenceEqual(rawBytes));
@@ -203,10 +210,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 Save(methodsJson: false, force: true);
         }
 
-        public void AddExtraRaw(MethodInfoDto methodInfo, Address extraBeginAddress, byte[] extraBytes, int methodOffset)
+        public void AddExtraRaw(MethodInfoDto methodInfo, Address extraBeginAddress, byte[] extraBytes)
         {
             var extraInterval = Interval.From(extraBeginAddress, extraBeginAddress + extraBytes.Length);
-            var methodInterval = Interval.From(methodInfo.Address + methodOffset, methodInfo.Address + methodOffset + methodInfo.RawBytes.Length);
+            var methodInterval = Interval.From(methodInfo.Address, methodInfo.Address + methodInfo.RawBytes.Length);
 
             var exists = Enumerable.Empty<Interval<Address, Address.Comparer>>().Append(methodInterval);
             if (methodInfo.ExtraRaw != null)

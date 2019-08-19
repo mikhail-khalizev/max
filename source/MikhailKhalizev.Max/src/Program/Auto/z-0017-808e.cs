@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_80b0, 1); popw(ds);                                 /* pop ds */
             ii(0x17_80b1, 1); leavew();                                 /* leave */
             ii(0x17_80b2, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_80b3, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_80b3, 1); Недостижимый код.
         l_0x17_80b4:
             ii(0x17_80b4, 2); not(ax);                                  /* not ax */
             ii(0x17_80b6, 1); pushw(ax);                                /* push ax */

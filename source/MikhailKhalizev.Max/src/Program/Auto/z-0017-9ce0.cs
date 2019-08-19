@@ -167,7 +167,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9e84, 1); popw(si);                                 /* pop si */
             ii(0x17_9e85, 1); leavew();                                 /* leave */
             ii(0x17_9e86, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_9e87, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_9e87, 1); Недостижимый код.
         l_0x17_9e88:
             ii(0x17_9e88, 6); cmp(memw_a16[es, bx + 0x16], 0x1000);     /* cmp word [es:bx+0x16], 0x1000 */
             ii(0x17_9e8e, 2); if(jbw(0x17_9ece, 0x3e)) goto l_0x17_9ece; /* jb 0x9ece */
@@ -255,7 +255,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9f59, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x17_9f5c, 5); or(memb_a16[es, bx + 0x2c], 0x1);         /* or byte [es:bx+0x2c], 0x1 */
             ii(0x17_9f61, 2); jmpw(0x17_9f66, 0x3); goto l_0x17_9f66;   /* jmp 0x9f66 */
-        //    ii(0x17_9f63, 1); nop();                                    /* nop */
+        //  ii(0x17_9f63, 1); Недостижимый код.
         l_0x17_9f64:
             ii(0x17_9f64, 2); jmpw(0x17_9f1c, -0x4a); goto l_0x17_9f1c; /* jmp 0x9f1c */
         l_0x17_9f66:
@@ -319,7 +319,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_a001, 3); callw(0x17_c48e, 0x248a);                 /* call 0xc48e */
             ii(0x17_a004, 3); add(sp, 0xe);                             /* add sp, 0xe */
             ii(0x17_a007, 2); jmpw(0x17_a086, 0x7d); goto l_0x17_a086;  /* jmp 0xa086 */
-        //    ii(0x17_a009, 1); nop();                                    /* nop */
+        //  ii(0x17_a009, 1); Недостижимый код.
         l_0x17_a00a:
             ii(0x17_a00a, 3); mov(ax, memw_a16[ds, 0x1fc4]);            /* mov ax, [0x1fc4] */
             ii(0x17_a00d, 4); mov(dx, memw_a16[ds, 0x1fc6]);            /* mov dx, [0x1fc6] */
@@ -380,7 +380,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_a0a2, 1); popw(si);                                 /* pop si */
             ii(0x17_a0a3, 1); leavew();                                 /* leave */
             ii(0x17_a0a4, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_a0a5, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_a0a5, 1); Недостижимый код.
         l_0x17_a0a6:
             ii(0x17_a0a6, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x17_a0a9, 3); mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */

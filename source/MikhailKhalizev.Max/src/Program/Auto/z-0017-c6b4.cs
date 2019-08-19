@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_c6e2, 1); popw(ds);                                 /* pop ds */
             ii(0x17_c6e3, 1); leavew();                                 /* leave */
             ii(0x17_c6e4, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_c6e5, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_c6e5, 1); Недостижимый код.
         l_0x17_c6e6:
             ii(0x17_c6e6, 2); jmpw(0x17_c6c4, -0x24); goto l_0x17_c6c4; /* jmp 0xc6c4 */
         l_0x17_c6e8:

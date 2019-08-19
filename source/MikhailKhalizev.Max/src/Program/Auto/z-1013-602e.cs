@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x1013_602e-202d3a01")]
+        [MethodInfo("0x1013_602e-a0a1e2bd")]
         public void Method_1013_602e()
         {
             ii(0x1013_602e, 5); pushd(0x50);                            /* push 0x50 */
@@ -27,16 +27,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_605c, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1013_605f, 3); mov(memd_a32[ss, ebp - 0x1c], eax);     /* mov [ebp-0x1c], eax */
             ii(0x1013_6062, 2); if(jmpd_func(0x1013_60a8, 0x44)) return; /* jmp 0x101360a8 */
-            ii(0x1013_6064, 7); mov(memd_a32[ss, ebp - 0x20], 0x101c_61b4); /* mov dword [ebp-0x20], 0x101c61b4 */
-            ii(0x1013_606b, 2); if(jmpd_func(0x1013_60c5, 0x58)) return; /* jmp 0x101360c5 */
-            ii(0x1013_606d, 7); mov(memd_a32[ss, ebp - 0x20], 0x101c_64b0); /* mov dword [ebp-0x20], 0x101c64b0 */
-            ii(0x1013_6074, 2); if(jmpd_func(0x1013_60c5, 0x4f)) return; /* jmp 0x101360c5 */
-            ii(0x1013_6076, 7); mov(memd_a32[ss, ebp - 0x20], 0x101c_67ac); /* mov dword [ebp-0x20], 0x101c67ac */
-            ii(0x1013_607d, 2); if(jmpd_func(0x1013_60c5, 0x46)) return; /* jmp 0x101360c5 */
-            ii(0x1013_607f, 7); mov(memd_a32[ss, ebp - 0x20], 0x101c_6aa8); /* mov dword [ebp-0x20], 0x101c6aa8 */
-            ii(0x1013_6086, 2); if(jmpd_func(0x1013_60c5, 0x3d)) return; /* jmp 0x101360c5 */
-            ii(0x1013_6088, 7); mov(memd_a32[ss, ebp - 0x20], 0x101c_6da4); /* mov dword [ebp-0x20], 0x101c6da4 */
-            ii(0x1013_608f, 2); if(jmpd_func(0x1013_60c5, 0x34)) return; /* jmp 0x101360c5 */
         }
     }
 }

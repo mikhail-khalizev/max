@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xad3d, 1);    popw(di);                                 /* pop di */
             ii(0xad3e, 1);    popw(si);                                 /* pop si */
             ii(0xad3f, 1);    retw(); return;                           /* ret */
-        //  ii(0xad40, 1);    Недостижимый (и не декодированный) код.
+        //  ii(0xad40, 1);    Недостижимый код.
         l_0xad41:
             ii(0xad41, 3);    callw(0x9cc4, -0x1080);                   /* call 0x9cc4 */
             ii(0xad44, 2);    if(jzw(0xad30, -0x16)) goto l_0xad30;     /* jz 0xad30 */

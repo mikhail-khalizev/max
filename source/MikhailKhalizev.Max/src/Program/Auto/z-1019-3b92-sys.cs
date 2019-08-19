@@ -86,7 +86,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3c5e, 3); add(ebx, memd_a32[ss, ebp - 0x2c]);     /* add ebx, [ebp-0x2c] */
             ii(0x1019_3c61, 3); add(edx, memd_a32[ss, ebp - 0x2c]);     /* add edx, [ebp-0x2c] */
             ii(0x1019_3c64, 1); retd(); return;                         /* ret */
-        //  ii(0x1019_3c65, 58); Недостижимый (и не декодированный) код.
+        //  ii(0x1019_3c65, 58); Недостижимый код.
         l_0x1019_3c9f:
             ii(0x1019_3c9f, 3); sub(esi, memd_a32[ss, ebp - 0x10]);     /* sub esi, [ebp-0x10] */
             ii(0x1019_3ca2, 3); sub(edi, memd_a32[ss, ebp - 0x14]);     /* sub edi, [ebp-0x14] */

@@ -17,25 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_e97c, 7); add(eax, memd_a32[ds, ebx * 4 + 0x101b_e8d0]); /* add eax, [ebx*4+0x101be8d0] */
             ii(0x1018_e983, 3); add(eax, memd_a32[ss, ebp - 0xc]);      /* add eax, [ebp-0xc] */
             ii(0x1018_e986, 2); jmpd(0x1018_e9b0, 0x28); goto l_0x1018_e9b0; /* jmp 0x1018e9b0 */
-        //    ii(0x1018_e988, 3); add(esp, 0x4);                          /* add esp, 0x4 */
-        //    ii(0x1018_e98b, 3); add(ebx, 0x2);                          /* add ebx, 0x2 */
-        //    ii(0x1018_e98e, 2); mov(eax, eax);                          /* mov eax, eax */
-        l_0x1018_e990:
-            ii(0x1018_e990, 3); add(edi, 0x10);                         /* add edi, 0x10 */
-            ii(0x1018_e993, 1); dec(ebx);                               /* dec ebx */
-            ii(0x1018_e994, 2); if(jzd(0x1018_e9ac, 0x16)) goto l_0x1018_e9ac; /* jz 0x1018e9ac */
-            ii(0x1018_e996, 3); dec(memd_a32[ss, ebp - 0x14]);          /* dec dword [ebp-0x14] */
-            ii(0x1018_e999, 2); if(jnsd(0x1018_e990, -0xb)) goto l_0x1018_e990; /* jns 0x1018e990 */
-            ii(0x1018_e99b, 3); add(edi, memd_a32[ss, ebp - 0x8]);      /* add edi, [ebp-0x8] */
-            ii(0x1018_e99e, 3); dec(memd_a32[ss, ebp + 0x1c]);          /* dec dword [ebp+0x1c] */
-            ii(0x1018_e9a1, 3); mov(eax, memd_a32[ss, ebp + 0x18]);     /* mov eax, [ebp+0x18] */
-            ii(0x1018_e9a4, 2); shr(eax, 0x1);                          /* shr eax, 1 */
-            ii(0x1018_e9a6, 1); dec(eax);                               /* dec eax */
-            ii(0x1018_e9a7, 3); mov(memd_a32[ss, ebp - 0x14], eax);     /* mov [ebp-0x14], eax */
-            ii(0x1018_e9aa, 2); jmpd(0x1018_e990, -0x1c); goto l_0x1018_e990; /* jmp 0x1018e990 */
-        l_0x1018_e9ac:
-            ii(0x1018_e9ac, 1); retd(); return;                         /* ret */
-        //  ii(0x1018_e9ad, 3); Недостижимый (и не декодированный) код.
+        //  ii(0x1018_e988, 40); Недостижимый код.
         l_0x1018_e9b0:
             ii(0x1018_e9b0, 2); mov(ebx, esi);                          /* mov ebx, esi */
             ii(0x1018_e9b2, 3); lea(esi, eax + edi);                    /* lea esi, [eax+edi] */

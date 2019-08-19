@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9cb4, 1); popw(ds);                                 /* pop ds */
             ii(0x17_9cb5, 1); leavew();                                 /* leave */
             ii(0x17_9cb6, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_9cb7, 3); Недостижимый (и не декодированный) код.
+        //  ii(0x17_9cb7, 3); Недостижимый код.
         l_0x17_9cba:
             ii(0x17_9cba, 3); mov(ax, memw_a16[ss, bp - 0x2]);          /* mov ax, [bp-0x2] */
             ii(0x17_9cbd, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */

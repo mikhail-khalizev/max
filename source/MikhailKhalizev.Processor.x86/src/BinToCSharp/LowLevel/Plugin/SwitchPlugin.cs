@@ -11,11 +11,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 {
     public class SwitchPlugin : PluginBase
     {
-        private int state;
-        private RegisterInfo reg;
-        private ud_operand op;
-        private Address addr_area_begin;
-        private int size_of_addr_area;
+        private int _state;
+        private RegisterInfo _reg;
+        private ud_operand _op;
+        private Address _addrAreaBegin;
+        private int _sizeOfAddrArea;
 
         /// <inheritdoc />
         public SwitchPlugin(Engine engine)
@@ -91,13 +91,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
     II(0x001577e0, 0x5)   jmpw_abs(memw_a16(cs, bx + 0x23c5));  /* jmp word near [cs:bx+0x23c5] */
 #endif
             
-            switch (state)
+            switch (_state)
             {
                 case 2:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ija)
-                        state++;
+                        _state++;
                     else
-                        state = 0;
+                        _state = 0;
                     break;
 
                 case 3:
@@ -106,61 +106,61 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
                         && cmd.Operands[0].@base == cmd.Operands[1].@base)
                     {
-                        reg = RegisterInfo.GetRegister(cmd.Operands[1].@base);
-                        if (reg.IsGeneralPurpose)
-                            state++;
+                        _reg = RegisterInfo.GetRegister(cmd.Operands[1].@base);
+                        if (_reg.IsGeneralPurpose)
+                            _state++;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG)
                     {
-                        reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
-                        if (reg.IsGeneralPurpose && reg.Size == 32 && Equals(cmd.Operands[1], op))
-                            state = 5;
+                        _reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
+                        if (_reg.IsGeneralPurpose && _reg.Size == 32 && Equals(cmd.Operands[1], _op))
+                            _state = 5;
                     }
 
-                    if (state == 3)
-                        state = 0;
+                    if (_state == 3)
+                        _state = 0;
 
                     break;
 
                 case 4:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
-                        && Equals(cmd.Operands[1], op))
-                        state++;
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
+                        && Equals(cmd.Operands[1], _op))
+                        _state++;
                     else
-                        state = 0;
+                        _state = 0;
                     break;
 
                 case 5:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
                         && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
-                        state++;
+                        _state++;
                     else
-                        state = 0;
+                        _state = 0;
                     break;
 
                 case 6:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp
                         && cmd.Operands[0].type == ud_type.UD_OP_MEM
-                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg)
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg)
                         add_switch_at(cmd);
 
-                    state = 0;
+                    _state = 0;
                     break;
 
 
                 case 7:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ija)
-                        state++;
+                        _state++;
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijbe)
-                        state = 12;
+                        _state = 12;
                     else
-                        state = 0;
+                        _state = 0;
                     break;
 
                 case 8:
@@ -170,7 +170,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         && cmd.Operands[0].scale == 4)
                     {
                         add_switch_at(cmd);
-                        state = 0;
+                        _state = 0;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imovzx
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
@@ -179,7 +179,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     //                && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg
                     )
                     {
-                        state++;
+                        _state++;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ixor
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
@@ -188,18 +188,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                     {
-                        state = 10;
+                        _state = 10;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_CONST)
                         && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
                     {
-                        state = 11;
+                        _state = 11;
                     }
                     else
-                        state = 0;
+                        _state = 0;
 
                     break;
 
@@ -210,16 +210,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         && cmd.Operands[0].scale == 4)
                     {
                         add_switch_at(cmd);
-                        state = 0;
+                        _state = 0;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
                         && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
-                        state = 6;
+                        _state = 6;
                     else
-                        state = 0;
+                        _state = 0;
 
                     break;
 
@@ -228,52 +228,52 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                     //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
-                        state = 9;
+                        _state = 9;
                     else
-                        state = 0;
+                        _state = 0;
                     break;
 
                 case 11:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ixchg
-                        && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg)
+                        && RegisterInfo.GetRegister(cmd.Operands[1].@base) == _reg)
                     {
-                        reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
-                        state = 6;
+                        _reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
+                        _state = 6;
                     }
                     else
-                        state = 0;
+                        _state = 0;
 
                     break;
 
                 case 12:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp)
-                        state = 8;
+                        _state = 8;
                     else
-                        state = 0;
+                        _state = 0;
                     break;
 
                 default:
-                    state = 0;
+                    _state = 0;
                     break;
             }
 
 
-            if (state == 0
+            if (_state == 0
                 && cmd.Mnemonic == ud_mnemonic_code.UD_Icmp
                 && cmd.Operands[1].type == ud_type.UD_OP_IMM
                 && cmd.Operands[1].size <= 16)
             {
-                size_of_addr_area = (cmd.Operands[1].lval.uword + 1) * ((int)Engine.Mode / 8);
+                _sizeOfAddrArea = (cmd.Operands[1].lval.uword + 1) * ((int)Engine.Mode / 8);
 
                 if (cmd.Operands[0].type == ud_type.UD_OP_MEM)
                 {
-                    op = cmd.Operands[0]; // memb_a32(ss, ebp - 0x3c)
-                    state = 2;
+                    _op = cmd.Operands[0]; // memb_a32(ss, ebp - 0x3c)
+                    _state = 2;
                 }
                 else if (cmd.Operands[0].type == ud_type.UD_OP_REG)
                 {
-                    reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
-                    state = 7;
+                    _reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
+                    _state = 7;
                 }
             }
         }
@@ -284,11 +284,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 return;
 
             Address addrOfAddrs = Engine.CsBase + cmd.Operands[0].lval.udword;
-            addr_area_begin = addrOfAddrs;
-
-            if ((addrOfAddrs & ((int)Engine.Mode / 8 - 1)) == 0)
-                Engine.Alignment[addrOfAddrs] = (int)Engine.Mode / 8;
-
+            _addrAreaBegin = addrOfAddrs;
+            
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. {");
 
@@ -302,7 +299,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             }
             
             var notFirst = false;
-            for (Address i = 0; i < size_of_addr_area; i += (uint)Engine.Mode / 8)
+            for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)
             {
                 Address to;
                 switch ((int)Engine.Mode)
@@ -330,21 +327,21 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             os.Append("}.");
 
-            Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + size_of_addr_area, os.ToString()));
+            Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
 
-            var copy_addr_area_begin = addr_area_begin;
-            var copy_size_of_addr_area = size_of_addr_area;
-            cmd.WriteCmd = (engine, dm, index, func, offset) => WriteCmd(copy_addr_area_begin, copy_size_of_addr_area, engine, dm, index, func, offset);
+            var copyAddrAreaBegin = _addrAreaBegin;
+            var copySizeOfAddrArea = _sizeOfAddrArea;
+            cmd.WriteCmd = (engine, dm, index, func, offset) => WriteCmd(copyAddrAreaBegin, copySizeOfAddrArea, engine, dm, index, func, offset);
         }
 
         private static string WriteCmd(
-            Address addr_area_begin, int size_of_addr_area,
-            Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset)
+            Address addrAreaBegin, int sizeOfAddrArea,
+            Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset)
         {
-            var raw = engine.Memory.ReadAll(addr_area_begin, size_of_addr_area);
-            engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addr_area_begin, raw, offset);
+            var raw = engine.Memory.ReadAll(addrAreaBegin, sizeOfAddrArea);
+            engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addrAreaBegin, raw);
 
-            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmd_index].Begin), out var curJmp);
+            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
             if (curJmp == null)
                 throw new NotImplementedException();
 
@@ -362,8 +359,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 throw new NotImplementedException();
             var funcSuffix = "_switch";
 
-            dm.Instructions[cmd_index].IsLocalBranch = true;
-            var str = dm.Instructions[cmd_index].ToCodeString(funcSuffix, "", offset: offset);
+            if (!dm.Instructions[cmdIndex].IsLocalBranch)
+                throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
+
+            var str = dm.Instructions[cmdIndex].ToCodeString(funcSuffix, "", offset: offset);
 
             var lines = new[]
                 {

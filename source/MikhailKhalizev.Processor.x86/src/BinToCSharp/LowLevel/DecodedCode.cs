@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             return _instructions.FirstNotLessOrDefault((instruction.End, null)).Instruction;
         }
 
-        public bool Contains(Address address)
+        public bool ContainsInstruction(Address address)
         {
             return _instructions.Contains((address, null));
         }

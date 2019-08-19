@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_746a, 3); mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x17_746d, 1); popw(ds);                                 /* pop ds */
             ii(0x17_746e, 1); retfw(); return;                          /* retf */
-        //  ii(0x17_746f, 1); Недостижимый (и не декодированный) код.
+        //  ii(0x17_746f, 1); Недостижимый код.
         l_0x17_7470:
             ii(0x17_7470, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x17_7472, 1); popw(ds);                                 /* pop ds */

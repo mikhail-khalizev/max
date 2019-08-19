@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 var orig = cmd.WriteCmd;
                 cmd.WriteCmd = (engine, dm, index, func, offset) =>
                 {
-                    engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
+                    engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);
                     return orig(engine, dm, index, func, offset);
                 };
 
@@ -119,8 +119,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             if (cmd.IsCall || op.type != ud_type.UD_OP_JIMM)
             {
-                if (notSuppressed)
-                    Engine.AddToNewDetectedMethods(toAddr); // create if not exist.
+                Engine.AddNewDetectedMethod(toAddr);
             }
             else
             {
@@ -137,16 +136,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             }
         }
 
-        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmd_index, List<string> comments_in_current_func, int offset, Address extraStart, byte[] extraBytes)
+        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset, Address extraStart, byte[] extraBytes)
         {
             if (extraBytes != null)
-                engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes, offset);
+                engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);
 
-            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmd_index].Begin), out var cur_jmp);
-            if (cur_jmp == null)
+            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
+            if (curJmp == null)
                 throw new InvalidOperationException();
 
-            var to = cur_jmp.To.Single();
+            var to = curJmp.To.Single();
 
             var jmpOutside = false;
             var suffix = "";
@@ -156,11 +155,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 suffix = "_func";
 
                 if (dm.Begin <= to && to < dm.End)
-                    comments_in_current_func.Add("Адрес перехода делит инструкцию в этой функции пополам.");
+                    commentsInCurrentFunc.Add("Адрес перехода делит инструкцию в этой функции пополам.");
             }
 
-            dm.Instructions[cmd_index].IsLocalBranch = !jmpOutside;
-            return dm.Instructions[cmd_index].ToCodeString(suffix, offset: offset);
+            if (dm.Instructions[cmdIndex].IsLocalBranch != !jmpOutside)
+                throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
+
+            return dm.Instructions[cmdIndex].ToCodeString(suffix);
         }
     }
 }
