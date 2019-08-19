@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_99e6, 3); mov(memw_a16[ss, bp - 0x8], dx);          /* mov [bp-0x8], dx */
             ii(0x17_99e9, 4); mov(memb_a16[ss, bp - 0x6], 0x1);         /* mov byte [bp-0x6], 0x1 */
             ii(0x17_99ed, 2); jmpw(0x17_99fe, 0xf); goto l_0x17_99fe;   /* jmp 0x99fe */
-        //  ii(0x17_99ef, 1); Недостижимый код.
+        //  ii(0x17_99ef, 1); nop();                                    /* nop */
         l_0x17_99f0:
             ii(0x17_99f0, 4); mov(ax, memw_a16[es, bx + 0x2]);          /* mov ax, [es:bx+0x2] */
             ii(0x17_99f4, 3); mov(memw_a16[ss, bp - 0xa], cx);          /* mov [bp-0xa], cx */

@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_3e17:
             ii(0x19_3e17, 1); clc();                                    /* clc */
             ii(0x19_3e18, 2); jmpw(0x19_3e1b, 0x1); goto l_0x19_3e1b;   /* jmp 0x3e1b */
-        //  ii(0x19_3e1a, 1); Недостижимый код.
+        //  ii(0x19_3e1a, 1); stc();                                    /* stc */
         l_0x19_3e1b:
             ii(0x19_3e1b, 1); retw(); return;                           /* ret */
         }

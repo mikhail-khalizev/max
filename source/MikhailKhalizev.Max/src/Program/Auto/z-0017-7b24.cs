@@ -66,7 +66,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7bb6, 4); les(bx, ds, 0x4f9c);                      /* les bx, [0x4f9c] */
             ii(0x17_7bba, 4); or(memb_a16[es, bx + si], 0x7f);          /* or byte [es:bx+si], 0x7f */
             ii(0x17_7bbe, 2); jmpw(0x17_7bde, 0x1e); goto l_0x17_7bde;  /* jmp 0x7bde */
-        //  ii(0x17_7bc0, 2); Недостижимый код.
+        //  ii(0x17_7bc0, 1); nop();                                    /* nop */
+        //  ii(0x17_7bc1, 1); nop();                                    /* nop */
         l_0x17_7bc2:
             ii(0x17_7bc2, 4); les(bx, ds, 0x4f9c);                      /* les bx, [0x4f9c] */
             ii(0x17_7bc6, 3); mov(si, memw_a16[ss, bp - 0x6]);          /* mov si, [bp-0x6] */

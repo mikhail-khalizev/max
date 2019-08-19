@@ -302,7 +302,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa714, 2);    @int(0x21);                               /* int 0x21 */
             ii(0xa716, 4);    if(jaew(0xa71d, 0x3)) goto l_0xa71d;      /* jae 0xa71d */
             ii(0xa71a, 2);    jmpw(0xa74b, 0x2f); goto l_0xa74b;        /* jmp 0xa74b */
-        //  ii(0xa71c, 1);    Недостижимый код.
+        //  ii(0xa71c, 1);    nop();                                    /* nop */
         l_0xa71d:
             ii(0xa71d, 3);    mov(memw_a16[ds, 0xc4c], ax);             /* mov [0xc4c], ax */
             ii(0xa720, 4);    mov(memb_a16[ds, 0x980], dl);             /* mov [0x980], dl */

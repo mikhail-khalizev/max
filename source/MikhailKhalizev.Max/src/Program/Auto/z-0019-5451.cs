@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_5483, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x19_5486, 3); mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */
             ii(0x19_5489, 3); jmpw(0x19_5498, 0xc); goto l_0x19_5498;   /* jmp 0x5498 */
-        //  ii(0x19_548c, 3); Недостижимый код.
+        //  ii(0x19_548c, 3); jmpw(0x19_5498, 0x9); goto l_0x19_5498;   /* jmp 0x5498 */
         l_0x19_548f:
             ii(0x19_548f, 3); mov(ax, 0);                               /* mov ax, 0x0 */
             ii(0x19_5492, 3); mov(dx, 0);                               /* mov dx, 0x0 */

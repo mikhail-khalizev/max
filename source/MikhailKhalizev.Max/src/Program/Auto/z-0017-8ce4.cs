@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8d07, 4); cmp(memb_a16[ss, bp + 0x10], 0);          /* cmp byte [bp+0x10], 0x0 */
             ii(0x17_8d0b, 2); if(jzw(0x17_8d10, 0x3)) goto l_0x17_8d10; /* jz 0x8d10 */
             ii(0x17_8d0d, 2); jmpw(0x17_8d54, 0x45); goto l_0x17_8d54;  /* jmp 0x8d54 */
-        //  ii(0x17_8d0f, 1); Недостижимый код.
+        //  ii(0x17_8d0f, 1); nop();                                    /* nop */
         l_0x17_8d10:
             ii(0x17_8d10, 3); pushw(memw_a16[ss, bp + 0xe]);            /* push word [bp+0xe] */
             ii(0x17_8d13, 3); pushw(memw_a16[ss, bp + 0xc]);            /* push word [bp+0xc] */

@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_794e, 3); or(ax, memw_a16[es, bx + si]);            /* or ax, [es:bx+si] */
             ii(0x17_7951, 2); if(jzw(0x17_7956, 0x3)) goto l_0x17_7956; /* jz 0x7956 */
             ii(0x17_7953, 2); jmpw(0x17_7958, 0x3); goto l_0x17_7958;   /* jmp 0x7958 */
-        //  ii(0x17_7955, 1); Недостижимый код.
+        //  ii(0x17_7955, 1); nop();                                    /* nop */
         l_0x17_7956:
             ii(0x17_7956, 2); jmpw(0x17_7926, -0x32); goto l_0x17_7926; /* jmp 0x7926 */
         l_0x17_7958:

@@ -56,7 +56,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_5f36, 3); lea(eax, ebp - 0x20);                   /* lea eax, [ebp-0x20] */
             ii(0x1014_5f39, 5); calld(0x100e_03bc, -0x6_5b82);          /* call 0x100e03bc */
             ii(0x1014_5f3e, 2); jmpd(0x1014_5f4a, 0xa); goto l_0x1014_5f4a; /* jmp 0x10145f4a */
-        //  ii(0x1014_5f40, 10); Недостижимый код.
+        //  ii(0x1014_5f40, 2); xor(edx, edx);                          /* xor edx, edx */
+        //  ii(0x1014_5f42, 3); lea(eax, ebp - 0x20);                   /* lea eax, [ebp-0x20] */
+        //  ii(0x1014_5f45, 5); calld(0x100e_03bc, -0x6_5b8e);          /* call 0x100e03bc */
         l_0x1014_5f4a:
             ii(0x1014_5f4a, 3); mov(al, memb_a32[ss, ebp - 0x14]);      /* mov al, [ebp-0x14] */
             ii(0x1014_5f4d, 2); mov(esp, ebp);                          /* mov esp, ebp */

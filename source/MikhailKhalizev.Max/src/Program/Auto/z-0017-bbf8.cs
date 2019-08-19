@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_bca7, 3); mov(memw_a16[ss, bp - 0x14], ax);         /* mov [bp-0x14], ax */
         l_0x17_bcaa:
             ii(0x17_bcaa, 3); jmpw(0x17_bc28, -0x85); goto l_0x17_bc28; /* jmp 0xbc28 */
-        //  ii(0x17_bcad, 1); Недостижимый код.
+        //  ii(0x17_bcad, 1); nop();                                    /* nop */
         l_0x17_bcae:
             ii(0x17_bcae, 3); mov(ax, 0xffff);                          /* mov ax, 0xffff */
             ii(0x17_bcb1, 1); cwd();                                    /* cwd */

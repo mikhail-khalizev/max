@@ -99,7 +99,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_0990, 5); cmp(memw_a32[ss, ebp - 0x38], 0x1);     /* cmp word [ebp-0x38], 0x1 */
             ii(0x1007_0995, 2); if(jzd(0x1007_0938, -0x5f)) goto l_0x1007_0938; /* jz 0x10070938 */
             ii(0x1007_0997, 2); jmpd(0x1007_097d, -0x1c); goto l_0x1007_097d; /* jmp 0x1007097d */
-        //  ii(0x1007_0999, 2); Недостижимый код.
+        //  ii(0x1007_0999, 2); jmpd(0x1007_097d, -0x1e); goto l_0x1007_097d; /* jmp 0x1007097d */
         l_0x1007_099b:
             ii(0x1007_099b, 3); mov(eax, memd_a32[ss, ebp - 0x18]);     /* mov eax, [ebp-0x18] */
             ii(0x1007_099e, 3); mov(edx, memd_a32[ss, ebp - 0xc]);      /* mov edx, [ebp-0xc] */

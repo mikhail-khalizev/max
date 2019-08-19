@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x1013_608e-ef2a1ddc")]
+        [MethodInfo("0x1013_608e-1de309a")]
         public void Method_1013_608e()
         {
         l_0x1013_608e:
@@ -27,8 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_60b4, 2); fdiv(memq_a32[ds, ecx]);                /* fdiv qword [ecx] */
             ii(0x1013_60b6, 4); shl(memb_a32[ds, esi - 0x75], 0x45);    /* shl byte [esi-0x75], 0x45 */
             ii(0x1013_60ba, 2); fadd(ST(1), ST(0));                     /* fadd st1, st0 */
-            ii(0x1013_60bc, 2); if(loopned_a32_func(0x1013_60c0, 0x2)) return; /* loopne 0x101360c0 */ /* Адрес перехода делит инструкцию в этой функции пополам. */
-            ii(0x1013_60be, 7); if(jmpd_abs(memd_a32[cs, eax + 0x1013_6094])) return; /* jmp dword [cs:eax+0x10136094] */
+            ii(0x1013_60bc, 2); if(loopned_a32_func(0x1013_60c0, 0x2)) return; /* loopne 0x101360c0 */
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_ab39, 2); if(jzw(0x17_ab44, 0x9)) goto l_0x17_ab44; /* jz 0xab44 */
             ii(0x17_ab3b, 5); mov(memw_a16[ss, bp - 0xa], 0x8023);      /* mov word [bp-0xa], 0x8023 */
             ii(0x17_ab40, 3); jmpw(0x17_ac16, 0xd3); goto l_0x17_ac16;  /* jmp 0xac16 */
-        //  ii(0x17_ab43, 1); Недостижимый код.
+        //  ii(0x17_ab43, 1); nop();                                    /* nop */
         l_0x17_ab44:
             ii(0x17_ab44, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
             ii(0x17_ab47, 4); mov(ax, memw_a16[es, bx + 0x8]);          /* mov ax, [es:bx+0x8] */
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_ab63, 2); if(jnzw(0x17_ab6e, 0x9)) goto l_0x17_ab6e; /* jnz 0xab6e */
             ii(0x17_ab65, 5); mov(memw_a16[ss, bp - 0xa], 0x8023);      /* mov word [bp-0xa], 0x8023 */
             ii(0x17_ab6a, 3); jmpw(0x17_ac16, 0xa9); goto l_0x17_ac16;  /* jmp 0xac16 */
-        //  ii(0x17_ab6d, 1); Недостижимый код.
+        //  ii(0x17_ab6d, 1); nop();                                    /* nop */
         l_0x17_ab6e:
             ii(0x17_ab6e, 3); add(ax, 0);                               /* add ax, 0x0 */
             ii(0x17_ab71, 3); adc(dx, 0x1);                             /* adc dx, 0x1 */
@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_abb3, 4); add(memw_a16[ss, bp - 0xe], 0x1);         /* add word [bp-0xe], 0x1 */
             ii(0x17_abb7, 4); adc(memw_a16[ss, bp - 0xc], 0);           /* adc word [bp-0xc], 0x0 */
             ii(0x17_abbb, 2); jmpw(0x17_ab92, -0x2b); goto l_0x17_ab92; /* jmp 0xab92 */
-        //  ii(0x17_abbd, 1); Недостижимый код.
+        //  ii(0x17_abbd, 1); nop();                                    /* nop */
         l_0x17_abbe:
             ii(0x17_abbe, 3); mov(ax, memw_a16[ss, bp - 0x6]);          /* mov ax, [bp-0x6] */
             ii(0x17_abc1, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */

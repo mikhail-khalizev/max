@@ -92,7 +92,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_c631, 3); mov(memw_a16[ss, bp - 0x8], ax);          /* mov [bp-0x8], ax */
             ii(0x17_c634, 3); mov(memw_a16[ss, bp - 0x6], dx);          /* mov [bp-0x6], dx */
             ii(0x17_c637, 2); jmpw(0x17_c675, 0x3c); goto l_0x17_c675;  /* jmp 0xc675 */
-        //  ii(0x17_c639, 1); Недостижимый код.
+        //  ii(0x17_c639, 1); nop();                                    /* nop */
         l_0x17_c63a:
             ii(0x17_c63a, 3); mov(ax, memw_a16[ss, bp + 0x6]);          /* mov ax, [bp+0x6] */
             ii(0x17_c63d, 3); mov(dx, memw_a16[ss, bp + 0x8]);          /* mov dx, [bp+0x8] */

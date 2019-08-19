@@ -142,9 +142,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
         public bool AddNewDetectedMethod(Address address)
         {
-            if (!DecodedCode.ContainsInstruction(address))
-                return false;
-
             if (SuppressDecode.Contains(address, false))
                 return false;
 
@@ -243,25 +240,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 foreach (var method in NewDetectedMethods.ToArray())
                 {
                     var methodBegin = method.Begin;
+                    var methodEnd = Address.MaxValue;
 
                     // Проверим, делит ли другой метод текущий.
 
                     if (method.End != 0)
                     {
-                        var otherMethodSplitCurrent =
-                            NewDetectedMethods.GreaterThat(new DetectedMethod(methodBegin))
-                                .Where(otherMethod => otherMethod.Begin < method.End)
-                                .Any(otherMethod => method.Instructions.Any(x => x.Begin == otherMethod.Begin));
+                        var otherMethod = NewDetectedMethods.FirstGreaterOrDefault(new DetectedMethod(methodBegin));
 
-                        if (otherMethodSplitCurrent)
-                        {
-                            method.End = 0;
-                        }
-                        else
+                        if (otherMethod == null || method.End <= otherMethod.Begin)
                         {
                             successCount++;
                             continue;
                         }
+
+                        method.End = 0;
+                        methodEnd = Math.Min(methodEnd, otherMethod.Begin);
                     }
 
                     // Проверим наличие первой инструкции метода.
@@ -277,11 +271,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // Посчитаем methodEnd - адрес конца метода, дальше которого функция точно уже не может продолжаться.
 
-                    var methodEnd = ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue);
-
-                    var nextMethod = NewDetectedMethods.FirstGreaterOrDefault(method);
-                    if (nextMethod != default)
-                        methodEnd = Math.Min(methodEnd, nextMethod.Begin);
+                    methodEnd = Math.Min(methodEnd, ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue));
+                    methodEnd = Math.Min(methodEnd, NewDetectedMethods.FirstGreaterOrDefault(method)?.Begin ?? Address.MaxValue);
 
                     // Учтём, что инструкции в DecodedCode могут пересекаться. Найдём "верную дорожку".
 
@@ -310,6 +301,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             break;
                         }
 
+                        if (methodEnd < cmd.End)
+                            break;
+
                         instructions.Add(cmd);
                         lastInstr = cmd;
                         lastInstrEnd = cmd.End;
@@ -331,9 +325,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     method.Labels.Clear();
 
-                    foreach (var brunchInfo in BrunchesInfo.GetViewBetween(new BrunchInfo(methodBegin), new BrunchInfo(methodEnd)))
+                    foreach (var branchInfo in BrunchesInfo.GetViewBetween(new BrunchInfo(methodBegin), new BrunchInfo(methodEnd)))
                     {
-                        foreach (var addressTo in brunchInfo.To)
+                        var branchInstructionIndex = instructions.BinarySearch(new CSharpInstruction(branchInfo.From), CSharpInstruction.BeginComparer);
+                        if (branchInstructionIndex < 0)
+                            continue;
+
+                        foreach (var addressTo in branchInfo.To)
                         {
                             if (methodBegin <= addressTo && addressTo < methodEnd)
                             {
@@ -349,12 +347,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     // Впрочем, не надо - довольно редкий специфический случай.
 
                                     NonBlockingConsole.WriteLine($"Предупреждение: Метка '{addressTo}' делит инструкцию пополам.");
-                                    AddNewDetectedMethod(addressTo);
+                                    if (DecodedCode.ContainsInstruction(addressTo))
+                                        AddNewDetectedMethod(addressTo);
                                 }
                             }
                             else
                             {
-                                AddNewDetectedMethod(addressTo);
+                                if (DecodedCode.ContainsInstruction(addressTo))
+                                    AddNewDetectedMethod(addressTo);
                             }
                         }
                     }
@@ -372,7 +372,46 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     NewDetectedMethods.Remove(detectedMethod);
 
                 if (successCount == NewDetectedMethods.Count)
-                    break;
+                {
+                    // Проверяем код на "дыры" после jmp. В Dos коде нередко происходит возврат обратно на инструкцию непосредственно за jmp.
+
+                    foreach (var method in NewDetectedMethods.ToArray())
+                    {
+                        var prev = method.Instructions.First();
+                        foreach (var instruction in method.Instructions.Skip(1))
+                        {
+                            var decodeStart = prev.End;
+
+                            while (decodeStart != 0 && decodeStart < instruction.Begin && DecodedCode.GetInstructionBefore(decodeStart).IsJmp)
+                            {
+                                // Перед декодированием, временно, добавляем адрес instruction.Begin в ForceEndMethod для безопасности.
+                                // А то вдруг там некорректный код и адрес instruction.Begin находится внутри инструкции и тогда мы можем уйти далеко за наш метод.
+                                var fem = ForceEndMethod.Contains(instruction.Begin);
+                                if (!fem)
+                                    AddForceEndMethod(instruction.Begin);
+
+                                Decode(decodeStart);
+
+                                if (!fem)
+                                    ForceEndMethod.Remove(instruction.Begin);
+
+                                if (DecodedCode.GetInstructionOrNull(decodeStart) == null)
+                                    break; // Decode fail. Skip this hole.
+
+                                decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false).End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
+
+                                // Заново пересчитываем метод.
+                                method.End = 0;
+                                successCount = 0;
+                            }
+
+                            prev = instruction;
+                        }
+                    }
+
+                    if (successCount == NewDetectedMethods.Count)
+                        break;
+                }
             }
 
             // --- Постобработка. ---
@@ -640,12 +679,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 if (skip || cmd.CommentThis)
                     output.Append("//"); // Комментируем недостижимый код.
+                else
+                    output.Append("  ");   
 
                 if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
                     skip = true;
 
 
-                output.AppendLine($"    {instr}");
+                output.AppendLine($"  {instr}");
 
                 last_instr_end = cmd.End;
                 last_instr_jmp_or_ret = cmd.IsJmpOrRet;

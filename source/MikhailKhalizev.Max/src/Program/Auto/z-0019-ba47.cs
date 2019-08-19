@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
                 default:
                     throw new NotImplementedException();
             } /* jmp word [cs:bx+0x66cd] */
-        //    ii(0x19_baed, 18); /* Служебная область с абсолютными адресами переходов. {0x19_ba84, 0x19_bad9, 0x19_ba63, 0x19_bac1, 0x19_bad9, 0x19_ba76, 0x19_baa3, 0x19_ba84, 0x19_bad4}. */
+        //  ii(0x19_baed, 18); /* Служебная область с абсолютными адресами переходов. {0x19_ba84, 0x19_bad9, 0x19_ba63, 0x19_bac1, 0x19_bad9, 0x19_ba76, 0x19_baa3, 0x19_ba84, 0x19_bad4}. */
         l_0x19_baff:
             ii(0x19_baff, 3); mov(ax, memw_a16[ss, bp - 0xa]);          /* mov ax, [bp-0xa] */
             ii(0x19_bb02, 3); mov(dx, memw_a16[ss, bp - 0x8]);          /* mov dx, [bp-0x8] */

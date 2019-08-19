@@ -35,10 +35,42 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_78a6, 3); mov(al, memb_a32[ds, eax + 0x13]);      /* mov al, [eax+0x13] */
             ii(0x100a_78a9, 3); mov(memb_a32[ss, ebp - 0x10], al);      /* mov [ebp-0x10], al */
             ii(0x100a_78ac, 5); jmpd(0x100a_7940, 0x8f); goto l_0x100a_7940; /* jmp 0x100a7940 */
-        //  ii(0x100a_78b1, 118); Недостижимый код.
+        //  ii(0x100a_78b1, 5); mov(edx, StringDefinitions.Waiting);    /* mov edx, 0x101a0c86 */
+        //  ii(0x100a_78b6, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+        //  ii(0x100a_78b9, 5); calld(Definitions.sys_strcat, 0xb_e673); /* call 0x10165f31 */
+        //  ii(0x100a_78be, 5); jmpd(0x100a_795b, 0x98); goto l_0x100a_795b; /* jmp 0x100a795b */
+        //  ii(0x100a_78c3, 5); mov(edx, StringDefinitions.ExaminingZones); /* mov edx, 0x101a0c8e */
+        //  ii(0x100a_78c8, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+        //  ii(0x100a_78cb, 5); calld(Definitions.sys_strcat, 0xb_e661); /* call 0x10165f31 */
+        //  ii(0x100a_78d0, 5); jmpd(0x100a_795b, 0x86); goto l_0x100a_795b; /* jmp 0x100a795b */
+        //  ii(0x100a_78d5, 5); mov(edx, StringDefinitions.SearchingMap); /* mov edx, 0x101a0c9e */
+        //  ii(0x100a_78da, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+        //  ii(0x100a_78dd, 5); calld(Definitions.sys_strcat, 0xb_e64f); /* call 0x10165f31 */
+        //  ii(0x100a_78e2, 5); jmpd(0x100a_795b, 0x74); goto l_0x100a_795b; /* jmp 0x100a795b */
+        //  ii(0x100a_78e7, 5); mov(edx, StringDefinitions.WaitingForPath); /* mov edx, 0x101a0cac */
+        //  ii(0x100a_78ec, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+        //  ii(0x100a_78ef, 5); calld(Definitions.sys_strcat, 0xb_e63d); /* call 0x10165f31 */
+        //  ii(0x100a_78f4, 2); jmpd(0x100a_795b, 0x65); goto l_0x100a_795b; /* jmp 0x100a795b */
+        //  ii(0x100a_78f6, 5); mov(edx, StringDefinitions.Moving2);    /* mov edx, 0x101a0cbd */
+        //  ii(0x100a_78fb, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+        //  ii(0x100a_78fe, 5); calld(Definitions.sys_strcat, 0xb_e62e); /* call 0x10165f31 */
+        //  ii(0x100a_7903, 3); mov(eax, memd_a32[ss, ebp - 0x8]);      /* mov eax, [ebp-0x8] */
+        //  ii(0x100a_7906, 3); add(eax, 0x4e);                         /* add eax, 0x4e */
+        //  ii(0x100a_7909, 5); calld(0x1007_6574, -0x3_139a);          /* call 0x10076574 */
+        //  ii(0x100a_790e, 3); mov(edx, memd_a32[ds, eax + 0x6]);      /* mov edx, [eax+0x6] */
+        //  ii(0x100a_7911, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */
+        //  ii(0x100a_7914, 3); imul(edx, edx, 0x33);                   /* imul edx, edx, 0x33 */
+        //  ii(0x100a_7917, 6); mov(edx, memd_a32[ds, edx + 0x101c_81d7]); /* mov edx, [edx+0x101c81d7] */
+        //  ii(0x100a_791d, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
+        //  ii(0x100a_7920, 5); calld(Definitions.sys_strcat, 0xb_e60c); /* call 0x10165f31 */
+        //  ii(0x100a_7925, 2); jmpd(0x100a_795b, 0x34); goto l_0x100a_795b; /* jmp 0x100a795b */
         l_0x100a_7927:
             ii(0x100a_7927, 2); jmpd(0x100a_795b, 0x32); goto l_0x100a_795b; /* jmp 0x100a795b */
-        //  ii(0x100a_7929, 23); Недостижимый код.
+        //  ii(0x100a_7929, 3); lea(eax, eax + 0);                      /* lea eax, [eax] */
+        //  ii(0x100a_792c, 2); mov(cl, 0x78);                          /* mov cl, 0x78 */
+        //  ii(0x100a_792e, 2); or(dl, memb_a32[ds, eax]);              /* or dl, [eax] */
+        //  ii(0x100a_7930, 1); retd(); return;                         /* ret */
+        //  ii(0x100a_7931, 15); Недостижимый код.
         l_0x100a_7940:
             ii(0x100a_7940, 3); mov(al, memb_a32[ss, ebp - 0x10]);      /* mov al, [ebp-0x10] */
             ii(0x100a_7943, 3); mov(memb_a32[ss, ebp - 0x14], al);      /* mov [ebp-0x14], al */

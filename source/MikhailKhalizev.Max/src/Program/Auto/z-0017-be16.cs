@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_be6b, 4); add(memw_a16[ss, bp - 0x4], 0x1);         /* add word [bp-0x4], 0x1 */
             ii(0x17_be6f, 4); adc(memw_a16[ss, bp - 0x2], 0);           /* adc word [bp-0x2], 0x0 */
             ii(0x17_be73, 2); jmpw(0x17_be4a, -0x2b); goto l_0x17_be4a; /* jmp 0xbe4a */
-        //  ii(0x17_be75, 1); Недостижимый код.
+        //  ii(0x17_be75, 1); nop();                                    /* nop */
         l_0x17_be76:
             ii(0x17_be76, 3); pushw(memw_a16[ss, bp - 0x2]);            /* push word [bp-0x2] */
             ii(0x17_be79, 3); pushw(memw_a16[ss, bp - 0x4]);            /* push word [bp-0x4] */

@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_3f4c, 1); dec(bx);                                  /* dec bx */
             ii(0x19_3f4d, 2); xor(di, di);                              /* xor di, di */
             ii(0x19_3f4f, 2); jmpw(0x19_3f5d, 0xc); goto l_0x19_3f5d;   /* jmp 0x3f5d */
-        //  ii(0x19_3f51, 1); Недостижимый код.
+        //  ii(0x19_3f51, 1); nop();                                    /* nop */
         l_0x19_3f52:
             ii(0x19_3f52, 3); lea(dx, si - 0x2);                        /* lea dx, [si-0x2] */
             ii(0x19_3f55, 2); cmp(dx, bx);                              /* cmp dx, bx */

@@ -28,6 +28,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public bool ShouldSerializeCsBase() => CsBase != 0;
 
+        // Result address (CsBase already added).
         public Address Address { get; set; }
 
         /// <summary>

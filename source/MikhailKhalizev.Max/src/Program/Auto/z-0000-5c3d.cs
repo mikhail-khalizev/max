@@ -5,10 +5,10 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x7c31-ca13a")]
-        public void Method_0000_7c31()
+        [MethodInfo("0x5c3d-602e")]
+        public void Method_0000_5c3d()
         {
-            ii(0x7c31, 3);    callw(0x7c36, 0x2);                       /* call 0x7c36 */
+            ii(0x5c3d, 2);    if(jmpw_abs(cx)) return;                  /* jmp cx */
         }
     }
 }

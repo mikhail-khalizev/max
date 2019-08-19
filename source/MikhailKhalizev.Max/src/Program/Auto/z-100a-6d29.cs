@@ -69,7 +69,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_6dd4, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
             ii(0x100a_6dd7, 5); calld(0x1007_5f6c, -0x3_0e70);          /* call 0x10075f6c */
             ii(0x100a_6ddc, 2); jmpd(0x100a_6de8, 0xa); goto l_0x100a_6de8; /* jmp 0x100a6de8 */
-        //  ii(0x100a_6dde, 10); Недостижимый код.
+        //  ii(0x100a_6dde, 2); xor(edx, edx);                          /* xor edx, edx */
+        //  ii(0x100a_6de0, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
+        //  ii(0x100a_6de3, 5); calld(0x1007_5f6c, -0x3_0e7c);          /* call 0x10075f6c */
         l_0x100a_6de8:
             ii(0x100a_6de8, 3); mov(eax, memd_a32[ss, ebp - 0x18]);     /* mov eax, [ebp-0x18] */
             ii(0x100a_6deb, 2); mov(esp, ebp);                          /* mov esp, ebp */
