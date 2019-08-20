@@ -125,7 +125,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fb48, 1); pushw(ax);                                /* push ax */
             ii(0x18_fb49, 1); nop();                                    /* nop */
             ii(0x18_fb4a, 1); pushw(cs);                                /* push cs */
-            ii(0x18_fb4b, 3); callw(0x19_0074, 0x526);                  /* call 0x74 */
+            ii(0x18_fb4b, 3); if(callw_up(0x19_0074, 0x526)) return;    /* call 0x74 */
             ii(0x18_fb4e, 3); add(sp, 0x4);                             /* add sp, 0x4 */
             ii(0x18_fb51, 4); movzx(esi, bp);                           /* movzx esi, bp */
             ii(0x18_fb55, 3); mov(es, memw_a16[ds, si + 0x2]);          /* mov es, [si+0x2] */

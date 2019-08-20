@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x100b_b2ef-4be46d1f")]
+        [MethodInfo("0x100b_b2ef-a92bc217")]
         public void Method_100b_b2ef()
         {
             ii(0x100b_b2ef, 5); pushd(0x214);                           /* push 0x214 */
@@ -293,21 +293,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_b6b7, 6); mov(al, memb_a32[ds, eax + 0x101c_a4ef]); /* mov al, [eax+0x101ca4ef] */
             ii(0x100b_b6bd, 6); mov(memb_a32[ss, ebp - 0xb4], al);      /* mov [ebp-0xb4], al */
             ii(0x100b_b6c3, 2); if(jmpd_func(0x100b_b71c, 0x57)) return; /* jmp 0x100bb71c */
-            ii(0x100b_b6c5, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x100b_b6c8, 4); mov(memb_a32[ds, eax + 0x2], 0x3);      /* mov byte [eax+0x2], 0x3 */
-            ii(0x100b_b6cc, 5); if(jmpd_func(0x100b_b745, 0x74)) return; /* jmp 0x100bb745 */
-            ii(0x100b_b6d1, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x100b_b6d4, 4); mov(memb_a32[ds, eax + 0x2], 0x4);      /* mov byte [eax+0x2], 0x4 */
-            ii(0x100b_b6d8, 2); if(jmpd_func(0x100b_b745, 0x6b)) return; /* jmp 0x100bb745 */
-            ii(0x100b_b6da, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x100b_b6dd, 4); mov(memb_a32[ds, eax + 0x2], 0x2);      /* mov byte [eax+0x2], 0x2 */
-            ii(0x100b_b6e1, 2); if(jmpd_func(0x100b_b745, 0x62)) return; /* jmp 0x100bb745 */
-            ii(0x100b_b6e3, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x100b_b6e6, 4); mov(memb_a32[ds, eax + 0x2], 0x7);      /* mov byte [eax+0x2], 0x7 */
-            ii(0x100b_b6ea, 2); if(jmpd_func(0x100b_b745, 0x59)) return; /* jmp 0x100bb745 */
-            ii(0x100b_b6ec, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
-            ii(0x100b_b6ef, 4); mov(memb_a32[ds, eax + 0x2], 0x1);      /* mov byte [eax+0x2], 0x1 */
-            ii(0x100b_b6f3, 2); if(jmpd_func(0x100b_b745, 0x50)) return; /* jmp 0x100bb745 */
         }
     }
 }
