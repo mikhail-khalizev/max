@@ -1727,6 +1727,7 @@ inline void setnz(uint_<8> & d)
         d = 0;
 }
 
+// +
 inline void setg(uint_<8> & d)
 {
     if (sf == of && zf == false)

@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_f938-ee784a23")]
         public void /* sys */ mve_4()
         {
-            if (mve_4_intro)
+            if (!mve_4_intro)
             {
                 mve_4_intro = true;
                 // Выход из вступительного видео.

@@ -511,7 +511,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         #endregion
 
         #region Memory
-        
+
         /// <inheritdoc />
         IMemory IProcessor.Memory => Memory;
         public Memory Memory { get; }
@@ -6851,7 +6851,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void setg(ValueBase value)
         {
-            throw new NotImplementedException();
+            value.Int32 = eflags.sf == eflags.of && !eflags.zf ? 1 : 0;
         }
 
         /// <inheritdoc />
