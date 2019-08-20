@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1017_9704:
             ii(0x1017_9704, 7); cmp(memd_a32[ds, 0x101b_e41c], -0x1 /* 0xff */); /* cmp dword [0x101be41c], 0xffffffff */
             ii(0x1017_970b, 2); if(jzd(0x1017_971d, 0x10)) goto l_0x1017_971d; /* jz 0x1017971d */
-            ii(0x1017_970d, 5); calld(/* sys */ 0x1018_dcc4, 0x1_45b2); /* call 0x1018dcc4 */
+            ii(0x1017_970d, 5); calld(Definitions.sys_timer_3, 0x1_45b2); /* call 0x1018dcc4 */
             ii(0x1017_9712, 5); mov(eax, memd_a32[ds, 0x1020_9dc0]);    /* mov eax, [0x10209dc0] */
             ii(0x1017_9717, 6); add(memd_a32[ds, 0x101b_e420], eax);    /* add [0x101be420], eax */
         l_0x1017_971d:

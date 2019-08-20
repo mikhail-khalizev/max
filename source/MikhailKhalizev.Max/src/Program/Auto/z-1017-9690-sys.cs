@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_9694, 1); pushd(ebx);                             /* push ebx */
             ii(0x1017_9695, 1); pushd(ecx);                             /* push ecx */
             ii(0x1017_9696, 1); pushd(edx);                             /* push edx */
-            ii(0x1017_9697, 5); calld(/* sys */ 0x1018_dc3c, 0x1_45a0); /* call 0x1018dc3c */
+            ii(0x1017_9697, 5); calld(Definitions.sys_timer_1, 0x1_45a0); /* call 0x1018dc3c */
             ii(0x1017_969c, 3); lea(esp, ebp - 0xc);                    /* lea esp, [ebp-0xc] */
             ii(0x1017_969f, 1); popd(edx);                              /* pop edx */
             ii(0x1017_96a0, 1); popd(ecx);                              /* pop ecx */

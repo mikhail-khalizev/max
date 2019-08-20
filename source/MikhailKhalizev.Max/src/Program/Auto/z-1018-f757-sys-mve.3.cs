@@ -5,10 +5,10 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x1018_f757-992b")]
+        [MethodInfo("0x1018_f757-992f")]
         public void /* sys_mve */ Method_1018_f757_v3()
         {
-            ii(0x1018_f757, 2); mov(al, cl);                            /* mov al, cl */
+            ii(0x1018_f757, 2); mov(al, ch);                            /* mov al, ch */
         }
     }
 }

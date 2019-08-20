@@ -8,6 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1017_9f60-4aef5b11")]
         public void /* sys */ Method_1017_9f60()
         {
+            retd(); return;
+
             var chan = RawProgramMain.DosDma.dma_get_channel(5);
 
             ii(0x1017_9f60, 1); pushd(ebp);                             /* push ebp */
@@ -60,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             if (chan.masked == false)
             {
                 var buf = new byte[2];
-                chan.read(buf);
+                //chan.read(buf);
             }
 
             ii(0x1017_9fe3, 6); mov(edx, memd_a32[ds, 0x101b_e434]);    /* mov edx, [0x101be434] */

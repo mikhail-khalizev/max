@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Program
         #endregion
 
         #region System
-        
+
         public static Address sys_int_21 { get; } = 0x14_f514;
         public static Address sys_int_paging_fault { get; } = 0x13_94f6;
 
@@ -224,6 +224,12 @@ namespace MikhailKhalizev.Max.Program
         public static Address sys_call_ctor_arr_v2 { get; } = 0x1016_5f70;
         public static Address sys_call_dtor_arr { get; } = 0x1016_5fb8;
         public static Address sys_call_dtor_arr_v2 { get; } = 0x1016_5fe0;
+
+        public static Address sys_timer_1 { get; } = 0x1018_dc3c;
+        public static Address sys_timer_2 { get; } = 0x1018_dc67;
+        public static Address sys_timer_3 { get; } = 0x1018_dcc4;
+        public static Address sys_timer_4 { get; } = 0x1018_dd02;
+
 
         #endregion
 
