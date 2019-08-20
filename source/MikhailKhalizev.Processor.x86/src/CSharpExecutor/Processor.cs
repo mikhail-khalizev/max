@@ -535,6 +535,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         public MemoryAccess memq_a32 { get; }
         /// <inheritdoc />
         public MemoryAccess memt_a32 => throw new NotImplementedException();
+        /// <inheritdoc />
+        public MemoryAccess memo_a32 => throw new NotImplementedException();
 
         #endregion
 
@@ -2273,7 +2275,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public void calld_far_abs(SegmentRegister segment, ValueBase address)
+        public void calld_far_abs(int segment, ValueBase address)
         {
             throw new NotImplementedException();
         }
@@ -3900,7 +3902,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jbd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(eflags.cf, address, offset);
         }
 
         /// <inheritdoc />

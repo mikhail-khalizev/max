@@ -5,14 +5,9 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x1013_60fe-a84a5aca")]
-        public void Method_1013_60fe()
+        [MethodInfo("0x1013_610e-4e6c4130")]
+        public void Method_1013_610e()
         {
-            ii(0x1013_60fe, 5); mov(edi, 0x458a_f455);                  /* mov edi, 0x458af455 */
-            ii(0x1013_6103, 1); cld();                                  /* cld */
-            ii(0x1013_6104, 2); add(al, 0x6b);                          /* add al, 0x6b */
-            ii(0x1013_6106, 3); movsx(eax, al);                         /* movsx eax, al */
-            ii(0x1013_6109, 5); calld(0x100c_aafc, -0x6_b612);          /* call 0x100caafc */
             ii(0x1013_610e, 4); movsx(edx, memw_a32[ss, ebp - 0x4]);    /* movsx edx, word [ebp-0x4] */
             ii(0x1013_6112, 6); imul(edx, edx, 0x247);                  /* imul edx, edx, 0x247 */
             ii(0x1013_6118, 3); mov(al, memb_a32[ss, ebp - 0xc]);       /* mov al, [ebp-0xc] */

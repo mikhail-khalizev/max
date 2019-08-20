@@ -5,14 +5,14 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x1017_9096-3bfbd21f")]
+        [MethodInfo("0x1017_9096-35e3510e")]
         public void /* sys */ Method_1017_9096()
         {
             ii(0x1017_9096, 2); mov(edi, ecx);                          /* mov edi, ecx */
             ii(0x1017_9098, 1); popd(es);                               /* pop es */
             ii(0x1017_9099, 2); mov(edx, edi);                          /* mov edx, edi */
             ii(0x1017_909b, 2); test(edi, edi);                         /* test edi, edi */
-            ii(0x1017_909d, 2); if(jzd(0x1017_90c3, 0x24)) goto l_0x1017_90c3; /* jz 0x101790c3 */
+            ii(0x1017_909d, 2); if(jzd_func(0x1017_90c3, 0x24)) return; /* jz 0x101790c3 */
             ii(0x1017_909f, 2); mov(ecx, ebp);                          /* mov ecx, ebp */
             ii(0x1017_90a1, 2); mov(edi, ebx);                          /* mov edi, ebx */
             ii(0x1017_90a3, 2); mov(esi, edx);                          /* mov esi, edx */
@@ -33,8 +33,6 @@ namespace MikhailKhalizev.Max.Program
         l_0x1017_90be:
             ii(0x1017_90be, 3); lea(esi, edx + 0x1);                    /* lea esi, [edx+0x1] */
             ii(0x1017_90c1, 2); if(jmpd_func(0x1017_907b, -0x48)) return; /* jmp 0x1017907b */
-        l_0x1017_90c3:
-            ii(0x1017_90c3, 2); xor(eax, eax);                          /* xor eax, eax */
         }
     }
 }

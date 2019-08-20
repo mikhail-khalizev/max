@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x1007_1ff5-83b95e8d")]
+        [MethodInfo("0x1007_1ff5-f312d0b5")]
         public void Method_1007_1ff5()
         {
             ii(0x1007_1ff5, 5); pushd(0x2c);                            /* push 0x2c */
@@ -22,6 +22,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_2010, 3); mov(eax, memd_a32[ss, ebp - 0x4]);      /* mov eax, [ebp-0x4] */
             ii(0x1007_2013, 3); mov(memd_a32[ss, ebp - 0x8], eax);      /* mov [ebp-0x8], eax */
             ii(0x1007_2016, 2); if(jmpd_func(0x1007_2040, 0x28)) return; /* jmp 0x10072040 */
+            ii(0x1007_2018, 7); mov(memd_a32[ss, ebp - 0xc], 0xffff_fffd); /* mov dword [ebp-0xc], 0xfffffffd */
+            ii(0x1007_201f, 2); if(jmpd_func(0x1007_2067, 0x46)) return; /* jmp 0x10072067 */
+            ii(0x1007_2021, 7); mov(memd_a32[ss, ebp - 0xc], 0x1);      /* mov dword [ebp-0xc], 0x1 */
+            ii(0x1007_2028, 2); if(jmpd_func(0x1007_2067, 0x3d)) return; /* jmp 0x10072067 */
         }
     }
 }

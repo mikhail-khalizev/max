@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
         private readonly SwitchPlugin _switchPlugin;
         private readonly ReadCStringPlugin _readCStringPlugin;
-        private readonly CommentDummyInstructionsPlugin comment_idle; // comment dummy instruction
+        private readonly CommentDummyInstructionsPlugin _commentIdle; // comment dummy instruction
 
 
         public Engine(
@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             MethodInfoCollection = methodInfoCollection;
 
             _readCStringPlugin = new ReadCStringPlugin(this);
-            comment_idle = new CommentDummyInstructionsPlugin(this);
+            _commentIdle = new CommentDummyInstructionsPlugin(this);
             _simpleBranchPlugin = new SimpleBranchPlugin(this);
             _switchPlugin = new SwitchPlugin(this);
 
@@ -240,13 +240,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 foreach (var method in NewDetectedMethods.ToArray())
                 {
                     var methodBegin = method.Begin;
-                    var methodEnd = Address.MaxValue;
+
+                    if (methodBegin == 0x4218)
+                    {
+                        var debug = 0;
+                    }
 
                     // Проверим, делит ли другой метод текущий.
 
                     if (method.End != 0)
                     {
-                        var otherMethod = NewDetectedMethods.FirstGreaterOrDefault(new DetectedMethod(methodBegin));
+                        var otherMethod = NewDetectedMethods.FirstGreaterOrDefault(method);
 
                         if (otherMethod == null || method.End <= otherMethod.Begin)
                         {
@@ -255,7 +259,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         }
 
                         method.End = 0;
-                        methodEnd = Math.Min(methodEnd, otherMethod.Begin);
                     }
 
                     // Проверим наличие первой инструкции метода.
@@ -271,7 +274,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // Посчитаем methodEnd - адрес конца метода, дальше которого функция точно уже не может продолжаться.
 
-                    methodEnd = Math.Min(methodEnd, ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue));
+                    var methodEnd = ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue);
                     methodEnd = Math.Min(methodEnd, NewDetectedMethods.FirstGreaterOrDefault(method)?.Begin ?? Address.MaxValue);
 
                     // Учтём, что инструкции в DecodedCode могут пересекаться. Найдём "верную дорожку".
@@ -283,7 +286,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
                     {
-                        if (methodEnd <= cmd.Begin)
+                        if (methodEnd < cmd.End)
                             break;
 
                         // Не допускаем большие "дыры".
@@ -294,15 +297,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         // Проверим на принадлежность к AlreadyDecodedMethods.
                         // Разрешим методам пересекаться при отсутствии ret и jmp в конце метода.
                         // Так выполнение кода может быть быстрее (при циклах), т.к. нет постоянных вызовов других методов.
-                        if ((lastInstr == null || (lastInstr.End != cmd.Begin) || (lastInstr.End == cmd.Begin && lastInstr.IsJmpOrRet)) &&
-                            HaveAlreadyDecodedMethodStartedWith(lastInstrEnd))
+                        if ((lastInstr == null || lastInstr.IsJmpOrRet) &&
+                            (HaveAlreadyDecodedMethodStartedWith(lastInstrEnd) ||
+                                (cmd.Begin != lastInstrEnd && HaveAlreadyDecodedMethodStartedWith(cmd.Begin))))
                         {
                             // Нашли среди декодированных.
                             break;
                         }
-
-                        if (methodEnd < cmd.End)
-                            break;
 
                         instructions.Add(cmd);
                         lastInstr = cmd;
@@ -419,7 +420,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             foreach (var method in NewDetectedMethods)
             {
                 // Заполняем MethodInfo.
-                
+
                 var mi = MethodInfoCollection.GetForMethod(Mode, method.RawBytes, method.Begin);
                 if (mi == null)
                 {
@@ -433,6 +434,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 }
 
                 method.MethodInfo = mi;
+
+                if (mi.Id == "0x17_d8bb-9d77fc5")
+                    throw new InvalidOperationException("0x17_d8bb-9d77fc5");
 
                 // Заполняем IsLocalBranch.
 
@@ -448,7 +452,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     if (branchInstruction.IsLocalBranch)
                         continue;
-                    
+
                     branchInstruction.IsLocalBranch = brunchInfo.To.All(
                         addressTo =>
                         {
@@ -467,12 +471,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                             return false;
                         });
                 }
-                
+
                 // Удаляем недостижимый код.
 
                 //foreach (var instruction in method.Instructions)
                 //{
-                    
+
                 //}
             }
 
@@ -613,7 +617,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             var offset = detectedMethod.MethodInfo.Address - detectedMethod.Begin;
 
 
-            var first_cmd = detectedMethod.Instructions.First();
+            var firstCmd = detectedMethod.Instructions.First();
 
             var methodName = DefinitionCollection.GetAddressFullName(methodBegin, new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
             if (methodName == null)
@@ -635,23 +639,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             output.AppendLine("        {");
 
             bool skip = false; // Если нашли недостижимый код устанавливаем в true.
-            bool last_instr_jmp_or_ret = false;
-            var last_instr_end = first_cmd.Begin;
+            bool lastInstrJmpOrRet = false;
+            var lastInstrEnd = firstCmd.Begin;
 
-            for (var cmd_index = 0; cmd_index < detectedMethod.Instructions.Count; cmd_index++)//   cmd = first_cmd; cmd != detectedMethod -> instr.end(); cmd++)
+            for (var cmdIndex = 0; cmdIndex < detectedMethod.Instructions.Count; cmdIndex++)//   cmd = first_cmd; cmd != detectedMethod -> instr.end(); cmd++)
             {
-                var cmd = detectedMethod.Instructions[cmd_index];
+                var cmd = detectedMethod.Instructions[cmdIndex];
                 var haveLabel = detectedMethod.Labels.Contains(cmd.Begin);
 
                 output.Append("        ");
 
-                if (last_instr_end != cmd.Begin) // Обнаружен недекодированный код.
+                if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
                     var os = new StringBuilder();
-                    write_instruction_position_and_spaces(os, last_instr_end, cmd.Begin, offset);
+                    write_instruction_position_and_spaces(os, lastInstrEnd, cmd.Begin, offset);
 
                     output.AppendLine(
-                        last_instr_jmp_or_ret
+                        lastInstrJmpOrRet
                             ? $"//  {os}Недостижимый код."
                             : $"    {os}throw new InvalidOperationException(\"Недекодированный код.\");");
                     output.Append("        ");
@@ -668,7 +672,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 string instr;
                 try
                 {
-                    instr = InstructionToString(detectedMethod, cmd_index, offset);
+                    instr = InstructionToString(detectedMethod, cmdIndex, offset);
                 }
                 catch (Exception ex)
                 {
@@ -680,7 +684,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 if (skip || cmd.CommentThis)
                     output.Append("//"); // Комментируем недостижимый код.
                 else
-                    output.Append("  ");   
+                    output.Append("  ");
 
                 if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
                     skip = true;
@@ -688,8 +692,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 output.AppendLine($"  {instr}");
 
-                last_instr_end = cmd.End;
-                last_instr_jmp_or_ret = cmd.IsJmpOrRet;
+                lastInstrEnd = cmd.End;
+                lastInstrJmpOrRet = cmd.IsJmpOrRet;
             }
 
             output.AppendLine("        }");
@@ -725,20 +729,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             WriteInstructionPosition(os, cmd.Begin, cmd.End, offset);
             write_spaces(os, LineCmdOffset - 1);
 
-            var comments_in_current_func = new List<string>();
+            var commentsInCurrentFunc = new List<string>();
 
             if (cmd.WriteCmd != null)
             {
-                os.Append(" " + cmd.WriteCmd(this, df, cmdIndex, comments_in_current_func, offset));
+                os.Append(" " + cmd.WriteCmd(this, df, cmdIndex, commentsInCurrentFunc, offset));
 
-                if (cmd.Comments.Count != 0 || comments_in_current_func.Count != 0)
+                if (cmd.Comments.Count != 0 || commentsInCurrentFunc.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);
             }
 
             foreach (var s in cmd.Comments)
                 os.Append($" /* {s} */");
 
-            foreach (var s in comments_in_current_func)
+            foreach (var s in commentsInCurrentFunc)
                 os.Append($" /* {s} */");
 
             return os.ToString();

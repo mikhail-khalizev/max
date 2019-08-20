@@ -73,7 +73,7 @@ namespace MikhailKhalizev.Max
                 definitionCollection.AddDefinitionsClass<Definitions>();
                 definitionCollection.AddDefinitionsClass<StringDefinitions>();
 
-                AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x10165d52, 0x1019c3cd + 1), "sys"); // TODO
+                AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys"); // TODO Implement IDefinitionGroupArea with Begin, End.
 
                 var redecodeArgIndex = args.IndexOf("--redecode");
                 if (0 <= redecodeArgIndex)

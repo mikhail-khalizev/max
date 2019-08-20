@@ -5,12 +5,12 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x18_e265-9f93986a")]
+        [MethodInfo("0x18_e265-97394712")]
         public void Method_0018_e265()
         {
             ii(0x18_e265, 3); callw(0x18_e070, -0x1f8);                 /* call 0xe070 */
-            ii(0x18_e268, 4); if(jbw(0x18_e2b3, 0x47)) goto l_0x18_e2b3; /* jb 0xe2b3 */
-            ii(0x18_e26c, 2); if(jcxzw(0x18_e2b3, 0x45)) goto l_0x18_e2b3; /* jcxz 0xe2b3 */
+            ii(0x18_e268, 4); if(jbw_func(0x18_e2b3, 0x47)) return;     /* jb 0xe2b3 */
+            ii(0x18_e26c, 2); if(jcxzw_func(0x18_e2b3, 0x45)) return;   /* jcxz 0xe2b3 */
             ii(0x18_e26e, 2); pushw(0x20);                              /* push 0x20 */
             ii(0x18_e270, 1); popw(es);                                 /* pop es */
             ii(0x18_e271, 6); cmp(memb_a16[es, 0x2f], 0x3);             /* cmp byte [es:0x2f], 0x3 */
@@ -36,8 +36,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e2aa, 4); mov(ax, memw_a32[ss, ebp + 0x18]);        /* mov ax, [ebp+0x18] */
             ii(0x18_e2ae, 2); mov(memw_a16[ds, bx], ax);                /* mov [bx], ax */
             ii(0x18_e2b0, 3); if(jmpw_func(0x18_e067, -0x24c)) return;  /* jmp 0xe067 */
-        l_0x18_e2b3:
-            ii(0x18_e2b3, 3); if(jmpw_func(0x18_e062, -0x254)) return;  /* jmp 0xe062 */
         }
     }
 }

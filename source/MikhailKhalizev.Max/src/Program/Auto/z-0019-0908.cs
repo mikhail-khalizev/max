@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("0x19_0908-7cf696cb")]
+        [MethodInfo("0x19_0908-c3334608")]
         public void Method_0019_0908()
         {
             ii(0x19_0908, 5); cmp(memb_a32[ss, ebp + 0x20], 0);         /* cmp byte [ebp+0x20], 0x0 */
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0952, 3); mov(cx, 0x10);                            /* mov cx, 0x10 */
             ii(0x19_0955, 4); movzx(ecx, cx);                           /* movzx ecx, cx */
             ii(0x19_0959, 3); repe_a32(() => cmpsb_a32());              /* a32 repe cmpsb */
-            ii(0x19_095c, 4); if(jnzw_func(0x19_097d, 0x1d)) return;    /* jnz 0x97d */
+            ii(0x19_095c, 4); if(jnzw(0x19_097d, 0x1d)) goto l_0x19_097d; /* jnz 0x97d */
             ii(0x19_0960, 5); lea(eax, 0x1460);                         /* lea eax, [0x1460] */
             ii(0x19_0965, 5); mov(memd_a32[ss, ebp + 0x4], eax);        /* mov [ebp+0x4], eax */
             ii(0x19_096a, 1); pushw(cs);                                /* push cs */
@@ -50,6 +50,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0978, 1); popw(es);                                 /* pop es */
             ii(0x19_0979, 2); popad();                                  /* popad */
             ii(0x19_097b, 2); iretd(); return;                          /* iretd */
+        l_0x19_097d:
+            ii(0x19_097d, 5); if(jmpw_a16_far_ind(cs, 0x14a8)) return;  /* jmp far word [cs:0x14a8] */
         }
     }
 }

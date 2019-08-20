@@ -100,7 +100,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             IsJmpOrJcc = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("j");
             IsLoopOrLoopcc = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");
             IsRet = 0 <= ud.mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
-            
+
             if (ud.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
                 throw new NotImplementedException();
 
@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
             catch { }
         }
-        
+
         public ud_type GetEffectiveSegmentOfOperand(ud_operand op)
         {
             if (PfxSeg != ud_type.UD_NONE)
@@ -200,14 +200,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             if (flags.HasFlag(InstrFlags.UseOprSizeInside))
             {
-                if (effOprSize == 8)
-                    sb.Append('b');
-                else if (effOprSize == 16)
-                    sb.Append('w');
-                else if (effOprSize == 32)
-                    sb.Append('d');
-                else if (effOprSize != 0)
-                    throw new InvalidOperationException($"effOprSize: {effOprSize}");
+                sb.Append(GetSizeSuffixByBits(effOprSize));
             }
 
             if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
@@ -235,7 +228,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
             else
                 needWriteNamespace = true;
-            
+
             var options = new DefinitionCollection.Options { WithNamespace = needWriteNamespace };
 
 
@@ -252,7 +245,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     sb.Append(", ");
                 nonFirstArg = true;
 
-                var oprSize = (int) op.size;
+                var oprSize = (int)op.size;
                 if (oprSize == 0)
                     oprSize = effOprSize;
 
@@ -270,11 +263,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         break;
 
                     case ud_type.UD_OP_MEM:
-                    {
-                        // TODO Remove?
-                        var memInside = // Обращение к памяти происходит внутри инструкции.
-                            new[]
-                            {
+                        {
+                            // TODO Remove?
+                            var memInside = // Обращение к памяти происходит внутри инструкции.
+                                new[]
+                                {
                                 ud_mnemonic_code.UD_Ilds,
                                 ud_mnemonic_code.UD_Iles,
                                 ud_mnemonic_code.UD_Ilss,
@@ -288,96 +281,88 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                 ud_mnemonic_code.UD_Ifrstor,
                                 ud_mnemonic_code.UD_Ifbstp,
                                 ud_mnemonic_code.UD_Ibound
-                            }.Contains(Mnemonic) ||
-                            new[]
-                            {
+                                }.Contains(Mnemonic) ||
+                                new[]
+                                {
                                 ud_mnemonic_code.UD_Icall,
                                 ud_mnemonic_code.UD_Ijmp
-                            }.Contains(Mnemonic) && BrFar;
+                                }.Contains(Mnemonic) && BrFar;
 
-                        if (memInside == false)
-                        {
-                            if (oprSize == 8)
-                                sb.Append("memb");
-                            else if (oprSize == 16)
-                                sb.Append("memw");
-                            else if (oprSize == 32)
-                                sb.Append("memd");
-                            else if (oprSize == 64)
-                                sb.Append("memq");
-                            else if (oprSize == 80)
-                                sb.Append("memt");
-                            else
-                                throw new NotImplementedException($"oprSize: {oprSize}");
-                            sb.Append($"{adrModeStr}[");
-                        }
-
-                        if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
-                        {
-                            sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
-
-                            if (PfxSeg != ud_type.UD_NONE)
-                                usePfxSeg = true;
-                        }
-
-                        var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
-                        if (op.@base != ud_type.UD_NONE)
-                        {
-                            sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
-                            isNextOperation = true;
-                        }
-
-                        if (op.index != ud_type.UD_NONE)
-                        {
-                            if (isNextOperation)
-                                sb.Append(" + ");
-                            isNextOperation = true;
-
-                            sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
-                        }
-
-                        if (1 < op.scale)
-                        {
-                            if (op.index == ud_type.UD_NONE)
-                                throw new NotImplementedException();
-
-                            sb.Append($" * {op.scale}");
-                        }
-
-                        if (op.offset != 0)
-                        {
-                            switch (op.offset)
+                            if (memInside == false)
                             {
-                                case 8:
-                                    val = op.lval.@sbyte;
-                                    break;
-                                case 16:
-                                    val = op.lval.sword;
-                                    break;
-                                case 32:
-                                    val = op.lval.sdword;
-                                    break;
-                                default: throw new NotImplementedException($"op.offset: {op.offset}");
+                                sb.Append("mem");
+                                sb.Append(GetSizeSuffixByBits(oprSize));
+                                sb.Append(adrModeStr);
+                                sb.Append("[");
                             }
 
-                            if (val < 0)
+                            if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
                             {
-                                sb.Append(isNextOperation ? " - " : "-");
-                                sb.Append($"0x{-val:x}");
-                            }
-                            else
-                            {
-                                sb.Append(isNextOperation ? " + " : "");
-                                sb.Append(DefinitionCollection.GetAddressFullName(val, options));
+                                sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
+
+                                if (PfxSeg != ud_type.UD_NONE)
+                                    usePfxSeg = true;
                             }
 
-                            isNextOperation = true;
+                            var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
+                            if (op.@base != ud_type.UD_NONE)
+                            {
+                                sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
+                                isNextOperation = true;
+                            }
+
+                            if (op.index != ud_type.UD_NONE)
+                            {
+                                if (isNextOperation)
+                                    sb.Append(" + ");
+                                isNextOperation = true;
+
+                                sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
+                            }
+
+                            if (1 < op.scale)
+                            {
+                                if (op.index == ud_type.UD_NONE)
+                                    throw new NotImplementedException();
+
+                                sb.Append($" * {op.scale}");
+                            }
+
+                            if (op.offset != 0)
+                            {
+                                switch (op.offset)
+                                {
+                                    case 8:
+                                        val = op.lval.@sbyte;
+                                        break;
+                                    case 16:
+                                        val = op.lval.sword;
+                                        break;
+                                    case 32:
+                                        val = op.lval.sdword;
+                                        break;
+                                    default:
+                                        throw new NotImplementedException($"op.offset: {op.offset}");
+                                }
+
+                                if (val < 0)
+                                {
+                                    sb.Append(isNextOperation ? " - " : "-");
+                                    sb.Append($"0x{-val:x}");
+                                }
+                                else
+                                {
+                                    sb.Append(isNextOperation ? " + " : "");
+                                    sb.Append(DefinitionCollection.GetAddressFullName(val, options));
+                                }
+
+                                isNextOperation = true;
+                            }
+
+                            if (memInside == false)
+                                sb.Append(']');
+                            break;
                         }
-
-                        if (memInside == false)
-                            sb.Append(']');
-                        break;
-                    }
 
                     case ud_type.UD_OP_IMM:
                         switch (oprSize)
@@ -395,22 +380,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                                     ud_mnemonic_code.UD_Icmp
                                 }.Contains(Mnemonic);
 
-                                // Работа не с 8-байтой инструкцией.
-                                if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
-                                    needSignExtend = needSignExtend ||
-                                        Mnemonic == ud_mnemonic_code.UD_Iand ||
-                                        Mnemonic == ud_mnemonic_code.UD_Ior ||
-                                        Mnemonic == ud_mnemonic_code.UD_Ixor;
+                                    // Работа не с 8-байтой инструкцией.
+                                    if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
+                                        needSignExtend = needSignExtend ||
+                                            Mnemonic == ud_mnemonic_code.UD_Iand ||
+                                            Mnemonic == ud_mnemonic_code.UD_Ior ||
+                                            Mnemonic == ud_mnemonic_code.UD_Ixor;
 
-                                val = op.lval.@sbyte;
+                                    val = op.lval.@sbyte;
 
-                                if (val < 0 && needSignExtend)
-                                    sb.Append(
-                                        $"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
-                                else
-                                    sb.Append(HexHelper.ToShortGrouped4Hex(op.lval.ubyte));
-                                break;
-                            }
+                                    if (val < 0 && needSignExtend)
+                                        sb.Append(
+                                            $"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
+                                    else
+                                        sb.Append(HexHelper.ToShortGrouped4Hex(op.lval.ubyte));
+                                    break;
+                                }
 
                             case 16:
                                 sb.Append(DefinitionCollection.GetAddressFullName(op.lval.uword, options));
@@ -521,7 +506,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
             return sb.ToString();
         }
-        
+
         #region Known Instructions
 
         [Flags]
@@ -750,7 +735,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 {ud_mnemonic_code.UD_Iverr, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ilahf, InstrFlags.None},
                 {ud_mnemonic_code.UD_Isalc, InstrFlags.None},
-                
+
                 {ud_mnemonic_code.UD_Iinvlpg, InstrFlags.None},
                 {ud_mnemonic_code.UD_Isysenter, InstrFlags.None},
                 {ud_mnemonic_code.UD_Imovups, InstrFlags.None}
@@ -796,7 +781,32 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        
+
+        public static string GetSizeSuffixByBits(int size)
+        {
+            switch (size)
+            {
+                case 8:
+                    return "b";
+                case 16:
+                    return "w";
+                case 32:
+                    return "d";
+                case 64:
+                    return "q";
+                case 80:
+                    return "t";
+                case 128:
+                    return "o";
+                case 256:
+                    return "y";
+                case 512:
+                    return "z";
+                default:
+                    throw new ArgumentException($"Unknown size {size}.");
+            }
+        }
+
         private class AssemblyCode : IAssemblyCode
         {
             private readonly IMemory _memory;
@@ -831,6 +841,5 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             /// <inheritdoc />
             public int Length => int.MaxValue;
         }
-
     }
 }

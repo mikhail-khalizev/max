@@ -303,9 +303,10 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         public MemoryAccess memd_a32 => Implementation.memd_a32;
         /// <inheritdoc />
         public MemoryAccess memq_a32 => Implementation.memq_a32;
-
         /// <inheritdoc />
         public MemoryAccess memt_a32 => Implementation.memt_a32;
+        /// <inheritdoc />
+        public MemoryAccess memo_a32 => Implementation.memo_a32;
 
         #endregion
 
@@ -677,7 +678,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void calld_far_abs(SegmentRegister segment, ValueBase address)
+        public void calld_far_abs(int segment, ValueBase address)
         {
             Implementation.calld_far_abs(segment, address);
         }

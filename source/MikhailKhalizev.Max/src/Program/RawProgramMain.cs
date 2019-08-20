@@ -407,6 +407,10 @@ namespace MikhailKhalizev.Max.Program
             engine.AddForceEndMethod(0x18_f88b);
             engine.AddForceEndMethod(0x18_f8ef);
             engine.AddForceEndMethod(0x19_8748);
+            engine.AddForceEndMethod(0x100f_e8f8);
+            engine.AddForceEndMethod(0x100f_bf17);
+            engine.AddForceEndMethod(0x100f_a6fe);
+            engine.AddForceEndMethod(0x100f_bf17);
         }
 
         private List<string> DecodeCurrentMethod()

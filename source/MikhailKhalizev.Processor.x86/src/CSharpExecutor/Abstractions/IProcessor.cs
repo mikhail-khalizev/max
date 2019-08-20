@@ -176,7 +176,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         MemoryAccess memw_a32 { get; }
         MemoryAccess memd_a32 { get; }
         MemoryAccess memq_a32 { get; }
+
+        // 80 bit.
         MemoryAccess memt_a32 { get; }
+
+        // 128 bit.
+        MemoryAccess memo_a32 { get; }
 
         #endregion
 
@@ -546,7 +551,7 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_far_abs(SegmentRegister segment, ValueBase address);
+        void calld_far_abs(int segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
