@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -57,7 +57,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             if (options.WithNamespace)
             {
                 var n = AddressNameConverter.GetNamespace(address);
-                if (n != null)
+                if (!string.IsNullOrEmpty(n))
                     str = $"/* {n} */ ";
             }
 

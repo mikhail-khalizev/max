@@ -67,36 +67,32 @@ namespace MikhailKhalizev.Max
 
             // Start.
             var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
-            try
+            var definitionCollection = new DefinitionCollection();
+            definitionCollection.AddDefinitionsClass<Definitions>();
+            definitionCollection.AddDefinitionsClass<StringDefinitions>();
+
+            // TODO Implement IDefinitionGroupArea with Begin, End. And remove AddressNameConverter.AddNamespace.
+            AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys");
+            foreach (var interval in RawProgramMain.MveForceEndIntervals)
+                AddressNameConverter.AddNamespace(interval, "mve");
+
+            var redecodeArgIndex = args.IndexOf("--redecode");
+            if (0 <= redecodeArgIndex)
             {
-                var definitionCollection = new DefinitionCollection();
-                definitionCollection.AddDefinitionsClass<Definitions>();
-                definitionCollection.AddDefinitionsClass<StringDefinitions>();
+                NonBlockingConsole.WriteLine("Start Redecode.");
+                var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
 
-                AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys"); // TODO Implement IDefinitionGroupArea with Begin, End.
+                if (redecodeArgIndex + 1 < args.Length)
+                    redecode.LimitFiles = int.Parse(args[redecodeArgIndex + 1]);
 
-                var redecodeArgIndex = args.IndexOf("--redecode");
-                if (0 <= redecodeArgIndex)
-                {
-                    NonBlockingConsole.WriteLine("Start Redecode.");
-                    var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
-
-                    if (redecodeArgIndex + 1 < args.Length)
-                        redecode.LimitFiles = int.Parse(args[redecodeArgIndex + 1]);
-
-                    redecode.Start(GetType().Assembly);
-                    return;
-                }
-
-                using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
-                {
-                    var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
-                    rp.Start();
-                }
+                redecode.Start(GetType().Assembly);
+                return;
             }
-            finally
+
+            using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
             {
-                methodsInfo.Save();
+                var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
+                rp.Start();
             }
         }
     }

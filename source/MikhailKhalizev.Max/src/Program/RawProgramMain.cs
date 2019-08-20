@@ -411,7 +411,27 @@ namespace MikhailKhalizev.Max.Program
             engine.AddForceEndMethod(0x100f_bf17);
             engine.AddForceEndMethod(0x100f_a6fe);
             engine.AddForceEndMethod(0x100f_bf17);
+
+            // mve
+            foreach (var interval in MveForceEndIntervals)
+                for (var i = interval.Begin; i <= interval.End; i++)
+                    engine.AddForceEndMethod(i);
         }
+
+        public static Interval<Address, Address.Comparer>[] MveForceEndIntervals { get; } = {
+            new Interval<Address, Address.Comparer>(0x1018_eb10, 0x1018_ebd3),
+            new Interval<Address, Address.Comparer>(0x1018_ec5c, 0x1018_ecd6),
+            new Interval<Address, Address.Comparer>(0x1018_edc8, 0x1018_eedc),
+            new Interval<Address, Address.Comparer>(0x1018_efd0, 0x1018_f0ba),
+            new Interval<Address, Address.Comparer>(0x1018_f1a0, 0x1018_f278),
+            new Interval<Address, Address.Comparer>(0x1018_f408, 0x1018_f4eb),
+            new Interval<Address, Address.Comparer>(0x1018_f56c, 0x1018_f5f6),
+            new Interval<Address, Address.Comparer>(0x1018_f6dc, 0x1018_f7c2),
+            new Interval<Address, Address.Comparer>(0x1018_f89c, 0x1018_f926),
+            new Interval<Address, Address.Comparer>(0x1018_fab4, 0x1018_fbc1),
+            new Interval<Address, Address.Comparer>(0x1018_fd50, 0x1018_fe4d),
+            new Interval<Address, Address.Comparer>(0x1018_ffcc, 0x1019_00b7)
+        };
 
         private List<string> DecodeCurrentMethod()
         {
@@ -440,7 +460,6 @@ namespace MikhailKhalizev.Max.Program
             engine.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
 
 
-#if true
             // Замечено, что многие функции начинаются со следующих двух команд.
 
             // {0x68, 0x28, 0, 0, 0,  0xe8, 0x90, 0xa1, 0xb, 0}
@@ -474,12 +493,19 @@ namespace MikhailKhalizev.Max.Program
                     code = code.Slice(1);
                 }
             }
-#endif
+
 
             NonBlockingConsole.WriteLine($"Запуск декодирования кода '{fullAddress}'.");
 
             engine.DecodeMethod(fullAddress);
-            return engine.Save();
+            try
+            {
+                return engine.Save();
+            }
+            finally
+            {
+                MethodInfoCollection.Save();
+            }
         }
 
         private bool its_first = true;

@@ -21,16 +21,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             {
                 if (item.Interval == interval && item.Namespace == @namespace)
                     return;
-                throw new InvalidOperationException($"Already have internal {item.Interval} with namespace '{item.Namespace}'.");
+                // throw new InvalidOperationException($"Already have internal {item.Interval} with namespace '{item.Namespace}'.");
             }
 
             NamespaceByAddress.Add((interval, @namespace));
         }
 
         [CanBeNull]
-        public static string GetNamespace(Address address)
+        public static string GetNamespace(Address address, string separator = "_")
         {
-            return NamespaceByAddress.FirstOrDefault(x => x.Interval.Contains(address)).Namespace;
+            return string.Join(separator, NamespaceByAddress.Where(x => x.Interval.Contains(address)).Select(x => x.Namespace).Distinct());
+        }
+
+        [CanBeNull]
+        public static List<string> GetNamespaces(Address address)
+        {
+            return NamespaceByAddress.Where(x => x.Interval.Contains(address)).Select(x => x.Namespace).Distinct().ToList();
         }
     }
 }

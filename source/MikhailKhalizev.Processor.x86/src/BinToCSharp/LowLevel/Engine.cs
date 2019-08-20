@@ -241,11 +241,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 {
                     var methodBegin = method.Begin;
 
-                    if (methodBegin == 0x4218)
-                    {
-                        var debug = 0;
-                    }
-
                     // Проверим, делит ли другой метод текущий.
 
                     if (method.End != 0)
@@ -274,8 +269,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     // Посчитаем methodEnd - адрес конца метода, дальше которого функция точно уже не может продолжаться.
 
-                    var methodEnd = ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue);
-                    methodEnd = Math.Min(methodEnd, NewDetectedMethods.FirstGreaterOrDefault(method)?.Begin ?? Address.MaxValue);
+                    var forceEndAfter = ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue);
+                    var forceEndInsideAfter = NewDetectedMethods.FirstGreaterOrDefault(method)?.Begin ?? Address.MaxValue;
 
                     // Учтём, что инструкции в DecodedCode могут пересекаться. Найдём "верную дорожку".
 
@@ -286,7 +281,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
                     {
-                        if (methodEnd < cmd.End)
+                        if (forceEndAfter <= cmd.Begin || forceEndInsideAfter < cmd.End)
                             break;
 
                         // Не допускаем большие "дыры".
@@ -320,7 +315,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                         continue;
                     }
 
-                    methodEnd = instructions[instructions.Count - 1].End;
+                    var methodEnd = instructions[instructions.Count - 1].End;
 
                     // Заполняем label.
 
@@ -435,8 +430,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 method.MethodInfo = mi;
 
-                if (mi.Id == "0x17_d8bb-9d77fc5")
-                    throw new InvalidOperationException("0x17_d8bb-9d77fc5");
+                if (AlreadyDecodedContainsMethodInfo(mi))
+                    throw new InvalidOperationException("Detect already decoded method. Error in algorithm.");
 
                 // Заполняем IsLocalBranch.
 
@@ -560,10 +555,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             }
         }
 
-        private string SaveMethod(DetectedMethod detectedMethod)
+        private string SaveMethod(DetectedMethod method)
         {
-            var methodBegin = detectedMethod.MethodInfo.Address;
-            var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
+            var methodBegin = method.MethodInfo.Address;
+            var methodEnd = methodBegin + method.End - method.Begin;
 
             // Skip empty method.
             if (methodBegin == methodEnd)
@@ -582,8 +577,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 methodBegin,
                 new DefinitionCollection.Options { SkipDeclaringType = true, NullIfNoName = true });
 
-            if (ns != null && (kd == null || !kd.StartsWith(ns)))
-                baseFileName += $"-{ns}";
+            if (!string.IsNullOrEmpty(ns) && (kd == null || !kd.StartsWith(ns)))
+                baseFileName += $"-{ns.Replace("_", "-")}";
 
             if (kd != null)
                 baseFileName += $"-{kd}";
@@ -596,6 +591,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 filePath = Path.Combine(Configuration.CodeOutput, baseFileName + (1 < num ? $".{num}" : "") + ".cs");
                 if (!File.Exists(filePath))
                     break;
+
+                var text = File.ReadAllText(filePath);
+                if (text.Contains(method.MethodInfo.Id))
+                    break; // Перезапишем уже существующий файл.
+
                 num++;
             }
 
@@ -604,7 +604,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
 
             var output = new StringBuilder();
-            WriteCSharpMethodToStringBuilder(output, detectedMethod, num);
+            WriteCSharpMethodToStringBuilder(output, method, num);
 
             File.WriteAllText(filePath, output.ToString());
             return filePath;
@@ -624,7 +624,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                 methodName = $"Method_{methodBegin.ToString(o => o.RemoveHexPrefix().SetTrimZero(false).SetGroupSize(4))}";
 
             var ns = AddressNameConverter.GetNamespace(methodBegin);
-            if (ns != null)
+            if (!string.IsNullOrEmpty(ns))
                 ns = $"/* {ns} */ ";
 
             output.AppendLine("using System;");

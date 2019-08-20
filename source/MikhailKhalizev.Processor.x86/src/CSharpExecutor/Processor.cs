@@ -3854,7 +3854,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jad_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(!eflags.cf && !eflags.zf, address, offset);
         }
 
         /// <inheritdoc />

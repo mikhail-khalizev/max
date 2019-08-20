@@ -132,7 +132,7 @@ namespace MikhailKhalizev.Max.Dos
              */
         };
 
-        private kbd_keys key_pressed = kbd_keys.none;
+        public kbd_keys key_pressed = kbd_keys.none;
         private int p61data = 0;
         private int pal_index;
         private int pal_rgb;
