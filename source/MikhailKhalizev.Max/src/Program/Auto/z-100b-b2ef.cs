@@ -318,7 +318,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_b6f8, 4); mov(memb_a32[ds, eax + 0x2], 0x8);      /* mov byte [eax+0x2], 0x8 */
             ii(0x100b_b6fc, 2); jmpd(0x100b_b745, 0x47); goto l_0x100b_b745; /* jmp 0x100bb745 */
         //  ii(0x100b_b6fe, 2); mov(eax, eax);                          /* mov eax, eax */
-        //  ii(0x100b_b700, 28); /* Служебная область с абсолютными адресами переходов. {0x100b_b6c5, 0x100b_b6d1, 0x100b_b6f5, 0x100b_b6da, 0x100b_b6f5, 0x100b_b6e3, 0x100b_b6ec}. */
+        //  ii(0x100b_b700, 28); /* Служебная область с абсолютными адресами переходов. (0x100b_b6c5, 0x100b_b6d1, 0x100b_b6f5, 0x100b_b6da, 0x100b_b6f5, 0x100b_b6e3, 0x100b_b6ec). */
         l_0x100b_b71c:
             ii(0x100b_b71c, 6); mov(al, memb_a32[ss, ebp - 0xb4]);      /* mov al, [ebp-0xb4] */
             ii(0x100b_b722, 2); dec(al);                                /* dec al */

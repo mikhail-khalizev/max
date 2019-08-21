@@ -638,7 +638,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_6151:
             ii(0x100f_6151, 2); jmpd(0x100f_6185, 0x32); goto l_0x100f_6185; /* jmp 0x100f6185 */
         //  ii(0x100f_6153, 1); nop();                                  /* nop */
-        //  ii(0x100f_6154, 20); /* Служебная область с абсолютными адресами переходов. {0x100f_5af9, 0x100f_5b1e, 0x100f_5b34, 0x100f_5c7e, 0x100f_5dab}. */
+        //  ii(0x100f_6154, 20); /* Служебная область с абсолютными адресами переходов. (0x100f_5af9, 0x100f_5b1e, 0x100f_5b34, 0x100f_5c7e, 0x100f_5dab). */
         l_0x100f_6168:
             ii(0x100f_6168, 3); mov(eax, memd_a32[ss, ebp - 0x14]);     /* mov eax, [ebp-0x14] */
             ii(0x100f_616b, 3); mov(memd_a32[ss, ebp - 0x3c], eax);     /* mov [ebp-0x3c], eax */

@@ -178,7 +178,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100b_a973:
             ii(0x100b_a973, 2); jmpd(0x100b_a9b9, 0x44); goto l_0x100b_a9b9; /* jmp 0x100ba9b9 */
         //  ii(0x100b_a975, 3); lea(eax, eax + 0);                      /* lea eax, [eax] */
-        //  ii(0x100b_a978, 36); /* Служебная область с абсолютными адресами переходов. {0x100b_a6ff, 0x100b_a73a, 0x100b_a763, 0x100b_a78c, 0x100b_a7eb, 0x100b_a88a, 0x100b_a8a1, 0x100b_a900, 0x100b_a929}. */
+        //  ii(0x100b_a978, 36); /* Служебная область с абсолютными адресами переходов. (0x100b_a6ff, 0x100b_a73a, 0x100b_a763, 0x100b_a78c, 0x100b_a7eb, 0x100b_a88a, 0x100b_a8a1, 0x100b_a900, 0x100b_a929). */
         l_0x100b_a99c:
             ii(0x100b_a99c, 3); mov(al, memb_a32[ss, ebp - 0x8]);       /* mov al, [ebp-0x8] */
             ii(0x100b_a99f, 2); dec(al);                                /* dec al */

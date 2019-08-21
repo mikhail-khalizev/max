@@ -276,7 +276,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1010_bae3:
             ii(0x1010_bae3, 2); jmpd(0x1010_bb0f, 0x2a); goto l_0x1010_bb0f; /* jmp 0x1010bb0f */
         //  ii(0x1010_bae5, 3); lea(eax, eax + 0);                      /* lea eax, [eax] */
-        //  ii(0x1010_bae8, 20); /* Служебная область с абсолютными адресами переходов. {0x1010_ba8b, 0x1010_ba9f, 0x1010_bab0, 0x1010_bac1, 0x1010_bad2}. */
+        //  ii(0x1010_bae8, 20); /* Служебная область с абсолютными адресами переходов. (0x1010_ba8b, 0x1010_ba9f, 0x1010_bab0, 0x1010_bac1, 0x1010_bad2). */
         l_0x1010_bafc:
             ii(0x1010_bafc, 4); cmp(memd_a32[ss, ebp - 0x1c], 0x4);     /* cmp dword [ebp-0x1c], 0x4 */
             ii(0x1010_bb00, 2); if(jad(0x1010_bae3, -0x1f)) goto l_0x1010_bae3; /* ja 0x1010bae3 */

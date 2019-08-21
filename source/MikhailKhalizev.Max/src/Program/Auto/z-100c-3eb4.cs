@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100c_3fdd:
             ii(0x100c_3fdd, 2); jmpd(0x100c_4021, 0x42); goto l_0x100c_4021; /* jmp 0x100c4021 */
         //  ii(0x100c_3fdf, 1); nop();                                  /* nop */
-        //  ii(0x100c_3fe0, 36); /* Служебная область с абсолютными адресами переходов. {0x100c_3edd, 0x100c_3f01, 0x100c_3f25, 0x100c_3f49, 0x100c_3f6d, 0x100c_3f79, 0x100c_3f85, 0x100c_3f91, 0x100c_3fbc}. */
+        //  ii(0x100c_3fe0, 36); /* Служебная область с абсолютными адресами переходов. (0x100c_3edd, 0x100c_3f01, 0x100c_3f25, 0x100c_3f49, 0x100c_3f6d, 0x100c_3f79, 0x100c_3f85, 0x100c_3f91, 0x100c_3fbc). */
         l_0x100c_4004:
             ii(0x100c_4004, 3); mov(al, memb_a32[ss, ebp - 0x8]);       /* mov al, [ebp-0x8] */
             ii(0x100c_4007, 2); dec(al);                                /* dec al */

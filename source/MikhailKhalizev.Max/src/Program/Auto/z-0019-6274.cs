@@ -220,7 +220,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_648c, 1); pushw(ss);                                /* push ss */
             ii(0x19_648d, 1); pushw(ax);                                /* push ax */
             ii(0x19_648e, 3); pushw(memw_a16[ss, bp + 0x6]);            /* push word [bp+0x6] */
-            ii(0x19_6491, 3); callw(0x19_61c1, -0x2d3);                 /* call 0x61c1 */
+            ii(0x19_6491, 3); if(callw_up(0x19_61c1, -0x2d3)) return;   /* call 0x61c1 */
             ii(0x19_6494, 3); add(sp, 0x6);                             /* add sp, 0x6 */
             ii(0x19_6497, 4); dec(memw_a16[ds, 0x1274]);                /* dec word [0x1274] */
             ii(0x19_649b, 3); mov(ax, memw_a16[ss, bp - 0x58]);         /* mov ax, [bp-0x58] */
@@ -2194,7 +2194,7 @@ namespace MikhailKhalizev.Max.Program
                 default:
                     throw new NotImplementedException();
             } /* jmp word [cs:bx+0x23c5] */
-        //  ii(0x19_77e5, 50); /* Служебная область с абсолютными адресами переходов. {0x19_633b, 0x19_6442, 0x19_6430, 0x19_64c5, 0x19_655f, 0x19_6923, 0x19_6969, 0x19_6a4d, 0x19_6a5a, 0x19_6b6f, 0x19_6b8f, 0x19_6d0e, 0x19_6d4f, 0x19_6e21, 0x19_6f54, 0x19_7203, 0x19_7417, 0x19_7428, 0x19_751e, 0x19_75aa, 0x19_75ca, 0x19_7602, 0x19_773b, 0x19_7746, 0x19_634c}. */
+        //  ii(0x19_77e5, 50); /* Служебная область с абсолютными адресами переходов. (0x19_633b, 0x19_6442, 0x19_6430, 0x19_64c5, 0x19_655f, 0x19_6923, 0x19_6969, 0x19_6a4d, 0x19_6a5a, 0x19_6b6f, 0x19_6b8f, 0x19_6d0e, 0x19_6d4f, 0x19_6e21, 0x19_6f54, 0x19_7203, 0x19_7417, 0x19_7428, 0x19_751e, 0x19_75aa, 0x19_75ca, 0x19_7602, 0x19_773b, 0x19_7746, 0x19_634c). */
         l_0x19_7817:
             ii(0x19_7817, 3); mov(ax, memw_a16[ss, bp - 0x14]);         /* mov ax, [bp-0x14] */
             ii(0x19_781a, 3); or(ax, memw_a16[ss, bp - 0x16]);          /* or ax, [bp-0x16] */

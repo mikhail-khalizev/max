@@ -182,7 +182,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_5b88, 2); jmpd(0x1012_5bc7, 0x3d); goto l_0x1012_5bc7; /* jmp 0x10125bc7 */
         l_0x1012_5b8a:
             ii(0x1012_5b8a, 2); jmpd(0x1012_5bc7, 0x3b); goto l_0x1012_5bc7; /* jmp 0x10125bc7 */
-        //  ii(0x1012_5b8c, 32); /* Служебная область с абсолютными адресами переходов. {0x1012_59ec, 0x1012_5a12, 0x1012_5a29, 0x1012_5a6c, 0x1012_5aac, 0x1012_5ac3, 0x1012_5b5b, 0x1012_59d5}. */
+        //  ii(0x1012_5b8c, 32); /* Служебная область с абсолютными адресами переходов. (0x1012_59ec, 0x1012_5a12, 0x1012_5a29, 0x1012_5a6c, 0x1012_5aac, 0x1012_5ac3, 0x1012_5b5b, 0x1012_59d5). */
         l_0x1012_5bac:
             ii(0x1012_5bac, 3); mov(al, memb_a32[ss, ebp - 0xc]);       /* mov al, [ebp-0xc] */
             ii(0x1012_5baf, 3); mov(memb_a32[ss, ebp - 0x10], al);      /* mov [ebp-0x10], al */

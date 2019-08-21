@@ -179,7 +179,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_3ea5:
             ii(0x100f_3ea5, 2); jmpd(0x100f_3ee4, 0x3d); goto l_0x100f_3ee4; /* jmp 0x100f3ee4 */
         //  ii(0x100f_3ea7, 1); nop();                                  /* nop */
-        //  ii(0x100f_3ea8, 24); /* Служебная область с абсолютными адресами переходов. {0x100f_3c88, 0x100f_3d10, 0x100f_3db4, 0x100f_3df1, 0x100f_3e2e, 0x100f_3e6b}. */
+        //  ii(0x100f_3ea8, 24); /* Служебная область с абсолютными адресами переходов. (0x100f_3c88, 0x100f_3d10, 0x100f_3db4, 0x100f_3df1, 0x100f_3e2e, 0x100f_3e6b). */
         l_0x100f_3ec0:
             ii(0x100f_3ec0, 3); mov(al, memb_a32[ss, ebp - 0xc]);       /* mov al, [ebp-0xc] */
             ii(0x100f_3ec3, 6); mov(memb_a32[ss, ebp - 0x154], al);     /* mov [ebp-0x154], al */

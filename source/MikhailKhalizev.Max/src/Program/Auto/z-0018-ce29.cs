@@ -82,7 +82,7 @@ namespace MikhailKhalizev.Max.Program
                 default:
                     throw new NotImplementedException();
             } /* jmp word [cs:bx+0x33aa] */
-        //  ii(0x18_ceca, 12); /* Служебная область с абсолютными адресами переходов. {0x18_d052, 0x18_ceb8, 0x18_d052, 0x18_cf12, 0x18_cf12, 0x18_cf12}. */
+        //  ii(0x18_ceca, 12); /* Служебная область с абсолютными адресами переходов. (0x18_d052, 0x18_ceb8, 0x18_d052, 0x18_cf12, 0x18_cf12, 0x18_cf12). */
         l_0x18_ced6:
             ii(0x18_ced6, 3); mov(al, memb_a16[ds, 0x980]);             /* mov al, [0x980] */
             ii(0x18_ced9, 1); cbw();                                    /* cbw */
@@ -123,7 +123,7 @@ namespace MikhailKhalizev.Max.Program
                 default:
                     throw new NotImplementedException();
             } /* jmp word [cs:bx+0x33e6] */
-        //  ii(0x18_cf06, 12); /* Служебная область с абсолютными адресами переходов. {0x18_cedc, 0x18_d052, 0x18_cf12, 0x18_d052, 0x18_cee7, 0x18_cee1}. */
+        //  ii(0x18_cf06, 12); /* Служебная область с абсолютными адресами переходов. (0x18_cedc, 0x18_d052, 0x18_cf12, 0x18_d052, 0x18_cee7, 0x18_cee1). */
         l_0x18_cf12:
             ii(0x18_cf12, 3); pushw(memw_a16[ss, bp - 0x16]);           /* push word [bp-0x16] */
             ii(0x18_cf15, 3); callw(0x18_daf7, 0xbdf);                  /* call 0xdaf7 */

@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100a_7927:
             ii(0x100a_7927, 2); jmpd(0x100a_795b, 0x32); goto l_0x100a_795b; /* jmp 0x100a795b */
         //  ii(0x100a_7929, 3); lea(eax, eax + 0);                      /* lea eax, [eax] */
-        //  ii(0x100a_792c, 20); /* Служебная область с абсолютными адресами переходов. {0x100a_78b1, 0x100a_78c3, 0x100a_78d5, 0x100a_78e7, 0x100a_78f6}. */
+        //  ii(0x100a_792c, 20); /* Служебная область с абсолютными адресами переходов. (0x100a_78b1, 0x100a_78c3, 0x100a_78d5, 0x100a_78e7, 0x100a_78f6). */
         l_0x100a_7940:
             ii(0x100a_7940, 3); mov(al, memb_a32[ss, ebp - 0x10]);      /* mov al, [ebp-0x10] */
             ii(0x100a_7943, 3); mov(memb_a32[ss, ebp - 0x14], al);      /* mov [ebp-0x14], al */

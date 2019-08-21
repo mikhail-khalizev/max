@@ -199,7 +199,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_db15, 3); calld_abs(memd_a32[ds, ebx + 0x44]);    /* call dword [ebx+0x44] */
             ii(0x1008_db18, 2); jmpd(0x1008_db55, 0x3b); goto l_0x1008_db55; /* jmp 0x1008db55 */
         //  ii(0x1008_db1a, 2); mov(eax, eax);                          /* mov eax, eax */
-        //  ii(0x1008_db1c, 28); /* Служебная область с абсолютными адресами переходов. {0x1008_d98b, 0x1008_d96e, 0x1008_d998, 0x1008_daf9, 0x1008_d9f4, 0x1008_daf9, 0x1008_dac7}. */
+        //  ii(0x1008_db1c, 28); /* Служебная область с абсолютными адресами переходов. (0x1008_d98b, 0x1008_d96e, 0x1008_d998, 0x1008_daf9, 0x1008_d9f4, 0x1008_daf9, 0x1008_dac7). */
         l_0x1008_db38:
             ii(0x1008_db38, 3); mov(al, memb_a32[ss, ebp - 0x8]);       /* mov al, [ebp-0x8] */
             ii(0x1008_db3b, 2); sub(al, 0x5);                           /* sub al, 0x5 */
