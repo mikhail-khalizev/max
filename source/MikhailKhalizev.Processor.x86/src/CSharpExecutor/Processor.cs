@@ -1782,10 +1782,10 @@ namespace MikhailKhalizev.Processor.x86.Core
                 if (padding == 0)
                 {
                     padding = Math.Max("Count".Length, count.ToString().Length);
-                    result += $"    {"Count".PadLeft(padding)}  Guid                                    Address{Environment.NewLine}";
+                    result += $"    {"Count".PadLeft(padding)}  Id{Environment.NewLine}";
                 }
 
-                result += $"    {count.ToString().PadLeft(padding)}  '{methodInfo.Id}'{Environment.NewLine}";
+                result += $"    {count.ToString().PadLeft(padding)}  {methodInfo.Id}{Environment.NewLine}";
             }
 
             return result;
@@ -1805,10 +1805,10 @@ namespace MikhailKhalizev.Processor.x86.Core
                 if (padding == 0)
                 {
                     padding = Math.Max("Count".Length, count.ToString().Length);
-                    result += $"    {"Count".PadLeft(padding)}  Guid                                    Address{Environment.NewLine}";
+                    result += $"    {"Count".PadLeft(padding)}  Id{Environment.NewLine}";
                 }
 
-                result += $"    {count.ToString().PadLeft(padding)}  '{methodInfo.Id}'{Environment.NewLine}";
+                result += $"    {count.ToString().PadLeft(padding)}  {methodInfo.Id}{Environment.NewLine}";
             }
 
             return result;
