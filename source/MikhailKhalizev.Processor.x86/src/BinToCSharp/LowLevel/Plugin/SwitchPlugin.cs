@@ -287,8 +287,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             _addrAreaBegin = addrOfAddrs;
 
             var os = new StringBuilder();
-            os.Append("Служебная область с абсолютными адресами переходов. {");
-
+            os.Append("Служебная область с абсолютными адресами переходов. (");
 
             Engine.BrunchesInfo.TryGetValue(new BrunchInfo(cmd.Begin), out var jtka);
             if (jtka == null)
@@ -311,7 +310,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         to = Engine.Memory.GetFixSize(addrOfAddrs + i, 4).GetUInt32();
                         break;
                     default:
-                        throw new NotImplementedException();
+                        throw new NotImplementedException($"Engine.Mode: {(int)Engine.Mode}.");
                 }
 
                 to += Engine.CsBase;
@@ -325,7 +324,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 Engine.AddToDecode(to);
             }
 
-            os.Append("}.");
+            os.Append(").");
 
             Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
 
@@ -343,20 +342,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
             if (curJmp == null)
-                throw new NotImplementedException();
+                throw new NotImplementedException("curJmp == null");
 
             var funcAddArg = new StringBuilder();
 
             foreach (var to in curJmp.To)
             {
                 if (!dm.Labels.Contains(to))
-                    throw new NotImplementedException();
-
+                {
+                    NonBlockingConsole.WriteLine(
+                        "Не все метки switch находятся внутри одного метода " +
+                        "(видимо не удалось разбить код на методы так, чтобы switch целиком находился внутри метода). " +
+                        $"Method.Id = {dm.MethodInfo.Id}.");
+                    return dm.Instructions[cmdIndex].ToCodeString();
+                }
                 funcAddArg.Append($"({to})");
             }
 
             if (curJmp.To.Count == 0)
-                throw new NotImplementedException();
+                throw new NotImplementedException("curJmp.To.Count == 0");
             var funcSuffix = "_switch";
 
             if (!dm.Instructions[cmdIndex].IsLocalBranch)
@@ -373,7 +377,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                     to =>
                     {
                         if (!dm.Labels.Contains(to))
-                            throw new NotImplementedException();
+                            throw new NotImplementedException("!dm.Labels.Contains(to) 2");
 
                         return
                             new[]

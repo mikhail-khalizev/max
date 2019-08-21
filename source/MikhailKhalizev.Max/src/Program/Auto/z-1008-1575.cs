@@ -76,43 +76,34 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_1628, 3); mov(al, memb_a32[ds, eax + 0x15]);      /* mov al, [eax+0x15] */
             ii(0x1008_162b, 3); mov(memb_a32[ss, ebp - 0x14], al);      /* mov [ebp-0x14], al */
             ii(0x1008_162e, 5); jmpd(0x1008_16a8, 0x75); goto l_0x1008_16a8; /* jmp 0x100816a8 */
-        //  ii(0x1008_1633, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.InitAttackOn); /* mov dword [ebp-0x1c], 0x101a0228 */
-        //  ii(0x1008_163a, 5); jmpd(0x1008_16c3, 0x84); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_163f, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.WaitToAttack); /* mov dword [ebp-0x1c], 0x101a0239 */
-        //  ii(0x1008_1646, 5); jmpd(0x1008_16c3, 0x78); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_164b, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.GatherAttackOn); /* mov dword [ebp-0x1c], 0x101a0249 */
-        //  ii(0x1008_1652, 5); jmpd(0x1008_16c3, 0x6c); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_1657, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.AdvOn); /* mov dword [ebp-0x1c], 0x101a025a */
-        //  ii(0x1008_165e, 2); jmpd(0x1008_16c3, 0x63); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_1660, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.AdvWTransOn); /* mov dword [ebp-0x1c], 0x101a0263 */
-        //  ii(0x1008_1667, 2); jmpd(0x1008_16c3, 0x5a); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_1669, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.SearchFor); /* mov dword [ebp-0x1c], 0x101a0273 */
-        //  ii(0x1008_1670, 2); jmpd(0x1008_16c3, 0x51); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_1672, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.BoldSearchFor); /* mov dword [ebp-0x1c], 0x101a027f */
-        //  ii(0x1008_1679, 2); jmpd(0x1008_16c3, 0x48); goto l_0x1008_16c3; /* jmp 0x100816c3 */
-        //  ii(0x1008_167b, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.Attack6); /* mov dword [ebp-0x1c], 0x101a0290 */
-        //  ii(0x1008_1682, 2); jmpd(0x1008_16c3, 0x3f); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_1633:
+            ii(0x1008_1633, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.InitAttackOn); /* mov dword [ebp-0x1c], 0x101a0228 */
+            ii(0x1008_163a, 5); jmpd(0x1008_16c3, 0x84); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_163f:
+            ii(0x1008_163f, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.WaitToAttack); /* mov dword [ebp-0x1c], 0x101a0239 */
+            ii(0x1008_1646, 5); jmpd(0x1008_16c3, 0x78); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_164b:
+            ii(0x1008_164b, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.GatherAttackOn); /* mov dword [ebp-0x1c], 0x101a0249 */
+            ii(0x1008_1652, 5); jmpd(0x1008_16c3, 0x6c); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_1657:
+            ii(0x1008_1657, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.AdvOn); /* mov dword [ebp-0x1c], 0x101a025a */
+            ii(0x1008_165e, 2); jmpd(0x1008_16c3, 0x63); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_1660:
+            ii(0x1008_1660, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.AdvWTransOn); /* mov dword [ebp-0x1c], 0x101a0263 */
+            ii(0x1008_1667, 2); jmpd(0x1008_16c3, 0x5a); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_1669:
+            ii(0x1008_1669, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.SearchFor); /* mov dword [ebp-0x1c], 0x101a0273 */
+            ii(0x1008_1670, 2); jmpd(0x1008_16c3, 0x51); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_1672:
+            ii(0x1008_1672, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.BoldSearchFor); /* mov dword [ebp-0x1c], 0x101a027f */
+            ii(0x1008_1679, 2); jmpd(0x1008_16c3, 0x48); goto l_0x1008_16c3; /* jmp 0x100816c3 */
+        l_0x1008_167b:
+            ii(0x1008_167b, 7); mov(memd_a32[ss, ebp - 0x1c], StringDefinitions.Attack6); /* mov dword [ebp-0x1c], 0x101a0290 */
+            ii(0x1008_1682, 2); jmpd(0x1008_16c3, 0x3f); goto l_0x1008_16c3; /* jmp 0x100816c3 */
         l_0x1008_1684:
             ii(0x1008_1684, 2); jmpd(0x1008_16c3, 0x3d); goto l_0x1008_16c3; /* jmp 0x100816c3 */
         //  ii(0x1008_1686, 2); mov(eax, eax);                          /* mov eax, eax */
-        //  ii(0x1008_1688, 2); xor(edx, memd_a32[ds, esi]);            /* xor edx, [esi] */
-        //  ii(0x1008_168a, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //  ii(0x1008_168c, 1); aas();                                  /* aas */
-        //  ii(0x1008_168d, 1); pushd(ss);                              /* push ss */
-        //  ii(0x1008_168e, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //  ii(0x1008_1690, 1); dec(ebx);                               /* dec ebx */
-        //  ii(0x1008_1691, 1); pushd(ss);                              /* push ss */
-        //  ii(0x1008_1692, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //  ii(0x1008_1694, 1); pushd(edi);                             /* push edi */
-        //  ii(0x1008_1695, 1); pushd(ss);                              /* push ss */
-        //  ii(0x1008_1696, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //  ii(0x1008_1698, 1); pushad();                               /* pushad */
-        //  ii(0x1008_1699, 1); pushd(ss);                              /* push ss */
-        //  ii(0x1008_169a, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //  ii(0x1008_169c, 6); imul(edx, memd_a32[ds, esi], 0x1672_1008); /* imul edx, [esi], 0x16721008 */
-        //  ii(0x1008_16a2, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
-        //  ii(0x1008_16a4, 2); if(jnpd(0x1008_16bc, 0x16)) goto l_0x1008_16bc; /* jnp 0x100816bc */
-        //  ii(0x1008_16a6, 2); or(memb_a32[ds, eax], dl);              /* or [eax], dl */
+        //  ii(0x1008_1688, 32); /* Служебная область с абсолютными адресами переходов. {0x1008_1633, 0x1008_163f, 0x1008_164b, 0x1008_1657, 0x1008_1660, 0x1008_1669, 0x1008_1672, 0x1008_167b}. */
         l_0x1008_16a8:
             ii(0x1008_16a8, 3); mov(al, memb_a32[ss, ebp - 0x14]);      /* mov al, [ebp-0x14] */
             ii(0x1008_16ab, 3); mov(memb_a32[ss, ebp - 0x20], al);      /* mov [ebp-0x20], al */
@@ -121,8 +112,28 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_16b4, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1008_16b6, 3); mov(al, memb_a32[ss, ebp - 0x20]);      /* mov al, [ebp-0x20] */
             ii(0x1008_16b9, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
-        l_0x1008_16bc:
-            ii(0x1008_16bc, 7); if(jmpd_abs(memd_a32[cs, eax + 0x1008_1688])) return; /* jmp dword [cs:eax+0x10081688] */
+            ii(0x1008_16bc, 7); 
+            switch (jmpd_abs_switch(memd_a32[cs, eax + 0x1008_1688]))
+            {
+                case 0x1008_1633:
+                    goto l_0x1008_1633;
+                case 0x1008_163f:
+                    goto l_0x1008_163f;
+                case 0x1008_164b:
+                    goto l_0x1008_164b;
+                case 0x1008_1657:
+                    goto l_0x1008_1657;
+                case 0x1008_1660:
+                    goto l_0x1008_1660;
+                case 0x1008_1669:
+                    goto l_0x1008_1669;
+                case 0x1008_1672:
+                    goto l_0x1008_1672;
+                case 0x1008_167b:
+                    goto l_0x1008_167b;
+                default:
+                    throw new NotImplementedException();
+            } /* jmp dword [cs:eax+0x10081688] */
         l_0x1008_16c3:
             ii(0x1008_16c3, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
             ii(0x1008_16c6, 3); mov(eax, memd_a32[ss, ebp - 0xc]);      /* mov eax, [ebp-0xc] */

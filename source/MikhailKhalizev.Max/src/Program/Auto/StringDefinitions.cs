@@ -87,6 +87,8 @@ namespace MikhailKhalizev.Max.Program
         public static string AttemptedToAddNullUnitToMapHashTableString { get; } = "Attempted to add NULL unit to map hash table.";
         public static string AttemptedToRemoveNullUnitFromMapHashTableString { get; } = "Attempted to remove NULL unit from map hash table.";
         public static string AttemptedToRemoveNullUnitFromUnitHashTableString { get; } = "Attempted to remove NULL unit from unit hash table.";
+        public static string AttemptToCaptureSString { get; } = "Attempt to capture %s!";
+        public static string AttemptToDisableSString { get; } = "Attempt to disable %s!";
         public static string AtThisPointYouMightWishToClickTheEndTurnButtonSeveralTimesSoTheEngineerWillFinishBuildingString { get; } = "\nAt this point you might wish to click the 'End Turn' button several times, so the Engineer will finish building.";
         public static string AtX2RateString { get; } = " at x2 rate";
         public static string AutoSavedTurnIString { get; } = "Auto-Saved turn %i";
@@ -113,6 +115,7 @@ namespace MikhailKhalizev.Max.Program
         public static string BuildCancelString { get; } = "Build cancel";
         public static string BuildClearingString { get; } = "Build clearing";
         public static string BuilderpathString { get; } = "BuilderPath";
+        public static string BuildHaltingString { get; } = "Build halting";
         public static string BuildingButtonNotEqual0String { get; } = "building_button != 0";
         public static string BuildingManagerGettypeEqualTaskManageBuildingsString { get; } = "building_manager->GetType() == task_manage_buildings";
         public static string BuildingsBuiltString { get; } = "Buildings Built";
@@ -120,6 +123,7 @@ namespace MikhailKhalizev.Max.Program
         public static string BuildingsMustBeConnectedToSharePowerFuelRawMaterialsAndGoldYouCanConnectBuildingsByPlacingThemNextToEachOtherOrByBuildingConnectString { get; } = "Buildings must be connected to share power, fuel, raw materials, and gold.  You can connect buildings by placing them next to each other, or by building connectors from one building to the other.";
         public static string BuildingsString { get; } = "buildings";
         public static string BuildingString { get; } = "building";
+        public static string BuildingString2 { get; } = ": building";
         public static string BuildListGetcountGreater0String { get; } = "build_list.GetCount() > 0";
         public static string BuildPacketExpectedTeamIReceivedTeamIString { get; } = "Build packet: expected team %i, received team %i";
         public static string BuildRateIIString { get; } = " Build rate      %i, %i\n";
@@ -155,6 +159,8 @@ namespace MikhailKhalizev.Max.Program
         public static string ChildString { get; } = "Child: ";
         public static string ClearAirZonesString { get; } = "Clear air zones: ";
         public static string ClearLandSeaZonesString { get; } = "Clear land / sea zones: ";
+        public static string ClearSiteString { get; } = ": clear site";
+        public static string ClearStartString { get; } = "Clear start";
         public static string ClearZoneMovingUnitNotEqual0String { get; } = "clear_zone->moving_unit != 0";
         public static string ClickInsideTapeToBeginTransformationString { get; } = "Click inside tape to begin transformation.";
         public static string ClickOnTheHeavyVehiclePlantToShowTheBuildButtonFactoriesNeedToBeConnectedToPowerAndASourceOfRawMaterialsUsuallyAMiningStationToOString { get; } = "Click on the heavy vehicle plant to show the Build button.  Factories need to be connected to power and a source of raw materials (usually a mining station) to operate.";
@@ -264,6 +270,7 @@ namespace MikhailKhalizev.Max.Program
         public static string DirnameidLessEndMemoryResourcesString { get; } = "DIRnameID < END_MEMORY_RESOURCES";
         public static string Disabled1TurnString { get; } = "Disabled 1 turn.";
         public static string DisabledITurnsString { get; } = "Disabled %i turns.";
+        public static string DisableStealString { get; } = "Disable/Steal";
         public static string DisableString { get; } = "disable";
         public static string DistanceLessMapxdim2String { get; } = "distance < MapXDim / 2";
         public static string DocksString { get; } = "Docks";
@@ -310,6 +317,7 @@ namespace MikhailKhalizev.Max.Program
         public static string EscortSAtIIString { get; } = "Escort %s at [%i,%i]";
         public static string EscortsString { get; } = "Escorts";
         public static string EscortString { get; } = "Escort";
+        public static string EvaluatingSiteString { get; } = ": evaluating site";
         public static string ExaminingZonesString { get; } = "examining zones";
         public static string ExpectedALetterString { get; } = "Expected a letter";
         public static string ExpectingAnCString { get; } = "Expecting an '%c'";
@@ -374,8 +382,10 @@ namespace MikhailKhalizev.Max.Program
         public static string GameSavedString { get; } = "Game saved.";
         public static string GameSetupString { get; } = "Game Setup:";
         public static string GatherAttackOnString { get; } = "Gather attack on";
+        public static string GetBuilderString { get; } = ": get builder";
         public static string GetIFromString { get; } = "get %i from ";
         public static string GetIMaterialsString { get; } = "Get %i Materials";
+        public static string GetMaterialsString { get; } = ": get materials";
         public static string GoldAllocIIString { get; } = " gold alloc      %i, %i\n";
         public static string GoldBackgroundNotEqual0String { get; } = "gold_background != 0";
         public static string GoldMiningIncreasedToIString { get; } = "Gold mining increased to %i.\n";
@@ -438,6 +448,7 @@ namespace MikhailKhalizev.Max.Program
         public static string HoldsRawMaterialsMiningStationsProduceRawMaterialsEveryTurnToSaveExtraRawMaterialsAMiningStationMustBeConnectedToAStorageUnitString { get; } = "Holds raw materials.  Mining stations produce raw materials every turn.  To save extra raw materials, a mining station must be connected to a storage unit.";
         public static string HoldsUnrefinedGoldOreMiningStationsProduceGoldEveryTurnIfTheyHaveGoldOreUnderneathThemToStoreTheOreAMiningStationMustBeConnectedString { get; } = "Holds unrefined gold ore.  Mining stations produce gold every turn, if they have gold ore underneath them.  To store the ore, a mining station must be connected to a gold vault.";
         public static string HorizontalSideEqualSideIsHigherString { get; } = "horizontal_side == SIDE_IS_HIGHER";
+        public static string HostIsNotTheSameReleaseVersionUnableToContinueWithConnectionString { get; } = "Host is not the same release version.\nUnable to continue with connection...";
         public static string HotSeatMenuString { get; } = "Hot Seat Menu";
         public static string HoveringString { get; } = "hovering";
         public static string HumanSoldiersEquippedWithLightAntiTankShoulderWeaponsInfantryCanSpotEnemyInflitratorsString { get; } = "Human soldiers equipped with light anti-tank shoulder weapons.  Infantry can spot enemy inflitrators.";
@@ -471,6 +482,7 @@ namespace MikhailKhalizev.Max.Program
         public static string InfoMapEqual0String { get; } = "info_map == 0";
         public static string InifileCppString { get; } = "inifile.cpp";
         public static string InitAttackOnString { get; } = "Init. attack on ";
+        public static string InitializingString { get; } = ": initializing";
         public static string InString { get; } = " in ";
         public static string InsufficientMaterialInStorageToReloadUnitString { get; } = "insufficient material in storage to reload unit.";
         public static string InsufficientMaterialInStorageToRepairUnitString { get; } = "insufficient material in storage to repair unit.";
@@ -495,6 +507,7 @@ namespace MikhailKhalizev.Max.Program
         public static string LandingFacilityForPlanesDoesNotRepairResupplyOrRefuelPlanesToResupplyAPlaneOnALandingPadUseANearbyTruckOrStorageUnitString { get; } = "Landing facility for planes.  Does not repair, resupply, or refuel planes.  To resupply a plane on a landing pad, use a nearby truck or storage unit.";
         public static string LandingPadsString { get; } = "Landing Pads";
         public static string LandingPadString { get; } = "Landing Pad";
+        public static string LandingString { get; } = "Landing";
         public static string LandMinesString { get; } = "Land Mines";
         public static string LandMineString { get; } = "Land Mine";
         public static string LandTilesGetcountGreater0String { get; } = "land_tiles.GetCount() > 0";
@@ -505,6 +518,7 @@ namespace MikhailKhalizev.Max.Program
         public static string LargeSlabString { get; } = "Large Slab";
         public static string LargeTapeString { get; } = "Large tape";
         public static string LayingStateString { get; } = "laying_state";
+        public static string LayMinesString { get; } = "lay mines";
         public static string LeaderSIAtIIString { get; } = ", leader %s %i at [%i,%i]";
         public static string LengthString { get; } = "length";
         public static string LessString { get; } = "<";
@@ -518,6 +532,7 @@ namespace MikhailKhalizev.Max.Program
         public static string LightVehicleWhichCanRapidlyRepairGroundUnitsAndBuildingsRepairsRequireMaterialsTheMostExtensiveTheDamageTheMoreMaterialsTheRepaiString { get; } = "Light vehicle which can rapidly repair ground units and buildings.  Repairs require materials.  The most extensive the damage, the more materials the repair requires.  Depots, docks, hangars, and barracks can also repair units.";
         public static string LimitToString { get; } = "Limit To:";
         public static string ListString { get; } = "list";
+        public static string LoadingString { get; } = "Loading";
         public static string LoadMenuString { get; } = "Load Menu";
         public static string LoadString { get; } = "Load";
         public static string LoadString2 { get; } = "load";
@@ -588,9 +603,11 @@ namespace MikhailKhalizev.Max.Program
         public static string MovedString { get; } = "moved";
         public static string MoveFinishedString { get; } = "Move: finished.";
         public static string MoveFractionString { get; } = "move_fraction";
+        public static string MoveOffSiteString { get; } = ": move off site";
         public static string MoveToIIString { get; } = "Move to [%i,%i]";
         public static string MoveToIIUsingSString { get; } = "Move to [%i,%i] using %s";
         public static string MoveToIIViaIIUsingSString { get; } = "Move to [%i,%i] via [%i,%i] using %s";
+        public static string MoveToSiteString { get; } = ": move to site";
         public static string MovingString { get; } = "moving";
         public static string MovingString2 { get; } = "moving ";
         public static string MovingString3 { get; } = "Moving";
@@ -604,6 +621,7 @@ namespace MikhailKhalizev.Max.Program
         public static string NameString2 { get; } = "name";
         public static string NeedALocationToPutThePowerGeneratorString { get; } = "Need a location to put the power generator.";
         public static string NetworkNotAvailableOrIpxSocketNotFoundUnableToContinueWithConnectionString { get; } = "Network not available or IPX socket not found.\nUnable to continue with connection...";
+        public static string NewAllocationString { get; } = "New allocation";
         public static string NewGameMenuString { get; } = "New Game Menu";
         public static string NewGenderEqualMNewGenderEqualFNewGenderEqualFString { get; } = "new_gender == 'M' || new_gender == 'F' || new_gender == 'F'";
         public static string NewUnitNotEqual0String { get; } = "new_unit != 0";
@@ -708,7 +726,9 @@ namespace MikhailKhalizev.Max.Program
         public static string RefCountEqual0String { get; } = "ref_count == 0";
         public static string ReferenceCountEqual0String { get; } = "reference_count == 0";
         public static string RefineryForConvertingGoldIntoCreditsCreditsAreRequiredToPurchaseUnitImprovementsToRunAGoldRefineryNeedsASourceOfPowerAndASourceOString { get; } = "Refinery for converting gold into credits.  Credits are required to purchase unit improvements.  To run, a gold refinery needs a source of power and a source of gold ore.  A mining station can produce gold ore if one of its four squares covers a square with underground gold.";
+        public static string RefuellingString { get; } = "Refuelling";
         public static string ReloadAllString { get; } = "Reload All";
+        public static string ReloadingString { get; } = "Reloading";
         public static string ReloadString { get; } = "Reload";
         public static string ReloadString2 { get; } = "reload";
         public static string ReloadUnitWithAmmunitionString { get; } = "Reload unit with ammunition";
@@ -717,7 +737,9 @@ namespace MikhailKhalizev.Max.Program
         public static string RemoveRubbleFromIIString { get; } = "Remove rubble from [%i,%i]";
         public static string RemoveString { get; } = "remove";
         public static string RemovingMinesString { get; } = "Removing mines";
+        public static string RemovingMinesString2 { get; } = ": removing mines";
         public static string RepairAllString { get; } = "Repair All";
+        public static string RepairingString { get; } = "Repairing";
         public static string RepairString { get; } = "Repair ";
         public static string RepairString2 { get; } = "Repair";
         public static string RepairString3 { get; } = "repair";
@@ -793,7 +815,10 @@ namespace MikhailKhalizev.Max.Program
         public static string SerialConnectMenuString { get; } = "Serial Connect Menu";
         public static string ShadowOffsetXString { get; } = "shadow_offset_x";
         public static string ShadowOffsetYString { get; } = "shadow_offset_y";
+        public static string SHasBeenCapturedString { get; } = "%s has been captured!";
         public static string SHasBeenDestroyedString { get; } = "%s has been destroyed!";
+        public static string SHasBeenDisabledString { get; } = "%s has been disabled!";
+        public static string SHasEndedTurnString { get; } = "%s has ended turn.";
         public static string SHasLeftTheGameString { get; } = "%s has left the game.";
         public static string ShipMountedMissileLauncherExcellentRangeHighAttackStrengthAndMediumArmorMakesThisAPowerfulUnitString { get; } = "Ship mounted missile launcher.  Excellent range, high attack strength, and medium armor makes this a powerful unit.";
         public static string ShipsForHaulingRawMaterialUsefulForResupplyingEngineersAndSeaCombatUnitsWithNewAmmunitionString { get; } = "Ships for hauling raw material.  Useful for resupplying engineers and sea combat units with new ammunition.";
@@ -809,6 +834,7 @@ namespace MikhailKhalizev.Max.Program
         public static string SIPointsISString { get; } = "%s: %i points, %i %s";
         public static string SIString { get; } = "%s %i";
         public static string SIString2 { get; } = "%s #%i";
+        public static string SiteBlockedString { get; } = ": site blocked";
         public static string SiteXGreater0SiteYGreater0String { get; } = "site.x > 0 && site.y > 0";
         public static string SiteXGreaterOrEqual0SiteXLessMapxdimSiteYGreaterOrEqual0SiteYLessMapydimString { get; } = "site.x >= 0 && site.x < MapXDim && site.y >= 0 && site.y < MapYDim";
         public static string SizeLessOrEqualMaxdatalenString { get; } = "size <= MAXDATALEN";
@@ -883,6 +909,7 @@ namespace MikhailKhalizev.Max.Program
         public static string SurveyorString { get; } = "Surveyor";
         public static string SurveyString { get; } = "Survey";
         public static string TaggedUnitOutOfRangeString { get; } = "Tagged unit out of range.";
+        public static string TakingOffString { get; } = "Taking off";
         public static string TankPlasmaBallString { get; } = "tank plasma ball";
         public static string TanksAreBigAndToughButNotAsFastAsScoutsLikeMostUnitsTanksCanEitherMoveOrFireButNotAlwaysBothIfYouDonTMoveATankItCanFireTwiceEachString { get; } = "Tanks are big and tough, but not as fast as scouts.  Like most units, tanks can either move or fire, but not always both.  If you don't move a tank, it can fire twice each turn.  If you move it a short way, it can fire once.  If you move it a long way, it can't fire at all.";
         public static string TanksString { get; } = "Tanks";
@@ -922,6 +949,7 @@ namespace MikhailKhalizev.Max.Program
         public static string TrainingMissionsString { get; } = "Training Missions";
         public static string TrainsInfiltratorsWhoCanDisableOrCaptureEnemyUnitsAndInfantryToGuardAgainstInfiltratorsOnlyInfantryAndOtherInfiltratorsCanDetectString { get; } = "Trains infiltrators who can disable or capture enemy units, and infantry to guard against infiltrators.  Only infantry and other infiltrators can detect infiltrators.  A training hall requires colonists from a Habitat and power to operate.";
         public static string TranferringString { get; } = "Tranferring";
+        public static string TransformString { get; } = "Transform";
         public static string TransportNotEqual0String { get; } = "transport != 0";
         public static string TransportUnitsDropOffSAtIIString { get; } = "Transport units: drop off %s at [%i,%i]";
         public static string TransportUnitsPickUpSAtIIString { get; } = "Transport units: pick up %s at [%i,%i]";
@@ -987,6 +1015,7 @@ namespace MikhailKhalizev.Max.Program
         public static string UnknownString { get; } = "UNKNOWN";
         public static string UnknownTypeString { get; } = "Unknown type";
         public static string UnknownUnitIdIReferencedInRemotePacketString { get; } = "Unknown unit, id %i, referenced in remote packet.";
+        public static string UnloadingString { get; } = "Unloading";
         public static string UpdateTerrainFinishedString { get; } = "Update Terrain (finished)";
         public static string UpdateTerrainIIString { get; } = "Update Terrain [%i,%i]";
         public static string UpgAllString { get; } = "Upg. All";
@@ -996,6 +1025,7 @@ namespace MikhailKhalizev.Max.Program
         public static string UpgradesString { get; } = "Upgrades";
         public static string UpgradeString { get; } = "Upgrade";
         public static string UpgradeString2 { get; } = "upgrade";
+        public static string UpgradingString { get; } = "Upgrading";
         public static string UpgradUnitString { get; } = "Upgrad unit";
         public static string UsageString { get; } = "Usage";
         public static string UsesString { get; } = "Uses";
@@ -1016,6 +1046,7 @@ namespace MikhailKhalizev.Max.Program
         public static string VString { get; } = "V";
         public static string WaitingForComputerToFinishTurnString { get; } = "Waiting for computer to finish turn.";
         public static string WaitingForPathString { get; } = "waiting for path";
+        public static string WaitingForPlatformString { get; } = ": waiting for platform";
         public static string WaitingForRemoteEndTurnString { get; } = "Waiting for remote End Turn.";
         public static string WaitingForRemotePlayerToSelectStartingLocationString { get; } = "Waiting for remote player\nto select starting location...";
         public static string WaitingForSourceString { get; } = "waiting for source.";
@@ -1118,6 +1149,18 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition AiBuildCpp { get; } = new StringDefinition(0x101a_0426, AiBuildCppString);
         public static StringDefinition SiteXGreaterOrEqual0SiteXLessMapxdimSiteYGreaterOrEqual0SiteYLessMapydim { get; } = new StringDefinition(0x101a_0433, SiteXGreaterOrEqual0SiteXLessMapxdimSiteYGreaterOrEqual0SiteYLessMapydimString);
         public static StringDefinition CreateASAtII { get; } = new StringDefinition(0x101a_0476, CreateASAtIIString);
+        public static StringDefinition Initializing { get; } = new StringDefinition(0x101a_048d, InitializingString);
+        public static StringDefinition RemovingMines2 { get; } = new StringDefinition(0x101a_049c, RemovingMinesString2);
+        public static StringDefinition WaitingForPlatform { get; } = new StringDefinition(0x101a_04ad, WaitingForPlatformString);
+        public static StringDefinition GetBuilder { get; } = new StringDefinition(0x101a_04c4, GetBuilderString);
+        public static StringDefinition GetMaterials { get; } = new StringDefinition(0x101a_04d2, GetMaterialsString);
+        public static StringDefinition MoveToSite { get; } = new StringDefinition(0x101a_04e2, MoveToSiteString);
+        public static StringDefinition EvaluatingSite { get; } = new StringDefinition(0x101a_04f1, EvaluatingSiteString);
+        public static StringDefinition SiteBlocked { get; } = new StringDefinition(0x101a_0503, SiteBlockedString);
+        public static StringDefinition ClearSite { get; } = new StringDefinition(0x101a_0512, ClearSiteString);
+        public static StringDefinition Building3 { get; } = new StringDefinition(0x101a_051f, BuildingString2);
+        public static StringDefinition MoveOffSite { get; } = new StringDefinition(0x101a_052a, MoveOffSiteString);
+        public static StringDefinition Finished3 { get; } = new StringDefinition(0x101a_053a, FinishedString);
         public static StringDefinition UnknownState { get; } = new StringDefinition(0x101a_0546, UnknownStateString);
         public static StringDefinition AtX2Rate { get; } = new StringDefinition(0x101a_0557, AtX2RateString);
         public static StringDefinition AiBuildCpp3 { get; } = new StringDefinition(0x101a_0563, AiBuildCppString);
@@ -1507,6 +1550,10 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition _22i22i { get; } = new StringDefinition(0x101a_2478, _22i22iString);
         public static StringDefinition SUnderAttack { get; } = new StringDefinition(0x101a_2484, SUnderAttackString);
         public static StringDefinition SHasBeenDestroyed { get; } = new StringDefinition(0x101a_2495, SHasBeenDestroyedString);
+        public static StringDefinition SHasBeenCaptured { get; } = new StringDefinition(0x101a_24ac, SHasBeenCapturedString);
+        public static StringDefinition SHasBeenDisabled { get; } = new StringDefinition(0x101a_24c2, SHasBeenDisabledString);
+        public static StringDefinition AttemptToCaptureS { get; } = new StringDefinition(0x101a_24d8, AttemptToCaptureSString);
+        public static StringDefinition AttemptToDisableS { get; } = new StringDefinition(0x101a_24ef, AttemptToDisableSString);
         public static StringDefinition PressF1 { get; } = new StringDefinition(0x101a_2506, PressF1String);
         public static StringDefinition GamemgrCpp { get; } = new StringDefinition(0x101a_2511, GamemgrCppString);
         public static StringDefinition TempTapeNotEqual0 { get; } = new StringDefinition(0x101a_251d, TempTapeNotEqual0String);
@@ -1814,6 +1861,13 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition NoticeTurnTimersHaveBeenChanged { get; } = new StringDefinition(0x101a_8204, NoticeTurnTimersHaveBeenChangedString);
         public static StringDefinition SDoesNotRespondTerminatingConnection { get; } = new StringDefinition(0x101a_822b, SDoesNotRespondTerminatingConnectionString);
         public static StringDefinition SHasLeftTheGame { get; } = new StringDefinition(0x101a_8258, SHasLeftTheGameString);
+        public static StringDefinition V1043 { get; } = new StringDefinition(0x101a_826e, V104String);
+        public static StringDefinition V1044 { get; } = new StringDefinition(0x101a_8274, V104String);
+        public static StringDefinition HostIsNotTheSameReleaseVersionUnableToContinueWithConnection { get; } = new StringDefinition(0x101a_827a, HostIsNotTheSameReleaseVersionUnableToContinueWithConnectionString);
+        public static StringDefinition SHasEndedTurn { get; } = new StringDefinition(0x101a_82c6, SHasEndedTurnString);
+        public static StringDefinition GameSaved2 { get; } = new StringDefinition(0x101a_82d9, GameSavedString);
+        public static StringDefinition Control43 { get; } = new StringDefinition(0x101a_82e5, ControlString17);
+        public static StringDefinition GamePausedClickOkToContinue2 { get; } = new StringDefinition(0x101a_82e8, GamePausedClickOkToContinueString);
         public static StringDefinition RemoteCpp { get; } = new StringDefinition(0x101a_830b, RemoteCppString);
         public static StringDefinition OutstreamPkthdrPktlengthLessOrEqualMaxdatalen { get; } = new StringDefinition(0x101a_8316, OutstreamPkthdrPktlengthLessOrEqualMaxdatalenString);
         public static StringDefinition NetworkNotAvailableOrIpxSocketNotFoundUnableToContinueWithConnection { get; } = new StringDefinition(0x101a_833f, NetworkNotAvailableOrIpxSocketNotFoundUnableToContinueWithConnectionString);
@@ -2673,6 +2727,7 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition SIHasBeenUnloadedFromAirTransport { get; } = new StringDefinition(0x101b_288e, SIHasBeenUnloadedFromAirTransportString);
         public static StringDefinition UnitsmgrCpp7 { get; } = new StringDefinition(0x101b_28ba, UnitsmgrCppString);
         public static StringDefinition ChildNotEqual0 { get; } = new StringDefinition(0x101b_28c7, ChildNotEqual0String);
+        public static StringDefinition Transform { get; } = new StringDefinition(0x101b_28e2, TransformString);
         public static StringDefinition Moving3 { get; } = new StringDefinition(0x101b_28ec, MovingString3);
         public static StringDefinition Storing { get; } = new StringDefinition(0x101b_28f3, StoringString);
         public static StringDefinition Firing { get; } = new StringDefinition(0x101b_28fb, FiringString);
@@ -2680,11 +2735,24 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition Moving4 { get; } = new StringDefinition(0x101b_290e, MovingString3);
         public static StringDefinition BuildClearing { get; } = new StringDefinition(0x101b_2915, BuildClearingString);
         public static StringDefinition BuildCancel { get; } = new StringDefinition(0x101b_2924, BuildCancelString);
+        public static StringDefinition BuildHalting { get; } = new StringDefinition(0x101b_2931, BuildHaltingString);
         public static StringDefinition Activation { get; } = new StringDefinition(0x101b_293f, ActivationString);
+        public static StringDefinition NewAllocation { get; } = new StringDefinition(0x101b_294a, NewAllocationString);
         public static StringDefinition PowerUp { get; } = new StringDefinition(0x101b_2959, PowerUpString);
         public static StringDefinition Exploding3 { get; } = new StringDefinition(0x101b_2962, ExplodingString2);
+        public static StringDefinition Unloading { get; } = new StringDefinition(0x101b_296c, UnloadingString);
+        public static StringDefinition ClearStart { get; } = new StringDefinition(0x101b_2976, ClearStartString);
+        public static StringDefinition Landing { get; } = new StringDefinition(0x101b_2982, LandingString);
+        public static StringDefinition TakingOff { get; } = new StringDefinition(0x101b_298a, TakingOffString);
+        public static StringDefinition Loading { get; } = new StringDefinition(0x101b_2995, LoadingString);
+        public static StringDefinition Repairing { get; } = new StringDefinition(0x101b_299d, RepairingString);
+        public static StringDefinition Refuelling { get; } = new StringDefinition(0x101b_29a7, RefuellingString);
+        public static StringDefinition Reloading { get; } = new StringDefinition(0x101b_29b2, ReloadingString);
+        public static StringDefinition LayMines { get; } = new StringDefinition(0x101b_29bc, LayMinesString);
         public static StringDefinition Tranferring { get; } = new StringDefinition(0x101b_29c6, TranferringString);
+        public static StringDefinition Upgrading { get; } = new StringDefinition(0x101b_29d2, UpgradingString);
         public static StringDefinition Scaling { get; } = new StringDefinition(0x101b_29dc, ScalingString);
+        public static StringDefinition DisableSteal { get; } = new StringDefinition(0x101b_29e4, DisableStealString);
         public static StringDefinition UnitsmgrCpp3 { get; } = new StringDefinition(0x101b_29f2, UnitsmgrCppString);
         public static StringDefinition BuildListGetcountGreater03 { get; } = new StringDefinition(0x101b_29ff, BuildListGetcountGreater0String);
         public static StringDefinition Turns5 { get; } = new StringDefinition(0x101b_2a19, TurnsString);
