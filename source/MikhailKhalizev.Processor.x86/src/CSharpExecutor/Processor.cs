@@ -92,9 +92,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             _tr = new SegmentRegisterImpl(this);
             _tr.ResetTaskRegisterSegment();
 
-            FPUDataPointer_seg = new SegmentRegisterImpl(this);
-            FPUInstructionPointer_seg = new SegmentRegisterImpl(this);
-
 
             _eflags = new EflagsRegister { UInt64 = 0x0000_0002 };
             _ia32Efer = new Ia32EferRegisterImpl();
@@ -433,11 +430,6 @@ namespace MikhailKhalizev.Processor.x86.Core
         private int FPUControlWord; // 16bit
         private int FPUStatusWord; // 16bit
         private int FPUTagWord; // 16bit
-        private readonly SegmentRegister FPUDataPointer_seg;
-        private uint FPUDataPointer_off;
-        private readonly SegmentRegister FPUInstructionPointer_seg;
-        private uint FPUInstructionPointer_off;
-        private int FPULastInstructionOpcode;
         private readonly double[] st_regs = new double[8];
 
 
@@ -3287,11 +3279,6 @@ namespace MikhailKhalizev.Processor.x86.Core
             FPUControlWord = 0x037F;
             FPUStatusWord = 0;
             FPUTagWord = 0xFFFF;
-            FPUDataPointer_seg.UInt16 = 0;
-            FPUDataPointer_off = 0;
-            FPUInstructionPointer_seg.UInt16 = 0;
-            FPUInstructionPointer_off = 0;
-            FPULastInstructionOpcode = 0;
         }
 
         /// <inheritdoc />
