@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
     II(0x001577df, 0x1)   xchg(bx, ax);                         /* xchg bx, ax */
     II(0x001577e0, 0x5)   jmpw_abs(memw_a16(cs, bx + 0x23c5));  /* jmp word near [cs:bx+0x23c5] */
 #endif
-            
+
             switch (_state)
             {
                 case 2:
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 case 4:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                        && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
+                        && RegisterInfo.Intersects(cmd.Operands[0].@base, _reg.UdType)
                         && Equals(cmd.Operands[1], _op))
                         _state++;
                     else
@@ -285,7 +285,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             Address addrOfAddrs = Engine.CsBase + cmd.Operands[0].lval.udword;
             _addrAreaBegin = addrOfAddrs;
-            
+
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. {");
 
@@ -297,7 +297,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 jtka.To = new SortedSet<Address>();
                 Engine.BrunchesInfo.Add(jtka);
             }
-            
+
             var notFirst = false;
             for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)
             {
@@ -389,7 +389,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                         "                    throw new NotImplementedException();",
                         "            }"
                     });
-            
+
             return Environment.NewLine + string.Join(Environment.NewLine, lines);
         }
     }

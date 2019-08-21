@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_a545, 3); callw(0x1a_1066, 0x6b1e);                 /* call 0x1066 */
             ii(0x19_a548, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x19_a54b, 1); pushw(si);                                /* push si */
-            ii(0x19_a54c, 3); callw(0x19_a1f7, -0x358);                 /* call 0xa1f7 */
+            ii(0x19_a54c, 3); if(callw_up(0x19_a1f7, -0x358)) return;   /* call 0xa1f7 */
         l_0x19_a54f:
             ii(0x19_a54f, 3); mov(ax, memw_a16[ss, bp - 0x42]);         /* mov ax, [bp-0x42] */
             ii(0x19_a552, 3); dec(memw_a16[ss, bp - 0x42]);             /* dec word [bp-0x42] */

@@ -246,13 +246,6 @@ void fscale()
     ST(0) = ldexpl(ST(0), ST(1));
 }
 
-void fabs()
-{
-    if (get_tag(0) == 3)
-        throw exo::exception::not_implemented();
-    ST(0) = fabsl(ST(0));
-}
-
 void f2xm1()
 {
     if (get_tag(0) == 3)

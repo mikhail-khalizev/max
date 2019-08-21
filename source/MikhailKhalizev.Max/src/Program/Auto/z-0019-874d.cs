@@ -113,7 +113,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_8866, 1); pushw(ds);                                /* push ds */
             ii(0x19_8867, 3); pushw(0x17ca);                            /* push 0x17ca */
             ii(0x19_886a, 3); pushw(0x7d1);                             /* push 0x7d1 */
-            ii(0x19_886d, 3); callw(0x19_104e, -0x7822);                /* call 0x104e */
+            ii(0x19_886d, 3); if(callw_up(0x19_104e, -0x7822)) return;  /* call 0x104e */
             ii(0x19_8870, 3); add(sp, 0x12);                            /* add sp, 0x12 */
             ii(0x19_8873, 3); les(bx, ss, bp + 0x8);                    /* les bx, [bp+0x8] */
             ii(0x19_8876, 5); cmp(memw_a16[es, bx + 0x2c], 0xc);        /* cmp word [es:bx+0x2c], 0xc */

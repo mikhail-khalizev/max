@@ -116,7 +116,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_1c22:
             ii(0x19_1c22, 2); mov(al, memb_a16[ds, bx]);                /* mov al, [bx] */
             ii(0x19_1c24, 1); pushw(ax);                                /* push ax */
-            ii(0x19_1c25, 3); callw_abs(memw_a16[ss, bp - 0x8]);        /* call word [bp-0x8] */
+            ii(0x19_1c25, 3); if(callw_abs_up(memw_a16[ss, bp - 0x8])) return; /* call word [bp-0x8] */
             ii(0x19_1c28, 1); popw(bx);                                 /* pop bx */
             ii(0x19_1c29, 3); inc(memw_a16[ss, bp - 0xa]);              /* inc word [bp-0xa] */
         l_0x19_1c2c:

@@ -575,6 +575,12 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void calld_a32_far_ind(SegmentRegister segment, ValueBase address);
 
         /// <summary>

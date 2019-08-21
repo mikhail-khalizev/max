@@ -2305,6 +2305,14 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            return CorrectMethodPosition(ret_addr, true);
+        }
+
+        /// <inheritdoc />
         public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             var ret_addr = cs[eip];
@@ -2884,7 +2892,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fabs()
         {
-            throw new NotImplementedException();
+            ST(0).Double = Math.Abs(ST(0).Double);
         }
 
         /// <inheritdoc />
