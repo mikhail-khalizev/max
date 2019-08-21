@@ -32,8 +32,4 @@
     <ProjectReference Include="..\MikhailKhalizev.Processor.x86\MikhailKhalizev.Processor.x86.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="png\" />
-  </ItemGroup>
-
 </Project>

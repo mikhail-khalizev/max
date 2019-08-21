@@ -1,6 +1,57 @@
-# max
+# M.A.X. Reverse Engineering
 
-# Set MAX installed path for develop
+Этот проект планирует в точности воссоздать легендарную игру [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration)
+из имеющихся бинарных файлов.
 
- cd source\MikhailKhalizev.Max
- dotnet user-secrets set "Max:InstalledPath" "<path>"
+![Screenshots 1](./doc/img/screenshot01.png)
+![Screenshots 2](./doc/img/screenshot02.png)
+![Screenshots 3](./doc/img/screenshot03.png)
+![Screenshots 4](./doc/img/screenshot04.png)
+![Screenshots 5](./doc/img/screenshot05.png)
+![Screenshots 6](./doc/img/screenshot06.png)
+
+## План работ
+
+### Дизассемблирование
+
+На первом этапе игра будет дизассемблирована в C#,
+и создано минимальное окружение для её эмуляции:
+процессор x86 и dos окружение.
+
+Главное добиться хоть какой-нибудь работы игры.
+И постараться получить наиболее приятный для использования
+в будущем дизассемблированный исходный код на С#.
+
+### Рефакторинг
+
+Далее, на втором этапе необходимо произвести глубокий
+рефакторинг получившегося кода и получить
+аккуратно написанный код ядра игры М.А.Х.
+
+### Мечты
+
+Третий, заключительный этап открывает неограниченный простор для творчества.
+Возможно сделать браузерную версию игры. И версию для мобильных устройств.
+
+## Текущее состояние
+
+Завершено базовое дизассемблирование кода игры в C#. Игра запускается в режиме демо - компьютер против компьютера.
+
+## Запуск на локальном компьютере
+
+1. Создайте файл `source\MikhailKhalizev.Max\settings\appsettings.user.json`:
+
+```json
+    {
+      "Max": {
+        "InstalledPath": "Путь к папке <M.A.X. En Orig With Patch 1.04>"
+      }
+    }
+```
+
+2. И запустите:
+
+```
+    cd source\MikhailKhalizev.Max
+    dotnet run -c Release
+```

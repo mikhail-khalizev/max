@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
     public partial class RawProgram
     {
         [MethodInfo("0x1018_0fc8-96eb1e64")]
-        public void /* sys */ Method_1018_0fc8()
+        public void /* sys */ sys_write_port()
         {
             ii(0x1018_0fc8, 1); pushd(ebx);                             /* push ebx */
             ii(0x1018_0fc9, 2); mov(ebx, eax);                          /* mov ebx, eax */

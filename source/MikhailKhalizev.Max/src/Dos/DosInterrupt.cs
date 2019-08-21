@@ -34,6 +34,8 @@ namespace MikhailKhalizev.Max.Dos
             fileHandlersPreserve = 5;
 
             Directory.CreateDirectory(RawProgramMain.Configuration.Dos.PngOutput);
+            foreach (var filePath in Directory.EnumerateFiles(RawProgramMain.Configuration.Dos.PngOutput, "*.png"))
+                File.Delete(filePath);
         }
 
         public void int_08()
@@ -243,7 +245,9 @@ namespace MikhailKhalizev.Max.Dos
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
                                         nimg.Save(filePath);
 
-                                        NonBlockingConsole.WriteLine($"draw {fileNum}.png");
+                                        var time = DateTime.Now.TimeOfDay;
+                                        time = time.Subtract(TimeSpan.FromMilliseconds(time.Milliseconds));
+                                        NonBlockingConsole.WriteLine($"    Draw. Time: {time}, File: {fileNum}.png");
 
                                         //extra_log = (124 <= fileNum); /* Движение единиц. */
                                     }

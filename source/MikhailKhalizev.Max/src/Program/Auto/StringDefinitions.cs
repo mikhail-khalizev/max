@@ -633,6 +633,7 @@ namespace MikhailKhalizev.Max.Program
         public static string PathRequestGetunitEqualUnitString { get; } = "path_request->GetUnit() == unit";
         public static string PathsCppString { get; } = "paths.cpp";
         public static string PathString { get; } = "path";
+        public static string PausedString { get; } = "Paused";
         public static string PDkString { get; } = ", P:%dK";
         public static string PersonnelCarriersString { get; } = "Personnel Carriers";
         public static string PersonnelCarrierString { get; } = "Personnel Carrier";
@@ -2714,6 +2715,8 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition Empty2 { get; } = new StringDefinition(0x101b_2dcc, EmptyString);
         public static StringDefinition FontDFon { get; } = new StringDefinition(0x101b_2de4, FontDFonString);
         public static StringDefinition Rb { get; } = new StringDefinition(0x101b_2df0, RbString);
+        public static StringDefinition Paused { get; } = new StringDefinition(0x101b_2df4, PausedString);
+        public static StringDefinition Done11 { get; } = new StringDefinition(0x101b_2dfc, DoneString);
         public static StringDefinition ColorCColorTableNotFound { get; } = new StringDefinition(0x101b_2e4c, ColorCColorTableNotFoundString);
         public static StringDefinition ColorPal { get; } = new StringDefinition(0x101b_2ec4, ColorPalString);
         public static StringDefinition SS { get; } = new StringDefinition(0x101b_2ed0, SSString);

@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
     public partial class RawProgram
     {
         [MethodInfo("0x1018_0fd2-d79a64a5")]
-        public void /* sys */ Method_1018_0fd2()
+        public void /* sys */ sys_read_port()
         {
             ii(0x1018_0fd2, 1); pushd(edx);                             /* push edx */
             ii(0x1018_0fd3, 2); mov(edx, eax);                          /* mov edx, eax */

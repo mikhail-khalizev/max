@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Dos
         public new Processor.x86.Core.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
-        private const bool logging = false;
+        private bool logging = false;
 
         private int PIC_IRQCheck;
         private int PIC_IRQOnSecondPicActive;

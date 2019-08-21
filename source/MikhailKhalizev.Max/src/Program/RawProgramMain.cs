@@ -70,10 +70,11 @@ namespace MikhailKhalizev.Max.Program
                 try
                 {
                     DosPort.MyInb(args.value, args.port);
+                    // NonBlockingConsole.WriteLine($"inb, port: {args.port}, value: {args.value}");
                 }
                 catch
                 {
-                    Console.WriteLine($"inb, value: {args.value}, port: {args.port}");
+                    NonBlockingConsole.WriteLine($"inb, port: {args.port}, value: {args.value}");
                     throw;
                 }
             };
@@ -82,10 +83,11 @@ namespace MikhailKhalizev.Max.Program
                 try
                 {
                     DosPort.MyOutb(args.port, args.value);
+                    // NonBlockingConsole.WriteLine($"outb, port: {args.port}, value: {args.value}");
                 }
                 catch
                 {
-                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
+                    NonBlockingConsole.WriteLine($"outb, port: {args.port}, value: {args.value}");
                     throw;
                 }
             };

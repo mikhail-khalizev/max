@@ -230,6 +230,11 @@ namespace MikhailKhalizev.Max.Program
         public static Address sys_timer_3 { get; } = 0x1018_dcc4;
         public static Address sys_timer_4 { get; } = 0x1018_dd02;
 
+        public static Address sys_read_port { get; } = 0x1018_0fd2;
+        public static Address sys_write_port { get; } = 0x1018_0fc8;
+
+        public static Address sys_cli { get; } = 0x1018_0fda;
+        public static Address sys_sti { get; } = 0x1018_0fdc;
 
         #endregion
 

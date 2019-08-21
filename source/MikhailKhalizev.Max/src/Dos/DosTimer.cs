@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Max.Dos
 {
@@ -72,7 +73,7 @@ namespace MikhailKhalizev.Max.Dos
             latched_timerstatus_locked = false;
             gate2 = false;
         }
-        
+
         private Task _start;
         public void Start()
         {
@@ -141,9 +142,9 @@ namespace MikhailKhalizev.Max.Dos
                             wait = pit[0].start + pit[0].delay - timeNow;
                         }
 
-                        if (wait < TimeSpan.FromSeconds(1))
-                            wait = TimeSpan.FromSeconds(1);
-                        
+                        if (wait < TimeSpan.FromSeconds(0.01))
+                            wait = TimeSpan.FromSeconds(0.01);
+
                         Monitor.Exit(pit_0_mutex);
                         locked = false;
 
@@ -174,11 +175,11 @@ namespace MikhailKhalizev.Max.Dos
                 case 0:
                     if (p.new_mode)
                         return false;
+
                     if (p.delay < index)
                         return true;
                     else
                         return false;
-                    break;
 
                 case 2:
                     {
@@ -293,7 +294,8 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 2:    /* Rate Generator */
-                    p.read_latch = checked((int)(p.cntr - (index.Ticks % p.delay.Ticks) * p.cntr / p.delay.Ticks));
+                    p.read_latch = checked((int)(p.cntr * (p.delay.Ticks - index.Ticks % p.delay.Ticks) / p.delay.Ticks));
+                    // NonBlockingConsole.WriteLine($"timer Rate Generator read_latch: {p.read_latch}");
                     break;
 
                 case 3:    /* Square Wave Rate Generator */

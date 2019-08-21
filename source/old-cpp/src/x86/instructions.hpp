@@ -2058,6 +2058,7 @@ inline void lodsd_a16()
     si += df ? -4 : 4;
 }
 
+// +
 inline void lodsd_a32()
 {
     eax = memd_a32(ds, esi);

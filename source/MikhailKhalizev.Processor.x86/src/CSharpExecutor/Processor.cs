@@ -1435,7 +1435,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var now = DateTime.UtcNow;
 
-            if (RunIrqInstructionCount + 25000 < InstructionCount || TimeSpan.FromSeconds(0.2) < now - RunIrqTimestamp)
+            if (RunIrqInstructionCount + 100 < InstructionCount && TimeSpan.FromSeconds(0.01) < now - RunIrqTimestamp)
             {
                 RunIrqTimestamp = now;
                 RunIrqInstructionCount = InstructionCount;
@@ -2289,6 +2289,14 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public bool callw_far_abs_up(int segment, Address address)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(16, segment, address & 0xffff);
+            return CorrectMethodPosition(ret_addr, true);
+        }
+
+        /// <inheritdoc />
         public void callw_a16_far_ind(SegmentRegister segment, ValueBase address)
         {
             var ret_addr = cs[eip];
@@ -2485,7 +2493,9 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void cmpsb_a32()
         {
-            throw new NotImplementedException();
+            cmp(memb_a32[ds, esi], memb_a32[es, edi]);
+            di += eflags.df ? -1 : 1;
+            si += eflags.df ? -1 : 1;
         }
 
         /// <inheritdoc />
@@ -3944,7 +3954,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jcxzd(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_if(ecx == 0, address, offset);
         }
 
         /// <inheritdoc />
@@ -4034,7 +4044,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jld_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4784,7 +4794,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lodsd_a32()
         {
-            throw new NotImplementedException();
+            eax = memd_a32[ds, esi];
+            esi += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
