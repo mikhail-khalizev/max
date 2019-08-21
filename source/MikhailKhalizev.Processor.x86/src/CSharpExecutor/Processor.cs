@@ -3053,7 +3053,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fdivr(ValueBase value)
         {
-            throw new NotImplementedException();
+            ST(0).Double = value.Double / ST(0).Double;
         }
 
         /// <inheritdoc />
@@ -3231,7 +3231,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fldln2()
         {
-            throw new NotImplementedException();
+            set_top(get_top() + 7); // TOP ← TOP − 1;
+            ST(0).Double = 0.6931471805599453094172321214581766; // loge2
         }
 
         /// <inheritdoc />

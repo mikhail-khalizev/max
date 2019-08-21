@@ -21,6 +21,7 @@ namespace MikhailKhalizev.Max.Program
         public static string ActivateString { get; } = "Activate";
         public static string ActivateString2 { get; } = "activate";
         public static string ActivateUnitString { get; } = "Activate unit";
+        public static string ActivationString { get; } = "Activation";
         public static string ADepotCanRepairDamageManufactureAmmunitionAndRefitGroundUnitsWithTheNewestTechnologyAllOfTheseOperationsRequireRawMaterialsSoDepString { get; } = "A depot can repair damage, manufacture ammunition, and refit ground units with the newest technology.  All of these operations require raw materials, so depots should be connected to stored materials.";
         public static string AdjustmentsMadeString { get; } = "Adjustments made:\n";
         public static string ADkString { get; } = ", A:%dK";
@@ -755,6 +756,7 @@ namespace MikhailKhalizev.Max.Program
         public static string SBeginCargoSelectionString { get; } = "%s:\nBegin cargo selection.";
         public static string SBeginTurnString { get; } = "%s:\nBegin turn.";
         public static string ScalerAdjustString { get; } = "scaler_adjust";
+        public static string ScalingString { get; } = "Scaling";
         public static string ScannersString { get; } = "Scanners";
         public static string ScannerString { get; } = "Scanner";
         public static string ScanningPlanetSurfaceString { get; } = "Scanning planet surface...";
@@ -919,6 +921,7 @@ namespace MikhailKhalizev.Max.Program
         public static string TrainingHallString { get; } = "Training Hall";
         public static string TrainingMissionsString { get; } = "Training Missions";
         public static string TrainsInfiltratorsWhoCanDisableOrCaptureEnemyUnitsAndInfantryToGuardAgainstInfiltratorsOnlyInfantryAndOtherInfiltratorsCanDetectString { get; } = "Trains infiltrators who can disable or capture enemy units, and infantry to guard against infiltrators.  Only infantry and other infiltrators can detect infiltrators.  A training hall requires colonists from a Habitat and power to operate.";
+        public static string TranferringString { get; } = "Tranferring";
         public static string TransportNotEqual0String { get; } = "transport != 0";
         public static string TransportUnitsDropOffSAtIIString { get; } = "Transport units: drop off %s at [%i,%i]";
         public static string TransportUnitsPickUpSAtIIString { get; } = "Transport units: pick up %s at [%i,%i]";
@@ -2677,8 +2680,11 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition Moving4 { get; } = new StringDefinition(0x101b_290e, MovingString3);
         public static StringDefinition BuildClearing { get; } = new StringDefinition(0x101b_2915, BuildClearingString);
         public static StringDefinition BuildCancel { get; } = new StringDefinition(0x101b_2924, BuildCancelString);
+        public static StringDefinition Activation { get; } = new StringDefinition(0x101b_293f, ActivationString);
         public static StringDefinition PowerUp { get; } = new StringDefinition(0x101b_2959, PowerUpString);
         public static StringDefinition Exploding3 { get; } = new StringDefinition(0x101b_2962, ExplodingString2);
+        public static StringDefinition Tranferring { get; } = new StringDefinition(0x101b_29c6, TranferringString);
+        public static StringDefinition Scaling { get; } = new StringDefinition(0x101b_29dc, ScalingString);
         public static StringDefinition UnitsmgrCpp3 { get; } = new StringDefinition(0x101b_29f2, UnitsmgrCppString);
         public static StringDefinition BuildListGetcountGreater03 { get; } = new StringDefinition(0x101b_29ff, BuildListGetcountGreater0String);
         public static StringDefinition Turns5 { get; } = new StringDefinition(0x101b_2a19, TurnsString);

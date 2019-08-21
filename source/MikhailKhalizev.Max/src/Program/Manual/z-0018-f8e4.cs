@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        [MethodInfo("96baa0a7-26c1-49e8-ba47-d5117a730cb3")]
+        [MethodInfo("0x18_f8e4-7d15f700")]
         public void Method_0018_f8e4()
         {
             if (Debugger.Launch())

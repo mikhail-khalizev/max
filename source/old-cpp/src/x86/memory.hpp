@@ -6,61 +6,8 @@
 #include <exo/memory_space.hpp>
 #include "registers.hpp"
 
-
-namespace exo {
-namespace math {
-
-template<>
-class uint_<80>
-{
-    typename uint_<8>::type val[10];
-};
-
-static_assert(sizeof(uint_<80>) == 10, "Компилятор неправильно упаковал структуру.");
-
-} /* namespace math */
-} /* namespace exo */
-
-
 namespace raw_program {
 namespace x86 {
-
-
-extern bool a20_gate;
-constexpr uint_<32> mem_limit = 32 * 1024 * 1024; /* 32Mb = 0x2000000 */
-
-
-/** no seg, no pg    may return size more, then input size  */
-exo::memory_space mem_phys_raw(uint_<32> addr, uint_<32> size);
-
-/** no seg, yes pg   may return size more, then input size  */
-exo::memory_space mem_pg_raw(uint_<32> addr, uint_<32> size);
-
-/** yes seg, yes pg  may rerurn size more, then input size  */
-exo::memory_space mem_seg_pg_raw(const seg_reg & seg, uint_<32> addr, uint_<32> size);
-
-/** @note На самом деле это внутренняя функция. Она сделана "публичной" в целях отладки. */
-uint_<32> mem_pg_raw_get_phys_addr(uint_<32> addr);
-
-uint_<8>  & memb_a16(const seg_reg & seg, uint_<16> addr);
-uint_<16> & memw_a16(const seg_reg & seg, uint_<16> addr);
-uint_<32> & memd_a16(const seg_reg & seg, uint_<16> addr);
-uint_<64> & memq_a16(const seg_reg & seg, uint_<16> addr);
-uint_<80> & memt_a16(const seg_reg & seg, uint_<16> addr);
-
-uint_<8>  & memb_a32(const seg_reg & seg, uint_<32> addr);
-uint_<16> & memw_a32(const seg_reg & seg, uint_<32> addr);
-uint_<32> & memd_a32(const seg_reg & seg, uint_<32> addr);
-uint_<64> & memq_a32(const seg_reg & seg, uint_<32> addr);
-uint_<80> & memt_a32(const seg_reg & seg, uint_<32> addr);
-
-template<typename T>
-typename std::add_lvalue_reference<T>::type mem(const seg_reg & seg, uint_<32> addr)
-{
-    return mem_seg_pg_raw(seg, addr, sizeof(T)).get<T>();
-}
-
-bool mem_pg_equals(uint_<32> addr, exo::memory_space_const sp);
 
 
 inline void int_set(uint_<8> num, uint_<16> cs_, uint_<16> ip_)
