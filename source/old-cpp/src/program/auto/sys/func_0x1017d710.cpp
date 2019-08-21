@@ -1,6 +1,0 @@
-FUNC_BEGIN(/* sys */ 0x1017d710, 0xeb07aae7e0947dc5, 0x20, ({0x51, 0xb9, 0x1, 0, 0, 0, 0xeb, 0xf1}))
-    II(0x1017d710, 0x1)   pushd(ecx);                           /* push ecx */
-    II(0x1017d711, 0x5)   mov(ecx, 0x1);                        /* mov ecx, 0x1 */
-    II(0x1017d716, 0x2)   jmpd_func(0x1017d709, -0xf);          /* jmp 0x1017d709 */
-FUNC_END
-
