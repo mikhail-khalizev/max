@@ -1427,52 +1427,6 @@ void fxch(int src_n, int dst_n)
     set_tag(dst_n, tag);
 }
 
-/**
- * @brief Load Integer.
- * Push <...> onto the FPU register stack.
- */
-void fild(uint_<16> & x)
-{
-    set_top(get_top() + 7); // TOP ← TOP − 1;
-
-    if (get_tag(0) != 3)
-        throw exo::exception::not_implemented();
-
-    ST(0) = static_cast<int16_t>(x);
-    set_tag(0, 0);
-}
-
-// +
-/**
- * @brief Load Integer.
- * Push <...> onto the FPU register stack.
- */
-void fild(uint_<32> & x)
-{
-    set_top(get_top() + 7); // TOP ← TOP − 1;
-
-    if (get_tag(0) != 3)
-        throw exo::exception::not_implemented();
-
-    ST(0) = static_cast<int32_t>(x);
-    set_tag(0, 0);
-}
-
-/**
- * @brief Load Integer.
- * Push <...> onto the FPU register stack.
- */
-void fild(uint_<64> & x)
-{
-    set_top(get_top() + 7); // TOP ← TOP − 1;
-
-    if (get_tag(0) != 3)
-        throw exo::exception::not_implemented();
-
-    ST(0) = static_cast<int64_t>(x);
-    set_tag(0, 0);
-}
-
 //+
 /**
  * @brief Store Integer.
@@ -1615,29 +1569,6 @@ void fprem()
     __float80 result;
     asm ("fprem" : "=t" (result) : "0" (x), "u" (y));
     ST(0) = result;
-}
-
-// +
-/**
- * @brief Round to Integer.
- * Round ST(0) to an integer.
- */
-void frndint()
-{
-    if (get_tag(0) == 3)
-        throw exo::exception::not_implemented();
-
-    __float80 x = ST(0);
-    __float80 result;
-    asm ("frndint" : "=t" (result) : "0" (x));
-    ST(0) = result;
-}
-
-void fsqrt()
-{
-    if (get_tag(0) == 3)
-        throw exo::exception::not_implemented();
-    ST(0) = sqrtl(ST(0));
 }
 
 void fscale()

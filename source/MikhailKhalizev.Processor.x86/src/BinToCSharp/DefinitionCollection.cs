@@ -9,6 +9,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
     {
         private readonly Dictionary<Address, PropertyInfo> _propertyInfoByAddress = new Dictionary<Address, PropertyInfo>();
 
+        public void AddDefinitionsFromAssembly(Assembly assembly)
+        {
+            foreach (var type in assembly.GetTypes().Where(x => typeof(IDefinitionGroup).IsAssignableFrom(x)))
+                AddDefinitionsClass(type);
+        }
+
         public void AddDefinitionsClass<T>()
         {
             AddDefinitionsClass(typeof(T));

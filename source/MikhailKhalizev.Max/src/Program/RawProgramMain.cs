@@ -301,6 +301,8 @@ namespace MikhailKhalizev.Max.Program
 
                     NonBlockingConsole.WriteLine($"Загрузка '{dllPath}'.");
                     var assembly = Assembly.LoadFile(dllPath);
+
+                    DefinitionCollection.AddDefinitionsFromAssembly(assembly);
                     ConnectDecodedMethods(assembly);
                 }
                 catch (Exception ex)

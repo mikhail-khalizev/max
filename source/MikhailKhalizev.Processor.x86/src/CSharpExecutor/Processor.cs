@@ -1435,7 +1435,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             var now = DateTime.UtcNow;
 
-            if (RunIrqInstructionCount + 100 < InstructionCount && TimeSpan.FromSeconds(0.01) < now - RunIrqTimestamp)
+            if (RunIrqInstructionCount + 100 < InstructionCount && TimeSpan.FromSeconds(0.05) < now - RunIrqTimestamp)
             {
                 RunIrqTimestamp = now;
                 RunIrqInstructionCount = InstructionCount;
@@ -3103,6 +3103,11 @@ namespace MikhailKhalizev.Processor.x86.Core
         {
             switch (value.Bits)
             {
+                case 16:
+                    set_top(get_top() + 7); // TOP ← TOP − 1;
+                    ST(0).Double = value.Int16;
+                    break;
+
                 case 32:
                     set_top(get_top() + 7); // TOP ← TOP − 1;
                     ST(0).Double = value.Int32;
@@ -3379,7 +3384,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fsqrt()
         {
-            throw new NotImplementedException();
+            ST(0).Double = Math.Sqrt(ST(0).Double);
         }
 
         /// <inheritdoc />

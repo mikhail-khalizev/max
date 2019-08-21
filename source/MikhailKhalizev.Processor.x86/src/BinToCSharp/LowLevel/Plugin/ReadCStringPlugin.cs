@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
             Engine.OnSave += OnSave;
 
-            InitializeIfNeed();
+            // InitializeIfNeed(); For Debug.
         }
 
         private void InitializeIfNeed()
@@ -38,18 +38,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 return;
             _allStringDefinitions = new HashSet<StringDefinition>();
 
-            Type myType = null;
+            var myTypes = new HashSet<Type>();
 
             foreach (var propertyInfo in Engine.DefinitionCollection.GetAllStringDefinition())
             {
                 var sd = (StringDefinition) propertyInfo.GetValue(null);
                 _allStringDefinitions.Add(sd);
 
-                if (myType == null && propertyInfo.DeclaringType.Name == Engine.Configuration.StringDefinitionsClassName)
-                    myType = propertyInfo.DeclaringType;
+                // NOTE. Может быть несколько "наших" классов из-за того, что мы декодируем, компилируем и загружаем библиотеки на лету.
+                if (propertyInfo.DeclaringType.Name == Engine.Configuration.StringDefinitionsClassName &&
+                        propertyInfo.DeclaringType.Namespace == Engine.Configuration.Namespace)
+                    myTypes.Add(propertyInfo.DeclaringType);
             }
 
-            if (myType != null)
+            foreach (var myType in myTypes)
             {
                 var stringDefinitions = new List<(string PropertyName, StringDefinition Value)>();
 

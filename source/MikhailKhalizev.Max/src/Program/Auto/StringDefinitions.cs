@@ -109,6 +109,8 @@ namespace MikhailKhalizev.Max.Program
         public static string BrightnessString { get; } = "brightness";
         public static string BringString { get; } = "Bring ";
         public static string BubbleTrailString { get; } = "bubble trail";
+        public static string BuildCancelString { get; } = "Build cancel";
+        public static string BuildClearingString { get; } = "Build clearing";
         public static string BuilderpathString { get; } = "BuilderPath";
         public static string BuildingButtonNotEqual0String { get; } = "building_button != 0";
         public static string BuildingManagerGettypeEqualTaskManageBuildingsString { get; } = "building_manager->GetType() == task_manage_buildings";
@@ -124,6 +126,7 @@ namespace MikhailKhalizev.Max.Program
         public static string BuildsConstructorsMobileScannersAndTheHeavyFightingUnitsTanksAssaultGunsRocketLaunchersAndMissileCrawlersAHeavyFactoryNeedsThreeString { get; } = "Builds constructors, mobile scanners, and the heavy fighting units: tanks, assault guns, rocket launchers, and missile crawlers.  A heavy factory needs three raw materials a turn to operate, and power from a power generator or power station.";
         public static string BuildsFightersGroundAttackPlanesAndAirTransportsAHeavyFactoryNeedsThreeRawMaterialsATurnToOperateAndPowerFromAPowerGeneratorOrPoString { get; } = "Builds fighters, ground attack planes, and air transports.  A heavy factory needs three raw materials a turn to operate, and power from a power generator or power station.";
         public static string BuildsLightVehiclesEngineersTrucksMobileRepairUnitsScoutsAndMobileAntiAircraftUnitsALightVehiclePlantRequiresThreeRawMaterialsATString { get; } = "Builds light vehicles: engineers, trucks, mobile repair units, scouts, and mobile anti-aircraft units.  A light vehicle plant requires three raw materials a turn to operate, and power from a power generator or power station.";
+        public static string BuildStartString { get; } = "Build start";
         public static string BuildString { get; } = "Build";
         public static string BuildTimeString { get; } = "build_time";
         public static string BuildTurnsIIString { get; } = " Build turns     %i, %i\n";
@@ -318,6 +321,7 @@ namespace MikhailKhalizev.Max.Program
         public static string ExpectingAWordString { get; } = "Expecting a word";
         public static string ExpectingOrLessString { get; } = "Expecting {, =, or <";
         public static string ExplodingString { get; } = "exploding";
+        public static string ExplodingString2 { get; } = "Exploding";
         public static string ExploreMapString { get; } = "Explore map.";
         public static string ExplosionString { get; } = "explosion";
         public static string ExtractsRawMaterialsFuelAndGoldFromTheGroundEveryTurnBuildingsMustBeConnectedToAMineToUseTheResourcesAMineProducesIfThereAreNoStString { get; } = "Extracts raw materials, fuel, and gold from the ground every turn.  Buildings must be connected to a mine to use the resources a mine produces.  If there are no storage buildings, fuel tanks, or gold vaults to store extra material, fuel, or gold, it will be lost.";
@@ -664,6 +668,7 @@ namespace MikhailKhalizev.Max.Program
         public static string PowerStationString { get; } = "Power Station";
         public static string PowerString { get; } = "Power";
         public static string PowerString2 { get; } = "power";
+        public static string PowerUpString { get; } = "Power up";
         public static string PreferencesString { get; } = "Preferences";
         public static string PressEscToExitAnyOtherKeyToContinueString { get; } = "\nPress ESC to exit, any other key to continue...";
         public static string PressF1String { get; } = " Press F1.";
@@ -786,6 +791,7 @@ namespace MikhailKhalizev.Max.Program
         public static string SerialConnectMenuString { get; } = "Serial Connect Menu";
         public static string ShadowOffsetXString { get; } = "shadow_offset_x";
         public static string ShadowOffsetYString { get; } = "shadow_offset_y";
+        public static string SHasBeenDestroyedString { get; } = "%s has been destroyed!";
         public static string SHasLeftTheGameString { get; } = "%s has left the game.";
         public static string ShipMountedMissileLauncherExcellentRangeHighAttackStrengthAndMediumArmorMakesThisAPowerfulUnitString { get; } = "Ship mounted missile launcher.  Excellent range, high attack strength, and medium armor makes this a powerful unit.";
         public static string ShipsForHaulingRawMaterialUsefulForResupplyingEngineersAndSeaCombatUnitsWithNewAmmunitionString { get; } = "Ships for hauling raw material.  Useful for resupplying engineers and sea combat units with new ammunition.";
@@ -864,6 +870,7 @@ namespace MikhailKhalizev.Max.Program
         public static string StrobjCppString { get; } = "strobj.cpp";
         public static string SubmarinesString { get; } = "Submarines";
         public static string SubmarineString { get; } = "Submarine";
+        public static string SUnderAttackString { get; } = "%s under attack!";
         public static string SUpgradedToMarkSForIRawMaterialString { get; } = "%s upgraded to mark %s for %i raw material.";
         public static string SupplyTrucksString { get; } = "Supply Trucks";
         public static string SupplyTruckString { get; } = "Supply Truck";
@@ -1495,6 +1502,8 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition _33i33i { get; } = new StringDefinition(0x101a_2469, _33i33iString);
         public static StringDefinition I12 { get; } = new StringDefinition(0x101a_2475, IString3);
         public static StringDefinition _22i22i { get; } = new StringDefinition(0x101a_2478, _22i22iString);
+        public static StringDefinition SUnderAttack { get; } = new StringDefinition(0x101a_2484, SUnderAttackString);
+        public static StringDefinition SHasBeenDestroyed { get; } = new StringDefinition(0x101a_2495, SHasBeenDestroyedString);
         public static StringDefinition PressF1 { get; } = new StringDefinition(0x101a_2506, PressF1String);
         public static StringDefinition GamemgrCpp { get; } = new StringDefinition(0x101a_2511, GamemgrCppString);
         public static StringDefinition TempTapeNotEqual0 { get; } = new StringDefinition(0x101a_251d, TempTapeNotEqual0String);
@@ -2664,6 +2673,12 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition Moving3 { get; } = new StringDefinition(0x101b_28ec, MovingString3);
         public static StringDefinition Storing { get; } = new StringDefinition(0x101b_28f3, StoringString);
         public static StringDefinition Firing { get; } = new StringDefinition(0x101b_28fb, FiringString);
+        public static StringDefinition BuildStart { get; } = new StringDefinition(0x101b_2902, BuildStartString);
+        public static StringDefinition Moving4 { get; } = new StringDefinition(0x101b_290e, MovingString3);
+        public static StringDefinition BuildClearing { get; } = new StringDefinition(0x101b_2915, BuildClearingString);
+        public static StringDefinition BuildCancel { get; } = new StringDefinition(0x101b_2924, BuildCancelString);
+        public static StringDefinition PowerUp { get; } = new StringDefinition(0x101b_2959, PowerUpString);
+        public static StringDefinition Exploding3 { get; } = new StringDefinition(0x101b_2962, ExplodingString2);
         public static StringDefinition UnitsmgrCpp3 { get; } = new StringDefinition(0x101b_29f2, UnitsmgrCppString);
         public static StringDefinition BuildListGetcountGreater03 { get; } = new StringDefinition(0x101b_29ff, BuildListGetcountGreater0String);
         public static StringDefinition Turns5 { get; } = new StringDefinition(0x101b_2a19, TurnsString);

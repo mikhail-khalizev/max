@@ -68,8 +68,7 @@ namespace MikhailKhalizev.Max
             // Start.
             var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
             var definitionCollection = new DefinitionCollection();
-            definitionCollection.AddDefinitionsClass<Definitions>();
-            definitionCollection.AddDefinitionsClass<StringDefinitions>();
+            definitionCollection.AddDefinitionsFromAssembly(typeof(Definitions).Assembly);
 
             // TODO Implement IDefinitionGroupArea with Begin, End. And remove AddressNameConverter.AddNamespace.
             AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys");
