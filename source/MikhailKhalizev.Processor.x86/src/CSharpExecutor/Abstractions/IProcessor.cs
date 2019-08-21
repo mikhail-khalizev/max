@@ -557,13 +557,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void callw_far_abs(int segment, Address address);
+        void callw_far_abs(int segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool callw_far_abs_up(int segment, Address address);
+        bool callw_far_abs_up(int segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.

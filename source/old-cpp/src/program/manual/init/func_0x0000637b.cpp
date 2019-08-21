@@ -1,9 +1,0 @@
-FUNC_BEGIN(0x0000637b, 0x2f8b51a95f26f7c6, 0x10, ({0xa0, 0x86, 0x11, 0x98, 0x50, 0xe8, 0xc2, 0x38, 0x5b, 0xc3}))
-    II(0x0000637b, 0x3)   mov(al, memb_a16(ds, 0x1186));        /* mov al, [0x1186] */
-    II(0x0000637e, 0x1)   cbw();                                /* cbw  */
-    II(0x0000637f, 0x1)   pushw(ax);                            /* push ax */
-    II(0x00006380, 0x3)   callw(0x00009c45, 0x38c2);            /* call 0x9c45 */
-    II(0x00006383, 0x1)   popw(bx);                             /* pop bx */
-    II(0x00006384, 0x1)   retw();                               /* ret  */
-FUNC_END
-

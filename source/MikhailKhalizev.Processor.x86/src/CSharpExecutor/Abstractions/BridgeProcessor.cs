@@ -684,13 +684,13 @@ namespace MikhailKhalizev.Processor.x86.Core.Abstractions
         }
 
         /// <inheritdoc />
-        public void callw_far_abs(int segment, Address address)
+        public void callw_far_abs(int segment, ValueBase address)
         {
             Implementation.callw_far_abs(segment, address);
         }
 
         /// <inheritdoc />
-        public bool callw_far_abs_up(int segment, Address address)
+        public bool callw_far_abs_up(int segment, ValueBase address)
         {
             return Implementation.callw_far_abs_up(segment, address);
         }

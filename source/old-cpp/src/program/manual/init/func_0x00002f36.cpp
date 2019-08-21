@@ -1,5 +1,0 @@
-FUNC_BEGIN(0x00002f36, 0xa16fb5873e7, 0x10, ({0xcd, 0x15, 0xcb}))
-    II(0x00002f36, 0x2)   int_(0x15);                           /* int 0x15 */
-    II(0x00002f38, 0x1)   retfw();                              /* retf  */
-FUNC_END
-

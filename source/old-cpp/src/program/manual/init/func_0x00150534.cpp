@@ -1,5 +1,0 @@
-FUNC_BEGIN(0x00150534, 0x28253c8867a58, 0x10, ({0xb8, 0x1, 0, 0xcb}))
-    II(0x00150534, 0x3)   mov(ax, 0x1);                         /* mov ax, 0x1 */
-    II(0x00150537, 0x1)   retfw();                              /* retf  */
-FUNC_END
-

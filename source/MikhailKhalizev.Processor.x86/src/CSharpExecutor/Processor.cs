@@ -2260,8 +2260,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void calld_abs(ValueBase address)
         {
-            pushd(eip);
             var ret_addr = cs[eip];
+            pushd(eip);
             eip = address;
             CorrectMethodPosition(ret_addr, saveJumpInfo: true);
         }
@@ -2269,11 +2269,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void calld_far_abs(int segment, ValueBase address)
         {
-            throw new NotImplementedException();
+            var ret_addr = cs[eip];
+            call_far_prepare(32, segment, address);
+            CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
-        public void callw_far_abs(int segment, Address address)
+        public void callw_far_abs(int segment, ValueBase address)
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, segment, address & 0xffff);
@@ -2281,7 +2283,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool callw_far_abs_up(int segment, Address address)
+        public bool callw_far_abs_up(int segment, ValueBase address)
         {
             var ret_addr = cs[eip];
             call_far_prepare(16, segment, address & 0xffff);
@@ -2878,7 +2880,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void f2xm1()
         {
-            throw new NotImplementedException();
+            ST(0).Double = Math.Pow(2, ST(0).Double) - 1;
         }
 
         /// <inheritdoc />
@@ -3034,7 +3036,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fdiv(ValueBase value)
         {
-            throw new NotImplementedException();
+            ST(0).Double /= value.Double;
         }
 
         /// <inheritdoc />
@@ -3057,9 +3059,16 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
+        public void fdivr(FpuStackRegister a, FpuStackRegister b)
+        {
+            a.Double = b.Double / a.Double;
+        }
+
+        /// <inheritdoc />
         public void fdivrp(FpuStackRegister a, FpuStackRegister b)
         {
-            throw new NotImplementedException();
+            fdivr(a, b);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -3213,7 +3222,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fldl2e()
         {
-            throw new NotImplementedException();
+            ST(0).Double = 1.4426950408889634073599246810018921; // log2e
         }
 
         /// <inheritdoc />
@@ -3290,7 +3299,25 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fnsavew_a16(SegmentRegister segment, ValueBase address)
         {
-            throw new NotImplementedException();
+            var off = address.UInt32;
+
+            if (!cr0.pe)
+            {
+                memw_a16[segment, off] = FPUControlWord;
+                memw_a16[segment, off + 2] = FPUStatusWord;
+                memw_a16[segment, off + 4] = FPUTagWord;
+                memw_a16[segment, off + 6] = 0; // FPUInstructionPointer_off;
+                memw_a16[segment, off + 8] = 0; // ((FPUInstructionPointer_off >> 16) << 12) | FPULastInstructionOpcode;
+                memw_a16[segment, off + 10] = 0; // FPUDataPointer_off;
+                memw_a16[segment, off + 12] = 0; // ((FPUDataPointer_off >> 16) << 12);
+            }
+            else
+                throw new NotImplementedException();
+
+            for (int i = 0; i < 8; i++)
+                Memory.GetStruct<double>(segment[off + 14 + i * 10]) = ST(i).Double;
+
+            fninit();
         }
 
         /// <inheritdoc />
@@ -3326,13 +3353,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fprem()
         {
-            throw new NotImplementedException();
+            ST(0).Double = Math.IEEERemainder(ST(0).Double, ST(1).Double);
         }
 
         /// <inheritdoc />
         public void fprem1()
         {
-            throw new NotImplementedException();
+            fprem();
         }
 
         /// <inheritdoc />
@@ -3362,7 +3389,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fscale()
         {
-            throw new NotImplementedException();
+            ST(0).Double = ST(0).Double * Math.Pow(2, ST(1).Double);
         }
 
         /// <inheritdoc />
@@ -3436,7 +3463,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fsubr(ValueBase value)
         {
-            throw new NotImplementedException();
+             ST(0).Double = value.Double - ST(0).Double;
         }
 
         /// <inheritdoc />
@@ -3526,7 +3553,10 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void fyl2x()
         {
-            throw new NotImplementedException();
+            // ST(1) ← ST(1) ∗ log2 ST(0);
+
+            ST(1).Double = ST(1).Double * Math.Log(ST(0).Double, 2);
+            fpu_pop();
         }
 
         /// <inheritdoc />
@@ -3967,7 +3997,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jcxzd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(ecx == 0, address, offset);
         }
 
         /// <inheritdoc />
@@ -4009,7 +4039,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jgd_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4019,15 +4049,15 @@ namespace MikhailKhalizev.Processor.x86.Core
         }
 
         /// <inheritdoc />
-        public bool jged_func(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public bool jged(Address address, int offset)
         {
             return jmpd_if(eflags.sf == eflags.of, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jged_func(Address address, int offset)
+        {
+            return jmpd_func_if(eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4063,7 +4093,7 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool jled_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpd_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4193,11 +4223,10 @@ namespace MikhailKhalizev.Processor.x86.Core
             return jmpd_func_if(!eflags.zf, address, offset);
         }
 
-
         /// <inheritdoc />
         public bool jow(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmpw_if(eflags.of, address, offset);
         }
 
         /// <inheritdoc />
@@ -4789,7 +4818,8 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void lodsd_a16()
         {
-            throw new NotImplementedException();
+            eax = memd_a16[ds, si];
+            si += eflags.df ? -4 : 4;
         }
 
         /// <inheritdoc />
@@ -4839,7 +4869,15 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool loopew_a16(Address address, int offset)
         {
-            throw new NotImplementedException();
+            // = loopzw_a16
+
+            if (--cx != 0 && eflags.zf)
+            {
+                jmpw(address, offset);
+                return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />
@@ -4869,13 +4907,17 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public bool loopw_a16_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            if (--cx != 0)
+                return jmpw_func(address, offset);
+            return false;
         }
 
         /// <inheritdoc />
         public bool loopd_a32_func(Address address, int offset)
         {
-            throw new NotImplementedException();
+            if (--ecx != 0)
+                return jmpd_func(address, offset);
+            return false;
         }
 
         /// <inheritdoc />
@@ -6851,13 +6893,13 @@ namespace MikhailKhalizev.Processor.x86.Core
         /// <inheritdoc />
         public void seta(ValueBase value)
         {
-            throw new NotImplementedException();
+            value.Int32 = !eflags.cf && !eflags.zf ? 1 : 0;
         }
 
         /// <inheritdoc />
         public void setbe(ValueBase value)
         {
-            throw new NotImplementedException();
+            value.Int32 = eflags.cf || eflags.zf ? 1 : 0;
         }
 
         /// <inheritdoc />

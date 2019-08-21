@@ -1,6 +1,0 @@
-FUNC_BEGIN(0x0013da94, 0x29b5539c765103ae, 0x10, ({0x8b, 0x46, 0xfe, 0x2b, 0x46, 0xfc}))
-    II(0x0013da94, 0x3)   mov(ax, memw_a16(ss, bp - 0x2));      /* mov ax, [bp-0x2] */
-    II(0x0013da97, 0x3)   sub(ax, memw_a16(ss, bp - 0x4));      /* sub ax, [bp-0x4] */
-    II(0x0013da9a, 0)     jmpd_func(0x0013da9a, 0);             /* Принудительное завершение функции. */
-FUNC_END
-

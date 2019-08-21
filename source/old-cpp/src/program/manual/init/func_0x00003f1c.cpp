@@ -1,5 +1,0 @@
-FUNC_BEGIN(0x00003f1c, 0xa3b7d93526bd66, 0x10, ({0x90, 0xff, 0x26, 0xbc, 0x9}))
-//    II(0x00003f1c, 0x1)   nop();                                /* nop  */
-    II(0x00003f1d, 0x4)   jmpw_abs(memw_a16(ds, 0x9bc));        /* jmp word near [0x9bc] */ /* Вызов '0x0000bbf0'. */
-FUNC_END
-

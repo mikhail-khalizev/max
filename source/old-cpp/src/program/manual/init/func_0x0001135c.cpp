@@ -1,7 +1,0 @@
-FUNC_BEGIN(0x0001135c, 0x5e7703410aa63f21, 0x10, ({0xa0, 0x82, 0x15, 0x24, 0x1, 0x98, 0xc3}))
-    II(0x0001135c, 0x3)   mov(al, memb_a16(ds, 0x1582));        /* mov al, [0x1582] */
-    II(0x0001135f, 0x2)   and_(al, 0x1);                        /* and al, 0x1 */
-    II(0x00011361, 0x1)   cbw();                                /* cbw  */
-    II(0x00011362, 0x1)   retw();                               /* ret  */
-FUNC_END
-
