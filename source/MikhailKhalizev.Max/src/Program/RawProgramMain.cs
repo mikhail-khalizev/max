@@ -322,7 +322,9 @@ namespace MikhailKhalizev.Max.Program
             var assemblyDllPath = Path.Combine(Path.GetTempPath(), assemblyName + ".dll");
             var assemblyPdbPath = Path.Combine(Path.GetTempPath(), assemblyName + ".pdb");
 
-            var syntaxTrees = files.Append(@"src\Program\RawProgram.cs")
+            var syntaxTrees = files
+                .Append(@"src\Program\RawProgram.cs")
+                .Append(Path.Combine(Configuration.BinToCSharp.CodeOutput, Configuration.BinToCSharp.StringDefinitionsClassName + ".cs"))
                 .Select(
                     file =>
                     {

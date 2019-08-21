@@ -341,6 +341,7 @@ namespace MikhailKhalizev.Max.Program
         public static string FinishedString2 { get; } = "(finished)";
         public static string FiresMissilesString { get; } = "fires_missiles";
         public static string FiringImageBaseString { get; } = "firing_image_base";
+        public static string FiringString { get; } = "Firing";
         public static string FlagsString { get; } = "flags";
         public static string FlicsmgrCppString { get; } = "flicsmgr.cpp";
         public static string FloatingPointSupportNotLoadedString { get; } = "Floating-point support not loaded\r\n";
@@ -587,6 +588,7 @@ namespace MikhailKhalizev.Max.Program
         public static string MoveToIIViaIIUsingSString { get; } = "Move to [%i,%i] via [%i,%i] using %s";
         public static string MovingString { get; } = "moving";
         public static string MovingString2 { get; } = "moving ";
+        public static string MovingString3 { get; } = "Moving";
         public static string MssglenLessSizeofMssgbfrString { get; } = "mssglen < sizeof( mssgbfr )";
         public static string MssgsmgrCppString { get; } = "mssgsmgr.cpp";
         public static string MString { get; } = "-m";
@@ -857,6 +859,7 @@ namespace MikhailKhalizev.Max.Program
         public static string StorageUnitsHoldRawMaterialsProducedByAnyMiningStationsThatAreConnectedToThemToFillAnAdjacentEngineerOrConstructorClickTheXferBuString { get; } = "Storage Units hold raw materials produced by any mining stations that are connected to them.  To fill an adjacent Engineer or Constructor, click the Xfer button and then click on the Engineer or Constructor.";
         public static string StorageUnitsString { get; } = "Storage Units";
         public static string StorageUnitString { get; } = "Storage Unit";
+        public static string StoringString { get; } = "Storing";
         public static string StrlenNewChunkStrlenMessageLessSizeofMessage1String { get; } = "strlen( new_chunk ) + strlen( message ) < sizeof( message ) + 1";
         public static string StrobjCppString { get; } = "strobj.cpp";
         public static string SubmarinesString { get; } = "Submarines";
@@ -2658,6 +2661,9 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition SIHasBeenUnloadedFromAirTransport { get; } = new StringDefinition(0x101b_288e, SIHasBeenUnloadedFromAirTransportString);
         public static StringDefinition UnitsmgrCpp7 { get; } = new StringDefinition(0x101b_28ba, UnitsmgrCppString);
         public static StringDefinition ChildNotEqual0 { get; } = new StringDefinition(0x101b_28c7, ChildNotEqual0String);
+        public static StringDefinition Moving3 { get; } = new StringDefinition(0x101b_28ec, MovingString3);
+        public static StringDefinition Storing { get; } = new StringDefinition(0x101b_28f3, StoringString);
+        public static StringDefinition Firing { get; } = new StringDefinition(0x101b_28fb, FiringString);
         public static StringDefinition UnitsmgrCpp3 { get; } = new StringDefinition(0x101b_29f2, UnitsmgrCppString);
         public static StringDefinition BuildListGetcountGreater03 { get; } = new StringDefinition(0x101b_29ff, BuildListGetcountGreater0String);
         public static StringDefinition Turns5 { get; } = new StringDefinition(0x101b_2a19, TurnsString);

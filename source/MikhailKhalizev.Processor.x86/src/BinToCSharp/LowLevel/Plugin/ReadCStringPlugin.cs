@@ -37,9 +37,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (_allStringDefinitions != null)
                 return;
             _allStringDefinitions = new HashSet<StringDefinition>();
-            
+
             Type myType = null;
-            
+
             foreach (var propertyInfo in Engine.DefinitionCollection.GetAllStringDefinition())
             {
                 var sd = (StringDefinition) propertyInfo.GetValue(null);
@@ -108,8 +108,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
         {
             if (!_anyChange)
                 return;
-            
-            NonBlockingConsole.WriteLine($"Save {Engine.Configuration.StringDefinitionsClassName}");
+
+            NonBlockingConsole.WriteLine($"Сохранение {Engine.Configuration.StringDefinitionsClassName}.cs.");
 
             var list = new List<string>
             {
@@ -126,13 +126,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
 
             foreach (var pair in _myStrings.OrderBy(x => x.Value))
                 list.Add($"        public static string {pair.Value} {{ get; }} = \"{EscapeString(pair.Key)}\";");
-            
+
             list.Add("");
             list.Add("        #endregion");
             list.Add("");
             list.Add("        #region StringDefinition");
             list.Add("");
-            
+
             foreach (var pair in _myStringDefinitions.OrderBy(x => x.Key.Address))
             {
                 var str = "        " +
@@ -151,19 +151,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 Path.Combine(Engine.Configuration.CodeOutput, Engine.Configuration.StringDefinitionsClassName + ".cs"),
                 list);
         }
-        
+
 
         private string GetOrAddStringPropertyName(string propertyName, StringDefinition sd)
         {
             if (_myStrings.TryGetValue(sd.String, out var stringPropertyName))
                 return stringPropertyName;
-            
+
             stringPropertyName = GetUniqueName(propertyName + "String");
             _myStrings[sd.String] = stringPropertyName;
 
             return stringPropertyName;
         }
-        
+
         public static string GetPropertyName(string name)
         {
             if (name == "")
@@ -207,7 +207,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
         }
 
         private static bool IsName(char c) => char.IsLetterOrDigit(c);
-        
+
         private string GetUniqueName(string value)
         {
             var num = 2;
@@ -216,7 +216,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
                 name = value + num++;
             return name;
         }
-        
+
         private static string EscapeString(string nativeStr)
         {
             return nativeStr

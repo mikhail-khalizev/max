@@ -1,6 +1,6 @@
 # M.A.X. Reverse Engineering
 
-Этот проект планирует в точности воссоздать легендарную игру [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration)
+Этот проект ставит цель в точности воссоздать легендарную игру [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration)
 из имеющихся бинарных файлов.
 
 ![Screenshots 1](./doc/img/screenshot01.png)
