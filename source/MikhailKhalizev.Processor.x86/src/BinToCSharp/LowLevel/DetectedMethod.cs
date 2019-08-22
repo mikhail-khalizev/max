@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
     [DebuggerDisplay("Begin = {Begin}, End = {End}, MethodInfo = {MethodInfo?.Id}")]
     public class DetectedMethod

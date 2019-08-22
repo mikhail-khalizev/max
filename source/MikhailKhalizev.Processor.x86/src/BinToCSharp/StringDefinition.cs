@@ -1,5 +1,5 @@
 using System;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp
 {

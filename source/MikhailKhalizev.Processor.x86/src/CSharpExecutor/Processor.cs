@@ -3,23 +3,21 @@
 
 #pragma warning disable IDE1006 // Naming Styles
 
-using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
-using MikhailKhalizev.Processor.x86.Configuration;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
-using MikhailKhalizev.Processor.x86.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
+using MikhailKhalizev.Processor.x86.Configuration;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.Core
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public class Processor : IProcessor, IDisposable
     {

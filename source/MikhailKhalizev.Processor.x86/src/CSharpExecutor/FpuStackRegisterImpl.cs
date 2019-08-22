@@ -1,7 +1,7 @@
-﻿using System;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using System;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Core
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public sealed class FpuStackRegisterImpl : FpuStackRegister
     {

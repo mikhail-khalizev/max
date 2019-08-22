@@ -1,6 +1,6 @@
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Core
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public class Ia32EferRegisterImpl : Ia32EferRegister
     {

@@ -1,6 +1,6 @@
 using System;
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Dos
 
     public class dma_channel
     {
-        private Processor.x86.Core.Processor Processor;
+        private Processor.x86.CSharpExecutor.Processor Processor;
 
         dma_callback callback;
 
@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Dos
 
         const int dma_wrapping = 0xffff;
 
-        public dma_channel(int num, bool dma16, Processor.x86.Core.Processor processor)
+        public dma_channel(int num, bool dma16, Processor.x86.CSharpExecutor.Processor processor)
         {
             if (num == 4)
                 return;
@@ -236,7 +236,7 @@ namespace MikhailKhalizev.Max.Dos
 
 
         /** @param num first or second DMA controller */
-        public dma_controller(int num, Processor.x86.Core.Processor processor)
+        public dma_controller(int num, Processor.x86.CSharpExecutor.Processor processor)
         {
             ctrlnum = num;
             for (var i = 0; i < 4; i++)

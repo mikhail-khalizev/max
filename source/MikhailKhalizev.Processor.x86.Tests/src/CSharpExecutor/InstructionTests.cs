@@ -1,6 +1,6 @@
 using FluentAssertions;
 using MikhailKhalizev.Processor.x86.Configuration;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.Core
@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
     {
         /// <inheritdoc />
         public InstructionTests()
-            : base(new x86.Core.Processor(new ProcessorDto()))
+            : base(new CSharpExecutor.Processor(new ProcessorDto()))
         { }
 
         [Fact]

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 
-namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
     public class InMemoryMethodInfoCollection : IMethodInfoCollection
     {

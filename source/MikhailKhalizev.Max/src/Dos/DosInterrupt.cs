@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -17,10 +16,10 @@ namespace MikhailKhalizev.Max.Dos
 {
     public class DosInterrupt : BridgeProcessor
     {
-        public new Processor.x86.Core.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
-        public DosInterrupt(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
+        public DosInterrupt(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;
@@ -155,7 +154,7 @@ namespace MikhailKhalizev.Max.Dos
                                     // std::cerr << static_cast<uint>(dl) << std::endl;
 
 
-                                    var curr_bank = ((Processor.x86.Core.Memory)Memory)
+                                    var curr_bank = ((Memory)Memory)
                                         .mem_phys_raw(0xa0000, 0x10000)
                                         .Slice(0, 0x10000);
 

@@ -4,11 +4,11 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm.Udis86;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public class ReadCStringPlugin : PluginBase
     {

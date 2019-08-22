@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
 {
     public abstract class SegmentRegister : Register
     {

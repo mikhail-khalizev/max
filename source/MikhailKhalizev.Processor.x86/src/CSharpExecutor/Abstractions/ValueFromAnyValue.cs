@@ -1,4 +1,4 @@
-namespace MikhailKhalizev.Processor.x86.Core.Abstractions
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
     public class ValueFromAnyValue : Value
     {

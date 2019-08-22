@@ -1,6 +1,7 @@
 using System.Linq;
 using FluentAssertions;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Configuration;
 using SharpDisasm;

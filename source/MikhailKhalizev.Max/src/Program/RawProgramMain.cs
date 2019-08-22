@@ -7,15 +7,14 @@ using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.CSharp;
 using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
-using MikhailKhalizev.Processor.x86.Core;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.CSharpExecutor;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
@@ -24,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
 {
     public class RawProgramMain : BridgeProcessor, ICompiledMethodCollection
     {
-        public new Processor.x86.Core.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
         public MethodInfoCollection MethodInfoCollection { get; }
@@ -44,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
         public const ushort pspseg = image_load_seg - 16; // 0x192
 
         public RawProgramMain(
-            Processor.x86.Core.Processor implementation,
+            Processor.x86.CSharpExecutor.Processor implementation,
             ConfigurationDto configuration,
             MethodInfoCollection methodInfoCollection,
             DefinitionCollection definitionCollection)

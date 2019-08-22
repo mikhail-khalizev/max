@@ -1,6 +1,7 @@
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using System;
+using MikhailKhalizev.Processor.x86.CSharpExecutor;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
@@ -8,7 +9,7 @@ namespace MikhailKhalizev.Max.Dos
 
     public class DosPort : BridgeProcessor
     {
-        public new Processor.x86.Core.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         public enum kbd_keys
@@ -178,7 +179,7 @@ namespace MikhailKhalizev.Max.Dos
             0,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0   // 0xf0
         };
 
-        public DosPort(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
+        public DosPort(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;
@@ -266,7 +267,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 case 0x92:
-                    value.Int32 = ((Processor.x86.Core.Memory)Memory).A20Gate ? 0x2 : 0;
+                    value.Int32 = ((Memory)Memory).A20Gate ? 0x2 : 0;
                     break;
 
                 case 0x215:

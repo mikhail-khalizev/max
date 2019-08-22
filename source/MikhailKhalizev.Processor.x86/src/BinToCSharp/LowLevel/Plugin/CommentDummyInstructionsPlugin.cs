@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.Decoder;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm.Udis86;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public class CommentDummyInstructionsPlugin : PluginBase
     {

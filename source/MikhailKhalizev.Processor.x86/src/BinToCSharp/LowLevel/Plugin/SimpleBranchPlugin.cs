@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using SharpDisasm;
 using SharpDisasm.Udis86;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public class SimpleBranchPlugin : PluginBase
     {
@@ -123,12 +123,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             }
             else
             {
-                Engine.BrunchesInfo.TryGetValue(new BrunchInfo(cmd.Begin), out var actual);
+                Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var actual);
                 if (actual == null)
                 {
-                    actual = new BrunchInfo(cmd.Begin);
+                    actual = new BranchInfo(cmd.Begin);
                     actual.To = new SortedSet<Address>();
-                    Engine.BrunchesInfo.Add(actual);
+                    Engine.BranchesInfo.Add(actual);
                 }
 
                 actual.To.Add(toAddr);
@@ -141,7 +141,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             if (extraBytes != null)
                 engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);
 
-            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
+            engine.BranchesInfo.TryGetValue(new BranchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
             if (curJmp == null)
                 throw new InvalidOperationException();
 

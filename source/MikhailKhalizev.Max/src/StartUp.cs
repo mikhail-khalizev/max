@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
 using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
@@ -88,7 +86,7 @@ namespace MikhailKhalizev.Max
                 return;
             }
 
-            using (var p = new Processor.x86.Core.Processor(ConfigurationDto.Processor))
+            using (var p = new Processor.x86.CSharpExecutor.Processor(ConfigurationDto.Processor))
             {
                 var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
                 rp.Start();

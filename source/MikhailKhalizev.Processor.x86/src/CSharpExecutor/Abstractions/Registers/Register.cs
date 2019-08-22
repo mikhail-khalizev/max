@@ -1,6 +1,6 @@
-﻿using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 
-namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
 {
     /// <summary>
     /// Регистр у которого можно прочитать или установить значение.
