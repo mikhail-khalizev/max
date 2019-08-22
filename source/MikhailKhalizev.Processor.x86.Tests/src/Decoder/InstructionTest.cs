@@ -1,4 +1,3 @@
-﻿using System.Linq;
 using FluentAssertions;
 using MikhailKhalizev.Processor.x86.Decoder;
 using MikhailKhalizev.Processor.x86.Decoder.Metadata;

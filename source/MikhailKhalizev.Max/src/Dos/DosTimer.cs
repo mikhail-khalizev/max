@@ -1,10 +1,8 @@
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Utils;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {

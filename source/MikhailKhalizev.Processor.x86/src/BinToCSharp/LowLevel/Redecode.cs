@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,14 +6,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Configuration;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Polly;
-using SharpDisasm;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
     public class Redecode
     {

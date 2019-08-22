@@ -4,10 +4,10 @@
 #pragma warning disable IDE1006 // Naming Styles
 
 using System;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
-namespace MikhailKhalizev.Processor.x86.Core.Abstractions
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
     public interface IProcessor
     {

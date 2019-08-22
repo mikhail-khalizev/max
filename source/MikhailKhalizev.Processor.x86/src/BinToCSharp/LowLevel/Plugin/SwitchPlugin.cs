@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Decoder;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm.Udis86;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public class SwitchPlugin : PluginBase
     {
@@ -289,12 +289,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. (");
 
-            Engine.BrunchesInfo.TryGetValue(new BrunchInfo(cmd.Begin), out var jtka);
+            Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var jtka);
             if (jtka == null)
             {
-                jtka = new BrunchInfo(cmd.Begin);
+                jtka = new BranchInfo(cmd.Begin);
                 jtka.To = new SortedSet<Address>();
-                Engine.BrunchesInfo.Add(jtka);
+                Engine.BranchesInfo.Add(jtka);
             }
 
             var notFirst = false;
@@ -340,7 +340,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
             var raw = engine.Memory.ReadAll(addrAreaBegin, sizeOfAddrArea);
             engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addrAreaBegin, raw);
 
-            engine.BrunchesInfo.TryGetValue(new BrunchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
+            engine.BranchesInfo.TryGetValue(new BranchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
             if (curJmp == null)
                 throw new NotImplementedException("curJmp == null");
 

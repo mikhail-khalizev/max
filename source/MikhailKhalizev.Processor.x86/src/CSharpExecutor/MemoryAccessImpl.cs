@@ -1,9 +1,8 @@
-﻿using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Registers;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.Core
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public class MemoryAccessImpl : MemoryAccess
     {

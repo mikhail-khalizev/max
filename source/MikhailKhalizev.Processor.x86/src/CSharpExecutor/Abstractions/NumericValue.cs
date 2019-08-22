@@ -1,6 +1,4 @@
-using System;
-
-namespace MikhailKhalizev.Processor.x86.Core.Abstractions
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
     public sealed class NumericValue16 : Value
     {

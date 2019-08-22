@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {

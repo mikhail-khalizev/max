@@ -1,14 +1,13 @@
 using System;
 using MikhailKhalizev.Max.Program;
-using MikhailKhalizev.Processor.x86;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Max.Dos
 {
     public class DosPic : BridgeProcessor
     {
-        public new Processor.x86.Core.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         private bool logging = false;
@@ -25,7 +24,7 @@ namespace MikhailKhalizev.Max.Dos
         private bool in_run_irqs = false;
 
 
-        public DosPic(Processor.x86.Core.Processor implementation, RawProgramMain rawProgramMain)
+        public DosPic(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;

@@ -1,22 +1,18 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
-using MikhailKhalizev.Processor.x86.BinToCSharp.Plugin;
 using MikhailKhalizev.Processor.x86.Configuration;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
-using SharpDisasm.Udis86;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
     // TODO Разделить класс на несколько - один разбивает код на части. Другой преобразовывает в C#. Третий сохраняет в файл.
 
@@ -69,7 +65,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
         public MySortedSet<DetectedMethod> NewDetectedMethods { get; } = new MySortedSet<DetectedMethod>(DetectedMethod.BeginComparer);
 
         // Переходы на известные адреса.
-        public SortedSet<BrunchInfo> BrunchesInfo = new SortedSet<BrunchInfo>(BrunchInfo.BeginComparer);
+        public SortedSet<BranchInfo> BranchesInfo = new SortedSet<BranchInfo>(BranchInfo.BeginComparer);
 
         private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
@@ -321,7 +317,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                     method.Labels.Clear();
 
-                    foreach (var branchInfo in BrunchesInfo.GetViewBetween(new BrunchInfo(methodBegin), new BrunchInfo(methodEnd)))
+                    foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(methodBegin), new BranchInfo(methodEnd)))
                     {
                         var branchInstructionIndex = instructions.BinarySearch(new CSharpInstruction(branchInfo.From), CSharpInstruction.BeginComparer);
                         if (branchInstructionIndex < 0)
@@ -435,7 +431,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
 
                 // Заполняем IsLocalBranch.
 
-                foreach (var brunchInfo in BrunchesInfo.GetViewBetween(new BrunchInfo(method.Begin), new BrunchInfo(method.End)))
+                foreach (var brunchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
                 {
                     var branchInstructionIndex = method.Instructions.BinarySearch(new CSharpInstruction(brunchInfo.From), CSharpInstruction.BeginComparer);
                     if (branchInstructionIndex < 0)

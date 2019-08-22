@@ -4,7 +4,7 @@
 
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.Core.Abstractions.Registers
+namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
 {
     public class EflagsRegister : Register
     {

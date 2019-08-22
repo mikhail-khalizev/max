@@ -1,4 +1,3 @@
-using System;
 using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 

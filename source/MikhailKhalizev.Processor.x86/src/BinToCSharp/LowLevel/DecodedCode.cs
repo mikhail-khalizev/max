@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
     public class DecodedCode
     {

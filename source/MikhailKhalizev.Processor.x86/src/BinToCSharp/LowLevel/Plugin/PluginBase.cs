@@ -1,4 +1,4 @@
-﻿namespace MikhailKhalizev.Processor.x86.BinToCSharp.Plugin
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public abstract class PluginBase
     {

@@ -1,21 +1,20 @@
 using System.Collections.Generic;
-using MikhailKhalizev.Processor.x86.Core.Abstractions;
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class BrunchInfo
+    public class BranchInfo
     {
         public Address From { get; set; }
         public SortedSet<Address> To { get; set; }
 
-        public BrunchInfo(Address from)
+        public BranchInfo(Address from)
         {
             From = from;
         }
 
-        public static IComparer<BrunchInfo> BeginComparer =>
-            new CustomComparer<BrunchInfo>(
+        public static IComparer<BranchInfo> BeginComparer =>
+            new CustomComparer<BranchInfo>(
                 (x, y) => x.From.CompareTo(y.From));
     }
 }

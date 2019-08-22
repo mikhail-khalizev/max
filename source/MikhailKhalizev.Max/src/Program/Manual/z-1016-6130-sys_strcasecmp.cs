@@ -1,6 +1,6 @@
 using System;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
-using MikhailKhalizev.Processor.x86.Core.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 
 namespace MikhailKhalizev.Max.Program
 {
