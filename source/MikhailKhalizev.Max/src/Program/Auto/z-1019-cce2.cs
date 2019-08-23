@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_ccf4, 2); fstp(memq_a32[ds, eax]);                /* fstp qword [eax] */
             ii(0x1019_ccf6, 1); popd(eax);                              /* pop eax */
             ii(0x1019_ccf7, 1); wait();                                 /* wait */
-            ii(0x1019_ccf8, 3); retd(0xc); return;                      /* ret 0xc */
+            ii(0x1019_ccf8, 3); retd(0xc);                              /* ret 0xc */
         }
     }
 }

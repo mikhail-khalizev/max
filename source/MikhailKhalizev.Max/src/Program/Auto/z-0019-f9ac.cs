@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_fa13:
             ii(0x19_fa13, 3); mov(ax, memw_a16[ss, bp - 0xa]);          /* mov ax, [bp-0xa] */
             ii(0x19_fa16, 1); leavew();                                 /* leave */
-            ii(0x19_fa17, 1); retfw(); return;                          /* retf */
+            ii(0x19_fa17, 1); retfw();                                  /* retf */
         }
     }
 }

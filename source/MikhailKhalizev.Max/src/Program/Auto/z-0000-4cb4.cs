@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x4cc2, 3);    mov(ax, 0x2);                             /* mov ax, 0x2 */
             ii(0x4cc5, 4);    callw_a16_far_ind(ds, 0x155c);            /* call far word [0x155c] */
         l_0x4cc9:
-            ii(0x4cc9, 1);    retw(); return;                           /* ret */
+            ii(0x4cc9, 1);    retw();                                   /* ret */
         }
     }
 }

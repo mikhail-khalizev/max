@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1016_b255-4e3")]
         public void /* sys */ Method_1016_b255()
         {
-            ii(0x1016_b255, 1); retd(); return;                         /* ret */
+            ii(0x1016_b255, 1); retd();                                 /* ret */
         }
     }
 }

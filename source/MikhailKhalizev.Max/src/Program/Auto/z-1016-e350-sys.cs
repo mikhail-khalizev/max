@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_e365, 2); if(jnzd(0x1016_e355, -0x12)) goto l_0x1016_e355; /* jnz 0x1016e355 */
             ii(0x1016_e367, 2); mov(eax, edx);                          /* mov eax, edx */
             ii(0x1016_e369, 1); popd(edx);                              /* pop edx */
-            ii(0x1016_e36a, 1); retd(); return;                         /* ret */
+            ii(0x1016_e36a, 1); retd();                                 /* ret */
         }
     }
 }

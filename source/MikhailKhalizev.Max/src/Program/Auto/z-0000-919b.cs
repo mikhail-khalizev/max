@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x91c7:
             ii(0x91c7, 2);    mov(sp, bp);                              /* mov sp, bp */
             ii(0x91c9, 1);    popw(bp);                                 /* pop bp */
-            ii(0x91ca, 1);    retw(); return;                           /* ret */
+            ii(0x91ca, 1);    retw();                                   /* ret */
         }
     }
 }

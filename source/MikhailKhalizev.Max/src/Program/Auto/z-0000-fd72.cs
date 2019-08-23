@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xfda5, 4);    adc(memw_a16[es, bx + 0xe], dx);          /* adc [es:bx+0xe], dx */
         l_0xfda9:
             ii(0xfda9, 1);    leavew();                                 /* leave */
-            ii(0xfdaa, 1);    retw(); return;                           /* ret */
+            ii(0xfdaa, 1);    retw();                                   /* ret */
         }
     }
 }

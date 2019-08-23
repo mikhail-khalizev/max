@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_dbeb, 2); rcl(dx, 0x1);                             /* rcl dx, 1 */
             ii(0x18_dbed, 2); shl(ax, 0x1);                             /* shl ax, 1 */
             ii(0x18_dbef, 2); rcl(dx, 0x1);                             /* rcl dx, 1 */
-            ii(0x18_dbf1, 1); retw(); return;                           /* ret */
+            ii(0x18_dbf1, 1); retw();                                   /* ret */
         }
     }
 }

@@ -134,7 +134,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9673, 5); mov(edi, memd_a16[es, di + 0x44]);        /* mov edi, [es:di+0x44] */
             ii(0x17_9678, 1); popw(es);                                 /* pop es */
             ii(0x17_9679, 2); clts();                                   /* clts */
-            ii(0x17_967b, 1); retfw(); return;                          /* retf */
+            ii(0x17_967b, 1); retfw();                                  /* retf */
         }
     }
 }

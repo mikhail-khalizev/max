@@ -129,7 +129,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1_0df6:
             ii(0x1_0df6, 1);  popw(si);                                 /* pop si */
             ii(0x1_0df7, 1);  leavew();                                 /* leave */
-            ii(0x1_0df8, 1);  retw(); return;                           /* ret */
+            ii(0x1_0df8, 1);  retw();                                   /* ret */
         }
     }
 }

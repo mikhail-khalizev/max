@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_ccf5:
             ii(0x19_ccf5, 3); mov(ax, memw_a16[ss, bp - 0x12]);         /* mov ax, [bp-0x12] */
             ii(0x19_ccf8, 1); leavew();                                 /* leave */
-            ii(0x19_ccf9, 3); retw(0xc); return;                        /* ret 0xc */
+            ii(0x19_ccf9, 3); retw(0xc);                                /* ret 0xc */
         }
     }
 }

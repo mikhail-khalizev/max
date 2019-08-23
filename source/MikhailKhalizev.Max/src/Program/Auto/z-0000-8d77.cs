@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8db7, 2);    jmpw(0x8d91, -0x28); goto l_0x8d91;       /* jmp 0x8d91 */
         l_0x8db9:
             ii(0x8db9, 1);    popw(si);                                 /* pop si */
-            ii(0x8dba, 1);    retw(); return;                           /* ret */
+            ii(0x8dba, 1);    retw();                                   /* ret */
         }
     }
 }

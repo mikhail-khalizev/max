@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x5c38-26f7cda7")]
         public void Method_0000_5c38()
         {
-            ii(0x5c38, 5);    if(jmpw_a16_far_ind(ds, 0xaf2)) return;   /* jmp far word [ds:0xaf2] */
+            ii(0x5c38, 5);    jmpw_a16_far_ind(ds, 0xaf2);              /* jmp far word [ds:0xaf2] */
         }
     }
 }

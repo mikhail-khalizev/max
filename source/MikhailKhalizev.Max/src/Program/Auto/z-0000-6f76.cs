@@ -73,7 +73,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x7000:
             ii(0x7000, 1);    popw(si);                                 /* pop si */
             ii(0x7001, 1);    popw(di);                                 /* pop di */
-            ii(0x7002, 1);    retw(); return;                           /* ret */
+            ii(0x7002, 1);    retw();                                   /* ret */
         }
     }
 }

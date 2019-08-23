@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_7470:
             ii(0x17_7470, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x17_7472, 1); popw(ds);                                 /* pop ds */
-            ii(0x17_7473, 1); retfw(); return;                          /* retf */
+            ii(0x17_7473, 1); retfw();                                  /* retf */
         }
     }
 }

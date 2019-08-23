@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0294, 5); popw(memw_a32[ss, edx + 0xc]);            /* pop word [ss:edx+0xc] */
             ii(0x19_0299, 2); popd(edx);                                /* pop edx */
             ii(0x19_029b, 1); popw(ds);                                 /* pop ds */
-            ii(0x19_029c, 1); iretw(); return;                          /* iretw */
+            ii(0x19_029c, 1); iretw();                                  /* iretw */
         }
     }
 }

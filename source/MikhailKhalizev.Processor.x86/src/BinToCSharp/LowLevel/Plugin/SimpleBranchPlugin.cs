@@ -27,12 +27,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             {
                 var orig = cmd.WriteCmd;
 
-                cmd.WriteCmd = (engine, dm, index, func, offset) =>
+                cmd.WriteCmd = (engine, dm, index, func) =>
                 {
-                    if (dm.MethodInfo.JumpsInfo?.IsGoUp?.Contains(cmd.End - offset) == true)
+                    if (dm.MethodInfo.JumpsInfo?.IsGoUp?.Contains(cmd.End) == true)
                         cmd.IsCallUp = true;
 
-                    return orig(engine, dm, index, func, offset);
+                    return orig(engine, dm, index, func);
                 };
             }
 
@@ -78,10 +78,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 extraBytes = Engine.Memory.ReadAll(extraStart, op.size / 8);
                 
                 var orig = cmd.WriteCmd;
-                cmd.WriteCmd = (engine, dm, index, func, offset) =>
+                cmd.WriteCmd = (engine, dm, index, func) =>
                 {
                     engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);
-                    return orig(engine, dm, index, func, offset);
+                    return orig(engine, dm, index, func);
                 };
 
                 switch (op.size)
@@ -132,11 +132,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 }
 
                 actual.To.Add(toAddr);
-                cmd.WriteCmd = (engine, dm, index, func, offset) => on_cmd_write(engine, dm, index, func, offset, extraStart, extraBytes);
+                cmd.WriteCmd = (engine, dm, index, func) => on_cmd_write(engine, dm, index, func, extraStart, extraBytes);
             }
         }
 
-        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset, Address extraStart, byte[] extraBytes)
+        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, Address extraStart, byte[] extraBytes)
         {
             if (extraBytes != null)
                 engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);

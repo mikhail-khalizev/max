@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1016_c348()
         {
             ii(0x1016_c348, 5); mov(eax, memd_a32[ds, 0x101c_fbdc]);    /* mov eax, [0x101cfbdc] */
-            ii(0x1016_c34d, 1); retd(); return;                         /* ret */
+            ii(0x1016_c34d, 1); retd();                                 /* ret */
         }
     }
 }

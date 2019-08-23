@@ -250,7 +250,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb692, 1);    popw(si);                                 /* pop si */
             ii(0xb693, 1);    popw(di);                                 /* pop di */
             ii(0xb694, 1);    leavew();                                 /* leave */
-            ii(0xb695, 1);    retw(); return;                           /* ret */
+            ii(0xb695, 1);    retw();                                   /* ret */
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x69af, 2);    jmpw(0x69b1, 0); goto l_0x69b1;           /* jmp 0x69b1 */
         l_0x69b1:
             ii(0x69b1, 2);    outb(0x92, al);                           /* out 0x92, al */
-            ii(0x69b3, 1);    retw(); return;                           /* ret */
+            ii(0x69b3, 1);    retw();                                   /* ret */
         }
     }
 }

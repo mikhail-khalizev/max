@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1_114b:
             ii(0x1_114b, 1);  popw(di);                                 /* pop di */
             ii(0x1_114c, 1);  popw(si);                                 /* pop si */
-            ii(0x1_114d, 5);  if(jmpw_far_abs(0x18, 0x2089)) return;    /* jmp word 0x18:0x2089 */
+            ii(0x1_114d, 5);  jmpw_far_abs(0x18, 0x2089);               /* jmp word 0x18:0x2089 */
         }
     }
 }

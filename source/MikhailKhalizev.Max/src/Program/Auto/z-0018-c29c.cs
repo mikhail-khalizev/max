@@ -138,7 +138,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_c3bb, 1); sti();                                    /* sti */
             ii(0x18_c3bc, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x18_c3be, 1); leavew();                                 /* leave */
-            ii(0x18_c3bf, 1); retw(); return;                           /* ret */
+            ii(0x18_c3bf, 1); retw();                                   /* ret */
         }
     }
 }

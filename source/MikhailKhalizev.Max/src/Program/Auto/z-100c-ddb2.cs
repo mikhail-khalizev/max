@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100c_ddcb:
             ii(0x100c_ddcb, 2); if(loopd_a32(0x100c_ddbf, -0xe)) goto l_0x100c_ddbf; /* loop 0x100cddbf */
             ii(0x100c_ddcd, 7); mov(memw_a32[ds, 0x101c_59b6], bx);     /* mov [0x101c59b6], bx */
-            ii(0x100c_ddd4, 1); retd(); return;                         /* ret */
+            ii(0x100c_ddd4, 1); retd();                                 /* ret */
         }
     }
 }

@@ -144,7 +144,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_d3d3:
             ii(0x19_d3d3, 1); popw(si);                                 /* pop si */
             ii(0x19_d3d4, 1); leavew();                                 /* leave */
-            ii(0x19_d3d5, 3); retw(0x12); return;                       /* ret 0x12 */
+            ii(0x19_d3d5, 3); retw(0x12);                               /* ret 0x12 */
         }
     }
 }

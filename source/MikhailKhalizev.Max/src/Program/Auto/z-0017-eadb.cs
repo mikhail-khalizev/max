@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_eaea:
             ii(0x17_eaea, 2); xor(cx, cx);                              /* xor cx, cx */
         l_0x17_eaec:
-            ii(0x17_eaec, 1); retw(); return;                           /* ret */
+            ii(0x17_eaec, 1); retw();                                   /* ret */
         }
     }
 }

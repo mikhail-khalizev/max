@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_40d6, 2); if(jnzw(0x19_40da, 0x2)) goto l_0x19_40da; /* jnz 0x40da */
             ii(0x19_40d8, 2); xor(cx, cx);                              /* xor cx, cx */
         l_0x19_40da:
-            ii(0x19_40da, 1); retw(); return;                           /* ret */
+            ii(0x19_40da, 1); retw();                                   /* ret */
         }
     }
 }

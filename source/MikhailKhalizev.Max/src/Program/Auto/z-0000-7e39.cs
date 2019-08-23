@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_7e39()
         {
             ii(0x7e39, 3);    callw(0x66dc, -0x1760);                   /* call 0x66dc */
-            ii(0x7e3c, 1);    retw(); return;                           /* ret */
+            ii(0x7e3c, 1);    retw();                                   /* ret */
         }
     }
 }

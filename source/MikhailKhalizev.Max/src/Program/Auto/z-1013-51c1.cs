@@ -805,7 +805,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_5e88, 1); popd(edx);                              /* pop edx */
             ii(0x1013_5e89, 1); popd(ecx);                              /* pop ecx */
             ii(0x1013_5e8a, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1013_5e8b, 1); retd(); return;                         /* ret */
+            ii(0x1013_5e8b, 1); retd();                                 /* ret */
         }
     }
 }

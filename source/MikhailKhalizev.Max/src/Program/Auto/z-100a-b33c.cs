@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_b367, 1); popd(edx);                              /* pop edx */
             ii(0x100a_b368, 1); popd(ecx);                              /* pop ecx */
             ii(0x100a_b369, 1); popd(ebx);                              /* pop ebx */
-            ii(0x100a_b36a, 1); retd(); return;                         /* ret */
+            ii(0x100a_b36a, 1); retd();                                 /* ret */
         }
     }
 }

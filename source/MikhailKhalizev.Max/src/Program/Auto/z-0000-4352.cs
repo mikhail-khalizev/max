@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x436a, 2);    if(jzw(0x436f, 0x3)) goto l_0x436f;       /* jz 0x436f */
             ii(0x436c, 3);    mov(bx, 0xe000);                          /* mov bx, 0xe000 */
         l_0x436f:
-            ii(0x436f, 1);    retw(); return;                           /* ret */
+            ii(0x436f, 1);    retw();                                   /* ret */
         }
     }
 }

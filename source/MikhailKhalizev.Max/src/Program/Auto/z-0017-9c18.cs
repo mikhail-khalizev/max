@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9cd7, 5); and(memb_a16[es, bx + 0x2c], -0x2 /* 0xfe */); /* and byte [es:bx+0x2c], 0xfe */
             ii(0x17_9cdc, 1); popw(ds);                                 /* pop ds */
             ii(0x17_9cdd, 1); leavew();                                 /* leave */
-            ii(0x17_9cde, 1); retfw(); return;                          /* retf */
+            ii(0x17_9cde, 1); retfw();                                  /* retf */
         }
     }
 }

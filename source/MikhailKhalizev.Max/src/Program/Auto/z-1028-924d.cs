@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_93d1, 2); mov(al, 0xb);                           /* mov al, 0xb */
             ii(0x1028_93d3, 1); outb(dx, al);                           /* out dx, al */
             ii(0x1028_93d4, 4); mov(ax, 0x1);                           /* mov ax, 0x1 */
-            ii(0x1028_93d8, 1); retd(); return;                         /* ret */
+            ii(0x1028_93d8, 1); retd();                                 /* ret */
         }
     }
 }

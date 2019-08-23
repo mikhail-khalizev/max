@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xbd5d, 1);    pushw(cx);                                /* push cx */
             ii(0xbd5e, 1);    pushw(cx);                                /* push cx */
             ii(0xbd5f, 2);    mov(ax, sp);                              /* mov ax, sp */
-            ii(0xbd61, 2);    if(jmpw_abs(cx)) return;                  /* jmp cx */
+            ii(0xbd61, 2);    jmpw_abs(cx);                             /* jmp cx */
         }
     }
 }

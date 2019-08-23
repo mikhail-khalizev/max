@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa26d, 2);    xor(ax, ax);                              /* xor ax, ax */
         l_0xa26f:
             ii(0xa26f, 4);    or(memb_a16[ds, 0x36], al);               /* or [0x36], al */
-            ii(0xa273, 1);    retw(); return;                           /* ret */
+            ii(0xa273, 1);    retw();                                   /* ret */
         }
     }
 }

@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_05e3, 3); mov(ax, memw_a16[ss, bp - 0x4]);          /* mov ax, [bp-0x4] */
             ii(0x19_05e6, 3); mov(dx, memw_a16[ss, bp - 0x2]);          /* mov dx, [bp-0x2] */
             ii(0x19_05e9, 1); leavew();                                 /* leave */
-            ii(0x19_05ea, 1); retfw(); return;                          /* retf */
+            ii(0x19_05ea, 1); retfw();                                  /* retf */
         }
     }
 }

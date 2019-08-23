@@ -171,7 +171,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_9db1, 3); jmpw(0x19_9cd5, -0xdf); goto l_0x19_9cd5; /* jmp 0x9cd5 */
         l_0x19_9db4:
             ii(0x19_9db4, 1); leavew();                                 /* leave */
-            ii(0x19_9db5, 3); retw(0x6); return;                        /* ret 0x6 */
+            ii(0x19_9db5, 3); retw(0x6);                                /* ret 0x6 */
         }
     }
 }

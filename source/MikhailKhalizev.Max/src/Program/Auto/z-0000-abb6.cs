@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xabf0, 3);    mov(cx, 0x8);                             /* mov cx, 0x8 */
             ii(0xabf3, 2);    jmpw(0xabc4, -0x31); goto l_0xabc4;       /* jmp 0xabc4 */
         l_0xabf5:
-            ii(0xabf5, 1);    retfw(); return;                          /* retf */
+            ii(0xabf5, 1);    retfw();                                  /* retf */
         }
     }
 }

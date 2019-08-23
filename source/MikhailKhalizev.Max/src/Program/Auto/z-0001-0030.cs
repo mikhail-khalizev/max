@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1_0066, 1);  retw(); return;                           /* ret */
         l_0x1_0067:
             ii(0x1_0067, 1);  stc();                                    /* stc */
-            ii(0x1_0068, 1);  retw(); return;                           /* ret */
+            ii(0x1_0068, 1);  retw();                                   /* ret */
         }
     }
 }

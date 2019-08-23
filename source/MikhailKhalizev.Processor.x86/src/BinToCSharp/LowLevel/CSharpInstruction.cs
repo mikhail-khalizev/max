@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool IsJmpOrJcc { get; set; }
         public bool IsLocalBranch { get; set; }
 
-        public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset);
+        public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc);
 
         public WriteCmdDelegate WriteCmd { get; set; }
 
@@ -76,7 +76,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 throw new ArgumentNullException(nameof(ud));
             DefinitionCollection = definitionCollection;
 
-            WriteCmd = (e, dm, index, func, offset) => ToCodeString(offset: offset);
+            WriteCmd = (e, dm, index, func) =>
+            {
+                var isLast = dm.Instructions.Count <= index + 1;
+                return ToCodeString(onlyRawCmd: isLast);
+            };
 
             Comments = new List<string>();
 
@@ -138,7 +142,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public string ToCodeString(
             string cmdSuffix = "",
             string funcAddArg = "",
-            int offset = 0,
             bool onlyRawCmd = false)
         {
             if (IsCallUp)
@@ -422,7 +425,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             default: throw new NotImplementedException($"oprSize: {oprSize}");
                         }
 
-                        sb.Append(DefinitionCollection.GetAddressFullName(End + val + offset, options));
+                        sb.Append(DefinitionCollection.GetAddressFullName(End + val, options));
                         sb.Append(", ");
 
                         sb.Append(
@@ -497,7 +500,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     default: throw new NotImplementedException($"oprSize: {oprSize}");
                 }
 
-                sb.Append($" goto l_{(Address)(End + val + offset)};");
+                sb.Append($" goto l_{(Address)(End + val)};");
             }
             else if (addReturn)
                 sb.Append($" return;");

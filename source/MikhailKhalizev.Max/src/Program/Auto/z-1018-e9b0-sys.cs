@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_ea24, 3); mov(memd_a32[ds, edi + 0x4], eax);      /* mov [edi+0x4], eax */
             ii(0x1018_ea27, 3); sub(edi, memd_a32[ss, ebp - 0x10]);     /* sub edi, [ebp-0x10] */
             ii(0x1018_ea2a, 2); mov(esi, ebx);                          /* mov esi, ebx */
-            ii(0x1018_ea2c, 1); retd(); return;                         /* ret */
+            ii(0x1018_ea2c, 1); retd();                                 /* ret */
         }
     }
 }

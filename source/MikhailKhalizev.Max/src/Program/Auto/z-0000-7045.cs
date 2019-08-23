@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x7045, 1);    pushw(ss);                                /* push ss */
             ii(0x7046, 1);    popw(ds);                                 /* pop ds */
-            ii(0x7047, 1);    retw(); return;                           /* ret */
+            ii(0x7047, 1);    retw();                                   /* ret */
         }
     }
 }

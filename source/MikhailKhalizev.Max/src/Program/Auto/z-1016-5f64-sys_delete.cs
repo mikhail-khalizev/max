@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x1016_5f64, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_5f66, 6); if(jnzd_func(Definitions.sys_free, 0x5155)) return; /* jnz 0x1016b0c1 */
-            ii(0x1016_5f6c, 1); retd(); return;                         /* ret */
+            ii(0x1016_5f6c, 1); retd();                                 /* ret */
         }
     }
 }

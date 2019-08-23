@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x8208:
             ii(0x8208, 2);    mov(sp, bp);                              /* mov sp, bp */
             ii(0x820a, 1);    popw(bp);                                 /* pop bp */
-            ii(0x820b, 1);    retw(); return;                           /* ret */
+            ii(0x820b, 1);    retw();                                   /* ret */
         }
     }
 }

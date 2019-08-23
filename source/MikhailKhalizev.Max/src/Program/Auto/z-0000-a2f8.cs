@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
         l_0xa344:
             ii(0xa344, 1);    popw(ax);                                 /* pop ax */
         l_0xa345:
-            ii(0xa345, 1);    retw(); return;                           /* ret */
+            ii(0xa345, 1);    retw();                                   /* ret */
         }
     }
 }

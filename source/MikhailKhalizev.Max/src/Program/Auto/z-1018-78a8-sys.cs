@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_78ec:
             ii(0x1018_78ec, 4); fdiv(memq_a32[ss, esp + 0x8]);          /* fdiv qword [esp+0x8] */
             ii(0x1018_78f0, 1); popd(eax);                              /* pop eax */
-            ii(0x1018_78f1, 3); retd(0x8); return;                      /* ret 0x8 */
+            ii(0x1018_78f1, 3); retd(0x8);                              /* ret 0x8 */
         }
     }
 }

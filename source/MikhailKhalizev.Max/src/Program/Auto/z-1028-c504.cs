@@ -131,7 +131,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_c69d:
             ii(0x1028_c69d, 1); popd(esi);                              /* pop esi */
             ii(0x1028_c69e, 1); popd(ds);                               /* pop ds */
-            ii(0x1028_c69f, 1); retd(); return;                         /* ret */
+            ii(0x1028_c69f, 1); retd();                                 /* ret */
         }
     }
 }

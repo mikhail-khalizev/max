@@ -102,7 +102,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_ba41:
             ii(0x19_ba41, 1); popw(si);                                 /* pop si */
             ii(0x19_ba42, 1); leavew();                                 /* leave */
-            ii(0x19_ba43, 3); retw(0x4); return;                        /* ret 0x4 */
+            ii(0x19_ba43, 3); retw(0x4);                                /* ret 0x4 */
         }
     }
 }

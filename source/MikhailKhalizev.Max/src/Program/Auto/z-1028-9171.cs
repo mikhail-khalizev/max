@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_91b6:
             ii(0x1028_91b6, 6); mov(ax, memw_a32[ds, 0x12d]);           /* mov ax, [0x12d] */
         l_0x1028_91bc:
-            ii(0x1028_91bc, 1); retd(); return;                         /* ret */
+            ii(0x1028_91bc, 1); retd();                                 /* ret */
         }
     }
 }

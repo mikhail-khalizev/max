@@ -161,7 +161,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_a281, 1); popw(ds);                                 /* pop ds */
             ii(0x17_a282, 1); popw(si);                                 /* pop si */
             ii(0x17_a283, 1); leavew();                                 /* leave */
-            ii(0x17_a284, 1); retfw(); return;                          /* retf */
+            ii(0x17_a284, 1); retfw();                                  /* retf */
         }
     }
 }

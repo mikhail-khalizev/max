@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0979, 2); popad();                                  /* popad */
             ii(0x19_097b, 2); iretd(); return;                          /* iretd */
         l_0x19_097d:
-            ii(0x19_097d, 5); if(jmpw_a16_far_ind(cs, 0x14a8)) return;  /* jmp far word [cs:0x14a8] */
+            ii(0x19_097d, 5); jmpw_a16_far_ind(cs, 0x14a8);             /* jmp far word [cs:0x14a8] */
         }
     }
 }

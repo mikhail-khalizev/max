@@ -74,7 +74,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x3fe2, 1);    wait();                                   /* wait */
             ii(0x3fe3, 2);    fnsetpm();                                /* fnsetpm */
         l_0x3fe5:
-            ii(0x3fe5, 1);    retw(); return;                           /* ret */
+            ii(0x3fe5, 1);    retw();                                   /* ret */
         }
     }
 }

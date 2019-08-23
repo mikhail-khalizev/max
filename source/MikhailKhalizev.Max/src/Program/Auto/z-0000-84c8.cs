@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8520, 1);    popw(si);                                 /* pop si */
             ii(0x8521, 2);    mov(sp, bp);                              /* mov sp, bp */
             ii(0x8523, 1);    popw(bp);                                 /* pop bp */
-            ii(0x8524, 1);    retw(); return;                           /* ret */
+            ii(0x8524, 1);    retw();                                   /* ret */
         }
     }
 }

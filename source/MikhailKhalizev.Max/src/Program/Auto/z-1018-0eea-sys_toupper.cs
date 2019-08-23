@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_0ef2, 2); if(jgd(0x1018_0ef7, 0x3)) goto l_0x1018_0ef7; /* jg 0x10180ef7 */
             ii(0x1018_0ef4, 3); add(eax, 0x20);                         /* add eax, 0x20 */
         l_0x1018_0ef7:
-            ii(0x1018_0ef7, 1); retd(); return;                         /* ret */
+            ii(0x1018_0ef7, 1); retd();                                 /* ret */
         }
     }
 }

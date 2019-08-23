@@ -47,7 +47,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_0ee0, 2); if(jnzw(0x1a_0e8d, -0x55)) goto l_0x1a_0e8d; /* jnz 0xe8d */
             ii(0x1a_0ee2, 1); popw(ds);                                 /* pop ds */
             ii(0x1a_0ee3, 1); leavew();                                 /* leave */
-            ii(0x1a_0ee4, 3); retfw(0x8); return;                       /* retf 0x8 */
+            ii(0x1a_0ee4, 3); retfw(0x8);                               /* retf 0x8 */
         }
     }
 }

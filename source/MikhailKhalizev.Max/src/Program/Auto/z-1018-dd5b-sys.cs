@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_dd77, 2); shl(eax, 0x1);                          /* shl eax, 1 */
         l_0x1018_dd79:
             ii(0x1018_dd79, 1); leaved();                               /* leave */
-            ii(0x1018_dd7a, 1); retd(); return;                         /* ret */
+            ii(0x1018_dd7a, 1); retd();                                 /* ret */
         }
     }
 }

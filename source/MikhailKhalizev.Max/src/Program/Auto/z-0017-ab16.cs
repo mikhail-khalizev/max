@@ -113,7 +113,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_ac30:
             ii(0x17_ac30, 1); popw(ds);                                 /* pop ds */
             ii(0x17_ac31, 1); leavew();                                 /* leave */
-            ii(0x17_ac32, 1); retfw(); return;                          /* retf */
+            ii(0x17_ac32, 1); retfw();                                  /* retf */
         }
     }
 }

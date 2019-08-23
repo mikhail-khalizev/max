@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_efe0, 2); if(jzw(0x18_efe5, 0x3)) goto l_0x18_efe5; /* jz 0xefe5 */
             ii(0x18_efe2, 3); retw(0x6); return;                        /* ret 0x6 */
         l_0x18_efe5:
-            ii(0x18_efe5, 3); retw(0x2); return;                        /* ret 0x2 */
+            ii(0x18_efe5, 3); retw(0x2);                                /* ret 0x2 */
         }
     }
 }

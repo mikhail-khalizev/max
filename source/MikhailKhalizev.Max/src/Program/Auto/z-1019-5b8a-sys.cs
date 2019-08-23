@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5b90, 5); mov(eax, StringDefinitions.FloatingPointSupportNotLoaded); /* mov eax, 0x101b3464 */
             ii(0x1019_5b95, 5); calld(/* sys */ 0x1018_1002, -0x1_4b98); /* call 0x10181002 */
             ii(0x1019_5b9a, 1); popd(edx);                              /* pop edx */
-            ii(0x1019_5b9b, 1); retd(); return;                         /* ret */
+            ii(0x1019_5b9b, 1); retd();                                 /* ret */
         }
     }
 }

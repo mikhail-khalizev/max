@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x658f:
             ii(0x658f, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x6591, 1);    popw(bp);                                 /* pop bp */
-            ii(0x6592, 1);    retw(); return;                           /* ret */
+            ii(0x6592, 1);    retw();                                   /* ret */
         }
     }
 }

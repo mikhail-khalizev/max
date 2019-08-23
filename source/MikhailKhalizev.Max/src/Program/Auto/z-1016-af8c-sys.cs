@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_afd8, 1); popd(ebp);                              /* pop ebp */
             ii(0x1016_afd9, 1); popd(edi);                              /* pop edi */
             ii(0x1016_afda, 1); popd(esi);                              /* pop esi */
-            ii(0x1016_afdb, 3); retd(0x8); return;                      /* ret 0x8 */
+            ii(0x1016_afdb, 3); retd(0x8);                              /* ret 0x8 */
         }
     }
 }

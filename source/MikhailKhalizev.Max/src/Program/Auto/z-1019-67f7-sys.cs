@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_6852, 2); if(jnzd(0x1019_684a, -0xa)) goto l_0x1019_684a; /* jnz 0x1019684a */
         l_0x1019_6854:
             ii(0x1019_6854, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1019_6855, 1); retd(); return;                         /* ret */
+            ii(0x1019_6855, 1); retd();                                 /* ret */
         }
     }
 }

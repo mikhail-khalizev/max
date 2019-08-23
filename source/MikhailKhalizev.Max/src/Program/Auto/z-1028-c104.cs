@@ -109,7 +109,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_c277, 4); mov(memd_a32[fs, ebx + 0x8], esi);      /* mov [fs:ebx+0x8], esi */
             ii(0x1028_c27b, 1); popd(esi);                              /* pop esi */
             ii(0x1028_c27c, 1); popd(ds);                               /* pop ds */
-            ii(0x1028_c27d, 1); retd(); return;                         /* ret */
+            ii(0x1028_c27d, 1); retd();                                 /* ret */
         }
     }
 }

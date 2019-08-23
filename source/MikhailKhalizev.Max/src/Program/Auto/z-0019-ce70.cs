@@ -166,7 +166,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_cff3:
             ii(0x19_cff3, 1); popw(si);                                 /* pop si */
             ii(0x19_cff4, 1); leavew();                                 /* leave */
-            ii(0x19_cff5, 3); retw(0xa); return;                        /* ret 0xa */
+            ii(0x19_cff5, 3); retw(0xa);                                /* ret 0xa */
         }
     }
 }

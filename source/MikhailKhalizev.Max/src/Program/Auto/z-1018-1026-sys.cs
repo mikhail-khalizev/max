@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_102c, 5); mov(eax, StringDefinitions.AbnormalTermination); /* mov eax, 0x101b32d0 */
             ii(0x1018_1031, 5); calld(/* sys */ 0x1018_1002, -0x34);    /* call 0x10181002 */
             ii(0x1018_1036, 1); popd(edx);                              /* pop edx */
-            ii(0x1018_1037, 1); retd(); return;                         /* ret */
+            ii(0x1018_1037, 1); retd();                                 /* ret */
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a404, 2); if(jmpw_func(0x18_a3f7, -0xf)) return;    /* jmp 0xa3f7 */
         l_0x18_a406:
             ii(0x18_a406, 4); xchg(memb_a16[ds, 0x980], al);            /* xchg [0x980], al */
-            ii(0x18_a40a, 1); retw(); return;                           /* ret */
+            ii(0x18_a40a, 1); retw();                                   /* ret */
         }
     }
 }

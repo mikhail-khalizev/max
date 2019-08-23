@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x5726:
             ii(0x5726, 2);    mov(sp, bp);                              /* mov sp, bp */
             ii(0x5728, 1);    popw(bp);                                 /* pop bp */
-            ii(0x5729, 1);    retw(); return;                           /* ret */
+            ii(0x5729, 1);    retw();                                   /* ret */
         }
     }
 }

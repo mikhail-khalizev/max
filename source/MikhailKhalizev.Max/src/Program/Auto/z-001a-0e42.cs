@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_0e7a, 3); dec(memw_a16[ss, bp + 0xc]);              /* dec word [bp+0xc] */
             ii(0x1a_0e7d, 2); if(jnzw(0x1a_0e5d, -0x22)) goto l_0x1a_0e5d; /* jnz 0xe5d */
             ii(0x1a_0e7f, 1); leavew();                                 /* leave */
-            ii(0x1a_0e80, 1); retfw(); return;                          /* retf */
+            ii(0x1a_0e80, 1); retfw();                                  /* retf */
         }
     }
 }

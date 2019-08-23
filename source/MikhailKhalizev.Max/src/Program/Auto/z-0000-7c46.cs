@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_7c46()
         {
             ii(0x7c46, 3);    pushw(0x3e8f);                            /* push 0x3e8f */
-            ii(0x7c49, 4);    if(jmpw_a16_far_ind(ds, 0xaf2)) return;   /* jmp far word [0xaf2] */
+            ii(0x7c49, 4);    jmpw_a16_far_ind(ds, 0xaf2);              /* jmp far word [0xaf2] */
         }
     }
 }

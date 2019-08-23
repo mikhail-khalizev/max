@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_9c2c:
             ii(0x19_9c2c, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x19_9c2e, 1); leavew();                                 /* leave */
-            ii(0x19_9c2f, 1); retfw(); return;                          /* retf */
+            ii(0x19_9c2f, 1); retfw();                                  /* retf */
         }
     }
 }

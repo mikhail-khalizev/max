@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_d460, 2); mov(memd_a32[ds, edx], eax);            /* mov [edx], eax */
             ii(0x1018_d462, 1); popd(edx);                              /* pop edx */
             ii(0x1018_d463, 1); popd(ecx);                              /* pop ecx */
-            ii(0x1018_d464, 1); retd(); return;                         /* ret */
+            ii(0x1018_d464, 1); retd();                                 /* ret */
         }
     }
 }

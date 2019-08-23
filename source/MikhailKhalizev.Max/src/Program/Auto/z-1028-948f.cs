@@ -89,7 +89,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_95b8, 5); calld(0x1028_95e8, 0x2b);               /* call 0x102895e8 */
             ii(0x1028_95bd, 2); xchg(al, ah);                           /* xchg al, ah */
             ii(0x1028_95bf, 1); outb(dx, al);                           /* out dx, al */
-            ii(0x1028_95c0, 1); retd(); return;                         /* ret */
+            ii(0x1028_95c0, 1); retd();                                 /* ret */
         }
     }
 }

@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_dace, 1); popw(ds);                                 /* pop ds */
             ii(0x18_dacf, 1); pushw(dx);                                /* push dx */
             ii(0x18_dad0, 1); popfw();                                  /* popfw */
-            ii(0x18_dad1, 2); if(jmpw_abs(ax)) return;                  /* jmp ax */
+            ii(0x18_dad1, 2); jmpw_abs(ax);                             /* jmp ax */
         }
     }
 }

@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_c7e4, 3); jmpw(0x19_c739, -0xae); goto l_0x19_c739; /* jmp 0xc739 */
         l_0x19_c7e7:
             ii(0x19_c7e7, 1); leavew();                                 /* leave */
-            ii(0x19_c7e8, 3); retw(0xe); return;                        /* ret 0xe */
+            ii(0x19_c7e8, 3); retw(0xe);                                /* ret 0xe */
         }
     }
 }

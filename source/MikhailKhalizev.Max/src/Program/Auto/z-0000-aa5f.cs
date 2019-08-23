@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xaac3, 6);    mov(memw_a16[ds, 0xecc], 0);              /* mov word [0xecc], 0x0 */
         l_0xaac9:
             ii(0xaac9, 2);    mov(al, 0x1);                             /* mov al, 0x1 */
-            ii(0xaacb, 1);    retw(); return;                           /* ret */
+            ii(0xaacb, 1);    retw();                                   /* ret */
         }
     }
 }

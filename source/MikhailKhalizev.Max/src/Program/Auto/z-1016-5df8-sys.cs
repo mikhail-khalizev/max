@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_5dfa, 2); if(jged(0x1016_5dfe, 0x2)) goto l_0x1016_5dfe; /* jge 0x10165dfe */
             ii(0x1016_5dfc, 2); neg(eax);                               /* neg eax */
         l_0x1016_5dfe:
-            ii(0x1016_5dfe, 1); retd(); return;                         /* ret */
+            ii(0x1016_5dfe, 1); retd();                                 /* ret */
         }
     }
 }

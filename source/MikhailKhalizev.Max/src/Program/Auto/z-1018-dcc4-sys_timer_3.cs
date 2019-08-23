@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_dcfe:
             ii(0x1018_dcfe, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1018_dd00, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1018_dd01, 1); retd(); return;                         /* ret */
+            ii(0x1018_dd01, 1); retd();                                 /* ret */
         }
     }
 }

@@ -67,7 +67,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x88da, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x88dc, 1);    cwd();                                    /* cwd */
             ii(0x88dd, 1);    leavew();                                 /* leave */
-            ii(0x88de, 1);    retw(); return;                           /* ret */
+            ii(0x88de, 1);    retw();                                   /* ret */
         }
     }
 }

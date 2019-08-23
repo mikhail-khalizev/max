@@ -452,7 +452,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_fbc9, 1); popd(edx);                              /* pop edx */
             ii(0x1012_fbca, 1); popd(ecx);                              /* pop ecx */
             ii(0x1012_fbcb, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1012_fbcc, 1); retd(); return;                         /* ret */
+            ii(0x1012_fbcc, 1); retd();                                 /* ret */
         }
     }
 }

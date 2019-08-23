@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_cdef:
             ii(0x1018_cdef, 1); popd(ecx);                              /* pop ecx */
             ii(0x1018_cdf0, 1); leaved();                               /* leave */
-            ii(0x1018_cdf1, 1); retd(); return;                         /* ret */
+            ii(0x1018_cdf1, 1); retd();                                 /* ret */
         }
     }
 }

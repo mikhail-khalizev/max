@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x939e:
             ii(0x939e, 2);    mov(sp, bp);                              /* mov sp, bp */
             ii(0x93a0, 1);    popw(bp);                                 /* pop bp */
-            ii(0x93a1, 1);    retw(); return;                           /* ret */
+            ii(0x93a1, 1);    retw();                                   /* ret */
         }
     }
 }

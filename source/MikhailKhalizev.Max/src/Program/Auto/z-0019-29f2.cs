@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_2a0d, 3); callw(0x19_2c8d, 0x27d);                  /* call 0x2c8d */
             ii(0x19_2a10, 2); mov(sp, bp);                              /* mov sp, bp */
             ii(0x19_2a12, 1); popw(bp);                                 /* pop bp */
-            ii(0x19_2a13, 1); retfw(); return;                          /* retf */
+            ii(0x19_2a13, 1); retfw();                                  /* retf */
         }
     }
 }

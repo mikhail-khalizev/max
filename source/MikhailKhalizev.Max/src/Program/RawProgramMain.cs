@@ -35,12 +35,10 @@ namespace MikhailKhalizev.Max.Program
         public DosDma DosDma { get; }
         public DosPic DosPic { get; }
 
-        public MultiValueDictionary<Address, MyMethodInfo> funcs_by_pc = new MultiValueDictionary<Address, MyMethodInfo>();
+        public MultiValueDictionary<Address, MyMethodInfo> MethodsByAddress = new MultiValueDictionary<Address, MyMethodInfo>();
 
-        public bool extra_log { get; set; } = false;
-
-        public const ushort image_load_seg = 0x1a2; // Const from dosbox.
-        public const ushort pspseg = image_load_seg - 16; // 0x192
+        public const ushort ImageLoadSeg = 0x1a2; // Const from dosbox.
+        public const ushort PspSeg = ImageLoadSeg - 16; // 0x192
 
         public RawProgramMain(
             Processor.x86.CSharpExecutor.Processor implementation,
@@ -141,7 +139,7 @@ namespace MikhailKhalizev.Max.Program
                     fi.MethodInfo = mi;
                     fi.Action = (Action)methodInfo.CreateDelegate(typeof(Action), instance);
 
-                    funcs_by_pc.Add(mi.Address, fi);
+                    MethodsByAddress.Add(mi.Address, fi);
                 }
             }
         }
@@ -160,7 +158,7 @@ namespace MikhailKhalizev.Max.Program
 
             // Alloc dos - dummy.
 
-            bx = pspseg - 2; // internal alloc logic
+            bx = PspSeg - 2; // internal alloc logic
             DosMemory.dos_mem_alloc();
             if (eflags.cf)
                 throw new Exception();
@@ -175,10 +173,10 @@ namespace MikhailKhalizev.Max.Program
             if (eflags.cf)
                 throw new Exception();
 
-            if (ax.UInt16 != pspseg)
+            if (ax.UInt16 != PspSeg)
                 throw new Exception();
 
-            ds.Selector = (image_load_seg);
+            ds.Selector = (ImageLoadSeg);
 
             var image = Implementation.Memory.GetFixSize(ds, 0, image_size);
 
@@ -196,12 +194,12 @@ namespace MikhailKhalizev.Max.Program
                     throw new Exception();
 
                 var val = image.GetUInt16(addr);
-                image.SetUInt16(val + image_load_seg, addr);
+                image.SetUInt16(val + ImageLoadSeg, addr);
             }
 
             // set psp
 
-            var evnseg = pspseg - 0xa; // 0x188
+            var evnseg = PspSeg - 0xa; // 0x188
             var evn_init = new byte[]
             {
                 // PATH=Z:\\
@@ -229,7 +227,7 @@ namespace MikhailKhalizev.Max.Program
                     .GetFixSize(ds, 0, evn_init.Length)
                     .AsSpan());
 
-            ds.Selector = (pspseg); // 0x192
+            ds.Selector = (PspSeg); // 0x192
             memb_a16[ds, 0x81] = 0xd; // Empty command-line (terminated by a 0x0D).
             memw_a16[ds, 0x2c] = evnseg;
 
@@ -239,10 +237,10 @@ namespace MikhailKhalizev.Max.Program
 
             ds.Selector = (evnseg - 1); // 0x187
             memb_a16[ds, 0] = 0x4d; // Не знаю, что это.
-            memw_a16[ds, 1] = pspseg;
+            memw_a16[ds, 1] = PspSeg;
             memw_a16[ds, 3] = 0x9;
 
-            ds.Selector = (pspseg - 1); // 0x191
+            ds.Selector = (PspSeg - 1); // 0x191
             // memw_a16(ds, 0x3) = 0x1346 - 0x191;
             memw_a16[ds, 0x3] = 0xc02 - 0x191;
 
@@ -250,20 +248,20 @@ namespace MikhailKhalizev.Max.Program
 
             // Устанавливаем начальные значения в регистры.
 
-            ds.Selector = (pspseg);
+            ds.Selector = (PspSeg);
             es = ds;
 
-            ss.Selector = (image_load_seg + dosMz.Hdr.InitialSs);
+            ss.Selector = (ImageLoadSeg + dosMz.Hdr.InitialSs);
             sp = dosMz.Hdr.InitialSp;
 
-            cs.Selector = (image_load_seg + dosMz.Hdr.InitialCs);
+            cs.Selector = (ImageLoadSeg + dosMz.Hdr.InitialCs);
             eip = dosMz.Hdr.InitialIp;
             CurrentInstructionAddress = dosMz.Hdr.InitialIp;
 
             eax = 0;
             ebx = 0;
             ecx = 0xff;
-            edx = pspseg;
+            edx = PspSeg;
 
             esi = 0x2382;
             edi = 0x340;
@@ -376,7 +374,7 @@ namespace MikhailKhalizev.Max.Program
 
         private MyMethodInfo find_func_exact(Address fullAddress)
         {
-            var infos = funcs_by_pc.GetValues(fullAddress, false);
+            var infos = MethodsByAddress.GetValues(fullAddress, false);
             if (infos == null)
                 return null;
 
@@ -459,7 +457,7 @@ namespace MikhailKhalizev.Max.Program
             if (cs.Descriptor.Base + cs.Descriptor.Limit + 1 != 0)
                 engine.SuppressDecode.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
 
-            foreach (var pair in funcs_by_pc)
+            foreach (var pair in MethodsByAddress)
                 foreach (var info in pair.Value)
                     engine.AddAlreadyDecodedFunc(info.MethodInfo);
             engine.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
@@ -475,7 +473,7 @@ namespace MikhailKhalizev.Max.Program
             Address code_start = 0x1007_0000;
             Address code_end = 0x1016_5d52;
 
-            if (cs[0] == 0 && cs.db && its_first && !funcs_by_pc.ContainsKey(0x1007_0010) && !funcs_by_pc.ContainsKey(0x1016_4ad4))
+            if (cs[0] == 0 && cs.db && its_first && !MethodsByAddress.ContainsKey(0x1007_0010) && !MethodsByAddress.ContainsKey(0x1016_4ad4))
             {
                 its_first = false;
                 NonBlockingConsole.WriteLine("Декодирования всего пользовательского кода MAX.");
@@ -491,7 +489,7 @@ namespace MikhailKhalizev.Max.Program
                         if (code.Count < 10)
                             code = Memory.GetMinSize(i, 10);
 
-                        if (code[5] == 0xe8 && code.GetUInt32(6) + i + 10 == 0x1016_5d52 && !funcs_by_pc.ContainsKey(i))
+                        if (code[5] == 0xe8 && code.GetUInt32(6) + i + 10 == 0x1016_5d52 && !MethodsByAddress.ContainsKey(i))
                             engine.DecodeMethod(i);
                     }
 
@@ -517,7 +515,7 @@ namespace MikhailKhalizev.Max.Program
 
         public void add_internal_dyn_func(Action func, int mode, Address address)
         {
-            var myMethodInfos = funcs_by_pc.GetValues(address, false);
+            var myMethodInfos = MethodsByAddress.GetValues(address, false);
 
             if (myMethodInfos != null)
             {
@@ -526,7 +524,7 @@ namespace MikhailKhalizev.Max.Program
                         throw new InvalidOperationException();
             }
 
-            funcs_by_pc.Add(
+            MethodsByAddress.Add(
                 address,
                 new MyMethodInfo
                 {
@@ -543,7 +541,7 @@ namespace MikhailKhalizev.Max.Program
 
         public void add_internal_dyn_func_if_free(Action func, int mode, Address address)
         {
-            if (funcs_by_pc.ContainsKey(address))
+            if (MethodsByAddress.ContainsKey(address))
                 return;
 
             add_internal_dyn_func(func, mode, address);

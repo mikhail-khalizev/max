@@ -152,7 +152,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_cabc, 1); popd(edx);                              /* pop edx */
             ii(0x100c_cabd, 1); popd(ecx);                              /* pop ecx */
             ii(0x100c_cabe, 1); popd(ebx);                              /* pop ebx */
-            ii(0x100c_cabf, 1); retd(); return;                         /* ret */
+            ii(0x100c_cabf, 1); retd();                                 /* ret */
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x41e5:
             ii(0x41e5, 3);    callw(0x41fd, 0x15);                      /* call 0x41fd */
             ii(0x41e8, 2);    if(jzw(0x41e5, -0x5)) goto l_0x41e5;      /* jz 0x41e5 */
-            ii(0x41ea, 1);    retw(); return;                           /* ret */
+            ii(0x41ea, 1);    retw();                                   /* ret */
         }
     }
 }

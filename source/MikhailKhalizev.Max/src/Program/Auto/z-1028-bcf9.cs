@@ -354,7 +354,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_c01a, 2); mov(al, 0xff);                          /* mov al, 0xff */
             ii(0x1028_c01c, 1); stosb_a32();                            /* stosb */
             ii(0x1028_c01d, 2); popa();                                 /* popa */
-            ii(0x1028_c01f, 1); retd(); return;                         /* ret */
+            ii(0x1028_c01f, 1); retd();                                 /* ret */
         }
     }
 }

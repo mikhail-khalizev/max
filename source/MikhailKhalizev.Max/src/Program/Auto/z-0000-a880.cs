@@ -184,7 +184,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xaa04, 2);    popd(edi);                                /* pop edi */
             ii(0xaa06, 1);    popw(si);                                 /* pop si */
             ii(0xaa07, 1);    popw(bp);                                 /* pop bp */
-            ii(0xaa08, 1);    retfw(); return;                          /* retf */
+            ii(0xaa08, 1);    retfw();                                  /* retf */
         }
     }
 }

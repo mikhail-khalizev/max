@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_99ac, 1); popw(ds);                                 /* pop ds */
             ii(0x19_99ad, 1); popw(di);                                 /* pop di */
             ii(0x19_99ae, 1); leavew();                                 /* leave */
-            ii(0x19_99af, 1); retfw(); return;                          /* retf */
+            ii(0x19_99af, 1); retfw();                                  /* retf */
         }
     }
 }

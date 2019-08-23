@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x4310, 3);    callw(0x4888, 0x575);                     /* call 0x4888 */
             ii(0x4313, 1);    popw(cx);                                 /* pop cx */
             ii(0x4314, 1);    sti();                                    /* sti */
-            ii(0x4315, 1);    retw(); return;                           /* ret */
+            ii(0x4315, 1);    retw();                                   /* ret */
         }
     }
 }

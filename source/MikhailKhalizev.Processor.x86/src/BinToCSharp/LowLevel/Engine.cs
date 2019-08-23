@@ -648,7 +648,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
                     var os = new StringBuilder();
-                    write_instruction_position_and_spaces(os, lastInstrEnd, cmd.Begin, offset);
+                    write_instruction_position_and_spaces(os, lastInstrEnd, cmd.Begin);
 
                     output.AppendLine(
                         lastInstrJmpOrRet
@@ -668,7 +668,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 string instr;
                 try
                 {
-                    instr = InstructionToString(detectedMethod, cmdIndex, offset);
+                    instr = InstructionToString(detectedMethod, cmdIndex);
                 }
                 catch (Exception ex)
                 {
@@ -697,9 +697,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             output.AppendLine("}");
         }
 
-        private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end, int offset)
+        private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end)
         {
-            WriteInstructionPosition(os, begin, end, offset);
+            WriteInstructionPosition(os, begin, end);
             write_spaces(os, LineCmdOffset - 1);
             os.Append(' ');
         }
@@ -711,25 +711,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 os.Append(new string(' ', count));
         }
 
-        private void WriteInstructionPosition(StringBuilder os, Address begin, Address end, int offset)
+        private void WriteInstructionPosition(StringBuilder os, Address begin, Address end)
         {
-            os.Append($"ii({begin + offset}, {end - begin});");
+            os.Append($"ii({begin}, {end - begin});");
         }
 
-        private string InstructionToString(DetectedMethod df, int cmdIndex, int offset)
+        private string InstructionToString(DetectedMethod df, int cmdIndex)
         {
             var os = new StringBuilder();
 
             var cmd = df.Instructions[cmdIndex];
 
-            WriteInstructionPosition(os, cmd.Begin, cmd.End, offset);
+            WriteInstructionPosition(os, cmd.Begin, cmd.End);
             write_spaces(os, LineCmdOffset - 1);
 
             var commentsInCurrentFunc = new List<string>();
 
             if (cmd.WriteCmd != null)
             {
-                os.Append(" " + cmd.WriteCmd(this, df, cmdIndex, commentsInCurrentFunc, offset));
+                os.Append(" " + cmd.WriteCmd(this, df, cmdIndex, commentsInCurrentFunc));
 
                 if (cmd.Comments.Count != 0 || commentsInCurrentFunc.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);

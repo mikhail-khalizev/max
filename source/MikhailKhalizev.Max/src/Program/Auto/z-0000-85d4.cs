@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x85f6, 2);    mov(cl, 0x9);                             /* mov cl, 0x9 */
             ii(0x85f8, 3);    if(jmpw_func(0x6672, -0x1f89)) return;    /* jmp 0x6672 */
         l_0x85fb:
-            ii(0x85fb, 1);    retw(); return;                           /* ret */
+            ii(0x85fb, 1);    retw();                                   /* ret */
         }
     }
 }

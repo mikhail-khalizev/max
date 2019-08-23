@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x69e6, 3);    callw(0x46cc, -0x231d);                   /* call 0x46cc */
         l_0x69e9:
             ii(0x69e9, 2);    popad();                                  /* popad */
-            ii(0x69eb, 1);    retw(); return;                           /* ret */
+            ii(0x69eb, 1);    retw();                                   /* ret */
         }
     }
 }

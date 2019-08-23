@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7861, 2);    not(ax);                                  /* not ax */
             ii(0x7863, 3);    and(ax, 0x1);                             /* and ax, 0x1 */
             ii(0x7866, 1);    leavew();                                 /* leave */
-            ii(0x7867, 1);    retw(); return;                           /* ret */
+            ii(0x7867, 1);    retw();                                   /* ret */
         }
     }
 }

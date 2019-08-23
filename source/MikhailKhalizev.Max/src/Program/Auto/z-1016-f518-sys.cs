@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_f525, 5); if(jmpd_func(0x1017_29f1, 0x34c7)) return; /* jmp 0x101729f1 */
         l_0x1016_f52a:
             ii(0x1016_f52a, 5); mov(eax, 0xffff_ffff);                  /* mov eax, 0xffffffff */
-            ii(0x1016_f52f, 1); retd(); return;                         /* ret */
+            ii(0x1016_f52f, 1); retd();                                 /* ret */
         }
     }
 }

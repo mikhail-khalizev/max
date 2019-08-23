@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SharpDisasm.Udis86;
@@ -7,8 +7,9 @@ namespace MikhailKhalizev.Processor.x86.Decoder
 {
     public class RegisterInfo
     {
-        private static readonly Dictionary<ud_type, RegisterInfo> _registerByType;
-        private static readonly HashSet<string> _allRegNames;
+        private static readonly Dictionary<ud_type, RegisterInfo> RegisterByType;
+        private static readonly HashSet<string> AllRegNames;
+
 
         static RegisterInfo()
         {
@@ -64,16 +65,16 @@ namespace MikhailKhalizev.Processor.x86.Decoder
             regs.Add(new RegisterInfo(ud_type.UD_R_CR2, ++index, 0b1111, 32));
             regs.Add(new RegisterInfo(ud_type.UD_R_CR3, ++index, 0b1111, 32));
 
-            _registerByType = regs.ToDictionary(x => x.UdType, x => x);
+            RegisterByType = regs.ToDictionary(x => x.UdType, x => x);
 
-            _allRegNames = Enum.GetValues(typeof(ud_type))
+            AllRegNames = Enum.GetValues(typeof(ud_type))
                 .Cast<ud_type>()
                 .Select(x => x.ToString())
                 .Where(x => x.StartsWith("UD_R_"))
                 .Select(x => x.Substring("UD_R_".Length).ToLowerInvariant())
                 .ToHashSet();
         }
-
+        
         // TODO Remove size argument.
         private RegisterInfo(ud_type udType, int index, int byteMask, int size)
         {
@@ -110,6 +111,29 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         }
 
         public static RegisterInfo Empty { get; } = new RegisterInfo(ud_type.UD_NONE, 0, 0, 0);
+        
+        public static IReadOnlyCollection<RegisterInfo> Registers => RegisterByType.Values;
+
+        public static RegisterInfo GetRegister(ud_type udType)
+        {
+            return RegisterByType[udType];
+        }
+
+        public static bool Intersects(RegisterInfo ra, RegisterInfo rb)
+        {
+            if (ra == Empty || rb == Empty)
+                return false;
+
+            return ra.Index == rb.Index && (ra.ByteMask & rb.ByteMask) != 0;
+        }
+
+        public static bool HasRegister(string name)
+        {
+            return AllRegNames.Contains(name.ToLowerInvariant());
+        }
+        
+        public static implicit operator RegisterInfo(ud_type value) => GetRegister(value);
+
 
         public string Name { get; }
         public ud_type UdType { get; }
@@ -117,28 +141,5 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         public int ByteMask { get; }
         public int Size { get; }
         public bool IsGeneralPurpose { get; private set; }
-
-        public static IReadOnlyCollection<RegisterInfo> Registers => _registerByType.Values;
-
-        public static RegisterInfo GetRegister(ud_type udType)
-        {
-            return _registerByType[udType];
-        }
-
-        public static bool Intersects(ud_type a, ud_type b)
-        {
-            if (a == ud_type.UD_NONE || b == ud_type.UD_NONE)
-                return false;
-
-            var ra = GetRegister(a);
-            var rb = GetRegister(b);
-
-            return ra.Index == rb.Index && (ra.ByteMask & rb.ByteMask) != 0;
-        }
-
-        public static bool HasRegister(string name)
-        {
-            return _allRegNames.Contains(name.ToLowerInvariant());
-        }
     }
 }

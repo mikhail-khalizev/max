@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x5233:
             ii(0x5233, 3);    callw(0x46c9, -0xb6d);                    /* call 0x46c9 */
         l_0x5236:
-            ii(0x5236, 1);    retw(); return;                           /* ret */
+            ii(0x5236, 1);    retw();                                   /* ret */
         }
     }
 }

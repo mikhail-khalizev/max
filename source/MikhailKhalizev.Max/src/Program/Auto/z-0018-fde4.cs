@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fe5c, 4); popd(memd_a16[ds, si + 0x10]);            /* pop dword [si+0x10] */
             ii(0x18_fe60, 3); xor(eax, eax);                            /* xor eax, eax */
             ii(0x18_fe63, 1); popw(bp);                                 /* pop bp */
-            ii(0x18_fe64, 1); retfw(); return;                          /* retf */
+            ii(0x18_fe64, 1); retfw();                                  /* retf */
         }
     }
 }

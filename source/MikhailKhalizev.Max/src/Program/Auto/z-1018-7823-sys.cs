@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7829, 4); fstp(memt_a32[ss, esp + 0xc]);          /* fstp tword [esp+0xc] */
             ii(0x1018_782d, 5); calld(/* sys */ 0x1018_7270, -0x5c2);   /* call 0x10187270 */
             ii(0x1018_7832, 3); add(esp, 0x2c);                         /* add esp, 0x2c */
-            ii(0x1018_7835, 1); retd(); return;                         /* ret */
+            ii(0x1018_7835, 1); retd();                                 /* ret */
         }
     }
 }

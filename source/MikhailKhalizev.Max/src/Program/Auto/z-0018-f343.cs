@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_f348, 2); popw(fs);                                 /* pop fs */
             ii(0x18_f34a, 2); popad();                                  /* popad */
             ii(0x18_f34c, 1); popw(bp);                                 /* pop bp */
-            ii(0x18_f34d, 1); retfw(); return;                          /* retf */
+            ii(0x18_f34d, 1); retfw();                                  /* retf */
         }
     }
 }

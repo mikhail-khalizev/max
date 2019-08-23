@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_1cc4()
         {
             ii(0x1018_1cc4, 3); add(eax, 0x8);                          /* add eax, 0x8 */
-            ii(0x1018_1cc7, 1); retd(); return;                         /* ret */
+            ii(0x1018_1cc7, 1); retd();                                 /* ret */
         }
     }
 }

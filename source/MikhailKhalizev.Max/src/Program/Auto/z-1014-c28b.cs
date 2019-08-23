@@ -119,7 +119,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_c3dd, 1); popd(edx);                              /* pop edx */
             ii(0x1014_c3de, 1); popd(ecx);                              /* pop ecx */
             ii(0x1014_c3df, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1014_c3e0, 1); retd(); return;                         /* ret */
+            ii(0x1014_c3e0, 1); retd();                                 /* ret */
         }
     }
 }

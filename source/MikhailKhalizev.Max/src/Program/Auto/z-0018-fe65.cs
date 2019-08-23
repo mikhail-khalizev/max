@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x18_febb:
             ii(0x18_febb, 1); sti();                                    /* sti */
             ii(0x18_febc, 1); popw(bp);                                 /* pop bp */
-            ii(0x18_febd, 1); retfw(); return;                          /* retf */
+            ii(0x18_febd, 1); retfw();                                  /* retf */
         }
     }
 }

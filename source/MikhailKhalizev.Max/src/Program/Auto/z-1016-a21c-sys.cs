@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a23c, 6); mov(memd_a32[ds, 0x101c_f964], edx);    /* mov [0x101cf964], edx */
         l_0x1016_a242:
             ii(0x1016_a242, 1); popd(edx);                              /* pop edx */
-            ii(0x1016_a243, 1); retd(); return;                         /* ret */
+            ii(0x1016_a243, 1); retd();                                 /* ret */
         }
     }
 }

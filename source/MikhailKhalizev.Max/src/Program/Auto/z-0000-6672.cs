@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x6680:
             ii(0x6680, 3);    mov(al, memb_a16[ds, 0x10ee]);            /* mov al, [0x10ee] */
             ii(0x6683, 2);    outb(0x71, al);                           /* out 0x71, al */
-            ii(0x6685, 1);    retw(); return;                           /* ret */
+            ii(0x6685, 1);    retw();                                   /* ret */
         }
     }
 }

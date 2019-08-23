@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_3fe6, 2); jmpw(0x19_3fe9, 0x1); goto l_0x19_3fe9;   /* jmp 0x3fe9 */
         //  ii(0x19_3fe8, 1); stc();                                    /* stc */
         l_0x19_3fe9:
-            ii(0x19_3fe9, 1); retw(); return;                           /* ret */
+            ii(0x19_3fe9, 1); retw();                                   /* ret */
         }
     }
 }

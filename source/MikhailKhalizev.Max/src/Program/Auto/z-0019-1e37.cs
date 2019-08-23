@@ -333,7 +333,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_212e, 1); dec(ax);                                  /* dec ax */
             ii(0x19_212f, 1); popw(ds);                                 /* pop ds */
             ii(0x19_2130, 1); leavew();                                 /* leave */
-            ii(0x19_2131, 1); retfw(); return;                          /* retf */
+            ii(0x19_2131, 1); retfw();                                  /* retf */
         }
     }
 }

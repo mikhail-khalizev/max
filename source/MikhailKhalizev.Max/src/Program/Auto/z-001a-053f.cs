@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1a_0605:
             ii(0x1a_0605, 1); popw(ds);                                 /* pop ds */
             ii(0x1a_0606, 1); leavew();                                 /* leave */
-            ii(0x1a_0607, 3); retfw(0xa); return;                       /* retf 0xa */
+            ii(0x1a_0607, 3); retfw(0xa);                               /* retf 0xa */
         }
     }
 }

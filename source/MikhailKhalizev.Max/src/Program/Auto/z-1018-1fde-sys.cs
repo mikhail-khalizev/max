@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_20a1, 2); if(jzd(0x1018_20a8, 0x5)) goto l_0x1018_20a8; /* jz 0x101820a8 */
             ii(0x1018_20a3, 5); calld(/* sys */ 0x1018_20c6, 0x1e);     /* call 0x101820c6 */
         l_0x1018_20a8:
-            ii(0x1018_20a8, 1); retd(); return;                         /* ret */
+            ii(0x1018_20a8, 1); retd();                                 /* ret */
         }
     }
 }

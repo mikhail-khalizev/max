@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa292, 3);    smsw(ax);                                 /* smsw ax */
             ii(0xa295, 2);    or(al, 0x1);                              /* or al, 0x1 */
             ii(0xa297, 3);    lmsw(ax);                                 /* lmsw ax */
-            ii(0xa29a, 5);    if(jmpw_far_abs(0x18, 0x64ff)) return;    /* jmp word 0x18:0x64ff */
+            ii(0xa29a, 5);    jmpw_far_abs(0x18, 0x64ff);               /* jmp word 0x18:0x64ff */
         }
     }
 }

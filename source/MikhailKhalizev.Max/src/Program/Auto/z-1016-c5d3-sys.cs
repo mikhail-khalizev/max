@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c5f1, 2); fstp(ST(0));                            /* fstp st0 */
             ii(0x1016_c5f3, 2); fld1();                                 /* fld1 */
         l_0x1016_c5f5:
-            ii(0x1016_c5f5, 1); retd(); return;                         /* ret */
+            ii(0x1016_c5f5, 1); retd();                                 /* ret */
         }
     }
 }

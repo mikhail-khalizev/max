@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x7baf:
             ii(0x7baf, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x7bb1, 1);    popw(bp);                                 /* pop bp */
-            ii(0x7bb2, 1);    retw(); return;                           /* ret */
+            ii(0x7bb2, 1);    retw();                                   /* ret */
         }
     }
 }

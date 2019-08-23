@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_b2c8, 1); pushw(cs);                                /* push cs */
             ii(0x18_b2c9, 3); callw(0x18_a3b9, -0xf13);                 /* call 0xa3b9 */
             ii(0x18_b2cc, 2); xchg(di, bx);                             /* xchg di, bx */
-            ii(0x18_b2ce, 1); retw(); return;                           /* ret */
+            ii(0x18_b2ce, 1); retw();                                   /* ret */
         }
     }
 }

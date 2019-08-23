@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fb91, 2); popw(gs);                                 /* pop gs */
             ii(0x18_fb93, 2); popad();                                  /* popad */
             ii(0x18_fb95, 4); add(esp, 0x6);                            /* add esp, 0x6 */
-            ii(0x18_fb99, 2); iretd(); return;                          /* iretd */
+            ii(0x18_fb99, 2); iretd();                                  /* iretd */
         }
     }
 }

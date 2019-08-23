@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x7023:
             ii(0x7023, 3);    shr(ax, 0x9);                             /* shr ax, 0x9 */
             ii(0x7026, 3);    and(ax, 0x1);                             /* and ax, 0x1 */
-            ii(0x7029, 1);    retw(); return;                           /* ret */
+            ii(0x7029, 1);    retw();                                   /* ret */
         }
     }
 }

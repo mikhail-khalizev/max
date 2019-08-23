@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x95cb, 2);    sbb(bx, bx);                              /* sbb bx, bx */
             ii(0x95cd, 2);    or(ax, bx);                               /* or ax, bx */
             ii(0x95cf, 2);    or(dx, bx);                               /* or dx, bx */
-            ii(0x95d1, 1);    retw(); return;                           /* ret */
+            ii(0x95d1, 1);    retw();                                   /* ret */
         }
     }
 }

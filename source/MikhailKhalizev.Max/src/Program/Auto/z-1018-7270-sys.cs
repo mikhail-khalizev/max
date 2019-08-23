@@ -100,7 +100,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_7380:
             ii(0x1018_7380, 4); fldcw(memw_a32[ss, esp + 0x1c]);        /* fldcw word [esp+0x1c] */
             ii(0x1018_7384, 2); fdivp(ST(1), ST(0));                    /* fdivp st1, st0 */
-            ii(0x1018_7386, 1); retd(); return;                         /* ret */
+            ii(0x1018_7386, 1); retd();                                 /* ret */
         }
     }
 }

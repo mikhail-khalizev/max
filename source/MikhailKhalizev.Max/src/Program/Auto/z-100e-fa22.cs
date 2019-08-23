@@ -110,7 +110,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_fbb1, 6); if(jnzd(0x100e_fa33, -0x184)) goto l_0x100e_fa33; /* jnz 0x100efa33 */
             ii(0x100e_fbb7, 1); popd(edi);                              /* pop edi */
             ii(0x100e_fbb8, 1); popd(esi);                              /* pop esi */
-            ii(0x100e_fbb9, 1); retd(); return;                         /* ret */
+            ii(0x100e_fbb9, 1); retd();                                 /* ret */
         }
     }
 }

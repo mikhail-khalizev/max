@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_c0f9, 5); jmpd(0x1028_c057, -0xa7); goto l_0x1028_c057; /* jmp 0x1028c057 */
         l_0x1028_c0fe:
             ii(0x1028_c0fe, 2); popa();                                 /* popa */
-            ii(0x1028_c100, 1); retd(); return;                         /* ret */
+            ii(0x1028_c100, 1); retd();                                 /* ret */
         }
     }
 }

@@ -420,7 +420,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_a684, 1); popw(si);                                 /* pop si */
             ii(0x17_a685, 1); popw(di);                                 /* pop di */
             ii(0x17_a686, 1); leavew();                                 /* leave */
-            ii(0x17_a687, 1); retfw(); return;                          /* retf */
+            ii(0x17_a687, 1); retfw();                                  /* retf */
         }
     }
 }

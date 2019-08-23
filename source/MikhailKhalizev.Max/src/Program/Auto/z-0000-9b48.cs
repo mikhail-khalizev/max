@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x9b94:
             ii(0x9b94, 1);    popw(ax);                                 /* pop ax */
         l_0x9b95:
-            ii(0x9b95, 1);    retw(); return;                           /* ret */
+            ii(0x9b95, 1);    retw();                                   /* ret */
         }
     }
 }

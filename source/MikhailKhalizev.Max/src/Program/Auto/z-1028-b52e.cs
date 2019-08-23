@@ -490,7 +490,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_baf4, 2); popd(fs);                               /* pop fs */
             ii(0x1028_baf6, 1); popd(es);                               /* pop es */
             ii(0x1028_baf7, 1); popd(ds);                               /* pop ds */
-            ii(0x1028_baf8, 1); retfd(); return;                        /* retf */
+            ii(0x1028_baf8, 1); retfd();                                /* retf */
         }
     }
 }

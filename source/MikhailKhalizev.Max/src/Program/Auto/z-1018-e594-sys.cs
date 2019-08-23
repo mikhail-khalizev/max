@@ -290,7 +290,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_e7ff, 1); popd(edi);                              /* pop edi */
             ii(0x1018_e800, 1); popd(esi);                              /* pop esi */
             ii(0x1018_e801, 1); leaved();                               /* leave */
-            ii(0x1018_e802, 1); retd(); return;                         /* ret */
+            ii(0x1018_e802, 1); retd();                                 /* ret */
         }
     }
 }

@@ -82,7 +82,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_d1a7, 2); sub(ax, ax);                              /* sub ax, ax */
         l_0x19_d1a9:
             ii(0x19_d1a9, 1); leavew();                                 /* leave */
-            ii(0x19_d1aa, 3); retw(0x10); return;                       /* ret 0x10 */
+            ii(0x19_d1aa, 3); retw(0x10);                               /* ret 0x10 */
         }
     }
 }

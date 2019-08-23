@@ -117,7 +117,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_013a, 3); mov(ax, 0x1);                             /* mov ax, 0x1 */
             ii(0x1a_013d, 1); popw(ds);                                 /* pop ds */
             ii(0x1a_013e, 1); leavew();                                 /* leave */
-            ii(0x1a_013f, 1); retfw(); return;                          /* retf */
+            ii(0x1a_013f, 1); retfw();                                  /* retf */
         }
     }
 }

@@ -203,7 +203,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x884c, 4);    mov(memw_a16[ds, 0x9a], bx);              /* mov [0x9a], bx */
         l_0x8850:
             ii(0x8850, 1);    leavew();                                 /* leave */
-            ii(0x8851, 1);    retw(); return;                           /* ret */
+            ii(0x8851, 1);    retw();                                   /* ret */
         }
     }
 }

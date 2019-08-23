@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_d4af, 5); and(eax, 0xff);                         /* and eax, 0xff */
         l_0x1018_d4b4:
             ii(0x1018_d4b4, 1); popd(edx);                              /* pop edx */
-            ii(0x1018_d4b5, 1); retd(); return;                         /* ret */
+            ii(0x1018_d4b5, 1); retd();                                 /* ret */
         }
     }
 }

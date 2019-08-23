@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1cbe, 2); jmpd(0x1018_1cad, -0x13); goto l_0x1018_1cad; /* jmp 0x10181cad */
         l_0x1018_1cc0:
             ii(0x1018_1cc0, 1); popd(edx);                              /* pop edx */
-            ii(0x1018_1cc1, 1); retd(); return;                         /* ret */
+            ii(0x1018_1cc1, 1); retd();                                 /* ret */
         }
     }
 }

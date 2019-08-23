@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_dc38:
             ii(0x1018_dc38, 2); sub(eax, eax);                          /* sub eax, eax */
         l_0x1018_dc3a:
-            ii(0x1018_dc3a, 1); retd(); return;                         /* ret */
+            ii(0x1018_dc3a, 1); retd();                                 /* ret */
         }
     }
 }

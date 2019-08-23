@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1019_b8b9()
         {
             ii(0x1019_b8b9, 1); popd(esi);                              /* pop esi */
-            ii(0x1019_b8ba, 1); retd(); return;                         /* ret */
+            ii(0x1019_b8ba, 1); retd();                                 /* ret */
         }
     }
 }

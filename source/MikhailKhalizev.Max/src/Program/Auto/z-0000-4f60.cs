@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x4f60-2df")]
         public void Method_0000_4f60()
         {
-            ii(0x4f60, 1);    iretw(); return;                          /* iretw */
+            ii(0x4f60, 1);    iretw();                                  /* iretw */
         }
     }
 }

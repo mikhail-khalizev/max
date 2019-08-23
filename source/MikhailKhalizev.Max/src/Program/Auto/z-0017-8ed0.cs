@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8ee4, 1); popw(di);                                 /* pop di */
             ii(0x17_8ee5, 1); popw(es);                                 /* pop es */
             ii(0x17_8ee6, 1); popw(bp);                                 /* pop bp */
-            ii(0x17_8ee7, 1); retfw(); return;                          /* retf */
+            ii(0x17_8ee7, 1); retfw();                                  /* retf */
         }
     }
 }

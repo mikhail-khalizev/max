@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a6ac, 6); mov(memd_a32[ds, Definitions.video_bank_count_in_win], ebx); /* mov [0x10209c9c], ebx */
             ii(0x1017_a6b2, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1017_a6b4, 1); popd(ebp);                              /* pop ebp */
-            ii(0x1017_a6b5, 1); retd(); return;                         /* ret */
+            ii(0x1017_a6b5, 1); retd();                                 /* ret */
         }
     }
 }

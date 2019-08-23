@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x3755, 2);    if(jbw(0x375b, 0x4)) goto l_0x375b;       /* jb 0x375b */
             ii(0x3757, 4);    mov(eax, memd_a16[ds, 0x10f2]);           /* mov eax, [0x10f2] */
         l_0x375b:
-            ii(0x375b, 1);    retw(); return;                           /* ret */
+            ii(0x375b, 1);    retw();                                   /* ret */
         }
     }
 }

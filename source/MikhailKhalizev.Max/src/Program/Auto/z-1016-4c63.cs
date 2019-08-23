@@ -709,7 +709,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_5648, 1); popd(esi);                              /* pop esi */
             ii(0x1016_5649, 1); popd(ecx);                              /* pop ecx */
             ii(0x1016_564a, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1016_564b, 1); retd(); return;                         /* ret */
+            ii(0x1016_564b, 1); retd();                                 /* ret */
         }
     }
 }

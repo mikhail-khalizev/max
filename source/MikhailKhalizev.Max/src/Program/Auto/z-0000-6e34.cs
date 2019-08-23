@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6e92, 5);    mov(memw_a16[ds, bx + 0x18], 0xffff);     /* mov word [bx+0x18], 0xffff */
             ii(0x6e97, 6);    mov(memw_a16[ds, 0x99e], 0);              /* mov word [0x99e], 0x0 */
             ii(0x6e9d, 1);    leavew();                                 /* leave */
-            ii(0x6e9e, 1);    retw(); return;                           /* ret */
+            ii(0x6e9e, 1);    retw();                                   /* ret */
         }
     }
 }

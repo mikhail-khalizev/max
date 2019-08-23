@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a88e, 2); if(jnzw_func(0x18_a859, -0x37)) return;   /* jnz 0xa859 */
             ii(0x18_a890, 1); cld();                                    /* cld */
             ii(0x18_a891, 1); cli();                                    /* cli */
-            ii(0x18_a892, 1); retw(); return;                           /* ret */
+            ii(0x18_a892, 1); retw();                                   /* ret */
         }
     }
 }

@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_f564:
             ii(0x17_f564, 1); popw(ds);                                 /* pop ds */
             ii(0x17_f565, 1); leavew();                                 /* leave */
-            ii(0x17_f566, 3); retw(0x10); return;                       /* ret 0x10 */
+            ii(0x17_f566, 3); retw(0x10);                               /* ret 0x10 */
         }
     }
 }

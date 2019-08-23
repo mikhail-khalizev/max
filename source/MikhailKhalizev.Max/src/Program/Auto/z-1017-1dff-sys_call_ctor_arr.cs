@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_1e02, 5); mov(ecx, Definitions.sys_delete_arr);   /* mov ecx, 0x10165fd8 */
             ii(0x1017_1e07, 5); calld(/* sys */ 0x1017_1d6c, -0xa0);    /* call 0x10171d6c */
             ii(0x1017_1e0c, 1); popd(ecx);                              /* pop ecx */
-            ii(0x1017_1e0d, 1); retd(); return;                         /* ret */
+            ii(0x1017_1e0d, 1); retd();                                 /* ret */
         }
     }
 }

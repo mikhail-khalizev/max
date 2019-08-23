@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x855a, 2);    rcl(dx, 0x1);                             /* rcl dx, 1 */
             ii(0x855c, 2);    if(loopw_a16(0x8558, -0x6)) goto l_0x8558; /* loop 0x8558 */
         l_0x855e:
-            ii(0x855e, 1);    retw(); return;                           /* ret */
+            ii(0x855e, 1);    retw();                                   /* ret */
         }
     }
 }

@@ -103,7 +103,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_daf4:
             ii(0x19_daf4, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x19_daf6, 1); leavew();                                 /* leave */
-            ii(0x19_daf7, 1); retfw(); return;                          /* retf */
+            ii(0x19_daf7, 1); retfw();                                  /* retf */
         }
     }
 }

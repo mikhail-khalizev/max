@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_fca8:
             ii(0x19_fca8, 1); popw(ds);                                 /* pop ds */
             ii(0x19_fca9, 1); leavew();                                 /* leave */
-            ii(0x19_fcaa, 3); retw(0x10); return;                       /* ret 0x10 */
+            ii(0x19_fcaa, 3); retw(0x10);                               /* ret 0x10 */
         }
     }
 }

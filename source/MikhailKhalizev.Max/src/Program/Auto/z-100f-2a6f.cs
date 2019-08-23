@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_2b8f, 1); popd(edi);                              /* pop edi */
             ii(0x100f_2b90, 1); popd(esi);                              /* pop esi */
             ii(0x100f_2b91, 1); popd(ecx);                              /* pop ecx */
-            ii(0x100f_2b92, 1); retd(); return;                         /* ret */
+            ii(0x100f_2b92, 1); retd();                                 /* ret */
         }
     }
 }
