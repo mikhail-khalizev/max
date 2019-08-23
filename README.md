@@ -43,25 +43,25 @@
         [MethodInfo("0x1016_6130-63cf5e5f")]
         public void sys_strcasecmp()
         {
-            ii(0x1016_6130, 1); pushd(ebx);                             /* push ebx */
-            ii(0x1016_6131, 1); pushd(ecx);                             /* push ecx */
+            ii(0x1016_6130, 1); push(ebx);                              /* push ebx */
+            ii(0x1016_6131, 1); push(ecx);                              /* push ecx */
             ii(0x1016_6132, 2); mov(ebx, eax);                          /* mov ebx, eax */
         l_0x1016_6134:
-            ii(0x1016_6134, 2); mov(al, memb_a32[ds, ebx]);             /* mov al, [ebx] */
+            ii(0x1016_6134, 2); mov(al, memb[ds, ebx]);                 /* mov al, [ebx] */
             ii(0x1016_6136, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
-            ii(0x1016_6138, 2); mov(ah, memb_a32[ds, edx]);             /* mov ah, [edx] */
+            ii(0x1016_6138, 2); mov(ah, memb[ds, edx]);                 /* mov ah, [edx] */
             ii(0x1016_613a, 2); mov(cl, al);                            /* mov cl, al */
             ii(0x1016_613c, 3); cmp(ecx, 0x41);                         /* cmp ecx, 0x41 */
-            ii(0x1016_613f, 2); if(jld(0x1016_6148, 0x7)) goto l_0x1016_6148; /* jl 0x10166148 */
+            ii(0x1016_613f, 2); if(jl(0x1016_6148, 0x7)) goto l_0x1016_6148; /* jl 0x10166148 */
             ii(0x1016_6141, 3); cmp(ecx, 0x5a);                         /* cmp ecx, 0x5a */
-            ii(0x1016_6144, 2); if(jgd(0x1016_6148, 0x2)) goto l_0x1016_6148; /* jg 0x10166148 */
-            ii(0x1016_6146, 2); add(al, 0x20);  
+            ii(0x1016_6144, 2); if(jg(0x1016_6148, 0x2)) goto l_0x1016_6148; /* jg 0x10166148 */
+            ii(0x1016_6146, 2); add(al, 0x20);                          /* add al, 0x20 */
             
             ...
             
-            ii(0x1016_6174, 1); popd(ecx);                              /* pop ecx */
-            ii(0x1016_6175, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1016_6176, 1); retd();                                 /* ret */
+            ii(0x1016_6174, 1); pop(ecx);                               /* pop ecx */
+            ii(0x1016_6175, 1); pop(ebx);                               /* pop ebx */
+            ii(0x1016_6176, 1); ret();                                  /* ret */
         }
 ```
 
