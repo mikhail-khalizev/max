@@ -119,7 +119,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Mode = ud.dis_mode;
             AddrMode = ud.adr_mode;
             OprMode = ud.opr_mode;
-            EffOprMode = OprMode;
 
             try
             {
@@ -184,7 +183,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             var sb = new StringBuilder();
 
-            if (!_knownInstr.TryGetValue(Mnemonic, out var flags))
+            if (!InstructionsFlag.TryGetValue(Mnemonic, out var flags))
                 flags = InstrFlags.Unknown;
             
             var method = udis86.ud_lookup_mnemonic(Mnemonic);
@@ -214,15 +213,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     !Operands.Any(x => x.type == ud_type.UD_OP_REG || x.type == ud_type.UD_OP_MEM))
                     throw new NotImplementedException(
                         "Вероятно, не используем переопределение размера операнда инструкции. " +
-                        $"Mnemonic = {Mnemonic}; Mode = {Mode}; effOprSize = {EffOprMode}; " +
+                        $"Mnemonic = {Mnemonic}; Mode = {Mode}; EffOprMode = {EffOprMode}; AddrMode = {AddrMode};  " +
                         $"PfxOpr = {PfxOpr}; PfxAddress = {PfxAddress}; " +
                         $"Comments = {string.Join(",", Comments)}.");
 
                 addSizeSuffix = flags.HasFlag(InstrFlags.UseOprSizeInside) && !flags.HasFlag(InstrFlags.NotUseOprSizeInside) && EffOprMode != Mode;
             }
 
-            
-            var addAdrSuffix = flags.HasFlag(InstrFlags.UseAdrSizeInside) && AddrMode != Mode;
+
+            if (PfxAddress &&
+                !flags.HasFlag(InstrFlags.UseAdrSizeInside) &&
+                !flags.HasFlag(InstrFlags.NotUseAdrSizeInside) &&
+                Operands.All(x => x.type != ud_type.UD_OP_MEM))
+                throw new NotImplementedException(
+                    "Вероятно, не используем переопределение размера адреса инструкции. " +
+                    $"Mnemonic = {Mnemonic}; Mode = {Mode}; EffOprMode = {EffOprMode}; AddrMode = {AddrMode}; " +
+                    $"PfxOpr = {PfxOpr}; PfxAddress = {PfxAddress}; " +
+                    $"Comments = {string.Join(",", Comments)}.");
+
+            var addAdrSuffix = flags.HasFlag(InstrFlags.UseAdrSizeInside) && !flags.HasFlag(InstrFlags.NotUseAdrSizeInside) && AddrMode != Mode;
             var adrModeStr = AddrMode != Mode ? $"_a{AddrMode}" : "";
 
 
@@ -521,7 +530,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             NotUseAdrSizeInside = 8
         }
 
-        private static readonly Dictionary<ud_mnemonic_code, InstrFlags> _knownInstr = new Dictionary<ud_mnemonic_code, InstrFlags>
+        private static readonly Dictionary<ud_mnemonic_code, InstrFlags> InstructionsFlag = new Dictionary<ud_mnemonic_code, InstrFlags>
             {
                 {ud_mnemonic_code.UD_Ipusha, InstrFlags.NotUseOprSizeInside},  // Always 16-bit size.
                 {ud_mnemonic_code.UD_Ipushad, InstrFlags.NotUseOprSizeInside}, // Always 32-bit size.
@@ -573,27 +582,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Iiretw, InstrFlags.NotUseOprSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Iiretd, InstrFlags.NotUseOprSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Iiretq, InstrFlags.NotUseOprSizeInside}, // Always 64-bit size.
+                
+                {ud_mnemonic_code.UD_Ijcxz, InstrFlags.NotUseAdrSizeInside},  // Always 16-bit cx.
+                {ud_mnemonic_code.UD_Ijecxz, InstrFlags.NotUseAdrSizeInside}, // Always 32-bit ecx.
+                {ud_mnemonic_code.UD_Ijrcxz, InstrFlags.NotUseAdrSizeInside}, // Always 64-bit rcx.
 
-                // Old (to check).
+                {ud_mnemonic_code.UD_Ixchg, InstrFlags.NotUseAdrSizeInside}, // Not used memory inside, PfxAddress ignored for method name.
+                {ud_mnemonic_code.UD_Iadd, InstrFlags.NotUseAdrSizeInside}, // Not used memory inside, PfxAddress ignored for method name.
+                {ud_mnemonic_code.UD_Iinc, InstrFlags.NotUseAdrSizeInside}, // Not used memory inside, PfxAddress ignored for method name.
+
+                {ud_mnemonic_code.UD_Inop, InstrFlags.NotUseOprSizeInside | InstrFlags.NotUseAdrSizeInside}, // Ignore PfxOpr & PfxAddress.
+                {ud_mnemonic_code.UD_Isti, InstrFlags.NotUseOprSizeInside | InstrFlags.NotUseAdrSizeInside}, // Ignore PfxOpr & PfxAddress.
                 
                 {ud_mnemonic_code.UD_Ifnsave, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ifrstor, InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Ifbstp, InstrFlags.UseAdrSizeInside},
-
-                {ud_mnemonic_code.UD_Ijmp, InstrFlags.UseOprSizeInside},
-
-                {ud_mnemonic_code.UD_Iloop, InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Iloope, InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Iloopne, InstrFlags.UseAdrSizeInside},
-                
-                {ud_mnemonic_code.UD_Icall, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Iret, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Iretf, InstrFlags.UseOprSizeInside},
-                
-                {ud_mnemonic_code.UD_Ilgdt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Ilidt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Isidt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Ixlatb, InstrFlags.UseAdrSizeInside},
 
                 {ud_mnemonic_code.UD_Iinsb, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iinsw, InstrFlags.UseAdrSizeInside},
@@ -602,6 +604,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Ioutsb, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ioutsw, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ioutsd, InstrFlags.UseAdrSizeInside},
+
+                {ud_mnemonic_code.UD_Iloop, InstrFlags.UseAdrSizeInside},
+                {ud_mnemonic_code.UD_Iloope, InstrFlags.UseAdrSizeInside},
+                {ud_mnemonic_code.UD_Iloopne, InstrFlags.UseAdrSizeInside},
+                
+                {ud_mnemonic_code.UD_Ijmp, InstrFlags.UseOprSizeInside},
+                {ud_mnemonic_code.UD_Icall, InstrFlags.UseOprSizeInside},
+
+                {ud_mnemonic_code.UD_Iret, InstrFlags.UseOprSizeInside},
+                {ud_mnemonic_code.UD_Iretf, InstrFlags.UseOprSizeInside},
+
+                {ud_mnemonic_code.UD_Ilgdt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
+                {ud_mnemonic_code.UD_Ilidt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
             };
 
         #endregion
