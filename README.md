@@ -61,7 +61,7 @@
             
             ii(0x1016_6174, 1); popd(ecx);                              /* pop ecx */
             ii(0x1016_6175, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1016_6176, 1); retd(); return;                         /* ret */
+            ii(0x1016_6176, 1); retd();                                 /* ret */
         }
 ```
 
