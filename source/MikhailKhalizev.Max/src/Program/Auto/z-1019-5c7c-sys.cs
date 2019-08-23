@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5c9a, 2); if(jbe(0x1019_5c9d, 0x1)) goto l_0x1019_5c9d; /* jbe 0x10195c9d */
             ii(0x1019_5c9c, 1); dec(ecx);                               /* dec ecx */
         l_0x1019_5c9d:
-            ii(0x1019_5c9d, 3); lea(ebp, edi + 0xc);                    /* lea ebp, [edi+0xc] */
+            ii(0x1019_5c9d, 3); lea(ebp, memd[ds, edi + 0xc]);          /* lea ebp, [edi+0xc] */
         }
     }
 }

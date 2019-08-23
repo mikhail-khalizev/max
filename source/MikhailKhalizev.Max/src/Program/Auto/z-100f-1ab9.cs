@@ -29,12 +29,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_1aee, 1); push(eax);                              /* push eax */
             ii(0x100f_1aef, 5); mov(eax, StringDefinitions.Smax44iPcx); /* mov eax, 0x101a22f8 */
             ii(0x100f_1af4, 1); push(eax);                              /* push eax */
-            ii(0x100f_1af5, 3); lea(eax, ebp - 0x80);                   /* lea eax, [ebp-0x80] */
+            ii(0x100f_1af5, 3); lea(eax, memd[ss, ebp - 0x80]);         /* lea eax, [ebp-0x80] */
             ii(0x100f_1af8, 1); push(eax);                              /* push eax */
             ii(0x100f_1af9, 5); call(Definitions.sys_sprintf, 0x7_4403); /* call 0x10165f01 */
             ii(0x100f_1afe, 3); add(esp, 0x10);                         /* add esp, 0x10 */
             ii(0x100f_1b01, 5); mov(edx, StringDefinitions.Rb13);       /* mov edx, 0x101a2307 */
-            ii(0x100f_1b06, 3); lea(eax, ebp - 0x80);                   /* lea eax, [ebp-0x80] */
+            ii(0x100f_1b06, 3); lea(eax, memd[ss, ebp - 0x80]);         /* lea eax, [ebp-0x80] */
             ii(0x100f_1b09, 5); call(Definitions.sys_fopen, 0x8_086c);  /* call 0x1017237a */
             ii(0x100f_1b0e, 3); mov(memd[ss, ebp - 0x1c], eax);         /* mov [ebp-0x1c], eax */
             ii(0x100f_1b11, 4); cmp(memd[ss, ebp - 0x1c], 0);           /* cmp dword [ebp-0x1c], 0x0 */
@@ -55,12 +55,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_1b40, 2); jmp(0x100f_1b2c, -0x16); goto l_0x100f_1b2c; /* jmp 0x100f1b2c */
         l_0x100f_1b42:
             ii(0x100f_1b42, 5); mov(edx, StringDefinitions.Wb2);        /* mov edx, 0x101a230a */
-            ii(0x100f_1b47, 3); lea(eax, ebp - 0x80);                   /* lea eax, [ebp-0x80] */
+            ii(0x100f_1b47, 3); lea(eax, memd[ss, ebp - 0x80]);         /* lea eax, [ebp-0x80] */
             ii(0x100f_1b4a, 5); call(Definitions.sys_fopen, 0x8_082b);  /* call 0x1017237a */
             ii(0x100f_1b4f, 3); mov(memd[ss, ebp - 0x1c], eax);         /* mov [ebp-0x1c], eax */
             ii(0x100f_1b52, 5); mov(ebx, 0x80);                         /* mov ebx, 0x80 */
             ii(0x100f_1b57, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x100f_1b59, 6); lea(eax, ebp - 0x100);                  /* lea eax, [ebp-0x100] */
+            ii(0x100f_1b59, 6); lea(eax, memd[ss, ebp - 0x100]);        /* lea eax, [ebp-0x100] */
             ii(0x100f_1b5f, 5); call(Definitions.sys_memset, 0x7_427c); /* call 0x10165de0 */
             ii(0x100f_1b64, 7); mov(memb[ss, ebp - 0x100], 0xa);        /* mov byte [ebp-0x100], 0xa */
             ii(0x100f_1b6b, 7); mov(memb[ss, ebp - 0xff], 0x5);         /* mov byte [ebp-0xff], 0x5 */
@@ -78,12 +78,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_1ba7, 9); mov(memw[ss, ebp - 0xbc], 0x1);         /* mov word [ebp-0xbc], 0x1 */
             ii(0x100f_1bb0, 5); mov(ebx, 0x30);                         /* mov ebx, 0x30 */
             ii(0x100f_1bb5, 3); mov(edx, memd[ss, ebp - 0x4]);          /* mov edx, [ebp-0x4] */
-            ii(0x100f_1bb8, 6); lea(eax, ebp - 0xf0);                   /* lea eax, [ebp-0xf0] */
+            ii(0x100f_1bb8, 6); lea(eax, memd[ss, ebp - 0xf0]);         /* lea eax, [ebp-0xf0] */
             ii(0x100f_1bbe, 5); call(Definitions.sys_memcpy, 0x7_4288); /* call 0x10165e4b */
             ii(0x100f_1bc3, 3); mov(ecx, memd[ss, ebp - 0x1c]);         /* mov ecx, [ebp-0x1c] */
             ii(0x100f_1bc6, 5); mov(ebx, 0x80);                         /* mov ebx, 0x80 */
             ii(0x100f_1bcb, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x100f_1bd0, 6); lea(eax, ebp - 0x100);                  /* lea eax, [ebp-0x100] */
+            ii(0x100f_1bd0, 6); lea(eax, memd[ss, ebp - 0x100]);        /* lea eax, [ebp-0x100] */
             ii(0x100f_1bd6, 5); call(/* sys */ 0x1017_2831, 0x8_0c56);  /* call 0x10172831 */
         l_0x100f_1bdb:
             ii(0x100f_1bdb, 3); dec(memd[ss, ebp - 0xc]);               /* dec dword [ebp-0xc] */

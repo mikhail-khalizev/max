@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_5858()
         {
             ii(0x5858, 4);    enter(0x2, 0);                            /* enter 0x2, 0x0 */
-            ii(0x585c, 3);    les(bx, ss, bp + 0x4);                    /* les bx, [bp+0x4] */
+            ii(0x585c, 3);    les(bx, memw[ss, bp + 0x4]);              /* les bx, [bp+0x4] */
             ii(0x585f, 5);    test(memb[es, bx + 0x5], 0x10);           /* test byte [es:bx+0x5], 0x10 */
             ii(0x5864, 2);    if(jz(0x58a8, 0x42)) goto l_0x58a8;       /* jz 0x58a8 */
             ii(0x5866, 4);    mov(al, memb[es, bx + 0x7]);              /* mov al, [es:bx+0x7] */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5880, 1);    pop(bx);                                  /* pop bx */
             ii(0x5881, 2);    push(0);                                  /* push 0x0 */
             ii(0x5883, 1);    push(ax);                                 /* push ax */
-            ii(0x5884, 3);    les(bx, ss, bp + 0x4);                    /* les bx, [bp+0x4] */
+            ii(0x5884, 3);    les(bx, memw[ss, bp + 0x4]);              /* les bx, [bp+0x4] */
             ii(0x5887, 4);    mov(ax, memw[es, bx + 0x2]);              /* mov ax, [es:bx+0x2] */
             ii(0x588b, 4);    mov(dx, memw[es, bx + 0x4]);              /* mov dx, [es:bx+0x4] */
             ii(0x588f, 2);    and(al, 0xf0);                            /* and al, 0xf0 */

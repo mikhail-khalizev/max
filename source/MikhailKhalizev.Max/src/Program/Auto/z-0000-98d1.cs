@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9965, 3);    add(memw[es, bx], dx);                    /* add [es:bx], dx */
         l_0x9968:
             ii(0x9968, 3);    mov(al, memb[ss, bp - 0x2]);              /* mov al, [bp-0x2] */
-            ii(0x996b, 3);    les(bx, ss, bp - 0xa);                    /* les bx, [bp-0xa] */
+            ii(0x996b, 3);    les(bx, memw[ss, bp - 0xa]);              /* les bx, [bp-0xa] */
             ii(0x996e, 4);    mov(memb[es, bx + 0x5], al);              /* mov [es:bx+0x5], al */
         l_0x9972:
             ii(0x9972, 1);    dec(si);                                  /* dec si */

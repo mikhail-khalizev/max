@@ -10,14 +10,14 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x84a4, 4);    enter(0xc, 0);                            /* enter 0xc, 0x0 */
             ii(0x84a8, 2);    push(0x5);                                /* push 0x5 */
-            ii(0x84aa, 3);    lea(ax, bp - 0x8);                        /* lea ax, [bp-0x8] */
+            ii(0x84aa, 3);    lea(ax, memw[ss, bp - 0x8]);              /* lea ax, [bp-0x8] */
             ii(0x84ad, 1);    push(ax);                                 /* push ax */
             ii(0x84ae, 2);    push(0x10);                               /* push 0x10 */
             ii(0x84b0, 2);    push(0x3);                                /* push 0x3 */
             ii(0x84b2, 3);    call(0x47dd, -0x3cd8);                    /* call 0x47dd */
             ii(0x84b5, 3);    add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x84b8, 3);    push(0xeee);                              /* push 0xeee */
-            ii(0x84bb, 3);    lea(ax, bp - 0x8);                        /* lea ax, [bp-0x8] */
+            ii(0x84bb, 3);    lea(ax, memw[ss, bp - 0x8]);              /* lea ax, [bp-0x8] */
             ii(0x84be, 1);    push(ax);                                 /* push ax */
             ii(0x84bf, 3);    call(0x4f4d, -0x3575);                    /* call 0x4f4d */
             ii(0x84c2, 1);    pop(bx);                                  /* pop bx */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x84c4, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0x84c6, 2);    if(jz(0x8518, 0x50)) goto l_0x8518;       /* jz 0x8518 */
             ii(0x84c8, 2);    push(0x2);                                /* push 0x2 */
-            ii(0x84ca, 3);    lea(ax, bp - 0xc);                        /* lea ax, [bp-0xc] */
+            ii(0x84ca, 3);    lea(ax, memw[ss, bp - 0xc]);              /* lea ax, [bp-0xc] */
             ii(0x84cd, 1);    push(ax);                                 /* push ax */
             ii(0x84ce, 2);    push(0x10);                               /* push 0x10 */
             ii(0x84d0, 2);    push(0x1e);                               /* push 0x1e */

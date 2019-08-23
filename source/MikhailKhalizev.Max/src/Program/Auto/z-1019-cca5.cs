@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1019_ccce:
             ii(0x1019_ccce, 4); or(ax, 0x1040);                         /* or ax, 0x1040 */
         l_0x1019_ccd2:
-            ii(0x1019_ccd2, 3); lea(edx, ebp + 0x8);                    /* lea edx, [ebp+0x8] */
+            ii(0x1019_ccd2, 3); lea(edx, memd[ss, ebp + 0x8]);          /* lea edx, [ebp+0x8] */
             ii(0x1019_ccd5, 5); call(/* sys */ 0x1019_6628, -0x66b2);   /* call 0x10196628 */
             ii(0x1019_ccda, 1); pop(edx);                               /* pop edx */
             ii(0x1019_ccdb, 1); pop(ebx);                               /* pop ebx */

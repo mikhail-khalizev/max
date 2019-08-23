@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_e9b0()
         {
             ii(0x1018_e9b0, 2); mov(ebx, esi);                          /* mov ebx, esi */
-            ii(0x1018_e9b2, 3); lea(esi, eax + edi);                    /* lea esi, [eax+edi] */
+            ii(0x1018_e9b2, 3); lea(esi, memd[ds, eax + edi]);          /* lea esi, [eax+edi] */
             ii(0x1018_e9b5, 6); mov(edx, memd[ds, 0x1020_9cd0]);        /* mov edx, [0x10209cd0] */
             ii(0x1018_e9bb, 2); mov(eax, memd[ds, esi]);                /* mov eax, [esi] */
             ii(0x1018_e9bd, 2); mov(memd[ds, edi], eax);                /* mov [edi], eax */

@@ -14,10 +14,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6e23, 3);    mov(memw[ds, bx - 0x12], ax);             /* mov [bx-0x12], ax */
             ii(0x6e26, 3);    mov(ax, 0x20);                            /* mov ax, 0x20 */
             ii(0x6e29, 2);    mov(ss, ax);                              /* mov ss, ax */
-            ii(0x6e2b, 3);    lea(sp, bx - 0x12);                       /* lea sp, [bx-0x12] */
+            ii(0x6e2b, 3);    lea(sp, memw[ds, bx - 0x12]);             /* lea sp, [bx-0x12] */
             ii(0x6e2e, 5);    mov(memb[ds, 0x9cc], 0x21);               /* mov byte [0x9cc], 0x21 */
             ii(0x6e33, 3);    call(0x66dc, -0x75a);                     /* call 0x66dc */
-            ii(0x6e36, 3);    lea(ax, bx + 0x18);                       /* lea ax, [bx+0x18] */
+            ii(0x6e36, 3);    lea(ax, memw[ds, bx + 0x18]);             /* lea ax, [bx+0x18] */
             ii(0x6e39, 4);    mov(memw[cs, 0x1064], ax);                /* mov [cs:0x1064], ax */
             ii(0x6e3d, 3);    mov(ax, memw[ds, bx + 0x16]);             /* mov ax, [bx+0x16] */
             ii(0x6e40, 6);    mov(memb[cs, 0x6], 0x21);                 /* mov byte [cs:0x6], 0x21 */

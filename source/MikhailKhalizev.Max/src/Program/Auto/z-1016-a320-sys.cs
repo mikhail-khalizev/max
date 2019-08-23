@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a358, 2); or(eax, edx);                           /* or eax, edx */
             ii(0x1016_a35a, 4); mov(ebx, memd[ss, esp + 0xc]);          /* mov ebx, [esp+0xc] */
             ii(0x1016_a35e, 1); push(eax);                              /* push eax */
-            ii(0x1016_a35f, 3); lea(eax, ecx + esi);                    /* lea eax, [ecx+esi] */
+            ii(0x1016_a35f, 3); lea(eax, memd[ds, ecx + esi]);          /* lea eax, [ecx+esi] */
             ii(0x1016_a362, 2); mov(edx, edi);                          /* mov edx, edi */
             ii(0x1016_a364, 1); inc(eax);                               /* inc eax */
             ii(0x1016_a365, 6); call_abs(memd[ds, 0x101b_ddec]);        /* call dword [0x101bddec] */ /* Вызов '0x1016_a320'. */
@@ -74,7 +74,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a3da, 2); jmp(0x1016_a3e8, 0xc); goto l_0x1016_a3e8; /* jmp 0x1016a3e8 */
         l_0x1016_a3dc:
             ii(0x1016_a3dc, 3); mov(edx, memd[ds, edx + 0x8]);          /* mov edx, [edx+0x8] */
-            ii(0x1016_a3df, 3); lea(eax, esi + ebp);                    /* lea eax, [esi+ebp] */
+            ii(0x1016_a3df, 3); lea(eax, memd[ds, esi + ebp]);          /* lea eax, [esi+ebp] */
             ii(0x1016_a3e2, 2); add(edx, eax);                          /* add edx, eax */
             ii(0x1016_a3e4, 4); mov(memd[ss, esp + 0x8], edx);          /* mov [esp+0x8], edx */
         l_0x1016_a3e8:
@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a49d, 3); imul(edx, esi);                         /* imul edx, esi */
             ii(0x1016_a4a0, 3); mov(ecx, memd[ss, esp]);                /* mov ecx, [esp] */
             ii(0x1016_a4a3, 2); sub(eax, ecx);                          /* sub eax, ecx */
-            ii(0x1016_a4a5, 3); lea(esi, ecx + edx);                    /* lea esi, [ecx+edx] */
+            ii(0x1016_a4a5, 3); lea(esi, memd[ds, ecx + edx]);          /* lea esi, [ecx+edx] */
             ii(0x1016_a4a8, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1016_a4aa, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_a4ac, 2); if(jle(0x1016_a4bb, 0xd)) goto l_0x1016_a4bb; /* jle 0x1016a4bb */

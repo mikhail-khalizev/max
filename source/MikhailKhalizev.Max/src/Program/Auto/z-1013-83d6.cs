@@ -28,8 +28,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_840d, 3); add(eax, memd[ss, ebp - 0xc]);          /* add eax, [ebp-0xc] */
             ii(0x1013_8410, 3); mov(eax, memd[ds, eax + 0x1c]);         /* mov eax, [eax+0x1c] */
             ii(0x1013_8413, 5); call(/* sys */ 0x1016_98f4, 0x3_14dc);  /* call 0x101698f4 */
-            ii(0x1013_8418, 3); lea(edx, ebp - 0x10);                   /* lea edx, [ebp-0x10] */
-            ii(0x1013_841b, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
+            ii(0x1013_8418, 3); lea(edx, memd[ss, ebp - 0x10]);         /* lea edx, [ebp-0x10] */
+            ii(0x1013_841b, 3); lea(eax, memd[ss, ebp - 0x14]);         /* lea eax, [ebp-0x14] */
             ii(0x1013_841e, 5); call(/* sys */ 0x1016_b244, 0x3_2e21);  /* call 0x1016b244 */
             ii(0x1013_8423, 4); cmp(memb[ss, ebp - 0x4], 0);            /* cmp byte [ebp-0x4], 0x0 */
             ii(0x1013_8427, 2); if(jz(0x1013_8438, 0xf)) goto l_0x1013_8438; /* jz 0x10138438 */

@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_96c6, 2); if(jnz(0x19_96cb, 0x3)) goto l_0x19_96cb; /* jnz 0x96cb */
             ii(0x19_96c8, 3); jmp(0x19_97fe, 0x133); goto l_0x19_97fe;  /* jmp 0x97fe */
         l_0x19_96cb:
-            ii(0x19_96cb, 3); les(bx, ss, bp - 0x28);                   /* les bx, [bp-0x28] */
+            ii(0x19_96cb, 3); les(bx, memw[ss, bp - 0x28]);             /* les bx, [bp-0x28] */
             ii(0x19_96ce, 5); test(memb[es, bx + 0x47], 0x80);          /* test byte [es:bx+0x47], 0x80 */
             ii(0x19_96d3, 2); if(jnz(0x19_96e4, 0xf)) goto l_0x19_96e4; /* jnz 0x96e4 */
             ii(0x19_96d5, 1); push(ds);                                 /* push ds */

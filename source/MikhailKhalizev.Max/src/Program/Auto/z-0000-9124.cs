@@ -367,7 +367,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x946e, 4);    cmp(memw[ss, bp + 0x4], 0);               /* cmp word [bp+0x4], 0x0 */
             ii(0x9472, 2);    if(jg(0x947e, 0xa)) goto l_0x947e;        /* jg 0x947e */
             ii(0x9474, 3);    shr(ax, 0x3);                             /* shr ax, 0x3 */
-            ii(0x9477, 3);    les(bx, ss, bp - 0x6);                    /* les bx, [bp-0x6] */
+            ii(0x9477, 3);    les(bx, memw[ss, bp - 0x6]);              /* les bx, [bp-0x6] */
             ii(0x947a, 4);    mov(memw[es, bx + 0x2], ax);              /* mov [es:bx+0x2], ax */
         l_0x947e:
             ii(0x947e, 3);    mov(ax, memw[ss, bp - 0x2c]);             /* mov ax, [bp-0x2c] */

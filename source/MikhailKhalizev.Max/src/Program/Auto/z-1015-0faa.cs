@@ -96,7 +96,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1015_109b:
             ii(0x1015_109b, 5); jmp(0x1015_1157, 0xb7); goto l_0x1015_1157; /* jmp 0x10151157 */
         l_0x1015_10a0:
-            ii(0x1015_10a0, 3); lea(edx, ebp - 0x18);                   /* lea edx, [ebp-0x18] */
+            ii(0x1015_10a0, 3); lea(edx, memd[ss, ebp - 0x18]);         /* lea edx, [ebp-0x18] */
             ii(0x1015_10a3, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
             ii(0x1015_10a6, 5); call(0x1014_edfa, -0x22b1);             /* call 0x1014edfa */
             ii(0x1015_10ab, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1106, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
             ii(0x1015_1109, 5); call(0x1007_1838, -0xd_f8d6);           /* call 0x10071838 */
             ii(0x1015_110e, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1015_1110, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x1015_1110, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1015_1113, 5); call(0x1007_65d0, -0xd_ab48);           /* call 0x100765d0 */
             ii(0x1015_1118, 5); call(0x1007_1838, -0xd_f8e5);           /* call 0x10071838 */
             ii(0x1015_111d, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
@@ -149,7 +149,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1146, 5); call(0x1014_f017, -0x2134);             /* call 0x1014f017 */
         l_0x1015_114b:
             ii(0x1015_114b, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1015_114d, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x1015_114d, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1015_1150, 5); call(0x1007_5f2c, -0xd_b229);           /* call 0x10075f2c */
             ii(0x1015_1155, 2); jmp(0x1015_116a, 0x13); goto l_0x1015_116a; /* jmp 0x1015116a */
         l_0x1015_1157:

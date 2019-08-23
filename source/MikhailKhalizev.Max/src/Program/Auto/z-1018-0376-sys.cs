@@ -22,12 +22,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_038f, 7); imul(eax, memd[ss, ebp - 0xc], 0xc0);   /* imul eax, [ebp-0xc], 0xc0 */
             ii(0x1018_0396, 4); imul(edx, memd[ss, ebp - 0x8], 0x6);    /* imul edx, [ebp-0x8], 0x6 */
             ii(0x1018_039a, 2); add(eax, edx);                          /* add eax, edx */
-            ii(0x1018_039c, 7); lgs(eax, ds, eax + 0x1020_b718);        /* lgs eax, [eax+0x1020b718] */
+            ii(0x1018_039c, 7); lgs(eax, memd[ds, eax + 0x1020_b718]);  /* lgs eax, [eax+0x1020b718] */
             ii(0x1018_03a3, 5); and(memb[gs, eax + 0x31], 0x7f);        /* and byte [gs:eax+0x31], 0x7f */
             ii(0x1018_03a8, 7); imul(eax, memd[ss, ebp - 0xc], 0xc0);   /* imul eax, [ebp-0xc], 0xc0 */
             ii(0x1018_03af, 4); imul(edx, memd[ss, ebp - 0x8], 0x6);    /* imul edx, [ebp-0x8], 0x6 */
             ii(0x1018_03b3, 2); add(eax, edx);                          /* add eax, edx */
-            ii(0x1018_03b5, 7); lgs(eax, ds, eax + 0x1020_b718);        /* lgs eax, [eax+0x1020b718] */
+            ii(0x1018_03b5, 7); lgs(eax, memd[ds, eax + 0x1020_b718]);  /* lgs eax, [eax+0x1020b718] */
             ii(0x1018_03bc, 7); mov(memw[gs, eax + 0x34], 0);           /* mov word [gs:eax+0x34], 0x0 */
             ii(0x1018_03c3, 7); mov(memd[ss, ebp - 0x4], 0);            /* mov dword [ebp-0x4], 0x0 */
             ii(0x1018_03ca, 2); jmp(0x1018_03d3, 0x7); goto l_0x1018_03d3; /* jmp 0x101803d3 */

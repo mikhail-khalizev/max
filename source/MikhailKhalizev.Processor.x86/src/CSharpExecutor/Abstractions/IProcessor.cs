@@ -2879,16 +2879,41 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void ldmxcsr();
 
         /// <summary>
-        /// Load Far Pointer.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lds(ValueBase dst, SegmentRegister segment, ValueBase offset);
-
-        /// <summary>
         /// Load Effective Address.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LEA.html</remarks>
-        void lea(ValueBase dst, ValueBase src);
+        void lea(ValueBase dst, MemoryValue src);
+
+
+        /// <summary>
+        /// Load Far Pointer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
+        void lds(ValueBase dst, MemoryValue src);
+
+        /// <summary>
+        /// Load Far Pointer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
+        void les(ValueBase dst, MemoryValue src);
+
+        /// <summary>
+        /// Load Far Pointer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
+        void lfs(ValueBase dst, MemoryValue src);
+        
+        /// <summary>
+        /// Load Far Pointer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
+        void lgs(ValueBase dst, MemoryValue src);
+
+        /// <summary>
+        /// Load Far Pointer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
+        void lss(ValueBase dst, MemoryValue src);
 
 
         /// <summary>
@@ -2914,25 +2939,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LFENCE.html</remarks>
         void lfence();
-
-
-        /// <summary>
-        /// Load Far Pointer.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void les(ValueBase dst, SegmentRegister segment, ValueBase offset);
-
-        /// <summary>
-        /// Load Far Pointer.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset);
-        
-        /// <summary>
-        /// Load Far Pointer.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
 
         /// <summary>
@@ -3151,12 +3157,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LSL.html</remarks>
         void lsl(ValueBase dst, ValueBase selector);
-
-        /// <summary>
-        /// Load Far Pointer.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lss(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
         /// Load Task Register.

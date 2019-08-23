@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_32cf, 3); add(sp, 0x4);                             /* add sp, 0x4 */
             ii(0x19_32d2, 2); mov(si, ax);                              /* mov si, ax */
         l_0x19_32d4:
-            ii(0x19_32d4, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_32d4, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_32d7, 4); mov(ax, memw[es, bx + 0x2]);              /* mov ax, [es:bx+0x2] */
             ii(0x19_32db, 3); or(ax, memw[es, bx]);                     /* or ax, [es:bx] */
             ii(0x19_32de, 2); if(jz(0x19_332a, 0x4a)) goto l_0x19_332a; /* jz 0x332a */
@@ -41,8 +41,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_32ec, 3); add(sp, 0x4);                             /* add sp, 0x4 */
             ii(0x19_32ef, 2); cmp(ax, si);                              /* cmp ax, si */
             ii(0x19_32f1, 2); if(jle(0x19_3324, 0x31)) goto l_0x19_3324; /* jle 0x3324 */
-            ii(0x19_32f3, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
-            ii(0x19_32f6, 3); les(bx, es, bx);                          /* les bx, [es:bx] */
+            ii(0x19_32f3, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
+            ii(0x19_32f6, 3); les(bx, memw[es, bx]);                    /* les bx, [es:bx] */
             ii(0x19_32f9, 4); cmp(memb[es, bx + si], 0x3d);             /* cmp byte [es:bx+si], 0x3d */
             ii(0x19_32fd, 2); if(jnz(0x19_3324, 0x25)) goto l_0x19_3324; /* jnz 0x3324 */
             ii(0x19_32ff, 1); push(si);                                 /* push si */
@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_330d, 3); add(sp, 0xa);                             /* add sp, 0xa */
             ii(0x19_3310, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x19_3312, 2); if(jnz(0x19_3324, 0x10)) goto l_0x19_3324; /* jnz 0x3324 */
-            ii(0x19_3314, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_3314, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_3317, 3); mov(ax, memw[es, bx]);                    /* mov ax, [es:bx] */
             ii(0x19_331a, 4); mov(dx, memw[es, bx + 0x2]);              /* mov dx, [es:bx+0x2] */
             ii(0x19_331e, 2); add(ax, si);                              /* add ax, si */

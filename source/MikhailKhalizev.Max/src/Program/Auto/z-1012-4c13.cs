@@ -52,12 +52,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4c93, 2); jmp(0x1012_4cbc, 0x27); goto l_0x1012_4cbc; /* jmp 0x10124cbc */
         l_0x1012_4c95:
             ii(0x1012_4c95, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x1012_4c9a, 3); lea(edx, ebp - 0x10);                   /* lea edx, [ebp-0x10] */
-            ii(0x1012_4c9d, 6); lea(eax, ebp - 0x238);                  /* lea eax, [ebp-0x238] */
+            ii(0x1012_4c9a, 3); lea(edx, memd[ss, ebp - 0x10]);         /* lea edx, [ebp-0x10] */
+            ii(0x1012_4c9d, 6); lea(eax, memd[ss, ebp - 0x238]);        /* lea eax, [ebp-0x238] */
             ii(0x1012_4ca3, 5); call(/* sys */ 0x1017_d4f2, 0x5_884a);  /* call 0x1017d4f2 */
             ii(0x1012_4ca8, 7); cmp(memb[ds, 0x101c_5630], 0);          /* cmp byte [0x101c5630], 0x0 */
             ii(0x1012_4caf, 2); if(jnz(0x1012_4cbc, 0xb)) goto l_0x1012_4cbc; /* jnz 0x10124cbc */
-            ii(0x1012_4cb1, 6); lea(eax, ebp - 0x238);                  /* lea eax, [ebp-0x238] */
+            ii(0x1012_4cb1, 6); lea(eax, memd[ss, ebp - 0x238]);        /* lea eax, [ebp-0x238] */
             ii(0x1012_4cb7, 5); call(0x1012_4b19, -0x1a3);              /* call 0x10124b19 */
         l_0x1012_4cbc:
             ii(0x1012_4cbc, 5); jmp(0x1012_4d3f, 0x7e); goto l_0x1012_4d3f; /* jmp 0x10124d3f */
@@ -112,7 +112,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4d4d, 5); call(Definitions.sys_strlen, 0x4_d175); /* call 0x10171ec7 */
             ii(0x1012_4d52, 2); mov(ebx, eax);                          /* mov ebx, eax */
             ii(0x1012_4d54, 3); mov(edx, memd[ss, ebp - 0x4]);          /* mov edx, [ebp-0x4] */
-            ii(0x1012_4d57, 6); lea(eax, ebp - 0x238);                  /* lea eax, [ebp-0x238] */
+            ii(0x1012_4d57, 6); lea(eax, memd[ss, ebp - 0x238]);        /* lea eax, [ebp-0x238] */
             ii(0x1012_4d5d, 5); call(/* sys */ 0x1017_d531, 0x5_87cf);  /* call 0x1017d531 */
             ii(0x1012_4d62, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1012_4d64, 2); if(jnz(0x1012_4d79, 0x13)) goto l_0x1012_4d79; /* jnz 0x10124d79 */

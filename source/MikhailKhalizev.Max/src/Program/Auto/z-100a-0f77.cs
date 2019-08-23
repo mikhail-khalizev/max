@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_0ff0, 6); push(memd[ds, eax + 0x101c_81d7]);      /* push dword [eax+0x101c81d7] */
             ii(0x100a_0ff6, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
             ii(0x100a_0ff9, 1); push(eax);                              /* push eax */
-            ii(0x100a_0ffa, 6); lea(eax, ebp - 0x13c);                  /* lea eax, [ebp-0x13c] */
+            ii(0x100a_0ffa, 6); lea(eax, memd[ss, ebp - 0x13c]);        /* lea eax, [ebp-0x13c] */
             ii(0x100a_1000, 1); push(eax);                              /* push eax */
             ii(0x100a_1001, 5); call(Definitions.sys_sprintf, 0xc_4efb); /* call 0x10165f01 */
             ii(0x100a_1006, 3); add(esp, 0x10);                         /* add esp, 0x10 */
@@ -78,12 +78,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_103f, 1); push(eax);                              /* push eax */
             ii(0x100a_1040, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x100a_1043, 1); push(eax);                              /* push eax */
-            ii(0x100a_1044, 6); lea(eax, ebp - 0x13c);                  /* lea eax, [ebp-0x13c] */
+            ii(0x100a_1044, 6); lea(eax, memd[ss, ebp - 0x13c]);        /* lea eax, [ebp-0x13c] */
             ii(0x100a_104a, 1); push(eax);                              /* push eax */
             ii(0x100a_104b, 5); call(Definitions.sys_sprintf, 0xc_4eb1); /* call 0x10165f01 */
             ii(0x100a_1050, 3); add(esp, 0x10);                         /* add esp, 0x10 */
         l_0x100a_1053:
-            ii(0x100a_1053, 6); lea(edx, ebp - 0x13c);                  /* lea edx, [ebp-0x13c] */
+            ii(0x100a_1053, 6); lea(edx, memd[ss, ebp - 0x13c]);        /* lea edx, [ebp-0x13c] */
             ii(0x100a_1059, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x100a_105c, 3); add(eax, 0x4d);                         /* add eax, 0x4d */
             ii(0x100a_105f, 5); call(Definitions.sys_strcat, 0xc_4ecd); /* call 0x10165f31 */

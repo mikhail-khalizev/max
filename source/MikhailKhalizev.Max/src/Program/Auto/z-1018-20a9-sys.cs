@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_20a9-771ba1f5")]
         public void /* sys */ Method_1018_20a9()
         {
-            ii(0x1018_20a9, 6); lea(ecx, /* sys */ 0x1019_6c4c);        /* lea ecx, [0x10196c4c] */
+            ii(0x1018_20a9, 6); lea(ecx, memd[ds, /* sys */ 0x1019_6c4c]); /* lea ecx, [0x10196c4c] */
             ii(0x1018_20af, 3); mov(dx, cs);                            /* mov dx, cs */
             ii(0x1018_20b2, 3); shl(edx, 0x10);                         /* shl edx, 0x10 */
             ii(0x1018_20b5, 3); mov(dx, cx);                            /* mov dx, cx */

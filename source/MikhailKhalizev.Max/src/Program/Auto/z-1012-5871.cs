@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1012_58cb:
             ii(0x1012_58cb, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1012_58cd, 6); mov(ax, memw[ds, 0x101b_b45c]);         /* mov ax, [0x101bb45c] */
-            ii(0x1012_58d3, 3); lea(edx, eax + 0x5);                    /* lea edx, [eax+0x5] */
+            ii(0x1012_58d3, 3); lea(edx, memd[ds, eax + 0x5]);          /* lea edx, [eax+0x5] */
             ii(0x1012_58d6, 2); sub(eax, eax);                          /* sub eax, eax */
             ii(0x1012_58d8, 1); inb(al, dx);                            /* in al, dx */
             ii(0x1012_58d9, 3); and(eax, 0x60);                         /* and eax, 0x60 */

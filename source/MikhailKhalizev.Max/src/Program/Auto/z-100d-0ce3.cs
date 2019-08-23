@@ -160,7 +160,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_0e9e, 3); mov(edx, memd[ss, ebp - 0x20]);         /* mov edx, [ebp-0x20] */
             ii(0x100d_0ea1, 2); add(edx, eax);                          /* add edx, eax */
             ii(0x100d_0ea3, 3); mov(memd[ss, ebp - 0x18], edx);         /* mov [ebp-0x18], edx */
-            ii(0x100d_0ea6, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
+            ii(0x100d_0ea6, 3); lea(edx, memd[ss, ebp - 0x24]);         /* lea edx, [ebp-0x24] */
             ii(0x100d_0ea9, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x100d_0eac, 3); mov(eax, memd[ds, eax + 0x16]);         /* mov eax, [eax+0x16] */
             ii(0x100d_0eaf, 5); call(Definitions.sys_display_draw_1, 0x9_65f4); /* call 0x101674a8 */

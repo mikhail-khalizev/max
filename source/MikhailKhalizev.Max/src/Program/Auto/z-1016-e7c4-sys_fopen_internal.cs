@@ -100,7 +100,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_e8a2, 1); push(ebp);                              /* push ebp */
             ii(0x1016_e8a3, 1); push(edi);                              /* push edi */
             ii(0x1016_e8a4, 5); push(StringDefinitions.SS);             /* push 0x101b2ed0 */
-            ii(0x1016_e8a9, 4); lea(eax, esp + 0xc);                    /* lea eax, [esp+0xc] */
+            ii(0x1016_e8a9, 4); lea(eax, memd[ss, esp + 0xc]);          /* lea eax, [esp+0xc] */
             ii(0x1016_e8ad, 1); push(eax);                              /* push eax */
             ii(0x1016_e8ae, 5); call(Definitions.sys_sprintf, -0x89b2); /* call 0x10165f01 */
             ii(0x1016_e8b3, 3); add(esp, 0x10);                         /* add esp, 0x10 */
@@ -128,13 +128,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_e8f6, 3); mov(esi, memd[ds, eax + 0x8]);          /* mov esi, [eax+0x8] */
             ii(0x1016_e8f9, 1); push(esi);                              /* push esi */
             ii(0x1016_e8fa, 5); push(StringDefinitions.SS);             /* push 0x101b2ed0 */
-            ii(0x1016_e8ff, 4); lea(eax, esp + 0xc);                    /* lea eax, [esp+0xc] */
+            ii(0x1016_e8ff, 4); lea(eax, memd[ss, esp + 0xc]);          /* lea eax, [esp+0xc] */
             ii(0x1016_e903, 1); push(eax);                              /* push eax */
             ii(0x1016_e904, 5); call(Definitions.sys_sprintf, -0x8a08); /* call 0x10165f01 */
             ii(0x1016_e909, 3); add(esp, 0x10);                         /* add esp, 0x10 */
         l_0x1016_e90c:
             ii(0x1016_e90c, 2); mov(eax, esp);                          /* mov eax, esp */
-            ii(0x1016_e90e, 7); lea(edx, esp + 0x90);                   /* lea edx, [esp+0x90] */
+            ii(0x1016_e90e, 7); lea(edx, memd[ss, esp + 0x90]);         /* lea edx, [esp+0x90] */
             ii(0x1016_e915, 5); call(/* sys */ 0x1017_9342, 0xaa28);    /* call 0x10179342 */
             ii(0x1016_e91a, 2); mov(eax, esp);                          /* mov eax, esp */
             ii(0x1016_e91c, 5); call(/* sys */ 0x1017_1028, 0x2707);    /* call 0x10171028 */

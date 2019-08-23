@@ -20,9 +20,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_fccc, 3); push(memd[ss, ebp - 0x10]);             /* push dword [ebp-0x10] */
             ii(0x1017_fccf, 5); call(/* sys */ 0x1019_548c, 0x1_57b8);  /* call 0x1019548c */
             ii(0x1017_fcd4, 3); add(esp, 0x4);                          /* add esp, 0x4 */
-            ii(0x1017_fcd7, 3); lea(ecx, ebp - 0xc);                    /* lea ecx, [ebp-0xc] */
+            ii(0x1017_fcd7, 3); lea(ecx, memd[ss, ebp - 0xc]);          /* lea ecx, [ebp-0xc] */
             ii(0x1017_fcda, 1); push(ecx);                              /* push ecx */
-            ii(0x1017_fcdb, 3); lea(ecx, ebp - 0x8);                    /* lea ecx, [ebp-0x8] */
+            ii(0x1017_fcdb, 3); lea(ecx, memd[ss, ebp - 0x8]);          /* lea ecx, [ebp-0x8] */
             ii(0x1017_fcde, 1); push(ecx);                              /* push ecx */
             ii(0x1017_fcdf, 2); push(0x20);                             /* push 0x20 */
             ii(0x1017_fce1, 5); call(/* sys */ 0x1019_52e4, 0x1_55fe);  /* call 0x101952e4 */

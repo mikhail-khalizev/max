@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_3fa7, 2); jmp(0x100c_3fba, 0x11); goto l_0x100c_3fba; /* jmp 0x100c3fba */
         l_0x100c_3fa9:
             ii(0x100c_3fa9, 5); call(/* sys */ 0x1016_5e9b, 0xa_1eed);  /* call 0x10165e9b */
-            ii(0x100c_3fae, 3); lea(eax, eax + eax * 2);                /* lea eax, [eax+eax*2] */
+            ii(0x100c_3fae, 3); lea(eax, memd[ds, eax + eax * 2]);      /* lea eax, [eax+eax*2] */
             ii(0x100c_3fb1, 3); shr(eax, 0xf);                          /* shr eax, 0xf */
             ii(0x100c_3fb4, 3); add(eax, 0x3);                          /* add eax, 0x3 */
             ii(0x100c_3fb7, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */

@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1f34, 2); mov(al, dl);                            /* mov al, dl */
             ii(0x1018_1f36, 2); or(al, 0x40);                           /* or al, 0x40 */
             ii(0x1018_1f38, 5); and(eax, 0xff);                         /* and eax, 0xff */
-            ii(0x1018_1f3d, 3); lea(edx, ebp + 0x8);                    /* lea edx, [ebp+0x8] */
+            ii(0x1018_1f3d, 3); lea(edx, memd[ss, ebp + 0x8]);          /* lea edx, [ebp+0x8] */
             ii(0x1018_1f40, 3); or(ah, 0x20);                           /* or ah, 0x20 */
             ii(0x1018_1f43, 2); jmp(0x1018_1f7d, 0x38); goto l_0x1018_1f7d; /* jmp 0x10181f7d */
         l_0x1018_1f45:
@@ -53,14 +53,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1f73, 3); or(dh, 0x11);                           /* or dh, 0x11 */
             ii(0x1018_1f76, 2); mov(ebx, edx);                          /* mov ebx, edx */
         l_0x1018_1f78:
-            ii(0x1018_1f78, 3); lea(edx, ebp + 0x8);                    /* lea edx, [ebp+0x8] */
+            ii(0x1018_1f78, 3); lea(edx, memd[ss, ebp + 0x8]);          /* lea edx, [ebp+0x8] */
             ii(0x1018_1f7b, 2); mov(eax, ebx);                          /* mov eax, ebx */
         l_0x1018_1f7d:
             ii(0x1018_1f7d, 5); call(/* sys */ 0x1019_6628, 0x1_46a6);  /* call 0x10196628 */
             ii(0x1018_1f82, 3); fstp(memq[ss, ebp - 0x14]);             /* fstp qword [ebp-0x14] */
         l_0x1018_1f85:
             ii(0x1018_1f85, 3); fld(memq[ss, ebp - 0x14]);              /* fld qword [ebp-0x14] */
-            ii(0x1018_1f88, 3); lea(esp, ebp - 0xc);                    /* lea esp, [ebp-0xc] */
+            ii(0x1018_1f88, 3); lea(esp, memd[ss, ebp - 0xc]);          /* lea esp, [ebp-0xc] */
             ii(0x1018_1f8b, 1); pop(edx);                               /* pop edx */
             ii(0x1018_1f8c, 1); pop(ebx);                               /* pop ebx */
             ii(0x1018_1f8d, 1); pop(eax);                               /* pop eax */

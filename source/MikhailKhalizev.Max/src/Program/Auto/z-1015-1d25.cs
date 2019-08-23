@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1d6c, 1); push(eax);                              /* push eax */
             ii(0x1015_1d6d, 5); mov(eax, StringDefinitions.BuildPacketExpectedTeamIReceivedTeamI); /* mov eax, 0x101ade93 */
             ii(0x1015_1d72, 1); push(eax);                              /* push eax */
-            ii(0x1015_1d73, 6); lea(eax, ebp - 0xe0);                   /* lea eax, [ebp-0xe0] */
+            ii(0x1015_1d73, 6); lea(eax, memd[ss, ebp - 0xe0]);         /* lea eax, [ebp-0xe0] */
             ii(0x1015_1d79, 1); push(eax);                              /* push eax */
             ii(0x1015_1d7a, 5); call(Definitions.sys_sprintf, 0x1_4182); /* call 0x10165f01 */
             ii(0x1015_1d7f, 3); add(esp, 0x10);                         /* add esp, 0x10 */
@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_1d92, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1015_1d94, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
             ii(0x1015_1d99, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
-            ii(0x1015_1d9e, 6); lea(eax, ebp - 0xe0);                   /* lea eax, [ebp-0xe0] */
+            ii(0x1015_1d9e, 6); lea(eax, memd[ss, ebp - 0xe0]);         /* lea eax, [ebp-0xe0] */
             ii(0x1015_1da4, 5); call(0x1011_5d23, -0x3_c086);           /* call 0x10115d23 */
         l_0x1015_1da9:
             ii(0x1015_1da9, 3); mov(eax, memd[ss, ebp - 0x18]);         /* mov eax, [ebp-0x18] */

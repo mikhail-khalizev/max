@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7929, 3); mov(ax, memw[ds, 0x519e]);                /* mov ax, [0x519e] */
             ii(0x17_792c, 3); cmp(memw[ss, bp - 0x8], ax);              /* cmp [bp-0x8], ax */
             ii(0x17_792f, 2); if(jae(0x17_7958, 0x27)) goto l_0x17_7958; /* jae 0x7958 */
-            ii(0x17_7931, 4); les(bx, ds, 0x4f9c);                      /* les bx, [0x4f9c] */
+            ii(0x17_7931, 4); les(bx, memw[ds, 0x4f9c]);                /* les bx, [0x4f9c] */
             ii(0x17_7935, 3); mov(si, memw[ss, bp - 0x8]);              /* mov si, [bp-0x8] */
             ii(0x17_7938, 3); mov(al, memb[es, bx + si]);               /* mov al, [es:bx+si] */
             ii(0x17_793b, 2); and(al, 0x80);                            /* and al, 0x80 */
@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_793f, 2); if(jz(0x17_7956, 0x15)) goto l_0x17_7956; /* jz 0x7956 */
             ii(0x17_7941, 2); mov(bx, si);                              /* mov bx, si */
             ii(0x17_7943, 3); shl(bx, 0x2);                             /* shl bx, 0x2 */
-            ii(0x17_7946, 4); les(si, ds, 0x4fa0);                      /* les si, [0x4fa0] */
+            ii(0x17_7946, 4); les(si, memw[ds, 0x4fa0]);                /* les si, [0x4fa0] */
             ii(0x17_794a, 4); mov(ax, memw[es, bx + si + 0x2]);         /* mov ax, [es:bx+si+0x2] */
             ii(0x17_794e, 3); or(ax, memw[es, bx + si]);                /* or ax, [es:bx+si] */
             ii(0x17_7951, 2); if(jz(0x17_7956, 0x3)) goto l_0x17_7956;  /* jz 0x7956 */
@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_7968:
             ii(0x17_7968, 3); mov(bx, memw[ss, bp - 0x8]);              /* mov bx, [bp-0x8] */
             ii(0x17_796b, 3); shl(bx, 0x2);                             /* shl bx, 0x2 */
-            ii(0x17_796e, 4); les(si, ds, 0x4fa4);                      /* les si, [0x4fa4] */
+            ii(0x17_796e, 4); les(si, memw[ds, 0x4fa4]);                /* les si, [0x4fa4] */
             ii(0x17_7972, 3); mov(ax, memw[es, bx + si]);               /* mov ax, [es:bx+si] */
             ii(0x17_7975, 4); mov(dx, memw[es, bx + si + 0x2]);         /* mov dx, [es:bx+si+0x2] */
             ii(0x17_7979, 3); mov(memw[ss, bp - 0x4], ax);              /* mov [bp-0x4], ax */
@@ -128,8 +128,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7a0e, 3); add(sp, 0x6);                             /* add sp, 0x6 */
             ii(0x17_7a11, 1); push(ds);                                 /* push ds */
             ii(0x17_7a12, 3); mov(cx, 0x400);                           /* mov cx, 0x400 */
-            ii(0x17_7a15, 4); les(di, ds, 0x1fe8);                      /* les di, [0x1fe8] */
-            ii(0x17_7a19, 4); lds(si, ds, 0x4fb8);                      /* lds si, [0x4fb8] */
+            ii(0x17_7a15, 4); les(di, memw[ds, 0x1fe8]);                /* les di, [0x1fe8] */
+            ii(0x17_7a19, 4); lds(si, memw[ds, 0x4fb8]);                /* lds si, [0x4fb8] */
             ii(0x17_7a1d, 3); rep(() => movsd());                       /* rep movsd */
             ii(0x17_7a20, 1); pop(ds);                                  /* pop ds */
             ii(0x17_7a21, 2); push(0);                                  /* push 0x0 */
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_7a33:
             ii(0x17_7a33, 3); mov(bx, memw[ss, bp - 0x8]);              /* mov bx, [bp-0x8] */
             ii(0x17_7a36, 3); shl(bx, 0x2);                             /* shl bx, 0x2 */
-            ii(0x17_7a39, 4); les(si, ds, 0x4fa4);                      /* les si, [0x4fa4] */
+            ii(0x17_7a39, 4); les(si, memw[ds, 0x4fa4]);                /* les si, [0x4fa4] */
             ii(0x17_7a3d, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x17_7a3f, 4); mov(memw[es, bx + si + 0x2], ax);         /* mov [es:bx+si+0x2], ax */
             ii(0x17_7a43, 3); mov(memw[es, bx + si], ax);               /* mov [es:bx+si], ax */

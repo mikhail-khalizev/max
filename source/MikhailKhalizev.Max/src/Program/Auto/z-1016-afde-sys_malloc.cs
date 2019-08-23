@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_aff9, 5); jmp(0x1016_b0b2, 0xb4); goto l_0x1016_b0b2; /* jmp 0x1016b0b2 */
         l_0x1016_affe:
             ii(0x1016_affe, 5); mov(ebp, 0x101b_de0c);                  /* mov ebp, 0x101bde0c */
-            ii(0x1016_b003, 3); lea(edi, esi + 0x3);                    /* lea edi, [esi+0x3] */
+            ii(0x1016_b003, 3); lea(edi, memd[ds, esi + 0x3]);          /* lea edi, [esi+0x3] */
             ii(0x1016_b006, 2); xor(ah, ah);                            /* xor ah, ah */
             ii(0x1016_b008, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1016_b00a, 3); mov(memb[ss, esp], ah);                 /* mov [esp], ah */

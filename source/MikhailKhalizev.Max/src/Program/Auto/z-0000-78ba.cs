@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x78f0, 3);    call(0x79ef, 0xfc);                       /* call 0x79ef */
             ii(0x78f3, 1);    pop(bx);                                  /* pop bx */
             ii(0x78f4, 1);    push(si);                                 /* push si */
-            ii(0x78f5, 3);    lea(di, bp - 0x8);                        /* lea di, [bp-0x8] */
+            ii(0x78f5, 3);    lea(di, memw[ss, bp - 0x8]);              /* lea di, [bp-0x8] */
             ii(0x78f8, 3);    mov(si, 0x11e4);                          /* mov si, 0x11e4 */
             ii(0x78fb, 1);    push(ss);                                 /* push ss */
             ii(0x78fc, 1);    pop(es);                                  /* pop es */
@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x790f, 3);    mov(ax, 0x910);                           /* mov ax, 0x910 */
             ii(0x7912, 1);    push(si);                                 /* push si */
             ii(0x7913, 2);    mov(di, ax);                              /* mov di, ax */
-            ii(0x7915, 3);    lea(si, bp - 0x8);                        /* lea si, [bp-0x8] */
+            ii(0x7915, 3);    lea(si, memw[ss, bp - 0x8]);              /* lea si, [bp-0x8] */
             ii(0x7918, 1);    push(ds);                                 /* push ds */
             ii(0x7919, 1);    pop(es);                                  /* pop es */
             ii(0x791a, 1);    movsw();                                  /* movsw */
@@ -78,7 +78,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x7942:
             ii(0x7942, 3);    mov(bx, memw[ss, bp - 0xc]);              /* mov bx, [bp-0xc] */
             ii(0x7945, 3);    shr(bx, 0x3);                             /* shr bx, 0x3 */
-            ii(0x7948, 3);    les(di, ss, bp - 0x10);                   /* les di, [bp-0x10] */
+            ii(0x7948, 3);    les(di, memw[ss, bp - 0x10]);             /* les di, [bp-0x10] */
             ii(0x794b, 4);    test(memb[es, bx + di], 0x1);             /* test byte [es:bx+di], 0x1 */
             ii(0x794f, 2);    if(jz(0x795c, 0xb)) goto l_0x795c;        /* jz 0x795c */
             ii(0x7951, 3);    push(memw[ss, bp - 0xa]);                 /* push word [bp-0xa] */

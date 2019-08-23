@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1016_cab4-ea65955a")]
         public void /* sys */ Method_1016_cab4()
         {
-            ii(0x1016_cab4, 4); lea(eax, eax + 0);                      /* lea eax, [eax] */
+            ii(0x1016_cab4, 4); lea(eax, memd[ds, eax + 0]);            /* lea eax, [eax] */
             ii(0x1016_cab8, 6); and(edx, 0xff);                         /* and edx, 0xff */
             ii(0x1016_cabe, 3); sar(eax, 0x9);                          /* sar eax, 0x9 */
             ii(0x1016_cac1, 3); shl(edx, 0x8);                          /* shl edx, 0x8 */

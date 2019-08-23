@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_06b3, 3); mov(edx, memd[ss, ebp - 0xc]);          /* mov edx, [ebp-0xc] */
             ii(0x100d_06b6, 4); mov(memw[ds, edx + 0x26], ax);          /* mov [edx+0x26], ax */
             ii(0x100d_06ba, 4); movsx(ebx, memw[ss, ebp - 0x4]);        /* movsx ebx, word [ebp-0x4] */
-            ii(0x100d_06be, 3); lea(edx, ebp - 0x8);                    /* lea edx, [ebp-0x8] */
+            ii(0x100d_06be, 3); lea(edx, memd[ss, ebp - 0x8]);          /* lea edx, [ebp-0x8] */
             ii(0x100d_06c1, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x100d_06c4, 3); add(eax, 0x1e);                         /* add eax, 0x1e */
             ii(0x100d_06c7, 5); call(0x1008_b2ec, -0x4_53e0);           /* call 0x1008b2ec */

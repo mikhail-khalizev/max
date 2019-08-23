@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_b2dd, 5); call(0x1013_acc5, -0x61d);              /* call 0x1013acc5 */
             ii(0x1013_b2e2, 2); jmp(0x1013_b2a2, -0x42); goto l_0x1013_b2a2; /* jmp 0x1013b2a2 */
         l_0x1013_b2e4:
-            ii(0x1013_b2e4, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
+            ii(0x1013_b2e4, 3); lea(eax, memd[ss, ebp - 0x14]);         /* lea eax, [ebp-0x14] */
             ii(0x1013_b2e7, 5); call(Definitions.my_ctor_0x101b_6edc, -0xc_44a8); /* call 0x10076e44 */
             ii(0x1013_b2ec, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1013_b2ee, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
@@ -72,11 +72,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_b2fa, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1013_b2fc, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
             ii(0x1013_b2ff, 3); mov(ebx, memd[ds, eax + 0x6]);          /* mov ebx, [eax+0x6] */
-            ii(0x1013_b302, 3); lea(eax, ecx - 0x4);                    /* lea eax, [ecx-0x4] */
+            ii(0x1013_b302, 3); lea(eax, memd[ds, ecx - 0x4]);          /* lea eax, [ecx-0x4] */
             ii(0x1013_b305, 2); add(eax, ebx);                          /* add eax, ebx */
             ii(0x1013_b307, 5); call(0x1013_acc5, -0x647);              /* call 0x1013acc5 */
             ii(0x1013_b30c, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1013_b30e, 3); lea(eax, ebp - 0x14);                   /* lea eax, [ebp-0x14] */
+            ii(0x1013_b30e, 3); lea(eax, memd[ss, ebp - 0x14]);         /* lea eax, [ebp-0x14] */
             ii(0x1013_b311, 5); call(Definitions.my_dtor_0x101b_6edc, -0x6d1); /* call 0x1013ac45 */
             ii(0x1013_b316, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
             ii(0x1013_b319, 4); dec(memw[ds, eax + 0x4]);               /* dec word [eax+0x4] */

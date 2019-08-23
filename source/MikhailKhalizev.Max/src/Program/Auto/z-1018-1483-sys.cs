@@ -96,7 +96,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1553, 2); jmp(0x1018_1538, -0x1d); goto l_0x1018_1538; /* jmp 0x10181538 */
         l_0x1018_1555:
             ii(0x1018_1555, 2); mov(dl, memb[ds, eax]);                 /* mov dl, [eax] */
-            ii(0x1018_1557, 3); lea(ecx, eax + 0x1);                    /* lea ecx, [eax+0x1] */
+            ii(0x1018_1557, 3); lea(ecx, memd[ds, eax + 0x1]);          /* lea ecx, [eax+0x1] */
             ii(0x1018_155a, 3); cmp(dl, 0x4e);                          /* cmp dl, 0x4e */
             ii(0x1018_155d, 2); if(jb(0x1018_157a, 0x1b)) goto l_0x1018_157a; /* jb 0x1018157a */
             ii(0x1018_155f, 2); if(jbe(0x1018_15b7, 0x56)) goto l_0x1018_15b7; /* jbe 0x101815b7 */

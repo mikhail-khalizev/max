@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_6440, 1); ret(); return;                          /* ret */
         l_0x1018_6441:
             ii(0x1018_6441, 6); mov(edx, memd[ds, 0x101b_e858]);        /* mov edx, [0x101be858] */
-            ii(0x1018_6447, 7); lea(eax, edx * 4 + 0);                  /* lea eax, [edx*4] */
+            ii(0x1018_6447, 7); lea(eax, memd[ds, edx * 4 + 0]);        /* lea eax, [edx*4] */
             ii(0x1018_644e, 2); sub(eax, edx);                          /* sub eax, edx */
             ii(0x1018_6450, 6); mov(edx, memd[ds, 0x101b_e854]);        /* mov edx, [0x101be854] */
             ii(0x1018_6456, 3); shl(eax, 0x3);                          /* shl eax, 0x3 */
@@ -74,7 +74,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_648a, 2); sub(esi, edi);                          /* sub esi, edi */
             ii(0x1018_648c, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1018_648e, 2); div(esi);                               /* div esi */
-            ii(0x1018_6490, 3); lea(edx, ecx + eax);                    /* lea edx, [ecx+eax] */
+            ii(0x1018_6490, 3); lea(edx, memd[ds, ecx + eax]);          /* lea edx, [ecx+eax] */
         l_0x1018_6493:
             ii(0x1018_6493, 5); mov(eax, memd[ds, 0x101b_e870]);        /* mov eax, [0x101be870] */
             ii(0x1018_6498, 5); call(/* sys */ 0x1016_b898, -0x1_ac05); /* call 0x1016b898 */
@@ -183,7 +183,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_65f3, 5); mov(ecx, 0x6);                          /* mov ecx, 0x6 */
             ii(0x1018_65f8, 6); mov(esi, memd[ds, 0x101b_e854]);        /* mov esi, [0x101be854] */
             ii(0x1018_65fe, 5); mov(edi, 0x1020_a2bc);                  /* mov edi, 0x1020a2bc */
-            ii(0x1018_6603, 3); lea(ebx, edx + 0x1);                    /* lea ebx, [edx+0x1] */
+            ii(0x1018_6603, 3); lea(ebx, memd[ds, edx + 0x1]);          /* lea ebx, [edx+0x1] */
             ii(0x1018_6606, 2); add(esi, eax);                          /* add esi, eax */
             ii(0x1018_6608, 6); mov(memd[ds, 0x101b_e858], ebx);        /* mov [0x101be858], ebx */
             ii(0x1018_660e, 2); rep(() => movsd());                     /* rep movsd */

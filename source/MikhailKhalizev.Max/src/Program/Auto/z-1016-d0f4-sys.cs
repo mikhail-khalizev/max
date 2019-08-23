@@ -40,21 +40,21 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_d143, 7); cmp(memd[ds, 0x1020_857c], 0);          /* cmp dword [0x1020857c], 0x0 */
             ii(0x1016_d14a, 2); if(jz(0x1016_d15d, 0x11)) goto l_0x1016_d15d; /* jz 0x1016d15d */
             ii(0x1016_d14c, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x1016_d151, 4); lea(edx, esp + 0x8);                    /* lea edx, [esp+0x8] */
+            ii(0x1016_d151, 4); lea(edx, memd[ss, esp + 0x8]);          /* lea edx, [esp+0x8] */
             ii(0x1016_d155, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1016_d157, 6); call_abs(memd[ds, 0x1020_857c]);        /* call dword [0x1020857c] */
         l_0x1016_d15d:
             ii(0x1016_d15d, 7); cmp(memd[ds, 0x1020_857c], 0);          /* cmp dword [0x1020857c], 0x0 */
             ii(0x1016_d164, 2); if(jz(0x1016_d177, 0x11)) goto l_0x1016_d177; /* jz 0x1016d177 */
             ii(0x1016_d166, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x1016_d16b, 4); lea(edx, esp + 0x4);                    /* lea edx, [esp+0x4] */
+            ii(0x1016_d16b, 4); lea(edx, memd[ss, esp + 0x4]);          /* lea edx, [esp+0x4] */
             ii(0x1016_d16f, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1016_d171, 6); call_abs(memd[ds, 0x1020_857c]);        /* call dword [0x1020857c] */
         l_0x1016_d177:
             ii(0x1016_d177, 7); cmp(memd[ds, 0x1020_857c], 0);          /* cmp dword [0x1020857c], 0x0 */
             ii(0x1016_d17e, 2); if(jz(0x1016_d191, 0x11)) goto l_0x1016_d191; /* jz 0x1016d191 */
             ii(0x1016_d180, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x1016_d185, 4); lea(edx, esp + 0xc);                    /* lea edx, [esp+0xc] */
+            ii(0x1016_d185, 4); lea(edx, memd[ss, esp + 0xc]);          /* lea edx, [esp+0xc] */
             ii(0x1016_d189, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1016_d18b, 6); call_abs(memd[ds, 0x1020_857c]);        /* call dword [0x1020857c] */
         l_0x1016_d191:

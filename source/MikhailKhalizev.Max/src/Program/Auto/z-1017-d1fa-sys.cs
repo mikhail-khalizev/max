@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d286, 2); if(jz(0x1017_d2eb, 0x63)) goto l_0x1017_d2eb; /* jz 0x1017d2eb */
             ii(0x1017_d288, 2); xor(edi, eax);                          /* xor edi, eax */
             ii(0x1017_d28a, 2); mov(eax, ebp);                          /* mov eax, ebp */
-            ii(0x1017_d28c, 3); lea(ecx, ebx + ebp);                    /* lea ecx, [ebx+ebp] */
+            ii(0x1017_d28c, 3); lea(ecx, memd[ds, ebx + ebp]);          /* lea ecx, [ebx+ebp] */
             ii(0x1017_d28f, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1017_d291, 4); mov(memd[ss, esp + 0x10], ecx);         /* mov [esp+0x10], ecx */
             ii(0x1017_d295, 2); jmp(0x1017_d2c8, 0x31); goto l_0x1017_d2c8; /* jmp 0x1017d2c8 */

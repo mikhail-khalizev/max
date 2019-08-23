@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_d11f, 1); push(si);                                 /* push si */
             ii(0x18_d120, 5); cmp(memw[ss, bp + 0x4], 0x80);            /* cmp word [bp+0x4], 0x80 */
             ii(0x18_d125, 2); if(jb(0x18_d13d, 0x16)) goto l_0x18_d13d; /* jb 0xd13d */
-            ii(0x18_d127, 3); lea(ax, bp - 0x16);                       /* lea ax, [bp-0x16] */
+            ii(0x18_d127, 3); lea(ax, memw[ss, bp - 0x16]);             /* lea ax, [bp-0x16] */
             ii(0x18_d12a, 1); push(ax);                                 /* push ax */
             ii(0x18_d12b, 3); push(memw[ss, bp + 0x4]);                 /* push word [bp+0x4] */
             ii(0x18_d12e, 3); call(0x18_dc8e, 0xb5d);                   /* call 0xdc8e */
@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_d143, 3); mov(memw[ds, 0x38], ax);                  /* mov [0x38], ax */
             ii(0x18_d146, 2); mov(bx, ax);                              /* mov bx, ax */
             ii(0x18_d148, 3); shr(bx, 0x3);                             /* shr bx, 0x3 */
-            ii(0x18_d14b, 4); les(di, ds, 0xaa0);                       /* les di, [0xaa0] */
+            ii(0x18_d14b, 4); les(di, memw[ds, 0xaa0]);                 /* les di, [0xaa0] */
             ii(0x18_d14f, 4); test(memb[es, bx + di], 0x1);             /* test byte [es:bx+di], 0x1 */
             ii(0x18_d153, 2); if(jz(0x18_d1b3, 0x5e)) goto l_0x18_d1b3; /* jz 0xd1b3 */
             ii(0x18_d155, 5); cmp(memb[ds, 0x2e], 0);                   /* cmp byte [0x2e], 0x0 */
@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_d19d, 2); if(jnz(0x18_d1ad, 0xe)) goto l_0x18_d1ad; /* jnz 0xd1ad */
             ii(0x18_d19f, 4); cmp(memb[es, bx + 0x5], ah);              /* cmp [es:bx+0x5], ah */
             ii(0x18_d1a3, 2); if(jz(0x18_d1ad, 0x8)) goto l_0x18_d1ad;  /* jz 0xd1ad */
-            ii(0x18_d1a5, 4); les(bx, ds, 0xaa0);                       /* les bx, [0xaa0] */
+            ii(0x18_d1a5, 4); les(bx, memw[ds, 0xaa0]);                 /* les bx, [0xaa0] */
             ii(0x18_d1a9, 4); or(memb[es, bx + si], 0x1);               /* or byte [es:bx+si], 0x1 */
         l_0x18_d1ad:
             ii(0x18_d1ad, 1); inc(si);                                  /* inc si */

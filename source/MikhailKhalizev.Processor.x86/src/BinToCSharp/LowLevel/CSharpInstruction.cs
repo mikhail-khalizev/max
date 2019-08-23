@@ -164,6 +164,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }.Contains(Mnemonic)
             );
 
+
             var sb = new StringBuilder();
 
             if (!_knownInstr.TryGetValue(Mnemonic, out var flags))
@@ -204,7 +205,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 new[] { ud_mnemonic_code.UD_Iin, ud_mnemonic_code.UD_Iout }.Contains(Mnemonic))
                 method += GetSizeSuffixByBits(effOprSize);
 
-            if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
+            if (flags.HasFlag(InstrFlags.UseAdrSizeInside) && AddrMode != DisMode ||
                 new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
                 BrFar &&
                 Operands[0].type == ud_type.UD_OP_MEM)
@@ -274,27 +275,21 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             var memInside = // Обращение к памяти происходит внутри инструкции.
                                 new[]
                                 {
-                                ud_mnemonic_code.UD_Ilds,
-                                ud_mnemonic_code.UD_Iles,
-                                ud_mnemonic_code.UD_Ilss,
-                                ud_mnemonic_code.UD_Ilgs,
-                                ud_mnemonic_code.UD_Ilfs,
-                                ud_mnemonic_code.UD_Ilea,
-                                ud_mnemonic_code.UD_Ilgdt,
-                                ud_mnemonic_code.UD_Ilidt,
-                                ud_mnemonic_code.UD_Isidt,
-                                ud_mnemonic_code.UD_Ifnsave,
-                                ud_mnemonic_code.UD_Ifrstor,
-                                ud_mnemonic_code.UD_Ifbstp,
-                                ud_mnemonic_code.UD_Ibound
+                                    ud_mnemonic_code.UD_Ilgdt,
+                                    ud_mnemonic_code.UD_Ilidt,
+                                    ud_mnemonic_code.UD_Isidt,
+                                    ud_mnemonic_code.UD_Ifnsave,
+                                    ud_mnemonic_code.UD_Ifrstor,
+                                    ud_mnemonic_code.UD_Ifbstp,
+                                    ud_mnemonic_code.UD_Ibound
                                 }.Contains(Mnemonic) ||
                                 new[]
                                 {
-                                ud_mnemonic_code.UD_Icall,
-                                ud_mnemonic_code.UD_Ijmp
+                                    ud_mnemonic_code.UD_Icall,
+                                    ud_mnemonic_code.UD_Ijmp
                                 }.Contains(Mnemonic) && BrFar;
 
-                            if (memInside == false)
+                            if (!memInside)
                             {
                                 sb.Append("mem");
                                 sb.Append(GetSizeSuffixByBits(oprSize));
@@ -302,13 +297,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 sb.Append("[");
                             }
 
-                            if (Mnemonic != ud_mnemonic_code.UD_Ilea /* Эта инструкция не использует сегмент. */)
-                            {
-                                sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
+                            sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
 
-                                if (PfxSeg != ud_type.UD_NONE)
-                                    usePfxSeg = true;
-                            }
+                            if (PfxSeg != ud_type.UD_NONE)
+                                usePfxSeg = true;
 
                             var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
                             if (op.@base != ud_type.UD_NONE)

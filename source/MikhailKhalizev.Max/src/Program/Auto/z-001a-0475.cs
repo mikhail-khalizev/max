@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_04a2, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x1a_04a4, 2); if(jz(0x1a_04ad, 0x7)) goto l_0x1a_04ad;  /* jz 0x4ad */
         l_0x1a_04a6:
-            ii(0x1a_04a6, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
+            ii(0x1a_04a6, 3); les(bx, memw[ss, bp + 0x6]);              /* les bx, [bp+0x6] */
             ii(0x1a_04a9, 4); or(memb[es, bx], 0x1);                    /* or byte [es:bx], 0x1 */
         l_0x1a_04ad:
             ii(0x1a_04ad, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_04ba, 3); call(0x1a_053f, 0x82);                    /* call 0x53f */
             ii(0x1a_04bd, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x1a_04bf, 2); if(jz(0x1a_04c8, 0x7)) goto l_0x1a_04c8;  /* jz 0x4c8 */
-            ii(0x1a_04c1, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
+            ii(0x1a_04c1, 3); les(bx, memw[ss, bp + 0x6]);              /* les bx, [bp+0x6] */
             ii(0x1a_04c4, 4); or(memb[es, bx], 0x10);                   /* or byte [es:bx], 0x10 */
         l_0x1a_04c8:
             ii(0x1a_04c8, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_04d5, 3); call(0x1a_053f, 0x67);                    /* call 0x53f */
             ii(0x1a_04d8, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x1a_04da, 2); if(jz(0x1a_04e3, 0x7)) goto l_0x1a_04e3;  /* jz 0x4e3 */
-            ii(0x1a_04dc, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
+            ii(0x1a_04dc, 3); les(bx, memw[ss, bp + 0x6]);              /* les bx, [bp+0x6] */
             ii(0x1a_04df, 4); or(memb[es, bx], 0x20);                   /* or byte [es:bx], 0x20 */
         l_0x1a_04e3:
             ii(0x1a_04e3, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
@@ -68,7 +68,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_04f0, 3); call(0x1a_053f, 0x4c);                    /* call 0x53f */
             ii(0x1a_04f3, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x1a_04f5, 2); if(jz(0x1a_04fe, 0x7)) goto l_0x1a_04fe;  /* jz 0x4fe */
-            ii(0x1a_04f7, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
+            ii(0x1a_04f7, 3); les(bx, memw[ss, bp + 0x6]);              /* les bx, [bp+0x6] */
             ii(0x1a_04fa, 4); or(memb[es, bx], -0x80 /* 0x80 */);       /* or byte [es:bx], 0x80 */
         l_0x1a_04fe:
             ii(0x1a_04fe, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_050b, 3); call(0x1a_053f, 0x31);                    /* call 0x53f */
             ii(0x1a_050e, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x1a_0510, 2); if(jz(0x1a_051a, 0x8)) goto l_0x1a_051a;  /* jz 0x51a */
-            ii(0x1a_0512, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
+            ii(0x1a_0512, 3); les(bx, memw[ss, bp + 0x6]);              /* les bx, [bp+0x6] */
             ii(0x1a_0515, 5); or(memb[es, bx + 0x1], 0x1);              /* or byte [es:bx+0x1], 0x1 */
         l_0x1a_051a:
             ii(0x1a_051a, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
@@ -92,7 +92,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_0527, 3); call(0x1a_053f, 0x15);                    /* call 0x53f */
             ii(0x1a_052a, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x1a_052c, 2); if(jz(0x1a_0535, 0x7)) goto l_0x1a_0535;  /* jz 0x535 */
-            ii(0x1a_052e, 3); les(bx, ss, bp + 0x6);                    /* les bx, [bp+0x6] */
+            ii(0x1a_052e, 3); les(bx, memw[ss, bp + 0x6]);              /* les bx, [bp+0x6] */
             ii(0x1a_0531, 4); or(memb[es, bx], 0x40);                   /* or byte [es:bx], 0x40 */
         l_0x1a_0535:
             ii(0x1a_0535, 3); mov(ax, 0x3755);                          /* mov ax, 0x3755 */

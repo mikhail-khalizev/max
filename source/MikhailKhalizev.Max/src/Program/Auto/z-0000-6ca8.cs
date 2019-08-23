@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6cb2, 2);    add(bx, bx);                              /* add bx, bx */
             ii(0x6cb4, 2);    add(bx, bx);                              /* add bx, bx */
             ii(0x6cb6, 2);    xor(cx, cx);                              /* xor cx, cx */
-            ii(0x6cb8, 3);    lea(dx, bx - 0x20);                       /* lea dx, [bx-0x20] */
+            ii(0x6cb8, 3);    lea(dx, memw[ds, bx - 0x20]);             /* lea dx, [bx-0x20] */
             ii(0x6cbb, 4);    cmp(dx, 0x98);                            /* cmp dx, 0x98 */
             ii(0x6cbf, 2);    if(ja(0x6ccc, 0xb)) goto l_0x6ccc;        /* ja 0x6ccc */
             ii(0x6cc1, 2);    test(al, al);                             /* test al, al */

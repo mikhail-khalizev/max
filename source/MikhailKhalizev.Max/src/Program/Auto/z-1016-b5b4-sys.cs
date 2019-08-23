@@ -15,11 +15,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_b5b8, 1); push(edi);                              /* push edi */
             ii(0x1016_b5b9, 5); mov(eax, memd[ds, 0x1020_88e8]);        /* mov eax, [0x102088e8] */
             ii(0x1016_b5be, 6); sub(eax, memd[ds, 0x1020_88e0]);        /* sub eax, [0x102088e0] */
-            ii(0x1016_b5c4, 3); lea(esi, eax + 0x1);                    /* lea esi, [eax+0x1] */
+            ii(0x1016_b5c4, 3); lea(esi, memd[ds, eax + 0x1]);          /* lea esi, [eax+0x1] */
             ii(0x1016_b5c7, 6); mov(ebx, memd[ds, 0x1020_88e4]);        /* mov ebx, [0x102088e4] */
             ii(0x1016_b5cd, 5); mov(eax, memd[ds, 0x1020_88ec]);        /* mov eax, [0x102088ec] */
             ii(0x1016_b5d2, 2); sub(eax, ebx);                          /* sub eax, ebx */
-            ii(0x1016_b5d4, 3); lea(edx, eax + 0x1);                    /* lea edx, [eax+0x1] */
+            ii(0x1016_b5d4, 3); lea(edx, memd[ds, eax + 0x1]);          /* lea edx, [eax+0x1] */
             ii(0x1016_b5d7, 2); mov(eax, esi);                          /* mov eax, esi */
             ii(0x1016_b5d9, 3); imul(eax, edx);                         /* imul eax, edx */
             ii(0x1016_b5dc, 5); call(Definitions.sys_malloc_internal, 0x1_6d0f); /* call 0x101822f0 */

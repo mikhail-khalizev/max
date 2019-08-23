@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_d91b, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1010_d91d, 6); sub(esp, 0xec);                         /* sub esp, 0xec */
             ii(0x1010_d923, 4); mov(memb[ss, ebp - 0x4], 0);            /* mov byte [ebp-0x4], 0x0 */
-            ii(0x1010_d927, 6); lea(eax, ebp - 0xe8);                   /* lea eax, [ebp-0xe8] */
+            ii(0x1010_d927, 6); lea(eax, memd[ss, ebp - 0xe8]);         /* lea eax, [ebp-0xe8] */
             ii(0x1010_d92d, 5); call(0x1010_d71b, -0x217);              /* call 0x1010d71b */
         l_0x1010_d932:
             ii(0x1010_d932, 7); cmp(memb[ds, 0x101c_5630], 0x1);        /* cmp byte [0x101c5630], 0x1 */
@@ -82,7 +82,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_da25, 10); add(memd[ss, ebp - 0xd8], 0xffff_fc18); /* add dword [ebp-0xd8], 0xfffffc18 */
             ii(0x1010_da2f, 7); movsx(edx, memw[ss, ebp - 0xec]);       /* movsx edx, word [ebp-0xec] */
             ii(0x1010_da36, 3); imul(edx, edx, 0xc);                    /* imul edx, edx, 0xc */
-            ii(0x1010_da39, 6); lea(eax, ebp - 0xe8);                   /* lea eax, [ebp-0xe8] */
+            ii(0x1010_da39, 6); lea(eax, memd[ss, ebp - 0xe8]);         /* lea eax, [ebp-0xe8] */
             ii(0x1010_da3f, 7); call_abs(memd[ds, edx + ebp - 0x90]);   /* call dword [edx+ebp-0x90] */
             ii(0x1010_da46, 2); jmp(0x1010_da4d, 0x5); goto l_0x1010_da4d; /* jmp 0x1010da4d */
         l_0x1010_da48:
@@ -97,7 +97,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1010_da61:
             ii(0x1010_da61, 5); jmp(0x1010_d932, -0x134); goto l_0x1010_d932; /* jmp 0x1010d932 */
         l_0x1010_da66:
-            ii(0x1010_da66, 6); lea(eax, ebp - 0xe8);                   /* lea eax, [ebp-0xe8] */
+            ii(0x1010_da66, 6); lea(eax, memd[ss, ebp - 0xe8]);         /* lea eax, [ebp-0xe8] */
             ii(0x1010_da6c, 5); call(0x1010_d7fa, -0x277);              /* call 0x1010d7fa */
             ii(0x1010_da71, 7); cmp(memd[ss, ebp - 0xe0], 0);           /* cmp dword [ebp-0xe0], 0x0 */
             ii(0x1010_da78, 2); if(jz(0x1010_da83, 0x9)) goto l_0x1010_da83; /* jz 0x1010da83 */

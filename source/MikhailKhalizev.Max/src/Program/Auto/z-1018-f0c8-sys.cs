@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_f0c8()
         {
             ii(0x1018_f0c8, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1018_f0ca, 6); lea(ecx, 0x101b_f110);                  /* lea ecx, [0x101bf110] */
-            ii(0x1018_f0d0, 6); lea(edx, /* sys_mve */ 0x1018_f1a2);    /* lea edx, [0x1018f1a2] */
+            ii(0x1018_f0ca, 6); lea(ecx, memd[ds, 0x101b_f110]);        /* lea ecx, [0x101bf110] */
+            ii(0x1018_f0d0, 6); lea(edx, memd[ds, /* sys_mve */ 0x1018_f1a2]); /* lea edx, [0x1018f1a2] */
             ii(0x1018_f0d6, 3); mov(al, memb[ds, esi + 0x2]);           /* mov al, [esi+0x2] */
             ii(0x1018_f0d9, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_f0dc, 2); mov(memb[ds, edx], bl);                 /* mov [edx], bl */

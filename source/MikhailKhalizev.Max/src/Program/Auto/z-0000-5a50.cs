@@ -136,7 +136,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5b2f, 3);    mov(memw[ss, bx], di);                    /* mov [ss:bx], di */
             ii(0x5b32, 1);    inc(bx);                                  /* inc bx */
             ii(0x5b33, 1);    inc(bx);                                  /* inc bx */
-            ii(0x5b34, 4);    lds(si, ds, 0xcf8);                       /* lds si, [0xcf8] */
+            ii(0x5b34, 4);    lds(si, memw[ds, 0xcf8]);                 /* lds si, [0xcf8] */
         l_0x5b38:
             ii(0x5b38, 1);    lodsb();                                  /* lodsb */
             ii(0x5b39, 1);    stosb();                                  /* stosb */

@@ -26,9 +26,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_1d9b, 4); mov(memd[ss, esp + 0x8], eax);          /* mov [esp+0x8], eax */
             ii(0x1017_1d9f, 4); mov(memd[ss, esp + 0xc], ebx);          /* mov [esp+0xc], ebx */
             ii(0x1017_1da3, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x1017_1da8, 4); lea(eax, esp + 0x1c);                   /* lea eax, [esp+0x1c] */
+            ii(0x1017_1da8, 4); lea(eax, memd[ss, esp + 0x1c]);         /* lea eax, [esp+0x1c] */
             ii(0x1017_1dac, 3); mov(memd[ss, esp], edx);                /* mov [esp], edx */
-            ii(0x1017_1daf, 4); lea(edx, esp + 0x10);                   /* lea edx, [esp+0x10] */
+            ii(0x1017_1daf, 4); lea(edx, memd[ss, esp + 0x10]);         /* lea edx, [esp+0x10] */
             ii(0x1017_1db3, 4); mov(memd[ss, esp + 0x4], ecx);          /* mov [esp+0x4], ecx */
             ii(0x1017_1db7, 5); call(/* sys */ 0x1018_d348, 0x1_b58c);  /* call 0x1018d348 */
             ii(0x1017_1dbc, 3); cmp(memb[ds, esi], 0x4);                /* cmp byte [esi], 0x4 */

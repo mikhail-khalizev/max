@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7e08, 3); mov(bx, memw[ss, bp + 0xa]);              /* mov bx, [bp+0xa] */
             ii(0x17_7e0b, 3); shl(bx, 0x2);                             /* shl bx, 0x2 */
             ii(0x17_7e0e, 2); mov(ax, si);                              /* mov ax, si */
-            ii(0x17_7e10, 4); les(si, ds, 0x4fa0);                      /* les si, [0x4fa0] */
+            ii(0x17_7e10, 4); les(si, memw[ds, 0x4fa0]);                /* les si, [0x4fa0] */
             ii(0x17_7e14, 3); mov(memw[ss, bp - 0x10], ax);             /* mov [bp-0x10], ax */
             ii(0x17_7e17, 3); mov(memw[ss, bp - 0xe], di);              /* mov [bp-0xe], di */
             ii(0x17_7e1a, 3); mov(ax, memw[es, bx + si]);               /* mov ax, [es:bx+si] */
@@ -92,11 +92,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7e74, 3); mov(ax, memw[ss, bp + 0x6]);              /* mov ax, [bp+0x6] */
             ii(0x17_7e77, 3); mov(dx, memw[ss, bp + 0x8]);              /* mov dx, [bp+0x8] */
             ii(0x17_7e7a, 2); sub(dh, dh);                              /* sub dh, dh */
-            ii(0x17_7e7c, 4); les(bx, ds, 0x4fa4);                      /* les bx, [0x4fa4] */
+            ii(0x17_7e7c, 4); les(bx, memw[ds, 0x4fa4]);                /* les bx, [0x4fa4] */
             ii(0x17_7e80, 3); mov(memw[es, bx + si], ax);               /* mov [es:bx+si], ax */
             ii(0x17_7e83, 4); mov(memw[es, bx + si + 0x2], dx);         /* mov [es:bx+si+0x2], dx */
             ii(0x17_7e87, 3); mov(bx, memw[ss, bp + 0xa]);              /* mov bx, [bp+0xa] */
-            ii(0x17_7e8a, 4); les(si, ds, 0x4f9c);                      /* les si, [0x4f9c] */
+            ii(0x17_7e8a, 4); les(si, memw[ds, 0x4f9c]);                /* les si, [0x4f9c] */
             ii(0x17_7e8e, 4); or(memb[es, bx + si], 0x7f);              /* or byte [es:bx+si], 0x7f */
             ii(0x17_7e92, 1); pop(ds);                                  /* pop ds */
             ii(0x17_7e93, 1); pop(si);                                  /* pop si */

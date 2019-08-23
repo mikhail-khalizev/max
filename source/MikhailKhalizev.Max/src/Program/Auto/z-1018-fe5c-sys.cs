@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_fe5c()
         {
             ii(0x1018_fe5c, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1018_fe5e, 6); lea(ecx, 0x101b_f510);                  /* lea ecx, [0x101bf510] */
-            ii(0x1018_fe64, 6); lea(edx, /* sys_mve */ 0x1018_ffcd);    /* lea edx, [0x1018ffcd] */
+            ii(0x1018_fe5e, 6); lea(ecx, memd[ds, 0x101b_f510]);        /* lea ecx, [0x101bf510] */
+            ii(0x1018_fe64, 6); lea(edx, memd[ds, /* sys_mve */ 0x1018_ffcd]); /* lea edx, [0x1018ffcd] */
             ii(0x1018_fe6a, 3); mov(al, memb[ds, esi + 0x4]);           /* mov al, [esi+0x4] */
             ii(0x1018_fe6d, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_fe70, 2); mov(memb[ds, edx], bl);                 /* mov [edx], bl */
@@ -67,7 +67,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_ff08, 3); shr(ebx, 0x10);                         /* shr ebx, 0x10 */
             ii(0x1018_ff0b, 3); mov(memb[ds, edx + 0x6b], bl);          /* mov [edx+0x6b], bl */
             ii(0x1018_ff0e, 3); mov(memb[ds, edx + 0x6d], bh);          /* mov [edx+0x6d], bh */
-            ii(0x1018_ff11, 3); lea(edx, edx + 0x7c);                   /* lea edx, [edx+0x7c] */
+            ii(0x1018_ff11, 3); lea(edx, memd[ds, edx + 0x7c]);         /* lea edx, [edx+0x7c] */
             ii(0x1018_ff14, 3); mov(al, memb[ds, esi + 0x10]);          /* mov al, [esi+0x10] */
             ii(0x1018_ff17, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_ff1a, 2); mov(memb[ds, edx], bl);                 /* mov [edx], bl */

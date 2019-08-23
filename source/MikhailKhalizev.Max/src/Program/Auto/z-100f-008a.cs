@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_00ed, 3); mov(ecx, memd[ss, ebp - 0x8]);          /* mov ecx, [ebp-0x8] */
             ii(0x100f_00f0, 5); mov(ebx, 0x10);                         /* mov ebx, 0x10 */
             ii(0x100f_00f5, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x100f_00fa, 3); lea(eax, ebp - 0x20);                   /* lea eax, [ebp-0x20] */
+            ii(0x100f_00fa, 3); lea(eax, memd[ss, ebp - 0x20]);         /* lea eax, [ebp-0x20] */
             ii(0x100f_00fd, 5); call(Definitions.my_fread, -0xc73);     /* call 0x100ef48f */
             ii(0x100f_0102, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100f_0104, 2); if(jnz(0x100f_010f, 0x9)) goto l_0x100f_010f; /* jnz 0x100f010f */

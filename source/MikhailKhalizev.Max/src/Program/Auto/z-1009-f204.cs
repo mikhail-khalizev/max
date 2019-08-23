@@ -40,19 +40,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_f257, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
         l_0x1009_f25a:
             ii(0x1009_f25a, 3); mov(edx, memd[ss, ebp - 0x8]);          /* mov edx, [ebp-0x8] */
-            ii(0x1009_f25d, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x1009_f25d, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1009_f260, 5); call(0x1008_a914, -0x1_4951);           /* call 0x1008a914 */
             ii(0x1009_f265, 5); mov(edx, 0x39);                         /* mov edx, 0x39 */
-            ii(0x1009_f26a, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x1009_f26a, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1009_f26d, 5); call(0x1008_a7dc, -0x1_4a96);           /* call 0x1008a7dc */
             ii(0x1009_f272, 5); call(0x100a_63bc, 0x7145);              /* call 0x100a63bc */
-            ii(0x1009_f277, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x1009_f277, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1009_f27a, 5); call(0x1008_a838, -0x1_4a47);           /* call 0x1008a838 */
             ii(0x1009_f27f, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1009_f281, 5); mov(eax, 0x101c_3180);                  /* mov eax, 0x101c3180 */
             ii(0x1009_f286, 5); call(0x100a_4d50, 0x5ac5);              /* call 0x100a4d50 */
             ii(0x1009_f28b, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1009_f28d, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x1009_f28d, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1009_f290, 5); call(0x1008_8cbc, -0x1_65d9);           /* call 0x10088cbc */
             ii(0x1009_f295, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1009_f297, 1); pop(ebp);                               /* pop ebp */

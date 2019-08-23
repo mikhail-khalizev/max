@@ -10,8 +10,8 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x19_d5b5, 4); enter(0x4a, 0);                           /* enter 0x4a, 0x0 */
             ii(0x19_d5b9, 1); push(si);                                 /* push si */
-            ii(0x19_d5ba, 3); les(bx, ss, bp + 0x4);                    /* les bx, [bp+0x4] */
-            ii(0x19_d5bd, 4); les(si, es, bx + 0x1c);                   /* les si, [es:bx+0x1c] */
+            ii(0x19_d5ba, 3); les(bx, memw[ss, bp + 0x4]);              /* les bx, [bp+0x4] */
+            ii(0x19_d5bd, 4); les(si, memw[es, bx + 0x1c]);             /* les si, [es:bx+0x1c] */
             ii(0x19_d5c1, 4); mov(ax, memw[es, si + 0x1c]);             /* mov ax, [es:si+0x1c] */
             ii(0x19_d5c5, 4); mov(dx, memw[es, si + 0x1e]);             /* mov dx, [es:si+0x1e] */
             ii(0x19_d5c9, 3); mov(memw[ss, bp - 0xc], ax);              /* mov [bp-0xc], ax */
@@ -40,9 +40,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_d601, 3); call(0x19_de46, 0x842);                   /* call 0xde46 */
             ii(0x19_d604, 3); mov(memw[ss, bp - 0x42], ax);             /* mov [bp-0x42], ax */
             ii(0x19_d607, 3); mov(memw[ss, bp - 0x40], dx);             /* mov [bp-0x40], dx */
-            ii(0x19_d60a, 4); les(bx, ds, 0x2b9a);                      /* les bx, [0x2b9a] */
+            ii(0x19_d60a, 4); les(bx, memw[ds, 0x2b9a]);                /* les bx, [0x2b9a] */
             ii(0x19_d60e, 5); mov(ax, memw[es, bx + 0x244]);            /* mov ax, [es:bx+0x244] */
-            ii(0x19_d613, 3); les(bx, ss, bp - 0x42);                   /* les bx, [bp-0x42] */
+            ii(0x19_d613, 3); les(bx, memw[ss, bp - 0x42]);             /* les bx, [bp-0x42] */
             ii(0x19_d616, 5); mov(memw[es, bx + 0xff8], ax);            /* mov [es:bx+0xff8], ax */
             ii(0x19_d61b, 7); mov(memw[es, bx + 0xffa], 0);             /* mov word [es:bx+0xffa], 0x0 */
             ii(0x19_d622, 3); mov(ax, memw[ss, bp - 0x46]);             /* mov ax, [bp-0x46] */

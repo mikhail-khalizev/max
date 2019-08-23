@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c63c, 1); push(ebx);                              /* push ebx */
             ii(0x1016_c63d, 1); push(edx);                              /* push edx */
             ii(0x1016_c63e, 3); sub(esp, 0x4);                          /* sub esp, 0x4 */
-            ii(0x1016_c641, 4); lea(eax, esp + 0x14);                   /* lea eax, [esp+0x14] */
+            ii(0x1016_c641, 4); lea(eax, memd[ss, esp + 0x14]);         /* lea eax, [esp+0x14] */
             ii(0x1016_c645, 2); mov(ebx, esp);                          /* mov ebx, esp */
             ii(0x1016_c647, 4); mov(edx, memd[ss, esp + 0x10]);         /* mov edx, [esp+0x10] */
             ii(0x1016_c64b, 3); mov(memd[ss, esp], eax);                /* mov [esp], eax */

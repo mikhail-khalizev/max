@@ -2982,15 +2982,39 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void lds(ValueBase dst, SegmentRegister segment, ValueBase offset)
+        public void lea(ValueBase dst, MemoryValue src)
         {
-            Implementation.lds(dst, segment, offset);
+            Implementation.lea(dst, src);
         }
 
         /// <inheritdoc />
-        public void lea(ValueBase dst, ValueBase src)
+        public void lds(ValueBase dst, MemoryValue src)
         {
-            Implementation.lea(dst, src);
+            Implementation.lds(dst, src);
+        }
+
+        /// <inheritdoc />
+        public void les(ValueBase dst, MemoryValue src)
+        {
+            Implementation.les(dst, src);
+        }
+
+        /// <inheritdoc />
+        public void lfs(ValueBase dst, MemoryValue src)
+        {
+            Implementation.lfs(dst, src);
+        }
+
+        /// <inheritdoc />
+        public void lgs(ValueBase dst, MemoryValue src)
+        {
+            Implementation.lgs(dst, src);
+        }
+
+        /// <inheritdoc />
+        public void lss(ValueBase dst, MemoryValue src)
+        {
+            Implementation.lss(dst, src);
         }
 
         /// <inheritdoc />
@@ -3012,23 +3036,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void les(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            Implementation.les(dst, segment, offset);
-        }
-
-        /// <inheritdoc />
         public void lfence()
         {
             Implementation.lfence();
         }
-
-        /// <inheritdoc />
-        public void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            Implementation.lfs(dst, segment, offset);
-        }
-
+        
         /// <inheritdoc />
         public void lgdt(SegmentRegister segment, ValueBase address)
         {
@@ -3051,12 +3063,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         public void lgdtd_a16(SegmentRegister segment, ValueBase address)
         {
             Implementation.lgdtd_a16(segment, address);
-        }
-
-        /// <inheritdoc />
-        public void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            Implementation.lgs(dst, segment, offset);
         }
 
         /// <inheritdoc />
@@ -3237,12 +3243,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         public void lsl(ValueBase dst, ValueBase selector)
         {
             Implementation.lsl(dst, selector);
-        }
-
-        /// <inheritdoc />
-        public void lss(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            Implementation.lss(dst, segment, offset);
         }
 
         /// <inheritdoc />

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_001a_15b9()
         {
             ii(0x1a_15b9, 4); enter(0x4, 0);                            /* enter 0x4, 0x0 */
-            ii(0x1a_15bd, 3); lea(ax, bp - 0x4);                        /* lea ax, [bp-0x4] */
+            ii(0x1a_15bd, 3); lea(ax, memw[ss, bp - 0x4]);              /* lea ax, [bp-0x4] */
             ii(0x1a_15c0, 1); push(ss);                                 /* push ss */
             ii(0x1a_15c1, 1); push(ax);                                 /* push ax */
             ii(0x1a_15c2, 3); push(memw[ss, bp + 0xa]);                 /* push word [bp+0xa] */

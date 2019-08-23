@@ -21,11 +21,11 @@ namespace MikhailKhalizev.Max.Program
         l_0x58b9:
             ii(0x58b9, 3);    mov(ax, memw[ss, bp + 0x4]);              /* mov ax, [bp+0x4] */
             ii(0x58bc, 4);    mov(memw[ss, bp - 0x9a], ax);             /* mov [bp-0x9a], ax */
-            ii(0x58c0, 4);    lea(si, bp - 0x98);                       /* lea si, [bp-0x98] */
+            ii(0x58c0, 4);    lea(si, memw[ss, bp - 0x98]);             /* lea si, [bp-0x98] */
             ii(0x58c4, 5);    cmp(memb[ds, 0xf21], 0x1);                /* cmp byte [0xf21], 0x1 */
             ii(0x58c9, 2);    if(jz(0x591d, 0x52)) goto l_0x591d;       /* jz 0x591d */
             ii(0x58cb, 5);    mov(memb[ss, bp - 0x98], 0x5b);           /* mov byte [bp-0x98], 0x5b */
-            ii(0x58d0, 4);    lea(si, bp - 0x97);                       /* lea si, [bp-0x97] */
+            ii(0x58d0, 4);    lea(si, memw[ss, bp - 0x97]);             /* lea si, [bp-0x97] */
         l_0x58d4:
             ii(0x58d4, 1);    inc(si);                                  /* inc si */
             ii(0x58d5, 3);    mov(cx, 0xa);                             /* mov cx, 0xa */
@@ -88,7 +88,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x594d, 2);    if(jz(0x595e, 0xf)) goto l_0x595e;        /* jz 0x595e */
             ii(0x594f, 3);    mov(ax, 0x1190);                          /* mov ax, 0x1190 */
             ii(0x5952, 1);    push(ax);                                 /* push ax */
-            ii(0x5953, 4);    lea(ax, bp - 0x98);                       /* lea ax, [bp-0x98] */
+            ii(0x5953, 4);    lea(ax, memw[ss, bp - 0x98]);             /* lea ax, [bp-0x98] */
             ii(0x5957, 1);    push(ax);                                 /* push ax */
             ii(0x5958, 4);    call_abs(memw[ds, 0xe6c]);                /* call word [0xe6c] */
             ii(0x595c, 1);    pop(bx);                                  /* pop bx */
@@ -96,7 +96,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x595e:
             ii(0x595e, 2);    sub(ax, ax);                              /* sub ax, ax */
             ii(0x5960, 1);    push(ax);                                 /* push ax */
-            ii(0x5961, 4);    lea(ax, bp - 0x98);                       /* lea ax, [bp-0x98] */
+            ii(0x5961, 4);    lea(ax, memw[ss, bp - 0x98]);             /* lea ax, [bp-0x98] */
             ii(0x5965, 1);    push(ax);                                 /* push ax */
             ii(0x5966, 4);    call_abs(memw[ds, 0xe6c]);                /* call word [0xe6c] */
             ii(0x596a, 1);    pop(bx);                                  /* pop bx */

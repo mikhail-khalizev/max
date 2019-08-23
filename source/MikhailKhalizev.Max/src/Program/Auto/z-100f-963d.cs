@@ -82,9 +82,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_9742, 3); mov(eax, memd[ss, ebp - 0x2c]);         /* mov eax, [ebp-0x2c] */
             ii(0x100f_9745, 6); mov(memw[ds, 0x101c_3988], ax);         /* mov [0x101c3988], ax */
         l_0x100f_974b:
-            ii(0x100f_974b, 3); lea(eax, ebp - 0x24);                   /* lea eax, [ebp-0x24] */
+            ii(0x100f_974b, 3); lea(eax, memd[ss, ebp - 0x24]);         /* lea eax, [ebp-0x24] */
             ii(0x100f_974e, 5); call(0x100e_ad24, -0xea2f);             /* call 0x100ead24 */
-            ii(0x100f_9753, 3); lea(eax, ebp - 0x24);                   /* lea eax, [ebp-0x24] */
+            ii(0x100f_9753, 3); lea(eax, memd[ss, ebp - 0x24]);         /* lea eax, [ebp-0x24] */
             ii(0x100f_9756, 5); call(0x100e_a933, -0xee28);             /* call 0x100ea933 */
             ii(0x100f_975b, 2); test(al, al);                           /* test al, al */
             ii(0x100f_975d, 2); if(jnz(0x100f_977a, 0x1b)) goto l_0x100f_977a; /* jnz 0x100f977a */

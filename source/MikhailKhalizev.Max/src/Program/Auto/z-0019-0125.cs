@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_0125-963bf1fe")]
         public void Method_0019_0125()
         {
-            ii(0x19_0125, 4); les(di, ds, 0x122);                       /* les di, [0x122] */
+            ii(0x19_0125, 4); les(di, memw[ds, 0x122]);                 /* les di, [0x122] */
             ii(0x19_0129, 4); mov(cx, memw[ds, 0x126]);                 /* mov cx, [0x126] */
             ii(0x19_012d, 2); if(jcxz(0x19_016e, 0x3f)) goto l_0x19_016e; /* jcxz 0x16e */
         l_0x19_012f:

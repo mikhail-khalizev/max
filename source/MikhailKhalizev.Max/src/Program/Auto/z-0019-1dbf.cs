@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_1e08:
             ii(0x19_1e08, 3); inc(memw[ss, bp - 0x4]);                  /* inc word [bp-0x4] */
         l_0x19_1e0b:
-            ii(0x19_1e0b, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_1e0b, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_1e0e, 3); mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
             ii(0x19_1e11, 2); or(al, al);                               /* or al, al */
             ii(0x19_1e13, 2); if(jnz(0x19_1dfb, -0x1a)) goto l_0x19_1dfb; /* jnz 0x1dfb */

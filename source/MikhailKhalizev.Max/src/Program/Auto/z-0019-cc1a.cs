@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_cc2a, 2); if(jbe(0x19_cc3e, 0x12)) goto l_0x19_cc3e; /* jbe 0xcc3e */
         l_0x19_cc2c:
             ii(0x19_cc2c, 2); push(0xc);                                /* push 0xc */
-            ii(0x19_cc2e, 3); lea(ax, bp + 0x6);                        /* lea ax, [bp+0x6] */
+            ii(0x19_cc2e, 3); lea(ax, memw[ss, bp + 0x6]);              /* lea ax, [bp+0x6] */
             ii(0x19_cc31, 1); push(ss);                                 /* push ss */
             ii(0x19_cc32, 1); push(ax);                                 /* push ax */
             ii(0x19_cc33, 5); call_far_abs(0x80, 0x4232);               /* call word 0x80:0x4232 */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_cc3e:
             ii(0x19_cc3e, 4); mov(memb[ss, bp - 0x8], 0);               /* mov byte [bp-0x8], 0x0 */
         l_0x19_cc42:
-            ii(0x19_cc42, 3); lea(ax, bp - 0x1a);                       /* lea ax, [bp-0x1a] */
+            ii(0x19_cc42, 3); lea(ax, memw[ss, bp - 0x1a]);             /* lea ax, [bp-0x1a] */
             ii(0x19_cc45, 1); push(ss);                                 /* push ss */
             ii(0x19_cc46, 1); push(ax);                                 /* push ax */
             ii(0x19_cc47, 3); push(memw[ss, bp + 0xe]);                 /* push word [bp+0xe] */
@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_cc89, 3); mov(al, memb[ss, bp - 0x8]);              /* mov al, [bp-0x8] */
             ii(0x19_cc8c, 2); or(al, 0x40);                             /* or al, 0x40 */
             ii(0x19_cc8e, 3); or(memb[ss, bp - 0x14], al);              /* or [bp-0x14], al */
-            ii(0x19_cc91, 3); lea(ax, bp - 0x1a);                       /* lea ax, [bp-0x1a] */
+            ii(0x19_cc91, 3); lea(ax, memw[ss, bp - 0x1a]);             /* lea ax, [bp-0x1a] */
             ii(0x19_cc94, 1); push(ss);                                 /* push ss */
             ii(0x19_cc95, 1); push(ax);                                 /* push ax */
             ii(0x19_cc96, 3); push(memw[ss, bp + 0xe]);                 /* push word [bp+0xe] */

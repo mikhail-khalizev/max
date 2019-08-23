@@ -19,13 +19,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7022, 1);    pop(bx);                                  /* pop bx */
             ii(0x7023, 1);    pop(bx);                                  /* pop bx */
             ii(0x7024, 2);    push(0x40);                               /* push 0x40 */
-            ii(0x7026, 3);    lea(ax, bp - 0x40);                       /* lea ax, [bp-0x40] */
+            ii(0x7026, 3);    lea(ax, memw[ss, bp - 0x40]);             /* lea ax, [bp-0x40] */
             ii(0x7029, 1);    push(ax);                                 /* push ax */
             ii(0x702a, 3);    call(0x9d82, 0x2d55);                     /* call 0x9d82 */
             ii(0x702d, 1);    pop(bx);                                  /* pop bx */
             ii(0x702e, 1);    pop(bx);                                  /* pop bx */
             ii(0x702f, 3);    push(0xe73);                              /* push 0xe73 */
-            ii(0x7032, 3);    lea(ax, bp - 0x40);                       /* lea ax, [bp-0x40] */
+            ii(0x7032, 3);    lea(ax, memw[ss, bp - 0x40]);             /* lea ax, [bp-0x40] */
             ii(0x7035, 1);    push(ax);                                 /* push ax */
             ii(0x7036, 3);    call(0x9eea, 0x2eb1);                     /* call 0x9eea */
             ii(0x7039, 1);    pop(bx);                                  /* pop bx */
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x703b, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0x703d, 2);    if(jnz(0x704f, 0x10)) goto l_0x704f;      /* jnz 0x704f */
             ii(0x703f, 3);    push(0xe7b);                              /* push 0xe7b */
-            ii(0x7042, 3);    lea(ax, bp - 0x40);                       /* lea ax, [bp-0x40] */
+            ii(0x7042, 3);    lea(ax, memw[ss, bp - 0x40]);             /* lea ax, [bp-0x40] */
             ii(0x7045, 1);    push(ax);                                 /* push ax */
             ii(0x7046, 3);    call(0x9eea, 0x2ea1);                     /* call 0x9eea */
             ii(0x7049, 1);    pop(bx);                                  /* pop bx */

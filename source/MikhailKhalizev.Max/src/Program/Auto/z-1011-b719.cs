@@ -63,7 +63,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1011_b7ae:
             ii(0x1011_b7ae, 3); mov(al, memb[ss, ebp - 0x1c]);          /* mov al, [ebp-0x1c] */
             ii(0x1011_b7b1, 3); mov(memb[ss, ebp - 0x17], al);          /* mov [ebp-0x17], al */
-            ii(0x1011_b7b4, 3); lea(edx, ebp - 0x18);                   /* lea edx, [ebp-0x18] */
+            ii(0x1011_b7b4, 3); lea(edx, memd[ss, ebp - 0x18]);         /* lea edx, [ebp-0x18] */
             ii(0x1011_b7b7, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x1011_b7ba, 3); add(eax, 0x18);                         /* add eax, 0x18 */
             ii(0x1011_b7bd, 5); call(0x1012_0b08, 0x5346);              /* call 0x10120b08 */

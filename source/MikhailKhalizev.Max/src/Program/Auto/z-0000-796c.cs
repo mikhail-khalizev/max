@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x79da, 2);    if(jz(0x79c1, -0x1b)) goto l_0x79c1;      /* jz 0x79c1 */
             ii(0x79dc, 2);    jmp(0x79ab, -0x33); goto l_0x79ab;        /* jmp 0x79ab */
         l_0x79de:
-            ii(0x79de, 3);    les(bx, ss, bp - 0x6);                    /* les bx, [bp-0x6] */
+            ii(0x79de, 3);    les(bx, memw[ss, bp - 0x6]);              /* les bx, [bp-0x6] */
             ii(0x79e1, 4);    mov(ax, memw[es, bx + 0x8]);              /* mov ax, [es:bx+0x8] */
             ii(0x79e5, 3);    shr(ax, 0x3);                             /* shr ax, 0x3 */
             ii(0x79e8, 3);    add(ax, memw[ss, bp + 0x4]);              /* add ax, [bp+0x4] */

@@ -84,7 +84,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_b7a9, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x100e_b7ac, 3); mov(eax, memd[ds, eax + 0x4]);          /* mov eax, [eax+0x4] */
             ii(0x100e_b7af, 3); add(memd[ss, ebp - 0x8], eax);          /* add [ebp-0x8], eax */
-            ii(0x100e_b7b2, 3); lea(edx, ebp - 0x14);                   /* lea edx, [ebp-0x14] */
+            ii(0x100e_b7b2, 3); lea(edx, memd[ss, ebp - 0x14]);         /* lea edx, [ebp-0x14] */
             ii(0x100e_b7b5, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x100e_b7b8, 3); mov(eax, memd[ds, eax + 0x12]);         /* mov eax, [eax+0x12] */
             ii(0x100e_b7bb, 5); call(Definitions.sys_display_draw_1, 0x7_bce8); /* call 0x101674a8 */

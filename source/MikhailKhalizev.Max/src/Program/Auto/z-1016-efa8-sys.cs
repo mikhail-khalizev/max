@@ -96,12 +96,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_f09a, 5); call(/* sys */ 0x1017_1f05, 0x2e66);    /* call 0x10171f05 */
             ii(0x1016_f09f, 2); jmp(0x1016_f0b7, 0x16); goto l_0x1016_f0b7; /* jmp 0x1016f0b7 */
         l_0x1016_f0a1:
-            ii(0x1016_f0a1, 3); lea(edi, ebx - 0x1);                    /* lea edi, [ebx-0x1] */
+            ii(0x1016_f0a1, 3); lea(edi, memd[ds, ebx - 0x1]);          /* lea edi, [ebx-0x1] */
             ii(0x1016_f0a4, 3); mov(memd[ds, esi + 0x4], edi);          /* mov [esi+0x4], edi */
             ii(0x1016_f0a7, 2); mov(eax, memd[ds, ecx]);                /* mov eax, [ecx] */
             ii(0x1016_f0a9, 3); mov(eax, memd[ds, eax + 0x4]);          /* mov eax, [eax+0x4] */
             ii(0x1016_f0ac, 2); mov(edx, memd[ds, eax]);                /* mov edx, [eax] */
-            ii(0x1016_f0ae, 3); lea(esi, edx + 0x1);                    /* lea esi, [edx+0x1] */
+            ii(0x1016_f0ae, 3); lea(esi, memd[ds, edx + 0x1]);          /* lea esi, [edx+0x1] */
             ii(0x1016_f0b1, 2); mov(memd[ds, eax], esi);                /* mov [eax], esi */
             ii(0x1016_f0b3, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1016_f0b5, 2); mov(al, memb[ds, edx]);                 /* mov al, [edx] */
@@ -138,7 +138,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_f105, 2); mov(edx, memd[ds, ecx]);                /* mov edx, [ecx] */
             ii(0x1016_f107, 3); mov(edx, memd[ds, edx + 0x4]);          /* mov edx, [edx+0x4] */
             ii(0x1016_f10a, 2); mov(eax, memd[ds, edx]);                /* mov eax, [edx] */
-            ii(0x1016_f10c, 3); lea(ebx, eax + 0x1);                    /* lea ebx, [eax+0x1] */
+            ii(0x1016_f10c, 3); lea(ebx, memd[ds, eax + 0x1]);          /* lea ebx, [eax+0x1] */
             ii(0x1016_f10f, 2); mov(memd[ds, edx], ebx);                /* mov [edx], ebx */
             ii(0x1016_f111, 2); mov(al, memb[ds, eax]);                 /* mov al, [eax] */
             ii(0x1016_f113, 5); and(eax, 0xff);                         /* and eax, 0xff */

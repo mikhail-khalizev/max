@@ -5405,21 +5405,47 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void lds(ValueBase dst, SegmentRegister segment, ValueBase offset)
+        public void lea(ValueBase dst, MemoryValue src)
         {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            ds.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
+            dst.UInt64 = src.Address;
+        }
+
+
+        /// <inheritdoc />
+        public void lds(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            ds.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
-        public void lea(ValueBase dst, ValueBase src)
+        public void les(ValueBase dst, MemoryValue src)
         {
-            // MemoryValue src
-            // dst.UInt64 = src.Address;
-
-            dst.UInt64 = src.UInt64;
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            es.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
         }
+
+        /// <inheritdoc />
+        public void lfs(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            fs.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
+
+        /// <inheritdoc />
+        public void lgs(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            gs.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
+
+        /// <inheritdoc />
+        public void lss(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            ss.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
+        
 
         /// <inheritdoc />
         public void leave()
@@ -5458,25 +5484,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void les(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            es.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
-        }
-
-        /// <inheritdoc />
         public void lfence()
         {
             throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            fs.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
 
@@ -5527,14 +5537,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             gdtr_base = memd_a16[segment, address + 2].UInt32;
         }
 
-
-        /// <inheritdoc />
-        public void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            gs.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
-        }
 
         /// <inheritdoc />
         public void lidt(SegmentRegister segment, ValueBase address)
@@ -5875,14 +5877,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             if (eflags.zf)
                 dst.UInt32 = seg.Descriptor.Limit;
-        }
-
-        /// <inheritdoc />
-        public void lss(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            ss.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />

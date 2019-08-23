@@ -96,7 +96,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1019_c8b7:
             ii(0x1019_c8b7, 2); xor(ah, ah);                            /* xor ah, ah */
             ii(0x1019_c8b9, 3); mov(memb[ss, ebp - 0x18], ah);          /* mov [ebp-0x18], ah */
-            ii(0x1019_c8bc, 3); lea(eax, ebp - 0x24);                   /* lea eax, [ebp-0x24] */
+            ii(0x1019_c8bc, 3); lea(eax, memd[ss, ebp - 0x24]);         /* lea eax, [ebp-0x24] */
             ii(0x1019_c8bf, 1); push(eax);                              /* push eax */
             ii(0x1019_c8c0, 3); mov(edi, memd[ss, ebp + 0xc]);          /* mov edi, [ebp+0xc] */
             ii(0x1019_c8c3, 1); push(edi);                              /* push edi */
@@ -114,7 +114,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c8dc, 2); mov(ebx, edx);                          /* mov ebx, edx */
             ii(0x1019_c8de, 3); mov(memb[ss, ebp - 0x18], al);          /* mov [ebp-0x18], al */
         l_0x1019_c8e1:
-            ii(0x1019_c8e1, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
+            ii(0x1019_c8e1, 3); lea(eax, memd[ss, ebp - 0x2c]);         /* lea eax, [ebp-0x2c] */
             ii(0x1019_c8e4, 1); push(eax);                              /* push eax */
             ii(0x1019_c8e5, 1); push(ebx);                              /* push ebx */
             ii(0x1019_c8e6, 3); mov(edi, memd[ss, ebp + 0xc]);          /* mov edi, [ebp+0xc] */
@@ -143,7 +143,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c91a, 2); if(jle(0x1019_c921, 0x5)) goto l_0x1019_c921; /* jle 0x1019c921 */
             ii(0x1019_c91c, 5); mov(ebx, 0x10);                         /* mov ebx, 0x10 */
         l_0x1019_c921:
-            ii(0x1019_c921, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
+            ii(0x1019_c921, 3); lea(eax, memd[ss, ebp - 0x2c]);         /* lea eax, [ebp-0x2c] */
             ii(0x1019_c924, 1); push(eax);                              /* push eax */
             ii(0x1019_c925, 1); push(ebx);                              /* push ebx */
             ii(0x1019_c926, 3); mov(edi, memd[ss, ebp + 0xc]);          /* mov edi, [ebp+0xc] */
@@ -188,9 +188,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c980, 2); if(jle(0x1019_c987, 0x5)) goto l_0x1019_c987; /* jle 0x1019c987 */
             ii(0x1019_c982, 5); mov(ebx, 0x11);                         /* mov ebx, 0x11 */
         l_0x1019_c987:
-            ii(0x1019_c987, 3); lea(edx, ebp - 0x40);                   /* lea edx, [ebp-0x40] */
-            ii(0x1019_c98a, 3); lea(eax, ebp - 0x2c);                   /* lea eax, [ebp-0x2c] */
-            ii(0x1019_c98d, 3); lea(esi, ebp - 0x40);                   /* lea esi, [ebp-0x40] */
+            ii(0x1019_c987, 3); lea(edx, memd[ss, ebp - 0x40]);         /* lea edx, [ebp-0x40] */
+            ii(0x1019_c98a, 3); lea(eax, memd[ss, ebp - 0x2c]);         /* lea eax, [ebp-0x2c] */
+            ii(0x1019_c98d, 3); lea(esi, memd[ss, ebp - 0x40]);         /* lea esi, [ebp-0x40] */
             ii(0x1019_c990, 3); mov(edi, memd[ss, ebp + 0x20]);         /* mov edi, [ebp+0x20] */
             ii(0x1019_c993, 5); call(0x1019_cda1, 0x409);               /* call 0x1019cda1 */
             ii(0x1019_c998, 1); push(edi);                              /* push edi */
@@ -209,7 +209,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c9b1, 1); pop(edi);                               /* pop edi */
             ii(0x1019_c9b2, 2); mov(eax, edi);                          /* mov eax, edi */
         l_0x1019_c9b4:
-            ii(0x1019_c9b4, 3); lea(esp, ebp - 0x14);                   /* lea esp, [ebp-0x14] */
+            ii(0x1019_c9b4, 3); lea(esp, memd[ss, ebp - 0x14]);         /* lea esp, [ebp-0x14] */
             ii(0x1019_c9b7, 1); pop(edi);                               /* pop edi */
             ii(0x1019_c9b8, 1); pop(esi);                               /* pop esi */
             ii(0x1019_c9b9, 1); pop(edx);                               /* pop edx */

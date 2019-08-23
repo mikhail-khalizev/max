@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_abe8, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x1009_abeb, 5); call(0x1009_a085, -0xb6b);              /* call 0x1009a085 */
             ii(0x1009_abf0, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x1009_abf3, 3); lea(eax, ebp - 0xc);                    /* lea eax, [ebp-0xc] */
+            ii(0x1009_abf3, 3); lea(eax, memd[ss, ebp - 0xc]);          /* lea eax, [ebp-0xc] */
             ii(0x1009_abf6, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
             ii(0x1009_abf9, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x1009_abfc, 7); mov(memd[ds, eax + 0x2], 0x101b_4258);  /* mov dword [eax+0x2], 0x101b4258 */

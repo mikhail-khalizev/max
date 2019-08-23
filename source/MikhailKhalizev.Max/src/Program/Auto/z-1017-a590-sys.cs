@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a604, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1017_a606, 6); mov(memd[ds, Definitions.video_win_end], edx); /* mov [0x10209cac], edx */
             ii(0x1017_a60c, 5); mov(memd[ds, 0x1020_9c94], eax);        /* mov [0x10209c94], eax */
-            ii(0x1017_a611, 3); lea(esp, ebp - 0x4);                    /* lea esp, [ebp-0x4] */
+            ii(0x1017_a611, 3); lea(esp, memd[ss, ebp - 0x4]);          /* lea esp, [ebp-0x4] */
             ii(0x1017_a614, 1); pop(edi);                               /* pop edi */
             ii(0x1017_a615, 1); pop(ebp);                               /* pop ebp */
             ii(0x1017_a616, 1); ret();                                  /* ret */

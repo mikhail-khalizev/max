@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c6e1, 2); if(jge(0x1016_c6fb, 0x18)) goto l_0x1016_c6fb; /* jge 0x1016c6fb */
             ii(0x1016_c6e3, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1016_c6e5, 2); xor(eax, ecx);                          /* xor eax, ecx */
-            ii(0x1016_c6e7, 3); lea(edx, ecx + 0x1);                    /* lea edx, [ecx+0x1] */
+            ii(0x1016_c6e7, 3); lea(edx, memd[ds, ecx + 0x1]);          /* lea edx, [ecx+0x1] */
             ii(0x1016_c6ea, 7); mov(memd[ds, ecx * 4 + 0x101c_fc14], ebx); /* mov [ecx*4+0x101cfc14], ebx */
             ii(0x1016_c6f1, 6); mov(memd[ds, 0x101c_fc94], edx);        /* mov [0x101cfc94], edx */
             ii(0x1016_c6f7, 1); pop(edx);                               /* pop edx */

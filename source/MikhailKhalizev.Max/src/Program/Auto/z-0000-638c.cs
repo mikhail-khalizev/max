@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x641c, 2);    if(js(0x643c, 0x1e)) goto l_0x643c;       /* js 0x643c */
             ii(0x641e, 3);    inc(memw[ss, bp - 0x4]);                  /* inc word [bp-0x4] */
         l_0x6421:
-            ii(0x6421, 3);    les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x6421, 3);    les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x6424, 3);    mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
             ii(0x6427, 2);    sub(ah, ah);                              /* sub ah, ah */
             ii(0x6429, 1);    push(ax);                                 /* push ax */
@@ -90,7 +90,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6437, 2);    if(js(0x644d, 0x14)) goto l_0x644d;       /* js 0x644d */
             ii(0x6439, 3);    inc(memw[ss, bp - 0x4]);                  /* inc word [bp-0x4] */
         l_0x643c:
-            ii(0x643c, 3);    les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x643c, 3);    les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x643f, 3);    mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
             ii(0x6442, 2);    sub(ah, ah);                              /* sub ah, ah */
             ii(0x6444, 1);    push(ax);                                 /* push ax */
@@ -100,14 +100,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x644b, 2);    if(jz(0x6434, -0x19)) goto l_0x6434;      /* jz 0x6434 */
         l_0x644d:
             ii(0x644d, 3);    mov(al, memb[ss, bp - 0xa]);              /* mov al, [bp-0xa] */
-            ii(0x6450, 3);    les(bx, ss, bp - 0x8);                    /* les bx, [bp-0x8] */
+            ii(0x6450, 3);    les(bx, memw[ss, bp - 0x8]);              /* les bx, [bp-0x8] */
             ii(0x6453, 3);    mov(memb[es, bx], al);                    /* mov [es:bx], al */
         l_0x6456:
-            ii(0x6456, 3);    les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x6456, 3);    les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x6459, 3);    inc(memw[ss, bp - 0x4]);                  /* inc word [bp-0x4] */
             ii(0x645c, 3);    mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
             ii(0x645f, 3);    inc(memw[ss, bp - 0x8]);                  /* inc word [bp-0x8] */
-            ii(0x6462, 3);    les(bx, ss, bp - 0x8);                    /* les bx, [bp-0x8] */
+            ii(0x6462, 3);    les(bx, memw[ss, bp - 0x8]);              /* les bx, [bp-0x8] */
             ii(0x6465, 3);    mov(memb[es, bx], al);                    /* mov [es:bx], al */
             ii(0x6468, 3);    dec(memw[ss, bp - 0xa]);                  /* dec word [bp-0xa] */
             ii(0x646b, 2);    if(jns(0x6456, -0x17)) goto l_0x6456;     /* jns 0x6456 */

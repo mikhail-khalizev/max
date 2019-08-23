@@ -123,8 +123,8 @@ namespace MikhailKhalizev.Max.Program
         l_0x1011_1f8d:
             ii(0x1011_1f8d, 5); call(/* sys */ 0x1016_b208, 0x5_9276);  /* call 0x1016b208 */
             ii(0x1011_1f92, 3); mov(memd[ss, ebp - 0x28], eax);         /* mov [ebp-0x28], eax */
-            ii(0x1011_1f95, 3); lea(edx, ebp - 0x2c);                   /* lea edx, [ebp-0x2c] */
-            ii(0x1011_1f98, 3); lea(eax, ebp - 0x30);                   /* lea eax, [ebp-0x30] */
+            ii(0x1011_1f95, 3); lea(edx, memd[ss, ebp - 0x2c]);         /* lea edx, [ebp-0x2c] */
+            ii(0x1011_1f98, 3); lea(eax, memd[ss, ebp - 0x30]);         /* lea eax, [ebp-0x30] */
             ii(0x1011_1f9b, 5); call(/* sys */ 0x1016_c298, 0x5_a2f8);  /* call 0x1016c298 */
             ii(0x1011_1fa0, 4); movsx(eax, memw[ss, ebp - 0x28]);       /* movsx eax, word [ebp-0x28] */
             ii(0x1011_1fa4, 3); cmp(eax, -0x1 /* 0xff */);              /* cmp eax, 0xffffffff */

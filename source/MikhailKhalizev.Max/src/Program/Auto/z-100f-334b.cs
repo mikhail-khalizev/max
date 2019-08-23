@@ -93,20 +93,20 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_3452, 1); push(eax);                              /* push eax */
             ii(0x100f_3453, 5); mov(eax, StringDefinitions._22i22i);    /* mov eax, 0x101a2478 */
             ii(0x100f_3458, 1); push(eax);                              /* push eax */
-            ii(0x100f_3459, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x100f_3459, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x100f_345c, 1); push(eax);                              /* push eax */
             ii(0x100f_345d, 5); call(Definitions.sys_sprintf, 0x7_2a9f); /* call 0x10165f01 */
             ii(0x100f_3462, 3); add(esp, 0x10);                         /* add esp, 0x10 */
             ii(0x100f_3465, 4); cmp(memb[ss, ebp - 0x4], 0);            /* cmp byte [ebp-0x4], 0x0 */
             ii(0x100f_3469, 2); if(jz(0x100f_3478, 0xd)) goto l_0x100f_3478; /* jz 0x100f3478 */
             ii(0x100f_346b, 3); mov(edx, memd[ss, ebp - 0xc]);          /* mov edx, [ebp-0xc] */
-            ii(0x100f_346e, 3); lea(eax, ebp - 0x18);                   /* lea eax, [ebp-0x18] */
+            ii(0x100f_346e, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x100f_3471, 5); call(0x100f_3033, -0x443);              /* call 0x100f3033 */
             ii(0x100f_3476, 2); jmp(0x100f_3491, 0x19); goto l_0x100f_3491; /* jmp 0x100f3491 */
         l_0x100f_3478:
             ii(0x100f_3478, 5); call(0x1010_2a34, 0xf5b7);              /* call 0x10102a34 */
             ii(0x100f_347d, 3); mov(ebx, memd[ss, ebp - 0xc]);          /* mov ebx, [ebp-0xc] */
-            ii(0x100f_3480, 3); lea(edx, ebp - 0x18);                   /* lea edx, [ebp-0x18] */
+            ii(0x100f_3480, 3); lea(edx, memd[ss, ebp - 0x18]);         /* lea edx, [ebp-0x18] */
             ii(0x100f_3483, 5); mov(esi, 0x3);                          /* mov esi, 0x3 */
             ii(0x100f_3488, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x100f_348a, 2); mov(eax, esi);                          /* mov eax, esi */

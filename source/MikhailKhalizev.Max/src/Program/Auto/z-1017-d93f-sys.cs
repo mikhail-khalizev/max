@@ -131,7 +131,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_dac9, 5); call(/* sys */ 0x1019_4b71, 0x1_70a3);  /* call 0x10194b71 */
         l_0x1017_dace:
             ii(0x1017_dace, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
-            ii(0x1017_dad1, 4); lgs(edx, ss, ebp + 0x14);               /* lgs edx, [ebp+0x14] */
+            ii(0x1017_dad1, 4); lgs(edx, memd[ss, ebp + 0x14]);         /* lgs edx, [ebp+0x14] */
             ii(0x1017_dad5, 3); mov(memd[gs, edx], eax);                /* mov [gs:edx], eax */
             ii(0x1017_dad8, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
         l_0x1017_dadf:

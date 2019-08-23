@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_48b7, 3); mov(ax, memw[ss, bp + 0x4]);              /* mov ax, [bp+0x4] */
             ii(0x17_48ba, 3); mov(dx, 0x8);                             /* mov dx, 0x8 */
             ii(0x17_48bd, 1); push(ds);                                 /* push ds */
-            ii(0x17_48be, 3); lea(di, bp - 0x10);                       /* lea di, [bp-0x10] */
+            ii(0x17_48be, 3); lea(di, memw[ss, bp - 0x10]);             /* lea di, [bp-0x10] */
             ii(0x17_48c1, 2); mov(si, ax);                              /* mov si, ax */
             ii(0x17_48c3, 1); push(ss);                                 /* push ss */
             ii(0x17_48c4, 1); pop(es);                                  /* pop es */
@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_4910, 2); if(jz(0x17_494c, 0x3a)) goto l_0x17_494c; /* jz 0x494c */
             ii(0x17_4912, 4); and(memb[ss, bp - 0xa], 0x7f);            /* and byte [bp-0xa], 0x7f */
             ii(0x17_4916, 2); push(0xc);                                /* push 0xc */
-            ii(0x17_4918, 3); lea(ax, bp - 0x8);                        /* lea ax, [bp-0x8] */
+            ii(0x17_4918, 3); lea(ax, memw[ss, bp - 0x8]);              /* lea ax, [bp-0x8] */
             ii(0x17_491b, 1); push(ss);                                 /* push ss */
             ii(0x17_491c, 1); push(ax);                                 /* push ax */
             ii(0x17_491d, 1); nop();                                    /* nop */
@@ -96,7 +96,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_4965, 3); mov(dx, 0x8);                             /* mov dx, 0x8 */
             ii(0x17_4968, 1); push(ds);                                 /* push ds */
             ii(0x17_4969, 2); mov(di, ax);                              /* mov di, ax */
-            ii(0x17_496b, 3); lea(si, bp - 0x10);                       /* lea si, [bp-0x10] */
+            ii(0x17_496b, 3); lea(si, memw[ss, bp - 0x10]);             /* lea si, [bp-0x10] */
             ii(0x17_496e, 2); mov(es, dx);                              /* mov es, dx */
             ii(0x17_4970, 1); push(ss);                                 /* push ss */
             ii(0x17_4971, 1); pop(ds);                                  /* pop ds */

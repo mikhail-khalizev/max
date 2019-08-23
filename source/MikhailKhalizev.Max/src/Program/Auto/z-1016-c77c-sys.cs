@@ -116,7 +116,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c8cd, 1); cld();                                  /* cld */
             ii(0x1016_c8ce, 2); mov(al, 0x20);                          /* mov al, 0x20 */
             ii(0x1016_c8d0, 2); repe(() => scasb());                    /* repe scasb */
-            ii(0x1016_c8d2, 3); lea(esi, edi - 0x1);                    /* lea esi, [edi-0x1] */
+            ii(0x1016_c8d2, 3); lea(esi, memd[ds, edi - 0x1]);          /* lea esi, [edi-0x1] */
             ii(0x1016_c8d5, 2); mov(edi, edx);                          /* mov edi, edx */
             ii(0x1016_c8d7, 3); mov(bx, es);                            /* mov bx, es */
             ii(0x1016_c8da, 3); mov(dx, ds);                            /* mov dx, ds */

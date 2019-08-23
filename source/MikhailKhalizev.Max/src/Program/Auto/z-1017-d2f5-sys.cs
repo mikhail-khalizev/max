@@ -85,7 +85,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d3bc, 2); if(jae(0x1017_d3c3, 0x5)) goto l_0x1017_d3c3; /* jae 0x1017d3c3 */
             ii(0x1017_d3be, 5); mov(edi, 0x80);                         /* mov edi, 0x80 */
         l_0x1017_d3c3:
-            ii(0x1017_d3c3, 3); lea(eax, edi + 0x3);                    /* lea eax, [edi+0x3] */
+            ii(0x1017_d3c3, 3); lea(eax, memd[ds, edi + 0x3]);          /* lea eax, [edi+0x3] */
             ii(0x1017_d3c6, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1017_d3c8, 2); and(al, 0xfc);                          /* and al, 0xfc */
             ii(0x1017_d3ca, 2); xor(esi, esi);                          /* xor esi, esi */

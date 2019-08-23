@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c75d, 2); if(jle(0x1019_c773, 0x14)) goto l_0x1019_c773; /* jle 0x1019c773 */
             ii(0x1019_c75f, 4); fld(memq[ss, esp + 0x20]);              /* fld qword [esp+0x20] */
             ii(0x1019_c763, 6); fmul(memq[ds, 0x101b_7746]);            /* fmul qword [0x101b7746] */
-            ii(0x1019_c769, 6); lea(edx, ecx - 0xd8);                   /* lea edx, [ecx-0xd8] */
+            ii(0x1019_c769, 6); lea(edx, memd[ds, ecx - 0xd8]);         /* lea edx, [ecx-0xd8] */
         l_0x1019_c76f:
             ii(0x1019_c76f, 4); fstp(memq[ss, esp + 0x20]);             /* fstp qword [esp+0x20] */
         l_0x1019_c773:

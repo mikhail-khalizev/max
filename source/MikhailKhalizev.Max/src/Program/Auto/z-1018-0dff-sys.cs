@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_0e18, 7); imul(edx, memd[ss, ebp - 0xc], 0xc0);   /* imul edx, [ebp-0xc], 0xc0 */
             ii(0x1018_0e1f, 4); imul(eax, memd[ss, ebp - 0x8], 0x6);    /* imul eax, [ebp-0x8], 0x6 */
             ii(0x1018_0e23, 2); add(eax, edx);                          /* add eax, edx */
-            ii(0x1018_0e25, 7); lgs(eax, ds, eax + 0x1020_b718);        /* lgs eax, [eax+0x1020b718] */
+            ii(0x1018_0e25, 7); lgs(eax, memd[ds, eax + 0x1020_b718]);  /* lgs eax, [eax+0x1020b718] */
             ii(0x1018_0e2c, 5); movsx(eax, memw[gs, eax + 0x30]);       /* movsx eax, word [gs:eax+0x30] */
             ii(0x1018_0e31, 3); test(ah, 0x80);                         /* test ah, 0x80 */
             ii(0x1018_0e34, 2); if(jnz(0x1018_0e3f, 0x9)) goto l_0x1018_0e3f; /* jnz 0x10180e3f */

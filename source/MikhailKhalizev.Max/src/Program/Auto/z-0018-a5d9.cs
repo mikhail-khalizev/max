@@ -82,7 +82,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a66c, 2); pushd(edi);                               /* push edi */
             ii(0x18_a66e, 3); xor(edi, edi);                            /* xor edi, edi */
             ii(0x18_a671, 2); mov(di, sp);                              /* mov di, sp */
-            ii(0x18_a673, 3); lea(di, di + 0x4);                        /* lea di, [di+0x4] */
+            ii(0x18_a673, 3); lea(di, memw[ds, di + 0x4]);              /* lea di, [di+0x4] */
             ii(0x18_a676, 1); push(ss);                                 /* push ss */
             ii(0x18_a677, 1); pop(es);                                  /* pop es */
             ii(0x18_a678, 3); mov(ax, 0x500);                           /* mov ax, 0x500 */

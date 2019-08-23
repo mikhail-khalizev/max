@@ -21,10 +21,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_f584, 3); push(memw[ss, bp + 0x8]);                 /* push word [bp+0x8] */
             ii(0x17_f587, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
             ii(0x17_f58a, 3); push(memw[ss, bp + 0x4]);                 /* push word [bp+0x4] */
-            ii(0x17_f58d, 3); lea(ax, bp - 0x4);                        /* lea ax, [bp-0x4] */
+            ii(0x17_f58d, 3); lea(ax, memw[ss, bp - 0x4]);              /* lea ax, [bp-0x4] */
             ii(0x17_f590, 1); push(ss);                                 /* push ss */
             ii(0x17_f591, 1); push(ax);                                 /* push ax */
-            ii(0x17_f592, 3); lea(ax, bp - 0x8);                        /* lea ax, [bp-0x8] */
+            ii(0x17_f592, 3); lea(ax, memw[ss, bp - 0x8]);              /* lea ax, [bp-0x8] */
             ii(0x17_f595, 1); push(ss);                                 /* push ss */
             ii(0x17_f596, 1); push(ax);                                 /* push ax */
             ii(0x17_f597, 3); call(0x17_f4f0, -0xaa);                   /* call 0xf4f0 */

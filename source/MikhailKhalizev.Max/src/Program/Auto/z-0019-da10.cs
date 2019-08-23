@@ -92,7 +92,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_dada:
             ii(0x19_dada, 3); mov(ax, memw[ss, bp - 0x4]);              /* mov ax, [bp-0x4] */
             ii(0x19_dadd, 3); mov(dx, memw[ss, bp - 0x2]);              /* mov dx, [bp-0x2] */
-            ii(0x19_dae0, 3); les(bx, ss, bp + 0x12);                   /* les bx, [bp+0x12] */
+            ii(0x19_dae0, 3); les(bx, memw[ss, bp + 0x12]);             /* les bx, [bp+0x12] */
             ii(0x19_dae3, 4); mov(memw[es, bx + 0x2], ax);              /* mov [es:bx+0x2], ax */
             ii(0x19_dae7, 4); mov(memw[es, bx + 0x4], dx);              /* mov [es:bx+0x4], dx */
             ii(0x19_daeb, 2); or(dx, ax);                               /* or dx, ax */

@@ -34,12 +34,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0946, 5); or(memb_a32[ss, ebp + 0x2c], 0x1);        /* or byte [ebp+0x2c], 0x1 */
             ii(0x19_094b, 1); push(cs);                                 /* push cs */
             ii(0x19_094c, 1); pop(es);                                  /* pop es */
-            ii(0x19_094d, 5); lea(edi, 0x1463);                         /* lea edi, [0x1463] */
+            ii(0x19_094d, 5); lea(edi, memd[ds, 0x1463]);               /* lea edi, [0x1463] */
             ii(0x19_0952, 3); mov(cx, 0x10);                            /* mov cx, 0x10 */
             ii(0x19_0955, 4); movzx(ecx, cx);                           /* movzx ecx, cx */
             ii(0x19_0959, 3); repe_a32(() => cmpsb_a32());              /* a32 repe cmpsb */
             ii(0x19_095c, 4); if(jnz(0x19_097d, 0x1d)) goto l_0x19_097d; /* jnz 0x97d */
-            ii(0x19_0960, 5); lea(eax, 0x1460);                         /* lea eax, [0x1460] */
+            ii(0x19_0960, 5); lea(eax, memd[ds, 0x1460]);               /* lea eax, [0x1460] */
             ii(0x19_0965, 5); mov(memd_a32[ss, ebp + 0x4], eax);        /* mov [ebp+0x4], eax */
             ii(0x19_096a, 1); push(cs);                                 /* push cs */
             ii(0x19_096b, 4); pop(memw_a32[ss, ebp + 0x2]);             /* pop word [ebp+0x2] */

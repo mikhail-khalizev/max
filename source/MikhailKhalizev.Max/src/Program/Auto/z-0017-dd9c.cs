@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_dd9d, 2); mov(bp, sp);                              /* mov bp, sp */
             ii(0x17_dd9f, 1); push(ds);                                 /* push ds */
             ii(0x17_dda0, 1); push(bx);                                 /* push bx */
-            ii(0x17_dda1, 3); lds(bx, ss, bp + 0x6);                    /* lds bx, [bp+0x6] */
+            ii(0x17_dda1, 3); lds(bx, memw[ss, bp + 0x6]);              /* lds bx, [bp+0x6] */
             ii(0x17_dda4, 2); mov(ax, memw[ds, bx]);                    /* mov ax, [bx] */
             ii(0x17_dda6, 3); mov(dx, memw[ds, bx + 0x2]);              /* mov dx, [bx+0x2] */
             ii(0x17_dda9, 3); mov(cx, memw[ss, bp + 0xa]);              /* mov cx, [bp+0xa] */

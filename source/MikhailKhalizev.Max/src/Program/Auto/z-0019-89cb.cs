@@ -51,10 +51,10 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_8a2c:
             ii(0x19_8a2c, 3); jmp(0x19_8a07, -0x28); goto l_0x19_8a07;  /* jmp 0x8a07 */
         l_0x19_8a2f:
-            ii(0x19_8a2f, 3); les(bx, ss, bp + 0x8);                    /* les bx, [bp+0x8] */
+            ii(0x19_8a2f, 3); les(bx, memw[ss, bp + 0x8]);              /* les bx, [bp+0x8] */
             ii(0x19_8a32, 4); mov(ax, memw[es, bx + 0x36]);             /* mov ax, [es:bx+0x36] */
             ii(0x19_8a36, 2); sub(cx, cx);                              /* sub cx, cx */
-            ii(0x19_8a38, 3); les(bx, ss, bp + 0x8);                    /* les bx, [bp+0x8] */
+            ii(0x19_8a38, 3); les(bx, memw[ss, bp + 0x8]);              /* les bx, [bp+0x8] */
             ii(0x19_8a3b, 4); or(cx, memw[es, bx + 0x32]);              /* or cx, [es:bx+0x32] */
             ii(0x19_8a3f, 3); or(ax, 0);                                /* or ax, 0x0 */
             ii(0x19_8a42, 3); sub(cx, memw[ss, bp - 0xa]);              /* sub cx, [bp-0xa] */
@@ -72,10 +72,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_8a61, 2); if(jb(0x19_8a66, 0x3)) goto l_0x19_8a66;  /* jb 0x8a66 */
             ii(0x19_8a63, 3); jmp(0x19_8a86, 0x20); goto l_0x19_8a86;   /* jmp 0x8a86 */
         l_0x19_8a66:
-            ii(0x19_8a66, 3); les(bx, ss, bp - 0xe);                    /* les bx, [bp-0xe] */
+            ii(0x19_8a66, 3); les(bx, memw[ss, bp - 0xe]);              /* les bx, [bp-0xe] */
             ii(0x19_8a69, 3); inc(memw[ss, bp - 0xe]);                  /* inc word [bp-0xe] */
             ii(0x19_8a6c, 3); mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
-            ii(0x19_8a6f, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_8a6f, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_8a72, 3); inc(memw[ss, bp - 0x4]);                  /* inc word [bp-0x4] */
             ii(0x19_8a75, 3); cmp(memb[es, bx], al);                    /* cmp [es:bx], al */
             ii(0x19_8a78, 2); if(jnz(0x19_8a7d, 0x3)) goto l_0x19_8a7d; /* jnz 0x8a7d */

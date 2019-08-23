@@ -13,12 +13,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_3a0d, 2); mov(dx, di);                              /* mov dx, di */
             ii(0x19_3a0f, 2); mov(bx, si);                              /* mov bx, si */
             ii(0x19_3a11, 1); push(ds);                                 /* push ds */
-            ii(0x19_3a12, 3); les(di, ss, bp + 0x6);                    /* les di, [bp+0x6] */
+            ii(0x19_3a12, 3); les(di, memw[ss, bp + 0x6]);              /* les di, [bp+0x6] */
             ii(0x19_3a15, 2); xor(ax, ax);                              /* xor ax, ax */
             ii(0x19_3a17, 3); mov(cx, 0xffff);                          /* mov cx, 0xffff */
             ii(0x19_3a1a, 2); repne(() => scasb());                     /* repne scasb */
-            ii(0x19_3a1c, 3); lea(si, di - 0x1);                        /* lea si, [di-0x1] */
-            ii(0x19_3a1f, 3); les(di, ss, bp + 0xa);                    /* les di, [bp+0xa] */
+            ii(0x19_3a1c, 3); lea(si, memw[ds, di - 0x1]);              /* lea si, [di-0x1] */
+            ii(0x19_3a1f, 3); les(di, memw[ss, bp + 0xa]);              /* les di, [bp+0xa] */
             ii(0x19_3a22, 3); mov(cx, 0xffff);                          /* mov cx, 0xffff */
             ii(0x19_3a25, 2); repne(() => scasb());                     /* repne scasb */
             ii(0x19_3a27, 2); not(cx);                                  /* not cx */

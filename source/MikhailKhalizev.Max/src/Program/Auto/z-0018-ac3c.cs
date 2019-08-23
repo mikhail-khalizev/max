@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_ac3c()
         {
             ii(0x18_ac3c, 2); shr(bx, 0x1);                             /* shr bx, 1 */
-            ii(0x18_ac3e, 3); lea(ax, bx - 0x20);                       /* lea ax, [bx-0x20] */
+            ii(0x18_ac3e, 3); lea(ax, memw[ds, bx - 0x20]);             /* lea ax, [bx-0x20] */
             ii(0x18_ac41, 3); cmp(ax, 0x9c);                            /* cmp ax, 0x9c */
             ii(0x18_ac44, 1); nop();                                    /* nop */
             ii(0x18_ac45, 2); if(jae_func(0x18_ac98, 0x51)) return;     /* jae 0xac98 */

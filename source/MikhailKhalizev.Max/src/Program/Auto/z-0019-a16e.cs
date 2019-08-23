@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_a17d:
             ii(0x19_a17d, 4); cmp(memw[ss, bp - 0x2], 0x10);            /* cmp word [bp-0x2], 0x10 */
             ii(0x19_a181, 2); if(jae(0x19_a1b9, 0x36)) goto l_0x19_a1b9; /* jae 0xa1b9 */
-            ii(0x19_a183, 4); les(bx, ds, 0x1f1a);                      /* les bx, [0x1f1a] */
+            ii(0x19_a183, 4); les(bx, memw[ds, 0x1f1a]);                /* les bx, [0x1f1a] */
             ii(0x19_a187, 4); add(bx, 0x1352);                          /* add bx, 0x1352 */
             ii(0x19_a18b, 3); mov(si, memw[ss, bp - 0x2]);              /* mov si, [bp-0x2] */
             ii(0x19_a18e, 4); cmp(memb[es, bx + si], 0);                /* cmp byte [es:bx+si], 0x0 */

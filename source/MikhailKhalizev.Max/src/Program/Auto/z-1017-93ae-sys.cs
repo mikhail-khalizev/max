@@ -17,10 +17,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_93b7, 2); mov(edi, ebx);                          /* mov edi, ebx */
             ii(0x1017_93b9, 2); mov(esi, edx);                          /* mov esi, edx */
             ii(0x1017_93bb, 2); xor(dl, dl);                            /* xor dl, dl */
-            ii(0x1017_93bd, 4); lea(ecx, esp + 0x1);                    /* lea ecx, [esp+0x1] */
+            ii(0x1017_93bd, 4); lea(ecx, memd[ss, esp + 0x1]);          /* lea ecx, [esp+0x1] */
             ii(0x1017_93c1, 3); mov(memb[ss, esp], dl);                 /* mov [esp], dl */
         l_0x1017_93c4:
-            ii(0x1017_93c4, 4); lea(ebx, esp + 0x24);                   /* lea ebx, [esp+0x24] */
+            ii(0x1017_93c4, 4); lea(ebx, memd[ss, esp + 0x24]);         /* lea ebx, [esp+0x24] */
             ii(0x1017_93c8, 4); mov(memd[ss, esp + 0x24], edi);         /* mov [esp+0x24], edi */
             ii(0x1017_93cc, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1017_93ce, 2); div(memd[ds, ebx]);                     /* div dword [ebx] */

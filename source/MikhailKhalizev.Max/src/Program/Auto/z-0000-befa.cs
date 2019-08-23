@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xbf44, 2);    repe(() => cmpsb());                      /* repe cmpsb */
             ii(0xbf46, 2);    if(jnz(0xbf2f, -0x19)) goto l_0xbf2f;     /* jnz 0xbf2f */
         l_0xbf48:
-            ii(0xbf48, 3);    lea(ax, bx - 0x1);                        /* lea ax, [bx-0x1] */
+            ii(0xbf48, 3);    lea(ax, memw[ds, bx - 0x1]);              /* lea ax, [bx-0x1] */
             ii(0xbf4b, 2);    jmp(0xbf54, 0x7); goto l_0xbf54;          /* jmp 0xbf54 */
         l_0xbf4d:
             ii(0xbf4d, 3);    mov(ax, memw[ss, bp + 0x4]);              /* mov ax, [bp+0x4] */

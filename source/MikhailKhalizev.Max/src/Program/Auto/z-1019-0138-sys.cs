@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_015c, 2); mov(bh, al);                            /* mov bh, al */
             ii(0x1019_015e, 3); mov(memd[ds, edi + 0x4], ebx);          /* mov [edi+0x4], ebx */
             ii(0x1019_0161, 4); mov(memd[ds, edx + edi + 0x4], ebx);    /* mov [edx+edi+0x4], ebx */
-            ii(0x1019_0165, 3); lea(edi, edi + edx * 2);                /* lea edi, [edi+edx*2] */
+            ii(0x1019_0165, 3); lea(edi, memd[ds, edi + edx * 2]);      /* lea edi, [edi+edx*2] */
             ii(0x1019_0168, 3); mov(eax, memd[ds, esi + 0x4]);          /* mov eax, [esi+0x4] */
             ii(0x1019_016b, 2); mov(bl, ah);                            /* mov bl, ah */
             ii(0x1019_016d, 2); mov(bh, ah);                            /* mov bh, ah */
@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_0187, 2); mov(bh, al);                            /* mov bh, al */
             ii(0x1019_0189, 3); mov(memd[ds, edi + 0x4], ebx);          /* mov [edi+0x4], ebx */
             ii(0x1019_018c, 4); mov(memd[ds, edx + edi + 0x4], ebx);    /* mov [edx+edi+0x4], ebx */
-            ii(0x1019_0190, 3); lea(edi, edi + edx * 2);                /* lea edi, [edi+edx*2] */
+            ii(0x1019_0190, 3); lea(edi, memd[ds, edi + edx * 2]);      /* lea edi, [edi+edx*2] */
             ii(0x1019_0193, 3); mov(eax, memd[ds, esi + 0x8]);          /* mov eax, [esi+0x8] */
             ii(0x1019_0196, 2); mov(bl, ah);                            /* mov bl, ah */
             ii(0x1019_0198, 2); mov(bh, ah);                            /* mov bh, ah */
@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_01b2, 2); mov(bh, al);                            /* mov bh, al */
             ii(0x1019_01b4, 3); mov(memd[ds, edi + 0x4], ebx);          /* mov [edi+0x4], ebx */
             ii(0x1019_01b7, 4); mov(memd[ds, edx + edi + 0x4], ebx);    /* mov [edx+edi+0x4], ebx */
-            ii(0x1019_01bb, 3); lea(edi, edi + edx * 2);                /* lea edi, [edi+edx*2] */
+            ii(0x1019_01bb, 3); lea(edi, memd[ds, edi + edx * 2]);      /* lea edi, [edi+edx*2] */
             ii(0x1019_01be, 3); mov(eax, memd[ds, esi + 0xc]);          /* mov eax, [esi+0xc] */
             ii(0x1019_01c1, 2); mov(bl, ah);                            /* mov bl, ah */
             ii(0x1019_01c3, 2); mov(bh, ah);                            /* mov bh, ah */

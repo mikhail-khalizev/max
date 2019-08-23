@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_b10f, 3); add(edx, 0x16);                         /* add edx, 0x16 */
             ii(0x1011_b112, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x1011_b115, 5); call(0x1013_bb7b, 0x2_0a61);            /* call 0x1013bb7b */
-            ii(0x1011_b11a, 3); lea(edx, ebp - 0xc);                    /* lea edx, [ebp-0xc] */
+            ii(0x1011_b11a, 3); lea(edx, memd[ss, ebp - 0xc]);          /* lea edx, [ebp-0xc] */
             ii(0x1011_b11d, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x1011_b120, 5); call(0x1013_bb7b, 0x2_0a56);            /* call 0x1013bb7b */
             ii(0x1011_b125, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
@@ -42,10 +42,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_b133, 5); cmp(memw[ss, ebp - 0xc], -0x1 /* 0xff */); /* cmp word [ebp-0xc], 0xffff */
             ii(0x1011_b138, 2); if(jz(0x1011_b15a, 0x20)) goto l_0x1011_b15a; /* jz 0x1011b15a */
             ii(0x1011_b13a, 5); mov(ebx, 0x2);                          /* mov ebx, 0x2 */
-            ii(0x1011_b13f, 3); lea(edx, ebp - 0x10);                   /* lea edx, [ebp-0x10] */
+            ii(0x1011_b13f, 3); lea(edx, memd[ss, ebp - 0x10]);         /* lea edx, [ebp-0x10] */
             ii(0x1011_b142, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
             ii(0x1011_b145, 5); call(0x1013_ba86, 0x2_093c);            /* call 0x1013ba86 */
-            ii(0x1011_b14a, 3); lea(edx, ebp - 0x10);                   /* lea edx, [ebp-0x10] */
+            ii(0x1011_b14a, 3); lea(edx, memd[ss, ebp - 0x10]);         /* lea edx, [ebp-0x10] */
             ii(0x1011_b14d, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
             ii(0x1011_b150, 3); add(eax, 0x18);                         /* add eax, 0x18 */
             ii(0x1011_b153, 5); call(0x1012_0b08, 0x59b0);              /* call 0x10120b08 */

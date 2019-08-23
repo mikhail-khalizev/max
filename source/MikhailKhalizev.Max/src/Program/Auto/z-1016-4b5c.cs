@@ -19,9 +19,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_4b74, 3); mov(memd[ss, ebp - 0xc], edx);          /* mov [ebp-0xc], edx */
             ii(0x1016_4b77, 3); mov(memd[ss, ebp - 0x8], ebx);          /* mov [ebp-0x8], ebx */
             ii(0x1016_4b7a, 3); mov(memd[ss, ebp - 0x4], ecx);          /* mov [ebp-0x4], ecx */
-            ii(0x1016_4b7d, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */
+            ii(0x1016_4b7d, 3); lea(eax, memd[ss, ebp - 0x1c]);         /* lea eax, [ebp-0x1c] */
             ii(0x1016_4b80, 5); call(0x1007_20b1, -0xf_2ad4);           /* call 0x100720b1 */
-            ii(0x1016_4b85, 3); lea(eax, ebp - 0x28);                   /* lea eax, [ebp-0x28] */
+            ii(0x1016_4b85, 3); lea(eax, memd[ss, ebp - 0x28]);         /* lea eax, [ebp-0x28] */
             ii(0x1016_4b88, 5); call(0x1007_20b1, -0xf_2adc);           /* call 0x100720b1 */
             ii(0x1016_4b8d, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1016_4b90, 5); call(0x1007_6204, -0xe_e991);           /* call 0x10076204 */
@@ -46,8 +46,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_4bcb, 3); mov(memw[ds, eax], dx);                 /* mov [eax], dx */
             ii(0x1016_4bce, 5); jmp(0x1016_4c5d, 0x8a); goto l_0x1016_4c5d; /* jmp 0x10164c5d */
         l_0x1016_4bd3:
-            ii(0x1016_4bd3, 3); lea(ebx, ebp - 0x28);                   /* lea ebx, [ebp-0x28] */
-            ii(0x1016_4bd6, 3); lea(edx, ebp - 0x1c);                   /* lea edx, [ebp-0x1c] */
+            ii(0x1016_4bd3, 3); lea(ebx, memd[ss, ebp - 0x28]);         /* lea ebx, [ebp-0x28] */
+            ii(0x1016_4bd6, 3); lea(edx, memd[ss, ebp - 0x1c]);         /* lea edx, [ebp-0x1c] */
             ii(0x1016_4bd9, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1016_4bdc, 5); call(0x1007_6204, -0xe_e9dd);           /* call 0x10076204 */
             ii(0x1016_4be1, 5); call(0x1014_3616, -0x2_15d0);           /* call 0x10143616 */

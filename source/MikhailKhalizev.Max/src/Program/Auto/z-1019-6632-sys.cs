@@ -91,9 +91,9 @@ namespace MikhailKhalizev.Max.Program
         l_0x1019_66fb:
             ii(0x1019_66fb, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
         l_0x1019_66fe:
-            ii(0x1019_66fe, 3); lea(eax, ebp - 0x28);                   /* lea eax, [ebp-0x28] */
+            ii(0x1019_66fe, 3); lea(eax, memd[ss, ebp - 0x28]);         /* lea eax, [ebp-0x28] */
             ii(0x1019_6701, 5); call(/* sys */ 0x1019_b7e3, 0x50dd);    /* call 0x1019b7e3 */
-            ii(0x1019_6706, 3); lea(esp, ebp - 0x8);                    /* lea esp, [ebp-0x8] */
+            ii(0x1019_6706, 3); lea(esp, memd[ss, ebp - 0x8]);          /* lea esp, [ebp-0x8] */
             ii(0x1019_6709, 1); pop(esi);                               /* pop esi */
             ii(0x1019_670a, 1); pop(ecx);                               /* pop ecx */
             ii(0x1019_670b, 1); pop(ebp);                               /* pop ebp */

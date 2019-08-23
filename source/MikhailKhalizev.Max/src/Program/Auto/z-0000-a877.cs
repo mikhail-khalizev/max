@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa8a9, 4);    add(memw[ds, si + 0xe], 0xa);             /* add word [si+0xe], 0xa */
             ii(0xa8ad, 2);    xor(bx, bx);                              /* xor bx, bx */
         l_0xa8af:
-            ii(0xa8af, 5);    les(di, cs, 0x17c2);                      /* les di, [cs:0x17c2] */
+            ii(0xa8af, 5);    les(di, memw[cs, 0x17c2]);                /* les di, [cs:0x17c2] */
             ii(0xa8b4, 2);    mov(ax, di);                              /* mov ax, di */
             ii(0xa8b6, 1);    cld();                                    /* cld */
             ii(0xa8b7, 3);    mov(cx, 0xd);                             /* mov cx, 0xd */
@@ -172,7 +172,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa9e9, 3);    mov(di, memw[ss, bp + 0xe]);              /* mov di, [bp+0xe] */
             ii(0xa9ec, 1);    dec(di);                                  /* dec di */
             ii(0xa9ed, 1);    dec(di);                                  /* dec di */
-            ii(0xa9ee, 3);    lea(si, bp + 0x26);                       /* lea si, [bp+0x26] */
+            ii(0xa9ee, 3);    lea(si, memw[ss, bp + 0x26]);             /* lea si, [bp+0x26] */
             ii(0xa9f1, 1);    push(ss);                                 /* push ss */
             ii(0xa9f2, 1);    pop(ds);                                  /* pop ds */
             ii(0xa9f3, 1);    std();                                    /* std */

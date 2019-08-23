@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100e_9b3e:
             ii(0x100e_9b3e, 5); jmp(0x100e_9c60, 0x11d); goto l_0x100e_9c60; /* jmp 0x100e9c60 */
         l_0x100e_9b43:
-            ii(0x100e_9b43, 3); lea(ecx, ebp - 0x1c);                   /* lea ecx, [ebp-0x1c] */
+            ii(0x100e_9b43, 3); lea(ecx, memd[ss, ebp - 0x1c]);         /* lea ecx, [ebp-0x1c] */
             ii(0x100e_9b46, 4); movsx(ebx, memw[ss, ebp + 0x14]);       /* movsx ebx, word [ebp+0x14] */
             ii(0x100e_9b4a, 4); movsx(edx, memw[ss, ebp - 0x18]);       /* movsx edx, word [ebp-0x18] */
             ii(0x100e_9b4e, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */

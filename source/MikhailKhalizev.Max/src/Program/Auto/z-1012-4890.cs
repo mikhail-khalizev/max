@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4909, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
             ii(0x1012_490b, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
             ii(0x1012_490e, 9); mov(memw[ds, 0x101c_59b4], 0);          /* mov word [0x101c59b4], 0x0 */
-            ii(0x1012_4917, 6); lea(eax, ebp - 0x23d);                  /* lea eax, [ebp-0x23d] */
+            ii(0x1012_4917, 6); lea(eax, memd[ss, ebp - 0x23d]);        /* lea eax, [ebp-0x23d] */
             ii(0x1012_491d, 6); mov(memd[ss, ebp - 0x244], eax);        /* mov [ebp-0x244], eax */
             ii(0x1012_4923, 10); mov(memd[ss, ebp - 0x248], 0);         /* mov dword [ebp-0x248], 0x0 */
             ii(0x1012_492d, 2); jmp(0x1012_493b, 0xc); goto l_0x1012_493b; /* jmp 0x1012493b */
@@ -119,11 +119,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4a13, 6); mov(memd[ss, ebp - 0x248], eax);        /* mov [ebp-0x248], eax */
             ii(0x1012_4a19, 4); cmp(memb[ss, ebp - 0x4], 0);            /* cmp byte [ebp-0x4], 0x0 */
             ii(0x1012_4a1d, 2); if(jz(0x1012_4a2d, 0xe)) goto l_0x1012_4a2d; /* jz 0x10124a2d */
-            ii(0x1012_4a1f, 6); lea(eax, ebp - 0x240);                  /* lea eax, [ebp-0x240] */
+            ii(0x1012_4a1f, 6); lea(eax, memd[ss, ebp - 0x240]);        /* lea eax, [ebp-0x240] */
             ii(0x1012_4a25, 6); mov(memd[ss, ebp - 0x244], eax);        /* mov [ebp-0x244], eax */
             ii(0x1012_4a2b, 2); jmp(0x1012_4a39, 0xc); goto l_0x1012_4a39; /* jmp 0x10124a39 */
         l_0x1012_4a2d:
-            ii(0x1012_4a2d, 6); lea(eax, ebp - 0x23d);                  /* lea eax, [ebp-0x23d] */
+            ii(0x1012_4a2d, 6); lea(eax, memd[ss, ebp - 0x23d]);        /* lea eax, [ebp-0x23d] */
             ii(0x1012_4a33, 6); mov(memd[ss, ebp - 0x244], eax);        /* mov [ebp-0x244], eax */
         l_0x1012_4a39:
             ii(0x1012_4a39, 6); mov(edx, memd[ds, 0x101c_587c]);        /* mov edx, [0x101c587c] */

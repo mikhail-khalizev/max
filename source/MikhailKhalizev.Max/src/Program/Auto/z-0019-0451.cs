@@ -30,14 +30,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0483, 3); mov(memw[ss, bp - 0x4], ax);              /* mov [bp-0x4], ax */
             ii(0x19_0486, 3); mov(memw[ss, bp - 0x2], dx);              /* mov [bp-0x2], dx */
             ii(0x19_0489, 3); mov(ax, memw[ss, bp + 0x8]);              /* mov ax, [bp+0x8] */
-            ii(0x19_048c, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_048c, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_048f, 4); cmp(memw[es, bx + 0x6], ax);              /* cmp [es:bx+0x6], ax */
             ii(0x19_0493, 2); if(jz(0x19_0498, 0x3)) goto l_0x19_0498;  /* jz 0x498 */
             ii(0x19_0495, 3); jmp(0x19_04b8, 0x20); goto l_0x19_04b8;   /* jmp 0x4b8 */
         l_0x19_0498:
             ii(0x19_0498, 3); mov(ax, memw[ss, bp + 0xa]);              /* mov ax, [bp+0xa] */
             ii(0x19_049b, 3); mov(dx, memw[ss, bp + 0xc]);              /* mov dx, [bp+0xc] */
-            ii(0x19_049e, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_049e, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_04a1, 4); cmp(memw[es, bx + 0x2], ax);              /* cmp [es:bx+0x2], ax */
             ii(0x19_04a5, 2); if(jz(0x19_04aa, 0x3)) goto l_0x19_04aa;  /* jz 0x4aa */
             ii(0x19_04a7, 3); jmp(0x19_04b8, 0xe); goto l_0x19_04b8;    /* jmp 0x4b8 */
@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_04b3, 2); mov(ax, si);                              /* mov ax, si */
             ii(0x19_04b5, 3); jmp(0x19_04cc, 0x14); goto l_0x19_04cc;   /* jmp 0x4cc */
         l_0x19_04b8:
-            ii(0x19_04b8, 3); les(bx, ss, bp - 0x4);                    /* les bx, [bp-0x4] */
+            ii(0x19_04b8, 3); les(bx, memw[ss, bp - 0x4]);              /* les bx, [bp-0x4] */
             ii(0x19_04bb, 4); mov(al, memb[es, bx + 0x1]);              /* mov al, [es:bx+0x1] */
             ii(0x19_04bf, 2); sub(ah, ah);                              /* sub ah, ah */
             ii(0x19_04c1, 2); mov(si, ax);                              /* mov si, ax */

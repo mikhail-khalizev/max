@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_2460, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1018_2462, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1018_2464, 2); if(jz(0x1018_24a0, 0x3a)) goto l_0x1018_24a0; /* jz 0x101824a0 */
-            ii(0x1018_2466, 3); lea(esi, eax - 0x8);                    /* lea esi, [eax-0x8] */
+            ii(0x1018_2466, 3); lea(esi, memd[ds, eax - 0x8]);          /* lea esi, [eax-0x8] */
             ii(0x1018_2469, 2); mov(eax, esi);                          /* mov eax, esi */
             ii(0x1018_246b, 5); call(Definitions.sys_check_memory_corrupt, 0x170); /* call 0x101825e0 */
             ii(0x1018_2470, 5); push(0xcc);                             /* push 0xcc */

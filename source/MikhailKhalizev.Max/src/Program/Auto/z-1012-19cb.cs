@@ -76,13 +76,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_1a9a, 2); if(jnz(0x1012_1ad6, 0x3a)) goto l_0x1012_1ad6; /* jnz 0x10121ad6 */
         l_0x1012_1a9c:
             ii(0x1012_1a9c, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
-            ii(0x1012_1aa0, 6); lea(edx, eax + 0x3ea);                  /* lea edx, [eax+0x3ea] */
+            ii(0x1012_1aa0, 6); lea(edx, memd[ds, eax + 0x3ea]);        /* lea edx, [eax+0x3ea] */
             ii(0x1012_1aa6, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
             ii(0x1012_1aaa, 3); imul(eax, eax, 0x1c);                   /* imul eax, eax, 0x1c */
             ii(0x1012_1aad, 6); mov(eax, memd[ds, eax + 0x101b_b068]);  /* mov eax, [eax+0x101bb068] */
             ii(0x1012_1ab3, 5); call(0x100d_5164, -0x4_c954);           /* call 0x100d5164 */
             ii(0x1012_1ab8, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
-            ii(0x1012_1abc, 6); lea(edx, eax + 0x3ea);                  /* lea edx, [eax+0x3ea] */
+            ii(0x1012_1abc, 6); lea(edx, memd[ds, eax + 0x3ea]);        /* lea edx, [eax+0x3ea] */
             ii(0x1012_1ac2, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
             ii(0x1012_1ac6, 3); imul(eax, eax, 0x1c);                   /* imul eax, eax, 0x1c */
             ii(0x1012_1ac9, 6); mov(eax, memd[ds, eax + 0x101b_b068]);  /* mov eax, [eax+0x101bb068] */
@@ -90,13 +90,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_1ad4, 2); jmp(0x1012_1b0e, 0x38); goto l_0x1012_1b0e; /* jmp 0x10121b0e */
         l_0x1012_1ad6:
             ii(0x1012_1ad6, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
-            ii(0x1012_1ada, 6); lea(edx, eax + 0x73ea);                 /* lea edx, [eax+0x73ea] */
+            ii(0x1012_1ada, 6); lea(edx, memd[ds, eax + 0x73ea]);       /* lea edx, [eax+0x73ea] */
             ii(0x1012_1ae0, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
             ii(0x1012_1ae4, 3); imul(eax, eax, 0x1c);                   /* imul eax, eax, 0x1c */
             ii(0x1012_1ae7, 6); mov(eax, memd[ds, eax + 0x101b_b068]);  /* mov eax, [eax+0x101bb068] */
             ii(0x1012_1aed, 5); call(0x100d_5164, -0x4_c98e);           /* call 0x100d5164 */
             ii(0x1012_1af2, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
-            ii(0x1012_1af6, 6); lea(edx, eax + 0x73ea);                 /* lea edx, [eax+0x73ea] */
+            ii(0x1012_1af6, 6); lea(edx, memd[ds, eax + 0x73ea]);       /* lea edx, [eax+0x73ea] */
             ii(0x1012_1afc, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
             ii(0x1012_1b00, 3); imul(eax, eax, 0x1c);                   /* imul eax, eax, 0x1c */
             ii(0x1012_1b03, 6); mov(eax, memd[ds, eax + 0x101b_b068]);  /* mov eax, [eax+0x101bb068] */
@@ -113,7 +113,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_1b2f, 3); imul(eax, eax, 0x1c);                   /* imul eax, eax, 0x1c */
             ii(0x1012_1b32, 6); mov(eax, memd[ds, eax + 0x101b_b068]);  /* mov eax, [eax+0x101bb068] */
             ii(0x1012_1b38, 5); call(0x100c_f85c, -0x5_22e1);           /* call 0x100cf85c */
-            ii(0x1012_1b3d, 3); lea(eax, ebp - 0x28);                   /* lea eax, [ebp-0x28] */
+            ii(0x1012_1b3d, 3); lea(eax, memd[ss, ebp - 0x28]);         /* lea eax, [ebp-0x28] */
             ii(0x1012_1b40, 5); call(0x1012_336c, 0x1827);              /* call 0x1012336c */
             ii(0x1012_1b45, 1); push(eax);                              /* push eax */
             ii(0x1012_1b46, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */

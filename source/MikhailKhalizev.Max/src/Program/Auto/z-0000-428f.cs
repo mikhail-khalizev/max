@@ -27,11 +27,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x42b6, 4);    push(memw[ds, 0x996]);                    /* push word [0x996] */
             ii(0x42ba, 2);    mov(bp, sp);                              /* mov bp, sp */
             ii(0x42bc, 2);    mov(es, ax);                              /* mov es, ax */
-            ii(0x42be, 4);    lds(si, ds, 0xf7a);                       /* lds si, [0xf7a] */
+            ii(0x42be, 4);    lds(si, memw[ds, 0xf7a]);                 /* lds si, [0xf7a] */
             ii(0x42c2, 1);    cld();                                    /* cld */
             ii(0x42c3, 1);    lodsw();                                  /* lodsw */
             ii(0x42c4, 3);    mov(memw[ss, bp + 0x4], ax);              /* mov [bp+0x4], ax */
-            ii(0x42c7, 3);    lea(di, bp + 0x16);                       /* lea di, [bp+0x16] */
+            ii(0x42c7, 3);    lea(di, memw[ss, bp + 0x16]);             /* lea di, [bp+0x16] */
             ii(0x42ca, 1);    movsw();                                  /* movsw */
             ii(0x42cb, 1);    movsw();                                  /* movsw */
             ii(0x42cc, 2);    movsd();                                  /* movsd */

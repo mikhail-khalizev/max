@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_f1de, 2); jmp(0x100a_f1f3, 0x13); goto l_0x100a_f1f3; /* jmp 0x100af1f3 */
         l_0x100a_f1e0:
             ii(0x100a_f1e0, 4); movsx(edx, memw[ss, ebp - 0xc]);        /* movsx edx, word [ebp-0xc] */
-            ii(0x100a_f1e4, 3); lea(edx, edx + edx * 2);                /* lea edx, [edx+edx*2] */
+            ii(0x100a_f1e4, 3); lea(edx, memd[ds, edx + edx * 2]);      /* lea edx, [edx+edx*2] */
             ii(0x100a_f1e7, 2); mov(eax, edx);                          /* mov eax, edx */
             ii(0x100a_f1e9, 3); sar(edx, 0x1f);                         /* sar edx, 0x1f */
             ii(0x100a_f1ec, 2); sub(eax, edx);                          /* sub eax, edx */

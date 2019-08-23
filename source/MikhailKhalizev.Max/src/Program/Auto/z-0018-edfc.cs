@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_edfc()
         {
             ii(0x18_edfc, 3); mov(ebx, esp);                            /* mov ebx, esp */
-            ii(0x18_edff, 6); lds(ebx, ss, ebx + 0xa);                  /* lds ebx, [ss:ebx+0xa] */
+            ii(0x18_edff, 6); lds(ebx, memd_a32[ss, ebx + 0xa]);        /* lds ebx, [ss:ebx+0xa] */
             ii(0x18_ee05, 3); mov(bl, memb_a32[ds, ebx]);               /* mov bl, [ebx] */
             ii(0x18_ee08, 3); cmp(bl, -0x65 /* 0x9b */);                /* cmp bl, 0x9b */
             ii(0x18_ee0b, 2); if(jz(0x18_ee13, 0x6)) goto l_0x18_ee13;  /* jz 0xee13 */

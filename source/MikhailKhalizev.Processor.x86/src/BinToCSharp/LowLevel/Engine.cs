@@ -431,9 +431,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 // Заполняем IsLocalBranch.
 
-                foreach (var brunchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
+                foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
                 {
-                    var branchInstructionIndex = method.Instructions.BinarySearch(new CSharpInstruction(brunchInfo.From), CSharpInstruction.BeginComparer);
+                    var branchInstructionIndex = method.Instructions.BinarySearch(new CSharpInstruction(branchInfo.From), CSharpInstruction.BeginComparer);
                     if (branchInstructionIndex < 0)
                         continue;
 
@@ -444,7 +444,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     if (branchInstruction.IsLocalBranch)
                         continue;
 
-                    branchInstruction.IsLocalBranch = brunchInfo.To.All(
+                    branchInstruction.IsLocalBranch = branchInfo.To.All(
                         addressTo =>
                         {
                             if (method.Begin <= addressTo && addressTo < method.End)

@@ -18,17 +18,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4ea6, 2); push(gs);                               /* push gs */
             ii(0x1019_4ea8, 1); push(es);                               /* push es */
             ii(0x1019_4ea9, 5); mov(eax, 0x8);                          /* mov eax, 0x8 */
-            ii(0x1019_4eae, 4); lfs(edi, ss, ebp + 0x10);               /* lfs edi, [ebp+0x10] */
+            ii(0x1019_4eae, 4); lfs(edi, memd[ss, ebp + 0x10]);         /* lfs edi, [ebp+0x10] */
             ii(0x1019_4eb2, 3); call_far_ind(ss, ebp + 0x8);            /* call far dword [ebp+0x8] */
             ii(0x1019_4eb5, 1); push(ds);                               /* push ds */
             ii(0x1019_4eb6, 1); push(es);                               /* push es */
-            ii(0x1019_4eb7, 3); les(edi, ss, ebp + 0x18);               /* les edi, [ebp+0x18] */
-            ii(0x1019_4eba, 3); lds(esi, ss, ebp + 0x10);               /* lds esi, [ebp+0x10] */
+            ii(0x1019_4eb7, 3); les(edi, memd[ss, ebp + 0x18]);         /* les edi, [ebp+0x18] */
+            ii(0x1019_4eba, 3); lds(esi, memd[ss, ebp + 0x10]);         /* lds esi, [ebp+0x10] */
             ii(0x1019_4ebd, 2); mov(esi, edx);                          /* mov esi, edx */
             ii(0x1019_4ebf, 5); mov(ecx, 0x6a);                         /* mov ecx, 0x6a */
             ii(0x1019_4ec4, 1); cld();                                  /* cld */
             ii(0x1019_4ec5, 2); rep(() => movsb());                     /* rep movsb */
-            ii(0x1019_4ec7, 3); les(edi, ss, ebp + 0x18);               /* les edi, [ebp+0x18] */
+            ii(0x1019_4ec7, 3); les(edi, memd[ss, ebp + 0x18]);         /* les edi, [ebp+0x18] */
             ii(0x1019_4eca, 5); mov(memw[es, edi + 0x44], ds);          /* mov [es:edi+0x44], ds */
             ii(0x1019_4ecf, 5); mov(memw[es, edi + 0x4c], ds);          /* mov [es:edi+0x4c], ds */
             ii(0x1019_4ed4, 5); mov(memw[es, edi + 0x54], ds);          /* mov [es:edi+0x54], ds */

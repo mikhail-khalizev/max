@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_cdc3:
             ii(0x1018_cdc3, 3); cmp(bh, 0x1);                           /* cmp bh, 0x1 */
             ii(0x1018_cdc6, 2); if(jnz(0x1018_cdda, 0x12)) goto l_0x1018_cdda; /* jnz 0x1018cdda */
-            ii(0x1018_cdc8, 3); lea(eax, ebp - 0x4);                    /* lea eax, [ebp-0x4] */
+            ii(0x1018_cdc8, 3); lea(eax, memd[ss, ebp - 0x4]);          /* lea eax, [ebp-0x4] */
             ii(0x1018_cdcb, 1); push(eax);                              /* push eax */
             ii(0x1018_cdcc, 1); push(ecx);                              /* push ecx */
             ii(0x1018_cdcd, 5); call(/* sys */ 0x1018_ca00, -0x3d2);    /* call 0x1018ca00 */

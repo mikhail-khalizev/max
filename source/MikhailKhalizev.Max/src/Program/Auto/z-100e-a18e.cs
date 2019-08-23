@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_a1a9, 3); mov(memd[ss, ebp - 0x4], ebx);          /* mov [ebp-0x4], ebx */
             ii(0x100e_a1ac, 3); mov(memd[ss, ebp - 0x8], ecx);          /* mov [ebp-0x8], ecx */
             ii(0x100e_a1af, 4); mov(memb[ss, ebp - 0x18], 0);           /* mov byte [ebp-0x18], 0x0 */
-            ii(0x100e_a1b3, 3); lea(edi, ebp - 0x24);                   /* lea edi, [ebp-0x24] */
+            ii(0x100e_a1b3, 3); lea(edi, memd[ss, ebp - 0x24]);         /* lea edi, [ebp-0x24] */
             ii(0x100e_a1b6, 3); mov(esi, memd[ss, ebp - 0xc]);          /* mov esi, [ebp-0xc] */
             ii(0x100e_a1b9, 2); movsw();                                /* movsw */
             ii(0x100e_a1bb, 1); movsb();                                /* movsb */
@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_a1df, 4); cmp(memb[ss, ebp - 0x1c], 0);           /* cmp byte [ebp-0x1c], 0x0 */
             ii(0x100e_a1e3, 2); if(jnz(0x100e_a21f, 0x3a)) goto l_0x100e_a21f; /* jnz 0x100ea21f */
             ii(0x100e_a1e5, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x100e_a1ea, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
+            ii(0x100e_a1ea, 3); lea(edx, memd[ss, ebp - 0x24]);         /* lea edx, [ebp-0x24] */
             ii(0x100e_a1ed, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x100e_a1f0, 5); call(0x100e_a11c, -0xd9);               /* call 0x100ea11c */
             ii(0x100e_a1f5, 4); movsx(edx, memb[ss, ebp - 0x23]);       /* movsx edx, byte [ebp-0x23] */
@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_a1fb, 3); add(edx, memd[ss, ebp + 0x10]);         /* add edx, [ebp+0x10] */
             ii(0x100e_a1fe, 3); mov(memw[ds, edx], ax);                 /* mov [edx], ax */
             ii(0x100e_a201, 5); mov(ebx, 0xffff_ffff);                  /* mov ebx, 0xffffffff */
-            ii(0x100e_a206, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
+            ii(0x100e_a206, 3); lea(edx, memd[ss, ebp - 0x24]);         /* lea edx, [ebp-0x24] */
             ii(0x100e_a209, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x100e_a20c, 5); call(0x100e_a11c, -0xf5);               /* call 0x100ea11c */
             ii(0x100e_a211, 2); mov(edx, eax);                          /* mov edx, eax */
@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_a23a, 4); mov(memb[ss, ebp - 0x18], 0x1);         /* mov byte [ebp-0x18], 0x1 */
             ii(0x100e_a23e, 5); jmp(0x100e_a2bb, 0x78); goto l_0x100e_a2bb; /* jmp 0x100ea2bb */
         l_0x100e_a243:
-            ii(0x100e_a243, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
+            ii(0x100e_a243, 3); lea(edx, memd[ss, ebp - 0x24]);         /* lea edx, [ebp-0x24] */
             ii(0x100e_a246, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x100e_a249, 5); call(0x100e_a067, -0x1e7);              /* call 0x100ea067 */
             ii(0x100e_a24e, 2); test(al, al);                           /* test al, al */
@@ -93,7 +93,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_a27a, 4); movsx(edx, memb[ss, ebp - 0x22]);       /* movsx edx, byte [ebp-0x22] */
             ii(0x100e_a27e, 2); cmp(edx, eax);                          /* cmp edx, eax */
             ii(0x100e_a280, 2); if(jg(0x100e_a291, 0xf)) goto l_0x100e_a291; /* jg 0x100ea291 */
-            ii(0x100e_a282, 3); lea(edx, ebp - 0x24);                   /* lea edx, [ebp-0x24] */
+            ii(0x100e_a282, 3); lea(edx, memd[ss, ebp - 0x24]);         /* lea edx, [ebp-0x24] */
             ii(0x100e_a285, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x100e_a288, 5); call(0x100e_a067, -0x226);              /* call 0x100ea067 */
             ii(0x100e_a28d, 2); test(al, al);                           /* test al, al */

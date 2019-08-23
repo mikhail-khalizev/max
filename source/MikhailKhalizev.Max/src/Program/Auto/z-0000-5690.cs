@@ -87,7 +87,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5730, 4);    cmp(si, 0x1190);                          /* cmp si, 0x1190 */
             ii(0x5734, 2);    if(jae(0x5725, -0x11)) goto l_0x5725;     /* jae 0x5725 */
         l_0x5736:
-            ii(0x5736, 3);    lea(ax, si + 0x1);                        /* lea ax, [si+0x1] */
+            ii(0x5736, 3);    lea(ax, memw[ds, si + 0x1]);              /* lea ax, [si+0x1] */
             ii(0x5739, 1);    push(ax);                                 /* push ax */
             ii(0x573a, 3);    call(0x4a87, -0xcb6);                     /* call 0x4a87 */
             ii(0x573d, 1);    pop(bx);                                  /* pop bx */

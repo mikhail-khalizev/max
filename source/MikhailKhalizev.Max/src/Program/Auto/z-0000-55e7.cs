@@ -25,21 +25,21 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5603, 3);    mov(si, 0x5);                             /* mov si, 0x5 */
             ii(0x5606, 2);    jmp(0x5622, 0x1a); goto l_0x5622;         /* jmp 0x5622 */
         l_0x5608:
-            ii(0x5608, 3);    lea(cx, si - 0x1);                        /* lea cx, [si-0x1] */
+            ii(0x5608, 3);    lea(cx, memw[ds, si - 0x1]);              /* lea cx, [si-0x1] */
             ii(0x560b, 2);    shl(cl, 0x1);                             /* shl cl, 1 */
             ii(0x560d, 2);    shl(cl, 0x1);                             /* shl cl, 1 */
             ii(0x560f, 3);    mov(bx, memw[ss, bp + 0x6]);              /* mov bx, [bp+0x6] */
             ii(0x5612, 2);    shr(bx, cl);                              /* shr bx, cl */
             ii(0x5614, 3);    and(bx, 0xf);                             /* and bx, 0xf */
             ii(0x5617, 4);    mov(al, memb[ds, bx + 0xab0]);            /* mov al, [bx+0xab0] */
-            ii(0x561b, 3);    lea(bx, bp - 0x2);                        /* lea bx, [bp-0x2] */
+            ii(0x561b, 3);    lea(bx, memw[ss, bp - 0x2]);              /* lea bx, [bp-0x2] */
             ii(0x561e, 2);    sub(bx, si);                              /* sub bx, si */
             ii(0x5620, 2);    mov(memb[ds, bx], al);                    /* mov [bx], al */
         l_0x5622:
             ii(0x5622, 1);    dec(si);                                  /* dec si */
             ii(0x5623, 2);    if(jns(0x5608, -0x1d)) goto l_0x5608;     /* jns 0x5608 */
             ii(0x5625, 4);    mov(memb[ss, bp - 0x2], 0);               /* mov byte [bp-0x2], 0x0 */
-            ii(0x5629, 3);    lea(ax, bp - 0x6);                        /* lea ax, [bp-0x6] */
+            ii(0x5629, 3);    lea(ax, memw[ss, bp - 0x6]);              /* lea ax, [bp-0x6] */
             ii(0x562c, 1);    push(ax);                                 /* push ax */
             ii(0x562d, 3);    call(0x5237, -0x3f9);                     /* call 0x5237 */
             ii(0x5630, 1);    pop(bx);                                  /* pop bx */

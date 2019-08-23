@@ -212,7 +212,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_07ae, 3); mov(memw[ss, bp - 0x18], dx);             /* mov [bp-0x18], dx */
             ii(0x19_07b1, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x19_07b3, 2); if(jz(0x19_0818, 0x63)) goto l_0x19_0818; /* jz 0x818 */
-            ii(0x19_07b5, 3); lea(ax, bp - 0x16);                       /* lea ax, [bp-0x16] */
+            ii(0x19_07b5, 3); lea(ax, memw[ss, bp - 0x16]);             /* lea ax, [bp-0x16] */
             ii(0x19_07b8, 1); push(ss);                                 /* push ss */
             ii(0x19_07b9, 1); push(ax);                                 /* push ax */
             ii(0x19_07ba, 2); push(0x31);                               /* push 0x31 */

@@ -59,11 +59,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_8e05, 1); push(eax);                              /* push eax */
             ii(0x1013_8e06, 5); mov(eax, StringDefinitions.SI2);        /* mov eax, 0x101ac878 */
             ii(0x1013_8e0b, 1); push(eax);                              /* push eax */
-            ii(0x1013_8e0c, 3); lea(eax, ebp - 0x44);                   /* lea eax, [ebp-0x44] */
+            ii(0x1013_8e0c, 3); lea(eax, memd[ss, ebp - 0x44]);         /* lea eax, [ebp-0x44] */
             ii(0x1013_8e0f, 1); push(eax);                              /* push eax */
             ii(0x1013_8e10, 5); call(Definitions.sys_sprintf, 0x2_d0ec); /* call 0x10165f01 */
             ii(0x1013_8e15, 3); add(esp, 0x10);                         /* add esp, 0x10 */
-            ii(0x1013_8e18, 3); lea(eax, ebp - 0x44);                   /* lea eax, [ebp-0x44] */
+            ii(0x1013_8e18, 3); lea(eax, memd[ss, ebp - 0x44]);         /* lea eax, [ebp-0x44] */
             ii(0x1013_8e1b, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
         l_0x1013_8e1e:
             ii(0x1013_8e1e, 4); cmp(memd[ss, ebp - 0x10], 0);           /* cmp dword [ebp-0x10], 0x0 */

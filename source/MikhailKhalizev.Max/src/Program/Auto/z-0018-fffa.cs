@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_fffa-2f2c2074")]
         public void Method_0018_fffa()
         {
-            ii(0x18_fffa, 3); les(si, ss, bp + 0x8);                    /* les si, [bp+0x8] */
+            ii(0x18_fffa, 3); les(si, memw[ss, bp + 0x8]);              /* les si, [bp+0x8] */
             ii(0x18_fffd, 4); push(memw[es, si + 0x4]);                 /* push word [es:si+0x4] */
             ii(0x19_0001, 4); pushd(memd[es, si]);                      /* push dword [es:si] */
             ii(0x19_0005, 3); mov(ax, 0xa8);                            /* mov ax, 0xa8 */

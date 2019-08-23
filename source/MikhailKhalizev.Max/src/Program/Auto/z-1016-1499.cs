@@ -102,7 +102,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_15b0, 2); if(jz(0x1016_15b8, 0x6)) goto l_0x1016_15b8; /* jz 0x101615b8 */
             ii(0x1016_15b2, 6); dec(memb[ds, 0x101c_947c]);             /* dec byte [0x101c947c] */
         l_0x1016_15b8:
-            ii(0x1016_15b8, 3); lea(eax, ebp - 0x1c);                   /* lea eax, [ebp-0x1c] */
+            ii(0x1016_15b8, 3); lea(eax, memd[ss, ebp - 0x1c]);         /* lea eax, [ebp-0x1c] */
             ii(0x1016_15bb, 5); call(0x100f_f562, -0x6_205e);           /* call 0x100ff562 */
         l_0x1016_15c0:
             ii(0x1016_15c0, 2); mov(esp, ebp);                          /* mov esp, ebp */

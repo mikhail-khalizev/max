@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_3c45, 3); mov(ax, memw[ss, bp + 0x6]);              /* mov ax, [bp+0x6] */
             ii(0x19_3c48, 3); mov(dx, memw[ss, bp + 0x8]);              /* mov dx, [bp+0x8] */
             ii(0x19_3c4b, 1); push(ds);                                 /* push ds */
-            ii(0x19_3c4c, 3); lds(di, ss, bp + 0xa);                    /* lds di, [bp+0xa] */
+            ii(0x19_3c4c, 3); lds(di, memw[ss, bp + 0xa]);              /* lds di, [bp+0xa] */
             ii(0x19_3c4f, 1); push(di);                                 /* push di */
             ii(0x19_3c50, 1); push(ds);                                 /* push ds */
             ii(0x19_3c51, 1); pop(es);                                  /* pop es */
@@ -57,7 +57,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_3c8e, 1); lodsb();                                  /* lodsb */
             ii(0x19_3c8f, 2); xchg(memb[ds, di], al);                   /* xchg [di], al */
             ii(0x19_3c91, 3); mov(memb[ds, si - 0x1], al);              /* mov [si-0x1], al */
-            ii(0x19_3c94, 3); lea(ax, si + 0x1);                        /* lea ax, [si+0x1] */
+            ii(0x19_3c94, 3); lea(ax, memw[ds, si + 0x1]);              /* lea ax, [si+0x1] */
             ii(0x19_3c97, 2); cmp(ax, di);                              /* cmp ax, di */
             ii(0x19_3c99, 2); if(jb(0x19_3c8d, -0xe)) goto l_0x19_3c8d; /* jb 0x3c8d */
             ii(0x19_3c9b, 2); mov(dx, ds);                              /* mov dx, ds */

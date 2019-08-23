@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7eeb, 1); push(ds);                                 /* push ds */
             ii(0x17_7eec, 3); mov(ax, 0x3e68);                          /* mov ax, 0x3e68 */
             ii(0x17_7eef, 2); mov(ds, ax);                              /* mov ds, ax */
-            ii(0x17_7ef1, 4); les(bx, ds, 0x4f9c);                      /* les bx, [0x4f9c] */
+            ii(0x17_7ef1, 4); les(bx, memw[ds, 0x4f9c]);                /* les bx, [0x4f9c] */
             ii(0x17_7ef5, 3); mov(si, memw[ss, bp + 0x6]);              /* mov si, [bp+0x6] */
             ii(0x17_7ef8, 4); test(memb[es, bx + si], 0x80);            /* test byte [es:bx+si], 0x80 */
             ii(0x17_7efc, 2); if(jz(0x17_7f35, 0x37)) goto l_0x17_7f35; /* jz 0x7f35 */
@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7f10, 3); xor(memb[es, bx + si], al);               /* xor [es:bx+si], al */
             ii(0x17_7f13, 4); cmp(memb[ss, bp - 0x2], 0);               /* cmp byte [bp-0x2], 0x0 */
             ii(0x17_7f17, 2); if(jnz(0x17_7f35, 0x1c)) goto l_0x17_7f35; /* jnz 0x7f35 */
-            ii(0x17_7f19, 4); les(bx, ds, 0x4f9c);                      /* les bx, [0x4f9c] */
+            ii(0x17_7f19, 4); les(bx, memw[ds, 0x4f9c]);                /* les bx, [0x4f9c] */
             ii(0x17_7f1d, 4); and(memb[es, bx + si], 0x7f);             /* and byte [es:bx+si], 0x7f */
             ii(0x17_7f21, 5); add(memw[ds, 0x1fb8], 0x1);               /* add word [0x1fb8], 0x1 */
             ii(0x17_7f26, 5); adc(memw[ds, 0x1fba], 0);                 /* adc word [0x1fba], 0x0 */
