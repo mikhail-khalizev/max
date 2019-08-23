@@ -7,7 +7,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1017_9f60-4aef5b11")]
         public void /* sys */ Method_1017_9f60()
         {
-            // retd(); return;
+            // ret(); return;
 
             var chan = RawProgramMain.DosDma.dma_get_channel(5);
 
