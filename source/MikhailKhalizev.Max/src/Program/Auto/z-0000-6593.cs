@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x6593-2d3")]
         public void Method_0000_6593()
         {
-            ii(0x6593, 1);    retw();                                   /* ret */
+            ii(0x6593, 1);    ret();                                    /* ret */
         }
     }
 }

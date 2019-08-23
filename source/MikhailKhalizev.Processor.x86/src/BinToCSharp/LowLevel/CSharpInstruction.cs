@@ -25,6 +25,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         public List<string> Comments { get; set; }
 
+        public int DisMode { get; set; }
         public int AddrMode { get; set; }
         public int OprMode { get; set; }
 
@@ -113,6 +114,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if ((IsJmpOrJcc || IsLoopOrLoopcc || IsCall) && Operands[0].type == ud_type.UD_OP_PTR)
                 BrFar = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
 
+            DisMode = ud.dis_mode;
             AddrMode = ud.adr_mode;
             OprMode = ud.opr_mode;
 
@@ -172,7 +174,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     throw new NotImplementedException($"Unknown instruction at {Begin}: {Mnemonic} {(string.Join(", ", Comments))}");
             }
 
-            var adrModeStr = $"_a{AddrMode}";
+            var adrModeStr = AddrMode != DisMode ? $"_a{AddrMode}" : "";
 
             var effOprSize = OprMode;
             if (Mnemonic == ud_mnemonic_code.UD_Iout)
@@ -195,35 +197,33 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (addIf)
                 sb.Append("if(");
 
-            if (Mnemonic == ud_mnemonic_code.UD_Iint)
-                sb.Append("@");
-            sb.Append(udis86.ud_lookup_mnemonic(Mnemonic));
 
-            if (flags.HasFlag(InstrFlags.UseOprSizeInside))
-            {
-                sb.Append(GetSizeSuffixByBits(effOprSize));
-            }
+            var method = udis86.ud_lookup_mnemonic(Mnemonic);
+
+            if (flags.HasFlag(InstrFlags.UseOprSizeInside) && effOprSize != DisMode ||
+                new[] { ud_mnemonic_code.UD_Iin, ud_mnemonic_code.UD_Iout }.Contains(Mnemonic))
+                method += GetSizeSuffixByBits(effOprSize);
 
             if (flags.HasFlag(InstrFlags.UseAdrSizeInside) ||
                 new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
                 BrFar &&
                 Operands[0].type == ud_type.UD_OP_MEM)
-                sb.Append(adrModeStr);
+                method += adrModeStr;
 
             if (BrFar)
-                sb.Append("_far");
+                method += "_far";
 
             var needWriteNamespace = IsCall;
             if (IsJmpOrJcc || IsLoopOrLoopcc || IsCall)
             {
                 if (Operands[0].type == ud_type.UD_OP_PTR)
                 {
-                    sb.Append("_abs");
+                    method += "_abs";
                     needWriteNamespace = true;
                 }
                 else if (Operands[0].type == ud_type.UD_OP_MEM || Operands[0].type == ud_type.UD_OP_REG)
                 {
-                    sb.Append(BrFar ? "_ind" : "_abs");
+                    method += BrFar ? "_ind" : "_abs";
                     needWriteNamespace = true;
                 }
             }
@@ -231,9 +231,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 needWriteNamespace = true;
 
             var options = new DefinitionCollection.Options { WithNamespace = needWriteNamespace };
+            
+            method += cmdSuffix;
+            
+            if (new[] { "int", "in", "out" }.Contains(method))
+                method = "@" + method;
 
 
-            sb.Append(cmdSuffix);
+            sb.Append(method);
             sb.Append("(");
 
 
@@ -369,9 +374,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         switch (oprSize)
                         {
                             case 8:
-                            {
-                                var needSignExtend = new[]
                                 {
+                                    var needSignExtend = new[]
+                                    {
                                     ud_mnemonic_code.UD_Iimul,
                                     ud_mnemonic_code.UD_Ipush,
                                     ud_mnemonic_code.UD_Iadc,

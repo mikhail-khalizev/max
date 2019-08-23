@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0017_e20f()
         {
             ii(0x17_e20f, 2); xor(ax, ax);                              /* xor ax, ax */
-            ii(0x17_e211, 1); retfw();                                  /* retf */
+            ii(0x17_e211, 1); retf();                                   /* retf */
         }
     }
 }

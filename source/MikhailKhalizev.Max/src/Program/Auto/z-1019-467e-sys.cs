@@ -8,9 +8,9 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_467e-a499f2da")]
         public void /* sys */ Method_1019_467e()
         {
-            ii(0x1019_467e, 1); pushd(ebx);                             /* push ebx */
-            ii(0x1019_467f, 1); pushd(ecx);                             /* push ecx */
-            ii(0x1019_4680, 1); pushd(edx);                             /* push edx */
+            ii(0x1019_467e, 1); push(ebx);                              /* push ebx */
+            ii(0x1019_467f, 1); push(ecx);                              /* push ecx */
+            ii(0x1019_4680, 1); push(edx);                              /* push edx */
             ii(0x1019_4681, 2); mov(ebx, eax);                          /* mov ebx, eax */
             ii(0x1019_4683, 2); mov(al, 0);                             /* mov al, 0x0 */
             ii(0x1019_4685, 2); mov(ah, 0x44);                          /* mov ah, 0x44 */
@@ -24,10 +24,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4697, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1019_4699, 3); setnz(al);                              /* setnz al */
             ii(0x1019_469c, 5); and(eax, 0xff);                         /* and eax, 0xff */
-            ii(0x1019_46a1, 1); popd(edx);                              /* pop edx */
-            ii(0x1019_46a2, 1); popd(ecx);                              /* pop ecx */
-            ii(0x1019_46a3, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1019_46a4, 1); retd();                                 /* ret */
+            ii(0x1019_46a1, 1); pop(edx);                               /* pop edx */
+            ii(0x1019_46a2, 1); pop(ecx);                               /* pop ecx */
+            ii(0x1019_46a3, 1); pop(ebx);                               /* pop ebx */
+            ii(0x1019_46a4, 1); ret();                                  /* ret */
         }
     }
 }

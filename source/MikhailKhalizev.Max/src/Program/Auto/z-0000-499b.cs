@@ -10,10 +10,10 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x499b, 2);    inb(al, 0x92);                            /* in al, 0x92 */
             ii(0x499d, 2);    and(al, 0xfd);                            /* and al, 0xfd */
-            ii(0x499f, 2);    jmpw(0x49a1, 0); goto l_0x49a1;           /* jmp 0x49a1 */
+            ii(0x499f, 2);    jmp(0x49a1, 0); goto l_0x49a1;            /* jmp 0x49a1 */
         l_0x49a1:
             ii(0x49a1, 2);    outb(0x92, al);                           /* out 0x92, al */
-            ii(0x49a3, 1);    retw();                                   /* ret */
+            ii(0x49a3, 1);    ret();                                    /* ret */
         }
     }
 }

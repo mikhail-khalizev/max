@@ -8,12 +8,12 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x17_488e-25c829cb")]
         public void Method_0017_488e()
         {
-            ii(0x17_488e, 1); pushw(ds);                                /* push ds */
+            ii(0x17_488e, 1); push(ds);                                 /* push ds */
             ii(0x17_488f, 3); mov(ax, 0x3e68);                          /* mov ax, 0x3e68 */
             ii(0x17_4892, 2); mov(ds, ax);                              /* mov ds, ax */
-            ii(0x17_4894, 4); dec(memw_a16[ds, 0xd8]);                  /* dec word [0xd8] */
-            ii(0x17_4898, 1); popw(ds);                                 /* pop ds */
-            ii(0x17_4899, 1); retfw();                                  /* retf */
+            ii(0x17_4894, 4); dec(memw[ds, 0xd8]);                      /* dec word [0xd8] */
+            ii(0x17_4898, 1); pop(ds);                                  /* pop ds */
+            ii(0x17_4899, 1); retf();                                   /* retf */
         }
     }
 }

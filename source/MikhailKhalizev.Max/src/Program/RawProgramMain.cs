@@ -466,8 +466,8 @@ namespace MikhailKhalizev.Max.Program
             // Замечено, что многие функции начинаются со следующих двух команд.
 
             // {0x68, 0x28, 0, 0, 0,  0xe8, 0x90, 0xa1, 0xb, 0}
-            // II(0x100abbb8, 0x5)   pushd(0x28);                                     /* push dword 0x28 */
-            // II(0x100abbbd, 0x5)   calld(sys_check_available_stack_size, 0xb_a190); /* call 0x10165d52 */
+            // ii(0, 0x5)   pushd(0x28);                                      /* push dword 0x28 */
+            // ii(0, 0x5)   calld(sys_check_available_stack_size, 0xb_a190);  /* call 0x10165d52 */
 
             // Весь код MAXRUN.EXE
             Address code_start = 0x1007_0000;

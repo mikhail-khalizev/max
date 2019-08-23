@@ -8,9 +8,9 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1_1b34-8b931")]
         public void Method_0001_1b34()
         {
-            ii(0x1_1b34, 1);  popw(ds);                                 /* pop ds */
-            ii(0x1_1b35, 1);  popw(bp);                                 /* pop bp */
-            ii(0x1_1b36, 1);  retw();                                   /* ret */
+            ii(0x1_1b34, 1);  pop(ds);                                  /* pop ds */
+            ii(0x1_1b35, 1);  pop(bp);                                  /* pop bp */
+            ii(0x1_1b36, 1);  ret();                                    /* ret */
         }
     }
 }

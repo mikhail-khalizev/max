@@ -9,10 +9,10 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_5578()
         {
             ii(0x5578, 3);    mov(ax, 0xaac);                           /* mov ax, 0xaac */
-            ii(0x557b, 1);    pushw(ax);                                /* push ax */
-            ii(0x557c, 3);    callw(0x5237, -0x348);                    /* call 0x5237 */
-            ii(0x557f, 1);    popw(bx);                                 /* pop bx */
-            ii(0x5580, 1);    retw();                                   /* ret */
+            ii(0x557b, 1);    push(ax);                                 /* push ax */
+            ii(0x557c, 3);    call(0x5237, -0x348);                     /* call 0x5237 */
+            ii(0x557f, 1);    pop(bx);                                  /* pop bx */
+            ii(0x5580, 1);    ret();                                    /* ret */
         }
     }
 }

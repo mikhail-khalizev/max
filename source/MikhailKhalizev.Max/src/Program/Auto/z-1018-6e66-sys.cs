@@ -8,12 +8,12 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_6e66-766c867a")]
         public void /* sys */ Method_1018_6e66()
         {
-            ii(0x1018_6e66, 1); popd(edi);                              /* pop edi */
-            ii(0x1018_6e67, 1); popd(esi);                              /* pop esi */
-            ii(0x1018_6e68, 1); popd(edx);                              /* pop edx */
-            ii(0x1018_6e69, 1); popd(ecx);                              /* pop ecx */
-            ii(0x1018_6e6a, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1018_6e6b, 1); retd();                                 /* ret */
+            ii(0x1018_6e66, 1); pop(edi);                               /* pop edi */
+            ii(0x1018_6e67, 1); pop(esi);                               /* pop esi */
+            ii(0x1018_6e68, 1); pop(edx);                               /* pop edx */
+            ii(0x1018_6e69, 1); pop(ecx);                               /* pop ecx */
+            ii(0x1018_6e6a, 1); pop(ebx);                               /* pop ebx */
+            ii(0x1018_6e6b, 1); ret();                                  /* ret */
         }
     }
 }

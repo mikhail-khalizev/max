@@ -246,7 +246,7 @@ namespace MikhailKhalizev.Max.Dos
 
                                         var time = DateTime.Now.TimeOfDay;
                                         time = new TimeSpan(time.Hours, time.Minutes, time.Seconds);
-                                        NonBlockingConsole.WriteLine($"    Draw. Time: {time}, File: {fileNum}.png");
+                                        NonBlockingConsole.WriteLine($"    Screen. Time: {time}, File: {fileNum}.png");
 
                                         //extra_log = (124 <= fileNum); /* Движение единиц. */
                                     }

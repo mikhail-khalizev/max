@@ -167,6 +167,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 
         IMemory Memory { get; }
 
+        MemoryAccess memb { get; }
+        MemoryAccess memw { get; }
+        MemoryAccess memd { get; }
+        MemoryAccess memq { get; }
+        MemoryAccess memt { get; } // 80 bit.
+        MemoryAccess memo { get; } // 128 bit.
+
         MemoryAccess memb_a16 { get; }
         MemoryAccess memw_a16 { get; }
         MemoryAccess memd_a16 { get; }
@@ -176,12 +183,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         MemoryAccess memw_a32 { get; }
         MemoryAccess memd_a32 { get; }
         MemoryAccess memq_a32 { get; }
-
-        // 80 bit.
-        MemoryAccess memt_a32 { get; }
-
-        // 128 bit.
-        MemoryAccess memo_a32 { get; }
+        MemoryAccess memt_a32 { get; } // 80 bit.
+        MemoryAccess memo_a32 { get; } // 128 bit.
 
         #endregion
 
@@ -509,6 +512,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void call(Address address, int offset);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void callw(Address address, int offset);
 
         /// <summary>
@@ -516,6 +525,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void calld(Address address, int offset);
+
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool call_up(Address address, int offset);
 
         /// <summary>
         /// Call Procedure.
@@ -529,6 +545,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool calld_up(Address address, int offset);
 
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void call_abs(ValueBase address);
+
         /// <summary>
         /// Call Procedure.
         /// </summary>
@@ -539,19 +562,27 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool callw_abs_up(ValueBase address);
-
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void calld_abs(ValueBase address);
 
+
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_far_abs(int segment, ValueBase address);
+        bool call_abs_up(ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool callw_abs_up(ValueBase address);
+
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void call_far_abs(int segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
@@ -563,7 +594,33 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void calld_far_abs(int segment, ValueBase address);
+
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool call_far_abs_up(int segment, ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool callw_far_abs_up(int segment, ValueBase address);
+
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void call_far_ind(SegmentRegister segment, ValueBase address);
+        
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        void calld_far_ind(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
@@ -575,7 +632,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address);
+        void calld_a16_far_ind(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
@@ -583,17 +640,24 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void calld_a32_far_ind(SegmentRegister segment, ValueBase address);
 
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_a16_far_ind(SegmentRegister segment, ValueBase address);
+        bool call_far_ind_up(SegmentRegister segment, ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address);
 
 
         /// <summary>
@@ -698,6 +762,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html</remarks>
         void cmps();
 
+
+        /// <summary>
+        /// Compare String Operands.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html</remarks>
+        void cmpsb();
+
         /// <summary>
         /// Compare String Operands.
         /// </summary>
@@ -709,6 +780,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html</remarks>
         void cmpsb_a32();
+
 
         /// <summary>
         /// Compare String Operands.
@@ -734,11 +806,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/CMPSS.html</remarks>
         void cmpss();
 
+
+        /// <summary>
+        /// Compare String Operands.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html</remarks>
+        void cmpsw();
+
         /// <summary>
         /// Compare String Operands.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CMPS:CMPSB:CMPSW:CMPSD:CMPSQ.html</remarks>
         void cmpsw_a16();
+
 
         /// <summary>
         /// Compare and Exchange.
@@ -998,11 +1078,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/EMMS.html</remarks>
         void emms();
 
+
+        /// <summary>
+        /// Make Stack Frame for Procedure Parameters.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/ENTER.html</remarks>
+        void enter(int size, int nestingLevel);
+
         /// <summary>
         /// Make Stack Frame for Procedure Parameters.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/ENTER.html</remarks>
         void enterw(int size, int nestingLevel);
+
 
         /// <summary>
         /// Extract Packed Floating-Point Values.
@@ -1333,6 +1421,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FNOP.html</remarks>
         void fnop();
+
+        /// <summary>
+        /// Store x87 FPU State.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html</remarks>
+        void fnsave(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Store x87 FPU State.
@@ -1732,7 +1826,26 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        void jmp(Address address, int offset);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         void jmpw(Address address, int offset);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        void jmpd(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        bool jmp_func(Address address, int offset);
 
         /// <summary>
         /// Jump.
@@ -1744,7 +1857,33 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        bool jmpd_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        bool jmp_abs(ValueBase address);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         bool jmpw_abs(ValueBase address);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        bool jmpd_abs(ValueBase address);
+
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        Address jmp_abs_switch(ValueBase address);
 
         /// <summary>
         /// Jump.
@@ -1756,38 +1895,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_far_abs(int segment, Address address);
-
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address);
-
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_abs(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         Address jmpd_abs_switch(ValueBase address);
+
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        bool jmp_far_abs(int segment, Address address);
+
+        /// <summary>
+        /// Jump.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
+        bool jmpw_far_abs(int segment, Address address);
 
         /// <summary>
         /// Call Procedure.
@@ -1795,12 +1916,37 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool jmpd_far_abs(int segment, Address address);
 
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool jmp_far_ind(SegmentRegister segment, ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool jmpd_far_ind(SegmentRegister segment, ValueBase address);
+
+        /// <summary>
+        /// Call Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
+        bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address);
+
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool ja(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1818,6 +1964,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool ja_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jaw_func(Address address, int offset);
 
         /// <summary>
@@ -1825,6 +1977,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jad_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jae(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1838,6 +1997,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jaed(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jae_func(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -1849,6 +2015,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jaed_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jb(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1866,6 +2039,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jb_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jbw_func(Address address, int offset);
 
         /// <summary>
@@ -1873,6 +2052,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jbd_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jbe(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1890,6 +2076,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jbe_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jbew_func(Address address, int offset);
 
         /// <summary>
@@ -1898,11 +2090,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jbed_func(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jc(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jcw(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jcxz(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1916,6 +2122,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jcxzd(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jcxz_func(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -1928,6 +2141,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jcxzd_func(Address address, int offset);
 
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -1938,7 +2152,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jecxz_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jecxzd_func(Address address, int offset);
+
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1951,6 +2172,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jew(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jg(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1970,6 +2198,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jgd_func(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jge(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -1987,6 +2222,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jged(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jl(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2006,6 +2248,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jld_func(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jle(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -2022,6 +2271,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jle_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jled_func(Address address, int offset);
 
         /// <summary>
@@ -2029,6 +2284,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jlew_func(Address address, int offset);
+
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2090,17 +2346,32 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnle(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jno(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnod(Address address, int offset);
 
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnp(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jns(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2114,6 +2385,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnsd(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jns_func(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -2125,6 +2403,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnsd_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jnz(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2142,6 +2427,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jnz_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnzw_func(Address address, int offset);
 
         /// <summary>
@@ -2150,11 +2441,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnzd_func(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jo(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jow(Address address, int offset);
+
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2180,6 +2479,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jpo(Address address, int offset);
 
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool js(Address address, int offset);
+
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
@@ -2196,7 +2502,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool js_func(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jsw_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jz(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2209,6 +2528,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jzd(Address address, int offset);
+
+        /// <summary>
+        /// Jump if Condition Is Met.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
+        bool jz_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2565,6 +2890,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/LEA.html</remarks>
         void lea(ValueBase dst, ValueBase src);
 
+
+        /// <summary>
+        /// High Level Procedure Exit.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LEAVE.html</remarks>
+        void leave();
+
         /// <summary>
         /// High Level Procedure Exit.
         /// </summary>
@@ -2576,6 +2908,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LEAVE.html</remarks>
         void leaved();
+        
+        /// <summary>
+        /// Load Fence.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LFENCE.html</remarks>
+        void lfence();
+
 
         /// <summary>
         /// Load Far Pointer.
@@ -2584,16 +2923,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void les(ValueBase dst, SegmentRegister segment, ValueBase offset);
 
         /// <summary>
-        /// Load Fence.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LFENCE.html</remarks>
-        void lfence();
-
-        /// <summary>
         /// Load Far Pointer.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
         void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset);
+        
+        /// <summary>
+        /// Load Far Pointer.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
+        void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset);
+
+
+        /// <summary>
+        /// Load Global/Interrupt Descriptor Table Register.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
+        void lgdt(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
@@ -2601,23 +2947,32 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
         void lgdtw_a16(SegmentRegister segment, ValueBase address);
 
+
+        /// <summary>
+        /// Load Global/Interrupt Descriptor Table Register.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
+        void lgdtd(SegmentRegister segment, ValueBase address);
+
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
         void lgdtd_a16(SegmentRegister segment, ValueBase address);
+        
 
         /// <summary>
-        /// Load Far Pointer.
+        /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
-        void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset);
+        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
+        void lidt(SegmentRegister segment, ValueBase address);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
         void lidtw_a16(SegmentRegister segment, ValueBase address);
+
 
         /// <summary>
         /// Load Local Descriptor Table Register.
@@ -2643,6 +2998,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
         void lods();
 
+
+        /// <summary>
+        /// Load String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
+        void lodsb();
+
         /// <summary>
         /// Load String.
         /// </summary>
@@ -2654,6 +3016,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
         void lodsb_a32();
+
+
+        /// <summary>
+        /// Load String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
+        void lodsd();
 
         /// <summary>
         /// Load String.
@@ -2667,6 +3036,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
         void lodsd_a32();
 
+
         /// <summary>
         /// Load String.
         /// </summary>
@@ -2677,7 +3047,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Load String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
+        void lodsw();
+
+        /// <summary>
+        /// Load String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LODS:LODSB:LODSW:LODSD:LODSQ.html</remarks>
         void lodsw_a16();
+
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loop(Address address, int offset);
 
         /// <summary>
         /// Loop According to ECX Counter.
@@ -2691,29 +3074,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopd_a32(Address address, int offset);
 
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopew_a16(Address address, int offset);
 
         /// <summary>
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool looped_a32(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool looped_a32_func(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopnew_a16(Address address, int offset);
+        bool loop_func(Address address, int offset);
 
         /// <summary>
         /// Loop According to ECX Counter.
@@ -2727,11 +3093,58 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopd_a32_func(Address address, int offset);
 
+
         /// <summary>
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopned_a32_func(Address address, int offset);
+        bool loope(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopew_a16(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool looped_a32(Address address, int offset);
+
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loope_func(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool looped_a32_func(Address address, int offset);
+
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopne(Address address, int offset);
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopnew_a16(Address address, int offset);
+
+
+        /// <summary>
+        /// Loop According to ECX Counter.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
+        bool loopne_func(Address address, int offset);
+
 
         /// <summary>
         /// Load Segment Limit.
@@ -2997,6 +3410,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/MOVQ2DQ.html</remarks>
         void movq2dq();
 
+
+        /// <summary>
+        /// Move Data from String to String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
+        void movsb(SegmentRegister segment = null);
+
         /// <summary>
         /// Move Data from String to String.
         /// </summary>
@@ -3008,6 +3428,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
         void movsb_a32(SegmentRegister segment = null);
+
+
+        /// <summary>
+        /// Move Data from String to String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
+        void movsw(SegmentRegister segment = null);
 
         /// <summary>
         /// Move Data from String to String.
@@ -3021,6 +3448,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
         void movsw_a32(SegmentRegister segment = null);
 
+
+        /// <summary>
+        /// Move Data from String to String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
+        void movsd();
+
         /// <summary>
         /// Move Data from String to String.
         /// </summary>
@@ -3032,6 +3466,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
         void movsd_a32(SegmentRegister segment = null);
+
+
+        /// <summary>
+        /// Move Data from String to String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
+        void movsq();
+
 
         /// <summary>
         /// Move or Merge Scalar Double-Precision Floating-Point Value.
@@ -3052,22 +3494,10 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void movsldup();
 
         /// <summary>
-        /// Move Data from String to String.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
-        void movsq();
-
-        /// <summary>
         /// Move or Merge Scalar Single-Precision Floating-Point Value.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVSS.html</remarks>
         void movss();
-
-        /// <summary>
-        /// Move Data from String to String.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/MOVS:MOVSB:MOVSW:MOVSD:MOVSQ.html</remarks>
-        void movsw();
 
         /// <summary>
         /// Move with Sign-Extension.
@@ -3201,6 +3631,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/OUTS:OUTSB:OUTSW:OUTSD.html</remarks>
         void outs();
 
+
+        /// <summary>
+        /// Output String to Port.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/OUTS:OUTSB:OUTSW:OUTSD.html</remarks>
+        void outsb(SegmentRegister segment = null);
+
         /// <summary>
         /// Output String to Port.
         /// </summary>
@@ -3212,6 +3649,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/OUTS:OUTSB:OUTSW:OUTSD.html</remarks>
         void outsb_a32(SegmentRegister segment = null);
+
 
         /// <summary>
         /// Output String to Port.
@@ -3723,6 +4161,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/PMULUDQ.html</remarks>
         void pmuludq();
 
+
+        /// <summary>
+        /// Pop a Value from the Stack.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
+        ValueBase pop(ValueBase d = null);
+
         /// <summary>
         /// Pop a Value from the Stack.
         /// </summary>
@@ -3734,6 +4179,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
         uint popd(ValueBase d = null);
+
 
         /// <summary>
         /// Pop All General-Purpose Registers.
@@ -4017,6 +4463,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/PUNPCKLBW:PUNPCKLWD:PUNPCKLDQ:PUNPCKLQDQ.html</remarks>
         void punpcklwd();
 
+
+        /// <summary>
+        /// Push Word, Doubleword or Quadword Onto the Stack.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/PUSH.html</remarks>
+        void push(ValueBase s);
+
         /// <summary>
         /// Push Word, Doubleword or Quadword Onto the Stack.
         /// </summary>
@@ -4058,6 +4511,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PUSHF:PUSHFD:PUSHFQ.html</remarks>
         void pushfq();
+
 
         /// <summary>
         /// Logical Exclusive OR.
@@ -4154,7 +4608,26 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Repeat String Operation Prefix.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void rep(Action action);
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
         void rep_a16(Action action);
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void rep_a32(Action action);
+
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void repe(Action action);
 
         /// <summary>
         /// Repeat String Operation Prefix.
@@ -4166,20 +4639,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Repeat String Operation Prefix.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
-        void repne_a16(Action action);
-
-
-        /// <summary>
-        /// Repeat String Operation Prefix.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
-        void rep_a32(Action action);
-
-        /// <summary>
-        /// Repeat String Operation Prefix.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
         void repe_a32(Action action);
+
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void repne(Action action);
+
+        /// <summary>
+        /// Repeat String Operation Prefix.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
+        void repne_a16(Action action);
 
         /// <summary>
         /// Repeat String Operation Prefix.
@@ -4187,6 +4660,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/REP:REPE:REPZ:REPNE:REPNZ.html</remarks>
         void repne_a32(Action action);
 
+
+        /// <summary>
+        /// Return from Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
+        void ret(int allocSize = 0);
 
         /// <summary>
         /// Return from Procedure.
@@ -4200,6 +4679,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
         void retd(int size = 0);
 
+
+        /// <summary>
+        /// Return from Procedure.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
+        void retf(int size = 0);
+
         /// <summary>
         /// Return from Procedure.
         /// </summary>
@@ -4211,6 +4697,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/RET.html</remarks>
         void retfd(int size = 0);
+
 
         /// <summary>
         /// Rotate.
@@ -4308,6 +4795,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
         void scas();
 
+
+        /// <summary>
+        /// Scan String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
+        void scasb();
+
         /// <summary>
         /// Scan String.
         /// </summary>
@@ -4320,6 +4814,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
         void scasb_a32();
 
+
+        /// <summary>
+        /// Scan String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
+        void scasd();
+
         /// <summary>
         /// Scan String.
         /// </summary>
@@ -4331,6 +4832,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
         void scasd_a32();
+
+
+        /// <summary>
+        /// Scan String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/SCAS:SCASB:SCASW:SCASD.html</remarks>
+        void scasw();
 
         /// <summary>
         /// Scan String.
@@ -4489,11 +4997,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/SHUFPS.html</remarks>
         void shufps();
 
+
         /// <summary>
         /// Store Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SIDT.html</remarks>
-        void sidtd_a32(SegmentRegister segment, ValueBase value);
+        void sidt(SegmentRegister segment, ValueBase value);
+
 
         /// <summary>
         /// Store Local Descriptor Table Register.
@@ -4567,6 +5077,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stos();
 
+
+        /// <summary>
+        /// Store String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
+        void stosb();
+
         /// <summary>
         /// Store String.
         /// </summary>
@@ -4578,6 +5095,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stosb_a32();
+
+
+        /// <summary>
+        /// Store String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
+        void stosd();
 
         /// <summary>
         /// Store String.
@@ -4591,11 +5115,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stosd_a32();
 
+
         /// <summary>
         /// Store String.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stosq();
+
+
+        /// <summary>
+        /// Store String.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
+        void stosw();
 
         /// <summary>
         /// Store String.
@@ -4608,6 +5140,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/STOS:STOSB:STOSW:STOSD:STOSQ.html</remarks>
         void stosw_a32();
+
 
         /// <summary>
         /// Store Task Register.
@@ -6631,11 +7164,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/XLAT:XLATB.html</remarks>
         void xlat();
 
+
+        /// <summary>
+        /// Table Look-up Translation.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/XLAT:XLATB.html</remarks>
+        void xlatb();
+
         /// <summary>
         /// Table Look-up Translation.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/XLAT:XLATB.html</remarks>
         void xlatb_a16();
+
 
         /// <summary>
         /// Logical Exclusive OR.

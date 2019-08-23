@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_2630()
         {
             ii(0x1018_2630, 5); mov(eax, /* sys */ 0x1018_2b48);        /* mov eax, 0x10182b48 */
-            ii(0x1018_2635, 5); if(jmpd_func(0x1016_c6c8, -0x1_5f72)) return; /* jmp 0x1016c6c8 */
+            ii(0x1018_2635, 5); if(jmp_func(0x1016_c6c8, -0x1_5f72)) return; /* jmp 0x1016c6c8 */
         }
     }
 }

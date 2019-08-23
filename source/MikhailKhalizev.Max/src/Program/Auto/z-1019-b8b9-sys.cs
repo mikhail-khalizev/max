@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_b8b9-94fd")]
         public void /* sys */ Method_1019_b8b9()
         {
-            ii(0x1019_b8b9, 1); popd(esi);                              /* pop esi */
-            ii(0x1019_b8ba, 1); retd();                                 /* ret */
+            ii(0x1019_b8b9, 1); pop(esi);                               /* pop esi */
+            ii(0x1019_b8ba, 1); ret();                                  /* ret */
         }
     }
 }

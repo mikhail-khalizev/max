@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_f33b()
         {
             ii(0x18_f33b, 3); cmp(edi, ecx);                            /* cmp edi, ecx */
-            ii(0x18_f33e, 2); if(jbew_func(0x18_f329, -0x17)) return;   /* jbe 0xf329 */
-            ii(0x18_f340, 3); callw(0x18_f356, 0x13);                   /* call 0xf356 */
+            ii(0x18_f33e, 2); if(jbe_func(0x18_f329, -0x17)) return;    /* jbe 0xf329 */
+            ii(0x18_f340, 3); call(0x18_f356, 0x13);                    /* call 0xf356 */
         }
     }
 }
