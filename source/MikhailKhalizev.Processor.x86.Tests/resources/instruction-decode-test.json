@@ -369,7 +369,7 @@
     "Arch": 16,
     "Addr": "0x40c5",
     "Raw": "0f011ed008",
-    "Dec": "lidt(ds, 0x8d0);"
+    "Dec": "lidt(memw[ds, 0x8d0]);"
   },
   {
     "Arch": 16,
@@ -531,7 +531,7 @@
     "Arch": 16,
     "Addr": "0x13_cebe",
     "Raw": "0fb2647b",
-    "Dec": "lss(sp, ds, si + 0x7b);"
+    "Dec": "lss(sp, memw[ds, si + 0x7b]);"
   },
   {
     "Arch": 16,
@@ -1155,13 +1155,13 @@
     "Arch": 16,
     "Addr": "0x15_0011",
     "Raw": "26668f4502",
-    "Dec": "popd(memd[es, di + 0x2]);"
+    "Dec": "pop(memd[es, di + 0x2]);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_cf2c",
     "Raw": "2666c46e75",
-    "Dec": "les(ebp, es, bp + 0x75);"
+    "Dec": "les(ebp, memd[es, bp + 0x75]);"
   },
   {
     "Arch": 16,
@@ -1173,13 +1173,13 @@
     "Arch": 16,
     "Addr": "0x15_0001",
     "Raw": "2666ff34",
-    "Dec": "pushd(memd[es, si]);"
+    "Dec": "push(memd[es, si]);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_95cc",
     "Raw": "2666ff7524",
-    "Dec": "pushd(memd[es, di + 0x24]);"
+    "Dec": "push(memd[es, di + 0x24]);"
   },
   {
     "Arch": 16,
@@ -1239,19 +1239,19 @@
     "Arch": 16,
     "Addr": "0x13_cf44",
     "Raw": "2667668f4504",
-    "Dec": "popd(memd_a32[es, ebp + 0x4]);"
+    "Dec": "pop(memd_a32[es, ebp + 0x4]);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_cec4",
     "Raw": "266766ff752c",
-    "Dec": "pushd(memd_a32[es, ebp + 0x2c]);"
+    "Dec": "push(memd_a32[es, ebp + 0x2c]);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_cf10",
     "Raw": "266766ff75fc",
-    "Dec": "pushd(memd_a32[es, ebp - 0x4]);"
+    "Dec": "push(memd_a32[es, ebp - 0x4]);"
   },
   {
     "Arch": 16,
@@ -1929,31 +1929,31 @@
     "Arch": 16,
     "Addr": "0x15_04ef",
     "Raw": "26c41e2201",
-    "Dec": "les(bx, es, 0x122);"
+    "Dec": "les(bx, memw[es, 0x122]);"
   },
   {
     "Arch": 16,
     "Addr": "0x15_32f6",
     "Raw": "26c41f",
-    "Dec": "les(bx, es, bx);"
+    "Dec": "les(bx, memw[es, bx]);"
   },
   {
     "Arch": 16,
     "Addr": "0x15_4030",
     "Raw": "26c47508",
-    "Dec": "les(si, es, di + 0x8);"
+    "Dec": "les(si, memw[es, di + 0x8]);"
   },
   {
     "Arch": 16,
     "Addr": "0x99c0",
     "Raw": "26c53f",
-    "Dec": "lds(di, es, bx);"
+    "Dec": "lds(di, memw[es, bx]);"
   },
   {
     "Arch": 16,
     "Addr": "0xf0fd",
     "Raw": "26c5b78600",
-    "Dec": "lds(si, es, bx + 0x86);"
+    "Dec": "lds(si, memw[es, bx + 0x86]);"
   },
   {
     "Arch": 16,
@@ -2193,7 +2193,7 @@
     "Arch": 16,
     "Addr": "0x4a74",
     "Raw": "26ff1eb008",
-    "Dec": "call_far_ind(es, 0x8b0);"
+    "Dec": "call_far_ind(memw[es, 0x8b0]);"
   },
   {
     "Arch": 16,
@@ -2229,7 +2229,7 @@
     "Arch": 16,
     "Addr": "0x15_8667",
     "Raw": "26ff5f10",
-    "Dec": "call_far_ind(es, bx + 0x10);"
+    "Dec": "call_far_ind(memw[es, bx + 0x10]);"
   },
   {
     "Arch": 16,
@@ -2583,13 +2583,13 @@
     "Arch": 16,
     "Addr": "0x3860",
     "Raw": "2ec43e0c00",
-    "Dec": "les(di, cs, 0xc);"
+    "Dec": "les(di, memw[cs, 0xc]);"
   },
   {
     "Arch": 16,
     "Addr": "0x49bc",
     "Raw": "2ec516c412",
-    "Dec": "lds(dx, cs, 0x12c4);"
+    "Dec": "lds(dx, memw[cs, 0x12c4]);"
   },
   {
     "Arch": 16,
@@ -2631,7 +2631,7 @@
     "Arch": 16,
     "Addr": "0x9b68",
     "Raw": "2eff1ec412",
-    "Dec": "call_far_ind(cs, 0x12c4);"
+    "Dec": "call_far_ind(memw[cs, 0x12c4]);"
   },
   {
     "Arch": 16,
@@ -2649,7 +2649,7 @@
     "Arch": 16,
     "Addr": "0xa14a",
     "Raw": "2eff2ebe17",
-    "Dec": "jmp_far_ind(cs, 0x17be);"
+    "Dec": "jmp_far_ind(memw[cs, 0x17be]);"
   },
   {
     "Arch": 16,
@@ -2661,7 +2661,7 @@
     "Arch": 16,
     "Addr": "0x1_001e",
     "Raw": "2eff6cfa",
-    "Dec": "jmp_far_ind(cs, si - 0x6);"
+    "Dec": "jmp_far_ind(memw[cs, si - 0x6]);"
   },
   {
     "Arch": 16,
@@ -2775,13 +2775,13 @@
     "Arch": 16,
     "Addr": "0x9a4c",
     "Raw": "360f0116c808",
-    "Dec": "lgdt(ss, 0x8c8);"
+    "Dec": "lgdt(memw[ss, 0x8c8]);"
   },
   {
     "Arch": 16,
     "Addr": "0x9a52",
     "Raw": "360f011ed008",
-    "Dec": "lidt(ss, 0x8d0);"
+    "Dec": "lidt(memw[ss, 0x8d0]);"
   },
   {
     "Arch": 16,
@@ -2805,7 +2805,7 @@
     "Arch": 16,
     "Addr": "0x14_edff",
     "Raw": "366766c55b0a",
-    "Dec": "lds(ebx, ss, ebx + 0xa);"
+    "Dec": "lds(ebx, memd_a32[ss, ebx + 0xa]);"
   },
   {
     "Arch": 16,
@@ -2937,7 +2937,7 @@
     "Arch": 16,
     "Addr": "0x49c3",
     "Raw": "36c516840f",
-    "Dec": "lds(dx, ss, 0xf84);"
+    "Dec": "lds(dx, memw[ss, 0xf84]);"
   },
   {
     "Arch": 16,
@@ -2961,7 +2961,7 @@
     "Arch": 16,
     "Addr": "0x13_d4ba",
     "Raw": "36ff1ebc1d",
-    "Dec": "call_far_ind(ss, 0x1dbc);"
+    "Dec": "call_far_ind(memw[ss, 0x1dbc]);"
   },
   {
     "Arch": 16,
@@ -3171,7 +3171,7 @@
     "Arch": 16,
     "Addr": "0x5488",
     "Raw": "3eff2ef20a",
-    "Dec": "jmp_far_ind(ds, 0xaf2);"
+    "Dec": "jmp_far_ind(memw[ds, 0xaf2]);"
   },
   {
     "Arch": 16,
@@ -3441,7 +3441,7 @@
     "Arch": 16,
     "Addr": "0x40bf",
     "Raw": "660f01167409",
-    "Dec": "lgdtd(ds, 0x974);"
+    "Dec": "lgdtd(memd[ds, 0x974]);"
   },
   {
     "Arch": 16,
@@ -3471,7 +3471,7 @@
     "Arch": 16,
     "Addr": "0x14_e462",
     "Raw": "660fb226180c",
-    "Dec": "lss(esp, ds, 0xc18);"
+    "Dec": "lss(esp, memd[ds, 0xc18]);"
   },
   {
     "Arch": 16,
@@ -3621,85 +3621,85 @@
     "Arch": 16,
     "Addr": "0x622a",
     "Raw": "6650",
-    "Dec": "pushd(eax);"
+    "Dec": "push(eax);"
   },
   {
     "Arch": 16,
     "Addr": "0xb03c",
     "Raw": "6651",
-    "Dec": "pushd(ecx);"
+    "Dec": "push(ecx);"
   },
   {
     "Arch": 16,
     "Addr": "0x9c1b",
     "Raw": "6652",
-    "Dec": "pushd(edx);"
+    "Dec": "push(edx);"
   },
   {
     "Arch": 16,
     "Addr": "0x6ce7",
     "Raw": "6653",
-    "Dec": "pushd(ebx);"
+    "Dec": "push(ebx);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_ceae",
     "Raw": "6655",
-    "Dec": "pushd(ebp);"
+    "Dec": "push(ebp);"
   },
   {
     "Arch": 16,
     "Addr": "0xaa09",
     "Raw": "6656",
-    "Dec": "pushd(esi);"
+    "Dec": "push(esi);"
   },
   {
     "Arch": 16,
     "Addr": "0xa958",
     "Raw": "6657",
-    "Dec": "pushd(edi);"
+    "Dec": "push(edi);"
   },
   {
     "Arch": 16,
     "Addr": "0x666f",
     "Raw": "6658",
-    "Dec": "popd(eax);"
+    "Dec": "pop(eax);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_8f49",
     "Raw": "6659",
-    "Dec": "popd(ecx);"
+    "Dec": "pop(ecx);"
   },
   {
     "Arch": 16,
     "Addr": "0x9c0c",
     "Raw": "665a",
-    "Dec": "popd(edx);"
+    "Dec": "pop(edx);"
   },
   {
     "Arch": 16,
     "Addr": "0xb048",
     "Raw": "665b",
-    "Dec": "popd(ebx);"
+    "Dec": "pop(ebx);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_cf97",
     "Raw": "665d",
-    "Dec": "popd(ebp);"
+    "Dec": "pop(ebp);"
   },
   {
     "Arch": 16,
     "Addr": "0xaa37",
     "Raw": "665e",
-    "Dec": "popd(esi);"
+    "Dec": "pop(esi);"
   },
   {
     "Arch": 16,
     "Addr": "0xaa04",
     "Raw": "665f",
-    "Dec": "popd(edi);"
+    "Dec": "pop(edi);"
   },
   {
     "Arch": 16,
@@ -3717,13 +3717,13 @@
     "Arch": 16,
     "Addr": "0x15_d97f",
     "Raw": "6665ff6e06",
-    "Dec": "jmpd_far_ind(gs, bp + 0x6);"
+    "Dec": "jmpd_far_ind(memd[gs, bp + 0x6]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_a006",
     "Raw": "66678d63f6",
-    "Dec": "lea(esp, ebx - 0xa);"
+    "Dec": "lea(esp, memd_a32[ds, ebx - 0xa]);"
   },
   {
     "Arch": 16,
@@ -3987,25 +3987,25 @@
     "Arch": 16,
     "Addr": "0x15_00de",
     "Raw": "668d0e7a0c",
-    "Dec": "lea(ecx, 0xc7a);"
+    "Dec": "lea(ecx, memd[ds, 0xc7a]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_f009",
     "Raw": "668d7622",
-    "Dec": "lea(esi, bp + 0x22);"
+    "Dec": "lea(esi, memd[ss, bp + 0x22]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_e474",
     "Raw": "668f06180c",
-    "Dec": "popd(memd[ds, 0xc18]);"
+    "Dec": "pop(memd[ds, 0xc18]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_9f5d",
     "Raw": "668f471e",
-    "Dec": "popd(memd[ds, bx + 0x1e]);"
+    "Dec": "pop(memd[ds, bx + 0x1e]);"
   },
   {
     "Arch": 16,
@@ -4143,19 +4143,19 @@
     "Arch": 16,
     "Addr": "0x15_d918",
     "Raw": "66c43e942b",
-    "Dec": "les(edi, ds, 0x2b94);"
+    "Dec": "les(edi, memd[ds, 0x2b94]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_efef",
     "Raw": "66c47e34",
-    "Dec": "les(edi, ss, bp + 0x34);"
+    "Dec": "les(edi, memd[ss, bp + 0x34]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_f983",
     "Raw": "66c5364a0a",
-    "Dec": "lds(esi, ds, 0xa4a);"
+    "Dec": "lds(esi, memd[ds, 0xa4a]);"
   },
   {
     "Arch": 16,
@@ -4209,37 +4209,37 @@
     "Arch": 16,
     "Addr": "0x6110",
     "Raw": "66ff1e5a0d",
-    "Dec": "calld_far_ind(ds, 0xd5a);"
+    "Dec": "calld_far_ind(memd[ds, 0xd5a]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_fe3a",
     "Raw": "66ff2f",
-    "Dec": "jmpd_far_ind(ds, bx);"
+    "Dec": "jmpd_far_ind(memd[ds, bx]);"
   },
   {
     "Arch": 16,
     "Addr": "0x621b",
     "Raw": "66ff369c00",
-    "Dec": "pushd(memd[ds, 0x9c]);"
+    "Dec": "push(memd[ds, 0x9c]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_f9e7",
     "Raw": "66ff37",
-    "Dec": "pushd(memd[ds, bx]);"
+    "Dec": "push(memd[ds, bx]);"
   },
   {
     "Arch": 16,
     "Addr": "0xb102",
     "Raw": "66ff7604",
-    "Dec": "pushd(memd[ss, bp + 0x4]);"
+    "Dec": "push(memd[ss, bp + 0x4]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_f9e3",
     "Raw": "66ff7704",
-    "Dec": "pushd(memd[ds, bx + 0x4]);"
+    "Dec": "push(memd[ds, bx + 0x4]);"
   },
   {
     "Arch": 16,
@@ -4383,37 +4383,37 @@
     "Arch": 16,
     "Addr": "0x1_132d",
     "Raw": "67668d5c1814",
-    "Dec": "lea(ebx, eax + ebx + 0x14);"
+    "Dec": "lea(ebx, memd_a32[ds, eax + ebx + 0x14]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_fdf4",
     "Raw": "67668d6d0e",
-    "Dec": "lea(ebp, ebp + 0xe);"
+    "Dec": "lea(ebp, memd_a32[ss, ebp + 0xe]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_e76b",
     "Raw": "67668d752f",
-    "Dec": "lea(esi, ebp + 0x2f);"
+    "Dec": "lea(esi, memd_a32[ss, ebp + 0x2f]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_e830",
     "Raw": "67668f07",
-    "Dec": "popd(memd_a32[ds, edi]);"
+    "Dec": "pop(memd_a32[ds, edi]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_9fb9",
     "Raw": "67668f43fc",
-    "Dec": "popd(memd_a32[ds, ebx - 0x4]);"
+    "Dec": "pop(memd_a32[ds, ebx - 0x4]);"
   },
   {
     "Arch": 16,
     "Addr": "0x14_e834",
     "Raw": "67668f4704",
-    "Dec": "popd(memd_a32[ds, edi + 0x4]);"
+    "Dec": "pop(memd_a32[ds, edi + 0x4]);"
   },
   {
     "Arch": 16,
@@ -4455,7 +4455,7 @@
     "Arch": 16,
     "Addr": "0x14_f988",
     "Raw": "6766ff7614",
-    "Dec": "pushd(memd_a32[ds, esi + 0x14]);"
+    "Dec": "push(memd_a32[ds, esi + 0x14]);"
   },
   {
     "Arch": 16,
@@ -6399,67 +6399,67 @@
     "Arch": 16,
     "Addr": "0x15_934c",
     "Raw": "8d38",
-    "Dec": "lea(di, bx + si);"
+    "Dec": "lea(di, memw[ds, bx + si]);"
   },
   {
     "Arch": 16,
     "Addr": "0x13_6df8",
     "Raw": "8d42a9",
-    "Dec": "lea(ax, bp + si - 0x57);"
+    "Dec": "lea(ax, memw[ss, bp + si - 0x57]);"
   },
   {
     "Arch": 16,
     "Addr": "0x5092",
     "Raw": "8d46ea",
-    "Dec": "lea(ax, bp - 0x16);"
+    "Dec": "lea(ax, memw[ss, bp - 0x16]);"
   },
   {
     "Arch": 16,
     "Addr": "0x6e36",
     "Raw": "8d4718",
-    "Dec": "lea(ax, bx + 0x18);"
+    "Dec": "lea(ax, memw[ds, bx + 0x18]);"
   },
   {
     "Arch": 16,
     "Addr": "0x6cb8",
     "Raw": "8d57e0",
-    "Dec": "lea(dx, bx - 0x20);"
+    "Dec": "lea(dx, memw[ds, bx - 0x20]);"
   },
   {
     "Arch": 16,
     "Addr": "0xed69",
     "Raw": "8d6604",
-    "Dec": "lea(sp, bp + 0x4);"
+    "Dec": "lea(sp, memw[ss, bp + 0x4]);"
   },
   {
     "Arch": 16,
     "Addr": "0xc050",
     "Raw": "8d66fc",
-    "Dec": "lea(sp, bp - 0x4);"
+    "Dec": "lea(sp, memw[ss, bp - 0x4]);"
   },
   {
     "Arch": 16,
     "Addr": "0x6e2b",
     "Raw": "8d67ee",
-    "Dec": "lea(sp, bx - 0x12);"
+    "Dec": "lea(sp, memw[ds, bx - 0x12]);"
   },
   {
     "Arch": 16,
     "Addr": "0x385c",
     "Raw": "8d761e",
-    "Dec": "lea(si, bp + 0x1e);"
+    "Dec": "lea(si, memw[ss, bp + 0x1e]);"
   },
   {
     "Arch": 16,
     "Addr": "0x58c0",
     "Raw": "8db668ff",
-    "Dec": "lea(si, bp - 0x98);"
+    "Dec": "lea(si, memw[ss, bp - 0x98]);"
   },
   {
     "Arch": 16,
     "Addr": "0xf0f9",
     "Raw": "8dbf9000",
-    "Dec": "lea(di, bx + 0x90);"
+    "Dec": "lea(di, memw[ds, bx + 0x90]);"
   },
   {
     "Arch": 16,
@@ -7155,43 +7155,43 @@
     "Arch": 16,
     "Addr": "0x61f7",
     "Raw": "c41ea000",
-    "Dec": "les(bx, ds, 0xa0);"
+    "Dec": "les(bx, memw[ds, 0xa0]);"
   },
   {
     "Arch": 16,
     "Addr": "0x50ac",
     "Raw": "c45e04",
-    "Dec": "les(bx, ss, bp + 0x4);"
+    "Dec": "les(bx, memw[ss, bp + 0x4]);"
   },
   {
     "Arch": 16,
     "Addr": "0x5188",
     "Raw": "c47ef0",
-    "Dec": "les(di, ss, bp - 0x10);"
+    "Dec": "les(di, memw[ss, bp - 0x10]);"
   },
   {
     "Arch": 16,
     "Addr": "0x15_705a",
     "Raw": "c49e38ff",
-    "Dec": "les(bx, ss, bp - 0xc8);"
+    "Dec": "les(bx, memw[ss, bp - 0xc8]);"
   },
   {
     "Arch": 16,
     "Addr": "0x42be",
     "Raw": "c5367a0f",
-    "Dec": "lds(si, ds, 0xf7a);"
+    "Dec": "lds(si, memw[ds, 0xf7a]);"
   },
   {
     "Arch": 16,
     "Addr": "0x15_3cea",
     "Raw": "c55f0c",
-    "Dec": "lds(bx, ds, bx + 0xc);"
+    "Dec": "lds(bx, memw[ds, bx + 0xc]);"
   },
   {
     "Arch": 16,
     "Addr": "0xa979",
     "Raw": "c57608",
-    "Dec": "lds(si, ss, bp + 0x8);"
+    "Dec": "lds(si, memw[ss, bp + 0x8]);"
   },
   {
     "Arch": 16,
@@ -8175,13 +8175,13 @@
     "Arch": 16,
     "Addr": "0x13_d60d",
     "Raw": "ff1d",
-    "Dec": "call_far_ind(ds, di);"
+    "Dec": "call_far_ind(memw[ds, di]);"
   },
   {
     "Arch": 16,
     "Addr": "0x4c9e",
     "Raw": "ff1e5c15",
-    "Dec": "call_far_ind(ds, 0x155c);"
+    "Dec": "call_far_ind(memw[ds, 0x155c]);"
   },
   {
     "Arch": 16,
@@ -8193,7 +8193,7 @@
     "Arch": 16,
     "Addr": "0x5489",
     "Raw": "ff2ef20a",
-    "Dec": "jmp_far_ind(ds, 0xaf2);"
+    "Dec": "jmp_far_ind(memw[ds, 0xaf2]);"
   },
   {
     "Arch": 16,
@@ -8253,13 +8253,13 @@
     "Arch": 16,
     "Addr": "0xab3d",
     "Raw": "ff5e00",
-    "Dec": "call_far_ind(ss, bp + 0);"
+    "Dec": "call_far_ind(memw[ss, bp + 0]);"
   },
   {
     "Arch": 16,
     "Addr": "0x5c80",
     "Raw": "ff5ef0",
-    "Dec": "call_far_ind(ss, bp - 0x10);"
+    "Dec": "call_far_ind(memw[ss, bp - 0x10]);"
   },
   {
     "Arch": 16,
@@ -8301,7 +8301,7 @@
     "Arch": 16,
     "Addr": "0x13_7cc8",
     "Raw": "ff9f2020",
-    "Dec": "call_far_ind(ds, bx + 0x2020);"
+    "Dec": "call_far_ind(memw[ds, bx + 0x2020]);"
   },
   {
     "Arch": 16,
@@ -8547,13 +8547,13 @@
     "Arch": 32,
     "Addr": "0x1014_81d6",
     "Raw": "06",
-    "Dec": "push(es);"
+    "Dec": "pushd(es);"
   },
   {
     "Arch": 32,
     "Addr": "0x1014_8290",
     "Raw": "07",
-    "Dec": "pop(es);"
+    "Dec": "popd(es);"
   },
   {
     "Arch": 32,
@@ -8709,13 +8709,13 @@
     "Arch": 32,
     "Addr": "0x1018_20e9",
     "Raw": "0e",
-    "Dec": "push(cs);"
+    "Dec": "pushd(cs);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_1fff",
     "Raw": "0f010c24",
-    "Dec": "sidt(ss, esp);"
+    "Dec": "sidt(memd[ss, esp]);"
   },
   {
     "Arch": 32,
@@ -8853,25 +8853,25 @@
     "Arch": 32,
     "Addr": "0x1014_81d7",
     "Raw": "0fa0",
-    "Dec": "push(fs);"
+    "Dec": "pushd(fs);"
   },
   {
     "Arch": 32,
     "Addr": "0x1014_828e",
     "Raw": "0fa1",
-    "Dec": "pop(fs);"
+    "Dec": "popd(fs);"
   },
   {
     "Arch": 32,
     "Addr": "0x1014_81d9",
     "Raw": "0fa8",
-    "Dec": "push(gs);"
+    "Dec": "pushd(gs);"
   },
   {
     "Arch": 32,
     "Addr": "0x1014_828c",
     "Raw": "0fa9",
-    "Dec": "pop(gs);"
+    "Dec": "popd(gs);"
   },
   {
     "Arch": 32,
@@ -8937,37 +8937,37 @@
     "Arch": 32,
     "Addr": "0x1019_49fe",
     "Raw": "0fb225420a1c10",
-    "Dec": "lss(esp, ds, 0x101c0a42);"
+    "Dec": "lss(esp, memd[ds, 0x101c0a42]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_4eae",
     "Raw": "0fb47d10",
-    "Dec": "lfs(edi, ss, ebp + 0x10);"
+    "Dec": "lfs(edi, memd[ss, ebp + 0x10]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1017_dad1",
     "Raw": "0fb55514",
-    "Dec": "lgs(edx, ss, ebp + 0x14);"
+    "Dec": "lgs(edx, memd[ss, ebp + 0x14]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1012_5170",
     "Raw": "0fb555f4",
-    "Dec": "lgs(edx, ss, ebp - 0xc);"
+    "Dec": "lgs(edx, memd[ss, ebp - 0xc]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1017_9a2a",
     "Raw": "0fb58218b72010",
-    "Dec": "lgs(eax, ds, edx + 0x1020b718);"
+    "Dec": "lgs(eax, memd[ds, edx + 0x1020b718]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1017_9af0",
     "Raw": "0fb5945318b72010",
-    "Dec": "lgs(edx, ds, ebx + edx * 2 + 0x1020b718);"
+    "Dec": "lgs(edx, memd[ds, ebx + edx * 2 + 0x1020b718]);"
   },
   {
     "Arch": 32,
@@ -9183,13 +9183,13 @@
     "Arch": 32,
     "Addr": "0x1014_81d5",
     "Raw": "1e",
-    "Dec": "push(ds);"
+    "Dec": "pushd(ds);"
   },
   {
     "Arch": 32,
     "Addr": "0x1014_8291",
     "Raw": "1f",
-    "Dec": "pop(ds);"
+    "Dec": "popd(ds);"
   },
   {
     "Arch": 32,
@@ -9579,7 +9579,7 @@
     "Arch": 32,
     "Addr": "0x1018_79ef",
     "Raw": "2e8d86927a1810",
-    "Dec": "lea(eax, esi + 0x10187a92);"
+    "Dec": "lea(eax, memd[cs, esi + 0x10187a92]);"
   },
   {
     "Arch": 32,
@@ -10209,7 +10209,7 @@
     "Arch": 32,
     "Addr": "0x1028_b6cf",
     "Raw": "65ff5e3c",
-    "Dec": "call_far_ind(gs, esi + 0x3c);"
+    "Dec": "call_far_ind(memd[gs, esi + 0x3c]);"
   },
   {
     "Arch": 32,
@@ -10671,31 +10671,31 @@
     "Arch": 32,
     "Addr": "0x1019_9bb8",
     "Raw": "6650",
-    "Dec": "pushw(ax);"
+    "Dec": "push(ax);"
   },
   {
     "Arch": 32,
     "Addr": "0x1028_95ea",
     "Raw": "6652",
-    "Dec": "pushw(dx);"
+    "Dec": "push(dx);"
   },
   {
     "Arch": 32,
     "Addr": "0x1028_9159",
     "Raw": "6653",
-    "Dec": "pushw(bx);"
+    "Dec": "push(bx);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_9bdc",
     "Raw": "6658",
-    "Dec": "popw(ax);"
+    "Dec": "pop(ax);"
   },
   {
     "Arch": 32,
     "Addr": "0x1028_95fc",
     "Raw": "665a",
-    "Dec": "popw(dx);"
+    "Dec": "pop(dx);"
   },
   {
     "Arch": 32,
@@ -13977,193 +13977,193 @@
     "Arch": 32,
     "Addr": "0x1016_a3df",
     "Raw": "8d042e",
-    "Dec": "lea(eax, esi + ebp);"
+    "Dec": "lea(eax, memd[ds, esi + ebp]);"
   },
   {
     "Arch": 32,
     "Addr": "0x100c_41e7",
     "Raw": "8d0480",
-    "Dec": "lea(eax, eax + eax * 4);"
+    "Dec": "lea(eax, memd[ds, eax + eax * 4]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1010_5e5e",
     "Raw": "8d04c0",
-    "Dec": "lea(eax, eax + eax * 8);"
+    "Dec": "lea(eax, memd[ds, eax + eax * 8]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1009_609b",
     "Raw": "8d1418",
-    "Dec": "lea(edx, eax + ebx);"
+    "Dec": "lea(edx, memd[ds, eax + ebx]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1009_3874",
     "Raw": "8d1452",
-    "Dec": "lea(edx, edx + edx * 2);"
+    "Dec": "lea(edx, memd[ds, edx + edx * 2]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_66eb",
     "Raw": "8d149d00000000",
-    "Dec": "lea(edx, ebx * 4 + 0);"
+    "Dec": "lea(edx, memd[ds, ebx * 4 + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_6563",
     "Raw": "8d14ad00000000",
-    "Dec": "lea(edx, ebp * 4 + 0);"
+    "Dec": "lea(edx, memd[ds, ebp * 4 + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_b80e",
     "Raw": "8d1cc500000000",
-    "Dec": "lea(ebx, eax * 8 + 0);"
+    "Dec": "lea(ebx, memd[ds, eax * 8 + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_7f84",
     "Raw": "8d2c8500000000",
-    "Dec": "lea(ebp, eax * 4 + 0);"
+    "Dec": "lea(ebp, memd[ds, eax * 4 + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_5e91",
     "Raw": "8d3414",
-    "Dec": "lea(esi, esp + edx);"
+    "Dec": "lea(esi, memd[ss, esp + edx]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_a5bc",
     "Raw": "8d344500000000",
-    "Dec": "lea(esi, eax * 2 + 0);"
+    "Dec": "lea(esi, memd[ds, eax * 2 + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_a143",
     "Raw": "8d3c85acf71c10",
-    "Dec": "lea(edi, eax * 4 + 0x101cf7ac);"
+    "Dec": "lea(edi, memd[ds, eax * 4 + 0x101cf7ac]);"
   },
   {
     "Arch": 32,
     "Addr": "0x100e_f55a",
     "Raw": "8d3de4861b10",
-    "Dec": "lea(edi, 0x101b86e4);"
+    "Dec": "lea(edi, memd[ds, 0x101b86e4]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_c9cd",
     "Raw": "8d4000",
-    "Dec": "lea(eax, eax + 0);"
+    "Dec": "lea(eax, memd[ds, eax + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_ad24",
     "Raw": "8d442d00",
-    "Dec": "lea(eax, ebp + ebp + 0);"
+    "Dec": "lea(eax, memd[ss, ebp + ebp + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_037b",
     "Raw": "8d4440f8",
-    "Dec": "lea(eax, eax + eax * 2 - 0x8);"
+    "Dec": "lea(eax, memd[ds, eax + eax * 2 - 0x8]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1007_6be3",
     "Raw": "8d500e",
-    "Dec": "lea(edx, eax + 0xe);"
+    "Dec": "lea(edx, memd[ds, eax + 0xe]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1007_d995",
     "Raw": "8d50fa",
-    "Dec": "lea(edx, eax - 0x6);"
+    "Dec": "lea(edx, memd[ds, eax - 0x6]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_25ce",
     "Raw": "8d5418fc",
-    "Dec": "lea(edx, eax + ebx - 0x4);"
+    "Dec": "lea(edx, memd[ds, eax + ebx - 0x4]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_7706",
     "Raw": "8d542410",
-    "Dec": "lea(edx, esp + 0x10);"
+    "Dec": "lea(edx, memd[ss, esp + 0x10]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1016_d822",
     "Raw": "8d546d00",
-    "Dec": "lea(edx, ebp + ebp * 2 + 0);"
+    "Dec": "lea(edx, memd[ss, ebp + ebp * 2 + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1007_0043",
     "Raw": "8d5dec",
-    "Dec": "lea(ebx, ebp - 0x14);"
+    "Dec": "lea(ebx, memd[ss, ebp - 0x14]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1017_952a",
     "Raw": "8d65f0",
-    "Dec": "lea(esp, ebp - 0x10);"
+    "Dec": "lea(esp, memd[ss, ebp - 0x10]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_b53f",
     "Raw": "8d6e01",
-    "Dec": "lea(ebp, esi + 0x1);"
+    "Dec": "lea(ebp, memd[ds, esi + 0x1]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1009_032b",
     "Raw": "8d751c",
-    "Dec": "lea(esi, ebp + 0x1c);"
+    "Dec": "lea(esi, memd[ss, ebp + 0x1c]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1017_aa03",
     "Raw": "8d8000000000",
-    "Dec": "lea(eax, eax + 0);"
+    "Dec": "lea(eax, memd[ds, eax + 0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1007_93bf",
     "Raw": "8d8578ffffff",
-    "Dec": "lea(eax, ebp - 0x88);"
+    "Dec": "lea(eax, memd[ss, ebp - 0x88]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_d9b5",
     "Raw": "8d87219cffff",
-    "Dec": "lea(eax, edi - 0x63df);"
+    "Dec": "lea(eax, memd[ds, edi - 0x63df]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1017_169f",
     "Raw": "8d8c2400010000",
-    "Dec": "lea(ecx, esp + 0x100);"
+    "Dec": "lea(ecx, memd[ss, esp + 0x100]);"
   },
   {
     "Arch": 32,
     "Addr": "0x100d_58ca",
     "Raw": "8d90e9030000",
-    "Dec": "lea(edx, eax + 0x3e9);"
+    "Dec": "lea(edx, memd[ds, eax + 0x3e9]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_e4e2",
     "Raw": "8db43700c0ffff",
-    "Dec": "lea(esi, edi + esi - 0x4000);"
+    "Dec": "lea(esi, memd[ds, edi + esi - 0x4000]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_e034",
     "Raw": "8db4770080ffff",
-    "Dec": "lea(esi, edi + esi * 2 - 0x8000);"
+    "Dec": "lea(esi, memd[ds, edi + esi * 2 - 0x8000]);"
   },
   {
     "Arch": 32,
@@ -14643,37 +14643,37 @@
     "Arch": 32,
     "Addr": "0x1019_523d",
     "Raw": "c435b81a1c10",
-    "Dec": "les(esi, ds, 0x101c1ab8);"
+    "Dec": "les(esi, memd[ds, 0x101c1ab8]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1018_118e",
     "Raw": "c451f8",
-    "Dec": "les(edx, ds, ecx - 0x8);"
+    "Dec": "les(edx, memd[ds, ecx - 0x8]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_4a8f",
     "Raw": "c47d0c",
-    "Dec": "les(edi, ss, ebp + 0xc);"
+    "Dec": "les(edi, memd[ss, ebp + 0xc]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_51fe",
     "Raw": "c535b01a1c10",
-    "Dec": "lds(esi, ds, 0x101c1ab0);"
+    "Dec": "lds(esi, memd[ds, 0x101c1ab0]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1019_4eba",
     "Raw": "c57510",
-    "Dec": "lds(esi, ss, ebp + 0x10);"
+    "Dec": "lds(esi, memd[ss, ebp + 0x10]);"
   },
   {
     "Arch": 32,
     "Addr": "0x1028_c153",
     "Raw": "c57608",
-    "Dec": "lds(esi, ds, esi + 0x8);"
+    "Dec": "lds(esi, memd[ds, esi + 0x8]);"
   },
   {
     "Arch": 32,
@@ -16203,7 +16203,7 @@
     "Arch": 32,
     "Addr": "0x1019_4a05",
     "Raw": "ff1d380a1c10",
-    "Dec": "call_far_ind(ds, 0x101c0a38);"
+    "Dec": "call_far_ind(memd[ds, 0x101c0a38]);"
   },
   {
     "Arch": 32,
@@ -16299,7 +16299,7 @@
     "Arch": 32,
     "Addr": "0x1019_4eb2",
     "Raw": "ff5d08",
-    "Dec": "call_far_ind(ss, ebp + 0x8);"
+    "Dec": "call_far_ind(memd[ss, ebp + 0x8]);"
   },
   {
     "Arch": 32,
@@ -16371,7 +16371,7 @@
     "Arch": 32,
     "Addr": "0x1017_df21",
     "Raw": "ff9899061c10",
-    "Dec": "call_far_ind(ds, eax + 0x101c0699);"
+    "Dec": "call_far_ind(memd[ds, eax + 0x101c0699]);"
   },
   {
     "Arch": 32,

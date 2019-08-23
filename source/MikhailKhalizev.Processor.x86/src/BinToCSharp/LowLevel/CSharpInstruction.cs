@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         public List<string> Comments { get; set; }
 
-        public int DisMode { get; set; }
+        public int Mode { get; set; }
         public int AddrMode { get; set; }
         public int OprMode { get; set; }
 
@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if ((IsJmpOrJcc || IsLoopOrLoopcc || IsCall) && Operands[0].type == ud_type.UD_OP_PTR)
                 BrFar = true; /* Почему-то cам ud_obj не устанавливает его в 1, хотя это far jump. */
 
-            DisMode = ud.dis_mode;
+            Mode = ud.dis_mode;
             AddrMode = ud.adr_mode;
             OprMode = ud.opr_mode;
 
@@ -169,14 +169,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             var sb = new StringBuilder();
 
             if (!_knownInstr.TryGetValue(Mnemonic, out var flags))
-            {
-                if (!PfxAddress && !PfxOpr && PfxSeg == ud_type.UD_NONE)
-                    flags = InstrFlags.None;
-                else
-                    throw new NotImplementedException($"Unknown instruction at {Begin}: {Mnemonic} {(string.Join(", ", Comments))}");
-            }
-
-            var adrModeStr = AddrMode != DisMode ? $"_a{AddrMode}" : "";
+                flags = InstrFlags.None;
 
             var effOprSize = OprMode;
             if (Mnemonic == ud_mnemonic_code.UD_Iout)
@@ -188,19 +181,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 || Mnemonic == ud_mnemonic_code.UD_Imul)
                 if (ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH)
                     effOprSize = 8;
-
-            if (PfxRepne)
-                sb.Append($"repne{adrModeStr}(() => ");
-            else if (PfxRepe)
-                sb.Append($"repe{adrModeStr}(() => ");
-            if (PfxRep)
-                sb.Append($"rep{adrModeStr}(() => ");
-
-            if (addIf)
-                sb.Append("if(");
-
-
+            
             var method = udis86.ud_lookup_mnemonic(Mnemonic);
+
 
             bool addSizeSuffix;
 
@@ -212,7 +195,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 else if (Operands[0].type == ud_type.UD_OP_MEM)
                     addSizeSuffix = effOprSize != (op.size == 0 ? effOprSize : op.size);
                 else
-                    addSizeSuffix = effOprSize != DisMode;
+                    addSizeSuffix = effOprSize != Mode;
             }
             else if (Mnemonic == ud_mnemonic_code.UD_Iin || Mnemonic == ud_mnemonic_code.UD_Iout)
             {
@@ -220,21 +203,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             }
             else
             {
-                addSizeSuffix = flags.HasFlag(InstrFlags.UseOprSizeInside) && effOprSize != DisMode;
+                addSizeSuffix = flags.HasFlag(InstrFlags.UseOprSizeInside) && effOprSize != Mode;
             }
 
             
-            var addAdrSuffix = flags.HasFlag(InstrFlags.UseAdrSizeInside) && AddrMode != DisMode ||
-                new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
-                BrFar &&
-                Operands[0].type == ud_type.UD_OP_MEM;
+            var addAdrSuffix = flags.HasFlag(InstrFlags.UseAdrSizeInside) && AddrMode != Mode;
+            var adrModeStr = AddrMode != Mode ? $"_a{AddrMode}" : "";
 
-            
+
             if (addSizeSuffix)
                 method += GetSizeSuffixByBits(effOprSize);
             if (addAdrSuffix)
                 method += adrModeStr;
-
             if (BrFar)
                 method += "_far";
 
@@ -262,6 +242,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (new[] { "int", "in", "out" }.Contains(method))
                 method = "@" + method;
 
+            
+            if (PfxRepne)
+                sb.Append($"repne{adrModeStr}(() => ");
+            else if (PfxRepe)
+                sb.Append($"repe{adrModeStr}(() => ");
+            else if (PfxRep)
+                sb.Append($"rep{adrModeStr}(() => ");
+
+            if (addIf)
+                sb.Append("if(");
 
             sb.Append(method);
             sb.Append("(");
@@ -470,11 +460,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (HaveAnyRep)
                 sb.Append(")");
             sb.Append(")");
-
-            if (addIf)
-                sb.Append($")");
-            else
-                sb.Append(";");
+            sb.Append(addIf ? ")" : ";");
 
             if (addGotoLabel)
             {
@@ -516,7 +502,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             UseAdrSizeInside = 2
         }
 
-        private static Dictionary<ud_mnemonic_code, InstrFlags> _knownInstr = new Dictionary<ud_mnemonic_code, InstrFlags>
+        private static readonly Dictionary<ud_mnemonic_code, InstrFlags> _knownInstr = new Dictionary<ud_mnemonic_code, InstrFlags>
             {
                 {ud_mnemonic_code.UD_Istosb, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Istosw, InstrFlags.UseAdrSizeInside},
@@ -534,66 +520,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Icmpsw, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Icmpsd, InstrFlags.UseAdrSizeInside},
 
-                {ud_mnemonic_code.UD_Ifninit, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifnsetpm, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifnstsw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifnstcw, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ifnsave, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ifrstor, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Iwait, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifldcw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifld, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifldz, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifld1, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifldlg2, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifdivp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifdiv, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifidivr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifmulp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifmul, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifimul, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifchs, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifcom, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifcom2, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifcomp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifcompp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifxch, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifsubp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifsub, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifsubr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifild, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifst, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifstp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifist, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifistp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifisttp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iftst, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifrndint, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifprem, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifdivr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifdivrp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifldln2, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifyl2x, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifldl2e, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifadd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifaddp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifsqrt, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifscale, InstrFlags.None},
+                
                 {ud_mnemonic_code.UD_Ifbstp, InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Ifisubr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ifabs, InstrFlags.None},
-                {ud_mnemonic_code.UD_If2xm1, InstrFlags.None},
-
-                {ud_mnemonic_code.UD_Ipushfw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipushfd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipopfw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipopfd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipush, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Ipop, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Ipusha, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipopa, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipushad, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ipopad, InstrFlags.None},
 
                 {ud_mnemonic_code.UD_Ijmp, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Ijb, InstrFlags.UseOprSizeInside},
@@ -618,126 +548,24 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Iloop, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iloope, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iloopne, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-
-                {ud_mnemonic_code.UD_Iles, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilds, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilss, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilgs, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilfs, InstrFlags.None},
-
-                {ud_mnemonic_code.UD_Imov, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iadd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iadc, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icmp, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isub, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isbb, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isar, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ishl, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ishr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ishrd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ishld, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ircl, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ircr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iror, InstrFlags.None},
-                {ud_mnemonic_code.UD_Irol, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iinc, InstrFlags.None},
-                {ud_mnemonic_code.UD_Idec, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ineg, InstrFlags.None},
-                {ud_mnemonic_code.UD_Inot, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iint, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iinto, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iint1, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iint3, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icld, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iand, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ior, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ixor, InstrFlags.None},
-                {ud_mnemonic_code.UD_Itest, InstrFlags.None},
+                
                 {ud_mnemonic_code.UD_Icall, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Iret, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Iretf, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Iiretw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iiretd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iiretq, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icwd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icbw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Istd, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ixchg, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilea, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iinvalid, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ismsw, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilmsw, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ienter, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Ileave, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Ibt, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ibtc, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icpuid, InstrFlags.None},
-
-                {ud_mnemonic_code.UD_Iseta, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetg, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetae, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetz, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetnz, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetbe, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetge, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetl, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isetle, InstrFlags.None},
-
-                {ud_mnemonic_code.UD_Imul, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iimul, InstrFlags.None},
-                {ud_mnemonic_code.UD_Idiv, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iidiv, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icli, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isti, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icmc, InstrFlags.None},
-                {ud_mnemonic_code.UD_Imovzx, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iclts, InstrFlags.None},
-                {ud_mnemonic_code.UD_Illdt, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isldt, InstrFlags.None},
+                
                 {ud_mnemonic_code.UD_Ilgdt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ilidt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Isidt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Iltr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilar, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iclc, InstrFlags.None},
-                {ud_mnemonic_code.UD_Istc, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ibtr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Istr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilsl, InstrFlags.None},
                 {ud_mnemonic_code.UD_Ixlatb, InstrFlags.UseAdrSizeInside},
 
-                {ud_mnemonic_code.UD_Iin, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Iout, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Iinsb, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iinsw, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iinsd, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ioutsb, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ioutsw, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ioutsd, InstrFlags.UseAdrSizeInside},
-
-                {ud_mnemonic_code.UD_Isahf, InstrFlags.None},
-                {ud_mnemonic_code.UD_Imovsx, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icwde, InstrFlags.None},
-                {ud_mnemonic_code.UD_Icdq, InstrFlags.None},
-                {ud_mnemonic_code.UD_Inop, InstrFlags.None},
-
-                {ud_mnemonic_code.UD_Iaaa, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iaad, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iaam, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iaas, InstrFlags.None},
-                {ud_mnemonic_code.UD_Idaa, InstrFlags.None},
-                {ud_mnemonic_code.UD_Idas, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iarpl, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ibound, InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Ihlt, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ibsr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Iverr, InstrFlags.None},
-                {ud_mnemonic_code.UD_Ilahf, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isalc, InstrFlags.None},
-
-                {ud_mnemonic_code.UD_Iinvlpg, InstrFlags.None},
-                {ud_mnemonic_code.UD_Isysenter, InstrFlags.None},
-                {ud_mnemonic_code.UD_Imovups, InstrFlags.None}
             };
 
         #endregion
