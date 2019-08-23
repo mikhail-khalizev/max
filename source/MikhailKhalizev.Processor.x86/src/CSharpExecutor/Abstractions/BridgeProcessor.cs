@@ -1554,15 +1554,15 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void fnsave(SegmentRegister segment, ValueBase address)
+        public void fnsave(MemoryValue src)
         {
-            Implementation.fnsave(segment, address);
+            Implementation.fnsave(src);
         }
 
         /// <inheritdoc />
-        public void fnsavew_a16(SegmentRegister segment, ValueBase address)
+        public void fnsavew_a16(MemoryValue src)
         {
-            Implementation.fnsavew_a16(segment, address);
+            Implementation.fnsavew_a16(src);
         }
 
         /// <inheritdoc />
@@ -3040,41 +3040,41 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             Implementation.lfence();
         }
-        
+
         /// <inheritdoc />
-        public void lgdt(SegmentRegister segment, ValueBase address)
+        public void lgdt(MemoryValue src)
         {
-            Implementation.lgdt(segment, address);
+            Implementation.lgdt(src);
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(SegmentRegister segment, ValueBase address)
+        public void lgdtw_a16(MemoryValue src)
         {
-            Implementation.lgdtw_a16(segment, address);
+            Implementation.lgdtw_a16(src);
         }
 
         /// <inheritdoc />
-        public void lgdtd(SegmentRegister segment, ValueBase address)
+        public void lgdtd(MemoryValue src)
         {
-            Implementation.lgdtd(segment, address);
+            Implementation.lgdtd(src);
         }
 
         /// <inheritdoc />
-        public void lgdtd_a16(SegmentRegister segment, ValueBase address)
+        public void lgdtd_a16(MemoryValue src)
         {
-            Implementation.lgdtd_a16(segment, address);
+            Implementation.lgdtd_a16(src);
         }
 
         /// <inheritdoc />
-        public void lidt(SegmentRegister segment, ValueBase address)
+        public void lidt(MemoryValue src)
         {
-            Implementation.lidt(segment, address);
+            Implementation.lidt(src);
         }
 
         /// <inheritdoc />
-        public void lidtw_a16(SegmentRegister segment, ValueBase address)
+        public void lidtw_a16(MemoryValue src)
         {
-            Implementation.lidtw_a16(segment, address);
+            Implementation.lidtw_a16(src);
         }
 
         /// <inheritdoc />
@@ -5064,9 +5064,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void sidt(SegmentRegister segment, ValueBase value)
+        public void sidt(MemoryValue src)
         {
-            Implementation.sidt(segment, value);
+            Implementation.sidt(src);
         }
 
         /// <inheritdoc />

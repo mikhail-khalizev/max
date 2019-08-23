@@ -3542,12 +3542,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void fnsave(SegmentRegister segment, ValueBase address)
+        public void fnsave(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    fnsavew_a16(segment, address);
+                    fnsavew_a16(src);
                     break;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
@@ -3555,9 +3555,10 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void fnsavew_a16(SegmentRegister segment, ValueBase address)
+        public void fnsavew_a16(MemoryValue src)
         {
-            var off = address.UInt32;
+            var segment = src.Segment;
+            var off = src.Address;
 
             if (!cr0.pe)
             {
@@ -3572,7 +3573,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             else
                 throw new NotImplementedException();
 
-            for (int i = 0; i < 8; i++)
+            for (var i = 0; i < 8; i++)
                 Memory.GetStruct<double>(segment[off + 14 + i * 10]) = ST(i).Double;
 
             fninit();
@@ -5491,12 +5492,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
 
         /// <inheritdoc />
-        public void lgdt(SegmentRegister segment, ValueBase address)
+        public void lgdt(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    lgdtw_a16(segment, address);
+                    lgdtw_a16(src);
                     break;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
@@ -5504,23 +5505,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(SegmentRegister segment, ValueBase address)
+        public void lgdtw_a16(MemoryValue src)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            gdtr_limit = memw_a16[segment, address].UInt16;
-            gdtr_base = memd_a16[segment, address + 2].UInt32 & 0x00ffffff;
+            gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+            gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
         }
 
 
         /// <inheritdoc />
-        public void lgdtd(SegmentRegister segment, ValueBase address)
+        public void lgdtd(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    lgdtd_a16(segment, address);
+                    lgdtd_a16(src);
                     break;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
@@ -5528,23 +5529,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void lgdtd_a16(SegmentRegister segment, ValueBase address)
+        public void lgdtd_a16(MemoryValue src)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            gdtr_limit = memw_a16[segment, address].UInt16;
-            gdtr_base = memd_a16[segment, address + 2].UInt32;
+            gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+            gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32;
         }
 
 
         /// <inheritdoc />
-        public void lidt(SegmentRegister segment, ValueBase address)
+        public void lidt(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    lidtw_a16(segment, address);
+                    lidtw_a16(src);
                     break;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
@@ -5552,13 +5553,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void lidtw_a16(SegmentRegister segment, ValueBase address)
+        public void lidtw_a16(MemoryValue src)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            idtr_limit = memw_a16[segment, address].UInt16;
-            idtr_base = memd_a16[segment, address + 2].UInt32 & 0x00ffffff;
+            idtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+            idtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
         }
 
         /// <inheritdoc />
@@ -8219,7 +8220,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void sidt(SegmentRegister segment, ValueBase value)
+        public void sidt(MemoryValue src)
         {
             throw new NotImplementedException();
         }

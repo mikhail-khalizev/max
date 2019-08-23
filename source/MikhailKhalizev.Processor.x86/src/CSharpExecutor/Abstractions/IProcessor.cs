@@ -1426,13 +1426,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Store x87 FPU State.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html</remarks>
-        void fnsave(SegmentRegister segment, ValueBase address);
+        void fnsave(MemoryValue src);
 
         /// <summary>
         /// Store x87 FPU State.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/FSAVE:FNSAVE.html</remarks>
-        void fnsavew_a16(SegmentRegister segment, ValueBase address);
+        void fnsavew_a16(MemoryValue src);
 
         // Obsoleted instruction.
         void fnsetpm();
@@ -2945,39 +2945,38 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdt(SegmentRegister segment, ValueBase address);
+        void lgdt(MemoryValue src);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtw_a16(SegmentRegister segment, ValueBase address);
-
+        void lgdtw_a16(MemoryValue src);
+        
+        /// <summary>
+        /// Load Global/Interrupt Descriptor Table Register.
+        /// </summary>
+        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
+        void lgdtd(MemoryValue src);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd(SegmentRegister segment, ValueBase address);
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd_a16(SegmentRegister segment, ValueBase address);
+        void lgdtd_a16(MemoryValue src);
         
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lidt(SegmentRegister segment, ValueBase address);
+        void lidt(MemoryValue src);
 
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lidtw_a16(SegmentRegister segment, ValueBase address);
+        void lidtw_a16(MemoryValue src);
 
 
         /// <summary>
@@ -5002,7 +5001,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Store Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/SIDT.html</remarks>
-        void sidt(SegmentRegister segment, ValueBase value);
+        void sidt(MemoryValue src);
 
 
         /// <summary>

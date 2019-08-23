@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x3fbf, 4);    mov(bx, memw[ds, 0xf82]);                 /* mov bx, [0xf82] */
             ii(0x3fc3, 2);    or(bx, bx);                               /* or bx, bx */
             ii(0x3fc5, 2);    if(jz(0x3fc9, 0x2)) goto l_0x3fc9;        /* jz 0x3fc9 */
-            ii(0x3fc7, 2);    fnsave(ds, bx);                           /* fnsave [bx] */
+            ii(0x3fc7, 2);    fnsave(memw[ds, bx]);                     /* fnsave [bx] */
         l_0x3fc9:
             ii(0x3fc9, 6);    mov(memb[cs, 0x92c], 0x9b);               /* mov byte [cs:0x92c], 0x9b */
             ii(0x3fcf, 6);    mov(memb[cs, 0x931], 0x9b);               /* mov byte [cs:0x931], 0x9b */

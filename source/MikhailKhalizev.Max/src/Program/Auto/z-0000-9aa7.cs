@@ -28,8 +28,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9acd, 2);    mov(al, 0xa);                             /* mov al, 0xa */
             ii(0x9acf, 2);    outb(0x71, al);                           /* out 0x71, al */
             ii(0x9ad1, 5);    mov(memw[ss, 0xf7a], sp);                 /* mov [ss:0xf7a], sp */
-            ii(0x9ad6, 6);    lgdt(ss, 0x8c8);                          /* lgdt [ss:0x8c8] */
-            ii(0x9adc, 6);    lidt(ss, 0x8d0);                          /* lidt [ss:0x8d0] */
+            ii(0x9ad6, 6);    lgdt(memw[ss, 0x8c8]);                    /* lgdt [ss:0x8c8] */
+            ii(0x9adc, 6);    lidt(memw[ss, 0x8d0]);                    /* lidt [ss:0x8d0] */
             ii(0x9ae2, 3);    smsw(ax);                                 /* smsw ax */
             ii(0x9ae5, 2);    or(al, 0x1);                              /* or al, 0x1 */
             ii(0x9ae7, 3);    lmsw(ax);                                 /* lmsw ax */

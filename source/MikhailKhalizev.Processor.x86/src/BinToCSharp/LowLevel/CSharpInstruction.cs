@@ -232,9 +232,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 needWriteNamespace = true;
 
             var options = new DefinitionCollection.Options { WithNamespace = needWriteNamespace };
-            
+
             method += cmdSuffix;
-            
+
             if (new[] { "int", "in", "out" }.Contains(method))
                 method = "@" + method;
 
@@ -273,16 +273,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         {
                             // TODO Remove?
                             var memInside = // Обращение к памяти происходит внутри инструкции.
-                                new[]
-                                {
-                                    ud_mnemonic_code.UD_Ilgdt,
-                                    ud_mnemonic_code.UD_Ilidt,
-                                    ud_mnemonic_code.UD_Isidt,
-                                    ud_mnemonic_code.UD_Ifnsave,
-                                    ud_mnemonic_code.UD_Ifrstor,
-                                    ud_mnemonic_code.UD_Ifbstp,
-                                    ud_mnemonic_code.UD_Ibound
-                                }.Contains(Mnemonic) ||
                                 new[]
                                 {
                                     ud_mnemonic_code.UD_Icall,
