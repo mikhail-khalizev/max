@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_fde4-b8271862")]
         public void Method_0018_fde4()
         {
-            ii(0x18_fde4, 2); pushd(esi);                               /* push esi */
-            ii(0x18_fde6, 2); pushd(ebp);                               /* push ebp */
+            ii(0x18_fde4, 2); push(esi);                                /* push esi */
+            ii(0x18_fde6, 2); push(ebp);                                /* push ebp */
             ii(0x18_fde8, 1); push(ds);                                 /* push ds */
             ii(0x18_fde9, 2); pushfd();                                 /* pushfd */
             ii(0x18_fdeb, 3); mov(si, 0xa8);                            /* mov si, 0xa8 */
@@ -37,20 +37,20 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fe34, 3); mov(ax, 0x902);                           /* mov ax, 0x902 */
             ii(0x18_fe37, 3); mov(bx, 0x2ca);                           /* mov bx, 0x2ca */
             ii(0x18_fe3a, 3); if(jmpd_far_ind(memd[ds, bx])) return;    /* jmp far dword [bx] */
-            ii(0x18_fe3d, 2); popd(ebx);                                /* pop ebx */
+            ii(0x18_fe3d, 2); pop(ebx);                                 /* pop ebx */
             ii(0x18_fe3f, 3); and(bh, 0xfd);                            /* and bh, 0xfd */
             ii(0x18_fe42, 2); shl(al, 0x1);                             /* shl al, 1 */
             ii(0x18_fe44, 2); or(bh, al);                               /* or bh, al */
-            ii(0x18_fe46, 2); pushd(ebx);                               /* push ebx */
+            ii(0x18_fe46, 2); push(ebx);                                /* push ebx */
         l_0x18_fe48:
-            ii(0x18_fe48, 2); popd(ebx);                                /* pop ebx */
+            ii(0x18_fe48, 2); pop(ebx);                                 /* pop ebx */
             ii(0x18_fe4a, 3); mov(al, memb[ds, si + 0x3b]);             /* mov al, [si+0x3b] */
             ii(0x18_fe4d, 2); and(al, 0x5);                             /* and al, 0x5 */
             ii(0x18_fe4f, 2); or(bh, al);                               /* or bh, al */
             ii(0x18_fe51, 4); mov(memd[ds, si + 0x3a], ebx);            /* mov [si+0x3a], ebx */
             ii(0x18_fe55, 3); pop(memw[ds, si + 0x4]);                  /* pop word [si+0x4] */
-            ii(0x18_fe58, 4); popd(memd[ds, si + 0x14]);                /* pop dword [si+0x14] */
-            ii(0x18_fe5c, 4); popd(memd[ds, si + 0x10]);                /* pop dword [si+0x10] */
+            ii(0x18_fe58, 4); pop(memd[ds, si + 0x14]);                 /* pop dword [si+0x14] */
+            ii(0x18_fe5c, 4); pop(memd[ds, si + 0x10]);                 /* pop dword [si+0x10] */
             ii(0x18_fe60, 3); xor(eax, eax);                            /* xor eax, eax */
             ii(0x18_fe63, 1); pop(bp);                                  /* pop bp */
             ii(0x18_fe64, 1); retf();                                   /* retf */

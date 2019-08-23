@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1028_c304-bb4346be")]
         public void Method_1028_c304()
         {
-            ii(0x1028_c304, 1); push(ds);                               /* push ds */
+            ii(0x1028_c304, 1); pushd(ds);                              /* push ds */
             ii(0x1028_c305, 1); push(esi);                              /* push esi */
             ii(0x1028_c306, 6); mov(ecx, memd[ds, 0x1348]);             /* mov ecx, [0x1348] */
             ii(0x1028_c30c, 6); mov(memd[ds, 0x134c], ecx);             /* mov [0x134c], ecx */
@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_c42d, 6); if(jnz(0x1028_c3cd, -0x66)) goto l_0x1028_c3cd; /* jnz 0x1028c3cd */
         l_0x1028_c433:
             ii(0x1028_c433, 1); pop(esi);                               /* pop esi */
-            ii(0x1028_c434, 1); pop(ds);                                /* pop ds */
+            ii(0x1028_c434, 1); popd(ds);                               /* pop ds */
             ii(0x1028_c435, 1); ret();                                  /* ret */
         }
     }

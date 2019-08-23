@@ -40,13 +40,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_6bc1, 2); jmp(0x1018_6b87, -0x3c); goto l_0x1018_6b87; /* jmp 0x10186b87 */
         l_0x1018_6bc3:
             ii(0x1018_6bc3, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1018_6bc5, 1); push(es);                               /* push es */
+            ii(0x1018_6bc5, 1); pushd(es);                              /* push es */
             ii(0x1018_6bc6, 2); mov(es, eax);                           /* mov es, eax */
             ii(0x1018_6bc8, 2); mov(ah, 0x49);                          /* mov ah, 0x49 */
             ii(0x1018_6bca, 2); @int(0x21);                             /* int 0x21 */
             ii(0x1018_6bcc, 2); rcl(eax, 0x1);                          /* rcl eax, 1 */
             ii(0x1018_6bce, 2); ror(eax, 0x1);                          /* ror eax, 1 */
-            ii(0x1018_6bd0, 1); pop(es);                                /* pop es */
+            ii(0x1018_6bd0, 1); popd(es);                               /* pop es */
             ii(0x1018_6bd1, 2); jmp(0x1018_6b87, -0x4c); goto l_0x1018_6b87; /* jmp 0x10186b87 */
         l_0x1018_6bd3:
             ii(0x1018_6bd3, 3); mov(edx, memd[ds, edx + 0x8]);          /* mov edx, [edx+0x8] */

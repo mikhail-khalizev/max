@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_9bb8-d24e3b2b")]
         public void /* sys */ Method_1019_9bb8()
         {
-            ii(0x1019_9bb8, 2); pushw(ax);                              /* push ax */
+            ii(0x1019_9bb8, 2); push(ax);                               /* push ax */
             ii(0x1019_9bba, 1); wait();                                 /* wait */
             ii(0x1019_9bbb, 2); fninit();                               /* fninit */
             ii(0x1019_9bbd, 2); fld1();                                 /* fld1 */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_9bd3, 2); fninit();                               /* fninit */
             ii(0x1019_9bd5, 3); fldcw(memw[ss, esp]);                   /* fldcw word [esp] */
             ii(0x1019_9bd8, 4); xchg(memw[ss, esp], ax);                /* xchg [esp], ax */
-            ii(0x1019_9bdc, 2); popw(ax);                               /* pop ax */
+            ii(0x1019_9bdc, 2); pop(ax);                                /* pop ax */
             ii(0x1019_9bde, 1); ret();                                  /* ret */
         }
     }

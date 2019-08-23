@@ -9,12 +9,12 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_79b4()
         {
             ii(0x1018_79b4, 1); push(ebp);                              /* push ebp */
-            ii(0x1018_79b5, 1); push(es);                               /* push es */
+            ii(0x1018_79b5, 1); pushd(es);                              /* push es */
             ii(0x1018_79b6, 1); push(ebx);                              /* push ebx */
-            ii(0x1018_79b7, 1); push(ds);                               /* push ds */
+            ii(0x1018_79b7, 1); pushd(ds);                              /* push ds */
             ii(0x1018_79b8, 1); push(edx);                              /* push edx */
             ii(0x1018_79b9, 5); call(/* sys */ 0x1018_79ec, 0x2e);      /* call 0x101879ec */
-            ii(0x1018_79be, 1); push(ds);                               /* push ds */
+            ii(0x1018_79be, 1); pushd(ds);                              /* push ds */
             ii(0x1018_79bf, 1); push(edi);                              /* push edi */
             ii(0x1018_79c0, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1018_79c2, 3); mov(edi, memd[ss, ebp + 0x8]);          /* mov edi, [ebp+0x8] */
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_79e1, 1); pop(ebx);                               /* pop ebx */
             ii(0x1018_79e2, 4); mov(memw[ds, ebx + 0x6], ax);           /* mov [ebx+0x6], ax */
             ii(0x1018_79e6, 3); mov(memw[ds, ebx], es);                 /* mov [ebx], es */
-            ii(0x1018_79e9, 1); pop(es);                                /* pop es */
+            ii(0x1018_79e9, 1); popd(es);                               /* pop es */
             ii(0x1018_79ea, 1); pop(ebp);                               /* pop ebp */
             ii(0x1018_79eb, 1); ret();                                  /* ret */
         }

@@ -14,9 +14,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5142, 1); push(edi);                              /* push edi */
             ii(0x1019_5143, 1); push(ebx);                              /* push ebx */
             ii(0x1019_5144, 1); push(ecx);                              /* push ecx */
-            ii(0x1019_5145, 2); push(fs);                               /* push fs */
-            ii(0x1019_5147, 2); push(gs);                               /* push gs */
-            ii(0x1019_5149, 1); push(es);                               /* push es */
+            ii(0x1019_5145, 2); pushd(fs);                              /* push fs */
+            ii(0x1019_5147, 2); pushd(gs);                              /* push gs */
+            ii(0x1019_5149, 1); pushd(es);                              /* push es */
             ii(0x1019_514a, 4); mov(ax, 0x1600);                        /* mov ax, 0x1600 */
             ii(0x1019_514e, 2); @int(0x2f);                             /* int 0x2f */
             ii(0x1019_5150, 2); cmp(al, 0x3);                           /* cmp al, 0x3 */
@@ -32,9 +32,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5162, 2); @int(0x4b);                             /* int 0x4b */
             ii(0x1019_5164, 4); mov(ax, 0);                             /* mov ax, 0x0 */
         l_0x1019_5168:
-            ii(0x1019_5168, 1); pop(es);                                /* pop es */
-            ii(0x1019_5169, 2); pop(gs);                                /* pop gs */
-            ii(0x1019_516b, 2); pop(fs);                                /* pop fs */
+            ii(0x1019_5168, 1); popd(es);                               /* pop es */
+            ii(0x1019_5169, 2); popd(gs);                               /* pop gs */
+            ii(0x1019_516b, 2); popd(fs);                               /* pop fs */
             ii(0x1019_516d, 1); pop(ecx);                               /* pop ecx */
             ii(0x1019_516e, 1); pop(ebx);                               /* pop ebx */
             ii(0x1019_516f, 1); pop(edi);                               /* pop edi */

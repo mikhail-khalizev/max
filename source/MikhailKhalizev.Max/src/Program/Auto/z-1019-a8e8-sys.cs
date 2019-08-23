@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_a8ea, 1); push(edx);                              /* push edx */
             ii(0x1019_a8eb, 1); push(esi);                              /* push esi */
             ii(0x1019_a8ec, 1); push(edi);                              /* push edi */
-            ii(0x1019_a8ed, 1); push(es);                               /* push es */
+            ii(0x1019_a8ed, 1); pushd(es);                              /* push es */
             ii(0x1019_a8ee, 1); push(ebp);                              /* push ebp */
             ii(0x1019_a8ef, 1); push(eax);                              /* push eax */
             ii(0x1019_a8f0, 6); cmp(eax, memd[ds, 0x101b_e574]);        /* cmp eax, [0x101be574] */
@@ -89,7 +89,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1019_a9a8:
             ii(0x1019_a9a8, 3); add(esp, 0x4);                          /* add esp, 0x4 */
             ii(0x1019_a9ab, 1); pop(ebp);                               /* pop ebp */
-            ii(0x1019_a9ac, 1); pop(es);                                /* pop es */
+            ii(0x1019_a9ac, 1); popd(es);                               /* pop es */
             ii(0x1019_a9ad, 1); pop(edi);                               /* pop edi */
             ii(0x1019_a9ae, 1); pop(esi);                               /* pop esi */
             ii(0x1019_a9af, 1); pop(edx);                               /* pop edx */

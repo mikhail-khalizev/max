@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x18_ef0e, 3); test(cl, 0x20);                           /* test cl, 0x20 */
             ii(0x18_ef11, 2); if(jz(0x18_ef15, 0x2)) goto l_0x18_ef15;  /* jz 0xef15 */
-            ii(0x18_ef13, 2); pushd(eax);                               /* push eax */
+            ii(0x18_ef13, 2); push(eax);                                /* push eax */
         l_0x18_ef15:
             ii(0x18_ef15, 2); pushad();                                 /* pushad */
             ii(0x18_ef17, 1); push(ds);                                 /* push ds */

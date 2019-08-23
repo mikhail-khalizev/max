@@ -13,9 +13,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_5f33, 1); push(edi);                              /* push edi */
             ii(0x1016_5f34, 2); mov(esi, edx);                          /* mov esi, edx */
             ii(0x1016_5f36, 2); mov(edi, eax);                          /* mov edi, eax */
-            ii(0x1016_5f38, 1); push(es);                               /* push es */
-            ii(0x1016_5f39, 1); push(ds);                               /* push ds */
-            ii(0x1016_5f3a, 1); pop(es);                                /* pop es */
+            ii(0x1016_5f38, 1); pushd(es);                              /* push es */
+            ii(0x1016_5f39, 1); pushd(ds);                              /* push ds */
+            ii(0x1016_5f3a, 1); popd(es);                               /* pop es */
             ii(0x1016_5f3b, 1); push(edi);                              /* push edi */
             ii(0x1016_5f3c, 2); sub(ecx, ecx);                          /* sub ecx, ecx */
             ii(0x1016_5f3e, 1); dec(ecx);                               /* dec ecx */
@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_5f5a, 2); if(jnz(0x1016_5f44, -0x18)) goto l_0x1016_5f44; /* jnz 0x10165f44 */
         l_0x1016_5f5c:
             ii(0x1016_5f5c, 1); pop(edi);                               /* pop edi */
-            ii(0x1016_5f5d, 1); pop(es);                                /* pop es */
+            ii(0x1016_5f5d, 1); popd(es);                               /* pop es */
             ii(0x1016_5f5e, 2); mov(eax, edi);                          /* mov eax, edi */
             ii(0x1016_5f60, 1); pop(edi);                               /* pop edi */
             ii(0x1016_5f61, 1); pop(esi);                               /* pop esi */

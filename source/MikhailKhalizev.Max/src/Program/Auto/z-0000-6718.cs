@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x6718, 5);    cmp(memb[ds, 0xdfe], 0x1);                /* cmp byte [0xdfe], 0x1 */
             ii(0x671d, 4);    if(jnz(0x6755, 0x34)) goto l_0x6755;      /* jnz 0x6755 */
-            ii(0x6721, 2);    pushd(eax);                               /* push eax */
+            ii(0x6721, 2);    push(eax);                                /* push eax */
             ii(0x6723, 3);    mov(eax, cr0);                            /* mov eax, cr0 */
             ii(0x6726, 6);    or(eax, 0x8000_0000);                     /* or eax, 0x80000000 */
             ii(0x672c, 3);    mov(cr0, eax);                            /* mov cr0, eax */
@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x674e, 3);    ltr(ax);                                  /* ltr ax */
             ii(0x6751, 2);    clts();                                   /* clts */
         l_0x6753:
-            ii(0x6753, 2);    popd(eax);                                /* pop eax */
+            ii(0x6753, 2);    pop(eax);                                 /* pop eax */
         l_0x6755:
             ii(0x6755, 3);    if(jmp_func(0x40d7, -0x2681)) return;     /* jmp 0x40d7 */
         }

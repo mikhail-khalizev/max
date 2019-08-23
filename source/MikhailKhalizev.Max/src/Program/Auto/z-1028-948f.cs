@@ -16,12 +16,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_94a8, 1); push(ecx);                              /* push ecx */
             ii(0x1028_94a9, 2); mov(cl, 0xc);                           /* mov cl, 0xc */
             ii(0x1028_94ab, 3); shl(ax, cl);                            /* shl ax, cl */
-            ii(0x1028_94ae, 2); pushw(ax);                              /* push ax */
+            ii(0x1028_94ae, 2); push(ax);                               /* push ax */
             ii(0x1028_94b0, 3); mov(ax, di);                            /* mov ax, di */
             ii(0x1028_94b3, 2); mov(cl, 0x4);                           /* mov cl, 0x4 */
             ii(0x1028_94b5, 3); shr(ax, cl);                            /* shr ax, cl */
             ii(0x1028_94b8, 3); mov(cx, ax);                            /* mov cx, ax */
-            ii(0x1028_94bb, 2); popw(ax);                               /* pop ax */
+            ii(0x1028_94bb, 2); pop(ax);                                /* pop ax */
             ii(0x1028_94bd, 3); add(ax, cx);                            /* add ax, cx */
             ii(0x1028_94c0, 1); pop(ecx);                               /* pop ecx */
             ii(0x1028_94c1, 7); mov(memw[ds, 0x165], cx);               /* mov [0x165], cx */

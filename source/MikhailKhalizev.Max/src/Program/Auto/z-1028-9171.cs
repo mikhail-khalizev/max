@@ -23,12 +23,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_9198, 1); outb(dx, al);                           /* out dx, al */
             ii(0x1028_9199, 2); inc(dx);                                /* inc dx */
             ii(0x1028_919b, 1); inb(al, dx);                            /* in al, dx */
-            ii(0x1028_919c, 2); pushw(ax);                              /* push ax */
+            ii(0x1028_919c, 2); push(ax);                               /* push ax */
             ii(0x1028_919e, 2); mov(al, 0xc0);                          /* mov al, 0xc0 */
             ii(0x1028_91a0, 1); outb(dx, al);                           /* out dx, al */
             ii(0x1028_91a1, 1); inb(al, dx);                            /* in al, dx */
             ii(0x1028_91a2, 2); cmp(al, -0x40 /* 0xc0 */);              /* cmp al, 0xc0 */
-            ii(0x1028_91a4, 2); popw(ax);                               /* pop ax */
+            ii(0x1028_91a4, 2); pop(ax);                                /* pop ax */
             ii(0x1028_91a6, 1); outb(dx, al);                           /* out dx, al */
             ii(0x1028_91a7, 6); if(jz(0x1028_91b6, 0x9)) goto l_0x1028_91b6; /* jz 0x102891b6 */
             ii(0x1028_91ad, 4); mov(ax, 0);                             /* mov ax, 0x0 */

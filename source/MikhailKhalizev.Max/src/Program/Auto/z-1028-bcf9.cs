@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1028_bcf9()
         {
             ii(0x1028_bcf9, 2); pusha();                                /* pusha */
-            ii(0x1028_bcfb, 1); push(ds);                               /* push ds */
-            ii(0x1028_bcfc, 1); pop(es);                                /* pop es */
+            ii(0x1028_bcfb, 1); pushd(ds);                              /* push ds */
+            ii(0x1028_bcfc, 1); popd(es);                               /* pop es */
             ii(0x1028_bcfd, 5); mov(edi, 0x1af9);                       /* mov edi, 0x1af9 */
             ii(0x1028_bd02, 2); mov(al, 0);                             /* mov al, 0x0 */
             ii(0x1028_bd04, 1); stosb();                                /* stosb */

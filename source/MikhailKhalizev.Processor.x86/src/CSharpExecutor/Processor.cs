@@ -6984,16 +6984,31 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public ValueBase pop(ValueBase d = null)
+        public ValueBase pop(ValueBase d)
         {
-            switch (CSharpEmulateMode)
+            if (d is Register || d is MemoryValue)
             {
-                case 16:
-                    return popw(d);
-                case 32:
-                    return popd(d);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                switch (d.Bits)
+                {
+                    case 16:
+                        return popw(d);
+                    case 32:
+                        return popd(d);
+                    default:
+                        throw new NotImplementedException($"Bits: {d.Bits}");
+                }
+            }
+            else
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        return popw(d);
+                    case 32:
+                        return popd(d);
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
             }
         }
 
@@ -7350,16 +7365,33 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void push(ValueBase s)
         {
-            switch (CSharpEmulateMode)
+            if (s is Register || s is MemoryValue)
             {
-                case 16:
-                    pushw(s);
-                    break;
-                case 32:
-                    pushd(s);
-                    break;
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                switch (s.Bits)
+                {
+                    case 16:
+                        pushw(s);
+                        break;
+                    case 32:
+                        pushd(s);
+                        break;
+                    default:
+                        throw new NotImplementedException($"Bits: {s.Bits}");
+                }
+            }
+            else
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        pushw(s);
+                        break;
+                    case 32:
+                        pushd(s);
+                        break;
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
             }
         }
 

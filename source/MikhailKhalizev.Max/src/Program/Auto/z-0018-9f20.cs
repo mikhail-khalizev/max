@@ -31,9 +31,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_9f55, 3); mov(memw[ds, bx - 0x28], bp);             /* mov [bx-0x28], bp */
             ii(0x18_9f58, 1); pop(si);                                  /* pop si */
             ii(0x18_9f59, 4); mov(memd[ds, bx + 0x2a], esp);            /* mov [bx+0x2a], esp */
-            ii(0x18_9f5d, 4); popd(memd[ds, bx + 0x1e]);                /* pop dword [bx+0x1e] */
-            ii(0x18_9f61, 4); popd(memd[ds, bx + 0x22]);                /* pop dword [bx+0x22] */
-            ii(0x18_9f65, 4); popd(memd[ds, bx + 0x26]);                /* pop dword [bx+0x26] */
+            ii(0x18_9f5d, 4); pop(memd[ds, bx + 0x1e]);                 /* pop dword [bx+0x1e] */
+            ii(0x18_9f61, 4); pop(memd[ds, bx + 0x22]);                 /* pop dword [bx+0x22] */
+            ii(0x18_9f65, 4); pop(memd[ds, bx + 0x26]);                 /* pop dword [bx+0x26] */
             ii(0x18_9f69, 3); mov(cx, memw[ds, bx + 0x26]);             /* mov cx, [bx+0x26] */
             ii(0x18_9f6c, 2); xor(ah, ah);                              /* xor ah, ah */
             ii(0x18_9f6e, 4); mov(memw[ds, 0x9ca], cx);                 /* mov [0x9ca], cx */

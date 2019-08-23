@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_ab71()
         {
             ii(0x18_ab71, 3); mov(cx, memw[ss, bp + 0x4]);              /* mov cx, [bp+0x4] */
-            ii(0x18_ab74, 2); pushd(edx);                               /* push edx */
-            ii(0x18_ab76, 2); pushd(eax);                               /* push eax */
+            ii(0x18_ab74, 2); push(edx);                                /* push edx */
+            ii(0x18_ab76, 2); push(eax);                                /* push eax */
             ii(0x18_ab78, 5); movzx(edx, memw[ss, bp + 0x12]);          /* movzx edx, word [bp+0x12] */
             ii(0x18_ab7d, 4); cmp(cx, memw[ds, 0xc26]);                 /* cmp cx, [0xc26] */
             ii(0x18_ab81, 2); if(jz(0x18_abb8, 0x35)) goto l_0x18_abb8; /* jz 0xabb8 */
@@ -42,8 +42,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_abb8, 3); mov(ax, 0x205);                           /* mov ax, 0x205 */
             ii(0x18_abbb, 1); push(cs);                                 /* push cs */
             ii(0x18_abbc, 3); call(0x18_a3b9, -0x806);                  /* call 0xa3b9 */
-            ii(0x18_abbf, 2); popd(eax);                                /* pop eax */
-            ii(0x18_abc1, 2); popd(edx);                                /* pop edx */
+            ii(0x18_abbf, 2); pop(eax);                                 /* pop eax */
+            ii(0x18_abc1, 2); pop(edx);                                 /* pop edx */
             ii(0x18_abc3, 2); mov(cx, bx);                              /* mov cx, bx */
             ii(0x18_abc5, 3); shl(bx, 0x3);                             /* shl bx, 0x3 */
             ii(0x18_abc8, 5); cmp(memb[ds, 0xc44], 0);                  /* cmp byte [0xc44], 0x0 */

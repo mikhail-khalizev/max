@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Decoder;
 using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using SharpDisasm.Udis86;
@@ -11,7 +12,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
     public class CSharpInstruction
     {
-        public DefinitionCollection DefinitionCollection { get; } // TODO Remove?
+        public DefinitionCollection DefinitionCollection { get; }
         public Address Begin { get; set; }
         public Address End { get; set; }
 
@@ -21,7 +22,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool CommentThis { get; set; }
 
         /// <summary>
-        /// Комментарии к иструкции.
+        /// Комментарии к инструкции.
         /// </summary>
         public List<string> Comments { get; set; }
 
@@ -201,14 +202,37 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             var method = udis86.ud_lookup_mnemonic(Mnemonic);
 
-            if (flags.HasFlag(InstrFlags.UseOprSizeInside) && effOprSize != DisMode ||
-                new[] { ud_mnemonic_code.UD_Iin, ud_mnemonic_code.UD_Iout }.Contains(Mnemonic))
-                method += GetSizeSuffixByBits(effOprSize);
+            bool addSizeSuffix;
 
-            if (flags.HasFlag(InstrFlags.UseAdrSizeInside) && AddrMode != DisMode ||
+            if (Mnemonic == ud_mnemonic_code.UD_Ipush || Mnemonic == ud_mnemonic_code.UD_Ipop)
+            {
+                var op = Operands[0];
+                if (Operands[0].type == ud_type.UD_OP_REG)
+                    addSizeSuffix = effOprSize != RegisterInfo.GetRegister(op.@base).Size;
+                else if (Operands[0].type == ud_type.UD_OP_MEM)
+                    addSizeSuffix = effOprSize != (op.size == 0 ? effOprSize : op.size);
+                else
+                    addSizeSuffix = effOprSize != DisMode;
+            }
+            else if (Mnemonic == ud_mnemonic_code.UD_Iin || Mnemonic == ud_mnemonic_code.UD_Iout)
+            {
+                addSizeSuffix = true;
+            }
+            else
+            {
+                addSizeSuffix = flags.HasFlag(InstrFlags.UseOprSizeInside) && effOprSize != DisMode;
+            }
+
+            
+            var addAdrSuffix = flags.HasFlag(InstrFlags.UseAdrSizeInside) && AddrMode != DisMode ||
                 new[] { ud_mnemonic_code.UD_Icall, ud_mnemonic_code.UD_Ijmp }.Contains(Mnemonic) &&
                 BrFar &&
-                Operands[0].type == ud_type.UD_OP_MEM)
+                Operands[0].type == ud_type.UD_OP_MEM;
+
+            
+            if (addSizeSuffix)
+                method += GetSizeSuffixByBits(effOprSize);
+            if (addAdrSuffix)
                 method += adrModeStr;
 
             if (BrFar)
@@ -252,9 +276,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     sb.Append(", ");
                 nonFirstArg = true;
 
-                var oprSize = (int)op.size;
-                if (oprSize == 0)
-                    oprSize = effOprSize;
+                var oprSize = op.size == 0 ? effOprSize : op.size;
 
                 int val;
                 switch (op.type)
@@ -266,7 +288,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
                             sb.Append($"ST({op.@base - ud_type.UD_R_ST0})");
                         else
-                            sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
+                            sb.Append(RegisterInfo.GetRegister(op.@base));
                         break;
 
                     case ud_type.UD_OP_MEM:
@@ -274,7 +296,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             sb.Append("mem");
                             sb.Append(GetSizeSuffixByBits(oprSize));
                             sb.Append(adrModeStr);
-                            sb.Append($"[{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
+                            sb.Append($"[{RegisterInfo.GetRegister(GetEffectiveSegmentOfOperand(op))}, ");
 
                             if (PfxSeg != ud_type.UD_NONE)
                                 usePfxSeg = true;
@@ -364,10 +386,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                     val = op.lval.@sbyte;
 
                                     if (val < 0 && needSignExtend)
-                                        sb.Append(
-                                            $"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
+                                    {
+                                        sb.Append($"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
+                                    }
                                     else
+                                    {
                                         sb.Append(HexHelper.ToShortGrouped4Hex(op.lval.ubyte));
+                                    }
+
                                     break;
                                 }
 
@@ -380,7 +406,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             default:
                                 throw new NotImplementedException($"oprSize: {oprSize}");
                         }
-
                         break;
 
                     case ud_type.UD_OP_JIMM:
@@ -781,6 +806,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             }
         }
 
+        public static string GetCSharpCast(bool signed, int bits)
+        {
+            switch (bits)
+            {
+                case 8:
+                    return signed ? "(sbyte)" : "(byte)";
+                case 16:
+                    return signed ? "(short)" : "(ushort)";
+                case 32:
+                    return signed ? "(int)" : "(uint)";
+                case 64:
+                    return signed ? "(long)" : "(ulong)";
+                default:
+                    throw new ArgumentException($"signed: {signed}, bits: {bits}.");
+            }
+        }
+
         private class AssemblyCode : IAssemblyCode
         {
             private readonly IMemory _memory;
@@ -797,7 +839,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             {
                 get
                 {
-                    // @todo Проверять suppress_decode.
                     try
                     {
                         return _memory.GetMinSize(index, 1)[0];

@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1017_d511()
         {
             ii(0x1017_d511, 2); mov(edi, ecx);                          /* mov edi, ecx */
-            ii(0x1017_d513, 1); pop(es);                                /* pop es */
+            ii(0x1017_d513, 1); popd(es);                               /* pop es */
             ii(0x1017_d514, 2); mov(eax, edi);                          /* mov eax, edi */
         l_0x1017_d516:
             ii(0x1017_d516, 2); test(ebx, ebx);                         /* test ebx, ebx */

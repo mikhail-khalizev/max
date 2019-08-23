@@ -141,5 +141,11 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         public int ByteMask { get; }
         public int Size { get; }
         public bool IsGeneralPurpose { get; private set; }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return syn.ud_reg_tab[UdType - ud_type.UD_R_AL];
+        }
     }
 }

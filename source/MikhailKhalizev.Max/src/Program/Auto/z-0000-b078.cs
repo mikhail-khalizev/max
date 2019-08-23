@@ -52,8 +52,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb0f9, 6);    mov(esi, 0x3f_f000);                      /* mov esi, 0x3ff000 */
             ii(0xb0ff, 3);    call(0xb1d9, 0xd7);                       /* call 0xb1d9 */
         l_0xb102:
-            ii(0xb102, 4);    pushd(memd[ss, bp + 0x4]);                /* push dword [bp+0x4] */
-            ii(0xb106, 5);    pushd(memd[ds, 0x98]);                    /* push dword [0x98] */
+            ii(0xb102, 4);    push(memd[ss, bp + 0x4]);                 /* push dword [bp+0x4] */
+            ii(0xb106, 5);    push(memd[ds, 0x98]);                     /* push dword [0x98] */
             ii(0xb10b, 5);    call_far_abs(0x70, 0x57bb);               /* call word 0x70:0x57bb */
             ii(0xb110, 3);    add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0xb113, 1);    push(ax);                                 /* push ax */

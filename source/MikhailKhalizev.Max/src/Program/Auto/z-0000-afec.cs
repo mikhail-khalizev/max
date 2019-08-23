@@ -36,13 +36,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb032, 4);    movzx(edi, di);                           /* movzx edi, di */
             ii(0xb036, 3);    add(edi, eax);                            /* add edi, eax */
             ii(0xb039, 3);    add(ecx, eax);                            /* add ecx, eax */
-            ii(0xb03c, 2);    pushd(ecx);                               /* push ecx */
-            ii(0xb03e, 2);    pushd(edi);                               /* push edi */
+            ii(0xb03c, 2);    push(ecx);                                /* push ecx */
+            ii(0xb03e, 2);    push(edi);                                /* push edi */
             ii(0xb040, 3);    call(0x3880, -0x77c3);                    /* call 0x3880 */
             ii(0xb043, 2);    push(0x38);                               /* push 0x38 */
             ii(0xb045, 1);    pop(es);                                  /* pop es */
-            ii(0xb046, 2);    popd(edi);                                /* pop edi */
-            ii(0xb048, 2);    popd(ebx);                                /* pop ebx */
+            ii(0xb046, 2);    pop(edi);                                 /* pop edi */
+            ii(0xb048, 2);    pop(ebx);                                 /* pop ebx */
         l_0xb04a:
             ii(0xb04a, 5);    call_far_abs(0x70, 0x5750);               /* call word 0x70:0x5750 */
             ii(0xb04f, 2);    or(ax, ax);                               /* or ax, ax */

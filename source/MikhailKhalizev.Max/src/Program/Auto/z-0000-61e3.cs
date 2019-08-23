@@ -27,10 +27,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6211, 6);    mov(memw[ds, 0xeca], 0x1000);             /* mov word [0xeca], 0x1000 */
             ii(0x6217, 1);    sti();                                    /* sti */
             ii(0x6218, 3);    push(0xf7ff);                             /* push 0xf7ff */
-            ii(0x621b, 5);    pushd(memd[ds, 0x9c]);                    /* push dword [0x9c] */
+            ii(0x621b, 5);    push(memd[ds, 0x9c]);                     /* push dword [0x9c] */
             ii(0x6220, 6);    movzx(eax, memw[ds, 0xeca]);              /* movzx eax, word [0xeca] */
             ii(0x6226, 4);    shl(eax, 0x6);                            /* shl eax, 0x6 */
-            ii(0x622a, 2);    pushd(eax);                               /* push eax */
+            ii(0x622a, 2);    push(eax);                                /* push eax */
             ii(0x622c, 3);    call(0x3880, -0x29af);                    /* call 0x3880 */
             ii(0x622f, 1);    push(cs);                                 /* push cs */
             ii(0x6230, 3);    call(0x6137, -0xfc);                      /* call 0x6137 */

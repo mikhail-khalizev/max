@@ -16,11 +16,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_eea9, 3); or(eax, eax);                             /* or eax, eax */
             ii(0x18_eeac, 2); if(jz(0x18_ef0a, 0x5c)) goto l_0x18_ef0a; /* jz 0xef0a */
         l_0x18_eeae:
-            ii(0x18_eeae, 2); popd(eax);                                /* pop eax */
-            ii(0x18_eeb0, 2); popd(ebp);                                /* pop ebp */
+            ii(0x18_eeae, 2); pop(eax);                                 /* pop eax */
+            ii(0x18_eeb0, 2); pop(ebp);                                 /* pop ebp */
             ii(0x18_eeb2, 1); ret(); return;                            /* ret */
         l_0x18_eeb3:
-            ii(0x18_eeb3, 2); pushd(esi);                               /* push esi */
+            ii(0x18_eeb3, 2); push(esi);                                /* push esi */
             ii(0x18_eeb5, 3); mov(esi, eax);                            /* mov esi, eax */
             ii(0x18_eeb8, 4); cmp(esi, 0x2);                            /* cmp esi, 0x2 */
             ii(0x18_eebc, 4); if(jb(0x18_ef08, 0x48)) goto l_0x18_ef08; /* jb 0xef08 */
@@ -49,17 +49,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_eef9, 2); mov(ds, bp);                              /* mov ds, bp */
             ii(0x18_eefb, 4); cmp(ax, memw_a32[ds, esi - 0x2]);         /* cmp ax, [esi-0x2] */
             ii(0x18_eeff, 1); pop(ds);                                  /* pop ds */
-            ii(0x18_ef00, 2); popd(esi);                                /* pop esi */
+            ii(0x18_ef00, 2); pop(esi);                                 /* pop esi */
             ii(0x18_ef02, 4); if(jnz(0x18_ef0a, 0x4)) goto l_0x18_ef0a; /* jnz 0xef0a */
             ii(0x18_ef06, 2); jmp(0x18_eeae, -0x5a); goto l_0x18_eeae;  /* jmp 0xeeae */
         l_0x18_ef08:
-            ii(0x18_ef08, 2); popd(esi);                                /* pop esi */
+            ii(0x18_ef08, 2); pop(esi);                                 /* pop esi */
         l_0x18_ef0a:
-            ii(0x18_ef0a, 2); popd(eax);                                /* pop eax */
-            ii(0x18_ef0c, 2); popd(ebp);                                /* pop ebp */
+            ii(0x18_ef0a, 2); pop(eax);                                 /* pop eax */
+            ii(0x18_ef0c, 2); pop(ebp);                                 /* pop ebp */
             ii(0x18_ef0e, 3); test(cl, 0x20);                           /* test cl, 0x20 */
             ii(0x18_ef11, 2); if(jz(0x18_ef15, 0x2)) goto l_0x18_ef15;  /* jz 0xef15 */
-            ii(0x18_ef13, 2); pushd(eax);                               /* push eax */
+            ii(0x18_ef13, 2); push(eax);                                /* push eax */
         l_0x18_ef15:
             ii(0x18_ef15, 2); pushad();                                 /* pushad */
             ii(0x18_ef17, 1); push(ds);                                 /* push ds */

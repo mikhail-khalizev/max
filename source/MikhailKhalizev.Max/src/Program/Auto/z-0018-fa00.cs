@@ -8,10 +8,10 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_fa00-bc95f066")]
         public void Method_0018_fa00()
         {
-            ii(0x18_fa00, 2); pushd(ebp);                               /* push ebp */
-            ii(0x18_fa02, 2); pushd(ebp);                               /* push ebp */
+            ii(0x18_fa00, 2); push(ebp);                                /* push ebp */
+            ii(0x18_fa02, 2); push(ebp);                                /* push ebp */
             ii(0x18_fa04, 3); mov(ebp, esp);                            /* mov ebp, esp */
-            ii(0x18_fa07, 2); pushd(ebx);                               /* push ebx */
+            ii(0x18_fa07, 2); push(ebx);                                /* push ebx */
             ii(0x18_fa09, 1); push(ds);                                 /* push ds */
             ii(0x18_fa0a, 3); mov(bx, 0xa8);                            /* mov bx, 0xa8 */
             ii(0x18_fa0d, 2); mov(ds, bx);                              /* mov ds, bx */
@@ -29,12 +29,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fa32, 2); if(jz_func(0x18_f9dc, -0x58)) return;     /* jz 0xf9dc */
             ii(0x18_fa34, 9); mov(memd_a32[ss, ebp + 0x6], 0);          /* mov dword [ebp+0x6], 0x0 */
             ii(0x18_fa3d, 1); pop(ds);                                  /* pop ds */
-            ii(0x18_fa3e, 2); popd(ebx);                                /* pop ebx */
-            ii(0x18_fa40, 2); popd(ebp);                                /* pop ebp */
+            ii(0x18_fa3e, 2); pop(ebx);                                 /* pop ebx */
+            ii(0x18_fa40, 2); pop(ebp);                                 /* pop ebp */
             ii(0x18_fa42, 2); xchg(bx, bx);                             /* xchg bx, bx */
             ii(0x18_fa44, 1); cld();                                    /* cld */
             ii(0x18_fa45, 1); push(ds);                                 /* push ds */
-            ii(0x18_fa46, 2); pushd(esi);                               /* push esi */
+            ii(0x18_fa46, 2); push(esi);                                /* push esi */
             ii(0x18_fa48, 3); mov(si, 0xa8);                            /* mov si, 0xa8 */
             ii(0x18_fa4b, 2); mov(ds, si);                              /* mov ds, si */
             ii(0x18_fa4d, 1); push(ax);                                 /* push ax */
@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fa7b, 3); and(si, -0x4 /* 0xfc */);                 /* and si, 0xfffc */
             ii(0x18_fa7e, 5); mov(memd[ds, 0xa42], esi);                /* mov [0xa42], esi */
             ii(0x18_fa83, 2); pop(memw[ds, si]);                        /* pop word [si] */
-            ii(0x18_fa85, 4); popd(memd[ds, si + 0x10]);                /* pop dword [si+0x10] */
+            ii(0x18_fa85, 4); pop(memd[ds, si + 0x10]);                 /* pop dword [si+0x10] */
             ii(0x18_fa89, 3); pop(memw[ds, si + 0x4]);                  /* pop word [si+0x4] */
             ii(0x18_fa8c, 4); mov(memd[ds, si + 0x28], eax);            /* mov [si+0x28], eax */
             ii(0x18_fa90, 4); mov(memd[ds, si + 0x1c], ebx);            /* mov [si+0x1c], ebx */
@@ -72,10 +72,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_faaa, 3); mov(memw[ds, si + 0xa], gs);              /* mov [si+0xa], gs */
             ii(0x18_faad, 3); mov(memw[ds, si + 0x2], ss);              /* mov [si+0x2], ss */
             ii(0x18_fab0, 1); pop(bx);                                  /* pop bx */
-            ii(0x18_fab1, 4); popd(memd[ds, si + 0x2e]);                /* pop dword [si+0x2e] */
-            ii(0x18_fab5, 4); popd(memd[ds, si + 0x32]);                /* pop dword [si+0x32] */
-            ii(0x18_fab9, 4); popd(memd[ds, si + 0x36]);                /* pop dword [si+0x36] */
-            ii(0x18_fabd, 4); popd(memd[ds, si + 0x3a]);                /* pop dword [si+0x3a] */
+            ii(0x18_fab1, 4); pop(memd[ds, si + 0x2e]);                 /* pop dword [si+0x2e] */
+            ii(0x18_fab5, 4); pop(memd[ds, si + 0x32]);                 /* pop dword [si+0x32] */
+            ii(0x18_fab9, 4); pop(memd[ds, si + 0x36]);                 /* pop dword [si+0x36] */
+            ii(0x18_fabd, 4); pop(memd[ds, si + 0x3a]);                 /* pop dword [si+0x3a] */
             ii(0x18_fac1, 3); mov(eax, esp);                            /* mov eax, esp */
             ii(0x18_fac4, 2); mov(cx, ss);                              /* mov cx, ss */
             ii(0x18_fac6, 4); lar(ecx, cx);                             /* lar ecx, cx */

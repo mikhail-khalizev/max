@@ -101,7 +101,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb104, 1);    push(bp);                                 /* push bp */
             ii(0xb105, 2);    mov(bp, sp);                              /* mov bp, sp */
             ii(0xb107, 1);    push(si);                                 /* push si */
-            ii(0xb108, 2);    pushd(edi);                               /* push edi */
+            ii(0xb108, 2);    push(edi);                                /* push edi */
             ii(0xb10a, 3);    xor(edi, edi);                            /* xor edi, edi */
             ii(0xb10d, 1);    push(ds);                                 /* push ds */
             ii(0xb10e, 1);    push(es);                                 /* push es */
@@ -181,7 +181,7 @@ namespace MikhailKhalizev.Max.Program
         l_0xb1b2:
             ii(0xb1b2, 1);    pop(es);                                  /* pop es */
             ii(0xb1b3, 1);    pop(ds);                                  /* pop ds */
-            ii(0xb1b4, 2);    popd(edi);                                /* pop edi */
+            ii(0xb1b4, 2);    pop(edi);                                 /* pop edi */
             ii(0xb1b6, 1);    pop(si);                                  /* pop si */
             ii(0xb1b7, 1);    pop(bp);                                  /* pop bp */
             ii(0xb1b8, 1);    retf();                                   /* retf */

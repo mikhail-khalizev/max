@@ -49,19 +49,19 @@ namespace MikhailKhalizev.Max.Program
         //  ii(0x19_00e6, 2); xchg(bx, bx);                             /* xchg bx, bx */
         l_0x19_00e8:
             ii(0x19_00e8, 2); mov(cx, ds);                              /* mov cx, ds */
-            ii(0x19_00ea, 2); pushd(ecx);                               /* push ecx */
-            ii(0x19_00ec, 2); pushd(esi);                               /* push esi */
-            ii(0x19_00ee, 2); pushd(ebx);                               /* push ebx */
+            ii(0x19_00ea, 2); push(ecx);                                /* push ecx */
+            ii(0x19_00ec, 2); push(esi);                                /* push esi */
+            ii(0x19_00ee, 2); push(ebx);                                /* push ebx */
             ii(0x19_00f0, 2); mov(cx, cs);                              /* mov cx, cs */
-            ii(0x19_00f2, 2); pushd(ecx);                               /* push ecx */
+            ii(0x19_00f2, 2); push(ecx);                                /* push ecx */
             ii(0x19_00f4, 5); lea(ecx, memd[ds, 0xc80]);                /* lea ecx, [0xc80] */
-            ii(0x19_00f9, 2); pushd(ecx);                               /* push ecx */
+            ii(0x19_00f9, 2); push(ecx);                                /* push ecx */
             ii(0x19_00fb, 4); mov(ss, memw[ds, 0]);                     /* mov ss, [0x0] */
             ii(0x19_00ff, 4); movzx(esp, sp);                           /* movzx esp, sp */
             ii(0x19_0103, 1); nop();                                    /* nop */
         l_0x19_0104:
-            ii(0x19_0104, 2); pushd(edx);                               /* push edx */
-            ii(0x19_0106, 2); pushd(eax);                               /* push eax */
+            ii(0x19_0104, 2); push(edx);                                /* push edx */
+            ii(0x19_0106, 2); push(eax);                                /* push eax */
             ii(0x19_0108, 2); retfd();                                  /* o32 retf */
         }
     }

@@ -4165,7 +4165,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Pop a Value from the Stack.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POP.html</remarks>
-        ValueBase pop(ValueBase d = null);
+        ValueBase pop(ValueBase d);
 
         /// <summary>
         /// Pop a Value from the Stack.

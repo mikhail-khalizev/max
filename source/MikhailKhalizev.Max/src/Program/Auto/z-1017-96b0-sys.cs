@@ -79,7 +79,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_97a4, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1017_97a6, 6); mov(memd[ds, 0x101b_e42c], edx);        /* mov [0x101be42c], edx */
         l_0x1017_97ac:
-            ii(0x1017_97ac, 1); push(ds);                               /* push ds */
+            ii(0x1017_97ac, 1); pushd(ds);                              /* push ds */
             ii(0x1017_97ad, 5); mov(eax, 0x77);                         /* mov eax, 0x77 */
             ii(0x1017_97b2, 5); push(0x101b_e41c);                      /* push 0x101be41c */
             ii(0x1017_97b7, 5); mov(ebx, /* sys */ 0x1017_9690);        /* mov ebx, 0x10179690 */

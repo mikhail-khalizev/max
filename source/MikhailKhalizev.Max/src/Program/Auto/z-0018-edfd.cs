@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_ee10, 3); cmp(bl, -0x28 /* 0xd8 */);                /* cmp bl, 0xd8 */
         l_0x18_ee13:
             ii(0x18_ee13, 1); pop(ds);                                  /* pop ds */
-            ii(0x18_ee14, 2); popd(ebx);                                /* pop ebx */
+            ii(0x18_ee14, 2); pop(ebx);                                 /* pop ebx */
             ii(0x18_ee16, 2); if(jz(0x18_ee19, 0x1)) goto l_0x18_ee19;  /* jz 0xee19 */
             ii(0x18_ee18, 1); ret(); return;                            /* ret */
         l_0x18_ee19:

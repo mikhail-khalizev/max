@@ -47,7 +47,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e762, 2); if(ja(0x18_e748, -0x1c)) goto l_0x18_e748; /* ja 0xe748 */
             ii(0x18_e764, 2); sub(bx, cx);                              /* sub bx, cx */
             ii(0x18_e766, 2); if(jcxz(0x18_e77d, 0x15)) goto l_0x18_e77d; /* jcxz 0xe77d */
-            ii(0x18_e768, 2); pushd(esi);                               /* push esi */
+            ii(0x18_e768, 2); push(esi);                                /* push esi */
             ii(0x18_e76a, 1); std();                                    /* std */
             ii(0x18_e76b, 5); lea(esi, memd_a32[ss, ebp + 0x2f]);       /* lea esi, [ebp+0x2f] */
             ii(0x18_e770, 3); add(esi, ecx);                            /* add esi, ecx */
@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e774, 4); rep_a32(() => movsb_a32(ss));             /* a32 ss rep movsb */
             ii(0x18_e778, 2); inc(di);                                  /* a32 inc di */
             ii(0x18_e77a, 1); cld();                                    /* cld */
-            ii(0x18_e77b, 2); popd(esi);                                /* pop esi */
+            ii(0x18_e77b, 2); pop(esi);                                 /* pop esi */
         l_0x18_e77d:
             ii(0x18_e77d, 3); lea(di, memw[ds, di - 0x32]);             /* lea di, [di-0x32] */
             ii(0x18_e780, 1); ret();                                    /* ret */

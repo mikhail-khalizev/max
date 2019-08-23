@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_94ff, 3); mov(di, 0x50c4);                          /* mov di, 0x50c4 */
             ii(0x17_9502, 1); push(es);                                 /* push es */
             ii(0x17_9503, 1); push(di);                                 /* push di */
-            ii(0x17_9504, 2); pushd(ebx);                               /* push ebx */
+            ii(0x17_9504, 2); push(ebx);                                /* push ebx */
             ii(0x17_9506, 3); mov(edx, ebx);                            /* mov edx, ebx */
             ii(0x17_9509, 4); mov(gs, memw[ds, 0xaa]);                  /* mov gs, [0xaa] */
             ii(0x17_950d, 2); clts();                                   /* clts */
@@ -37,8 +37,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9536, 5); cmp(ebx, memd[ds, 0x4fd8]);               /* cmp ebx, [0x4fd8] */
             ii(0x17_953b, 4); if(jbe(0x17_9546, 0x7)) goto l_0x17_9546; /* jbe 0x9546 */
         l_0x17_953f:
-            ii(0x17_953f, 2); pushd(ebx);                               /* push ebx */
-            ii(0x17_9541, 2); popd(eax);                                /* pop eax */
+            ii(0x17_953f, 2); push(ebx);                                /* push ebx */
+            ii(0x17_9541, 2); pop(eax);                                 /* pop eax */
             ii(0x17_9543, 3); jmp(0x17_95ec, 0xa6); goto l_0x17_95ec;   /* jmp 0x95ec */
         l_0x17_9546:
             ii(0x17_9546, 7); sub(ebx, 0x1000_0000);                    /* sub ebx, 0x10000000 */
@@ -80,10 +80,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_95bf, 4); mov(fs, memw[es, di + 0x58]);             /* mov fs, [es:di+0x58] */
             ii(0x17_95c3, 4); mov(ss, memw[es, di + 0x50]);             /* mov ss, [es:di+0x50] */
             ii(0x17_95c7, 5); mov(esp, memd[es, di + 0x38]);            /* mov esp, [es:di+0x38] */
-            ii(0x17_95cc, 5); pushd(memd[es, di + 0x24]);               /* push dword [es:di+0x24] */
+            ii(0x17_95cc, 5); push(memd[es, di + 0x24]);                /* push dword [es:di+0x24] */
             ii(0x17_95d1, 4); push(memw[es, di + 0x4c]);                /* push word [es:di+0x4c] */
             ii(0x17_95d5, 4); push(memw[es, di + 0x4c]);                /* push word [es:di+0x4c] */
-            ii(0x17_95d9, 5); pushd(memd[es, di + 0x20]);               /* push dword [es:di+0x20] */
+            ii(0x17_95d9, 5); push(memd[es, di + 0x20]);                /* push dword [es:di+0x20] */
             ii(0x17_95de, 4); push(memw[es, di + 0x48]);                /* push word [es:di+0x48] */
             ii(0x17_95e2, 5); mov(edi, memd[es, di + 0x44]);            /* mov edi, [es:di+0x44] */
             ii(0x17_95e7, 1); pop(es);                                  /* pop es */
@@ -119,10 +119,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_963b, 4); mov(fs, memw[es, di + 0x58]);             /* mov fs, [es:di+0x58] */
             ii(0x17_963f, 4); mov(ss, memw[es, di + 0x50]);             /* mov ss, [es:di+0x50] */
             ii(0x17_9643, 5); mov(esp, memd[es, di + 0x38]);            /* mov esp, [es:di+0x38] */
-            ii(0x17_9648, 5); pushd(memd[es, di + 0x24]);               /* push dword [es:di+0x24] */
+            ii(0x17_9648, 5); push(memd[es, di + 0x24]);                /* push dword [es:di+0x24] */
             ii(0x17_964d, 4); push(memw[es, di + 0x4c]);                /* push word [es:di+0x4c] */
             ii(0x17_9651, 4); push(memw[es, di + 0x4c]);                /* push word [es:di+0x4c] */
-            ii(0x17_9655, 5); pushd(memd[es, di + 0x20]);               /* push dword [es:di+0x20] */
+            ii(0x17_9655, 5); push(memd[es, di + 0x20]);                /* push dword [es:di+0x20] */
             ii(0x17_965a, 5); cmp(memw[es, di + 0x5a], 0);              /* cmp word [es:di+0x5a], 0x0 */
             ii(0x17_965f, 4); if(jnz(0x17_9667, 0x4)) goto l_0x17_9667; /* jnz 0x9667 */
             ii(0x17_9663, 2); push(0);                                  /* push 0x0 */

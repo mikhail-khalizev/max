@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_e450()
         {
             ii(0x18_e450, 4); inc(memb[ds, 0x1182]);                    /* inc byte [0x1182] */
-            ii(0x18_e454, 2); pushd(edi);                               /* push edi */
+            ii(0x18_e454, 2); push(edi);                                /* push edi */
             ii(0x18_e456, 3); call(0x18_dd10, -0x749);                  /* call 0xdd10 */
             ii(0x18_e459, 2); pushfd();                                 /* pushfd */
             ii(0x18_e45b, 2); pushd(cs);                                /* o32 push cs */
@@ -20,8 +20,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e469, 6); add(memw[ds, 0x996], 0x180);              /* add word [0x996], 0x180 */
             ii(0x18_e46f, 1); popfw();                                  /* popfw */
             ii(0x18_e470, 4); pop(memw[ds, 0xc1c]);                     /* pop word [0xc1c] */
-            ii(0x18_e474, 5); popd(memd[ds, 0xc18]);                    /* pop dword [0xc18] */
-            ii(0x18_e479, 2); popd(edi);                                /* pop edi */
+            ii(0x18_e474, 5); pop(memd[ds, 0xc18]);                     /* pop dword [0xc18] */
+            ii(0x18_e479, 2); pop(edi);                                 /* pop edi */
             ii(0x18_e47b, 4); dec(memb[ds, 0x1182]);                    /* dec byte [0x1182] */
             ii(0x18_e47f, 1); ret();                                    /* ret */
         }

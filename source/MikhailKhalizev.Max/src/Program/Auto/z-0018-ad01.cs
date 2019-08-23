@@ -17,12 +17,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_ad10, 2); if(jz(0x18_ad29, 0x17)) goto l_0x18_ad29; /* jz 0xad29 */
         l_0x18_ad12:
             ii(0x18_ad12, 3); mov(ax, 0x204);                           /* mov ax, 0x204 */
-            ii(0x18_ad15, 2); pushd(edx);                               /* push edx */
+            ii(0x18_ad15, 2); push(edx);                                /* push edx */
             ii(0x18_ad17, 1); pop(dx);                                  /* pop dx */
             ii(0x18_ad18, 1); push(cs);                                 /* push cs */
             ii(0x18_ad19, 3); call(0x18_a3b9, -0x963);                  /* call 0xa3b9 */
             ii(0x18_ad1c, 1); push(dx);                                 /* push dx */
-            ii(0x18_ad1d, 2); popd(edx);                                /* pop edx */
+            ii(0x18_ad1d, 2); pop(edx);                                 /* pop edx */
         l_0x18_ad1f:
             ii(0x18_ad1f, 3); mov(memw[ss, bp + 0x6], cx);              /* mov [bp+0x6], cx */
             ii(0x18_ad22, 3); mov(memw[ss, bp + 0x10], dx);             /* mov [bp+0x10], dx */

@@ -9,10 +9,10 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1017_2d9c()
         {
             ii(0x1017_2d9c, 1); pushad();                               /* pushad */
-            ii(0x1017_2d9d, 1); push(ds);                               /* push ds */
-            ii(0x1017_2d9e, 1); push(es);                               /* push es */
-            ii(0x1017_2d9f, 2); push(fs);                               /* push fs */
-            ii(0x1017_2da1, 2); push(gs);                               /* push gs */
+            ii(0x1017_2d9d, 1); pushd(ds);                              /* push ds */
+            ii(0x1017_2d9e, 1); pushd(es);                              /* push es */
+            ii(0x1017_2d9f, 2); pushd(fs);                              /* push fs */
+            ii(0x1017_2da1, 2); pushd(gs);                              /* push gs */
             ii(0x1017_2da3, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1017_2da5, 1); cld();                                  /* cld */
             ii(0x1017_2da6, 5); call(/* sys */ 0x1016_c9d0, -0x63db);   /* call 0x1016c9d0 */
@@ -39,10 +39,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_2df2, 2); mov(al, 0x20);                          /* mov al, 0x20 */
             ii(0x1017_2df4, 5); mov(edx, 0x20);                         /* mov edx, 0x20 */
             ii(0x1017_2df9, 1); outb(dx, al);                           /* out dx, al */
-            ii(0x1017_2dfa, 2); pop(gs);                                /* pop gs */
-            ii(0x1017_2dfc, 2); pop(fs);                                /* pop fs */
-            ii(0x1017_2dfe, 1); pop(es);                                /* pop es */
-            ii(0x1017_2dff, 1); pop(ds);                                /* pop ds */
+            ii(0x1017_2dfa, 2); popd(gs);                               /* pop gs */
+            ii(0x1017_2dfc, 2); popd(fs);                               /* pop fs */
+            ii(0x1017_2dfe, 1); popd(es);                               /* pop es */
+            ii(0x1017_2dff, 1); popd(ds);                               /* pop ds */
             ii(0x1017_2e00, 1); popad();                                /* popad */
             ii(0x1017_2e01, 1); iretd();                                /* iretd */
         }

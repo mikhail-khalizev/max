@@ -35,9 +35,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb29e, 3);    sub(edx, eax);                            /* sub edx, eax */
             ii(0xb2a1, 3);    neg(edx);                                 /* neg edx */
             ii(0xb2a4, 3);    and(dh, 0xf);                             /* and dh, 0xf */
-            ii(0xb2a7, 2);    pushd(eax);                               /* push eax */
+            ii(0xb2a7, 2);    push(eax);                                /* push eax */
             ii(0xb2a9, 3);    or(ax, 0xeee);                            /* or ax, 0xeee */
-            ii(0xb2ac, 2);    pushd(eax);                               /* push eax */
+            ii(0xb2ac, 2);    push(eax);                                /* push eax */
             ii(0xb2ae, 2);    mov(bx, sp);                              /* mov bx, sp */
             ii(0xb2b0, 2);    push(0);                                  /* push 0x0 */
             ii(0xb2b2, 1);    push(dx);                                 /* push dx */

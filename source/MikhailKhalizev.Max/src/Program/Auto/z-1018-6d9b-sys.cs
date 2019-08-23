@@ -65,13 +65,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_6e2d, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1018_6e2f, 2); mov(ebx, eax);                          /* mov ebx, eax */
             ii(0x1018_6e31, 2); mov(eax, edx);                          /* mov eax, edx */
-            ii(0x1018_6e33, 1); push(es);                               /* push es */
+            ii(0x1018_6e33, 1); pushd(es);                              /* push es */
             ii(0x1018_6e34, 2); mov(es, eax);                           /* mov es, eax */
             ii(0x1018_6e36, 2); mov(ah, 0x49);                          /* mov ah, 0x49 */
             ii(0x1018_6e38, 2); @int(0x21);                             /* int 0x21 */
             ii(0x1018_6e3a, 2); rcl(eax, 0x1);                          /* rcl eax, 1 */
             ii(0x1018_6e3c, 2); ror(eax, 0x1);                          /* ror eax, 1 */
-            ii(0x1018_6e3e, 1); pop(es);                                /* pop es */
+            ii(0x1018_6e3e, 1); popd(es);                               /* pop es */
             ii(0x1018_6e3f, 2); test(esi, esi);                         /* test esi, esi */
             ii(0x1018_6e41, 2); if(jl(0x1018_6e61, 0x1e)) goto l_0x1018_6e61; /* jl 0x10186e61 */
             ii(0x1018_6e43, 2); mov(ah, 0);                             /* mov ah, 0x0 */

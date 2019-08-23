@@ -9,14 +9,14 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_9fb5()
         {
             ii(0x18_9fb5, 4); mov(ebx, memd[ss, bp + 0x2a]);            /* mov ebx, [bp+0x2a] */
-            ii(0x18_9fb9, 5); popd(memd_a32[ds, ebx - 0x4]);            /* pop dword [ebx-0x4] */
+            ii(0x18_9fb9, 5); pop(memd_a32[ds, ebx - 0x4]);             /* pop dword [ebx-0x4] */
             ii(0x18_9fbe, 4); mov(eax, memd[ss, bp + 0x1e]);            /* mov eax, [bp+0x1e] */
             ii(0x18_9fc2, 4); mov(memd_a32[ds, ebx], eax);              /* mov [ebx], eax */
             ii(0x18_9fc6, 3); mov(ax, memw[ss, bp + 0x22]);             /* mov ax, [bp+0x22] */
             ii(0x18_9fc9, 4); mov(memw_a32[ds, ebx + 0x4], ax);         /* mov [ebx+0x4], ax */
             ii(0x18_9fcd, 3); mov(ax, memw[ss, bp + 0x28]);             /* mov ax, [bp+0x28] */
             ii(0x18_9fd0, 4); mov(memw_a32[ds, ebx + 0xa], ax);         /* mov [ebx+0xa], ax */
-            ii(0x18_9fd4, 2); popd(eax);                                /* pop eax */
+            ii(0x18_9fd4, 2); pop(eax);                                 /* pop eax */
             ii(0x18_9fd6, 3); cmp(dx, memw[ss, bp + 0x6]);              /* cmp dx, [bp+0x6] */
             ii(0x18_9fd9, 2); if(jnz(0x18_a016, 0x3b)) goto l_0x18_a016; /* jnz 0xa016 */
         l_0x18_9fdb:
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x18_9fe3:
             ii(0x18_9fe3, 4); mov(memw_a32[ds, ebx - 0x8], dx);         /* mov [ebx-0x8], dx */
             ii(0x18_9fe7, 4); pop(memw_a32[ds, ebx - 0x6]);             /* pop word [ebx-0x6] */
-            ii(0x18_9feb, 5); popd(memd_a32[ds, ebx - 0x4]);            /* pop dword [ebx-0x4] */
+            ii(0x18_9feb, 5); pop(memd_a32[ds, ebx - 0x4]);             /* pop dword [ebx-0x4] */
             ii(0x18_9ff0, 4); pop(memw_a32[ds, ebx - 0xa]);             /* pop word [ebx-0xa] */
             ii(0x18_9ff4, 1); pop(dx);                                  /* pop dx */
             ii(0x18_9ff5, 3); and(dh, 0xe);                             /* and dh, 0xe */
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a00b, 1); pop(dx);                                  /* pop dx */
             ii(0x18_a00c, 1); pop(ds);                                  /* pop ds */
             ii(0x18_a00d, 1); pop(bp);                                  /* pop bp */
-            ii(0x18_a00e, 2); popd(ebx);                                /* pop ebx */
+            ii(0x18_a00e, 2); pop(ebx);                                 /* pop ebx */
             ii(0x18_a010, 2); iretd(); return;                          /* iretd */
         l_0x18_a012:
             ii(0x18_a012, 2); xor(dx, dx);                              /* xor dx, dx */

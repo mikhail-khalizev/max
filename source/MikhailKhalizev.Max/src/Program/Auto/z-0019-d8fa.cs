@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_d95a, 6); mov(memw_a32[ds, esi + 0x6], 0x8564);     /* mov word [esi+0x6], 0x8564 */
             ii(0x19_d960, 6); mov(memw_a32[ds, esi + 0x8], 0);          /* mov word [esi+0x8], 0x0 */
             ii(0x19_d966, 5); mov(memb_a32[ds, esi + 0xa], 0xcb);       /* mov byte [esi+0xa], 0xcb */
-            ii(0x19_d96b, 2); pushd(esi);                               /* push esi */
+            ii(0x19_d96b, 2); push(esi);                                /* push esi */
             ii(0x19_d96d, 3); xor(eax, eax);                            /* xor eax, eax */
             ii(0x19_d970, 3); xor(ebx, ebx);                            /* xor ebx, ebx */
             ii(0x19_d973, 3); xor(ecx, ecx);                            /* xor ecx, ecx */

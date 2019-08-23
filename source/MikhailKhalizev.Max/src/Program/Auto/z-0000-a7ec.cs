@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa803, 5);    mov(cx, memw[cs, 0xf71]);                 /* mov cx, [cs:0xf71] */
             ii(0xa808, 3);    mov(ax, 0x304);                           /* mov ax, 0x304 */
             ii(0xa80b, 2);    @int(0x31);                               /* int 0x31 */
-            ii(0xa80d, 2);    pushd(edx);                               /* push edx */
+            ii(0xa80d, 2);    push(edx);                                /* push edx */
             ii(0xa80f, 3);    xor(edx, edx);                            /* xor edx, edx */
             ii(0xa812, 3);    mov(si, 0xf8a);                           /* mov si, 0xf8a */
             ii(0xa815, 2);    mov(bl, 0x8);                             /* mov bl, 0x8 */
@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa856, 2);    xor(di, di);                              /* xor di, di */
             ii(0xa858, 1);    push(cs);                                 /* push cs */
             ii(0xa859, 3);    call(0xabb6, 0x35a);                      /* call 0xabb6 */
-            ii(0xa85c, 2);    popd(edx);                                /* pop edx */
+            ii(0xa85c, 2);    pop(edx);                                 /* pop edx */
             ii(0xa85e, 1);    pop(ax);                                  /* pop ax */
             ii(0xa85f, 2);    mov(ah, 0x4c);                            /* mov ah, 0x4c */
             ii(0xa861, 2);    @int(0x21);                               /* int 0x21 */

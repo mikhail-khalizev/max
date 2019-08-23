@@ -14,10 +14,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_f97c, 2); mov(ss, si);                              /* mov ss, si */
             ii(0x18_f97e, 5); mov(esp, memd[ds, 0xa46]);                /* mov esp, [0xa46] */
             ii(0x18_f983, 5); lds(esi, memd[ds, 0xa4a]);                /* lds esi, [0xa4a] */
-            ii(0x18_f988, 5); pushd(memd_a32[ds, esi + 0x14]);          /* push dword [esi+0x14] */
-            ii(0x18_f98d, 5); pushd(memd_a32[ds, esi + 0x10]);          /* push dword [esi+0x10] */
-            ii(0x18_f992, 5); pushd(memd_a32[ds, esi + 0xc]);           /* push dword [esi+0xc] */
-            ii(0x18_f997, 5); pushd(memd_a32[ds, esi + 0x8]);           /* push dword [esi+0x8] */
+            ii(0x18_f988, 5); push(memd_a32[ds, esi + 0x14]);           /* push dword [esi+0x14] */
+            ii(0x18_f98d, 5); push(memd_a32[ds, esi + 0x10]);           /* push dword [esi+0x10] */
+            ii(0x18_f992, 5); push(memd_a32[ds, esi + 0xc]);            /* push dword [esi+0xc] */
+            ii(0x18_f997, 5); push(memd_a32[ds, esi + 0x8]);            /* push dword [esi+0x8] */
             ii(0x18_f99c, 1); push(ax);                                 /* push ax */
             ii(0x18_f99d, 2); pushad();                                 /* pushad */
             ii(0x18_f99f, 4); mov(edx, memd_a32[ds, esi]);              /* mov edx, [esi] */

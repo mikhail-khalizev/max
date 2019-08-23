@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1_1ca0:
             ii(0x1_1ca0, 1);  push(ds);                                 /* push ds */
             ii(0x1_1ca1, 1);  pop(es);                                  /* pop es */
-            ii(0x1_1ca2, 2);  pushd(edi);                               /* push edi */
+            ii(0x1_1ca2, 2);  push(edi);                                /* push edi */
             ii(0x1_1ca4, 3);  xor(edi, edi);                            /* xor edi, edi */
             ii(0x1_1ca7, 3);  mov(di, 0x8c0);                           /* mov di, 0x8c0 */
             ii(0x1_1caa, 2);  mov(si, di);                              /* mov si, di */
@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1_1cb0, 3);  mov(ax, 0xb);                             /* mov ax, 0xb */
             ii(0x1_1cb3, 1);  push(cs);                                 /* push cs */
             ii(0x1_1cb4, 3);  call(0xe389, -0x392e);                    /* call 0xe389 */
-            ii(0x1_1cb7, 2);  popd(edi);                                /* pop edi */
+            ii(0x1_1cb7, 2);  pop(edi);                                 /* pop edi */
             ii(0x1_1cb9, 2);  if(jae(0x1_1c7e, -0x3d)) goto l_0x1_1c7e; /* jae 0x1c7e */
             ii(0x1_1cbb, 2);  xor(ax, ax);                              /* xor ax, ax */
             ii(0x1_1cbd, 2);  jmp(0x1_1c9c, -0x23); goto l_0x1_1c9c;    /* jmp 0x1c9c */

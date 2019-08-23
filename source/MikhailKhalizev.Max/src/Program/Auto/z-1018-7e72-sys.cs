@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7e73, 1); push(edi);                              /* push edi */
             ii(0x1018_7e74, 1); push(ebx);                              /* push ebx */
             ii(0x1018_7e75, 1); push(edx);                              /* push edx */
-            ii(0x1018_7e76, 1); push(es);                               /* push es */
+            ii(0x1018_7e76, 1); pushd(es);                              /* push es */
             ii(0x1018_7e77, 2); mov(edx, eax);                          /* mov edx, eax */
         l_0x1018_7e79:
             ii(0x1018_7e79, 6); mov(esi, 0x101c_2f92);                  /* mov esi, 0x101c2f92 */
@@ -37,8 +37,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7ea5, 3); mov(eax, memd[ds, ebx + 0x2]);          /* mov eax, [ebx+0x2] */
             ii(0x1018_7ea8, 2); or(eax, eax);                           /* or eax, eax */
             ii(0x1018_7eaa, 2); if(jz(0x1018_7eb2, 0x6)) goto l_0x1018_7eb2; /* jz 0x10187eb2 */
-            ii(0x1018_7eac, 1); push(ds);                               /* push ds */
-            ii(0x1018_7ead, 1); pop(es);                                /* pop es */
+            ii(0x1018_7eac, 1); pushd(ds);                              /* push ds */
+            ii(0x1018_7ead, 1); popd(es);                               /* pop es */
             ii(0x1018_7eae, 1); push(edx);                              /* push edx */
             ii(0x1018_7eaf, 2); call_abs(eax);                          /* call eax */
             ii(0x1018_7eb1, 1); pop(edx);                               /* pop edx */
@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7eb2, 3); mov(memb[ds, ebx], 0x2);                /* mov byte [ebx], 0x2 */
             ii(0x1018_7eb5, 2); jmp(0x1018_7e79, -0x3e); goto l_0x1018_7e79; /* jmp 0x10187e79 */
         l_0x1018_7eb7:
-            ii(0x1018_7eb7, 1); pop(es);                                /* pop es */
+            ii(0x1018_7eb7, 1); popd(es);                               /* pop es */
             ii(0x1018_7eb8, 1); pop(edx);                               /* pop edx */
             ii(0x1018_7eb9, 1); pop(ebx);                               /* pop ebx */
             ii(0x1018_7eba, 1); pop(edi);                               /* pop edi */

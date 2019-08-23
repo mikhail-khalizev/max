@@ -10,9 +10,9 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x18_ffc8, 4); enter(0, 0);                              /* enter 0x0, 0x0 */
             ii(0x18_ffcc, 1); push(ds);                                 /* push ds */
-            ii(0x18_ffcd, 2); pushd(esi);                               /* push esi */
-            ii(0x18_ffcf, 2); pushd(edi);                               /* push edi */
-            ii(0x18_ffd1, 2); pushd(ebx);                               /* push ebx */
+            ii(0x18_ffcd, 2); push(esi);                                /* push esi */
+            ii(0x18_ffcf, 2); push(edi);                                /* push edi */
+            ii(0x18_ffd1, 2); push(ebx);                                /* push ebx */
             ii(0x18_ffd3, 5); movzx(ebx, memw[ss, bp + 0x6]);           /* movzx ebx, word [bp+0x6] */
             ii(0x18_ffd8, 7); cmp(ebx, 0xff);                           /* cmp ebx, 0xff */
             ii(0x18_ffdf, 2); if(jbe_func(0x18_fffa, 0x19)) return;     /* jbe 0xfffa */

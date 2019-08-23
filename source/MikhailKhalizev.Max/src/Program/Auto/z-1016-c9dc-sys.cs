@@ -13,10 +13,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c9e0, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1016_c9e2, 3); xchg(memd[ss, ebp + 0x28], ecx);        /* xchg [ebp+0x28], ecx */
             ii(0x1016_c9e5, 3); xchg(memd[ss, ebp + 0x2c], eax);        /* xchg [ebp+0x2c], eax */
-            ii(0x1016_c9e8, 2); pop(gs);                                /* pop gs */
-            ii(0x1016_c9ea, 2); pop(fs);                                /* pop fs */
-            ii(0x1016_c9ec, 1); pop(es);                                /* pop es */
-            ii(0x1016_c9ed, 1); pop(ds);                                /* pop ds */
+            ii(0x1016_c9e8, 2); popd(gs);                               /* pop gs */
+            ii(0x1016_c9ea, 2); popd(fs);                               /* pop fs */
+            ii(0x1016_c9ec, 1); popd(es);                               /* pop es */
+            ii(0x1016_c9ed, 1); popd(ds);                               /* pop ds */
             ii(0x1016_c9ee, 1); pop(edi);                               /* pop edi */
             ii(0x1016_c9ef, 1); pop(esi);                               /* pop esi */
             ii(0x1016_c9f0, 1); pop(ebp);                               /* pop ebp */

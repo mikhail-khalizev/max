@@ -156,7 +156,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c91b, 3); cmp(memb[ds, esi], 0);                  /* cmp byte [esi], 0x0 */
             ii(0x1016_c91e, 1); movsb();                                /* movsb */
             ii(0x1016_c91f, 2); if(jnz(0x1016_c91b, -0x6)) goto l_0x1016_c91b; /* jnz 0x1016c91b */
-            ii(0x1016_c921, 1); pop(ds);                                /* pop ds */
+            ii(0x1016_c921, 1); popd(ds);                               /* pop ds */
             ii(0x1016_c922, 1); pop(esi);                               /* pop esi */
             ii(0x1016_c923, 2); mov(ebx, esp);                          /* mov ebx, esp */
             ii(0x1016_c925, 7); mov(memw[ds, 0x101b_e58c], bp);         /* mov [0x101be58c], bp */

@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x17_cfcb-39b60ce7")]
         public void Method_0017_cfcb()
         {
-            ii(0x17_cfcb, 2); pushd(ebx);                               /* push ebx */
+            ii(0x17_cfcb, 2); push(ebx);                                /* push ebx */
             ii(0x17_cfcd, 5); movzx(bx, memb_a32[ss, ebp + 0x20]);      /* movzx bx, byte [ebp+0x20] */
             ii(0x17_cfd2, 3); push(0x3e68);                             /* push 0x3e68 */
             ii(0x17_cfd5, 1); pop(ds);                                  /* pop ds */
@@ -30,12 +30,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_cff5, 1); pop(bx);                                  /* pop bx */
             ii(0x17_cff6, 1); pop(bx);                                  /* pop bx */
             ii(0x17_cff7, 3); call(0x17_cf26, -0xd4);                   /* call 0xcf26 */
-            ii(0x17_cffa, 2); popd(ebx);                                /* pop ebx */
+            ii(0x17_cffa, 2); pop(ebx);                                 /* pop ebx */
             ii(0x17_cffc, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x17_cffe, 4); if(jnz_func(0x17_d0ab, 0xa9)) return;     /* jnz 0xd0ab */
             ii(0x17_d002, 3); if(jmp_func(0x17_d0b0, 0xab)) return;     /* jmp 0xd0b0 */
         l_0x17_d005:
-            ii(0x17_d005, 2); popd(ebx);                                /* pop ebx */
+            ii(0x17_d005, 2); pop(ebx);                                 /* pop ebx */
             ii(0x17_d007, 5); jmp_far_ind(memw[cs, -0x7984]);           /* jmp far word [cs:0x867c] */
         }
     }

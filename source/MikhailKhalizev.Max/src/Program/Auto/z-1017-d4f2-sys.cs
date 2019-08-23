@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d4fa, 5); mov(ecx, 0xffff_ffff);                  /* mov ecx, 0xffffffff */
             ii(0x1017_d4ff, 2); mov(edi, ebp);                          /* mov edi, ebp */
             ii(0x1017_d501, 2); xor(al, al);                            /* xor al, al */
-            ii(0x1017_d503, 1); push(es);                               /* push es */
+            ii(0x1017_d503, 1); pushd(es);                              /* push es */
             ii(0x1017_d504, 2); if(jecxz_func(0x1017_d511, 0xb)) return; /* jecxz 0x1017d511 */
             ii(0x1017_d506, 2); mov(edx, ds);                           /* mov edx, ds */
             ii(0x1017_d508, 2); mov(es, edx);                           /* mov es, edx */

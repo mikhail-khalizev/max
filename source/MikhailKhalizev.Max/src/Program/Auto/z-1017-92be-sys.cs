@@ -24,10 +24,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_92e0, 2); xor(cl, cl);                            /* xor cl, cl */
             ii(0x1017_92e2, 3); or(ah, 0x35);                           /* or ah, 0x35 */
         l_0x1017_92e5:
-            ii(0x1017_92e5, 1); push(es);                               /* push es */
+            ii(0x1017_92e5, 1); pushd(es);                              /* push es */
             ii(0x1017_92e6, 2); @int(0x21);                             /* int 0x21 */
             ii(0x1017_92e8, 2); mov(edx, es);                           /* mov edx, es */
-            ii(0x1017_92ea, 1); pop(es);                                /* pop es */
+            ii(0x1017_92ea, 1); popd(es);                               /* pop es */
             ii(0x1017_92eb, 2); mov(eax, ebx);                          /* mov eax, ebx */
             ii(0x1017_92ed, 1); pop(ecx);                               /* pop ecx */
             ii(0x1017_92ee, 1); pop(ebx);                               /* pop ebx */

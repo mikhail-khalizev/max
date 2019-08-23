@@ -21,9 +21,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fd86, 3); mov(dx, 0x954);                           /* mov dx, 0x954 */
             ii(0x18_fd89, 4); test(memb[ds, di + 0x6], 0x8);            /* test byte [di+0x6], 0x8 */
             ii(0x18_fd8d, 2); if(jz(0x18_fd97, 0x8)) goto l_0x18_fd97;  /* jz 0xfd97 */
-            ii(0x18_fd8f, 2); pushd(ebx);                               /* push ebx */
-            ii(0x18_fd91, 2); pushd(ecx);                               /* push ecx */
-            ii(0x18_fd93, 2); pushd(edx);                               /* push edx */
+            ii(0x18_fd8f, 2); push(ebx);                                /* push ebx */
+            ii(0x18_fd91, 2); push(ecx);                                /* push ecx */
+            ii(0x18_fd93, 2); push(edx);                                /* push edx */
             ii(0x18_fd95, 2); jmp(0x18_fd9c, 0x5); goto l_0x18_fd9c;    /* jmp 0xfd9c */
         l_0x18_fd97:
             ii(0x18_fd97, 1); push(bx);                                 /* push bx */
@@ -33,11 +33,11 @@ namespace MikhailKhalizev.Max.Program
         l_0x18_fd9c:
             ii(0x18_fd9c, 4); mov(ebx, memd[ds, si + 0x3a]);            /* mov ebx, [si+0x3a] */
             ii(0x18_fda0, 3); and(bh, 0xfc);                            /* and bh, 0xfc */
-            ii(0x18_fda3, 2); pushd(ebx);                               /* push ebx */
+            ii(0x18_fda3, 2); push(ebx);                                /* push ebx */
             ii(0x18_fda5, 5); movzx(ebx, memw[ds, di + 0x4]);           /* movzx ebx, word [di+0x4] */
             ii(0x18_fdaa, 3); mov(ecx, memd[ds, di]);                   /* mov ecx, [di] */
-            ii(0x18_fdad, 2); pushd(ebx);                               /* push ebx */
-            ii(0x18_fdaf, 2); pushd(ecx);                               /* push ecx */
+            ii(0x18_fdad, 2); push(ebx);                                /* push ebx */
+            ii(0x18_fdaf, 2); push(ecx);                                /* push ecx */
             ii(0x18_fdb1, 3); push(memw[ds, si + 0x4]);                 /* push word [si+0x4] */
             ii(0x18_fdb4, 3); push(memw[ds, si + 0x6]);                 /* push word [si+0x6] */
             ii(0x18_fdb7, 1); pop(es);                                  /* pop es */

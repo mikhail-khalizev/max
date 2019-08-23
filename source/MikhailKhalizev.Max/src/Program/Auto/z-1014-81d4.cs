@@ -9,10 +9,10 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1014_81d4()
         {
             ii(0x1014_81d4, 1); pushad();                               /* pushad */
-            ii(0x1014_81d5, 1); push(ds);                               /* push ds */
-            ii(0x1014_81d6, 1); push(es);                               /* push es */
-            ii(0x1014_81d7, 2); push(fs);                               /* push fs */
-            ii(0x1014_81d9, 2); push(gs);                               /* push gs */
+            ii(0x1014_81d5, 1); pushd(ds);                              /* push ds */
+            ii(0x1014_81d6, 1); pushd(es);                              /* push es */
+            ii(0x1014_81d7, 2); pushd(fs);                              /* push fs */
+            ii(0x1014_81d9, 2); pushd(gs);                              /* push gs */
             ii(0x1014_81db, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1014_81dd, 6); sub(esp, 0x4);                          /* sub esp, 0x4 */
             ii(0x1014_81e3, 1); cld();                                  /* cld */
@@ -53,10 +53,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_8285, 5); call(Definitions.sys_write_port, 0x3_8d3e); /* call 0x10180fc8 */
         l_0x1014_828a:
             ii(0x1014_828a, 2); mov(esp, ebp);                          /* mov esp, ebp */
-            ii(0x1014_828c, 2); pop(gs);                                /* pop gs */
-            ii(0x1014_828e, 2); pop(fs);                                /* pop fs */
-            ii(0x1014_8290, 1); pop(es);                                /* pop es */
-            ii(0x1014_8291, 1); pop(ds);                                /* pop ds */
+            ii(0x1014_828c, 2); popd(gs);                               /* pop gs */
+            ii(0x1014_828e, 2); popd(fs);                               /* pop fs */
+            ii(0x1014_8290, 1); popd(es);                               /* pop es */
+            ii(0x1014_8291, 1); popd(ds);                               /* pop ds */
             ii(0x1014_8292, 1); popad();                                /* popad */
             ii(0x1014_8293, 1); iretd();                                /* iretd */
         }

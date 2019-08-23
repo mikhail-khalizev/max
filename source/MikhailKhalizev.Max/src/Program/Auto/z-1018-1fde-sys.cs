@@ -29,12 +29,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_2030, 7); cmp(memb[ds, 0x101b_e58e], 0);          /* cmp byte [0x101be58e], 0x0 */
             ii(0x1018_2037, 2); if(jnz(0x1018_2054, 0x1b)) goto l_0x1018_2054; /* jnz 0x10182054 */
             ii(0x1018_2039, 4); mov(ax, 0x2507);                        /* mov ax, 0x2507 */
-            ii(0x1018_203d, 1); push(ds);                               /* push ds */
+            ii(0x1018_203d, 1); pushd(ds);                              /* push ds */
             ii(0x1018_203e, 3); mov(cx, cs);                            /* mov cx, cs */
             ii(0x1018_2041, 2); mov(ds, ecx);                           /* mov ds, ecx */
             ii(0x1018_2043, 6); lea(edx, memd[ds, /* sys */ 0x1019_6c4c]); /* lea edx, [0x10196c4c] */
             ii(0x1018_2049, 2); @int(0x21);                             /* int 0x21 */
-            ii(0x1018_204b, 1); pop(ds);                                /* pop ds */
+            ii(0x1018_204b, 1); popd(ds);                               /* pop ds */
             ii(0x1018_204c, 2); mov(al, 0x4);                           /* mov al, 0x4 */
             ii(0x1018_204e, 2); mov(ah, 0xf3);                          /* mov ah, 0xf3 */
             ii(0x1018_2050, 2); @int(0x21);                             /* int 0x21 */

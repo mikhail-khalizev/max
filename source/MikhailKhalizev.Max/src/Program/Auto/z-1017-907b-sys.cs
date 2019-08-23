@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_9082, 2); if(jb_func(0x1017_90c3, 0x3f)) return;  /* jb 0x101790c3 */
             ii(0x1017_9084, 2); mov(edi, esi);                          /* mov edi, esi */
             ii(0x1017_9086, 2); mov(al, memb[ds, ebx]);                 /* mov al, [ebx] */
-            ii(0x1017_9088, 1); push(es);                               /* push es */
+            ii(0x1017_9088, 1); pushd(es);                              /* push es */
             ii(0x1017_9089, 2); if(jecxz_func(0x1017_9096, 0xb)) return; /* jecxz 0x10179096 */
             ii(0x1017_908b, 2); mov(edx, ds);                           /* mov edx, ds */
             ii(0x1017_908d, 2); mov(es, edx);                           /* mov es, edx */

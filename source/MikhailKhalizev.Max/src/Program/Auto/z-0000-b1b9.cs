@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0xb1b9-b7b77fa9")]
         public void Method_0000_b1b9()
         {
-            ii(0xb1b9, 2);    pushd(esi);                               /* push esi */
-            ii(0xb1bb, 2);    pushd(edi);                               /* push edi */
+            ii(0xb1b9, 2);    push(esi);                                /* push esi */
+            ii(0xb1bb, 2);    push(edi);                                /* push edi */
             ii(0xb1bd, 3);    xor(esi, esi);                            /* xor esi, esi */
             ii(0xb1c0, 3);    xor(edi, edi);                            /* xor edi, edi */
             ii(0xb1c3, 1);    push(ds);                                 /* push ds */
@@ -31,8 +31,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb1e3, 1);    stosw();                                  /* stosw */
         l_0xb1e4:
             ii(0xb1e4, 1);    pop(ds);                                  /* pop ds */
-            ii(0xb1e5, 2);    popd(edi);                                /* pop edi */
-            ii(0xb1e7, 2);    popd(esi);                                /* pop esi */
+            ii(0xb1e5, 2);    pop(edi);                                 /* pop edi */
+            ii(0xb1e7, 2);    pop(esi);                                 /* pop esi */
             ii(0xb1e9, 1);    ret();                                    /* ret */
         }
     }

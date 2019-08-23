@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1a_1e1c-2aeeaad2")]
         public void Method_001a_1e1c()
         {
-            ii(0x1a_1e1c, 1); push(ds);                                 /* push ds */
+            ii(0x1a_1e1c, 1); pushd(ds);                                /* push ds */
             ii(0x1a_1e1d, 4); mov(ax, 0x303);                           /* mov ax, 0x303 */
             ii(0x1a_1e21, 4); mov(dx, 0x98);                            /* mov dx, 0x98 */
             ii(0x1a_1e25, 3); mov(ds, dx);                              /* mov ds, dx */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_1e44, 3); xor(dx, dx);                              /* xor dx, dx */
             ii(0x1a_1e47, 3); xor(ax, ax);                              /* xor ax, ax */
         l_0x1a_1e4a:
-            ii(0x1a_1e4a, 1); pop(ds);                                  /* pop ds */
+            ii(0x1a_1e4a, 1); popd(ds);                                 /* pop ds */
             ii(0x1a_1e4b, 2); retfw();                                  /* o16 retf */
         }
     }
