@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ sys_int_33()
         {
             ii(0x1018_7b2b, 2); @int(0x33);                             /* int 0x33 */
-            ii(0x1018_7b2d, 1); retd(); return;                         /* ret */
+            ii(0x1018_7b2d, 1); ret();                                  /* ret */
         }
     }
 }

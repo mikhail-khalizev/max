@@ -210,6 +210,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 
         #region Cast from Numeric Operators
         
+        public static implicit operator ValueBase(sbyte value) => (Value)value;
+        public static implicit operator ValueBase(byte value) => (Value)value;
         public static implicit operator ValueBase(short value) => (Value)value;
         public static implicit operator ValueBase(ushort value) => (Value)value;
         public static implicit operator ValueBase(int value) => (Value)value;

@@ -507,6 +507,79 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public Memory Memory { get; }
 
         /// <inheritdoc />
+        public MemoryAccess memb
+        {
+            get
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        return memb_a16;
+                    case 32:
+                        return memb_a32;
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public MemoryAccess memw
+        {
+            get
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        return memw_a16;
+                    case 32:
+                        return memw_a32;
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public MemoryAccess memd
+        {
+            get
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        return memd_a16;
+                    case 32:
+                        return memd_a32;
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public MemoryAccess memq
+        {
+            get
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        return memq_a16;
+                    case 32:
+                        return memq_a32;
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public MemoryAccess memt => throw new NotImplementedException();
+        /// <inheritdoc />
+        public MemoryAccess memo => throw new NotImplementedException();
+
+        /// <inheritdoc />
         public MemoryAccess memb_a16 { get; }
         /// <inheritdoc />
         public MemoryAccess memw_a16 { get; }
@@ -2200,6 +2273,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
 
         /// <inheritdoc />
+        public void call(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    callw(address, offset);
+                    break;
+                case 32:
+                    calld(address, offset);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void callw(Address address, int offset)
         {
             var retAddr = cs[eip];
@@ -2207,6 +2296,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             eip = eip + offset;
             eip &= 0xffff;
             CorrectMethodPosition(retAddr);
+        }
+
+        /// <inheritdoc />
+        public bool call_up(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return callw_up(address, offset);
+                case 32:
+                    return calld_up(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -2229,6 +2332,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void call_abs(ValueBase address)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    callw_abs(address);
+                    break;
+                case 32:
+                    calld_abs(address);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void calld(Address address, int offset)
         {
             var retAddr = cs[eip];
@@ -2244,6 +2363,18 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             var ret_addr = cs[eip];
             eip = address & 0xffff;
             CorrectMethodPosition(ret_addr, saveJumpInfo: true);
+        }
+
+        /// <inheritdoc />
+        public bool call_abs_up(ValueBase address)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return callw_abs_up(address);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -2265,11 +2396,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void calld_far_abs(int segment, ValueBase address)
+        public void call_far_abs(int segment, ValueBase address)
         {
-            var ret_addr = cs[eip];
-            call_far_prepare(32, segment, address);
-            CorrectMethodPosition(ret_addr);
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    callw_far_abs(segment, address);
+                    break;
+                case 32:
+                    calld_far_abs(segment, address);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -2281,6 +2420,26 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void calld_far_abs(int segment, ValueBase address)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(32, segment, address);
+            CorrectMethodPosition(ret_addr);
+        }
+
+        /// <inheritdoc />
+        public bool call_far_abs_up(int segment, ValueBase address)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return callw_far_abs_up(segment, address);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool callw_far_abs_up(int segment, ValueBase address)
         {
             var ret_addr = cs[eip];
@@ -2289,42 +2448,86 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void callw_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public void call_far_ind(MemoryValue src)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    callw_a16_far_ind(src);
+                    break;
+                case 32:
+                    calld_a32_far_ind(src);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public void calld_far_ind(MemoryValue src)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    calld_a16_far_ind(src);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public void callw_a16_far_ind(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            call_far_prepare(16, memw_a16[src.Segment, src.Address + 2].UInt16, memw_a16[src.Segment, src.Address].UInt16);
             CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
-        public bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address)
+        public void calld_a16_far_ind(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            call_far_prepare(32, memw_a16[src.Segment, src.Address + 4].UInt16, memd_a16[src.Segment, src.Address].UInt32);
+            CorrectMethodPosition(ret_addr);
+        }
+
+        /// <inheritdoc />
+        public void calld_a32_far_ind(MemoryValue src)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(32, memw_a32[src.Segment, src.Address + 4].UInt16, memd_a32[src.Segment, src.Address].UInt32);
+            CorrectMethodPosition(ret_addr);
+        }
+
+
+        /// <inheritdoc />
+        public bool call_far_ind_up(MemoryValue src)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return callw_a16_far_ind_up(src);
+                case 32:
+                    return calld_a32_far_ind_up(src);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public bool callw_a16_far_ind_up(MemoryValue src)
+        {
+            var ret_addr = cs[eip];
+            call_far_prepare(16, memw_a16[src.Segment, src.Address + 2].UInt16, memw_a16[src.Segment, src.Address].UInt16);
             return CorrectMethodPosition(ret_addr, true);
         }
 
         /// <inheritdoc />
-        public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool calld_a32_far_ind_up(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
-            CorrectMethodPosition(ret_addr);
-        }
-
-        /// <inheritdoc />
-        public void calld_a32_far_ind(SegmentRegister segment, ValueBase address)
-        {
-            var ret_addr = cs[eip];
-            call_far_prepare(32, memw_a32[segment, address + 4].UInt16, memd_a32[segment, address].UInt32);
-            CorrectMethodPosition(ret_addr);
-        }
-
-        /// <inheritdoc />
-        public bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address)
-        {
-            var ret_addr = cs[eip];
-            call_far_prepare(32, memw_a32[segment, address + 4].UInt16, memd_a32[segment, address].UInt32);
+            call_far_prepare(32, memw_a32[src.Segment, src.Address + 4].UInt16, memd_a32[src.Segment, src.Address].UInt32);
             return CorrectMethodPosition(ret_addr, true);
         }
 
@@ -2482,6 +2685,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
+        /// <inheritdoc />
+        public void cmpsb()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    cmpsb_a16();
+                    break;
+                case 32:
+                    cmpsb_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public void cmpsb_a16()
         {
@@ -2497,6 +2717,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             di += eflags.df ? -1 : 1;
             si += eflags.df ? -1 : 1;
         }
+
 
         /// <inheritdoc />
         public void cmpsd()
@@ -2520,6 +2741,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public void cmpss()
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void cmpsw()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    cmpsw_a16();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -2847,6 +3081,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public void emms()
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void enter(int size, int nestingLevel)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    enterw(size, nestingLevel);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3295,9 +3542,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void fnsavew_a16(SegmentRegister segment, ValueBase address)
+        public void fnsave(MemoryValue src)
         {
-            var off = address.UInt32;
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    fnsavew_a16(src);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public void fnsavew_a16(MemoryValue src)
+        {
+            var segment = src.Segment;
+            var off = src.Address;
 
             if (!cr0.pe)
             {
@@ -3312,7 +3573,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             else
                 throw new NotImplementedException();
 
-            for (int i = 0; i < 8; i++)
+            for (var i = 0; i < 8; i++)
                 Memory.GetStruct<double>(segment[off + 14 + i * 10]) = ST(i).Double;
 
             fninit();
@@ -3461,7 +3722,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void fsubr(ValueBase value)
         {
-             ST(0).Double = value.Double - ST(0).Double;
+            ST(0).Double = value.Double - ST(0).Double;
         }
 
         /// <inheritdoc />
@@ -3638,14 +3899,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (value.Bits)
             {
                 case 16:
-                {
-                    var r = ax.Int32 * value.Int32;
-                    ax = r;
-                    dx = r >> 16;
+                    {
+                        var r = ax.Int32 * value.Int32;
+                        ax = r;
+                        dx = r >> 16;
 
-                    eflags.cf = eflags.of = (ax != r);
-                    break;
-                }
+                        eflags.cf = eflags.of = (ax != r);
+                        break;
+                    }
                 default:
                     throw new NotImplementedException($"Bits: {value.Bits}");
             }
@@ -3782,6 +4043,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void jmp(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    jmpw(address, offset);
+                    break;
+                case 32:
+                    jmpd(address, offset);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void jmpw(Address address, int offset)
         {
             eip = eip + offset;
@@ -3809,6 +4086,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jmp_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpw_func(address, offset);
+                case 32:
+                    return jmpd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jmpw_func(Address address, int offset)
         {
             return jmpw_func_internal(eip + offset);
@@ -3821,9 +4112,37 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jmp_abs(ValueBase address)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpw_abs(address);
+                case 32:
+                    return jmpd_abs(address);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jmpw_abs(ValueBase address)
         {
             return jmpw_func_internal(address, saveJumpInfo: true);
+        }
+
+        /// <inheritdoc />
+        public Address jmp_abs_switch(ValueBase address)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpw_abs_switch(address);
+                case 32:
+                    return jmpd_abs_switch(address);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3843,15 +4162,63 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jmp_far_abs(int segment, Address address)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpw_far_abs(segment, address);
+                case 32:
+                    return jmpd_far_abs(segment, address);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jmpw_far_abs(int segment, Address address)
         {
             return jmpw_func_internal(address, saveJumpInfo: true, segmentSelector: segment);
         }
 
         /// <inheritdoc />
-        public bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool jmp_far_ind(MemoryValue src)
         {
-            return jmpw_func_internal(memw_a16[segment, address].UInt16, segmentSelector: memw_a16[segment, address + 2].UInt16);
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpw_a16_far_ind(src);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public bool jmpd_far_ind(MemoryValue src)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpd_a16_far_ind(src);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public bool jmpw_a16_far_ind(MemoryValue src)
+        {
+            return jmpw_func_internal(
+                memw_a16[src.Segment, src.Address].UInt16,
+                segmentSelector: memw_a16[src.Segment, src.Address + 2].UInt16);
+        }
+
+        /// <inheritdoc />
+        public bool jmpd_a16_far_ind(MemoryValue src)
+        {
+            return jmpd_func_internal(
+                memd_a16[src.Segment, src.Address].UInt32,
+                segmentSelector: memw_a16[src.Segment, src.Address + 4].UInt16);
         }
 
         /// <inheritdoc />
@@ -3866,10 +4233,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_func_internal(address, saveJumpInfo: true, segmentSelector: segment);
         }
 
+
         /// <inheritdoc />
-        public bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool ja(Address address, int offset)
         {
-            return jmpd_func_internal(memd_a16[segment, address].UInt32, segmentSelector: memw_a16[segment, address + 4].UInt16);
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jaw(address, offset);
+                case 32:
+                    return jad(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3885,6 +4261,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool ja_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jaw_func(address, offset);
+                case 32:
+                    return jad_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jaw_func(Address address, int offset)
         {
             return jmpw_func_if(!eflags.cf && !eflags.zf, address, offset);
@@ -3894,6 +4284,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public bool jad_func(Address address, int offset)
         {
             return jmpd_func_if(!eflags.cf && !eflags.zf, address, offset);
+        }
+
+
+        /// <inheritdoc />
+        public bool jae(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jaew(address, offset);
+                case 32:
+                    return jaed(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3908,6 +4313,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_if(!eflags.cf, address, offset);
         }
 
+
+        /// <inheritdoc />
+        public bool jae_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jaew_func(address, offset);
+                case 32:
+                    return jaed_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool jaew_func(Address address, int offset)
         {
@@ -3918,6 +4338,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public bool jaed_func(Address address, int offset)
         {
             return jmpd_func_if(!eflags.cf, address, offset);
+        }
+
+
+        /// <inheritdoc />
+        public bool jb(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jbw(address, offset);
+                case 32:
+                    return jbd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3933,6 +4368,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jb_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jbw_func(address, offset);
+                case 32:
+                    return jbd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jbw_func(Address address, int offset)
         {
             return jmpw_func_if(eflags.cf, address, offset);
@@ -3942,6 +4391,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public bool jbd_func(Address address, int offset)
         {
             return jmpd_func_if(eflags.cf, address, offset);
+        }
+
+
+        /// <inheritdoc />
+        public bool jbe(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jbew(address, offset);
+                case 32:
+                    return jbed(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3957,6 +4421,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jbe_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jbew_func(address, offset);
+                case 32:
+                    return jbed_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jbew_func(Address address, int offset)
         {
             return jmpw_func_if(eflags.cf || eflags.zf, address, offset);
@@ -3969,9 +4447,34 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jc(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jcw(Address address, int offset)
         {
             throw new NotImplementedException();
+        }
+
+
+        /// <inheritdoc />
+        public bool jcxz(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jcxzw(address, offset);
+                case 32:
+                    return jcxzd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -3986,6 +4489,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_if(ecx == 0, address, offset);
         }
 
+
+        /// <inheritdoc />
+        public bool jcxz_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jcxzw_func(address, offset);
+                case 32:
+                    return jcxzd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool jcxzw_func(Address address, int offset)
         {
@@ -3998,10 +4516,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_func_if(ecx == 0, address, offset);
         }
 
+
         /// <inheritdoc />
         public bool jecxzw(Address address, int offset)
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public bool jecxz_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 32:
+                    return jecxzd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4023,6 +4554,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jg(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jgw(address, offset);
+                case 32:
+                    return jgd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jgw(Address address, int offset)
         {
             return jmpw_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
@@ -4038,6 +4583,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public bool jgd_func(Address address, int offset)
         {
             return jmpd_func_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
+        }
+
+
+        /// <inheritdoc />
+        public bool jge(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jgew(address, offset);
+                case 32:
+                    return jged(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4058,6 +4618,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_func_if(eflags.sf == eflags.of, address, offset);
         }
 
+
+        /// <inheritdoc />
+        public bool jl(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jlw(address, offset);
+                case 32:
+                    return jld(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool jlw(Address address, int offset)
         {
@@ -4076,6 +4651,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_func_if(eflags.sf != eflags.of, address, offset);
         }
 
+
+        /// <inheritdoc />
+        public bool jle(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jlew(address, offset);
+                case 32:
+                    return jled(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool jlew(Address address, int offset)
         {
@@ -4088,10 +4678,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
 
+
         /// <inheritdoc />
-        public bool jled_func(Address address, int offset)
+        public bool jle_func(Address address, int offset)
         {
-            return jmpd_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jlew_func(address, offset);
+                case 32:
+                    return jled_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4099,6 +4698,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             return jmpw_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
+
+        /// <inheritdoc />
+        public bool jled_func(Address address, int offset)
+        {
+            return jmpd_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
+        }
+
 
         /// <inheritdoc />
         public bool jnaw(Address address, int offset)
@@ -4160,16 +4766,45 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
+        /// <inheritdoc />
+        public bool jno(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 32:
+                    return jnod(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool jnod(Address address, int offset)
         {
             return jmpd_if(!eflags.of, address, offset);
         }
 
+
         /// <inheritdoc />
         public bool jnp(Address address, int offset)
         {
             throw new NotImplementedException();
+        }
+
+
+        /// <inheritdoc />
+        public bool jns(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jnsw(address, offset);
+                case 32:
+                    return jnsd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4182,6 +4817,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public bool jnsd(Address address, int offset)
         {
             return jmpd_if(!eflags.sf, address, offset);
+        }
+
+
+        /// <inheritdoc />
+        public bool jns_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jnsw_func(address, offset);
+                case 32:
+                    return jnsd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4198,6 +4848,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
 
         /// <inheritdoc />
+        public bool jnz(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jnzw(address, offset);
+                case 32:
+                    return jnzd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jnzw(Address address, int offset)
         {
             return jmpw_if(!eflags.zf, address, offset);
@@ -4207,6 +4871,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public bool jnzd(Address address, int offset)
         {
             return jmpd_if(!eflags.zf, address, offset);
+        }
+
+        /// <inheritdoc />
+        public bool jnz_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jnzw_func(address, offset);
+                case 32:
+                    return jnzd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4221,11 +4899,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmpd_func_if(!eflags.zf, address, offset);
         }
 
+
+        /// <inheritdoc />
+        public bool jo(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jow(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool jow(Address address, int offset)
         {
             return jmpw_if(eflags.of, address, offset);
         }
+
 
         /// <inheritdoc />
         public bool jp(Address address, int offset)
@@ -4252,6 +4944,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool js(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jsw(address, offset);
+                case 32:
+                    return jsd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jsw(Address address, int offset)
         {
             return jmpw_if(eflags.sf, address, offset);
@@ -4264,9 +4970,36 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool js_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jsw_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jsw_func(Address address, int offset)
         {
             return jmpw_func_if(eflags.sf, address, offset);
+        }
+
+
+        /// <inheritdoc />
+        public bool jz(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jzw(address, offset);
+                case 32:
+                    return jzd(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4282,6 +5015,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public bool jz_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jzw_func(address, offset);
+                case 32:
+                    return jzd_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public bool jzw_func(Address address, int offset)
         {
             return jmpw_func_if(eflags.zf, address, offset);
@@ -4292,6 +5039,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             return jmpd_func_if(eflags.zf, address, offset);
         }
+
 
         /// <inheritdoc />
         public void kaddb()
@@ -4662,20 +5410,62 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void lds(ValueBase dst, SegmentRegister segment, ValueBase offset)
+        public void lea(ValueBase dst, MemoryValue src)
         {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            ds.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
+            dst.UInt64 = src.Address;
+        }
+
+
+        /// <inheritdoc />
+        public void lds(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            ds.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
-        public void lea(ValueBase dst, ValueBase src)
+        public void les(ValueBase dst, MemoryValue src)
         {
-            // MemoryValue src
-            // dst.UInt64 = src.Address;
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            es.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
 
-            dst.UInt64 = src.UInt64;
+        /// <inheritdoc />
+        public void lfs(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            fs.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
+
+        /// <inheritdoc />
+        public void lgs(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            gs.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
+
+        /// <inheritdoc />
+        public void lss(ValueBase dst, MemoryValue src)
+        {
+            dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
+            ss.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+        }
+        
+
+        /// <inheritdoc />
+        public void leave()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    leavew();
+                    break;
+                case 32:
+                    leaved();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4699,63 +5489,81 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void les(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            es.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
-        }
-
-        /// <inheritdoc />
         public void lfence()
         {
             throw new NotImplementedException();
         }
 
+
         /// <inheritdoc />
-        public void lfs(ValueBase dst, SegmentRegister segment, ValueBase offset)
+        public void lgdt(MemoryValue src)
         {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            fs.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    lgdtw_a16(src);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(SegmentRegister segment, ValueBase address)
+        public void lgdtw_a16(MemoryValue src)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            gdtr_limit = memw_a16[segment, address].UInt16;
-            gdtr_base = memd_a16[segment, address + 2].UInt32 & 0x00ffffff;
+            gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+            gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
+        }
+
+
+        /// <inheritdoc />
+        public void lgdtd(MemoryValue src)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    lgdtd_a16(src);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
-        public void lgdtd_a16(SegmentRegister segment, ValueBase address)
+        public void lgdtd_a16(MemoryValue src)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            gdtr_limit = memw_a16[segment, address].UInt16;
-            gdtr_base = memd_a16[segment, address + 2].UInt32;
+            gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+            gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32;
         }
 
+
         /// <inheritdoc />
-        public void lgs(ValueBase dst, SegmentRegister segment, ValueBase offset)
+        public void lidt(MemoryValue src)
         {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            gs.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    lidtw_a16(src);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
-        public void lidtw_a16(SegmentRegister segment, ValueBase address)
+        public void lidtw_a16(MemoryValue src)
         {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            idtr_limit = memw_a16[segment, address].UInt16;
-            idtr_base = memd_a16[segment, address + 2].UInt32 & 0x00ffffff;
+            idtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+            idtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
         }
 
         /// <inheritdoc />
@@ -4799,6 +5607,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
+        /// <inheritdoc />
+        public void lodsb()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    lodsb_a16();
+                    break;
+                case 32:
+                    lodsb_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public void lodsb_a16()
         {
@@ -4812,6 +5637,24 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             al = memb_a32[ds, esi];
             esi += eflags.df ? -1 : 1;
         }
+
+
+        /// <inheritdoc />
+        public void lodsd()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    lodsd_a16();
+                    break;
+                case 32:
+                    lodsd_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
 
         /// <inheritdoc />
         public void lodsd_a16()
@@ -4827,6 +5670,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             esi += eflags.df ? -4 : 4;
         }
 
+
         /// <inheritdoc />
         public void lodsq()
         {
@@ -4834,10 +5678,38 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void lodsw()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    lodsw_a16();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void lodsw_a16()
         {
             ax = memw_a16[ds, si];
             si += eflags.df ? -2 : 2;
+        }
+
+
+        /// <inheritdoc />
+        public bool loop(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return loopw_a16(address, offset);
+                case 32:
+                    return loopd_a32(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4864,6 +5736,52 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return false;
         }
 
+
+        /// <inheritdoc />
+        public bool loop_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return loopw_a16_func(address, offset);
+                case 32:
+                    return loopd_a32_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
+        public bool loopw_a16_func(Address address, int offset)
+        {
+            if (--cx != 0)
+                return jmpw_func(address, offset);
+            return false;
+        }
+
+        /// <inheritdoc />
+        public bool loopd_a32_func(Address address, int offset)
+        {
+            if (--ecx != 0)
+                return jmpd_func(address, offset);
+            return false;
+        }
+
+
+        /// <inheritdoc />
+        public bool loope(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return loopew_a16(address, offset);
+                case 32:
+                    return looped_a32(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool loopew_a16(Address address, int offset)
         {
@@ -4884,10 +5802,36 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
+        /// <inheritdoc />
+        public bool loope_func(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 32:
+                    return looped_a32_func(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public bool looped_a32_func(Address address, int offset)
         {
             throw new NotImplementedException();
+        }
+
+
+        /// <inheritdoc />
+        public bool loopne(Address address, int offset)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return loopnew_a16(address, offset);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -4902,27 +5846,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return false;
         }
 
-        /// <inheritdoc />
-        public bool loopw_a16_func(Address address, int offset)
-        {
-            if (--cx != 0)
-                return jmpw_func(address, offset);
-            return false;
-        }
 
         /// <inheritdoc />
-        public bool loopd_a32_func(Address address, int offset)
-        {
-            if (--ecx != 0)
-                return jmpd_func(address, offset);
-            return false;
-        }
-
-        /// <inheritdoc />
-        public bool loopned_a32_func(Address address, int offset)
+        public bool loopne_func(Address address, int offset)
         {
             throw new NotImplementedException();
         }
+
 
         /// <inheritdoc />
         public void lsl(ValueBase dst, ValueBase selector)
@@ -4952,14 +5882,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             if (eflags.zf)
                 dst.UInt32 = seg.Descriptor.Limit;
-        }
-
-        /// <inheritdoc />
-        public void lss(ValueBase dst, SegmentRegister segment, ValueBase offset)
-        {
-            var cache = offset.UInt32;
-            dst.UInt32 = memd_a32[segment, cache].UInt32;
-            ss.Selector = (memw_a32[segment, cache + dst.Bits / 8].UInt16);
         }
 
         /// <inheritdoc />
@@ -5228,6 +6150,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void movsb(SegmentRegister segment = null)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    movsb_a16(segment);
+                    break;
+                case 32:
+                    movsb_a32(segment);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void movsb_a16(SegmentRegister segment = null)
         {
             memb_a16[es, di] = memb_a16[segment ?? ds, si];
@@ -5244,6 +6182,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void movsw(SegmentRegister segment = null)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    movsw_a16(segment);
+                    break;
+                case 32:
+                    movsw_a32(segment);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void movsw_a16(SegmentRegister segment = null)
         {
             memw_a16[es, di] = memw_a16[segment ?? ds, si];
@@ -5257,6 +6211,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             memw_a32[es, edi] = memw_a32[segment ?? ds, esi];
             edi += eflags.df ? -2 : 2;
             esi += eflags.df ? -2 : 2;
+        }
+
+
+        /// <inheritdoc />
+        public void movsd()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    movsd_a16();
+                    break;
+                case 32:
+                    movsd_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -5304,13 +6275,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             throw new NotImplementedException();
         }
-
-        /// <inheritdoc />
-        public void movsw()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         /// <inheritdoc />
         public void movsx(ValueBase dst, ValueBase src)
         {
@@ -5353,30 +6318,30 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (value.Bits)
             {
                 case 8:
-                {
-                    var r = al.UInt32 * value.UInt32;
-                    ax = r;
-                    eflags.cf = eflags.of = ((r >> 8) != 0);
-                    break;
-                }
+                    {
+                        var r = al.UInt32 * value.UInt32;
+                        ax = r;
+                        eflags.cf = eflags.of = ((r >> 8) != 0);
+                        break;
+                    }
 
                 case 16:
-                {
-                    var r = ax.UInt32 * value.UInt32;
-                    ax.UInt32 = r;
-                    dx.UInt32 = (r >> 16);
-                    eflags.cf = eflags.of = ((r >> 16) != 0);
-                    break;
-                }
+                    {
+                        var r = ax.UInt32 * value.UInt32;
+                        ax.UInt32 = r;
+                        dx.UInt32 = (r >> 16);
+                        eflags.cf = eflags.of = ((r >> 16) != 0);
+                        break;
+                    }
 
                 case 32:
-                {
-                    var r = eax.UInt64 * value.UInt64;
-                    eax.UInt64 = r;
-                    edx.UInt64 = (r >> 32);
-                    eflags.cf = eflags.of = ((r >> 32) != 0);
-                    break;
-                }
+                    {
+                        var r = eax.UInt64 * value.UInt64;
+                        eax.UInt64 = r;
+                        edx.UInt64 = (r >> 32);
+                        eflags.cf = eflags.of = ((r >> 32) != 0);
+                        break;
+                    }
 
                 default:
                     throw new NotImplementedException($"Bits: {value.Bits}");
@@ -5477,6 +6442,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public void outs()
         {
             throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void outsb(SegmentRegister segment = null)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    outsb_a16(segment);
+                    break;
+                case 32:
+                    outsb_a32(segment);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -6003,6 +6984,35 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public ValueBase pop(ValueBase d)
+        {
+            if (d is Register || d is MemoryValue)
+            {
+                switch (d.Bits)
+                {
+                    case 16:
+                        return popw(d);
+                    case 32:
+                        return popd(d);
+                    default:
+                        throw new NotImplementedException($"Bits: {d.Bits}");
+                }
+            }
+            else
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        return popw(d);
+                    case 32:
+                        return popd(d);
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
+            }
+        }
+
+        /// <inheritdoc />
         public ushort popw(ValueBase d = null)
         {
             ushort value;
@@ -6353,6 +7363,39 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void push(ValueBase s)
+        {
+            if (s is Register || s is MemoryValue)
+            {
+                switch (s.Bits)
+                {
+                    case 16:
+                        pushw(s);
+                        break;
+                    case 32:
+                        pushd(s);
+                        break;
+                    default:
+                        throw new NotImplementedException($"Bits: {s.Bits}");
+                }
+            }
+            else
+            {
+                switch (CSharpEmulateMode)
+                {
+                    case 16:
+                        pushw(s);
+                        break;
+                    case 32:
+                        pushd(s);
+                        break;
+                    default:
+                        throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                }
+            }
+        }
+
+        /// <inheritdoc />
         public void pushw(ValueBase s)
         {
             // todo Join popw, popd in one method push ?
@@ -6613,6 +7656,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
 
         /// <inheritdoc />
+        public void rep(Action action)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    rep_a16(action);
+                    break;
+                case 32:
+                    rep_a32(action);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void rep_a16(Action action)
         {
             var cxCache = cx.UInt16;
@@ -6635,6 +7694,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void repe(Action action)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    repe_a16(action);
+                    break;
+                case 32:
+                    repe_a32(action);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void repe_a16(Action action)
         {
             for (eflags.zf = true; cx != 0 && eflags.zf; cx--)
@@ -6646,6 +7721,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             for (eflags.zf = true; ecx != 0 && eflags.zf; ecx--)
                 action();
+        }
+
+        /// <inheritdoc />
+        public void repne(Action action)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    repne_a16(action);
+                    break;
+                case 32:
+                    repne_a32(action);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -6662,6 +7753,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 action();
         }
 
+
+        /// <inheritdoc />
+        public void ret(int allocSize = 0)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    retw(allocSize);
+                    break;
+                case 32:
+                    retd(allocSize);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
 
         /// <inheritdoc />
         public void retw(int size = 0)
@@ -6681,6 +7788,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             __plus_sp(size);
         }
 
+
+        /// <inheritdoc />
+        public void retf(int size = 0)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    retfw(size);
+                    break;
+                case 32:
+                    retfd(size);
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public void retfw(int size = 0)
         {
@@ -6694,6 +7818,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             ret_far(32);
             __plus_sp(size);
         }
+
 
         /// <inheritdoc />
         public void rol(ValueBase dst, ValueBase c)
@@ -6854,6 +7979,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void scasb()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    scasb_a16();
+                    break;
+                case 32:
+                    scasb_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void scasb_a16()
         {
             cmp(al, memb_a16[es, di]);
@@ -6865,6 +8006,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             cmp(al, memb_a32[es, edi]);
             edi += eflags.df ? -1 : 1;
+        }
+
+
+        /// <inheritdoc />
+        public void scasd()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    scasd_a16();
+                    break;
+                case 32:
+                    scasd_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -6881,12 +8039,27 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             edi += eflags.df ? -4 : 4;
         }
 
+
+        /// <inheritdoc />
+        public void scasw()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    scasw_a16();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public void scasw_a16()
         {
             cmp(ax, memw_a16[es, di]);
             di += eflags.df ? -2 : 2;
         }
+
 
         /// <inheritdoc />
         public void seta(ValueBase value)
@@ -7083,7 +8256,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void sidtd_a32(SegmentRegister segment, ValueBase value)
+        public void sidt(MemoryValue src)
         {
             throw new NotImplementedException();
         }
@@ -7191,6 +8364,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
+        public void stosb()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    stosb_a16();
+                    break;
+                case 32:
+                    stosb_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
+        /// <inheritdoc />
         public void stosb_a16()
         {
             memb_a16[es, di] = al;
@@ -7202,6 +8391,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             memb_a32[es, edi] = al;
             edi += eflags.df ? -1 : 1;
+        }
+
+        /// <inheritdoc />
+        public void stosd()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    stosd_a16();
+                    break;
+                case 32:
+                    stosd_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         /// <inheritdoc />
@@ -7224,6 +8429,23 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
+        /// <inheritdoc />
+        public void stosw()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    stosw_a16();
+                    break;
+                case 32:
+                    stosw_a32();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public void stosw_a16()
         {
@@ -7237,6 +8459,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             memw_a32[es, edi] = ax;
             edi += eflags.df ? -2 : 2;
         }
+
 
         /// <inheritdoc />
         public void str(ValueBase value)
@@ -9266,11 +10489,26 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
+        /// <inheritdoc />
+        public void xlatb()
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    xlatb_a16();
+                    break;
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
+        }
+
         /// <inheritdoc />
         public void xlatb_a16()
         {
             al = memb_a16[ds, bx + al];
         }
+
 
         /// <inheritdoc />
         public void xor(ValueBase dst, ValueBase src)

@@ -8,12 +8,12 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1_1303-ccf6799c")]
         public void Method_0001_1303()
         {
-            ii(0x1_1303, 3);  popw(memw_a16[ss, bp - 0x4]);             /* pop word [bp-0x4] */
-            ii(0x1_1306, 2);  popw(gs);                                 /* pop gs */
-            ii(0x1_1308, 2);  popw(fs);                                 /* pop fs */
+            ii(0x1_1303, 3);  pop(memw[ss, bp - 0x4]);                  /* pop word [bp-0x4] */
+            ii(0x1_1306, 2);  pop(gs);                                  /* pop gs */
+            ii(0x1_1308, 2);  pop(fs);                                  /* pop fs */
             ii(0x1_130a, 2);  popad();                                  /* popad */
-            ii(0x1_130c, 1);  popw(bp);                                 /* pop bp */
-            ii(0x1_130d, 1);  retfw(); return;                          /* retf */
+            ii(0x1_130c, 1);  pop(bp);                                  /* pop bp */
+            ii(0x1_130d, 1);  retf();                                   /* retf */
         }
     }
 }

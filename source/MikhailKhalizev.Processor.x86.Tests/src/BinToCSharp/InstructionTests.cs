@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
                     "MikhailKhalizev.Processor.x86.Tests.resources.instruction-decode-test.json")))
                     json = stream.ReadToEnd();
 
-                var data = (JArray) JsonConvert.DeserializeObject(json);
+                var data = (JArray)JsonConvert.DeserializeObject(json);
                 _decodeSource = data.Select(item => new object[]
                 {
                     item["Arch"].Value<int>(),
@@ -40,6 +40,45 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
                     Address.Parse(item["Addr"].Value<string>()),
                     item["Dec"].Value<string>()
                 }).ToList();
+
+
+                //var newArr = new JArray();
+
+                //foreach (var jObject in _decodeSource.Select(
+                //    item =>
+                //    {
+                //        var u = new ud();
+                //        udis86.ud_init(ref u);
+                //        udis86.ud_set_input_buffer(ref u, new AssemblyCodeArray(HexHelper.ToBytes((string)item[1])));
+
+                //        udis86.ud_set_mode(ref u, (byte)(int)item[0]);
+                //        udis86.ud_set_pc(ref u, (Address)item[2]);
+                //        udis86.ud_set_vendor(ref u, (int)Vendor.Any);
+
+                //        var length = udis86.ud_disassemble(ref u);
+                //        length.Should().BeGreaterOrEqualTo(0);
+                //        u.error.Should().Be(0);
+
+                //        var cmd = new CSharpInstruction(new DefinitionCollection(), u);
+                //        var str = cmd.ToCodeString(onlyRawCmd: true);
+
+                //        str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
+
+                //        return JObject.FromObject(
+                //            new
+                //            {
+                //                Arch = item[0],
+                //                Addr = ((Address)item[2]).ToString(),
+                //                Raw = item[1],
+                //                Dec = str
+                //            });
+                //    }))
+                //{
+                //    newArr.Add(jObject);
+                //}
+
+                //var newJson = JsonConvert.SerializeObject(newArr, Formatting.Indented);
+
 
                 return _decodeSource;
             }
@@ -65,10 +104,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 
-            str.Should().Be(dec);
+            str.Should().Be(dec, $"Raw: {raw}");
         }
 
-        class AssemblyCodeArray : IAssemblyCode
+        private class AssemblyCodeArray : IAssemblyCode
         {
             private byte[] _buffer;
 

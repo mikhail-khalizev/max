@@ -246,7 +246,7 @@ namespace MikhailKhalizev.Max.Dos
 
                                         var time = DateTime.Now.TimeOfDay;
                                         time = new TimeSpan(time.Hours, time.Minutes, time.Seconds);
-                                        NonBlockingConsole.WriteLine($"    Draw. Time: {time}, File: {fileNum}.png");
+                                        NonBlockingConsole.WriteLine($"    Screen. Time: {time}, File: {fileNum}.png");
 
                                         //extra_log = (124 <= fileNum); /* Движение единиц. */
                                     }
@@ -819,12 +819,12 @@ namespace MikhailKhalizev.Max.Dos
                     throw new Exception($"Exit with code {al.Int32}");
 
                 case 0x50: // seg psp
-                    if (bx.UInt16 != RawProgramMain.pspseg)
+                    if (bx.UInt16 != RawProgramMain.PspSeg)
                         throw new NotImplementedException();
                     break;
 
                 case 0x51: // get psp
-                    bx = RawProgramMain.pspseg;
+                    bx = RawProgramMain.PspSeg;
                     break;
 
                 case 0x5a:

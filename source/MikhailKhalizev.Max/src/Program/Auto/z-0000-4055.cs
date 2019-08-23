@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_4055()
         {
             ii(0x4055, 1);    popa();                                   /* popa */
-            ii(0x4056, 1);    retw(); return;                           /* ret */
+            ii(0x4056, 1);    ret();                                    /* ret */
         }
     }
 }

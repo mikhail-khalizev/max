@@ -330,12 +330,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
             var copyAddrAreaBegin = _addrAreaBegin;
             var copySizeOfAddrArea = _sizeOfAddrArea;
-            cmd.WriteCmd = (engine, dm, index, func, offset) => WriteCmd(copyAddrAreaBegin, copySizeOfAddrArea, engine, dm, index, func, offset);
+            cmd.WriteCmd = (engine, dm, index, func) => WriteCmd(copyAddrAreaBegin, copySizeOfAddrArea, engine, dm, index, func);
         }
 
         private static string WriteCmd(
             Address addrAreaBegin, int sizeOfAddrArea,
-            Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, int offset)
+            Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc)
         {
             var raw = engine.Memory.ReadAll(addrAreaBegin, sizeOfAddrArea);
             engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addrAreaBegin, raw);
@@ -366,7 +366,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             if (!dm.Instructions[cmdIndex].IsLocalBranch)
                 throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
 
-            var str = dm.Instructions[cmdIndex].ToCodeString(funcSuffix, "", offset: offset);
+            var str = dm.Instructions[cmdIndex].ToCodeString(funcSuffix, "");
 
             var lines = new[]
                 {

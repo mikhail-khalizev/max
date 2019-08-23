@@ -8,15 +8,15 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_b14d-7b2a3b63")]
         public void /* sys */ Method_1019_b14d()
         {
-            ii(0x1019_b14d, 6); mov(ah, memb_a32[ds, 0x101c_1cf2]);     /* mov ah, [0x101c1cf2] */
+            ii(0x1019_b14d, 6); mov(ah, memb[ds, 0x101c_1cf2]);         /* mov ah, [0x101c1cf2] */
             ii(0x1019_b153, 3); test(ah, 0x1);                          /* test ah, 0x1 */
-            ii(0x1019_b156, 2); if(jzd(0x1019_b15d, 0x5)) goto l_0x1019_b15d; /* jz 0x1019b15d */
+            ii(0x1019_b156, 2); if(jz(0x1019_b15d, 0x5)) goto l_0x1019_b15d; /* jz 0x1019b15d */
             ii(0x1019_b158, 3); test(ah, 0x2);                          /* test ah, 0x2 */
-            ii(0x1019_b15b, 2); if(jnzd(0x1019_b164, 0x7)) goto l_0x1019_b164; /* jnz 0x1019b164 */
+            ii(0x1019_b15b, 2); if(jnz(0x1019_b164, 0x7)) goto l_0x1019_b164; /* jnz 0x1019b164 */
         l_0x1019_b15d:
-            ii(0x1019_b15d, 7); or(memb_a32[ds, 0x101c_1cf2], 0x2);     /* or byte [0x101c1cf2], 0x2 */
+            ii(0x1019_b15d, 7); or(memb[ds, 0x101c_1cf2], 0x2);         /* or byte [0x101c1cf2], 0x2 */
         l_0x1019_b164:
-            ii(0x1019_b164, 1); retd(); return;                         /* ret */
+            ii(0x1019_b164, 1); ret();                                  /* ret */
         }
     }
 }

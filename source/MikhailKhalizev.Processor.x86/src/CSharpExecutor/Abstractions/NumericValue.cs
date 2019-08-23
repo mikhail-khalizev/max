@@ -1,5 +1,73 @@
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
+    public sealed class NumericValue8 : Value
+    {
+        private uint _value;
+
+        public NumericValue8(int value)
+        {
+            _value = (uint)value & 0xff;
+        }
+
+        /// <inheritdoc />
+        public override int Bits => 8;
+
+        /// <inheritdoc />
+        protected override ulong UInt64Internal
+        {
+            get => _value;
+            set => _value = (uint)value & 0xff;
+        }
+
+        /// <inheritdoc />
+        public override short Int16
+        {
+            get => (sbyte)_value;
+            set => _value = (byte)value;
+        }
+
+        /// <inheritdoc />
+        public override ushort UInt16
+        {
+            get => (ushort)_value;
+            set => _value = value;
+        }
+
+        /// <inheritdoc />
+        public override int Int32
+        {
+            get => (sbyte)_value;
+            set => _value = (uint)value & 0xff;
+        }
+
+        /// <inheritdoc />
+        public override uint UInt32
+        {
+            get => _value;
+            set => _value = value & 0xff;
+        }
+
+        /// <inheritdoc />
+        public override long Int64
+        {
+            get => (sbyte)_value;
+            set => _value = (uint)value & 0xff;
+        }
+
+        /// <inheritdoc />
+        public override ulong UInt64
+        {
+            get => _value;
+            set => _value = (uint)value & 0xff;
+        }
+
+        /// <inheritdoc />
+        public override bool IsNegative => (sbyte)_value < 0;
+
+        /// <inheritdoc />
+        public override bool IsPositive => 0 <= (sbyte)_value;
+    }
+
     public sealed class NumericValue16 : Value
     {
         private uint _value;
@@ -36,7 +104,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <inheritdoc />
         public override int Int32
         {
-            get => (int)_value;
+            get => (short)_value;
             set => _value = (uint)value & 0xffff;
         }
 
@@ -50,7 +118,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <inheritdoc />
         public override long Int64
         {
-            get => _value;
+            get => (short)_value;
             set => _value = (uint)value & 0xffff;
         }
 
@@ -58,14 +126,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         public override ulong UInt64
         {
             get => _value;
-            set => _value = (uint) value & 0xffff;
+            set => _value = (uint)value & 0xffff;
         }
 
         /// <inheritdoc />
-        public override bool IsNegative => (short) _value < 0;
+        public override bool IsNegative => (short)_value < 0;
 
         /// <inheritdoc />
-        public override bool IsPositive => 0 <= (short) _value;
+        public override bool IsPositive => 0 <= (short)_value;
     }
 
     public sealed class NumericValue32 : Value
@@ -109,7 +177,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <inheritdoc />
         public override long Int64
         {
-            get => _value;
+            get => (int)_value;
             set => _value = (uint)value;
         }
 
@@ -117,14 +185,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         public override ulong UInt64
         {
             get => _value;
-            set => _value = (uint) value;
+            set => _value = (uint)value;
         }
 
         /// <inheritdoc />
-        public override bool IsNegative => (int) _value < 0;
+        public override bool IsNegative => (int)_value < 0;
 
         /// <inheritdoc />
-        public override bool IsPositive => 0 <= (int) _value;
+        public override bool IsPositive => 0 <= (int)_value;
     }
 
     public sealed class NumericValue64 : Value
@@ -166,20 +234,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public override bool IsNegative => (long) _value < 0;
+        public override bool IsNegative => (long)_value < 0;
 
         /// <inheritdoc />
-        public override bool IsPositive => 0 <= (long) _value;
+        public override bool IsPositive => 0 <= (long)_value;
     }
 
     public sealed class NumericValue : Value
     {
-        public static Value From(uint value, int bits) => From((int) value, bits);
+        public static Value From(uint value, int bits) => From((int)value, bits);
 
         public static Value From(int value, int bits)
         {
             switch (bits)
             {
+                case 8:
+                    return new NumericValue8(value);
                 case 16:
                     return new NumericValue16(value);
                 case 32:
@@ -191,12 +261,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
             }
         }
 
-        public static Value From(ulong value, int bits) => From((long) value, bits);
+        public static Value From(ulong value, int bits) => From((long)value, bits);
 
         public static Value From(long value, int bits)
         {
             switch (bits)
             {
+                case 8:
+                    return new NumericValue8((int)value);
                 case 16:
                     return new NumericValue16((int)value);
                 case 32:

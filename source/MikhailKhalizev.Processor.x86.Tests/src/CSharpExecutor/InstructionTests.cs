@@ -411,5 +411,40 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
             cmp(-15, -5);
             jged(a, 0).Should().BeFalse();
         }
+
+        [Fact]
+        public void CheckJaed()
+        {
+            var a = cs[eip];
+
+            cmp(5, 5);
+            jaed(a, 0).Should().BeTrue();
+
+            cmp(0, 0);
+            jaed(a, 0).Should().BeTrue();
+
+            cmp(uint.MaxValue, uint.MaxValue);
+            jaed(a, 0).Should().BeTrue();
+
+
+            cmp(15, 5);
+            jaed(a, 0).Should().BeTrue();
+
+            cmp(uint.MaxValue, 5);
+            jaed(a, 0).Should().BeTrue();
+
+            cmp(uint.MaxValue, uint.MaxValue - 1);
+            jaed(a, 0).Should().BeTrue();
+
+
+            cmp(5, 15);
+            jaed(a, 0).Should().BeFalse();
+
+            cmp(5, uint.MaxValue);
+            jaed(a, 0).Should().BeFalse();
+
+            cmp(uint.MaxValue - 1, uint.MaxValue);
+            jaed(a, 0).Should().BeFalse();
+        }
     }
 }

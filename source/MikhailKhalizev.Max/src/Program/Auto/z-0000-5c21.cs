@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x5c21-ca13a")]
         public void Method_0000_5c21()
         {
-            ii(0x5c21, 3);    callw(0x5c26, 0x2);                       /* call 0x5c26 */
+            ii(0x5c21, 3);    call(0x5c26, 0x2);                        /* call 0x5c26 */
         }
     }
 }

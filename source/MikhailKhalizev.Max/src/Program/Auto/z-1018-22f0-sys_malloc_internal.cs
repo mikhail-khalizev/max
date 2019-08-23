@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_22f0-c6de1692")]
         public void /* sys */ sys_malloc_internal()
         {
-            ii(0x1018_22f0, 6); calld_abs(memd_a32[ds, 0x101b_e818]);   /* call dword [0x101be818] */ /* Вызов '0x1018_22f8'. */
-            ii(0x1018_22f6, 1); retd(); return;                         /* ret */
+            ii(0x1018_22f0, 6); call_abs(memd[ds, 0x101b_e818]);        /* call dword [0x101be818] */ /* Вызов '0x1018_22f8'. */
+            ii(0x1018_22f6, 1); ret();                                  /* ret */
         }
     }
 }

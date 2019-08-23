@@ -8,10 +8,10 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_ee44-11ffb6e")]
         public void Method_0018_ee44()
         {
-            ii(0x18_ee44, 1); popw(ds);                                 /* pop ds */
-            ii(0x18_ee45, 1); popw(dx);                                 /* pop dx */
-            ii(0x18_ee46, 1); popw(ax);                                 /* pop ax */
-            ii(0x18_ee47, 1); retw(); return;                           /* ret */
+            ii(0x18_ee44, 1); pop(ds);                                  /* pop ds */
+            ii(0x18_ee45, 1); pop(dx);                                  /* pop dx */
+            ii(0x18_ee46, 1); pop(ax);                                  /* pop ax */
+            ii(0x18_ee47, 1); ret();                                    /* ret */
         }
     }
 }

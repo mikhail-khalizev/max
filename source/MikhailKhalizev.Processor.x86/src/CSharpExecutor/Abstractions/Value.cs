@@ -4,6 +4,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
     public abstract class Value : ValueBase
     {
+        public static implicit operator Value(sbyte value) => new NumericValue8(value);
+        public static implicit operator Value(byte value) => new NumericValue8(value);
         public static implicit operator Value(short value) => new NumericValue16(value);
         public static implicit operator Value(ushort value) => new NumericValue16(value);
         public static implicit operator Value(int value) => new NumericValue32(value);

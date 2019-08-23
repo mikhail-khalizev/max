@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1_1993-602e")]
         public void Method_0001_1993()
         {
-            ii(0x1_1993, 2);  if(jmpw_abs(cx)) return;                  /* jmp cx */
+            ii(0x1_1993, 2);  jmp_abs(cx);                              /* jmp cx */
         }
     }
 }

@@ -8,11 +8,11 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_0120-251ef698")]
         public void Method_0019_0120()
         {
-            ii(0x19_0120, 1); popw(ds);                                 /* pop ds */
-            ii(0x19_0121, 1); popw(di);                                 /* pop di */
-            ii(0x19_0122, 1); popw(si);                                 /* pop si */
-            ii(0x19_0123, 1); popw(bp);                                 /* pop bp */
-            ii(0x19_0124, 1); retfw(); return;                          /* retf */
+            ii(0x19_0120, 1); pop(ds);                                  /* pop ds */
+            ii(0x19_0121, 1); pop(di);                                  /* pop di */
+            ii(0x19_0122, 1); pop(si);                                  /* pop si */
+            ii(0x19_0123, 1); pop(bp);                                  /* pop bp */
+            ii(0x19_0124, 1); retf();                                   /* retf */
         }
     }
 }

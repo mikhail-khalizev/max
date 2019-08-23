@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x7c46-33cc4da0")]
         public void Method_0000_7c46()
         {
-            ii(0x7c46, 3);    pushw(0x3e8f);                            /* push 0x3e8f */
-            ii(0x7c49, 4);    if(jmpw_a16_far_ind(ds, 0xaf2)) return;   /* jmp far word [0xaf2] */
+            ii(0x7c46, 3);    push(0x3e8f);                             /* push 0x3e8f */
+            ii(0x7c49, 4);    jmp_far_ind(memw[ds, 0xaf2]);             /* jmp far word [0xaf2] */
         }
     }
 }
