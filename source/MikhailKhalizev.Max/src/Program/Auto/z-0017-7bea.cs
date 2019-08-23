@@ -89,7 +89,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7cc0, 2); push(0);                                  /* push 0x0 */
             ii(0x17_7cc2, 3); push(memw[ss, bp - 0x6]);                 /* push word [bp-0x6] */
             ii(0x17_7cc5, 3); push(memw[ss, bp - 0x8]);                 /* push word [bp-0x8] */
-            ii(0x17_7cc8, 4); call_far_ind(ds, bx + 0x2020);            /* call far word [bx+0x2020] */
+            ii(0x17_7cc8, 4); call_far_ind(memw[ds, bx + 0x2020]);      /* call far word [bx+0x2020] */
             ii(0x17_7ccc, 3); add(sp, 0x14);                            /* add sp, 0x14 */
             ii(0x17_7ccf, 2); or(ax, ax);                               /* or ax, ax */
             ii(0x17_7cd1, 2); if(jz(0x17_7cea, 0x17)) goto l_0x17_7cea; /* jz 0x7cea */

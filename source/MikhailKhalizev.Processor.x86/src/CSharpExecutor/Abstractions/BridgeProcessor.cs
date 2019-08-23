@@ -750,52 +750,53 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void call_far_ind(SegmentRegister segment, ValueBase address)
+        public void call_far_ind(MemoryValue src)
         {
-            Implementation.call_far_ind(segment, address);
+            Implementation.call_far_ind(src);
         }
 
         /// <inheritdoc />
-        public void calld_far_ind(SegmentRegister segment, ValueBase address)
+        public void calld_far_ind(MemoryValue src)
         {
-            Implementation.calld_far_ind(segment, address);
+            Implementation.calld_far_ind(src);
         }
 
         /// <inheritdoc />
-        public void callw_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public void callw_a16_far_ind(MemoryValue src)
         {
-            Implementation.callw_a16_far_ind(segment, address);
+            Implementation.callw_a16_far_ind(src);
         }
 
         /// <inheritdoc />
-        public bool call_far_ind_up(SegmentRegister segment, ValueBase address)
+        public void calld_a16_far_ind(MemoryValue src)
         {
-            return Implementation.call_far_ind_up(segment, address);
+            Implementation.calld_a16_far_ind(src);
         }
 
         /// <inheritdoc />
-        public bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address)
+        public void calld_a32_far_ind(MemoryValue src)
         {
-            return Implementation.callw_a16_far_ind_up(segment, address);
+            Implementation.calld_a32_far_ind(src);
         }
 
         /// <inheritdoc />
-        public void calld_a32_far_ind(SegmentRegister segment, ValueBase address)
+        public bool call_far_ind_up(MemoryValue src)
         {
-            Implementation.calld_a32_far_ind(segment, address);
+            return Implementation.call_far_ind_up(src);
         }
 
         /// <inheritdoc />
-        public bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address)
+        public bool callw_a16_far_ind_up(MemoryValue src)
         {
-            return Implementation.calld_a32_far_ind_up(segment, address);
+            return Implementation.callw_a16_far_ind_up(src);
         }
 
         /// <inheritdoc />
-        public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool calld_a32_far_ind_up(MemoryValue src)
         {
-            Implementation.calld_a16_far_ind(segment, address);
+            return Implementation.calld_a32_far_ind_up(src);
         }
+
 
         /// <inheritdoc />
         public void cbw()
@@ -2009,23 +2010,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
             return Implementation.jmpw_far_abs(segment, address);
         }
 
-        /// <inheritdoc />
-        public bool jmp_far_ind(SegmentRegister segment, ValueBase address)
-        {
-            return Implementation.jmp_far_ind(segment, address);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_far_ind(SegmentRegister segment, ValueBase address)
-        {
-            return Implementation.jmpd_far_ind(segment, address);
-        }
-
-        /// <inheritdoc />
-        public bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address)
-        {
-            return Implementation.jmpw_a16_far_ind(segment, address);
-        }
 
         /// <inheritdoc />
         public void jmpd(Address address, int offset)
@@ -2064,10 +2048,29 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool jmp_far_ind(MemoryValue src)
         {
-            return Implementation.jmpd_a16_far_ind(segment, address);
+            return Implementation.jmp_far_ind(src);
         }
+
+        /// <inheritdoc />
+        public bool jmpd_far_ind(MemoryValue src)
+        {
+            return Implementation.jmpd_far_ind(src);
+        }
+
+        /// <inheritdoc />
+        public bool jmpw_a16_far_ind(MemoryValue src)
+        {
+            return Implementation.jmpw_a16_far_ind(src);
+        }
+
+        /// <inheritdoc />
+        public bool jmpd_a16_far_ind(MemoryValue src)
+        {
+            return Implementation.jmpd_a16_far_ind(src);
+        }
+
 
         /// <inheritdoc />
         public bool ja(Address address, int offset)

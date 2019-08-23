@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa866, 2);    if(jz(0xa87a, 0x12)) goto l_0xa87a;       /* jz 0xa87a */
             ii(0xa868, 3);    cmp(ax, 0xbfdc);                          /* cmp ax, 0xbfdc */
             ii(0xa86b, 2);    if(jz(0xa872, 0x5)) goto l_0xa872;        /* jz 0xa872 */
-            ii(0xa86d, 5);    if(jmp_far_ind(cs, 0x12c4)) return;       /* jmp far word [cs:0x12c4] */
+            ii(0xa86d, 5);    if(jmp_far_ind(memw[cs, 0x12c4])) return; /* jmp far word [cs:0x12c4] */
         l_0xa872:
             ii(0xa872, 3);    mov(si, 0x98);                            /* mov si, 0x98 */
             ii(0xa875, 5);    mov(dx, memw[cs, 0]);                     /* mov dx, [cs:0x0] */

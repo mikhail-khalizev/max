@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa8f2, 2);    mov(bp, sp);                              /* mov bp, sp */
             ii(0xa8f4, 4);    cmp(memw[ss, bp + 0x18], 0xd);            /* cmp word [bp+0x18], 0xd */
             ii(0xa8f8, 2);    if(jz(0xa96d, 0x73)) goto l_0xa96d;       /* jz 0xa96d */
-            ii(0xa8fa, 5);    if(jmp_far_ind(cs, 0x17be)) return;       /* jmp far word [cs:0x17be] */
+            ii(0xa8fa, 5);    if(jmp_far_ind(memw[cs, 0x17be])) return; /* jmp far word [cs:0x17be] */
             ii(0xa8ff, 2);    jmp(0xa917, 0x16); goto l_0xa917;         /* jmp 0xa917 */
         //  ii(0xa901, 2);    pushd(edx);                               /* push edx */
         //  ii(0xa903, 6);    mov(edx, memd[cs, 0x6d66]);               /* mov edx, [cs:0x6d66] */
@@ -114,7 +114,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa964, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xa966, 2);    if(jae(0xa9e6, 0x7e)) goto l_0xa9e6;      /* jae 0xa9e6 */
         l_0xa968:
-            ii(0xa968, 5);    if(jmp_far_ind(cs, 0x17be)) return;       /* jmp far word [cs:0x17be] */
+            ii(0xa968, 5);    if(jmp_far_ind(memw[cs, 0x17be])) return; /* jmp far word [cs:0x17be] */
         l_0xa96d:
             ii(0xa96d, 4);    lsl(ax, memw[ss, bp + 0x22]);             /* lsl ax, [bp+0x22] */
             ii(0xa971, 3);    sub(ax, memw[ss, bp + 0x1e]);             /* sub ax, [bp+0x1e] */

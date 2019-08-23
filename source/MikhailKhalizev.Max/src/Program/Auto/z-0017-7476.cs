@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7498, 3); mov(memw[ss, bp - 0x8], dx);              /* mov [bp-0x8], dx */
             ii(0x17_749b, 1); push(dx);                                 /* push dx */
             ii(0x17_749c, 1); push(ax);                                 /* push ax */
-            ii(0x17_749d, 4); call_far_ind(ds, 0x1e9e);                 /* call far word [0x1e9e] */
+            ii(0x17_749d, 4); call_far_ind(memw[ds, 0x1e9e]);           /* call far word [0x1e9e] */
             ii(0x17_74a1, 3); add(sp, 0x4);                             /* add sp, 0x4 */
             ii(0x17_74a4, 3); mov(memw[ss, bp - 0x4], ax);              /* mov [bp-0x4], ax */
             ii(0x17_74a7, 3); mov(memw[ss, bp - 0x2], dx);              /* mov [bp-0x2], dx */
@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_74cd, 3); push(memw[ss, bp - 0x4]);                 /* push word [bp-0x4] */
             ii(0x17_74d0, 2); mov(si, ax);                              /* mov si, ax */
             ii(0x17_74d2, 2); mov(di, dx);                              /* mov di, dx */
-            ii(0x17_74d4, 4); call_far_ind(ds, 0x1ea2);                 /* call far word [0x1ea2] */
+            ii(0x17_74d4, 4); call_far_ind(memw[ds, 0x1ea2]);           /* call far word [0x1ea2] */
             ii(0x17_74d8, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x17_74db, 3); mov(al, memb[ss, bp - 0xa]);              /* mov al, [bp-0xa] */
             ii(0x17_74de, 2); sub(ah, ah);                              /* sub ah, ah */
@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_74e8, 2); sub(al, al);                              /* sub al, al */
             ii(0x17_74ea, 1); push(dx);                                 /* push dx */
             ii(0x17_74eb, 1); push(ax);                                 /* push ax */
-            ii(0x17_74ec, 4); call_far_ind(ds, 0x1ea2);                 /* call far word [0x1ea2] */
+            ii(0x17_74ec, 4); call_far_ind(memw[ds, 0x1ea2]);           /* call far word [0x1ea2] */
             ii(0x17_74f0, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x17_74f3, 3); add(memw[ss, bp - 0x4], si);              /* add [bp-0x4], si */
             ii(0x17_74f6, 3); adc(memw[ss, bp - 0x2], di);              /* adc [bp-0x2], di */

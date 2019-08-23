@@ -567,7 +567,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_b0be, 3); push(memw[ss, bp - 0x42]);                /* push word [bp-0x42] */
             ii(0x19_b0c1, 3); push(memw[ss, bp - 0x24]);                /* push word [bp-0x24] */
             ii(0x19_b0c4, 3); push(memw[ss, bp - 0x26]);                /* push word [bp-0x26] */
-            ii(0x19_b0c7, 4); call_far_ind(ds, 0x1a04);                 /* call far word [0x1a04] */
+            ii(0x19_b0c7, 4); call_far_ind(memw[ds, 0x1a04]);           /* call far word [0x1a04] */
             ii(0x19_b0cb, 3); add(sp, 0xc);                             /* add sp, 0xc */
             ii(0x19_b0ce, 3); jmp(0x19_af77, -0x15a); goto l_0x19_af77; /* jmp 0xaf77 */
         l_0x19_b0d1:

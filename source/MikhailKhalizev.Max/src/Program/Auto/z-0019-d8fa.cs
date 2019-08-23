@@ -50,7 +50,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_d976, 3); xor(edx, edx);                            /* xor edx, edx */
             ii(0x19_d979, 3); xor(edi, edi);                            /* xor edi, edi */
             ii(0x19_d97c, 3); xor(esi, esi);                            /* xor esi, esi */
-            ii(0x19_d97f, 5); jmpd_far_ind(gs, bp + 0x6);               /* jmp far dword [gs:bp+0x6] */
+            ii(0x19_d97f, 5); jmpd_far_ind(memd[gs, bp + 0x6]);         /* jmp far dword [gs:bp+0x6] */
         }
     }
 }

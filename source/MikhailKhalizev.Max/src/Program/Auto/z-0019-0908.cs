@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_092e, 2); jmp(0x19_0974, 0x44); goto l_0x19_0974;   /* jmp 0x974 */
         //  ii(0x19_0930, 1); nop();                                    /* nop */
         l_0x19_0931:
-            ii(0x19_0931, 5); if(jmp_far_ind(cs, 0x1474)) return;       /* jmp far word [cs:0x1474] */
+            ii(0x19_0931, 5); if(jmp_far_ind(memw[cs, 0x1474])) return; /* jmp far word [cs:0x1474] */
             ii(0x19_0936, 2); xchg(bx, bx);                             /* xchg bx, bx */
             ii(0x19_0938, 2); xor(al, 0x45);                            /* xor al, 0x45 */
             ii(0x19_093a, 2); if(jo(0x19_093c, 0)) goto l_0x19_093c;    /* jo 0x93c */
@@ -51,7 +51,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0979, 2); popad();                                  /* popad */
             ii(0x19_097b, 2); iretd(); return;                          /* iretd */
         l_0x19_097d:
-            ii(0x19_097d, 5); jmp_far_ind(cs, 0x14a8);                  /* jmp far word [cs:0x14a8] */
+            ii(0x19_097d, 5); jmp_far_ind(memw[cs, 0x14a8]);            /* jmp far word [cs:0x14a8] */
         }
     }
 }

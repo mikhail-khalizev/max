@@ -132,11 +132,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8cac, 1); pusha();                                  /* pusha */
             ii(0x17_8cad, 3); mov(bx, 0x13);                            /* mov bx, 0x13 */
             ii(0x17_8cb0, 2); mov(ah, 0x45);                            /* mov ah, 0x45 */
-            ii(0x17_8cb2, 4); call_far_ind(ds, 0x1fe0);                 /* call far word [0x1fe0] */
+            ii(0x17_8cb2, 4); call_far_ind(memw[ds, 0x1fe0]);           /* call far word [0x1fe0] */
             ii(0x17_8cb6, 2); if(jb(0x17_8cc0, 0x8)) goto l_0x17_8cc0;  /* jb 0x8cc0 */
             ii(0x17_8cb8, 2); mov(bx, ax);                              /* mov bx, ax */
             ii(0x17_8cba, 2); mov(ah, 0x3e);                            /* mov ah, 0x3e */
-            ii(0x17_8cbc, 4); call_far_ind(ds, 0x1fe0);                 /* call far word [0x1fe0] */
+            ii(0x17_8cbc, 4); call_far_ind(memw[ds, 0x1fe0]);           /* call far word [0x1fe0] */
         l_0x17_8cc0:
             ii(0x17_8cc0, 1); popa();                                   /* popa */
             ii(0x17_8cc1, 3); mov(ax, memw[ss, bp - 0x4]);              /* mov ax, [bp-0x4] */

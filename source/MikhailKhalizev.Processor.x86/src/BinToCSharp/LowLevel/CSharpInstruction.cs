@@ -271,23 +271,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     case ud_type.UD_OP_MEM:
                         {
-                            // TODO Remove?
-                            var memInside = // Обращение к памяти происходит внутри инструкции.
-                                new[]
-                                {
-                                    ud_mnemonic_code.UD_Icall,
-                                    ud_mnemonic_code.UD_Ijmp
-                                }.Contains(Mnemonic) && BrFar;
-
-                            if (!memInside)
-                            {
-                                sb.Append("mem");
-                                sb.Append(GetSizeSuffixByBits(oprSize));
-                                sb.Append(adrModeStr);
-                                sb.Append("[");
-                            }
-
-                            sb.Append($"{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
+                            sb.Append("mem");
+                            sb.Append(GetSizeSuffixByBits(oprSize));
+                            sb.Append(adrModeStr);
+                            sb.Append($"[{syn.ud_reg_tab[GetEffectiveSegmentOfOperand(op) - ud_type.UD_R_AL]}, ");
 
                             if (PfxSeg != ud_type.UD_NONE)
                                 usePfxSeg = true;
@@ -336,7 +323,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 if (val < 0)
                                 {
                                     sb.Append(isNextOperation ? " - " : "-");
-                                    sb.Append($"0x{-val:x}");
+                                    sb.Append(HexHelper.ToShortGrouped4Hex(-val));
                                 }
                                 else
                                 {
@@ -347,8 +334,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 isNextOperation = true;
                             }
 
-                            if (memInside == false)
-                                sb.Append(']');
+                            sb.Append(']');
                             break;
                         }
 
@@ -359,14 +345,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 {
                                     var needSignExtend = new[]
                                     {
-                                    ud_mnemonic_code.UD_Iimul,
-                                    ud_mnemonic_code.UD_Ipush,
-                                    ud_mnemonic_code.UD_Iadc,
-                                    ud_mnemonic_code.UD_Iadd,
-                                    ud_mnemonic_code.UD_Isbb,
-                                    ud_mnemonic_code.UD_Isub,
-                                    ud_mnemonic_code.UD_Icmp
-                                }.Contains(Mnemonic);
+                                        ud_mnemonic_code.UD_Iimul,
+                                        ud_mnemonic_code.UD_Ipush,
+                                        ud_mnemonic_code.UD_Iadc,
+                                        ud_mnemonic_code.UD_Iadd,
+                                        ud_mnemonic_code.UD_Isbb,
+                                        ud_mnemonic_code.UD_Isub,
+                                        ud_mnemonic_code.UD_Icmp
+                                    }.Contains(Mnemonic);
 
                                     // Работа не с 8-байтой инструкцией.
                                     if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))

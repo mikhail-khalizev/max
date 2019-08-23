@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1_001a, 1);  cld();                                    /* cld */
             ii(0x1_001b, 3);  if(jmp_abs(memw[cs, bx + si])) return;    /* jmp word [cs:bx+si] */
         l_0x1_001e:
-            ii(0x1_001e, 4);  if(jmp_far_ind(cs, si - 0x6)) return;     /* jmp far word [cs:si-0x6] */
+            ii(0x1_001e, 4);  if(jmp_far_ind(memw[cs, si - 0x6])) return; /* jmp far word [cs:si-0x6] */
         l_0x1_0022:
             ii(0x1_0022, 5);  or(memb_a32[ss, ebp + 0x2c], 0x1);        /* or byte [ebp+0x2c], 0x1 */
             ii(0x1_0027, 3);  mov(esp, ebp);                            /* mov esp, ebp */

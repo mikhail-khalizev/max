@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_e978, 2); if(jnz(0x19_e97d, 0x3)) goto l_0x19_e97d; /* jnz 0xe97d */
             ii(0x19_e97a, 3); jmp(0x19_e9ed, 0x70); goto l_0x19_e9ed;   /* jmp 0xe9ed */
         l_0x19_e97d:
-            ii(0x19_e97d, 3); call_far_ind(ss, bp - 0x8);               /* call far word [bp-0x8] */
+            ii(0x19_e97d, 3); call_far_ind(memw[ss, bp - 0x8]);         /* call far word [bp-0x8] */
             ii(0x19_e980, 3); mov(memw[ss, bp - 0xe], ax);              /* mov [bp-0xe], ax */
             ii(0x19_e983, 3); cmp(ax, 0);                               /* cmp ax, 0x0 */
             ii(0x19_e986, 2); if(jnz(0x19_e98b, 0x3)) goto l_0x19_e98b; /* jnz 0xe98b */
@@ -64,7 +64,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_e9d0, 3); push(memw[ss, bp + 0x8]);                 /* push word [bp+0x8] */
             ii(0x19_e9d3, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
             ii(0x19_e9d6, 3); les(bx, memw[ss, bp + 0xe]);              /* les bx, [bp+0xe] */
-            ii(0x19_e9d9, 4); call_far_ind(es, bx + 0x1c);              /* call far word [es:bx+0x1c] */
+            ii(0x19_e9d9, 4); call_far_ind(memw[es, bx + 0x1c]);        /* call far word [es:bx+0x1c] */
             ii(0x19_e9dd, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x19_e9e0, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x19_e9e2, 2); if(jnz(0x19_e9e7, 0x3)) goto l_0x19_e9e7; /* jnz 0xe9e7 */
@@ -101,7 +101,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_ea2b, 3); push(memw[ss, bp + 0x8]);                 /* push word [bp+0x8] */
             ii(0x19_ea2e, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
             ii(0x19_ea31, 3); les(bx, memw[ss, bp + 0xe]);              /* les bx, [bp+0xe] */
-            ii(0x19_ea34, 4); call_far_ind(es, bx + 0x1c);              /* call far word [es:bx+0x1c] */
+            ii(0x19_ea34, 4); call_far_ind(memw[es, bx + 0x1c]);        /* call far word [es:bx+0x1c] */
             ii(0x19_ea38, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x19_ea3b, 2); or(dx, ax);                               /* or dx, ax */
             ii(0x19_ea3d, 2); if(jnz(0x19_ea42, 0x3)) goto l_0x19_ea42; /* jnz 0xea42 */

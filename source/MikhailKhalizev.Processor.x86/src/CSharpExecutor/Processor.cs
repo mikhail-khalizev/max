@@ -2448,15 +2448,15 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void call_far_ind(SegmentRegister segment, ValueBase address)
+        public void call_far_ind(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    callw_a16_far_ind(segment, address);
+                    callw_a16_far_ind(src);
                     break;
                 case 32:
-                    calld_a32_far_ind(segment, address);
+                    calld_a32_far_ind(src);
                     break;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
@@ -2464,12 +2464,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void calld_far_ind(SegmentRegister segment, ValueBase address)
+        public void calld_far_ind(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    calld_a16_far_ind(segment, address);
+                    calld_a16_far_ind(src);
                     break;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
@@ -2477,57 +2477,57 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public void callw_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public void callw_a16_far_ind(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            call_far_prepare(16, memw_a16[src.Segment, src.Address + 2].UInt16, memw_a16[src.Segment, src.Address].UInt16);
             CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
-        public void calld_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public void calld_a16_far_ind(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(32, memw_a16[segment, address + 4].UInt16, memd_a16[segment, address].UInt32);
+            call_far_prepare(32, memw_a16[src.Segment, src.Address + 4].UInt16, memd_a16[src.Segment, src.Address].UInt32);
             CorrectMethodPosition(ret_addr);
         }
 
         /// <inheritdoc />
-        public void calld_a32_far_ind(SegmentRegister segment, ValueBase address)
+        public void calld_a32_far_ind(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(32, memw_a32[segment, address + 4].UInt16, memd_a32[segment, address].UInt32);
+            call_far_prepare(32, memw_a32[src.Segment, src.Address + 4].UInt16, memd_a32[src.Segment, src.Address].UInt32);
             CorrectMethodPosition(ret_addr);
         }
 
 
         /// <inheritdoc />
-        public bool call_far_ind_up(SegmentRegister segment, ValueBase address)
+        public bool call_far_ind_up(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return callw_a16_far_ind_up(segment, address);
+                    return callw_a16_far_ind_up(src);
                 case 32:
-                    return calld_a32_far_ind_up(segment, address);
+                    return calld_a32_far_ind_up(src);
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
 
         /// <inheritdoc />
-        public bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address)
+        public bool callw_a16_far_ind_up(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(16, memw_a16[segment, address + 2].UInt16, memw_a16[segment, address].UInt16);
+            call_far_prepare(16, memw_a16[src.Segment, src.Address + 2].UInt16, memw_a16[src.Segment, src.Address].UInt16);
             return CorrectMethodPosition(ret_addr, true);
         }
 
         /// <inheritdoc />
-        public bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address)
+        public bool calld_a32_far_ind_up(MemoryValue src)
         {
             var ret_addr = cs[eip];
-            call_far_prepare(32, memw_a32[segment, address + 4].UInt16, memd_a32[segment, address].UInt32);
+            call_far_prepare(32, memw_a32[src.Segment, src.Address + 4].UInt16, memd_a32[src.Segment, src.Address].UInt32);
             return CorrectMethodPosition(ret_addr, true);
         }
 
@@ -4182,39 +4182,43 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public bool jmp_far_ind(SegmentRegister segment, ValueBase address)
+        public bool jmp_far_ind(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return jmpw_a16_far_ind(segment, address);
+                    return jmpw_a16_far_ind(src);
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
 
         /// <inheritdoc />
-        public bool jmpd_far_ind(SegmentRegister segment, ValueBase address)
+        public bool jmpd_far_ind(MemoryValue src)
         {
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return jmpd_a16_far_ind(segment, address);
+                    return jmpd_a16_far_ind(src);
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
 
         /// <inheritdoc />
-        public bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool jmpw_a16_far_ind(MemoryValue src)
         {
-            return jmpw_func_internal(memw_a16[segment, address].UInt16, segmentSelector: memw_a16[segment, address + 2].UInt16);
+            return jmpw_func_internal(
+                memw_a16[src.Segment, src.Address].UInt16,
+                segmentSelector: memw_a16[src.Segment, src.Address + 2].UInt16);
         }
 
         /// <inheritdoc />
-        public bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address)
+        public bool jmpd_a16_far_ind(MemoryValue src)
         {
-            return jmpd_func_internal(memd_a16[segment, address].UInt32, segmentSelector: memw_a16[segment, address + 4].UInt16);
+            return jmpd_func_internal(
+                memd_a16[src.Segment, src.Address].UInt32,
+                segmentSelector: memw_a16[src.Segment, src.Address + 4].UInt16);
         }
 
         /// <inheritdoc />

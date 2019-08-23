@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb2c7, 3);    shr(cx, 0x2);                             /* shr cx, 0x2 */
         l_0xb2ca:
             ii(0xb2ca, 2);    mov(ah, 0xb);                             /* mov ah, 0xb */
-            ii(0xb2cc, 4);    call_far_ind(ds, 0xaec);                  /* call far word [0xaec] */
+            ii(0xb2cc, 4);    call_far_ind(memw[ds, 0xaec]);            /* call far word [0xaec] */
             ii(0xb2d0, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0xb2d2, 2);    if(jz(0xb311, 0x3d)) goto l_0xb311;       /* jz 0xb311 */
             ii(0xb2d4, 3);    add(memd[ds, bx], edi);                   /* add [bx], edi */

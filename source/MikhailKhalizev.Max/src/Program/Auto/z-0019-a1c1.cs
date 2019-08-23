@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_a1da, 2); if(jz(0x19_a1ea, 0xe)) goto l_0x19_a1ea;  /* jz 0xa1ea */
             ii(0x19_a1dc, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
             ii(0x19_a1df, 3); push(memw[ss, bp + 0x4]);                 /* push word [bp+0x4] */
-            ii(0x19_a1e2, 4); call_far_ind(ds, 0x329c);                 /* call far word [0x329c] */
+            ii(0x19_a1e2, 4); call_far_ind(memw[ds, 0x329c]);           /* call far word [0x329c] */
             ii(0x19_a1e6, 1); pop(bx);                                  /* pop bx */
             ii(0x19_a1e7, 1); pop(bx);                                  /* pop bx */
             ii(0x19_a1e8, 2); jmp(0x19_a1f3, 0x9); goto l_0x19_a1f3;    /* jmp 0xa1f3 */

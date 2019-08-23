@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_ce8c, 3); add(memb[ds, eax + 0x7a], al);          /* add [eax+0x7a], al */
             ii(0x1019_ce8f, 3); adc(memb[ds, esi - 0x73], bh);          /* adc [esi-0x73], bh */
             ii(0x1019_ce92, 2); add(eax, memd[ds, eax]);                /* add eax, [eax] */
-            ii(0x1019_ce94, 6); add(memb[ds, eax - 0x790d5b3a], al);    /* add [eax-0x790d5b3a], al */
+            ii(0x1019_ce94, 6); add(memb[ds, eax - 0x790d_5b3a], al);   /* add [eax-0x790d5b3a], al */
             ii(0x1019_ce9a, 2); and(eax, memd[ds, eax]);                /* and eax, [eax] */
             ii(0x1019_ce9c, 2); add(memb[ds, eax], al);                 /* add [eax], al */
             ii(0x1019_ce9e, 4); shr(memd[ds, edi + 0x78], 0x45);        /* shr dword [edi+0x78], 0x45 */

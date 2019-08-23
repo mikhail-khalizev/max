@@ -141,7 +141,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_b6c5, 1); push(eax);                              /* push eax */
             ii(0x1028_b6c6, 8); movzx(eax, memw[gs, 0x1388]);           /* movzx eax, word [gs:0x1388] */
             ii(0x1028_b6ce, 1); push(eax);                              /* push eax */
-            ii(0x1028_b6cf, 4); call_far_ind(gs, esi + 0x3c);           /* call far dword [gs:esi+0x3c] */
+            ii(0x1028_b6cf, 4); call_far_ind(memd[gs, esi + 0x3c]);     /* call far dword [gs:esi+0x3c] */
             ii(0x1028_b6d3, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x1028_b6d6, 1); pop(ds);                                /* pop ds */
             ii(0x1028_b6d7, 1); pop(es);                                /* pop es */
@@ -409,7 +409,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_b9f8, 1); push(eax);                              /* push eax */
             ii(0x1028_b9f9, 8); movzx(eax, memw[gs, 0x1388]);           /* movzx eax, word [gs:0x1388] */
             ii(0x1028_ba01, 1); push(eax);                              /* push eax */
-            ii(0x1028_ba02, 4); call_far_ind(gs, esi + 0x3c);           /* call far dword [gs:esi+0x3c] */
+            ii(0x1028_ba02, 4); call_far_ind(memd[gs, esi + 0x3c]);     /* call far dword [gs:esi+0x3c] */
             ii(0x1028_ba06, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x1028_ba09, 1); pop(ds);                                /* pop ds */
             ii(0x1028_ba0a, 1); pop(es);                                /* pop es */
@@ -441,7 +441,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_ba54, 1); push(eax);                              /* push eax */
             ii(0x1028_ba55, 8); movzx(eax, memw[gs, 0x1388]);           /* movzx eax, word [gs:0x1388] */
             ii(0x1028_ba5d, 1); push(eax);                              /* push eax */
-            ii(0x1028_ba5e, 4); call_far_ind(gs, esi + 0x3c);           /* call far dword [gs:esi+0x3c] */
+            ii(0x1028_ba5e, 4); call_far_ind(memd[gs, esi + 0x3c]);     /* call far dword [gs:esi+0x3c] */
             ii(0x1028_ba62, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x1028_ba65, 1); pop(ds);                                /* pop ds */
             ii(0x1028_ba66, 1); pop(es);                                /* pop es */

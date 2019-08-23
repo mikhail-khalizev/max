@@ -18,9 +18,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5ba4, 2);    if(jz(0x5b9a, -0xc)) goto l_0x5b9a;       /* jz 0x5b9a */
             ii(0x5ba6, 1);    push(bx);                                 /* push bx */
             ii(0x5ba7, 2);    mov(ah, 0xd);                             /* mov ah, 0xd */
-            ii(0x5ba9, 4);    call_far_ind(ds, 0xaec);                  /* call far word [0xaec] */
+            ii(0x5ba9, 4);    call_far_ind(memw[ds, 0xaec]);            /* call far word [0xaec] */
             ii(0x5bad, 2);    mov(ah, 0xa);                             /* mov ah, 0xa */
-            ii(0x5baf, 4);    call_far_ind(ds, 0xaec);                  /* call far word [0xaec] */
+            ii(0x5baf, 4);    call_far_ind(memw[ds, 0xaec]);            /* call far word [0xaec] */
             ii(0x5bb3, 1);    pop(bx);                                  /* pop bx */
             ii(0x5bb4, 6);    mov(memw[ds, bx + 0xadc], 0);             /* mov word [bx+0xadc], 0x0 */
             ii(0x5bba, 2);    jmp(0x5b9a, -0x22); goto l_0x5b9a;        /* jmp 0x5b9a */

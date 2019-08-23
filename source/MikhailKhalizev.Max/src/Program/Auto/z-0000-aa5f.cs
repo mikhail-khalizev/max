@@ -18,12 +18,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0xaa6f, 3);    mov(memw[ds, 0xecc], ax);                 /* mov [0xecc], ax */
             ii(0xaa72, 1);    xchg(dx, ax);                             /* xchg dx, ax */
             ii(0xaa73, 2);    mov(ah, 0x9);                             /* mov ah, 0x9 */
-            ii(0xaa75, 4);    call_far_ind(ds, 0xaec);                  /* call far word [0xaec] */
+            ii(0xaa75, 4);    call_far_ind(memw[ds, 0xaec]);            /* call far word [0xaec] */
             ii(0xaa79, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0xaa7b, 2);    if(jz(0xaac3, 0x46)) goto l_0xaac3;       /* jz 0xaac3 */
             ii(0xaa7d, 4);    mov(memw[ds, 0xadc], dx);                 /* mov [0xadc], dx */
             ii(0xaa81, 2);    mov(ah, 0xc);                             /* mov ah, 0xc */
-            ii(0xaa83, 4);    call_far_ind(ds, 0xaec);                  /* call far word [0xaec] */
+            ii(0xaa83, 4);    call_far_ind(memw[ds, 0xaec]);            /* call far word [0xaec] */
             ii(0xaa87, 2);    or(ax, ax);                               /* or ax, ax */
             ii(0xaa89, 2);    if(jnz(0xaa90, 0x5)) goto l_0xaa90;       /* jnz 0xaa90 */
             ii(0xaa8b, 3);    call(0x5b97, -0x4ef7);                    /* call 0x5b97 */

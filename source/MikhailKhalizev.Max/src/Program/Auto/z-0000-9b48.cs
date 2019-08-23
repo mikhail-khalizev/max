@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9b62, 2);    xor(dx, dx);                              /* xor dx, dx */
             ii(0x9b64, 3);    mov(ax, 0xbf01);                          /* mov ax, 0xbf01 */
             ii(0x9b67, 1);    pushfw();                                 /* pushfw */
-            ii(0x9b68, 5);    call_far_ind(cs, 0x12c4);                 /* call far word [cs:0x12c4] */
+            ii(0x9b68, 5);    call_far_ind(memw[cs, 0x12c4]);           /* call far word [cs:0x12c4] */
             ii(0x9b6d, 1);    push(dx);                                 /* push dx */
             ii(0x9b6e, 2);    or(dx, dx);                               /* or dx, dx */
             ii(0x9b70, 2);    if(jz(0x9b94, 0x22)) goto l_0x9b94;       /* jz 0x9b94 */

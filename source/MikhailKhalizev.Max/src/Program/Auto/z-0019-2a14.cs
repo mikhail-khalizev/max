@@ -249,7 +249,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_2bb3, 1); pop(ds);                                  /* pop ds */
             ii(0x19_2bb4, 4); mov(memw[ds, bx], 0);                     /* mov word [bx], 0x0 */
             ii(0x19_2bb8, 5); mov(memw[ds, bx + 0x2], 0);               /* mov word [bx+0x2], 0x0 */
-            ii(0x19_2bbd, 4); jmp_far_ind(ds, 0x3c50);                  /* jmp far word [0x3c50] */
+            ii(0x19_2bbd, 4); jmp_far_ind(memw[ds, 0x3c50]);            /* jmp far word [0x3c50] */
         }
     }
 }

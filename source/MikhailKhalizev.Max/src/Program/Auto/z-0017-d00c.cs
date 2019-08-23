@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
         //  ii(0x17_d039, 1); nop();                                    /* nop */
         l_0x17_d03a:
             ii(0x17_d03a, 2); popd(ebx);                                /* pop ebx */
-            ii(0x17_d03c, 5); if(jmp_far_ind(cs, -0x7980)) return;      /* jmp far word [cs:0x8680] */
+            ii(0x17_d03c, 5); if(jmp_far_ind(memw[cs, -0x7980])) return; /* jmp far word [cs:0x8680] */
             ii(0x17_d041, 2); pushd(ebx);                               /* push ebx */
             ii(0x17_d043, 5); movzx(bx, memb_a32[ss, ebp + 0x20]);      /* movzx bx, byte [ebp+0x20] */
             ii(0x17_d048, 3); cmp(bl, 0x4);                             /* cmp bl, 0x4 */
@@ -57,7 +57,7 @@ namespace MikhailKhalizev.Max.Program
         //  ii(0x17_d06e, 1); nop();                                    /* nop */
         l_0x17_d06f:
             ii(0x17_d06f, 2); popd(ebx);                                /* pop ebx */
-            ii(0x17_d071, 5); if(jmp_far_ind(cs, -0x797c)) return;      /* jmp far word [cs:0x8684] */
+            ii(0x17_d071, 5); if(jmp_far_ind(memw[cs, -0x797c])) return; /* jmp far word [cs:0x8684] */
             ii(0x17_d076, 2); pushd(ebx);                               /* push ebx */
             ii(0x17_d078, 5); movzx(bx, memb_a32[ss, ebp + 0x20]);      /* movzx bx, byte [ebp+0x20] */
             ii(0x17_d07d, 3); cmp(bl, 0x1);                             /* cmp bl, 0x1 */
@@ -82,7 +82,7 @@ namespace MikhailKhalizev.Max.Program
         //  ii(0x17_d0a3, 1); nop();                                    /* nop */
         l_0x17_d0a4:
             ii(0x17_d0a4, 2); popd(ebx);                                /* pop ebx */
-            ii(0x17_d0a6, 5); if(jmp_far_ind(cs, -0x7978)) return;      /* jmp far word [cs:0x8688] */
+            ii(0x17_d0a6, 5); if(jmp_far_ind(memw[cs, -0x7978])) return; /* jmp far word [cs:0x8688] */
         l_0x17_d0ab:
             ii(0x17_d0ab, 5); or(memb_a32[ss, ebp + 0x2c], 0x1);        /* or byte [ebp+0x2c], 0x1 */
         l_0x17_d0b0:

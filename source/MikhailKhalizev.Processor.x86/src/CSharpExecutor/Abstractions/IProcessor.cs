@@ -614,50 +614,50 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void call_far_ind(SegmentRegister segment, ValueBase address);
+        void call_far_ind(MemoryValue src);
         
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_far_ind(SegmentRegister segment, ValueBase address);
+        void calld_far_ind(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void callw_a16_far_ind(SegmentRegister segment, ValueBase address);
+        void callw_a16_far_ind(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_a16_far_ind(SegmentRegister segment, ValueBase address);
+        void calld_a16_far_ind(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        void calld_a32_far_ind(SegmentRegister segment, ValueBase address);
+        void calld_a32_far_ind(MemoryValue src);
 
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool call_far_ind_up(SegmentRegister segment, ValueBase address);
+        bool call_far_ind_up(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool callw_a16_far_ind_up(SegmentRegister segment, ValueBase address);
+        bool callw_a16_far_ind_up(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool calld_a32_far_ind_up(SegmentRegister segment, ValueBase address);
+        bool calld_a32_far_ind_up(MemoryValue src);
 
 
         /// <summary>
@@ -1921,25 +1921,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmp_far_ind(SegmentRegister segment, ValueBase address);
+        bool jmp_far_ind(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpd_far_ind(SegmentRegister segment, ValueBase address);
+        bool jmpd_far_ind(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpw_a16_far_ind(SegmentRegister segment, ValueBase address);
+        bool jmpw_a16_far_ind(MemoryValue src);
 
         /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpd_a16_far_ind(SegmentRegister segment, ValueBase address);
+        bool jmpd_a16_far_ind(MemoryValue src);
 
 
         /// <summary>

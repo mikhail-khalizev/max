@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_4a10, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x17_4a12, 3); mov(dl, memb[ss, bp + 0x6]);              /* mov dl, [bp+0x6] */
             ii(0x17_4a15, 2); mov(ah, 0x36);                            /* mov ah, 0x36 */
-            ii(0x17_4a17, 4); call_far_ind(ds, 0x1fe0);                 /* call far word [0x1fe0] */
+            ii(0x17_4a17, 4); call_far_ind(memw[ds, 0x1fe0]);           /* call far word [0x1fe0] */
             ii(0x17_4a1b, 3); cmp(ax, 0xffff);                          /* cmp ax, 0xffff */
             ii(0x17_4a1e, 2); if(jz(0x17_4a26, 0x6)) goto l_0x17_4a26;  /* jz 0x4a26 */
             ii(0x17_4a20, 2); mul(cx);                                  /* mul cx */

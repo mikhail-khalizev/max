@@ -123,7 +123,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_9d42, 2); push(0);                                  /* push 0x0 */
             ii(0x19_9d44, 3); push(memw[ss, bp + 0x4]);                 /* push word [bp+0x4] */
             ii(0x19_9d47, 4); mov(es, memw[ds, 0x3fc0]);                /* mov es, [0x3fc0] */
-            ii(0x19_9d4b, 5); call_far_ind(es, 0x32ac);                 /* call far word [es:0x32ac] */
+            ii(0x19_9d4b, 5); call_far_ind(memw[es, 0x32ac]);           /* call far word [es:0x32ac] */
             ii(0x19_9d50, 3); add(sp, 0x8);                             /* add sp, 0x8 */
             ii(0x19_9d53, 3); mov(memw[ss, bp - 0xc], ax);              /* mov [bp-0xc], ax */
             ii(0x19_9d56, 3); mov(memw[ss, bp - 0xa], dx);              /* mov [bp-0xa], dx */

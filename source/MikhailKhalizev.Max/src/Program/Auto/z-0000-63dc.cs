@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x642b, 3);    mov(ds, memw[ds, di + 0x6]);              /* mov ds, [di+0x6] */
             ii(0x642e, 1);    pop(di);                                  /* pop di */
             ii(0x642f, 1);    push(bp);                                 /* push bp */
-            ii(0x6430, 3);    call_far_ind(ss, bp - 0x10);              /* call far word [bp-0x10] */
+            ii(0x6430, 3);    call_far_ind(memw[ss, bp - 0x10]);        /* call far word [bp-0x10] */
             ii(0x6433, 1);    pop(bp);                                  /* pop bp */
             ii(0x6434, 1);    cld();                                    /* cld */
             ii(0x6435, 1);    push(di);                                 /* push di */
