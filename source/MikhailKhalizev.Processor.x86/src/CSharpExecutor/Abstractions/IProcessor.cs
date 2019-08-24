@@ -2946,37 +2946,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
         void lgdt(MemoryValue src);
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtw_a16(MemoryValue src);
         
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd(MemoryValue src);
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd_a16(MemoryValue src);
-        
-
         /// <summary>
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
         void lidt(MemoryValue src);
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lidtw_a16(MemoryValue src);
 
 
         /// <summary>

@@ -3051,33 +3051,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(MemoryValue src)
-        {
-            Implementation.lgdtw_a16(src);
-        }
-
-        /// <inheritdoc />
-        public void lgdtd(MemoryValue src)
-        {
-            Implementation.lgdtd(src);
-        }
-
-        /// <inheritdoc />
-        public void lgdtd_a16(MemoryValue src)
-        {
-            Implementation.lgdtd_a16(src);
-        }
-
-        /// <inheritdoc />
         public void lidt(MemoryValue src)
         {
             Implementation.lidt(src);
-        }
-
-        /// <inheritdoc />
-        public void lidtw_a16(MemoryValue src)
-        {
-            Implementation.lidtw_a16(src);
         }
 
         /// <inheritdoc />

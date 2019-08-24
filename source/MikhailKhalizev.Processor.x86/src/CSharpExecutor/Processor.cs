@@ -5450,7 +5450,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
             ss.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
         }
-        
+
 
         /// <inheritdoc />
         public void leave()
@@ -5498,72 +5498,52 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void lgdt(MemoryValue src)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    lgdtw_a16(src);
-                    break;
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
+            var mem = (MemoryValueImpl)src;
 
-        /// <inheritdoc />
-        public void lgdtw_a16(MemoryValue src)
-        {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
-            gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
-        }
+            if (mem.MemoryAccess.AddressBits != 16)
+                throw new NotImplementedException();
 
-
-        /// <inheritdoc />
-        public void lgdtd(MemoryValue src)
-        {
-            switch (CSharpEmulateMode)
+            switch (mem.MemoryAccess.DataBits)
             {
                 case 16:
-                    lgdtd_a16(src);
+                    gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+                    gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
                     break;
+
+                case 32:
+                    gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+                    gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32;
+                    break;
+
                 default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+                    throw new NotImplementedException($"AddressBits: {mem.MemoryAccess.AddressBits}, DataBits: {mem.MemoryAccess.DataBits}");
             }
         }
-
-        /// <inheritdoc />
-        public void lgdtd_a16(MemoryValue src)
-        {
-            if (CPL != 0)
-                throw new NotImplementedException(); // #GP(0)
-
-            gdtr_limit = memw_a16[src.Segment, src.Address].UInt16;
-            gdtr_base = memd_a16[src.Segment, src.Address + 2].UInt32;
-        }
-
 
         /// <inheritdoc />
         public void lidt(MemoryValue src)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    lidtw_a16(src);
-                    break;
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
+            var mem = (MemoryValueImpl)src;
 
-        /// <inheritdoc />
-        public void lidtw_a16(MemoryValue src)
-        {
             if (CPL != 0)
                 throw new NotImplementedException(); // #GP(0)
 
-            idtr_limit = memw_a16[src.Segment, src.Address].UInt16;
-            idtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
+            if (mem.MemoryAccess.AddressBits != 16)
+                throw new NotImplementedException();
+
+            switch (mem.MemoryAccess.DataBits)
+            {
+                case 16:
+                    idtr_limit = memw_a16[src.Segment, src.Address].UInt16;
+                    idtr_base = memd_a16[src.Segment, src.Address + 2].UInt32 & 0x00ffffff;
+                    break;
+
+                default:
+                    throw new NotImplementedException($"AddressBits: {mem.MemoryAccess.AddressBits}, DataBits: {mem.MemoryAccess.DataBits}");
+            }
         }
 
         /// <inheritdoc />
@@ -6275,7 +6255,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             throw new NotImplementedException();
         }
-        
+
         /// <inheritdoc />
         public void movsx(ValueBase dst, ValueBase src)
         {

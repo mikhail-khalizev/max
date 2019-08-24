@@ -613,10 +613,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Icall, InstrFlags.UseOprSizeInside},
 
                 {ud_mnemonic_code.UD_Iret, InstrFlags.UseOprSizeInside},
-                {ud_mnemonic_code.UD_Iretf, InstrFlags.UseOprSizeInside},
-
-                {ud_mnemonic_code.UD_Ilgdt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
-                {ud_mnemonic_code.UD_Ilidt, InstrFlags.UseOprSizeInside | InstrFlags.UseAdrSizeInside},
+                {ud_mnemonic_code.UD_Iretf, InstrFlags.UseOprSizeInside}
             };
 
         #endregion
