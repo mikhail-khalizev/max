@@ -73,7 +73,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
         private readonly SwitchPlugin _switchPlugin;
         private readonly ReadCStringPlugin _readCStringPlugin;
-        private readonly CommentDummyInstructionsPlugin _commentIdle; // comment dummy instruction
 
 
         public Engine(
@@ -86,7 +85,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             MethodInfoCollection = methodInfoCollection;
 
             _readCStringPlugin = new ReadCStringPlugin(this);
-            _commentIdle = new CommentDummyInstructionsPlugin(this);
             _simpleBranchPlugin = new SimpleBranchPlugin(this);
             _switchPlugin = new SwitchPlugin(this);
 

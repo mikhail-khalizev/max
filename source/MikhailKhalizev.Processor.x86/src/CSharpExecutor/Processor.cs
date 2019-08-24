@@ -470,27 +470,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             set_top(get_top() + 1);
         }
 
-        // @remark cf
-        private void set_c0(bool v)
+        private void set_c0_cf(bool v)
         {
-            FPUStatusWord = (FPUStatusWord & (~(1 << 8))) | ((v ? 1 : 0) << 8);
+            FPUStatusWord = (int)((FPUStatusWord & (~(EflagsMask.cf << 8))) | ((v ? EflagsMask.cf : 0) << 8));
         }
 
-        //static void set_c1(bool v)
-        //{
-        //    FPUStatusWord = (FPUStatusWord & (~(1 << 9))) | ((v ? 1 : 0) << 9);
-        //}
-
-        // @remark pf
-        private void set_c2(bool v)
+        private void set_c2_pf(bool v)
         {
-            FPUStatusWord = (FPUStatusWord & (~(1 << 10))) | ((v ? 1 : 0) << 10);
+            FPUStatusWord = (int)((FPUStatusWord & (~(EflagsMask.pf << 8))) | ((v ? EflagsMask.pf : 0) << 2));
         }
 
-        // @remark zf
-        private void set_c3(bool v)
+        private void set_c3_zf(bool v)
         {
-            FPUStatusWord = (FPUStatusWord & (~(1 << 14))) | ((v ? 1 : 0) << 14);
+            FPUStatusWord = (int)((FPUStatusWord & (~(EflagsMask.zf << 8))) | ((v ? EflagsMask.zf : 0) << 8));
         }
 
         private bool get_invalid_flag()
@@ -1475,11 +1467,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             int_internal(0xe, true, false, true, 0);
 
-            if (!string.IsNullOrEmpty(Configuration.StateOutput))
-            {
-                InitStateLogIfNeed();
+            if (NeedWriteToStateLog())
                 _stateLog.WriteLine($"    paging_fault begin: cr2: {cr2}");
-            }
 
             CorrectMethodPosition(returnAddress);
 
@@ -1684,11 +1673,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
                     MethodInfo = nextMethodInfo;
 
-                    if (!string.IsNullOrEmpty(Configuration.StateOutput))
-                    {
-                        InitStateLogIfNeed();
+                    if (NeedWriteToStateLog())
                         _stateLog.WriteLine($"    method id: '{MethodInfo.Id}', name: {nextMethod.Method.Name}");
-                    }
 
                     try
                     {
@@ -1703,11 +1689,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         CurrentInstructionAddress = prevCurrentInstructionAddress;
                         MethodInfo = prevMethodInfo;
 
-                        if (!string.IsNullOrEmpty(Configuration.StateOutput))
-                        {
-                            InitStateLogIfNeed();
-                            _stateLog.WriteLine($"    return to method guid: '{MethodInfo.Id}'");
-                        }
+                        if (NeedWriteToStateLog())
+                            _stateLog.WriteLine($"    return to method id: '{MethodInfo.Id}'");
                     }
                 }
             }
@@ -1746,13 +1729,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 throw new Exception("Bad eip");
 
 
-            if (!string.IsNullOrEmpty(Configuration.StateOutput))
+            if (NeedWriteToStateLog())
             {
-                InitStateLogIfNeed();
                 var effAddress = cs[CurrentInstructionAddress];
 
-                _stateLog.WriteLine(
-                    "cs[eip]: " + effAddress
+                var str = "cs[eip]: " + effAddress
                     + ", eax: " + eax
                     + ", ebx: " + ebx
                     + ", ecx: " + ecx
@@ -1762,12 +1743,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     + ", esp: " + esp
                     + ", ebp: " + ebp
                     + ", flags: " + eflags
-                    + ", cs: " + cs + " " + (Address)cs.Descriptor.Base
-                    + ", ss: " + ss + " " + (Address)ss.Descriptor.Base
-                    + ", ds: " + ds + " " + (Address)ds.Descriptor.Base
-                    + ", es: " + es + " " + (Address)es.Descriptor.Base
-                    + ", fs: " + fs + " " + (Address)fs.Descriptor.Base
-                    + ", gs: " + gs + " " + (Address)gs.Descriptor.Base);
+                    + ", cs: " + cs + " " + (Address) cs.Descriptor.Base
+                    + ", ss: " + ss + " " + (Address) ss.Descriptor.Base
+                    + ", ds: " + ds + " " + (Address) ds.Descriptor.Base
+                    + ", es: " + es + " " + (Address) es.Descriptor.Base
+                    + ", fs: " + fs + " " + (Address) fs.Descriptor.Base
+                    + ", gs: " + gs + " " + (Address) gs.Descriptor.Base
+                    + ", top: " + get_top();
+
+                for (var i = 0; i < 8; i++)
+                {
+                    if (get_tag(i) != 3)
+                        str += $", st{i}: {RawST(i)}";
+                }
+
+                _stateLog.WriteLine(str);
             }
 
             if (!string.IsNullOrEmpty(Configuration.StatisticOutput))
@@ -1794,10 +1784,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             }
         }
 
-        private void InitStateLogIfNeed()
+        private bool NeedWriteToStateLog()
         {
+            if (string.IsNullOrEmpty(Configuration.StateOutput))
+                return false;
+
             if (_stateLog != null)
-                return;
+                return true;
 
             if (File.Exists(Configuration.StateOutput))
             {
@@ -1812,6 +1805,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             var fileStream = new FileStream(Configuration.StateOutput, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read, byteBufferSize, FileOptions.SequentialScan);
             fileStream.SetLength(0);
             _stateLog = new StreamWriter(fileStream, Encoding.UTF8, charBufferSize, false);
+
+            return true;
         }
 
         private string GetStatisticMethodCall()
@@ -1862,6 +1857,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
         private void WriteStatistic()
         {
+            if (string.IsNullOrEmpty(Configuration.StatisticOutput))
+                return;
+
             if (_statisticIiCall == null)
                 return;
 
@@ -3198,9 +3196,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 c0 = c2 = c3 = true;
             }
 
-            set_c0(c0);
-            set_c2(c2);
-            set_c3(c3);
+            set_c0_cf(c0);
+            set_c2_pf(c2);
+            set_c3_zf(c3);
         }
 
         /// <inheritdoc />
@@ -9813,9 +9811,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             if (disposing)
             {
                 _stateLog?.Dispose();
-
-                if (!string.IsNullOrEmpty(Configuration.StatisticOutput))
-                    WriteStatistic();
+                WriteStatistic();
             }
         }
 
