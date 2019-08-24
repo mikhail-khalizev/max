@@ -1519,29 +1519,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return false;
         }
 
-        private bool jmpw_if(bool cond, Address address, int offset)
-        {
-            if (cond)
-            {
-                jmpw(address, offset);
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool jmpd_if(bool cond, Address address, int offset)
-        {
-            if (cond)
-            {
-                jmpd(address, offset);
-                return true;
-            }
-
-            return false;
-        }
-
-
         private bool jmp_func_if(bool cond, Address address, int offset)
         {
             if (cond)
@@ -1549,35 +1526,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return false;
         }
 
-        private bool jmpw_func_if(bool cond, Address address, int offset)
-        {
-            if (cond)
-                return jmpw_func_internal(eip + offset);
-            return false;
-        }
-
-        private bool jmpd_func_if(bool cond, Address address, int offset)
-        {
-            if (cond)
-                return jmpd_func_internal(eip + offset);
-            return false;
-        }
-
-
         public bool jmp_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jmpw_func_internal(newEip, saveJumpInfo, segmentSelector);
-                case 32:
-                    return jmpd_func_internal(newEip, saveJumpInfo, segmentSelector);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_func_internal(CSharpEmulateMode, newEip, saveJumpInfo, segmentSelector);
         }
 
-        private bool jmpw_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
+        private bool jmp_func_internal(int mode, Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
         {
             var retAddr = cs[eip];
 
@@ -1585,22 +1539,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 jmp_far_set_cs_eip(segmentSelector.Value, newEip);
             else
                 eip = newEip;
-            eip &= 0xffff;
 
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-
-            return CorrectMethodPosition(retAddr, true, true);
-        }
-
-        private bool jmpd_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
-        {
-            var retAddr = cs[eip];
-
-            if (segmentSelector != null)
-                jmp_far_set_cs_eip(segmentSelector.Value, newEip);
-            else
-                eip = newEip;
+            if (mode == 16)
+                eip &= 0xffff;
 
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
@@ -4079,24 +4020,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void jmp(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    jmpw(address, offset);
-                    break;
-                case 32:
-                    jmpd(address, offset);
-                    break;
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public void jmpw(Address address, int offset)
-        {
             eip = eip + offset;
-            eip &= 0xffff;
+            if (CSharpEmulateMode == 16)
+                eip &= 0xffff;
 
             if (cs.fail_limit_check(eip))
                 throw new NotImplementedException();
@@ -4105,93 +4031,27 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             run_irqs();
         }
-
-        /// <inheritdoc />
-        public void jmpd(Address address, int offset)
-        {
-            eip = eip + offset;
-
-            if (cs.fail_limit_check(eip))
-                throw new NotImplementedException();
-            if (cs[eip] != address)
-                throw new NotImplementedException();
-
-            run_irqs();
-        }
-
 
         /// <inheritdoc />
         public bool jmp_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jmpw_func(address, offset);
-                case 32:
-                    return jmpd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jmpw_func(Address address, int offset)
-        {
-            return jmpw_func_internal(eip + offset);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_func(Address address, int offset)
-        {
-            return jmpd_func_internal(eip + offset);
+            return jmp_func_internal(CSharpEmulateMode, eip + offset);
         }
 
         /// <inheritdoc />
         public bool jmp_abs(ValueBase address)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jmpw_abs(address);
-                case 32:
-                    return jmpd_abs(address);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jmpw_abs(ValueBase address)
-        {
-            return jmpw_func_internal(address, saveJumpInfo: true);
+            return jmp_func_internal(CSharpEmulateMode, address, saveJumpInfo: true);
         }
 
         /// <inheritdoc />
         public Address jmp_abs_switch(ValueBase address)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jmpw_abs_switch(address);
-                case 32:
-                    return jmpd_abs_switch(address);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public Address jmpw_abs_switch(ValueBase address)
-        {
-            eip = address & 0xffff;
-            run_irqs();
-            return cs[eip];
-        }
-
-        /// <inheritdoc />
-        public Address jmpd_abs_switch(ValueBase address)
-        {
             eip = address;
+
+            if (CSharpEmulateMode == 16)
+                eip &= 0xffff;
+
             run_irqs();
             return cs[eip];
         }
@@ -4202,7 +4062,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return jmpw_far_abs(segment, address);
+                    return jmp_func_internal(16, address, saveJumpInfo: true, segmentSelector: segment);
                 case 32:
                     return jmpd_far_abs(segment, address);
                 default:
@@ -4211,9 +4071,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public bool jmpw_far_abs(int segment, Address address)
+        public bool jmpd_far_abs(int segment, Address address)
         {
-            return jmpw_func_internal(address, saveJumpInfo: true, segmentSelector: segment);
+            return jmp_func_internal(32, address, saveJumpInfo: true, segmentSelector: segment);
         }
 
         /// <inheritdoc />
@@ -4222,7 +4082,10 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return jmpw_a16_far_ind(src);
+                    return jmp_func_internal(
+                        16,
+                        memw_a16[src.Segment, src.Address].UInt16,
+                        segmentSelector: memw_a16[src.Segment, src.Address + 2].UInt16);
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
@@ -4234,38 +4097,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return jmpd_a16_far_ind(src);
+                    return jmp_func_internal(
+                        32,
+                        memd_a16[src.Segment, src.Address].UInt32,
+                        segmentSelector: memw_a16[src.Segment, src.Address + 4].UInt16);
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
-        }
-
-        /// <inheritdoc />
-        public bool jmpw_a16_far_ind(MemoryValue src)
-        {
-            return jmpw_func_internal(
-                memw_a16[src.Segment, src.Address].UInt16,
-                segmentSelector: memw_a16[src.Segment, src.Address + 2].UInt16);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_a16_far_ind(MemoryValue src)
-        {
-            return jmpd_func_internal(
-                memd_a16[src.Segment, src.Address].UInt32,
-                segmentSelector: memw_a16[src.Segment, src.Address + 4].UInt16);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_abs(ValueBase address)
-        {
-            return jmpd_func_internal(address, saveJumpInfo: true);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_far_abs(int segment, Address address)
-        {
-            return jmpd_func_internal(address, saveJumpInfo: true, segmentSelector: segment);
         }
 
 
@@ -4333,7 +4171,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return jmp_func_if(cx == 0, address, offset);
         }
 
-
         /// <inheritdoc />
         public bool jecxz(Address address, int offset)
         {
@@ -4345,7 +4182,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             return jmp_func_if(ecx == 0, address, offset);
         }
-
 
         /// <inheritdoc />
         public bool jrcxz(Address address, int offset)
@@ -5134,38 +4970,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return loopw_a16(address, offset);
+                    if (--cx != 0)
+                    {
+                        jmp(address, offset);
+                        return true;
+                    }
+
+                    return false;
                 case 32:
-                    return loopd_a32(address, offset);
+                    if (--ecx != 0)
+                    {
+                        jmp(address, offset);
+                        return true;
+                    }
+
+                    return false;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
-
-        /// <inheritdoc />
-        public bool loopw_a16(Address address, int offset)
-        {
-            if (--cx != 0)
-            {
-                jmpw(address, offset);
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc />
-        public bool loopd_a32(Address address, int offset)
-        {
-            if (--ecx != 0)
-            {
-                jmpd(address, offset);
-                return true;
-            }
-
-            return false;
-        }
-
 
         /// <inheritdoc />
         public bool loop_func(Address address, int offset)
@@ -5173,84 +4996,43 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return loopw_a16_func(address, offset);
+                    if (--cx != 0)
+                        return jmp_func(address, offset);
+                    return false;
                 case 32:
-                    return loopd_a32_func(address, offset);
+                    if (--ecx != 0)
+                        return jmp_func(address, offset);
+                    return false;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
-
-        /// <inheritdoc />
-        public bool loopw_a16_func(Address address, int offset)
-        {
-            if (--cx != 0)
-                return jmpw_func(address, offset);
-            return false;
-        }
-
-        /// <inheritdoc />
-        public bool loopd_a32_func(Address address, int offset)
-        {
-            if (--ecx != 0)
-                return jmpd_func(address, offset);
-            return false;
-        }
-
 
         /// <inheritdoc />
         public bool loope(Address address, int offset)
         {
+            // = loopz
+
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return loopew_a16(address, offset);
-                case 32:
-                    return looped_a32(address, offset);
+                    if (--cx != 0 && eflags.zf)
+                    {
+                        jmp(address, offset);
+                        return true;
+                    }
+
+                    return false;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
-
-        /// <inheritdoc />
-        public bool loopew_a16(Address address, int offset)
-        {
-            // = loopzw_a16
-
-            if (--cx != 0 && eflags.zf)
-            {
-                jmpw(address, offset);
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <inheritdoc />
-        public bool looped_a32(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
 
         /// <inheritdoc />
         public bool loope_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 32:
-                    return looped_a32_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool looped_a32_func(Address address, int offset)
-        {
             throw new NotImplementedException();
         }
-
 
         /// <inheritdoc />
         public bool loopne(Address address, int offset)
@@ -5258,24 +5040,17 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             switch (CSharpEmulateMode)
             {
                 case 16:
-                    return loopnew_a16(address, offset);
+                    if (--cx != 0 && !eflags.zf)
+                    {
+                        jmp(address, offset);
+                        return true;
+                    }
+
+                    return false;
                 default:
                     throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
             }
         }
-
-        /// <inheritdoc />
-        public bool loopnew_a16(Address address, int offset)
-        {
-            if (--cx != 0 && !eflags.zf)
-            {
-                jmpw(address, offset);
-                return true;
-            }
-
-            return false;
-        }
-
 
         /// <inheritdoc />
         public bool loopne_func(Address address, int offset)

@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Program
         //     ii(0x1028_929e, 5); mov(ecx, 0xffff);                       /* mov ecx, 0xffff */
         // l_0x1028_92a3:
         //     ii(0x1028_92a3, 1); nop();                                  /* nop */
-        //     ii(0x1028_92a4, 2); if(loopd_a32(0x1028_92a3, -0x3)) goto l_0x1028_92a3; /* loop 0x102892a3 */
+        //     ii(0x1028_92a4, 2); if(loop(0x1028_92a3, -0x3)) goto l_0x1028_92a3; /* loop 0x102892a3 */
         //     ii(0x1028_92a6, 1); popd(ecx);                              /* pop ecx */
 
             ret();

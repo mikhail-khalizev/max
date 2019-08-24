@@ -1832,33 +1832,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpw(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         bool jmp_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_func(Address address, int offset);
-
 
         /// <summary>
         /// Jump.
@@ -1870,33 +1844,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_abs(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_abs(ValueBase address);
-
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         Address jmp_abs_switch(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        Address jmpw_abs_switch(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        Address jmpd_abs_switch(ValueBase address);
-
 
         /// <summary>
         /// Jump.
@@ -1905,17 +1853,10 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         bool jmp_far_abs(int segment, Address address);
 
         /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_far_abs(int segment, Address address);
-
-        /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool jmpd_far_abs(int segment, Address address);
-
 
         /// <summary>
         /// Call Procedure.
@@ -1928,18 +1869,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool jmpd_far_ind(MemoryValue src);
-
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpw_a16_far_ind(MemoryValue src);
-
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpd_a16_far_ind(MemoryValue src);
 
 
         /// <summary>
@@ -2661,33 +2590,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopw_a16(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopd_a32(Address address, int offset);
-
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loop_func(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopw_a16_func(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopd_a32_func(Address address, int offset);
-
 
         /// <summary>
         /// Loop According to ECX Counter.
@@ -2699,40 +2602,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopew_a16(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool looped_a32(Address address, int offset);
-
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loope_func(Address address, int offset);
 
         /// <summary>
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool looped_a32_func(Address address, int offset);
-
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopne(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopnew_a16(Address address, int offset);
-
 
         /// <summary>
         /// Loop According to ECX Counter.
