@@ -4,7 +4,7 @@ namespace MikhailKhalizev.Processor.x86.Configuration
     {
         public string SettingsDirectory { get; set; }
         public string MethodInfosFile => "methods.json";
-        public string JumpInfosFile => "method-jumps.json";
+        public string JumpInfosFile => "method-jumps.json"; // TODO rename to methods.runtime.json
         
         public string MetadataOutput { get; set; }
         public string CodeOutput { get; set; }

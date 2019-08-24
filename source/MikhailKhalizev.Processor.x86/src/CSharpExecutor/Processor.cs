@@ -1503,7 +1503,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 RunIrqTimestamp = now;
                 RunIrqInstructionCount = InstructionCount;
 
+                var a = CurrentInstructionAddress;
+                var b = cs[eip];
+                var e = CSharpEmulateMode;
+
                 runIrqs?.Invoke(this, EventArgs.Empty);
+
+                if (CurrentInstructionAddress != a || cs[eip] != b || CSharpEmulateMode != e)
+                    throw new InvalidOperationException("CurrentInstructionAddress or cs[eip] or CSharpEmulateMode changed during runIrqs.");
             }
         }
 
@@ -1611,7 +1618,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 {
                     if (cs.fail_limit_check(eip))
                         throw new NotImplementedException();
-
+                    
                     var toRun = cs[eip];
                     hist.Add(toRun);
 
@@ -1673,6 +1680,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                     var prevMethodInfo = MethodInfo;
+                    var prevCurrentInstructionAddress = CurrentInstructionAddress;
 
                     MethodInfo = nextMethodInfo;
 
@@ -1692,6 +1700,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
                     finally
                     {
+                        CurrentInstructionAddress = prevCurrentInstructionAddress;
                         MethodInfo = prevMethodInfo;
 
                         if (!string.IsNullOrEmpty(Configuration.StateOutput))

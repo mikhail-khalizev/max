@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             get
             {
                 if (Processor.get_tag(Number) == 3)
-                    throw new NotImplementedException();
+                    throw new NotImplementedException("get_tag == 3");
                 return (ulong) BitConverter.DoubleToInt64Bits(Processor.RawST(Number));
             }
             set
