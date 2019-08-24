@@ -1508,6 +1508,17 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
 
+        private bool jmp_if(bool cond, Address address, int offset)
+        {
+            if (cond)
+            {
+                jmp(address, offset);
+                return true;
+            }
+
+            return false;
+        }
+
         private bool jmpw_if(bool cond, Address address, int offset)
         {
             if (cond)
@@ -1530,6 +1541,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             return false;
         }
 
+
+        private bool jmp_func_if(bool cond, Address address, int offset)
+        {
+            if (cond)
+                return jmp_func_internal(eip + offset);
+            return false;
+        }
+
         private bool jmpw_func_if(bool cond, Address address, int offset)
         {
             if (cond)
@@ -1542,6 +1561,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             if (cond)
                 return jmpd_func_internal(eip + offset);
             return false;
+        }
+
+
+        public bool jmp_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
+        {
+            switch (CSharpEmulateMode)
+            {
+                case 16:
+                    return jmpw_func_internal(newEip, saveJumpInfo, segmentSelector);
+                case 32:
+                    return jmpd_func_internal(newEip, saveJumpInfo, segmentSelector);
+                default:
+                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
+            }
         }
 
         private bool jmpw_func_internal(Address newEip, bool saveJumpInfo = false, int? segmentSelector = null)
@@ -4042,6 +4075,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             iret_(32);
         }
 
+
         /// <inheritdoc />
         public void jmp(Address address, int offset)
         {
@@ -4084,6 +4118,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             run_irqs();
         }
+
 
         /// <inheritdoc />
         public bool jmp_func(Address address, int offset)
@@ -4237,309 +4272,80 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public bool ja(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jaw(address, offset);
-                case 32:
-                    return jad(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jaw(Address address, int offset)
-        {
-            return jmpw_if(!eflags.cf && !eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jad(Address address, int offset)
-        {
-            return jmpd_if(!eflags.cf && !eflags.zf, address, offset);
+            return jmp_if(!eflags.cf && !eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
         public bool ja_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jaw_func(address, offset);
-                case 32:
-                    return jad_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jaw_func(Address address, int offset)
-        {
-            return jmpw_func_if(!eflags.cf && !eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jad_func(Address address, int offset)
-        {
-            return jmpd_func_if(!eflags.cf && !eflags.zf, address, offset);
+            return jmp_func_if(!eflags.cf && !eflags.zf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jae(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jaew(address, offset);
-                case 32:
-                    return jaed(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(!eflags.cf, address, offset);
         }
-
-        /// <inheritdoc />
-        public bool jaew(Address address, int offset)
-        {
-            return jmpw_if(!eflags.cf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jaed(Address address, int offset)
-        {
-            return jmpd_if(!eflags.cf, address, offset);
-        }
-
 
         /// <inheritdoc />
         public bool jae_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jaew_func(address, offset);
-                case 32:
-                    return jaed_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jaew_func(Address address, int offset)
-        {
-            return jmpw_func_if(!eflags.cf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jaed_func(Address address, int offset)
-        {
-            return jmpd_func_if(!eflags.cf, address, offset);
+            return jmp_func_if(!eflags.cf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jb(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jbw(address, offset);
-                case 32:
-                    return jbd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jbw(Address address, int offset)
-        {
-            return jmpw_if(eflags.cf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbd(Address address, int offset)
-        {
-            return jmpd_if(eflags.cf, address, offset);
+            return jmp_if(eflags.cf, address, offset);
         }
 
         /// <inheritdoc />
         public bool jb_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jbw_func(address, offset);
-                case 32:
-                    return jbd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jbw_func(Address address, int offset)
-        {
-            return jmpw_func_if(eflags.cf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbd_func(Address address, int offset)
-        {
-            return jmpd_func_if(eflags.cf, address, offset);
+            return jmp_func_if(eflags.cf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jbe(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jbew(address, offset);
-                case 32:
-                    return jbed(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jbew(Address address, int offset)
-        {
-            return jmpw_if(eflags.cf || eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbed(Address address, int offset)
-        {
-            return jmpd_if(eflags.cf || eflags.zf, address, offset);
+            return jmp_if(eflags.cf || eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
         public bool jbe_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jbew_func(address, offset);
-                case 32:
-                    return jbed_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jbew_func(Address address, int offset)
-        {
-            return jmpw_func_if(eflags.cf || eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbed_func(Address address, int offset)
-        {
-            return jmpd_func_if(eflags.cf || eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jc(Address address, int offset)
-        {
-            switch (CSharpEmulateMode)
-            {
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jcw(Address address, int offset)
-        {
-            throw new NotImplementedException();
+            return jmp_func_if(eflags.cf || eflags.zf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jcxz(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jcxzw(address, offset);
-                case 32:
-                    return jcxzd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(cx == 0, address, offset);
         }
-
-        /// <inheritdoc />
-        public bool jcxzw(Address address, int offset)
-        {
-            return jmpw_if(cx == 0, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jcxzd(Address address, int offset)
-        {
-            return jmpd_if(ecx == 0, address, offset);
-        }
-
 
         /// <inheritdoc />
         public bool jcxz_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jcxzw_func(address, offset);
-                case 32:
-                    return jcxzd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jcxzw_func(Address address, int offset)
-        {
-            return jmpw_func_if(cx == 0, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jcxzd_func(Address address, int offset)
-        {
-            return jmpd_func_if(ecx == 0, address, offset);
+            return jmp_func_if(cx == 0, address, offset);
         }
 
 
         /// <inheritdoc />
-        public bool jecxzw(Address address, int offset)
+        public bool jecxz(Address address, int offset)
         {
-            throw new NotImplementedException();
+            return jmp_if(ecx == 0, address, offset);
         }
 
         /// <inheritdoc />
         public bool jecxz_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 32:
-                    return jecxzd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_func_if(ecx == 0, address, offset);
         }
 
-        /// <inheritdoc />
-        public bool jecxzd_func(Address address, int offset)
-        {
-            return jmpd_func_if(ecx == 0, address, offset);
-        }
 
         /// <inheritdoc />
         public bool jrcxz(Address address, int offset)
@@ -4547,386 +4353,101 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc />
-        public bool jew(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <inheritdoc />
         public bool jg(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jgw(address, offset);
-                case 32:
-                    return jgd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
-        public bool jgw(Address address, int offset)
+        public bool jg_func(Address address, int offset)
         {
-            return jmpw_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jgd(Address address, int offset)
-        {
-            return jmpd_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jgd_func(Address address, int offset)
-        {
-            return jmpd_func_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
+            return jmp_func_if(!eflags.zf && eflags.sf == eflags.of, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jge(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jgew(address, offset);
-                case 32:
-                    return jged(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(eflags.sf == eflags.of, address, offset);
         }
 
         /// <inheritdoc />
-        public bool jgew(Address address, int offset)
+        public bool jge_func(Address address, int offset)
         {
-            return jmpw_if(eflags.sf == eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jged(Address address, int offset)
-        {
-            return jmpd_if(eflags.sf == eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jged_func(Address address, int offset)
-        {
-            return jmpd_func_if(eflags.sf == eflags.of, address, offset);
+            return jmp_func_if(eflags.sf == eflags.of, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jl(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jlw(address, offset);
-                case 32:
-                    return jld(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(eflags.sf != eflags.of, address, offset);
         }
 
         /// <inheritdoc />
-        public bool jlw(Address address, int offset)
+        public bool jl_func(Address address, int offset)
         {
-            return jmpw_if(eflags.sf != eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jld(Address address, int offset)
-        {
-            return jmpd_if(eflags.sf != eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jld_func(Address address, int offset)
-        {
-            return jmpd_func_if(eflags.sf != eflags.of, address, offset);
+            return jmp_func_if(eflags.sf != eflags.of, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jle(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jlew(address, offset);
-                case 32:
-                    return jled(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
-
-        /// <inheritdoc />
-        public bool jlew(Address address, int offset)
-        {
-            return jmpw_if(eflags.zf || eflags.sf != eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jled(Address address, int offset)
-        {
-            return jmpd_if(eflags.zf || eflags.sf != eflags.of, address, offset);
-        }
-
 
         /// <inheritdoc />
         public bool jle_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jlew_func(address, offset);
-                case 32:
-                    return jled_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jlew_func(Address address, int offset)
-        {
-            return jmpw_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jled_func(Address address, int offset)
-        {
-            return jmpd_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
-        }
-
-
-        /// <inheritdoc />
-        public bool jnaw(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnaew(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnbw(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnbe(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnc(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jne(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jng(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnge(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnl(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jnle(Address address, int offset)
-        {
-            throw new NotImplementedException();
+            return jmp_func_if(eflags.zf || eflags.sf != eflags.of, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jno(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 32:
-                    return jnod(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jnod(Address address, int offset)
-        {
-            return jmpd_if(!eflags.of, address, offset);
-        }
-
-
-        /// <inheritdoc />
-        public bool jnp(Address address, int offset)
-        {
-            throw new NotImplementedException();
+            return jmp_if(!eflags.of, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jns(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jnsw(address, offset);
-                case 32:
-                    return jnsd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
+            return jmp_if(!eflags.sf, address, offset);
         }
-
-        /// <inheritdoc />
-        public bool jnsw(Address address, int offset)
-        {
-            return jmpw_if(!eflags.sf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnsd(Address address, int offset)
-        {
-            return jmpd_if(!eflags.sf, address, offset);
-        }
-
 
         /// <inheritdoc />
         public bool jns_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jnsw_func(address, offset);
-                case 32:
-                    return jnsd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jnsw_func(Address address, int offset)
-        {
-            return jmpw_func_if(!eflags.sf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnsd_func(Address address, int offset)
-        {
-            return jmpd_func_if(!eflags.sf, address, offset);
+            return jmp_func_if(!eflags.sf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jnz(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jnzw(address, offset);
-                case 32:
-                    return jnzd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jnzw(Address address, int offset)
-        {
-            return jmpw_if(!eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnzd(Address address, int offset)
-        {
-            return jmpd_if(!eflags.zf, address, offset);
+            return jmp_if(!eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
         public bool jnz_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jnzw_func(address, offset);
-                case 32:
-                    return jnzd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jnzw_func(Address address, int offset)
-        {
-            return jmpw_func_if(!eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnzd_func(Address address, int offset)
-        {
-            return jmpd_func_if(!eflags.zf, address, offset);
+            return jmp_func_if(!eflags.zf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jo(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jow(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jow(Address address, int offset)
-        {
-            return jmpw_if(eflags.of, address, offset);
+            return jmp_if(eflags.of, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jp(Address address, int offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool jpd(Address address, int offset)
         {
             throw new NotImplementedException();
         }
@@ -4943,101 +4464,30 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             throw new NotImplementedException();
         }
 
+
         /// <inheritdoc />
         public bool js(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jsw(address, offset);
-                case 32:
-                    return jsd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jsw(Address address, int offset)
-        {
-            return jmpw_if(eflags.sf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jsd(Address address, int offset)
-        {
-            return jmpd_if(eflags.sf, address, offset);
+            return jmp_if(eflags.sf, address, offset);
         }
 
         /// <inheritdoc />
         public bool js_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jsw_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jsw_func(Address address, int offset)
-        {
-            return jmpw_func_if(eflags.sf, address, offset);
+            return jmp_func_if(eflags.sf, address, offset);
         }
 
 
         /// <inheritdoc />
         public bool jz(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jzw(address, offset);
-                case 32:
-                    return jzd(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jzw(Address address, int offset)
-        {
-            return jmpw_if(eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jzd(Address address, int offset)
-        {
-            return jmpd_if(eflags.zf, address, offset);
+            return jmp_if(eflags.zf, address, offset);
         }
 
         /// <inheritdoc />
         public bool jz_func(Address address, int offset)
         {
-            switch (CSharpEmulateMode)
-            {
-                case 16:
-                    return jzw_func(address, offset);
-                case 32:
-                    return jzd_func(address, offset);
-                default:
-                    throw new NotImplementedException($"CSharpEmulateMode: {CSharpEmulateMode}");
-            }
-        }
-
-        /// <inheritdoc />
-        public bool jzw_func(Address address, int offset)
-        {
-            return jmpw_func_if(eflags.zf, address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jzd_func(Address address, int offset)
-        {
-            return jmpd_func_if(eflags.zf, address, offset);
+            return jmp_func_if(eflags.zf, address, offset);
         }
 
 
