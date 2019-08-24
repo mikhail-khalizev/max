@@ -3441,7 +3441,7 @@
     "Arch": 16,
     "Addr": "0x40bf",
     "Raw": "660f01167409",
-    "Dec": "lgdtd(memd[ds, 0x974]);"
+    "Dec": "lgdt(memd[ds, 0x974]);"
   },
   {
     "Arch": 16,
