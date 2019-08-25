@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
     public partial class RawProgram
     {
         [MethodInfo("0x1016_c4a0-b317b320")]
-        public void /* sys */ Method_1016_c4a0()
+        public void /* sys */ sys_pow()
         {
             ii(0x1016_c4a0, 1); push(ebp);                              /* push ebp */
             ii(0x1016_c4a1, 2); mov(ebp, esp);                          /* mov ebp, esp */
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c5af, 2); fabs();                                 /* fabs */
             ii(0x1016_c5b1, 2); fyl2x();                                /* fyl2x */
             ii(0x1016_c5b3, 2); mov(al, 0x7);                           /* mov al, 0x7 */
-            ii(0x1016_c5b5, 5); call(/* sys */ 0x1018_7204, 0x1_ac4a);  /* call 0x10187204 */
+            ii(0x1016_c5b5, 5); call(Definitions.sys_pow_e, 0x1_ac4a);  /* call 0x10187204 */
             ii(0x1016_c5ba, 2); cmp(al, 0);                             /* cmp al, 0x0 */
             ii(0x1016_c5bc, 2); if(jnz(0x1016_c59e, -0x20)) goto l_0x1016_c59e; /* jnz 0x1016c59e */
             ii(0x1016_c5be, 3); mov(ah, memb[ss, ebp - 0x7]);           /* mov ah, [ebp-0x7] */

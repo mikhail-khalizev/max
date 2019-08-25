@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1019_474a()
         {
             // Wait eax seconds? Skip.
-            retd();
+            ret();
 
 #if false
 
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_477c, 1); popd(edx);                              /* pop edx */
             ii(0x1019_477d, 1); popd(ecx);                              /* pop ecx */
             ii(0x1019_477e, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1019_477f, 1); retd(); return;                         /* ret */
+            ii(0x1019_477f, 1); ret();                                  /* ret */
 #endif
         }
     }

@@ -1,26 +1,39 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MikhailKhalizev.Max.Configuration;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
-using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max
 {
-    public class StartUp
+    public class Startup
     {
-        static int Main(string[] args)
+        public static int ExitCode { get; set; }
+
+        public static int Main(string[] args)
         {
             try
             {
-                new StartUp(args);
+                CreateWebHostBuilder(args).Build().Run();
                 NonBlockingConsole.AllWritten.Wait();
-                return 0;
+                return ExitCode;
             }
             catch (Exception ex)
             {
@@ -30,67 +43,142 @@ namespace MikhailKhalizev.Max
             }
         }
 
-        public IServiceProvider Services { get; set; }
-        public IConfiguration Configuration { get; set; }
-        public ConfigurationDto ConfigurationDto { get; set; }
-
-        public StartUp(string[] args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            // Read configuration.
+            if (args.Contains("--redecode"))
+                args = args.Append(int.MaxValue.ToString()).ToArray();
 
-            Configuration = new ConfigurationBuilder()
-                .SetBasePath(Environment.CurrentDirectory)
-                .AddJsonFile("appsettings.json", optional: true)
-                .AddJsonFile("appsettings.user.json", optional: true)
-                .AddJsonFile("settings/appsettings.json", optional: true)
-                .AddJsonFile("settings/appsettings.user.json", optional: true)
-                .AddEnvironmentVariables()
-                .AddCommandLine(args)
-                .Build();
-            ConfigurationDto = Configuration.Get<ConfigurationDto>();
+            return WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(
+                    (hostingContext, config) =>
+                    {
+                        var env = hostingContext.HostingEnvironment;
 
+                        config
+                            .AddJsonFile("appsettings.json", optional: true)
+                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                            .AddJsonFile("appsettings.user.json", optional: true)
+
+                            .AddJsonFile("settings/appsettings.json", optional: true)
+                            .AddJsonFile($"settings/appsettings.{env.EnvironmentName}.json", optional: true)
+                            .AddJsonFile("settings/appsettings.user.json", optional: true)
+
+                            .AddEnvironmentVariables()
+                            .AddCommandLine(args);
+                    })
+                .UseStartup<Startup>();
+        }
+
+
+        public IConfiguration Configuration { get; }
+        public ConfigurationDto ConfigurationDto { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+            ConfigurationDto = configuration.Get<ConfigurationDto>();
 
             // Check configuration.
 
             var installedPath = ConfigurationDto.Max.InstalledPath;
             if (!Directory.Exists(installedPath))
                 throw new InvalidOperationException($"Directory '{installedPath}' not found. Check Max:InstalledPath configuration option.");
+        }
 
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
-            // Create ServiceProvider.
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSignalR();
 
-            var serviceCollection = new ServiceCollection();
-            Services = serviceCollection.BuildServiceProvider();
-
-
-            // Start.
-            var methodsInfo = MethodInfoCollection.Load(ConfigurationDto.BinToCSharp);
-            var definitionCollection = new DefinitionCollection();
-            definitionCollection.AddDefinitionsFromAssembly(typeof(Definitions).Assembly);
+            services.AddSingleton(
+                provider => new Processor.x86.CSharpExecutor.Processor(
+                    ConfigurationDto.Processor,
+                    provider.GetRequiredService<IApplicationLifetime>().ApplicationStopping));
+            services.AddSingleton(p => MethodInfoCollection.Load(ConfigurationDto.BinToCSharp));
+            services.AddSingleton(
+                p =>
+                {
+                    var definitionCollection = new DefinitionCollection();
+                    definitionCollection.AddDefinitionsFromAssembly(typeof(Definitions).Assembly);
+                    return definitionCollection;
+                });
+            services.AddSingleton(
+                p => new RawProgramMain(
+                    p.GetRequiredService<Processor.x86.CSharpExecutor.Processor>(),
+                    ConfigurationDto,
+                    p.GetRequiredService<MethodInfoCollection>(),
+                    p.GetRequiredService<DefinitionCollection>(),
+                    p));
 
             // TODO Implement IDefinitionGroupArea with Begin, End. And remove AddressNameConverter.AddNamespace.
             AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys");
             foreach (var interval in RawProgramMain.MveForceEndIntervals)
                 AddressNameConverter.AddNamespace(interval, "mve");
+        }
 
-            var redecodeArgIndex = args.IndexOf("--redecode");
-            if (0 <= redecodeArgIndex)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime applicationLifetime)
+        {
+            // Redecode.
+
+            var redecodeCount = Configuration.GetValue<int?>("redecode");
+            if (redecodeCount != null)
             {
                 NonBlockingConsole.WriteLine("Start Redecode.");
+
+                var methodsInfo = app.ApplicationServices.GetRequiredService<MethodInfoCollection>();
+                var definitionCollection = app.ApplicationServices.GetRequiredService<DefinitionCollection>();
+
                 var redecode = new Redecode(ConfigurationDto.BinToCSharp, methodsInfo, definitionCollection);
-
-                if (redecodeArgIndex + 1 < args.Length)
-                    redecode.LimitFiles = int.Parse(args[redecodeArgIndex + 1]);
-
+                redecode.LimitFiles = redecodeCount.Value;
                 redecode.Start(GetType().Assembly);
+
+                applicationLifetime.StopApplication();
                 return;
             }
 
-            using (var p = new Processor.x86.CSharpExecutor.Processor(ConfigurationDto.Processor))
+            // Asp.
+
+            if (env.IsDevelopment())
             {
-                var rp = new RawProgramMain(p, ConfigurationDto, methodsInfo, definitionCollection);
-                rp.Start();
+                app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+            app.UseSignalR(routes => { routes.MapHub<MainHub>("/signalr"); });
+            app.UseMvc();
+
+            // Start M.A.X.
+
+            var rawProgramMain = app.ApplicationServices.GetRequiredService<RawProgramMain>();
+            Task.Run(() =>
+            {
+                try
+                {
+                    rawProgramMain.Start();
+                }
+                catch (Exception ex)
+                {
+                    ExitCode = -1;
+                    NonBlockingConsole.WriteLine(ex);
+                }
+
+                applicationLifetime.StopApplication();
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
@@ -410,6 +411,20 @@ namespace MikhailKhalizev.Max.Dos
             RawProgramMain = rawProgramMain;
             dma_controllers[0] = new dma_controller(0, rawProgramMain.Implementation);
             dma_controllers[1] = new dma_controller(1, rawProgramMain.Implementation);
+
+            Task.Run(async () => {
+                var chan = RawProgramMain.DosDma.dma_get_channel(5);
+
+                while (true)
+                {
+                    if (!chan.masked)
+                    {
+                        var buf = new byte[2 * 300];
+                        chan.read(buf);
+                    }
+                    await Task.Delay(TimeSpan.FromSeconds(0.01));
+                }
+            });
         }
 
         public void dma_write_p8x(int port, int val)

@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
             RawProgramMain.DosTimer.Start();
 
             mov(memd_a32[ds, 0x1020_bc5c], 1);
-            retd();
+            ret();
 
 #if false
 
@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4746, 1); popd(edx);                              /* pop edx */
             ii(0x1019_4747, 1); popd(ecx);                              /* pop ecx */
             ii(0x1019_4748, 1); popd(ebx);                              /* pop ebx */
-            ii(0x1019_4749, 1); retd(); return;                         /* ret */
+            ii(0x1019_4749, 1); ret();                                  /* ret */
 #endif
         }
     }

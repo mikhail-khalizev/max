@@ -6,9 +6,13 @@ namespace MikhailKhalizev.Max.Program
     {
         public RawProgramMain RawProgramMain { get; set; }
 
+        public new MikhailKhalizev.Processor.x86.CSharpExecutor.Processor Implementation { get; }
+
         /// <inheritdoc />
-        public RawProgram(IProcessor implementation)
+        public RawProgram(MikhailKhalizev.Processor.x86.CSharpExecutor.Processor implementation)
             : base(implementation)
-        { }
+        {
+            Implementation = implementation;
+        }
     }
 }

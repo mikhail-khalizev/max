@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
         public static MethodInfoCollection Load(BinToCSharpDto configuration)
         {
-            var path = Path.Combine(configuration.SettingsDirectory, configuration.MethodInfosFile);
+            var path = Path.Combine(configuration.SettingsDirectory, configuration.MethodsInfoFile);
             var allText = File.Exists(path) ? File.ReadAllText(path) : "";
             var methods = (JsonConvert.DeserializeObject<List<MethodInfoDto>>(allText) ?? new List<MethodInfoDto>());
 
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
                 .Where(method => method.Raw.Length % 2 == 0)
                 .ToDictionary(x => x.Id);
 
-            path = Path.Combine(configuration.SettingsDirectory, configuration.JumpInfosFile);
+            path = Path.Combine(configuration.SettingsDirectory, configuration.MethodsRuntimeInfoFile);
             allText = File.Exists(path) ? File.ReadAllText(path) : "";
             var jumpsInfos = JsonConvert.DeserializeObject<List<JumpsInfoDto>>(allText) ?? new List<JumpsInfoDto>();
 
@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
             if (methodsJson)
             {
-                var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodInfosFile);
+                var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodsInfoFile);
 
                 policy.Execute(
                     () =>
@@ -104,7 +104,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 
             if (methodJumpsJson)
             {
-                var path = Path.Combine(_configuration.SettingsDirectory, _configuration.JumpInfosFile);
+                var path = Path.Combine(_configuration.SettingsDirectory, _configuration.MethodsRuntimeInfoFile);
 
                 policy.Execute(
                     () =>

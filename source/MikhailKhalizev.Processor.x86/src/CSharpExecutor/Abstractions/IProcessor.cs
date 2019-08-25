@@ -615,7 +615,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         void call_far_ind(MemoryValue src);
-        
+
         /// <summary>
         /// Call Procedure.
         /// </summary>
@@ -1832,33 +1832,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpw(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        void jmpd(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         bool jmp_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_func(Address address, int offset);
-
 
         /// <summary>
         /// Jump.
@@ -1870,33 +1844,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_abs(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpd_abs(ValueBase address);
-
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
         Address jmp_abs_switch(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        Address jmpw_abs_switch(ValueBase address);
-
-        /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        Address jmpd_abs_switch(ValueBase address);
-
 
         /// <summary>
         /// Jump.
@@ -1905,17 +1853,10 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         bool jmp_far_abs(int segment, Address address);
 
         /// <summary>
-        /// Jump.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/JMP.html</remarks>
-        bool jmpw_far_abs(int segment, Address address);
-
-        /// <summary>
         /// Call Procedure.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool jmpd_far_abs(int segment, Address address);
-
 
         /// <summary>
         /// Call Procedure.
@@ -1929,18 +1870,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
         bool jmpd_far_ind(MemoryValue src);
 
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpw_a16_far_ind(MemoryValue src);
-
-        /// <summary>
-        /// Call Procedure.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/CALL.html</remarks>
-        bool jmpd_a16_far_ind(MemoryValue src);
-
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -1952,31 +1881,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jaw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jad(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool ja_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jaw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jad_func(Address address, int offset);
 
 
         /// <summary>
@@ -1989,32 +1894,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jaew(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jaed(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jae_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jaew_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jaed_func(Address address, int offset);
 
 
         /// <summary>
@@ -2027,31 +1907,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbd(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jb_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbd_func(Address address, int offset);
 
 
         /// <summary>
@@ -2064,44 +1920,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbew(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbed(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jbe_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbew_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jbed_func(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jc(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jcw(Address address, int offset);
 
 
         /// <summary>
@@ -2114,39 +1933,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jcxzw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jcxzd(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jcxz_func(Address address, int offset);
 
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jcxzw_func(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jcxzd_func(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jecxzw(Address address, int offset);
+        bool jecxz(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2158,20 +1952,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jecxzd_func(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jrcxz(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jew(Address address, int offset);
 
 
         /// <summary>
@@ -2184,19 +1965,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jgw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jgd(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jgd_func(Address address, int offset);
+        bool jg_func(Address address, int offset);
 
 
         /// <summary>
@@ -2209,19 +1978,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jgew(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jged_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jged(Address address, int offset);
+        bool jge_func(Address address, int offset);
 
 
         /// <summary>
@@ -2234,19 +1991,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jlw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jld(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jld_func(Address address, int offset);
+        bool jl_func(Address address, int offset);
 
 
         /// <summary>
@@ -2259,92 +2004,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jlew(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jled(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jle_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jled_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jlew_func(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnaw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnaew(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnbw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnbe(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnc(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jne(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jng(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnge(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnl(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnle(Address address, int offset);
 
 
         /// <summary>
@@ -2352,19 +2012,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jno(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnod(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnp(Address address, int offset);
 
 
         /// <summary>
@@ -2377,32 +2024,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnsw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnsd(Address address, int offset);
-
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jns_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnsw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnsd_func(Address address, int offset);
 
 
         /// <summary>
@@ -2415,31 +2037,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnzw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnzd(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jnz_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnzw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jnzd_func(Address address, int offset);
 
 
         /// <summary>
@@ -2448,24 +2046,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jo(Address address, int offset);
 
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jow(Address address, int offset);
-
 
         /// <summary>
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jp(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jpd(Address address, int offset);
 
         /// <summary>
         /// Jump if Condition Is Met.
@@ -2490,25 +2076,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jsw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jsd(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool js_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jsw_func(Address address, int offset);
 
 
         /// <summary>
@@ -2521,31 +2089,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Jump if Condition Is Met.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jzw(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jzd(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
         bool jz_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jzw_func(Address address, int offset);
-
-        /// <summary>
-        /// Jump if Condition Is Met.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/Jcc.html</remarks>
-        bool jzd_func(Address address, int offset);
 
 
         /// <summary>
@@ -2902,7 +2446,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDS:LES:LFS:LGS:LSS.html</remarks>
         void lfs(ValueBase dst, MemoryValue src);
-        
+
         /// <summary>
         /// Load Far Pointer.
         /// </summary>
@@ -2933,7 +2477,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LEAVE.html</remarks>
         void leaved();
-        
+
         /// <summary>
         /// Load Fence.
         /// </summary>
@@ -2951,32 +2495,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Load Global/Interrupt Descriptor Table Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtw_a16(MemoryValue src);
-        
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd(MemoryValue src);
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lgdtd_a16(MemoryValue src);
-        
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
         void lidt(MemoryValue src);
-
-        /// <summary>
-        /// Load Global/Interrupt Descriptor Table Register.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LGDT:LIDT.html</remarks>
-        void lidtw_a16(MemoryValue src);
 
 
         /// <summary>
@@ -3071,33 +2590,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopw_a16(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopd_a32(Address address, int offset);
-
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loop_func(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopw_a16_func(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopd_a32_func(Address address, int offset);
-
 
         /// <summary>
         /// Loop According to ECX Counter.
@@ -3109,40 +2602,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopew_a16(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool looped_a32(Address address, int offset);
-
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loope_func(Address address, int offset);
 
         /// <summary>
         /// Loop According to ECX Counter.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool looped_a32_func(Address address, int offset);
-
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
         bool loopne(Address address, int offset);
-
-        /// <summary>
-        /// Loop According to ECX Counter.
-        /// </summary>
-        /// <remarks>https://www.felixcloutier.com/x86/LOOP:LOOPcc.html</remarks>
-        bool loopnew_a16(Address address, int offset);
-
 
         /// <summary>
         /// Loop According to ECX Counter.

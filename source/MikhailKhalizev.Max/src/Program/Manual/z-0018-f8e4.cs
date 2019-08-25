@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_f8e4-7d15f700")]
         public void Method_0018_f8e4()
         {
-            if (Debugger.Launch())
+            // if (Debugger.Launch())
                 Debugger.Break();
 
             throw new InvalidOperationException("Видимо paging_fail завершился провалом.");

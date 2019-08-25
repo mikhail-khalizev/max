@@ -211,6 +211,8 @@ namespace MikhailKhalizev.Max.Program
 
         public static Address sys_sqrt { get; } = 0x1016_6046;
         public static Address sys_round { get; } = 0x1016_607e;
+        public static Address sys_pow { get; } = 0x1016_c4a0; // st0 ^ st1
+        public static Address sys_pow_e { get; } = 0x1018_7204; // e ^ st0
 
         public static Address sys_display_apply_palette { get; } = 0x1016_cbbc;
         public static Address sys_display_draw_0 { get; } = 0x1016_7484;

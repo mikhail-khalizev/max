@@ -26,6 +26,7 @@ namespace MikhailKhalizev.Max.Program
         public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
         public ConfigurationDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
+        public IServiceProvider ServiceProvider { get; }
         public MethodInfoCollection MethodInfoCollection { get; }
 
         public DosMemory DosMemory { get; }
@@ -44,13 +45,15 @@ namespace MikhailKhalizev.Max.Program
             Processor.x86.CSharpExecutor.Processor implementation,
             ConfigurationDto configuration,
             MethodInfoCollection methodInfoCollection,
-            DefinitionCollection definitionCollection)
+            DefinitionCollection definitionCollection,
+            IServiceProvider serviceProvider)
             : base(implementation)
         {
             MethodInfoCollection = methodInfoCollection;
             Configuration = configuration;
             Implementation = implementation;
             DefinitionCollection = definitionCollection;
+            ServiceProvider = serviceProvider;
 
             DosMemory = new DosMemory(implementation, this);
             DosInterrupt = new DosInterrupt(implementation, this);

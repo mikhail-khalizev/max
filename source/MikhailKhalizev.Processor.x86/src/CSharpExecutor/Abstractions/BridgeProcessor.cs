@@ -1963,27 +1963,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void jmpw(Address address, int offset)
-        {
-            Implementation.jmpw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jmpw_func(Address address, int offset)
-        {
-            return Implementation.jmpw_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jmp_abs(ValueBase address)
         {
             return Implementation.jmp_abs(address);
-        }
-
-        /// <inheritdoc />
-        public bool jmpw_abs(ValueBase address)
-        {
-            return Implementation.jmpw_abs(address);
         }
 
         /// <inheritdoc />
@@ -1993,52 +1975,16 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public Address jmpw_abs_switch(ValueBase address)
-        {
-            return Implementation.jmpw_abs_switch(address);
-        }
-
-        /// <inheritdoc />
         public bool jmp_far_abs(int segment, Address address)
         {
             return Implementation.jmp_far_abs(segment, address);
         }
 
-        /// <inheritdoc />
-        public bool jmpw_far_abs(int segment, Address address)
-        {
-            return Implementation.jmpw_far_abs(segment, address);
-        }
-
-
-        /// <inheritdoc />
-        public void jmpd(Address address, int offset)
-        {
-            Implementation.jmpd(address, offset);
-        }
 
         /// <inheritdoc />
         public bool jmp_func(Address address, int offset)
         {
             return Implementation.jmp_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_func(Address address, int offset)
-        {
-            return Implementation.jmpd_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_abs(ValueBase address)
-        {
-            return Implementation.jmpd_abs(address);
-        }
-
-        /// <inheritdoc />
-        public Address jmpd_abs_switch(ValueBase address)
-        {
-            return Implementation.jmpd_abs_switch(address);
         }
 
         /// <inheritdoc />
@@ -2059,35 +2005,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
             return Implementation.jmpd_far_ind(src);
         }
 
-        /// <inheritdoc />
-        public bool jmpw_a16_far_ind(MemoryValue src)
-        {
-            return Implementation.jmpw_a16_far_ind(src);
-        }
-
-        /// <inheritdoc />
-        public bool jmpd_a16_far_ind(MemoryValue src)
-        {
-            return Implementation.jmpd_a16_far_ind(src);
-        }
-
 
         /// <inheritdoc />
         public bool ja(Address address, int offset)
         {
             return Implementation.ja(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jaw(Address address, int offset)
-        {
-            return Implementation.jaw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jad(Address address, int offset)
-        {
-            return Implementation.jad(address, offset);
         }
 
         /// <inheritdoc />
@@ -2097,33 +2019,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jaw_func(Address address, int offset)
-        {
-            return Implementation.jaw_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jad_func(Address address, int offset)
-        {
-            return Implementation.jad_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jae(Address address, int offset)
         {
             return Implementation.jae(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jaew(Address address, int offset)
-        {
-            return Implementation.jaew(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jaed(Address address, int offset)
-        {
-            return Implementation.jaed(address, offset);
         }
 
         /// <inheritdoc />
@@ -2133,33 +2031,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jaew_func(Address address, int offset)
-        {
-            return Implementation.jaew_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jaed_func(Address address, int offset)
-        {
-            return Implementation.jaed_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jb(Address address, int offset)
         {
             return Implementation.jb(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbw(Address address, int offset)
-        {
-            return Implementation.jbw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbd(Address address, int offset)
-        {
-            return Implementation.jbd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2169,33 +2043,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jbw_func(Address address, int offset)
-        {
-            return Implementation.jbw_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbd_func(Address address, int offset)
-        {
-            return Implementation.jbd_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jbe(Address address, int offset)
         {
             return Implementation.jbe(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbew(Address address, int offset)
-        {
-            return Implementation.jbew(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbed(Address address, int offset)
-        {
-            return Implementation.jbed(address, offset);
         }
 
         /// <inheritdoc />
@@ -2205,45 +2055,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jbew_func(Address address, int offset)
-        {
-            return Implementation.jbew_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jbed_func(Address address, int offset)
-        {
-            return Implementation.jbed_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jc(Address address, int offset)
-        {
-            return Implementation.jc(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jcw(Address address, int offset)
-        {
-            return Implementation.jcw(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jcxz(Address address, int offset)
         {
             return Implementation.jcxz(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jcxzw(Address address, int offset)
-        {
-            return Implementation.jcxzw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jcxzd(Address address, int offset)
-        {
-            return Implementation.jcxzd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2253,21 +2067,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jcxzw_func(Address address, int offset)
+        public bool jecxz(Address address, int offset)
         {
-            return Implementation.jcxzw_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jcxzd_func(Address address, int offset)
-        {
-            return Implementation.jcxzd_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jecxzw(Address address, int offset)
-        {
-            return Implementation.jecxzw(address, offset);
+            return Implementation.jecxz(address, offset);
         }
 
         /// <inheritdoc />
@@ -2277,21 +2079,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jecxzd_func(Address address, int offset)
-        {
-            return Implementation.jecxzd_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jrcxz(Address address, int offset)
         {
             return Implementation.jrcxz(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jew(Address address, int offset)
-        {
-            return Implementation.jew(address, offset);
         }
 
         /// <inheritdoc />
@@ -2301,21 +2091,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jgw(Address address, int offset)
+        public bool jg_func(Address address, int offset)
         {
-            return Implementation.jgw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jgd(Address address, int offset)
-        {
-            return Implementation.jgd(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jgd_func(Address address, int offset)
-        {
-            return Implementation.jgd_func(address, offset);
+            return Implementation.jg_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2325,21 +2103,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jgew(Address address, int offset)
+        public bool jge_func(Address address, int offset)
         {
-            return Implementation.jgew(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jged_func(Address address, int offset)
-        {
-            return Implementation.jged_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jged(Address address, int offset)
-        {
-            return Implementation.jged(address, offset);
+            return Implementation.jge_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2349,21 +2115,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jlw(Address address, int offset)
+        public bool jl_func(Address address, int offset)
         {
-            return Implementation.jlw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jld(Address address, int offset)
-        {
-            return Implementation.jld(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jld_func(Address address, int offset)
-        {
-            return Implementation.jld_func(address, offset);
+            return Implementation.jl_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2373,93 +2127,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jlew(Address address, int offset)
-        {
-            return Implementation.jlew(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jled(Address address, int offset)
-        {
-            return Implementation.jled(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jle_func(Address address, int offset)
         {
             return Implementation.jle_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jled_func(Address address, int offset)
-        {
-            return Implementation.jled_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jlew_func(Address address, int offset)
-        {
-            return Implementation.jlew_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnaw(Address address, int offset)
-        {
-            return Implementation.jnaw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnaew(Address address, int offset)
-        {
-            return Implementation.jnaew(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnbw(Address address, int offset)
-        {
-            return Implementation.jnbw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnbe(Address address, int offset)
-        {
-            return Implementation.jnbe(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnc(Address address, int offset)
-        {
-            return Implementation.jnc(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jne(Address address, int offset)
-        {
-            return Implementation.jne(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jng(Address address, int offset)
-        {
-            return Implementation.jng(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnge(Address address, int offset)
-        {
-            return Implementation.jnge(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnl(Address address, int offset)
-        {
-            return Implementation.jnl(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnle(Address address, int offset)
-        {
-            return Implementation.jnle(address, offset);
         }
 
         /// <inheritdoc />
@@ -2469,33 +2139,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jnod(Address address, int offset)
-        {
-            return Implementation.jnod(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnp(Address address, int offset)
-        {
-            return Implementation.jnp(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jns(Address address, int offset)
         {
             return Implementation.jns(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnsw(Address address, int offset)
-        {
-            return Implementation.jnsw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnsd(Address address, int offset)
-        {
-            return Implementation.jnsd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2505,33 +2151,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jnsw_func(Address address, int offset)
-        {
-            return Implementation.jnsw_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnsd_func(Address address, int offset)
-        {
-            return Implementation.jnsd_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jnz(Address address, int offset)
         {
             return Implementation.jnz(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnzw(Address address, int offset)
-        {
-            return Implementation.jnzw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnzd(Address address, int offset)
-        {
-            return Implementation.jnzd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2541,39 +2163,15 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jnzw_func(Address address, int offset)
-        {
-            return Implementation.jnzw_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jnzd_func(Address address, int offset)
-        {
-            return Implementation.jnzd_func(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jo(Address address, int offset)
         {
             return Implementation.jo(address, offset);
         }
 
         /// <inheritdoc />
-        public bool jow(Address address, int offset)
-        {
-            return Implementation.jow(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jp(Address address, int offset)
         {
             return Implementation.jp(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jpd(Address address, int offset)
-        {
-            return Implementation.jpd(address, offset);
         }
 
         /// <inheritdoc />
@@ -2595,27 +2193,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jsw(Address address, int offset)
-        {
-            return Implementation.jsw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jsd(Address address, int offset)
-        {
-            return Implementation.jsd(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool js_func(Address address, int offset)
         {
             return Implementation.js_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jsw_func(Address address, int offset)
-        {
-            return Implementation.jsw_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -2625,33 +2205,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool jzw(Address address, int offset)
-        {
-            return Implementation.jzw(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jzd(Address address, int offset)
-        {
-            return Implementation.jzd(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool jz_func(Address address, int offset)
         {
             return Implementation.jz_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jzw_func(Address address, int offset)
-        {
-            return Implementation.jzw_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool jzd_func(Address address, int offset)
-        {
-            return Implementation.jzd_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -3051,33 +2607,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public void lgdtw_a16(MemoryValue src)
-        {
-            Implementation.lgdtw_a16(src);
-        }
-
-        /// <inheritdoc />
-        public void lgdtd(MemoryValue src)
-        {
-            Implementation.lgdtd(src);
-        }
-
-        /// <inheritdoc />
-        public void lgdtd_a16(MemoryValue src)
-        {
-            Implementation.lgdtd_a16(src);
-        }
-
-        /// <inheritdoc />
         public void lidt(MemoryValue src)
         {
             Implementation.lidt(src);
-        }
-
-        /// <inheritdoc />
-        public void lidtw_a16(MemoryValue src)
-        {
-            Implementation.lidtw_a16(src);
         }
 
         /// <inheritdoc />
@@ -3165,18 +2697,6 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool loopw_a16(Address address, int offset)
-        {
-            return Implementation.loopw_a16(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool loopd_a32(Address address, int offset)
-        {
-            return Implementation.loopd_a32(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool loop_func(Address address, int offset)
         {
             return Implementation.loop_func(address, offset);
@@ -3189,27 +2709,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool loopew_a16(Address address, int offset)
-        {
-            return Implementation.loopew_a16(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool looped_a32(Address address, int offset)
-        {
-            return Implementation.looped_a32(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool loope_func(Address address, int offset)
         {
             return Implementation.loope_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool looped_a32_func(Address address, int offset)
-        {
-            return Implementation.looped_a32_func(address, offset);
         }
 
         /// <inheritdoc />
@@ -3219,27 +2721,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public bool loopnew_a16(Address address, int offset)
-        {
-            return Implementation.loopnew_a16(address, offset);
-        }
-
-        /// <inheritdoc />
         public bool loopne_func(Address address, int offset)
         {
             return Implementation.loopne_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool loopw_a16_func(Address address, int offset)
-        {
-            return Implementation.loopw_a16_func(address, offset);
-        }
-
-        /// <inheritdoc />
-        public bool loopd_a32_func(Address address, int offset)
-        {
-            return Implementation.loopd_a32_func(address, offset);
         }
 
         /// <inheritdoc />

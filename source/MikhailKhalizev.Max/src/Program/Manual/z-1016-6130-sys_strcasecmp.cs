@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             var s1 = Memory.ReadCString(ds[eax]);
             var s2 = Memory.ReadCString(ds[edx]);
             eax = StringComparer.OrdinalIgnoreCase.Compare(s1, s2);
-            retd();
+            ret();
             return;
 
 #if false

@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Max.Program
     public partial class RawProgram
     {
         [MethodInfo("0x1018_7204-17817b27")]
-        public void /* sys */ Method_1018_7204()
+        public void /* sys */ sys_pow_e()
         {
             ii(0x1018_7204, 1); push(ebp);                              /* push ebp */
             ii(0x1018_7205, 2); mov(ebp, esp);                          /* mov ebp, esp */

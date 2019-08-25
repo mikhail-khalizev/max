@@ -34,36 +34,36 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
     II(0x10122c3a, 0x2)   xor_(eax, eax);                       /* xor eax, eax */
     II(0x10122c3c, 0x3)   mov(al, memb_a32(ss, ebp - 0x3c));    /* mov al, [ebp-0x3c] */
     II(0x10122c3f, 0x3)   shl(eax, 0x2);                        /* shl eax, 0x2 */
-6   II(0x10122c42, 0x7)   jmpd_abs(memd_a32(cs, eax + 0x10122c18)); /* jmp dword near [cs:eax+0x10122c18] */
+6   II(0x10122c42, 0x7)   jmp_abs(memd_a32(cs, eax + 0x10122c18)); /* jmp dword near [cs:eax+0x10122c18] */
 
     II(0x10070886, 0x5)   cmp(memw_a32(ss, ebp - 0x2c), 0x3);   /* cmp word [ebp-0x2c], 0x3 */
 2   II(0x1007088b, 0x2)   jad_func(0x1007086c, -0x21);          /* ja 0x1007086c */
     II(0x1007088d, 0x2)   xor_(eax, eax);                       /* xor eax, eax */
     II(0x1007088f, 0x4)   mov(ax, memw_a32(ss, ebp - 0x2c));    /* mov ax, [ebp-0x2c] */
     II(0x10070893, 0x3)   shl(eax, 0x2);                        /* shl eax, 0x2 */
-6   II(0x10070896, 0x7)   jmpd_abs(memd_a32(cs, eax + 0x10070870)); /* jmp dword near [cs:eax+0x10070870] */
+6   II(0x10070896, 0x7)   jmp_abs(memd_a32(cs, eax + 0x10070870)); /* jmp dword near [cs:eax+0x10070870] */
 
     II(0x1010fc44, 0x4)   cmp(memd_a32(ss, ebp - 0xc), 0x6);    /* cmp dword [ebp-0xc], 0x6 */
 2   II(0x1010fc48, 0x2)   jad(0x1010fc24, -0x26);               /* ja 0x1010fc24 */
     II(0x1010fc4a, 0x3)   mov(eax, memd_a32(ss, ebp - 0xc));    /* mov eax, [ebp-0xc] */
     II(0x1010fc4d, 0x3)   shl(eax, 0x2);                        /* shl eax, 0x2 */
-6   II(0x1010fc50, 0x7)   jmpd_abs(memd_a32(cs, eax + 0x1010fc28)); /* jmp dword near [cs:eax+0x1010fc28] */
+6   II(0x1010fc50, 0x7)   jmp_abs(memd_a32(cs, eax + 0x1010fc28)); /* jmp dword near [cs:eax+0x1010fc28] */
 
 
     II(0x10172cc4, 0x3)   cmp(eax, 0x4);                        /* cmp eax, 0x4 */
 7   II(0x10172cc7, 0x2)   jad(0x10172d26, 0x5d);                /* ja 0x10172d26 */
-8   II(0x10172cc9, 0x8)   jmpd_abs(memd_a32(cs, eax * 0x4 + 0x10172ca4)); /* jmp dword near [cs:eax*4+0x10172ca4] */
+8   II(0x10172cc9, 0x8)   jmp_abs(memd_a32(cs, eax * 0x4 + 0x10172ca4)); /* jmp dword near [cs:eax*4+0x10172ca4] */
 
     II(0x10196425, 0x2)   cmp(al, 0x3);                         /* cmp al, 0x3 */
 7   II(0x10196427, 0x6)   jad(0x101964bc, 0x8f);                /* ja dword 0x101964bc */
 8   II(0x1019642d, 0x3)   movzx(eax, al);                       /* movzx eax, al */
-    II(0x10196430, 0x8)   jmpd_abs(memd_a32(cs, eax * 0x4 + 0x10196408)); /* jmp dword near [cs:eax*4+0x10196408] */
+    II(0x10196430, 0x8)   jmp_abs(memd_a32(cs, eax * 0x4 + 0x10196408)); /* jmp dword near [cs:eax*4+0x10196408] */
 
     II(0x10196098, 0x3)   cmp(cl, 0x8);                         /* cmp cl, 0x8 */
 7   II(0x1019609b, 0x2)   jad_func(0x10196078, -0x25);          /* ja 0x10196078 */
 8   II(0x1019609d, 0x3)   movzx(ecx, cl);                       /* movzx ecx, cl */
     II(0x101960a0, 0x3)   shl(ecx, 0x2);                        /* shl ecx, 0x2 */
-6   II(0x101960a3, 0x7)   jmpd_abs(memd_a32(cs, ecx + 0x10195f48)); /* jmp dword near [cs:ecx+0x10195f48] */
+6   II(0x101960a3, 0x7)   jmp_abs(memd_a32(cs, ecx + 0x10195f48)); /* jmp dword near [cs:ecx+0x10195f48] */
 
 
     II(0x1017bab3, 0x3)   mov(ah, memb_a32(ss, ebp - 0xe));     /* mov ah, [ebp-0xe] */
@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 7   II(0x1017babc, 0x2)   jad(0x1017ba97, -0x27);               /* ja 0x1017ba97 */
 8   II(0x1017babe, 0x2)   xor_(eax, eax);                       /* xor eax, eax */
     II(0x1017bac0, 0x3)   mov(al, memb_a32(ss, ebp - 0xe));     /* mov al, [ebp-0xe] */
-    II(0x1017bac3, 0x8)   jmpd_abs(memd_a32(cs, eax * 0x4 + 0x1017b9e8)); /* jmp dword near [cs:eax*4+0x1017b9e8] */
+    II(0x1017bac3, 0x8)   jmp_abs(memd_a32(cs, eax * 0x4 + 0x1017b9e8)); /* jmp dword near [cs:eax*4+0x1017b9e8] */
 
 16-bit
 
@@ -80,15 +80,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 7   II(0x0015bae3, 0x2)   jaw_func(0x0015bad9, -0xc);           /* ja 0x15bad9 */
 8   II(0x0015bae5, 0x2)   shl(ax, 0x1);                         /* shl ax, 1 */
 11  II(0x0015bae7, 0x1)   xchg(bx, ax);                         /* xchg bx, ax */
-6   II(0x0015bae8, 0x5)   jmpw_abs(memw_a16(cs, bx + 0x66cd));  /* jmp word near [cs:bx+0x66cd] */
+6   II(0x0015bae8, 0x5)   jmp_abs(memw_a16(cs, bx + 0x66cd));  /* jmp word near [cs:bx+0x66cd] */
 
     II(0x001577d5, 0x3)   cmp(ax, 0x18);                        /* cmp ax, 0x18 */
 7   II(0x001577d8, 0x2)   jbew(0x001577dd, 0x3);                /* jbe 0x1577dd */
-12  II(0x001577da, 0x3)   jmpw_func(0x00157817, 0x3a);          /* jmp 0x157817 */
+12  II(0x001577da, 0x3)   jmp_func(0x00157817, 0x3a);          /* jmp 0x157817 */
   l_0x001577dd:
 8   II(0x001577dd, 0x2)   shl(ax, 0x1);                         /* shl ax, 1 */
     II(0x001577df, 0x1)   xchg(bx, ax);                         /* xchg bx, ax */
-    II(0x001577e0, 0x5)   jmpw_abs(memw_a16(cs, bx + 0x23c5));  /* jmp word near [cs:bx+0x23c5] */
+    II(0x001577e0, 0x5)   jmp_abs(memw_a16(cs, bx + 0x23c5));  /* jmp word near [cs:bx+0x23c5] */
 #endif
 
             switch (_state)
