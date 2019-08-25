@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Configuration;
@@ -21,11 +22,18 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public class Processor : IProcessor, IDisposable
     {
+        public CancellationToken CancellationToken { get; }
+
         public ProcessorDto Configuration { get; }
 
         public Processor(ProcessorDto configuration)
+            : this(configuration, System.Threading.CancellationToken.None)
+        { }
+
+        public Processor(ProcessorDto configuration, CancellationToken cancellationToken)
         {
             Configuration = configuration;
+            CancellationToken = cancellationToken;
 
             _eax = new SimpleRegister(32);
             _ebx = new SimpleRegister(32);
@@ -1710,8 +1718,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
         public void ii(Address address, uint length)
         {
+            CancellationToken.ThrowIfCancellationRequested();
             InstructionCount++;
-
             check_mode();
 
             if (cs.fail_limit_check(eip))
@@ -1864,7 +1872,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 return;
 
             var str = GetStatisticMethodCall() + Environment.NewLine + GetStatisticIiCall();
-            File.WriteAllText(Configuration.StatisticOutput, str);
+
+            lock (Configuration.StatisticOutput)
+                File.WriteAllText(Configuration.StatisticOutput, str);
         }
 
         private async void WriteStatisticPeriodicly()
@@ -9799,6 +9809,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         #endregion
+
+        public void Flush()
+        {
+            _stateLog.Flush();
+            WriteStatistic();
+        }
 
         #region IDisposable
 

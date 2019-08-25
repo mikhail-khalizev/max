@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.CSharpExecutor;
@@ -19,6 +22,9 @@ namespace MikhailKhalizev.Max.Dos
         public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
+        [CanBeNull]
+        public byte[] PngBytes { get; private set; }
+
         public DosInterrupt(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
@@ -32,9 +38,12 @@ namespace MikhailKhalizev.Max.Dos
             fileHandlers.Add(null); // dummy (from dosbox)
             fileHandlersPreserve = 5;
 
-            Directory.CreateDirectory(RawProgramMain.Configuration.Dos.PngOutput);
-            foreach (var filePath in Directory.EnumerateFiles(RawProgramMain.Configuration.Dos.PngOutput, "*.png"))
-                File.Delete(filePath);
+            if (!string.IsNullOrEmpty(RawProgramMain.Configuration.Dos.PngOutput))
+            {
+                Directory.CreateDirectory(RawProgramMain.Configuration.Dos.PngOutput);
+                foreach (var filePath in Directory.EnumerateFiles(RawProgramMain.Configuration.Dos.PngOutput, "*.png"))
+                    File.Delete(filePath);
+            }
         }
 
         public void int_08()
@@ -236,14 +245,21 @@ namespace MikhailKhalizev.Max.Dos
                         }
 #endif
 
-                                        fileNum++;
-                                        var pngOutput = RawProgramMain.Configuration.Dos.PngOutput;
-                                        var filePath = Path.Combine(pngOutput, $"img-{fileNum:D4}.png");
-
-
+                                        var ms = new MemoryStream();
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
-                                        nimg.Save(filePath);
+                                        nimg.SaveAsPng(ms);
+                                        PngBytes = ms.ToArray();
 
+                                        var forgot = MainHub.SendClientUpdateImage(RawProgramMain.ServiceProvider);
+
+                                        fileNum++;
+                                        if (!string.IsNullOrEmpty(RawProgramMain.Configuration.Dos.PngOutput))
+                                        {
+                                            var pngOutput = RawProgramMain.Configuration.Dos.PngOutput;
+                                            var filePath = Path.Combine(pngOutput, $"img-{fileNum:D4}.png");
+                                            File.WriteAllBytes(filePath, PngBytes);
+                                        }
+                                        
                                         var time = DateTime.Now.TimeOfDay;
                                         time = new TimeSpan(time.Hours, time.Minutes, time.Seconds);
                                         NonBlockingConsole.WriteLine($"    Screen. Time: {time}, File: {fileNum}.png");
