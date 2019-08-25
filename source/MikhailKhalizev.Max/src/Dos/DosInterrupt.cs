@@ -187,63 +187,10 @@ namespace MikhailKhalizev.Max.Dos
 #endif
                                     }
 
-                                    if (dl == 0)
+                                    //if (dl == 0)
                                     {
                                         //var width = 640;
                                         //var height = 480;
-
-#if false
-                        const int line_y1 = 15; // Вписан.
-                        const int line_y2 = 334; // Вписан
-                        const int line_x1 = 32; // Вписан
-                        const int line_x2 = 603; // Вписан
-
-                        // -> total_height = 320, total_width = 572
-
-                        for (int i = line_x1; i <= line_x2; i++)
-                        {
-                            // Граница заданной области - красная.
-                            img_data[3 * buf_width * line_y1 + 3 * i + 0] = 255;
-                            img_data[3 * buf_width * line_y1 + 3 * i + 1] = 0;
-                            img_data[3 * buf_width * line_y1 + 3 * i + 2] = 0;
-
-                            img_data[3 * buf_width * line_y2 + 3 * i + 0] = 255;
-                            img_data[3 * buf_width * line_y2 + 3 * i + 1] = 0;
-                            img_data[3 * buf_width * line_y2 + 3 * i + 2] = 0;
-
-
-                            // Граница всего изображения - зелёная.
-//                            img_data[3 * i + 0] = 0;
-//                            img_data[3 * i + 1] = 255;
-//                            img_data[3 * i + 2] = 0;
-//
-//                            img_data[3 * buf_width * (buf_height - 1) + 3 * i + 0] = 0;
-//                            img_data[3 * buf_width * (buf_height - 1) + 3 * i + 1] = 255;
-//                            img_data[3 * buf_width * (buf_height - 1) + 3 * i + 2] = 0;
-                        }
-
-                        for (int i = line_y1; i <= line_y2; i++)
-                        {
-                            // Граница заданной области - красная.
-                            img_data[3 * line_x1 + 3 * buf_width * i + 0] = 255;
-                            img_data[3 * line_x1 + 3 * buf_width * i + 1] = 0;
-                            img_data[3 * line_x1 + 3 * buf_width * i + 2] = 0;
-
-                            img_data[3 * line_x2 + 3 * buf_width * i + 0] = 255;
-                            img_data[3 * line_x2 + 3 * buf_width * i + 1] = 0;
-                            img_data[3 * line_x2 + 3 * buf_width * i + 2] = 0;
-
-
-                            // Граница всего изображения - зелёная.
-//                            img_data[3 * buf_width * i + 0] = 0;
-//                            img_data[3 * buf_width * i + 1] = 255;
-//                            img_data[3 * buf_width * i + 2] = 0;
-//
-//                            img_data[3 * (buf_width - 1) + 3 * buf_width * i + 0] = 0;
-//                            img_data[3 * (buf_width - 1) + 3 * buf_width * i + 1] = 255;
-//                            img_data[3 * (buf_width - 1) + 3 * buf_width * i + 2] = 0;
-                        }
-#endif
 
                                         var ms = new MemoryStream();
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
@@ -259,12 +206,10 @@ namespace MikhailKhalizev.Max.Dos
                                             var filePath = Path.Combine(pngOutput, $"img-{fileNum:D4}.png");
                                             File.WriteAllBytes(filePath, PngBytes);
                                         }
-                                        
-                                        var time = DateTime.Now.TimeOfDay;
-                                        time = new TimeSpan(time.Hours, time.Minutes, time.Seconds);
-                                        NonBlockingConsole.WriteLine($"    Screen. Time: {time}, File: {fileNum}.png");
 
-                                        //extra_log = (124 <= fileNum); /* Движение единиц. */
+                                        var time = DateTime.Now.TimeOfDay;
+                                        time = new TimeSpan(0, time.Hours, time.Minutes, time.Seconds, time.Milliseconds / 10 * 10);
+                                        NonBlockingConsole.WriteLine($"    Screen. Time: {time}, Number: {fileNum}.");
                                     }
 
 
@@ -433,7 +378,7 @@ namespace MikhailKhalizev.Max.Dos
             {
                 case 0x06:
                     if (dl == 0xff)
-                        throw new NotImplementedException();
+                        throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
                     else
                     {
                         Console.Write((char)dl.Int32);
@@ -454,7 +399,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         // al <- int fileNum, ds:dx <- addr of int
                         if (cr0.pe)
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
                         Memory.GetStruct<int>(al.UInt32 * 4) = (ds.Selector << 16) + dx.UInt16;
                     }
@@ -499,7 +444,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         // al <- int fileNum. es:bx >- addr of int
                         if (cr0.pe)
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
                         var v = Memory.GetStruct<int>(al.UInt32 * 4);
 
@@ -531,7 +476,7 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x38:
                     if (al != 0)
-                        throw new NotImplementedException();
+                        throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
                     ax = 1;
                     bx = 1;
@@ -557,7 +502,7 @@ namespace MikhailKhalizev.Max.Dos
                             ax = fd;
                         }
                         else
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
                     }
                     break;
 
@@ -576,13 +521,14 @@ namespace MikhailKhalizev.Max.Dos
                                 fileAccess = FileAccess.Read;
                                 fileShare = FileShare.Read;
                                 break;
+                            case 1:
                             case 2:
                                 fileMode = FileMode.Open;
                                 fileAccess = FileAccess.ReadWrite;
                                 fileShare = FileShare.Read;
                                 break;
                             default:
-                                throw new NotImplementedException();
+                                throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
                         }
 
                         try
@@ -753,7 +699,7 @@ namespace MikhailKhalizev.Max.Dos
                                 new_off = file.Length + to_seek;
                                 break;
                             default:
-                                throw new NotImplementedException();
+                                throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
                         }
 
                         if (new_off < 0 || file.Length < new_off)
@@ -779,7 +725,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var path = get_path();
                         if (al != 0)
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
                         eflags.cf = true;
 
@@ -836,7 +782,7 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x50: // seg psp
                     if (bx.UInt16 != RawProgramMain.PspSeg)
-                        throw new NotImplementedException();
+                        throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
                     break;
 
                 case 0x51: // get psp
@@ -847,7 +793,7 @@ namespace MikhailKhalizev.Max.Dos
                     {
                         var path = Memory.ReadCString(ds[dx]);
                         if (path != ".\\")
-                            throw new NotImplementedException();
+                            throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
                         var tempFileName = Path.Combine(Path.GetTempPath(), $"max-{tmpNum++}.tmp");
 
@@ -867,7 +813,7 @@ namespace MikhailKhalizev.Max.Dos
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
             }
 
             syscall_iretww();
@@ -919,8 +865,19 @@ namespace MikhailKhalizev.Max.Dos
         public void int_31() { throw new NotImplementedException(); }
 
         // Mouse
+
+        public int MouseX { get; set; } = 320;
+        public int MouseY { get; set; } = 240;
+        public bool MouseLeftButton { get; set; }
+        public bool MouseRightButton { get; set; }
+
+        private int _mouseMotionX;
+        private int _mouseMotionY;
+
         public void int_33()
         {
+            // NonBlockingConsole.WriteLine($"int_33: {ax}");
+
             if (ax.UInt16 == 0)
                 RawProgramMain.DosPic.set_irq_mask(12, false);
 
@@ -935,15 +892,23 @@ namespace MikhailKhalizev.Max.Dos
 
 
                 case 0x3: // return position and button status
-                    bx = 0;
-                    cx = 0; // pos_x
-                    dx = 0; // pos_y
+                    bx = (MouseLeftButton ? 1 : 0) + (MouseRightButton ? 2 : 0);
+                    cx = MouseX;
+                    dx = MouseY;
                     break;
 
                 case 0xb: // read motion data
-                    cx = 0; // x
-                    dx = 0; // y
+                {
+                    var x = MouseX;
+                    var y = MouseY;
+
+                    cx = x - _mouseMotionX;
+                    dx = y - _mouseMotionY;
+
+                    _mouseMotionX = x;
+                    _mouseMotionY = y;
                     break;
+                }
 
                 case 0x15: // get driver storage space requirements
                     bx = 0x1f0;

@@ -153,7 +153,7 @@ namespace MikhailKhalizev.Max.Program
         #endregion
 
         #region System
-
+        public static Address sys_int_21_v2 { get; } = 0x6e18;
         public static Address sys_int_21 { get; } = 0x14_f514;
         public static Address sys_int_paging_fault { get; } = 0x13_94f6;
 

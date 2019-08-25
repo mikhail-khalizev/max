@@ -1,41 +1,28 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/ws").build();
-
-//Disable send button until connection is established
-//document.getElementById("sendButton").disabled = true;
-
-connection.on("UpdateImage", function (url) {
-    document.getElementById("screen").src = url;
-});
-
-connection.start().then(function () {
-    //document.getElementById("sendButton").disabled = false;
-}).catch(function (err) {
-    return console.error(err.toString());
-});
-
-//document.getElementById("sendButton").addEventListener("click", function (event) {
-//    var user = document.getElementById("userInput").value;
-//    var message = document.getElementById("messageInput").value;
-//    connection.invoke("SendMessage", user, message).catch(function (err) {
-//        return console.error(err.toString());
-//    });
-//    event.preventDefault();
-//});
-
-// ---
-
 function onMouseMove(e) {
-    document.getElementById("mouse").innerHTML = stringifyEvent(e);
+    event.preventDefault();
+    if (connection.connectionState === 1 /* Connected */) {
+        connection.send("MouseEvent", { x: e.offsetX, y: e.offsetY, buttons: e.buttons });
+    }
+
+    //document.getElementById("mouse").innerHTML = stringifyEvent(e);
 }
 
 function onMouseOut() {
-    document.getElementById("mouse").innerHTML = "";
+    if (connection.connectionState === 1 /* Connected */) {
+        connection.send("MouseEvent", {});
+    }
+
+    //document.getElementById("mouse").innerHTML = "";
 }
 
 function onKeyboard(e) {
-    document.getElementById("keyboard").innerHTML = stringifyEvent(e);
+    if (connection.connectionState === 1 /* Connected */) {
+        connection.send("KeyboardEvent", { key: e.key });
+    }
+
+    //document.getElementById("keyboard").innerHTML = stringifyEvent(e);
 }
 
 function stringifyEvent(e) {
@@ -49,3 +36,35 @@ function stringifyEvent(e) {
         return v;
     }, " ");
 }
+
+// ---
+
+var connection = new signalR.HubConnectionBuilder().withUrl("/signalr").build();
+
+connection.on("UpdateImage", function (url) {
+    $("#screen").attr("src", url);
+});
+
+async function start() {
+    try {
+        await connection.start();
+    } catch (err) {
+        console.log(err);
+        setTimeout(() => start(), 5000);
+    }
+};
+
+connection.onclose(() => {
+    setTimeout(() => start(), 5000);
+});
+
+start();
+
+
+$("#screen").on('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+$("body").keyup(onKeyboard);
+$("body").keypress(onKeyboard);
+$("body").keydown(onKeyboard);

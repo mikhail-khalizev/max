@@ -852,6 +852,9 @@ namespace MikhailKhalizev.Max.Program
         public static string SmplString { get; } = "smpl";
         public static string SmrtarryCppString { get; } = "smrtarry.cpp";
         public static string SmrtfileCppString { get; } = "smrtfile.cpp";
+        public static string SoundmgrCppString { get; } = "soundmgr.cpp";
+        public static string SoundMgrMusicSampleHandleEqualWsampleString { get; } = "sound_mgr.music_sample->handle == wSample";
+        public static string SoundMgrMusicSampleNotEqual0String { get; } = "sound_mgr.music_sample != 0";
         public static string SoundString { get; } = "sound";
         public static string SpecializedMiningStationForExtractingMagneticMonopolesString { get; } = "Specialized mining station for extracting magnetic monopoles.";
         public static string SpecializedVehicleWhichTransformsToBecomeANewMiningStationString { get; } = "Specialized vehicle which transforms to become a new mining station.";
@@ -2016,6 +2019,10 @@ namespace MikhailKhalizev.Max.Program
         public static StringDefinition Rb4 { get; } = new StringDefinition(0x101a_cd43, RbString);
         public static StringDefinition Riff2 { get; } = new StringDefinition(0x101a_cd46, RiffString);
         public static StringDefinition Smpl { get; } = new StringDefinition(0x101a_cd4b, SmplString);
+        public static StringDefinition SoundmgrCpp { get; } = new StringDefinition(0x101a_cd50, SoundmgrCppString);
+        public static StringDefinition SoundMgrMusicSampleNotEqual0 { get; } = new StringDefinition(0x101a_cd5d, SoundMgrMusicSampleNotEqual0String);
+        public static StringDefinition SoundmgrCpp2 { get; } = new StringDefinition(0x101a_cd79, SoundmgrCppString);
+        public static StringDefinition SoundMgrMusicSampleHandleEqualWsample { get; } = new StringDefinition(0x101a_cd86, SoundMgrMusicSampleHandleEqualWsampleString);
         public static StringDefinition Attack { get; } = new StringDefinition(0x101a_cdc4, AttackString);
         public static StringDefinition Shots2 { get; } = new StringDefinition(0x101a_cdcb, ShotsString);
         public static StringDefinition Range { get; } = new StringDefinition(0x101a_cdd1, RangeString);

@@ -62,13 +62,13 @@ namespace MikhailKhalizev.Max
                             .AddJsonFile("settings/appsettings.json", optional: true)
                             .AddJsonFile($"settings/appsettings.{env.EnvironmentName}.json", optional: true)
                             .AddJsonFile("settings/appsettings.user.json", optional: true)
-                        
+
                             .AddEnvironmentVariables()
                             .AddCommandLine(args);
                     })
                 .UseStartup<Startup>();
         }
-        
+
 
         public IConfiguration Configuration { get; }
         public ConfigurationDto ConfigurationDto { get; }
@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Max
         {
             Configuration = configuration;
             ConfigurationDto = configuration.Get<ConfigurationDto>();
-            
+
             // Check configuration.
 
             var installedPath = ConfigurationDto.Max.InstalledPath;
@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Max
                     p.GetRequiredService<MethodInfoCollection>(),
                     p.GetRequiredService<DefinitionCollection>(),
                     p));
-            
+
             // TODO Implement IDefinitionGroupArea with Begin, End. And remove AddressNameConverter.AddNamespace.
             AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys");
             foreach (var interval in RawProgramMain.MveForceEndIntervals)
@@ -142,7 +142,7 @@ namespace MikhailKhalizev.Max
                 applicationLifetime.StopApplication();
                 return;
             }
-            
+
             // Asp.
 
             if (env.IsDevelopment())
@@ -159,11 +159,11 @@ namespace MikhailKhalizev.Max
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseSignalR(routes => { routes.MapHub<MainHub>("/ws"); });
+            app.UseSignalR(routes => { routes.MapHub<MainHub>("/signalr"); });
             app.UseMvc();
 
             // Start M.A.X.
-            
+
             var rawProgramMain = app.ApplicationServices.GetRequiredService<RawProgramMain>();
             Task.Run(() =>
             {
