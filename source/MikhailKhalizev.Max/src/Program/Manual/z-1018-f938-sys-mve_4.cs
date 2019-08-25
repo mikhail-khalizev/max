@@ -5,18 +5,13 @@ namespace MikhailKhalizev.Max.Program
 {
     public partial class RawProgram
     {
-        private bool mve_4_intro;
 
         [MethodInfo("0x1018_f938-ee784a23")]
         public void /* sys */ mve_4()
         {
-            if (!mve_4_intro)
-            {
-                mve_4_intro = true;
-                // Выход из вступительного видео.
-                RawProgramMain.DosPort.key_pressed = DosPort.kbd_keys.esc;
-                RawProgramMain.DosPic.activate_irq(1);
-            }
+            // Выход из видео.
+            RawProgramMain.DosPort.key_pressed = DosPort.kbd_keys.esc;
+            RawProgramMain.DosPic.activate_irq(1);
 
             ii(0x1018_f938, 3); mov(ax, memw[ds, esi]);                 /* mov ax, [esi] */
             ii(0x1018_f93b, 2); cmp(al, ah);                            /* cmp al, ah */

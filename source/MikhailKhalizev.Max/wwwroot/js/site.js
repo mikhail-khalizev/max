@@ -41,6 +41,8 @@ function stringifyEvent(e) {
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/signalr").build();
 
+$("#screen").attr("src", "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=");
+
 connection.on("UpdateImage", function (url) {
     if (url) {
         $("#screen").attr("src", url);

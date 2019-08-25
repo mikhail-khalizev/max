@@ -53,12 +53,21 @@ namespace MikhailKhalizev.Max
 
         public void KeyboardEvent(JObject obj)
         {
-            NonBlockingConsole.WriteLine($"KeyboardEvent: {obj}");
-
             var key = obj["key"]?.Value<string>();
-            if (key == "Escape")
+            NonBlockingConsole.WriteLine($"KeyboardEvent: {obj}, key: {key}.");
+
+            DosPort.kbd_keys dosKey = default;
+
+            switch (key)
             {
-                _rawProgramMain.DosPort.key_pressed = DosPort.kbd_keys.esc;
+                case " ": dosKey = DosPort.kbd_keys.space; break;
+                case "Escape": dosKey = DosPort.kbd_keys.esc; break;
+                case "Enter": dosKey = DosPort.kbd_keys.enter; break;
+            }
+
+            if (dosKey != default)
+            {
+                _rawProgramMain.DosPort.key_pressed = dosKey;
                 _rawProgramMain.DosPic.activate_irq(1);
             }
         }
