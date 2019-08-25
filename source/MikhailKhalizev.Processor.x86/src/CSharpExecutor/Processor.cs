@@ -20,6 +20,7 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
+    // TODO Rename to Core, ICore.
     public class Processor : IProcessor, IDisposable
     {
         public CancellationToken CancellationToken { get; }
@@ -433,9 +434,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         #region FPU
 
         // TODO Move to separate class?
-        private int FPUControlWord; // 16bit
-        private int FPUStatusWord; // 16bit
-        private int FPUTagWord; // 16bit
+        public int FPUControlWord { get; private set; } // 16bit
+        public int FPUStatusWord { get; private set; } // 16bit
+        public int FPUTagWord { get; private set; } // 16bit
         private readonly double[] st_regs = new double[8];
 
 
@@ -451,7 +452,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         // TODO create property TOP.
-        private int get_top()
+        public int get_top()
         {
             return ((FPUStatusWord >> 11) & 7);
         }
@@ -1504,10 +1505,17 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 var b = cs[eip];
                 var e = CSharpEmulateMode;
 
+                var before = $"FPUTagWord: {FPUTagWord:x4}, top: {get_top()}";
+
                 runIrqs?.Invoke(this, EventArgs.Empty);
+
+                var after = $"FPUTagWord: {FPUTagWord:x4}, top: {get_top()}";
 
                 if (CurrentInstructionAddress != a || cs[eip] != b || CSharpEmulateMode != e)
                     throw new InvalidOperationException("CurrentInstructionAddress or cs[eip] or CSharpEmulateMode changed during runIrqs.");
+
+                if (before != after)
+                    throw new InvalidOperationException($"FPU state changed from {{{before}}} to {{{after}}}.");
             }
         }
 
@@ -1615,7 +1623,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 {
                     if (cs.fail_limit_check(eip))
                         throw new NotImplementedException();
-                    
+
                     var toRun = cs[eip];
                     hist.Add(toRun);
 
@@ -3458,6 +3466,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void fldl2e()
         {
+            set_top(get_top() + 7); // TOP ← TOP − 1;
             ST(0).Double = 1.4426950408889634073599246810018921; // log2e
         }
 

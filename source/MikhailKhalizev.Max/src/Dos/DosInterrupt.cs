@@ -209,7 +209,7 @@ namespace MikhailKhalizev.Max.Dos
 
                                         var time = DateTime.Now.TimeOfDay;
                                         time = new TimeSpan(0, time.Hours, time.Minutes, time.Seconds, time.Milliseconds / 10 * 10);
-                                        NonBlockingConsole.WriteLine($"    Screen. Time: {time}, Number: {fileNum}.");
+                                        NonBlockingConsole.WriteLine($"    Screen. Time: {time:hh\\:mm\\:ss\\.ff}, Number: {fileNum}.");
                                     }
 
 
@@ -871,8 +871,8 @@ namespace MikhailKhalizev.Max.Dos
         public bool MouseLeftButton { get; set; }
         public bool MouseRightButton { get; set; }
 
-        private int _mouseMotionX;
-        private int _mouseMotionY;
+        private int _mouseMotionX = 320;
+        private int _mouseMotionY = 240;
 
         public void int_33()
         {

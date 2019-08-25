@@ -42,7 +42,11 @@ function stringifyEvent(e) {
 var connection = new signalR.HubConnectionBuilder().withUrl("/signalr").build();
 
 connection.on("UpdateImage", function (url) {
-    $("#screen").attr("src", url);
+    if (url) {
+        $("#screen").attr("src", url);
+    } else {
+        $("#screen").attr("src", "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=");
+    }
 });
 
 async function start() {

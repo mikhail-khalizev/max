@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
+using MikhailKhalizev.Max.Dos;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86.Utils;
 using Newtonsoft.Json.Linq;
@@ -25,9 +26,10 @@ namespace MikhailKhalizev.Max
             _rawProgramMain = rawProgramMain;
         }
 
-
         public override Task OnConnectedAsync(){
-            return Clients.Caller.SendAsync(MainHub.ClientUpdateImage, MainController.GetImageUrl());
+            return Clients.Caller.SendAsync(
+                MainHub.ClientUpdateImage,
+                _rawProgramMain.DosInterrupt.PngBytes == null ? null : MainController.GetImageUrl());
         }
 
         public void MouseEvent(JObject obj)
@@ -52,6 +54,13 @@ namespace MikhailKhalizev.Max
         public void KeyboardEvent(JObject obj)
         {
             NonBlockingConsole.WriteLine($"KeyboardEvent: {obj}");
+
+            var key = obj["key"]?.Value<string>();
+            if (key == "Escape")
+            {
+                _rawProgramMain.DosPort.key_pressed = DosPort.kbd_keys.esc;
+                _rawProgramMain.DosPic.activate_irq(1);
+            }
         }
     }
 }

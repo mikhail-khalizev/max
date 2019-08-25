@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_15ef, 3); push(memw[ss, bp + 0xa]);                 /* push word [bp+0xa] */
             ii(0x19_15f2, 3); push(memw[ss, bp + 0x8]);                 /* push word [bp+0x8] */
             ii(0x19_15f5, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
-            ii(0x19_15f8, 4); if(call_far_ind_up(memw[ds, 0x38bc])) return; /* call far word [0x38bc] */
+            ii(0x19_15f8, 4); call_far_ind(memw[ds, 0x38bc]);           /* call far word [0x38bc] */
             ii(0x19_15fc, 1); leave();                                  /* leave */
             ii(0x19_15fd, 1); retf();                                   /* retf */
         }

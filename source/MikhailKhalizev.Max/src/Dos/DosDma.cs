@@ -419,7 +419,7 @@ namespace MikhailKhalizev.Max.Dos
                 {
                     if (!chan.masked)
                     {
-                        var buf = new byte[2];
+                        var buf = new byte[2 * 10];
                         chan.read(buf);
                     }
                     await Task.Delay(TimeSpan.FromSeconds(0.01));
