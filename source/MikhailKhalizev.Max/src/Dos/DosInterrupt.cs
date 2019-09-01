@@ -17,15 +17,15 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class DosInterrupt : BridgeProcessor
+    public class DosInterrupt : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         [CanBeNull]
         public byte[] PngBytes { get; private set; }
 
-        public DosInterrupt(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
+        public DosInterrupt(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;

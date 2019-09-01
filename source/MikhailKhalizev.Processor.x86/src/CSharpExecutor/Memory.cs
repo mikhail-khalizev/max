@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
         public bool A20Gate { get; set; }
 
-        private Processor Processor { get; }
+        private Cpu Cpu { get; }
 
         private const int cacheLineSize = 0x1000; // 4kb.
 
@@ -19,9 +19,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         private readonly bool[] cache_ena = new bool[2];
         private readonly uint[] cache_map = new uint[2];
 
-        public Memory(Processor processor)
+        public Memory(Cpu cpu)
         {
-            Processor = processor;
+            Cpu = cpu;
             Ram = new byte[32 * 1024 * 1024]; // 32Mb = 0x200_0000
         }
 
@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public Span<byte> GetMinSize(Address address, int minSize)
         {
-            if (!Processor.cr0.pg)
+            if (!Cpu.cr0.pg)
                 return mem_phys_raw(address, minSize);
 
             var physAddresses = new uint[2]; // { current, current + page }
@@ -150,7 +150,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
         public Address GetRamAddress(Address address)
         {
-            if (!Processor.cr0.pg)
+            if (!Cpu.cr0.pg)
                 return address;
 
             var a = (uint) address;
@@ -161,24 +161,24 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             while (true)
             {
-                if (Processor.cr4.pae)
+                if (Cpu.cr4.pae)
                     throw new NotImplementedException();
 
-                var pde = mem_phys_raw((Processor.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).Ref<uint>();
+                var pde = mem_phys_raw((Cpu.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).Ref<uint>();
 
-                if (Processor.cr4.pse && (pde & PdeMask.ps) != 0) // 4Mb page
+                if (Cpu.cr4.pse && (pde & PdeMask.ps) != 0) // 4Mb page
                     throw new NotImplementedException();
 
                 if ((pde & PdeMask.p) == 0 /* || @todo reserved bits sets */)
                 {
-                    Processor.paging_fault(address);
+                    Cpu.paging_fault(address);
                     continue; // repeat
                 }
 
                 var pte = mem_phys_raw((pde & 0xffff_f000) + 4 * pti, 4).Ref<uint>();
                 if ((pte & PteMask.p) == 0 /* || @todo reserved bits sets */)
                 {
-                    Processor.paging_fault(address);
+                    Cpu.paging_fault(address);
                     continue; // repeat
                 }
 

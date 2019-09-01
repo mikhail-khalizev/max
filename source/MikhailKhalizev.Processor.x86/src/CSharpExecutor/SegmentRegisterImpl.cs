@@ -4,7 +4,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public class SegmentRegisterImpl : SegmentRegister
     {
-        public Processor Processor { get; }
+        public Cpu Cpu { get; }
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
@@ -31,17 +31,17 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         private int _rpl;
 
 
-        public bool In64BitMode => l && !db && Processor.InIa32eMode;
-        public bool InCompatibilityMode => !l && Processor.InIa32eMode;
+        public bool In64BitMode => l && !db && Cpu.InIa32eMode;
+        public bool InCompatibilityMode => !l && Cpu.InIa32eMode;
 
-        public SegmentRegisterImpl(Processor processor)
+        public SegmentRegisterImpl(Cpu cpu)
         {
-            Processor = processor;
+            Cpu = cpu;
         }
 
         private void LoadDescriptor()
         {
-            if (Processor.cr0.pe == false)
+            if (Cpu.cr0.pe == false)
             {
                 Descriptor.Base = (uint)(Selector * 16);
                 _rpl = 0;
@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 return;
             }
 
-            Descriptor = Processor.get_orig_desc_ref(Selector);
+            Descriptor = Cpu.get_orig_desc_ref(Selector);
         }
     }
 }

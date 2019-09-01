@@ -5,11 +5,11 @@ using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.Core
 {
-    public class InstructionTests : BridgeProcessor
+    public class InstructionTests : BridgeCpu
     {
         /// <inheritdoc />
         public InstructionTests()
-            : base(new CSharpExecutor.Processor(new ProcessorDto()))
+            : base(new CSharpExecutor.Cpu(new ProcessorDto()))
         { }
 
         [Fact]

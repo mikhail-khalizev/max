@@ -21,9 +21,9 @@ using ConfigurationDto = MikhailKhalizev.Max.Configuration.ConfigurationDto;
 
 namespace MikhailKhalizev.Max.Program
 {
-    public class RawProgramMain : BridgeProcessor, ICompiledMethodCollection
+    public class RawProgramMain : BridgeCpu, ICompiledMethodCollection
     {
-        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
         public ConfigurationDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
         public IServiceProvider ServiceProvider { get; }
@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
         public const ushort PspSeg = ImageLoadSeg - 16; // 0x192
 
         public RawProgramMain(
-            Processor.x86.CSharpExecutor.Processor implementation,
+            Processor.x86.CSharpExecutor.Cpu implementation,
             ConfigurationDto configuration,
             MethodInfoCollection methodInfoCollection,
             DefinitionCollection definitionCollection,
@@ -117,7 +117,7 @@ namespace MikhailKhalizev.Max.Program
 
         private void ConnectDecodedMethods(Assembly assembly)
         {
-            foreach (var bridgeProcessorType in assembly.GetTypes().Where(x => typeof(BridgeProcessor).IsAssignableFrom(x)))
+            foreach (var bridgeProcessorType in assembly.GetTypes().Where(x => typeof(BridgeCpu).IsAssignableFrom(x)))
             {
                 object instance = null;
 

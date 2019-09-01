@@ -9,8 +9,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
-    // TODO Rename to ICore ?
-    public interface IProcessor
+    public interface ICpu
     {
         #region Registers
 

@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
         [Fact]
         public void CheckProcessorGenericRegister()
         {
-            var r = new CSharpExecutor.Processor(new ProcessorDto());
+            var r = new CSharpExecutor.Cpu(new ProcessorDto());
 
             r.eax.UInt64 = 0x1234_5678;
             r.ax.UInt64.Should().Be(0x5678);

@@ -104,7 +104,7 @@ namespace MikhailKhalizev.Max
             services.AddSignalR();
 
             services.AddSingleton(
-                provider => new Processor.x86.CSharpExecutor.Processor(
+                provider => new Processor.x86.CSharpExecutor.Cpu(
                     ConfigurationDto.Processor,
                     provider.GetRequiredService<IApplicationLifetime>().ApplicationStopping));
             services.AddSingleton(p => MethodInfoCollection.Load(ConfigurationDto.BinToCSharp));
@@ -117,7 +117,7 @@ namespace MikhailKhalizev.Max
                 });
             services.AddSingleton(
                 p => new RawProgramMain(
-                    p.GetRequiredService<Processor.x86.CSharpExecutor.Processor>(),
+                    p.GetRequiredService<Processor.x86.CSharpExecutor.Cpu>(),
                     ConfigurationDto,
                     p.GetRequiredService<MethodInfoCollection>(),
                     p.GetRequiredService<DefinitionCollection>(),

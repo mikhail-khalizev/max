@@ -20,18 +20,17 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
-    // TODO Rename to Core, ICore.
-    public class Processor : IProcessor, IDisposable
+    public class Cpu : ICpu, IDisposable
     {
         public CancellationToken CancellationToken { get; }
 
         public ProcessorDto Configuration { get; }
 
-        public Processor(ProcessorDto configuration)
+        public Cpu(ProcessorDto configuration)
             : this(configuration, System.Threading.CancellationToken.None)
         { }
 
-        public Processor(ProcessorDto configuration, CancellationToken cancellationToken)
+        public Cpu(ProcessorDto configuration, CancellationToken cancellationToken)
         {
             Configuration = configuration;
             CancellationToken = cancellationToken;
@@ -504,7 +503,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         #region Memory
 
         /// <inheritdoc />
-        IMemory IProcessor.Memory => Memory;
+        IMemory ICpu.Memory => Memory;
         public Memory Memory { get; }
 
         /// <inheritdoc />

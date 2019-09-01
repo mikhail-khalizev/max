@@ -5,12 +5,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
     public sealed class FpuStackRegisterImpl : FpuStackRegister
     {
-        public Processor Processor { get; }
+        public Cpu Cpu { get; }
         public override int Number { get; }
 
-        public FpuStackRegisterImpl(Processor processor, int number)
+        public FpuStackRegisterImpl(Cpu cpu, int number)
         {
-            Processor = processor;
+            Cpu = cpu;
             Number = number;
         }
 
@@ -22,15 +22,15 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             get
             {
-                if (Processor.get_tag(Number) == 3)
+                if (Cpu.get_tag(Number) == 3)
                     throw new NotImplementedException($"get_tag({Number}) == 3");
-                return (ulong) BitConverter.DoubleToInt64Bits(Processor.RawST(Number));
+                return (ulong) BitConverter.DoubleToInt64Bits(Cpu.RawST(Number));
             }
             set
             {
                 var d = BitConverter.Int64BitsToDouble((long) value);
-                Processor.RawST(Number) = d;
-                Processor.set_tag(0, d == 0 ? 1 : 0);
+                Cpu.RawST(Number) = d;
+                Cpu.set_tag(0, d == 0 ? 1 : 0);
             }
         }
 
@@ -38,14 +38,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             get
             {
-                if (Processor.get_tag(Number) == 3)
+                if (Cpu.get_tag(Number) == 3)
                     throw new NotImplementedException($"get_tag({Number}) == 3");
-                return Processor.RawST(Number);
+                return Cpu.RawST(Number);
             }
             set
             {
-                Processor.RawST(Number) = value;
-                Processor.set_tag(0, value == 0 ? 1 : 0);
+                Cpu.RawST(Number) = value;
+                Cpu.set_tag(0, value == 0 ? 1 : 0);
             }
         }
     }
