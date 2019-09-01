@@ -32,14 +32,21 @@ namespace MikhailKhalizev.Max
             try
             {
                 CreateWebHostBuilder(args).Build().Run();
-                NonBlockingConsole.AllWritten.Wait();
                 return ExitCode;
+            }
+            catch (System.OperationCanceledException ex)
+            {
+                NonBlockingConsole.WriteLine(ex.Message);
+                return -2;
             }
             catch (Exception ex)
             {
-                NonBlockingConsole.AllWritten.Wait();
-                Console.WriteLine(ex);
+                NonBlockingConsole.WriteLine(ex);
                 return -1;
+            }
+            finally
+            {
+                NonBlockingConsole.AllWritten.Wait();
             }
         }
 
@@ -171,10 +178,15 @@ namespace MikhailKhalizev.Max
                 {
                     rawProgramMain.Start();
                 }
+                catch (System.OperationCanceledException ex)
+                {
+                    NonBlockingConsole.WriteLine(ex.Message);
+                    ExitCode = -2;
+                }
                 catch (Exception ex)
                 {
-                    ExitCode = -1;
                     NonBlockingConsole.WriteLine(ex);
+                    ExitCode = -1;
                 }
 
                 applicationLifetime.StopApplication();
