@@ -504,7 +504,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         #region Memory
 
         /// <inheritdoc />
-        IMemory IProcessor.Memory => Memory;
+        IRandomAccess IProcessor.Memory => Memory;
         public Memory Memory { get; }
 
         /// <inheritdoc />
@@ -3574,7 +3574,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 throw new NotImplementedException();
 
             for (var i = 0; i < 8; i++)
-                Memory.GetStruct<double>(segment[off + 14 + i * 10]) = ST(i).Double;
+                Memory.Get<double>(segment[off + 14 + i * 10]) = ST(i).Double;
 
             fninit();
         }

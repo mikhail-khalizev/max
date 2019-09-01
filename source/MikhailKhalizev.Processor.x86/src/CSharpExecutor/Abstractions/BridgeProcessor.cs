@@ -284,7 +284,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public IMemory Memory => Implementation.Memory;
+        public IRandomAccess Memory => Implementation.Memory;
 
         /// <inheritdoc />
         public MemoryAccess memb => Implementation.memb;

@@ -6,9 +6,9 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
 {
-    public static class MemoryExtensions
+    public static class RandomAccessExtensions
     {
-        public static ArraySegment<byte> GetMinSize(this IMemory memory, SegmentRegister seg, Address address, int minSize)
+        public static ArraySegment<byte> GetMinSize(this IRandomAccess memory, SegmentRegister seg, Address address, int minSize)
         {
             if (seg.Descriptor.Present == false /* @todo || seg.is_null() */)
                 throw new NotImplementedException();
@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
 
             // correct size with segment limit
 
-            Address end = address + ret.Count;
+            var end = address + ret.Count;
 
             if (seg.Descriptor.Limit + 1 != 0)
             {
@@ -39,32 +39,26 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
             return ret;
         }
 
-        public static ArraySegment<byte> GetFixSize(this IMemory memory, Address address, int size)
+
+        public static ArraySegment<byte> GetFixSize(this IRandomAccess memory, Address address, int size)
         {
             return memory.GetMinSize(address, size).Slice(0, size);
         }
      
-        public static ArraySegment<byte> GetFixSize(this IMemory memory, SegmentRegister seg, Address address, int size)
+        public static ArraySegment<byte> GetFixSize(this IRandomAccess memory, SegmentRegister seg, Address address, int size)
         {
             return memory.GetMinSize(seg, address, size).Slice(0, size);
         }
 
-        // Dangerous. Because bytes.Array must be pinned before call.
-        public static unsafe ref T GetStruct<T>(this IMemory memory, Address address)
-            where T : struct
+
+        public static ref T Get<T>(this IRandomAccess memory, Address address)
         {
             var bytes = memory.GetMinSize(address, Marshal.SizeOf<T>());
-
-            // bytes.Array must be pinned. See MikhailKhalizev.Processor.x86.FullSimulate.Memory constructor.
-
-            var intPtr = Marshal.UnsafeAddrOfPinnedArrayElement(bytes.Array, bytes.Offset);
-            var ptr = intPtr.ToPointer();
-            
-            ref var element = ref Unsafe.AsRef<T>(ptr);
-            return ref element;
+            return ref Unsafe.As<byte, T>(ref bytes.AsSpan()[0]);
         }
 
-        public static bool Equals(this IMemory memory, Address address, ArraySegment<byte> left)
+
+        public static bool Equals(this IRandomAccess memory, Address address, ArraySegment<byte> left)
         {
             var i = 0;
 
@@ -85,7 +79,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
             return true;
         }
 
-        public static byte[] ReadAll(this IMemory memory, Address address, int size)
+
+        public static byte[] ReadAll(this IRandomAccess memory, Address address, int size)
         {
             var result = new byte[size];
 
@@ -102,7 +97,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
             return result;
         }
         
-        public static string ReadCString(this IMemory memory, Address address, int maxLength = int.MaxValue)
+        public static string ReadCString(this IRandomAccess memory, Address address, int maxLength = int.MaxValue)
         {
             var availSpace = ArraySegment<byte>.Empty;
 

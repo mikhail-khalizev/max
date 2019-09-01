@@ -4,7 +4,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
-    public class Memory : IMemory, IDisposable
+    public class Memory : IRandomAccess
     {
         public byte[] Ram { get; set; }
 
@@ -19,20 +19,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         private readonly bool[] cache_ena = new bool[2];
         private readonly uint[] cache_map = new uint[2];
 
-        private GCHandle _handleRam;
-        private GCHandle _handleCache;
-
         public Memory(Processor processor)
         {
             Processor = processor;
             Ram = new byte[32 * 1024 * 1024]; // 32Mb = 0x200_0000
-
-            _handleRam = GCHandle.Alloc(Ram, GCHandleType.Pinned);
-            _handleCache = GCHandle.Alloc(cache, GCHandleType.Pinned);
         }
-
-        /// <inheritdoc />
-        public int Length => Ram.Length;
 
         /// <summary>
         /// no seg, no pg - may return size more, then input size.
@@ -194,28 +185,5 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 return (pte & 0xffff_f000) + off;
             }
         }
-
-        #region IDispose
-
-        private void ReleaseUnmanagedResources()
-        {
-            _handleRam.Free();
-            _handleCache.Free();
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            ReleaseUnmanagedResources();
-            GC.SuppressFinalize(this);
-        }
-
-        /// <inheritdoc />
-        ~Memory()
-        {
-            ReleaseUnmanagedResources();
-        }
-
-        #endregion
     }
 }   

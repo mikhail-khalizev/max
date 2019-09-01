@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public ArchitectureMode Mode { get; set; }
         public Address CsBase { get; set; }
         public Address DsBase { get; set; }
-        public IMemory Memory { get; set; }
+        public IRandomAccess Memory { get; set; }
 
         public event EventHandler<CSharpInstruction> InstructionDecoded;
         public event EventHandler OnSave;

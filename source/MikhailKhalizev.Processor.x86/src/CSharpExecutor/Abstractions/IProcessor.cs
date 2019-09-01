@@ -165,7 +165,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 
         #region Memory
 
-        IMemory Memory { get; }
+        IRandomAccess Memory { get; }
 
         MemoryAccess memb { get; }
         MemoryAccess memw { get; }

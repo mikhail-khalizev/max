@@ -629,7 +629,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
 
         public static IEnumerable<CSharpInstruction> DecodeCode(
-            IMemory memory,
+            IRandomAccess memory,
             Address address,
             ArchitectureMode mode,
             DefinitionCollection definitionCollection)
@@ -701,10 +701,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         private class AssemblyCode : IAssemblyCode
         {
-            private readonly IMemory _memory;
+            private readonly IRandomAccess _memory;
             private readonly ud _ud;
 
-            public AssemblyCode(IMemory memory, ud ud)
+            public AssemblyCode(IRandomAccess memory, ud ud)
             {
                 _memory = memory;
                 _ud = ud;

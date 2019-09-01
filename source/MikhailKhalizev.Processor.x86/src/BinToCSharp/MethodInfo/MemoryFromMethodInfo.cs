@@ -4,7 +4,7 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
 {
-    public class MemoryFromMethodInfo : IMemory
+    public class MemoryFromMethodInfo : IRandomAccess
     {
         public MethodInfoDto MethodInfo { get; }
 
@@ -12,9 +12,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         {
             MethodInfo = methodInfo;
         }
-
-        /// <inheritdoc />
-        public int Length => throw new NotSupportedException();
 
         /// <inheritdoc />
         public ArraySegment<byte> GetMinSize(Address address, int minSize)
