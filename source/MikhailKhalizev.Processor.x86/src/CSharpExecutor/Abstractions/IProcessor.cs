@@ -9,6 +9,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
+    // TODO Rename to ICore ?
     public interface IProcessor
     {
         #region Registers
@@ -165,7 +166,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 
         #region Memory
 
-        IRandomAccess Memory { get; }
+        IMemory Memory { get; }
 
         MemoryAccess memb { get; }
         MemoryAccess memw { get; }

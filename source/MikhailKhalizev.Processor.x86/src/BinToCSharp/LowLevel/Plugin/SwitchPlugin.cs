@@ -304,10 +304,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 switch ((int)Engine.Mode)
                 {
                     case 16:
-                        to = Engine.Memory.GetFixSize(addrOfAddrs + i, 2).GetUInt16();
+                        to = Engine.Memory.Ref<ushort>(addrOfAddrs + i);
                         break;
                     case 32:
-                        to = Engine.Memory.GetFixSize(addrOfAddrs + i, 4).GetUInt32();
+                        to = Engine.Memory.Ref<uint>(addrOfAddrs + i);
                         break;
                     default:
                         throw new NotImplementedException($"Engine.Mode: {(int)Engine.Mode}.");

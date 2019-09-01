@@ -14,11 +14,10 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public override int Bits => MemoryAccess.DataBits;
 
-        public ArraySegment<byte> MemorySpace =>
-            _memorySpace ?? (_memorySpace = Segment == null
+        public Span<byte> Span =>
+            Segment == null
                 ? MemoryAccess.Memory.GetMinSize(Address, Bits / 8)
-                : MemoryAccess.Memory.GetMinSize(Segment, Address, Bits / 8)).Value;
-        private ArraySegment<byte>? _memorySpace;
+                : MemoryAccess.Memory.GetMinSize(Segment, Address, Bits / 8);
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
@@ -28,33 +27,32 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 switch (Bits)
                 {
                     case 8:
-                        return MemorySpace[0];
+                        return Span[0];
                     case 16:
-                        return BitConverter.ToUInt16(MemorySpace.AsSpan(0, 2));
+                        return Span.Ref<ushort>();
                     case 32:
-                        return BitConverter.ToUInt32(MemorySpace.AsSpan(0, 4));
+                        return Span.Ref<uint>();
                     case 64:
-                        return BitConverter.ToUInt64(MemorySpace.AsSpan(0, 8));
+                        return Span.Ref<ulong>();
                     default:
                         throw new NotImplementedException($"Bits: {Bits}");
                 }
             }
             set
             {
-                var ms = MemorySpace;
                 switch (Bits)
                 {
                     case 8:
-                        ms[0] = (byte)value;
+                        Span[0] = (byte)value;
                         break;
                     case 16:
-                        BitConverter.TryWriteBytes(ms.AsSpan(0, 2), (ushort)value);
+                        Span.Ref<ushort>() = (ushort)value;
                         break;
                     case 32:
-                        BitConverter.TryWriteBytes(ms.AsSpan(0, 4), (uint)value);
+                        Span.Ref<uint>() = (uint)value;
                         break;
                     case 64:
-                        BitConverter.TryWriteBytes(ms.AsSpan(0, 8), value);
+                        Span.Ref<ulong>() = (ulong)value;
                         break;
                     default:
                         throw new NotImplementedException($"Bits: {Bits}");
@@ -70,13 +68,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 switch (Bits)
                 {
                     case 8:
-                        return (sbyte)MemorySpace[0];
+                        return (sbyte)Span[0];
                     case 16:
-                        return BitConverter.ToInt16(MemorySpace.AsSpan(0, 2));
+                        return Span.Ref<short>();
                     case 32:
-                        return BitConverter.ToInt32(MemorySpace.AsSpan(0, 4));
+                        return Span.Ref<int>();
                     case 64:
-                        return BitConverter.ToInt64(MemorySpace.AsSpan(0, 8));
+                        return Span.Ref<long>();
                     default:
                         throw new NotImplementedException($"Bits: {Bits}");
                 }

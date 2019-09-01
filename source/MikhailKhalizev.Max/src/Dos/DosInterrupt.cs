@@ -50,11 +50,7 @@ namespace MikhailKhalizev.Max.Dos
         {
             var BIOS_TIMER = 0x46c;
 
-            var bios_timer_ms = Implementation.Memory.mem_phys_raw(BIOS_TIMER, 4);
-
-            var bios_timer_value = bios_timer_ms.GetInt32();
-            bios_timer_value++;
-            bios_timer_ms.SetInt32(bios_timer_value);
+            Implementation.Memory.mem_phys_raw(BIOS_TIMER, 4).Ref<int>()++;
 
             @int(0x1c);
 
@@ -90,10 +86,10 @@ namespace MikhailKhalizev.Max.Dos
 
                                 ushort mode_attr = 0x9b;
 
-                                var ms = Memory.GetFixSize(es, di, Marshal.SizeOf<mode_info>());
-                                Array.Clear(ms.Array, ms.Offset, ms.Count);
+                                var span = Memory.GetFixSize(es, di, Marshal.SizeOf<mode_info>());
+                                span.Clear();
 
-                                ref var mi = ref Memory.GetStruct<mode_info>(es[di]);
+                                ref var mi = ref Memory.Ref<mode_info>(es[di]);
 
                                 mi.BytesPerScanLine = 640;
                                 mi.NumberOfPlanes = 1;
@@ -216,12 +212,12 @@ namespace MikhailKhalizev.Max.Dos
                                     var need_cpy = (curr_bank_num * 0x10000 < all_banks.Length);
 
                                     if (need_cpy)
-                                        curr_bank.CopyTo(all_banks, curr_bank_num * 0x10000);
+                                        curr_bank.CopyTo(all_banks.AsSpan(curr_bank_num * 0x10000));
 
                                     curr_bank_num = dl.UInt16;
 
                                     if (need_cpy)
-                                        all_banks.AsSpan().Slice(curr_bank_num * 0x10000, 0x10000).CopyTo(curr_bank.AsSpan());
+                                        all_banks.AsSpan().Slice(curr_bank_num * 0x10000, 0x10000).CopyTo(curr_bank);
                                 }
                                 else
                                     ah = 1;
@@ -401,7 +397,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (cr0.pe)
                             throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
-                        Memory.GetStruct<int>(al.UInt32 * 4) = (ds.Selector << 16) + dx.UInt16;
+                        Memory.Ref<int>(al.UInt32 * 4) = (ds.Selector << 16) + dx.UInt16;
                     }
                     break;
 
@@ -446,7 +442,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (cr0.pe)
                             throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
-                        var v = Memory.GetStruct<int>(al.UInt32 * 4);
+                        var v = Memory.Ref<int>(al.UInt32 * 4);
 
                         es.Selector = (v >> 16);
                         bx = v;
@@ -600,9 +596,9 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x3f: // read
                     {
-                        var ms = Memory.GetFixSize(ds, dx, cx.Int32);
+                        var span = Memory.GetFixSize(ds, dx, cx.Int32);
 
-                        var readed = fileHandlers[bx.Int32].Read(ms.AsSpan());
+                        var readed = fileHandlers[bx.Int32].Read(span);
                         if (0 <= readed)
                         {
                             eflags.cf = false;
@@ -620,12 +616,17 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x40: // write
                     {
-                        var ms = Memory.GetFixSize(ds, dx, cx.Int32);
+                        var span = Memory.GetFixSize(ds, dx, cx.Int32);
 
                         if (bx.Int32 == 1 || bx.Int32 == 2)
-                            Console.Write(ms.Select(x => (char)x).ToArray());
+                        {
+                            var chars = new List<char>();
+                            foreach (var x in span)
+                                chars.Add((char)x);
+                            Console.Write(chars);
+                        }
                         else
-                            fileHandlers[bx.Int32].Write(ms.AsSpan());
+                            fileHandlers[bx.Int32].Write(span);
 
                         var writed = cx.Int32;
                         if (0 <= writed)
@@ -1112,12 +1113,9 @@ namespace MikhailKhalizev.Max.Dos
                 RawProgramMain.add_internal_dyn_func_if_free(int_unknown, 16, address);
             }
 
-            var ms = Memory.GetFixSize(0, intVec.Length * 2);
-            Marshal.Copy(
-                Marshal.UnsafeAddrOfPinnedArrayElement(intVec, 0),
-                ms.Array,
-                ms.Offset,
-                ms.Count);
+            var span = Memory.GetFixSize(0, intVec.Length * 2);
+
+            MemoryMarshal.Cast<ushort,byte>(intVec.AsSpan()).CopyTo(span);
         }
     }
 }

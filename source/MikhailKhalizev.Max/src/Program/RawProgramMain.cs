@@ -196,8 +196,7 @@ namespace MikhailKhalizev.Max.Program
                 if (image_size <= addr + 1)
                     throw new Exception();
 
-                var val = image.GetUInt16(addr);
-                image.SetUInt16(val + ImageLoadSeg, addr);
+                image.Ref<ushort>(addr) += ImageLoadSeg;
             }
 
             // set psp
@@ -227,8 +226,7 @@ namespace MikhailKhalizev.Max.Program
             ds.Selector = (evnseg);
             evn_init.CopyTo(
                 Implementation.Memory
-                    .GetFixSize(ds, 0, evn_init.Length)
-                    .AsSpan());
+                    .GetFixSize(ds, 0, evn_init.Length));
 
             ds.Selector = (PspSeg); // 0x192
             memb_a16[ds, 0x81] = 0xd; // Empty command-line (terminated by a 0x0D).
@@ -481,18 +479,18 @@ namespace MikhailKhalizev.Max.Program
                 its_first = false;
                 NonBlockingConsole.WriteLine("Декодирования всего пользовательского кода MAX.");
 
-                var code = ArraySegment<byte>.Empty;
+                var code = Span<byte>.Empty;
                 for (var i = code_start; i < code_end; i++)
                 {
-                    if (code.Count == 0)
+                    if (code.Length == 0)
                         code = Memory.GetMinSize(i, 1);
 
                     if (code[0] == 0x68)
                     {
-                        if (code.Count < 10)
+                        if (code.Length < 10)
                             code = Memory.GetMinSize(i, 10);
 
-                        if (code[5] == 0xe8 && code.GetUInt32(6) + i + 10 == 0x1016_5d52 && !MethodsByAddress.ContainsKey(i))
+                        if (code[5] == 0xe8 && code.Ref<uint>(6) + i + 10 == 0x1016_5d52 && !MethodsByAddress.ContainsKey(i))
                             engine.DecodeMethod(i);
                     }
 

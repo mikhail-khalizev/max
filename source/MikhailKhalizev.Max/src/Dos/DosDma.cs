@@ -207,7 +207,7 @@ namespace MikhailKhalizev.Max.Dos
         }
 
         /* write a block into physical memory */
-        void dma_block_write(ArraySegment<byte> buffer, int @base, int offset, int size, int dma16)
+        void dma_block_write(Span<byte> buffer, int @base, int offset, int size, int dma16)
         {
             if (dma_wrapping < offset + size)
                 throw new NotImplementedException();
@@ -219,8 +219,7 @@ namespace MikhailKhalizev.Max.Dos
             var size_p1 = Math.Min(size, dma_wrap + 1 - offset);
 
             buffer.CopyTo(
-            Processor.Memory.mem_phys_raw(@base + offset, size_p1).Slice(0, size_p1));
-
+                Processor.Memory.mem_phys_raw(@base + offset, size_p1).Slice(0, size_p1));
 
             var size_p2 = size - size_p1;
             if (size_p2 != 0)

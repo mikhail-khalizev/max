@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo
         }
 
         /// <inheritdoc />
-        public ArraySegment<byte> GetMinSize(Address address, int minSize)
+        public Span<byte> GetMinSize(Address address, int minSize)
         {
             var interval = Interval.From(MethodInfo.Address, MethodInfo.Address + MethodInfo.RawBytes.Length);
             if (interval.Contains(address))

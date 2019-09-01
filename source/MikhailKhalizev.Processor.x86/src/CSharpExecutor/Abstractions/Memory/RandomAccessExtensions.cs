@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
 {
     public static class RandomAccessExtensions
     {
-        public static ArraySegment<byte> GetMinSize(this IRandomAccess memory, SegmentRegister seg, Address address, int minSize)
+        public static Span<byte> GetMinSize(this IRandomAccess memory, SegmentRegister seg, Address address, int minSize)
         {
             if (seg.Descriptor.Present == false /* @todo || seg.is_null() */)
                 throw new NotImplementedException();
@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
 
             // correct size with segment limit
 
-            var end = address + ret.Count;
+            var end = address + ret.Length;
 
             if (seg.Descriptor.Limit + 1 != 0)
             {
@@ -40,40 +40,40 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
         }
 
 
-        public static ArraySegment<byte> GetFixSize(this IRandomAccess memory, Address address, int size)
+        public static Span<byte> GetFixSize(this IRandomAccess memory, Address address, int size)
         {
             return memory.GetMinSize(address, size).Slice(0, size);
         }
      
-        public static ArraySegment<byte> GetFixSize(this IRandomAccess memory, SegmentRegister seg, Address address, int size)
+        public static Span<byte> GetFixSize(this IRandomAccess memory, SegmentRegister seg, Address address, int size)
         {
             return memory.GetMinSize(seg, address, size).Slice(0, size);
         }
 
 
-        public static ref T Get<T>(this IRandomAccess memory, Address address)
+        public static ref T Ref<T>(this IRandomAccess memory, Address address)
         {
             var bytes = memory.GetMinSize(address, Marshal.SizeOf<T>());
-            return ref Unsafe.As<byte, T>(ref bytes.AsSpan()[0]);
+            return ref Unsafe.As<byte, T>(ref bytes[0]);
         }
 
 
-        public static bool Equals(this IRandomAccess memory, Address address, ArraySegment<byte> left)
+        public static bool Equals(this IRandomAccess memory, Address address, Span<byte> left)
         {
             var i = 0;
 
-            while (left.Count != 0)
+            while (left.Length != 0)
             {
                 var code = memory.GetMinSize(address + i, 1);
 
-                if (left.Count <= code.Count)
-                    return code.Slice(0, left.Count).SequenceEqual(left);
+                if (left.Length <= code.Length)
+                    return code.Slice(0, left.Length).SequenceEqual(left);
 
-                if (!left.Slice(0, code.Count).SequenceEqual(code))
+                if (!left.Slice(0, code.Length).SequenceEqual(code))
                     return false;
 
-                i += code.Count;
-                left = left.Slice(code.Count);
+                i += code.Length;
+                left = left.Slice(code.Length);
             }
 
             return true;
@@ -87,11 +87,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
             for (var i = 0; i < size;)
             {
                 var availableSpace = memory.GetMinSize(address + i, 1);
-                if (size - i < availableSpace.Count)
+                if (size - i < availableSpace.Length)
                     availableSpace = availableSpace.Slice(0, size - i);
 
-                availableSpace.CopyTo(result, i);
-                i += availableSpace.Count;
+                availableSpace.CopyTo(result.AsSpan(i));
+                i += availableSpace.Length;
             }
 
             return result;
@@ -99,12 +99,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
         
         public static string ReadCString(this IRandomAccess memory, Address address, int maxLength = int.MaxValue)
         {
-            var availSpace = ArraySegment<byte>.Empty;
+            var availSpace = Span<byte>.Empty;
 
             var sb = new StringBuilder();
             for (var ptr = address; 0 < maxLength; ptr++, maxLength--)
             {
-                if (availSpace.Count == 0)
+                if (availSpace.Length == 0)
                     availSpace = memory.GetMinSize(ptr, 1);
 
                 var c = (char) availSpace[0];

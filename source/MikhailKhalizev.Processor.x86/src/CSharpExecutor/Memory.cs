@@ -4,7 +4,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
-    public class Memory : IRandomAccess
+    public class Memory : IMemory
     {
         public byte[] Ram { get; set; }
 
@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <summary>
         /// no seg, no pg - may return size more, then input size.
         /// </summary>
-        public ArraySegment<byte> mem_phys_raw(Address address, int size)
+        public Span<byte> mem_phys_raw(Address address, int size)
         {
             var a = (uint) address;
 
@@ -75,7 +75,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public ArraySegment<byte> GetMinSize(Address address, int minSize)
+        public Span<byte> GetMinSize(Address address, int minSize)
         {
             if (!Processor.cr0.pg)
                 return mem_phys_raw(address, minSize);
@@ -164,7 +164,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 if (Processor.cr4.pae)
                     throw new NotImplementedException();
 
-                var pde = mem_phys_raw((Processor.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).GetUInt32();
+                var pde = mem_phys_raw((Processor.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).Ref<uint>();
 
                 if (Processor.cr4.pse && (pde & PdeMask.ps) != 0) // 4Mb page
                     throw new NotImplementedException();
@@ -175,7 +175,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     continue; // repeat
                 }
 
-                var pte = mem_phys_raw((pde & 0xffff_f000) + 4 * pti, 4).GetUInt32();
+                var pte = mem_phys_raw((pde & 0xffff_f000) + 4 * pti, 4).Ref<uint>();
                 if ((pte & PteMask.p) == 0 /* || @todo reserved bits sets */)
                 {
                     Processor.paging_fault(address);
@@ -185,5 +185,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 return (pte & 0xffff_f000) + off;
             }
         }
+
+        /// <inheritdoc />
+        public int Size => Ram.Length;
     }
 }   
