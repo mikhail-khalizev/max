@@ -16,8 +16,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9cb5, 2);    neg(cx);                                  /* neg cx */
             ii(0x9cb7, 3);    and(ch, 0x40);                            /* and ch, 0x40 */
             ii(0x9cba, 2);    xor(ch, al);                              /* xor ch, al */
-            ii(0x9cbc, 2);    if(jz(0x9cc1, 0x3)) goto l_0x9cc1;        /* jz 0x9cc1 */
-            ii(0x9cbe, 2);    mov(al, 0x1);                             /* mov al, 0x1 */
+            ii(0x9cbc, 2);    if(jz(0x9cc1, 3)) goto l_0x9cc1;          /* jz 0x9cc1 */
+            ii(0x9cbe, 2);    mov(al, 1);                               /* mov al, 0x1 */
             ii(0x9cc0, 1);    ret(); return;                            /* ret */
         l_0x9cc1:
             ii(0x9cc1, 2);    xor(ax, ax);                              /* xor ax, ax */

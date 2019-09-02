@@ -17,13 +17,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_7436, 1); push(ebp);                              /* push ebp */
             ii(0x100b_7437, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x100b_7439, 6); sub(esp, 0xc);                          /* sub esp, 0xc */
-            ii(0x100b_743f, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x100b_7442, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x100b_7445, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x100b_744a, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x100b_743f, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x100b_7442, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x100b_7445, 5); mov(edx, 1);                            /* mov edx, 0x1 */
+            ii(0x100b_744a, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100b_744d, 5); call(Definitions.my_dtor_0x101b_6edc, 0x8_37f3); /* call 0x1013ac45 */
-            ii(0x100b_7452, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x100b_7455, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x100b_7452, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x100b_7455, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100b_7458, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
             ii(0x100b_745b, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x100b_745e, 2); mov(esp, ebp);                          /* mov esp, ebp */

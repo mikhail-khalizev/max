@@ -17,19 +17,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6c73, 1); push(edi);                              /* push edi */
             ii(0x1010_6c74, 1); push(ebp);                              /* push ebp */
             ii(0x1010_6c75, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x1010_6c77, 6); sub(esp, 0x4);                          /* sub esp, 0x4 */
+            ii(0x1010_6c77, 6); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1010_6c7d, 5); call(0x1010_6bb0, -0xd2);               /* call 0x10106bb0 */
-            ii(0x1010_6c82, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
-            ii(0x1010_6c85, 7); cmp(memd[ss, ebp - 0x4], 0x5b_8d80);    /* cmp dword [ebp-0x4], 0x5b8d80 */
+            ii(0x1010_6c82, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
+            ii(0x1010_6c85, 7); cmp(memd[ss, ebp - 4], 0x5b_8d80);      /* cmp dword [ebp-0x4], 0x5b8d80 */
             ii(0x1010_6c8c, 2); if(jge(0x1010_6caf, 0x21)) goto l_0x1010_6caf; /* jge 0x10106caf */
-            ii(0x1010_6c8e, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1010_6c8e, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1010_6c91, 1); push(eax);                              /* push eax */
             ii(0x1010_6c92, 5); push(0x5b_8d80);                        /* push 0x5b8d80 */
             ii(0x1010_6c97, 5); mov(eax, StringDefinitions.NotEnoughExtendedMemoryAvailableToRunMAXAmountNeededIAmountFoundI); /* mov eax, 0x101a43d4 */
             ii(0x1010_6c9c, 1); push(eax);                              /* push eax */
             ii(0x1010_6c9d, 5); call(Definitions.sys_printf, 0x6_599a); /* call 0x1016c63c */
             ii(0x1010_6ca2, 3); add(esp, 0xc);                          /* add esp, 0xc */
-            ii(0x1010_6ca5, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
+            ii(0x1010_6ca5, 5); mov(eax, 1);                            /* mov eax, 0x1 */
             ii(0x1010_6caa, 5); call(Definitions.sys_exit, 0x6_59b0);   /* call 0x1016c65f */
         l_0x1010_6caf:
             ii(0x1010_6caf, 2); mov(esp, ebp);                          /* mov esp, ebp */

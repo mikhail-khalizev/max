@@ -17,12 +17,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a2d9, 2); test(edx, edx);                         /* test edx, edx */
             ii(0x1016_a2db, 2); if(jle(0x1016_a315, 0x38)) goto l_0x1016_a315; /* jle 0x1016a315 */
             ii(0x1016_a2dd, 2); mov(ecx, edx);                          /* mov ecx, edx */
-            ii(0x1016_a2df, 3); shl(edx, 0x2);                          /* shl edx, 0x2 */
+            ii(0x1016_a2df, 3); shl(edx, 2);                            /* shl edx, 0x2 */
             ii(0x1016_a2e2, 2); sub(edx, ecx);                          /* sub edx, ecx */
-            ii(0x1016_a2e4, 3); shl(edx, 0x2);                          /* shl edx, 0x2 */
+            ii(0x1016_a2e4, 3); shl(edx, 2);                            /* shl edx, 0x2 */
             ii(0x1016_a2e7, 2); sub(edx, ecx);                          /* sub edx, ecx */
             ii(0x1016_a2e9, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1016_a2eb, 3); shl(edx, 0x2);                          /* shl edx, 0x2 */
+            ii(0x1016_a2eb, 3); shl(edx, 2);                            /* shl edx, 0x2 */
         l_0x1016_a2ee:
             ii(0x1016_a2ee, 6); cmp(ebx, memd[ds, eax + 0x101c_f7ac]);  /* cmp ebx, [eax+0x101cf7ac] */
             ii(0x1016_a2f4, 2); if(jl(0x1016_a30e, 0x18)) goto l_0x1016_a30e; /* jl 0x1016a30e */
@@ -31,8 +31,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a2fe, 5); mov(edx, 0x101c_f7ac);                  /* mov edx, 0x101cf7ac */
             ii(0x1016_a303, 2); add(edx, eax);                          /* add edx, eax */
             ii(0x1016_a305, 2); mov(memd[ds, esi], edx);                /* mov [esi], edx */
-            ii(0x1016_a307, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
-            ii(0x1016_a30c, 2); jmp(0x1016_a317, 0x9); goto l_0x1016_a317; /* jmp 0x1016a317 */
+            ii(0x1016_a307, 5); mov(edx, 1);                            /* mov edx, 0x1 */
+            ii(0x1016_a30c, 2); jmp(0x1016_a317, 9); goto l_0x1016_a317; /* jmp 0x1016a317 */
         l_0x1016_a30e:
             ii(0x1016_a30e, 3); add(eax, 0x2c);                         /* add eax, 0x2c */
             ii(0x1016_a311, 2); cmp(eax, edx);                          /* cmp eax, edx */

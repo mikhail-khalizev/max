@@ -11,10 +11,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_dcc4, 1); push(ebx);                              /* push ebx */
             ii(0x1018_dcc5, 5); mov(ecx, 0);                            /* mov ecx, 0x0 */
             ii(0x1018_dcca, 7); cmp(memd[ds, 0x101b_e420], 0);          /* cmp dword [0x101be420], 0x0 */
-            ii(0x1018_dcd1, 2); if(js(0x1018_dcda, 0x7)) goto l_0x1018_dcda; /* js 0x1018dcda */
+            ii(0x1018_dcd1, 2); if(js(0x1018_dcda, 7)) goto l_0x1018_dcda; /* js 0x1018dcda */
             ii(0x1018_dcd3, 2); jmp(0x1018_dcfe, 0x29); goto l_0x1018_dcfe; /* jmp 0x1018dcfe */
         l_0x1018_dcd5:
-            ii(0x1018_dcd5, 5); mov(ecx, 0x1);                          /* mov ecx, 0x1 */
+            ii(0x1018_dcd5, 5); mov(ecx, 1);                            /* mov ecx, 0x1 */
         l_0x1018_dcda:
             ii(0x1018_dcda, 2); mov(al, 0x80);                          /* mov al, 0x80 */
             ii(0x1018_dcdc, 1); cli();                                  /* cli */

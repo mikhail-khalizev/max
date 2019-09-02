@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_e833()
         {
             ii(0xe833, 1);    pusha();                                  /* pusha */
-            ii(0xe834, 3);    lea(ax, memw[ds, bx + 0x4]);              /* lea ax, [bx+0x4] */
+            ii(0xe834, 3);    lea(ax, memw[ds, bx + 4]);                /* lea ax, [bx+0x4] */
             ii(0xe837, 1);    push(ds);                                 /* push ds */
             ii(0xe838, 1);    push(ax);                                 /* push ax */
             ii(0xe839, 1);    push(ds);                                 /* push ds */
@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xe841, 3);    add(sp, 0xa);                             /* add sp, 0xa */
             ii(0xe844, 4);    mov(bx, memw[ds, 0x99e]);                 /* mov bx, [0x99e] */
             ii(0xe848, 3);    mov(cx, memw[ss, bp + 0x26]);             /* mov cx, [bp+0x26] */
-            ii(0xe84b, 3);    and(ch, 0x2);                             /* and ch, 0x2 */
+            ii(0xe84b, 3);    and(ch, 2);                               /* and ch, 0x2 */
             ii(0xe84e, 3);    and(ah, 0xfd);                            /* and ah, 0xfd */
             ii(0xe851, 2);    or(ah, ch);                               /* or ah, ch */
             ii(0xe853, 3);    mov(memw[ds, bx + 0x26], ax);             /* mov [bx+0x26], ax */

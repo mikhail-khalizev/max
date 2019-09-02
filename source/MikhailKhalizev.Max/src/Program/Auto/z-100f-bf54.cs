@@ -30,10 +30,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_bf9c, 5); call(0x1007_6600, -0x8_59a1);           /* call 0x10076600 */
             ii(0x100f_bfa1, 5); call(0x1015_f2cc, 0x6_3326);            /* call 0x1015f2cc */
         l_0x100f_bfa6:
-            ii(0x100f_bfa6, 4); cmp(memb[ss, ebp - 0x8], 0);            /* cmp byte [ebp-0x8], 0x0 */
-            ii(0x100f_bfaa, 2); if(jnz(0x100f_bfb2, 0x6)) goto l_0x100f_bfb2; /* jnz 0x100fbfb2 */
-            ii(0x100f_bfac, 4); mov(memb[ss, ebp - 0x48], 0x1);         /* mov byte [ebp-0x48], 0x1 */
-            ii(0x100f_bfb0, 2); jmp(0x100f_bfb6, 0x4); goto l_0x100f_bfb6; /* jmp 0x100fbfb6 */
+            ii(0x100f_bfa6, 4); cmp(memb[ss, ebp - 8], 0);              /* cmp byte [ebp-0x8], 0x0 */
+            ii(0x100f_bfaa, 2); if(jnz(0x100f_bfb2, 6)) goto l_0x100f_bfb2; /* jnz 0x100fbfb2 */
+            ii(0x100f_bfac, 4); mov(memb[ss, ebp - 0x48], 1);           /* mov byte [ebp-0x48], 0x1 */
+            ii(0x100f_bfb0, 2); jmp(0x100f_bfb6, 4); goto l_0x100f_bfb6; /* jmp 0x100fbfb6 */
         l_0x100f_bfb2:
             ii(0x100f_bfb2, 4); mov(memb[ss, ebp - 0x48], 0);           /* mov byte [ebp-0x48], 0x0 */
         l_0x100f_bfb6:

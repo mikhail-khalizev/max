@@ -21,11 +21,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_4edf, 2); mov(eax, memd[ds, ebx]);                /* mov eax, [ebx] */
             ii(0x1018_4ee1, 6); call_abs(memd[ds, 0x101b_ddf4]);        /* call dword [0x101bddf4] */
             ii(0x1018_4ee7, 2); cmp(eax, ecx);                          /* cmp eax, ecx */
-            ii(0x1018_4ee9, 2); if(jle(0x1018_4eed, 0x2)) goto l_0x1018_4eed; /* jle 0x10184eed */
+            ii(0x1018_4ee9, 2); if(jle(0x1018_4eed, 2)) goto l_0x1018_4eed; /* jle 0x10184eed */
             ii(0x1018_4eeb, 2); mov(ecx, eax);                          /* mov ecx, eax */
         l_0x1018_4eed:
             ii(0x1018_4eed, 1); inc(edx);                               /* inc edx */
-            ii(0x1018_4eee, 3); add(ebx, 0x4);                          /* add ebx, 0x4 */
+            ii(0x1018_4eee, 3); add(ebx, 4);                            /* add ebx, 0x4 */
             ii(0x1018_4ef1, 2); cmp(edx, esi);                          /* cmp edx, esi */
             ii(0x1018_4ef3, 2); if(jl(0x1018_4edf, -0x16)) goto l_0x1018_4edf; /* jl 0x10184edf */
         l_0x1018_4ef5:

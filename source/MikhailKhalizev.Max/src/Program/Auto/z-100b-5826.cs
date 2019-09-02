@@ -17,17 +17,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_5834, 1); push(edi);                              /* push edi */
             ii(0x100b_5835, 1); push(ebp);                              /* push ebp */
             ii(0x100b_5836, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x100b_5838, 6); sub(esp, 0x4);                          /* sub esp, 0x4 */
-            ii(0x100b_583e, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
-            ii(0x100b_5841, 3); mov(edx, memd[ss, ebp - 0x4]);          /* mov edx, [ebp-0x4] */
-            ii(0x100b_5844, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x100b_5838, 6); sub(esp, 4);                            /* sub esp, 0x4 */
+            ii(0x100b_583e, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
+            ii(0x100b_5841, 3); mov(edx, memd[ss, ebp - 4]);            /* mov edx, [ebp-0x4] */
+            ii(0x100b_5844, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100b_5847, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100b_584a, 5); call(0x1007_6574, -0x3_f2db);           /* call 0x10076574 */
             ii(0x100b_584f, 5); call(0x1015_27ed, 0x9_cf99);            /* call 0x101527ed */
             ii(0x100b_5854, 5); call(0x1008_b0e4, -0x2_a775);           /* call 0x1008b0e4 */
             ii(0x100b_5859, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100b_585b, 2); mov(dl, al);                            /* mov dl, al */
-            ii(0x100b_585d, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x100b_585d, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100b_5860, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100b_5863, 5); call(0x1007_65d0, -0x3_f298);           /* call 0x100765d0 */
             ii(0x100b_5868, 5); call(0x100a_297d, -0x1_2ef0);           /* call 0x100a297d */

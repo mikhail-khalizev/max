@@ -14,14 +14,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x597b, 3);    mov(si, 0x35f);                           /* mov si, 0x35f */
             ii(0x597e, 2);    sub(si, di);                              /* sub si, di */
             ii(0x5980, 2);    mov(ax, si);                              /* mov ax, si */
-            ii(0x5982, 2);    mov(cl, 0x4);                             /* mov cl, 0x4 */
+            ii(0x5982, 2);    mov(cl, 4);                               /* mov cl, 0x4 */
             ii(0x5984, 2);    shl(ax, cl);                              /* shl ax, cl */
             ii(0x5986, 1);    dec(ax);                                  /* dec ax */
             ii(0x5987, 4);    mov(memw[ss, 0xce6], ax);                 /* mov [ss:0xce6], ax */
             ii(0x598b, 5);    mov(memw[ss, 0xcdc], sp);                 /* mov [ss:0xcdc], sp */
             ii(0x5990, 3);    mov(si, 0x10ca);                          /* mov si, 0x10ca */
             ii(0x5993, 1);    inc(si);                                  /* inc si */
-            ii(0x5994, 4);    mov(memw[ds, 0x2], si);                   /* mov [0x2], si */
+            ii(0x5994, 4);    mov(memw[ds, 2], si);                     /* mov [0x2], si */
             ii(0x5998, 2);    mov(bx, es);                              /* mov bx, es */
             ii(0x599a, 2);    sub(bx, si);                              /* sub bx, si */
             ii(0x599c, 2);    neg(bx);                                  /* neg bx */
@@ -41,13 +41,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x59b8, 2);    mov(ah, 0x30);                            /* mov ah, 0x30 */
             ii(0x59ba, 2);    @int(0x21);                               /* int 0x21 */
             ii(0x59bc, 3);    mov(memw[ds, 0xcee], ax);                 /* mov [0xcee], ax */
-            ii(0x59bf, 3);    mov(bx, 0x4);                             /* mov bx, 0x4 */
+            ii(0x59bf, 3);    mov(bx, 4);                               /* mov bx, 0x4 */
         l_0x59c2:
             ii(0x59c2, 3);    mov(ax, 0x4400);                          /* mov ax, 0x4400 */
             ii(0x59c5, 2);    @int(0x21);                               /* int 0x21 */
             ii(0x59c7, 2);    if(jb(0x59d3, 0xa)) goto l_0x59d3;        /* jb 0x59d3 */
             ii(0x59c9, 3);    test(dl, 0x80);                           /* test dl, 0x80 */
-            ii(0x59cc, 2);    if(jz(0x59d3, 0x5)) goto l_0x59d3;        /* jz 0x59d3 */
+            ii(0x59cc, 2);    if(jz(0x59d3, 5)) goto l_0x59d3;          /* jz 0x59d3 */
             ii(0x59ce, 5);    or(memb[ds, bx + 0xcfa], 0x40);           /* or byte [bx+0xcfa], 0x40 */
         l_0x59d3:
             ii(0x59d3, 1);    dec(bx);                                  /* dec bx */

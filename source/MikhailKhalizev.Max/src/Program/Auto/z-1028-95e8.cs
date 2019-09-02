@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1028_95f7:
             ii(0x1028_95f7, 1); inb(al, dx);                            /* in al, dx */
             ii(0x1028_95f8, 2); and(al, 0x80);                          /* and al, 0x80 */
-            ii(0x1028_95fa, 2); if(jnz(0x1028_95f7, -0x5)) goto l_0x1028_95f7; /* jnz 0x102895f7 */
+            ii(0x1028_95fa, 2); if(jnz(0x1028_95f7, -5)) goto l_0x1028_95f7; /* jnz 0x102895f7 */
             ii(0x1028_95fc, 2); pop(dx);                                /* pop dx */
             ii(0x1028_95fe, 2); pop(ax);                                /* pop ax */
             ii(0x1028_9600, 1); ret();                                  /* ret */

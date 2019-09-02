@@ -8,12 +8,12 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_6494-996bfee")]
         public void Method_0019_6494()
         {
-            ii(0x19_6494, 3); add(sp, 0x6);                             /* add sp, 0x6 */
+            ii(0x19_6494, 3); add(sp, 6);                               /* add sp, 0x6 */
             ii(0x19_6497, 4); dec(memw[ds, 0x1274]);                    /* dec word [0x1274] */
             ii(0x19_649b, 3); mov(ax, memw[ss, bp - 0x58]);             /* mov ax, [bp-0x58] */
             ii(0x19_649e, 3); cmp(memw[ss, bp - 0x68], ax);             /* cmp [bp-0x68], ax */
-            ii(0x19_64a1, 2); if(jz(0x19_64a6, 0x3)) goto l_0x19_64a6;  /* jz 0x64a6 */
-            ii(0x19_64a3, 3); jmp(0x19_64ac, 0x6); goto l_0x19_64ac;    /* jmp 0x64ac */
+            ii(0x19_64a1, 2); if(jz(0x19_64a6, 3)) goto l_0x19_64a6;    /* jz 0x64a6 */
+            ii(0x19_64a3, 3); jmp(0x19_64ac, 6); goto l_0x19_64ac;      /* jmp 0x64ac */
         l_0x19_64a6:
             ii(0x19_64a6, 3); mov(ax, memw[ss, bp - 0x62]);             /* mov ax, [bp-0x62] */
             ii(0x19_64a9, 3); mov(memw[ss, bp - 0x58], ax);             /* mov [bp-0x58], ax */

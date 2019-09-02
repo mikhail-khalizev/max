@@ -17,22 +17,22 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_f268, 1); push(ebp);                              /* push ebp */
             ii(0x1013_f269, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1013_f26b, 6); sub(esp, 0x14);                         /* sub esp, 0x14 */
-            ii(0x1013_f271, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1013_f274, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1013_f277, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1013_f271, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1013_f274, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1013_f277, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1013_f27a, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
             ii(0x1013_f27c, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
         l_0x1013_f27f:
-            ii(0x1013_f27f, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1013_f27f, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1013_f282, 3); cmp(memd[ds, eax], 0);                  /* cmp dword [eax], 0x0 */
             ii(0x1013_f285, 2); if(jz(0x1013_f2b4, 0x2d)) goto l_0x1013_f2b4; /* jz 0x1013f2b4 */
-            ii(0x1013_f287, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1013_f287, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1013_f28a, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
             ii(0x1013_f28c, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
             ii(0x1013_f28f, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1013_f292, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
             ii(0x1013_f294, 3); mov(ax, memw[ds, eax]);                 /* mov ax, [eax] */
-            ii(0x1013_f297, 4); cmp(ax, memw[ss, ebp - 0x4]);           /* cmp ax, [ebp-0x4] */
+            ii(0x1013_f297, 4); cmp(ax, memw[ss, ebp - 4]);             /* cmp ax, [ebp-0x4] */
             ii(0x1013_f29b, 2); if(jnz(0x1013_f2a7, 0xa)) goto l_0x1013_f2a7; /* jnz 0x1013f2a7 */
             ii(0x1013_f29d, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1013_f2a0, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
@@ -40,13 +40,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_f2a5, 2); jmp(0x1013_f2c3, 0x1c); goto l_0x1013_f2c3; /* jmp 0x1013f2c3 */
         l_0x1013_f2a7:
             ii(0x1013_f2a7, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
-            ii(0x1013_f2aa, 3); mov(edx, memd[ds, eax + 0x4]);          /* mov edx, [eax+0x4] */
-            ii(0x1013_f2ad, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1013_f2aa, 3); mov(edx, memd[ds, eax + 4]);            /* mov edx, [eax+0x4] */
+            ii(0x1013_f2ad, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1013_f2b0, 2); mov(memd[ds, eax], edx);                /* mov [eax], edx */
             ii(0x1013_f2b2, 2); jmp(0x1013_f27f, -0x35); goto l_0x1013_f27f; /* jmp 0x1013f27f */
         l_0x1013_f2b4:
             ii(0x1013_f2b4, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
-            ii(0x1013_f2b7, 3); mov(edx, memd[ss, ebp - 0x8]);          /* mov edx, [ebp-0x8] */
+            ii(0x1013_f2b7, 3); mov(edx, memd[ss, ebp - 8]);            /* mov edx, [ebp-0x8] */
             ii(0x1013_f2ba, 2); mov(memd[ds, edx], eax);                /* mov [edx], eax */
             ii(0x1013_f2bc, 7); mov(memd[ss, ebp - 0x14], 0);           /* mov dword [ebp-0x14], 0x0 */
         l_0x1013_f2c3:

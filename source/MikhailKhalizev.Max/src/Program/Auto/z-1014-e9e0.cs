@@ -17,9 +17,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_e9ef, 6); sub(esp, 0x1c);                         /* sub esp, 0x1c */
             ii(0x1014_e9f5, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
             ii(0x1014_e9f8, 3); mov(memd[ss, ebp - 0xc], edx);          /* mov [ebp-0xc], edx */
-            ii(0x1014_e9fb, 3); mov(memd[ss, ebp - 0x8], ebx);          /* mov [ebp-0x8], ebx */
-            ii(0x1014_e9fe, 3); mov(memd[ss, ebp - 0x4], ecx);          /* mov [ebp-0x4], ecx */
-            ii(0x1014_ea01, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1014_e9fb, 3); mov(memd[ss, ebp - 8], ebx);            /* mov [ebp-0x8], ebx */
+            ii(0x1014_e9fe, 3); mov(memd[ss, ebp - 4], ecx);            /* mov [ebp-0x4], ecx */
+            ii(0x1014_ea01, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1014_ea04, 5); call(0x1007_6338, -0xd_86d1);           /* call 0x10076338 */
             ii(0x1014_ea09, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1014_ea0b, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
@@ -39,17 +39,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_ea3c, 4); test(memb[ds, eax + 0x14], 0x40);       /* test byte [eax+0x14], 0x40 */
             ii(0x1014_ea40, 2); if(jz(0x1014_ea5f, 0x1d)) goto l_0x1014_ea5f; /* jz 0x1014ea5f */
             ii(0x1014_ea42, 4); movsx(ecx, memw[ss, ebp - 0x14]);       /* movsx ecx, word [ebp-0x14] */
-            ii(0x1014_ea46, 4); movsx(ebx, memw[ss, ebp - 0x8]);        /* movsx ebx, word [ebp-0x8] */
+            ii(0x1014_ea46, 4); movsx(ebx, memw[ss, ebp - 8]);          /* movsx ebx, word [ebp-0x8] */
             ii(0x1014_ea4a, 4); movsx(edx, memw[ss, ebp - 0xc]);        /* movsx edx, word [ebp-0xc] */
             ii(0x1014_ea4e, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_ea51, 5); call(0x1007_63d4, -0xd_8682);           /* call 0x100763d4 */
             ii(0x1014_ea56, 5); call(0x1007_0d68, -0xd_dcf3);           /* call 0x10070d68 */
             ii(0x1014_ea5b, 2); test(eax, eax);                         /* test eax, eax */
-            ii(0x1014_ea5d, 2); if(jnz(0x1014_ea61, 0x2)) goto l_0x1014_ea61; /* jnz 0x1014ea61 */
+            ii(0x1014_ea5d, 2); if(jnz(0x1014_ea61, 2)) goto l_0x1014_ea61; /* jnz 0x1014ea61 */
         l_0x1014_ea5f:
             ii(0x1014_ea5f, 2); jmp(0x1014_ea89, 0x28); goto l_0x1014_ea89; /* jmp 0x1014ea89 */
         l_0x1014_ea61:
-            ii(0x1014_ea61, 4); movsx(ebx, memw[ss, ebp - 0x8]);        /* movsx ebx, word [ebp-0x8] */
+            ii(0x1014_ea61, 4); movsx(ebx, memw[ss, ebp - 8]);          /* movsx ebx, word [ebp-0x8] */
             ii(0x1014_ea65, 4); movsx(edx, memw[ss, ebp - 0xc]);        /* movsx edx, word [ebp-0xc] */
             ii(0x1014_ea69, 3); lea(eax, memd[ss, ebp - 0x1c]);         /* lea eax, [ebp-0x1c] */
             ii(0x1014_ea6c, 5); call(0x1007_6aac, -0xd_7fc5);           /* call 0x10076aac */
@@ -60,17 +60,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_ea7d, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1014_ea80, 5); call(0x1007_4b2b, -0xd_9f5a);           /* call 0x10074b2b */
             ii(0x1014_ea85, 2); test(al, al);                           /* test al, al */
-            ii(0x1014_ea87, 2); if(jnz(0x1014_ea8e, 0x5)) goto l_0x1014_ea8e; /* jnz 0x1014ea8e */
+            ii(0x1014_ea87, 2); if(jnz(0x1014_ea8e, 5)) goto l_0x1014_ea8e; /* jnz 0x1014ea8e */
         l_0x1014_ea89:
             ii(0x1014_ea89, 5); jmp(0x1014_eb2b, 0x9d); goto l_0x1014_eb2b; /* jmp 0x1014eb2b */
         l_0x1014_ea8e:
             ii(0x1014_ea8e, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_ea91, 5); call(0x1007_63a0, -0xd_86f6);           /* call 0x100763a0 */
-            ii(0x1014_ea96, 5); cmp(memw[ds, eax + 0x8], 0x27);         /* cmp word [eax+0x8], 0x27 */
+            ii(0x1014_ea96, 5); cmp(memw[ds, eax + 8], 0x27);           /* cmp word [eax+0x8], 0x27 */
             ii(0x1014_ea9b, 2); if(jz(0x1014_eaac, 0xf)) goto l_0x1014_eaac; /* jz 0x1014eaac */
             ii(0x1014_ea9d, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_eaa0, 5); call(0x1007_63a0, -0xd_8705);           /* call 0x100763a0 */
-            ii(0x1014_eaa5, 5); cmp(memw[ds, eax + 0x8], 0x21);         /* cmp word [eax+0x8], 0x21 */
+            ii(0x1014_eaa5, 5); cmp(memw[ds, eax + 8], 0x21);           /* cmp word [eax+0x8], 0x21 */
             ii(0x1014_eaaa, 2); if(jnz(0x1014_eac7, 0x1b)) goto l_0x1014_eac7; /* jnz 0x1014eac7 */
         l_0x1014_eaac:
             ii(0x1014_eaac, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
@@ -85,7 +85,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_eac7, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_eaca, 5); call(0x1007_63a0, -0xd_872f);           /* call 0x100763a0 */
             ii(0x1014_eacf, 4); mov(ax, memw[ds, eax + 0x1c]);          /* mov ax, [eax+0x1c] */
-            ii(0x1014_ead3, 3); sub(eax, memd[ss, ebp - 0x8]);          /* sub eax, [ebp-0x8] */
+            ii(0x1014_ead3, 3); sub(eax, memd[ss, ebp - 8]);            /* sub eax, [ebp-0x8] */
             ii(0x1014_ead6, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x1014_ead9, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_eadc, 5); call(0x1007_63a0, -0xd_8741);           /* call 0x100763a0 */
@@ -97,7 +97,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_eaf1, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_eaf4, 5); call(0x1007_63a0, -0xd_8759);           /* call 0x100763a0 */
             ii(0x1014_eaf9, 4); mov(ax, memw[ds, eax + 0x1c]);          /* mov ax, [eax+0x1c] */
-            ii(0x1014_eafd, 3); sub(eax, memd[ss, ebp - 0x8]);          /* sub eax, [ebp-0x8] */
+            ii(0x1014_eafd, 3); sub(eax, memd[ss, ebp - 8]);            /* sub eax, [ebp-0x8] */
             ii(0x1014_eb00, 3); movsx(edx, ax);                         /* movsx edx, ax */
             ii(0x1014_eb03, 3); lea(eax, memd[ss, ebp - 0x18]);         /* lea eax, [ebp-0x18] */
             ii(0x1014_eb06, 5); call(0x1007_63a0, -0xd_876b);           /* call 0x100763a0 */

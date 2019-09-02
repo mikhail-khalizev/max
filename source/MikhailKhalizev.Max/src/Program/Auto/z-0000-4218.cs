@@ -12,14 +12,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x4219, 2);    xor(cx, cx);                              /* xor cx, cx */
         l_0x421b:
             ii(0x421b, 2);    inb(al, 0x64);                            /* in al, 0x64 */
-            ii(0x421d, 2);    test(al, 0x2);                            /* test al, 0x2 */
-            ii(0x421f, 2);    if(jnz(0x4223, 0x2)) goto l_0x4223;       /* jnz 0x4223 */
+            ii(0x421d, 2);    test(al, 2);                              /* test al, 0x2 */
+            ii(0x421f, 2);    if(jnz(0x4223, 2)) goto l_0x4223;         /* jnz 0x4223 */
         l_0x4221:
             ii(0x4221, 1);    pop(cx);                                  /* pop cx */
             ii(0x4222, 1);    ret(); return;                            /* ret */
         l_0x4223:
             ii(0x4223, 2);    if(loopne(0x421b, -0xa)) goto l_0x421b;   /* loopne 0x421b */
-            ii(0x4225, 2);    if(jz(0x4221, -0x6)) goto l_0x4221;       /* jz 0x4221 */
+            ii(0x4225, 2);    if(jz(0x4221, -6)) goto l_0x4221;         /* jz 0x4221 */
             ii(0x4227, 2);    push(0x1a);                               /* push 0x1a */
             ii(0x4229, 3);    call(0x589d, 0x1671);                     /* call 0x589d */
             ii(0x422c, 3);    call(0x428b, 0x5c);                       /* call 0x428b */

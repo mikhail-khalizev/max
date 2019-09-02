@@ -17,16 +17,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_27fb, 1); push(ebp);                              /* push ebp */
             ii(0x1015_27fc, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1015_27fe, 6); sub(esp, 0xc);                          /* sub esp, 0xc */
-            ii(0x1015_2804, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1015_2807, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1015_280a, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1015_2804, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1015_2807, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1015_280a, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1015_280d, 5); call(0x1015_26ac, -0x166);              /* call 0x101526ac */
             ii(0x1015_2812, 3); lea(ebx, memd[ss, ebp - 0xc]);          /* lea ebx, [ebp-0xc] */
             ii(0x1015_2815, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1015_2817, 2); mov(eax, ebx);                          /* mov eax, ebx */
             ii(0x1015_2819, 5); call(0x1008_b060, -0xc_77be);           /* call 0x1008b060 */
-            ii(0x1015_281e, 3); mov(edx, memd[ss, ebp - 0x4]);          /* mov edx, [ebp-0x4] */
-            ii(0x1015_2821, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1015_281e, 3); mov(edx, memd[ss, ebp - 4]);            /* mov edx, [ebp-0x4] */
+            ii(0x1015_2821, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1015_2824, 5); add(eax, 0x8a);                         /* add eax, 0x8a */
             ii(0x1015_2829, 5); call(0x1015_51d4, 0x29a6);              /* call 0x101551d4 */
             ii(0x1015_282e, 2); xor(edx, edx);                          /* xor edx, edx */

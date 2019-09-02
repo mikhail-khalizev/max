@@ -16,12 +16,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_0c01, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1017_0c03, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_0c05, 6); if(jz(0x1017_0c86, 0x7b)) goto l_0x1017_0c86; /* jz 0x10170c86 */
-            ii(0x1017_0c0b, 3); mov(edx, memd[ds, eax + 0x4]);          /* mov edx, [eax+0x4] */
+            ii(0x1017_0c0b, 3); mov(edx, memd[ds, eax + 4]);            /* mov edx, [eax+0x4] */
             ii(0x1017_0c0e, 2); test(edx, edx);                         /* test edx, edx */
             ii(0x1017_0c10, 2); if(jz(0x1017_0c20, 0xe)) goto l_0x1017_0c20; /* jz 0x10170c20 */
             ii(0x1017_0c12, 2); mov(eax, edx);                          /* mov eax, edx */
             ii(0x1017_0c14, 5); call(Definitions.sys_fclose, 0x1450);   /* call 0x10172069 */
-            ii(0x1017_0c19, 7); mov(memd[ds, ecx + 0x4], 0);            /* mov dword [ecx+0x4], 0x0 */
+            ii(0x1017_0c19, 7); mov(memd[ds, ecx + 4], 0);              /* mov dword [ecx+0x4], 0x0 */
         l_0x1017_0c20:
             ii(0x1017_0c20, 2); mov(ebx, memd[ds, ecx]);                /* mov ebx, [ecx] */
             ii(0x1017_0c22, 2); test(ebx, ebx);                         /* test ebx, ebx */
@@ -53,11 +53,11 @@ namespace MikhailKhalizev.Max.Program
         l_0x1017_0c6a:
             ii(0x1017_0c6a, 3); lea(eax, memd[ds, ecx + 0x14]);         /* lea eax, [ecx+0x14] */
             ii(0x1017_0c6d, 5); call(/* sys */ 0x1018_b664, 0x1_a9f2);  /* call 0x1018b664 */
-            ii(0x1017_0c72, 3); mov(eax, memd[ds, ecx + 0x8]);          /* mov eax, [ecx+0x8] */
+            ii(0x1017_0c72, 3); mov(eax, memd[ds, ecx + 8]);            /* mov eax, [ecx+0x8] */
             ii(0x1017_0c75, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_0c77, 2); if(jz(0x1017_0c86, 0xd)) goto l_0x1017_0c86; /* jz 0x10170c86 */
             ii(0x1017_0c79, 6); call_abs(memd[ds, 0x101b_e1d0]);        /* call dword [0x101be1d0] */ /* Вызов '0x1017_11b4'. */
-            ii(0x1017_0c7f, 7); mov(memd[ds, ecx + 0x8], 0);            /* mov dword [ecx+0x8], 0x0 */
+            ii(0x1017_0c7f, 7); mov(memd[ds, ecx + 8], 0);              /* mov dword [ecx+0x8], 0x0 */
         l_0x1017_0c86:
             ii(0x1017_0c86, 1); pop(ebp);                               /* pop ebp */
             ii(0x1017_0c87, 1); pop(edi);                               /* pop edi */

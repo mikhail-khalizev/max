@@ -17,11 +17,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x552d, 3);    mov(ax, memw[ds, 0xa10]);                 /* mov ax, [0xa10] */
             ii(0x5530, 1);    push(dx);                                 /* push dx */
             ii(0x5531, 1);    push(ax);                                 /* push ax */
-            ii(0x5532, 3);    mov(cx, 0x4);                             /* mov cx, 0x4 */
+            ii(0x5532, 3);    mov(cx, 4);                               /* mov cx, 0x4 */
         l_0x5535:
-            ii(0x5535, 2);    shl(ax, 0x1);                             /* shl ax, 1 */
-            ii(0x5537, 2);    rcl(dx, 0x1);                             /* rcl dx, 1 */
-            ii(0x5539, 2);    if(loop(0x5535, -0x6)) goto l_0x5535;     /* loop 0x5535 */
+            ii(0x5535, 2);    shl(ax, 1);                               /* shl ax, 1 */
+            ii(0x5537, 2);    rcl(dx, 1);                               /* rcl dx, 1 */
+            ii(0x5539, 2);    if(loop(0x5535, -6)) goto l_0x5535;       /* loop 0x5535 */
             ii(0x553b, 3);    mov(memw[ds, 0x932], ax);                 /* mov [0x932], ax */
             ii(0x553e, 4);    mov(memb[ds, 0x934], dl);                 /* mov [0x934], dl */
             ii(0x5542, 4);    mov(memb[ds, 0x937], dh);                 /* mov [0x937], dh */

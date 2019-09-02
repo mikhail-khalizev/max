@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x17_d0ab-2ce1aed7")]
         public void Method_0017_d0ab()
         {
-            ii(0x17_d0ab, 5); or(memb_a32[ss, ebp + 0x2c], 0x1);        /* or byte [ebp+0x2c], 0x1 */
+            ii(0x17_d0ab, 5); or(memb_a32[ss, ebp + 0x2c], 1);          /* or byte [ebp+0x2c], 0x1 */
         }
     }
 }

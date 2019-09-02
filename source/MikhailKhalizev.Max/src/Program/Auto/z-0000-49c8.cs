@@ -12,14 +12,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x49c9, 2);    xor(cx, cx);                              /* xor cx, cx */
         l_0x49cb:
             ii(0x49cb, 2);    inb(al, 0x64);                            /* in al, 0x64 */
-            ii(0x49cd, 2);    test(al, 0x2);                            /* test al, 0x2 */
-            ii(0x49cf, 2);    if(jnz(0x49d3, 0x2)) goto l_0x49d3;       /* jnz 0x49d3 */
+            ii(0x49cd, 2);    test(al, 2);                              /* test al, 0x2 */
+            ii(0x49cf, 2);    if(jnz(0x49d3, 2)) goto l_0x49d3;         /* jnz 0x49d3 */
         l_0x49d1:
             ii(0x49d1, 1);    pop(cx);                                  /* pop cx */
             ii(0x49d2, 1);    ret(); return;                            /* ret */
         l_0x49d3:
             ii(0x49d3, 2);    if(loopne(0x49cb, -0xa)) goto l_0x49cb;   /* loopne 0x49cb */
-            ii(0x49d5, 2);    if(jz(0x49d1, -0x6)) goto l_0x49d1;       /* jz 0x49d1 */
+            ii(0x49d5, 2);    if(jz(0x49d1, -6)) goto l_0x49d1;         /* jz 0x49d1 */
             ii(0x49d7, 2);    push(0x1a);                               /* push 0x1a */
             ii(0x49d9, 3);    call(0x604d, 0x1671);                     /* call 0x604d */
             ii(0x49dc, 3);    call(0x4a3b, 0x5c);                       /* call 0x4a3b */

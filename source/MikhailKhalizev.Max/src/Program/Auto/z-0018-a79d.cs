@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a7a0, 2); if(jbe_func(0x18_a7de, 0x3c)) return;     /* jbe 0xa7de */
             ii(0x18_a7a2, 3); cmp(ah, 0x59);                            /* cmp ah, 0x59 */
             ii(0x18_a7a5, 2); if(jz_func(0x18_a7de, 0x37)) return;      /* jz 0xa7de */
-            ii(0x18_a7a7, 3); cmp(ah, -0x1 /* 0xff */);                 /* cmp ah, 0xff */
+            ii(0x18_a7a7, 3); cmp(ah, -1 /* 0xff */);                   /* cmp ah, 0xff */
             ii(0x18_a7aa, 2); if(jz_func(0x18_a7de, 0x32)) return;      /* jz 0xa7de */
             ii(0x18_a7ac, 6); cmp(memb[es, 0x1182], 0);                 /* cmp byte [es:0x1182], 0x0 */
             ii(0x18_a7b2, 2); if(jnz_func(0x18_a7de, 0x2a)) return;     /* jnz 0xa7de */

@@ -17,10 +17,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_44e9, 1); push(ebp);                              /* push ebp */
             ii(0x1007_44ea, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1007_44ec, 6); sub(esp, 0x14);                         /* sub esp, 0x14 */
-            ii(0x1007_44f2, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1007_44f5, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1007_44f8, 4); movsx(ebx, memw[ss, ebp - 0x4]);        /* movsx ebx, word [ebp-0x4] */
-            ii(0x1007_44fc, 4); movsx(edx, memw[ss, ebp - 0x8]);        /* movsx edx, word [ebp-0x8] */
+            ii(0x1007_44f2, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1007_44f5, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1007_44f8, 4); movsx(ebx, memw[ss, ebp - 4]);          /* movsx ebx, word [ebp-0x4] */
+            ii(0x1007_44fc, 4); movsx(edx, memw[ss, ebp - 8]);          /* movsx edx, word [ebp-0x8] */
             ii(0x1007_4500, 5); mov(eax, 0x101c_39b8);                  /* mov eax, 0x101c39b8 */
             ii(0x1007_4505, 5); call(0x1010_3541, 0x8_f037);            /* call 0x10103541 */
             ii(0x1007_450a, 2); mov(edx, eax);                          /* mov edx, eax */
@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_4520, 6); if(jz(0x1007_4588, 0x62)) goto l_0x1007_4588; /* jz 0x10074588 */
             ii(0x1007_4526, 3); lea(eax, memd[ss, ebp - 0xc]);          /* lea eax, [ebp-0xc] */
             ii(0x1007_4529, 5); call(0x1007_63a0, 0x1e72);              /* call 0x100763a0 */
-            ii(0x1007_452e, 4); mov(ax, memw[ds, eax + 0x8]);           /* mov ax, [eax+0x8] */
+            ii(0x1007_452e, 4); mov(ax, memw[ds, eax + 8]);             /* mov ax, [eax+0x8] */
             ii(0x1007_4532, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
             ii(0x1007_4535, 2); jmp(0x1007_4548, 0x11); goto l_0x1007_4548; /* jmp 0x10074548 */
         l_0x1007_4537:

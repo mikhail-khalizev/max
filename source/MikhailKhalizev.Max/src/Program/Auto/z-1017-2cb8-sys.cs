@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_2cb8, 1); push(edx);                              /* push edx */
             ii(0x1017_2cb9, 6); mov(edx, memd[ds, 0x1020_9540]);        /* mov edx, [0x10209540] */
             ii(0x1017_2cbf, 5); mov(memd[ds, 0x1020_9540], eax);        /* mov [0x10209540], eax */
-            ii(0x1017_2cc4, 3); cmp(eax, 0x4);                          /* cmp eax, 0x4 */
+            ii(0x1017_2cc4, 3); cmp(eax, 4);                            /* cmp eax, 0x4 */
             ii(0x1017_2cc7, 2); if(ja(0x1017_2d26, 0x5d)) goto l_0x1017_2d26; /* ja 0x10172d26 */
             ii(0x1017_2cc9, 8); 
             switch (jmp_abs_switch(memd[cs, eax * 4 + /* sys */ 0x1017_2ca4]))

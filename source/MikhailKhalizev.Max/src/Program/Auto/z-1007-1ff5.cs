@@ -18,28 +18,28 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_2004, 1); push(ebp);                              /* push ebp */
             ii(0x1007_2005, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1007_2007, 6); sub(esp, 0x10);                         /* sub esp, 0x10 */
-            ii(0x1007_200d, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
-            ii(0x1007_2010, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
-            ii(0x1007_2013, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
+            ii(0x1007_200d, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
+            ii(0x1007_2010, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
+            ii(0x1007_2013, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
             ii(0x1007_2016, 2); jmp(0x1007_2040, 0x28); goto l_0x1007_2040; /* jmp 0x10072040 */
         l_0x1007_2018:
             ii(0x1007_2018, 7); mov(memd[ss, ebp - 0xc], 0xffff_fffd);  /* mov dword [ebp-0xc], 0xfffffffd */
             ii(0x1007_201f, 2); jmp(0x1007_2067, 0x46); goto l_0x1007_2067; /* jmp 0x10072067 */
         l_0x1007_2021:
-            ii(0x1007_2021, 7); mov(memd[ss, ebp - 0xc], 0x1);          /* mov dword [ebp-0xc], 0x1 */
+            ii(0x1007_2021, 7); mov(memd[ss, ebp - 0xc], 1);            /* mov dword [ebp-0xc], 0x1 */
             ii(0x1007_2028, 2); jmp(0x1007_2067, 0x3d); goto l_0x1007_2067; /* jmp 0x10072067 */
         l_0x1007_202a:
             ii(0x1007_202a, 2); jmp(0x1007_2060, 0x34); goto l_0x1007_2060; /* jmp 0x10072060 */
         //  ii(0x1007_202c, 20); /* Служебная область с абсолютными адресами переходов. (0x1007_2018, 0x1007_2021, 0x1007_2021, 0x1007_202a, 0x1007_2021). */
         l_0x1007_2040:
-            ii(0x1007_2040, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1007_2040, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1007_2043, 3); sub(eax, 0x1c);                         /* sub eax, 0x1c */
             ii(0x1007_2046, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
-            ii(0x1007_2049, 5); cmp(memw[ss, ebp - 0x10], 0x4);         /* cmp word [ebp-0x10], 0x4 */
+            ii(0x1007_2049, 5); cmp(memw[ss, ebp - 0x10], 4);           /* cmp word [ebp-0x10], 0x4 */
             ii(0x1007_204e, 2); if(ja(0x1007_202a, -0x26)) goto l_0x1007_202a; /* ja 0x1007202a */
             ii(0x1007_2050, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1007_2052, 4); mov(ax, memw[ss, ebp - 0x10]);          /* mov ax, [ebp-0x10] */
-            ii(0x1007_2056, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
+            ii(0x1007_2056, 3); shl(eax, 2);                            /* shl eax, 0x2 */
             ii(0x1007_2059, 7); 
             switch (jmp_abs_switch(memd[cs, eax + 0x1007_202c]))
             {

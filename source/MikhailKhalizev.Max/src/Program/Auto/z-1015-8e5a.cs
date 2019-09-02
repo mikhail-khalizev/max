@@ -17,17 +17,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_8e68, 1); push(ebp);                              /* push ebp */
             ii(0x1015_8e69, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1015_8e6b, 6); sub(esp, 0x10);                         /* sub esp, 0x10 */
-            ii(0x1015_8e71, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1015_8e74, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1015_8e77, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1015_8e71, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1015_8e74, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1015_8e77, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1015_8e7a, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
-            ii(0x1015_8e7d, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
+            ii(0x1015_8e7d, 5); mov(eax, 1);                            /* mov eax, 0x1 */
             ii(0x1015_8e82, 5); call(0x100f_448c, -0x6_49fb);           /* call 0x100f448c */
             ii(0x1015_8e87, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1015_8e8a, 4); cmp(memb[ds, eax + 0x55], 0);           /* cmp byte [eax+0x55], 0x0 */
-            ii(0x1015_8e8e, 2); if(jnz(0x1015_8e96, 0x6)) goto l_0x1015_8e96; /* jnz 0x10158e96 */
-            ii(0x1015_8e90, 4); mov(memb[ss, ebp - 0xc], 0x1);          /* mov byte [ebp-0xc], 0x1 */
-            ii(0x1015_8e94, 2); jmp(0x1015_8e9a, 0x4); goto l_0x1015_8e9a; /* jmp 0x10158e9a */
+            ii(0x1015_8e8e, 2); if(jnz(0x1015_8e96, 6)) goto l_0x1015_8e96; /* jnz 0x10158e96 */
+            ii(0x1015_8e90, 4); mov(memb[ss, ebp - 0xc], 1);            /* mov byte [ebp-0xc], 0x1 */
+            ii(0x1015_8e94, 2); jmp(0x1015_8e9a, 4); goto l_0x1015_8e9a; /* jmp 0x10158e9a */
         l_0x1015_8e96:
             ii(0x1015_8e96, 4); mov(memb[ss, ebp - 0xc], 0);            /* mov byte [ebp-0xc], 0x0 */
         l_0x1015_8e9a:

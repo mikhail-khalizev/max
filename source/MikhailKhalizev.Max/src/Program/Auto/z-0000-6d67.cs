@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x6d67, 1);    push(si);                                 /* push si */
             ii(0x6d68, 3);    mov(si, 0x9f00);                          /* mov si, 0x9f00 */
-            ii(0x6d6b, 2);    jmp(0x6d70, 0x3); goto l_0x6d70;          /* jmp 0x6d70 */
+            ii(0x6d6b, 2);    jmp(0x6d70, 3); goto l_0x6d70;            /* jmp 0x6d70 */
         l_0x6d6d:
             ii(0x6d6d, 3);    add(si, 0x40);                            /* add si, 0x40 */
         l_0x6d70:
@@ -31,8 +31,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6d8b, 3);    shr(cx, 0xc);                             /* shr cx, 0xc */
             ii(0x6d8e, 3);    mov(ax, 0xd000);                          /* mov ax, 0xd000 */
             ii(0x6d91, 2);    shr(ax, cl);                              /* shr ax, cl */
-            ii(0x6d93, 3);    and(ax, 0x1);                             /* and ax, 0x1 */
-            ii(0x6d96, 3);    cmp(ax, 0x1);                             /* cmp ax, 0x1 */
+            ii(0x6d93, 3);    and(ax, 1);                               /* and ax, 0x1 */
+            ii(0x6d96, 3);    cmp(ax, 1);                               /* cmp ax, 0x1 */
             ii(0x6d99, 2);    sbb(ax, ax);                              /* sbb ax, ax */
             ii(0x6d9b, 2);    and(al, 0xf8);                            /* and al, 0xf8 */
             ii(0x6d9d, 3);    add(ax, 0x9a);                            /* add ax, 0x9a */

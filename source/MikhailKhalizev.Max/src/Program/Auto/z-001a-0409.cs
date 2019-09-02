@@ -26,8 +26,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_042e, 3); lea(ax, memw[ss, bp - 0x26]);             /* lea ax, [bp-0x26] */
             ii(0x1a_0431, 1); push(ss);                                 /* push ss */
             ii(0x1a_0432, 1); push(ax);                                 /* push ax */
-            ii(0x1a_0433, 3); push(memw[ss, bp + 0x8]);                 /* push word [bp+0x8] */
-            ii(0x1a_0436, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
+            ii(0x1a_0433, 3); push(memw[ss, bp + 8]);                   /* push word [bp+0x8] */
+            ii(0x1a_0436, 3); push(memw[ss, bp + 6]);                   /* push word [bp+0x6] */
             ii(0x1a_0439, 3); call(0x19_fff7, -0x445);                  /* call 0xfff7 */
             ii(0x1a_043c, 3); mov(ax, memw[ds, 0x32a2]);                /* mov ax, [0x32a2] */
             ii(0x1a_043f, 4); or(ax, memw[ds, 0x32a0]);                 /* or ax, [0x32a0] */
@@ -49,16 +49,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_045e, 3); mov(memw[ss, bp - 0x2a], ax);             /* mov [bp-0x2a], ax */
             ii(0x1a_0461, 3); mov(memw[ss, bp - 0x28], dx);             /* mov [bp-0x28], dx */
             ii(0x1a_0464, 2); or(dx, ax);                               /* or dx, ax */
-            ii(0x1a_0466, 2); if(jz(0x1a_046d, 0x5)) goto l_0x1a_046d;  /* jz 0x46d */
+            ii(0x1a_0466, 2); if(jz(0x1a_046d, 5)) goto l_0x1a_046d;    /* jz 0x46d */
             ii(0x1a_0468, 3); mov(dx, memw[ss, bp - 0x28]);             /* mov dx, [bp-0x28] */
-            ii(0x1a_046b, 2); jmp(0x1a_0470, 0x3); goto l_0x1a_0470;    /* jmp 0x470 */
+            ii(0x1a_046b, 2); jmp(0x1a_0470, 3); goto l_0x1a_0470;      /* jmp 0x470 */
         l_0x1a_046d:
             ii(0x1a_046d, 2); sub(ax, ax);                              /* sub ax, ax */
             ii(0x1a_046f, 1); cwd();                                    /* cwd */
         l_0x1a_0470:
             ii(0x1a_0470, 1); pop(ds);                                  /* pop ds */
             ii(0x1a_0471, 1); leave();                                  /* leave */
-            ii(0x1a_0472, 3); retf(0x4);                                /* retf 0x4 */
+            ii(0x1a_0472, 3); retf(4);                                  /* retf 0x4 */
         }
     }
 }

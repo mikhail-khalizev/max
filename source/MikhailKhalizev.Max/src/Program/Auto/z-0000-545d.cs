@@ -14,9 +14,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5465, 2);    if(loop_func(0x5488, 0x21)) return;       /* loop 0x5488 */
             ii(0x5467, 3);    call(0x5476, 0xc);                        /* call 0x5476 */
             ii(0x546a, 2);    mov(bl, 0x3f);                            /* mov bl, 0x3f */
-            ii(0x546c, 3);    call(0x5476, 0x7);                        /* call 0x5476 */
+            ii(0x546c, 3);    call(0x5476, 7);                          /* call 0x5476 */
             ii(0x546f, 2);    if(jz_func(0x54b0, 0x3f)) return;         /* jz 0x54b0 */
-            ii(0x5471, 3);    call(0x5476, 0x2);                        /* call 0x5476 */
+            ii(0x5471, 3);    call(0x5476, 2);                          /* call 0x5476 */
         }
     }
 }

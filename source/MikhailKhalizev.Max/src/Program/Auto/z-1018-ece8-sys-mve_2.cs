@@ -14,28 +14,28 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_ecf3, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1018_ecf5, 6); lea(ecx, memd[ds, 0x101b_f110]);        /* lea ecx, [0x101bf110] */
             ii(0x1018_ecfb, 6); lea(edx, memd[ds, /* sys_mve */ 0x1018_edca]); /* lea edx, [0x1018edca] */
-            ii(0x1018_ed01, 3); mov(al, memb[ds, esi + 0x2]);           /* mov al, [esi+0x2] */
+            ii(0x1018_ed01, 3); mov(al, memb[ds, esi + 2]);             /* mov al, [esi+0x2] */
             ii(0x1018_ed04, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_ed07, 2); mov(memb[ds, edx], bl);                 /* mov [edx], bl */
-            ii(0x1018_ed09, 3); mov(memb[ds, edx + 0x6], bh);           /* mov [edx+0x6], bh */
+            ii(0x1018_ed09, 3); mov(memb[ds, edx + 6], bh);             /* mov [edx+0x6], bh */
             ii(0x1018_ed0c, 3); shr(ebx, 0x10);                         /* shr ebx, 0x10 */
             ii(0x1018_ed0f, 3); mov(memb[ds, edx + 0xd], bl);           /* mov [edx+0xd], bl */
             ii(0x1018_ed12, 3); mov(memb[ds, edx + 0x13], bh);          /* mov [edx+0x13], bh */
-            ii(0x1018_ed15, 3); mov(al, memb[ds, esi + 0x3]);           /* mov al, [esi+0x3] */
+            ii(0x1018_ed15, 3); mov(al, memb[ds, esi + 3]);             /* mov al, [esi+0x3] */
             ii(0x1018_ed18, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_ed1b, 3); mov(memb[ds, edx + 0x1a], bl);          /* mov [edx+0x1a], bl */
             ii(0x1018_ed1e, 3); mov(memb[ds, edx + 0x20], bh);          /* mov [edx+0x20], bh */
             ii(0x1018_ed21, 3); shr(ebx, 0x10);                         /* shr ebx, 0x10 */
             ii(0x1018_ed24, 3); mov(memb[ds, edx + 0x27], bl);          /* mov [edx+0x27], bl */
             ii(0x1018_ed27, 3); mov(memb[ds, edx + 0x2d], bh);          /* mov [edx+0x2d], bh */
-            ii(0x1018_ed2a, 3); mov(al, memb[ds, esi + 0x6]);           /* mov al, [esi+0x6] */
+            ii(0x1018_ed2a, 3); mov(al, memb[ds, esi + 6]);             /* mov al, [esi+0x6] */
             ii(0x1018_ed2d, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_ed30, 3); mov(memb[ds, edx + 0x49], bl);          /* mov [edx+0x49], bl */
             ii(0x1018_ed33, 3); mov(memb[ds, edx + 0x4f], bh);          /* mov [edx+0x4f], bh */
             ii(0x1018_ed36, 3); shr(ebx, 0x10);                         /* shr ebx, 0x10 */
             ii(0x1018_ed39, 3); mov(memb[ds, edx + 0x56], bl);          /* mov [edx+0x56], bl */
             ii(0x1018_ed3c, 3); mov(memb[ds, edx + 0x5c], bh);          /* mov [edx+0x5c], bh */
-            ii(0x1018_ed3f, 3); mov(al, memb[ds, esi + 0x7]);           /* mov al, [esi+0x7] */
+            ii(0x1018_ed3f, 3); mov(al, memb[ds, esi + 7]);             /* mov al, [esi+0x7] */
             ii(0x1018_ed42, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_ed45, 3); mov(memb[ds, edx + 0x63], bl);          /* mov [edx+0x63], bl */
             ii(0x1018_ed48, 3); mov(memb[ds, edx + 0x69], bh);          /* mov [edx+0x69], bh */
@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_ed5a, 3); mov(al, memb[ds, esi + 0xa]);           /* mov al, [esi+0xa] */
             ii(0x1018_ed5d, 3); mov(ebx, memd[ds, ecx + eax * 4]);      /* mov ebx, [ecx+eax*4] */
             ii(0x1018_ed60, 2); mov(memb[ds, edx], bl);                 /* mov [edx], bl */
-            ii(0x1018_ed62, 3); mov(memb[ds, edx + 0x6], bh);           /* mov [edx+0x6], bh */
+            ii(0x1018_ed62, 3); mov(memb[ds, edx + 6], bh);             /* mov [edx+0x6], bh */
             ii(0x1018_ed65, 3); shr(ebx, 0x10);                         /* shr ebx, 0x10 */
             ii(0x1018_ed68, 3); mov(memb[ds, edx + 0xd], bl);           /* mov [edx+0xd], bl */
             ii(0x1018_ed6b, 3); mov(memb[ds, edx + 0x13], bh);          /* mov [edx+0x13], bh */

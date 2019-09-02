@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa286, 6);    lgdt(memw[ss, 0x8c8]);                    /* lgdt [ss:0x8c8] */
             ii(0xa28c, 6);    lidt(memw[ss, 0x8d0]);                    /* lidt [ss:0x8d0] */
             ii(0xa292, 3);    smsw(ax);                                 /* smsw ax */
-            ii(0xa295, 2);    or(al, 0x1);                              /* or al, 0x1 */
+            ii(0xa295, 2);    or(al, 1);                                /* or al, 0x1 */
             ii(0xa297, 3);    lmsw(ax);                                 /* lmsw ax */
             ii(0xa29a, 5);    jmp_far_abs(0x18, 0x64ff);                /* jmp word 0x18:0x64ff */
         }

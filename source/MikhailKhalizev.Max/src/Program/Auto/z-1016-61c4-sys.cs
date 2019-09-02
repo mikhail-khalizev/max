@@ -19,9 +19,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_61d0, 2); mov(es, eax);                           /* mov es, eax */
             ii(0x1016_61d2, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1016_61d4, 2); repe(() => cmpsb());                    /* repe cmpsb */
-            ii(0x1016_61d6, 2); if(jz(0x1016_61dd, 0x5)) goto l_0x1016_61dd; /* jz 0x101661dd */
+            ii(0x1016_61d6, 2); if(jz(0x1016_61dd, 5)) goto l_0x1016_61dd; /* jz 0x101661dd */
             ii(0x1016_61d8, 2); sbb(eax, eax);                          /* sbb eax, eax */
-            ii(0x1016_61da, 3); sbb(eax, -0x1 /* 0xff */);              /* sbb eax, 0xffffffff */
+            ii(0x1016_61da, 3); sbb(eax, -1 /* 0xff */);                /* sbb eax, 0xffffffff */
         l_0x1016_61dd:
             ii(0x1016_61dd, 1); popd(es);                               /* pop es */
             ii(0x1016_61de, 1); pop(edi);                               /* pop edi */

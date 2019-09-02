@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_0534-174e522")]
         public void Method_0019_0534()
         {
-            ii(0x19_0534, 3); mov(ax, 0x1);                             /* mov ax, 0x1 */
+            ii(0x19_0534, 3); mov(ax, 1);                               /* mov ax, 0x1 */
             ii(0x19_0537, 1); retf();                                   /* retf */
         }
     }

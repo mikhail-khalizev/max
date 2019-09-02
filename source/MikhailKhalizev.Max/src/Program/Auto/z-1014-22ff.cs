@@ -17,9 +17,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_230d, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1014_230f, 6); sub(esp, 0x10);                         /* sub esp, 0x10 */
             ii(0x1014_2315, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x1014_2318, 3); mov(memd[ss, ebp - 0x8], edx);          /* mov [ebp-0x8], edx */
-            ii(0x1014_231b, 3); mov(memd[ss, ebp - 0x4], ebx);          /* mov [ebp-0x4], ebx */
-            ii(0x1014_231e, 3); mov(ecx, memd[ss, ebp - 0x4]);          /* mov ecx, [ebp-0x4] */
+            ii(0x1014_2318, 3); mov(memd[ss, ebp - 8], edx);            /* mov [ebp-0x8], edx */
+            ii(0x1014_231b, 3); mov(memd[ss, ebp - 4], ebx);            /* mov [ebp-0x4], ebx */
+            ii(0x1014_231e, 3); mov(ecx, memd[ss, ebp - 4]);            /* mov ecx, [ebp-0x4] */
             ii(0x1014_2321, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x1014_2324, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
             ii(0x1014_2326, 5); call(Definitions.my_strobj_c_str, -0xb_8b2f); /* call 0x100897fc */
@@ -30,12 +30,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_2337, 2); mov(edx, ecx);                          /* mov edx, ecx */
             ii(0x1014_2339, 5); call(Definitions.my_string_append_string_v2, 0x156); /* call 0x10142494 */
             ii(0x1014_233e, 2); mov(edx, eax);                          /* mov edx, eax */
-            ii(0x1014_2340, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1014_2340, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1014_2343, 5); call(Definitions.my_string_ctor_string, -0x8a2); /* call 0x10141aa6 */
             ii(0x1014_2348, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1014_234a, 3); lea(eax, memd[ss, ebp - 0x10]);         /* lea eax, [ebp-0x10] */
             ii(0x1014_234d, 5); call(Definitions.my_string_dtor, -0x828); /* call 0x10141b2a */
-            ii(0x1014_2352, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1014_2352, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1014_2355, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_2357, 1); pop(ebp);                               /* pop ebp */
             ii(0x1014_2358, 1); pop(edi);                               /* pop edi */

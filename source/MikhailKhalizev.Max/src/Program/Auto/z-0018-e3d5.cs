@@ -15,10 +15,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e3df, 2); if(jbe(0x18_e3fb, 0x1a)) goto l_0x18_e3fb; /* jbe 0xe3fb */
             ii(0x18_e3e1, 2); push(0x10);                               /* push 0x10 */
             ii(0x18_e3e3, 1); pop(ds);                                  /* pop ds */
-            ii(0x18_e3e4, 3); shl(si, 0x3);                             /* shl si, 0x3 */
+            ii(0x18_e3e4, 3); shl(si, 3);                               /* shl si, 0x3 */
             ii(0x18_e3e7, 1); lodsw();                                  /* lodsw */
             ii(0x18_e3e8, 4); mov(memw_a32[ss, ebp + 0x18], ax);        /* mov [ebp+0x18], ax */
-            ii(0x18_e3ec, 3); mov(ax, memw[ds, si + 0x4]);              /* mov ax, [si+0x4] */
+            ii(0x18_e3ec, 3); mov(ax, memw[ds, si + 4]);                /* mov ax, [si+0x4] */
             ii(0x18_e3ef, 4); mov(memw_a32[ss, ebp + 0x1a], ax);        /* mov [ebp+0x1a], ax */
             ii(0x18_e3f3, 1); lodsw();                                  /* lodsw */
             ii(0x18_e3f4, 4); mov(memw_a32[ss, ebp + 0x1c], ax);        /* mov [ebp+0x1c], ax */

@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_b4bf-e7833084")]
         public void /* sys */ Method_1019_b4bf()
         {
-            ii(0x1019_b4bf, 3); add(esp, 0x4);                          /* add esp, 0x4 */
+            ii(0x1019_b4bf, 3); add(esp, 4);                            /* add esp, 0x4 */
             ii(0x1019_b4c2, 1); pop(ebp);                               /* pop ebp */
             ii(0x1019_b4c3, 1); pop(edi);                               /* pop edi */
             ii(0x1019_b4c4, 1); pop(esi);                               /* pop esi */

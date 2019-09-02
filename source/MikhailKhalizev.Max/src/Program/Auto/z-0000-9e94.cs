@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9e9d, 2);    add(bx, ax);                              /* add bx, ax */
             ii(0x9e9f, 1);    lodsw();                                  /* lodsw */
             ii(0x9ea0, 2);    adc(dx, ax);                              /* adc dx, ax */
-            ii(0x9ea2, 2);    if(loop(0x9e9c, -0x8)) goto l_0x9e9c;     /* loop 0x9e9c */
+            ii(0x9ea2, 2);    if(loop(0x9e9c, -8)) goto l_0x9e9c;       /* loop 0x9e9c */
             ii(0x9ea4, 1);    pop(si);                                  /* pop si */
             ii(0x9ea5, 1);    push(ss);                                 /* push ss */
             ii(0x9ea6, 1);    pop(ds);                                  /* pop ds */

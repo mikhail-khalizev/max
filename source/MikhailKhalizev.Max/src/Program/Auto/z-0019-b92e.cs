@@ -14,23 +14,23 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_b932, 2); sub(si, si);                              /* sub si, si */
             ii(0x19_b934, 2); jmp(0x19_b941, 0xb); goto l_0x19_b941;    /* jmp 0xb941 */
         l_0x19_b936:
-            ii(0x19_b936, 4); mov(al, memb[es, bx + si + 0x1]);         /* mov al, [es:bx+si+0x1] */
-            ii(0x19_b93a, 3); les(bx, memw[ss, bp + 0x4]);              /* les bx, [bp+0x4] */
+            ii(0x19_b936, 4); mov(al, memb[es, bx + si + 1]);           /* mov al, [es:bx+si+0x1] */
+            ii(0x19_b93a, 3); les(bx, memw[ss, bp + 4]);                /* les bx, [bp+0x4] */
             ii(0x19_b93d, 3); mov(memb[es, bx + si], al);               /* mov [es:bx+si], al */
             ii(0x19_b940, 1); inc(si);                                  /* inc si */
         l_0x19_b941:
-            ii(0x19_b941, 3); les(bx, memw[ss, bp + 0x8]);              /* les bx, [bp+0x8] */
+            ii(0x19_b941, 3); les(bx, memw[ss, bp + 8]);                /* les bx, [bp+0x8] */
             ii(0x19_b944, 3); mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
             ii(0x19_b947, 1); cbw();                                    /* cbw */
             ii(0x19_b948, 2); cmp(ax, si);                              /* cmp ax, si */
             ii(0x19_b94a, 2); if(jg(0x19_b936, -0x16)) goto l_0x19_b936; /* jg 0xb936 */
-            ii(0x19_b94c, 3); les(bx, memw[ss, bp + 0x4]);              /* les bx, [bp+0x4] */
+            ii(0x19_b94c, 3); les(bx, memw[ss, bp + 4]);                /* les bx, [bp+0x4] */
             ii(0x19_b94f, 4); mov(memb[es, bx + si], 0);                /* mov byte [es:bx+si], 0x0 */
             ii(0x19_b953, 2); mov(ax, bx);                              /* mov ax, bx */
             ii(0x19_b955, 2); mov(dx, es);                              /* mov dx, es */
             ii(0x19_b957, 1); pop(si);                                  /* pop si */
             ii(0x19_b958, 1); leave();                                  /* leave */
-            ii(0x19_b959, 3); ret(0x8);                                 /* ret 0x8 */
+            ii(0x19_b959, 3); ret(8);                                   /* ret 0x8 */
         }
     }
 }

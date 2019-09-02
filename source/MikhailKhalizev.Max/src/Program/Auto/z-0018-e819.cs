@@ -9,15 +9,15 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_e819()
         {
             ii(0x18_e819, 4); mov(bp, memw[ds, 0x996]);                 /* mov bp, [0x996] */
-            ii(0x18_e81d, 3); mov(ds, memw[ss, bp + 0x6]);              /* mov ds, [bp+0x6] */
-            ii(0x18_e820, 4); mov(edi, memd[ss, bp + 0x8]);             /* mov edi, [bp+0x8] */
+            ii(0x18_e81d, 3); mov(ds, memw[ss, bp + 6]);                /* mov ds, [bp+0x6] */
+            ii(0x18_e820, 4); mov(edi, memd[ss, bp + 8]);               /* mov edi, [bp+0x8] */
             ii(0x18_e824, 4); mov(memw_a32[ds, edi + 0x20], ax);        /* mov [edi+0x20], ax */
             ii(0x18_e828, 4); pop(memw_a32[ds, edi + 0x24]);            /* pop word [edi+0x24] */
             ii(0x18_e82c, 4); pop(memw_a32[ds, edi + 0x22]);            /* pop word [edi+0x22] */
             ii(0x18_e830, 4); pop(memd_a32[ds, edi]);                   /* pop dword [edi] */
-            ii(0x18_e834, 5); pop(memd_a32[ds, edi + 0x4]);             /* pop dword [edi+0x4] */
-            ii(0x18_e839, 5); pop(memd_a32[ds, edi + 0x8]);             /* pop dword [edi+0x8] */
-            ii(0x18_e83e, 4); add(esp, 0x4);                            /* add esp, 0x4 */
+            ii(0x18_e834, 5); pop(memd_a32[ds, edi + 4]);               /* pop dword [edi+0x4] */
+            ii(0x18_e839, 5); pop(memd_a32[ds, edi + 8]);               /* pop dword [edi+0x8] */
+            ii(0x18_e83e, 4); add(esp, 4);                              /* add esp, 0x4 */
             ii(0x18_e842, 5); pop(memd_a32[ds, edi + 0x10]);            /* pop dword [edi+0x10] */
             ii(0x18_e847, 5); pop(memd_a32[ds, edi + 0x14]);            /* pop dword [edi+0x14] */
             ii(0x18_e84c, 5); pop(memd_a32[ds, edi + 0x18]);            /* pop dword [edi+0x18] */

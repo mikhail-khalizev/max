@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1017_2c28:
             ii(0x1017_2c28, 5); call(/* sys */ 0x1018_d7ae, 0x1_ab81);  /* call 0x1018d7ae */
             ii(0x1017_2c2d, 2); test(eax, eax);                         /* test eax, eax */
-            ii(0x1017_2c2f, 2); if(jz(0x1017_2c38, 0x7)) goto l_0x1017_2c38; /* jz 0x10172c38 */
+            ii(0x1017_2c2f, 2); if(jz(0x1017_2c38, 7)) goto l_0x1017_2c38; /* jz 0x10172c38 */
             ii(0x1017_2c31, 5); call(/* sys */ 0x1017_9285, 0x664f);    /* call 0x10179285 */
             ii(0x1017_2c36, 2); jmp(0x1017_2c28, -0x10); goto l_0x1017_2c28; /* jmp 0x10172c28 */
         l_0x1017_2c38:

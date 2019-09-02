@@ -11,8 +11,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb366, 2);    mov(cx, es);                              /* mov cx, es */
             ii(0xb368, 2);    if(jcxz(0xb3a5, 0x3b)) goto l_0xb3a5;     /* jcxz 0xb3a5 */
             ii(0xb36a, 2);    mov(bx, cs);                              /* mov bx, cs */
-            ii(0xb36c, 3);    and(bx, 0x7);                             /* and bx, 0x7 */
-            ii(0xb36f, 3);    or(bx, 0x8);                              /* or bx, 0x8 */
+            ii(0xb36c, 3);    and(bx, 7);                               /* and bx, 0x7 */
+            ii(0xb36f, 3);    or(bx, 8);                                /* or bx, 0x8 */
             ii(0xb372, 2);    jmp(0xb39d, 0x29); goto l_0xb39d;         /* jmp 0xb39d */
         l_0xb374:
             ii(0xb374, 3);    test(dl, 0x80);                           /* test dl, 0x80 */
@@ -22,8 +22,8 @@ namespace MikhailKhalizev.Max.Program
         l_0xb380:
             ii(0xb380, 4);    if(jnz(0xb390, 0xc)) goto l_0xb390;       /* jnz 0xb390 */
             ii(0xb384, 3);    test(ah, 0x93);                           /* test ah, 0x93 */
-            ii(0xb387, 4);    if(jz(0xb390, 0x5)) goto l_0xb390;        /* jz 0xb390 */
-            ii(0xb38b, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
+            ii(0xb387, 4);    if(jz(0xb390, 5)) goto l_0xb390;          /* jz 0xb390 */
+            ii(0xb38b, 3);    mov(ax, 1);                               /* mov ax, 0x1 */
             ii(0xb38e, 2);    @int(0x31);                               /* int 0x31 */
         l_0xb390:
             ii(0xb390, 2);    add(dl, dl);                              /* add dl, dl */
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xb39c, 1);    inc(di);                                  /* inc di */
         l_0xb39d:
             ii(0xb39d, 3);    mov(dl, memb[es, di]);                    /* mov dl, [es:di] */
-            ii(0xb3a0, 3);    mov(cx, 0x8);                             /* mov cx, 0x8 */
+            ii(0xb3a0, 3);    mov(cx, 8);                               /* mov cx, 0x8 */
             ii(0xb3a3, 2);    jmp(0xb374, -0x31); goto l_0xb374;        /* jmp 0xb374 */
         l_0xb3a5:
             ii(0xb3a5, 1);    retf();                                   /* retf */

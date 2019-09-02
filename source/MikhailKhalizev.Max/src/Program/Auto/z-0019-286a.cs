@@ -27,14 +27,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_2896, 2); mov(dx, ds);                              /* mov dx, ds */
             ii(0x19_2898, 2); xor(bx, bx);                              /* xor bx, bx */
             ii(0x19_289a, 5); call_far_ind(memw[ss, 0x3f78]);           /* call far word [ss:0x3f78] */
-            ii(0x19_289f, 2); if(jae(0x19_28a6, 0x5)) goto l_0x19_28a6; /* jae 0x28a6 */
+            ii(0x19_289f, 2); if(jae(0x19_28a6, 5)) goto l_0x19_28a6;   /* jae 0x28a6 */
             ii(0x19_28a1, 1); push(ss);                                 /* push ss */
             ii(0x19_28a2, 1); pop(ds);                                  /* pop ds */
             ii(0x19_28a3, 3); if(jmp_func(0x19_3ab8, 0x1212)) return;   /* jmp 0x3ab8 */
         l_0x19_28a6:
             ii(0x19_28a6, 5); lds(ax, memw[ss, 0x3f80]);                /* lds ax, [ss:0x3f80] */
             ii(0x19_28ab, 2); mov(dx, ds);                              /* mov dx, ds */
-            ii(0x19_28ad, 3); mov(bx, 0x3);                             /* mov bx, 0x3 */
+            ii(0x19_28ad, 3); mov(bx, 3);                               /* mov bx, 0x3 */
             ii(0x19_28b0, 5); call_far_ind(memw[ss, 0x3f78]);           /* call far word [ss:0x3f78] */
             ii(0x19_28b5, 1); push(ss);                                 /* push ss */
             ii(0x19_28b6, 1); pop(ds);                                  /* pop ds */
@@ -63,7 +63,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_28e4, 1); pop(ds);                                  /* pop ds */
             ii(0x19_28e5, 2); mov(si, di);                              /* mov si, di */
             ii(0x19_28e7, 3); mov(di, 0x3c21);                          /* mov di, 0x3c21 */
-            ii(0x19_28ea, 2); mov(cl, 0x4);                             /* mov cl, 0x4 */
+            ii(0x19_28ea, 2); mov(cl, 4);                               /* mov cl, 0x4 */
         l_0x19_28ec:
             ii(0x19_28ec, 1); lodsb();                                  /* lodsb */
             ii(0x19_28ed, 2); sub(al, 0x41);                            /* sub al, 0x41 */
@@ -72,7 +72,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_28f3, 1); xchg(dx, ax);                             /* xchg dx, ax */
             ii(0x19_28f4, 1); lodsb();                                  /* lodsb */
             ii(0x19_28f5, 2); sub(al, 0x41);                            /* sub al, 0x41 */
-            ii(0x19_28f7, 2); if(jb(0x19_28fe, 0x5)) goto l_0x19_28fe;  /* jb 0x28fe */
+            ii(0x19_28f7, 2); if(jb(0x19_28fe, 5)) goto l_0x19_28fe;    /* jb 0x28fe */
             ii(0x19_28f9, 2); or(al, dl);                               /* or al, dl */
             ii(0x19_28fb, 1); stosb();                                  /* stosb */
             ii(0x19_28fc, 2); jmp(0x19_28ec, -0x12); goto l_0x19_28ec;  /* jmp 0x28ec */
@@ -80,14 +80,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_28fe, 1); push(ss);                                 /* push ss */
             ii(0x19_28ff, 1); pop(ds);                                  /* pop ds */
         l_0x19_2900:
-            ii(0x19_2900, 3); mov(bx, 0x4);                             /* mov bx, 0x4 */
+            ii(0x19_2900, 3); mov(bx, 4);                               /* mov bx, 0x4 */
         l_0x19_2903:
             ii(0x19_2903, 5); and(memb[ds, bx + 0x3c21], -0x41 /* 0xbf */); /* and byte [bx+0x3c21], 0xbf */
             ii(0x19_2908, 3); mov(ax, 0x4400);                          /* mov ax, 0x4400 */
             ii(0x19_290b, 2); @int(0x21);                               /* int 0x21 */
             ii(0x19_290d, 2); if(jb(0x19_2919, 0xa)) goto l_0x19_2919;  /* jb 0x2919 */
             ii(0x19_290f, 3); test(dl, 0x80);                           /* test dl, 0x80 */
-            ii(0x19_2912, 2); if(jz(0x19_2919, 0x5)) goto l_0x19_2919;  /* jz 0x2919 */
+            ii(0x19_2912, 2); if(jz(0x19_2919, 5)) goto l_0x19_2919;    /* jz 0x2919 */
             ii(0x19_2914, 5); or(memb[ds, bx + 0x3c21], 0x40);          /* or byte [bx+0x3c21], 0x40 */
         l_0x19_2919:
             ii(0x19_2919, 1); dec(bx);                                  /* dec bx */

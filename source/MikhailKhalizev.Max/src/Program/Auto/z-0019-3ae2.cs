@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_3af8, 1); pop(cx);                                  /* pop cx */
             ii(0x19_3af9, 2); mov(bx, dx);                              /* mov bx, dx */
             ii(0x19_3afb, 2); or(bx, ax);                               /* or bx, ax */
-            ii(0x19_3afd, 2); if(jz(0x19_3b02, 0x3)) goto l_0x19_3b02;  /* jz 0x3b02 */
+            ii(0x19_3afd, 2); if(jz(0x19_3b02, 3)) goto l_0x19_3b02;    /* jz 0x3b02 */
             ii(0x19_3aff, 1); pop(es);                                  /* pop es */
             ii(0x19_3b00, 1); pop(bx);                                  /* pop bx */
             ii(0x19_3b01, 1); ret(); return;                            /* ret */

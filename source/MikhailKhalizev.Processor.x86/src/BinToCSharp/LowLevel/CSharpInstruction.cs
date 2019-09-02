@@ -185,7 +185,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             if (!InstructionsFlag.TryGetValue(Mnemonic, out var flags))
                 flags = InstrFlags.Unknown;
-            
+
             var method = udis86.ud_lookup_mnemonic(Mnemonic);
 
 
@@ -266,7 +266,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (new[] { "int", "in", "out" }.Contains(method))
                 method = "@" + method;
 
-            
+
             if (PfxRepne)
                 sb.Append($"repne{adrModeStr}(() => ");
             else if (PfxRepe)
@@ -359,12 +359,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 if (val < 0)
                                 {
                                     sb.Append(isNextOperation ? " - " : "-");
-                                    sb.Append(HexHelper.ToShortGrouped4Hex(-val));
+                                    AppendNumeric(sb, (uint)-val);
                                 }
-                                else
+                                else if (0 < val || !isNextOperation)
                                 {
-                                    sb.Append(isNextOperation ? " + " : "");
-                                    sb.Append(DefinitionCollection.GetAddressFullName(val, options));
+                                    if (isNextOperation)
+                                        sb.Append(" + ");
+                                    AppendAddress(sb, (uint)val, options);
                                 }
 
                                 isNextOperation = true;
@@ -401,21 +402,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                                     if (val < 0 && needSignExtend)
                                     {
-                                        sb.Append($"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
+                                        sb.Append("-");
+                                        AppendNumeric(sb, (byte)-val);
+                                        sb.Append(" /* ");
+                                        AppendNumeric(sb, (byte)val);
+                                        sb.Append(" */");
                                     }
                                     else
                                     {
-                                        sb.Append(HexHelper.ToShortGrouped4Hex(op.lval.ubyte));
+                                        AppendNumeric(sb, (byte)val);
                                     }
 
                                     break;
                                 }
 
                             case 16:
-                                sb.Append(DefinitionCollection.GetAddressFullName(op.lval.uword, options));
+                                AppendAddress(sb, op.lval.uword, options);
                                 break;
                             case 32:
-                                sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
+                                AppendAddress(sb, op.lval.udword, options);
                                 break;
                             default:
                                 throw new NotImplementedException($"oprSize: {oprSize}");
@@ -440,14 +445,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         sb.Append(DefinitionCollection.GetAddressFullName(End + val, options));
                         sb.Append(", ");
 
-                        sb.Append(
-                            val < 0
-                                ? $"-{HexHelper.ToShortGrouped4Hex(-val)}"
-                                : HexHelper.ToShortGrouped4Hex(val));
+                        if (val < 0)
+                            sb.Append("-");
+                        AppendNumeric(sb, val < 0 ? (uint)-val : (uint)val);
                         break;
 
                     case ud_type.UD_OP_CONST:
-                        sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
+                        AppendAddress(sb, op.lval.udword, options);
                         break;
 
                     case ud_type.UD_OP_PTR:
@@ -516,6 +520,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return sb.ToString();
         }
 
+        private static void AppendNumeric(StringBuilder sb, uint val)
+        {
+            if (val <= 9)
+                sb.Append(val);
+            else
+                sb.Append(HexHelper.ToShortGrouped4Hex(val));
+        }
+
+        private void AppendAddress(StringBuilder sb, uint val, DefinitionCollection.Options options)
+        {
+            if (val <= 9)
+                sb.Append(val);
+            else
+                sb.Append(DefinitionCollection.GetAddressFullName(val, options));
+        }
+
         #region Known Instructions
 
         [Flags]
@@ -545,7 +565,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Ipopfw, InstrFlags.NotUseOprSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Ipopfd, InstrFlags.NotUseOprSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Ipopfq, InstrFlags.NotUseOprSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Imovsb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Imovsw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Imovsd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
@@ -555,17 +575,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Istosw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Istosd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Istosq, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Iscasb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Iscasw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Iscasd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Iscasq, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Ilodsb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Ilodsw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Ilodsd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Ilodsq, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Icmpsb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Icmpsw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Icmpsd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
@@ -582,7 +602,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Iiretw, InstrFlags.NotUseOprSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Iiretd, InstrFlags.NotUseOprSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Iiretq, InstrFlags.NotUseOprSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Ijcxz, InstrFlags.NotUseAdrSizeInside},  // Always 16-bit cx.
                 {ud_mnemonic_code.UD_Ijecxz, InstrFlags.NotUseAdrSizeInside}, // Always 32-bit ecx.
                 {ud_mnemonic_code.UD_Ijrcxz, InstrFlags.NotUseAdrSizeInside}, // Always 64-bit rcx.
@@ -593,7 +613,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 {ud_mnemonic_code.UD_Inop, InstrFlags.NotUseOprSizeInside | InstrFlags.NotUseAdrSizeInside}, // Ignore PfxOpr & PfxAddress.
                 {ud_mnemonic_code.UD_Isti, InstrFlags.NotUseOprSizeInside | InstrFlags.NotUseAdrSizeInside}, // Ignore PfxOpr & PfxAddress.
-                
+
                 {ud_mnemonic_code.UD_Ifnsave, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ifrstor, InstrFlags.UseAdrSizeInside},
 
@@ -608,7 +628,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Iloop, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iloope, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iloopne, InstrFlags.UseAdrSizeInside},
-                
+
                 {ud_mnemonic_code.UD_Ijmp, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Icall, InstrFlags.UseOprSizeInside},
 

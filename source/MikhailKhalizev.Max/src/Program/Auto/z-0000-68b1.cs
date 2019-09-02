@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x68c8, 4);    and(memw_a32[es, edi], ax);               /* and [es:edi], ax */
             ii(0x68cc, 4);    inc(memw[ds, 0xdf8]);                     /* inc word [0xdf8] */
             ii(0x68d0, 9);    sub(memd[ds, 0xaa8], 0x1000);             /* sub dword [0xaa8], 0x1000 */
-            ii(0x68d9, 4);    add(edi, 0x4);                            /* add edi, 0x4 */
+            ii(0x68d9, 4);    add(edi, 4);                              /* add edi, 0x4 */
             ii(0x68dd, 1);    dec(cx);                                  /* dec cx */
             ii(0x68de, 2);    if(jns(0x68c8, -0x18)) goto l_0x68c8;     /* jns 0x68c8 */
             ii(0x68e0, 1);    pop(cx);                                  /* pop cx */

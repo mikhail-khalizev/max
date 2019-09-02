@@ -17,11 +17,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_a77d, 1); push(ebp);                              /* push ebp */
             ii(0x1015_a77e, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1015_a780, 6); sub(esp, 0x18);                         /* sub esp, 0x18 */
-            ii(0x1015_a786, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1015_a789, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1015_a78c, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1015_a786, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1015_a789, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1015_a78c, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1015_a78f, 3); mov(memd[ss, ebp - 0x18], eax);         /* mov [ebp-0x18], eax */
-            ii(0x1015_a792, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
+            ii(0x1015_a792, 5); mov(eax, 1);                            /* mov eax, 0x1 */
             ii(0x1015_a797, 5); call(0x100f_448c, -0x6_6310);           /* call 0x100f448c */
             ii(0x1015_a79c, 3); mov(eax, memd[ss, ebp - 0x18]);         /* mov eax, [ebp-0x18] */
             ii(0x1015_a79f, 4); mov(ax, memw[ds, eax + 0x41]);          /* mov ax, [eax+0x41] */
@@ -44,13 +44,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_a7d3, 5); call(0x100c_aa20, -0x8_fdb8);           /* call 0x100caa20 */
             ii(0x1015_a7d8, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1015_a7da, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x1015_a7dc, 5); mov(edx, 0x2);                          /* mov edx, 0x2 */
+            ii(0x1015_a7dc, 5); mov(edx, 2);                            /* mov edx, 0x2 */
             ii(0x1015_a7e1, 5); mov(eax, StringDefinitions.NeedALocationToPutThePowerGenerator); /* mov eax, 0x101b2702 */
             ii(0x1015_a7e6, 5); call(0x1011_5d23, -0x4_4ac8);           /* call 0x10115d23 */
             ii(0x1015_a7eb, 2); jmp(0x1015_a863, 0x76); goto l_0x1015_a863; /* jmp 0x1015a863 */
         l_0x1015_a7ed:
             ii(0x1015_a7ed, 5); mov(ebx, 0x19);                         /* mov ebx, 0x19 */
-            ii(0x1015_a7f2, 5); mov(edx, 0x4);                          /* mov edx, 0x4 */
+            ii(0x1015_a7f2, 5); mov(edx, 4);                            /* mov edx, 0x4 */
             ii(0x1015_a7f7, 3); mov(eax, memd[ss, ebp - 0x18]);         /* mov eax, [ebp-0x18] */
             ii(0x1015_a7fa, 5); call(0x1016_2f96, 0x8797);              /* call 0x10162f96 */
             ii(0x1015_a7ff, 3); mov(eax, memd[ss, ebp - 0x18]);         /* mov eax, [ebp-0x18] */

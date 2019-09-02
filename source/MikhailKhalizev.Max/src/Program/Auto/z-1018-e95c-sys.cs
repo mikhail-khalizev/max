@@ -12,10 +12,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_e95e, 2); mov(al, memb[ds, esi]);                 /* mov al, [esi] */
             ii(0x1018_e960, 1); inc(esi);                               /* inc esi */
             ii(0x1018_e961, 8); mov(ax, memw[ds, eax * 2 + 0x101b_ecd0]); /* mov ax, [eax*2+0x101becd0] */
-            ii(0x1018_e969, 2); jmp(0x1018_e972, 0x7); goto l_0x1018_e972; /* jmp 0x1018e972 */
+            ii(0x1018_e969, 2); jmp(0x1018_e972, 7); goto l_0x1018_e972; /* jmp 0x1018e972 */
         //  ii(0x1018_e96b, 1); nop();                                  /* nop */
         //  ii(0x1018_e96c, 3); mov(ax, memw[ds, esi]);                 /* mov ax, [esi] */
-        //  ii(0x1018_e96f, 3); add(esi, 0x2);                          /* add esi, 0x2 */
+        //  ii(0x1018_e96f, 3); add(esi, 2);                            /* add esi, 0x2 */
         l_0x1018_e972:
             ii(0x1018_e972, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1018_e974, 2); mov(bl, ah);                            /* mov bl, ah */

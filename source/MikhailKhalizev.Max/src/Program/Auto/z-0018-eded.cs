@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_edf0, 2); mov(bx, ss);                              /* mov bx, ss */
             ii(0x18_edf2, 4); lar(ebx, bx);                             /* lar ebx, bx */
             ii(0x18_edf6, 4); shr(ebx, 0x17);                           /* shr ebx, 0x17 */
-            ii(0x18_edfa, 2); if(jae_func(0x18_edfd, 0x1)) return;      /* jae 0xedfd */
+            ii(0x18_edfa, 2); if(jae_func(0x18_edfd, 1)) return;        /* jae 0xedfd */
         }
     }
 }

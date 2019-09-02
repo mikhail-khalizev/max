@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_e96c()
         {
             ii(0x1018_e96c, 3); mov(ax, memw[ds, esi]);                 /* mov ax, [esi] */
-            ii(0x1018_e96f, 3); add(esi, 0x2);                          /* add esi, 0x2 */
+            ii(0x1018_e96f, 3); add(esi, 2);                            /* add esi, 0x2 */
             ii(0x1018_e972, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1018_e974, 2); mov(bl, ah);                            /* mov bl, ah */
             ii(0x1018_e976, 3); shl(eax, 0x18);                         /* shl eax, 0x18 */

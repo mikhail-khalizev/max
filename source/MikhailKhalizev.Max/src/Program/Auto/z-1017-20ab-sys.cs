@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x1017_20ab, 3); add(eax, 0x30);                         /* add eax, 0x30 */
             ii(0x1017_20ae, 3); cmp(eax, 0x39);                         /* cmp eax, 0x39 */
-            ii(0x1017_20b1, 2); if(jle(0x1017_20b6, 0x3)) goto l_0x1017_20b6; /* jle 0x101720b6 */
+            ii(0x1017_20b1, 2); if(jle(0x1017_20b6, 3)) goto l_0x1017_20b6; /* jle 0x101720b6 */
             ii(0x1017_20b3, 3); add(eax, 0x27);                         /* add eax, 0x27 */
         l_0x1017_20b6:
             ii(0x1017_20b6, 1); ret();                                  /* ret */

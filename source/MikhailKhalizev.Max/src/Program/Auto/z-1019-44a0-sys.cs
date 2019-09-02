@@ -26,10 +26,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_44cc, 5); mov(eax, 0x31);                         /* mov eax, 0x31 */
             ii(0x1019_44d1, 4); mov(memw[ss, ebp - 0x20], cx);          /* mov [ebp-0x20], cx */
             ii(0x1019_44d5, 5); call(/* sys */ 0x1016_c606, -0x2_7ed4); /* call 0x1016c606 */
-            ii(0x1019_44da, 4); cmp(memd[ss, ebp - 0x8], 0);            /* cmp dword [ebp-0x8], 0x0 */
+            ii(0x1019_44da, 4); cmp(memd[ss, ebp - 8], 0);              /* cmp dword [ebp-0x8], 0x0 */
             ii(0x1019_44de, 3); setz(al);                               /* setz al */
             ii(0x1019_44e1, 5); and(eax, 0xff);                         /* and eax, 0xff */
-            ii(0x1019_44e6, 3); lea(esp, memd[ss, ebp - 0x4]);          /* lea esp, [ebp-0x4] */
+            ii(0x1019_44e6, 3); lea(esp, memd[ss, ebp - 4]);            /* lea esp, [ebp-0x4] */
             ii(0x1019_44e9, 1); pop(ecx);                               /* pop ecx */
             ii(0x1019_44ea, 1); pop(ebp);                               /* pop ebp */
             ii(0x1019_44eb, 1); ret();                                  /* ret */

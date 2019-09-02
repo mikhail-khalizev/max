@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x69c8, 3);    push(0xf7ff);                             /* push 0xf7ff */
             ii(0x69cb, 5);    push(memd[ds, 0x9c]);                     /* push dword [0x9c] */
             ii(0x69d0, 6);    movzx(eax, memw[ds, 0xeca]);              /* movzx eax, word [0xeca] */
-            ii(0x69d6, 4);    shl(eax, 0x6);                            /* shl eax, 0x6 */
+            ii(0x69d6, 4);    shl(eax, 6);                              /* shl eax, 0x6 */
             ii(0x69da, 2);    push(eax);                                /* push eax */
             ii(0x69dc, 3);    call(0x4030, -0x29af);                    /* call 0x4030 */
             ii(0x69df, 1);    push(cs);                                 /* push cs */

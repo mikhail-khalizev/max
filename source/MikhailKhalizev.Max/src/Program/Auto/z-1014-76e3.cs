@@ -17,8 +17,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_76f2, 6); sub(esp, 0x14);                         /* sub esp, 0x14 */
             ii(0x1014_76f8, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
             ii(0x1014_76fb, 3); mov(memd[ss, ebp - 0xc], edx);          /* mov [ebp-0xc], edx */
-            ii(0x1014_76fe, 3); mov(memd[ss, ebp - 0x8], ebx);          /* mov [ebp-0x8], ebx */
-            ii(0x1014_7701, 3); mov(memd[ss, ebp - 0x4], ecx);          /* mov [ebp-0x4], ecx */
+            ii(0x1014_76fe, 3); mov(memd[ss, ebp - 8], ebx);            /* mov [ebp-0x8], ebx */
+            ii(0x1014_7701, 3); mov(memd[ss, ebp - 4], ecx);            /* mov [ebp-0x4], ecx */
             ii(0x1014_7704, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
             ii(0x1014_7707, 5); call(0x1014_7395, -0x377);              /* call 0x10147395 */
             ii(0x1014_770c, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
@@ -29,8 +29,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_771c, 2); mov(edx, memd[ds, eax]);                /* mov edx, [eax] */
             ii(0x1014_771e, 5); mov(eax, StringDefinitions.Control33);  /* mov eax, 0x101ad154 */
             ii(0x1014_7723, 5); call(/* sys */ 0x1018_0f4d, 0x3_9825);  /* call 0x10180f4d */
-            ii(0x1014_7728, 4); movsx(edx, memw[ss, ebp - 0x4]);        /* movsx edx, word [ebp-0x4] */
-            ii(0x1014_772c, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1014_7728, 4); movsx(edx, memw[ss, ebp - 4]);          /* movsx edx, word [ebp-0x4] */
+            ii(0x1014_772c, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1014_772f, 5); call(0x1014_58f2, -0x1e42);             /* call 0x101458f2 */
             ii(0x1014_7734, 3); mov(memd[ss, ebp - 0x14], eax);         /* mov [ebp-0x14], eax */
             ii(0x1014_7737, 4); cmp(memd[ss, ebp - 0x14], 0);           /* cmp dword [ebp-0x14], 0x0 */

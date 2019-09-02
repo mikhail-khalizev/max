@@ -22,10 +22,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5b46, 3); mov(memb[es, edi], al);                 /* mov [es:edi], al */
             ii(0x1019_5b49, 2); cmp(al, 0);                             /* cmp al, 0x0 */
             ii(0x1019_5b4b, 2); if(jz(0x1019_5b5e, 0x11)) goto l_0x1019_5b5e; /* jz 0x10195b5e */
-            ii(0x1019_5b4d, 3); mov(al, memb[ds, esi + 0x1]);           /* mov al, [esi+0x1] */
-            ii(0x1019_5b50, 3); add(esi, 0x2);                          /* add esi, 0x2 */
-            ii(0x1019_5b53, 4); mov(memb[es, edi + 0x1], al);           /* mov [es:edi+0x1], al */
-            ii(0x1019_5b57, 3); add(edi, 0x2);                          /* add edi, 0x2 */
+            ii(0x1019_5b4d, 3); mov(al, memb[ds, esi + 1]);             /* mov al, [esi+0x1] */
+            ii(0x1019_5b50, 3); add(esi, 2);                            /* add esi, 0x2 */
+            ii(0x1019_5b53, 4); mov(memb[es, edi + 1], al);             /* mov [es:edi+0x1], al */
+            ii(0x1019_5b57, 3); add(edi, 2);                            /* add edi, 0x2 */
             ii(0x1019_5b5a, 2); cmp(al, 0);                             /* cmp al, 0x0 */
             ii(0x1019_5b5c, 2); if(jnz(0x1019_5b44, -0x1a)) goto l_0x1019_5b44; /* jnz 0x10195b44 */
         l_0x1019_5b5e:

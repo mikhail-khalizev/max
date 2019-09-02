@@ -14,17 +14,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9648, 1);    push(si);                                 /* push si */
             ii(0x9649, 1);    push(ds);                                 /* push ds */
             ii(0x964a, 1);    pop(es);                                  /* pop es */
-            ii(0x964b, 3);    mov(di, memw[ss, bp + 0x4]);              /* mov di, [bp+0x4] */
-            ii(0x964e, 3);    mov(si, memw[ss, bp + 0x6]);              /* mov si, [bp+0x6] */
+            ii(0x964b, 3);    mov(di, memw[ss, bp + 4]);                /* mov di, [bp+0x4] */
+            ii(0x964e, 3);    mov(si, memw[ss, bp + 6]);                /* mov si, [bp+0x6] */
             ii(0x9651, 2);    mov(bx, di);                              /* mov bx, di */
-            ii(0x9653, 3);    mov(cx, memw[ss, bp + 0x8]);              /* mov cx, [bp+0x8] */
+            ii(0x9653, 3);    mov(cx, memw[ss, bp + 8]);                /* mov cx, [bp+0x8] */
             ii(0x9656, 2);    if(jcxz(0x9664, 0xc)) goto l_0x9664;      /* jcxz 0x9664 */
         l_0x9658:
             ii(0x9658, 1);    lodsb();                                  /* lodsb */
             ii(0x9659, 2);    or(al, al);                               /* or al, al */
-            ii(0x965b, 2);    if(jz(0x9660, 0x3)) goto l_0x9660;        /* jz 0x9660 */
+            ii(0x965b, 2);    if(jz(0x9660, 3)) goto l_0x9660;          /* jz 0x9660 */
             ii(0x965d, 1);    stosb();                                  /* stosb */
-            ii(0x965e, 2);    if(loop(0x9658, -0x8)) goto l_0x9658;     /* loop 0x9658 */
+            ii(0x965e, 2);    if(loop(0x9658, -8)) goto l_0x9658;       /* loop 0x9658 */
         l_0x9660:
             ii(0x9660, 2);    xor(al, al);                              /* xor al, al */
             ii(0x9662, 2);    rep(() => stosb());                       /* rep stosb */

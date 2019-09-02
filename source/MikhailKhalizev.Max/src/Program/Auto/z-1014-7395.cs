@@ -17,16 +17,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_73a3, 1); push(edi);                              /* push edi */
             ii(0x1014_73a4, 1); push(ebp);                              /* push ebp */
             ii(0x1014_73a5, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x1014_73a7, 6); sub(esp, 0x8);                          /* sub esp, 0x8 */
-            ii(0x1014_73ad, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
-            ii(0x1014_73b0, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1014_73a7, 6); sub(esp, 8);                            /* sub esp, 0x8 */
+            ii(0x1014_73ad, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
+            ii(0x1014_73b0, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1014_73b3, 4); mov(ax, memw[ds, eax + 0xe]);           /* mov ax, [eax+0xe] */
-            ii(0x1014_73b7, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
+            ii(0x1014_73b7, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
         l_0x1014_73ba:
-            ii(0x1014_73ba, 3); dec(memd[ss, ebp - 0x8]);               /* dec dword [ebp-0x8] */
-            ii(0x1014_73bd, 5); cmp(memw[ss, ebp - 0x8], -0x1 /* 0xff */); /* cmp word [ebp-0x8], 0xffff */
+            ii(0x1014_73ba, 3); dec(memd[ss, ebp - 8]);                 /* dec dword [ebp-0x8] */
+            ii(0x1014_73bd, 5); cmp(memw[ss, ebp - 8], -1 /* 0xff */);  /* cmp word [ebp-0x8], 0xffff */
             ii(0x1014_73c2, 2); if(jz(0x1014_73d5, 0x11)) goto l_0x1014_73d5; /* jz 0x101473d5 */
-            ii(0x1014_73c4, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1014_73c4, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1014_73c7, 2); mov(edx, memd[ds, eax]);                /* mov edx, [eax] */
             ii(0x1014_73c9, 5); mov(eax, 0x20);                         /* mov eax, 0x20 */
             ii(0x1014_73ce, 5); call(/* sys */ 0x1017_29f1, 0x2_b61e);  /* call 0x101729f1 */

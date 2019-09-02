@@ -17,15 +17,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_b53e, 1); push(ebp);                              /* push ebp */
             ii(0x1008_b53f, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1008_b541, 6); sub(esp, 0x10);                         /* sub esp, 0x10 */
-            ii(0x1008_b547, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1008_b54a, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1008_b54d, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1008_b547, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1008_b54a, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1008_b54d, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1008_b550, 2); mov(edx, memd[ds, eax]);                /* mov edx, [eax] */
-            ii(0x1008_b552, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1008_b552, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1008_b555, 2); cmp(edx, memd[ds, eax]);                /* cmp edx, [eax] */
-            ii(0x1008_b557, 2); if(jnz(0x1008_b55f, 0x6)) goto l_0x1008_b55f; /* jnz 0x1008b55f */
-            ii(0x1008_b559, 4); mov(memb[ss, ebp - 0xc], 0x1);          /* mov byte [ebp-0xc], 0x1 */
-            ii(0x1008_b55d, 2); jmp(0x1008_b563, 0x4); goto l_0x1008_b563; /* jmp 0x1008b563 */
+            ii(0x1008_b557, 2); if(jnz(0x1008_b55f, 6)) goto l_0x1008_b55f; /* jnz 0x1008b55f */
+            ii(0x1008_b559, 4); mov(memb[ss, ebp - 0xc], 1);            /* mov byte [ebp-0xc], 0x1 */
+            ii(0x1008_b55d, 2); jmp(0x1008_b563, 4); goto l_0x1008_b563; /* jmp 0x1008b563 */
         l_0x1008_b55f:
             ii(0x1008_b55f, 4); mov(memb[ss, ebp - 0xc], 0);            /* mov byte [ebp-0xc], 0x0 */
         l_0x1008_b563:

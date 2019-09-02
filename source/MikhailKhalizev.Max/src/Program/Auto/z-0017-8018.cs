@@ -8,11 +8,11 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x17_8018-1dc984ab")]
         public void Method_0017_8018()
         {
-            ii(0x17_8018, 4); enter(0x2, 0);                            /* enter 0x2, 0x0 */
+            ii(0x17_8018, 4); enter(2, 0);                              /* enter 0x2, 0x0 */
             ii(0x17_801c, 1); push(ds);                                 /* push ds */
             ii(0x17_801d, 3); mov(ax, 0x3e68);                          /* mov ax, 0x3e68 */
             ii(0x17_8020, 2); mov(ds, ax);                              /* mov ds, ax */
-            ii(0x17_8022, 5); mov(memw[ss, bp - 0x2], 0);               /* mov word [bp-0x2], 0x0 */
+            ii(0x17_8022, 5); mov(memw[ss, bp - 2], 0);                 /* mov word [bp-0x2], 0x0 */
             ii(0x17_8027, 4); mov(es, memw[ds, 0x1dca]);                /* mov es, [0x1dca] */
             ii(0x17_802b, 6); cmp(memb[es, 0x2e], 0);                   /* cmp byte [es:0x2e], 0x0 */
             ii(0x17_8031, 2); if(jz(0x17_804d, 0x1a)) goto l_0x17_804d; /* jz 0x804d */
@@ -26,14 +26,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8040, 1); nop();                                    /* nop */
             ii(0x17_8041, 1); push(cs);                                 /* push cs */
             ii(0x17_8042, 3); call(0x17_ed1a, 0x6cd5);                  /* call 0xed1a */
-            ii(0x17_8045, 3); add(sp, 0x4);                             /* add sp, 0x4 */
-            ii(0x17_8048, 5); mov(memw[ss, bp - 0x2], 0x1);             /* mov word [bp-0x2], 0x1 */
+            ii(0x17_8045, 3); add(sp, 4);                               /* add sp, 0x4 */
+            ii(0x17_8048, 5); mov(memw[ss, bp - 2], 1);                 /* mov word [bp-0x2], 0x1 */
         l_0x17_804d:
-            ii(0x17_804d, 3); push(memw[ss, bp - 0x2]);                 /* push word [bp-0x2] */
+            ii(0x17_804d, 3); push(memw[ss, bp - 2]);                   /* push word [bp-0x2] */
             ii(0x17_8050, 1); nop();                                    /* nop */
             ii(0x17_8051, 1); push(cs);                                 /* push cs */
             ii(0x17_8052, 3); call(0x17_ee52, 0x6dfd);                  /* call 0xee52 */
-            ii(0x17_8055, 3); add(sp, 0x2);                             /* add sp, 0x2 */
+            ii(0x17_8055, 3); add(sp, 2);                               /* add sp, 0x2 */
             ii(0x17_8058, 1); pop(ds);                                  /* pop ds */
             ii(0x17_8059, 1); leave();                                  /* leave */
             ii(0x17_805a, 1); retf();                                   /* retf */

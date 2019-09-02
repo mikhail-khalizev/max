@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_5c77-5420b68e")]
         public void /* sys */ Method_1019_5c77()
         {
-            ii(0x1019_5c77, 4); sub(memd[ds, eax + 0x4], 0x2);          /* sub dword [eax+0x4], 0x2 */
+            ii(0x1019_5c77, 4); sub(memd[ds, eax + 4], 2);              /* sub dword [eax+0x4], 0x2 */
             ii(0x1019_5c7b, 1); ret();                                  /* ret */
         }
     }

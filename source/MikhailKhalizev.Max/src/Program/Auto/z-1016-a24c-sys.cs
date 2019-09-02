@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x1016_a24c, 1); push(ebx);                              /* push ebx */
             ii(0x1016_a24d, 1); push(edx);                              /* push edx */
-            ii(0x1016_a24e, 3); sub(esp, 0x4);                          /* sub esp, 0x4 */
+            ii(0x1016_a24e, 3); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1016_a251, 2); mov(ebx, eax);                          /* mov ebx, eax */
             ii(0x1016_a253, 2); mov(edx, esp);                          /* mov edx, esp */
             ii(0x1016_a255, 5); call(/* sys */ 0x1016_a2cc, 0x72);      /* call 0x1016a2cc */
@@ -43,9 +43,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_a2b4, 5); mov(memd[ds, 0x101b_de08], eax);        /* mov [0x101bde08], eax */
             ii(0x1016_a2b9, 2); mov(eax, ebx);                          /* mov eax, ebx */
             ii(0x1016_a2bb, 6); mov(memd[ds, 0x101b_dde4], ebx);        /* mov [0x101bdde4], ebx */
-            ii(0x1016_a2c1, 3); call_abs(memd[ds, edx + 0x8]);          /* call dword [edx+0x8] */
+            ii(0x1016_a2c1, 3); call_abs(memd[ds, edx + 8]);            /* call dword [edx+0x8] */
         l_0x1016_a2c4:
-            ii(0x1016_a2c4, 3); add(esp, 0x4);                          /* add esp, 0x4 */
+            ii(0x1016_a2c4, 3); add(esp, 4);                            /* add esp, 0x4 */
             ii(0x1016_a2c7, 1); pop(edx);                               /* pop edx */
             ii(0x1016_a2c8, 1); pop(ebx);                               /* pop ebx */
             ii(0x1016_a2c9, 1); ret();                                  /* ret */

@@ -12,10 +12,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3b93, 1); push(ecx);                              /* push ecx */
             ii(0x1019_3b94, 1); push(edx);                              /* push edx */
             ii(0x1019_3b95, 2); mov(ecx, eax);                          /* mov ecx, eax */
-            ii(0x1019_3b97, 3); shl(ecx, 0x2);                          /* shl ecx, 0x2 */
+            ii(0x1019_3b97, 3); shl(ecx, 2);                            /* shl ecx, 0x2 */
             ii(0x1019_3b9a, 2); neg(ecx);                               /* neg ecx */
             ii(0x1019_3b9c, 3); mov(memd[ss, ebp - 0x2c], ecx);         /* mov [ebp-0x2c], ecx */
-            ii(0x1019_3b9f, 3); mov(ebx, memd[ss, ebp - 0x8]);          /* mov ebx, [ebp-0x8] */
+            ii(0x1019_3b9f, 3); mov(ebx, memd[ss, ebp - 8]);            /* mov ebx, [ebp-0x8] */
             ii(0x1019_3ba2, 3); mov(edx, memd[ss, ebp - 0xc]);          /* mov edx, [ebp-0xc] */
             ii(0x1019_3ba5, 6); sub(edi, memd[ds, Definitions.video_win_start]); /* sub edi, [0x10209ca8] */
             ii(0x1019_3bab, 5); mov(ecx, /* sys */ 0x1019_3c65);        /* mov ecx, 0x10193c65 */
@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3c2a, 3); cmp(memd[ss, ebp - 0x2c], edi);         /* cmp [ebp-0x2c], edi */
             ii(0x1019_3c2d, 2); if(js(0x1019_3c4e, 0x1f)) goto l_0x1019_3c4e; /* js 0x10193c4e */
             ii(0x1019_3c2f, 6); add(edi, memd[ds, Definitions.video_win_start]); /* add edi, [0x10209ca8] */
-            ii(0x1019_3c35, 3); shl(eax, 0x2);                          /* shl eax, 0x2 */
+            ii(0x1019_3c35, 3); shl(eax, 2);                            /* shl eax, 0x2 */
             ii(0x1019_3c38, 2); add(esi, eax);                          /* add esi, eax */
             ii(0x1019_3c3a, 2); add(edi, eax);                          /* add edi, eax */
             ii(0x1019_3c3c, 2); jmp(0x1019_3c9f, 0x61); goto l_0x1019_3c9f; /* jmp 0x10193c9f */
@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3c4e, 1); push(ecx);                              /* push ecx */
             ii(0x1019_3c4f, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1019_3c51, 2); sub(esi, edi);                          /* sub esi, edi */
-            ii(0x1019_3c53, 3); sar(edi, 0x2);                          /* sar edi, 0x2 */
+            ii(0x1019_3c53, 3); sar(edi, 2);                            /* sar edi, 0x2 */
             ii(0x1019_3c56, 2); add(ecx, edi);                          /* add ecx, edi */
             ii(0x1019_3c58, 6); mov(edi, memd[ds, Definitions.video_win_start]); /* mov edi, [0x10209ca8] */
             ii(0x1019_3c5e, 3); add(ebx, memd[ss, ebp - 0x2c]);         /* add ebx, [ebp-0x2c] */

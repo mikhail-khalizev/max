@@ -15,12 +15,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a8ff, 3); mov(memw[ds, bx + 0x12], di);             /* mov [bx+0x12], di */
             ii(0x18_a902, 4); mov(cx, memw[ds, 0xe]);                   /* mov cx, [0xe] */
             ii(0x18_a906, 1); push(ds);                                 /* push ds */
-            ii(0x18_a907, 3); mov(ds, memw[ss, bp + 0x4]);              /* mov ds, [bp+0x4] */
+            ii(0x18_a907, 3); mov(ds, memw[ss, bp + 4]);                /* mov ds, [bp+0x4] */
         l_0x18_a90a:
             ii(0x18_a90a, 1); lodsb();                                  /* lodsb */
             ii(0x18_a90b, 1); stosb();                                  /* stosb */
             ii(0x18_a90c, 2); or(al, al);                               /* or al, al */
-            ii(0x18_a90e, 2); if(loopne(0x18_a90a, -0x6)) goto l_0x18_a90a; /* loopne 0xa90a */
+            ii(0x18_a90e, 2); if(loopne(0x18_a90a, -6)) goto l_0x18_a90a; /* loopne 0xa90a */
             ii(0x18_a910, 1); pop(ds);                                  /* pop ds */
             ii(0x18_a911, 1); clc();                                    /* clc */
         l_0x18_a912:

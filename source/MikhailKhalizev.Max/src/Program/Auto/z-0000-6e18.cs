@@ -20,16 +20,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x6e36, 3);    lea(ax, memw[ds, bx + 0x18]);             /* lea ax, [bx+0x18] */
             ii(0x6e39, 4);    mov(memw[cs, 0x1064], ax);                /* mov [cs:0x1064], ax */
             ii(0x6e3d, 3);    mov(ax, memw[ds, bx + 0x16]);             /* mov ax, [bx+0x16] */
-            ii(0x6e40, 6);    mov(memb[cs, 0x6], 0x21);                 /* mov byte [cs:0x6], 0x21 */
-            ii(0x6e46, 5);    mov(memb[cs, 0x7], ah);                   /* mov [cs:0x7], ah */
+            ii(0x6e40, 6);    mov(memb[cs, 6], 0x21);                   /* mov byte [cs:0x6], 0x21 */
+            ii(0x6e46, 5);    mov(memb[cs, 7], ah);                     /* mov [cs:0x7], ah */
             ii(0x6e4b, 3);    push(memw[ds, bx + 0x10]);                /* push word [bx+0x10] */
             ii(0x6e4e, 3);    mov(cx, memw[ds, bx + 0x14]);             /* mov cx, [bx+0x14] */
             ii(0x6e51, 3);    mov(dx, memw[ds, bx + 0x12]);             /* mov dx, [bx+0x12] */
             ii(0x6e54, 3);    mov(bp, memw[ds, bx + 0xc]);              /* mov bp, [bx+0xc] */
             ii(0x6e57, 3);    mov(si, memw[ds, bx + 0xa]);              /* mov si, [bx+0xa] */
-            ii(0x6e5a, 3);    mov(di, memw[ds, bx + 0x8]);              /* mov di, [bx+0x8] */
-            ii(0x6e5d, 3);    mov(es, memw[ds, bx + 0x6]);              /* mov es, [bx+0x6] */
-            ii(0x6e60, 3);    mov(ds, memw[ds, bx + 0x4]);              /* mov ds, [bx+0x4] */
+            ii(0x6e5a, 3);    mov(di, memw[ds, bx + 8]);                /* mov di, [bx+0x8] */
+            ii(0x6e5d, 3);    mov(es, memw[ds, bx + 6]);                /* mov es, [bx+0x6] */
+            ii(0x6e60, 3);    mov(ds, memw[ds, bx + 4]);                /* mov ds, [bx+0x4] */
             ii(0x6e63, 1);    pop(bx);                                  /* pop bx */
             ii(0x6e64, 1);    popfw();                                  /* popfw */
             ii(0x6e65, 2);    @int(0x21);                               /* int 0x21 */

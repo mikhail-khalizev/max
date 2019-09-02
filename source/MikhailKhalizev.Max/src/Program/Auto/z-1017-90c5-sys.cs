@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1017_90c5-a22ad73e")]
         public void /* sys */ Method_1017_90c5()
         {
-            ii(0x1017_90c5, 3); add(esp, 0x4);                          /* add esp, 0x4 */
+            ii(0x1017_90c5, 3); add(esp, 4);                            /* add esp, 0x4 */
             ii(0x1017_90c8, 1); pop(ebp);                               /* pop ebp */
             ii(0x1017_90c9, 1); pop(edi);                               /* pop edi */
             ii(0x1017_90ca, 1); pop(esi);                               /* pop esi */

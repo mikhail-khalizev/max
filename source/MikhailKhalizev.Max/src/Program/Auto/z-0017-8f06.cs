@@ -19,11 +19,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8f12, 4); mov(es, memw[ds, 0xaa]);                  /* mov es, [0xaa] */
             ii(0x17_8f16, 5); mov(ecx, memd[ds, 0x1f50]);               /* mov ecx, [0x1f50] */
             ii(0x17_8f1b, 5); mov(edi, memd[ds, 0x4fb4]);               /* mov edi, [0x4fb4] */
-            ii(0x17_8f20, 4); mov(eax, memd[ss, bp + 0x4]);             /* mov eax, [bp+0x4] */
+            ii(0x17_8f20, 4); mov(eax, memd[ss, bp + 4]);               /* mov eax, [bp+0x4] */
             ii(0x17_8f24, 4); repne_a32(() => scasd_a32());             /* a32 repne scasd */
-            ii(0x17_8f28, 4); if(jz(0x17_8f34, 0x8)) goto l_0x17_8f34;  /* jz 0x8f34 */
+            ii(0x17_8f28, 4); if(jz(0x17_8f34, 8)) goto l_0x17_8f34;    /* jz 0x8f34 */
             ii(0x17_8f2c, 6); mov(eax, 0xffff_ffff);                    /* mov eax, 0xffffffff */
-            ii(0x17_8f32, 2); if(jcxz(0x17_8f3d, 0x9)) goto l_0x17_8f3d; /* jcxz 0x8f3d */
+            ii(0x17_8f32, 2); if(jcxz(0x17_8f3d, 9)) goto l_0x17_8f3d;  /* jcxz 0x8f3d */
         l_0x17_8f34:
             ii(0x17_8f34, 4); mov(eax, memd[ds, 0x1f50]);               /* mov eax, [0x1f50] */
             ii(0x17_8f38, 3); sub(eax, ecx);                            /* sub eax, ecx */

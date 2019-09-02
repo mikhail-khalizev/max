@@ -8,13 +8,13 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_20c6-4b364719")]
         public void /* sys */ Method_1018_20c6()
         {
-            ii(0x1018_20c6, 2); mov(cl, 0x7);                           /* mov cl, 0x7 */
+            ii(0x1018_20c6, 2); mov(cl, 7);                             /* mov cl, 0x7 */
             ii(0x1018_20c8, 4); mov(ax, 0x2502);                        /* mov ax, 0x2502 */
             ii(0x1018_20cc, 2); @int(0x21);                             /* int 0x21 */
             ii(0x1018_20ce, 6); mov(memd[ds, 0x101b_e80c], ebx);        /* mov [0x101be80c], ebx */
             ii(0x1018_20d4, 7); mov(memw[ds, 0x101b_e810], es);         /* mov [0x101be810], es */
-            ii(0x1018_20db, 7); cmp(memb[ds, 0x101b_e58e], 0x3);        /* cmp byte [0x101be58e], 0x3 */
-            ii(0x1018_20e2, 2); mov(cl, 0x7);                           /* mov cl, 0x7 */
+            ii(0x1018_20db, 7); cmp(memb[ds, 0x101b_e58e], 3);          /* cmp byte [0x101be58e], 0x3 */
+            ii(0x1018_20e2, 2); mov(cl, 7);                             /* mov cl, 0x7 */
             ii(0x1018_20e4, 4); mov(ax, 0x2504);                        /* mov ax, 0x2504 */
             ii(0x1018_20e8, 1); pushd(ds);                              /* push ds */
             ii(0x1018_20e9, 1); pushd(cs);                              /* push cs */
@@ -30,8 +30,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_2103, 2); @int(0x21);                             /* int 0x21 */
             ii(0x1018_2105, 1); popd(ds);                               /* pop ds */
             ii(0x1018_2106, 3); mov(ecx, cr0);                          /* mov ecx, cr0 */
-            ii(0x1018_2109, 3); or(ecx, 0x4);                           /* or ecx, 0x4 */
-            ii(0x1018_210c, 3); and(ecx, -0x3 /* 0xfd */);              /* and ecx, 0xfffffffd */
+            ii(0x1018_2109, 3); or(ecx, 4);                             /* or ecx, 0x4 */
+            ii(0x1018_210c, 3); and(ecx, -3 /* 0xfd */);                /* and ecx, 0xfffffffd */
             ii(0x1018_210f, 3); mov(cr0, ecx);                          /* mov cr0, ecx */
         l_0x1018_2112:
             ii(0x1018_2112, 1); ret();                                  /* ret */

@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_5f0a:
             ii(0x1018_5f0a, 6); mov(ebx, memd[ds, 0x101b_e850]);        /* mov ebx, [0x101be850] */
             ii(0x1018_5f10, 2); test(ebx, ebx);                         /* test ebx, ebx */
-            ii(0x1018_5f12, 2); if(jnz(0x1018_5f19, 0x5)) goto l_0x1018_5f19; /* jnz 0x10185f19 */
+            ii(0x1018_5f12, 2); if(jnz(0x1018_5f19, 5)) goto l_0x1018_5f19; /* jnz 0x10185f19 */
             ii(0x1018_5f14, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1018_5f16, 1); pop(edx);                               /* pop edx */
             ii(0x1018_5f17, 1); pop(ebx);                               /* pop ebx */

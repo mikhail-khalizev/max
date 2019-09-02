@@ -17,10 +17,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_1e31, 3); mov(es, dx);                              /* mov es, dx */
             ii(0x1a_1e34, 5); mov(edi, 0x2e0a);                         /* mov edi, 0x2e0a */
             ii(0x1a_1e39, 2); @int(0x31);                               /* int 0x31 */
-            ii(0x1a_1e3b, 2); if(jb(0x1a_1e44, 0x7)) goto l_0x1a_1e44;  /* jb 0x1a1e44 */
+            ii(0x1a_1e3b, 2); if(jb(0x1a_1e44, 7)) goto l_0x1a_1e44;    /* jb 0x1a1e44 */
             ii(0x1a_1e3d, 2); xchg(dx, ax);                             /* xchg dx, ax */
             ii(0x1a_1e3f, 3); mov(dx, cx);                              /* mov dx, cx */
-            ii(0x1a_1e42, 2); jmp(0x1a_1e4a, 0x6); goto l_0x1a_1e4a;    /* jmp 0x1a1e4a */
+            ii(0x1a_1e42, 2); jmp(0x1a_1e4a, 6); goto l_0x1a_1e4a;      /* jmp 0x1a1e4a */
         l_0x1a_1e44:
             ii(0x1a_1e44, 3); xor(dx, dx);                              /* xor dx, dx */
             ii(0x1a_1e47, 3); xor(ax, ax);                              /* xor ax, ax */

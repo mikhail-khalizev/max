@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_ddee, 6); sub(esp, 0);                            /* sub esp, 0x0 */
             ii(0x100c_ddf4, 5); mov(ecx, 0xc7);                         /* mov ecx, 0xc7 */
             ii(0x100c_ddf9, 5); mov(ebx, 0x38);                         /* mov ebx, 0x38 */
-            ii(0x100c_ddfe, 5); mov(edx, 0x5);                          /* mov edx, 0x5 */
+            ii(0x100c_ddfe, 5); mov(edx, 5);                            /* mov edx, 0x5 */
             ii(0x100c_de03, 5); mov(eax, 0x101c_35a4);                  /* mov eax, 0x101c35a4 */
             ii(0x100c_de08, 5); call(0x100d_53a4, 0x7597);              /* call 0x100d53a4 */
             ii(0x100c_de0d, 5); mov(ecx, 0xc7);                         /* mov ecx, 0xc7 */

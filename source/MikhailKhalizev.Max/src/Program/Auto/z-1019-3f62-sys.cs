@@ -24,10 +24,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3f8d, 1); pop(ebx);                               /* pop ebx */
             ii(0x1019_3f8e, 3); mov(ecx, memd[ss, ebp + 0x14]);         /* mov ecx, [ebp+0x14] */
             ii(0x1019_3f91, 5); mov(eax, 0);                            /* mov eax, 0x0 */
-            ii(0x1019_3f96, 2); jmp(0x1019_3f9e, 0x6); goto l_0x1019_3f9e; /* jmp 0x10193f9e */
+            ii(0x1019_3f96, 2); jmp(0x1019_3f9e, 6); goto l_0x1019_3f9e; /* jmp 0x10193f9e */
         l_0x1019_3f98:
             ii(0x1019_3f98, 3); mov(dx, memw[ds, ebx]);                 /* mov dx, [ebx] */
-            ii(0x1019_3f9b, 3); add(ebx, 0x2);                          /* add ebx, 0x2 */
+            ii(0x1019_3f9b, 3); add(ebx, 2);                            /* add ebx, 0x2 */
         l_0x1019_3f9e:
             ii(0x1019_3f9e, 3); add(dx, dx);                            /* add dx, dx */
             ii(0x1019_3fa1, 2); if(jz(0x1019_3f98, -0xb)) goto l_0x1019_3f98; /* jz 0x10193f98 */
@@ -38,13 +38,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3fad, 5); if(jmp_func(0x1019_3da0, -0x212)) return; /* jmp 0x10193da0 */
         l_0x1019_3fb2:
             ii(0x1019_3fb2, 3); mov(dx, memw[ds, ebx]);                 /* mov dx, [ebx] */
-            ii(0x1019_3fb5, 3); add(ebx, 0x2);                          /* add ebx, 0x2 */
+            ii(0x1019_3fb5, 3); add(ebx, 2);                            /* add ebx, 0x2 */
         l_0x1019_3fb8:
             ii(0x1019_3fb8, 3); add(dx, dx);                            /* add dx, dx */
             ii(0x1019_3fbb, 2); if(ja(0x1019_3fce, 0x11)) goto l_0x1019_3fce; /* ja 0x10193fce */
             ii(0x1019_3fbd, 2); if(jz(0x1019_3fb2, -0xd)) goto l_0x1019_3fb2; /* jz 0x10193fb2 */
         l_0x1019_3fbf:
-            ii(0x1019_3fbf, 3); add(eax, 0x4);                          /* add eax, 0x4 */
+            ii(0x1019_3fbf, 3); add(eax, 4);                            /* add eax, 0x4 */
             ii(0x1019_3fc2, 2); if(loop(0x1019_3fb8, -0xc)) goto l_0x1019_3fb8; /* loop 0x10193fb8 */
             ii(0x1019_3fc4, 5); call(/* sys */ 0x1019_3fe5, 0x1c);      /* call 0x10193fe5 */
             ii(0x1019_3fc9, 5); if(jmp_func(0x1019_3da0, -0x22e)) return; /* jmp 0x10193da0 */

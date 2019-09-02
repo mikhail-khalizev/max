@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1016_c5f6()
         {
             ii(0x1016_c5f6, 4); fld(memq[ss, esp + 0xc]);               /* fld qword [esp+0xc] */
-            ii(0x1016_c5fa, 4); fld(memq[ss, esp + 0x4]);               /* fld qword [esp+0x4] */
+            ii(0x1016_c5fa, 4); fld(memq[ss, esp + 4]);                 /* fld qword [esp+0x4] */
             ii(0x1016_c5fe, 5); call(Definitions.sys_pow, -0x163);      /* call 0x1016c4a0 */
             ii(0x1016_c603, 3); ret(0x10);                              /* ret 0x10 */
         }

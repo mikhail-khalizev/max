@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1019_cce2()
         {
             ii(0x1019_cce2, 1); push(eax);                              /* push eax */
-            ii(0x1019_cce3, 4); fld(memq[ss, esp + 0x8]);               /* fld qword [esp+0x8] */
+            ii(0x1019_cce3, 4); fld(memq[ss, esp + 8]);                 /* fld qword [esp+0x8] */
             ii(0x1019_cce7, 2); fld(ST(0));                             /* fld st0 */
             ii(0x1019_cce9, 5); call(Definitions.sys_round, -0x3_6c70); /* call 0x1016607e */
             ii(0x1019_ccee, 2); fsub(ST(1), ST(0));                     /* fsub st1, st0 */

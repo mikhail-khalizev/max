@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_af58-70ad69ca")]
         public void Method_0018_af58()
         {
-            ii(0x18_af58, 5); test(memb[ds, 0x15], 0x1);                /* test byte [0x15], 0x1 */
+            ii(0x18_af58, 5); test(memb[ds, 0x15], 1);                  /* test byte [0x15], 0x1 */
             ii(0x18_af5d, 2); if(jnz(0x18_af98, 0x39)) goto l_0x18_af98; /* jnz 0xaf98 */
             ii(0x18_af5f, 5); cmp(memb[ds, 0x34], 0x15);                /* cmp byte [0x34], 0x15 */
             ii(0x18_af64, 2); if(jnz(0x18_af98, 0x32)) goto l_0x18_af98; /* jnz 0xaf98 */

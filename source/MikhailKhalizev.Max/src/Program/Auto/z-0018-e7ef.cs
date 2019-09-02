@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e7f8, 4); mov(ax, memw_a32[ds, esi + 0x22]);        /* mov ax, [esi+0x22] */
             ii(0x18_e7fc, 1); stosw();                                  /* stosw */
             ii(0x18_e7fd, 1); xchg(cx, ax);                             /* xchg cx, ax */
-            ii(0x18_e7fe, 6); mov(ecx, 0x8);                            /* mov ecx, 0x8 */
+            ii(0x18_e7fe, 6); mov(ecx, 8);                              /* mov ecx, 0x8 */
             ii(0x18_e804, 4); movzx(edi, di);                           /* movzx edi, di */
             ii(0x18_e808, 4); rep_a32(() => movsd_a32());               /* a32 rep movsd */
             ii(0x18_e80c, 2); xchg(cx, ax);                             /* a32 xchg cx, ax */

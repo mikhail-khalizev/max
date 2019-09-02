@@ -16,18 +16,18 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_faeb, 3); mov(ax, 0xa8);                            /* mov ax, 0xa8 */
             ii(0x19_faee, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x19_faf0, 2); sub(si, si);                              /* sub si, si */
-            ii(0x19_faf2, 2); push(0x3);                                /* push 0x3 */
+            ii(0x19_faf2, 2); push(3);                                  /* push 0x3 */
             ii(0x19_faf4, 5); call_far_abs(0x80, 0x51ba);               /* call word 0x80:0x51ba */
             ii(0x19_faf9, 1); pop(bx);                                  /* pop bx */
             ii(0x19_fafa, 2); mov(di, ax);                              /* mov di, ax */
-            ii(0x19_fafc, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
-            ii(0x19_faff, 3); push(memw[ss, bp + 0x4]);                 /* push word [bp+0x4] */
+            ii(0x19_fafc, 3); push(memw[ss, bp + 6]);                   /* push word [bp+0x6] */
+            ii(0x19_faff, 3); push(memw[ss, bp + 4]);                   /* push word [bp+0x4] */
             ii(0x19_fb02, 5); call_far_abs(0x80, 0x535a);               /* call word 0x80:0x535a */
             ii(0x19_fb07, 1); pop(bx);                                  /* pop bx */
             ii(0x19_fb08, 1); pop(bx);                                  /* pop bx */
             ii(0x19_fb09, 2); or(dx, ax);                               /* or dx, ax */
-            ii(0x19_fb0b, 2); if(jz(0x19_fb10, 0x3)) goto l_0x19_fb10;  /* jz 0xfb10 */
-            ii(0x19_fb0d, 3); mov(si, 0x1);                             /* mov si, 0x1 */
+            ii(0x19_fb0b, 2); if(jz(0x19_fb10, 3)) goto l_0x19_fb10;    /* jz 0xfb10 */
+            ii(0x19_fb0d, 3); mov(si, 1);                               /* mov si, 0x1 */
         l_0x19_fb10:
             ii(0x19_fb10, 1); push(di);                                 /* push di */
             ii(0x19_fb11, 5); call_far_abs(0x80, 0x51ba);               /* call word 0x80:0x51ba */
@@ -37,7 +37,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_fb1a, 1); pop(si);                                  /* pop si */
             ii(0x19_fb1b, 1); pop(di);                                  /* pop di */
             ii(0x19_fb1c, 1); leave();                                  /* leave */
-            ii(0x19_fb1d, 3); ret(0x4);                                 /* ret 0x4 */
+            ii(0x19_fb1d, 3); ret(4);                                   /* ret 0x4 */
         }
     }
 }

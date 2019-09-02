@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_b046-a5737d0")]
         public void Method_0018_b046()
         {
-            ii(0x18_b046, 4); or(memb[ss, bp + 0x26], 0x1);             /* or byte [bp+0x26], 0x1 */
+            ii(0x18_b046, 4); or(memb[ss, bp + 0x26], 1);               /* or byte [bp+0x26], 0x1 */
             ii(0x18_b04a, 2); push(0);                                  /* push 0x0 */
             ii(0x18_b04c, 1); push(ss);                                 /* push ss */
             ii(0x18_b04d, 1); push(bp);                                 /* push bp */

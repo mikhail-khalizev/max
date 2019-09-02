@@ -14,8 +14,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3a71, 1); push(esi);                              /* push esi */
             ii(0x1019_3a72, 1); push(edi);                              /* push edi */
             ii(0x1019_3a73, 2); mov(ecx, eax);                          /* mov ecx, eax */
-            ii(0x1019_3a75, 3); shl(ecx, 0x2);                          /* shl ecx, 0x2 */
-            ii(0x1019_3a78, 3); mov(ebx, memd[ss, ebp - 0x8]);          /* mov ebx, [ebp-0x8] */
+            ii(0x1019_3a75, 3); shl(ecx, 2);                            /* shl ecx, 0x2 */
+            ii(0x1019_3a78, 3); mov(ebx, memd[ss, ebp - 8]);            /* mov ebx, [ebp-0x8] */
             ii(0x1019_3a7b, 2); sub(ebx, ecx);                          /* sub ebx, ecx */
             ii(0x1019_3a7d, 3); mov(edx, memd[ss, ebp - 0xc]);          /* mov edx, [ebp-0xc] */
             ii(0x1019_3a80, 2); sub(edx, ecx);                          /* sub edx, ecx */
@@ -65,21 +65,21 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3ae4, 2); add(esi, ebx);                          /* add esi, ebx */
             ii(0x1019_3ae6, 2); add(edi, edx);                          /* add edi, edx */
             ii(0x1019_3ae8, 3); cmp(edi, memd[ss, ebp - 0x2c]);         /* cmp edi, [ebp-0x2c] */
-            ii(0x1019_3aeb, 2); if(jns(0x1019_3af1, 0x4)) goto l_0x1019_3af1; /* jns 0x10193af1 */
+            ii(0x1019_3aeb, 2); if(jns(0x1019_3af1, 4)) goto l_0x1019_3af1; /* jns 0x10193af1 */
             ii(0x1019_3aed, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1019_3aef, 2); jmp(0x1019_3afe, 0xd); goto l_0x1019_3afe; /* jmp 0x10193afe */
         l_0x1019_3af1:
             ii(0x1019_3af1, 6); mov(ecx, memd[ds, Definitions.video_win_end]); /* mov ecx, [0x10209cac] */
             ii(0x1019_3af7, 2); sub(ecx, edi);                          /* sub ecx, edi */
-            ii(0x1019_3af9, 2); if(js(0x1019_3b00, 0x5)) goto l_0x1019_3b00; /* js 0x10193b00 */
-            ii(0x1019_3afb, 3); shr(ecx, 0x2);                          /* shr ecx, 0x2 */
+            ii(0x1019_3af9, 2); if(js(0x1019_3b00, 5)) goto l_0x1019_3b00; /* js 0x10193b00 */
+            ii(0x1019_3afb, 3); shr(ecx, 2);                            /* shr ecx, 0x2 */
         l_0x1019_3afe:
             ii(0x1019_3afe, 2); rep(() => movsd());                     /* rep movsd */
         l_0x1019_3b00:
             ii(0x1019_3b00, 1); pop(edi);                               /* pop edi */
             ii(0x1019_3b01, 1); pop(esi);                               /* pop esi */
             ii(0x1019_3b02, 2); mov(ecx, eax);                          /* mov ecx, eax */
-            ii(0x1019_3b04, 3); shl(ecx, 0x2);                          /* shl ecx, 0x2 */
+            ii(0x1019_3b04, 3); shl(ecx, 2);                            /* shl ecx, 0x2 */
             ii(0x1019_3b07, 2); add(esi, ecx);                          /* add esi, ecx */
             ii(0x1019_3b09, 2); add(edi, ecx);                          /* add edi, ecx */
             ii(0x1019_3b0b, 1); pop(edx);                               /* pop edx */

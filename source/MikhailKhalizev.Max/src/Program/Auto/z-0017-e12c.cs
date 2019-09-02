@@ -21,14 +21,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_e13f, 3); mov(cx, 0xffff);                          /* mov cx, 0xffff */
             ii(0x17_e142, 2); repne(() => scasb());                     /* repne scasb */
             ii(0x17_e144, 2); not(cx);                                  /* not cx */
-            ii(0x17_e146, 3); les(di, memw[ss, bp + 0x6]);              /* les di, [bp+0x6] */
+            ii(0x17_e146, 3); les(di, memw[ss, bp + 6]);                /* les di, [bp+0x6] */
             ii(0x17_e149, 2); mov(ax, di);                              /* mov ax, di */
-            ii(0x17_e14b, 2); test(al, 0x1);                            /* test al, 0x1 */
-            ii(0x17_e14d, 2); if(jz(0x17_e151, 0x2)) goto l_0x17_e151;  /* jz 0xe151 */
+            ii(0x17_e14b, 2); test(al, 1);                              /* test al, 0x1 */
+            ii(0x17_e14d, 2); if(jz(0x17_e151, 2)) goto l_0x17_e151;    /* jz 0xe151 */
             ii(0x17_e14f, 1); movsb();                                  /* movsb */
             ii(0x17_e150, 1); dec(cx);                                  /* dec cx */
         l_0x17_e151:
-            ii(0x17_e151, 2); shr(cx, 0x1);                             /* shr cx, 1 */
+            ii(0x17_e151, 2); shr(cx, 1);                               /* shr cx, 1 */
             ii(0x17_e153, 2); rep(() => movsw());                       /* rep movsw */
             ii(0x17_e155, 2); adc(cx, cx);                              /* adc cx, cx */
             ii(0x17_e157, 2); rep(() => movsb());                       /* rep movsb */

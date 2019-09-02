@@ -13,8 +13,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a01e, 2); if(jz(0x18_a06b, 0x4b)) goto l_0x18_a06b; /* jz 0xa06b */
             ii(0x18_a020, 3); cmp(ah, 0x10);                            /* cmp ah, 0x10 */
             ii(0x18_a023, 2); if(jz(0x18_a06b, 0x46)) goto l_0x18_a06b; /* jz 0xa06b */
-            ii(0x18_a025, 3); cmp(ah, 0x1);                             /* cmp ah, 0x1 */
-            ii(0x18_a028, 2); if(jz(0x18_a02f, 0x5)) goto l_0x18_a02f;  /* jz 0xa02f */
+            ii(0x18_a025, 3); cmp(ah, 1);                               /* cmp ah, 0x1 */
+            ii(0x18_a028, 2); if(jz(0x18_a02f, 5)) goto l_0x18_a02f;    /* jz 0xa02f */
             ii(0x18_a02a, 3); cmp(ah, 0x11);                            /* cmp ah, 0x11 */
             ii(0x18_a02d, 2); if(jnz(0x18_a05c, 0x2d)) goto l_0x18_a05c; /* jnz 0xa05c */
         l_0x18_a02f:
@@ -27,15 +27,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a039, 1); pop(ds);                                  /* pop ds */
             ii(0x18_a03a, 2); mov(ah, al);                              /* mov ah, al */
             ii(0x18_a03c, 4); xchg(memb[ds, 0x10ed], al);               /* xchg [0x10ed], al */
-            ii(0x18_a040, 5); test(memb[ds, 0x14], 0x4);                /* test byte [0x14], 0x4 */
+            ii(0x18_a040, 5); test(memb[ds, 0x14], 4);                  /* test byte [0x14], 0x4 */
             ii(0x18_a045, 2); if(jnz(0x18_a052, 0xb)) goto l_0x18_a052; /* jnz 0xa052 */
             ii(0x18_a047, 2); cmp(ah, al);                              /* cmp ah, al */
-            ii(0x18_a049, 2); if(jnz(0x18_a052, 0x7)) goto l_0x18_a052; /* jnz 0xa052 */
+            ii(0x18_a049, 2); if(jnz(0x18_a052, 7)) goto l_0x18_a052;   /* jnz 0xa052 */
             ii(0x18_a04b, 1); pop(ax);                                  /* pop ax */
         l_0x18_a04c:
             ii(0x18_a04c, 1); pop(ds);                                  /* pop ds */
             ii(0x18_a04d, 1); sti();                                    /* sti */
-            ii(0x18_a04e, 4); retfd(0x4); return;                       /* o32 retf 0x4 */
+            ii(0x18_a04e, 4); retfd(4); return;                         /* o32 retf 0x4 */
         l_0x18_a052:
             ii(0x18_a052, 1); pop(ax);                                  /* pop ax */
             ii(0x18_a053, 2); pushfd();                                 /* pushfd */

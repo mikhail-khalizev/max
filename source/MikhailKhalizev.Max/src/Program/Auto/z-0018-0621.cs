@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_0628, 1); push(di);                                 /* push di */
             ii(0x18_0629, 1); push(cx);                                 /* push cx */
             ii(0x18_062a, 3); lds(si, memw[ss, bp + 0xa]);              /* lds si, [bp+0xa] */
-            ii(0x18_062d, 3); les(di, memw[ss, bp + 0x6]);              /* les di, [bp+0x6] */
+            ii(0x18_062d, 3); les(di, memw[ss, bp + 6]);                /* les di, [bp+0x6] */
             ii(0x18_0630, 2); mov(ax, di);                              /* mov ax, di */
             ii(0x18_0632, 3); mov(cx, memw[ss, bp + 0xe]);              /* mov cx, [bp+0xe] */
             ii(0x18_0635, 2); if(jcxz(0x18_0668, 0x31)) goto l_0x18_0668; /* jcxz 0x668 */
@@ -39,12 +39,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_0656, 2); jmp(0x18_0668, 0x10); goto l_0x18_0668;   /* jmp 0x668 */
         l_0x18_0658:
             ii(0x18_0658, 2); mov(ax, di);                              /* mov ax, di */
-            ii(0x18_065a, 2); test(al, 0x1);                            /* test al, 0x1 */
-            ii(0x18_065c, 2); if(jz(0x18_0660, 0x2)) goto l_0x18_0660;  /* jz 0x660 */
+            ii(0x18_065a, 2); test(al, 1);                              /* test al, 0x1 */
+            ii(0x18_065c, 2); if(jz(0x18_0660, 2)) goto l_0x18_0660;    /* jz 0x660 */
             ii(0x18_065e, 1); movsb();                                  /* movsb */
             ii(0x18_065f, 1); dec(cx);                                  /* dec cx */
         l_0x18_0660:
-            ii(0x18_0660, 2); shr(cx, 0x1);                             /* shr cx, 1 */
+            ii(0x18_0660, 2); shr(cx, 1);                               /* shr cx, 1 */
             ii(0x18_0662, 2); rep(() => movsw());                       /* rep movsw */
             ii(0x18_0664, 2); adc(cx, cx);                              /* adc cx, cx */
             ii(0x18_0666, 2); rep(() => movsb());                       /* rep movsb */

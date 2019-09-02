@@ -18,14 +18,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7215, 3); mov(ah, memb[ss, ebp - 0xf]);           /* mov ah, [ebp-0xf] */
             ii(0x1018_7218, 1); sahf();                                 /* sahf */
             ii(0x1018_7219, 2); if(jbe(0x1018_7233, 0x18)) goto l_0x1018_7233; /* jbe 0x10187233 */
-            ii(0x1018_721b, 2); cmp(al, 0x7);                           /* cmp al, 0x7 */
+            ii(0x1018_721b, 2); cmp(al, 7);                             /* cmp al, 0x7 */
             ii(0x1018_721d, 2); if(jz(0x1018_722d, 0xe)) goto l_0x1018_722d; /* jz 0x1018722d */
             ii(0x1018_721f, 3); fstp(memq[ss, ebp - 0x10]);             /* fstp qword [ebp-0x10] */
-            ii(0x1018_7222, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1018_7225, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
+            ii(0x1018_7222, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1018_7225, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
             ii(0x1018_7228, 5); call(/* sys */ 0x1018_1f17, -0x5316);   /* call 0x10181f17 */
         l_0x1018_722d:
-            ii(0x1018_722d, 2); mov(al, 0x1);                           /* mov al, 0x1 */
+            ii(0x1018_722d, 2); mov(al, 1);                             /* mov al, 0x1 */
             ii(0x1018_722f, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1018_7231, 1); pop(ebp);                               /* pop ebp */
             ii(0x1018_7232, 1); ret(); return;                          /* ret */
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_723d, 1); wait();                                 /* wait */
             ii(0x1018_723e, 3); mov(ah, memb[ss, ebp - 0xf]);           /* mov ah, [ebp-0xf] */
             ii(0x1018_7241, 1); sahf();                                 /* sahf */
-            ii(0x1018_7242, 2); if(ja(0x1018_7248, 0x4)) goto l_0x1018_7248; /* ja 0x10187248 */
+            ii(0x1018_7242, 2); if(ja(0x1018_7248, 4)) goto l_0x1018_7248; /* ja 0x10187248 */
             ii(0x1018_7244, 2); fldz();                                 /* fldz */
             ii(0x1018_7246, 2); jmp(0x1018_725c, 0x14); goto l_0x1018_725c; /* jmp 0x1018725c */
         l_0x1018_7248:

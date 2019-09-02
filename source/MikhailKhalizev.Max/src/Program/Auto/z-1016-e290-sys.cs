@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x1016_e290, 1); push(ecx);                              /* push ecx */
             ii(0x1016_e291, 1); push(esi);                              /* push esi */
-            ii(0x1016_e292, 3); sub(esp, 0x4);                          /* sub esp, 0x4 */
+            ii(0x1016_e292, 3); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1016_e295, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1016_e297, 2); mov(ecx, ebx);                          /* mov ecx, ebx */
             ii(0x1016_e299, 2); mov(eax, esp);                          /* mov eax, esp */
@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_e2be, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_e2c0, 2); if(jnz(0x1016_e2d8, 0x16)) goto l_0x1016_e2d8; /* jnz 0x1016e2d8 */
             ii(0x1016_e2c2, 7); cmp(memd[ds, 0x101b_e1c0], 0);          /* cmp dword [0x101be1c0], 0x0 */
-            ii(0x1016_e2c9, 2); if(jnz(0x1016_e2d3, 0x8)) goto l_0x1016_e2d3; /* jnz 0x1016e2d3 */
+            ii(0x1016_e2c9, 2); if(jnz(0x1016_e2d3, 8)) goto l_0x1016_e2d3; /* jnz 0x1016e2d3 */
             ii(0x1016_e2cb, 3); mov(eax, memd[ss, esp]);                /* mov eax, [esp] */
             ii(0x1016_e2ce, 5); mov(memd[ds, 0x101b_e1c0], eax);        /* mov [0x101be1c0], eax */
         l_0x1016_e2d3:
@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1016_e2e0:
             ii(0x1016_e2e0, 5); mov(eax, 0xffff_ffff);                  /* mov eax, 0xffffffff */
         l_0x1016_e2e5:
-            ii(0x1016_e2e5, 3); add(esp, 0x4);                          /* add esp, 0x4 */
+            ii(0x1016_e2e5, 3); add(esp, 4);                            /* add esp, 0x4 */
             ii(0x1016_e2e8, 1); pop(esi);                               /* pop esi */
             ii(0x1016_e2e9, 1); pop(ecx);                               /* pop ecx */
             ii(0x1016_e2ea, 1); ret();                                  /* ret */

@@ -17,15 +17,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_9069, 1); push(ebp);                              /* push ebp */
             ii(0x1015_906a, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1015_906c, 6); sub(esp, 0xc);                          /* sub esp, 0xc */
-            ii(0x1015_9072, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1015_9075, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
-            ii(0x1015_9078, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1015_9072, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1015_9075, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
+            ii(0x1015_9078, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1015_907b, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x1015_907e, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
+            ii(0x1015_907e, 5); mov(eax, 1);                            /* mov eax, 0x1 */
             ii(0x1015_9083, 5); call(0x100f_448c, -0x6_4bfc);           /* call 0x100f448c */
             ii(0x1015_9088, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
             ii(0x1015_908b, 5); call(0x1008_aa4c, -0xc_e644);           /* call 0x1008aa4c */
-            ii(0x1015_9090, 2); cmp(al, 0x1);                           /* cmp al, 0x1 */
+            ii(0x1015_9090, 2); cmp(al, 1);                             /* cmp al, 0x1 */
             ii(0x1015_9092, 2); if(jnz(0x1015_90a8, 0x14)) goto l_0x1015_90a8; /* jnz 0x101590a8 */
             ii(0x1015_9094, 5); mov(ebx, 0x2b);                         /* mov ebx, 0x2b */
             ii(0x1015_9099, 5); mov(edx, 0x1d);                         /* mov edx, 0x1d */
@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_90c8, 5); call(0x100c_aa20, -0x8_e6ad);           /* call 0x100caa20 */
             ii(0x1015_90cd, 2); mov(ecx, eax);                          /* mov ecx, eax */
             ii(0x1015_90cf, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x1015_90d1, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
+            ii(0x1015_90d1, 5); mov(edx, 1);                            /* mov edx, 0x1 */
             ii(0x1015_90d6, 5); mov(eax, StringDefinitions.MinelayerIsFullCannotPickUpMoreMines); /* mov eax, 0x101b2564 */
             ii(0x1015_90db, 5); call(0x1011_5d23, -0x4_33bd);           /* call 0x10115d23 */
             ii(0x1015_90e0, 2); jmp(0x1015_90f4, 0x12); goto l_0x1015_90f4; /* jmp 0x101590f4 */

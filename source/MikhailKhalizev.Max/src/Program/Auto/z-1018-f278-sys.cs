@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_f278-d443d7a5")]
         public void /* sys */ Method_1018_f278()
         {
-            ii(0x1018_f278, 3); mov(memd[ds, edi + 0x4], eax);          /* mov [edi+0x4], eax */
+            ii(0x1018_f278, 3); mov(memd[ds, edi + 4], eax);            /* mov [edi+0x4], eax */
             ii(0x1018_f27b, 1); pop(esi);                               /* pop esi */
             ii(0x1018_f27c, 1); pop(ebp);                               /* pop ebp */
             ii(0x1018_f27d, 3); add(esi, 0xc);                          /* add esi, 0xc */
