@@ -657,9 +657,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
 
-        public static string GetSizeSuffixByBits(int size)
+        public static string GetSizeSuffixByBits(int bits)
         {
-            switch (size)
+            switch (bits)
             {
                 case 8:
                     return "b";
@@ -678,7 +678,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 case 512:
                     return "z";
                 default:
-                    throw new ArgumentException($"Unknown size {size}.");
+                    throw new ArgumentException($"Unknown size {bits}.");
             }
         }
 

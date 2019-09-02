@@ -620,9 +620,10 @@ namespace MikhailKhalizev.Max.Dos
 
                         if (bx.Int32 == 1 || bx.Int32 == 2)
                         {
-                            var chars = new List<char>();
-                            foreach (var x in span)
-                                chars.Add((char)x);
+                            var chars = new char[span.Length];
+                            for (var i = 0; i < span.Length; i++)
+                                chars[i] = (char)span[i];
+
                             Console.Write(chars);
                         }
                         else
