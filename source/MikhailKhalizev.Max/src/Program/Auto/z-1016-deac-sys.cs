@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_df0b, 3); mov(memd[ss, esp], ecx);                /* mov [esp], ecx */
             ii(0x1016_df0e, 6); mov(ecx, memd[ds, 0x1020_88ac]);        /* mov ecx, [0x102088ac] */
             ii(0x1016_df14, 6); mov(edi, memd[ds, 0x1020_8570]);        /* mov edi, [0x10208570] */
-            ii(0x1016_df1a, 4); mov(memd[ss, esp + 0xc], ecx);          /* mov [esp+0xc], ecx */
+            ii(0x1016_df1a, 4); mov(memd[ss, esp + 12], ecx);           /* mov [esp+0xc], ecx */
             ii(0x1016_df1e, 2); cmp(ebx, ecx);                          /* cmp ebx, ecx */
             ii(0x1016_df20, 2); if(jg(0x1016_df7d, 0x5b)) goto l_0x1016_df7d; /* jg 0x1016df7d */
         l_0x1016_df22:
@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_df4b, 7); mov(memd[ss, esp], 1);                  /* mov dword [esp], 0x1 */
             ii(0x1016_df52, 2); jmp(0x1016_df7d, 0x29); goto l_0x1016_df7d; /* jmp 0x1016df7d */
         l_0x1016_df54:
-            ii(0x1016_df54, 4); mov(ecx, memd[ss, esp + 0xc]);          /* mov ecx, [esp+0xc] */
+            ii(0x1016_df54, 4); mov(ecx, memd[ss, esp + 12]);           /* mov ecx, [esp+0xc] */
             ii(0x1016_df58, 1); inc(ebx);                               /* inc ebx */
             ii(0x1016_df59, 3); add(edx, 4);                            /* add edx, 0x4 */
             ii(0x1016_df5c, 1); inc(edi);                               /* inc edi */
@@ -77,7 +77,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_df78, 3); mov(memb[ds, edi - 1], cl);             /* mov [edi-0x1], cl */
             ii(0x1016_df7b, 2); add(esi, ebp);                          /* add esi, ebp */
         l_0x1016_df7d:
-            ii(0x1016_df7d, 4); cmp(ebx, memd[ss, esp + 0xc]);          /* cmp ebx, [esp+0xc] */
+            ii(0x1016_df7d, 4); cmp(ebx, memd[ss, esp + 12]);           /* cmp ebx, [esp+0xc] */
             ii(0x1016_df81, 2); if(jle(0x1016_df67, -0x1c)) goto l_0x1016_df67; /* jle 0x1016df67 */
         l_0x1016_df83:
             ii(0x1016_df83, 3); mov(ecx, memd[ss, esp]);                /* mov ecx, [esp] */

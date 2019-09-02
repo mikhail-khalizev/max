@@ -131,10 +131,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_ecca, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100f_eccd, 5); call(Definitions.my_dtor_d3, -0x2_6f9f); /* call 0x100d7d33 */
             ii(0x100f_ecd2, 5); call(Definitions.sys_delete, 0x6_728d); /* call 0x10165f64 */
-            ii(0x100f_ecd7, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x100f_ecd7, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
             ii(0x100f_ecda, 2); jmp(0x100f_ece3, 7); goto l_0x100f_ece3; /* jmp 0x100fece3 */
         l_0x100f_ecdc:
-            ii(0x100f_ecdc, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
+            ii(0x100f_ecdc, 7); mov(memd[ss, ebp - 12], 0);             /* mov dword [ebp-0xc], 0x0 */
         l_0x100f_ece3:
             ii(0x100f_ece3, 5); call(0x100f_2955, -0xc393);             /* call 0x100f2955 */
             ii(0x100f_ece8, 5); call(0x1013_44d5, 0x3_57e8);            /* call 0x101344d5 */

@@ -134,7 +134,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a825, 6); call_abs(memd[ds, 0x101b_e444]);        /* call dword [0x101be444] */ /* Вызов '0x1017_a850'. */
             ii(0x1017_a82b, 3); add(esp, 0x24);                         /* add esp, 0x24 */
         l_0x1017_a82e:
-            ii(0x1017_a82e, 3); lea(esp, memd[ss, ebp - 0xc]);          /* lea esp, [ebp-0xc] */
+            ii(0x1017_a82e, 3); lea(esp, memd[ss, ebp - 12]);           /* lea esp, [ebp-0xc] */
             ii(0x1017_a831, 1); pop(edi);                               /* pop edi */
             ii(0x1017_a832, 1); pop(esi);                               /* pop esi */
             ii(0x1017_a833, 1); pop(ecx);                               /* pop ecx */

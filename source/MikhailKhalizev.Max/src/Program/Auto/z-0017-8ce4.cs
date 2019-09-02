@@ -20,14 +20,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8d00, 1); push(cs);                                 /* push cs */
             ii(0x17_8d01, 3); call(0x17_8988, -0x37c);                  /* call 0x8988 */
             ii(0x17_8d04, 3); add(sp, 4);                               /* add sp, 0x4 */
-            ii(0x17_8d07, 4); cmp(memb[ss, bp + 0x10], 0);              /* cmp byte [bp+0x10], 0x0 */
+            ii(0x17_8d07, 4); cmp(memb[ss, bp + 16], 0);                /* cmp byte [bp+0x10], 0x0 */
             ii(0x17_8d0b, 2); if(jz(0x17_8d10, 3)) goto l_0x17_8d10;    /* jz 0x8d10 */
             ii(0x17_8d0d, 2); jmp(0x17_8d54, 0x45); goto l_0x17_8d54;   /* jmp 0x8d54 */
         //  ii(0x17_8d0f, 1); nop();                                    /* nop */
         l_0x17_8d10:
-            ii(0x17_8d10, 3); push(memw[ss, bp + 0xe]);                 /* push word [bp+0xe] */
-            ii(0x17_8d13, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
-            ii(0x17_8d16, 3); push(memw[ss, bp + 0xa]);                 /* push word [bp+0xa] */
+            ii(0x17_8d10, 3); push(memw[ss, bp + 14]);                  /* push word [bp+0xe] */
+            ii(0x17_8d13, 3); push(memw[ss, bp + 12]);                  /* push word [bp+0xc] */
+            ii(0x17_8d16, 3); push(memw[ss, bp + 10]);                  /* push word [bp+0xa] */
             ii(0x17_8d19, 1); nop();                                    /* nop */
             ii(0x17_8d1a, 1); push(cs);                                 /* push cs */
             ii(0x17_8d1b, 3); call(0x17_9153, 0x435);                   /* call 0x9153 */
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8d23, 3); push(0x1000);                             /* push 0x1000 */
             ii(0x17_8d26, 4); push(memw[ds, 0x4f82]);                   /* push word [0x4f82] */
             ii(0x17_8d2a, 4); push(memw[ds, 0x4f80]);                   /* push word [0x4f80] */
-            ii(0x17_8d2e, 3); push(memw[ss, bp + 0xa]);                 /* push word [bp+0xa] */
+            ii(0x17_8d2e, 3); push(memw[ss, bp + 10]);                  /* push word [bp+0xa] */
             ii(0x17_8d31, 1); nop();                                    /* nop */
             ii(0x17_8d32, 1); push(cs);                                 /* push cs */
             ii(0x17_8d33, 3); call(0x17_9175, 0x43f);                   /* call 0x9175 */

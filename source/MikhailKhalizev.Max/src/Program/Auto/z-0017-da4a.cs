@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_da78, 2); mov(ah, 9);                               /* mov ah, 0x9 */
             ii(0x17_da7a, 2); if(jmp_func(0x17_da9a, 0x1e)) return;     /* jmp 0xda9a */
         l_0x17_da7c:
-            ii(0x17_da7c, 5); test(memb[ds, bx + 0x1c5d], 0x40);        /* test byte [bx+0x1c5d], 0x40 */
+            ii(0x17_da7c, 5); test(memb[ds, bx + 7261], 0x40);          /* test byte [bx+0x1c5d], 0x40 */
             ii(0x17_da81, 2); if(jz(0x17_da8e, 0xb)) goto l_0x17_da8e;  /* jz 0xda8e */
             ii(0x17_da83, 3); mov(bx, memw[ss, bp + 8]);                /* mov bx, [bp+0x8] */
             ii(0x17_da86, 3); cmp(memb[ds, bx], 0x1a);                  /* cmp byte [bx], 0x1a */

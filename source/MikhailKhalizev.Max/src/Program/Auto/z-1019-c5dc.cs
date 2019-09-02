@@ -13,13 +13,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c5df, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1019_c5e1, 3); sub(esp, 0x10);                         /* sub esp, 0x10 */
             ii(0x1019_c5e4, 1); wait();                                 /* wait */
-            ii(0x1019_c5e5, 3); fnstsw(memw[ss, ebp - 0x10]);           /* fnstsw word [ebp-0x10] */
+            ii(0x1019_c5e5, 3); fnstsw(memw[ss, ebp - 16]);             /* fnstsw word [ebp-0x10] */
             ii(0x1019_c5e8, 1); wait();                                 /* wait */
-            ii(0x1019_c5e9, 3); mov(ah, memb[ss, ebp - 0xf]);           /* mov ah, [ebp-0xf] */
+            ii(0x1019_c5e9, 3); mov(ah, memb[ss, ebp - 15]);            /* mov ah, [ebp-0xf] */
             ii(0x1019_c5ec, 1); sahf();                                 /* sahf */
             ii(0x1019_c5ed, 2); if(ja(0x1019_c601, 0x12)) goto l_0x1019_c601; /* ja 0x1019c601 */
             ii(0x1019_c5ef, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
-            ii(0x1019_c5f2, 3); fstp(memq[ss, ebp - 0x10]);             /* fstp qword [ebp-0x10] */
+            ii(0x1019_c5f2, 3); fstp(memq[ss, ebp - 16]);               /* fstp qword [ebp-0x10] */
             ii(0x1019_c5f5, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
             ii(0x1019_c5f8, 5); call(0x1019_cca5, 0x6a8);               /* call 0x1019cca5 */
             ii(0x1019_c5fd, 2); mov(al, 1);                             /* mov al, 0x1 */

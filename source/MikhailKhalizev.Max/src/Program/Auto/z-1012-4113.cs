@@ -16,9 +16,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4120, 1); push(ebp);                              /* push ebp */
             ii(0x1012_4121, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1012_4123, 6); sub(esp, 4);                            /* sub esp, 0x4 */
-            ii(0x1012_4129, 3); mov(eax, memd[ss, ebp + 0x18]);         /* mov eax, [ebp+0x18] */
+            ii(0x1012_4129, 3); mov(eax, memd[ss, ebp + 24]);           /* mov eax, [ebp+0x18] */
             ii(0x1012_412c, 1); push(eax);                              /* push eax */
-            ii(0x1012_412d, 3); mov(eax, memd[ss, ebp + 0x14]);         /* mov eax, [ebp+0x14] */
+            ii(0x1012_412d, 3); mov(eax, memd[ss, ebp + 20]);           /* mov eax, [ebp+0x14] */
             ii(0x1012_4130, 1); push(eax);                              /* push eax */
             ii(0x1012_4131, 5); call(0x1012_3850, -0x8e6);              /* call 0x10123850 */
             ii(0x1012_4136, 3); add(esp, 8);                            /* add esp, 0x8 */
@@ -27,9 +27,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_413d, 7); mov(memd[ss, ebp - 4], 0);              /* mov dword [ebp-0x4], 0x0 */
             ii(0x1012_4144, 2); jmp(0x1012_416a, 0x24); goto l_0x1012_416a; /* jmp 0x1012416a */
         l_0x1012_4146:
-            ii(0x1012_4146, 3); mov(eax, memd[ss, ebp + 0x1c]);         /* mov eax, [ebp+0x1c] */
+            ii(0x1012_4146, 3); mov(eax, memd[ss, ebp + 28]);           /* mov eax, [ebp+0x1c] */
             ii(0x1012_4149, 1); push(eax);                              /* push eax */
-            ii(0x1012_414a, 3); mov(eax, memd[ss, ebp + 0x14]);         /* mov eax, [ebp+0x14] */
+            ii(0x1012_414a, 3); mov(eax, memd[ss, ebp + 20]);           /* mov eax, [ebp+0x14] */
             ii(0x1012_414d, 1); push(eax);                              /* push eax */
             ii(0x1012_414e, 5); call(0x1012_3a00, -0x753);              /* call 0x10123a00 */
             ii(0x1012_4153, 3); add(esp, 8);                            /* add esp, 0x8 */

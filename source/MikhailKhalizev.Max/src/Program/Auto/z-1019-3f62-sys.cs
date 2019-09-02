@@ -11,18 +11,18 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3f62, 1); pop(edi);                               /* pop edi */
             ii(0x1019_3f63, 1); pop(esi);                               /* pop esi */
             ii(0x1019_3f64, 5); mov(eax, memd[ds, Definitions.video_bank_count_in_win]); /* mov eax, [0x10209c9c] */
-            ii(0x1019_3f69, 3); add(memd[ss, ebp - 0x28], eax);         /* add [ebp-0x28], eax */
+            ii(0x1019_3f69, 3); add(memd[ss, ebp - 40], eax);           /* add [ebp-0x28], eax */
             ii(0x1019_3f6c, 6); sub(edi, memd[ds, Definitions.video_win_len]); /* sub edi, [0x10209ca0] */
             ii(0x1019_3f72, 7); cmp(memd[ds, 0x1020_9c90], 0);          /* cmp dword [0x10209c90], 0x0 */
             ii(0x1019_3f79, 2); if(jz(0x1019_3f8c, 0x11)) goto l_0x1019_3f8c; /* jz 0x10193f8c */
             ii(0x1019_3f7b, 2); mov(bh, 0);                             /* mov bh, 0x0 */
             ii(0x1019_3f7d, 6); mov(bl, memb[ds, 0x1020_9cb0]);         /* mov bl, [0x10209cb0] */
-            ii(0x1019_3f83, 3); mov(edx, memd[ss, ebp - 0x28]);         /* mov edx, [ebp-0x28] */
+            ii(0x1019_3f83, 3); mov(edx, memd[ss, ebp - 40]);           /* mov edx, [ebp-0x28] */
             ii(0x1019_3f86, 6); call_abs(memd[ds, 0x1020_9c90]);        /* call dword [0x10209c90] */
         l_0x1019_3f8c:
             ii(0x1019_3f8c, 1); pop(edx);                               /* pop edx */
             ii(0x1019_3f8d, 1); pop(ebx);                               /* pop ebx */
-            ii(0x1019_3f8e, 3); mov(ecx, memd[ss, ebp + 0x14]);         /* mov ecx, [ebp+0x14] */
+            ii(0x1019_3f8e, 3); mov(ecx, memd[ss, ebp + 20]);           /* mov ecx, [ebp+0x14] */
             ii(0x1019_3f91, 5); mov(eax, 0);                            /* mov eax, 0x0 */
             ii(0x1019_3f96, 2); jmp(0x1019_3f9e, 6); goto l_0x1019_3f9e; /* jmp 0x10193f9e */
         l_0x1019_3f98:

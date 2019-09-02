@@ -14,14 +14,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c4a5, 3); sub(esp, 0x18);                         /* sub esp, 0x18 */
             ii(0x1016_c4a8, 1); wait();                                 /* wait */
             ii(0x1016_c4a9, 3); fnstsw(memw[ss, ebp - 8]);              /* fnstsw word [ebp-0x8] */
-            ii(0x1016_c4ac, 3); fst(memq[ss, ebp - 0x18]);              /* fst qword [ebp-0x18] */
+            ii(0x1016_c4ac, 3); fst(memq[ss, ebp - 24]);                /* fst qword [ebp-0x18] */
             ii(0x1016_c4af, 3); mov(ah, memb[ss, ebp - 7]);             /* mov ah, [ebp-0x7] */
             ii(0x1016_c4b2, 1); sahf();                                 /* sahf */
             ii(0x1016_c4b3, 2); if(jnz(0x1016_c4cf, 0x1a)) goto l_0x1016_c4cf; /* jnz 0x1016c4cf */
             ii(0x1016_c4b5, 2); mov(al, 0);                             /* mov al, 0x0 */
         l_0x1016_c4b7:
             ii(0x1016_c4b7, 2); fstp(ST(0));                            /* fstp st0 */
-            ii(0x1016_c4b9, 3); fstp(memq[ss, ebp - 0x10]);             /* fstp qword [ebp-0x10] */
+            ii(0x1016_c4b9, 3); fstp(memq[ss, ebp - 16]);               /* fstp qword [ebp-0x10] */
             ii(0x1016_c4bc, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
             ii(0x1016_c4bf, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
             ii(0x1016_c4c2, 5); call(/* sys */ 0x1018_7170, 0x1_aca9);  /* call 0x10187170 */
@@ -71,9 +71,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c51d, 5); jmp(0x1016_c5a9, 0x87); goto l_0x1016_c5a9; /* jmp 0x1016c5a9 */
         l_0x1016_c522:
             ii(0x1016_c522, 2); fld(ST(1));                             /* fld st1 */
-            ii(0x1016_c524, 3); fstp(memq[ss, ebp - 0x10]);             /* fstp qword [ebp-0x10] */
+            ii(0x1016_c524, 3); fstp(memq[ss, ebp - 16]);               /* fstp qword [ebp-0x10] */
             ii(0x1016_c527, 1); wait();                                 /* wait */
-            ii(0x1016_c528, 4); mov(ax, memw[ss, ebp - 0xa]);           /* mov ax, [ebp-0xa] */
+            ii(0x1016_c528, 4); mov(ax, memw[ss, ebp - 10]);            /* mov ax, [ebp-0xa] */
             ii(0x1016_c52c, 4); and(ax, 0x7ff0);                        /* and ax, 0x7ff0 */
             ii(0x1016_c530, 4); sub(ax, 0x3ff0);                        /* sub ax, 0x3ff0 */
             ii(0x1016_c534, 4); cmp(ax, 0x100);                         /* cmp ax, 0x100 */

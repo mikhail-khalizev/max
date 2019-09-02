@@ -51,17 +51,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_9a3f, 7); cmp(memd[ds, 0x101c_4de4], 0);          /* cmp dword [0x101c4de4], 0x0 */
             ii(0x1010_9a46, 2); if(jz(0x1010_9a71, 0x29)) goto l_0x1010_9a71; /* jz 0x10109a71 */
             ii(0x1010_9a48, 5); mov(eax, memd[ds, 0x101c_4de4]);        /* mov eax, [0x101c4de4] */
-            ii(0x1010_9a4d, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
-            ii(0x1010_9a50, 4); cmp(memd[ss, ebp - 0x10], 0);           /* cmp dword [ebp-0x10], 0x0 */
+            ii(0x1010_9a4d, 3); mov(memd[ss, ebp - 16], eax);           /* mov [ebp-0x10], eax */
+            ii(0x1010_9a50, 4); cmp(memd[ss, ebp - 16], 0);             /* cmp dword [ebp-0x10], 0x0 */
             ii(0x1010_9a54, 2); if(jz(0x1010_9a6a, 0x14)) goto l_0x1010_9a6a; /* jz 0x10109a6a */
             ii(0x1010_9a56, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1010_9a58, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
+            ii(0x1010_9a58, 3); mov(eax, memd[ss, ebp - 16]);           /* mov eax, [ebp-0x10] */
             ii(0x1010_9a5b, 5); call(Definitions.my_dtor_d2, -0x3_b528); /* call 0x100ce538 */
             ii(0x1010_9a60, 5); call(Definitions.sys_delete, 0x5_c4ff); /* call 0x10165f64 */
-            ii(0x1010_9a65, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x1010_9a65, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
             ii(0x1010_9a68, 2); jmp(0x1010_9a71, 7); goto l_0x1010_9a71; /* jmp 0x10109a71 */
         l_0x1010_9a6a:
-            ii(0x1010_9a6a, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
+            ii(0x1010_9a6a, 7); mov(memd[ss, ebp - 12], 0);             /* mov dword [ebp-0xc], 0x0 */
         l_0x1010_9a71:
             ii(0x1010_9a71, 10); mov(memd[ds, 0x101c_4de4], 0);         /* mov dword [0x101c4de4], 0x0 */
             ii(0x1010_9a7b, 2); mov(esp, ebp);                          /* mov esp, ebp */

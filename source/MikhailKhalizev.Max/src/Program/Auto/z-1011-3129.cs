@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_3146, 4); movsx(eax, memw[ss, ebp - 4]);          /* movsx eax, word [ebp-0x4] */
             ii(0x1011_314a, 3); imul(eax, eax, 0x1e);                   /* imul eax, eax, 0x1e */
             ii(0x1011_314d, 3); add(eax, memd[ss, ebp - 8]);            /* add eax, [ebp-0x8] */
-            ii(0x1011_3150, 6); mov(al, memb[ds, eax + 0x520]);         /* mov al, [eax+0x520] */
+            ii(0x1011_3150, 6); mov(al, memb[ds, eax + 1312]);          /* mov al, [eax+0x520] */
             ii(0x1011_3156, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x1011_315b, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1011_315d, 2); if(jz(0x1011_31c1, 0x62)) goto l_0x1011_31c1; /* jz 0x101131c1 */
@@ -68,10 +68,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_31e9, 4); movsx(eax, memw[ss, ebp - 4]);          /* movsx eax, word [ebp-0x4] */
             ii(0x1011_31ed, 2); add(eax, eax);                          /* add eax, eax */
             ii(0x1011_31ef, 3); add(eax, memd[ss, ebp - 8]);            /* add eax, [ebp-0x8] */
-            ii(0x1011_31f2, 9); mov(memw[ds, eax + 0x4dc], 0);          /* mov word [eax+0x4dc], 0x0 */
+            ii(0x1011_31f2, 9); mov(memw[ds, eax + 1244], 0);           /* mov word [eax+0x4dc], 0x0 */
             ii(0x1011_31fb, 4); movsx(eax, memw[ss, ebp - 4]);          /* movsx eax, word [ebp-0x4] */
             ii(0x1011_31ff, 3); add(eax, memd[ss, ebp - 8]);            /* add eax, [ebp-0x8] */
-            ii(0x1011_3202, 7); mov(memb[ds, eax + 0x4ec], 0);          /* mov byte [eax+0x4ec], 0x0 */
+            ii(0x1011_3202, 7); mov(memb[ds, eax + 1260], 0);           /* mov byte [eax+0x4ec], 0x0 */
             ii(0x1011_3209, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1011_320b, 1); pop(ebp);                               /* pop ebp */
             ii(0x1011_320c, 1); pop(edi);                               /* pop edi */

@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_c70c, 2); if(jae(0x17_c760, 0x52)) goto l_0x17_c760; /* jae 0xc760 */
             ii(0x17_c70e, 3); mov(bx, memw[ss, bp - 2]);                /* mov bx, [bp-0x2] */
             ii(0x17_c711, 2); shl(bx, 1);                               /* shl bx, 1 */
-            ii(0x17_c713, 4); mov(ax, memw[ds, bx + 0xaca]);            /* mov ax, [bx+0xaca] */
+            ii(0x17_c713, 4); mov(ax, memw[ds, bx + 2762]);             /* mov ax, [bx+0xaca] */
             ii(0x17_c717, 3); mov(memw[ss, bp - 4], ax);                /* mov [bp-0x4], ax */
             ii(0x17_c71a, 3); cmp(ax, 0xffff);                          /* cmp ax, 0xffff */
             ii(0x17_c71d, 2); if(jz(0x17_c75e, 0x3f)) goto l_0x17_c75e; /* jz 0xc75e */
@@ -44,11 +44,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_c740, 3); mov(memw[ss, bp - 6], ax);                /* mov [bp-0x6], ax */
             ii(0x17_c743, 3); mov(bx, memw[ss, bp - 2]);                /* mov bx, [bp-0x2] */
             ii(0x17_c746, 2); shl(bx, 1);                               /* shl bx, 1 */
-            ii(0x17_c748, 4); or(memw[ds, bx + 0xaca], ax);             /* or [bx+0xaca], ax */
+            ii(0x17_c748, 4); or(memw[ds, bx + 2762], ax);              /* or [bx+0xaca], ax */
             ii(0x17_c74c, 3); mov(ax, memw[ss, bp - 2]);                /* mov ax, [bp-0x2] */
             ii(0x17_c74f, 3); shl(ax, 4);                               /* shl ax, 0x4 */
             ii(0x17_c752, 3); add(ax, memw[ss, bp - 8]);                /* add ax, [bp-0x8] */
-            ii(0x17_c755, 3); mov(memw[ss, bp - 0xa], ax);              /* mov [bp-0xa], ax */
+            ii(0x17_c755, 3); mov(memw[ss, bp - 10], ax);               /* mov [bp-0xa], ax */
             ii(0x17_c758, 1); pop(ds);                                  /* pop ds */
             ii(0x17_c759, 1); leave();                                  /* leave */
             ii(0x17_c75a, 1); retf(); return;                           /* retf */

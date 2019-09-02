@@ -15,10 +15,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_09cc, 2); push(edi);                                /* push edi */
             ii(0x19_09ce, 2); push(ecx);                                /* push ecx */
             ii(0x19_09d0, 4); mov(esi, memd[ss, bp + 6]);               /* mov esi, [bp+0x6] */
-            ii(0x19_09d4, 3); mov(ds, memw[ss, bp + 0xa]);              /* mov ds, [bp+0xa] */
-            ii(0x19_09d7, 3); les(di, memw[ss, bp + 0xc]);              /* les di, [bp+0xc] */
+            ii(0x19_09d4, 3); mov(ds, memw[ss, bp + 10]);               /* mov ds, [bp+0xa] */
+            ii(0x19_09d7, 3); les(di, memw[ss, bp + 12]);               /* les di, [bp+0xc] */
             ii(0x19_09da, 4); movzx(edi, di);                           /* movzx edi, di */
-            ii(0x19_09de, 3); mov(cx, memw[ss, bp + 0x10]);             /* mov cx, [bp+0x10] */
+            ii(0x19_09de, 3); mov(cx, memw[ss, bp + 16]);               /* mov cx, [bp+0x10] */
             ii(0x19_09e1, 2); if(jcxz(0x19_09ec, 9)) goto l_0x19_09ec;  /* jcxz 0x9ec */
             ii(0x19_09e3, 4); movzx(ecx, cx);                           /* movzx ecx, cx */
             ii(0x19_09e7, 3); rep_a32(() => movsb_a32());               /* a32 rep movsb */

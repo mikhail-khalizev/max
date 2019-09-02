@@ -14,9 +14,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_394e, 1); push(si);                                 /* push si */
             ii(0x19_394f, 1); push(ds);                                 /* push ds */
             ii(0x19_3950, 3); les(di, memw[ss, bp + 6]);                /* les di, [bp+0x6] */
-            ii(0x19_3953, 3); lds(si, memw[ss, bp + 0xa]);              /* lds si, [bp+0xa] */
+            ii(0x19_3953, 3); lds(si, memw[ss, bp + 10]);               /* lds si, [bp+0xa] */
             ii(0x19_3956, 2); mov(bx, di);                              /* mov bx, di */
-            ii(0x19_3958, 3); mov(cx, memw[ss, bp + 0xe]);              /* mov cx, [bp+0xe] */
+            ii(0x19_3958, 3); mov(cx, memw[ss, bp + 14]);               /* mov cx, [bp+0xe] */
             ii(0x19_395b, 2); if(jcxz(0x19_3969, 0xc)) goto l_0x19_3969; /* jcxz 0x3969 */
         l_0x19_395d:
             ii(0x19_395d, 1); lodsb();                                  /* lodsb */

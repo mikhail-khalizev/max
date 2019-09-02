@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_3dc0-3c93eb8")]
         public void /* sys */ Method_1019_3dc0()
         {
-            ii(0x1019_3dc0, 3); mov(ecx, memd[ss, ebp + 0x14]);         /* mov ecx, [ebp+0x14] */
+            ii(0x1019_3dc0, 3); mov(ecx, memd[ss, ebp + 20]);           /* mov ecx, [ebp+0x14] */
             ii(0x1019_3dc3, 5); mov(eax, 0);                            /* mov eax, 0x0 */
             ii(0x1019_3dc8, 2); jmp(0x1019_3dd0, 6); goto l_0x1019_3dd0; /* jmp 0x10193dd0 */
         l_0x1019_3dca:

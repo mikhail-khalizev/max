@@ -29,10 +29,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_875b, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x100d_875d, 2); mov(dl, al);                            /* mov dl, al */
             ii(0x100d_875f, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x100d_8762, 3); mov(eax, memd[ds, eax + 0xa]);          /* mov eax, [eax+0xa] */
+            ii(0x100d_8762, 3); mov(eax, memd[ds, eax + 10]);           /* mov eax, [eax+0xa] */
             ii(0x100d_8765, 5); call(0x100c_fb06, -0x8c64);             /* call 0x100cfb06 */
             ii(0x100d_876a, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x100d_876d, 4); mov(memb[ds, eax + 0xe], 0);            /* mov byte [eax+0xe], 0x0 */
+            ii(0x100d_876d, 4); mov(memb[ds, eax + 14], 0);             /* mov byte [eax+0xe], 0x0 */
             ii(0x100d_8771, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100d_8773, 1); pop(ebp);                               /* pop ebp */
             ii(0x100d_8774, 1); pop(edi);                               /* pop edi */

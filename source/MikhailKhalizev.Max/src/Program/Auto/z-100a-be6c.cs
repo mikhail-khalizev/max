@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_bea5, 5); call(Definitions.my__get_unit, 0xc172); /* call 0x100b801c */
             ii(0x100a_beaa, 3); cmp(eax, memd[ss, ebp - 4]);            /* cmp eax, [ebp-0x4] */
             ii(0x100a_bead, 2); if(jnz(0x100a_beb8, 9)) goto l_0x100a_beb8; /* jnz 0x100abeb8 */
-            ii(0x100a_beaf, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
+            ii(0x100a_beaf, 7); mov(memd[ss, ebp - 12], 0);             /* mov dword [ebp-0xc], 0x0 */
             ii(0x100a_beb6, 2); jmp(0x100a_bed1, 0x19); goto l_0x100a_bed1; /* jmp 0x100abed1 */
         l_0x100a_beb8:
             ii(0x100a_beb8, 5); mov(ecx, 0x114);                        /* mov ecx, 0x114 */
@@ -39,14 +39,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_bec2, 5); mov(edx, StringDefinitions.PathRequestGetunitEqualUnit); /* mov edx, 0x101a0ddb */
             ii(0x100a_bec7, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x100a_bec9, 5); call(Definitions.sys_assert, 0xb_9ec4); /* call 0x10165d92 */
-            ii(0x100a_bece, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x100a_bece, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
         l_0x100a_bed1:
             ii(0x100a_bed1, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x100a_bed4, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
-            ii(0x100a_bed7, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
+            ii(0x100a_bed4, 3); mov(memd[ss, ebp - 16], eax);           /* mov [ebp-0x10], eax */
+            ii(0x100a_bed7, 3); mov(eax, memd[ss, ebp - 16]);           /* mov eax, [ebp-0x10] */
             ii(0x100a_beda, 3); mov(edx, memd[ds, eax + 2]);            /* mov edx, [eax+0x2] */
-            ii(0x100a_bedd, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
-            ii(0x100a_bee0, 3); call_abs(memd[ds, edx + 0x48]);         /* call dword [edx+0x48] */
+            ii(0x100a_bedd, 3); mov(eax, memd[ss, ebp - 16]);           /* mov eax, [ebp-0x10] */
+            ii(0x100a_bee0, 3); call_abs(memd[ds, edx + 72]);           /* call dword [edx+0x48] */
         l_0x100a_bee3:
             ii(0x100a_bee3, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100a_bee5, 1); pop(ebp);                               /* pop ebp */

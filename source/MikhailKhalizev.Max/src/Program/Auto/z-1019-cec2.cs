@@ -13,10 +13,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_cec4, 1); push(ecx);                              /* push ecx */
             ii(0x1019_cec5, 1); push(edx);                              /* push edx */
             ii(0x1019_cec6, 3); sub(esp, 8);                            /* sub esp, 0x8 */
-            ii(0x1019_cec9, 4); mov(eax, memd[ss, esp + 0x1c]);         /* mov eax, [esp+0x1c] */
-            ii(0x1019_cecd, 4); mov(ecx, memd[ss, esp + 0x1c]);         /* mov ecx, [esp+0x1c] */
+            ii(0x1019_cec9, 4); mov(eax, memd[ss, esp + 28]);           /* mov eax, [esp+0x1c] */
+            ii(0x1019_cecd, 4); mov(ecx, memd[ss, esp + 28]);           /* mov ecx, [esp+0x1c] */
             ii(0x1019_ced1, 3); mov(memd[ss, esp], eax);                /* mov [esp], eax */
-            ii(0x1019_ced4, 4); mov(eax, memd[ss, esp + 0x20]);         /* mov eax, [esp+0x20] */
+            ii(0x1019_ced4, 4); mov(eax, memd[ss, esp + 32]);           /* mov eax, [esp+0x20] */
             ii(0x1019_ced8, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1019_ceda, 4); mov(memd[ss, esp + 4], eax);            /* mov [esp+0x4], eax */
             ii(0x1019_cede, 5); test(eax, 0x7fff_ffff);                 /* test eax, 0x7fffffff */
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_cf13, 6); sub(edx, 0x3fe);                        /* sub edx, 0x3fe */
             ii(0x1019_cf19, 5); mov(memw[ss, esp + 6], cx);             /* mov [esp+0x6], cx */
         l_0x1019_cf1e:
-            ii(0x1019_cf1e, 4); mov(eax, memd[ss, esp + 0x24]);         /* mov eax, [esp+0x24] */
+            ii(0x1019_cf1e, 4); mov(eax, memd[ss, esp + 36]);           /* mov eax, [esp+0x24] */
             ii(0x1019_cf22, 3); fld(memq[ss, esp]);                     /* fld qword [esp] */
             ii(0x1019_cf25, 2); mov(memd[ds, eax], edx);                /* mov [eax], edx */
             ii(0x1019_cf27, 3); add(esp, 8);                            /* add esp, 0x8 */

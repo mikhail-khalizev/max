@@ -120,7 +120,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_f622, 6); div(memd[ds, 0x101c_38c4]);             /* div dword [0x101c38c4] */
             ii(0x100e_f628, 2); sub(eax, ebx);                          /* sub eax, ebx */
             ii(0x100e_f62a, 5); mov(memb[ds, 0x101b_8709], al);         /* mov [0x101b8709], al */
-            ii(0x100e_f62f, 3); mov(eax, memd[ds, esi + 0xc]);          /* mov eax, [esi+0xc] */
+            ii(0x100e_f62f, 3); mov(eax, memd[ds, esi + 12]);           /* mov eax, [esi+0xc] */
             ii(0x100e_f632, 1); dec(eax);                               /* dec eax */
             ii(0x100e_f633, 3); shl(eax, 0x10);                         /* shl eax, 0x10 */
             ii(0x100e_f636, 1); cdq();                                  /* cdq */

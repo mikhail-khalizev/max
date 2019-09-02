@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_3fd2:
             ii(0x19_3fd2, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x19_3fd4, 2); xor(bx, bx);                              /* xor bx, bx */
-            ii(0x19_3fd6, 4); mov(ax, memw[es, di + 0xc]);              /* mov ax, [es:di+0xc] */
+            ii(0x19_3fd6, 4); mov(ax, memw[es, di + 12]);               /* mov ax, [es:di+0xc] */
             ii(0x19_3fda, 3); mov(memw[ds, bx + 2], ax);                /* mov [bx+0x2], ax */
             ii(0x19_3fdd, 2); mov(ax, dx);                              /* mov ax, dx */
             ii(0x19_3fdf, 3); call(0x19_3fea, 8);                       /* call 0x3fea */

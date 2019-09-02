@@ -12,13 +12,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_c105, 1); push(esi);                              /* push esi */
             ii(0x1028_c106, 6); mov(ecx, memd[ds, 0x1348]);             /* mov ecx, [0x1348] */
             ii(0x1028_c10c, 6); mov(memd[ds, 0x134c], ecx);             /* mov [0x134c], ecx */
-            ii(0x1028_c112, 4); movzx(ebp, memw[ds, esi + 0x48]);       /* movzx ebp, word [esi+0x48] */
-            ii(0x1028_c116, 4); movzx(eax, memw[ds, esi + 0x44]);       /* movzx eax, word [esi+0x44] */
+            ii(0x1028_c112, 4); movzx(ebp, memw[ds, esi + 72]);         /* movzx ebp, word [esi+0x48] */
+            ii(0x1028_c116, 4); movzx(eax, memw[ds, esi + 68]);         /* movzx eax, word [esi+0x44] */
             ii(0x1028_c11a, 5); mov(memd[ds, 0x138a], eax);             /* mov [0x138a], eax */
-            ii(0x1028_c11f, 4); movzx(eax, memw[ds, esi + 0x46]);       /* movzx eax, word [esi+0x46] */
+            ii(0x1028_c11f, 4); movzx(eax, memw[ds, esi + 70]);         /* movzx eax, word [esi+0x46] */
             ii(0x1028_c123, 5); mov(memd[ds, 0x138e], eax);             /* mov [0x138e], eax */
             ii(0x1028_c128, 6); mov(memd[ds, 0x1392], esi);             /* mov [0x1392], esi */
-            ii(0x1028_c12e, 4); movzx(eax, memw[ds, esi + 0x32]);       /* movzx eax, word [esi+0x32] */
+            ii(0x1028_c12e, 4); movzx(eax, memw[ds, esi + 50]);         /* movzx eax, word [esi+0x32] */
             ii(0x1028_c132, 7); imul(memw[ds, 0x1334]);                 /* imul word [0x1334] */
             ii(0x1028_c139, 2); add(edx, edx);                          /* add edx, edx */
             ii(0x1028_c13b, 2); mov(ebx, edx);                          /* mov ebx, edx */
@@ -103,7 +103,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_c261, 6); if(jnz(0x1028_c1f5, -0x72)) goto l_0x1028_c1f5; /* jnz 0x1028c1f5 */
         l_0x1028_c267:
             ii(0x1028_c267, 7); mov(ebx, memd[fs, 0x1392]);             /* mov ebx, [fs:0x1392] */
-            ii(0x1028_c26e, 5); mov(memw[fs, ebx + 0x48], bp);          /* mov [fs:ebx+0x48], bp */
+            ii(0x1028_c26e, 5); mov(memw[fs, ebx + 72], bp);            /* mov [fs:ebx+0x48], bp */
             ii(0x1028_c273, 2); add(ecx, ecx);                          /* add ecx, ecx */
             ii(0x1028_c275, 2); add(esi, ecx);                          /* add esi, ecx */
             ii(0x1028_c277, 4); mov(memd[fs, ebx + 8], esi);            /* mov [fs:ebx+0x8], esi */

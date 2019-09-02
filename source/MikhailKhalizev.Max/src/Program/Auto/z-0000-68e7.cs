@@ -36,11 +36,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x692d, 3);    not(ecx);                                 /* not ecx */
             ii(0x6930, 2);    and(di, cx);                              /* and di, cx */
             ii(0x6932, 4);    shr(edi, 6);                              /* shr edi, 0x6 */
-            ii(0x6936, 4);    and(ecx, memd[ss, bp + 0xa]);             /* and ecx, [bp+0xa] */
+            ii(0x6936, 4);    and(ecx, memd[ss, bp + 10]);              /* and ecx, [bp+0xa] */
             ii(0x693a, 4);    shr(ecx, 6);                              /* shr ecx, 0x6 */
             ii(0x693e, 3);    add(edi, esi);                            /* add edi, esi */
             ii(0x6941, 3);    add(ecx, esi);                            /* add ecx, esi */
-            ii(0x6944, 4);    mov(memd[ss, bp + 0xa], ecx);             /* mov [bp+0xa], ecx */
+            ii(0x6944, 4);    mov(memd[ss, bp + 10], ecx);              /* mov [bp+0xa], ecx */
             ii(0x6948, 2);    jmp(0x694e, 4); goto l_0x694e;            /* jmp 0x694e */
         l_0x694a:
             ii(0x694a, 4);    add(edi, 4);                              /* add edi, 0x4 */

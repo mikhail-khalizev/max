@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_4e6c, 2); jmp(0x19_4e8d, 0x1f); goto l_0x19_4e8d;   /* jmp 0x4e8d */
         l_0x19_4e6e:
             ii(0x19_4e6e, 2); mov(ax, es);                              /* mov ax, es */
-            ii(0x19_4e70, 3); les(si, memw[ss, bp + 0xa]);              /* les si, [bp+0xa] */
+            ii(0x19_4e70, 3); les(si, memw[ss, bp + 10]);               /* les si, [bp+0xa] */
             ii(0x19_4e73, 4); cmp(memb[es, si], 0);                     /* cmp byte [es:si], 0x0 */
             ii(0x19_4e77, 2); if(jz(0x19_4e96, 0x1d)) goto l_0x19_4e96; /* jz 0x4e96 */
             ii(0x19_4e79, 2); mov(cx, es);                              /* mov cx, es */
@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_4e82, 3); cmp(memb[es, si], al);                    /* cmp [es:si], al */
             ii(0x19_4e85, 2); if(jnz(0x19_4e96, 0xf)) goto l_0x19_4e96; /* jnz 0x4e96 */
             ii(0x19_4e87, 3); inc(memw[ss, bp + 6]);                    /* inc word [bp+0x6] */
-            ii(0x19_4e8a, 3); inc(memw[ss, bp + 0xa]);                  /* inc word [bp+0xa] */
+            ii(0x19_4e8a, 3); inc(memw[ss, bp + 10]);                   /* inc word [bp+0xa] */
         l_0x19_4e8d:
             ii(0x19_4e8d, 3); les(bx, memw[ss, bp + 6]);                /* les bx, [bp+0x6] */
             ii(0x19_4e90, 4); cmp(memb[es, bx], 0);                     /* cmp byte [es:bx], 0x0 */
@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_4e96:
             ii(0x19_4e96, 3); mov(es, memw[ss, bp + 8]);                /* mov es, [bp+0x8] */
             ii(0x19_4e99, 3); mov(al, memb[es, bx]);                    /* mov al, [es:bx] */
-            ii(0x19_4e9c, 3); les(bx, memw[ss, bp + 0xa]);              /* les bx, [bp+0xa] */
+            ii(0x19_4e9c, 3); les(bx, memw[ss, bp + 10]);               /* les bx, [bp+0xa] */
             ii(0x19_4e9f, 3); cmp(memb[es, bx], al);                    /* cmp [es:bx], al */
             ii(0x19_4ea2, 2); if(jnz(0x19_4eaa, 6)) goto l_0x19_4eaa;   /* jnz 0x4eaa */
             ii(0x19_4ea4, 3); mov(ax, 1);                               /* mov ax, 0x1 */

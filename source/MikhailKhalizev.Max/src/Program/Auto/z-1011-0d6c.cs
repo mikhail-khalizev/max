@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_0d7e, 6); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1011_0d84, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
             ii(0x1011_0d87, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1011_0d8a, 7); cmp(memb[ds, eax + 0x143], 1);          /* cmp byte [eax+0x143], 0x1 */
+            ii(0x1011_0d8a, 7); cmp(memb[ds, eax + 323], 1);            /* cmp byte [eax+0x143], 0x1 */
             ii(0x1011_0d91, 2); if(jnz(0x1011_0daa, 0x17)) goto l_0x1011_0daa; /* jnz 0x10110daa */
             ii(0x1011_0d93, 5); call(0x100d_4e6c, -0x3_bf2c);           /* call 0x100d4e6c */
             ii(0x1011_0d98, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_0da8, 2); jmp(0x1011_0e05, 0x5b); goto l_0x1011_0e05; /* jmp 0x10110e05 */
         l_0x1011_0daa:
             ii(0x1011_0daa, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1011_0dad, 7); cmp(memb[ds, eax + 0x143], 8);          /* cmp byte [eax+0x143], 0x8 */
+            ii(0x1011_0dad, 7); cmp(memb[ds, eax + 323], 8);            /* cmp byte [eax+0x143], 0x8 */
             ii(0x1011_0db4, 2); if(jnz(0x1011_0dcd, 0x17)) goto l_0x1011_0dcd; /* jnz 0x10110dcd */
             ii(0x1011_0db6, 5); call(0x100d_4e6c, -0x3_bf4f);           /* call 0x100d4e6c */
             ii(0x1011_0dbb, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
@@ -42,7 +42,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1011_0dcb, 2); jmp(0x1011_0e05, 0x38); goto l_0x1011_0e05; /* jmp 0x10110e05 */
         l_0x1011_0dcd:
             ii(0x1011_0dcd, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1011_0dd0, 7); cmp(memb[ds, eax + 0x143], 2);          /* cmp byte [eax+0x143], 0x2 */
+            ii(0x1011_0dd0, 7); cmp(memb[ds, eax + 323], 2);            /* cmp byte [eax+0x143], 0x2 */
             ii(0x1011_0dd7, 2); if(jnz(0x1011_0df0, 0x17)) goto l_0x1011_0df0; /* jnz 0x10110df0 */
             ii(0x1011_0dd9, 5); call(0x100d_4e6c, -0x3_bf72);           /* call 0x100d4e6c */
             ii(0x1011_0dde, 2); xor(ebx, ebx);                          /* xor ebx, ebx */

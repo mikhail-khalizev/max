@@ -28,9 +28,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_e599, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1015_e59b, 2); if(jz(0x1015_e5ba, 0x1d)) goto l_0x1015_e5ba; /* jz 0x1015e5ba */
             ii(0x1015_e59d, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1015_e5a0, 4); mov(memb[ds, eax + 0x3d], 0x10);        /* mov byte [eax+0x3d], 0x10 */
+            ii(0x1015_e5a0, 4); mov(memb[ds, eax + 61], 0x10);          /* mov byte [eax+0x3d], 0x10 */
             ii(0x1015_e5a4, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1015_e5a7, 4); mov(memb[ds, eax + 0x3e], 3);           /* mov byte [eax+0x3e], 0x3 */
+            ii(0x1015_e5a7, 4); mov(memb[ds, eax + 62], 3);             /* mov byte [eax+0x3e], 0x3 */
             ii(0x1015_e5ab, 5); mov(edx, 0x21);                         /* mov edx, 0x21 */
             ii(0x1015_e5b0, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1015_e5b3, 5); call(0x1016_2f0a, 0x4952);              /* call 0x10162f0a */
@@ -44,9 +44,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_e5cc, 2); mov(eax, ebx);                          /* mov eax, ebx */
             ii(0x1015_e5ce, 5); call(0x1014_a205, -0x1_43ce);           /* call 0x1014a205 */
             ii(0x1015_e5d3, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1015_e5d6, 4); mov(memb[ds, eax + 0x3d], 0);           /* mov byte [eax+0x3d], 0x0 */
+            ii(0x1015_e5d6, 4); mov(memb[ds, eax + 61], 0);             /* mov byte [eax+0x3d], 0x0 */
             ii(0x1015_e5da, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1015_e5dd, 4); mov(memb[ds, eax + 0x3e], 1);           /* mov byte [eax+0x3e], 0x1 */
+            ii(0x1015_e5dd, 4); mov(memb[ds, eax + 62], 1);             /* mov byte [eax+0x3e], 0x1 */
         l_0x1015_e5e1:
             ii(0x1015_e5e1, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1015_e5e3, 5); mov(al, memb[ds, 0x101c_37da]);         /* mov al, [0x101c37da] */

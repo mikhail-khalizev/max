@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1018_78a8()
         {
             ii(0x1018_78a8, 1); push(eax);                              /* push eax */
-            ii(0x1018_78a9, 4); mov(eax, memd[ss, esp + 0xc]);          /* mov eax, [esp+0xc] */
+            ii(0x1018_78a9, 4); mov(eax, memd[ss, esp + 12]);           /* mov eax, [esp+0xc] */
             ii(0x1018_78ad, 5); and(eax, 0x7ff0_0000);                  /* and eax, 0x7ff00000 */
             ii(0x1018_78b2, 5); cmp(eax, 0x7ff0_0000);                  /* cmp eax, 0x7ff00000 */
             ii(0x1018_78b7, 2); if(jz(0x1018_78ec, 0x33)) goto l_0x1018_78ec; /* jz 0x101878ec */
@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_78cf, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */
             ii(0x1018_78d1, 3); sub(esp, 0xc);                          /* sub esp, 0xc */
             ii(0x1018_78d4, 3); fstp(memt[ss, esp]);                    /* fstp tword [esp] */
-            ii(0x1018_78d7, 4); fld(memq[ss, esp + 0x14]);              /* fld qword [esp+0x14] */
+            ii(0x1018_78d7, 4); fld(memq[ss, esp + 20]);                /* fld qword [esp+0x14] */
             ii(0x1018_78db, 5); call(/* sys */ 0x1018_7823, -0xbd);     /* call 0x10187823 */
             ii(0x1018_78e0, 3); fld(memt[ss, esp]);                     /* fld tword [esp] */
             ii(0x1018_78e3, 2); fxch(ST(0), ST(1));                     /* fxch st0, st1 */

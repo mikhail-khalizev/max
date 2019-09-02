@@ -43,14 +43,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_87f4, 5); call(Definitions.sys_display_apply_palette, 0x6_43c3); /* call 0x1016cbbc */
             ii(0x1010_87f9, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1010_87fb, 5); call(0x100e_883d, -0x1_ffc3);           /* call 0x100e883d */
-            ii(0x1010_8800, 3); mov(eax, memd[ds, eax + 0x12]);         /* mov eax, [eax+0x12] */
+            ii(0x1010_8800, 3); mov(eax, memd[ds, eax + 18]);           /* mov eax, [eax+0x12] */
             ii(0x1010_8803, 5); call(Definitions.sys_display_draw_0, 0x5_ec7c); /* call 0x10167484 */
             ii(0x1010_8808, 5); mov(eax, 0x1f4);                        /* mov eax, 0x1f4 */
             ii(0x1010_880d, 5); call(0x100e_9399, -0x1_f479);           /* call 0x100e9399 */
             ii(0x1010_8812, 5); call(0x1014_82f4, 0x3_fadd);            /* call 0x101482f4 */
-            ii(0x1010_8817, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x1010_8817, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
         l_0x1010_881a:
-            ii(0x1010_881a, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x1010_881a, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x1010_881d, 5); call(0x1014_85ad, 0x3_fd8b);            /* call 0x101485ad */
             ii(0x1010_8822, 3); cmp(eax, memd[ss, ebp - 8]);            /* cmp eax, [ebp-0x8] */
             ii(0x1010_8825, 2); if(jae(0x1010_8831, 0xa)) goto l_0x1010_8831; /* jae 0x10108831 */

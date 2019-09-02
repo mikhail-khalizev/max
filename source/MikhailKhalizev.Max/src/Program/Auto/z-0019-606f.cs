@@ -33,16 +33,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_60a0, 4); mov(memb[ss, bp - 7], 0x17);              /* mov byte [bp-0x7], 0x17 */
             ii(0x19_60a4, 3); mov(al, memb[ss, bp + 8]);                /* mov al, [bp+0x8] */
             ii(0x19_60a7, 3); mov(memb[ss, bp - 8], al);                /* mov [bp-0x8], al */
-            ii(0x19_60aa, 4); mov(memb[ss, bp - 0xd], 0xff);            /* mov byte [bp-0xd], 0xff */
+            ii(0x19_60aa, 4); mov(memb[ss, bp - 13], 0xff);             /* mov byte [bp-0xd], 0xff */
             ii(0x19_60ae, 3); mov(al, memb[ss, bp + 6]);                /* mov al, [bp+0x6] */
-            ii(0x19_60b1, 3); mov(memb[ss, bp - 0xe], al);              /* mov [bp-0xe], al */
+            ii(0x19_60b1, 3); mov(memb[ss, bp - 14], al);               /* mov [bp-0xe], al */
             ii(0x19_60b4, 3); mov(ax, 0);                               /* mov ax, 0x0 */
-            ii(0x19_60b7, 3); mov(memw[ss, bp - 0x10], ax);             /* mov [bp-0x10], ax */
-            ii(0x19_60ba, 3); mov(memw[ss, bp - 0x16], ax);             /* mov [bp-0x16], ax */
-            ii(0x19_60bd, 3); lea(ax, memw[ss, bp - 0x16]);             /* lea ax, [bp-0x16] */
+            ii(0x19_60b7, 3); mov(memw[ss, bp - 16], ax);               /* mov [bp-0x10], ax */
+            ii(0x19_60ba, 3); mov(memw[ss, bp - 22], ax);               /* mov [bp-0x16], ax */
+            ii(0x19_60bd, 3); lea(ax, memw[ss, bp - 22]);               /* lea ax, [bp-0x16] */
             ii(0x19_60c0, 1); push(ss);                                 /* push ss */
             ii(0x19_60c1, 1); push(ax);                                 /* push ax */
-            ii(0x19_60c2, 3); lea(ax, memw[ss, bp - 0xe]);              /* lea ax, [bp-0xe] */
+            ii(0x19_60c2, 3); lea(ax, memw[ss, bp - 14]);               /* lea ax, [bp-0xe] */
             ii(0x19_60c5, 1); push(ss);                                 /* push ss */
             ii(0x19_60c6, 1); push(ax);                                 /* push ax */
             ii(0x19_60c7, 1); push(ss);                                 /* push ss */

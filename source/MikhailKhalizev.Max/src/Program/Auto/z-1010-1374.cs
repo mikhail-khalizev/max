@@ -54,10 +54,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_13f6, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
             ii(0x1010_13f8, 2); mov(cl, al);                            /* mov cl, al */
             ii(0x1010_13fa, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1010_13fd, 3); mov(ebx, memd[ds, eax + 0x1a]);         /* mov ebx, [eax+0x1a] */
+            ii(0x1010_13fd, 3); mov(ebx, memd[ds, eax + 26]);           /* mov ebx, [eax+0x1a] */
             ii(0x1010_1400, 3); sar(ebx, 0x10);                         /* sar ebx, 0x10 */
             ii(0x1010_1403, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1010_1406, 3); mov(edx, memd[ds, eax + 0x18]);         /* mov edx, [eax+0x18] */
+            ii(0x1010_1406, 3); mov(edx, memd[ds, eax + 24]);           /* mov edx, [eax+0x18] */
             ii(0x1010_1409, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */
             ii(0x1010_140c, 5); mov(eax, 1);                            /* mov eax, 0x1 */
             ii(0x1010_1411, 5); call(0x1010_1620, 0x20a);               /* call 0x10101620 */

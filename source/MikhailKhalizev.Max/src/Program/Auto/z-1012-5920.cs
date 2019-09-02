@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_59c2, 6); mov(memd[ds, eax], 0);                  /* mov dword [eax], 0x0 */
         l_0x1012_59c8:
             ii(0x1012_59c8, 5); mov(al, memb[ds, 0x101c_5631]);         /* mov al, [0x101c5631] */
-            ii(0x1012_59cd, 3); mov(memb[ss, ebp - 0xc], al);           /* mov [ebp-0xc], al */
+            ii(0x1012_59cd, 3); mov(memb[ss, ebp - 12], al);            /* mov [ebp-0xc], al */
             ii(0x1012_59d0, 5); jmp(0x1012_5bac, 0x1d7); goto l_0x1012_5bac; /* jmp 0x10125bac */
         l_0x1012_59d5:
             ii(0x1012_59d5, 2); xor(eax, eax);                          /* xor eax, eax */
@@ -184,12 +184,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_5b8a, 2); jmp(0x1012_5bc7, 0x3b); goto l_0x1012_5bc7; /* jmp 0x10125bc7 */
         //  ii(0x1012_5b8c, 32); /* Служебная область с абсолютными адресами переходов. (0x1012_59ec, 0x1012_5a12, 0x1012_5a29, 0x1012_5a6c, 0x1012_5aac, 0x1012_5ac3, 0x1012_5b5b, 0x1012_59d5). */
         l_0x1012_5bac:
-            ii(0x1012_5bac, 3); mov(al, memb[ss, ebp - 0xc]);           /* mov al, [ebp-0xc] */
-            ii(0x1012_5baf, 3); mov(memb[ss, ebp - 0x10], al);          /* mov [ebp-0x10], al */
-            ii(0x1012_5bb2, 4); cmp(memb[ss, ebp - 0x10], 7);           /* cmp byte [ebp-0x10], 0x7 */
+            ii(0x1012_5bac, 3); mov(al, memb[ss, ebp - 12]);            /* mov al, [ebp-0xc] */
+            ii(0x1012_5baf, 3); mov(memb[ss, ebp - 16], al);            /* mov [ebp-0x10], al */
+            ii(0x1012_5bb2, 4); cmp(memb[ss, ebp - 16], 7);             /* cmp byte [ebp-0x10], 0x7 */
             ii(0x1012_5bb6, 2); if(ja(0x1012_5b8a, -0x2e)) goto l_0x1012_5b8a; /* ja 0x10125b8a */
             ii(0x1012_5bb8, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1012_5bba, 3); mov(al, memb[ss, ebp - 0x10]);          /* mov al, [ebp-0x10] */
+            ii(0x1012_5bba, 3); mov(al, memb[ss, ebp - 16]);            /* mov al, [ebp-0x10] */
             ii(0x1012_5bbd, 3); shl(eax, 2);                            /* shl eax, 0x2 */
             ii(0x1012_5bc0, 7); 
             switch (jmp_abs_switch(memd[cs, eax + 0x1012_5b8c]))

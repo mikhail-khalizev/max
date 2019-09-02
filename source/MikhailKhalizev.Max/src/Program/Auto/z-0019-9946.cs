@@ -25,16 +25,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_9966, 4); mov(sp, memw[ds, 0x19e2]);                /* mov sp, [0x19e2] */
             ii(0x19_996a, 4); mov(bp, memw[ds, 0x19e2]);                /* mov bp, [0x19e2] */
             ii(0x19_996e, 2); push(0);                                  /* push 0x0 */
-            ii(0x19_9970, 4); push(memw[es, di + 0x1c]);                /* push word [es:di+0x1c] */
-            ii(0x19_9974, 4); push(memw[es, di + 0x1a]);                /* push word [es:di+0x1a] */
-            ii(0x19_9978, 4); push(memw[es, di + 0x18]);                /* push word [es:di+0x18] */
-            ii(0x19_997c, 4); push(memw[es, di + 0x16]);                /* push word [es:di+0x16] */
-            ii(0x19_9980, 4); push(memw[es, di + 0x14]);                /* push word [es:di+0x14] */
-            ii(0x19_9984, 4); push(memw[es, di + 0x12]);                /* push word [es:di+0x12] */
-            ii(0x19_9988, 4); push(memw[es, di + 0x10]);                /* push word [es:di+0x10] */
-            ii(0x19_998c, 4); push(memw[es, di + 0xe]);                 /* push word [es:di+0xe] */
-            ii(0x19_9990, 4); push(memw[es, di + 0xc]);                 /* push word [es:di+0xc] */
-            ii(0x19_9994, 4); push(memw[es, di + 0xa]);                 /* push word [es:di+0xa] */
+            ii(0x19_9970, 4); push(memw[es, di + 28]);                  /* push word [es:di+0x1c] */
+            ii(0x19_9974, 4); push(memw[es, di + 26]);                  /* push word [es:di+0x1a] */
+            ii(0x19_9978, 4); push(memw[es, di + 24]);                  /* push word [es:di+0x18] */
+            ii(0x19_997c, 4); push(memw[es, di + 22]);                  /* push word [es:di+0x16] */
+            ii(0x19_9980, 4); push(memw[es, di + 20]);                  /* push word [es:di+0x14] */
+            ii(0x19_9984, 4); push(memw[es, di + 18]);                  /* push word [es:di+0x12] */
+            ii(0x19_9988, 4); push(memw[es, di + 16]);                  /* push word [es:di+0x10] */
+            ii(0x19_998c, 4); push(memw[es, di + 14]);                  /* push word [es:di+0xe] */
+            ii(0x19_9990, 4); push(memw[es, di + 12]);                  /* push word [es:di+0xc] */
+            ii(0x19_9994, 4); push(memw[es, di + 10]);                  /* push word [es:di+0xa] */
             ii(0x19_9998, 1); nop();                                    /* nop */
             ii(0x19_9999, 1); push(cs);                                 /* push cs */
             ii(0x19_999a, 3); call(0x19_8c69, -0xd34);                  /* call 0x8c69 */

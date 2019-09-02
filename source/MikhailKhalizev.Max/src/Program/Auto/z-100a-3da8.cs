@@ -22,14 +22,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_3dc3, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100a_3dc6, 3); add(eax, 6);                            /* add eax, 0x6 */
             ii(0x100a_3dc9, 5); call(0x1007_6574, -0x2_d85a);           /* call 0x10076574 */
-            ii(0x100a_3dce, 3); mov(al, memb[ds, eax + 0x4d]);          /* mov al, [eax+0x4d] */
+            ii(0x100a_3dce, 3); mov(al, memb[ds, eax + 77]);            /* mov al, [eax+0x4d] */
             ii(0x100a_3dd1, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100a_3dd6, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100a_3dd8, 2); if(jle(0x100a_3df1, 0x17)) goto l_0x100a_3df1; /* jle 0x100a3df1 */
             ii(0x100a_3dda, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100a_3ddd, 3); add(eax, 6);                            /* add eax, 0x6 */
             ii(0x100a_3de0, 5); call(0x1007_6574, -0x2_d871);           /* call 0x10076574 */
-            ii(0x100a_3de5, 3); mov(al, memb[ds, eax + 0x50]);          /* mov al, [eax+0x50] */
+            ii(0x100a_3de5, 3); mov(al, memb[ds, eax + 80]);            /* mov al, [eax+0x50] */
             ii(0x100a_3de8, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100a_3ded, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x100a_3def, 2); if(jg(0x100a_3df3, 2)) goto l_0x100a_3df3; /* jg 0x100a3df3 */
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_3df3, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100a_3df6, 3); add(eax, 6);                            /* add eax, 0x6 */
             ii(0x100a_3df9, 5); call(0x1007_6574, -0x2_d88a);           /* call 0x10076574 */
-            ii(0x100a_3dfe, 3); mov(al, memb[ds, eax + 0x26]);          /* mov al, [eax+0x26] */
+            ii(0x100a_3dfe, 3); mov(al, memb[ds, eax + 38]);            /* mov al, [eax+0x26] */
             ii(0x100a_3e01, 5); and(eax, 0xff);                         /* and eax, 0xff */
             ii(0x100a_3e06, 6); imul(eax, eax, 0x247);                  /* imul eax, eax, 0x247 */
             ii(0x100a_3e0c, 6); mov(al, memb[ds, eax + 0x101c_a490]);   /* mov al, [eax+0x101ca490] */

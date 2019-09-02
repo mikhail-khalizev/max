@@ -25,21 +25,21 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_5d8d:
             ii(0x1018_5d8d, 2); mov(edx, edi);                          /* mov edx, edi */
             ii(0x1018_5d8f, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1018_5d91, 3); mov(esi, memd[ds, ecx + 0x10]);         /* mov esi, [ecx+0x10] */
+            ii(0x1018_5d91, 3); mov(esi, memd[ds, ecx + 16]);           /* mov esi, [ecx+0x10] */
             ii(0x1018_5d94, 5); call(/* sys */ 0x1018_5dd0, 0x37);      /* call 0x10185dd0 */
             ii(0x1018_5d99, 2); mov(memd[ds, ebx], eax);                /* mov [ebx], eax */
             ii(0x1018_5d9b, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1018_5d9d, 2); if(jz(0x1018_5dab, 0xc)) goto l_0x1018_5dab; /* jz 0x10185dab */
         l_0x1018_5d9f:
             ii(0x1018_5d9f, 2); mov(ebx, memd[ds, ebx]);                /* mov ebx, [ebx] */
-            ii(0x1018_5da1, 3); mov(edx, memd[ds, ebx + 0x10]);         /* mov edx, [ebx+0x10] */
+            ii(0x1018_5da1, 3); mov(edx, memd[ds, ebx + 16]);           /* mov edx, [ebx+0x10] */
             ii(0x1018_5da4, 3); add(ebx, 0x10);                         /* add ebx, 0x10 */
             ii(0x1018_5da7, 2); test(edx, edx);                         /* test edx, edx */
             ii(0x1018_5da9, 2); if(jnz(0x1018_5d9f, -0xc)) goto l_0x1018_5d9f; /* jnz 0x10185d9f */
         l_0x1018_5dab:
             ii(0x1018_5dab, 5); mov(eax, memd[ds, 0x101b_e850]);        /* mov eax, [0x101be850] */
             ii(0x1018_5db0, 6); mov(memd[ds, 0x101b_e850], ecx);        /* mov [0x101be850], ecx */
-            ii(0x1018_5db6, 3); mov(memd[ds, ecx + 0x10], eax);         /* mov [ecx+0x10], eax */
+            ii(0x1018_5db6, 3); mov(memd[ds, ecx + 16], eax);           /* mov [ecx+0x10], eax */
             ii(0x1018_5db9, 2); mov(ecx, esi);                          /* mov ecx, esi */
             ii(0x1018_5dbb, 2); test(esi, esi);                         /* test esi, esi */
             ii(0x1018_5dbd, 2); if(jnz(0x1018_5d8d, -0x32)) goto l_0x1018_5d8d; /* jnz 0x10185d8d */

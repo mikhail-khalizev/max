@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1019_b807:
             ii(0x1019_b807, 5); call(/* sys */ 0x1018_d3cb, -0xe441);   /* call 0x1018d3cb */
         l_0x1019_b80c:
-            ii(0x1019_b80c, 3); fld(memq[ds, ebx + 0x18]);              /* fld qword [ebx+0x18] */
+            ii(0x1019_b80c, 3); fld(memq[ds, ebx + 24]);                /* fld qword [ebx+0x18] */
             ii(0x1019_b80f, 1); pop(edx);                               /* pop edx */
             ii(0x1019_b810, 1); pop(ebx);                               /* pop ebx */
             ii(0x1019_b811, 1); ret();                                  /* ret */

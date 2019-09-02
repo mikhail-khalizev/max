@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_970e, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x17_9710, 5); mov(memw[ss, bp - 2], 1);                 /* mov word [bp-0x2], 0x1 */
             ii(0x17_9715, 1); cld();                                    /* cld */
-            ii(0x17_9716, 3); mov(al, memb[ss, bp + 0xa]);              /* mov al, [bp+0xa] */
+            ii(0x17_9716, 3); mov(al, memb[ss, bp + 10]);               /* mov al, [bp+0xa] */
             ii(0x17_9719, 2); sub(ah, ah);                              /* sub ah, ah */
             ii(0x17_971b, 3); jmp(0x17_9808, 0xea); goto l_0x17_9808;   /* jmp 0x9808 */
         l_0x17_971e:
@@ -118,7 +118,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_980d, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x17_980f, 1); xchg(bx, ax);                             /* xchg bx, ax */
             ii(0x17_9810, 5); 
-            switch (jmp_abs_switch(memw[cs, bx + 0x4ff6]))
+            switch (jmp_abs_switch(memw[cs, bx + 20470]))
             {
                 case 0x17_971e:
                     goto l_0x17_971e;

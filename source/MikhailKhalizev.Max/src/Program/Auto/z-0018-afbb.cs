@@ -33,13 +33,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_affb, 2); mov(ch, 0x3c);                            /* mov ch, 0x3c */
             ii(0x18_affd, 2); div(ch);                                  /* div ch */
             ii(0x18_afff, 2); xchg(bl, ah);                             /* xchg bl, ah */
-            ii(0x18_b001, 3); mov(memw[ss, bp + 0x14], ax);             /* mov [bp+0x14], ax */
+            ii(0x18_b001, 3); mov(memw[ss, bp + 20], ax);               /* mov [bp+0x14], ax */
             ii(0x18_b004, 1); xchg(dx, ax);                             /* xchg dx, ax */
             ii(0x18_b005, 2); xor(dx, dx);                              /* xor dx, dx */
             ii(0x18_b007, 3); mov(cx, 0x25d);                           /* mov cx, 0x25d */
             ii(0x18_b00a, 2); div(cx);                                  /* div cx */
             ii(0x18_b00c, 2); mov(ah, bl);                              /* mov ah, bl */
-            ii(0x18_b00e, 3); mov(memw[ss, bp + 0x12], ax);             /* mov [bp+0x12], ax */
+            ii(0x18_b00e, 3); mov(memw[ss, bp + 18], ax);               /* mov [bp+0x12], ax */
             ii(0x18_b011, 2); if(jmp_func(0x18_af95, -0x7e)) return;    /* jmp 0xaf95 */
         }
     }

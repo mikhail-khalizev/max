@@ -8,14 +8,14 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_a578-3d016c17")]
         public void Method_0018_a578()
         {
-            ii(0x18_a578, 3); mov(bx, memw[ss, bp + 0x10]);             /* mov bx, [bp+0x10] */
-            ii(0x18_a57b, 3); mov(cx, memw[ss, bp + 0x14]);             /* mov cx, [bp+0x14] */
+            ii(0x18_a578, 3); mov(bx, memw[ss, bp + 16]);               /* mov bx, [bp+0x10] */
+            ii(0x18_a57b, 3); mov(cx, memw[ss, bp + 20]);               /* mov cx, [bp+0x14] */
             ii(0x18_a57e, 1); push(ss);                                 /* push ss */
             ii(0x18_a57f, 1); pop(es);                                  /* pop es */
-            ii(0x18_a580, 3); mov(si, memw[ss, bp + 0x22]);             /* mov si, [bp+0x22] */
-            ii(0x18_a583, 4); cmp(memb[ss, bp + 0x16], 0);              /* cmp byte [bp+0x16], 0x0 */
+            ii(0x18_a580, 3); mov(si, memw[ss, bp + 34]);               /* mov si, [bp+0x22] */
+            ii(0x18_a583, 4); cmp(memb[ss, bp + 22], 0);                /* cmp byte [bp+0x16], 0x0 */
             ii(0x18_a587, 3); mov(ax, memw[ss, bp + 8]);                /* mov ax, [bp+0x8] */
-            ii(0x18_a58a, 3); mov(ss, memw[ss, bp + 0xa]);              /* mov ss, [bp+0xa] */
+            ii(0x18_a58a, 3); mov(ss, memw[ss, bp + 10]);               /* mov ss, [bp+0xa] */
             ii(0x18_a58d, 1); xchg(sp, ax);                             /* xchg sp, ax */
             ii(0x18_a58e, 1); push(bx);                                 /* push bx */
             ii(0x18_a58f, 1); push(cx);                                 /* push cx */

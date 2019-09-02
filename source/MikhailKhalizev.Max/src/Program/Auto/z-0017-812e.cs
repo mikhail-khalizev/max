@@ -231,12 +231,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_8319, 4); les(bx, memw[ds, 0xa30]);                 /* les bx, [0xa30] */
             ii(0x17_831d, 4); mov(si, memw[ds, 0x982]);                 /* mov si, [0x982] */
             ii(0x17_8321, 4); mov(memb[es, bx + si], 0xff);             /* mov byte [es:bx+si], 0xff */
-            ii(0x17_8325, 5); mov(memw[ss, bp - 0xa], 1);               /* mov word [bp-0xa], 0x1 */
+            ii(0x17_8325, 5); mov(memw[ss, bp - 10], 1);                /* mov word [bp-0xa], 0x1 */
             ii(0x17_832a, 2); jmp(0x17_832f, 3); goto l_0x17_832f;      /* jmp 0x832f */
         l_0x17_832c:
-            ii(0x17_832c, 3); inc(memw[ss, bp - 0xa]);                  /* inc word [bp-0xa] */
+            ii(0x17_832c, 3); inc(memw[ss, bp - 10]);                   /* inc word [bp-0xa] */
         l_0x17_832f:
-            ii(0x17_832f, 3); mov(ax, memw[ss, bp - 0xa]);              /* mov ax, [bp-0xa] */
+            ii(0x17_832f, 3); mov(ax, memw[ss, bp - 10]);               /* mov ax, [bp-0xa] */
             ii(0x17_8332, 4); cmp(memw[ds, 0xa24], ax);                 /* cmp [0xa24], ax */
             ii(0x17_8336, 2); if(jbe(0x17_8390, 0x58)) goto l_0x17_8390; /* jbe 0x8390 */
             ii(0x17_8338, 1); push(ds);                                 /* push ds */
@@ -258,7 +258,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_835a, 4); mov(si, memw[ds, 0x982]);                 /* mov si, [0x982] */
             ii(0x17_835e, 3); mov(al, memb[es, bx + si]);               /* mov al, [es:bx+si] */
             ii(0x17_8361, 1); cbw();                                    /* cbw */
-            ii(0x17_8362, 3); mov(si, memw[ss, bp - 0xa]);              /* mov si, [bp-0xa] */
+            ii(0x17_8362, 3); mov(si, memw[ss, bp - 10]);               /* mov si, [bp-0xa] */
             ii(0x17_8365, 2); mov(cx, si);                              /* mov cx, si */
             ii(0x17_8367, 2); shl(si, 1);                               /* shl si, 1 */
             ii(0x17_8369, 2); add(si, cx);                              /* add si, cx */

@@ -18,10 +18,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_535c, 2); pushd(gs);                              /* push gs */
             ii(0x1019_535e, 1); pushd(es);                              /* push es */
             ii(0x1019_535f, 5); mov(esi, 0x101c_1afc);                  /* mov esi, 0x101c1afc */
-            ii(0x1019_5364, 7); mov(memd[ds, esi + 0x1c], 0x8107);      /* mov dword [esi+0x1c], 0x8107 */
-            ii(0x1019_536b, 7); mov(memd[ds, esi + 0x14], 0);           /* mov dword [esi+0x14], 0x0 */
+            ii(0x1019_5364, 7); mov(memd[ds, esi + 28], 0x8107);        /* mov dword [esi+0x1c], 0x8107 */
+            ii(0x1019_536b, 7); mov(memd[ds, esi + 20], 0);             /* mov dword [esi+0x14], 0x0 */
             ii(0x1019_5372, 4); mov(ax, memw[ss, ebp + 8]);             /* mov ax, [ebp+0x8] */
-            ii(0x1019_5376, 4); mov(memw[ds, esi + 0x22], ax);          /* mov [esi+0x22], ax */
+            ii(0x1019_5376, 4); mov(memw[ds, esi + 34], ax);            /* mov [esi+0x22], ax */
             ii(0x1019_537a, 6); mov(memd[ds, esi], 0);                  /* mov dword [esi], 0x0 */
             ii(0x1019_5380, 4); mov(ax, 0x300);                         /* mov ax, 0x300 */
             ii(0x1019_5384, 2); mov(bl, 0x4b);                          /* mov bl, 0x4b */
@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5392, 1); popd(es);                               /* pop es */
             ii(0x1019_5393, 2); @int(0x31);                             /* int 0x31 */
             ii(0x1019_5395, 5); mov(esi, 0x101c_1afc);                  /* mov esi, 0x101c1afc */
-            ii(0x1019_539a, 5); and(memw[ds, esi + 0x20], 1);           /* and word [esi+0x20], 0x1 */
+            ii(0x1019_539a, 5); and(memw[ds, esi + 32], 1);             /* and word [esi+0x20], 0x1 */
             ii(0x1019_539f, 2); if(jnz(0x1019_53af, 0xe)) goto l_0x1019_53af; /* jnz 0x101953af */
             ii(0x1019_53a1, 1); nop();                                  /* nop */
             ii(0x1019_53a2, 1); nop();                                  /* nop */

@@ -45,19 +45,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_831d, 2); mov(edx, memd[ds, eax]);                /* mov edx, [eax] */
             ii(0x1010_831f, 3); sar(edx, 0x10);                         /* sar edx, 0x10 */
             ii(0x1010_8322, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1010_8325, 3); cmp(edx, memd[ds, eax + 0xc]);          /* cmp edx, [eax+0xc] */
+            ii(0x1010_8325, 3); cmp(edx, memd[ds, eax + 12]);           /* cmp edx, [eax+0xc] */
             ii(0x1010_8328, 2); if(jl(0x1010_832c, 2)) goto l_0x1010_832c; /* jl 0x1010832c */
         l_0x1010_832a:
             ii(0x1010_832a, 2); jmp(0x1010_8332, 6); goto l_0x1010_8332; /* jmp 0x10108332 */
         l_0x1010_832c:
-            ii(0x1010_832c, 4); mov(memb[ss, ebp - 0xc], 1);            /* mov byte [ebp-0xc], 0x1 */
+            ii(0x1010_832c, 4); mov(memb[ss, ebp - 12], 1);             /* mov byte [ebp-0xc], 0x1 */
             ii(0x1010_8330, 2); jmp(0x1010_8336, 4); goto l_0x1010_8336; /* jmp 0x10108336 */
         l_0x1010_8332:
-            ii(0x1010_8332, 4); mov(memb[ss, ebp - 0xc], 0);            /* mov byte [ebp-0xc], 0x0 */
+            ii(0x1010_8332, 4); mov(memb[ss, ebp - 12], 0);             /* mov byte [ebp-0xc], 0x0 */
         l_0x1010_8336:
-            ii(0x1010_8336, 3); mov(al, memb[ss, ebp - 0xc]);           /* mov al, [ebp-0xc] */
-            ii(0x1010_8339, 3); mov(memb[ss, ebp - 0x10], al);          /* mov [ebp-0x10], al */
-            ii(0x1010_833c, 3); mov(al, memb[ss, ebp - 0x10]);          /* mov al, [ebp-0x10] */
+            ii(0x1010_8336, 3); mov(al, memb[ss, ebp - 12]);            /* mov al, [ebp-0xc] */
+            ii(0x1010_8339, 3); mov(memb[ss, ebp - 16], al);            /* mov [ebp-0x10], al */
+            ii(0x1010_833c, 3); mov(al, memb[ss, ebp - 16]);            /* mov al, [ebp-0x10] */
             ii(0x1010_833f, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1010_8341, 1); pop(ebp);                               /* pop ebp */
             ii(0x1010_8342, 1); pop(edi);                               /* pop edi */

@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x848d, 3);    mov(cx, memw[ds, di + 4]);                /* mov cx, [di+0x4] */
             ii(0x8490, 3);    mov(dx, memw[ds, di + 6]);                /* mov dx, [di+0x6] */
             ii(0x8493, 3);    mov(si, memw[ds, di + 8]);                /* mov si, [di+0x8] */
-            ii(0x8496, 3);    mov(di, memw[ds, di + 0xa]);              /* mov di, [di+0xa] */
+            ii(0x8496, 3);    mov(di, memw[ds, di + 10]);               /* mov di, [di+0xa] */
             ii(0x8499, 2);    @int(0x21);                               /* int 0x21 */
             ii(0x849b, 1);    push(di);                                 /* push di */
             ii(0x849c, 3);    mov(di, memw[ss, bp + 6]);                /* mov di, [bp+0x6] */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x84a4, 3);    mov(memw[ds, di + 4], cx);                /* mov [di+0x4], cx */
             ii(0x84a7, 3);    mov(memw[ds, di + 6], dx);                /* mov [di+0x6], dx */
             ii(0x84aa, 3);    mov(memw[ds, di + 8], si);                /* mov [di+0x8], si */
-            ii(0x84ad, 3);    pop(memw[ds, di + 0xa]);                  /* pop word [di+0xa] */
+            ii(0x84ad, 3);    pop(memw[ds, di + 10]);                   /* pop word [di+0xa] */
             ii(0x84b0, 2);    if(jb(0x84b6, 4)) goto l_0x84b6;          /* jb 0x84b6 */
             ii(0x84b2, 2);    xor(si, si);                              /* xor si, si */
             ii(0x84b4, 2);    jmp(0x84be, 8); goto l_0x84be;            /* jmp 0x84be */
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x84b9, 3);    mov(si, 1);                               /* mov si, 0x1 */
             ii(0x84bc, 2);    mov(ax, memw[ds, di]);                    /* mov ax, [di] */
         l_0x84be:
-            ii(0x84be, 3);    mov(memw[ds, di + 0xc], si);              /* mov [di+0xc], si */
+            ii(0x84be, 3);    mov(memw[ds, di + 12], si);               /* mov [di+0xc], si */
             ii(0x84c1, 1);    pop(di);                                  /* pop di */
             ii(0x84c2, 1);    pop(si);                                  /* pop si */
             ii(0x84c3, 2);    mov(sp, bp);                              /* mov sp, bp */

@@ -48,7 +48,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x59c7, 2);    if(jb(0x59d3, 0xa)) goto l_0x59d3;        /* jb 0x59d3 */
             ii(0x59c9, 3);    test(dl, 0x80);                           /* test dl, 0x80 */
             ii(0x59cc, 2);    if(jz(0x59d3, 5)) goto l_0x59d3;          /* jz 0x59d3 */
-            ii(0x59ce, 5);    or(memb[ds, bx + 0xcfa], 0x40);           /* or byte [bx+0xcfa], 0x40 */
+            ii(0x59ce, 5);    or(memb[ds, bx + 3322], 0x40);            /* or byte [bx+0xcfa], 0x40 */
         l_0x59d3:
             ii(0x59d3, 1);    dec(bx);                                  /* dec bx */
             ii(0x59d4, 2);    if(jns(0x59c2, -0x14)) goto l_0x59c2;     /* jns 0x59c2 */

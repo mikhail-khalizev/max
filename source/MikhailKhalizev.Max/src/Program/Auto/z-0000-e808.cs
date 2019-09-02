@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0xe808-fe6c4151")]
         public void Method_0000_e808()
         {
-            ii(0xe808, 5);    test(memw[ss, bp + 0x26], 0x200);         /* test word [bp+0x26], 0x200 */
+            ii(0xe808, 5);    test(memw[ss, bp + 38], 0x200);           /* test word [bp+0x26], 0x200 */
             ii(0xe80d, 2);    if(jz(0xe810, 1)) goto l_0xe810;          /* jz 0xe810 */
             ii(0xe80f, 1);    sti();                                    /* sti */
         l_0xe810:

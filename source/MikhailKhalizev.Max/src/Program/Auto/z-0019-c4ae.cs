@@ -9,12 +9,12 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0019_c4ae()
         {
             ii(0x19_c4ae, 4); enter(0x14, 0);                           /* enter 0x14, 0x0 */
-            ii(0x19_c4b2, 5); mov(memw[ss, bp - 0x12], 0);              /* mov word [bp-0x12], 0x0 */
+            ii(0x19_c4b2, 5); mov(memw[ss, bp - 18], 0);                /* mov word [bp-0x12], 0x0 */
             ii(0x19_c4b7, 3); mov(ax, memw[ss, bp + 6]);                /* mov ax, [bp+0x6] */
-            ii(0x19_c4ba, 3); mov(memw[ss, bp - 0x14], ax);             /* mov [bp-0x14], ax */
+            ii(0x19_c4ba, 3); mov(memw[ss, bp - 20], ax);               /* mov [bp-0x14], ax */
             ii(0x19_c4bd, 3); mov(ax, memw[ss, bp + 4]);                /* mov ax, [bp+0x4] */
             ii(0x19_c4c0, 3); mov(memw[ss, bp - 6], ax);                /* mov [bp-0x6], ax */
-            ii(0x19_c4c3, 3); lea(ax, memw[ss, bp - 0x14]);             /* lea ax, [bp-0x14] */
+            ii(0x19_c4c3, 3); lea(ax, memw[ss, bp - 20]);               /* lea ax, [bp-0x14] */
             ii(0x19_c4c6, 1); push(ss);                                 /* push ss */
             ii(0x19_c4c7, 1); push(ax);                                 /* push ax */
             ii(0x19_c4c8, 3); push(0x3d00);                             /* push 0x3d00 */

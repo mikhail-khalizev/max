@@ -15,12 +15,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_cd88, 1); push(edi);                              /* push edi */
             ii(0x1016_cd89, 1); push(ebp);                              /* push ebp */
             ii(0x1016_cd8a, 3); sub(esp, 0x10);                         /* sub esp, 0x10 */
-            ii(0x1016_cd8d, 4); mov(memb[ss, esp + 0xc], al);           /* mov [esp+0xc], al */
+            ii(0x1016_cd8d, 4); mov(memb[ss, esp + 12], al);            /* mov [esp+0xc], al */
             ii(0x1016_cd91, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
             ii(0x1016_cd93, 2); xor(edx, edx);                          /* xor edx, edx */
         l_0x1016_cd95:
             ii(0x1016_cd95, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x1016_cd97, 4); mov(bl, memb[ss, esp + 0xc]);           /* mov bl, [esp+0xc] */
+            ii(0x1016_cd97, 4); mov(bl, memb[ss, esp + 12]);            /* mov bl, [esp+0xc] */
             ii(0x1016_cd9b, 2); mov(eax, ebx);                          /* mov eax, ebx */
             ii(0x1016_cd9d, 5); call(/* sys */ 0x1016_cae8, -0x2ba);    /* call 0x1016cae8 */
             ii(0x1016_cda2, 2); mov(edi, eax);                          /* mov edi, eax */

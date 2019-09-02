@@ -63,8 +63,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_bc8b, 2); jmp(0x1008_bc36, -0x57); goto l_0x1008_bc36; /* jmp 0x1008bc36 */
         l_0x1008_bc8d:
             ii(0x1008_bc8d, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1008_bc90, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x1008_bc93, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x1008_bc90, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
+            ii(0x1008_bc93, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x1008_bc96, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1008_bc98, 1); pop(ebp);                               /* pop ebp */
             ii(0x1008_bc99, 1); pop(edi);                               /* pop edi */

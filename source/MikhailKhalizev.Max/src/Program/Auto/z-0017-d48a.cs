@@ -82,13 +82,13 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_d520:
             ii(0x17_d520, 3); mov(bx, 4);                               /* mov bx, 0x4 */
         l_0x17_d523:
-            ii(0x17_d523, 5); and(memb[ds, bx + 0x1c5d], -0x41 /* 0xbf */); /* and byte [bx+0x1c5d], 0xbf */
+            ii(0x17_d523, 5); and(memb[ds, bx + 7261], -0x41 /* 0xbf */); /* and byte [bx+0x1c5d], 0xbf */
             ii(0x17_d528, 3); mov(ax, 0x4400);                          /* mov ax, 0x4400 */
             ii(0x17_d52b, 2); @int(0x21);                               /* int 0x21 */
             ii(0x17_d52d, 2); if(jb(0x17_d539, 0xa)) goto l_0x17_d539;  /* jb 0xd539 */
             ii(0x17_d52f, 3); test(dl, 0x80);                           /* test dl, 0x80 */
             ii(0x17_d532, 2); if(jz(0x17_d539, 5)) goto l_0x17_d539;    /* jz 0xd539 */
-            ii(0x17_d534, 5); or(memb[ds, bx + 0x1c5d], 0x40);          /* or byte [bx+0x1c5d], 0x40 */
+            ii(0x17_d534, 5); or(memb[ds, bx + 7261], 0x40);            /* or byte [bx+0x1c5d], 0x40 */
         l_0x17_d539:
             ii(0x17_d539, 1); dec(bx);                                  /* dec bx */
             ii(0x17_d53a, 2); if(jns(0x17_d523, -0x19)) goto l_0x17_d523; /* jns 0xd523 */

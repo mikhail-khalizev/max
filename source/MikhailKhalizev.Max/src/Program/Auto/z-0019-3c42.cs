@@ -8,11 +8,11 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_3c42-593d6ddf")]
         public void Method_0019_3c42()
         {
-            ii(0x19_3c42, 3); mov(cx, memw[ss, bp + 0xe]);              /* mov cx, [bp+0xe] */
+            ii(0x19_3c42, 3); mov(cx, memw[ss, bp + 14]);               /* mov cx, [bp+0xe] */
             ii(0x19_3c45, 3); mov(ax, memw[ss, bp + 6]);                /* mov ax, [bp+0x6] */
             ii(0x19_3c48, 3); mov(dx, memw[ss, bp + 8]);                /* mov dx, [bp+0x8] */
             ii(0x19_3c4b, 1); push(ds);                                 /* push ds */
-            ii(0x19_3c4c, 3); lds(di, memw[ss, bp + 0xa]);              /* lds di, [bp+0xa] */
+            ii(0x19_3c4c, 3); lds(di, memw[ss, bp + 10]);               /* lds di, [bp+0xa] */
             ii(0x19_3c4f, 1); push(di);                                 /* push di */
             ii(0x19_3c50, 1); push(ds);                                 /* push ds */
             ii(0x19_3c51, 1); pop(es);                                  /* pop es */

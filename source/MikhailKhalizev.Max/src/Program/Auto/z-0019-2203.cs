@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_222d, 2); add(memb[ds, bx + si], al);               /* add [bx+si], al */
             ii(0x19_222f, 2); add(memb[ds, bx + si], al);               /* add [bx+si], al */
             ii(0x19_2231, 4); add(memb[ds, -0x48], al);                 /* add [0xffb8], al */
-            ii(0x19_2235, 4); push(memw[ss, bp - 0x73fb]);              /* push word [bp-0x73fb] */
+            ii(0x19_2235, 4); push(memw[ss, bp - 29691]);               /* push word [bp-0x73fb] */
             ii(0x19_2239, 1); retf();                                   /* retf */
         }
     }

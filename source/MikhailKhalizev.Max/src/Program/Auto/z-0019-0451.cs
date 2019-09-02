@@ -35,8 +35,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_0493, 2); if(jz(0x19_0498, 3)) goto l_0x19_0498;    /* jz 0x498 */
             ii(0x19_0495, 3); jmp(0x19_04b8, 0x20); goto l_0x19_04b8;   /* jmp 0x4b8 */
         l_0x19_0498:
-            ii(0x19_0498, 3); mov(ax, memw[ss, bp + 0xa]);              /* mov ax, [bp+0xa] */
-            ii(0x19_049b, 3); mov(dx, memw[ss, bp + 0xc]);              /* mov dx, [bp+0xc] */
+            ii(0x19_0498, 3); mov(ax, memw[ss, bp + 10]);               /* mov ax, [bp+0xa] */
+            ii(0x19_049b, 3); mov(dx, memw[ss, bp + 12]);               /* mov dx, [bp+0xc] */
             ii(0x19_049e, 3); les(bx, memw[ss, bp - 4]);                /* les bx, [bp-0x4] */
             ii(0x19_04a1, 4); cmp(memw[es, bx + 2], ax);                /* cmp [es:bx+0x2], ax */
             ii(0x19_04a5, 2); if(jz(0x19_04aa, 3)) goto l_0x19_04aa;    /* jz 0x4aa */

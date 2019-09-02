@@ -31,10 +31,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_97ef, 7); mov(memd[ds, eax + 2], 0x101b_7398);    /* mov dword [eax+0x2], 0x101b7398 */
             ii(0x1014_97f6, 7); dec(memw[ds, 0x101c_8148]);             /* dec word [0x101c8148] */
             ii(0x1014_97fd, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1014_9800, 7); cmp(memd[ds, eax + 0xa7], 0);           /* cmp dword [eax+0xa7], 0x0 */
+            ii(0x1014_9800, 7); cmp(memd[ds, eax + 167], 0);            /* cmp dword [eax+0xa7], 0x0 */
             ii(0x1014_9807, 2); if(jz(0x1014_9817, 0xe)) goto l_0x1014_9817; /* jz 0x10149817 */
             ii(0x1014_9809, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1014_980c, 6); mov(eax, memd[ds, eax + 0xa7]);         /* mov eax, [eax+0xa7] */
+            ii(0x1014_980c, 6); mov(eax, memd[ds, eax + 167]);          /* mov eax, [eax+0xa7] */
             ii(0x1014_9812, 5); call(Definitions.sys_delete, 0x1_c74d); /* call 0x10165f64 */
         l_0x1014_9817:
             ii(0x1014_9817, 2); xor(edx, edx);                          /* xor edx, edx */
@@ -95,8 +95,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_98db, 5); call(Definitions.sys_delete, 0x1_c684); /* call 0x10165f64 */
         l_0x1014_98e0:
             ii(0x1014_98e0, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1014_98e3, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x1014_98e6, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x1014_98e3, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
+            ii(0x1014_98e6, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x1014_98e9, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_98eb, 1); pop(ebp);                               /* pop ebp */
             ii(0x1014_98ec, 1); pop(edi);                               /* pop edi */

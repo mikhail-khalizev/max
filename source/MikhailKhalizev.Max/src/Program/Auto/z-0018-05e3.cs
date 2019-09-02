@@ -14,11 +14,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_05e9, 1); push(cx);                                 /* push cx */
             ii(0x18_05ea, 1); cld();                                    /* cld */
             ii(0x18_05eb, 3); les(di, memw[ss, bp + 6]);                /* les di, [bp+0x6] */
-            ii(0x18_05ee, 3); mov(cx, memw[ss, bp + 0xa]);              /* mov cx, [bp+0xa] */
-            ii(0x18_05f1, 3); mov(ax, memw[ss, bp + 0xc]);              /* mov ax, [bp+0xc] */
+            ii(0x18_05ee, 3); mov(cx, memw[ss, bp + 10]);               /* mov cx, [bp+0xa] */
+            ii(0x18_05f1, 3); mov(ax, memw[ss, bp + 12]);               /* mov ax, [bp+0xc] */
             ii(0x18_05f4, 2); repne(() => scasb());                     /* repne scasb */
             ii(0x18_05f6, 2); mov(ax, cx);                              /* mov ax, cx */
-            ii(0x18_05f8, 3); mov(ax, memw[ss, bp + 0xa]);              /* mov ax, [bp+0xa] */
+            ii(0x18_05f8, 3); mov(ax, memw[ss, bp + 10]);               /* mov ax, [bp+0xa] */
             ii(0x18_05fb, 2); sub(ax, cx);                              /* sub ax, cx */
             ii(0x18_05fd, 1); dec(ax);                                  /* dec ax */
             ii(0x18_05fe, 1); pop(cx);                                  /* pop cx */

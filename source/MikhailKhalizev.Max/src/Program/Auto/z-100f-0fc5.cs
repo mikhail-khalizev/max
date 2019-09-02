@@ -41,10 +41,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_101d, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100f_1020, 5); call(Definitions.my_dtor_d2, -0x2_2aed); /* call 0x100ce538 */
             ii(0x100f_1025, 5); call(Definitions.sys_delete, 0x7_4f3a); /* call 0x10165f64 */
-            ii(0x100f_102a, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x100f_102a, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
             ii(0x100f_102d, 2); jmp(0x100f_1036, 7); goto l_0x100f_1036; /* jmp 0x100f1036 */
         l_0x100f_102f:
-            ii(0x100f_102f, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
+            ii(0x100f_102f, 7); mov(memd[ss, ebp - 12], 0);             /* mov dword [ebp-0xc], 0x0 */
         l_0x100f_1036:
             ii(0x100f_1036, 4); movsx(eax, memw[ss, ebp - 4]);          /* movsx eax, word [ebp-0x4] */
             ii(0x100f_103a, 3); imul(eax, eax, 0xe);                    /* imul eax, eax, 0xe */

@@ -38,14 +38,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_6f8d, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1010_6f8f, 2); if(jnz(0x1010_6f99, 8)) goto l_0x1010_6f99; /* jnz 0x10106f99 */
             ii(0x1010_6f91, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1010_6f94, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x1010_6f94, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
             ii(0x1010_6f97, 2); jmp(0x1010_6fa2, 9); goto l_0x1010_6fa2; /* jmp 0x10106fa2 */
         l_0x1010_6f99:
             ii(0x1010_6f99, 2); jmp(0x1010_6f63, -0x38); goto l_0x1010_6f63; /* jmp 0x10106f63 */
         l_0x1010_6f9b:
-            ii(0x1010_6f9b, 7); mov(memd[ss, ebp - 0xc], 0xffff_ffff);  /* mov dword [ebp-0xc], 0xffffffff */
+            ii(0x1010_6f9b, 7); mov(memd[ss, ebp - 12], 0xffff_ffff);   /* mov dword [ebp-0xc], 0xffffffff */
         l_0x1010_6fa2:
-            ii(0x1010_6fa2, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x1010_6fa2, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x1010_6fa5, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1010_6fa7, 1); pop(ebp);                               /* pop ebp */
             ii(0x1010_6fa8, 1); pop(edi);                               /* pop edi */

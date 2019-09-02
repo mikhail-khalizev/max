@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5d6a, 3); mov(esi, memd[ds, ebx + 6]);            /* mov esi, [ebx+0x6] */
             ii(0x1019_5d6d, 2); jmp(0x1019_5d17, -0x58); goto l_0x1019_5d17; /* jmp 0x10195d17 */
         l_0x1019_5d6f:
-            ii(0x1019_5d6f, 3); mov(esi, memd[ds, ebx + 0xa]);          /* mov esi, [ebx+0xa] */
+            ii(0x1019_5d6f, 3); mov(esi, memd[ds, ebx + 10]);           /* mov esi, [ebx+0xa] */
             ii(0x1019_5d72, 2); jmp(0x1019_5d17, -0x5d); goto l_0x1019_5d17; /* jmp 0x10195d17 */
         l_0x1019_5d74:
             ii(0x1019_5d74, 3); mov(esi, memd[ds, ebx + 2]);            /* mov esi, [ebx+0x2] */

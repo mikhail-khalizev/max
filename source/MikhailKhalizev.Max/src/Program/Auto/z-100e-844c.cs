@@ -37,8 +37,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_84a2, 5); call(Definitions.sys_delete, 0x7_dabd); /* call 0x10165f64 */
         l_0x100e_84a7:
             ii(0x100e_84a7, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x100e_84aa, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x100e_84ad, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x100e_84aa, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
+            ii(0x100e_84ad, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x100e_84b0, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x100e_84b2, 1); pop(ebp);                               /* pop ebp */
             ii(0x100e_84b3, 1); pop(edi);                               /* pop edi */

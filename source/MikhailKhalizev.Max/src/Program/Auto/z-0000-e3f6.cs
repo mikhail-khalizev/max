@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xe40f, 2);    jmp(0xe475, 0x64); goto l_0xe475;         /* jmp 0xe475 */
         l_0xe411:
             ii(0xe411, 1);    cli();                                    /* cli */
-            ii(0xe412, 3);    push(memw[ss, bp + 0xa]);                 /* push word [bp+0xa] */
+            ii(0xe412, 3);    push(memw[ss, bp + 10]);                  /* push word [bp+0xa] */
             ii(0xe415, 3);    push(memw[ss, bp + 8]);                   /* push word [bp+0x8] */
             ii(0xe418, 2);    push(8);                                  /* push 0x8 */
             ii(0xe41a, 3);    push(memw[ss, bp - 2]);                   /* push word [bp-0x2] */

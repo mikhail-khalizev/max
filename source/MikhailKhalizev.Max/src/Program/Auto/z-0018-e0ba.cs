@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_e117, 3); sub(bx, 8);                               /* sub bx, 0x8 */
             ii(0x18_e11a, 2); jmp(0x18_e0f9, -0x23); goto l_0x18_e0f9;  /* jmp 0xe0f9 */
         l_0x18_e11c:
-            ii(0x18_e11c, 4); mov(memw_a32[ss, ebp + 0x20], bx);        /* mov [ebp+0x20], bx */
+            ii(0x18_e11c, 4); mov(memw_a32[ss, ebp + 32], bx);          /* mov [ebp+0x20], bx */
             ii(0x18_e120, 1); ret(); return;                            /* ret */
         l_0x18_e121:
             ii(0x18_e121, 3); mov(memw[ds, bx + 4], ax);                /* mov [bx+0x4], ax */

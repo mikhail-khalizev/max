@@ -18,11 +18,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_6141, 3); mov(ax, 1);                               /* mov ax, 0x1 */
             ii(0x19_6144, 3); jmp(0x19_617f, 0x38); goto l_0x19_617f;   /* jmp 0x617f */
         l_0x19_6147:
-            ii(0x19_6147, 3); push(memw[ss, bp + 0xc]);                 /* push word [bp+0xc] */
+            ii(0x19_6147, 3); push(memw[ss, bp + 12]);                  /* push word [bp+0xc] */
             ii(0x19_614a, 3); mov(al, memb[ds, 0xd81]);                 /* mov al, [0xd81] */
             ii(0x19_614d, 1); cbw();                                    /* cbw */
             ii(0x19_614e, 1); push(ax);                                 /* push ax */
-            ii(0x19_614f, 3); push(memw[ss, bp + 0xa]);                 /* push word [bp+0xa] */
+            ii(0x19_614f, 3); push(memw[ss, bp + 10]);                  /* push word [bp+0xa] */
             ii(0x19_6152, 3); push(memw[ss, bp + 8]);                   /* push word [bp+0x8] */
             ii(0x19_6155, 3); push(memw[ss, bp + 6]);                   /* push word [bp+0x6] */
             ii(0x19_6158, 1); push(ds);                                 /* push ds */
@@ -34,11 +34,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_6167, 1); push(ax);                                 /* push ax */
             ii(0x19_6168, 1); push(cx);                                 /* push cx */
             ii(0x19_6169, 3); call(0x18_fa6b, -0x6701);                 /* call 0xfa6b */
-            ii(0x19_616c, 4); cmp(memw[ss, bp + 0xc], 0);               /* cmp word [bp+0xc], 0x0 */
+            ii(0x19_616c, 4); cmp(memw[ss, bp + 12], 0);                /* cmp word [bp+0xc], 0x0 */
             ii(0x19_6170, 2); if(jnz(0x19_6175, 3)) goto l_0x19_6175;   /* jnz 0x6175 */
             ii(0x19_6172, 3); jmp(0x19_617f, 0xa); goto l_0x19_617f;    /* jmp 0x617f */
         l_0x19_6175:
-            ii(0x19_6175, 3); mov(ax, memw[ss, bp + 0xc]);              /* mov ax, [bp+0xc] */
+            ii(0x19_6175, 3); mov(ax, memw[ss, bp + 12]);               /* mov ax, [bp+0xc] */
             ii(0x19_6178, 2); sub(cx, cx);                              /* sub cx, cx */
             ii(0x19_617a, 1); push(ax);                                 /* push ax */
             ii(0x19_617b, 1); push(cx);                                 /* push cx */

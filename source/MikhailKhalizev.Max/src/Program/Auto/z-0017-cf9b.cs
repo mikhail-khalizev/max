@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0017_cf9b()
         {
             ii(0x17_cf9b, 2); push(ebx);                                /* push ebx */
-            ii(0x17_cf9d, 5); movzx(bx, memb_a32[ss, ebp + 0x20]);      /* movzx bx, byte [ebp+0x20] */
+            ii(0x17_cf9d, 5); movzx(bx, memb_a32[ss, ebp + 32]);        /* movzx bx, byte [ebp+0x20] */
             ii(0x17_cfa2, 3); cmp(bl, 0);                               /* cmp bl, 0x0 */
             ii(0x17_cfa5, 4); if(ja(0x17_cfc4, 0x1b)) goto l_0x17_cfc4; /* ja 0xcfc4 */
             ii(0x17_cfa9, 3); push(0x3e68);                             /* push 0x3e68 */

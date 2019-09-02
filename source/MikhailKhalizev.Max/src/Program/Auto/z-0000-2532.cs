@@ -102,9 +102,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x25f6, 2);    if(jnz(0x25fa, 2)) goto l_0x25fa;         /* jnz 0x25fa */
             ii(0x25f8, 2);    mov(memw[ds, bx + si], ax);               /* mov [bx+si], ax */
         l_0x25fa:
-            ii(0x25fa, 4);    cmp(memw[es, bx + 0x22], dx);             /* cmp [es:bx+0x22], dx */
+            ii(0x25fa, 4);    cmp(memw[es, bx + 34], dx);               /* cmp [es:bx+0x22], dx */
             ii(0x25fe, 2);    if(jnz(0x2604, 4)) goto l_0x2604;         /* jnz 0x2604 */
-            ii(0x2600, 4);    mov(memw[es, bx + 0x22], ax);             /* mov [es:bx+0x22], ax */
+            ii(0x2600, 4);    mov(memw[es, bx + 34], ax);               /* mov [es:bx+0x22], ax */
         l_0x2604:
             ii(0x2604, 3);    add(bx, 4);                               /* add bx, 0x4 */
             ii(0x2607, 2);    if(loop(0x25ee, -0x1b)) goto l_0x25ee;    /* loop 0x25ee */

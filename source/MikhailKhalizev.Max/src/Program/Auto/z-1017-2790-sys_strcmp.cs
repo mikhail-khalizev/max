@@ -41,8 +41,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_27db, 2); and(eax, ecx);                          /* and eax, ecx */
             ii(0x1017_27dd, 5); and(eax, 0x8080_8080);                  /* and eax, 0x80808080 */
             ii(0x1017_27e2, 2); if(jnz(0x1017_2804, 0x20)) goto l_0x1017_2804; /* jnz 0x10172804 */
-            ii(0x1017_27e4, 3); mov(eax, memd[ds, ebx + 0xc]);          /* mov eax, [ebx+0xc] */
-            ii(0x1017_27e7, 3); mov(ecx, memd[ds, edx + 0xc]);          /* mov ecx, [edx+0xc] */
+            ii(0x1017_27e4, 3); mov(eax, memd[ds, ebx + 12]);           /* mov eax, [ebx+0xc] */
+            ii(0x1017_27e7, 3); mov(ecx, memd[ds, edx + 12]);           /* mov ecx, [edx+0xc] */
             ii(0x1017_27ea, 2); cmp(ecx, eax);                          /* cmp ecx, eax */
             ii(0x1017_27ec, 2); if(jnz(0x1017_2809, 0x1b)) goto l_0x1017_2809; /* jnz 0x10172809 */
             ii(0x1017_27ee, 3); add(ebx, 0x10);                         /* add ebx, 0x10 */

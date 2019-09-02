@@ -31,19 +31,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_cb6a, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100a_cb6d, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100a_cb70, 5); call(0x1007_6574, -0x3_6601);           /* call 0x10076574 */
-            ii(0x100a_cb75, 4); cmp(memb[ds, eax + 0x3d], 0x10);        /* cmp byte [eax+0x3d], 0x10 */
+            ii(0x100a_cb75, 4); cmp(memb[ds, eax + 61], 0x10);          /* cmp byte [eax+0x3d], 0x10 */
             ii(0x100a_cb79, 2); if(jnz(0x100a_cb88, 0xd)) goto l_0x100a_cb88; /* jnz 0x100acb88 */
             ii(0x100a_cb7b, 5); mov(edx, 1);                            /* mov edx, 0x1 */
             ii(0x100a_cb80, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100a_cb83, 5); call(0x100a_2a04, -0xa184);             /* call 0x100a2a04 */
         l_0x100a_cb88:
             ii(0x100a_cb88, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x100a_cb8b, 5); cmp(memw[ds, eax + 0x26], -1 /* 0xff */); /* cmp word [eax+0x26], 0xffff */
+            ii(0x100a_cb8b, 5); cmp(memw[ds, eax + 38], -1 /* 0xff */); /* cmp word [eax+0x26], 0xffff */
             ii(0x100a_cb90, 2); if(jnz(0x100a_cba3, 0x11)) goto l_0x100a_cba3; /* jnz 0x100acba3 */
             ii(0x100a_cb92, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100a_cb95, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100a_cb98, 5); call(0x1007_6574, -0x3_6629);           /* call 0x10076574 */
-            ii(0x100a_cb9d, 4); cmp(memb[ds, eax + 0x3d], 0x10);        /* cmp byte [eax+0x3d], 0x10 */
+            ii(0x100a_cb9d, 4); cmp(memb[ds, eax + 61], 0x10);          /* cmp byte [eax+0x3d], 0x10 */
             ii(0x100a_cba1, 2); if(jnz(0x100a_cba5, 2)) goto l_0x100a_cba5; /* jnz 0x100acba5 */
         l_0x100a_cba3:
             ii(0x100a_cba3, 2); jmp(0x100a_cbb2, 0xd); goto l_0x100a_cbb2; /* jmp 0x100acbb2 */

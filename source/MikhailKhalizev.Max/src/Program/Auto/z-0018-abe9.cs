@@ -9,10 +9,10 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_abe9()
         {
             ii(0x18_abe9, 1); push(bx);                                 /* push bx */
-            ii(0x18_abea, 3); mov(dx, memw[ss, bp + 0x12]);             /* mov dx, [bp+0x12] */
+            ii(0x18_abea, 3); mov(dx, memw[ss, bp + 18]);               /* mov dx, [bp+0x12] */
             ii(0x18_abed, 3); mov(cx, memw[ss, bp + 4]);                /* mov cx, [bp+0x4] */
             ii(0x18_abf0, 2); xor(bh, bh);                              /* xor bh, bh */
-            ii(0x18_abf2, 3); mov(bl, memb[ss, bp + 0x16]);             /* mov bl, [bp+0x16] */
+            ii(0x18_abf2, 3); mov(bl, memb[ss, bp + 22]);               /* mov bl, [bp+0x16] */
             ii(0x18_abf5, 3); cmp(bl, 0xd);                             /* cmp bl, 0xd */
             ii(0x18_abf8, 2); if(jz_func(0x18_abe4, -0x16)) return;     /* jz 0xabe4 */
             ii(0x18_abfa, 2); mov(di, bx);                              /* mov di, bx */

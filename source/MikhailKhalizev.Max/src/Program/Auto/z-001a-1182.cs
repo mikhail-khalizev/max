@@ -12,16 +12,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1a_1186, 1); push(ds);                                 /* push ds */
             ii(0x1a_1187, 3); mov(ax, 0xa8);                            /* mov ax, 0xa8 */
             ii(0x1a_118a, 2); mov(ds, ax);                              /* mov ds, ax */
-            ii(0x1a_118c, 5); mov(memw[ss, bp - 0x12], 0);              /* mov word [bp-0x12], 0x0 */
-            ii(0x1a_1191, 3); mov(ax, memw[ss, bp + 0xa]);              /* mov ax, [bp+0xa] */
-            ii(0x1a_1194, 3); mov(memw[ss, bp - 0x14], ax);             /* mov [bp-0x14], ax */
+            ii(0x1a_118c, 5); mov(memw[ss, bp - 18], 0);                /* mov word [bp-0x12], 0x0 */
+            ii(0x1a_1191, 3); mov(ax, memw[ss, bp + 10]);               /* mov ax, [bp+0xa] */
+            ii(0x1a_1194, 3); mov(memw[ss, bp - 20], ax);               /* mov [bp-0x14], ax */
             ii(0x1a_1197, 3); mov(ax, memw[ss, bp + 8]);                /* mov ax, [bp+0x8] */
             ii(0x1a_119a, 3); mov(memw[ss, bp - 6], ax);                /* mov [bp-0x6], ax */
             ii(0x1a_119d, 3); mov(ax, memw[ss, bp + 6]);                /* mov ax, [bp+0x6] */
             ii(0x1a_11a0, 3); mov(memw[ss, bp - 4], ax);                /* mov [bp-0x4], ax */
-            ii(0x1a_11a3, 3); mov(ax, memw[ss, bp + 0xc]);              /* mov ax, [bp+0xc] */
+            ii(0x1a_11a3, 3); mov(ax, memw[ss, bp + 12]);               /* mov ax, [bp+0xc] */
             ii(0x1a_11a6, 3); mov(memw[ss, bp - 8], ax);                /* mov [bp-0x8], ax */
-            ii(0x1a_11a9, 3); lea(ax, memw[ss, bp - 0x14]);             /* lea ax, [bp-0x14] */
+            ii(0x1a_11a9, 3); lea(ax, memw[ss, bp - 20]);               /* lea ax, [bp-0x14] */
             ii(0x1a_11ac, 1); push(ss);                                 /* push ss */
             ii(0x1a_11ad, 1); push(ax);                                 /* push ax */
             ii(0x1a_11ae, 3); push(0x3f00);                             /* push 0x3f00 */

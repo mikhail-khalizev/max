@@ -125,9 +125,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_7041, 3); mov(eax, memd[ss, esp]);                /* mov eax, [esp] */
             ii(0x1018_7044, 2); or(al, 1);                              /* or al, 0x1 */
             ii(0x1018_7046, 2); mov(memd[ds, ebx], eax);                /* mov [ebx], eax */
-            ii(0x1018_7048, 3); inc(memd[ds, edx + 0x18]);              /* inc dword [edx+0x18] */
+            ii(0x1018_7048, 3); inc(memd[ds, edx + 24]);                /* inc dword [edx+0x18] */
             ii(0x1018_704b, 3); lea(eax, memd[ds, ebx + 4]);            /* lea eax, [ebx+0x4] */
-            ii(0x1018_704e, 7); mov(memd[ds, edx + 0x14], 0xffff_ffff); /* mov dword [edx+0x14], 0xffffffff */
+            ii(0x1018_704e, 7); mov(memd[ds, edx + 20], 0xffff_ffff);   /* mov dword [edx+0x14], 0xffffffff */
             ii(0x1018_7055, 5); call(Definitions.sys_free, -0x1_bf99);  /* call 0x1016b0c1 */
             ii(0x1018_705a, 5); mov(eax, 1);                            /* mov eax, 0x1 */
         l_0x1018_705f:

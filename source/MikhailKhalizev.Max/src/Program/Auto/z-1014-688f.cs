@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_68c8, 2); mov(eax, edx);                          /* mov eax, edx */
             ii(0x1014_68ca, 3); sar(edx, 0x1f);                         /* sar edx, 0x1f */
             ii(0x1014_68cd, 3); mov(ebx, memd[ss, ebp - 4]);            /* mov ebx, [ebp-0x4] */
-            ii(0x1014_68d0, 3); idiv(memd[ds, ebx + 0x20]);             /* idiv dword [ebx+0x20] */
+            ii(0x1014_68d0, 3); idiv(memd[ds, ebx + 32]);               /* idiv dword [ebx+0x20] */
             ii(0x1014_68d3, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
         l_0x1014_68d6:
             ii(0x1014_68d6, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */

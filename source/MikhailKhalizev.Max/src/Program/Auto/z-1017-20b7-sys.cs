@@ -39,9 +39,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_20fb, 5); call(/* sys */ 0x1017_20ab, -0x55);     /* call 0x101720ab */
             ii(0x1017_2100, 4); mov(memb[ds, ecx + 8], 0x2e);           /* mov byte [ecx+0x8], 0x2e */
             ii(0x1017_2104, 4); mov(memb[ds, ecx + 9], 0x74);           /* mov byte [ecx+0x9], 0x74 */
-            ii(0x1017_2108, 4); mov(memb[ds, ecx + 0xa], 0x6d);         /* mov byte [ecx+0xa], 0x6d */
-            ii(0x1017_210c, 4); mov(memb[ds, ecx + 0xb], 0x70);         /* mov byte [ecx+0xb], 0x70 */
-            ii(0x1017_2110, 4); mov(memb[ds, ecx + 0xc], 0);            /* mov byte [ecx+0xc], 0x0 */
+            ii(0x1017_2108, 4); mov(memb[ds, ecx + 10], 0x6d);          /* mov byte [ecx+0xa], 0x6d */
+            ii(0x1017_210c, 4); mov(memb[ds, ecx + 11], 0x70);          /* mov byte [ecx+0xb], 0x70 */
+            ii(0x1017_2110, 4); mov(memb[ds, ecx + 12], 0);             /* mov byte [ecx+0xc], 0x0 */
             ii(0x1017_2114, 3); mov(memb[ds, ecx + 7], al);             /* mov [ecx+0x7], al */
             ii(0x1017_2117, 1); pop(edi);                               /* pop edi */
             ii(0x1017_2118, 1); pop(esi);                               /* pop esi */

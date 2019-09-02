@@ -67,7 +67,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
                     str = $"/* {n} */ ";
             }
 
-            return $"{str}{address.ToShortString()}";
+            if (options.WriteAddressAsDecimal)
+                return $"{str}{address.Native}";
+            else
+                return $"{str}{address.ToShortString()}";
         }
 
         public struct Options
@@ -75,6 +78,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             public bool WithNamespace { get; set; } // withNamespace - true, если необходимо добавить перед адресом комментарий с пространством имён; иначе - false.
             public bool SkipDeclaringType { get; set; }
             public bool NullIfNoName { get; set; }
+            public bool WriteAddressAsDecimal { get; set; }
         }
     }
 }

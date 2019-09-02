@@ -15,10 +15,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a827, 3); lea(si, memw[ds, bx + 8]);                /* lea si, [bx+0x8] */
             ii(0x18_a82a, 3); mov(cx, 8);                               /* mov cx, 0x8 */
             ii(0x18_a82d, 2); rep(() => movsw());                       /* rep movsw */
-            ii(0x18_a82f, 3); mov(ax, memw[ds, bx + 0x26]);             /* mov ax, [bx+0x26] */
+            ii(0x18_a82f, 3); mov(ax, memw[ds, bx + 38]);               /* mov ax, [bx+0x26] */
             ii(0x18_a832, 3); and(ah, 0xe);                             /* and ah, 0xe */
-            ii(0x18_a835, 3); mov(memw[ss, bp + 0x26], ax);             /* mov [bp+0x26], ax */
-            ii(0x18_a838, 5); test(memw[ss, bp + 0x26], 0x200);         /* test word [bp+0x26], 0x200 */
+            ii(0x18_a835, 3); mov(memw[ss, bp + 38], ax);               /* mov [bp+0x26], ax */
+            ii(0x18_a838, 5); test(memw[ss, bp + 38], 0x200);           /* test word [bp+0x26], 0x200 */
             ii(0x18_a83d, 2); if(jz(0x18_a840, 1)) goto l_0x18_a840;    /* jz 0xa840 */
             ii(0x18_a83f, 1); sti();                                    /* sti */
         l_0x18_a840:

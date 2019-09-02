@@ -41,11 +41,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c029, 3); shl(eax, 3);                            /* shl eax, 0x3 */
             ii(0x1016_c02c, 2); add(eax, esi);                          /* add eax, esi */
             ii(0x1016_c02e, 6); mov(memd[ds, eax], 3);                  /* mov dword [eax], 0x3 */
-            ii(0x1016_c034, 3); mov(memd[ds, eax + 0xc], ecx);          /* mov [eax+0xc], ecx */
+            ii(0x1016_c034, 3); mov(memd[ds, eax + 12], ecx);           /* mov [eax+0xc], ecx */
             ii(0x1016_c037, 6); mov(ebp, memd[ds, 0x101b_e858]);        /* mov ebp, [0x101be858] */
-            ii(0x1016_c03d, 3); mov(memd[ds, eax + 0x10], edx);         /* mov [eax+0x10], edx */
+            ii(0x1016_c03d, 3); mov(memd[ds, eax + 16], edx);           /* mov [eax+0x10], edx */
             ii(0x1016_c040, 6); mov(esi, memd[ds, 0x101b_e860]);        /* mov esi, [0x101be860] */
-            ii(0x1016_c046, 3); mov(memd[ds, eax + 0x14], ebx);         /* mov [eax+0x14], ebx */
+            ii(0x1016_c046, 3); mov(memd[ds, eax + 20], ebx);           /* mov [eax+0x14], ebx */
             ii(0x1016_c049, 1); inc(ebp);                               /* inc ebp */
             ii(0x1016_c04a, 3); mov(memd[ds, eax + 4], esi);            /* mov [eax+0x4], esi */
             ii(0x1016_c04d, 6); mov(esi, memd[ds, 0x101b_e864]);        /* mov esi, [0x101be864] */
@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_c147, 2); add(eax, esi);                          /* add eax, esi */
             ii(0x1016_c149, 1); dec(eax);                               /* dec eax */
             ii(0x1016_c14a, 3); mov(ebx, memd[ss, esp]);                /* mov ebx, [esp] */
-            ii(0x1016_c14d, 4); mov(memd[ss, esp + 0xc], eax);          /* mov [esp+0xc], eax */
+            ii(0x1016_c14d, 4); mov(memd[ss, esp + 12], eax);           /* mov [esp+0xc], eax */
             ii(0x1016_c151, 3); movsx(eax, cx);                         /* movsx eax, cx */
             ii(0x1016_c154, 2); add(ebx, eax);                          /* add ebx, eax */
             ii(0x1016_c156, 3); movsx(eax, dx);                         /* movsx eax, dx */

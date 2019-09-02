@@ -20,19 +20,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_187e, 6); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1016_1884, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
             ii(0x1016_1887, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1016_188a, 4); cmp(memb[ds, eax + 0x3d], 0x16);        /* cmp byte [eax+0x3d], 0x16 */
+            ii(0x1016_188a, 4); cmp(memb[ds, eax + 61], 0x16);          /* cmp byte [eax+0x3d], 0x16 */
             ii(0x1016_188e, 2); if(jnz(0x1016_18b9, 0x29)) goto l_0x1016_18b9; /* jnz 0x101618b9 */
             ii(0x1016_1890, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1016_1893, 4); cmp(memb[ds, eax + 0x3e], 0x20);        /* cmp byte [eax+0x3e], 0x20 */
+            ii(0x1016_1893, 4); cmp(memb[ds, eax + 62], 0x20);          /* cmp byte [eax+0x3e], 0x20 */
             ii(0x1016_1897, 2); if(jnz(0x1016_18aa, 0x11)) goto l_0x1016_18aa; /* jnz 0x101618aa */
             ii(0x1016_1899, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1016_189c, 4); mov(memb[ds, eax + 0x2d], 0);           /* mov byte [eax+0x2d], 0x0 */
+            ii(0x1016_189c, 4); mov(memb[ds, eax + 45], 0);             /* mov byte [eax+0x2d], 0x0 */
             ii(0x1016_18a0, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1016_18a3, 5); call(0x1015_ec73, -0x2c35);             /* call 0x1015ec73 */
             ii(0x1016_18a8, 2); jmp(0x1016_18b9, 0xf); goto l_0x1016_18b9; /* jmp 0x101618b9 */
         l_0x1016_18aa:
             ii(0x1016_18aa, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
-            ii(0x1016_18ad, 4); mov(memb[ds, eax + 0x2d], 4);           /* mov byte [eax+0x2d], 0x4 */
+            ii(0x1016_18ad, 4); mov(memb[ds, eax + 45], 4);             /* mov byte [eax+0x2d], 0x4 */
             ii(0x1016_18b1, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1016_18b4, 5); call(0x1016_16bd, -0x1fc);              /* call 0x101616bd */
         l_0x1016_18b9:

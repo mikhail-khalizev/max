@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_e070-223a15c2")]
         public void Method_0018_e070()
         {
-            ii(0x18_e070, 6); movzx(ebx, memw_a32[ss, ebp + 0x14]);     /* movzx ebx, word [ebp+0x14] */
+            ii(0x18_e070, 6); movzx(ebx, memw_a32[ss, ebp + 20]);       /* movzx ebx, word [ebp+0x14] */
             ii(0x18_e076, 3); mov(ax, 8);                               /* mov ax, 0x8 */
             ii(0x18_e079, 2); mov(ds, ax);                              /* mov ds, ax */
             ii(0x18_e07b, 4); cmp(bx, memw[ds, 8]);                     /* cmp bx, [0x8] */

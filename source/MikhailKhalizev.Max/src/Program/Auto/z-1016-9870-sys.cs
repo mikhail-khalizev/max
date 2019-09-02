@@ -39,21 +39,21 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_98af, 5); mov(ecx, 1);                            /* mov ecx, 0x1 */
             ii(0x1016_98b4, 3); mov(memb[ds, esi + 4], dl);             /* mov [esi+0x4], dl */
             ii(0x1016_98b7, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1016_98b9, 3); mov(ebx, memd[ds, esi + 0x48]);         /* mov ebx, [esi+0x48] */
+            ii(0x1016_98b9, 3); mov(ebx, memd[ds, esi + 72]);           /* mov ebx, [esi+0x48] */
             ii(0x1016_98bc, 4); mov(edx, memd[ss, esp + 4]);            /* mov edx, [esp+0x4] */
             ii(0x1016_98c0, 5); call(/* sys */ 0x1016_9b90, 0x2cb);     /* call 0x10169b90 */
             ii(0x1016_98c5, 3); mov(eax, memd[ss, esp]);                /* mov eax, [esp] */
-            ii(0x1016_98c8, 3); mov(ebx, memd[ds, eax + 0x34]);         /* mov ebx, [eax+0x34] */
+            ii(0x1016_98c8, 3); mov(ebx, memd[ds, eax + 52]);           /* mov ebx, [eax+0x34] */
             ii(0x1016_98cb, 2); cmp(esi, ebx);                          /* cmp esi, ebx */
             ii(0x1016_98cd, 2); if(jnz(0x1016_98e8, 0x19)) goto l_0x1016_98e8; /* jnz 0x101698e8 */
-            ii(0x1016_98cf, 3); mov(ecx, memd[ds, ebx + 0x1c]);         /* mov ecx, [ebx+0x1c] */
+            ii(0x1016_98cf, 3); mov(ecx, memd[ds, ebx + 28]);           /* mov ecx, [ebx+0x1c] */
             ii(0x1016_98d2, 3); cmp(ecx, -1 /* 0xff */);                /* cmp ecx, 0xffffffff */
             ii(0x1016_98d5, 2); if(jz(0x1016_98de, 7)) goto l_0x1016_98de; /* jz 0x101698de */
             ii(0x1016_98d7, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1016_98d9, 5); call(/* sys */ 0x1016_b280, 0x19a2);    /* call 0x1016b280 */
         l_0x1016_98de:
             ii(0x1016_98de, 3); mov(eax, memd[ss, esp]);                /* mov eax, [esp] */
-            ii(0x1016_98e1, 7); mov(memd[ds, eax + 0x34], 0);           /* mov dword [eax+0x34], 0x0 */
+            ii(0x1016_98e1, 7); mov(memd[ds, eax + 52], 0);             /* mov dword [eax+0x34], 0x0 */
         l_0x1016_98e8:
             ii(0x1016_98e8, 2); xor(eax, eax);                          /* xor eax, eax */
         l_0x1016_98ea:

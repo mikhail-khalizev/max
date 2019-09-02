@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_a43c-3069a996")]
         public void Method_0018_a43c()
         {
-            ii(0x18_a43c, 3); mov(ax, memw[ss, bp + 0x10]);             /* mov ax, [bp+0x10] */
+            ii(0x18_a43c, 3); mov(ax, memw[ss, bp + 16]);               /* mov ax, [bp+0x10] */
             ii(0x18_a43f, 1); push(ax);                                 /* push ax */
             ii(0x18_a440, 1); xchg(si, ax);                             /* xchg si, ax */
             ii(0x18_a441, 1); sti();                                    /* sti */

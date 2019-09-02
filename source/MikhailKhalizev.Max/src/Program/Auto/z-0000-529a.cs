@@ -9,9 +9,9 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_529a()
         {
             ii(0x529a, 4);    enter(8, 0);                              /* enter 0x8, 0x0 */
-            ii(0x529e, 3);    mov(ax, memw[ss, bp + 0xa]);              /* mov ax, [bp+0xa] */
+            ii(0x529e, 3);    mov(ax, memw[ss, bp + 10]);               /* mov ax, [bp+0xa] */
             ii(0x52a1, 3);    mov(memw[ss, bp - 8], ax);                /* mov [bp-0x8], ax */
-            ii(0x52a4, 3);    mov(al, memb[ss, bp + 0xc]);              /* mov al, [bp+0xc] */
+            ii(0x52a4, 3);    mov(al, memb[ss, bp + 12]);               /* mov al, [bp+0xc] */
             ii(0x52a7, 3);    mov(memb[ss, bp - 3], al);                /* mov [bp-0x3], al */
             ii(0x52aa, 3);    mov(ax, memw[ss, bp + 6]);                /* mov ax, [bp+0x6] */
             ii(0x52ad, 3);    shl(ax, 4);                               /* shl ax, 0x4 */

@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_298f, 1); push(ebp);                              /* push ebp */
             ii(0x100b_2990, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x100b_2992, 6); sub(esp, 0x10);                         /* sub esp, 0x10 */
-            ii(0x100b_2998, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x100b_2998, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
             ii(0x100b_299b, 3); mov(memd[ss, ebp - 8], edx);            /* mov [ebp-0x8], edx */
             ii(0x100b_299e, 3); mov(memd[ss, ebp - 4], ebx);            /* mov [ebp-0x4], ebx */
             ii(0x100b_29a1, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
@@ -25,11 +25,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100b_29ab, 2); if(jz(0x100b_29c8, 0x1b)) goto l_0x100b_29c8; /* jz 0x100b29c8 */
             ii(0x100b_29ad, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100b_29b0, 5); call(0x1015_26ac, 0x9_fcf7);            /* call 0x101526ac */
-            ii(0x100b_29b5, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
-            ii(0x100b_29b8, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
+            ii(0x100b_29b5, 3); mov(memd[ss, ebp - 16], eax);           /* mov [ebp-0x10], eax */
+            ii(0x100b_29b8, 3); mov(eax, memd[ss, ebp - 16]);           /* mov eax, [ebp-0x10] */
             ii(0x100b_29bb, 3); mov(edx, memd[ds, eax + 2]);            /* mov edx, [eax+0x2] */
-            ii(0x100b_29be, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
-            ii(0x100b_29c1, 3); call_abs(memd[ds, edx + 0x20]);         /* call dword [edx+0x20] */
+            ii(0x100b_29be, 3); mov(eax, memd[ss, ebp - 16]);           /* mov eax, [ebp-0x10] */
+            ii(0x100b_29c1, 3); call_abs(memd[ds, edx + 32]);           /* call dword [edx+0x20] */
             ii(0x100b_29c4, 2); cmp(al, 0x17);                          /* cmp al, 0x17 */
             ii(0x100b_29c6, 2); if(jz(0x100b_29ca, 2)) goto l_0x100b_29ca; /* jz 0x100b29ca */
         l_0x100b_29c8:

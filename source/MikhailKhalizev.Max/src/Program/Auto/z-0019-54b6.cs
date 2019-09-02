@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_54cb, 3); inc(memw[ss, bp + 4]);                    /* inc word [bp+0x4] */
         l_0x19_54ce:
             ii(0x19_54ce, 3); mov(ax, memw[ss, bp - 4]);                /* mov ax, [bp-0x4] */
-            ii(0x19_54d1, 3); cmp(memw[ss, bp + 0xc], ax);              /* cmp [bp+0xc], ax */
+            ii(0x19_54d1, 3); cmp(memw[ss, bp + 12], ax);               /* cmp [bp+0xc], ax */
             ii(0x19_54d4, 2); if(jg(0x19_54d9, 3)) goto l_0x19_54d9;    /* jg 0x54d9 */
             ii(0x19_54d6, 3); jmp(0x19_5518, 0x3f); goto l_0x19_5518;   /* jmp 0x5518 */
         l_0x19_54d9:

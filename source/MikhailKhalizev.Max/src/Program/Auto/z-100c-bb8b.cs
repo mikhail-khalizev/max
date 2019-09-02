@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_bbd3, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100c_bbd6, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100c_bbd9, 5); call(0x1007_6574, -0x5_566a);           /* call 0x10076574 */
-            ii(0x100c_bbde, 4); test(memb[ds, eax + 0x13], 1);          /* test byte [eax+0x13], 0x1 */
+            ii(0x100c_bbde, 4); test(memb[ds, eax + 19], 1);            /* test byte [eax+0x13], 0x1 */
             ii(0x100c_bbe2, 2); if(jz(0x100c_bbed, 9)) goto l_0x100c_bbed; /* jz 0x100cbbed */
             ii(0x100c_bbe4, 7); mov(memd[ss, ebp - 8], 9);              /* mov dword [ebp-0x8], 0x9 */
             ii(0x100c_bbeb, 2); jmp(0x100c_bc28, 0x3b); goto l_0x100c_bc28; /* jmp 0x100cbc28 */
@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_bbed, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100c_bbf0, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100c_bbf3, 5); call(0x1007_6574, -0x5_5684);           /* call 0x10076574 */
-            ii(0x100c_bbf8, 4); test(memb[ds, eax + 0x12], 0x40);       /* test byte [eax+0x12], 0x40 */
+            ii(0x100c_bbf8, 4); test(memb[ds, eax + 18], 0x40);         /* test byte [eax+0x12], 0x40 */
             ii(0x100c_bbfc, 2); if(jz(0x100c_bc07, 9)) goto l_0x100c_bc07; /* jz 0x100cbc07 */
             ii(0x100c_bbfe, 7); mov(memd[ss, ebp - 8], 0xa);            /* mov dword [ebp-0x8], 0xa */
             ii(0x100c_bc05, 2); jmp(0x100c_bc28, 0x21); goto l_0x100c_bc28; /* jmp 0x100cbc28 */
@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_bc07, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100c_bc0a, 3); add(eax, 0x13);                         /* add eax, 0x13 */
             ii(0x100c_bc0d, 5); call(0x1007_6574, -0x5_569e);           /* call 0x10076574 */
-            ii(0x100c_bc12, 4); test(memb[ds, eax + 0x12], 0x80);       /* test byte [eax+0x12], 0x80 */
+            ii(0x100c_bc12, 4); test(memb[ds, eax + 18], 0x80);         /* test byte [eax+0x12], 0x80 */
             ii(0x100c_bc16, 2); if(jz(0x100c_bc21, 9)) goto l_0x100c_bc21; /* jz 0x100cbc21 */
             ii(0x100c_bc18, 7); mov(memd[ss, ebp - 8], 0xb);            /* mov dword [ebp-0x8], 0xb */
             ii(0x100c_bc1f, 2); jmp(0x100c_bc28, 7); goto l_0x100c_bc28; /* jmp 0x100cbc28 */

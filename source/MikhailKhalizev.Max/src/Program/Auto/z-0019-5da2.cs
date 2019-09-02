@@ -19,12 +19,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_5db5, 3); jmp(0x19_5e25, 0x6d); goto l_0x19_5e25;   /* jmp 0x5e25 */
         l_0x19_5db8:
             ii(0x19_5db8, 2); push(0x10);                               /* push 0x10 */
-            ii(0x19_5dba, 3); lea(ax, memw[ss, bp - 0x14]);             /* lea ax, [bp-0x14] */
+            ii(0x19_5dba, 3); lea(ax, memw[ss, bp - 20]);               /* lea ax, [bp-0x14] */
             ii(0x19_5dbd, 1); push(ss);                                 /* push ss */
             ii(0x19_5dbe, 1); push(ax);                                 /* push ax */
             ii(0x19_5dbf, 3); push(memw[ss, bp + 6]);                   /* push word [bp+0x6] */
             ii(0x19_5dc2, 3); mov(cx, memw[ss, bp + 8]);                /* mov cx, [bp+0x8] */
-            ii(0x19_5dc5, 3); mov(dx, memw[ss, bp + 0xa]);              /* mov dx, [bp+0xa] */
+            ii(0x19_5dc5, 3); mov(dx, memw[ss, bp + 10]);               /* mov dx, [bp+0xa] */
             ii(0x19_5dc8, 3); add(cx, 2);                               /* add cx, 0x2 */
             ii(0x19_5dcb, 3); adc(dx, 0);                               /* adc dx, 0x0 */
             ii(0x19_5dce, 1); push(dx);                                 /* push dx */
@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_5dd0, 5); call_far_abs(0x80, 0x1534);               /* call word 0x80:0x1534 */
             ii(0x19_5dd5, 3); add(sp, 0xc);                             /* add sp, 0xc */
             ii(0x19_5dd8, 4); mov(memb[ss, bp - 5], 0);                 /* mov byte [bp-0x5], 0x0 */
-            ii(0x19_5ddc, 3); lea(ax, memw[ss, bp - 0x14]);             /* lea ax, [bp-0x14] */
+            ii(0x19_5ddc, 3); lea(ax, memw[ss, bp - 20]);               /* lea ax, [bp-0x14] */
             ii(0x19_5ddf, 3); mov(memw[ss, bp - 4], ax);                /* mov [bp-0x4], ax */
             ii(0x19_5de2, 3); mov(memw[ss, bp - 2], ss);                /* mov [bp-0x2], ss */
             ii(0x19_5de5, 3); jmp(0x19_5deb, 3); goto l_0x19_5deb;      /* jmp 0x5deb */

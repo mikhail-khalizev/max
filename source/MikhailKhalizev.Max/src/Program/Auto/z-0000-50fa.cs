@@ -64,52 +64,52 @@ namespace MikhailKhalizev.Max.Program
             ii(0x515e, 1);    pop(si);                                  /* pop si */
             ii(0x515f, 3);    mov(si, 0x78);                            /* mov si, 0x78 */
         l_0x5162:
-            ii(0x5162, 5);    mov(memw[ss, bp - 0x10], 0);              /* mov word [bp-0x10], 0x0 */
-            ii(0x5167, 5);    mov(memw[ss, bp - 0xe], 0x50);            /* mov word [bp-0xe], 0x50 */
+            ii(0x5162, 5);    mov(memw[ss, bp - 16], 0);                /* mov word [bp-0x10], 0x0 */
+            ii(0x5167, 5);    mov(memw[ss, bp - 14], 0x50);             /* mov word [bp-0xe], 0x50 */
             ii(0x516c, 3);    mov(ax, memw[ds, 0x938]);                 /* mov ax, [0x938] */
             ii(0x516f, 2);    and(al, 0xf8);                            /* and al, 0xf8 */
-            ii(0x5171, 3);    mov(memw[ss, bp - 0xc], ax);              /* mov [bp-0xc], ax */
-            ii(0x5174, 3);    mov(memw[ss, bp - 0xa], si);              /* mov [bp-0xa], si */
+            ii(0x5171, 3);    mov(memw[ss, bp - 12], ax);               /* mov [bp-0xc], ax */
+            ii(0x5174, 3);    mov(memw[ss, bp - 10], si);               /* mov [bp-0xa], si */
             ii(0x5177, 3);    call(0x4f7a, -0x200);                     /* call 0x4f7a */
             ii(0x517a, 2);    push(1);                                  /* push 0x1 */
             ii(0x517c, 3);    call(0x4856, -0x929);                     /* call 0x4856 */
             ii(0x517f, 1);    pop(bx);                                  /* pop bx */
             ii(0x5180, 2);    jmp(0x51a0, 0x1e); goto l_0x51a0;         /* jmp 0x51a0 */
         l_0x5182:
-            ii(0x5182, 3);    mov(bx, memw[ss, bp - 0xc]);              /* mov bx, [bp-0xc] */
+            ii(0x5182, 3);    mov(bx, memw[ss, bp - 12]);               /* mov bx, [bp-0xc] */
             ii(0x5185, 3);    shr(bx, 3);                               /* shr bx, 0x3 */
-            ii(0x5188, 3);    les(di, memw[ss, bp - 0x10]);             /* les di, [bp-0x10] */
+            ii(0x5188, 3);    les(di, memw[ss, bp - 16]);               /* les di, [bp-0x10] */
             ii(0x518b, 4);    test(memb[es, bx + di], 1);               /* test byte [es:bx+di], 0x1 */
             ii(0x518f, 2);    if(jz(0x519c, 0xb)) goto l_0x519c;        /* jz 0x519c */
-            ii(0x5191, 3);    push(memw[ss, bp - 0xa]);                 /* push word [bp-0xa] */
-            ii(0x5194, 3);    push(memw[ss, bp - 0xc]);                 /* push word [bp-0xc] */
+            ii(0x5191, 3);    push(memw[ss, bp - 10]);                  /* push word [bp-0xa] */
+            ii(0x5194, 3);    push(memw[ss, bp - 12]);                  /* push word [bp-0xc] */
             ii(0x5197, 3);    call(0x50a8, -0xf2);                      /* call 0x50a8 */
             ii(0x519a, 1);    pop(bx);                                  /* pop bx */
             ii(0x519b, 1);    pop(bx);                                  /* pop bx */
         l_0x519c:
-            ii(0x519c, 4);    sub(memw[ss, bp - 0xc], 8);               /* sub word [bp-0xc], 0x8 */
+            ii(0x519c, 4);    sub(memw[ss, bp - 12], 8);                /* sub word [bp-0xc], 0x8 */
         l_0x51a0:
-            ii(0x51a0, 5);    cmp(memw[ss, bp - 0xc], 0x80);            /* cmp word [bp-0xc], 0x80 */
+            ii(0x51a0, 5);    cmp(memw[ss, bp - 12], 0x80);             /* cmp word [bp-0xc], 0x80 */
             ii(0x51a5, 2);    if(jae(0x5182, -0x25)) goto l_0x5182;     /* jae 0x5182 */
-            ii(0x51a7, 5);    mov(memw[ss, bp - 0xc], 0x50);            /* mov word [bp-0xc], 0x50 */
-            ii(0x51ac, 3);    push(memw[ss, bp - 0xa]);                 /* push word [bp-0xa] */
-            ii(0x51af, 3);    push(memw[ss, bp - 0xc]);                 /* push word [bp-0xc] */
+            ii(0x51a7, 5);    mov(memw[ss, bp - 12], 0x50);             /* mov word [bp-0xc], 0x50 */
+            ii(0x51ac, 3);    push(memw[ss, bp - 10]);                  /* push word [bp-0xa] */
+            ii(0x51af, 3);    push(memw[ss, bp - 12]);                  /* push word [bp-0xc] */
             ii(0x51b2, 3);    call(0x50a8, -0x10d);                     /* call 0x50a8 */
             ii(0x51b5, 1);    pop(bx);                                  /* pop bx */
             ii(0x51b6, 1);    pop(bx);                                  /* pop bx */
-            ii(0x51b7, 5);    mov(memw[ss, bp - 0xc], 8);               /* mov word [bp-0xc], 0x8 */
-            ii(0x51bc, 3);    push(memw[ss, bp - 0xa]);                 /* push word [bp-0xa] */
-            ii(0x51bf, 3);    push(memw[ss, bp - 0xc]);                 /* push word [bp-0xc] */
+            ii(0x51b7, 5);    mov(memw[ss, bp - 12], 8);                /* mov word [bp-0xc], 0x8 */
+            ii(0x51bc, 3);    push(memw[ss, bp - 10]);                  /* push word [bp-0xa] */
+            ii(0x51bf, 3);    push(memw[ss, bp - 12]);                  /* push word [bp-0xc] */
             ii(0x51c2, 3);    call(0x50a8, -0x11d);                     /* call 0x50a8 */
             ii(0x51c5, 1);    pop(bx);                                  /* pop bx */
             ii(0x51c6, 1);    pop(bx);                                  /* pop bx */
-            ii(0x51c7, 5);    mov(memw[ss, bp - 0xc], 0x70);            /* mov word [bp-0xc], 0x70 */
+            ii(0x51c7, 5);    mov(memw[ss, bp - 12], 0x70);             /* mov word [bp-0xc], 0x70 */
             ii(0x51cc, 5);    cmp(memb[ds, 0x9f8], 0);                  /* cmp byte [0x9f8], 0x0 */
             ii(0x51d1, 2);    if(jnz(0x51e5, 0x12)) goto l_0x51e5;      /* jnz 0x51e5 */
             ii(0x51d3, 5);    test(memb[ds, 0x47], 0x80);               /* test byte [0x47], 0x80 */
             ii(0x51d8, 2);    if(jnz(0x51e5, 0xb)) goto l_0x51e5;       /* jnz 0x51e5 */
-            ii(0x51da, 3);    push(memw[ss, bp - 0xa]);                 /* push word [bp-0xa] */
-            ii(0x51dd, 3);    push(memw[ss, bp - 0xc]);                 /* push word [bp-0xc] */
+            ii(0x51da, 3);    push(memw[ss, bp - 10]);                  /* push word [bp-0xa] */
+            ii(0x51dd, 3);    push(memw[ss, bp - 12]);                  /* push word [bp-0xc] */
             ii(0x51e0, 3);    call(0x50a8, -0x13b);                     /* call 0x50a8 */
             ii(0x51e3, 1);    pop(bx);                                  /* pop bx */
             ii(0x51e4, 1);    pop(bx);                                  /* pop bx */

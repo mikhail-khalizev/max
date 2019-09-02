@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_0ad4, 1); cwde();                                 /* cwde */
             ii(0x1015_0ad5, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1015_0ad7, 2); if(jle(0x1015_0ae2, 9)) goto l_0x1015_0ae2; /* jle 0x10150ae2 */
-            ii(0x1015_0ad9, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
+            ii(0x1015_0ad9, 7); mov(memd[ss, ebp - 12], 0);             /* mov dword [ebp-0xc], 0x0 */
             ii(0x1015_0ae0, 2); jmp(0x1015_0afb, 0x19); goto l_0x1015_0afb; /* jmp 0x10150afb */
         l_0x1015_0ae2:
             ii(0x1015_0ae2, 5); mov(ecx, 0xc15);                        /* mov ecx, 0xc15 */
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_0aec, 5); mov(edx, StringDefinitions.BuildListGetcountGreater0); /* mov edx, 0x101addfe */
             ii(0x1015_0af1, 2); xor(eax, eax);                          /* xor eax, eax */
             ii(0x1015_0af3, 5); call(Definitions.sys_assert, 0x1_529a); /* call 0x10165d92 */
-            ii(0x1015_0af8, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x1015_0af8, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
         l_0x1015_0afb:
             ii(0x1015_0afb, 2); xor(edx, edx);                          /* xor edx, edx */
             ii(0x1015_0afd, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */

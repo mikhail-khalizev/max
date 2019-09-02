@@ -18,11 +18,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a86d, 4); call_far_ind(memw[ds, 0x22]);             /* call far word [0x22] */
             ii(0x18_a871, 3); add(sp, 0xa);                             /* add sp, 0xa */
             ii(0x18_a874, 4); mov(bx, memw[ds, 0x99e]);                 /* mov bx, [0x99e] */
-            ii(0x18_a878, 3); mov(cx, memw[ss, bp + 0x26]);             /* mov cx, [bp+0x26] */
+            ii(0x18_a878, 3); mov(cx, memw[ss, bp + 38]);               /* mov cx, [bp+0x26] */
             ii(0x18_a87b, 3); and(ch, 2);                               /* and ch, 0x2 */
             ii(0x18_a87e, 3); and(ah, 0xfd);                            /* and ah, 0xfd */
             ii(0x18_a881, 2); or(ah, ch);                               /* or ah, ch */
-            ii(0x18_a883, 3); mov(memw[ds, bx + 0x26], ax);             /* mov [bx+0x26], ax */
+            ii(0x18_a883, 3); mov(memw[ds, bx + 38], ax);               /* mov [bx+0x26], ax */
             ii(0x18_a886, 1); push(ds);                                 /* push ds */
             ii(0x18_a887, 1); pop(es);                                  /* pop es */
             ii(0x18_a888, 1); popa();                                   /* popa */

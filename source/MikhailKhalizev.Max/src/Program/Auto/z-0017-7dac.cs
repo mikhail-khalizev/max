@@ -28,8 +28,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7dd0, 2); rcl(dx, 1);                               /* rcl dx, 1 */
             ii(0x17_7dd2, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x17_7dd4, 2); rcl(dx, 1);                               /* rcl dx, 1 */
-            ii(0x17_7dd6, 3); mov(memw[ss, bp - 0xc], ax);              /* mov [bp-0xc], ax */
-            ii(0x17_7dd9, 3); mov(memw[ss, bp - 0xa], dx);              /* mov [bp-0xa], dx */
+            ii(0x17_7dd6, 3); mov(memw[ss, bp - 12], ax);               /* mov [bp-0xc], ax */
+            ii(0x17_7dd9, 3); mov(memw[ss, bp - 10], dx);               /* mov [bp-0xa], dx */
             ii(0x17_7ddc, 3); mov(ax, memw[ss, bp + 6]);                /* mov ax, [bp+0x6] */
             ii(0x17_7ddf, 3); mov(dx, memw[ss, bp + 8]);                /* mov dx, [bp+0x8] */
             ii(0x17_7de2, 3); sub(ax, 0);                               /* sub ax, 0x0 */
@@ -46,12 +46,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7dff, 3); add(sp, 8);                               /* add sp, 0x8 */
             ii(0x17_7e02, 3); mov(memw[ss, bp - 4], ax);                /* mov [bp-0x4], ax */
             ii(0x17_7e05, 3); mov(memw[ss, bp - 2], dx);                /* mov [bp-0x2], dx */
-            ii(0x17_7e08, 3); mov(bx, memw[ss, bp + 0xa]);              /* mov bx, [bp+0xa] */
+            ii(0x17_7e08, 3); mov(bx, memw[ss, bp + 10]);               /* mov bx, [bp+0xa] */
             ii(0x17_7e0b, 3); shl(bx, 2);                               /* shl bx, 0x2 */
             ii(0x17_7e0e, 2); mov(ax, si);                              /* mov ax, si */
             ii(0x17_7e10, 4); les(si, memw[ds, 0x4fa0]);                /* les si, [0x4fa0] */
-            ii(0x17_7e14, 3); mov(memw[ss, bp - 0x10], ax);             /* mov [bp-0x10], ax */
-            ii(0x17_7e17, 3); mov(memw[ss, bp - 0xe], di);              /* mov [bp-0xe], di */
+            ii(0x17_7e14, 3); mov(memw[ss, bp - 16], ax);               /* mov [bp-0x10], ax */
+            ii(0x17_7e17, 3); mov(memw[ss, bp - 14], di);               /* mov [bp-0xe], di */
             ii(0x17_7e1a, 3); mov(ax, memw[es, bx + si]);               /* mov ax, [es:bx+si] */
             ii(0x17_7e1d, 4); mov(dx, memw[es, bx + si + 2]);           /* mov dx, [es:bx+si+0x2] */
             ii(0x17_7e21, 2); mov(dh, dl);                              /* mov dh, dl */
@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7e57, 1); push(si);                                 /* push si */
             ii(0x17_7e58, 3); push(memw[ss, bp - 4]);                   /* push word [bp-0x4] */
             ii(0x17_7e5b, 1); push(di);                                 /* push di */
-            ii(0x17_7e5c, 3); push(memw[ss, bp - 0x10]);                /* push word [bp-0x10] */
+            ii(0x17_7e5c, 3); push(memw[ss, bp - 16]);                  /* push word [bp-0x10] */
             ii(0x17_7e5f, 4); push(memw[ds, 0x4f8e]);                   /* push word [0x4f8e] */
             ii(0x17_7e63, 4); push(memw[ds, 0x4f8c]);                   /* push word [0x4f8c] */
             ii(0x17_7e67, 2); mov(si, bx);                              /* mov si, bx */
@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7e7c, 4); les(bx, memw[ds, 0x4fa4]);                /* les bx, [0x4fa4] */
             ii(0x17_7e80, 3); mov(memw[es, bx + si], ax);               /* mov [es:bx+si], ax */
             ii(0x17_7e83, 4); mov(memw[es, bx + si + 2], dx);           /* mov [es:bx+si+0x2], dx */
-            ii(0x17_7e87, 3); mov(bx, memw[ss, bp + 0xa]);              /* mov bx, [bp+0xa] */
+            ii(0x17_7e87, 3); mov(bx, memw[ss, bp + 10]);               /* mov bx, [bp+0xa] */
             ii(0x17_7e8a, 4); les(si, memw[ds, 0x4f9c]);                /* les si, [0x4f9c] */
             ii(0x17_7e8e, 4); or(memb[es, bx + si], 0x7f);              /* or byte [es:bx+si], 0x7f */
             ii(0x17_7e92, 1); pop(ds);                                  /* pop ds */

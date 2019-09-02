@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_100a()
         {
             ii(0x18_100a, 4); enter(6, 0);                              /* enter 0x6, 0x0 */
-            ii(0x18_100e, 3); lea(ax, memw[ss, bp + 0xa]);              /* lea ax, [bp+0xa] */
+            ii(0x18_100e, 3); lea(ax, memw[ss, bp + 10]);               /* lea ax, [bp+0xa] */
             ii(0x18_1011, 3); mov(memw[ss, bp - 6], ax);                /* mov [bp-0x6], ax */
             ii(0x18_1014, 3); mov(memw[ss, bp - 4], ss);                /* mov [bp-0x4], ss */
             ii(0x18_1017, 3); lea(ax, memw[ss, bp - 6]);                /* lea ax, [bp-0x6] */

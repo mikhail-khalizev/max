@@ -37,20 +37,20 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_de7f, 3); sar(eax, 0x10);                         /* sar eax, 0x10 */
             ii(0x100c_de82, 3); shl(eax, 2);                            /* shl eax, 0x2 */
             ii(0x100c_de85, 6); mov(eax, memd[ds, eax + 0x101b_7e08]);  /* mov eax, [eax+0x101b7e08] */
-            ii(0x100c_de8b, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
+            ii(0x100c_de8b, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
         l_0x100c_de8e:
-            ii(0x100c_de8e, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x100c_de8e, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x100c_de91, 4); cmp(memw[ds, eax], -1 /* 0xff */);      /* cmp word [eax], 0xffff */
             ii(0x100c_de95, 2); if(jz(0x100c_deb2, 0x1b)) goto l_0x100c_deb2; /* jz 0x100cdeb2 */
-            ii(0x100c_de97, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x100c_de97, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x100c_de9a, 3); mov(ax, memw[ds, eax]);                 /* mov ax, [eax] */
             ii(0x100c_de9d, 4); cmp(ax, memw[ss, ebp - 4]);             /* cmp ax, [ebp-0x4] */
             ii(0x100c_dea1, 2); if(jnz(0x100c_dea9, 6)) goto l_0x100c_dea9; /* jnz 0x100cdea9 */
             ii(0x100c_dea3, 4); mov(memb[ss, ebp - 8], 1);              /* mov byte [ebp-0x8], 0x1 */
             ii(0x100c_dea7, 2); jmp(0x100c_deb6, 0xd); goto l_0x100c_deb6; /* jmp 0x100cdeb6 */
         l_0x100c_dea9:
-            ii(0x100c_dea9, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
-            ii(0x100c_deac, 4); add(memd[ss, ebp - 0xc], 2);            /* add dword [ebp-0xc], 0x2 */
+            ii(0x100c_dea9, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
+            ii(0x100c_deac, 4); add(memd[ss, ebp - 12], 2);             /* add dword [ebp-0xc], 0x2 */
             ii(0x100c_deb0, 2); jmp(0x100c_de8e, -0x24); goto l_0x100c_de8e; /* jmp 0x100cde8e */
         l_0x100c_deb2:
             ii(0x100c_deb2, 4); mov(memb[ss, ebp - 8], 0);              /* mov byte [ebp-0x8], 0x0 */

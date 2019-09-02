@@ -49,20 +49,20 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_1856, 2); mov(edx, memd[ds, eax]);                /* mov edx, [eax] */
             ii(0x100f_1858, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100f_185b, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
-            ii(0x100f_185d, 3); mov(eax, memd[ds, eax + 0x12]);         /* mov eax, [eax+0x12] */
+            ii(0x100f_185d, 3); mov(eax, memd[ds, eax + 18]);           /* mov eax, [eax+0x12] */
             ii(0x100f_1860, 5); call(Definitions.sys_display_draw_1, 0x7_5c43); /* call 0x101674a8 */
             ii(0x100f_1865, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100f_1868, 3); mov(edx, memd[ds, eax + 4]);            /* mov edx, [eax+0x4] */
             ii(0x100f_186b, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100f_186e, 3); mov(eax, memd[ds, eax + 4]);            /* mov eax, [eax+0x4] */
-            ii(0x100f_1871, 3); mov(eax, memd[ds, eax + 0x12]);         /* mov eax, [eax+0x12] */
+            ii(0x100f_1871, 3); mov(eax, memd[ds, eax + 18]);           /* mov eax, [eax+0x12] */
             ii(0x100f_1874, 5); call(Definitions.sys_display_draw_1, 0x7_5c2f); /* call 0x101674a8 */
             ii(0x100f_1879, 5); call(/* sys */ 0x1016_b258, 0x7_99da);  /* call 0x1016b258 */
         l_0x100f_187e:
             ii(0x100f_187e, 5); call(0x1014_82f4, 0x5_6a71);            /* call 0x101482f4 */
             ii(0x100f_1883, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x100f_1885, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x100f_1888, 3); sub(edx, memd[ds, eax + 0x18]);         /* sub edx, [eax+0x18] */
+            ii(0x100f_1888, 3); sub(edx, memd[ds, eax + 24]);           /* sub edx, [eax+0x18] */
             ii(0x100f_188b, 6); cmp(edx, 0xc233);                       /* cmp edx, 0xc233 */
             ii(0x100f_1891, 2); if(jb(0x100f_187e, -0x15)) goto l_0x100f_187e; /* jb 0x100f187e */
             ii(0x100f_1893, 2); mov(esp, ebp);                          /* mov esp, ebp */

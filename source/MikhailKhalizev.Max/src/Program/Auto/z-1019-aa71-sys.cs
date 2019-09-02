@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_aad2, 3); add(ecx, 0x1a);                         /* add ecx, 0x1a */
             ii(0x1019_aad5, 2); mov(memd[ds, ebx], eax);                /* mov [ebx], eax */
         l_0x1019_aad7:
-            ii(0x1019_aad7, 3); mov(edx, memd[ds, ecx + 0xc]);          /* mov edx, [ecx+0xc] */
+            ii(0x1019_aad7, 3); mov(edx, memd[ds, ecx + 12]);           /* mov edx, [ecx+0xc] */
             ii(0x1019_aada, 2); test(edx, edx);                         /* test edx, edx */
             ii(0x1019_aadc, 2); if(jnz(0x1019_aa95, -0x49)) goto l_0x1019_aa95; /* jnz 0x1019aa95 */
             ii(0x1019_aade, 6); mov(memd[ds, 0x1020_a1f4], edx);        /* mov [0x1020a1f4], edx */

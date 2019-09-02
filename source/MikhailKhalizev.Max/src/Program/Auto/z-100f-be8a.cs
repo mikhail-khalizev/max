@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_bea3, 5); mov(eax, StringDefinitions.WarningExclusionZonesOverlapSelectAgain); /* mov eax, 0x101a28cd */
             ii(0x100f_bea8, 5); call(0x1011_5d23, 0x1_9e76);            /* call 0x10115d23 */
             ii(0x100f_bead, 4); mov(memb[ss, ebp - 8], 1);              /* mov byte [ebp-0x8], 0x1 */
-            ii(0x100f_beb1, 4); mov(memb[ss, ebp - 0xc], 1);            /* mov byte [ebp-0xc], 0x1 */
+            ii(0x100f_beb1, 4); mov(memb[ss, ebp - 12], 1);             /* mov byte [ebp-0xc], 0x1 */
             ii(0x100f_beb5, 5); if(jmp_func(0x100f_bf4f, 0x95)) return; /* jmp 0x100fbf4f */
         }
     }

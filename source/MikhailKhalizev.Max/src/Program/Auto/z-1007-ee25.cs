@@ -19,17 +19,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_ee36, 6); sub(esp, 0xc);                          /* sub esp, 0xc */
             ii(0x1007_ee3c, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
             ii(0x1007_ee3f, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
-            ii(0x1007_ee42, 7); mov(memd[ss, ebp - 0xc], 0);            /* mov dword [ebp-0xc], 0x0 */
+            ii(0x1007_ee42, 7); mov(memd[ss, ebp - 12], 0);             /* mov dword [ebp-0xc], 0x0 */
             ii(0x1007_ee49, 2); jmp(0x1007_ee51, 6); goto l_0x1007_ee51; /* jmp 0x1007ee51 */
         l_0x1007_ee4b:
-            ii(0x1007_ee4b, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
-            ii(0x1007_ee4e, 3); inc(memd[ss, ebp - 0xc]);               /* inc dword [ebp-0xc] */
+            ii(0x1007_ee4b, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
+            ii(0x1007_ee4e, 3); inc(memd[ss, ebp - 12]);                /* inc dword [ebp-0xc] */
         l_0x1007_ee51:
-            ii(0x1007_ee51, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
+            ii(0x1007_ee51, 4); movsx(eax, memw[ss, ebp - 12]);         /* movsx eax, word [ebp-0xc] */
             ii(0x1007_ee55, 3); cmp(eax, 8);                            /* cmp eax, 0x8 */
             ii(0x1007_ee58, 2); if(jge(0x1007_ee75, 0x1b)) goto l_0x1007_ee75; /* jge 0x1007ee75 */
             ii(0x1007_ee5a, 3); mov(edx, memd[ss, ebp - 4]);            /* mov edx, [ebp-0x4] */
-            ii(0x1007_ee5d, 4); movsx(eax, memw[ss, ebp - 0xc]);        /* movsx eax, word [ebp-0xc] */
+            ii(0x1007_ee5d, 4); movsx(eax, memw[ss, ebp - 12]);         /* movsx eax, word [ebp-0xc] */
             ii(0x1007_ee61, 3); imul(eax, eax, 0x16);                   /* imul eax, eax, 0x16 */
             ii(0x1007_ee64, 3); mov(ebx, memd[ss, ebp - 8]);            /* mov ebx, [ebp-0x8] */
             ii(0x1007_ee67, 3); add(ebx, 0x21);                         /* add ebx, 0x21 */

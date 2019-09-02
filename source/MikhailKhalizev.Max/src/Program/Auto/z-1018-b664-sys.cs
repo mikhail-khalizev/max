@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_b67b, 2); if(jle(0x1018_b6b1, 0x34)) goto l_0x1018_b6b1; /* jle 0x1018b6b1 */
             ii(0x1018_b67d, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
         l_0x1018_b67f:
-            ii(0x1018_b67f, 3); mov(eax, memd[ds, ecx + 0x20]);         /* mov eax, [ecx+0x20] */
+            ii(0x1018_b67f, 3); mov(eax, memd[ds, ecx + 32]);           /* mov eax, [ecx+0x20] */
             ii(0x1018_b682, 2); add(eax, ebx);                          /* add eax, ebx */
             ii(0x1018_b684, 2); mov(ebp, memd[ds, eax]);                /* mov ebp, [eax] */
             ii(0x1018_b686, 2); test(ebp, ebp);                         /* test ebp, ebp */
@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_b68a, 2); mov(eax, ebp);                          /* mov eax, ebp */
             ii(0x1018_b68c, 6); call_abs(memd[ds, 0x101b_e8b8]);        /* call dword [0x101be8b8] */ /* Вызов '0x1018_b5c0'. */
         l_0x1018_b692:
-            ii(0x1018_b692, 3); mov(eax, memd[ds, ecx + 0x20]);         /* mov eax, [ecx+0x20] */
+            ii(0x1018_b692, 3); mov(eax, memd[ds, ecx + 32]);           /* mov eax, [ecx+0x20] */
             ii(0x1018_b695, 2); add(eax, ebx);                          /* add eax, ebx */
             ii(0x1018_b697, 3); mov(esi, memd[ds, eax + 4]);            /* mov esi, [eax+0x4] */
             ii(0x1018_b69a, 2); test(esi, esi);                         /* test esi, esi */
@@ -45,7 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_b6ad, 2); cmp(edx, esi);                          /* cmp edx, esi */
             ii(0x1018_b6af, 2); if(jl(0x1018_b67f, -0x32)) goto l_0x1018_b67f; /* jl 0x1018b67f */
         l_0x1018_b6b1:
-            ii(0x1018_b6b1, 3); mov(edi, memd[ds, ecx + 0x20]);         /* mov edi, [ecx+0x20] */
+            ii(0x1018_b6b1, 3); mov(edi, memd[ds, ecx + 32]);           /* mov edi, [ecx+0x20] */
             ii(0x1018_b6b4, 2); test(edi, edi);                         /* test edi, edi */
             ii(0x1018_b6b6, 2); if(jz(0x1018_b6c0, 8)) goto l_0x1018_b6c0; /* jz 0x1018b6c0 */
             ii(0x1018_b6b8, 2); mov(eax, edi);                          /* mov eax, edi */

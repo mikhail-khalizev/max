@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0018_ad01()
         {
             ii(0x18_ad01, 1); push(bx);                                 /* push bx */
-            ii(0x18_ad02, 3); mov(bl, memb[ss, bp + 0x16]);             /* mov bl, [bp+0x16] */
+            ii(0x18_ad02, 3); mov(bl, memb[ss, bp + 22]);               /* mov bl, [bp+0x16] */
             ii(0x18_ad05, 2); xor(bh, bh);                              /* xor bh, bh */
             ii(0x18_ad07, 4); cmp(memb[ds, 0x2e], bh);                  /* cmp [0x2e], bh */
             ii(0x18_ad0b, 2); if(jz(0x18_ad12, 5)) goto l_0x18_ad12;    /* jz 0xad12 */
@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_ad1d, 2); pop(edx);                                 /* pop edx */
         l_0x18_ad1f:
             ii(0x18_ad1f, 3); mov(memw[ss, bp + 6], cx);                /* mov [bp+0x6], cx */
-            ii(0x18_ad22, 3); mov(memw[ss, bp + 0x10], dx);             /* mov [bp+0x10], dx */
+            ii(0x18_ad22, 3); mov(memw[ss, bp + 16], dx);               /* mov [bp+0x10], dx */
             ii(0x18_ad25, 1); pop(bx);                                  /* pop bx */
             ii(0x18_ad26, 3); if(jmp_func(0x18_a838, -0x4f1)) return;   /* jmp 0xa838 */
         l_0x18_ad29:

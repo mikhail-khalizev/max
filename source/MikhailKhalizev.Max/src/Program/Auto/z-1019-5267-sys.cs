@@ -20,12 +20,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5273, 1); push(esi);                              /* push esi */
             ii(0x1019_5274, 1); pushd(es);                              /* push es */
             ii(0x1019_5275, 4); mov(ax, 0xb);                           /* mov ax, 0xb */
-            ii(0x1019_5279, 4); lfs(edi, memd[ss, ebp + 0x20]);         /* lfs edi, [ebp+0x20] */
-            ii(0x1019_527d, 3); call_far_ind(memd[ss, ebp + 0x18]);     /* call far dword [ebp+0x18] */
+            ii(0x1019_5279, 4); lfs(edi, memd[ss, ebp + 32]);           /* lfs edi, [ebp+0x20] */
+            ii(0x1019_527d, 3); call_far_ind(memd[ss, ebp + 24]);       /* call far dword [ebp+0x18] */
             ii(0x1019_5280, 2); mov(esi, eax);                          /* mov esi, eax */
             ii(0x1019_5282, 2); mov(es, edx);                           /* mov es, edx */
             ii(0x1019_5284, 4); mov(ax, 0xc);                           /* mov ax, 0xc */
-            ii(0x1019_5288, 4); lfs(edi, memd[ss, ebp + 0x10]);         /* lfs edi, [ebp+0x10] */
+            ii(0x1019_5288, 4); lfs(edi, memd[ss, ebp + 16]);           /* lfs edi, [ebp+0x10] */
             ii(0x1019_528c, 3); call_far_ind(memd[ss, ebp + 8]);        /* call far dword [ebp+0x8] */
             ii(0x1019_528f, 1); popd(es);                               /* pop es */
             ii(0x1019_5290, 1); pop(esi);                               /* pop esi */

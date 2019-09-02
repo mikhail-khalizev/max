@@ -31,11 +31,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x42c2, 1);    cld();                                    /* cld */
             ii(0x42c3, 1);    lodsw();                                  /* lodsw */
             ii(0x42c4, 3);    mov(memw[ss, bp + 4], ax);                /* mov [bp+0x4], ax */
-            ii(0x42c7, 3);    lea(di, memw[ss, bp + 0x16]);             /* lea di, [bp+0x16] */
+            ii(0x42c7, 3);    lea(di, memw[ss, bp + 22]);               /* lea di, [bp+0x16] */
             ii(0x42ca, 1);    movsw();                                  /* movsw */
             ii(0x42cb, 1);    movsw();                                  /* movsw */
             ii(0x42cc, 2);    movsd();                                  /* movsd */
-            ii(0x42ce, 3);    mov(memw[ss, bp + 0xe], si);              /* mov [bp+0xe], si */
+            ii(0x42ce, 3);    mov(memw[ss, bp + 14], si);               /* mov [bp+0xe], si */
             ii(0x42d1, 2);    movsd();                                  /* movsd */
             ii(0x42d3, 2);    movsd();                                  /* movsd */
             ii(0x42d5, 2);    movsd();                                  /* movsd */

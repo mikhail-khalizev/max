@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_9db8, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
             ii(0x1015_9dbb, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
             ii(0x1015_9dbe, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
-            ii(0x1015_9dc1, 4); cmp(memb[ds, eax + 0x3d], 8);           /* cmp byte [eax+0x3d], 0x8 */
+            ii(0x1015_9dc1, 4); cmp(memb[ds, eax + 61], 8);             /* cmp byte [eax+0x3d], 0x8 */
             ii(0x1015_9dc5, 2); if(jnz(0x1015_9de3, 0x1c)) goto l_0x1015_9de3; /* jnz 0x10159de3 */
             ii(0x1015_9dc7, 5); mov(eax, 0x1015_9d42);                  /* mov eax, 0x10159d42 */
             ii(0x1015_9dcc, 1); push(eax);                              /* push eax */
