@@ -153,8 +153,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_5c0a, 4); les(si, memw[ds, 0x992]);                 /* les si, [0x992] */
             ii(0x17_5c0e, 3); mov(ax, memw[es, bx + si]);               /* mov ax, [es:bx+si] */
             ii(0x17_5c11, 4); mov(dx, memw[es, bx + si + 2]);           /* mov dx, [es:bx+si+0x2] */
-            ii(0x17_5c15, 4); mov(memw[ds, bx + 16224], ax);            /* mov [bx+0x3f60], ax */
-            ii(0x17_5c19, 4); mov(memw[ds, bx + 16226], dx);            /* mov [bx+0x3f62], dx */
+            ii(0x17_5c15, 4); mov(memw[ds, bx + 0x3f60], ax);           /* mov [bx+0x3f60], ax */
+            ii(0x17_5c19, 4); mov(memw[ds, bx + 0x3f62], dx);           /* mov [bx+0x3f62], dx */
             ii(0x17_5c1d, 2); jmp(0x17_5bfa, -0x25); goto l_0x17_5bfa;  /* jmp 0x5bfa */
         //  ii(0x17_5c1f, 1); nop();                                    /* nop */
         l_0x17_5c20:

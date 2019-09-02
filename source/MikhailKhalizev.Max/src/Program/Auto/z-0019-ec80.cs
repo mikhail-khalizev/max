@@ -300,7 +300,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_ef92, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x19_ef94, 1); xchg(bx, ax);                             /* xchg bx, ax */
             ii(0x19_ef95, 5); 
-            switch (jmp_abs_switch(memw[cs, bx - 25734]))
+            switch (jmp_abs_switch(memw[cs, bx - 0x6486]))
             {
                 case 0x19_ecbe:
                     goto l_0x19_ecbe;

@@ -158,7 +158,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_e032:
             ii(0x1018_e032, 2); jmp(0x1018_e0b1, 0x7d); goto l_0x1018_e0b1; /* jmp 0x1018e0b1 */
         l_0x1018_e034:
-            ii(0x1018_e034, 7); lea(esi, memd[ds, edi + esi * 2 - 32768]); /* lea esi, [edi+esi*2-0x8000] */
+            ii(0x1018_e034, 7); lea(esi, memd[ds, edi + esi * 2 - 0x8000]); /* lea esi, [edi+esi*2-0x8000] */
             ii(0x1018_e03b, 1); movsd();                                /* movsd */
             ii(0x1018_e03c, 1); movsd();                                /* movsd */
             ii(0x1018_e03d, 1); movsd();                                /* movsd */

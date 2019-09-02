@@ -79,6 +79,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             public bool SkipDeclaringType { get; set; }
             public bool NullIfNoName { get; set; }
             public bool WriteAddressAsDecimal { get; set; }
+
+            public Options WithWriteAddressAsDecimal(bool value = true)
+            {
+                var opt = this;
+                opt.WriteAddressAsDecimal = value;
+                return opt;
+            }
         }
     }
 }

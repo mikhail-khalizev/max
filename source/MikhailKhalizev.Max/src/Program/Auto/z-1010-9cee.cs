@@ -158,7 +158,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_9ec5, 2); mov(eax, memd[ds, eax]);                /* mov eax, [eax] */
             ii(0x1010_9ec7, 5); call(0x100d_5134, -0x3_4d98);           /* call 0x100d5134 */
             ii(0x1010_9ecc, 4); movsx(eax, memw[ss, ebp - 8]);          /* movsx eax, word [ebp-0x8] */
-            ii(0x1010_9ed0, 6); lea(edx, memd[ds, eax + 28672]);        /* lea edx, [eax+0x7000] */
+            ii(0x1010_9ed0, 6); lea(edx, memd[ds, eax + 0x7000]);       /* lea edx, [eax+0x7000] */
             ii(0x1010_9ed6, 4); movsx(eax, memw[ss, ebp - 8]);          /* movsx eax, word [ebp-0x8] */
             ii(0x1010_9eda, 3); imul(eax, eax, 0x13);                   /* imul eax, eax, 0x13 */
             ii(0x1010_9edd, 3); add(eax, memd[ss, ebp - 12]);           /* add eax, [ebp-0xc] */

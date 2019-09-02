@@ -139,7 +139,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa9a4, 3);    cmp(ax, 0x26);                            /* cmp ax, 0x26 */
             ii(0xa9a7, 2);    if(ja(0xa9b8, 0xf)) goto l_0xa9b8;        /* ja 0xa9b8 */
             ii(0xa9a9, 2);    mov(bx, ax);                              /* mov bx, ax */
-            ii(0xa9ab, 5);    cmp(memb[ds, bx + 4294], 0);              /* cmp byte [bx+0x10c6], 0x0 */
+            ii(0xa9ab, 5);    cmp(memb[ds, bx + 0x10c6], 0);            /* cmp byte [bx+0x10c6], 0x0 */
             ii(0xa9b0, 2);    if(jz(0xa9b8, 6)) goto l_0xa9b8;          /* jz 0xa9b8 */
             ii(0xa9b2, 4);    add(si, 0xf6a);                           /* add si, 0xf6a */
             ii(0xa9b6, 2);    mov(dx, ds);                              /* mov dx, ds */

@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         public WriteCmdDelegate WriteCmd { get; set; }
 
-        private const int DecimalLimit = 0xffff;
+        private int DecimalLimit => 0xfff;
 
 
         public CSharpInstruction(Address address)
@@ -425,18 +425,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         {
                             sb.Append(isNextOperation ? " - " : "-");
 
-                            options.WriteAddressAsDecimal = isNextOperation && -DecimalLimit < val;
-                            AppendAddress(sb, (uint) -val, options);
-                            options.WriteAddressAsDecimal = false;
+                            AppendAddress(sb, (uint) -val, options.WithWriteAddressAsDecimal(isNextOperation && -DecimalLimit < val));
                         }
                         else if (0 < val || !isNextOperation)
                         {
                             if (isNextOperation)
                                 sb.Append(" + ");
                             
-                            options.WriteAddressAsDecimal = isNextOperation && val < DecimalLimit;
-                            AppendAddress(sb, (uint) val, options);
-                            options.WriteAddressAsDecimal = false;
+                            AppendAddress(sb, (uint) val, options.WithWriteAddressAsDecimal(isNextOperation && val < DecimalLimit));
                         }
 
                         isNextOperation = true;
@@ -447,6 +443,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }
 
                 case ud_type.UD_OP_IMM:
+                {
+                    var hexValue = true;
+                    //new[]
+                    //{
+                    //    ud_mnemonic_code.UD_Iand,
+                    //    ud_mnemonic_code.UD_Ior,
+                    //    ud_mnemonic_code.UD_Itest,
+                    //    ud_mnemonic_code.UD_Irol,
+                    //    ud_mnemonic_code.UD_Iror,
+                    //    ud_mnemonic_code.UD_Ishl,
+                    //    ud_mnemonic_code.UD_Ishr,
+                    //    ud_mnemonic_code.UD_Iint,
+                    //}.Contains(Mnemonic);
+
                     switch (oprSize)
                     {
                         case 8:
@@ -462,7 +472,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 ud_mnemonic_code.UD_Icmp
                             }.Contains(Mnemonic);
 
-                            // Работа не с 8-байтой инструкцией.
+                            // Работа не с 8-битной инструкцией.
                             if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
                                 needSignExtend = needSignExtend ||
                                     Mnemonic == ud_mnemonic_code.UD_Iand ||
@@ -474,29 +484,31 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             if (val < 0 && needSignExtend)
                             {
                                 sb.Append("-");
-                                AppendNumeric(sb, (byte) -val);
+                                AppendAddress(sb, (byte) -val, options.WithWriteAddressAsDecimal(-val < DecimalLimit && !hexValue));
                                 sb.Append(" /* ");
-                                AppendNumeric(sb, (byte) val);
+                                
+                                AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal((byte) val < DecimalLimit && !hexValue));
                                 sb.Append(" */");
                             }
                             else
                             {
-                                AppendNumeric(sb, (byte) val);
+                                AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal(val < DecimalLimit && !hexValue));
                             }
 
                             break;
                         }
 
                         case 16:
-                            AppendAddress(sb, op.lval.uword, options);
+                            AppendAddress(sb, op.lval.uword, options.WithWriteAddressAsDecimal(op.lval.uword < DecimalLimit && !hexValue));
                             break;
                         case 32:
-                            AppendAddress(sb, op.lval.udword, options);
+                            AppendAddress(sb, op.lval.udword, options.WithWriteAddressAsDecimal(op.lval.udword < DecimalLimit && !hexValue));
                             break;
                         default:
                             throw new NotImplementedException($"oprSize: {oprSize}");
                     }
                     break;
+                }
 
                 case ud_type.UD_OP_JIMM:
                 {

@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_bae5, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x19_bae7, 1); xchg(bx, ax);                             /* xchg bx, ax */
             ii(0x19_bae8, 5); 
-            switch (jmp_abs_switch(memw[cs, bx + 26317]))
+            switch (jmp_abs_switch(memw[cs, bx + 0x66cd]))
             {
                 case 0x19_ba63:
                     goto l_0x19_ba63;

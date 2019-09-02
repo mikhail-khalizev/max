@@ -107,9 +107,9 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_1c09:
             ii(0x19_1c09, 3); mov(bx, memw[ss, bp + 10]);               /* mov bx, [bp+0xa] */
             ii(0x19_1c0c, 2); shl(bx, 1);                               /* shl bx, 1 */
-            ii(0x19_1c0e, 4); mov(bx, memw[ds, bx + 14906]);            /* mov bx, [bx+0x3a3a] */
+            ii(0x19_1c0e, 4); mov(bx, memw[ds, bx + 0x3a3a]);           /* mov bx, [bx+0x3a3a] */
             ii(0x19_1c12, 2); shl(bx, 1);                               /* shl bx, 1 */
-            ii(0x19_1c14, 4); mov(ax, memw[ds, bx + 14892]);            /* mov ax, [bx+0x3a2c] */
+            ii(0x19_1c14, 4); mov(ax, memw[ds, bx + 0x3a2c]);           /* mov ax, [bx+0x3a2c] */
             ii(0x19_1c18, 3); mov(memw[ss, bp - 8], ax);                /* mov [bp-0x8], ax */
             ii(0x19_1c1b, 5); mov(memw[ss, bp - 10], 0x392c);           /* mov word [bp-0xa], 0x392c */
             ii(0x19_1c20, 2); jmp(0x19_1c2c, 0xa); goto l_0x19_1c2c;    /* jmp 0x1c2c */

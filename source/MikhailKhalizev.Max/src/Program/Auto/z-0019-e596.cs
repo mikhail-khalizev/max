@@ -29,12 +29,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_e5c2, 3); jmp(0x19_e5e8, 0x23); goto l_0x19_e5e8;   /* jmp 0xe5e8 */
         l_0x19_e5c5:
             ii(0x19_e5c5, 3); mov(bx, memw[ss, bp - 2]);                /* mov bx, [bp-0x2] */
-            ii(0x19_e5c8, 5); cmp(memb[ds, bx + 18614], 0x5c);          /* cmp byte [bx+0x48b6], 0x5c */
+            ii(0x19_e5c8, 5); cmp(memb[ds, bx + 0x48b6], 0x5c);         /* cmp byte [bx+0x48b6], 0x5c */
             ii(0x19_e5cd, 2); if(jnz(0x19_e5d2, 3)) goto l_0x19_e5d2;   /* jnz 0xe5d2 */
             ii(0x19_e5cf, 3); jmp(0x19_e5e8, 0x16); goto l_0x19_e5e8;   /* jmp 0xe5e8 */
         l_0x19_e5d2:
             ii(0x19_e5d2, 3); mov(bx, memw[ss, bp - 2]);                /* mov bx, [bp-0x2] */
-            ii(0x19_e5d5, 5); cmp(memb[ds, bx + 18614], 0x2e);          /* cmp byte [bx+0x48b6], 0x2e */
+            ii(0x19_e5d5, 5); cmp(memb[ds, bx + 0x48b6], 0x2e);         /* cmp byte [bx+0x48b6], 0x2e */
             ii(0x19_e5da, 2); if(jz(0x19_e5df, 3)) goto l_0x19_e5df;    /* jz 0xe5df */
             ii(0x19_e5dc, 3); jmp(0x19_e5e5, 6); goto l_0x19_e5e5;      /* jmp 0xe5e5 */
         l_0x19_e5df:

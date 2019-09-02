@@ -60,8 +60,8 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_7bda:
             ii(0x19_7bda, 2); mov(bx, si);                              /* mov bx, si */
             ii(0x19_7bdc, 3); shl(bx, 2);                               /* shl bx, 0x2 */
-            ii(0x19_7bdf, 4); mov(ax, memw[ds, bx + 5520]);             /* mov ax, [bx+0x1590] */
-            ii(0x19_7be3, 4); mov(dx, memw[ds, bx + 5522]);             /* mov dx, [bx+0x1592] */
+            ii(0x19_7bdf, 4); mov(ax, memw[ds, bx + 0x1590]);           /* mov ax, [bx+0x1590] */
+            ii(0x19_7be3, 4); mov(dx, memw[ds, bx + 0x1592]);           /* mov dx, [bx+0x1592] */
             ii(0x19_7be7, 3); mov(memw[ss, bp - 4], ax);                /* mov [bp-0x4], ax */
             ii(0x19_7bea, 3); mov(memw[ss, bp - 2], dx);                /* mov [bp-0x2], dx */
             ii(0x19_7bed, 2); mov(bx, si);                              /* mov bx, si */

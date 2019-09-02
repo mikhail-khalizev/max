@@ -28,9 +28,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_caae, 3); mov(cx, memw[ss, bp + 8]);                /* mov cx, [bp+0x8] */
             ii(0x19_cab1, 3); mov(dx, memw[ss, bp + 10]);               /* mov dx, [bp+0xa] */
             ii(0x19_cab4, 3); imul(bx, si, 0xc);                        /* imul bx, si, 0xc */
-            ii(0x19_cab7, 4); cmp(memw[ds, bx + 8548], cx);             /* cmp [bx+0x2164], cx */
+            ii(0x19_cab7, 4); cmp(memw[ds, bx + 0x2164], cx);           /* cmp [bx+0x2164], cx */
             ii(0x19_cabb, 2); if(jnz(0x19_ca9d, -0x20)) goto l_0x19_ca9d; /* jnz 0xca9d */
-            ii(0x19_cabd, 4); cmp(memw[ds, bx + 8550], dx);             /* cmp [bx+0x2166], dx */
+            ii(0x19_cabd, 4); cmp(memw[ds, bx + 0x2166], dx);           /* cmp [bx+0x2166], dx */
             ii(0x19_cac1, 2); if(jnz(0x19_ca9d, -0x26)) goto l_0x19_ca9d; /* jnz 0xca9d */
             ii(0x19_cac3, 3); mov(memw[ss, bp - 38], si);               /* mov [bp-0x26], si */
             ii(0x19_cac6, 3); mov(memw[ss, bp - 36], ax);               /* mov [bp-0x24], ax */
@@ -57,8 +57,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_caf9, 2); push(0);                                  /* push 0x0 */
             ii(0x19_cafb, 2); push(0);                                  /* push 0x0 */
             ii(0x19_cafd, 4); imul(bx, memw[ss, bp - 38], 0xc);         /* imul bx, [bp-0x26], 0xc */
-            ii(0x19_cb01, 4); mov(ax, memw[ds, bx + 8556]);             /* mov ax, [bx+0x216c] */
-            ii(0x19_cb05, 4); mov(dx, memw[ds, bx + 8558]);             /* mov dx, [bx+0x216e] */
+            ii(0x19_cb01, 4); mov(ax, memw[ds, bx + 0x216c]);           /* mov ax, [bx+0x216c] */
+            ii(0x19_cb05, 4); mov(dx, memw[ds, bx + 0x216e]);           /* mov dx, [bx+0x216e] */
             ii(0x19_cb09, 3); mov(memw[ss, bp - 38], ax);               /* mov [bp-0x26], ax */
             ii(0x19_cb0c, 3); mov(memw[ss, bp - 36], dx);               /* mov [bp-0x24], dx */
             ii(0x19_cb0f, 1); push(dx);                                 /* push dx */

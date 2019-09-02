@@ -37,8 +37,8 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_e98b:
             ii(0x19_e98b, 3); mov(bx, memw[ss, bp - 14]);               /* mov bx, [bp-0xe] */
             ii(0x19_e98e, 3); shl(bx, 2);                               /* shl bx, 0x2 */
-            ii(0x19_e991, 4); push(memw[ds, bx + 11660]);               /* push word [bx+0x2d8c] */
-            ii(0x19_e995, 4); push(memw[ds, bx + 11658]);               /* push word [bx+0x2d8a] */
+            ii(0x19_e991, 4); push(memw[ds, bx + 0x2d8c]);              /* push word [bx+0x2d8c] */
+            ii(0x19_e995, 4); push(memw[ds, bx + 0x2d8a]);              /* push word [bx+0x2d8a] */
             ii(0x19_e999, 5); call_far_abs(0x80, 0x5ba0);               /* call word 0x80:0x5ba0 */
             ii(0x19_e99e, 3); add(sp, 4);                               /* add sp, 0x4 */
             ii(0x19_e9a1, 3); mov(memw[ss, bp - 4], ax);                /* mov [bp-0x4], ax */

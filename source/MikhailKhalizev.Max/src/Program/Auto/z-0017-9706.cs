@@ -118,7 +118,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_980d, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x17_980f, 1); xchg(bx, ax);                             /* xchg bx, ax */
             ii(0x17_9810, 5); 
-            switch (jmp_abs_switch(memw[cs, bx + 20470]))
+            switch (jmp_abs_switch(memw[cs, bx + 0x4ff6]))
             {
                 case 0x17_971e:
                     goto l_0x17_971e;

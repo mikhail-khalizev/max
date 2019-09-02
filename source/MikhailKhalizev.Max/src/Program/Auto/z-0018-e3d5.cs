@@ -26,9 +26,9 @@ namespace MikhailKhalizev.Max.Program
         l_0x18_e3fb:
             ii(0x18_e3fb, 3); call(0x18_e868, 0x46a);                   /* call 0xe868 */
             ii(0x18_e3fe, 3); imul(si, si, 0x1c);                       /* imul si, si, 0x1c */
-            ii(0x18_e401, 5); mov(eax, memd[ds, si + 16959]);           /* mov eax, [si+0x423f] */
+            ii(0x18_e401, 5); mov(eax, memd[ds, si + 0x423f]);          /* mov eax, [si+0x423f] */
             ii(0x18_e406, 5); mov(memd_a32[ss, ebp + 24], eax);         /* mov [ebp+0x18], eax */
-            ii(0x18_e40b, 4); mov(ax, memw[ds, si + 16963]);            /* mov ax, [si+0x4243] */
+            ii(0x18_e40b, 4); mov(ax, memw[ds, si + 0x4243]);           /* mov ax, [si+0x4243] */
             ii(0x18_e40f, 4); mov(memw_a32[ss, ebp + 28], ax);          /* mov [ebp+0x1c], ax */
             ii(0x18_e413, 3); if(jmp_func(0x18_e067, -0x3af)) return;   /* jmp 0xe067 */
         }

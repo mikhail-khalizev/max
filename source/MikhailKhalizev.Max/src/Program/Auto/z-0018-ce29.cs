@@ -71,7 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_cec2, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x18_cec4, 1); xchg(bx, ax);                             /* xchg bx, ax */
             ii(0x18_cec5, 5); 
-            switch (jmp_abs_switch(memw[cs, bx + 13226]))
+            switch (jmp_abs_switch(memw[cs, bx + 0x33aa]))
             {
                 case 0x18_ceb8:
                     goto l_0x18_ceb8;
@@ -108,7 +108,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_cefe, 2); shl(ax, 1);                               /* shl ax, 1 */
             ii(0x18_cf00, 1); xchg(bx, ax);                             /* xchg bx, ax */
             ii(0x18_cf01, 5); 
-            switch (jmp_abs_switch(memw[cs, bx + 13286]))
+            switch (jmp_abs_switch(memw[cs, bx + 0x33e6]))
             {
                 case 0x18_cedc:
                     goto l_0x18_cedc;
