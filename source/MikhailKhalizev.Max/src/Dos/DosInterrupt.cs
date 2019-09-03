@@ -13,6 +13,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace MikhailKhalizev.Max.Dos
@@ -74,6 +75,7 @@ namespace MikhailKhalizev.Max.Dos
                     switch (al.UInt16)
                     {
                         case 0x01: // Get SVGA Mode Information
+                        {
                             if (cx != 0x101)
                                 throw new NotImplementedException();
 
@@ -104,7 +106,7 @@ namespace MikhailKhalizev.Max.Dos
                                 else
                                 {
                                     mi.ModeAttributes = mode_attr;
-                                    mi.NumberOfImagePages = (byte)((vga_vmemsize / page_size) - 1);
+                                    mi.NumberOfImagePages = (byte) ((vga_vmemsize / page_size) - 1);
                                 }
 
                                 mi.WinGranularity = 64;
@@ -128,8 +130,10 @@ namespace MikhailKhalizev.Max.Dos
                             }
 
                             break;
+                        }
 
                         case 0x02: // Set videomode
+                        {
                             if (bx != 0x101)
                                 throw new NotImplementedException();
 
@@ -140,8 +144,10 @@ namespace MikhailKhalizev.Max.Dos
                             //{ 0x101  ,M_LIN8   ,640 ,480 ,80 ,30 ,8 ,16 ,1 ,0xa0000 ,0x10000,100 ,525 ,80 ,480 ,0    },
 
                             break;
+                        }
 
                         case 0x05:
+                        {
                             if (bh != 0)
                                 throw new NotImplementedException();
 
@@ -159,7 +165,7 @@ namespace MikhailKhalizev.Max.Dos
                                     // std::cerr << static_cast<uint>(dl) << std::endl;
 
 
-                                    var curr_bank = ((Memory)Memory)
+                                    var curr_bank = ((Memory) Memory)
                                         .mem_phys_raw(0xa0000, 0x10000)
                                         .Slice(0, 0x10000);
 
@@ -190,7 +196,9 @@ namespace MikhailKhalizev.Max.Dos
 
                                         var ms = new MemoryStream();
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
-                                        nimg.SaveAsPng(ms);
+                                        var pngEncoder = new PngEncoder();
+                                        pngEncoder.CompressionLevel = 1;
+                                        pngEncoder.Encode(nimg, ms);
                                         PngBytes = ms.ToArray();
 
                                         var forgot = MainHub.SendClientUpdateImage(RawProgramMain.ServiceProvider);
@@ -225,6 +233,7 @@ namespace MikhailKhalizev.Max.Dos
 
                             al = 0x4f;
                             break;
+                        }
 
                         default:
                             throw new NotImplementedException();

@@ -2,6 +2,7 @@ using MikhailKhalizev.Max.Program;
 using System;
 using MikhailKhalizev.Processor.x86.CSharpExecutor;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Max.Dos
 {
