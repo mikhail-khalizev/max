@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0xa87b-2cc6e6e0")]
         public void Method_0000_a87b()
         {
-            ii(0xa87b, 2);    push(0x1f);                               /* push 0x1f */
-            ii(0xa87d, 3);    call(0x589d, -0x4fe3);                    /* call 0x589d */
+            ii(0xa87b, 2);  push(0x1f);                                /* push 0x1f */
+            ii(0xa87d, 3);  call(0x589d, -0x4fe3);                     /* call 0x589d */
         }
     }
 }

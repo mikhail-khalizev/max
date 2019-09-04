@@ -8,13 +8,13 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1_1ac7-53327d29")]
         public void Method_0001_1ac7()
         {
-            ii(0x1_1ac7, 2);  mov(bx, sp);                              /* mov bx, sp */
-            ii(0x1_1ac9, 4);  mov(ax, memw[ss, bx + 2]);                /* mov ax, [ss:bx+0x2] */
-            ii(0x1_1acd, 3);  add(ax, 0x10);                            /* add ax, 0x10 */
-            ii(0x1_1ad0, 2);  rcr(ax, 1);                               /* rcr ax, 1 */
-            ii(0x1_1ad2, 2);  mov(cl, 3);                               /* mov cl, 0x3 */
-            ii(0x1_1ad4, 2);  shr(ax, cl);                              /* shr ax, cl */
-            ii(0x1_1ad6, 1);  ret();                                    /* ret */
+            ii(0x1_1ac7, 2);  mov(bx, sp);                             /* mov bx, sp */
+            ii(0x1_1ac9, 4);  mov(ax, memw[ss, bx + 2]);               /* mov ax, [ss:bx+0x2] */
+            ii(0x1_1acd, 3);  add(ax, 0x10);                           /* add ax, 0x10 */
+            ii(0x1_1ad0, 2);  rcr(ax, 1);                              /* rcr ax, 1 */
+            ii(0x1_1ad2, 2);  mov(cl, 3);                              /* mov cl, 0x3 */
+            ii(0x1_1ad4, 2);  shr(ax, cl);                             /* shr ax, cl */
+            ii(0x1_1ad6, 1);  ret();                                   /* ret */
         }
     }
 }

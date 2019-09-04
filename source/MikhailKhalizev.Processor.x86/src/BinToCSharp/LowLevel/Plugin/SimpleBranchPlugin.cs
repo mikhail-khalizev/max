@@ -161,7 +161,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             if (dm.Instructions[cmdIndex].IsLocalBranch != !jmpOutside)
                 throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
 
-            return dm.Instructions[cmdIndex].ToCodeString(suffix);
+            return dm.Instructions[cmdIndex].GetInstructionString(suffix);
         }
     }
 }

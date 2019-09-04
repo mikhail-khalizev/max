@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_7b2b-14fabd")]
         public void /* sys */ sys_int_33()
         {
-            ii(0x1018_7b2b, 2); @int(0x33);                             /* int 0x33 */
-            ii(0x1018_7b2d, 1); ret();                                  /* ret */
+            ii(0x1018_7b2b, 2);  @int(0x33);                           /* int 0x33 */
+            ii(0x1018_7b2d, 1);  ret();                                /* ret */
         }
     }
 }

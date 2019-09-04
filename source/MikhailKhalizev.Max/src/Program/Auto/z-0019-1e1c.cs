@@ -8,18 +8,18 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_1e1c-feb37d51")]
         public void Method_0019_1e1c()
         {
-            ii(0x19_1e1c, 4); enter(6, 0);                              /* enter 0x6, 0x0 */
-            ii(0x19_1e20, 3); lea(ax, memw[ss, bp + 12]);               /* lea ax, [bp+0xc] */
-            ii(0x19_1e23, 1); push(ss);                                 /* push ss */
-            ii(0x19_1e24, 1); push(ax);                                 /* push ax */
-            ii(0x19_1e25, 3); push(memw[ss, bp + 10]);                  /* push word [bp+0xa] */
-            ii(0x19_1e28, 3); push(memw[ss, bp + 8]);                   /* push word [bp+0x8] */
-            ii(0x19_1e2b, 3); push(memw[ss, bp + 6]);                   /* push word [bp+0x6] */
-            ii(0x19_1e2e, 3); push(memw[ss, bp + 4]);                   /* push word [bp+0x4] */
-            ii(0x19_1e31, 1); push(cs);                                 /* push cs */
-            ii(0x19_1e32, 3); call(0x19_1e37, 2);                       /* call 0x1e37 */
-            ii(0x19_1e35, 1); leave();                                  /* leave */
-            ii(0x19_1e36, 1); ret();                                    /* ret */
+            ii(0x19_1e1c, 4);  enter(6, 0);                            /* enter 0x6, 0x0 */
+            ii(0x19_1e20, 3);  lea(ax, memw[ss, bp + 12]);             /* lea ax, [bp+0xc] */
+            ii(0x19_1e23, 1);  push(ss);                               /* push ss */
+            ii(0x19_1e24, 1);  push(ax);                               /* push ax */
+            ii(0x19_1e25, 3);  push(memw[ss, bp + 10]);                /* push word [bp+0xa] */
+            ii(0x19_1e28, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
+            ii(0x19_1e2b, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
+            ii(0x19_1e2e, 3);  push(memw[ss, bp + 4]);                 /* push word [bp+0x4] */
+            ii(0x19_1e31, 1);  push(cs);                               /* push cs */
+            ii(0x19_1e32, 3);  call(0x19_1e37, 2);                     /* call 0x1e37 */
+            ii(0x19_1e35, 1);  leave();                                /* leave */
+            ii(0x19_1e36, 1);  ret();                                  /* ret */
         }
     }
 }

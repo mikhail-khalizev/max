@@ -20,13 +20,13 @@ namespace MikhailKhalizev.Max.Dos
 {
     public class DosInterrupt : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
+        public new Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         [CanBeNull]
         public byte[] PngBytes { get; private set; }
 
-        public DosInterrupt(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
+        public DosInterrupt(Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;

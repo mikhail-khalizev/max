@@ -7,7 +7,7 @@ using MikhailKhalizev.Processor.x86.Configuration;
 using SharpDisasm;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
 {
     public class EngineTests
     {

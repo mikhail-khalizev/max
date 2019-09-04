@@ -67,7 +67,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         // Переходы на известные адреса.
         public SortedSet<BranchInfo> BranchesInfo = new SortedSet<BranchInfo>(BranchInfo.BeginComparer);
 
-        private const int LineCmdOffset = 18;
         private const int LineCommentOffset = 60;
 
         private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
@@ -646,7 +645,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
                     var os = new StringBuilder();
-                    write_instruction_position_and_spaces(os, lastInstrEnd, cmd.Begin);
+                    os.Append(CSharpInstruction.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin));
 
                     output.AppendLine(
                         lastInstrJmpOrRet
@@ -695,49 +694,32 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             output.AppendLine("}");
         }
 
-        private void write_instruction_position_and_spaces(StringBuilder os, Address begin, Address end)
-        {
-            WriteInstructionPosition(os, begin, end);
-            write_spaces(os, LineCmdOffset - 1);
-            os.Append(' ');
-        }
-
         private void write_spaces(StringBuilder os, int offset)
         {
             var count = offset - os.Length;
             if (0 < count)
                 os.Append(new string(' ', count));
         }
-
-        private void WriteInstructionPosition(StringBuilder os, Address begin, Address end)
-        {
-            os.Append($"ii({begin}, {end - begin});");
-        }
-
+        
         private string InstructionToString(DetectedMethod df, int cmdIndex)
         {
             var os = new StringBuilder();
 
             var cmd = df.Instructions[cmdIndex];
 
-            WriteInstructionPosition(os, cmd.Begin, cmd.End);
-            write_spaces(os, LineCmdOffset - 1);
+            os.Append(cmd.GetInstructionInfoString(true));
 
             var commentsInCurrentFunc = new List<string>();
 
             if (cmd.WriteCmd != null)
             {
-                os.Append(" " + cmd.WriteCmd(this, df, cmdIndex, commentsInCurrentFunc));
+                os.Append(cmd.WriteCmd(this, df, cmdIndex, commentsInCurrentFunc));
 
                 if (cmd.Comments.Count != 0 || commentsInCurrentFunc.Count != 0)
                     write_spaces(os, LineCommentOffset - 1);
             }
 
-            foreach (var s in cmd.Comments)
-                os.Append($" /* {s} */");
-
-            foreach (var s in commentsInCurrentFunc)
-                os.Append($" /* {s} */");
+            os.Append(string.Join(" ", cmd.Comments.Concat(commentsInCurrentFunc).Select(x => $"/* {x} */")));
 
             return os.ToString();
         }

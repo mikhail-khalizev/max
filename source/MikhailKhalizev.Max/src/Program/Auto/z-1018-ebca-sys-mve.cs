@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_ebca-123fee")]
         public void /* sys_mve */ Method_1018_ebca()
         {
-            ii(0x1018_ebca, 3); mov(ax, bx);                            /* mov ax, bx */
+            ii(0x1018_ebca, 3);  mov(ax, bx);                          /* mov ax, bx */
         }
     }
 }

@@ -10,10 +10,10 @@ namespace MikhailKhalizev.Max.Dos
 {
     public class DosMemory : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
+        public new Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
-        public DosMemory(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
+        public DosMemory(Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;

@@ -354,7 +354,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         "Не все метки switch находятся внутри одного метода " +
                         "(видимо не удалось разбить код на методы так, чтобы switch целиком находился внутри метода). " +
                         $"Method.Id = {dm.MethodInfo.Id}.");
-                    return dm.Instructions[cmdIndex].ToCodeString();
+                    return dm.Instructions[cmdIndex].GetInstructionString();
                 }
                 funcAddArg.Append($"({to})");
             }
@@ -366,7 +366,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             if (!dm.Instructions[cmdIndex].IsLocalBranch)
                 throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
 
-            var str = dm.Instructions[cmdIndex].ToCodeString(funcSuffix, "");
+            var str = dm.Instructions[cmdIndex].GetInstructionString(funcSuffix, "");
 
             var lines = new[]
                 {

@@ -3,13 +3,13 @@ using MikhailKhalizev.Processor.x86.Configuration;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.Core
+namespace MikhailKhalizev.Processor.x86.Tests.CSharpExecutor
 {
     public class InstructionTests : BridgeCpu
     {
         /// <inheritdoc />
         public InstructionTests()
-            : base(new CSharpExecutor.Cpu(new ProcessorDto()))
+            : base(new x86.CSharpExecutor.Cpu(new ProcessorDto()))
         { }
 
         [Fact]

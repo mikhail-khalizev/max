@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_eddb-123fe8")]
         public void /* sys_mve */ Method_1018_eddb()
         {
-            ii(0x1018_eddb, 3); mov(ax, bp);                            /* mov ax, bp */
+            ii(0x1018_eddb, 3);  mov(ax, bp);                          /* mov ax, bp */
         }
     }
 }

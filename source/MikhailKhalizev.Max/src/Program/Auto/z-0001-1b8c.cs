@@ -8,18 +8,18 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1_1b8c-de9b9692")]
         public void Method_0001_1b8c()
         {
-            ii(0x1_1b8c, 2);  mov(bx, sp);                              /* mov bx, sp */
-            ii(0x1_1b8e, 4);  mov(ax, memw[ss, bx + 2]);                /* mov ax, [ss:bx+0x2] */
-            ii(0x1_1b92, 4);  mov(dx, memw[ss, bx + 4]);                /* mov dx, [ss:bx+0x4] */
-            ii(0x1_1b96, 2);  shr(dx, 1);                               /* shr dx, 1 */
-            ii(0x1_1b98, 2);  rcr(ax, 1);                               /* rcr ax, 1 */
-            ii(0x1_1b9a, 2);  shr(dx, 1);                               /* shr dx, 1 */
-            ii(0x1_1b9c, 2);  rcr(ax, 1);                               /* rcr ax, 1 */
-            ii(0x1_1b9e, 2);  shr(dx, 1);                               /* shr dx, 1 */
-            ii(0x1_1ba0, 2);  rcr(ax, 1);                               /* rcr ax, 1 */
-            ii(0x1_1ba2, 2);  shr(dx, 1);                               /* shr dx, 1 */
-            ii(0x1_1ba4, 2);  rcr(ax, 1);                               /* rcr ax, 1 */
-            ii(0x1_1ba6, 1);  ret();                                    /* ret */
+            ii(0x1_1b8c, 2);  mov(bx, sp);                             /* mov bx, sp */
+            ii(0x1_1b8e, 4);  mov(ax, memw[ss, bx + 2]);               /* mov ax, [ss:bx+0x2] */
+            ii(0x1_1b92, 4);  mov(dx, memw[ss, bx + 4]);               /* mov dx, [ss:bx+0x4] */
+            ii(0x1_1b96, 2);  shr(dx, 1);                              /* shr dx, 1 */
+            ii(0x1_1b98, 2);  rcr(ax, 1);                              /* rcr ax, 1 */
+            ii(0x1_1b9a, 2);  shr(dx, 1);                              /* shr dx, 1 */
+            ii(0x1_1b9c, 2);  rcr(ax, 1);                              /* rcr ax, 1 */
+            ii(0x1_1b9e, 2);  shr(dx, 1);                              /* shr dx, 1 */
+            ii(0x1_1ba0, 2);  rcr(ax, 1);                              /* rcr ax, 1 */
+            ii(0x1_1ba2, 2);  shr(dx, 1);                              /* shr dx, 1 */
+            ii(0x1_1ba4, 2);  rcr(ax, 1);                              /* rcr ax, 1 */
+            ii(0x1_1ba6, 1);  ret();                                   /* ret */
         }
     }
 }

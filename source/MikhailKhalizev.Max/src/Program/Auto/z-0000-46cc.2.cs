@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x46cc-2d8ed507")]
         public void Method_0000_46cc_v2()
         {
-            ii(0x46cc, 1);    wait();                                   /* wait */
-            ii(0x46cd, 4);    jmp_abs(memw[ds, 0x9bc]);                 /* jmp word [0x9bc] */
+            ii(0x46cc, 1);  wait();                                    /* wait */
+            ii(0x46cd, 4);  jmp_abs(memw[ds, 0x9bc]);                  /* jmp word [0x9bc] */
         }
     }
 }

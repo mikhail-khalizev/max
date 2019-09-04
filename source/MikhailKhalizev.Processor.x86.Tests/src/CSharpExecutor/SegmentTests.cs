@@ -2,7 +2,7 @@ using FluentAssertions;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.Core
+namespace MikhailKhalizev.Processor.x86.Tests.CSharpExecutor
 {
     public class SegmentTests
     {

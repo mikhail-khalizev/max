@@ -13,7 +13,7 @@ using SharpDisasm;
 using SharpDisasm.Udis86;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
 {
     public class InstructionTests
     {
@@ -63,7 +63,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
                             u.error.Should().Be(0);
 
                             var cmd = new CSharpInstruction(new DefinitionCollection(), u);
-                            var str = cmd.ToCodeString(onlyRawCmd: true);
+                            var str = cmd.GetInstructionString(onlyRawCmd: true);
 
                             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 
@@ -103,7 +103,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
             u.error.Should().Be(0);
 
             var cmd = new CSharpInstruction(new DefinitionCollection(), u);
-            var str = cmd.ToCodeString(onlyRawCmd: true);
+            var str = cmd.GetInstructionString(onlyRawCmd: true);
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 

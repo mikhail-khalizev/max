@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_2454-c4255caa")]
         public void /* sys */ sys_free_internal()
         {
-            ii(0x1018_2454, 6); call_abs(memd[ds, 0x101b_e820]);        /* call dword [0x101be820] */ /* Вызов 'Definitions.sys_free_with_check_memory_corrupt'. */
-            ii(0x1018_245a, 1); ret();                                  /* ret */
+            ii(0x1018_2454, 6);  call_abs(memd[ds, 0x101b_e820]);      /* call dword [0x101be820] */ /* Вызов 'Definitions.sys_free_with_check_memory_corrupt'. */
+            ii(0x1018_245a, 1);  ret();                                /* ret */
         }
     }
 }

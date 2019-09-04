@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1016_c350-79d243a5")]
         public void /* sys */ Method_1016_c350()
         {
-            ii(0x1016_c350, 5); mov(eax, memd[ds, 0x101c_fb90]);        /* mov eax, [0x101cfb90] */
-            ii(0x1016_c355, 1); ret();                                  /* ret */
+            ii(0x1016_c350, 5);  mov(eax, memd[ds, 0x101c_fb90]);      /* mov eax, [0x101cfb90] */
+            ii(0x1016_c355, 1);  ret();                                /* ret */
         }
     }
 }

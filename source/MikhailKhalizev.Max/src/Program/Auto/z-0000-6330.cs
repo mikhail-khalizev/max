@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x6330-97478")]
         public void Method_0000_6330()
         {
-            ii(0x6330, 2);    sub(ax, ax);                              /* sub ax, ax */
-            ii(0x6332, 1);    ret();                                    /* ret */
+            ii(0x6330, 2);  sub(ax, ax);                               /* sub ax, ax */
+            ii(0x6332, 1);  ret();                                     /* ret */
         }
     }
 }

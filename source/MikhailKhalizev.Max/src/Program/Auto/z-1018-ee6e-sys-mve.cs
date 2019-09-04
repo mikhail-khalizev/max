@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_ee6e-887d")]
         public void /* sys_mve */ Method_1018_ee6e()
         {
-            ii(0x1018_ee6e, 2); add(edi, esi);                          /* add edi, esi */
+            ii(0x1018_ee6e, 2);  add(edi, esi);                        /* add edi, esi */
         }
     }
 }

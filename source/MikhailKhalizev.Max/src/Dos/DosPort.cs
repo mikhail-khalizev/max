@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Dos
 
     public class DosPort : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
+        public new Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         public enum kbd_keys
@@ -180,7 +180,7 @@ namespace MikhailKhalizev.Max.Dos
             0,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0   // 0xf0
         };
 
-        public DosPort(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
+        public DosPort(Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;
@@ -208,7 +208,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x0d:
                 case 0x0e:
                 case 0x0f:
-                    value.UInt32AsInt = RawProgramMain.DosDma.dma_controllers[0].read_controller_reg(port.UInt32AsInt);
+                    value.UInt32AsInt = RawProgramMain.DosDma.DmaControllers[0].read_controller_reg(port.UInt32AsInt);
                     break;
 
                 case 0x81:
@@ -236,7 +236,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0xda:
                 case 0xdc:
                 case 0xde:
-                    value.UInt32AsInt = RawProgramMain.DosDma.dma_controllers[1].read_controller_reg((port.UInt32AsInt - 0xc0) / 2);
+                    value.UInt32AsInt = RawProgramMain.DosDma.DmaControllers[1].read_controller_reg((port.UInt32AsInt - 0xc0) / 2);
                     break;
 
                 case 0x20:
@@ -375,7 +375,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x0d:
                 case 0x0e:
                 case 0x0f:
-                    RawProgramMain.DosDma.dma_controllers[0].write_controller_reg(port.UInt32AsInt, value.UInt32AsInt);
+                    RawProgramMain.DosDma.DmaControllers[0].write_controller_reg(port.UInt32AsInt, value.UInt32AsInt);
                     break;
 
                 case 0x81:
@@ -403,7 +403,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0xda:
                 case 0xdc:
                 case 0xde:
-                    RawProgramMain.DosDma.dma_controllers[1].write_controller_reg((port.UInt32AsInt - 0xc0) / 2, value.UInt32AsInt);
+                    RawProgramMain.DosDma.DmaControllers[1].write_controller_reg((port.UInt32AsInt - 0xc0) / 2, value.UInt32AsInt);
                     break;
 
                 case 0x20:
@@ -530,11 +530,11 @@ namespace MikhailKhalizev.Max.Dos
                                         throw new NotImplementedException();
 
                                     var chan = RawProgramMain.DosDma.dma_get_channel(5);
-                                    if (chan.masked)
+                                    if (chan.Masked)
                                         throw new NotImplementedException();
 
                                     var buf = new byte[2 * 0x1000];
-                                    chan.read(buf);
+                                    chan.Read(buf);
                                     RawProgramMain.DosPic.activate_irq(7);
                                     break;
                                 }

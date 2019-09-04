@@ -85,7 +85,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             WriteCmd = (e, dm, index, func) =>
             {
                 var isLast = dm.Instructions.Count <= index + 1;
-                return ToCodeString(onlyRawCmd: isLast);
+                return GetInstructionString(onlyRawCmd: isLast);
             };
 
             Comments = new List<string>();
@@ -153,14 +153,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 return ud_type.UD_R_SS;
             return ud_type.UD_R_DS;
         }
-
+        
         /// <inheritdoc />
         public override string ToString()
         {
-            return ToCodeString();
+            return GetInstructionString();
         }
 
-        public string ToCodeString(
+
+        public string GetInstructionString(
             string cmdSuffix = "",
             string funcAddArg = "",
             bool onlyRawCmd = false)
@@ -563,7 +564,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             else
                 sb.Append(DefinitionCollection.GetAddressFullName(val, options));
         }
-
+        
         #region Known Instructions
 
         [Flags]
@@ -665,6 +666,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             };
 
         #endregion
+
+
+        public string GetInstructionInfoString(bool withRightPadding)
+        {
+            return GetInstructionInfoStringStatic(withRightPadding, Begin, End);
+        }
+
+        public static string GetInstructionInfoStringStatic(bool withRightPadding, Address begin, Address end)
+        {
+            var str = $"ii({begin}, {end - begin});";
+
+            if (withRightPadding)
+                str += "  ";
+
+            return str;
+        }
+        
 
         public static IEqualityComparer<CSharpInstruction> BeginEqualityComparer =>
             new CustomEqualityComparer<CSharpInstruction>(

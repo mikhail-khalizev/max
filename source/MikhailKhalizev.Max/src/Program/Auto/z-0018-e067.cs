@@ -8,11 +8,11 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_e067-75fb132e")]
         public void Method_0018_e067()
         {
-            ii(0x18_e067, 3); mov(esp, ebp);                            /* mov esp, ebp */
-            ii(0x18_e06a, 1); pop(ds);                                  /* pop ds */
-            ii(0x18_e06b, 1); pop(es);                                  /* pop es */
-            ii(0x18_e06c, 2); popad();                                  /* popad */
-            ii(0x18_e06e, 2); iretd();                                  /* iretd */
+            ii(0x18_e067, 3);  mov(esp, ebp);                          /* mov esp, ebp */
+            ii(0x18_e06a, 1);  pop(ds);                                /* pop ds */
+            ii(0x18_e06b, 1);  pop(es);                                /* pop es */
+            ii(0x18_e06c, 2);  popad();                                /* popad */
+            ii(0x18_e06e, 2);  iretd();                                /* iretd */
         }
     }
 }
