@@ -1,47 +1,45 @@
-# M.A.X. Reverse Engineering
+# M.A.X. Reverse engineering
 
-Этот проект ставит цель в точности воссоздать легендарную игру [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration)
-из имеющихся бинарных файлов.
+This project aims to accurately recreate the legendary game [M.A.X.] (https://www.mobygames.com/game/max-mechanized-assault-exploration)
+from existing binary files.
 
-![Screenshots 1](./doc/img/screenshot01.png)
-![Screenshots 2](./doc/img/screenshot02.png)
-![Screenshots 3](./doc/img/screenshot03.png)
-![Screenshots 4](./doc/img/screenshot04.png)
-![Screenshots 5](./doc/img/screenshot05.png)
-![Screenshots 6](./doc/img/screenshot06.png)
+! [Screenshots 1] (./ doc / img / screenshot01.png)
+! [Screenshots 2] (./ doc / img / screenshot02.png)
+! [Screenshots 3] (./ doc / img / screenshot03.png)
+! [Screenshots 4] (./ doc / img / screenshot04.png)
+! [Screenshots 5] (./ doc / img / screenshot05.png)
+! [Screenshots 6] (./ doc / img / screenshot06.png)
 
-## План работ
+## Work plan
 
-### Дизассемблирование
+### Disassembling
 
-На первом этапе игра будет дизассемблирована в C#,
-и создано минимальное окружение для её эмуляции:
-процессор x86 и dos окружение.
+At the first stage, the game will be disassembled in C#,
+and a minimal environment will be created for its emulation:
+x86 processor and dos environment.
 
-Главное добиться хоть какой-нибудь работы игры.
-И постараться получить наиболее приятный для использования
-в будущем дизассемблированный исходный код на С#.
+The main thing is to achieve at least some work of the game.
+And try to get the most disassembled C# source code for future use.
 
-### Рефакторинг
+### Refactoring
 
-Далее, на втором этапе необходимо произвести глубокий
-рефакторинг получившегося кода и получить
-аккуратно написанный код ядра игры М.А.Х.
+Further, at the second stage, it is necessary to deeply refactor the resulting code and get neatly written M.A.X.
 
-### Мечты
+### Dreams
 
-Третий, заключительный этап открывает неограниченный простор для творчества.
-Возможно сделать браузерную версию игры. И версию для мобильных устройств.
+The third, final stage opens up unlimited scope for creativity.
+It is possible to make a browser version of the game. And the version for mobile devices.
 
-## Текущее состояние
+## Current state
 
-Завершено базовое дизассемблирование кода игры в C#.
+Completed basic disassembly of game code in C#.
 
-Игра запускается, вступительное видео отключено.
-Отображение экрана происходит на web-странице в браузере. События мыши из браузера передаются обратно в игру.
-Таким образом на данный момент возможно полноценно играть в M.A.X.
+The game starts, the intro video is disabled.
+The screen is displayed on a web page in a browser.
+Mouse events from the browser are passed back to the game.
+Thus, at the moment it is possible to fully play M.A.X.
 
-Код M.A.X. выглядит следующим образом:
+Code M.A.X. as follows:
 
 ```C#
         [MethodInfo("0x1016_6130-63cf5e5f")]
@@ -60,32 +58,32 @@
             ii(0x1016_6141, 3); cmp(ecx, 0x5a);                         /* cmp ecx, 0x5a */
             ii(0x1016_6144, 2); if(jg(0x1016_6148, 0x2)) goto l_0x1016_6148; /* jg 0x10166148 */
             ii(0x1016_6146, 2); add(al, 0x20);                          /* add al, 0x20 */
-            
+
             ...
-            
+
             ii(0x1016_6174, 1); pop(ecx);                               /* pop ecx */
             ii(0x1016_6175, 1); pop(ebx);                               /* pop ebx */
             ii(0x1016_6176, 1); ret();                                  /* ret */
         }
 ```
 
-## Запуск на локальном компьютере
+## Running on the local computer
 
-1. Создайте файл `source\MikhailKhalizev.Max\settings\appsettings.user.json`:
+1. Create the file `source \ MikhailKhalizev.Max \ settings \ appsettings.user.json`:
 
 ```json
-    {
-      "Max": {
-        "InstalledPath": "Путь к папке <M.A.X. En Orig With Patch 1.04>"
-      }
-    }
+    {
+      "Max": {
+        "InstalledPath": "Path to folder <M.A.X. En Orig With Patch 1.04>"
+      }
+    }
 ```
 
-2. Запустите:
+2. Run:
 
 ```
     cd source\MikhailKhalizev.Max
     dotnet run -c Release
 ```
 
-3. Откройте  в браузере страницу https://localhost:5001.
+3. Open a browser page https://localhost:5001.
