@@ -1,9 +1,8 @@
-Language: [**en**|[ru](README.ru.md)]
+Язык: [[en](README.md)|**ru**]
 
-# M.A.X. Reverse engineering
+# M.A.X. Reverse Engineering
 
-This project aims to accurately recreate the legendary game [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration)
-from existing binary files.
+Этот проект ставит цель в точности воссоздать легендарную игру [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration) из имеющихся бинарных файлов.
 
 ![Screenshots 1](./doc/img/screenshot01.png)
 ![Screenshots 2](./doc/img/screenshot02.png)
@@ -12,36 +11,35 @@ from existing binary files.
 ![Screenshots 5](./doc/img/screenshot05.png)
 ![Screenshots 6](./doc/img/screenshot06.png)
 
-## Work plan
+## План работ
 
-### Disassembling
+### Дизассемблирование
 
-At the first stage, the game will be disassembled in C#,
-and a minimal environment will be created for its emulation:
-x86 processor and dos environment.
+На первом этапе игра будет дизассемблирована в C#, и создано минимальное окружение для её эмуляции: процессор x86 и dos окружение.
 
-The main thing is to achieve at least some work of the game.
-And try to get the most disassembled C# source code for future use.
+Главное добиться хоть какой-нибудь работы игры.
+И постараться получить наиболее приятный для использования в будущем дизассемблированный исходный код на С#.
 
-### Refactoring
+### Рефакторинг
 
-Further, at the second stage, it is necessary to deeply refactor the resulting code and get neatly written M.A.X.
+Далее, на втором этапе необходимо произвести глубокий рефакторинг получившегося кода и получить аккуратно написанный код ядра игры М.А.X.
 
-### Dreams
+### Мечты
 
-The third, final stage opens up unlimited scope for creativity.
-It is possible to make a browser version of the game. And the version for mobile devices.
+Третий, заключительный этап открывает неограниченный простор для творчества.
+Возможно сделать браузерную версию игры.
+И версию для мобильных устройств.
 
-## Current state
+## Текущее состояние
 
-Completed basic disassembly of game code in C#.
+Завершено базовое дизассемблирование кода игры в C#.
 
-The game starts, the intro video is disabled.
-The screen is displayed on a web page in a browser.
-Mouse events from the browser are passed back to the game.
-Thus, at the moment it is possible to fully play M.A.X.
+Игра запускается, вступительное видео отключено.
+Отображение экрана происходит на web-странице в браузере.
+События мыши из браузера передаются обратно в игру.
+Таким образом на данный момент возможно полноценно играть в M.A.X.
 
-The game code is as follows:
+Код игры выглядит следующим образом:
 
 ```C#
         [MethodInfo("0x1016_6130-63cf5e5f")]
@@ -69,23 +67,23 @@ The game code is as follows:
         }
 ```
 
-## Running on the local computer
+## Запуск на локальном компьютере
 
-1. Create the file `source \ MikhailKhalizev.Max \ settings \ appsettings.user.json`:
+1. Создайте файл `source\MikhailKhalizev.Max\settings\appsettings.user.json`:
 
 ```json
     {
       "Max": {
-        "InstalledPath": "Path to folder <M.A.X. En Orig With Patch 1.04>"
+        "InstalledPath": "Путь к папке <M.A.X. En Orig With Patch 1.04>"
       }
     }
 ```
 
-2. Run:
+2. Запустите:
 
 ```
     cd source\MikhailKhalizev.Max
     dotnet run -c Release
 ```
 
-3. Open a browser page https://localhost:5001.
+3. Откройте  в браузере страницу https://localhost:5001.
