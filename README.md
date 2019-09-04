@@ -1,4 +1,4 @@
-Язык: [[en](README.md)|**ru**]
+Язык: [[en](README.en.md)|**ru**]
 
 # M.A.X. Reverse Engineering
 
