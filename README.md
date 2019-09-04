@@ -41,7 +41,7 @@ The screen is displayed on a web page in a browser.
 Mouse events from the browser are passed back to the game.
 Thus, at the moment it is possible to fully play M.A.X.
 
-Code M.A.X. as follows:
+The game code is as follows:
 
 ```C#
         [MethodInfo("0x1016_6130-63cf5e5f")]
