@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_90bc, 2);  if(jmp_func(0x1017_90c5, 7)) return;  /* jmp 0x101790c5 */
         l_0x1017_90be:
             ii(0x1017_90be, 3);  lea(esi, memd[ds, edx + 1]);          /* lea esi, [edx+0x1] */
-            ii(0x1017_90c1, 2);  if(jmp_func(0x1017_907b, -0x48)) return;/* jmp 0x1017907b */
+            ii(0x1017_90c1, 2);  jmp_func(0x1017_907b, -0x48);         /* jmp 0x1017907b */
         }
     }
 }

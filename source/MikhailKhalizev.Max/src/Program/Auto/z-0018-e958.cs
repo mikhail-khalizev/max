@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x18_e9ac:
             ii(0x18_e9ac, 1);  ret(); return;                          /* ret */
         l_0x18_e9ad:
-            ii(0x18_e9ad, 3);  if(jmp_func(0x18_e062, -0x94e)) return; /* jmp 0xe062 */
+            ii(0x18_e9ad, 3);  jmp_func(0x18_e062, -0x94e);            /* jmp 0xe062 */
         }
     }
 }

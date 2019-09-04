@@ -407,7 +407,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_9b98, 3);  mov(memd[ss, ebp - 20], eax);         /* mov [ebp-0x14], eax */
             ii(0x100f_9b9b, 3);  mov(al, memb[ss, ebp - 4]);           /* mov al, [ebp-0x4] */
             ii(0x100f_9b9e, 3);  mov(memb[ss, ebp - 64], al);          /* mov [ebp-0x40], al */
-            ii(0x100f_9ba1, 5);  if(jmp_func(0x100f_a76e, 0xbc8)) return;/* jmp 0x100fa76e */
+            ii(0x100f_9ba1, 5);  jmp_func(0x100f_a76e, 0xbc8);         /* jmp 0x100fa76e */
         }
     }
 }

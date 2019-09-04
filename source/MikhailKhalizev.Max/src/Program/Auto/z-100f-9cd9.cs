@@ -99,7 +99,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_9e08, 3);  mov(ebx, memd[ss, ebp - 92]);         /* mov ebx, [ebp-0x5c] */
             ii(0x100f_9e0b, 5);  call(0x100f_79d4, -0x243c);           /* call 0x100f79d4 */
         l_0x100f_9e10:
-            ii(0x100f_9e10, 5);  if(jmp_func(0x100f_a7df, 0x9ca)) return;/* jmp 0x100fa7df */
+            ii(0x100f_9e10, 5);  jmp_func(0x100f_a7df, 0x9ca);         /* jmp 0x100fa7df */
         }
     }
 }

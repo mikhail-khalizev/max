@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_41f5, 1);  push(bx);                               /* push bx */
             ii(0x19_41f6, 1);  push(ds);                               /* push ds */
             ii(0x19_41f7, 3);  lds(bx, memw[ss, bp + 10]);             /* lds bx, [bp+0xa] */
-            ii(0x19_41fa, 3);  if(jmp_func(0x19_4166, -0x97)) return;  /* jmp 0x4166 */
+            ii(0x19_41fa, 3);  jmp_func(0x19_4166, -0x97);             /* jmp 0x4166 */
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_f2d3, 1);  pop(ax);                                /* pop ax */
             ii(0x18_f2d4, 1);  inc(ax);                                /* inc ax */
             ii(0x18_f2d5, 1);  push(ax);                               /* push ax */
-            ii(0x18_f2d6, 2);  if(jmp_func(0x18_f33b, 0x63)) return;   /* jmp 0xf33b */
+            ii(0x18_f2d6, 2);  jmp_func(0x18_f33b, 0x63);              /* jmp 0xf33b */
         }
     }
 }

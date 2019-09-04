@@ -127,7 +127,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_ffbb, 3);  mov(bx, memw[ds, esi]);               /* mov bx, [esi] */
             ii(0x1018_ffbe, 4);  mov(cx, memw[ds, esi + 2]);           /* mov cx, [esi+0x2] */
             ii(0x1018_ffc2, 6);  mov(edx, memd[ds, 0x1020_9cd0]);      /* mov edx, [0x10209cd0] */
-            ii(0x1018_ffc8, 2);  if(jmp_func(0x1018_ffcc, 2)) return;  /* jmp 0x1018ffcc */
+            ii(0x1018_ffc8, 2);  jmp_func(0x1018_ffcc, 2);             /* jmp 0x1018ffcc */
         }
     }
 }

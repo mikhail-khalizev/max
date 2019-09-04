@@ -67,12 +67,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         // Переходы на известные адреса.
         public SortedSet<BranchInfo> BranchesInfo = new SortedSet<BranchInfo>(BranchInfo.BeginComparer);
 
-        private const int LineCommentOffset = 60;
-
         private readonly SimpleBranchPlugin _simpleBranchPlugin; // addr_to_decode from any jmp.
         private readonly SwitchPlugin _switchPlugin;
         private readonly ReadCStringPlugin _readCStringPlugin;
 
+        public delegate void OnInstructionAttachToMethodDelegate(DetectedMethod method, int instructionIndex);
+        private readonly MySortedDictionary<CSharpInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
+            new MySortedDictionary<CSharpInstruction, OnInstructionAttachToMethodDelegate>(CSharpInstruction.BeginComparer);
 
         public Engine(
             BinToCSharpDto configuration,
@@ -93,6 +94,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public void SetCStringDataArea(Address begin, Address end)
         {
             _readCStringPlugin.StringArea = Interval.From(begin, end);
+        }
+
+        public void RegisterOnInstructionAttachToMethod(CSharpInstruction instruction, OnInstructionAttachToMethodDelegate action)
+        {
+            if (_onAttachToMethod.TryGetValue(instruction, out var prevAction))
+                action += prevAction;
+
+            _onAttachToMethod[instruction] = action;
         }
 
         public void AddForceEndMethod(Address fullAddress)
@@ -221,8 +230,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (_addressesToDecode.Count != 0)
                 ProcessDecode();
 
-            // --- Разбиение кода на методы. ---
+            SplitCodeToMethods();
+            PostProcessingNewDetectedMethods();
+        }
 
+        private void SplitCodeToMethods()
+        {
             AddNewDetectedMethod(DecodedCode.Area.First().Begin);
 
             while (true)
@@ -316,7 +329,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(methodBegin), new BranchInfo(methodEnd)))
                     {
-                        var branchInstructionIndex = instructions.BinarySearch(new CSharpInstruction(branchInfo.From), CSharpInstruction.BeginComparer);
+                        var branchInstructionIndex = instructions.BinarySearch(
+                            new CSharpInstruction(branchInfo.From),
+                            CSharpInstruction.BeginComparer);
                         if (branchInstructionIndex < 0)
                             continue;
 
@@ -387,7 +402,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 if (DecodedCode.GetInstructionOrNull(decodeStart) == null)
                                     break; // Decode fail. Skip this hole.
 
-                                decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false).End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
+                                decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false)
+                                    .End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
 
                                 // Заново пересчитываем метод.
                                 method.End = 0;
@@ -402,9 +418,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         break;
                 }
             }
-
-            // --- Постобработка. ---
-            PostProcessingNewDetectedMethods();
         }
 
         private void PostProcessingNewDetectedMethods()
@@ -430,7 +443,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 if (AlreadyDecodedContainsMethodInfo(mi))
                     throw new InvalidOperationException("Detect already decoded method. Error in algorithm.");
 
-                // Заполняем IsLocalBranch.
+                // Заполняем HasLabel и IsLocalBranch.
 
                 foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
                 {
@@ -471,6 +484,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                             return false;
                         });
+                }
+
+                // Call onAttachToMethod.
+
+                foreach (var instruction in _onAttachToMethod.GreaterThat(new CSharpInstruction(method.Begin - 1)).Where(x => x.Begin < method.End).ToList())
+                {
+                    var index = method.Instructions.BinarySearch(instruction, CSharpInstruction.BeginComparer);
+                    if (0 <= index)
+                        _onAttachToMethod[instruction](method, index);
                 }
 
                 // Удаляем недостижимый код.
@@ -677,7 +699,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 foreach (var str in lines)
                 {
-                    output.Append("        ");
+                    output.Append(new string(' ', 8));
                     output.AppendLine(str);
                 }
 

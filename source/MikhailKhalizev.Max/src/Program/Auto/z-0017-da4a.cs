@@ -49,7 +49,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x17_da8e:
             ii(0x17_da8e, 1);  stc();                                  /* stc */
             ii(0x17_da8f, 3);  mov(ax, 0x1c00);                        /* mov ax, 0x1c00 */
-            ii(0x17_da92, 2);  if(jmp_func(0x17_da9a, 6)) return;      /* jmp 0xda9a */
+            ii(0x17_da92, 2);  jmp_func(0x17_da9a, 6);                 /* jmp 0xda9a */
         }
     }
 }

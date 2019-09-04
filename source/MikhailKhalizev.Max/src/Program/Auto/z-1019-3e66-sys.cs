@@ -44,7 +44,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_3eb2, 3);  add(edi, 0x10);                       /* add edi, 0x10 */
             ii(0x1019_3eb5, 5);  mov(eax, 0);                          /* mov eax, 0x0 */
             ii(0x1019_3eba, 2);  if(loop(0x1019_3e7a, -0x42)) goto l_0x1019_3e7a;/* loop 0x10193e7a */
-            ii(0x1019_3ebc, 5);  if(jmp_func(0x1019_3f62, 0xa1)) return;/* jmp 0x10193f62 */
+            ii(0x1019_3ebc, 5);  jmp_func(0x1019_3f62, 0xa1);          /* jmp 0x10193f62 */
         }
     }
 }

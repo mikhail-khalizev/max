@@ -58,7 +58,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_a530, 1);  retf(); return;                         /* retf */
         //  ii(0x18_a531, 58);  Недостижимый код.
         l_0x18_a56b:
-            ii(0x18_a56b, 3);  if(jmp_func(0x18_a838, 0x2ca)) return;  /* jmp 0xa838 */
+            ii(0x18_a56b, 3);  jmp_func(0x18_a838, 0x2ca);             /* jmp 0xa838 */
         }
     }
 }

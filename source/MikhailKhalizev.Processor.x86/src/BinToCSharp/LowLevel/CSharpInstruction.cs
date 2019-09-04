@@ -54,6 +54,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool IsJmpOrRet => IsJmp || IsRet;
         public bool IsJmpOrJcc { get; set; }
         public bool IsLocalBranch { get; set; }
+        public List<Address> SwitchAddresses { get; set; }
 
         public bool HasLabel { get; set; }
 
@@ -87,7 +88,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             WriteCmd = (e, dm, index, func) =>
             {
                 var isLast = dm.Instructions.Count <= index + 1;
-                return GetInstructionString(onlyRawCmd: isLast);
+                return GetInstructionString(onlyRawCmd: isLast && !IsLocalBranch);
             };
 
             Comments = new List<string>();
@@ -201,14 +202,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
 
-        public string GetInstructionString(
-            string cmdSuffix = "",
-            string funcAddArg = "",
-            bool onlyRawCmd = false)
+        public string GetInstructionString(string cmdSuffix = "", bool onlyRawCmd = false)
         {
+            if ((IsLoopOrLoopcc || IsJmpOrJcc) && !IsLocalBranch && Operands[0].type == ud_type.UD_OP_JIMM)
+                cmdSuffix += "_func";
+
             if (IsCallUp)
                 cmdSuffix += "_up";
-
+            
             var addIf = !onlyRawCmd && (IsCallUp || IsJmpOrJcc || IsLoopOrLoopcc) && (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
             var addGotoLabel = !onlyRawCmd && IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
             var addReturn = !onlyRawCmd && !IsLocalBranch && (
@@ -348,15 +349,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 nonFirstArg = true;
 
                 sb.Append(syn.ud_reg_tab[PfxSeg - ud_type.UD_R_AL]);
-            }
-
-            if (funcAddArg.Length != 0)
-            {
-                if (nonFirstArg)
-                    sb.Append(", ");
-                nonFirstArg = true;
-
-                sb.Append(funcAddArg);
             }
 
             if (HaveAnyRep)

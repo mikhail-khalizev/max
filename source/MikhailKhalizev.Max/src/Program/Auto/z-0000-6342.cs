@@ -30,7 +30,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x636f, 3);  call(0x4dc8, -0x15aa);                     /* call 0x4dc8 */
         l_0x6372:
             ii(0x6372, 6);  mov(memw[ds, 0xe], 0x2000);                /* mov word [0xe], 0x2000 */
-            ii(0x6378, 3);  if(jmp_func(0x9b39, 0x37be)) return;       /* jmp 0x9b39 */
+            ii(0x6378, 3);  jmp_func(0x9b39, 0x37be);                  /* jmp 0x9b39 */
         }
     }
 }

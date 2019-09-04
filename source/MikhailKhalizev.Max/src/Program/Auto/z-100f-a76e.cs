@@ -40,7 +40,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_a7d3:
             ii(0x100f_a7d3, 4);  cmp(memb[ss, ebp - 128], 1);          /* cmp byte [ebp-0x80], 0x1 */
             ii(0x100f_a7d7, 6);  if(jz_func(0x100f_9ba6, -0xc37)) return;/* jz 0x100f9ba6 */
-            ii(0x100f_a7dd, 2);  if(jmp_func(0x100f_a762, -0x7d)) return;/* jmp 0x100fa762 */
+            ii(0x100f_a7dd, 2);  jmp_func(0x100f_a762, -0x7d);         /* jmp 0x100fa762 */
         }
     }
 }

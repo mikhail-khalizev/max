@@ -215,7 +215,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_a13a:
             ii(0x100f_a13a, 5);  call(0x1012_11ea, 0x2_70ab);          /* call 0x101211ea */
             ii(0x100f_a13f, 3);  mov(memb[ss, ebp - 100], al);         /* mov [ebp-0x64], al */
-            ii(0x100f_a142, 5);  if(jmp_func(0x100f_a740, 0x5f9)) return;/* jmp 0x100fa740 */
+            ii(0x100f_a142, 5);  jmp_func(0x100f_a740, 0x5f9);         /* jmp 0x100fa740 */
         }
     }
 }

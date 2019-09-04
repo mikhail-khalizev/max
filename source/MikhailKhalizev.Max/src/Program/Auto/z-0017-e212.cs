@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0017_e212()
         {
             ii(0x17_e212, 3);  mov(ax, 2);                             /* mov ax, 0x2 */
-            ii(0x17_e215, 3);  if(jmp_func(0x17_d16b, -0x10ad)) return;/* jmp 0xd16b */
+            ii(0x17_e215, 3);  jmp_func(0x17_d16b, -0x10ad);           /* jmp 0xd16b */
         }
     }
 }

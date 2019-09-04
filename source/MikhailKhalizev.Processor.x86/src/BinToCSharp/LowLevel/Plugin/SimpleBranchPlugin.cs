@@ -25,15 +25,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             
             if (cmd.IsCall)
             {
-                var orig = cmd.WriteCmd;
-
-                cmd.WriteCmd = (engine, dm, index, func) =>
-                {
-                    if (dm.MethodInfo.JumpsInfo?.IsGoUp?.Contains(cmd.End) == true)
-                        cmd.IsCallUp = true;
-
-                    return orig(engine, dm, index, func);
-                };
+                Engine.RegisterOnInstructionAttachToMethod(
+                    cmd,
+                    (method, index) =>
+                    {
+                        if (method.MethodInfo.JumpsInfo?.IsGoUp?.Contains(cmd.End) == true)
+                            cmd.IsCallUp = true;
+                    });
             }
 
 
@@ -76,14 +74,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                 extraStart = where;
                 extraBytes = Engine.Memory.ReadAll(extraStart, op.size / 8);
-                
-                var orig = cmd.WriteCmd;
-                cmd.WriteCmd = (engine, dm, index, func) =>
-                {
-                    engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);
-                    return orig(engine, dm, index, func);
-                };
 
+                Engine.RegisterOnInstructionAttachToMethod(
+                    cmd,
+                    (method, index) =>
+                    {
+                        Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, extraStart, extraBytes);
+                    });
+                
                 switch (op.size)
                 {
                     case 16:
@@ -132,36 +130,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 }
 
                 actual.To.Add(toAddr);
-                cmd.WriteCmd = (engine, dm, index, func) => on_cmd_write(engine, dm, index, func, extraStart, extraBytes);
+
+                Engine.RegisterOnInstructionAttachToMethod(
+                    cmd,
+                    (method, index) =>
+                    {
+                        if (extraBytes != null)
+                            Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, extraStart, extraBytes);
+
+                        Engine.BranchesInfo.TryGetValue(new BranchInfo(method.Instructions[index].Begin), out var curJmp);
+                        if (curJmp == null)
+                            throw new InvalidOperationException();
+
+                        var to = curJmp.To.Single();
+
+                        if (!method.Labels.Contains(to))
+                        {
+                            if (method.Begin <= to && to < method.End)
+                                cmd.Comments.Add("Адрес перехода делит инструкцию в этой функции пополам.");
+                        }
+                    });
             }
-        }
-
-        private string on_cmd_write(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc, Address extraStart, byte[] extraBytes)
-        {
-            if (extraBytes != null)
-                engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, extraStart, extraBytes);
-
-            engine.BranchesInfo.TryGetValue(new BranchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
-            if (curJmp == null)
-                throw new InvalidOperationException();
-
-            var to = curJmp.To.Single();
-
-            var jmpOutside = false;
-            var suffix = "";
-            if (!dm.Labels.Contains(to))
-            {
-                jmpOutside = true;
-                suffix = "_func";
-
-                if (dm.Begin <= to && to < dm.End)
-                    commentsInCurrentFunc.Add("Адрес перехода делит инструкцию в этой функции пополам.");
-            }
-
-            if (dm.Instructions[cmdIndex].IsLocalBranch != !jmpOutside)
-                throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
-
-            return dm.Instructions[cmdIndex].GetInstructionString(suffix);
         }
     }
 }

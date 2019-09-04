@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x4aa3:
             ii(0x4aa3, 3);  mov(al, memb[cs, bx]);                     /* mov al, [cs:bx] */
             ii(0x4aa6, 3);  mov(memw[ss, bp + 24], ax);                /* mov [bp+0x18], ax */
-            ii(0x4aa9, 3);  if(jmp_func(0x3ff1, -0xabb)) return;       /* jmp 0x3ff1 */
+            ii(0x4aa9, 3);  jmp_func(0x3ff1, -0xabb);                  /* jmp 0x3ff1 */
         }
     }
 }

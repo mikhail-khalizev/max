@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d98c, 2);  if(jb(0x17_d993, 5)) goto l_0x17_d993;  /* jb 0xd993 */
             ii(0x17_d98e, 5);  and(memb[ds, bx + 0x1c5d], -3 /* 0xfd */);/* and byte [bx+0x1c5d], 0xfd */
         l_0x17_d993:
-            ii(0x17_d993, 3);  if(jmp_func(0x17_d8bb, -0xdb)) return;  /* jmp 0xd8bb */
+            ii(0x17_d993, 3);  jmp_func(0x17_d8bb, -0xdb);             /* jmp 0xd8bb */
         }
     }
 }

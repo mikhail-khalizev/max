@@ -331,20 +331,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             var copyAddrAreaBegin = _addrAreaBegin;
             var copySizeOfAddrArea = _sizeOfAddrArea;
             cmd.WriteCmd = (engine, dm, index, func) => WriteCmd(copyAddrAreaBegin, copySizeOfAddrArea, engine, dm, index, func);
+            Engine.RegisterOnInstructionAttachToMethod(
+                cmd,
+                (method, index) =>
+                {
+                    var raw = Engine.Memory.ReadAll(copyAddrAreaBegin, copySizeOfAddrArea);
+                    Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, copyAddrAreaBegin, raw);
+                });
         }
 
         private static string WriteCmd(
             Address addrAreaBegin, int sizeOfAddrArea,
             Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc)
         {
-            var raw = engine.Memory.ReadAll(addrAreaBegin, sizeOfAddrArea);
-            engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addrAreaBegin, raw);
-
             engine.BranchesInfo.TryGetValue(new BranchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
             if (curJmp == null)
                 throw new NotImplementedException("curJmp == null");
-
-            var funcAddArg = new StringBuilder();
 
             foreach (var to in curJmp.To)
             {
@@ -356,7 +358,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         $"Method.Id = {dm.MethodInfo.Id}.");
                     return dm.Instructions[cmdIndex].GetInstructionString();
                 }
-                funcAddArg.Append($"({to})");
             }
 
             if (curJmp.To.Count == 0)
@@ -366,7 +367,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             if (!dm.Instructions[cmdIndex].IsLocalBranch)
                 throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
 
-            var str = dm.Instructions[cmdIndex].GetInstructionString(funcSuffix, "");
+            var str = dm.Instructions[cmdIndex].GetInstructionString(funcSuffix);
 
             var lines = new[]
                 {

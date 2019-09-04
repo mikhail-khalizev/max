@@ -180,7 +180,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xae8d, 3);  call(0x9bb3, -0x12dd);                     /* call 0x9bb3 */
             ii(0xae90, 1);  pop(cx);                                   /* pop cx */
             ii(0xae91, 3);  cmp(ax, 0xffff);                           /* cmp ax, 0xffff */
-            ii(0xae94, 2);  if(jnz_func(0xae9b, 5)) return;            /* jnz 0xae9b */
+            ii(0xae94, 2);  jnz_func(0xae9b, 5);                       /* jnz 0xae9b */
         }
     }
 }

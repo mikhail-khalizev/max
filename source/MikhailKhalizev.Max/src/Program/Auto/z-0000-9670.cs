@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x9670-cb0b3")]
         public void Method_0000_9670()
         {
-            ii(0x9670, 3);  if(jmp_func(0x97de, 0x16b)) return;        /* jmp 0x97de */
+            ii(0x9670, 3);  jmp_func(0x97de, 0x16b);                   /* jmp 0x97de */
         }
     }
 }

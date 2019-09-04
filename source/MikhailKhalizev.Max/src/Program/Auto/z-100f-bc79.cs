@@ -167,7 +167,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100f_be7f:
             ii(0x100f_be7f, 3);  mov(al, memb[ss, ebp - 52]);          /* mov al, [ebp-0x34] */
             ii(0x100f_be82, 3);  mov(memb[ss, ebp - 64], al);          /* mov [ebp-0x40], al */
-            ii(0x100f_be85, 5);  if(jmp_func(0x100f_bf34, 0xaa)) return;/* jmp 0x100fbf34 */
+            ii(0x100f_be85, 5);  jmp_func(0x100f_bf34, 0xaa);          /* jmp 0x100fbf34 */
         }
     }
 }

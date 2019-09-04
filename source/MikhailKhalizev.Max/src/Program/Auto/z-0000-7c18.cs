@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7c1f, 2);  add(al, dh);                               /* add al, dh */
             ii(0x7c21, 2);  and(al, 0xe8);                             /* and al, 0xe8 */
             ii(0x7c23, 2);  adc(memw[ds, bx + si], ax);                /* adc [bx+si], ax */
-            ii(0x7c25, 2);  if(loop_func(0x7c48, 0x21)) return;        /* loop 0x7c48 */
+            ii(0x7c25, 2);  loop_func(0x7c48, 0x21);                   /* loop 0x7c48 */
         }
     }
 }
