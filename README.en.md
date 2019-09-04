@@ -71,7 +71,7 @@ The game code is as follows:
 
 ## Running on the local computer
 
-1. Create the file `source \ MikhailKhalizev.Max \ settings \ appsettings.user.json`:
+1. Create the file `source\MikhailKhalizev.Max\settings\appsettings.user.json`:
 
 ```json
     {
