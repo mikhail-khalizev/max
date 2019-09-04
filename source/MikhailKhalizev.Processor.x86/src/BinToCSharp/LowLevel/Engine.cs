@@ -404,7 +404,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             }
 
             // --- Постобработка. ---
+            PostProcessingNewDetectedMethods();
+        }
 
+        private void PostProcessingNewDetectedMethods()
+        {
             foreach (var method in NewDetectedMethods)
             {
                 // Заполняем MethodInfo.
@@ -430,18 +434,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
                 {
-                    var branchInstructionIndex = method.Instructions.BinarySearch(new CSharpInstruction(branchInfo.From), CSharpInstruction.BeginComparer);
-                    if (branchInstructionIndex < 0)
+                    foreach (var to in branchInfo.To)
+                    {
+                        var toInstructionIndex = method.Instructions.BinarySearch(new CSharpInstruction(to), CSharpInstruction.BeginComparer);
+                        if (0 <= toInstructionIndex)
+                            method.Instructions[toInstructionIndex].HasLabel = true;
+                    }
+
+                    var fromInstructionIndex = method.Instructions.BinarySearch(
+                        new CSharpInstruction(branchInfo.From),
+                        CSharpInstruction.BeginComparer);
+                    if (fromInstructionIndex < 0)
                         continue;
 
-                    var branchInstruction = method.Instructions[branchInstructionIndex];
-                    if (!branchInstruction.IsJmpOrJcc && !branchInstruction.IsLoopOrLoopcc)
+                    var fromInstruction = method.Instructions[fromInstructionIndex];
+                    if (!fromInstruction.IsJmpOrJcc && !fromInstruction.IsLoopOrLoopcc)
                         continue;
 
-                    if (branchInstruction.IsLocalBranch)
+                    if (fromInstruction.IsLocalBranch)
                         continue;
 
-                    branchInstruction.IsLocalBranch = branchInfo.To.All(
+                    fromInstruction.IsLocalBranch = branchInfo.To.All(
                         addressTo =>
                         {
                             if (method.Begin <= addressTo && addressTo < method.End)
@@ -606,8 +619,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private void WriteCSharpMethodToStringBuilder(StringBuilder output, DetectedMethod detectedMethod, int fileNum)
         {
             var methodBegin = detectedMethod.MethodInfo.Address;
-            var methodEnd = methodBegin + detectedMethod.End - detectedMethod.Begin;
-            var offset = detectedMethod.MethodInfo.Address - detectedMethod.Begin;
 
 
             var firstCmd = detectedMethod.Instructions.First();
@@ -639,51 +650,40 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             {
                 var cmd = detectedMethod.Instructions[cmdIndex];
                 var haveLabel = detectedMethod.Labels.Contains(cmd.Begin);
+                if (haveLabel != cmd.HasLabel)
+                    throw new InvalidOperationException("haveLabel != cmd.HasLabel");
 
-                output.Append("        ");
+                var lines = Enumerable.Empty<string>();
+
 
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
-                    var os = new StringBuilder();
-                    os.Append(CSharpInstruction.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin));
-
-                    output.AppendLine(
+                    var ii = CSharpInstruction.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
+                    lines = lines.Append(
                         lastInstrJmpOrRet
-                            ? $"//  {os}Недостижимый код."
-                            : $"    {os}throw new InvalidOperationException(\"Недекодированный код.\");");
-                    output.Append("        ");
+                            ? $"//  {ii}Недостижимый код."
+                            : $"    {ii}throw new InvalidOperationException(\"Недекодированный код.\");");
                 }
+
 
                 if (haveLabel)
-                {
-                    output.AppendLine($"l_{cmd.Begin + offset}:");
-                    output.Append("        ");
                     skip = false;
-                }
 
-                // InstructionToString может изменить CommentThis. Поэтому вызывается раньше.
-                string instr;
-                try
+                if (skip)
+                    cmd.CommentThis = true; // Комментируем недостижимый код.
+
+                lines = lines.Concat(cmd.GetCodeString(this, detectedMethod, cmdIndex));
+
+
+                foreach (var str in lines)
                 {
-                    instr = InstructionToString(detectedMethod, cmdIndex);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException(
-                        $"Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
+                    output.Append("        ");
+                    output.AppendLine(str);
                 }
 
-
-                if (skip || cmd.CommentThis)
-                    output.Append("//"); // Комментируем недостижимый код.
-                else
-                    output.Append("  ");
 
                 if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
                     skip = true;
-
-
-                output.AppendLine($"  {instr}");
 
                 lastInstrEnd = cmd.End;
                 lastInstrJmpOrRet = cmd.IsJmpOrRet;
@@ -692,36 +692,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             output.AppendLine("        }");
             output.AppendLine("    }");
             output.AppendLine("}");
-        }
-
-        private void write_spaces(StringBuilder os, int offset)
-        {
-            var count = offset - os.Length;
-            if (0 < count)
-                os.Append(new string(' ', count));
-        }
-        
-        private string InstructionToString(DetectedMethod df, int cmdIndex)
-        {
-            var os = new StringBuilder();
-
-            var cmd = df.Instructions[cmdIndex];
-
-            os.Append(cmd.GetInstructionInfoString(true));
-
-            var commentsInCurrentFunc = new List<string>();
-
-            if (cmd.WriteCmd != null)
-            {
-                os.Append(cmd.WriteCmd(this, df, cmdIndex, commentsInCurrentFunc));
-
-                if (cmd.Comments.Count != 0 || commentsInCurrentFunc.Count != 0)
-                    write_spaces(os, LineCommentOffset - 1);
-            }
-
-            os.Append(string.Join(" ", cmd.Comments.Concat(commentsInCurrentFunc).Select(x => $"/* {x} */")));
-
-            return os.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
@@ -54,8 +55,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool IsJmpOrJcc { get; set; }
         public bool IsLocalBranch { get; set; }
 
-        public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc);
+        public bool HasLabel { get; set; }
 
+        public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc);
         public WriteCmdDelegate WriteCmd { get; set; }
 
         private int DecimalLimit => 0xfff;
@@ -158,6 +160,44 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public override string ToString()
         {
             return GetInstructionString();
+        }
+
+        // TODO Remove arguments.
+        public IEnumerable<string> GetCodeString(Engine engine, DetectedMethod dm, int cmdIndex)
+        {
+            string line;
+            try
+            {
+                line = GetInstructionInfoString(true);
+
+                var commentsInCurrentFunc = new List<string>();
+
+                if (WriteCmd != null)
+                {
+                    line += WriteCmd(engine, dm, cmdIndex, commentsInCurrentFunc);
+
+                    if (Comments.Count != 0 || commentsInCurrentFunc.Count != 0)
+                        line = line.PadRight(59);
+                }
+
+                line += string.Join(" ", Comments.Concat(commentsInCurrentFunc).Select(x => $"/* {x} */"));
+
+
+                // WriteCmd может изменить CommentThis. Поэтому CommentThis учитывается в конце.
+                if (CommentThis)
+                    line = "//  " + line;
+                else
+                    line = "    " + line;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Instruction address: {Begin}, Method Id: '{dm.MethodInfo.Id}'", ex);
+            }
+
+            return
+                HasLabel
+                    ? new[] { $"l_{Begin}:", line }
+                    : new[] { line };
         }
 
 
