@@ -1,3 +1,5 @@
+[[en](README.md)|**ru**]
+
 # M.A.X. Reverse Engineering
 
 Этот проект ставит цель в точности воссоздать легендарную игру [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration) из имеющихся бинарных файлов.
@@ -56,9 +58,9 @@
             ii(0x1016_6141, 3); cmp(ecx, 0x5a);                         /* cmp ecx, 0x5a */
             ii(0x1016_6144, 2); if(jg(0x1016_6148, 0x2)) goto l_0x1016_6148; /* jg 0x10166148 */
             ii(0x1016_6146, 2); add(al, 0x20);                          /* add al, 0x20 */
-            
+
             ...
-            
+
             ii(0x1016_6174, 1); pop(ecx);                               /* pop ecx */
             ii(0x1016_6175, 1); pop(ebx);                               /* pop ebx */
             ii(0x1016_6176, 1); ret();                                  /* ret */

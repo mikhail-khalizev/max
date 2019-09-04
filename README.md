@@ -1,14 +1,16 @@
+[**en**|[ru](README.ru.md)]
+
 # M.A.X. Reverse engineering
 
 This project aims to accurately recreate the legendary game [M.A.X.] (https://www.mobygames.com/game/max-mechanized-assault-exploration)
 from existing binary files.
 
-! [Screenshots 1] (./ doc / img / screenshot01.png)
-! [Screenshots 2] (./ doc / img / screenshot02.png)
-! [Screenshots 3] (./ doc / img / screenshot03.png)
-! [Screenshots 4] (./ doc / img / screenshot04.png)
-! [Screenshots 5] (./ doc / img / screenshot05.png)
-! [Screenshots 6] (./ doc / img / screenshot06.png)
+![Screenshots 1](./doc/img/screenshot01.png)
+![Screenshots 2](./doc/img/screenshot02.png)
+![Screenshots 3](./doc/img/screenshot03.png)
+![Screenshots 4](./doc/img/screenshot04.png)
+![Screenshots 5](./doc/img/screenshot05.png)
+![Screenshots 6](./doc/img/screenshot06.png)
 
 ## Work plan
 
