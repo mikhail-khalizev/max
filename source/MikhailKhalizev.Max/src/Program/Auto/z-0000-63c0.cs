@@ -13,7 +13,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x63c3, 2);    mov(dx, di);                              /* mov dx, di */
             ii(0x63c5, 2);    mov(ax, ds);                              /* mov ax, ds */
             ii(0x63c7, 2);    mov(es, ax);                              /* mov es, ax */
-            ii(0x63c9, 3);    mov(di, memw[ss, bp + 0x4]);              /* mov di, [bp+0x4] */
+            ii(0x63c9, 3);    mov(di, memw[ss, bp + 4]);                /* mov di, [bp+0x4] */
             ii(0x63cc, 2);    xor(ax, ax);                              /* xor ax, ax */
             ii(0x63ce, 3);    mov(cx, 0xffff);                          /* mov cx, 0xffff */
             ii(0x63d1, 2);    repne(() => scasb());                     /* repne scasb */

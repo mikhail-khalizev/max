@@ -58,6 +58,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         public WriteCmdDelegate WriteCmd { get; set; }
 
+        private int DecimalLimit => 0xfff;
+
+
         public CSharpInstruction(Address address)
         {
             Begin = address;
@@ -185,7 +188,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             if (!InstructionsFlag.TryGetValue(Mnemonic, out var flags))
                 flags = InstrFlags.Unknown;
-            
+
             var method = udis86.ud_lookup_mnemonic(Mnemonic);
 
 
@@ -266,7 +269,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (new[] { "int", "in", "out" }.Contains(method))
                 method = "@" + method;
 
-            
+
             if (PfxRepne)
                 sb.Append($"repne{adrModeStr}(() => ");
             else if (PfxRepe)
@@ -290,173 +293,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     sb.Append(", ");
                 nonFirstArg = true;
 
-                var oprSize = op.size == 0 ? EffOprMode : op.size;
-
-                int val;
-                switch (op.type)
-                {
-                    case ud_type.UD_NONE:
-                        break;
-
-                    case ud_type.UD_OP_REG:
-                        if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
-                            sb.Append($"ST({op.@base - ud_type.UD_R_ST0})");
-                        else
-                            sb.Append(RegisterInfo.GetRegister(op.@base));
-                        break;
-
-                    case ud_type.UD_OP_MEM:
-                        {
-                            sb.Append("mem");
-                            sb.Append(GetSizeSuffixByBits(oprSize));
-                            sb.Append(adrModeStr);
-                            sb.Append($"[{RegisterInfo.GetRegister(GetEffectiveSegmentOfOperand(op))}, ");
-
-                            if (PfxSeg != ud_type.UD_NONE)
-                                usePfxSeg = true;
-
-                            var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
-                            if (op.@base != ud_type.UD_NONE)
-                            {
-                                sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
-                                isNextOperation = true;
-                            }
-
-                            if (op.index != ud_type.UD_NONE)
-                            {
-                                if (isNextOperation)
-                                    sb.Append(" + ");
-                                isNextOperation = true;
-
-                                sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
-                            }
-
-                            if (1 < op.scale)
-                            {
-                                if (op.index == ud_type.UD_NONE)
-                                    throw new NotImplementedException();
-
-                                sb.Append($" * {op.scale}");
-                            }
-
-                            if (op.offset != 0)
-                            {
-                                switch (op.offset)
-                                {
-                                    case 8:
-                                        val = op.lval.@sbyte;
-                                        break;
-                                    case 16:
-                                        val = op.lval.sword;
-                                        break;
-                                    case 32:
-                                        val = op.lval.sdword;
-                                        break;
-                                    default:
-                                        throw new NotImplementedException($"op.offset: {op.offset}");
-                                }
-
-                                if (val < 0)
-                                {
-                                    sb.Append(isNextOperation ? " - " : "-");
-                                    sb.Append(HexHelper.ToShortGrouped4Hex(-val));
-                                }
-                                else
-                                {
-                                    sb.Append(isNextOperation ? " + " : "");
-                                    sb.Append(DefinitionCollection.GetAddressFullName(val, options));
-                                }
-
-                                isNextOperation = true;
-                            }
-
-                            sb.Append(']');
-                            break;
-                        }
-
-                    case ud_type.UD_OP_IMM:
-                        switch (oprSize)
-                        {
-                            case 8:
-                                {
-                                    var needSignExtend = new[]
-                                    {
-                                        ud_mnemonic_code.UD_Iimul,
-                                        ud_mnemonic_code.UD_Ipush,
-                                        ud_mnemonic_code.UD_Iadc,
-                                        ud_mnemonic_code.UD_Iadd,
-                                        ud_mnemonic_code.UD_Isbb,
-                                        ud_mnemonic_code.UD_Isub,
-                                        ud_mnemonic_code.UD_Icmp
-                                    }.Contains(Mnemonic);
-
-                                    // Работа не с 8-байтой инструкцией.
-                                    if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
-                                        needSignExtend = needSignExtend ||
-                                            Mnemonic == ud_mnemonic_code.UD_Iand ||
-                                            Mnemonic == ud_mnemonic_code.UD_Ior ||
-                                            Mnemonic == ud_mnemonic_code.UD_Ixor;
-
-                                    val = op.lval.@sbyte;
-
-                                    if (val < 0 && needSignExtend)
-                                    {
-                                        sb.Append($"-{HexHelper.ToShortGrouped4Hex(-val)} /* {HexHelper.ToShortGrouped4Hex(op.lval.ubyte)} */");
-                                    }
-                                    else
-                                    {
-                                        sb.Append(HexHelper.ToShortGrouped4Hex(op.lval.ubyte));
-                                    }
-
-                                    break;
-                                }
-
-                            case 16:
-                                sb.Append(DefinitionCollection.GetAddressFullName(op.lval.uword, options));
-                                break;
-                            case 32:
-                                sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
-                                break;
-                            default:
-                                throw new NotImplementedException($"oprSize: {oprSize}");
-                        }
-                        break;
-
-                    case ud_type.UD_OP_JIMM:
-                        switch (oprSize)
-                        {
-                            case 8:
-                                val = op.lval.@sbyte;
-                                break;
-                            case 16:
-                                val = op.lval.sword;
-                                break;
-                            case 32:
-                                val = op.lval.sdword;
-                                break;
-                            default: throw new NotImplementedException($"oprSize: {oprSize}");
-                        }
-
-                        sb.Append(DefinitionCollection.GetAddressFullName(End + val, options));
-                        sb.Append(", ");
-
-                        sb.Append(
-                            val < 0
-                                ? $"-{HexHelper.ToShortGrouped4Hex(-val)}"
-                                : HexHelper.ToShortGrouped4Hex(val));
-                        break;
-
-                    case ud_type.UD_OP_CONST:
-                        sb.Append(DefinitionCollection.GetAddressFullName(op.lval.udword, options));
-                        break;
-
-                    case ud_type.UD_OP_PTR:
-                        sb.Append($"{HexHelper.ToShortGrouped4Hex(op.lval.ptr_seg)}, {HexHelper.ToShortGrouped4Hex(op.lval.ptr_off)}");
-                        break;
-
-                    default:
-                        throw new NotImplementedException($"op.type: {op.type}");
-                }
+                AppendOperand(op, sb, adrModeStr, ref usePfxSeg, options);
             }
 
             if (usePfxSeg == false && PfxSeg != ud_type.UD_NONE
@@ -516,6 +353,217 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return sb.ToString();
         }
 
+        private void AppendOperand(ud_operand op, StringBuilder sb, string adrModeStr, ref bool usePfxSeg, DefinitionCollection.Options options)
+        {
+            var oprSize = op.size == 0 ? EffOprMode : op.size;
+
+            int val;
+            switch (op.type)
+            {
+                case ud_type.UD_NONE:
+                    break;
+
+                case ud_type.UD_OP_REG:
+                    if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
+                        sb.Append($"ST({op.@base - ud_type.UD_R_ST0})");
+                    else
+                        sb.Append(RegisterInfo.GetRegister(op.@base));
+                    break;
+
+                case ud_type.UD_OP_MEM:
+                {
+                    sb.Append("mem");
+                    sb.Append(GetSizeSuffixByBits(oprSize));
+                    sb.Append(adrModeStr);
+                    sb.Append($"[{RegisterInfo.GetRegister(GetEffectiveSegmentOfOperand(op))}, ");
+
+                    if (PfxSeg != ud_type.UD_NONE)
+                        usePfxSeg = true;
+
+                    var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
+                    if (op.@base != ud_type.UD_NONE)
+                    {
+                        sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
+                        isNextOperation = true;
+                    }
+
+                    if (op.index != ud_type.UD_NONE)
+                    {
+                        if (isNextOperation)
+                            sb.Append(" + ");
+                        isNextOperation = true;
+
+                        sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
+                    }
+
+                    if (1 < op.scale)
+                    {
+                        if (op.index == ud_type.UD_NONE)
+                            throw new NotImplementedException();
+
+                        sb.Append($" * {op.scale}");
+                    }
+
+                    if (op.offset != 0)
+                    {
+                        switch (op.offset)
+                        {
+                            case 8:
+                                val = op.lval.@sbyte;
+                                break;
+                            case 16:
+                                val = op.lval.sword;
+                                break;
+                            case 32:
+                                val = op.lval.sdword;
+                                break;
+                            default:
+                                throw new NotImplementedException($"op.offset: {op.offset}");
+                        }
+
+                        if (val < 0)
+                        {
+                            sb.Append(isNextOperation ? " - " : "-");
+
+                            AppendAddress(sb, (uint) -val, options.WithWriteAddressAsDecimal(isNextOperation && -DecimalLimit < val));
+                        }
+                        else if (0 < val || !isNextOperation)
+                        {
+                            if (isNextOperation)
+                                sb.Append(" + ");
+                            
+                            AppendAddress(sb, (uint) val, options.WithWriteAddressAsDecimal(isNextOperation && val < DecimalLimit));
+                        }
+
+                        isNextOperation = true;
+                    }
+
+                    sb.Append(']');
+                    break;
+                }
+
+                case ud_type.UD_OP_IMM:
+                {
+                    var hexValue = true;
+                    //new[]
+                    //{
+                    //    ud_mnemonic_code.UD_Iand,
+                    //    ud_mnemonic_code.UD_Ior,
+                    //    ud_mnemonic_code.UD_Itest,
+                    //    ud_mnemonic_code.UD_Irol,
+                    //    ud_mnemonic_code.UD_Iror,
+                    //    ud_mnemonic_code.UD_Ishl,
+                    //    ud_mnemonic_code.UD_Ishr,
+                    //    ud_mnemonic_code.UD_Iint,
+                    //}.Contains(Mnemonic);
+
+                    switch (oprSize)
+                    {
+                        case 8:
+                        {
+                            var needSignExtend = new[]
+                            {
+                                ud_mnemonic_code.UD_Iimul,
+                                ud_mnemonic_code.UD_Ipush,
+                                ud_mnemonic_code.UD_Iadc,
+                                ud_mnemonic_code.UD_Iadd,
+                                ud_mnemonic_code.UD_Isbb,
+                                ud_mnemonic_code.UD_Isub,
+                                ud_mnemonic_code.UD_Icmp
+                            }.Contains(Mnemonic);
+
+                            // Работа не с 8-битной инструкцией.
+                            if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
+                                needSignExtend = needSignExtend ||
+                                    Mnemonic == ud_mnemonic_code.UD_Iand ||
+                                    Mnemonic == ud_mnemonic_code.UD_Ior ||
+                                    Mnemonic == ud_mnemonic_code.UD_Ixor;
+
+                            val = op.lval.@sbyte;
+
+                            if (val < 0 && needSignExtend)
+                            {
+                                sb.Append("-");
+                                AppendAddress(sb, (byte) -val, options.WithWriteAddressAsDecimal(-val < DecimalLimit && !hexValue));
+                                sb.Append(" /* ");
+                                
+                                AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal((byte) val < DecimalLimit && !hexValue));
+                                sb.Append(" */");
+                            }
+                            else
+                            {
+                                AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal(val < DecimalLimit && !hexValue));
+                            }
+
+                            break;
+                        }
+
+                        case 16:
+                            AppendAddress(sb, op.lval.uword, options.WithWriteAddressAsDecimal(op.lval.uword < DecimalLimit && !hexValue));
+                            break;
+                        case 32:
+                            AppendAddress(sb, op.lval.udword, options.WithWriteAddressAsDecimal(op.lval.udword < DecimalLimit && !hexValue));
+                            break;
+                        default:
+                            throw new NotImplementedException($"oprSize: {oprSize}");
+                    }
+                    break;
+                }
+
+                case ud_type.UD_OP_JIMM:
+                {
+                    switch (oprSize)
+                    {
+                        case 8:
+                            val = op.lval.@sbyte;
+                            break;
+                        case 16:
+                            val = op.lval.sword;
+                            break;
+                        case 32:
+                            val = op.lval.sdword;
+                            break;
+                        default: throw new NotImplementedException($"oprSize: {oprSize}");
+                    }
+
+                    sb.Append(DefinitionCollection.GetAddressFullName(End + val, options));
+                    sb.Append(", ");
+
+                    if (val < 0)
+                        sb.Append("-");
+                    AppendNumeric(sb, val < 0 ? (uint) -val : (uint) val);
+                    break;
+                }
+
+                case ud_type.UD_OP_CONST:
+                    AppendAddress(sb, op.lval.udword, options);
+                    break;
+
+                case ud_type.UD_OP_PTR:
+                    sb.Append($"{HexHelper.ToShortGrouped4Hex(op.lval.ptr_seg)}, {HexHelper.ToShortGrouped4Hex(op.lval.ptr_off)}");
+                    break;
+
+                default:
+                    throw new NotImplementedException($"op.type: {op.type}");
+            }
+        }
+
+        private static void AppendNumeric(StringBuilder sb, uint val)
+        {
+            if (val <= 9)
+                sb.Append(val);
+            else
+                sb.Append(HexHelper.ToShortGrouped4Hex(val));
+        }
+
+        private void AppendAddress(StringBuilder sb, uint val, DefinitionCollection.Options options)
+        {
+            if (val <= 9)
+                sb.Append(val);
+            else
+                sb.Append(DefinitionCollection.GetAddressFullName(val, options));
+        }
+
         #region Known Instructions
 
         [Flags]
@@ -545,7 +593,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Ipopfw, InstrFlags.NotUseOprSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Ipopfd, InstrFlags.NotUseOprSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Ipopfq, InstrFlags.NotUseOprSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Imovsb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Imovsw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Imovsd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
@@ -555,17 +603,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Istosw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Istosd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Istosq, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Iscasb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Iscasw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Iscasd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Iscasq, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Ilodsb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Ilodsw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Ilodsd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Ilodsq, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Icmpsb, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 8-bit size, PfxOpr ignored.
                 {ud_mnemonic_code.UD_Icmpsw, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Icmpsd, InstrFlags.NotUseOprSizeInside | InstrFlags.UseAdrSizeInside}, // Always 32-bit size.
@@ -582,7 +630,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Iiretw, InstrFlags.NotUseOprSizeInside}, // Always 16-bit size.
                 {ud_mnemonic_code.UD_Iiretd, InstrFlags.NotUseOprSizeInside}, // Always 32-bit size.
                 {ud_mnemonic_code.UD_Iiretq, InstrFlags.NotUseOprSizeInside}, // Always 64-bit size.
-                
+
                 {ud_mnemonic_code.UD_Ijcxz, InstrFlags.NotUseAdrSizeInside},  // Always 16-bit cx.
                 {ud_mnemonic_code.UD_Ijecxz, InstrFlags.NotUseAdrSizeInside}, // Always 32-bit ecx.
                 {ud_mnemonic_code.UD_Ijrcxz, InstrFlags.NotUseAdrSizeInside}, // Always 64-bit rcx.
@@ -593,7 +641,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 {ud_mnemonic_code.UD_Inop, InstrFlags.NotUseOprSizeInside | InstrFlags.NotUseAdrSizeInside}, // Ignore PfxOpr & PfxAddress.
                 {ud_mnemonic_code.UD_Isti, InstrFlags.NotUseOprSizeInside | InstrFlags.NotUseAdrSizeInside}, // Ignore PfxOpr & PfxAddress.
-                
+
                 {ud_mnemonic_code.UD_Ifnsave, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Ifrstor, InstrFlags.UseAdrSizeInside},
 
@@ -608,7 +656,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {ud_mnemonic_code.UD_Iloop, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iloope, InstrFlags.UseAdrSizeInside},
                 {ud_mnemonic_code.UD_Iloopne, InstrFlags.UseAdrSizeInside},
-                
+
                 {ud_mnemonic_code.UD_Ijmp, InstrFlags.UseOprSizeInside},
                 {ud_mnemonic_code.UD_Icall, InstrFlags.UseOprSizeInside},
 
@@ -629,7 +677,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
 
         public static IEnumerable<CSharpInstruction> DecodeCode(
-            IMemory memory,
+            IRandomAccess memory,
             Address address,
             ArchitectureMode mode,
             DefinitionCollection definitionCollection)
@@ -657,9 +705,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
 
-        public static string GetSizeSuffixByBits(int size)
+        public static string GetSizeSuffixByBits(int bits)
         {
-            switch (size)
+            switch (bits)
             {
                 case 8:
                     return "b";
@@ -678,7 +726,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 case 512:
                     return "z";
                 default:
-                    throw new ArgumentException($"Unknown size {size}.");
+                    throw new ArgumentException($"Unknown size {bits}.");
             }
         }
 
@@ -701,10 +749,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         private class AssemblyCode : IAssemblyCode
         {
-            private readonly IMemory _memory;
+            private readonly IRandomAccess _memory;
             private readonly ud _ud;
 
-            public AssemblyCode(IMemory memory, ud ud)
+            public AssemblyCode(IRandomAccess memory, ud ud)
             {
                 _memory = memory;
                 _ud = ud;

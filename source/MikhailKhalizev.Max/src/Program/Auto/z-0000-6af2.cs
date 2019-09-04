@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x6af2-6d0b905f")]
         public void Method_0000_6af2()
         {
-            ii(0x6af2, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
+            ii(0x6af2, 3);    mov(ax, 1);                               /* mov ax, 0x1 */
             ii(0x6af5, 1);    push(ax);                                 /* push ax */
             ii(0x6af6, 3);    call(0xa3f5, 0x38fc);                     /* call 0xa3f5 */
             ii(0x6af9, 1);    pop(bx);                                  /* pop bx */

@@ -11,12 +11,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x3841, 3);    call(0x3836, -0xe);                       /* call 0x3836 */
             ii(0x3844, 4);    mov(sp, memw[ds, 0x996]);                 /* mov sp, [0x996] */
             ii(0x3848, 2);    mov(bp, sp);                              /* mov bp, sp */
-            ii(0x384a, 3);    mov(di, memw[ss, bp + 0xe]);              /* mov di, [bp+0xe] */
+            ii(0x384a, 3);    mov(di, memw[ss, bp + 14]);               /* mov di, [bp+0xe] */
             ii(0x384d, 5);    mov(memw[cs, 0xc], di);                   /* mov [cs:0xc], di */
-            ii(0x3852, 3);    mov(ax, memw[ss, bp + 0x2]);              /* mov ax, [bp+0x2] */
+            ii(0x3852, 3);    mov(ax, memw[ss, bp + 2]);                /* mov ax, [bp+0x2] */
             ii(0x3855, 4);    mov(memw[cs, 0xe], ax);                   /* mov [cs:0xe], ax */
             ii(0x3859, 3);    call(0x3880, 0x24);                       /* call 0x3880 */
-            ii(0x385c, 3);    lea(si, memw[ss, bp + 0x1e]);             /* lea si, [bp+0x1e] */
+            ii(0x385c, 3);    lea(si, memw[ss, bp + 30]);               /* lea si, [bp+0x1e] */
             ii(0x385f, 1);    cld();                                    /* cld */
             ii(0x3860, 5);    les(di, memw[cs, 0xc]);                   /* les di, [cs:0xc] */
             ii(0x3865, 2);    movsd();                                  /* movsd */

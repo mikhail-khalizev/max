@@ -25,8 +25,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x668b, 3);    mov(ax, memw[ds, 0xf58]);                 /* mov ax, [0xf58] */
             ii(0x668e, 4);    mov(memw[es, 0x469], ax);                 /* mov [es:0x469], ax */
             ii(0x6692, 2);    mov(es, bx);                              /* mov es, bx */
-            ii(0x6694, 5);    cmp(memb[ds, 0x2e], 0x2);                 /* cmp byte [0x2e], 0x2 */
-            ii(0x6699, 2);    if(jz(0x66a1, 0x6)) goto l_0x66a1;        /* jz 0x66a1 */
+            ii(0x6694, 5);    cmp(memb[ds, 0x2e], 2);                   /* cmp byte [0x2e], 0x2 */
+            ii(0x6699, 2);    if(jz(0x66a1, 6)) goto l_0x66a1;          /* jz 0x66a1 */
             ii(0x669b, 3);    call(0x499b, -0x1d03);                    /* call 0x499b */
         l_0x669e:
             ii(0x669e, 1);    pop(bx);                                  /* pop bx */
@@ -37,13 +37,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x66a3, 3);    call(0x4963, -0x1d43);                    /* call 0x4963 */
             ii(0x66a6, 2);    jmp(0x669e, -0xa); goto l_0x669e;         /* jmp 0x669e */
         l_0x66a8:
-            ii(0x66a8, 5);    cmp(memb[ds, 0x2e], 0x5);                 /* cmp byte [0x2e], 0x5 */
+            ii(0x66a8, 5);    cmp(memb[ds, 0x2e], 5);                   /* cmp byte [0x2e], 0x5 */
             ii(0x66ad, 2);    if(jz(0x66c7, 0x18)) goto l_0x66c7;       /* jz 0x66c7 */
             ii(0x66af, 5);    cmp(memb[ds, 0x2e], 0xe);                 /* cmp byte [0x2e], 0xe */
             ii(0x66b4, 2);    if(jz(0x66cf, 0x19)) goto l_0x66cf;       /* jz 0x66cf */
             ii(0x66b6, 5);    cmp(memb[ds, 0x2e], 0xf);                 /* cmp byte [0x2e], 0xf */
             ii(0x66bb, 2);    if(jz(0x66ea, 0x2d)) goto l_0x66ea;       /* jz 0x66ea */
-            ii(0x66bd, 5);    cmp(memb[ds, 0x2e], 0x1);                 /* cmp byte [0x2e], 0x1 */
+            ii(0x66bd, 5);    cmp(memb[ds, 0x2e], 1);                   /* cmp byte [0x2e], 0x1 */
             ii(0x66c2, 2);    if(jz(0x66f7, 0x33)) goto l_0x66f7;       /* jz 0x66f7 */
             ii(0x66c4, 1);    pop(bx);                                  /* pop bx */
             ii(0x66c5, 1);    pop(ax);                                  /* pop ax */
@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x66d4, 1);    cli();                                    /* cli */
             ii(0x66d5, 1);    push(dx);                                 /* push dx */
             ii(0x66d6, 3);    mov(dx, 0x140);                           /* mov dx, 0x140 */
-            ii(0x66d9, 2);    mov(al, 0x1);                             /* mov al, 0x1 */
+            ii(0x66d9, 2);    mov(al, 1);                               /* mov al, 0x1 */
             ii(0x66db, 1);    outb(dx, al);                             /* out dx, al */
             ii(0x66dc, 2);    dec(al);                                  /* dec al */
             ii(0x66de, 1);    outb(dx, al);                             /* out dx, al */
@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x66e1, 1);    push(cx);                                 /* push cx */
             ii(0x66e2, 3);    mov(cx, 0xfa0);                           /* mov cx, 0xfa0 */
         l_0x66e5:
-            ii(0x66e5, 2);    if(loop(0x66e5, -0x2)) goto l_0x66e5;     /* loop 0x66e5 */
+            ii(0x66e5, 2);    if(loop(0x66e5, -2)) goto l_0x66e5;       /* loop 0x66e5 */
             ii(0x66e7, 1);    pop(cx);                                  /* pop cx */
             ii(0x66e8, 2);    jmp(0x669e, -0x4c); goto l_0x669e;        /* jmp 0x669e */
         l_0x66ea:
@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x66f4, 1);    pop(dx);                                  /* pop dx */
             ii(0x66f5, 2);    jmp(0x669e, -0x59); goto l_0x669e;        /* jmp 0x669e */
         l_0x66f7:
-            ii(0x66f7, 2);    mov(al, 0x3);                             /* mov al, 0x3 */
+            ii(0x66f7, 2);    mov(al, 3);                               /* mov al, 0x3 */
             ii(0x66f9, 2);    outb(0xf6, al);                           /* out 0xf6, al */
             ii(0x66fb, 2);    jmp(0x669e, -0x5f); goto l_0x669e;        /* jmp 0x669e */
         }

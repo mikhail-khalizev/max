@@ -12,8 +12,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_9369, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1017_936b, 2); mov(ah, 0x3b);                          /* mov ah, 0x3b */
             ii(0x1017_936d, 2); @int(0x21);                             /* int 0x21 */
-            ii(0x1017_936f, 2); rcl(eax, 0x1);                          /* rcl eax, 1 */
-            ii(0x1017_9371, 2); ror(eax, 0x1);                          /* ror eax, 1 */
+            ii(0x1017_936f, 2); rcl(eax, 1);                            /* rcl eax, 1 */
+            ii(0x1017_9371, 2); ror(eax, 1);                            /* ror eax, 1 */
             ii(0x1017_9373, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1017_9375, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1017_9377, 2); if(jge(0x1017_9385, 0xc)) goto l_0x1017_9385; /* jge 0x10179385 */

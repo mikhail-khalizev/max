@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0xa274, 3);    call(0xa264, -0x13);                      /* call 0xa264 */
             ii(0xa277, 2);    or(ax, ax);                               /* or ax, ax */
-            ii(0xa279, 2);    if(jnz(0xa27c, 0x1)) goto l_0xa27c;       /* jnz 0xa27c */
+            ii(0xa279, 2);    if(jnz(0xa27c, 1)) goto l_0xa27c;         /* jnz 0xa27c */
             ii(0xa27b, 1);    ret(); return;                            /* ret */
         l_0xa27c:
             ii(0xa27c, 3);    mov(ax, 0x4310);                          /* mov ax, 0x4310 */
@@ -22,13 +22,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa28f, 2);    dec(ah);                                  /* dec ah */
             ii(0xa291, 2);    if(jle_func(0xa25a, -0x39)) return;       /* jle 0xa25a */
             ii(0xa293, 4);    cmp(bx, 0x204);                           /* cmp bx, 0x204 */
-            ii(0xa297, 2);    if(jae(0xa2a0, 0x7)) goto l_0xa2a0;       /* jae 0xa2a0 */
+            ii(0xa297, 2);    if(jae(0xa2a0, 7)) goto l_0xa2a0;         /* jae 0xa2a0 */
             ii(0xa299, 7);    mov(memw[cs, 0x1df5], 0x40);              /* mov word [cs:0x1df5], 0x40 */
         l_0xa2a0:
-            ii(0xa2a0, 2);    mov(ah, 0x8);                             /* mov ah, 0x8 */
+            ii(0xa2a0, 2);    mov(ah, 8);                               /* mov ah, 0x8 */
             ii(0xa2a2, 4);    call_far_ind(memw[ds, 0xaec]);            /* call far word [0xaec] */
             ii(0xa2a6, 5);    sub(ax, memw[cs, 0x1df5]);                /* sub ax, [cs:0x1df5] */
-            ii(0xa2ab, 2);    if(jae_func(0xa2af, 0x2)) return;         /* jae 0xa2af */
+            ii(0xa2ab, 2);    if(jae_func(0xa2af, 2)) return;           /* jae 0xa2af */
             ii(0xa2ad, 2);    xor(ax, ax);                              /* xor ax, ax */
         }
     }

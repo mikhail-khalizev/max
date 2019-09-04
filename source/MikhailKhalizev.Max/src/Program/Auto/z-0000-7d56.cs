@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x7d56, 3);    call(0x66dc, -0x167d);                    /* call 0x66dc */
             ii(0x7d59, 5);    xchg(memw[cs, 0x1fbb], cx);               /* xchg [cs:0x1fbb], cx */
-            ii(0x7d5e, 3);    mov(memw[ss, bp + 0x14], cx);             /* mov [bp+0x14], cx */
+            ii(0x7d5e, 3);    mov(memw[ss, bp + 20], cx);               /* mov [bp+0x14], cx */
             ii(0x7d61, 2);    jmp(0x7d63, 0); goto l_0x7d63;            /* jmp 0x7d63 */
         l_0x7d63:
             ii(0x7d63, 1);    pop(ax);                                  /* pop ax */

@@ -22,9 +22,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1630, 3); mov(bl, memb[es, esi]);                 /* mov bl, [es:esi] */
             ii(0x1018_1633, 1); inc(edx);                               /* inc edx */
             ii(0x1018_1634, 2); test(bl, bl);                           /* test bl, bl */
-            ii(0x1018_1636, 2); if(jz_func(0x1018_163f, 0x7)) return;   /* jz 0x1018163f */
+            ii(0x1018_1636, 2); if(jz_func(0x1018_163f, 7)) return;     /* jz 0x1018163f */
             ii(0x1018_1638, 2); cmp(eax, edi);                          /* cmp eax, edi */
-            ii(0x1018_163a, 2); if(jz_func(0x1018_163f, 0x3)) return;   /* jz 0x1018163f */
+            ii(0x1018_163a, 2); if(jz_func(0x1018_163f, 3)) return;     /* jz 0x1018163f */
             ii(0x1018_163c, 1); inc(eax);                               /* inc eax */
             ii(0x1018_163d, 2); jmp(0x1018_162e, -0x11); goto l_0x1018_162e; /* jmp 0x1018162e */
         }

@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_b5dc-9aa47ed1")]
         public void Method_0018_b5dc()
         {
-            ii(0x18_b5dc, 2); cmp(al, 0x2);                             /* cmp al, 0x2 */
-            ii(0x18_b5de, 2); if(jz(0x18_b5e2, 0x2)) goto l_0x18_b5e2;  /* jz 0xb5e2 */
+            ii(0x18_b5dc, 2); cmp(al, 2);                               /* cmp al, 0x2 */
+            ii(0x18_b5de, 2); if(jz(0x18_b5e2, 2)) goto l_0x18_b5e2;    /* jz 0xb5e2 */
             ii(0x18_b5e0, 2); if(jmp_func(0x18_b5b2, -0x30)) return;    /* jmp 0xb5b2 */
         l_0x18_b5e2:
             ii(0x18_b5e2, 1); pusha();                                  /* pusha */

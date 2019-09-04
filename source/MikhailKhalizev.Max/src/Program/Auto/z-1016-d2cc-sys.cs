@@ -17,13 +17,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_d2d6, 5); mov(edi, 0x101b_dec0);                  /* mov edi, 0x101bdec0 */
             ii(0x1016_d2db, 5); mov(ebx, 0x100);                        /* mov ebx, 0x100 */
             ii(0x1016_d2e0, 2); mov(esi, eax);                          /* mov esi, eax */
-            ii(0x1016_d2e2, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
+            ii(0x1016_d2e2, 5); mov(edx, 1);                            /* mov edx, 0x1 */
             ii(0x1016_d2e7, 1); push(edi);                              /* push edi */
             ii(0x1016_d2e8, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1016_d2ea, 3); shr(ecx, 0x2);                          /* shr ecx, 0x2 */
+            ii(0x1016_d2ea, 3); shr(ecx, 2);                            /* shr ecx, 0x2 */
             ii(0x1016_d2ed, 2); repne(() => movsd());                   /* repne movsd */
             ii(0x1016_d2ef, 2); mov(cl, al);                            /* mov cl, al */
-            ii(0x1016_d2f1, 3); and(cl, 0x3);                           /* and cl, 0x3 */
+            ii(0x1016_d2f1, 3); and(cl, 3);                             /* and cl, 0x3 */
             ii(0x1016_d2f4, 2); repne(() => movsb());                   /* repne movsb */
             ii(0x1016_d2f6, 1); pop(edi);                               /* pop edi */
             ii(0x1016_d2f7, 5); mov(eax, 0x101d_0420);                  /* mov eax, 0x101d0420 */

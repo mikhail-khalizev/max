@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_f028, 1); push(ds);                                 /* push ds */
             ii(0x19_f029, 3); push(0x2e3c);                             /* push 0x2e3c */
             ii(0x19_f02c, 5); call_far_abs(0x80, 0x408a);               /* call word 0x80:0x408a */
-            ii(0x19_f031, 3); add(sp, 0x8);                             /* add sp, 0x8 */
+            ii(0x19_f031, 3); add(sp, 8);                               /* add sp, 0x8 */
             ii(0x19_f034, 1); pop(si);                                  /* pop si */
             ii(0x19_f035, 1); pop(di);                                  /* pop di */
             ii(0x19_f036, 1); leave();                                  /* leave */

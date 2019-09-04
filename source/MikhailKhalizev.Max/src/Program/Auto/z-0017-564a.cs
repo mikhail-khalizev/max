@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_566b, 1); nop();                                    /* nop */
             ii(0x17_566c, 1); push(cs);                                 /* push cs */
             ii(0x17_566d, 3); call(0x17_909e, 0x3a2e);                  /* call 0x909e */
-            ii(0x17_5670, 3); add(sp, 0x4);                             /* add sp, 0x4 */
+            ii(0x17_5670, 3); add(sp, 4);                               /* add sp, 0x4 */
             ii(0x17_5673, 1); nop();                                    /* nop */
             ii(0x17_5674, 1); push(cs);                                 /* push cs */
             ii(0x17_5675, 3); call(0x17_9078, 0x3a00);                  /* call 0x9078 */

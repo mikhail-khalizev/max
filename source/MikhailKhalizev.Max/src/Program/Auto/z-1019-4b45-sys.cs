@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4b5d, 1); nop();                                  /* nop */
             ii(0x1019_4b5e, 4); mov(dx, 0x21);                          /* mov dx, 0x21 */
             ii(0x1019_4b62, 1); inb(al, dx);                            /* in al, dx */
-            ii(0x1019_4b63, 2); or(al, 0x1);                            /* or al, 0x1 */
+            ii(0x1019_4b63, 2); or(al, 1);                              /* or al, 0x1 */
             ii(0x1019_4b65, 1); outb(dx, al);                           /* out dx, al */
         l_0x1019_4b66:
             ii(0x1019_4b66, 1); popd(es);                               /* pop es */

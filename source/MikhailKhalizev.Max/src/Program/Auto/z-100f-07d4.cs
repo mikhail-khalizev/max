@@ -15,19 +15,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100f_07e0, 1); push(ebp);                              /* push ebp */
             ii(0x100f_07e1, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x100f_07e3, 6); sub(esp, 0x10);                         /* sub esp, 0x10 */
-            ii(0x100f_07e9, 3); mov(memd[ss, ebp - 0x10], eax);         /* mov [ebp-0x10], eax */
-            ii(0x100f_07ec, 3); mov(memd[ss, ebp - 0xc], edx);          /* mov [ebp-0xc], edx */
-            ii(0x100f_07ef, 3); mov(memd[ss, ebp - 0x8], ebx);          /* mov [ebp-0x8], ebx */
-            ii(0x100f_07f2, 3); mov(memd[ss, ebp - 0x4], ecx);          /* mov [ebp-0x4], ecx */
+            ii(0x100f_07e9, 3); mov(memd[ss, ebp - 16], eax);           /* mov [ebp-0x10], eax */
+            ii(0x100f_07ec, 3); mov(memd[ss, ebp - 12], edx);           /* mov [ebp-0xc], edx */
+            ii(0x100f_07ef, 3); mov(memd[ss, ebp - 8], ebx);            /* mov [ebp-0x8], ebx */
+            ii(0x100f_07f2, 3); mov(memd[ss, ebp - 4], ecx);            /* mov [ebp-0x4], ecx */
             ii(0x100f_07f5, 5); call(/* sys */ 0x1016_66b0, 0x7_5eb6);  /* call 0x101666b0 */
             ii(0x100f_07fa, 5); call(/* sys */ 0x1017_1880, 0x8_1081);  /* call 0x10171880 */
-            ii(0x100f_07ff, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x100f_07ff, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x100f_0802, 1); push(eax);                              /* push eax */
-            ii(0x100f_0803, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x100f_0803, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x100f_0806, 1); push(eax);                              /* push eax */
-            ii(0x100f_0807, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x100f_0807, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x100f_080a, 1); push(eax);                              /* push eax */
-            ii(0x100f_080b, 3); mov(eax, memd[ss, ebp - 0x10]);         /* mov eax, [ebp-0x10] */
+            ii(0x100f_080b, 3); mov(eax, memd[ss, ebp - 16]);           /* mov eax, [ebp-0x10] */
             ii(0x100f_080e, 1); push(eax);                              /* push eax */
             ii(0x100f_080f, 5); mov(eax, StringDefinitions.AssertionFailedSAtLineLiInFileSReasonS); /* mov eax, 0x101a224c */
             ii(0x100f_0814, 1); push(eax);                              /* push eax */

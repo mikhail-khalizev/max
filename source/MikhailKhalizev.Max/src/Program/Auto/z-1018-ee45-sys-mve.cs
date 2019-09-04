@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_ee45-e8bc76ff")]
         public void /* sys_mve */ Method_1018_ee45()
         {
-            ii(0x1018_ee45, 7); lea(eax, memd[ds, esi * 8 - 0x4]);      /* lea eax, [esi*8-0x4] */
+            ii(0x1018_ee45, 7); lea(eax, memd[ds, esi * 8 - 4]);        /* lea eax, [esi*8-0x4] */
         }
     }
 }

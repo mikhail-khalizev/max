@@ -11,13 +11,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_e0f0, 1); push(bp);                                 /* push bp */
             ii(0x17_e0f1, 2); mov(bp, sp);                              /* mov bp, sp */
             ii(0x17_e0f3, 2); mov(cx, ds);                              /* mov cx, ds */
-            ii(0x17_e0f5, 3); lds(bx, memw[ss, bp + 0x6]);              /* lds bx, [bp+0x6] */
+            ii(0x17_e0f5, 3); lds(bx, memw[ss, bp + 6]);                /* lds bx, [bp+0x6] */
             ii(0x17_e0f8, 2); mov(dx, bx);                              /* mov dx, bx */
             ii(0x17_e0fa, 2); jmp(0x17_e107, 0xb); goto l_0x17_e107;    /* jmp 0xe107 */
         l_0x17_e0fc:
             ii(0x17_e0fc, 2); sub(al, 0x61);                            /* sub al, 0x61 */
             ii(0x17_e0fe, 2); cmp(al, 0x1a);                            /* cmp al, 0x1a */
-            ii(0x17_e100, 2); if(jae(0x17_e106, 0x4)) goto l_0x17_e106; /* jae 0xe106 */
+            ii(0x17_e100, 2); if(jae(0x17_e106, 4)) goto l_0x17_e106;   /* jae 0xe106 */
             ii(0x17_e102, 2); add(al, 0x41);                            /* add al, 0x41 */
             ii(0x17_e104, 2); mov(memb[ds, bx], al);                    /* mov [bx], al */
         l_0x17_e106:

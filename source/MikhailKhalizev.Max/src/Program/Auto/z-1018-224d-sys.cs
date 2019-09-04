@@ -22,8 +22,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_2269, 2); mov(al, ah);                            /* mov al, ah */
             ii(0x1018_226b, 2); xor(dh, dh);                            /* xor dh, dh */
             ii(0x1018_226d, 5); and(eax, 0xff);                         /* and eax, 0xff */
-            ii(0x1018_2272, 3); cmp(eax, 0x3);                          /* cmp eax, 0x3 */
-            ii(0x1018_2275, 2); if(jnz(0x1018_2280, 0x9)) goto l_0x1018_2280; /* jnz 0x10182280 */
+            ii(0x1018_2272, 3); cmp(eax, 3);                            /* cmp eax, 0x3 */
+            ii(0x1018_2275, 2); if(jnz(0x1018_2280, 9)) goto l_0x1018_2280; /* jnz 0x10182280 */
             ii(0x1018_2277, 5); call(/* sys */ 0x1018_2212, -0x6a);     /* call 0x10182212 */
             ii(0x1018_227c, 2); mov(dl, al);                            /* mov dl, al */
             ii(0x1018_227e, 2); mov(dh, al);                            /* mov dh, al */

@@ -25,8 +25,8 @@ namespace MikhailKhalizev.Max.Program
             ii(0x869b, 3);    mov(ax, memw[ds, 0xf58]);                 /* mov ax, [0xf58] */
             ii(0x869e, 4);    mov(memw[es, 0x469], ax);                 /* mov [es:0x469], ax */
             ii(0x86a2, 2);    mov(es, bx);                              /* mov es, bx */
-            ii(0x86a4, 5);    cmp(memb[ds, 0x2e], 0x2);                 /* cmp byte [0x2e], 0x2 */
-            ii(0x86a9, 2);    if(jz(0x86b1, 0x6)) goto l_0x86b1;        /* jz 0x86b1 */
+            ii(0x86a4, 5);    cmp(memb[ds, 0x2e], 2);                   /* cmp byte [0x2e], 0x2 */
+            ii(0x86a9, 2);    if(jz(0x86b1, 6)) goto l_0x86b1;          /* jz 0x86b1 */
             ii(0x86ab, 3);    call(0x69ab, -0x1d03);                    /* call 0x69ab */
         l_0x86ae:
             ii(0x86ae, 1);    pop(bx);                                  /* pop bx */
@@ -37,13 +37,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x86b3, 3);    call(0x6973, -0x1d43);                    /* call 0x6973 */
             ii(0x86b6, 2);    jmp(0x86ae, -0xa); goto l_0x86ae;         /* jmp 0x86ae */
         l_0x86b8:
-            ii(0x86b8, 5);    cmp(memb[ds, 0x2e], 0x5);                 /* cmp byte [0x2e], 0x5 */
+            ii(0x86b8, 5);    cmp(memb[ds, 0x2e], 5);                   /* cmp byte [0x2e], 0x5 */
             ii(0x86bd, 2);    if(jz(0x86d7, 0x18)) goto l_0x86d7;       /* jz 0x86d7 */
             ii(0x86bf, 5);    cmp(memb[ds, 0x2e], 0xe);                 /* cmp byte [0x2e], 0xe */
             ii(0x86c4, 2);    if(jz(0x86df, 0x19)) goto l_0x86df;       /* jz 0x86df */
             ii(0x86c6, 5);    cmp(memb[ds, 0x2e], 0xf);                 /* cmp byte [0x2e], 0xf */
             ii(0x86cb, 2);    if(jz(0x86fa, 0x2d)) goto l_0x86fa;       /* jz 0x86fa */
-            ii(0x86cd, 5);    cmp(memb[ds, 0x2e], 0x1);                 /* cmp byte [0x2e], 0x1 */
+            ii(0x86cd, 5);    cmp(memb[ds, 0x2e], 1);                   /* cmp byte [0x2e], 0x1 */
             ii(0x86d2, 2);    if(jz(0x8707, 0x33)) goto l_0x8707;       /* jz 0x8707 */
             ii(0x86d4, 1);    pop(bx);                                  /* pop bx */
             ii(0x86d5, 1);    pop(ax);                                  /* pop ax */
@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x86e4, 1);    cli();                                    /* cli */
             ii(0x86e5, 1);    push(dx);                                 /* push dx */
             ii(0x86e6, 3);    mov(dx, 0x140);                           /* mov dx, 0x140 */
-            ii(0x86e9, 2);    mov(al, 0x1);                             /* mov al, 0x1 */
+            ii(0x86e9, 2);    mov(al, 1);                               /* mov al, 0x1 */
             ii(0x86eb, 1);    outb(dx, al);                             /* out dx, al */
             ii(0x86ec, 2);    dec(al);                                  /* dec al */
             ii(0x86ee, 1);    outb(dx, al);                             /* out dx, al */
@@ -69,7 +69,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x86f1, 1);    push(cx);                                 /* push cx */
             ii(0x86f2, 3);    mov(cx, 0xfa0);                           /* mov cx, 0xfa0 */
         l_0x86f5:
-            ii(0x86f5, 2);    if(loop(0x86f5, -0x2)) goto l_0x86f5;     /* loop 0x86f5 */
+            ii(0x86f5, 2);    if(loop(0x86f5, -2)) goto l_0x86f5;       /* loop 0x86f5 */
             ii(0x86f7, 1);    pop(cx);                                  /* pop cx */
             ii(0x86f8, 2);    jmp(0x86ae, -0x4c); goto l_0x86ae;        /* jmp 0x86ae */
         l_0x86fa:
@@ -83,7 +83,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8704, 1);    pop(dx);                                  /* pop dx */
             ii(0x8705, 2);    jmp(0x86ae, -0x59); goto l_0x86ae;        /* jmp 0x86ae */
         l_0x8707:
-            ii(0x8707, 2);    mov(al, 0x3);                             /* mov al, 0x3 */
+            ii(0x8707, 2);    mov(al, 3);                               /* mov al, 0x3 */
             ii(0x8709, 2);    outb(0xf6, al);                           /* out 0xf6, al */
             ii(0x870b, 2);    jmp(0x86ae, -0x5f); goto l_0x86ae;        /* jmp 0x86ae */
         }

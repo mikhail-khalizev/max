@@ -35,10 +35,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_cbf8, 2); mov(edx, esi);                          /* mov edx, esi */
             ii(0x1016_cbfa, 2); mov(al, memb[ds, ecx]);                 /* mov al, [ecx] */
             ii(0x1016_cbfc, 1); outb(dx, al);                           /* out dx, al */
-            ii(0x1016_cbfd, 3); mov(al, memb[ds, ecx + 0x1]);           /* mov al, [ecx+0x1] */
-            ii(0x1016_cc00, 3); add(ecx, 0x3);                          /* add ecx, 0x3 */
+            ii(0x1016_cbfd, 3); mov(al, memb[ds, ecx + 1]);             /* mov al, [ecx+0x1] */
+            ii(0x1016_cc00, 3); add(ecx, 3);                            /* add ecx, 0x3 */
             ii(0x1016_cc03, 1); outb(dx, al);                           /* out dx, al */
-            ii(0x1016_cc04, 3); mov(al, memb[ds, ecx - 0x1]);           /* mov al, [ecx-0x1] */
+            ii(0x1016_cc04, 3); mov(al, memb[ds, ecx - 1]);             /* mov al, [ecx-0x1] */
             ii(0x1016_cc07, 1); inc(ebx);                               /* inc ebx */
             ii(0x1016_cc08, 1); outb(dx, al);                           /* out dx, al */
             ii(0x1016_cc09, 6); cmp(ebx, 0x100);                        /* cmp ebx, 0x100 */

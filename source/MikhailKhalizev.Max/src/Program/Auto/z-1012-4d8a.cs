@@ -17,17 +17,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_4d98, 1); push(edi);                              /* push edi */
             ii(0x1012_4d99, 1); push(ebp);                              /* push ebp */
             ii(0x1012_4d9a, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x1012_4d9c, 6); sub(esp, 0x8);                          /* sub esp, 0x8 */
-            ii(0x1012_4da2, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
+            ii(0x1012_4d9c, 6); sub(esp, 8);                            /* sub esp, 0x8 */
+            ii(0x1012_4da2, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
             ii(0x1012_4da5, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x1012_4da7, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1012_4da7, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1012_4daa, 5); call(Definitions.sys_strlen, 0x4_d118); /* call 0x10171ec7 */
-            ii(0x1012_4daf, 3); mov(ecx, memd[ss, ebp - 0x4]);          /* mov ecx, [ebp-0x4] */
+            ii(0x1012_4daf, 3); mov(ecx, memd[ss, ebp - 4]);            /* mov ecx, [ebp-0x4] */
             ii(0x1012_4db2, 2); mov(edx, eax);                          /* mov edx, eax */
             ii(0x1012_4db4, 2); mov(eax, ecx);                          /* mov eax, ecx */
             ii(0x1012_4db6, 5); call(0x1012_4890, -0x52b);              /* call 0x10124890 */
             ii(0x1012_4dbb, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
-            ii(0x1012_4dbd, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
+            ii(0x1012_4dbd, 5); mov(edx, 1);                            /* mov edx, 0x1 */
             ii(0x1012_4dc2, 5); mov(eax, StringDefinitions.Control29);  /* mov eax, 0x101a8184 */
             ii(0x1012_4dc7, 5); call(0x1012_4890, -0x53c);              /* call 0x10124890 */
             ii(0x1012_4dcc, 2); mov(esp, ebp);                          /* mov esp, ebp */

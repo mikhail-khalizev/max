@@ -16,14 +16,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_ba93, 1); push(ebp);                              /* push ebp */
             ii(0x1013_ba94, 2); mov(ebp, esp);                          /* mov ebp, esp */
             ii(0x1013_ba96, 6); sub(esp, 0xc);                          /* sub esp, 0xc */
-            ii(0x1013_ba9c, 3); mov(memd[ss, ebp - 0xc], eax);          /* mov [ebp-0xc], eax */
-            ii(0x1013_ba9f, 3); mov(memd[ss, ebp - 0x8], edx);          /* mov [ebp-0x8], edx */
-            ii(0x1013_baa2, 3); mov(memd[ss, ebp - 0x4], ebx);          /* mov [ebp-0x4], ebx */
-            ii(0x1013_baa5, 3); mov(eax, memd[ss, ebp - 0xc]);          /* mov eax, [ebp-0xc] */
+            ii(0x1013_ba9c, 3); mov(memd[ss, ebp - 12], eax);           /* mov [ebp-0xc], eax */
+            ii(0x1013_ba9f, 3); mov(memd[ss, ebp - 8], edx);            /* mov [ebp-0x8], edx */
+            ii(0x1013_baa2, 3); mov(memd[ss, ebp - 4], ebx);            /* mov [ebp-0x4], ebx */
+            ii(0x1013_baa5, 3); mov(eax, memd[ss, ebp - 12]);           /* mov eax, [ebp-0xc] */
             ii(0x1013_baa8, 2); mov(ecx, memd[ds, eax]);                /* mov ecx, [eax] */
-            ii(0x1013_baaa, 5); mov(ebx, 0x1);                          /* mov ebx, 0x1 */
-            ii(0x1013_baaf, 3); mov(edx, memd[ss, ebp - 0x4]);          /* mov edx, [ebp-0x4] */
-            ii(0x1013_bab2, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1013_baaa, 5); mov(ebx, 1);                            /* mov ebx, 0x1 */
+            ii(0x1013_baaf, 3); mov(edx, memd[ss, ebp - 4]);            /* mov edx, [ebp-0x4] */
+            ii(0x1013_bab2, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1013_bab5, 5); call(Definitions.my_fread, -0x4_c62b);  /* call 0x100ef48f */
             ii(0x1013_baba, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1013_babc, 1); pop(ebp);                               /* pop ebp */

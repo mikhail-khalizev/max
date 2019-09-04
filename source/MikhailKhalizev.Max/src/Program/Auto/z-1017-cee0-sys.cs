@@ -36,10 +36,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_cf0b, 2); mov(es, eax);                           /* mov es, eax */
             ii(0x1017_cf0d, 1); push(edi);                              /* push edi */
             ii(0x1017_cf0e, 2); mov(eax, ecx);                          /* mov eax, ecx */
-            ii(0x1017_cf10, 3); shr(ecx, 0x2);                          /* shr ecx, 0x2 */
+            ii(0x1017_cf10, 3); shr(ecx, 2);                            /* shr ecx, 0x2 */
             ii(0x1017_cf13, 2); repne(() => movsd());                   /* repne movsd */
             ii(0x1017_cf15, 2); mov(cl, al);                            /* mov cl, al */
-            ii(0x1017_cf17, 3); and(cl, 0x3);                           /* and cl, 0x3 */
+            ii(0x1017_cf17, 3); and(cl, 3);                             /* and cl, 0x3 */
             ii(0x1017_cf1a, 2); repne(() => movsb());                   /* repne movsb */
             ii(0x1017_cf1c, 1); pop(edi);                               /* pop edi */
             ii(0x1017_cf1d, 1); popd(es);                               /* pop es */

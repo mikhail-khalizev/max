@@ -25,14 +25,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5c7a, 1);    push(bx);                                 /* push bx */
             ii(0x5c7b, 3);    call(0x5cce, 0x50);                       /* call 0x5cce */
             ii(0x5c7e, 1);    pop(cx);                                  /* pop cx */
-            ii(0x5c7f, 3);    shl(cx, 0x3);                             /* shl cx, 0x3 */
+            ii(0x5c7f, 3);    shl(cx, 3);                               /* shl cx, 0x3 */
             ii(0x5c82, 1);    push(cs);                                 /* push cs */
             ii(0x5c83, 1);    pop(es);                                  /* pop es */
             ii(0x5c84, 3);    mov(ax, 0xcccc);                          /* mov ax, 0xcccc */
             ii(0x5c87, 2);    mov(bx, di);                              /* mov bx, di */
             ii(0x5c89, 2);    rep(() => stosw());                       /* rep stosw */
             ii(0x5c8b, 3);    add(bx, 0xf);                             /* add bx, 0xf */
-            ii(0x5c8e, 3);    shr(bx, 0x4);                             /* shr bx, 0x4 */
+            ii(0x5c8e, 3);    shr(bx, 4);                               /* shr bx, 0x4 */
             ii(0x5c91, 4);    add(bx, memw[ds, 0x9b6]);                 /* add bx, [0x9b6] */
             ii(0x5c95, 3);    mov(ax, memw[ds, 0xcec]);                 /* mov ax, [0xcec] */
             ii(0x5c98, 2);    sub(bx, ax);                              /* sub bx, ax */

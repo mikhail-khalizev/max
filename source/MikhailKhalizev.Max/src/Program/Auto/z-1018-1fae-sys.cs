@@ -16,12 +16,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1018_1fb4, 1); push(eax);                              /* push eax */
             ii(0x1018_1fb5, 3); fnstcw(memw[ss, esp]);                  /* fnstcw word [esp] */
             ii(0x1018_1fb8, 1); pop(eax);                               /* pop eax */
-            ii(0x1018_1fb9, 3); cmp(ah, 0x3);                           /* cmp ah, 0x3 */
-            ii(0x1018_1fbc, 2); if(jz(0x1018_1fbf, 0x1)) goto l_0x1018_1fbf; /* jz 0x10181fbf */
+            ii(0x1018_1fb9, 3); cmp(ah, 3);                             /* cmp ah, 0x3 */
+            ii(0x1018_1fbc, 2); if(jz(0x1018_1fbf, 1)) goto l_0x1018_1fbf; /* jz 0x10181fbf */
             ii(0x1018_1fbe, 1); inc(ebp);                               /* inc ebp */
         l_0x1018_1fbf:
             ii(0x1018_1fbf, 2); or(ebp, ebp);                           /* or ebp, ebp */
-            ii(0x1018_1fc1, 2); if(jz(0x1018_1fc8, 0x5)) goto l_0x1018_1fc8; /* jz 0x10181fc8 */
+            ii(0x1018_1fc1, 2); if(jz(0x1018_1fc8, 5)) goto l_0x1018_1fc8; /* jz 0x10181fc8 */
             ii(0x1018_1fc3, 5); call(/* sys */ 0x1018_1fde, 0x16);      /* call 0x10181fde */
         l_0x1018_1fc8:
             ii(0x1018_1fc8, 1); wait();                                 /* wait */

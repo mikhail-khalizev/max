@@ -17,10 +17,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_c7fe, 1); push(edi);                              /* push edi */
             ii(0x1008_c7ff, 1); push(ebp);                              /* push ebp */
             ii(0x1008_c800, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x1008_c802, 6); sub(esp, 0x4);                          /* sub esp, 0x4 */
-            ii(0x1008_c808, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
+            ii(0x1008_c802, 6); sub(esp, 4);                            /* sub esp, 0x4 */
+            ii(0x1008_c808, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
             ii(0x1008_c80b, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1008_c80d, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1008_c80d, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1008_c810, 3); add(eax, 0x15);                         /* add eax, 0x15 */
             ii(0x1008_c813, 5); call(0x1013_ad71, 0xa_e559);            /* call 0x1013ad71 */
             ii(0x1008_c818, 2); test(al, al);                           /* test al, al */
@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_c81c, 5); call(0x1008_a79c, -0x2085);             /* call 0x1008a79c */
             ii(0x1008_c821, 2); xor(ebx, ebx);                          /* xor ebx, ebx */
             ii(0x1008_c823, 2); mov(bl, al);                            /* mov bl, al */
-            ii(0x1008_c825, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1008_c825, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1008_c828, 3); add(eax, 0x15);                         /* add eax, 0x15 */
             ii(0x1008_c82b, 5); call(0x1007_65d0, -0x1_6260);           /* call 0x100765d0 */
             ii(0x1008_c830, 2); mov(edx, eax);                          /* mov edx, eax */
@@ -36,14 +36,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_c837, 5); call(0x100a_53ac, 0x1_8b70);            /* call 0x100a53ac */
         l_0x1008_c83c:
             ii(0x1008_c83c, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1008_c83e, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1008_c83e, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1008_c841, 3); add(eax, 0x15);                         /* add eax, 0x15 */
             ii(0x1008_c844, 5); call(0x1007_6630, -0x1_6219);           /* call 0x10076630 */
             ii(0x1008_c849, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1008_c84b, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1008_c84b, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1008_c84e, 3); add(eax, 0xf);                          /* add eax, 0xf */
             ii(0x1008_c851, 5); call(0x1008_afe4, -0x1872);             /* call 0x1008afe4 */
-            ii(0x1008_c856, 3); mov(edx, memd[ss, ebp - 0x4]);          /* mov edx, [ebp-0x4] */
+            ii(0x1008_c856, 3); mov(edx, memd[ss, ebp - 4]);            /* mov edx, [ebp-0x4] */
             ii(0x1008_c859, 5); mov(eax, 0x101c_3180);                  /* mov eax, 0x101c3180 */
             ii(0x1008_c85e, 5); call(0x100a_5e27, 0x1_95c4);            /* call 0x100a5e27 */
             ii(0x1008_c863, 2); mov(esp, ebp);                          /* mov esp, ebp */

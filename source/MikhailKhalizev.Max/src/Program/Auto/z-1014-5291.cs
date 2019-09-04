@@ -16,15 +16,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_529e, 1); push(edi);                              /* push edi */
             ii(0x1014_529f, 1); push(ebp);                              /* push ebp */
             ii(0x1014_52a0, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x1014_52a2, 6); sub(esp, 0x8);                          /* sub esp, 0x8 */
-            ii(0x1014_52a8, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1014_52ab, 3); mov(memd[ss, ebp - 0x4], edx);          /* mov [ebp-0x4], edx */
+            ii(0x1014_52a2, 6); sub(esp, 8);                            /* sub esp, 0x8 */
+            ii(0x1014_52a8, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1014_52ab, 3); mov(memd[ss, ebp - 4], edx);            /* mov [ebp-0x4], edx */
             ii(0x1014_52ae, 5); mov(edx, StringDefinitions.ExpectingAString); /* mov edx, 0x101acfba */
-            ii(0x1014_52b3, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1014_52b3, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1014_52b6, 5); call(0x1014_5151, -0x16a);              /* call 0x10145151 */
-            ii(0x1014_52bb, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1014_52bb, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1014_52be, 5); call(Definitions.my_string_ctor, -0x37db); /* call 0x10141ae8 */
-            ii(0x1014_52c3, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1014_52c3, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1014_52c6, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1014_52c8, 1); pop(ebp);                               /* pop ebp */
             ii(0x1014_52c9, 1); pop(edi);                               /* pop edi */

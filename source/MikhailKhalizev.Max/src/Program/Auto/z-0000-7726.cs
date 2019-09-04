@@ -17,15 +17,15 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7734, 2);    if(jnz(0x77b0, 0x7a)) goto l_0x77b0;      /* jnz 0x77b0 */
             ii(0x7736, 4);    mov(si, memw[ds, 0xe]);                   /* mov si, [0xe] */
             ii(0x773a, 4);    cmp(memw[ds, 0x11d6], ax);                /* cmp [0x11d6], ax */
-            ii(0x773e, 2);    if(jz(0x7744, 0x4)) goto l_0x7744;        /* jz 0x7744 */
+            ii(0x773e, 2);    if(jz(0x7744, 4)) goto l_0x7744;          /* jz 0x7744 */
             ii(0x7740, 4);    mov(si, memw[ds, 0x11d6]);                /* mov si, [0x11d6] */
         l_0x7744:
             ii(0x7744, 2);    or(si, si);                               /* or si, si */
-            ii(0x7746, 2);    if(jnz(0x774b, 0x3)) goto l_0x774b;       /* jnz 0x774b */
+            ii(0x7746, 2);    if(jnz(0x774b, 3)) goto l_0x774b;         /* jnz 0x774b */
             ii(0x7748, 3);    mov(si, 0x800);                           /* mov si, 0x800 */
         l_0x774b:
             ii(0x774b, 4);    cmp(si, 0x400);                           /* cmp si, 0x400 */
-            ii(0x774f, 2);    if(jae(0x7754, 0x3)) goto l_0x7754;       /* jae 0x7754 */
+            ii(0x774f, 2);    if(jae(0x7754, 3)) goto l_0x7754;         /* jae 0x7754 */
             ii(0x7751, 3);    mov(si, 0x400);                           /* mov si, 0x400 */
         l_0x7754:
             ii(0x7754, 3);    mov(ax, memw[ds, 0x9b8]);                 /* mov ax, [0x9b8] */
@@ -35,17 +35,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x775c, 4);    cmp(memb[es, bx], 0x4d);                  /* cmp byte [es:bx], 0x4d */
             ii(0x7760, 2);    if(jnz(0x777b, 0x19)) goto l_0x777b;      /* jnz 0x777b */
             ii(0x7762, 3);    mov(ax, memw[ds, 0xcec]);                 /* mov ax, [0xcec] */
-            ii(0x7765, 4);    cmp(memw[es, bx + 0x1], ax);              /* cmp [es:bx+0x1], ax */
+            ii(0x7765, 4);    cmp(memw[es, bx + 1], ax);                /* cmp [es:bx+0x1], ax */
             ii(0x7769, 2);    if(jnz(0x777b, 0x10)) goto l_0x777b;      /* jnz 0x777b */
-            ii(0x776b, 4);    mov(di, memw[es, bx + 0x3]);              /* mov di, [es:bx+0x3] */
+            ii(0x776b, 4);    mov(di, memw[es, bx + 3]);                /* mov di, [es:bx+0x3] */
             ii(0x776f, 3);    add(di, 0x20);                            /* add di, 0x20 */
-            ii(0x7772, 3);    shl(di, 0x4);                             /* shl di, 0x4 */
+            ii(0x7772, 3);    shl(di, 4);                               /* shl di, 0x4 */
             ii(0x7775, 2);    cmp(di, si);                              /* cmp di, si */
-            ii(0x7777, 2);    if(jbe(0x777b, 0x2)) goto l_0x777b;       /* jbe 0x777b */
+            ii(0x7777, 2);    if(jbe(0x777b, 2)) goto l_0x777b;         /* jbe 0x777b */
             ii(0x7779, 2);    mov(si, di);                              /* mov si, di */
         l_0x777b:
             ii(0x777b, 4);    cmp(si, 0x8200);                          /* cmp si, 0x8200 */
-            ii(0x777f, 2);    if(jbe(0x7784, 0x3)) goto l_0x7784;       /* jbe 0x7784 */
+            ii(0x777f, 2);    if(jbe(0x7784, 3)) goto l_0x7784;         /* jbe 0x7784 */
             ii(0x7781, 3);    mov(si, 0x8200);                          /* mov si, 0x8200 */
         l_0x7784:
             ii(0x7784, 3);    add(si, 0xf);                             /* add si, 0xf */
@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x7788, 5);    call_far_abs(0x1a2, 0xb12);               /* call word 0x1a2:0xb12 */
             ii(0x778d, 1);    pop(bx);                                  /* pop bx */
             ii(0x778e, 2);    or(ax, ax);                               /* or ax, ax */
-            ii(0x7790, 2);    if(jnz(0x7798, 0x6)) goto l_0x7798;       /* jnz 0x7798 */
+            ii(0x7790, 2);    if(jnz(0x7798, 6)) goto l_0x7798;         /* jnz 0x7798 */
         l_0x7792:
             ii(0x7792, 2);    push(0xd);                                /* push 0xd */
             ii(0x7794, 3);    call(0x604d, -0x174a);                    /* call 0x604d */

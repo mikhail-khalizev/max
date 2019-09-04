@@ -8,11 +8,11 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
-    public class BridgeProcessor : IProcessor
+    public class BridgeCpu : ICpu
     {
-        public IProcessor Implementation { get; set; }
+        public ICpu Implementation { get; set; }
 
-        public BridgeProcessor(IProcessor implementation)
+        public BridgeCpu(ICpu implementation)
         {
             Implementation = implementation;
         }

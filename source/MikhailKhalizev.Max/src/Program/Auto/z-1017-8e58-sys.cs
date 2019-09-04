@@ -11,17 +11,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_8e58, 1); push(edx);                              /* push edx */
             ii(0x1017_8e59, 6); mov(dl, memb[ds, 0x101b_e1f2]);         /* mov dl, [0x101be1f2] */
             ii(0x1017_8e5f, 2); xor(ah, ah);                            /* xor ah, ah */
-            ii(0x1017_8e61, 3); test(dl, 0x1);                          /* test dl, 0x1 */
-            ii(0x1017_8e64, 2); if(jz(0x1017_8e68, 0x2)) goto l_0x1017_8e68; /* jz 0x10178e68 */
-            ii(0x1017_8e66, 2); mov(ah, 0x2);                           /* mov ah, 0x2 */
+            ii(0x1017_8e61, 3); test(dl, 1);                            /* test dl, 0x1 */
+            ii(0x1017_8e64, 2); if(jz(0x1017_8e68, 2)) goto l_0x1017_8e68; /* jz 0x10178e68 */
+            ii(0x1017_8e66, 2); mov(ah, 2);                             /* mov ah, 0x2 */
         l_0x1017_8e68:
-            ii(0x1017_8e68, 7); test(memb[ds, 0x101b_e1f2], 0x2);       /* test byte [0x101be1f2], 0x2 */
-            ii(0x1017_8e6f, 2); if(jz(0x1017_8e74, 0x3)) goto l_0x1017_8e74; /* jz 0x10178e74 */
-            ii(0x1017_8e71, 3); or(ah, 0x4);                            /* or ah, 0x4 */
+            ii(0x1017_8e68, 7); test(memb[ds, 0x101b_e1f2], 2);         /* test byte [0x101be1f2], 0x2 */
+            ii(0x1017_8e6f, 2); if(jz(0x1017_8e74, 3)) goto l_0x1017_8e74; /* jz 0x10178e74 */
+            ii(0x1017_8e71, 3); or(ah, 4);                              /* or ah, 0x4 */
         l_0x1017_8e74:
-            ii(0x1017_8e74, 7); test(memb[ds, 0x101b_e1f2], 0x4);       /* test byte [0x101be1f2], 0x4 */
-            ii(0x1017_8e7b, 2); if(jz(0x1017_8e80, 0x3)) goto l_0x1017_8e80; /* jz 0x10178e80 */
-            ii(0x1017_8e7d, 3); or(ah, 0x1);                            /* or ah, 0x1 */
+            ii(0x1017_8e74, 7); test(memb[ds, 0x101b_e1f2], 4);         /* test byte [0x101be1f2], 0x4 */
+            ii(0x1017_8e7b, 2); if(jz(0x1017_8e80, 3)) goto l_0x1017_8e80; /* jz 0x10178e80 */
+            ii(0x1017_8e7d, 3); or(ah, 1);                              /* or ah, 0x1 */
         l_0x1017_8e80:
             ii(0x1017_8e80, 2); mov(al, 0xed);                          /* mov al, 0xed */
             ii(0x1017_8e82, 5); mov(edx, 0x60);                         /* mov edx, 0x60 */

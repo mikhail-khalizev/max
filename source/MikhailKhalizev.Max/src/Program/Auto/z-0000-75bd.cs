@@ -9,14 +9,14 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_75bd()
         {
             ii(0x75bd, 5);    cmp(memw[ds, 0xe70], 0);                  /* cmp word [0xe70], 0x0 */
-            ii(0x75c2, 2);    if(jge(0x75cb, 0x7)) goto l_0x75cb;       /* jge 0x75cb */
+            ii(0x75c2, 2);    if(jge(0x75cb, 7)) goto l_0x75cb;         /* jge 0x75cb */
             ii(0x75c4, 3);    push(0x1190);                             /* push 0x1190 */
             ii(0x75c7, 3);    call(0x9d58, 0x278e);                     /* call 0x9d58 */
             ii(0x75ca, 1);    pop(bx);                                  /* pop bx */
         l_0x75cb:
             ii(0x75cb, 5);    cmp(memw[ds, 0xe70], 0);                  /* cmp word [0xe70], 0x0 */
-            ii(0x75d0, 2);    if(jge(0x75d8, 0x6)) goto l_0x75d8;       /* jge 0x75d8 */
-            ii(0x75d2, 2);    push(-0x8 /* 0xf8 */);                    /* push 0xfff8 */
+            ii(0x75d0, 2);    if(jge(0x75d8, 6)) goto l_0x75d8;         /* jge 0x75d8 */
+            ii(0x75d2, 2);    push(-8 /* 0xf8 */);                      /* push 0xfff8 */
             ii(0x75d4, 3);    call(0x604d, -0x158a);                    /* call 0x604d */
             ii(0x75d7, 1);    pop(bx);                                  /* pop bx */
         l_0x75d8:

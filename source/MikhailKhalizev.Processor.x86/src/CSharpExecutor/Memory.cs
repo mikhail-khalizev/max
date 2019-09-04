@@ -4,13 +4,13 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
-    public class Memory : IMemory, IDisposable
+    public class Memory : IMemory
     {
         public byte[] Ram { get; set; }
 
         public bool A20Gate { get; set; }
 
-        private Processor Processor { get; }
+        private Cpu Cpu { get; }
 
         private const int cacheLineSize = 0x1000; // 4kb.
 
@@ -19,25 +19,16 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         private readonly bool[] cache_ena = new bool[2];
         private readonly uint[] cache_map = new uint[2];
 
-        private GCHandle _handleRam;
-        private GCHandle _handleCache;
-
-        public Memory(Processor processor)
+        public Memory(Cpu cpu)
         {
-            Processor = processor;
+            Cpu = cpu;
             Ram = new byte[32 * 1024 * 1024]; // 32Mb = 0x200_0000
-
-            _handleRam = GCHandle.Alloc(Ram, GCHandleType.Pinned);
-            _handleCache = GCHandle.Alloc(cache, GCHandleType.Pinned);
         }
-
-        /// <inheritdoc />
-        public int Length => Ram.Length;
 
         /// <summary>
         /// no seg, no pg - may return size more, then input size.
         /// </summary>
-        public ArraySegment<byte> mem_phys_raw(Address address, int size)
+        public Span<byte> mem_phys_raw(Address address, int size)
         {
             var a = (uint) address;
 
@@ -84,9 +75,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public ArraySegment<byte> GetMinSize(Address address, int minSize)
+        public Span<byte> GetMinSize(Address address, int minSize)
         {
-            if (!Processor.cr0.pg)
+            if (!Cpu.cr0.pg)
                 return mem_phys_raw(address, minSize);
 
             var physAddresses = new uint[2]; // { current, current + page }
@@ -159,7 +150,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
         public Address GetRamAddress(Address address)
         {
-            if (!Processor.cr0.pg)
+            if (!Cpu.cr0.pg)
                 return address;
 
             var a = (uint) address;
@@ -170,24 +161,24 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             while (true)
             {
-                if (Processor.cr4.pae)
+                if (Cpu.cr4.pae)
                     throw new NotImplementedException();
 
-                var pde = mem_phys_raw((Processor.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).GetUInt32();
+                var pde = mem_phys_raw((Cpu.cr3.UInt32 & 0xffff_f000) + 4 * pdi, 4).Ref<uint>();
 
-                if (Processor.cr4.pse && (pde & PdeMask.ps) != 0) // 4Mb page
+                if (Cpu.cr4.pse && (pde & PdeMask.ps) != 0) // 4Mb page
                     throw new NotImplementedException();
 
                 if ((pde & PdeMask.p) == 0 /* || @todo reserved bits sets */)
                 {
-                    Processor.paging_fault(address);
+                    Cpu.paging_fault(address);
                     continue; // repeat
                 }
 
-                var pte = mem_phys_raw((pde & 0xffff_f000) + 4 * pti, 4).GetUInt32();
+                var pte = mem_phys_raw((pde & 0xffff_f000) + 4 * pti, 4).Ref<uint>();
                 if ((pte & PteMask.p) == 0 /* || @todo reserved bits sets */)
                 {
-                    Processor.paging_fault(address);
+                    Cpu.paging_fault(address);
                     continue; // repeat
                 }
 
@@ -195,27 +186,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             }
         }
 
-        #region IDispose
-
-        private void ReleaseUnmanagedResources()
-        {
-            _handleRam.Free();
-            _handleCache.Free();
-        }
-
         /// <inheritdoc />
-        public void Dispose()
-        {
-            ReleaseUnmanagedResources();
-            GC.SuppressFinalize(this);
-        }
-
-        /// <inheritdoc />
-        ~Memory()
-        {
-            ReleaseUnmanagedResources();
-        }
-
-        #endregion
+        public int Size => Ram.Length;
     }
 }   

@@ -2,14 +2,15 @@ using MikhailKhalizev.Max.Program;
 using System;
 using MikhailKhalizev.Processor.x86.CSharpExecutor;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Max.Dos
 {
     // http://bochs.sourceforge.net/techspec/PORTS.LST
 
-    public class DosPort : BridgeProcessor
+    public class DosPort : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         public enum kbd_keys
@@ -179,7 +180,7 @@ namespace MikhailKhalizev.Max.Dos
             0,0,0,0, 0,0,0,0, 0,1,0,0, 0,0,0,0   // 0xf0
         };
 
-        public DosPort(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
+        public DosPort(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;

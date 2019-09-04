@@ -19,13 +19,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_fd22, 1); pusha();                                  /* pusha */
             ii(0x19_fd23, 3); mov(ax, 0xbfde);                          /* mov ax, 0xbfde */
             ii(0x19_fd26, 3); mov(bx, 0x14);                            /* mov bx, 0x14 */
-            ii(0x19_fd29, 3); mov(cx, memw[ss, bp + 0x6]);              /* mov cx, [bp+0x6] */
+            ii(0x19_fd29, 3); mov(cx, memw[ss, bp + 6]);                /* mov cx, [bp+0x6] */
             ii(0x19_fd2c, 2); @int(0x15);                               /* int 0x15 */
             ii(0x19_fd2e, 1); popa();                                   /* popa */
         l_0x19_fd2f:
             ii(0x19_fd2f, 1); pop(ds);                                  /* pop ds */
             ii(0x19_fd30, 1); leave();                                  /* leave */
-            ii(0x19_fd31, 3); retf(0x2);                                /* retf 0x2 */
+            ii(0x19_fd31, 3); retf(2);                                  /* retf 0x2 */
         }
     }
 }

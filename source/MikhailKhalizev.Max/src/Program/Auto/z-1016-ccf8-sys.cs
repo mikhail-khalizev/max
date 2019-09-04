@@ -9,11 +9,11 @@ namespace MikhailKhalizev.Max.Program
         public void /* sys */ Method_1016_ccf8()
         {
             ii(0x1016_ccf8, 1); push(esi);                              /* push esi */
-            ii(0x1016_ccf9, 3); sub(esp, 0x4);                          /* sub esp, 0x4 */
+            ii(0x1016_ccf9, 3); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1016_ccfc, 3); mov(memd[ss, esp], eax);                /* mov [esp], eax */
             ii(0x1016_ccff, 2); mov(ah, dl);                            /* mov ah, dl */
             ii(0x1016_cd01, 3); mov(esi, memd[ss, esp]);                /* mov esi, [esp] */
-            ii(0x1016_cd04, 7); lea(edx, memd[ds, esi * 4 + 0]);        /* lea edx, [esi*4] */
+            ii(0x1016_cd04, 7); lea(edx, memd[ds, esi * 4]);            /* lea edx, [esi*4] */
             ii(0x1016_cd0b, 2); sub(edx, esi);                          /* sub edx, esi */
             ii(0x1016_cd0d, 6); mov(memb[ds, edx + 0x101c_fce0], ah);   /* mov [edx+0x101cfce0], ah */
             ii(0x1016_cd13, 6); mov(memb[ds, edx + 0x101c_fce1], bl);   /* mov [edx+0x101cfce1], bl */
@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_cd57, 1); outb(dx, al);                           /* out dx, al */
             ii(0x1016_cd58, 2); mov(al, cl);                            /* mov al, cl */
             ii(0x1016_cd5a, 1); outb(dx, al);                           /* out dx, al */
-            ii(0x1016_cd5b, 3); add(esp, 0x4);                          /* add esp, 0x4 */
+            ii(0x1016_cd5b, 3); add(esp, 4);                            /* add esp, 0x4 */
             ii(0x1016_cd5e, 1); pop(esi);                               /* pop esi */
             ii(0x1016_cd5f, 1); ret();                                  /* ret */
         }

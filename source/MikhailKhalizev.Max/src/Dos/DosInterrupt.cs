@@ -13,19 +13,20 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Utils;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class DosInterrupt : BridgeProcessor
+    public class DosInterrupt : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         [CanBeNull]
         public byte[] PngBytes { get; private set; }
 
-        public DosInterrupt(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
+        public DosInterrupt(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;
@@ -50,11 +51,7 @@ namespace MikhailKhalizev.Max.Dos
         {
             var BIOS_TIMER = 0x46c;
 
-            var bios_timer_ms = Implementation.Memory.mem_phys_raw(BIOS_TIMER, 4);
-
-            var bios_timer_value = bios_timer_ms.GetInt32();
-            bios_timer_value++;
-            bios_timer_ms.SetInt32(bios_timer_value);
+            Implementation.Memory.mem_phys_raw(BIOS_TIMER, 4).Ref<int>()++;
 
             @int(0x1c);
 
@@ -78,6 +75,7 @@ namespace MikhailKhalizev.Max.Dos
                     switch (al.UInt16)
                     {
                         case 0x01: // Get SVGA Mode Information
+                        {
                             if (cx != 0x101)
                                 throw new NotImplementedException();
 
@@ -90,10 +88,10 @@ namespace MikhailKhalizev.Max.Dos
 
                                 ushort mode_attr = 0x9b;
 
-                                var ms = Memory.GetFixSize(es, di, Marshal.SizeOf<mode_info>());
-                                Array.Clear(ms.Array, ms.Offset, ms.Count);
+                                var span = Memory.GetFixSize(es, di, Marshal.SizeOf<mode_info>());
+                                span.Clear();
 
-                                ref var mi = ref Memory.GetStruct<mode_info>(es[di]);
+                                ref var mi = ref Memory.Ref<mode_info>(es[di]);
 
                                 mi.BytesPerScanLine = 640;
                                 mi.NumberOfPlanes = 1;
@@ -108,7 +106,7 @@ namespace MikhailKhalizev.Max.Dos
                                 else
                                 {
                                     mi.ModeAttributes = mode_attr;
-                                    mi.NumberOfImagePages = (byte)((vga_vmemsize / page_size) - 1);
+                                    mi.NumberOfImagePages = (byte) ((vga_vmemsize / page_size) - 1);
                                 }
 
                                 mi.WinGranularity = 64;
@@ -132,8 +130,10 @@ namespace MikhailKhalizev.Max.Dos
                             }
 
                             break;
+                        }
 
                         case 0x02: // Set videomode
+                        {
                             if (bx != 0x101)
                                 throw new NotImplementedException();
 
@@ -144,8 +144,10 @@ namespace MikhailKhalizev.Max.Dos
                             //{ 0x101  ,M_LIN8   ,640 ,480 ,80 ,30 ,8 ,16 ,1 ,0xa0000 ,0x10000,100 ,525 ,80 ,480 ,0    },
 
                             break;
+                        }
 
                         case 0x05:
+                        {
                             if (bh != 0)
                                 throw new NotImplementedException();
 
@@ -163,7 +165,7 @@ namespace MikhailKhalizev.Max.Dos
                                     // std::cerr << static_cast<uint>(dl) << std::endl;
 
 
-                                    var curr_bank = ((Memory)Memory)
+                                    var curr_bank = ((Memory) Memory)
                                         .mem_phys_raw(0xa0000, 0x10000)
                                         .Slice(0, 0x10000);
 
@@ -194,7 +196,9 @@ namespace MikhailKhalizev.Max.Dos
 
                                         var ms = new MemoryStream();
                                         var nimg = Image.LoadPixelData<Rgb24>(img_data, buf_width, buf_height);
-                                        nimg.SaveAsPng(ms);
+                                        var pngEncoder = new PngEncoder();
+                                        pngEncoder.CompressionLevel = 1;
+                                        pngEncoder.Encode(nimg, ms);
                                         PngBytes = ms.ToArray();
 
                                         var forgot = MainHub.SendClientUpdateImage(RawProgramMain.ServiceProvider);
@@ -216,12 +220,12 @@ namespace MikhailKhalizev.Max.Dos
                                     var need_cpy = (curr_bank_num * 0x10000 < all_banks.Length);
 
                                     if (need_cpy)
-                                        curr_bank.CopyTo(all_banks, curr_bank_num * 0x10000);
+                                        curr_bank.CopyTo(all_banks.AsSpan(curr_bank_num * 0x10000));
 
                                     curr_bank_num = dl.UInt16;
 
                                     if (need_cpy)
-                                        all_banks.AsSpan().Slice(curr_bank_num * 0x10000, 0x10000).CopyTo(curr_bank.AsSpan());
+                                        all_banks.AsSpan().Slice(curr_bank_num * 0x10000, 0x10000).CopyTo(curr_bank);
                                 }
                                 else
                                     ah = 1;
@@ -229,6 +233,7 @@ namespace MikhailKhalizev.Max.Dos
 
                             al = 0x4f;
                             break;
+                        }
 
                         default:
                             throw new NotImplementedException();
@@ -401,7 +406,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (cr0.pe)
                             throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
-                        Memory.GetStruct<int>(al.UInt32 * 4) = (ds.Selector << 16) + dx.UInt16;
+                        Memory.Ref<int>(al.UInt32 * 4) = (ds.Selector << 16) + dx.UInt16;
                     }
                     break;
 
@@ -446,7 +451,7 @@ namespace MikhailKhalizev.Max.Dos
                         if (cr0.pe)
                             throw new NotImplementedException($"ax: {ax}, bx: {bx}, cx: {cx}, dx: {dx}");
 
-                        var v = Memory.GetStruct<int>(al.UInt32 * 4);
+                        var v = Memory.Ref<int>(al.UInt32 * 4);
 
                         es.Selector = (v >> 16);
                         bx = v;
@@ -600,9 +605,9 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x3f: // read
                     {
-                        var ms = Memory.GetFixSize(ds, dx, cx.Int32);
+                        var span = Memory.GetFixSize(ds, dx, cx.Int32);
 
-                        var readed = fileHandlers[bx.Int32].Read(ms.AsSpan());
+                        var readed = fileHandlers[bx.Int32].Read(span);
                         if (0 <= readed)
                         {
                             eflags.cf = false;
@@ -620,12 +625,18 @@ namespace MikhailKhalizev.Max.Dos
 
                 case 0x40: // write
                     {
-                        var ms = Memory.GetFixSize(ds, dx, cx.Int32);
+                        var span = Memory.GetFixSize(ds, dx, cx.Int32);
 
                         if (bx.Int32 == 1 || bx.Int32 == 2)
-                            Console.Write(ms.Select(x => (char)x).ToArray());
+                        {
+                            var chars = new char[span.Length];
+                            for (var i = 0; i < span.Length; i++)
+                                chars[i] = (char)span[i];
+
+                            Console.Write(chars);
+                        }
                         else
-                            fileHandlers[bx.Int32].Write(ms.AsSpan());
+                            fileHandlers[bx.Int32].Write(span);
 
                         var writed = cx.Int32;
                         if (0 <= writed)
@@ -1112,12 +1123,9 @@ namespace MikhailKhalizev.Max.Dos
                 RawProgramMain.add_internal_dyn_func_if_free(int_unknown, 16, address);
             }
 
-            var ms = Memory.GetFixSize(0, intVec.Length * 2);
-            Marshal.Copy(
-                Marshal.UnsafeAddrOfPinnedArrayElement(intVec, 0),
-                ms.Array,
-                ms.Offset,
-                ms.Count);
+            var span = Memory.GetFixSize(0, intVec.Length * 2);
+
+            MemoryMarshal.Cast<ushort,byte>(intVec.AsSpan()).CopyTo(span);
         }
     }
 }

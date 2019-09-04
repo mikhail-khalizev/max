@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
+using MikhailKhalizev.Processor.x86.CSharpExecutor;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class DosMemory : BridgeProcessor
+    public class DosMemory : BridgeCpu
     {
+        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
-        public DosMemory(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosMemory(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
+            Implementation = implementation;
             RawProgramMain = rawProgramMain;
         }
 
@@ -21,7 +24,6 @@ namespace MikhailKhalizev.Max.Dos
         public void dos_mem_init()
         {
             var memory = Implementation.Memory;
-
             var physMem = memory.GetMinSize(0, 0x100030);
 
             //for (var addr = 0x100000; addr < 0x100030; addr++)
@@ -96,7 +98,7 @@ namespace MikhailKhalizev.Max.Dos
             {
                 ax = findParagraph;
 
-                if (Memory.Length < (bx + ax).UInt32 * 16)
+                if (Memory.Size < (bx + ax).UInt32 * 16)
                     throw new Exception("std::bad_alloc()");
 
                 bx -= 1;
@@ -158,7 +160,7 @@ namespace MikhailKhalizev.Max.Dos
                 throw new Exception();
             }
 
-            if (Memory.Length < bx.UInt16 * 16 + iter)
+            if (Memory.Size < bx.UInt16 * 16 + iter)
                 throw new Exception("std::bad_alloc()");
 
             eflags.cf = false;
@@ -199,7 +201,7 @@ namespace MikhailKhalizev.Max.Dos
 
                     handle_iter = 0x17_0000;
 
-                    if (Memory.Length < handle_1_size + handle_iter)
+                    if (Memory.Size < handle_1_size + handle_iter)
                         throw new Exception("std::bad_alloc()");
 
                     maps.Add(handle_iter, handle_1_size);

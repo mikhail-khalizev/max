@@ -16,11 +16,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa03e, 2);    if(jz(0xa063, 0x23)) goto l_0xa063;       /* jz 0xa063 */
             ii(0xa040, 3);    call(0x573a, -0x4909);                    /* call 0x573a */
             ii(0xa043, 5);    cmp(memb[ds, 0x2e], 0xa);                 /* cmp byte [0x2e], 0xa */
-            ii(0xa048, 2);    if(jnz(0xa04d, 0x3)) goto l_0xa04d;       /* jnz 0xa04d */
+            ii(0xa048, 2);    if(jnz(0xa04d, 3)) goto l_0xa04d;         /* jnz 0xa04d */
             ii(0xa04a, 3);    call(0xa257, 0x20a);                      /* call 0xa257 */
         l_0xa04d:
-            ii(0xa04d, 5);    cmp(memb[ds, 0x2e], 0x9);                 /* cmp byte [0x2e], 0x9 */
-            ii(0xa052, 2);    if(jnz(0xa057, 0x3)) goto l_0xa057;       /* jnz 0xa057 */
+            ii(0xa04d, 5);    cmp(memb[ds, 0x2e], 9);                   /* cmp byte [0x2e], 0x9 */
+            ii(0xa052, 2);    if(jnz(0xa057, 3)) goto l_0xa057;         /* jnz 0xa057 */
             ii(0xa054, 3);    call(0xa1bd, 0x166);                      /* call 0xa1bd */
         l_0xa057:
             ii(0xa057, 3);    call(0x3f0c, -0x614e);                    /* call 0x3f0c */
@@ -34,13 +34,13 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa06e, 3);    mov(bx, 0xa);                             /* mov bx, 0xa */
             ii(0xa071, 3);    mov(ax, memw[es, bx]);                    /* mov ax, [es:bx] */
             ii(0xa074, 3);    mov(memw[ds, 0x10c2], ax);                /* mov [0x10c2], ax */
-            ii(0xa077, 4);    mov(ax, memw[es, bx + 0x2]);              /* mov ax, [es:bx+0x2] */
+            ii(0xa077, 4);    mov(ax, memw[es, bx + 2]);                /* mov ax, [es:bx+0x2] */
             ii(0xa07b, 3);    mov(memw[ds, 0x10c4], ax);                /* mov [0x10c4], ax */
             ii(0xa07e, 4);    mov(memw[ds, 0xf50], sp);                 /* mov [0xf50], sp */
             ii(0xa082, 5);    cmp(memb[ds, 0x2e], 0);                   /* cmp byte [0x2e], 0x0 */
             ii(0xa087, 2);    if(jz(0xa095, 0xc)) goto l_0xa095;        /* jz 0xa095 */
             ii(0xa089, 5);    mov(memw[es, bx], 0x10);                  /* mov word [es:bx], 0x10 */
-            ii(0xa08e, 4);    mov(memw[es, bx + 0x2], cs);              /* mov [es:bx+0x2], cs */
+            ii(0xa08e, 4);    mov(memw[es, bx + 2], cs);                /* mov [es:bx+0x2], cs */
             ii(0xa092, 3);    if(jmp_func(0x3ff1, -0x60a4)) return;     /* jmp 0x3ff1 */
         l_0xa095:
             ii(0xa095, 3);    call(0xb030, 0xf98);                      /* call 0xb030 */

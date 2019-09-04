@@ -27,10 +27,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_5f46, 2); mov(memb[ds, edi], al);                 /* mov [edi], al */
             ii(0x1016_5f48, 2); cmp(al, 0);                             /* cmp al, 0x0 */
             ii(0x1016_5f4a, 2); if(jz(0x1016_5f5c, 0x10)) goto l_0x1016_5f5c; /* jz 0x10165f5c */
-            ii(0x1016_5f4c, 3); mov(al, memb[ds, esi + 0x1]);           /* mov al, [esi+0x1] */
-            ii(0x1016_5f4f, 3); add(esi, 0x2);                          /* add esi, 0x2 */
-            ii(0x1016_5f52, 3); mov(memb[ds, edi + 0x1], al);           /* mov [edi+0x1], al */
-            ii(0x1016_5f55, 3); add(edi, 0x2);                          /* add edi, 0x2 */
+            ii(0x1016_5f4c, 3); mov(al, memb[ds, esi + 1]);             /* mov al, [esi+0x1] */
+            ii(0x1016_5f4f, 3); add(esi, 2);                            /* add esi, 0x2 */
+            ii(0x1016_5f52, 3); mov(memb[ds, edi + 1], al);             /* mov [edi+0x1], al */
+            ii(0x1016_5f55, 3); add(edi, 2);                            /* add edi, 0x2 */
             ii(0x1016_5f58, 2); cmp(al, 0);                             /* cmp al, 0x0 */
             ii(0x1016_5f5a, 2); if(jnz(0x1016_5f44, -0x18)) goto l_0x1016_5f44; /* jnz 0x10165f44 */
         l_0x1016_5f5c:

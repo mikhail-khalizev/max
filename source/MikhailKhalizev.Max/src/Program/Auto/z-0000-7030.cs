@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_7030()
         {
             ii(0x7030, 2);    mov(bx, sp);                              /* mov bx, sp */
-            ii(0x7032, 3);    mov(di, memw[ds, bx + 0x2]);              /* mov di, [bx+0x2] */
+            ii(0x7032, 3);    mov(di, memw[ds, bx + 2]);                /* mov di, [bx+0x2] */
             ii(0x7035, 2);    xor(ax, ax);                              /* xor ax, ax */
             ii(0x7037, 2);    mov(ds, ax);                              /* mov ds, ax */
             ii(0x7039, 1);    push(ss);                                 /* push ss */

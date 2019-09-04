@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x8642, 5);    mov(memb[ds, 0xdfe], 0);                  /* mov byte [0xdfe], 0x0 */
             ii(0x8647, 5);    btr(eax, 0x1f);                           /* btr eax, 0x1f */
             ii(0x864c, 4);    if(jae(0x865a, 0xa)) goto l_0x865a;       /* jae 0x865a */
-            ii(0x8650, 5);    mov(memb[ds, 0xdfe], 0x1);                /* mov byte [0xdfe], 0x1 */
+            ii(0x8650, 5);    mov(memb[ds, 0xdfe], 1);                  /* mov byte [0xdfe], 0x1 */
             ii(0x8655, 5);    str(memw[ds, 0xdfc]);                     /* str word [0xdfc] */
         l_0x865a:
             ii(0x865a, 4);    mov(cx, memw[ds, 0x40]);                  /* mov cx, [0x40] */

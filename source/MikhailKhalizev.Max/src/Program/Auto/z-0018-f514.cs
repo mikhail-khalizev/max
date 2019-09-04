@@ -10,9 +10,9 @@ namespace MikhailKhalizev.Max.Program
         {
             ii(0x18_f514, 3); if(call_up(0x18_fa00, 0x4e9)) return;     /* call 0xfa00 */
             ii(0x18_f517, 2); and(ax, bp);                              /* and ax, bp */
-            ii(0x18_f519, 2); inw(ax, 0x4);                             /* in ax, 0x4 */
+            ii(0x18_f519, 2); inw(ax, 4);                               /* in ax, 0x4 */
             ii(0x18_f51b, 2); and(ch, al);                              /* and ch, al */
-            ii(0x18_f51d, 2); if(loope(0x18_f523, 0x4)) goto l_0x18_f523; /* loope 0xf523 */
+            ii(0x18_f51d, 2); if(loope(0x18_f523, 4)) goto l_0x18_f523; /* loope 0xf523 */
             ii(0x18_f51f, 2); and(bp, ax);                              /* and bp, ax */
             ii(0x18_f521, 2); fld(memq[ds, si]);                        /* fld qword [si] */
         l_0x18_f523:
@@ -55,9 +55,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_f579, 2); test(memw[ds, si], ax);                   /* test [si], ax */
             ii(0x18_f57b, 2); cmp(ch, al);                              /* cmp ch, al */
             ii(0x18_f57d, 4); add(memw[ds, si], 0xe83b);                /* add word [si], 0xe83b */
-            ii(0x18_f581, 2); if(jge(0x18_f587, 0x4)) goto l_0x18_f587; /* jge 0xf587 */
+            ii(0x18_f581, 2); if(jge(0x18_f587, 4)) goto l_0x18_f587;   /* jge 0xf587 */
             ii(0x18_f583, 2); cmp(al, -0x18 /* 0xe8 */);                /* cmp al, 0xe8 */
-            ii(0x18_f585, 2); if(jns_func(0x18_f58b, 0x4)) return;      /* jns 0xf58b */
+            ii(0x18_f585, 2); if(jns_func(0x18_f58b, 4)) return;        /* jns 0xf58b */
         l_0x18_f587:
             ii(0x18_f587, 3); cmp(ax, 0x75e8);                          /* cmp ax, 0x75e8 */
         }

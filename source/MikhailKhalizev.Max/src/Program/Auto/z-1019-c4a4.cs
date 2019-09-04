@@ -9,7 +9,7 @@ namespace MikhailKhalizev.Max.Program
         public void Method_1019_c4a4()
         {
             ii(0x1019_c4a4, 1); push(edx);                              /* push edx */
-            ii(0x1019_c4a5, 3); sub(esp, 0x4);                          /* sub esp, 0x4 */
+            ii(0x1019_c4a5, 3); sub(esp, 4);                            /* sub esp, 0x4 */
             ii(0x1019_c4a8, 5); mov(eax, memd[ds, 0x1020_a20c]);        /* mov eax, [0x1020a20c] */
             ii(0x1019_c4ad, 3); mov(memd[ss, esp], eax);                /* mov [esp], eax */
             ii(0x1019_c4b0, 2); test(eax, eax);                         /* test eax, eax */
@@ -17,19 +17,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_c4b4, 5); mov(edx, 0x1020_a1f8);                  /* mov edx, 0x1020a1f8 */
             ii(0x1019_c4b9, 7); cmp(memd[ds, 0x1020_a204], 0);          /* cmp dword [0x1020a204], 0x0 */
             ii(0x1019_c4c0, 2); if(jnz(0x1019_c4cc, 0xa)) goto l_0x1019_c4cc; /* jnz 0x1019c4cc */
-            ii(0x1019_c4c2, 5); mov(eax, 0x1);                          /* mov eax, 0x1 */
+            ii(0x1019_c4c2, 5); mov(eax, 1);                            /* mov eax, 0x1 */
             ii(0x1019_c4c7, 5); if(jmp_func(0x1016_c993, -0x2_fb39)) return; /* jmp 0x1016c993 */
         l_0x1019_c4cc:
-            ii(0x1019_c4cc, 3); mov(eax, memd[ds, edx + 0xc]);          /* mov eax, [edx+0xc] */
-            ii(0x1019_c4cf, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
+            ii(0x1019_c4cc, 3); mov(eax, memd[ds, edx + 12]);           /* mov eax, [edx+0xc] */
+            ii(0x1019_c4cf, 5); mov(edx, 1);                            /* mov edx, 0x1 */
             ii(0x1019_c4d4, 2); jmp(0x1019_c4e3, 0xd); goto l_0x1019_c4e3; /* jmp 0x1019c4e3 */
         l_0x1019_c4d6:
             ii(0x1019_c4d6, 3); call_abs(memd[ss, esp]);                /* call dword [esp] */
-            ii(0x1019_c4d9, 5); mov(edx, 0x1);                          /* mov edx, 0x1 */
+            ii(0x1019_c4d9, 5); mov(edx, 1);                            /* mov edx, 0x1 */
             ii(0x1019_c4de, 5); mov(eax, StringDefinitions.ReturnFromTerminateFunction); /* mov eax, 0x101b3800 */
         l_0x1019_c4e3:
             ii(0x1019_c4e3, 5); call(/* sys */ 0x1018_0fe0, -0x1_b508); /* call 0x10180fe0 */
-            ii(0x1019_c4e8, 3); add(esp, 0x4);                          /* add esp, 0x4 */
+            ii(0x1019_c4e8, 3); add(esp, 4);                            /* add esp, 0x4 */
             ii(0x1019_c4eb, 1); pop(edx);                               /* pop edx */
             ii(0x1019_c4ec, 1); ret();                                  /* ret */
         }

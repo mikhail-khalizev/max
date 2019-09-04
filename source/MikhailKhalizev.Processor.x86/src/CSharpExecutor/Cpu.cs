@@ -20,18 +20,17 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 {
-    // TODO Rename to Core, ICore.
-    public class Processor : IProcessor, IDisposable
+    public class Cpu : ICpu, IDisposable
     {
         public CancellationToken CancellationToken { get; }
 
         public ProcessorDto Configuration { get; }
 
-        public Processor(ProcessorDto configuration)
+        public Cpu(ProcessorDto configuration)
             : this(configuration, System.Threading.CancellationToken.None)
         { }
 
-        public Processor(ProcessorDto configuration, CancellationToken cancellationToken)
+        public Cpu(ProcessorDto configuration, CancellationToken cancellationToken)
         {
             Configuration = configuration;
             CancellationToken = cancellationToken;
@@ -504,7 +503,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         #region Memory
 
         /// <inheritdoc />
-        IMemory IProcessor.Memory => Memory;
+        IMemory ICpu.Memory => Memory;
         public Memory Memory { get; }
 
         /// <inheritdoc />
@@ -684,8 +683,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             if (gdtr_limit < offset + 7)
                 throw new NotImplementedException(); // #GP(selector) or #GP(error_code(vector_number,1,EXT)) in interrupt
 
-            var ms = Memory.GetFixSize(gdtr_base + offset, 8);
-            descriptor.Bytes.CopyTo(ms.AsSpan());
+            var span = Memory.GetFixSize(gdtr_base + offset, 8);
+            descriptor.Bytes.CopyTo(span);
         }
 
         public void jmp_far_set_cs_eip(int segmentSelector, Address newEip)
@@ -1066,7 +1065,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 tr.Descriptor.SystemSegmentTypeIn32BitMode != SystemSegmentTypeIn32BitMode.Tss32BitBusy)
                 throw new NotImplementedException();
 
-            tss32SaveContext(
+            Tss32SaveContext(
                 tr.Descriptor.Base,
                 ts_reason != task_switch_reason.exception || in_interrupt_hw,
                 ts_reason == task_switch_reason.iret);
@@ -1086,28 +1085,28 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 tr.Descriptor.SystemSegmentTypeIn32BitMode != SystemSegmentTypeIn32BitMode.Tss32BitBusy)
                 throw new NotImplementedException();
 
-            var ms = Memory.GetFixSize(tr.Descriptor.Base, 104);
+            var span = Memory.GetFixSize(tr.Descriptor.Base, 104);
 
-            cr3 = ms.GetUInt32(28);
-            eip = ms.GetUInt32(32);
-            eflags.UInt32 = ms.GetUInt32(36);
-            eax = ms.GetUInt32(40);
-            ecx = ms.GetUInt32(44);
-            edx = ms.GetUInt32(48);
-            ebx = ms.GetUInt32(52);
-            esp = ms.GetUInt32(56);
-            ebp = ms.GetUInt32(60);
-            esi = ms.GetUInt32(64);
-            edi = ms.GetUInt32(68);
+            cr3 = span.Ref<uint>(28);
+            eip = span.Ref<uint>(32);
+            eflags.UInt32 = span.Ref<uint>(36);
+            eax = span.Ref<uint>(40);
+            ecx = span.Ref<uint>(44);
+            edx = span.Ref<uint>(48);
+            ebx = span.Ref<uint>(52);
+            esp = span.Ref<uint>(56);
+            ebp = span.Ref<uint>(60);
+            esi = span.Ref<uint>(64);
+            edi = span.Ref<uint>(68);
 
-            ldtr.Selector = ms.GetUInt16(96);
+            ldtr.Selector = span.Ref<ushort>(96);
 
-            es.Selector = (ms.GetUInt16(72));
-            cs.Selector = (ms.GetUInt16(76));
-            ss.Selector = (ms.GetUInt16(80));
-            ds.Selector = (ms.GetUInt16(84));
-            fs.Selector = (ms.GetUInt16(88));
-            gs.Selector = (ms.GetUInt16(92));
+            es.Selector = span.Ref<ushort>(72);
+            cs.Selector = span.Ref<ushort>(76);
+            ss.Selector = span.Ref<ushort>(80);
+            ds.Selector = span.Ref<ushort>(84);
+            fs.Selector = span.Ref<ushort>(88);
+            gs.Selector = span.Ref<ushort>(92);
 
             // 9.
             if (ts_reason == task_switch_reason.call
@@ -1116,8 +1115,8 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             {
                 eflags.nt = true;
 
-                ms.SetUInt32(ms.GetUInt32(36) | EflagsMask.nt, 36); // set nt flag.
-                ms.SetUInt32(tss_old_selector, 0); // 7.4 TASK LINKING
+                span.Ref<uint>(36) |= EflagsMask.nt; // set nt flag.
+                span.Ref<int>() = tss_old_selector; // 7.4 TASK LINKING
             }
 
             // end of switch_tasks
@@ -1149,9 +1148,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 pushw(eip);
 
                 /* No error codes are pushed in real-address mode */
-                var ms = Memory.GetFixSize(idtr_base + num * 4, 4);
-                eip = ms.GetUInt16();
-                cs.Selector = (ms.GetUInt16(2));
+                var span = Memory.GetFixSize(idtr_base + num * 4, 4);
+                eip = span.Ref<ushort>();
+                cs.Selector = span.Ref<ushort>(2);
             }
             else // PE = 1
             {
@@ -1297,9 +1296,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             }
         }
 
-        public void tss32SaveContext(Address address, bool next_eip, bool clr_nt_flag)
+        public void Tss32SaveContext(Address address, bool next_eip, bool clr_nt_flag)
         {
-            var ms = Memory.GetFixSize(address, 104);
+            var span = Memory.GetFixSize(address, 104);
 
             var ef = eflags.UInt32;
             if (clr_nt_flag)
@@ -1307,24 +1306,24 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
 
             var ip = next_eip ? eip : CurrentInstructionAddress;
 
-            ms.SetUInt32(cr3, 28);
-            ms.SetUInt32(ip, 32);
-            ms.SetUInt32(ef, 36);
-            ms.SetUInt32(eax, 40);
-            ms.SetUInt32(ecx, 44);
-            ms.SetUInt32(edx, 48);
-            ms.SetUInt32(ebx, 52);
-            ms.SetUInt32(esp, 56);
-            ms.SetUInt32(ebp, 60);
-            ms.SetUInt32(esi, 64);
-            ms.SetUInt32(edi, 68);
-            ms.SetUInt32(es.Selector, 72);
-            ms.SetUInt32(cs.Selector, 76);
-            ms.SetUInt32(ss.Selector, 80);
-            ms.SetUInt32(ds.Selector, 84);
-            ms.SetUInt32(fs.Selector, 88);
-            ms.SetUInt32(gs.Selector, 92);
-            ms.SetUInt32(ldtr.Selector, 96);
+            span.Ref<uint>(28) = cr3.UInt32;
+            span.Ref<uint>(32) = ip;
+            span.Ref<uint>(36) = ef;
+            span.Ref<uint>(40) = eax.UInt32;
+            span.Ref<uint>(44) = ecx.UInt32;
+            span.Ref<uint>(48) = edx.UInt32;
+            span.Ref<uint>(52) = ebx.UInt32;
+            span.Ref<uint>(56) = esp.UInt32;
+            span.Ref<uint>(60) = ebp.UInt32;
+            span.Ref<uint>(64) = esi.UInt32;
+            span.Ref<uint>(68) = edi.UInt32;
+            span.Ref<int>(72) = es.Selector;
+            span.Ref<int>(76) = cs.Selector;
+            span.Ref<int>(80) = ss.Selector;
+            span.Ref<int>(84) = ds.Selector;
+            span.Ref<int>(88) = fs.Selector;
+            span.Ref<int>(92) = gs.Selector;
+            span.Ref<int>(96) = ldtr.Selector;
         }
 
         public void iret_(int op_size)
@@ -1365,7 +1364,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     {
                         // TASK-RETURN
                         var tss_old_ms = Memory.GetFixSize(tr.Descriptor.Base, 104);
-                        var tss_new_selector = tss_old_ms.GetUInt16();
+                        var tss_new_selector = tss_old_ms.Ref<ushort>();
 
                         if (((tss_new_selector >> 2) & 0x1) == 1 /* local */
                                 || gdtr_limit < (tss_new_selector & 0xfff8) + 7)
@@ -3574,7 +3573,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                 throw new NotImplementedException();
 
             for (var i = 0; i < 8; i++)
-                Memory.GetStruct<double>(segment[off + 14 + i * 10]) = ST(i).Double;
+                Memory.Ref<double>(segment[off + 14 + i * 10]) = ST(i).Double;
 
             fninit();
         }

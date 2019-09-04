@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x522f, 1);    push(bp);                                 /* push bp */
             ii(0x5230, 2);    mov(bp, sp);                              /* mov bp, sp */
             ii(0x5232, 3);    mov(ax, memw[ds, 0x97c]);                 /* mov ax, [0x97c] */
-            ii(0x5235, 3);    cmp(memw[ss, bp + 0x4], ax);              /* cmp [bp+0x4], ax */
+            ii(0x5235, 3);    cmp(memw[ss, bp + 4], ax);                /* cmp [bp+0x4], ax */
             ii(0x5238, 2);    if(jbe(0x524f, 0x15)) goto l_0x524f;      /* jbe 0x524f */
             ii(0x523a, 2);    sub(al, al);                              /* sub al, al */
             ii(0x523c, 3);    mov(memb[ds, 0x11e9], al);                /* mov [0x11e9], al */
@@ -23,9 +23,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x524d, 1);    leave();                                  /* leave */
             ii(0x524e, 1);    ret(); return;                            /* ret */
         l_0x524f:
-            ii(0x524f, 2);    push(0x8);                                /* push 0x8 */
+            ii(0x524f, 2);    push(8);                                  /* push 0x8 */
             ii(0x5251, 3);    push(0x11e4);                             /* push 0x11e4 */
-            ii(0x5254, 3);    mov(ax, memw[ss, bp + 0x4]);              /* mov ax, [bp+0x4] */
+            ii(0x5254, 3);    mov(ax, memw[ss, bp + 4]);                /* mov ax, [bp+0x4] */
             ii(0x5257, 2);    and(al, 0xf8);                            /* and al, 0xf8 */
             ii(0x5259, 2);    sub(dx, dx);                              /* sub dx, dx */
             ii(0x525b, 4);    add(ax, memw[ds, 0x98e]);                 /* add ax, [0x98e] */
@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x5263, 1);    push(dx);                                 /* push dx */
             ii(0x5264, 1);    push(ax);                                 /* push ax */
             ii(0x5265, 3);    call(0x47dd, -0xa8b);                     /* call 0x47dd */
-            ii(0x5268, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
+            ii(0x5268, 3);    mov(ax, 1);                               /* mov ax, 0x1 */
             ii(0x526b, 1);    leave();                                  /* leave */
             ii(0x526c, 1);    ret();                                    /* ret */
         }

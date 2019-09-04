@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_d58f, 1); push(edi);                              /* push edi */
             ii(0x1017_d590, 2); mov(es, edx);                           /* mov es, edx */
             ii(0x1017_d592, 2); mov(ah, al);                            /* mov ah, al */
-            ii(0x1017_d594, 2); shr(ecx, 0x1);                          /* shr ecx, 1 */
+            ii(0x1017_d594, 2); shr(ecx, 1);                            /* shr ecx, 1 */
             ii(0x1017_d596, 3); repne(() => stosw());                   /* repne stosw */
             ii(0x1017_d599, 2); adc(ecx, ecx);                          /* adc ecx, ecx */
             ii(0x1017_d59b, 2); repne(() => stosb());                   /* repne stosb */

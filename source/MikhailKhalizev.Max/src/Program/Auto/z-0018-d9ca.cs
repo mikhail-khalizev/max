@@ -22,19 +22,19 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_d9dd, 1); pop(es);                                  /* pop es */
             ii(0x18_d9de, 1); push(bx);                                 /* push bx */
             ii(0x18_d9df, 1); pop(ds);                                  /* pop ds */
-            ii(0x18_d9e0, 3); add(cx, 0x1);                             /* add cx, 0x1 */
-            ii(0x18_d9e3, 2); rcr(cx, 0x1);                             /* rcr cx, 1 */
+            ii(0x18_d9e0, 3); add(cx, 1);                               /* add cx, 0x1 */
+            ii(0x18_d9e3, 2); rcr(cx, 1);                               /* rcr cx, 1 */
             ii(0x18_d9e5, 1); cld();                                    /* cld */
             ii(0x18_d9e6, 2); rep(() => movsw());                       /* rep movsw */
-            ii(0x18_d9e8, 2); if(jae(0x18_d9eb, 0x1)) goto l_0x18_d9eb; /* jae 0xd9eb */
+            ii(0x18_d9e8, 2); if(jae(0x18_d9eb, 1)) goto l_0x18_d9eb;   /* jae 0xd9eb */
             ii(0x18_d9ea, 1); movsb();                                  /* movsb */
         l_0x18_d9eb:
             ii(0x18_d9eb, 2); mov(bx, ss);                              /* mov bx, ss */
-            ii(0x18_d9ed, 3); cmp(bx, memw[ss, bp + 0x8]);              /* cmp bx, [bp+0x8] */
+            ii(0x18_d9ed, 3); cmp(bx, memw[ss, bp + 8]);                /* cmp bx, [bp+0x8] */
             ii(0x18_d9f0, 2); if(jnz(0x18_da01, 0xf)) goto l_0x18_da01; /* jnz 0xda01 */
-            ii(0x18_d9f2, 3); mov(cx, memw[ss, bp + 0x6]);              /* mov cx, [bp+0x6] */
-            ii(0x18_d9f5, 3); mov(dx, memw[ss, bp + 0x4]);              /* mov dx, [bp+0x4] */
-            ii(0x18_d9f8, 3); mov(ax, 0x6);                             /* mov ax, 0x6 */
+            ii(0x18_d9f2, 3); mov(cx, memw[ss, bp + 6]);                /* mov cx, [bp+0x6] */
+            ii(0x18_d9f5, 3); mov(dx, memw[ss, bp + 4]);                /* mov dx, [bp+0x4] */
+            ii(0x18_d9f8, 3); mov(ax, 6);                               /* mov ax, 0x6 */
             ii(0x18_d9fb, 1); push(cs);                                 /* push cs */
             ii(0x18_d9fc, 3); call(0x18_a3b9, -0x3646);                 /* call 0xa3b9 */
             ii(0x18_d9ff, 1); push(ss);                                 /* push ss */

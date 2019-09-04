@@ -18,10 +18,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_9bc5, 2); fchs();                                 /* fchs */
             ii(0x1019_9bc7, 2); fcompp();                               /* fcompp */
             ii(0x1019_9bc9, 2); fnstsw(ax);                             /* fnstsw ax */
-            ii(0x1019_9bcb, 2); mov(al, 0x2);                           /* mov al, 0x2 */
+            ii(0x1019_9bcb, 2); mov(al, 2);                             /* mov al, 0x2 */
             ii(0x1019_9bcd, 1); sahf();                                 /* sahf */
-            ii(0x1019_9bce, 2); if(jz(0x1019_9bd2, 0x2)) goto l_0x1019_9bd2; /* jz 0x10199bd2 */
-            ii(0x1019_9bd0, 2); mov(al, 0x3);                           /* mov al, 0x3 */
+            ii(0x1019_9bce, 2); if(jz(0x1019_9bd2, 2)) goto l_0x1019_9bd2; /* jz 0x10199bd2 */
+            ii(0x1019_9bd0, 2); mov(al, 3);                             /* mov al, 0x3 */
         l_0x1019_9bd2:
             ii(0x1019_9bd2, 1); wait();                                 /* wait */
             ii(0x1019_9bd3, 2); fninit();                               /* fninit */

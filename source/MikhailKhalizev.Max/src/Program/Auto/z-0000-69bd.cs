@@ -19,7 +19,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x69ca, 1);    push(di);                                 /* push di */
             ii(0x69cb, 3);    mov(di, 0x30);                            /* mov di, 0x30 */
             ii(0x69ce, 1);    cld();                                    /* cld */
-            ii(0x69cf, 3);    mov(cx, 0x4);                             /* mov cx, 0x4 */
+            ii(0x69cf, 3);    mov(cx, 4);                               /* mov cx, 0x4 */
             ii(0x69d2, 2);    repe(() => cmpsw());                      /* repe cmpsw */
             ii(0x69d4, 1);    pop(di);                                  /* pop di */
             ii(0x69d5, 1);    pop(si);                                  /* pop si */

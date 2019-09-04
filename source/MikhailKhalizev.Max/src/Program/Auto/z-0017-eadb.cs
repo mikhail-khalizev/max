@@ -13,9 +13,9 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_eade, 3); lar(ax, cx);                              /* lar ax, cx */
             ii(0x17_eae1, 2); jmp(0x17_eae3, 0); goto l_0x17_eae3;      /* jmp 0xeae3 */
         l_0x17_eae3:
-            ii(0x17_eae3, 2); if(jnz(0x17_eaea, 0x5)) goto l_0x17_eaea; /* jnz 0xeaea */
+            ii(0x17_eae3, 2); if(jnz(0x17_eaea, 5)) goto l_0x17_eaea;   /* jnz 0xeaea */
             ii(0x17_eae5, 3); test(ah, 0x10);                           /* test ah, 0x10 */
-            ii(0x17_eae8, 2); if(jnz(0x17_eaec, 0x2)) goto l_0x17_eaec; /* jnz 0xeaec */
+            ii(0x17_eae8, 2); if(jnz(0x17_eaec, 2)) goto l_0x17_eaec;   /* jnz 0xeaec */
         l_0x17_eaea:
             ii(0x17_eaea, 2); xor(cx, cx);                              /* xor cx, cx */
         l_0x17_eaec:

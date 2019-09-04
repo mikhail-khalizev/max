@@ -18,6 +18,10 @@ function onMouseOut() {
 }
 
 function onKeyboard(e) {
+    if (e.key === "F1") {
+        e.preventDefault();
+    }
+
     if (connection.connectionState === 1 /* Connected */) {
         connection.send("KeyboardEvent", { key: e.key });
     }

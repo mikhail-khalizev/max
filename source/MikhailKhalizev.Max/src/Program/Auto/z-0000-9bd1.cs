@@ -27,16 +27,16 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9beb, 1);    pushfw();                                 /* pushfw */
             ii(0x9bec, 1);    pop(bx);                                  /* pop bx */
             ii(0x9bed, 2);    and(bx, ax);                              /* and bx, ax */
-            ii(0x9bef, 2);    if(jz(0x9bfa, 0x9)) goto l_0x9bfa;        /* jz 0x9bfa */
-            ii(0x9bf1, 3);    mov(ax, 0x3);                             /* mov ax, 0x3 */
+            ii(0x9bef, 2);    if(jz(0x9bfa, 9)) goto l_0x9bfa;          /* jz 0x9bfa */
+            ii(0x9bf1, 3);    mov(ax, 3);                               /* mov ax, 0x3 */
             ii(0x9bf4, 4);    mov(memd[ds, 0x10f2], eax);               /* mov [0x10f2], eax */
             ii(0x9bf8, 2);    jmp(0x9c06, 0xc); goto l_0x9c06;          /* jmp 0x9c06 */
         l_0x9bfa:
-            ii(0x9bfa, 3);    mov(ax, 0x2);                             /* mov ax, 0x2 */
-            ii(0x9bfd, 2);    jmp(0x9c06, 0x7); goto l_0x9c06;          /* jmp 0x9c06 */
+            ii(0x9bfa, 3);    mov(ax, 2);                               /* mov ax, 0x2 */
+            ii(0x9bfd, 2);    jmp(0x9c06, 7); goto l_0x9c06;            /* jmp 0x9c06 */
         l_0x9bff:
-            ii(0x9bff, 3);    mov(ax, 0x1);                             /* mov ax, 0x1 */
-            ii(0x9c02, 2);    jmp(0x9c06, 0x2); goto l_0x9c06;          /* jmp 0x9c06 */
+            ii(0x9bff, 3);    mov(ax, 1);                               /* mov ax, 0x1 */
+            ii(0x9c02, 2);    jmp(0x9c06, 2); goto l_0x9c06;            /* jmp 0x9c06 */
         l_0x9c04:
             ii(0x9c04, 2);    xor(ax, ax);                              /* xor ax, ax */
         l_0x9c06:

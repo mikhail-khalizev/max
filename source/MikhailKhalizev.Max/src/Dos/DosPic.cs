@@ -5,9 +5,9 @@ using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class DosPic : BridgeProcessor
+    public class DosPic : BridgeCpu
     {
-        public new Processor.x86.CSharpExecutor.Processor Implementation { get; }
+        public new Processor.x86.CSharpExecutor.Cpu Implementation { get; }
         public RawProgramMain RawProgramMain { get; }
 
         private bool logging = false;
@@ -24,7 +24,7 @@ namespace MikhailKhalizev.Max.Dos
         private bool in_run_irqs = false;
 
 
-        public DosPic(Processor.x86.CSharpExecutor.Processor implementation, RawProgramMain rawProgramMain)
+        public DosPic(Processor.x86.CSharpExecutor.Cpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             Implementation = implementation;

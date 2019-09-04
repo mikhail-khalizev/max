@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x19_98c5-f37e1609")]
         public void Method_0019_98c5()
         {
-            ii(0x19_98c5, 4); enter(0x4, 0);                            /* enter 0x4, 0x0 */
+            ii(0x19_98c5, 4); enter(4, 0);                              /* enter 0x4, 0x0 */
             ii(0x19_98c9, 1); push(di);                                 /* push di */
             ii(0x19_98ca, 1); push(ds);                                 /* push ds */
             ii(0x19_98cb, 3); mov(ax, 0xa8);                            /* mov ax, 0xa8 */

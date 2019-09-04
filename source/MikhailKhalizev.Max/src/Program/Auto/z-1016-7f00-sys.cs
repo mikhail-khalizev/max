@@ -20,10 +20,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_7f12, 2); if(jle(0x1016_7f51, 0x3d)) goto l_0x1016_7f51; /* jle 0x10167f51 */
             ii(0x1016_7f14, 6); mov(esi, memd[ds, 0x101c_b2d8]);        /* mov esi, [0x101cb2d8] */
             ii(0x1016_7f1a, 2); xor(edx, edx);                          /* xor edx, edx */
-            ii(0x1016_7f1c, 3); shl(esi, 0x2);                          /* shl esi, 0x2 */
+            ii(0x1016_7f1c, 3); shl(esi, 2);                            /* shl esi, 0x2 */
         l_0x1016_7f1f:
             ii(0x1016_7f1f, 6); mov(eax, memd[ds, edx + 0x101c_b1fc]);  /* mov eax, [edx+0x101cb1fc] */
-            ii(0x1016_7f25, 3); mov(eax, memd[ds, eax + 0x30]);         /* mov eax, [eax+0x30] */
+            ii(0x1016_7f25, 3); mov(eax, memd[ds, eax + 48]);           /* mov eax, [eax+0x30] */
             ii(0x1016_7f28, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_7f2a, 2); if(jz(0x1016_7f49, 0x1d)) goto l_0x1016_7f49; /* jz 0x10167f49 */
         l_0x1016_7f2c:
@@ -39,11 +39,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_7f40, 1); pop(ebx);                               /* pop ebx */
             ii(0x1016_7f41, 1); ret(); return;                          /* ret */
         l_0x1016_7f42:
-            ii(0x1016_7f42, 3); mov(eax, memd[ds, eax + 0x70]);         /* mov eax, [eax+0x70] */
+            ii(0x1016_7f42, 3); mov(eax, memd[ds, eax + 112]);          /* mov eax, [eax+0x70] */
             ii(0x1016_7f45, 2); test(eax, eax);                         /* test eax, eax */
             ii(0x1016_7f47, 2); if(jnz(0x1016_7f2c, -0x1d)) goto l_0x1016_7f2c; /* jnz 0x10167f2c */
         l_0x1016_7f49:
-            ii(0x1016_7f49, 3); add(edx, 0x4);                          /* add edx, 0x4 */
+            ii(0x1016_7f49, 3); add(edx, 4);                            /* add edx, 0x4 */
             ii(0x1016_7f4c, 1); inc(ecx);                               /* inc ecx */
             ii(0x1016_7f4d, 2); cmp(edx, esi);                          /* cmp edx, esi */
             ii(0x1016_7f4f, 2); if(jl(0x1016_7f1f, -0x32)) goto l_0x1016_7f1f; /* jl 0x10167f1f */

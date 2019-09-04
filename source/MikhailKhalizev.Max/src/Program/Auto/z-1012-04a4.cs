@@ -17,14 +17,14 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_04b2, 1); push(edi);                              /* push edi */
             ii(0x1012_04b3, 1); push(ebp);                              /* push ebp */
             ii(0x1012_04b4, 2); mov(ebp, esp);                          /* mov ebp, esp */
-            ii(0x1012_04b6, 6); sub(esp, 0x8);                          /* sub esp, 0x8 */
-            ii(0x1012_04bc, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
-            ii(0x1012_04bf, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
+            ii(0x1012_04b6, 6); sub(esp, 8);                            /* sub esp, 0x8 */
+            ii(0x1012_04bc, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
+            ii(0x1012_04bf, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
             ii(0x1012_04c2, 5); call(Definitions.my_ctor_0x101b_4184, -0xa_99d7); /* call 0x10076af0 */
-            ii(0x1012_04c7, 3); mov(memd[ss, ebp - 0x4], eax);          /* mov [ebp-0x4], eax */
-            ii(0x1012_04ca, 3); mov(eax, memd[ss, ebp - 0x4]);          /* mov eax, [ebp-0x4] */
-            ii(0x1012_04cd, 3); mov(memd[ss, ebp - 0x8], eax);          /* mov [ebp-0x8], eax */
-            ii(0x1012_04d0, 3); mov(eax, memd[ss, ebp - 0x8]);          /* mov eax, [ebp-0x8] */
+            ii(0x1012_04c7, 3); mov(memd[ss, ebp - 4], eax);            /* mov [ebp-0x4], eax */
+            ii(0x1012_04ca, 3); mov(eax, memd[ss, ebp - 4]);            /* mov eax, [ebp-0x4] */
+            ii(0x1012_04cd, 3); mov(memd[ss, ebp - 8], eax);            /* mov [ebp-0x8], eax */
+            ii(0x1012_04d0, 3); mov(eax, memd[ss, ebp - 8]);            /* mov eax, [ebp-0x8] */
             ii(0x1012_04d3, 2); mov(esp, ebp);                          /* mov esp, ebp */
             ii(0x1012_04d5, 1); pop(ebp);                               /* pop ebp */
             ii(0x1012_04d6, 1); pop(edi);                               /* pop edi */

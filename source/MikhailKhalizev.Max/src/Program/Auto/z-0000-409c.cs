@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x40b3, 3);    mov(ax, 0x334);                           /* mov ax, 0x334 */
             ii(0x40b6, 4);    call_abs(memw[ds, 0x9ba]);                /* call word [0x9ba] */
             ii(0x40ba, 3);    smsw(ax);                                 /* smsw ax */
-            ii(0x40bd, 2);    or(al, 0x1);                              /* or al, 0x1 */
+            ii(0x40bd, 2);    or(al, 1);                                /* or al, 0x1 */
             ii(0x40bf, 6);    lgdt(memd[ds, 0x974]);                    /* o32 lgdt [0x974] */
             ii(0x40c5, 5);    lidt(memw[ds, 0x8d0]);                    /* lidt [0x8d0] */
             ii(0x40ca, 3);    lmsw(ax);                                 /* lmsw ax */

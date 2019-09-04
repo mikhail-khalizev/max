@@ -9,7 +9,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 
 namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 {
-    public interface IProcessor
+    public interface ICpu
     {
         #region Registers
 

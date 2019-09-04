@@ -9,10 +9,10 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0000_4888()
         {
             ii(0x4888, 2);    mov(bx, sp);                              /* mov bx, sp */
-            ii(0x488a, 3);    mov(si, memw[ds, bx + 0x2]);              /* mov si, [bx+0x2] */
+            ii(0x488a, 3);    mov(si, memw[ds, bx + 2]);                /* mov si, [bx+0x2] */
             ii(0x488d, 2);    xor(ax, ax);                              /* xor ax, ax */
             ii(0x488f, 2);    mov(es, ax);                              /* mov es, ax */
-            ii(0x4891, 3);    mov(bx, 0x8);                             /* mov bx, 0x8 */
+            ii(0x4891, 3);    mov(bx, 8);                               /* mov bx, 0x8 */
             ii(0x4894, 1);    cld();                                    /* cld */
             ii(0x4895, 1);    cli();                                    /* cli */
             ii(0x4896, 3);    mov(di, 0x20);                            /* mov di, 0x20 */

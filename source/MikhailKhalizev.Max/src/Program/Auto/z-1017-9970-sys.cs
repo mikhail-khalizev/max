@@ -28,11 +28,11 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_9994, 6); call_abs(memd[ds, 0x1020_9db8]);        /* call dword [0x10209db8] */
             ii(0x1017_999a, 3); add(esp, 0xc);                          /* add esp, 0xc */
             ii(0x1017_999d, 2); test(eax, eax);                         /* test eax, eax */
-            ii(0x1017_999f, 2); if(jnz(0x1017_99a3, 0x2)) goto l_0x1017_99a3; /* jnz 0x101799a3 */
+            ii(0x1017_999f, 2); if(jnz(0x1017_99a3, 2)) goto l_0x1017_99a3; /* jnz 0x101799a3 */
             ii(0x1017_99a1, 2); xor(esi, esi);                          /* xor esi, esi */
         l_0x1017_99a3:
             ii(0x1017_99a3, 2); mov(eax, esi);                          /* mov eax, esi */
-            ii(0x1017_99a5, 3); lea(esp, memd[ss, ebp - 0x10]);         /* lea esp, [ebp-0x10] */
+            ii(0x1017_99a5, 3); lea(esp, memd[ss, ebp - 16]);           /* lea esp, [ebp-0x10] */
             ii(0x1017_99a8, 1); pop(esi);                               /* pop esi */
             ii(0x1017_99a9, 1); pop(edx);                               /* pop edx */
             ii(0x1017_99aa, 1); pop(ecx);                               /* pop ecx */

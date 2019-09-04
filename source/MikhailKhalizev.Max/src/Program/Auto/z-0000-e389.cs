@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xe38a, 5);    mov(ds, memw[cs, 0x5680]);                /* mov ds, [cs:0x5680] */
             ii(0xe38f, 5);    cmp(memb[ds, 0x2e], 0);                   /* cmp byte [0x2e], 0x0 */
             ii(0xe394, 1);    pop(ds);                                  /* pop ds */
-            ii(0xe395, 2);    if(jnz(0xe39a, 0x3)) goto l_0xe39a;       /* jnz 0xe39a */
+            ii(0xe395, 2);    if(jnz(0xe39a, 3)) goto l_0xe39a;         /* jnz 0xe39a */
             ii(0xe397, 2);    @int(0x31);                               /* int 0x31 */
             ii(0xe399, 1);    retf(); return;                           /* retf */
         l_0xe39a:

@@ -8,11 +8,11 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_accb-9334574c")]
         public void Method_0018_accb()
         {
-            ii(0x18_accb, 3); shl(bx, 0x2);                             /* shl bx, 0x2 */
+            ii(0x18_accb, 3); shl(bx, 2);                               /* shl bx, 0x2 */
             ii(0x18_acce, 4); cmp(cx, memw[ds, 0xc42]);                 /* cmp cx, [0xc42] */
-            ii(0x18_acd2, 2); if(jz(0x18_acd9, 0x5)) goto l_0x18_acd9;  /* jz 0xacd9 */
+            ii(0x18_acd2, 2); if(jz(0x18_acd9, 5)) goto l_0x18_acd9;    /* jz 0xacd9 */
             ii(0x18_acd4, 3); cmp(cx, 0x70);                            /* cmp cx, 0x70 */
-            ii(0x18_acd7, 2); if(jnz(0x18_ace0, 0x7)) goto l_0x18_ace0; /* jnz 0xace0 */
+            ii(0x18_acd7, 2); if(jnz(0x18_ace0, 7)) goto l_0x18_ace0;   /* jnz 0xace0 */
         l_0x18_acd9:
             ii(0x18_acd9, 2); xor(cx, cx);                              /* xor cx, cx */
             ii(0x18_acdb, 3); call(0x18_acf3, 0x15);                    /* call 0xacf3 */

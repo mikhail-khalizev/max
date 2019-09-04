@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fe8b, 2); xor(si, si);                              /* xor si, si */
             ii(0x18_fe8d, 1); cli();                                    /* cli */
         l_0x18_fe8e:
-            ii(0x18_fe8e, 3); push(memw[ss, bp + 0x6]);                 /* push word [bp+0x6] */
+            ii(0x18_fe8e, 3); push(memw[ss, bp + 6]);                   /* push word [bp+0x6] */
             ii(0x18_fe91, 1); push(si);                                 /* push si */
             ii(0x18_fe92, 1); nop();                                    /* nop */
             ii(0x18_fe93, 1); push(cs);                                 /* push cs */
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_fead, 3); sub(edx, edx);                            /* sub edx, edx */
             ii(0x18_feb0, 3); mov(dx, 0xa2e);                           /* mov dx, 0xa2e */
             ii(0x18_feb3, 2); @int(0x31);                               /* int 0x31 */
-            ii(0x18_feb5, 4); if(jae(0x18_febb, 0x2)) goto l_0x18_febb; /* jae 0xfebb */
+            ii(0x18_feb5, 4); if(jae(0x18_febb, 2)) goto l_0x18_febb;   /* jae 0xfebb */
         l_0x18_feb9:
             ii(0x18_feb9, 2); sub(ax, ax);                              /* sub ax, ax */
         l_0x18_febb:

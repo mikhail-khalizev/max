@@ -20,17 +20,17 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_be51, 3); mov(memd[ss, esp], eax);                /* mov [esp], eax */
             ii(0x1016_be54, 5); mov(eax, memd[ds, 0x101c_fbd0]);        /* mov eax, [0x101cfbd0] */
             ii(0x1016_be59, 6); mov(esi, memd[ds, 0x101c_fbf0]);        /* mov esi, [0x101cfbf0] */
-            ii(0x1016_be5f, 4); mov(memd[ss, esp + 0x4], eax);          /* mov [esp+0x4], eax */
+            ii(0x1016_be5f, 4); mov(memd[ss, esp + 4], eax);            /* mov [esp+0x4], eax */
             ii(0x1016_be63, 3); mov(eax, memd[ss, esp]);                /* mov eax, [esp] */
-            ii(0x1016_be66, 5); mov(ecx, 0x1);                          /* mov ecx, 0x1 */
+            ii(0x1016_be66, 5); mov(ecx, 1);                            /* mov ecx, 0x1 */
             ii(0x1016_be6b, 2); add(eax, esi);                          /* add eax, esi */
             ii(0x1016_be6d, 2); sub(eax, ecx);                          /* sub eax, ecx */
             ii(0x1016_be6f, 6); mov(edi, memd[ds, 0x101c_fb94]);        /* mov edi, [0x101cfb94] */
-            ii(0x1016_be75, 4); mov(memd[ss, esp + 0x8], eax);          /* mov [esp+0x8], eax */
-            ii(0x1016_be79, 4); mov(eax, memd[ss, esp + 0x4]);          /* mov eax, [esp+0x4] */
+            ii(0x1016_be75, 4); mov(memd[ss, esp + 8], eax);            /* mov [esp+0x8], eax */
+            ii(0x1016_be79, 4); mov(eax, memd[ss, esp + 4]);            /* mov eax, [esp+0x4] */
             ii(0x1016_be7d, 2); add(eax, edi);                          /* add eax, edi */
             ii(0x1016_be7f, 2); sub(eax, ecx);                          /* sub eax, ecx */
-            ii(0x1016_be81, 4); mov(memd[ss, esp + 0xc], eax);          /* mov [esp+0xc], eax */
+            ii(0x1016_be81, 4); mov(memd[ss, esp + 12], eax);           /* mov [esp+0xc], eax */
             ii(0x1016_be85, 2); mov(eax, esp);                          /* mov eax, esp */
             ii(0x1016_be87, 6); mov(memd[ds, 0x101c_fb90], ecx);        /* mov [0x101cfb90], ecx */
             ii(0x1016_be8d, 5); call(/* sys */ 0x1016_7ac0, -0x43d2);   /* call 0x10167ac0 */

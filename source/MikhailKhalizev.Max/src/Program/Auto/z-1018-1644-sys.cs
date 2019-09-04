@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x1018_1652:
             ii(0x1018_1652, 2); mov(ecx, ebx);                          /* mov ecx, ebx */
             ii(0x1018_1654, 4); mov(di, memw[es, ecx]);                 /* mov di, [es:ecx] */
-            ii(0x1018_1658, 3); add(ebx, 0x2);                          /* add ebx, 0x2 */
+            ii(0x1018_1658, 3); add(ebx, 2);                            /* add ebx, 0x2 */
             ii(0x1018_165b, 3); test(di, di);                           /* test di, di */
             ii(0x1018_165e, 2); if(jz_func(0x1018_163f, -0x21)) return; /* jz 0x1018163f */
             ii(0x1018_1660, 2); cmp(eax, esi);                          /* cmp eax, esi */

@@ -6,7 +6,7 @@ using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions;
 
 namespace MikhailKhalizev.Max.Dos
 {
-    public class DosTimer : BridgeProcessor
+    public class DosTimer : BridgeCpu
     {
         public RawProgramMain RawProgramMain { get; }
 
@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Max.Dos
         private bool latched_timerstatus_locked;
 
 
-        public DosTimer(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosTimer(ICpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;

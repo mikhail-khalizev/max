@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Processor.x86
         {
             public int Compare(Address x, Address y)
             {
-                return x._value.CompareTo(y._value);
+                return x.Native.CompareTo(y.Native);
             }
         }
 
@@ -23,18 +23,19 @@ namespace MikhailKhalizev.Processor.x86
         public static Address MinValue { get; } = uint.MinValue;
         public static Address MaxValue { get; } = uint.MaxValue;
         public static Address Parse(string str) => HexHelper.ToUInt32(str);
-
-        private readonly uint _value;
+        
+        public uint Native { get; }
 
         public Address(uint address)
         {
-            _value = address;
+            Native = address;
         }
 
+
         public override string ToString() => ToShortString();
-        public string ToString(Func<HexHelper.Options, HexHelper.Options> setupOptions) => HexHelper.ToString(_value, setupOptions);
-        public string ToShortString() => HexHelper.ToShortGrouped4Hex(_value);
-        public string ToFullString() => HexHelper.ToString(_value, o => o.SetTrimZero(false).SetGroupSize(4));
+        public string ToString(Func<HexHelper.Options, HexHelper.Options> setupOptions) => HexHelper.ToString(Native, setupOptions);
+        public string ToShortString() => HexHelper.ToShortGrouped4Hex(Native);
+        public string ToFullString() => HexHelper.ToString(Native, o => o.SetTrimZero(false).SetGroupSize(4));
 
         #region IEquatable
 
@@ -47,7 +48,7 @@ namespace MikhailKhalizev.Processor.x86
             return obj is Address address && Equals(address);
         }
 
-        public bool Equals(Address other) => _value == other._value;
+        public bool Equals(Address other) => Native == other.Native;
 
         /// <summary>Returns a value that indicates whether the values of two <see cref="T:MikhailKhalizev.Processor.x86.Address" /> objects are equal.</summary>
         /// <param name="left">The first value to compare.</param>
@@ -61,7 +62,7 @@ namespace MikhailKhalizev.Processor.x86
         /// <returns>true if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, false.</returns>
         public static bool operator !=(Address left, Address right) => !left.Equals(right);
 
-        public override int GetHashCode() => (int)_value;
+        public override int GetHashCode() => (int)Native;
 
         #endregion
 
@@ -80,8 +81,8 @@ namespace MikhailKhalizev.Processor.x86
 
         public int CompareTo(Address other)
         {
-            var copy = _value; // Prevent "Impure method is called for readonly field".
-            return copy.CompareTo(other._value);
+            var copy = Native; // Prevent "Impure method is called for readonly field".
+            return copy.CompareTo(other.Native);
         }
 
         /// <summary>Returns a value that indicates whether a <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value is less than another <see cref="T:MikhailKhalizev.Processor.x86.Address" /> value.</summary>
@@ -112,7 +113,7 @@ namespace MikhailKhalizev.Processor.x86
 
         #region Cast from/to Value Operators
 
-        public static implicit operator Value(Address address) => address._value;
+        public static implicit operator Value(Address address) => address.Native;
 
         public static implicit operator Address(ValueBase v) => v.UInt64;
 
@@ -120,8 +121,8 @@ namespace MikhailKhalizev.Processor.x86
 
         #region Cast from/to Numeric Operators
 
-        public static implicit operator uint(Address address) => address._value;
-        public static explicit operator int(Address address) => (int)address._value;
+        public static implicit operator uint(Address address) => address.Native;
+        public static explicit operator int(Address address) => (int)address.Native;
 
         public static implicit operator Address(byte address) => new Address(address);
         public static implicit operator Address(ushort address) => new Address(address);

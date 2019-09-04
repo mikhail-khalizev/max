@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_f2c0-6d77f75")]
         public void Method_0018_f2c0()
         {
-            ii(0x18_f2c0, 5); test(memb[ds, 0x1582], 0x1);              /* test byte [0x1582], 0x1 */
+            ii(0x18_f2c0, 5); test(memb[ds, 0x1582], 1);                /* test byte [0x1582], 0x1 */
             ii(0x18_f2c5, 4); if(jnz_func(0x18_f351, 0x88)) return;     /* jnz 0xf351 */
             ii(0x18_f2c9, 1); push(cs);                                 /* push cs */
             ii(0x18_f2ca, 3); call(0x18_f270, -0x5d);                   /* call 0xf270 */

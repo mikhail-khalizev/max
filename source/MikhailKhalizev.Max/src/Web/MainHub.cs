@@ -63,6 +63,7 @@ namespace MikhailKhalizev.Max
                 case " ": dosKey = DosPort.kbd_keys.space; break;
                 case "Escape": dosKey = DosPort.kbd_keys.esc; break;
                 case "Enter": dosKey = DosPort.kbd_keys.enter; break;
+                case "F1": dosKey = DosPort.kbd_keys.f1; break;
             }
 
             if (dosKey != default)

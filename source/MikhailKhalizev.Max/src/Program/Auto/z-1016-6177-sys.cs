@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_6182, 3); lea(edi, memd[ds, edx + ebx]);          /* lea edi, [edx+ebx] */
             ii(0x1016_6185, 2); cmp(edi, eax);                          /* cmp edi, eax */
             ii(0x1016_6187, 2); if(jbe(0x1016_61aa, 0x21)) goto l_0x1016_61aa; /* jbe 0x101661aa */
-            ii(0x1016_6189, 3); lea(esi, memd[ds, edi - 0x1]);          /* lea esi, [edi-0x1] */
+            ii(0x1016_6189, 3); lea(esi, memd[ds, edi - 1]);            /* lea esi, [edi-0x1] */
             ii(0x1016_618c, 3); lea(edi, memd[ds, eax + ebx]);          /* lea edi, [eax+ebx] */
             ii(0x1016_618f, 2); mov(edx, ds);                           /* mov edx, ds */
             ii(0x1016_6191, 1); dec(edi);                               /* dec edi */
@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_6195, 1); std();                                  /* std */
             ii(0x1016_6196, 1); dec(esi);                               /* dec esi */
             ii(0x1016_6197, 1); dec(edi);                               /* dec edi */
-            ii(0x1016_6198, 2); shr(ecx, 0x1);                          /* shr ecx, 1 */
+            ii(0x1016_6198, 2); shr(ecx, 1);                            /* shr ecx, 1 */
             ii(0x1016_619a, 3); rep(() => movsw());                     /* rep movsw */
             ii(0x1016_619d, 2); adc(ecx, ecx);                          /* adc ecx, ecx */
             ii(0x1016_619f, 1); inc(esi);                               /* inc esi */
@@ -46,10 +46,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_61b0, 1); pushd(es);                              /* push es */
             ii(0x1016_61b1, 2); mov(es, edx);                           /* mov es, edx */
             ii(0x1016_61b3, 1); push(ecx);                              /* push ecx */
-            ii(0x1016_61b4, 3); shr(ecx, 0x2);                          /* shr ecx, 0x2 */
+            ii(0x1016_61b4, 3); shr(ecx, 2);                            /* shr ecx, 0x2 */
             ii(0x1016_61b7, 2); rep(() => movsd());                     /* rep movsd */
             ii(0x1016_61b9, 1); pop(ecx);                               /* pop ecx */
-            ii(0x1016_61ba, 3); and(ecx, 0x3);                          /* and ecx, 0x3 */
+            ii(0x1016_61ba, 3); and(ecx, 3);                            /* and ecx, 0x3 */
             ii(0x1016_61bd, 2); rep(() => movsb());                     /* rep movsb */
             ii(0x1016_61bf, 1); popd(es);                               /* pop es */
         l_0x1016_61c0:

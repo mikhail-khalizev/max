@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Dos
 
     public class dma_channel
     {
-        private Processor.x86.CSharpExecutor.Processor Processor;
+        private Processor.x86.CSharpExecutor.Cpu _cpu;
 
         dma_callback callback;
 
@@ -43,13 +43,13 @@ namespace MikhailKhalizev.Max.Dos
 
         const int dma_wrapping = 0xffff;
 
-        public dma_channel(int num, bool dma16, Processor.x86.CSharpExecutor.Processor processor)
+        public dma_channel(int num, bool dma16, Processor.x86.CSharpExecutor.Cpu cpu)
         {
             if (num == 4)
                 return;
 
             channum = num;
-            Processor = processor;
+            _cpu = cpu;
             DMA16 = dma16 ? 0x1 : 0x0;
             increment = true;
         }
@@ -199,15 +199,15 @@ namespace MikhailKhalizev.Max.Dos
 
             var size_p1 = Math.Min(size, dma_wrap + 1 - offset);
 
-            Processor.Memory.mem_phys_raw(@base + offset, size_p1).Slice(0, size_p1).CopyTo(buffer);
+            _cpu.Memory.mem_phys_raw(@base + offset, size_p1).Slice(0, size_p1).CopyTo(buffer);
 
             var size_p2 = size - size_p1;
             if (size_p2 != 0)
-                Processor.Memory.mem_phys_raw(@base, size_p2).Slice(0, size_p2).CopyTo(buffer.Slice(size_p1));
+                _cpu.Memory.mem_phys_raw(@base, size_p2).Slice(0, size_p2).CopyTo(buffer.Slice(size_p1));
         }
 
         /* write a block into physical memory */
-        void dma_block_write(ArraySegment<byte> buffer, int @base, int offset, int size, int dma16)
+        void dma_block_write(Span<byte> buffer, int @base, int offset, int size, int dma16)
         {
             if (dma_wrapping < offset + size)
                 throw new NotImplementedException();
@@ -219,12 +219,11 @@ namespace MikhailKhalizev.Max.Dos
             var size_p1 = Math.Min(size, dma_wrap + 1 - offset);
 
             buffer.CopyTo(
-            Processor.Memory.mem_phys_raw(@base + offset, size_p1).Slice(0, size_p1));
-
+                _cpu.Memory.mem_phys_raw(@base + offset, size_p1).Slice(0, size_p1));
 
             var size_p2 = size - size_p1;
             if (size_p2 != 0)
-                buffer.Slice(size_p1).CopyTo(Processor.Memory.mem_phys_raw(@base, size_p2).Slice(0, size_p2));
+                buffer.Slice(size_p1).CopyTo(_cpu.Memory.mem_phys_raw(@base, size_p2).Slice(0, size_p2));
         }
     }
 
@@ -237,11 +236,11 @@ namespace MikhailKhalizev.Max.Dos
 
 
         /** @param num first or second DMA controller */
-        public dma_controller(int num, Processor.x86.CSharpExecutor.Processor processor)
+        public dma_controller(int num, Processor.x86.CSharpExecutor.Cpu cpu)
         {
             ctrlnum = num;
             for (var i = 0; i < 4; i++)
-                dma_channels[i] = new dma_channel(num * 4 + i, num == 1, processor);
+                dma_channels[i] = new dma_channel(num * 4 + i, num == 1, cpu);
         }
 
         public dma_channel get_channel(int chan)
@@ -399,13 +398,13 @@ namespace MikhailKhalizev.Max.Dos
         }
     }
 
-    public class DosDma : BridgeProcessor
+    public class DosDma : BridgeCpu
     {
         public RawProgramMain RawProgramMain { get; }
 
         public dma_controller[] dma_controllers = new dma_controller[2];
 
-        public DosDma(IProcessor implementation, RawProgramMain rawProgramMain)
+        public DosDma(ICpu implementation, RawProgramMain rawProgramMain)
             : base(implementation)
         {
             RawProgramMain = rawProgramMain;
@@ -419,10 +418,10 @@ namespace MikhailKhalizev.Max.Dos
                 {
                     if (!chan.masked)
                     {
-                        var buf = new byte[2 * 300];
+                        var buf = new byte[2 * 50];
                         chan.read(buf);
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(0.01));
+                    await Task.Delay(TimeSpan.FromSeconds(0.05));
                 }
             });
         }

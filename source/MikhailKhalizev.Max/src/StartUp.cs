@@ -32,14 +32,21 @@ namespace MikhailKhalizev.Max
             try
             {
                 CreateWebHostBuilder(args).Build().Run();
-                NonBlockingConsole.AllWritten.Wait();
                 return ExitCode;
+            }
+            catch (System.OperationCanceledException ex)
+            {
+                NonBlockingConsole.WriteLine(ex.Message);
+                return -2;
             }
             catch (Exception ex)
             {
-                NonBlockingConsole.AllWritten.Wait();
-                Console.WriteLine(ex);
+                NonBlockingConsole.WriteLine(ex);
                 return -1;
+            }
+            finally
+            {
+                NonBlockingConsole.AllWritten.Wait();
             }
         }
 
@@ -97,7 +104,7 @@ namespace MikhailKhalizev.Max
             services.AddSignalR();
 
             services.AddSingleton(
-                provider => new Processor.x86.CSharpExecutor.Processor(
+                provider => new Processor.x86.CSharpExecutor.Cpu(
                     ConfigurationDto.Processor,
                     provider.GetRequiredService<IApplicationLifetime>().ApplicationStopping));
             services.AddSingleton(p => MethodInfoCollection.Load(ConfigurationDto.BinToCSharp));
@@ -110,7 +117,7 @@ namespace MikhailKhalizev.Max
                 });
             services.AddSingleton(
                 p => new RawProgramMain(
-                    p.GetRequiredService<Processor.x86.CSharpExecutor.Processor>(),
+                    p.GetRequiredService<Processor.x86.CSharpExecutor.Cpu>(),
                     ConfigurationDto,
                     p.GetRequiredService<MethodInfoCollection>(),
                     p.GetRequiredService<DefinitionCollection>(),
@@ -171,10 +178,15 @@ namespace MikhailKhalizev.Max
                 {
                     rawProgramMain.Start();
                 }
+                catch (System.OperationCanceledException ex)
+                {
+                    NonBlockingConsole.WriteLine(ex.Message);
+                    ExitCode = -2;
+                }
                 catch (Exception ex)
                 {
-                    ExitCode = -1;
                     NonBlockingConsole.WriteLine(ex);
+                    ExitCode = -1;
                 }
 
                 applicationLifetime.StopApplication();

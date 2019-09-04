@@ -16,12 +16,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x610d, 3);    mov(ax, 0xde05);                          /* mov ax, 0xde05 */
         l_0x6110:
             ii(0x6110, 5);    calld_far_ind(memd[ds, 0xd5a]);           /* call far dword [0xd5a] */
-            ii(0x6115, 3);    mov(ax, memw[ss, bp + 0xe]);              /* mov ax, [bp+0xe] */
+            ii(0x6115, 3);    mov(ax, memw[ss, bp + 14]);               /* mov ax, [bp+0xe] */
         l_0x6118:
             ii(0x6118, 4);    and(memw_a32[es, edi], ax);               /* and [es:edi], ax */
             ii(0x611c, 4);    inc(memw[ds, 0xdf8]);                     /* inc word [0xdf8] */
             ii(0x6120, 9);    sub(memd[ds, 0xaa8], 0x1000);             /* sub dword [0xaa8], 0x1000 */
-            ii(0x6129, 4);    add(edi, 0x4);                            /* add edi, 0x4 */
+            ii(0x6129, 4);    add(edi, 4);                              /* add edi, 0x4 */
             ii(0x612d, 1);    dec(cx);                                  /* dec cx */
             ii(0x612e, 2);    if(jns(0x6118, -0x18)) goto l_0x6118;     /* jns 0x6118 */
             ii(0x6130, 1);    pop(cx);                                  /* pop cx */

@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Max.Program
         public void Method_0017_d5d2()
         {
             ii(0x17_d5d2, 4); mov(cx, memw[ds, 0x1dbe]);                /* mov cx, [0x1dbe] */
-            ii(0x17_d5d6, 2); if(jcxz(0x17_d5df, 0x7)) goto l_0x17_d5df; /* jcxz 0xd5df */
-            ii(0x17_d5d8, 3); mov(bx, 0x2);                             /* mov bx, 0x2 */
+            ii(0x17_d5d6, 2); if(jcxz(0x17_d5df, 7)) goto l_0x17_d5df;  /* jcxz 0xd5df */
+            ii(0x17_d5d8, 3); mov(bx, 2);                               /* mov bx, 0x2 */
             ii(0x17_d5db, 4); call_far_ind(memw[ds, 0x1dbc]);           /* call far word [0x1dbc] */
         l_0x17_d5df:
             ii(0x17_d5df, 1); push(ds);                                 /* push ds */

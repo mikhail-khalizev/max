@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public void Start(Assembly assembly)
         {
             var allDecodedMethodInfos = assembly.GetTypes()
-                .Where(x => typeof(BridgeProcessor).IsAssignableFrom(x))
+                .Where(x => typeof(BridgeCpu).IsAssignableFrom(x))
                 .SelectMany(
                     bridgeProcessorType => bridgeProcessorType.GetMethods(BindingFlags.Instance | BindingFlags.Public),
                     (bridgeProcessorType, methodInfo) => methodInfo.GetCustomAttribute<MethodInfoAttribute>())
