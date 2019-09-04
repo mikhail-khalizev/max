@@ -2,7 +2,7 @@ Language: [**en**|[ru](README.ru.md)]
 
 # M.A.X. Reverse engineering
 
-This project aims to accurately recreate the legendary game [M.A.X.] (https://www.mobygames.com/game/max-mechanized-assault-exploration)
+This project aims to accurately recreate the legendary game [M.A.X.](https://www.mobygames.com/game/max-mechanized-assault-exploration)
 from existing binary files.
 
 ![Screenshots 1](./doc/img/screenshot01.png)
