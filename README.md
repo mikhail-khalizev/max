@@ -74,11 +74,11 @@ The game code is as follows:
 1. Create the file `source \ MikhailKhalizev.Max \ settings \ appsettings.user.json`:
 
 ```json
-    {
-      "Max": {
-        "InstalledPath": "Path to folder <M.A.X. En Orig With Patch 1.04>"
-      }
-    }
+    {
+      "Max": {
+        "InstalledPath": "Path to folder <M.A.X. En Orig With Patch 1.04>"
+      }
+    }
 ```
 
 2. Run:
