@@ -80,7 +80,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_3c16, 2);  xor(eax, eax);                        /* xor eax, eax */
             ii(0x1016_3c18, 3);  mov(al, memb[ss, ebp - 20]);          /* mov al, [ebp-0x14] */
             ii(0x1016_3c1b, 3);  shl(eax, 2);                          /* shl eax, 0x2 */
-            ii(0x1016_3c1e, 7);  
+            ii(0x1016_3c1e, 7);  /* jmp dword [cs:eax+0x10163be4] */
             switch (jmp_abs_switch(memd[cs, eax + 0x1016_3be4]))
             {
                 case 0x1016_3b69:
@@ -103,7 +103,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x1016_3bd6;
                 default:
                     throw new NotImplementedException();
-            }/* jmp dword [cs:eax+0x10163be4] */
+            }
         l_0x1016_3c25:
             ii(0x1016_3c25, 5);  mov(ecx, 0x1fd8);                     /* mov ecx, 0x1fd8 */
             ii(0x1016_3c2a, 5);  mov(ebx, StringDefinitions.UnitsmgrCpp);/* mov ebx, 0x101b2b0d */

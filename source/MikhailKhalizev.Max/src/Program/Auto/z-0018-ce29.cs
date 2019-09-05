@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_cec0, 2);  if(ja(0x18_cf12, 0x50)) goto l_0x18_cf12;/* ja 0xcf12 */
             ii(0x18_cec2, 2);  shl(ax, 1);                             /* shl ax, 1 */
             ii(0x18_cec4, 1);  xchg(bx, ax);                           /* xchg bx, ax */
-            ii(0x18_cec5, 5);  
+            ii(0x18_cec5, 5);  /* jmp word [cs:bx+0x33aa] */
             switch (jmp_abs_switch(memw[cs, bx + 0x33aa]))
             {
                 case 0x18_ceb8:
@@ -81,7 +81,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x18_d052;
                 default:
                     throw new NotImplementedException();
-            }/* jmp word [cs:bx+0x33aa] */
+            }
         //  ii(0x18_ceca, 12);  /* Служебная область с абсолютными адресами переходов. (0x18_d052, 0x18_ceb8, 0x18_d052, 0x18_cf12, 0x18_cf12, 0x18_cf12). */
         l_0x18_ced6:
             ii(0x18_ced6, 3);  mov(al, memb[ds, 0x980]);               /* mov al, [0x980] */
@@ -107,7 +107,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x18_cefc, 2);  if(ja(0x18_cf12, 0x14)) goto l_0x18_cf12;/* ja 0xcf12 */
             ii(0x18_cefe, 2);  shl(ax, 1);                             /* shl ax, 1 */
             ii(0x18_cf00, 1);  xchg(bx, ax);                           /* xchg bx, ax */
-            ii(0x18_cf01, 5);  
+            ii(0x18_cf01, 5);  /* jmp word [cs:bx+0x33e6] */
             switch (jmp_abs_switch(memw[cs, bx + 0x33e6]))
             {
                 case 0x18_cedc:
@@ -122,7 +122,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x18_d052;
                 default:
                     throw new NotImplementedException();
-            }/* jmp word [cs:bx+0x33e6] */
+            }
         //  ii(0x18_cf06, 12);  /* Служебная область с абсолютными адресами переходов. (0x18_cedc, 0x18_d052, 0x18_cf12, 0x18_d052, 0x18_cee7, 0x18_cee1). */
         l_0x18_cf12:
             ii(0x18_cf12, 3);  push(memw[ss, bp - 22]);                /* push word [bp-0x16] */

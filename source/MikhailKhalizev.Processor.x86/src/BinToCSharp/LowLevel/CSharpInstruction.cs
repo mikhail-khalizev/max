@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public int OprMode { get; set; }
         public int EffOprMode { get; set; }
 
-        public ud_mnemonic_code Mnemonic { get; set; }
+        public ud_mnemonic_code Mnemonic { get; set; } = ud_mnemonic_code.UD_Inone;
         public List<ud_operand> Operands { get; set; }
 
         public ud_type PfxSeg { get; set; }
@@ -58,9 +58,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         public bool HasLabel { get; set; }
 
-        public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc);
-        public WriteCmdDelegate WriteCmd { get; set; }
-
         private int DecimalLimit => 0xfff;
 
 
@@ -84,12 +81,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (ud == null)
                 throw new ArgumentNullException(nameof(ud));
             DefinitionCollection = definitionCollection;
-
-            WriteCmd = (e, dm, index, func) =>
-            {
-                var isLast = dm.Instructions.Count <= index + 1;
-                return GetInstructionString(onlyRawCmd: isLast && !IsLocalBranch);
-            };
 
             Comments = new List<string>();
 
@@ -156,60 +147,90 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 return ud_type.UD_R_SS;
             return ud_type.UD_R_DS;
         }
-        
+
         /// <inheritdoc />
         public override string ToString()
         {
             return GetInstructionString();
         }
 
-        // TODO Remove arguments.
-        public IEnumerable<string> GetCodeString(Engine engine, DetectedMethod dm, int cmdIndex)
+        public IEnumerable<string> GetCodeString(bool isLastInstructionInMethod)
         {
-            string line;
-            try
+            var lines = Enumerable.Empty<string>();
+
+            var ii = GetInstructionInfoString(true);
+            var comments = string.Join(" ", Comments.Select(x => $"/* {x} */"));
+
+            if (SwitchAddresses != null)
             {
-                line = GetInstructionInfoString(true);
+                var cmd = GetInstructionString().TrimEnd(';');
 
-                var commentsInCurrentFunc = new List<string>();
-
-                if (WriteCmd != null)
-                {
-                    line += WriteCmd(engine, dm, cmdIndex, commentsInCurrentFunc);
-
-                    if (Comments.Count != 0 || commentsInCurrentFunc.Count != 0)
-                        line = line.PadRight(59);
-                }
-
-                line += string.Join(" ", Comments.Concat(commentsInCurrentFunc).Select(x => $"/* {x} */"));
-
-
-                // WriteCmd может изменить CommentThis. Поэтому CommentThis учитывается в конце.
-                if (CommentThis)
-                    line = "//  " + line;
-                else
-                    line = "    " + line;
+                lines = lines
+                    .Append((ii + comments).TrimEnd())
+                    .Concat(
+                        new[]
+                        {
+                            $"switch ({cmd})",
+                            "{"
+                        })
+                    .Concat(
+                        SwitchAddresses.SelectMany(
+                            to =>
+                            {
+                                return
+                                    new[]
+                                    {
+                                        $"    case {to}:",
+                                        $"        goto l_{to};"
+                                    };
+                            }))
+                    .Concat(
+                        new[]
+                        {
+                            "    default:",
+                            "        throw new NotImplementedException();",
+                            "}"
+                        });
             }
-            catch (Exception ex)
+            else
             {
-                throw new InvalidOperationException($"Instruction address: {Begin}, Method Id: '{dm.MethodInfo.Id}'", ex);
+                var cmd = GetInstructionString(onlyRawCmd: isLastInstructionInMethod && !IsLocalBranch);
+                var line = ii + cmd;
+
+                if (!string.IsNullOrEmpty(cmd) && Comments.Count != 0)
+                    line = line.PadRight(59);
+                line += comments;
+
+                lines = lines.Append(line);
             }
 
-            return
-                HasLabel
-                    ? new[] { $"l_{Begin}:", line }
-                    : new[] { line };
+
+            lines =
+                CommentThis
+                    ? lines.Select(x => "//  " + x)
+                    : lines.Select(x => "    " + x);
+
+            if (HasLabel)
+                lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);
+
+            return lines;
         }
 
 
         public string GetInstructionString(string cmdSuffix = "", bool onlyRawCmd = false)
         {
+            if (Mnemonic == ud_mnemonic_code.UD_Inone)
+                return "";
+
             if ((IsLoopOrLoopcc || IsJmpOrJcc) && !IsLocalBranch && Operands[0].type == ud_type.UD_OP_JIMM)
                 cmdSuffix += "_func";
 
             if (IsCallUp)
                 cmdSuffix += "_up";
-            
+
+            if (SwitchAddresses != null)
+                cmdSuffix += "_switch";
+
             var addIf = !onlyRawCmd && (IsCallUp || IsJmpOrJcc || IsLoopOrLoopcc) && (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
             var addGotoLabel = !onlyRawCmd && IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
             var addReturn = !onlyRawCmd && !IsLocalBranch && (
@@ -464,7 +485,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         {
                             if (isNextOperation)
                                 sb.Append(" + ");
-                            
+
                             AppendAddress(sb, (uint) val, options.WithWriteAddressAsDecimal(isNextOperation && val < DecimalLimit));
                         }
 
@@ -519,7 +540,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 sb.Append("-");
                                 AppendAddress(sb, (byte) -val, options.WithWriteAddressAsDecimal(-val < DecimalLimit && !hexValue));
                                 sb.Append(" /* ");
-                                
+
                                 AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal((byte) val < DecimalLimit && !hexValue));
                                 sb.Append(" */");
                             }
@@ -596,7 +617,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             else
                 sb.Append(DefinitionCollection.GetAddressFullName(val, options));
         }
-        
+
         #region Known Instructions
 
         [Flags]
@@ -714,7 +735,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             return str;
         }
-        
+
 
         public static IEqualityComparer<CSharpInstruction> BeginEqualityComparer =>
             new CustomEqualityComparer<CSharpInstruction>(

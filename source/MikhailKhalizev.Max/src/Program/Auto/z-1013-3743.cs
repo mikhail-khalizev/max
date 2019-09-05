@@ -98,7 +98,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_3874, 2);  xor(eax, eax);                        /* xor eax, eax */
             ii(0x1013_3876, 3);  mov(al, memb[ss, ebp - 36]);          /* mov al, [ebp-0x24] */
             ii(0x1013_3879, 3);  shl(eax, 2);                          /* shl eax, 0x2 */
-            ii(0x1013_387c, 7);  
+            ii(0x1013_387c, 7);  /* jmp dword [cs:eax+0x1013384c] */
             switch (jmp_abs_switch(memd[cs, eax + 0x1013_384c]))
             {
                 case 0x1013_37c7:
@@ -117,7 +117,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x1013_3839;
                 default:
                     throw new NotImplementedException();
-            }/* jmp dword [cs:eax+0x1013384c] */
+            }
         l_0x1013_3883:
             ii(0x1013_3883, 4);  movsx(edx, memw[ss, ebp - 32]);       /* movsx edx, word [ebp-0x20] */
             ii(0x1013_3887, 3);  mov(eax, memd[ss, ebp - 16]);         /* mov eax, [ebp-0x10] */

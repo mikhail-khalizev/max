@@ -115,7 +115,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_67c2, 2);  xor(eax, eax);                        /* xor eax, eax */
             ii(0x100c_67c4, 3);  mov(al, memb[ss, ebp - 36]);          /* mov al, [ebp-0x24] */
             ii(0x100c_67c7, 3);  shl(eax, 2);                          /* shl eax, 0x2 */
-            ii(0x100c_67ca, 7);  
+            ii(0x100c_67ca, 7);  /* jmp dword [cs:eax+0x100c6798] */
             switch (jmp_abs_switch(memd[cs, eax + 0x100c_6798]))
             {
                 case 0x100c_672a:
@@ -128,7 +128,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x100c_6796;
                 default:
                     throw new NotImplementedException();
-            }/* jmp dword [cs:eax+0x100c6798] */
+            }
         l_0x100c_67d1:
             ii(0x100c_67d1, 5);  jmp(0x100c_693c, 0x166); goto l_0x100c_693c;/* jmp 0x100c693c */
         l_0x100c_67d6:
@@ -697,7 +697,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_7106, 2);  xor(eax, eax);                        /* xor eax, eax */
             ii(0x100c_7108, 3);  mov(al, memb[ss, ebp - 48]);          /* mov al, [ebp-0x30] */
             ii(0x100c_710b, 3);  shl(eax, 2);                          /* shl eax, 0x2 */
-            ii(0x100c_710e, 7);  
+            ii(0x100c_710e, 7);  /* jmp dword [cs:eax+0x100c70d4] */
             switch (jmp_abs_switch(memd[cs, eax + 0x100c_70d4]))
             {
                 case 0x100c_695b:
@@ -720,7 +720,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x100c_7027;
                 default:
                     throw new NotImplementedException();
-            }/* jmp dword [cs:eax+0x100c70d4] */
+            }
         l_0x100c_7115:
             ii(0x100c_7115, 4);  cmp(memb[ss, ebp - 4], 0);            /* cmp byte [ebp-0x4], 0x0 */
             ii(0x100c_7119, 2);  if(jnz(0x100c_7143, 0x28)) goto l_0x100c_7143;/* jnz 0x100c7143 */

@@ -2138,7 +2138,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_77dd:
             ii(0x19_77dd, 2);  shl(ax, 1);                             /* shl ax, 1 */
             ii(0x19_77df, 1);  xchg(bx, ax);                           /* xchg bx, ax */
-            ii(0x19_77e0, 5);  
+            ii(0x19_77e0, 5);  /* jmp word [cs:bx+0x23c5] */
             switch (jmp_abs_switch(memw[cs, bx + 0x23c5]))
             {
                 case 0x19_633b:
@@ -2193,7 +2193,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x19_7746;
                 default:
                     throw new NotImplementedException();
-            }/* jmp word [cs:bx+0x23c5] */
+            }
         //  ii(0x19_77e5, 50);  /* Служебная область с абсолютными адресами переходов. (0x19_633b, 0x19_6442, 0x19_6430, 0x19_64c5, 0x19_655f, 0x19_6923, 0x19_6969, 0x19_6a4d, 0x19_6a5a, 0x19_6b6f, 0x19_6b8f, 0x19_6d0e, 0x19_6d4f, 0x19_6e21, 0x19_6f54, 0x19_7203, 0x19_7417, 0x19_7428, 0x19_751e, 0x19_75aa, 0x19_75ca, 0x19_7602, 0x19_773b, 0x19_7746, 0x19_634c). */
         l_0x19_7817:
             ii(0x19_7817, 3);  mov(ax, memw[ss, bp - 20]);             /* mov ax, [bp-0x14] */

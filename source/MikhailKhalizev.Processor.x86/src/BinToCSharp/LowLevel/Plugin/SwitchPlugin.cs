@@ -330,72 +330,35 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
             var copyAddrAreaBegin = _addrAreaBegin;
             var copySizeOfAddrArea = _sizeOfAddrArea;
-            cmd.WriteCmd = (engine, dm, index, func) => WriteCmd(copyAddrAreaBegin, copySizeOfAddrArea, engine, dm, index, func);
+
             Engine.RegisterOnInstructionAttachToMethod(
                 cmd,
                 (method, index) =>
                 {
                     var raw = Engine.Memory.ReadAll(copyAddrAreaBegin, copySizeOfAddrArea);
                     Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, copyAddrAreaBegin, raw);
+
+                    Engine.BranchesInfo.TryGetValue(new BranchInfo(method.Instructions[index].Begin), out var curJmp);
+                    if (curJmp == null)
+                        throw new NotImplementedException("curJmp == null");
+
+                    foreach (var to in curJmp.To)
+                    {
+                        if (!method.Labels.Contains(to))
+                        {
+                            NonBlockingConsole.WriteLine(
+                                "Не все метки switch находятся внутри одного метода " +
+                                "(видимо не удалось разбить код на методы так, чтобы switch целиком находился внутри метода). " +
+                                $"Method.Id = {method.MethodInfo.Id}.");
+                            return;
+                        }
+                    }
+
+                    if (curJmp.To.Count == 0)
+                        throw new NotImplementedException("curJmp.To.Count == 0");
+                    
+                    cmd.SwitchAddresses = curJmp.To.ToList();
                 });
-        }
-
-        private static string WriteCmd(
-            Address addrAreaBegin, int sizeOfAddrArea,
-            Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc)
-        {
-            engine.BranchesInfo.TryGetValue(new BranchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
-            if (curJmp == null)
-                throw new NotImplementedException("curJmp == null");
-
-            foreach (var to in curJmp.To)
-            {
-                if (!dm.Labels.Contains(to))
-                {
-                    NonBlockingConsole.WriteLine(
-                        "Не все метки switch находятся внутри одного метода " +
-                        "(видимо не удалось разбить код на методы так, чтобы switch целиком находился внутри метода). " +
-                        $"Method.Id = {dm.MethodInfo.Id}.");
-                    return dm.Instructions[cmdIndex].GetInstructionString();
-                }
-            }
-
-            if (curJmp.To.Count == 0)
-                throw new NotImplementedException("curJmp.To.Count == 0");
-            var funcSuffix = "_switch";
-
-            if (!dm.Instructions[cmdIndex].IsLocalBranch)
-                throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
-
-            var str = dm.Instructions[cmdIndex].GetInstructionString(funcSuffix);
-
-            var lines = new[]
-                {
-                    $"            switch ({str.TrimEnd(';')})",
-                    "            {"
-                }
-                .Concat(curJmp.To.SelectMany(
-                    to =>
-                    {
-                        if (!dm.Labels.Contains(to))
-                            throw new NotImplementedException("!dm.Labels.Contains(to) 2");
-
-                        return
-                            new[]
-                            {
-                                $"                case {to}:",
-                                $"                    goto l_{to};"
-                            };
-                    }))
-                .Concat(
-                    new[]
-                    {
-                        "                default:",
-                        "                    throw new NotImplementedException();",
-                        "            }"
-                    });
-
-            return Environment.NewLine + string.Join(Environment.NewLine, lines);
         }
     }
 }

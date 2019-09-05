@@ -103,6 +103,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
             u.error.Should().Be(0);
 
             var cmd = new CSharpInstruction(new DefinitionCollection(), u);
+            cmd.IsLocalBranch = true;
             var str = cmd.GetInstructionString(onlyRawCmd: true);
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);

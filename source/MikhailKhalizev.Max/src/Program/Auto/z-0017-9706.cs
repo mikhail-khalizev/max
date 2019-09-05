@@ -117,7 +117,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_980b, 2);  if(ja(0x17_982c, 0x1f)) goto l_0x17_982c;/* ja 0x982c */
             ii(0x17_980d, 2);  shl(ax, 1);                             /* shl ax, 1 */
             ii(0x17_980f, 1);  xchg(bx, ax);                           /* xchg bx, ax */
-            ii(0x17_9810, 5);  
+            ii(0x17_9810, 5);  /* jmp word [cs:bx+0x4ff6] */
             switch (jmp_abs_switch(memw[cs, bx + 0x4ff6]))
             {
                 case 0x17_971e:
@@ -144,7 +144,7 @@ namespace MikhailKhalizev.Max.Program
                     goto l_0x17_97f2;
                 default:
                     throw new NotImplementedException();
-            }/* jmp word [cs:bx+0x4ff6] */
+            }
         //  ii(0x17_9815, 1);  nop();                                  /* nop */
         //  ii(0x17_9816, 22);  /* Служебная область с абсолютными адресами переходов. (0x17_971e, 0x17_9734, 0x17_974a, 0x17_9760, 0x17_9776, 0x17_978c, 0x17_97a2, 0x17_97b6, 0x17_97ca, 0x17_97de, 0x17_97f2). */
         l_0x17_982c:

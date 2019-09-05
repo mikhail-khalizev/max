@@ -693,9 +693,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 if (skip)
                     cmd.CommentThis = true; // Комментируем недостижимый код.
-
-                lines = lines.Concat(cmd.GetCodeString(this, detectedMethod, cmdIndex));
-
+                
+                try
+                {
+                    var isLast = detectedMethod.Instructions.Count <= cmdIndex + 1;
+                    lines = lines.Concat(cmd.GetCodeString(isLast));
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException($"Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
+                }
 
                 foreach (var str in lines)
                 {
