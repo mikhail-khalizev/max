@@ -84,7 +84,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_a1c8, 5);  cmp(memw[ss, ebp - 16], 0x15);        /* cmp word [ebp-0x10], 0x15 */
             ii(0x1014_a1cd, 6);  if(jz(0x1014_a126, -0xad)) goto l_0x1014_a126;/* jz 0x1014a126 */
             ii(0x1014_a1d3, 5);  jmp(0x1014_a141, -0x97); goto l_0x1014_a141;/* jmp 0x1014a141 */
-        //  ii(0x1014_a1d8, 5);  jmp(0x1014_a141, -0x9c); goto l_0x1014_a141;/* jmp 0x1014a141 */
+        //  ii(0x1014_a1d8, 5);  Недостижимый код.
         l_0x1014_a1dd:
             ii(0x1014_a1dd, 5);  cmp(memw[ss, ebp - 16], 0xd);         /* cmp word [ebp-0x10], 0xd */
             ii(0x1014_a1e2, 2);  if(jb(0x1014_a1f4, 0x10)) goto l_0x1014_a1f4;/* jb 0x1014a1f4 */

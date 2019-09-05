@@ -25,7 +25,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9728, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_972b, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_9730, 3);  jmp(0x17_982c, 0xf9); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_9733, 1);  nop();                                  /* nop */
+        //  ii(0x17_9733, 1);  Недостижимый код.
         l_0x17_9734:
             ii(0x17_9734, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
             ii(0x17_9737, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_973e, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_9741, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_9746, 3);  jmp(0x17_982c, 0xe3); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_9749, 1);  nop();                                  /* nop */
+        //  ii(0x17_9749, 1);  Недостижимый код.
         l_0x17_974a:
             ii(0x17_974a, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
             ii(0x17_974d, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
@@ -43,7 +43,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9754, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_9757, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_975c, 3);  jmp(0x17_982c, 0xcd); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_975f, 1);  nop();                                  /* nop */
+        //  ii(0x17_975f, 1);  Недостижимый код.
         l_0x17_9760:
             ii(0x17_9760, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
             ii(0x17_9763, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
@@ -52,7 +52,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_976a, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_976d, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_9772, 3);  jmp(0x17_982c, 0xb7); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_9775, 1);  nop();                                  /* nop */
+        //  ii(0x17_9775, 1);  Недостижимый код.
         l_0x17_9776:
             ii(0x17_9776, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
             ii(0x17_9779, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9780, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_9783, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_9788, 3);  jmp(0x17_982c, 0xa1); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_978b, 1);  nop();                                  /* nop */
+        //  ii(0x17_978b, 1);  Недостижимый код.
         l_0x17_978c:
             ii(0x17_978c, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
             ii(0x17_978f, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
@@ -70,7 +70,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_9796, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_9799, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_979e, 3);  jmp(0x17_982c, 0x8b); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_97a1, 1);  nop();                                  /* nop */
+        //  ii(0x17_97a1, 1);  Недостижимый код.
         l_0x17_97a2:
             ii(0x17_97a2, 3);  push(memw[ss, bp + 8]);                 /* push word [bp+0x8] */
             ii(0x17_97a5, 3);  push(memw[ss, bp + 6]);                 /* push word [bp+0x6] */
@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_97fc, 3);  add(sp, 4);                             /* add sp, 0x4 */
             ii(0x17_97ff, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_9804, 2);  jmp(0x17_982c, 0x26); goto l_0x17_982c; /* jmp 0x982c */
-        //  ii(0x17_9806, 2);  jmp(0x17_982c, 0x24); goto l_0x17_982c; /* jmp 0x982c */
+        //  ii(0x17_9806, 2);  Недостижимый код.
         l_0x17_9808:
             ii(0x17_9808, 3);  cmp(ax, 0xa);                           /* cmp ax, 0xa */
             ii(0x17_980b, 2);  if(ja(0x17_982c, 0x1f)) goto l_0x17_982c;/* ja 0x982c */
@@ -145,8 +145,7 @@ namespace MikhailKhalizev.Max.Program
                 default:
                     throw new NotImplementedException();
             }
-        //  ii(0x17_9815, 1);  nop();                                  /* nop */
-        //  ii(0x17_9816, 22);  /* Служебная область с абсолютными адресами переходов. (0x17_971e, 0x17_9734, 0x17_974a, 0x17_9760, 0x17_9776, 0x17_978c, 0x17_97a2, 0x17_97b6, 0x17_97ca, 0x17_97de, 0x17_97f2). */
+        //  ii(0x17_9815, 23);  Недостижимый код.
         l_0x17_982c:
             ii(0x17_982c, 3);  mov(ax, memw[ss, bp - 2]);              /* mov ax, [bp-0x2] */
             ii(0x17_982f, 1);  pop(ds);                                /* pop ds */

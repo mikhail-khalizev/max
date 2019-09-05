@@ -185,9 +185,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1028_b726, 3);  and(ecx, 3);                          /* and ecx, 0x3 */
             ii(0x1028_b729, 2);  rep(() => stosb());                   /* rep stosb */
             ii(0x1028_b72b, 2);  jmp(0x1028_b75d, 0x30); goto l_0x1028_b75d;/* jmp 0x1028b75d */
-        //  ii(0x1028_b72d, 1);  nop();                                /* nop */
-        //  ii(0x1028_b72e, 1);  nop();                                /* nop */
-        //  ii(0x1028_b72f, 1);  nop();                                /* nop */
+        //  ii(0x1028_b72d, 3);  Недостижимый код.
         l_0x1028_b730:
             ii(0x1028_b730, 6);  mov(ecx, memd[ds, 0x1366]);           /* mov ecx, [0x1366] */
             ii(0x1028_b736, 2);  sub(ecx, edi);                        /* sub ecx, edi */

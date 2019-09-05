@@ -208,7 +208,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1007_25e1, 5);  jmp(0x1007_2558, -0x8e); goto l_0x1007_2558;/* jmp 0x10072558 */
         l_0x1007_25e6:
             ii(0x1007_25e6, 5);  jmp(0x1007_2500, -0xeb); goto l_0x1007_2500;/* jmp 0x10072500 */
-        //  ii(0x1007_25eb, 5);  jmp(0x1007_2558, -0x98); goto l_0x1007_2558;/* jmp 0x10072558 */
+        //  ii(0x1007_25eb, 5);  Недостижимый код.
         l_0x1007_25f0:
             ii(0x1007_25f0, 3);  mov(eax, memd[ss, ebp - 8]);          /* mov eax, [ebp-0x8] */
             ii(0x1007_25f3, 3);  mov(memd[ss, ebp - 36], eax);         /* mov [ebp-0x24], eax */

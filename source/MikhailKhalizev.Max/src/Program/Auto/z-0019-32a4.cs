@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_331e, 2);  add(ax, si);                            /* add ax, si */
             ii(0x19_3320, 1);  inc(ax);                                /* inc ax */
             ii(0x19_3321, 2);  jmp(0x19_332d, 0xa); goto l_0x19_332d;  /* jmp 0x332d */
-        //  ii(0x19_3323, 1);  nop();                                  /* nop */
+        //  ii(0x19_3323, 1);  Недостижимый код.
         l_0x19_3324:
             ii(0x19_3324, 4);  add(memw[ss, bp - 4], 4);               /* add word [bp-0x4], 0x4 */
             ii(0x19_3328, 2);  jmp(0x19_32d4, -0x56); goto l_0x19_32d4;/* jmp 0x32d4 */

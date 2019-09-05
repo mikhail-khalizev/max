@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_4811, 3);  mov(ax, memw[ss, bp - 18]);             /* mov ax, [bp-0x12] */
             ii(0x19_4814, 3);  mov(memw[ss, bp + 8], ax);              /* mov [bp+0x8], ax */
             ii(0x19_4817, 2);  jmp(0x19_4822, 9); goto l_0x19_4822;    /* jmp 0x4822 */
-        //  ii(0x19_4819, 1);  nop();                                  /* nop */
+        //  ii(0x19_4819, 1);  Недостижимый код.
         l_0x19_481a:
             ii(0x19_481a, 2);  sub(ax, ax);                            /* sub ax, ax */
             ii(0x19_481c, 3);  mov(memw[ss, bp + 8], ax);              /* mov [bp+0x8], ax */

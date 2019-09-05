@@ -105,8 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1010_fc22, 2);  jmp(0x1010_fc57, 0x33); goto l_0x1010_fc57;/* jmp 0x1010fc57 */
         l_0x1010_fc24:
             ii(0x1010_fc24, 2);  jmp(0x1010_fc57, 0x31); goto l_0x1010_fc57;/* jmp 0x1010fc57 */
-        //  ii(0x1010_fc26, 2);  mov(eax, eax);                        /* mov eax, eax */
-        //  ii(0x1010_fc28, 28);  /* Служебная область с абсолютными адресами переходов. (0x1010_fb1c, 0x1010_fb8b, 0x1010_fba6, 0x1010_fbc1, 0x1010_fbdc, 0x1010_fbf4, 0x1010_fc0c). */
+        //  ii(0x1010_fc26, 30);  Недостижимый код.
         l_0x1010_fc44:
             ii(0x1010_fc44, 4);  cmp(memd[ss, ebp - 12], 6);           /* cmp dword [ebp-0xc], 0x6 */
             ii(0x1010_fc48, 2);  if(ja(0x1010_fc24, -0x26)) goto l_0x1010_fc24;/* ja 0x1010fc24 */

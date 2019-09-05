@@ -293,7 +293,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             if (jtka == null)
             {
                 jtka = new BranchInfo(cmd.Begin);
-                jtka.To = new SortedSet<Address>();
+                jtka.To = new MySortedSet<Address>();
                 Engine.BranchesInfo.Add(jtka);
             }
 
@@ -344,7 +344,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                     foreach (var to in curJmp.To)
                     {
-                        if (!method.Labels.Contains(to))
+                        if (method.InstructionOf(to)?.HasLabel != true)
                         {
                             NonBlockingConsole.WriteLine(
                                 "Не все метки switch находятся внутри одного метода " +
@@ -356,7 +356,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                     if (curJmp.To.Count == 0)
                         throw new NotImplementedException("curJmp.To.Count == 0");
-                    
+
                     cmd.SwitchAddresses = curJmp.To.ToList();
                 });
         }

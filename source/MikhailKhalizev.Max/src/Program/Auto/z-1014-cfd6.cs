@@ -371,7 +371,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1014_d480, 2);  jmp(0x1014_d4b3, 0x31); goto l_0x1014_d4b3;/* jmp 0x1014d4b3 */
         l_0x1014_d482:
             ii(0x1014_d482, 2);  jmp(0x1014_d4b3, 0x2f); goto l_0x1014_d4b3;/* jmp 0x1014d4b3 */
-        //  ii(0x1014_d484, 20);  /* Служебная область с абсолютными адресами переходов. (0x1014_d455, 0x1014_d45e, 0x1014_d467, 0x1014_d470, 0x1014_d479). */
+        //  ii(0x1014_d484, 20);  Недостижимый код.
         l_0x1014_d498:
             ii(0x1014_d498, 3);  mov(al, memb[ss, ebp - 56]);          /* mov al, [ebp-0x38] */
             ii(0x1014_d49b, 3);  mov(memb[ss, ebp - 60], al);          /* mov [ebp-0x3c], al */

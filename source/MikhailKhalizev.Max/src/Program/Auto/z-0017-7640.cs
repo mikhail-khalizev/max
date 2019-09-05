@@ -223,7 +223,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_7837, 3);  mov(memw[ss, bp - 10], ax);             /* mov [bp-0xa], ax */
             ii(0x17_783a, 3);  mov(memw[ss, bp - 8], dx);              /* mov [bp-0x8], dx */
             ii(0x17_783d, 2);  jmp(0x17_7854, 0x15); goto l_0x17_7854; /* jmp 0x7854 */
-        //  ii(0x17_783f, 1);  nop();                                  /* nop */
+        //  ii(0x17_783f, 1);  Недостижимый код.
         l_0x17_7840:
             ii(0x17_7840, 3);  les(bx, memw[ss, bp + 10]);             /* les bx, [bp+0xa] */
             ii(0x17_7843, 4);  mov(ax, memw[es, bx + 56]);             /* mov ax, [es:bx+0x38] */

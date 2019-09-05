@@ -45,9 +45,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_4aef, 3);  mov(cx, cs);                          /* mov cx, cs */
             ii(0x1019_4af2, 2);  @int(0x31);                           /* int 0x31 */
             ii(0x1019_4af4, 2);  jmp(0x1019_4b20, 0x2a); goto l_0x1019_4b20;/* jmp 0x10194b20 */
-        //  ii(0x1019_4af6, 1);  nop();                                /* nop */
-        //  ii(0x1019_4af7, 1);  nop();                                /* nop */
-        //  ii(0x1019_4af8, 1);  nop();                                /* nop */
+        //  ii(0x1019_4af6, 3);  Недостижимый код.
         l_0x1019_4af9:
             ii(0x1019_4af9, 4);  mov(ax, 0x3508);                      /* mov ax, 0x3508 */
             ii(0x1019_4afd, 2);  @int(0x21);                           /* int 0x21 */

@@ -196,12 +196,12 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_2466, 7);  cmp(memd[ss, ebp - 16], 0x452);       /* cmp dword [ebp-0x10], 0x452 */
             ii(0x100d_246d, 6);  if(jz(0x100d_2233, -0x240)) goto l_0x100d_2233;/* jz 0x100d2233 */
             ii(0x100d_2473, 5);  jmp(0x100d_2368, -0x110); goto l_0x100d_2368;/* jmp 0x100d2368 */
-        //  ii(0x100d_2478, 5);  jmp(0x100d_2368, -0x115); goto l_0x100d_2368;/* jmp 0x100d2368 */
+        //  ii(0x100d_2478, 5);  Недостижимый код.
         l_0x100d_247d:
             ii(0x100d_247d, 7);  cmp(memd[ss, ebp - 16], 0x44e);       /* cmp dword [ebp-0x10], 0x44e */
             ii(0x100d_2484, 6);  if(jbe(0x100d_230a, -0x180)) goto l_0x100d_230a;/* jbe 0x100d230a */
             ii(0x100d_248a, 5);  jmp(0x100d_2339, -0x156); goto l_0x100d_2339;/* jmp 0x100d2339 */
-        //  ii(0x100d_248f, 5);  jmp(0x100d_2368, -0x12c); goto l_0x100d_2368;/* jmp 0x100d2368 */
+        //  ii(0x100d_248f, 5);  Недостижимый код.
         l_0x100d_2494:
             ii(0x100d_2494, 4);  cmp(memd[ss, ebp - 16], 0x3f);        /* cmp dword [ebp-0x10], 0x3f */
             ii(0x100d_2498, 2);  if(jb(0x100d_24d1, 0x37)) goto l_0x100d_24d1;/* jb 0x100d24d1 */

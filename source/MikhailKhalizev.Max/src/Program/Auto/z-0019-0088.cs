@@ -46,7 +46,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x19_00de, 5);  lea(ecx, memd[ds, 0xc7a]);              /* lea ecx, [0xc7a] */
             ii(0x19_00e3, 1);  push(cx);                               /* push cx */
             ii(0x19_00e4, 2);  jmp(0x19_0104, 0x1e); goto l_0x19_0104; /* jmp 0x104 */
-        //  ii(0x19_00e6, 2);  xchg(bx, bx);                           /* xchg bx, bx */
+        //  ii(0x19_00e6, 2);  Недостижимый код.
         l_0x19_00e8:
             ii(0x19_00e8, 2);  mov(cx, ds);                            /* mov cx, ds */
             ii(0x19_00ea, 2);  push(ecx);                              /* push ecx */

@@ -12,21 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d550, 2);  mov(bp, sp);                            /* mov bp, sp */
             ii(0x17_d552, 2);  xor(cx, cx);                            /* xor cx, cx */
             ii(0x17_d554, 2);  jmp(0x17_d570, 0x1a); goto l_0x17_d570; /* jmp 0xd570 */
-        //  ii(0x17_d556, 1);  push(bp);                               /* push bp */
-        //  ii(0x17_d557, 2);  mov(bp, sp);                            /* mov bp, sp */
-        //  ii(0x17_d559, 3);  mov(cx, 1);                             /* mov cx, 0x1 */
-        //  ii(0x17_d55c, 2);  jmp(0x17_d570, 0x12); goto l_0x17_d570; /* jmp 0xd570 */
-        //  ii(0x17_d55e, 1);  push(bp);                               /* push bp */
-        //  ii(0x17_d55f, 2);  mov(bp, sp);                            /* mov bp, sp */
-        //  ii(0x17_d561, 1);  push(si);                               /* push si */
-        //  ii(0x17_d562, 1);  push(di);                               /* push di */
-        //  ii(0x17_d563, 3);  mov(cx, 0x100);                         /* mov cx, 0x100 */
-        //  ii(0x17_d566, 2);  jmp(0x17_d570, 8); goto l_0x17_d570;    /* jmp 0xd570 */
-        //  ii(0x17_d568, 1);  push(bp);                               /* push bp */
-        //  ii(0x17_d569, 2);  mov(bp, sp);                            /* mov bp, sp */
-        //  ii(0x17_d56b, 1);  push(si);                               /* push si */
-        //  ii(0x17_d56c, 1);  push(di);                               /* push di */
-        //  ii(0x17_d56d, 3);  mov(cx, 0x101);                         /* mov cx, 0x101 */
+        //  ii(0x17_d556, 26);  Недостижимый код.
         l_0x17_d570:
             ii(0x17_d570, 1);  push(cx);                               /* push cx */
             ii(0x17_d571, 2);  or(cl, cl);                             /* or cl, cl */

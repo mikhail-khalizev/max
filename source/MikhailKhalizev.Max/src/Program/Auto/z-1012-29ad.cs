@@ -192,8 +192,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_2c12, 2);  jmp(0x1012_2c49, 0x35); goto l_0x1012_2c49;/* jmp 0x10122c49 */
         l_0x1012_2c14:
             ii(0x1012_2c14, 2);  jmp(0x1012_2c49, 0x33); goto l_0x1012_2c49;/* jmp 0x10122c49 */
-        //  ii(0x1012_2c16, 2);  mov(eax, eax);                        /* mov eax, eax */
-        //  ii(0x1012_2c18, 20);  /* Служебная область с абсолютными адресами переходов. (0x1012_2ae6, 0x1012_2b04, 0x1012_2b26, 0x1012_2b7b, 0x1012_2be0). */
+        //  ii(0x1012_2c16, 22);  Недостижимый код.
         l_0x1012_2c2c:
             ii(0x1012_2c2c, 3);  mov(al, memb[ss, ebp - 36]);          /* mov al, [ebp-0x24] */
             ii(0x1012_2c2f, 2);  dec(al);                              /* dec al */
@@ -328,8 +327,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_2dbe, 2);  jmp(0x1012_2df9, 0x39); goto l_0x1012_2df9;/* jmp 0x10122df9 */
         l_0x1012_2dc0:
             ii(0x1012_2dc0, 2);  jmp(0x1012_2df9, 0x37); goto l_0x1012_2df9;/* jmp 0x10122df9 */
-        //  ii(0x1012_2dc2, 2);  mov(eax, eax);                        /* mov eax, eax */
-        //  ii(0x1012_2dc4, 24);  /* Служебная область с абсолютными адресами переходов. (0x1012_2d12, 0x1012_2d2c, 0x1012_2d46, 0x1012_2d60, 0x1012_2d82, 0x1012_2da1). */
+        //  ii(0x1012_2dc2, 26);  Недостижимый код.
         l_0x1012_2ddc:
             ii(0x1012_2ddc, 3);  mov(al, memb[ss, ebp - 76]);          /* mov al, [ebp-0x4c] */
             ii(0x1012_2ddf, 2);  sub(al, 0x36);                        /* sub al, 0x36 */

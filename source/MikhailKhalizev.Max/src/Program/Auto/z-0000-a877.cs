@@ -71,13 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0xa8f8, 2);  if(jz(0xa96d, 0x73)) goto l_0xa96d;        /* jz 0xa96d */
             ii(0xa8fa, 5);  if(jmp_far_ind(memw[cs, 0x17be])) return;  /* jmp far word [cs:0x17be] */
             ii(0xa8ff, 2);  jmp(0xa917, 0x16); goto l_0xa917;          /* jmp 0xa917 */
-        //  ii(0xa901, 2);  push(edx);                                 /* push edx */
-        //  ii(0xa903, 6);  mov(edx, memd[cs, 0x6d66]);                /* mov edx, [cs:0x6d66] */
-        //  ii(0xa909, 5);  mov(cx, memw[cs, 0x6d6a]);                 /* mov cx, [cs:0x6d6a] */
-        //  ii(0xa90e, 2);  mov(bl, 0x21);                             /* mov bl, 0x21 */
-        //  ii(0xa910, 3);  mov(ax, 0x205);                            /* mov ax, 0x205 */
-        //  ii(0xa913, 2);  @int(0x31);                                /* int 0x31 */
-        //  ii(0xa915, 2);  pop(edx);                                  /* pop edx */
+        //  ii(0xa901, 22);  Недостижимый код.
         l_0xa917:
             ii(0xa917, 4);  mov(ax, memw[cs, 0x208e]);                 /* mov ax, [cs:0x208e] */
             ii(0xa91b, 2);  mov(ds, ax);                               /* mov ds, ax */

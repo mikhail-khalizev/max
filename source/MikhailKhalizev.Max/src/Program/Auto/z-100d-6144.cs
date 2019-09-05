@@ -336,8 +336,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100d_64fe, 2);  jmp(0x100d_6541, 0x41); goto l_0x100d_6541;/* jmp 0x100d6541 */
         l_0x100d_6500:
             ii(0x100d_6500, 2);  jmp(0x100d_6541, 0x3f); goto l_0x100d_6541;/* jmp 0x100d6541 */
-        //  ii(0x100d_6502, 2);  mov(eax, eax);                        /* mov eax, eax */
-        //  ii(0x100d_6504, 32);  /* Служебная область с абсолютными адресами переходов. (0x100d_62ff, 0x100d_633e, 0x100d_6380, 0x100d_63bf, 0x100d_6401, 0x100d_6443, 0x100d_6482, 0x100d_64c4). */
+        //  ii(0x100d_6502, 34);  Недостижимый код.
         l_0x100d_6524:
             ii(0x100d_6524, 3);  mov(eax, memd[ss, ebp - 72]);         /* mov eax, [ebp-0x48] */
             ii(0x100d_6527, 3);  mov(memd[ss, ebp - 108], eax);        /* mov [ebp-0x6c], eax */

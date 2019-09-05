@@ -389,7 +389,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_f52b:
             ii(0x19_f52b, 3);  inc(memw[ss, bp - 12]);                 /* inc word [bp-0xc] */
             ii(0x19_f52e, 3);  jmp(0x19_f551, 0x20); goto l_0x19_f551; /* jmp 0xf551 */
-        //  ii(0x19_f531, 3);  jmp(0x19_f551, 0x1d); goto l_0x19_f551; /* jmp 0xf551 */
+        //  ii(0x19_f531, 3);  Недостижимый код.
         l_0x19_f534:
             ii(0x19_f534, 1);  dec(ax);                                /* dec ax */
             ii(0x19_f535, 1);  dec(ax);                                /* dec ax */

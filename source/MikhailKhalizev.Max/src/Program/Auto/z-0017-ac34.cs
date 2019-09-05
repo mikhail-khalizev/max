@@ -128,7 +128,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_ad49, 3);  mov(memw[ss, bp - 24], ax);             /* mov [bp-0x18], ax */
             ii(0x17_ad4c, 3);  mov(memw[ss, bp - 26], ax);             /* mov [bp-0x1a], ax */
             ii(0x17_ad4f, 2);  jmp(0x17_ad62, 0x11); goto l_0x17_ad62; /* jmp 0xad62 */
-        //  ii(0x17_ad51, 1);  nop();                                  /* nop */
+        //  ii(0x17_ad51, 1);  Недостижимый код.
         l_0x17_ad52:
             ii(0x17_ad52, 4);  add(memw[ss, bp - 26], 1);              /* add word [bp-0x1a], 0x1 */
             ii(0x17_ad56, 4);  adc(memw[ss, bp - 24], 0);              /* adc word [bp-0x18], 0x0 */
@@ -184,7 +184,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_adde, 4);  test(memb[es, bx + si], 0x80);          /* test byte [es:bx+si], 0x80 */
             ii(0x17_ade2, 2);  if(jz(0x17_ade8, 4)) goto l_0x17_ade8;  /* jz 0xade8 */
             ii(0x17_ade4, 3);  jmp(0x17_af19, 0x132); goto l_0x17_af19;/* jmp 0xaf19 */
-        //  ii(0x17_ade7, 1);  nop();                                  /* nop */
+        //  ii(0x17_ade7, 1);  Недостижимый код.
         l_0x17_ade8:
             ii(0x17_ade8, 1);  nop();                                  /* nop */
             ii(0x17_ade9, 1);  push(cs);                               /* push cs */
@@ -335,7 +335,7 @@ namespace MikhailKhalizev.Max.Program
         //  ii(0x17_af33, 1);  Недостижимый код.
         l_0x17_af34:
             ii(0x17_af34, 3);  jmp(0x17_ad52, -0x1e5); goto l_0x17_ad52;/* jmp 0xad52 */
-        //  ii(0x17_af37, 1);  nop();                                  /* nop */
+        //  ii(0x17_af37, 1);  Недостижимый код.
         l_0x17_af38:
             ii(0x17_af38, 3);  les(bx, memw[ss, bp + 6]);              /* les bx, [bp+0x6] */
             ii(0x17_af3b, 5);  and(memb[es, bx + 44], -2 /* 0xfe */);  /* and byte [es:bx+0x2c], 0xfe */

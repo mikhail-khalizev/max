@@ -100,8 +100,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_f3f6, 4);  cmp(memd[ss, ebp - 4], 2);            /* cmp dword [ebp-0x4], 0x2 */
             ii(0x1013_f3fa, 6);  if(jbe(0x1013_f2e5, -0x11b)) goto l_0x1013_f2e5;/* jbe 0x1013f2e5 */
             ii(0x1013_f400, 2);  jmp(0x1013_f3ea, -0x18); goto l_0x1013_f3ea;/* jmp 0x1013f3ea */
-        //  ii(0x1013_f402, 2);  jmp(0x1013_f3ea, -0x1a); goto l_0x1013_f3ea;/* jmp 0x1013f3ea */
-        //  ii(0x1013_f404, 2);  jmp(0x1013_f3ea, -0x1c); goto l_0x1013_f3ea;/* jmp 0x1013f3ea */
+        //  ii(0x1013_f402, 4);  Недостижимый код.
         l_0x1013_f406:
             ii(0x1013_f406, 2);  mov(esp, ebp);                        /* mov esp, ebp */
             ii(0x1013_f408, 1);  pop(ebp);                             /* pop ebp */

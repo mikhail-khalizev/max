@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_f09b, 3);  add(sp, 0xc);                           /* add sp, 0xc */
             ii(0x17_f09e, 3);  mov(memw[ss, bp + 6], ax);              /* mov [bp+0x6], ax */
             ii(0x17_f0a1, 2);  jmp(0x17_f0d5, 0x32); goto l_0x17_f0d5; /* jmp 0xf0d5 */
-        //  ii(0x17_f0a3, 1);  nop();                                  /* nop */
+        //  ii(0x17_f0a3, 1);  Недостижимый код.
         l_0x17_f0a4:
             ii(0x17_f0a4, 3);  mov(ax, memw[ds, 0x1412]);              /* mov ax, [0x1412] */
             ii(0x17_f0a7, 3);  mov(memw[ss, bp - 26], ax);             /* mov [bp-0x1a], ax */

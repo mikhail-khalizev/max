@@ -322,16 +322,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     }
 
                     var methodEnd = instructions[instructions.Count - 1].End;
+                    method.Instructions = instructions;
+                    method.End = methodEnd;
+                    method.RawBytes = Memory.ReadAll(method.Begin, method.End - method.Begin);
 
                     // Заполняем label.
 
-                    method.Labels.Clear();
-
                     foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(methodBegin), new BranchInfo(methodEnd)))
                     {
-                        var branchInstructionIndex = instructions.BinarySearch(
-                            new CSharpInstruction(branchInfo.From),
-                            CSharpInstruction.BeginComparer);
+                        var branchInstructionIndex = method.InstructionIndexOf(branchInfo.From);
                         if (branchInstructionIndex < 0)
                             continue;
 
@@ -341,11 +340,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             {
                                 // Переход внутрь метода.
 
-                                var index = instructions.BinarySearch(new CSharpInstruction(addressTo), CSharpInstruction.BeginComparer);
-
-                                if (0 <= index)
-                                    method.Labels.Add(addressTo);
-                                else
+                                var index = method.InstructionIndexOf(addressTo);
+                                if (index < 0)
                                 {
                                     // TODO Улучшить логику обработки подобных ситуаций.
                                     // Впрочем, не надо - довольно редкий специфический случай.
@@ -362,12 +358,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             }
                         }
                     }
-
-                    // Готово.
-
-                    method.Instructions = instructions;
-                    method.End = methodEnd;
-                    method.RawBytes = Memory.ReadAll(method.Begin, method.End - method.Begin);
 
                     successCount++;
                 }
@@ -447,18 +437,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
                 {
+                    var fromInstructionIndex = method.InstructionIndexOf(branchInfo.From);
+                    if (fromInstructionIndex < 0)
+                        continue;
+                    
                     foreach (var to in branchInfo.To)
                     {
-                        var toInstructionIndex = method.Instructions.BinarySearch(new CSharpInstruction(to), CSharpInstruction.BeginComparer);
+                        var toInstructionIndex = method.InstructionIndexOf(to);
                         if (0 <= toInstructionIndex)
                             method.Instructions[toInstructionIndex].HasLabel = true;
                     }
-
-                    var fromInstructionIndex = method.Instructions.BinarySearch(
-                        new CSharpInstruction(branchInfo.From),
-                        CSharpInstruction.BeginComparer);
-                    if (fromInstructionIndex < 0)
-                        continue;
 
                     var fromInstruction = method.Instructions[fromInstructionIndex];
                     if (!fromInstruction.IsJmpOrJcc && !fromInstruction.IsLoopOrLoopcc)
@@ -474,10 +462,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             {
                                 // Переход внутрь метода.
 
-                                var index = method.Instructions.BinarySearch(
-                                    new CSharpInstruction(addressTo),
-                                    CSharpInstruction.BeginComparer);
-
+                                var index = method.InstructionIndexOf(addressTo);
                                 if (0 <= index)
                                     return true;
                             }
@@ -488,24 +473,70 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 // Call onAttachToMethod.
 
-                foreach (var instruction in _onAttachToMethod.GreaterThat(new CSharpInstruction(method.Begin - 1)).Where(x => x.Begin < method.End).ToList())
+                foreach (var instruction in _onAttachToMethod.GreaterThat(new CSharpInstruction(method.Begin - 1))
+                    .Where(x => x.Begin < method.End).ToList())
                 {
-                    var index = method.Instructions.BinarySearch(instruction, CSharpInstruction.BeginComparer);
+                    var index = method.InstructionIndexOf(instruction);
                     if (0 <= index)
                         _onAttachToMethod[instruction](method, index);
                 }
 
                 // Удаляем недостижимый код.
 
-                //foreach (var instruction in method.Instructions)
-                //{
+                while (true)
+                {
+                    var skip = false; // Если нашли недостижимый код устанавливаем в true.
+                    var anyBranchSkipped = false;
 
-                //}
+                    var removeLabels = new HashSet<Address>();
+
+                    for (var cmdIndex = 0; cmdIndex < method.Instructions.Count; cmdIndex++)
+                    {
+                        var cmd = method.Instructions[cmdIndex];
+
+                        if (cmd.HasLabel)
+                            skip = false;
+
+                        if (skip /* && !cmd.CommentThis */)
+                        {
+                            if (BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var branchInfo))
+                            {
+                                anyBranchSkipped = true;
+                                removeLabels.UnionWith(branchInfo.To);
+                            }
+
+                            method.Instructions.RemoveAt(cmdIndex);
+                            cmdIndex--;
+                        }
+                        else if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
+                            skip = true;
+                    }
+
+                    if (!anyBranchSkipped)
+                        break;
+
+                    foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
+                    {
+                        var fromInstructionIndex = method.InstructionIndexOf(branchInfo.From);
+                        if (fromInstructionIndex < 0)
+                            continue;
+
+                        removeLabels.ExceptWith(branchInfo.To);
+                    }
+
+                    if (removeLabels.Count == 0)
+                        break;
+
+                    foreach (var removeLabel in removeLabels)
+                    {
+                        var index = method.InstructionIndexOf(removeLabel);
+                        if (0 <= index)
+                            method.Instructions[index].HasLabel = false;
+                    }
+                }
             }
-
-            //MethodInfoCollection.Save();
         }
-
+        
 
         // return file paths.
         public List<string> Save(bool inParallel = true, bool callDetectMethods = true)
@@ -664,20 +695,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             output.AppendLine($"        public void {ns}{methodName}{(1 < fileNum ? "_v" + fileNum : "")}()");
             output.AppendLine("        {");
 
-            bool skip = false; // Если нашли недостижимый код устанавливаем в true.
-            bool lastInstrJmpOrRet = false;
+            var lastInstrJmpOrRet = false;
             var lastInstrEnd = firstCmd.Begin;
 
-            for (var cmdIndex = 0; cmdIndex < detectedMethod.Instructions.Count; cmdIndex++)//   cmd = first_cmd; cmd != detectedMethod -> instr.end(); cmd++)
+            for (var cmdIndex = 0; cmdIndex < detectedMethod.Instructions.Count; cmdIndex++)
             {
                 var cmd = detectedMethod.Instructions[cmdIndex];
-                var haveLabel = detectedMethod.Labels.Contains(cmd.Begin);
-                if (haveLabel != cmd.HasLabel)
-                    throw new InvalidOperationException("haveLabel != cmd.HasLabel");
 
                 var lines = Enumerable.Empty<string>();
-
-
+                
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
                     var ii = CSharpInstruction.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
@@ -687,33 +713,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             : $"    {ii}throw new InvalidOperationException(\"Недекодированный код.\");");
                 }
 
-
-                if (haveLabel)
-                    skip = false;
-
-                if (skip)
-                    cmd.CommentThis = true; // Комментируем недостижимый код.
-                
                 try
                 {
                     var isLast = detectedMethod.Instructions.Count <= cmdIndex + 1;
-                    lines = lines.Concat(cmd.GetCodeString(isLast));
+                    lines = lines.Concat(cmd.GetCode(isLast));
+
+                    foreach (var str in lines)
+                    {
+                        output.Append(new string(' ', 8));
+                        output.AppendLine(str);
+                    }
                 }
                 catch (Exception ex)
                 {
                     throw new InvalidOperationException($"Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
                 }
-
-                foreach (var str in lines)
-                {
-                    output.Append(new string(' ', 8));
-                    output.AppendLine(str);
-                }
-
-
-                if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
-                    skip = true;
-
+                
                 lastInstrEnd = cmd.End;
                 lastInstrJmpOrRet = cmd.IsJmpOrRet;
             }

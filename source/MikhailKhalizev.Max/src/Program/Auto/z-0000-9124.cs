@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x9127, 3);  mov(memb[ds, 0x980], al);                  /* mov [0x980], al */
             ii(0x912a, 3);  call(0xb436, 0x2309);                      /* call 0xb436 */
             ii(0x912d, 2);  jmp(0x9132, 3); goto l_0x9132;             /* jmp 0x9132 */
-        //  ii(0x912f, 3);  call(0x9736, 0x604);                       /* call 0x9736 */
+        //  ii(0x912f, 3);  Недостижимый код.
         l_0x9132:
             ii(0x9132, 4);  cmp(memw[ss, bp + 4], 0);                  /* cmp word [bp+0x4], 0x0 */
             ii(0x9136, 2);  if(jge(0x9142, 0xa)) goto l_0x9142;        /* jge 0x9142 */

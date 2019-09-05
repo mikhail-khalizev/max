@@ -151,10 +151,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// <inheritdoc />
         public override string ToString()
         {
-            return GetInstructionString();
+            var str = GetCommandString();
+            if (string.IsNullOrEmpty(str))
+                str = string.Join(" ", Comments);
+            return str;
         }
 
-        public IEnumerable<string> GetCodeString(bool isLastInstructionInMethod)
+        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
         {
             var lines = Enumerable.Empty<string>();
 
@@ -163,7 +166,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             if (SwitchAddresses != null)
             {
-                var cmd = GetInstructionString().TrimEnd(';');
+                var cmd = GetCommandString().TrimEnd(';');
 
                 lines = lines
                     .Append((ii + comments).TrimEnd())
@@ -194,7 +197,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             }
             else
             {
-                var cmd = GetInstructionString(onlyRawCmd: isLastInstructionInMethod && !IsLocalBranch);
+                var cmd = GetCommandString(onlyRawCmd: isLastInstructionInMethod && !IsLocalBranch);
                 var line = ii + cmd;
 
                 if (!string.IsNullOrEmpty(cmd) && Comments.Count != 0)
@@ -217,7 +220,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
 
-        public string GetInstructionString(string cmdSuffix = "", bool onlyRawCmd = false)
+        public string GetCommandString(string cmdSuffix = "", bool onlyRawCmd = false)
         {
             if (Mnemonic == ud_mnemonic_code.UD_Inone)
                 return "";

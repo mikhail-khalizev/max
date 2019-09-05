@@ -157,8 +157,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_3514, 3);  mov(memd[ss, ebp - 60], eax);         /* mov [ebp-0x3c], eax */
         l_0x1013_3517:
             ii(0x1013_3517, 2);  jmp(0x1013_3557, 0x3e); goto l_0x1013_3557;/* jmp 0x10133557 */
-        //  ii(0x1013_3519, 3);  lea(eax, memd[ds, eax]);              /* lea eax, [eax] */
-        //  ii(0x1013_351c, 32);  /* Служебная область с абсолютными адресами переходов. (0x1013_340f, 0x1013_3431, 0x1013_3453, 0x1013_3475, 0x1013_3497, 0x1013_34b9, 0x1013_34db, 0x1013_34fa). */
+        //  ii(0x1013_3519, 35);  Недостижимый код.
         l_0x1013_353c:
             ii(0x1013_353c, 3);  mov(al, memb[ss, ebp - 24]);          /* mov al, [ebp-0x18] */
             ii(0x1013_353f, 3);  mov(memb[ss, ebp - 64], al);          /* mov [ebp-0x40], al */

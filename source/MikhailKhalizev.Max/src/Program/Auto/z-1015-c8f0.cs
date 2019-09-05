@@ -225,9 +225,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1015_cbaa, 3);  lea(eax, memd[ss, ebp - 16]);         /* lea eax, [ebp-0x10] */
             ii(0x1015_cbad, 5);  call(0x1007_5f2c, -0xe_6c86);         /* call 0x10075f2c */
             ii(0x1015_cbb2, 2);  jmp(0x1015_cbbe, 0xa); goto l_0x1015_cbbe;/* jmp 0x1015cbbe */
-        //  ii(0x1015_cbb4, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x1015_cbb6, 3);  lea(eax, memd[ss, ebp - 16]);         /* lea eax, [ebp-0x10] */
-        //  ii(0x1015_cbb9, 5);  call(0x1007_5f2c, -0xe_6c92);         /* call 0x10075f2c */
+        //  ii(0x1015_cbb4, 10);  Недостижимый код.
         l_0x1015_cbbe:
             ii(0x1015_cbbe, 3);  mov(eax, memd[ss, ebp - 20]);         /* mov eax, [ebp-0x14] */
             ii(0x1015_cbc1, 2);  mov(esp, ebp);                        /* mov esp, ebp */

@@ -69,8 +69,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1016_3bdf, 2);  jmp(0x1016_3c47, 0x66); goto l_0x1016_3c47;/* jmp 0x10163c47 */
         l_0x1016_3be1:
             ii(0x1016_3be1, 2);  jmp(0x1016_3c25, 0x42); goto l_0x1016_3c25;/* jmp 0x10163c25 */
-        //  ii(0x1016_3be3, 1);  nop();                                /* nop */
-        //  ii(0x1016_3be4, 36);  /* Служебная область с абсолютными адресами переходов. (0x1016_3b69, 0x1016_3b77, 0x1016_3b85, 0x1016_3b93, 0x1016_3ba1, 0x1016_3baf, 0x1016_3bbd, 0x1016_3bcb, 0x1016_3bd6). */
+        //  ii(0x1016_3be3, 37);  Недостижимый код.
         l_0x1016_3c08:
             ii(0x1016_3c08, 3);  mov(al, memb[ss, ebp - 12]);          /* mov al, [ebp-0xc] */
             ii(0x1016_3c0b, 2);  dec(al);                              /* dec al */

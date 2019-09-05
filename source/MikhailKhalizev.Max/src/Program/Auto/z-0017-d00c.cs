@@ -29,7 +29,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d031, 2);  or(ax, ax);                             /* or ax, ax */
             ii(0x17_d033, 4);  if(jnz(0x17_d0ab, 0x74)) goto l_0x17_d0ab;/* jnz 0xd0ab */
             ii(0x17_d037, 2);  jmp(0x17_d0b0, 0x77); goto l_0x17_d0b0; /* jmp 0xd0b0 */
-        //  ii(0x17_d039, 1);  nop();                                  /* nop */
+        //  ii(0x17_d039, 1);  Недостижимый код.
         l_0x17_d03a:
             ii(0x17_d03a, 2);  pop(ebx);                               /* pop ebx */
             ii(0x17_d03c, 5);  if(jmp_far_ind(memw[cs, -0x7980])) return;/* jmp far word [cs:0x8680] */
@@ -54,7 +54,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d066, 2);  or(ax, ax);                             /* or ax, ax */
             ii(0x17_d068, 4);  if(jnz(0x17_d0ab, 0x3f)) goto l_0x17_d0ab;/* jnz 0xd0ab */
             ii(0x17_d06c, 2);  jmp(0x17_d0b0, 0x42); goto l_0x17_d0b0; /* jmp 0xd0b0 */
-        //  ii(0x17_d06e, 1);  nop();                                  /* nop */
+        //  ii(0x17_d06e, 1);  Недостижимый код.
         l_0x17_d06f:
             ii(0x17_d06f, 2);  pop(ebx);                               /* pop ebx */
             ii(0x17_d071, 5);  if(jmp_far_ind(memw[cs, -0x797c])) return;/* jmp far word [cs:0x8684] */
@@ -79,7 +79,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d09b, 2);  or(ax, ax);                             /* or ax, ax */
             ii(0x17_d09d, 4);  if(jnz(0x17_d0ab, 0xa)) goto l_0x17_d0ab;/* jnz 0xd0ab */
             ii(0x17_d0a1, 2);  jmp(0x17_d0b0, 0xd); goto l_0x17_d0b0;  /* jmp 0xd0b0 */
-        //  ii(0x17_d0a3, 1);  nop();                                  /* nop */
+        //  ii(0x17_d0a3, 1);  Недостижимый код.
         l_0x17_d0a4:
             ii(0x17_d0a4, 2);  pop(ebx);                               /* pop ebx */
             ii(0x17_d0a6, 5);  if(jmp_far_ind(memw[cs, -0x7978])) return;/* jmp far word [cs:0x8688] */

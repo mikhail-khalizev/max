@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_6794, 2);  jmp(0x100c_67d1, 0x3b); goto l_0x100c_67d1;/* jmp 0x100c67d1 */
         l_0x100c_6796:
             ii(0x100c_6796, 2);  jmp(0x100c_67d1, 0x39); goto l_0x100c_67d1;/* jmp 0x100c67d1 */
-        //  ii(0x100c_6798, 28);  /* Служебная область с абсолютными адресами переходов. (0x100c_672a, 0x100c_674e, 0x100c_6772, 0x100c_6796, 0x100c_6796, 0x100c_6796, 0x100c_672a). */
+        //  ii(0x100c_6798, 28);  Недостижимый код.
         l_0x100c_67b4:
             ii(0x100c_67b4, 3);  mov(al, memb[ss, ebp - 32]);          /* mov al, [ebp-0x20] */
             ii(0x100c_67b7, 2);  sub(al, 2);                           /* sub al, 0x2 */
@@ -686,8 +686,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_70cf, 2);  jmp(0x100c_7115, 0x44); goto l_0x100c_7115;/* jmp 0x100c7115 */
         l_0x100c_70d1:
             ii(0x100c_70d1, 2);  jmp(0x100c_7115, 0x42); goto l_0x100c_7115;/* jmp 0x100c7115 */
-        //  ii(0x100c_70d3, 1);  nop();                                /* nop */
-        //  ii(0x100c_70d4, 36);  /* Служебная область с абсолютными адресами переходов. (0x100c_695b, 0x100c_6a30, 0x100c_6af3, 0x100c_6bb6, 0x100c_6cf7, 0x100c_6d44, 0x100c_6dcd, 0x100c_6f68, 0x100c_7027). */
+        //  ii(0x100c_70d3, 37);  Недостижимый код.
         l_0x100c_70f8:
             ii(0x100c_70f8, 3);  mov(al, memb[ss, ebp - 44]);          /* mov al, [ebp-0x2c] */
             ii(0x100c_70fb, 2);  dec(al);                              /* dec al */
@@ -747,9 +746,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100c_7159, 3);  lea(eax, memd[ss, ebp - 20]);         /* lea eax, [ebp-0x14] */
             ii(0x100c_715c, 5);  call(0x100c_a6a0, 0x353f);            /* call 0x100ca6a0 */
             ii(0x100c_7161, 2);  jmp(0x100c_716d, 0xa); goto l_0x100c_716d;/* jmp 0x100c716d */
-        //  ii(0x100c_7163, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x100c_7165, 3);  lea(eax, memd[ss, ebp - 20]);         /* lea eax, [ebp-0x14] */
-        //  ii(0x100c_7168, 5);  call(0x100c_a6a0, 0x3533);            /* call 0x100ca6a0 */
+        //  ii(0x100c_7163, 10);  Недостижимый код.
         l_0x100c_716d:
             ii(0x100c_716d, 3);  mov(eax, memd[ss, ebp - 8]);          /* mov eax, [ebp-0x8] */
             ii(0x100c_7170, 2);  mov(esp, ebp);                        /* mov esp, ebp */

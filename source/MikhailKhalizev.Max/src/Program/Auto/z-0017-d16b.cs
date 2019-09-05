@@ -25,7 +25,6 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d189, 4);  call_abs(memw[ds, 0x13f2]);             /* call word [0x13f2] */
             ii(0x17_d18d, 3);  push(0x3e);                             /* push 0x3e */
             ii(0x17_d190, 2);  add(memb[ds, bx + si], al);             /* add [bx+si], al */
-        l_0x17_d192:
             ii(0x17_d192, 1);  push(es);                               /* push es */
             ii(0x17_d193, 3);  mov(ax, 0xffff);                        /* mov ax, 0xffff */
             ii(0x17_d196, 2);  mov(dh, 5);                             /* mov dh, 0x5 */
@@ -36,7 +35,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_d1a5, 4);  mov(memw[es, -0x7690], ax);             /* mov [es:0x8970], ax */
             ii(0x17_d1a9, 1);  pop(es);                                /* pop es */
             ii(0x17_d1aa, 2);  jmp(0x17_d1ae, 2); goto l_0x17_d1ae;    /* jmp 0xd1ae */
-        //  ii(0x17_d1ac, 2);  jmp(0x17_d192, -0x1c); goto l_0x17_d192;/* jmp 0xd192 */
+        //  ii(0x17_d1ac, 2);  Недостижимый код.
         l_0x17_d1ae:
             ii(0x17_d1ae, 1);  push(bp);                               /* push bp */
             ii(0x17_d1af, 2);  mov(bp, sp);                            /* mov bp, sp */

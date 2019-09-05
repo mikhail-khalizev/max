@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x19_0929:
             ii(0x19_0929, 5);  or(memb_a32[ss, ebp + 44], 1);          /* or byte [ebp+0x2c], 0x1 */
             ii(0x19_092e, 2);  jmp(0x19_0974, 0x44); goto l_0x19_0974; /* jmp 0x974 */
-        //  ii(0x19_0930, 1);  nop();                                  /* nop */
+        //  ii(0x19_0930, 1);  Недостижимый код.
         l_0x19_0931:
             ii(0x19_0931, 5);  if(jmp_far_ind(memw[cs, 0x1474])) return;/* jmp far word [cs:0x1474] */
             ii(0x19_0936, 2);  xchg(bx, bx);                           /* xchg bx, bx */

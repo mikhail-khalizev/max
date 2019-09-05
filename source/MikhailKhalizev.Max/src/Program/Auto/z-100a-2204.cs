@@ -141,12 +141,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_23b8, 3);  lea(eax, memd[ss, ebp - 24]);         /* lea eax, [ebp-0x18] */
             ii(0x100a_23bb, 5);  call(0x1007_5f6c, -0x2_c454);         /* call 0x10075f6c */
             ii(0x100a_23c0, 2);  jmp(0x100a_23d9, 0x17); goto l_0x100a_23d9;/* jmp 0x100a23d9 */
-        //  ii(0x100a_23c2, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x100a_23c4, 6);  lea(eax, memd[ss, ebp - 916]);        /* lea eax, [ebp-0x394] */
-        //  ii(0x100a_23ca, 5);  call(0x100a_a698, 0x82c9);            /* call 0x100aa698 */
-        //  ii(0x100a_23cf, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x100a_23d1, 3);  lea(eax, memd[ss, ebp - 24]);         /* lea eax, [ebp-0x18] */
-        //  ii(0x100a_23d4, 5);  call(0x1007_5f6c, -0x2_c46d);         /* call 0x10075f6c */
+        //  ii(0x100a_23c2, 23);  Недостижимый код.
         l_0x100a_23d9:
             ii(0x100a_23d9, 3);  mov(al, memb[ss, ebp - 20]);          /* mov al, [ebp-0x14] */
             ii(0x100a_23dc, 2);  mov(esp, ebp);                        /* mov esp, ebp */

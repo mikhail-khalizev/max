@@ -89,8 +89,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1013_5f6d, 2);  jmp(0x1013_5fc5, 0x56); goto l_0x1013_5fc5;/* jmp 0x10135fc5 */
         l_0x1013_5f6f:
             ii(0x1013_5f6f, 2);  jmp(0x1013_5fc5, 0x54); goto l_0x1013_5fc5;/* jmp 0x10135fc5 */
-        //  ii(0x1013_5f71, 3);  lea(eax, memd[ds, eax]);              /* lea eax, [eax] */
-        //  ii(0x1013_5f74, 52);  /* Служебная область с абсолютными адресами переходов. (0x1013_5eb6, 0x1013_5ec5, 0x1013_5ed4, 0x1013_5ee3, 0x1013_5ef2, 0x1013_5f00, 0x1013_5f0f, 0x1013_5f1e, 0x1013_5f2d, 0x1013_5f3c, 0x1013_5f4b, 0x1013_5f57, 0x1013_5f63). */
+        //  ii(0x1013_5f71, 55);  Недостижимый код.
         l_0x1013_5fa8:
             ii(0x1013_5fa8, 3);  mov(eax, memd[ss, ebp - 16]);         /* mov eax, [ebp-0x10] */
             ii(0x1013_5fab, 3);  mov(memd[ss, ebp - 20], eax);         /* mov [ebp-0x14], eax */

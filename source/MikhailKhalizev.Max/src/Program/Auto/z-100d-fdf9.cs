@@ -97,8 +97,7 @@ namespace MikhailKhalizev.Max.Program
         l_0x100d_ff2e:
             ii(0x100d_ff2e, 7);  mov(memd[ss, ebp - 32], 0);           /* mov dword [ebp-0x20], 0x0 */
             ii(0x100d_ff35, 2);  jmp(0x100d_ff75, 0x3e); goto l_0x100d_ff75;/* jmp 0x100dff75 */
-        //  ii(0x100d_ff37, 1);  nop();                                /* nop */
-        //  ii(0x100d_ff38, 32);  /* Служебная область с абсолютными адресами переходов. (0x100d_fe83, 0x100d_fe9a, 0x100d_feb4, 0x100d_ff2e, 0x100d_fece, 0x100d_fee8, 0x100d_ff02, 0x100d_ff19). */
+        //  ii(0x100d_ff37, 33);  Недостижимый код.
         l_0x100d_ff58:
             ii(0x100d_ff58, 3);  mov(al, memb[ss, ebp - 16]);          /* mov al, [ebp-0x10] */
             ii(0x100d_ff5b, 2);  dec(al);                              /* dec al */
@@ -236,12 +235,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100e_00af, 3);  lea(eax, memd[ss, ebp - 20]);         /* lea eax, [ebp-0x14] */
             ii(0x100e_00b2, 5);  call(0x1007_5eec, -0x6_a1cb);         /* call 0x10075eec */
             ii(0x100e_00b7, 2);  jmp(0x100e_00cd, 0x14); goto l_0x100e_00cd;/* jmp 0x100e00cd */
-        //  ii(0x100e_00b9, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x100e_00bb, 3);  lea(eax, memd[ss, ebp - 24]);         /* lea eax, [ebp-0x18] */
-        //  ii(0x100e_00be, 5);  call(0x1007_5eec, -0x6_a1d7);         /* call 0x10075eec */
-        //  ii(0x100e_00c3, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x100e_00c5, 3);  lea(eax, memd[ss, ebp - 20]);         /* lea eax, [ebp-0x14] */
-        //  ii(0x100e_00c8, 5);  call(0x1007_5eec, -0x6_a1e1);         /* call 0x10075eec */
+        //  ii(0x100e_00b9, 20);  Недостижимый код.
         l_0x100e_00cd:
             ii(0x100e_00cd, 3);  mov(eax, memd[ss, ebp - 56]);         /* mov eax, [ebp-0x38] */
             ii(0x100e_00d0, 2);  mov(esp, ebp);                        /* mov esp, ebp */

@@ -105,7 +105,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_a9dd, 3);  mov(memw[ss, bp - 24], ax);             /* mov [bp-0x18], ax */
             ii(0x17_a9e0, 3);  mov(memw[ss, bp - 26], ax);             /* mov [bp-0x1a], ax */
             ii(0x17_a9e3, 2);  jmp(0x17_a9f6, 0x11); goto l_0x17_a9f6; /* jmp 0xa9f6 */
-        //  ii(0x17_a9e5, 1);  nop();                                  /* nop */
+        //  ii(0x17_a9e5, 1);  Недостижимый код.
         l_0x17_a9e6:
             ii(0x17_a9e6, 4);  add(memw[ss, bp - 26], 1);              /* add word [bp-0x1a], 0x1 */
             ii(0x17_a9ea, 4);  adc(memw[ss, bp - 24], 0);              /* adc word [bp-0x18], 0x0 */
@@ -131,8 +131,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_aa21, 2);  if(jnz(0x17_aa2e, 0xb)) goto l_0x17_aa2e;/* jnz 0xaa2e */
             ii(0x17_aa23, 5);  mov(memw[ss, bp - 14], 0x8002);         /* mov word [bp-0xe], 0x8002 */
             ii(0x17_aa28, 3);  jmp(0x17_aaf6, 0xcb); goto l_0x17_aaf6; /* jmp 0xaaf6 */
-        //  ii(0x17_aa2b, 2);  jmp(0x17_aa51, 0x24); goto l_0x17_aa51; /* jmp 0xaa51 */
-        //  ii(0x17_aa2d, 1);  nop();                                  /* nop */
+        //  ii(0x17_aa2b, 3);  Недостижимый код.
         l_0x17_aa2e:
             ii(0x17_aa2e, 3);  mov(al, memb[ds, 0x51a6]);              /* mov al, [0x51a6] */
             ii(0x17_aa31, 2);  sub(ah, ah);                            /* sub ah, ah */
@@ -150,7 +149,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_aa4e, 3);  add(sp, 8);                             /* add sp, 0x8 */
         l_0x17_aa51:
             ii(0x17_aa51, 2);  jmp(0x17_a9e6, -0x6d); goto l_0x17_a9e6;/* jmp 0xa9e6 */
-        //  ii(0x17_aa53, 1);  nop();                                  /* nop */
+        //  ii(0x17_aa53, 1);  Недостижимый код.
         l_0x17_aa54:
             ii(0x17_aa54, 3);  mov(ax, memw[ss, bp - 18]);             /* mov ax, [bp-0x12] */
             ii(0x17_aa57, 3);  mov(dx, memw[ss, bp - 16]);             /* mov dx, [bp-0x10] */

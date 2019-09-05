@@ -283,7 +283,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_1a84, 5);  cmp(memw[ss, ebp - 92], 1);           /* cmp word [ebp-0x5c], 0x1 */
             ii(0x1009_1a89, 2);  if(jz(0x1009_1a3b, -0x50)) goto l_0x1009_1a3b;/* jz 0x10091a3b */
             ii(0x1009_1a8b, 2);  jmp(0x1009_1a56, -0x37); goto l_0x1009_1a56;/* jmp 0x10091a56 */
-        //  ii(0x1009_1a8d, 2);  jmp(0x1009_1a56, -0x39); goto l_0x1009_1a56;/* jmp 0x10091a56 */
+        //  ii(0x1009_1a8d, 2);  Недостижимый код.
         l_0x1009_1a8f:
             ii(0x1009_1a8f, 5);  jmp(0x1009_1af3, 0x5f); goto l_0x1009_1af3;/* jmp 0x10091af3 */
         l_0x1009_1a94:

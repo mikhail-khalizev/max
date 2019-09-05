@@ -15,12 +15,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_5b74, 1);  push(eax);                            /* push eax */
             ii(0x1019_5b75, 1);  int3();                               /* int3 */
             ii(0x1019_5b76, 2);  jmp(0x1019_5b7e, 6); goto l_0x1019_5b7e;/* jmp 0x10195b7e */
-        //  ii(0x1019_5b78, 1);  push(edi);                            /* push edi */
-        //  ii(0x1019_5b79, 1);  push(esi);                            /* push esi */
-        //  ii(0x1019_5b7a, 1);  dec(ecx);                             /* dec ecx */
-        //  ii(0x1019_5b7b, 1);  inc(esp);                             /* inc esp */
-        //  ii(0x1019_5b7c, 1);  inc(ebp);                             /* inc ebp */
-        //  ii(0x1019_5b7d, 1);  dec(edi);                             /* dec edi */
+        //  ii(0x1019_5b78, 6);  Недостижимый код.
         l_0x1019_5b7e:
             ii(0x1019_5b7e, 5);  mov(eax, 1);                          /* mov eax, 0x1 */
             ii(0x1019_5b83, 3);  add(esp, 8);                          /* add esp, 0x8 */

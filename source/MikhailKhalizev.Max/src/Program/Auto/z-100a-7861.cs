@@ -71,8 +71,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x100a_7925, 2);  jmp(0x100a_795b, 0x34); goto l_0x100a_795b;/* jmp 0x100a795b */
         l_0x100a_7927:
             ii(0x100a_7927, 2);  jmp(0x100a_795b, 0x32); goto l_0x100a_795b;/* jmp 0x100a795b */
-        //  ii(0x100a_7929, 3);  lea(eax, memd[ds, eax]);              /* lea eax, [eax] */
-        //  ii(0x100a_792c, 20);  /* Служебная область с абсолютными адресами переходов. (0x100a_78b1, 0x100a_78c3, 0x100a_78d5, 0x100a_78e7, 0x100a_78f6). */
+        //  ii(0x100a_7929, 23);  Недостижимый код.
         l_0x100a_7940:
             ii(0x100a_7940, 3);  mov(al, memb[ss, ebp - 16]);          /* mov al, [ebp-0x10] */
             ii(0x100a_7943, 3);  mov(memb[ss, ebp - 20], al);          /* mov [ebp-0x14], al */

@@ -297,8 +297,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_5746, 2);  jmp(0x1008_577d, 0x35); goto l_0x1008_577d;/* jmp 0x1008577d */
         l_0x1008_5748:
             ii(0x1008_5748, 2);  jmp(0x1008_577d, 0x33); goto l_0x1008_577d;/* jmp 0x1008577d */
-        //  ii(0x1008_574a, 2);  mov(eax, eax);                        /* mov eax, eax */
-        //  ii(0x1008_574c, 20);  /* Служебная область с абсолютными адресами переходов. (0x1008_5722, 0x1008_572a, 0x1008_572a, 0x1008_5734, 0x1008_573f). */
+        //  ii(0x1008_574a, 22);  Недостижимый код.
         l_0x1008_5760:
             ii(0x1008_5760, 3);  mov(eax, memd[ss, ebp - 104]);        /* mov eax, [ebp-0x68] */
             ii(0x1008_5763, 3);  mov(memd[ss, ebp - 108], eax);        /* mov [ebp-0x6c], eax */

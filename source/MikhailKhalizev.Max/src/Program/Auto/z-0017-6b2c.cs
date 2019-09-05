@@ -123,7 +123,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_6c2d, 3);  mov(memw[ss, bp - 44], ax);             /* mov [bp-0x2c], ax */
             ii(0x17_6c30, 3);  mov(memw[ss, bp - 46], ax);             /* mov [bp-0x2e], ax */
             ii(0x17_6c33, 2);  jmp(0x17_6c3f, 0xa); goto l_0x17_6c3f;  /* jmp 0x6c3f */
-        //  ii(0x17_6c35, 1);  nop();                                  /* nop */
+        //  ii(0x17_6c35, 1);  Недостижимый код.
         l_0x17_6c36:
             ii(0x17_6c36, 5);  add(memw[ss, bp - 42], 0x1000);         /* add word [bp-0x2a], 0x1000 */
             ii(0x17_6c3b, 4);  adc(memw[ss, bp - 40], 0);              /* adc word [bp-0x28], 0x0 */

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
+using MikhailKhalizev.Processor.x86.Utils;
 using SharpDisasm;
 using SharpDisasm.Udis86;
 
@@ -22,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 return;
             var op = cmd.Operands[0];
 
-            
+
             if (cmd.IsCall)
             {
                 Engine.RegisterOnInstructionAttachToMethod(
@@ -81,7 +82,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     {
                         Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, extraStart, extraBytes);
                     });
-                
+
                 switch (op.size)
                 {
                     case 16:
@@ -125,7 +126,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 if (actual == null)
                 {
                     actual = new BranchInfo(cmd.Begin);
-                    actual.To = new SortedSet<Address>();
+                    actual.To = new MySortedSet<Address>();
                     Engine.BranchesInfo.Add(actual);
                 }
 
@@ -138,13 +139,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         if (extraBytes != null)
                             Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, extraStart, extraBytes);
 
-                        Engine.BranchesInfo.TryGetValue(new BranchInfo(method.Instructions[index].Begin), out var curJmp);
-                        if (curJmp == null)
+                        Engine.BranchesInfo.TryGetValue(new BranchInfo(method.Instructions[index].Begin), out var branchInfo);
+                        if (branchInfo == null)
                             throw new InvalidOperationException();
 
-                        var to = curJmp.To.Single();
-
-                        if (!method.Labels.Contains(to))
+                        var to = branchInfo.To.Single();
+                        
+                        if (method.InstructionOf(to)?.HasLabel != true)
                         {
                             if (method.Begin <= to && to < method.End)
                                 cmd.Comments.Add("Адрес перехода делит инструкцию в этой функции пополам.");

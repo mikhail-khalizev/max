@@ -16,8 +16,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1019_0276, 3);  mov(ax, bx);                          /* mov ax, bx */
             ii(0x1019_0279, 2);  mov(ebx, eax);                        /* mov ebx, eax */
             ii(0x1019_027b, 2);  jmp(0x1019_0294, 0x17); goto l_0x1019_0294;/* jmp 0x10190294 */
-        //  ii(0x1019_027d, 1);  ret(); return;                        /* ret */
-        //  ii(0x1019_027e, 22);  Недостижимый код.
+        //  ii(0x1019_027d, 23);  Недостижимый код.
         l_0x1019_0294:
             ii(0x1019_0294, 6);  mov(edx, memd[ds, 0x1020_9cd0]);      /* mov edx, [0x10209cd0] */
             ii(0x1019_029a, 2);  mov(memd[ds, edi], eax);              /* mov [edi], eax */

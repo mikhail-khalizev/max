@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1012_e8d7, 4);  cmp(memb[ss, ebp - 36], 3);           /* cmp byte [ebp-0x24], 0x3 */
             ii(0x1012_e8db, 2);  if(jz(0x1012_e8b2, -0x2b)) goto l_0x1012_e8b2;/* jz 0x1012e8b2 */
             ii(0x1012_e8dd, 2);  jmp(0x1012_e8c9, -0x16); goto l_0x1012_e8c9;/* jmp 0x1012e8c9 */
-        //  ii(0x1012_e8df, 2);  jmp(0x1012_e8c9, -0x18); goto l_0x1012_e8c9;/* jmp 0x1012e8c9 */
+        //  ii(0x1012_e8df, 2);  Недостижимый код.
         l_0x1012_e8e1:
             ii(0x1012_e8e1, 3);  mov(eax, memd[ss, ebp - 12]);         /* mov eax, [ebp-0xc] */
             ii(0x1012_e8e4, 3);  mov(memd[ss, ebp - 40], eax);         /* mov [ebp-0x28], eax */

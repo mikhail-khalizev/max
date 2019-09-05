@@ -378,9 +378,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1009_db01, 3);  lea(eax, memd[ss, ebp - 80]);         /* lea eax, [ebp-0x50] */
             ii(0x1009_db04, 5);  call(Definitions.my_dtor_d1, -0x1_4e0d);/* call 0x10088cfc */
             ii(0x1009_db09, 2);  jmp(0x1009_db15, 0xa); goto l_0x1009_db15;/* jmp 0x1009db15 */
-        //  ii(0x1009_db0b, 2);  xor(edx, edx);                        /* xor edx, edx */
-        //  ii(0x1009_db0d, 3);  lea(eax, memd[ss, ebp - 80]);         /* lea eax, [ebp-0x50] */
-        //  ii(0x1009_db10, 5);  call(Definitions.my_dtor_d1, -0x1_4e19);/* call 0x10088cfc */
+        //  ii(0x1009_db0b, 10);  Недостижимый код.
         l_0x1009_db15:
             ii(0x1009_db15, 3);  mov(al, memb[ss, ebp - 8]);           /* mov al, [ebp-0x8] */
             ii(0x1009_db18, 2);  mov(esp, ebp);                        /* mov esp, ebp */

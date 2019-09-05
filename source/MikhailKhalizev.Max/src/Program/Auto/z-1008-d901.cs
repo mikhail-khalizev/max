@@ -198,8 +198,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1008_db12, 3);  mov(eax, memd[ss, ebp - 20]);         /* mov eax, [ebp-0x14] */
             ii(0x1008_db15, 3);  call_abs(memd[ds, ebx + 68]);         /* call dword [ebx+0x44] */
             ii(0x1008_db18, 2);  jmp(0x1008_db55, 0x3b); goto l_0x1008_db55;/* jmp 0x1008db55 */
-        //  ii(0x1008_db1a, 2);  mov(eax, eax);                        /* mov eax, eax */
-        //  ii(0x1008_db1c, 28);  /* Служебная область с абсолютными адресами переходов. (0x1008_d98b, 0x1008_d96e, 0x1008_d998, 0x1008_daf9, 0x1008_d9f4, 0x1008_daf9, 0x1008_dac7). */
+        //  ii(0x1008_db1a, 30);  Недостижимый код.
         l_0x1008_db38:
             ii(0x1008_db38, 3);  mov(al, memb[ss, ebp - 8]);           /* mov al, [ebp-0x8] */
             ii(0x1008_db3b, 2);  sub(al, 5);                           /* sub al, 0x5 */

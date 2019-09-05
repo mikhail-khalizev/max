@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_96c4, 3);  mov(al, memb[ss, bp + 10]);             /* mov al, [bp+0xa] */
             ii(0x17_96c7, 2);  sub(ah, ah);                            /* sub ah, ah */
             ii(0x17_96c9, 2);  jmp(0x17_96f6, 0x2b); goto l_0x17_96f6; /* jmp 0x96f6 */
-        //  ii(0x17_96cb, 1);  nop();                                  /* nop */
+        //  ii(0x17_96cb, 1);  Недостижимый код.
         l_0x17_96cc:
             ii(0x17_96cc, 3);  mov(ax, memw[ds, 0x1f58]);              /* mov ax, [0x1f58] */
             ii(0x17_96cf, 3);  les(bx, memw[ss, bp + 6]);              /* les bx, [bp+0x6] */
@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Max.Program
             ii(0x17_96e9, 4);  mov(memw[es, bx + 24], ax);             /* mov [es:bx+0x18], ax */
             ii(0x17_96ed, 5);  mov(memw[ss, bp - 2], 0);               /* mov word [bp-0x2], 0x0 */
             ii(0x17_96f2, 2);  jmp(0x17_96fc, 8); goto l_0x17_96fc;    /* jmp 0x96fc */
-        //  ii(0x17_96f4, 2);  jmp(0x17_96fc, 6); goto l_0x17_96fc;    /* jmp 0x96fc */
+        //  ii(0x17_96f4, 2);  Недостижимый код.
         l_0x17_96f6:
             ii(0x17_96f6, 2);  or(ax, ax);                             /* or ax, ax */
             ii(0x17_96f8, 2);  if(jz(0x17_96cc, -0x2e)) goto l_0x17_96cc;/* jz 0x96cc */

@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     public class BranchInfo
     {
         public Address From { get; set; }
-        public SortedSet<Address> To { get; set; }
+        public MySortedSet<Address> To { get; set; }
 
         public BranchInfo(Address from)
         {
