@@ -22,7 +22,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     /// чего декодирование части заканчивается и начинается декодирование других частей,
     /// выявленных по операциям ветвления (jcc, jmp, loop, call).
     /// </summary>
-    public class Engine
+    public class LowLevelEngine
     {
         public BinToCSharpDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
@@ -75,7 +75,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private readonly MySortedDictionary<CSharpInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
             new MySortedDictionary<CSharpInstruction, OnInstructionAttachToMethodDelegate>(CSharpInstruction.BeginComparer);
 
-        public Engine(
+        public LowLevelEngine(
             BinToCSharpDto configuration,
             DefinitionCollection definitionCollection,
             IMethodInfoCollection methodInfoCollection)
@@ -440,7 +440,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var fromInstructionIndex = method.InstructionIndexOf(branchInfo.From);
                     if (fromInstructionIndex < 0)
                         continue;
-                    
+
                     foreach (var to in branchInfo.To)
                     {
                         var toInstructionIndex = method.InstructionIndexOf(to);
@@ -536,7 +536,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }
             }
         }
-        
+
 
         // return file paths.
         public List<string> Save(bool inParallel = true, bool callDetectMethods = true)
@@ -703,7 +703,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 var cmd = detectedMethod.Instructions[cmdIndex];
 
                 var lines = Enumerable.Empty<string>();
-                
+
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
                     var ii = CSharpInstruction.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
@@ -728,7 +728,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {
                     throw new InvalidOperationException($"Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
                 }
-                
+
                 lastInstrEnd = cmd.End;
                 lastInstrJmpOrRet = cmd.IsJmpOrRet;
             }
@@ -736,6 +736,29 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             output.AppendLine("        }");
             output.AppendLine("    }");
             output.AppendLine("}");
+        }
+
+        public static DetectedMethod GetMethod(MethodInfoDto mi, Action<LowLevelEngine> configure = null)
+        {
+            var engine = new LowLevelEngine(
+                new BinToCSharpDto(),
+                new DefinitionCollection(),
+                new InMemoryMethodInfoCollection());
+
+            engine.Memory = new MemoryFromMethodInfo(mi);
+            engine.CsBase = mi.CsBase;
+            engine.Mode = mi.Mode;
+
+            engine.SuppressDecode.Add(0, mi.Address);
+            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
+
+            configure?.Invoke(engine);
+
+            engine.DecodeMethod(mi.Address);
+            engine.DetectMethods();
+
+            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
+            return method;
         }
     }
 }

@@ -1,16 +1,13 @@
 using System;
-using System.Linq;
 using FluentAssertions;
-using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
-using MikhailKhalizev.Processor.x86.Configuration;
 using SharpDisasm;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
 {
-    public class EngineTests
+    public class LowLevelEngineTests
     {
         [Fact]
         public void DecodeMethodWithCallInsideInstruction()
@@ -88,27 +85,6 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
         }
 
 
-        private DetectedMethod Decode(MethodInfoDto mi, Action<Engine> configure = null)
-        {
-            var engine = new Engine(
-                new BinToCSharpDto(),
-                new DefinitionCollection(),
-                new InMemoryMethodInfoCollection());
-
-            engine.Memory = new MemoryFromMethodInfo(mi);
-            engine.CsBase = mi.CsBase;
-            engine.Mode = mi.Mode;
-
-            engine.SuppressDecode.Add(0, mi.Address);
-            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
-
-            configure?.Invoke(engine);
-
-            engine.DecodeMethod(mi.Address);
-            engine.DetectMethods();
-
-            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
-            return method;
-        }
+        private DetectedMethod Decode(MethodInfoDto mi, Action<LowLevelEngine> configure = null) => LowLevelEngine.GetMethod(mi, configure);
     }
 }

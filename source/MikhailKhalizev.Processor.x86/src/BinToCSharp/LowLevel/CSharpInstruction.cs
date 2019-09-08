@@ -197,7 +197,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             }
             else
             {
-                var cmd = GetCommandString(onlyRawCmd: isLastInstructionInMethod && !IsLocalBranch);
+                var cmd = GetCommandString(isLastInstructionInMethod && !IsLocalBranch);
                 var line = ii + cmd;
 
                 if (!string.IsNullOrEmpty(cmd) && Comments.Count != 0)
@@ -220,8 +220,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
 
-        public string GetCommandString(string cmdSuffix = "", bool onlyRawCmd = false)
+        public string GetCommandString(bool onlyRawCmd = false)
         {
+            var cmdSuffix = "";
+
             if (Mnemonic == ud_mnemonic_code.UD_Inone)
                 return "";
 
@@ -405,7 +407,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 sb.Append($" goto l_{(Address)(End + val)};");
             }
             else if (addReturn)
-                sb.Append($" return;");
+                sb.Append(" return;");
 
             return sb.ToString();
         }

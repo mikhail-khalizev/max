@@ -392,7 +392,7 @@ namespace MikhailKhalizev.Max.Program
         }
 
 
-        public static void ConfigureEngine(Engine engine)
+        public static void ConfigureEngine(LowLevelEngine engine)
         {
             // Аргументы следующим методам установлены опытным путём.
 
@@ -443,7 +443,7 @@ namespace MikhailKhalizev.Max.Program
 
             var fullAddress = cs[eip];
 
-            var engine = new Engine(
+            var engine = new LowLevelEngine(
                 Configuration.BinToCSharp,
                 DefinitionCollection,
                 MethodInfoCollection);

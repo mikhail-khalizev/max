@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
     public class SimpleBranchPlugin : PluginBase
     {
         /// <inheritdoc />
-        public SimpleBranchPlugin(Engine engine)
+        public SimpleBranchPlugin(LowLevelEngine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;

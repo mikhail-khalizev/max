@@ -86,7 +86,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     {
                         try
                         {
-                            var engine = new Engine(
+                            var engine = new LowLevelEngine(
                                 Configuration,
                                 _definitionCollection,
                                 MethodInfoCollection);

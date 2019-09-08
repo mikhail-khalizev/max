@@ -18,7 +18,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
         private int _sizeOfAddrArea;
 
         /// <inheritdoc />
-        public SwitchPlugin(Engine engine)
+        public SwitchPlugin(LowLevelEngine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;

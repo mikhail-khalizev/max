@@ -1,17 +1,71 @@
-using System.Linq;
-using FluentAssertions;
-using MikhailKhalizev.Processor.x86.BinToCSharp;
+using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
-using MikhailKhalizev.Processor.x86.Configuration;
 using SharpDisasm;
 using Xunit;
 
 namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
 {
-    public class EngineTests
+    public class HighLevelEngineTests
     {
         [Fact]
+        public void DecodeStrCaseCmp()
+        {
+            var mi = new MethodInfoDto();
+            mi.Id = "0x1016_6130-63cf5e5f";
+            mi.Address = 0x1016_6130;
+            mi.Mode = ArchitectureMode.x86_32;
+            mi.Raw = "535189c38a0331c98a2288c183f9417c0783f95a7f02042031c988e183f9417c0883f95a7f0380c42038e0750884e474044342ebcf31d288c288e025ff00000029c289d0595bc3";
+
+            //var hl = Decode(mi);
+        }
+
+#if false
+
+            ii(0x1016_6130, 1); push(ebx);                              /* push ebx */
+            ii(0x1016_6131, 1); push(ecx);                              /* push ecx */
+            ii(0x1016_6132, 2); mov(ebx, eax);                          /* mov ebx, eax */
+        l_0x1016_6134:
+            ii(0x1016_6134, 2); mov(al, memb[ds, ebx]);                 /* mov al, [ebx] */
+            ii(0x1016_6136, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
+            ii(0x1016_6138, 2); mov(ah, memb[ds, edx]);                 /* mov ah, [edx] */
+            ii(0x1016_613a, 2); mov(cl, al);                            /* mov cl, al */
+            ii(0x1016_613c, 3); cmp(ecx, 0x41);                         /* cmp ecx, 0x41 */
+            ii(0x1016_613f, 2); if(jl(0x1016_6148, 0x7)) goto l_0x1016_6148; /* jl 0x10166148 */
+            ii(0x1016_6141, 3); cmp(ecx, 0x5a);                         /* cmp ecx, 0x5a */
+            ii(0x1016_6144, 2); if(jg(0x1016_6148, 0x2)) goto l_0x1016_6148; /* jg 0x10166148 */
+            ii(0x1016_6146, 2); add(al, 0x20);                          /* add al, 0x20 */
+        l_0x1016_6148:
+            ii(0x1016_6148, 2); xor(ecx, ecx);                          /* xor ecx, ecx */
+            ii(0x1016_614a, 2); mov(cl, ah);                            /* mov cl, ah */
+            ii(0x1016_614c, 3); cmp(ecx, 0x41);                         /* cmp ecx, 0x41 */
+            ii(0x1016_614f, 2); if(jl(0x1016_6159, 0x8)) goto l_0x1016_6159; /* jl 0x10166159 */
+            ii(0x1016_6151, 3); cmp(ecx, 0x5a);                         /* cmp ecx, 0x5a */
+            ii(0x1016_6154, 2); if(jg(0x1016_6159, 0x3)) goto l_0x1016_6159; /* jg 0x10166159 */
+            ii(0x1016_6156, 3); add(ah, 0x20);                          /* add ah, 0x20 */
+        l_0x1016_6159:
+            ii(0x1016_6159, 2); cmp(al, ah);                            /* cmp al, ah */
+            ii(0x1016_615b, 2); if(jnz(0x1016_6165, 0x8)) goto l_0x1016_6165; /* jnz 0x10166165 */
+            ii(0x1016_615d, 2); test(ah, ah);                           /* test ah, ah */
+            ii(0x1016_615f, 2); if(jz(0x1016_6165, 0x4)) goto l_0x1016_6165; /* jz 0x10166165 */
+            ii(0x1016_6161, 1); inc(ebx);                               /* inc ebx */
+            ii(0x1016_6162, 1); inc(edx);                               /* inc edx */
+            ii(0x1016_6163, 2); jmp(0x1016_6134, -0x31); goto l_0x1016_6134; /* jmp 0x10166134 */
+        l_0x1016_6165:
+            ii(0x1016_6165, 2); xor(edx, edx);                          /* xor edx, edx */
+            ii(0x1016_6167, 2); mov(dl, al);                            /* mov dl, al */
+            ii(0x1016_6169, 2); mov(al, ah);                            /* mov al, ah */
+            ii(0x1016_616b, 5); and(eax, 0xff);                         /* and eax, 0xff */
+            ii(0x1016_6170, 2); sub(edx, eax);                          /* sub edx, eax */
+            ii(0x1016_6172, 2); mov(eax, edx);                          /* mov eax, edx */
+            ii(0x1016_6174, 1); pop(ecx);                               /* pop ecx */
+            ii(0x1016_6175, 1); pop(ebx);                               /* pop ebx */
+            ii(0x1016_6176, 1); ret();                                  /* ret */
+
+#endif
+
+
+        [Fact(Skip = "In develop")]
         public void DecodeMethod_1008_a330()
         {
             var mi = new MethodInfoDto();
@@ -20,22 +74,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "6828000000e818ba0d0053515256575589e581ec0c0000008945fc8b45fce8f1cafeff8945fc8d45fc8945f88b45fc8945f48b45f489ec5d5f5e5a595bc3";
 
-            var engine = new Engine(
-                new BinToCSharpDto(),
-                new DefinitionCollection(),
-                new InMemoryMethodInfoCollection());
-
-            engine.Memory = new MemoryFromMethodInfo(mi);
-            engine.CsBase = mi.CsBase;
-            engine.Mode = mi.Mode;
-
-            engine.SuppressDecode.Add(0, mi.Address);
-            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
-
-            engine.DecodeMethod(mi.Address);
-            engine.DetectMethods();
-
-            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
+            var hl = Decode(mi);
         }
 
 #if false
@@ -74,8 +113,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
 
 #endif
 
-
-        [Fact]
+        
+        [Fact(Skip = "In develop")]
         public void DecodeMethod_1013_3a88()
         {
             var mi = new MethodInfoDto();
@@ -83,23 +122,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Address = 0x1013_3a88;
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "6844000000e8c022030056575589e581ec340000008945f08955f4895df8884dfcc745e8ffffff7fc745e400000000eb048345e4030fbf45e43d000300000f8dea000000807dfc0075360fbf45e483f81b7c090fbf45e483f85d7e02eb05e9c60000000fbf45e43d200100007c0b0fbf45e43d7d0100007e02eb05e9a90000000fbf55e4a164941c1001d08a0025ff0000008945e00fbf45f08b55e029c28955dc0fbf45e48b1564941c1001d08a400125ff0000008945e00fbf45f48b55e029c28955d80fbf55e4a164941c1001d08a400225ff0000008945e00fbf45f88b55e029c28955d48b55dc0faf55dc8b45d80faf45d801c28b45d40faf45d401c28955d08b45d03b45e87d1f8b45d08945e80fbf55e4bb0300000089d0c1fa1ff7fb8945cc837dd0007405e903ffffff8a45cc8845ec8a45ec89ec5d5f5ec3";
-
-            var engine = new Engine(
-                new BinToCSharpDto(),
-                new DefinitionCollection(),
-                new InMemoryMethodInfoCollection());
-
-            engine.Memory = new MemoryFromMethodInfo(mi);
-            engine.CsBase = mi.CsBase;
-            engine.Mode = mi.Mode;
-
-            engine.SuppressDecode.Add(0, mi.Address);
-            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
-
-            engine.DecodeMethod(mi.Address);
-            engine.DetectMethods();
-
-            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
+            
+            var hl = Decode(mi);
         }
 
 #if false
@@ -219,7 +243,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
 #endif
         
         
-        [Fact]
+        [Fact(Skip = "In develop")]
         public void DecodeMethod_1012_3850()
         {
             var mi = new MethodInfoDto();
@@ -227,23 +251,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Address = 0x1012_3850;
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "6830000000e8f82404005356575589e581ec1c000000c745fc000000008b45148b80900000008945e88b45148b80940000008945f88b45148b90840000008b45148b808800000001d08945f48b45188945f08b45e88a108b45f03a100f85de0000008b45e88945ec8b45e8ff45e88b45f0ff45f08b45f8ff45f88b45e88a108b45f03a1075088b45e83b45f47202eb148b45e8ff45e88b45f0ff45f08b45f8ff45f8ebd68b45f08a0025ff00000085c00f858a0000008b45e83b45f473088b45e880383d7502eb0f8b45e88a0025ff00000083f80d7502eb0e8b45e8ff45e88b45f8ff45f8ebcf8b45e83b45f473088b45e880383d7402eb1a8b45e8ff45e88b45f8ff45f88b45e88b55148982a0000000eb0d8b4514c780a0000000000000008b45ec8b551489829c0000008b4514c780a400000000000000c745fc01000000837dfc0075278b45e83b45f4730f8b45e88a0025ff00000083f80a7502eb0e8b45e8ff45e88b45f8ff45f8ebd98b45e83b45f473068b45e8ff45e88b45f8ff45f8837dfc0075088b45e83b45f47202eb088b45e880385b7502eb05e9acfeffff8b45fc8945e48b45e489ec5d5f5e5bc3";
-
-            var engine = new Engine(
-                new BinToCSharpDto(),
-                new DefinitionCollection(),
-                new InMemoryMethodInfoCollection());
-
-            engine.Memory = new MemoryFromMethodInfo(mi);
-            engine.CsBase = mi.CsBase;
-            engine.Mode = mi.Mode;
-
-            engine.SuppressDecode.Add(0, mi.Address);
-            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
-
-            engine.DecodeMethod(mi.Address);
-            engine.DetectMethods();
-
-            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
+            
+            var hl = Decode(mi);
         }
 
 #if false
@@ -421,5 +430,14 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
         }
 
 #endif
+        
+        private HighLevelEngine Decode(MethodInfoDto mi)
+        {
+            var method = LowLevelEngine.GetMethod(mi);
+
+            var hl = new HighLevelEngine(method.Instructions);
+            hl.Decode();
+            return hl;
+        }
     }
 }
