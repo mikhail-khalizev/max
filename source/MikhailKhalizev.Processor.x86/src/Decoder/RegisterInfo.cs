@@ -5,7 +5,7 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.Decoder
 {
-    public class RegisterInfo
+    public class RegisterInfo : IEquatable<RegisterInfo>
     {
         private static readonly Dictionary<ud_type, RegisterInfo> RegisterByType;
         private static readonly HashSet<string> AllRegNames;
@@ -76,12 +76,12 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         }
         
         // TODO Remove size argument.
-        private RegisterInfo(ud_type udType, int index, int byteMask, int size)
+        private RegisterInfo(ud_type udType, int index, int byteMask, int bits)
         {
             UdType = udType;
             Index = index;
             ByteMask = byteMask;
-            Size = size;
+            Bits = bits;
 
 
             var s = 0;
@@ -93,7 +93,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
                 m = m >> 1;
             }
 
-            if (size != s)
+            if (bits != s)
                 throw new InvalidOperationException("Incorrect size");
 
 
@@ -139,13 +139,53 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         public ud_type UdType { get; }
         public int Index { get; }
         public int ByteMask { get; }
-        public int Size { get; }
+        public int Bits { get; }
         public bool IsGeneralPurpose { get; private set; }
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return syn.ud_reg_tab[UdType - ud_type.UD_R_AL];
+            return Name; // syn.ud_reg_tab[UdType - ud_type.UD_R_AL];
         }
+        
+        #region IEquatable
+        
+        /// <inheritdoc />
+        public bool Equals(RegisterInfo other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Index == other.Index && ByteMask == other.ByteMask;
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((RegisterInfo) obj);
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Index * 397) ^ ByteMask;
+            }
+        }
+
+        public static bool operator ==(RegisterInfo left, RegisterInfo right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(RegisterInfo left, RegisterInfo right)
+        {
+            return !Equals(left, right);
+        }
+
+        #endregion
     }
 }
