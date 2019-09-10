@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikhailKhalizev.Processor.x86", "MikhailKhalizev.Processor.x86\MikhailKhalizev.Processor.x86.csproj", "{44EF46BE-9C1F-49EF-BF08-5574EE4A576B}"
 EndProject
@@ -15,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{4B31A797-375A-4E66-B6AB-26224AFDC743}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandwych.QuickGraph.Core", "..\external\QuickGraph\Sandwych.QuickGraph.Core\Sandwych.QuickGraph.Core.csproj", "{3DF6B434-0B87-4222-87D2-E964F26C72AA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandwych.QuickGraph.Graphviz", "..\external\QuickGraph\Sandwych.QuickGraph.Graphviz\Sandwych.QuickGraph.Graphviz.csproj", "{C2768F03-D38E-4216-83C2-E2B8B2970157}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +44,21 @@ Global
 		{0114FFF5-AAD7-4974-A767-84FE9DCC85C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0114FFF5-AAD7-4974-A767-84FE9DCC85C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0114FFF5-AAD7-4974-A767-84FE9DCC85C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3DF6B434-0B87-4222-87D2-E964F26C72AA} = {4B31A797-375A-4E66-B6AB-26224AFDC743}
+		{C2768F03-D38E-4216-83C2-E2B8B2970157} = {4B31A797-375A-4E66-B6AB-26224AFDC743}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D740980D-0938-4102-8647-85E6FE320B83}
