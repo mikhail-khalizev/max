@@ -128,7 +128,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
     }
 
 
-    public class ConstantValue : Value, IEquatable<ConstantValue>
+    public class ConstantValue : Value
     {
         public int Value { get; }
 
@@ -167,44 +167,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static ConstantValue operator *(ConstantValue a, int b) => new ConstantValue(a.Value * b, a.Bits);
 
         public static ConstantValue operator *(int a, ConstantValue b) => b * a;
-
-
-        #region IEquatable
-
-        /// <inheritdoc />
-        public bool Equals(ConstantValue other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Value == other.Value && Bits == other.Bits;
-        }
-
-        /// <inheritdoc />
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((ConstantValue) obj);
-        }
-
-        /// <inheritdoc />
-        public override int GetHashCode()
-        {
-            return (Value * 397) ^ Bits;
-        }
-
-        public static bool operator ==(ConstantValue left, ConstantValue right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(ConstantValue left, ConstantValue right)
-        {
-            return !Equals(left, right);
-        }
-
-        #endregion
     }
 
     public class RegisterValue : Value
@@ -217,7 +179,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
     }
 
-    //public class MemoryValue : Value
+    public class MemoryValue : Value
+    {
+        public Value Address { get; }
+        public Value Value { get; }
+
+        public MemoryValue(Value address, int bits) : base(bits)
+        {
+            Address = address;
+        }
+
+        public MemoryValue(Value address, Value value) : base(value.Bits)
+        {
+            Address = address;
+            Value = value;
+        }
+    }
 
     //public class CombineValue : Value
 
