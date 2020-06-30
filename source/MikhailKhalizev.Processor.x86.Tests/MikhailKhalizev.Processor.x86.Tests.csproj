@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
     
     <DebugType>portable</DebugType>
@@ -30,7 +30,7 @@
 	
     <PackageReference Include="JetBrains.Annotations" Version="2018.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />	
-	<PackageReference Include="FluentAssertions" Version="5.6.0" />
+	  <PackageReference Include="FluentAssertions" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
