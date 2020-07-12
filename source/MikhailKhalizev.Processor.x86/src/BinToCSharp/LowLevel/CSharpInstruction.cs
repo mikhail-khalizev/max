@@ -10,6 +10,9 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
+    public interface IInstructionFeature
+    {}
+
     public class CSharpInstruction
     {
         public DefinitionCollection DefinitionCollection { get; }
@@ -57,6 +60,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public delegate string WriteCmdDelegate(Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc);
 
         public WriteCmdDelegate WriteCmd { get; set; }
+
+        public List<IInstructionFeature> Features { get; } = new List<IInstructionFeature>();
 
         private int DecimalLimit => 0xfff;
 
