@@ -9,6 +9,19 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
+    public class SwitchFeature : IInstructionFeature
+    {
+        public List<Address> Addresses { get; } = new List<Address>();
+
+        public SwitchFeature()
+        { }
+
+        public SwitchFeature(List<Address> addresses)
+        {
+            Addresses = addresses;
+        }
+    }
+
     public class SwitchPlugin : PluginBase
     {
         private int _state;
@@ -148,7 +161,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Ijmp
                         && cmd.Operands[0].type == ud_type.UD_OP_MEM
                         && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg)
-                        add_switch_at(cmd);
+                        AddSwitchAt(cmd);
 
                     _state = 0;
                     break;
@@ -169,7 +182,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         //                && RegisterInfo.GetRegister(cmd.Operands[0].index) == reg
                         && cmd.Operands[0].scale == 4)
                     {
-                        add_switch_at(cmd);
+                        AddSwitchAt(cmd);
                         _state = 0;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imovzx
@@ -209,7 +222,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         //                && RegisterInfo.GetRegister(cmd.Operands[0].index) == reg
                         && cmd.Operands[0].scale == 4)
                     {
-                        add_switch_at(cmd);
+                        AddSwitchAt(cmd);
                         _state = 0;
                     }
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Ishl
@@ -278,7 +291,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             }
         }
 
-        private void add_switch_at(CSharpInstruction cmd)
+        private void AddSwitchAt(CSharpInstruction cmd)
         {
             if (cmd.BrFar)
                 return;
@@ -296,6 +309,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 jtka.To = new MySortedSet<Address>();
                 Engine.BranchesInfo.Add(jtka);
             }
+
+            // TODO Add 'SwitchFeature' to 'cmd.Features'.
 
             var notFirst = false;
             for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)

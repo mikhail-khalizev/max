@@ -11,6 +11,9 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
+    public interface IInstructionFeature
+    {}
+
     public class CSharpInstruction
     {
         public DefinitionCollection DefinitionCollection { get; }
@@ -57,6 +60,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public List<Address> SwitchAddresses { get; set; }
 
         public bool HasLabel { get; set; }
+
+        public List<IInstructionFeature> Features { get; } = new List<IInstructionFeature>();
 
         private int DecimalLimit => 0xfff;
 

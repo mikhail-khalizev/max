@@ -65,11 +65,9 @@ namespace MikhailKhalizev.Max
                             .AddJsonFile("appsettings.json", optional: true)
                             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                             .AddJsonFile("appsettings.user.json", optional: true)
-
                             .AddJsonFile("settings/appsettings.json", optional: true)
                             .AddJsonFile($"settings/appsettings.{env.EnvironmentName}.json", optional: true)
                             .AddJsonFile("settings/appsettings.user.json", optional: true)
-
                             .AddEnvironmentVariables()
                             .AddCommandLine(args);
                     })
@@ -89,18 +87,22 @@ namespace MikhailKhalizev.Max
 
             var installedPath = ConfigurationDto.Max.InstalledPath;
             if (!Directory.Exists(installedPath))
-                throw new InvalidOperationException($"Directory '{installedPath}' not found. Check Max:InstalledPath configuration option.");
+                throw new InvalidOperationException(
+                    $"Directory '{installedPath}' not found. Check Max:InstalledPath configuration option.");
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services
+                .AddMvc(o => { o.EnableEndpointRouting = false; })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSignalR();
 
             services.AddSingleton(
@@ -172,25 +174,26 @@ namespace MikhailKhalizev.Max
             // Start M.A.X.
 
             var rawProgramMain = app.ApplicationServices.GetRequiredService<RawProgramMain>();
-            Task.Run(() =>
-            {
-                try
+            Task.Run(
+                () =>
                 {
-                    rawProgramMain.Start();
-                }
-                catch (System.OperationCanceledException ex)
-                {
-                    NonBlockingConsole.WriteLine(ex.Message);
-                    ExitCode = -2;
-                }
-                catch (Exception ex)
-                {
-                    NonBlockingConsole.WriteLine(ex);
-                    ExitCode = -1;
-                }
+                    try
+                    {
+                        rawProgramMain.Start();
+                    }
+                    catch (System.OperationCanceledException ex)
+                    {
+                        NonBlockingConsole.WriteLine(ex.Message);
+                        ExitCode = -2;
+                    }
+                    catch (Exception ex)
+                    {
+                        NonBlockingConsole.WriteLine(ex);
+                        ExitCode = -1;
+                    }
 
-                applicationLifetime.StopApplication();
-            });
+                    applicationLifetime.StopApplication();
+                });
         }
     }
 }
