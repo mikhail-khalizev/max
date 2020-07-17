@@ -11,10 +11,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public class SwitchFeature : IInstructionFeature
     {
-        public List<Address> Addresses { get; } = new List<Address>();
+        public List<Address> Addresses { get; }
 
         public SwitchFeature()
-        { }
+        {
+            Addresses = new List<Address>();
+        }
 
         public SwitchFeature(List<Address> addresses)
         {
@@ -310,7 +312,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 Engine.BranchesInfo.Add(jtka);
             }
 
-            // TODO Add 'SwitchFeature' to 'cmd.Features'.
+            var switchFeature = new SwitchFeature();
+            cmd.Features.Add(switchFeature);
 
             var notFirst = false;
             for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)
@@ -337,6 +340,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                 jtka.To.Add(to);
                 Engine.AddToDecode(to);
+                
+                switchFeature.Addresses.Add(to);
             }
 
             os.Append(").");
