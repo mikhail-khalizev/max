@@ -1,3 +1,4 @@
+using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
@@ -435,7 +436,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
         {
             var method = LowLevelEngine.GetMethod(mi);
 
-            var hl = new HighLevelEngine(method.Instructions);
+            var hl = new HighLevelEngine(method.Instructions.OfType<CSharpInstruction>().ToList());
             hl.Decode();
             return hl;
         }

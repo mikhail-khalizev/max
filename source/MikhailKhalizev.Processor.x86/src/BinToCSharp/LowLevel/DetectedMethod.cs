@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     {
         public Address Begin { get; }
         public Address End { get; set; } // 0 if unknown
-        public List<CSharpInstruction> Instructions { get; set; } = new List<CSharpInstruction>();
+        public List<ICSharpInstruction> Instructions { get; set; } = new List<ICSharpInstruction>();
         public byte[] RawBytes { get; set; }
         public MethodInfoDto MethodInfo { get; set; }
 
@@ -20,20 +20,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Begin = begin;
         }
 
-        public CSharpInstruction InstructionOf(Address address)
+        public ICSharpInstruction InstructionOf(Address address)
         {
-            var index = Instructions.BinarySearch(new CSharpInstruction(address), CSharpInstruction.BeginComparer);
+            var index = Instructions.BinarySearch(new CSharpInstructionAddressSearch(address), ICSharpInstruction.BeginComparer);
             return index < 0 ? null : Instructions[index];
         }
 
         public int InstructionIndexOf(Address address)
         {
-            return Instructions.BinarySearch(new CSharpInstruction(address), CSharpInstruction.BeginComparer);
+            return Instructions.BinarySearch(new CSharpInstructionAddressSearch(address), ICSharpInstruction.BeginComparer);
         }
 
-        public int InstructionIndexOf(CSharpInstruction instruction)
+        public int InstructionIndexOf(ICSharpInstruction instruction)
         {
-            return Instructions.BinarySearch(instruction, CSharpInstruction.BeginComparer);
+            return Instructions.BinarySearch(instruction, ICSharpInstruction.BeginComparer);
         }
         
         public static IEqualityComparer<DetectedMethod> BeginEqualityComparer =>

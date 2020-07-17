@@ -72,8 +72,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private readonly ReadCStringPlugin _readCStringPlugin;
 
         public delegate void OnInstructionAttachToMethodDelegate(DetectedMethod method, int instructionIndex);
-        private readonly MySortedDictionary<CSharpInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
-            new MySortedDictionary<CSharpInstruction, OnInstructionAttachToMethodDelegate>(CSharpInstruction.BeginComparer);
+        private readonly MySortedDictionary<ICSharpInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
+            new MySortedDictionary<ICSharpInstruction, OnInstructionAttachToMethodDelegate>(ICSharpInstruction.BeginComparer);
 
         public LowLevelEngine(
             BinToCSharpDto configuration,
@@ -280,7 +280,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     // Учтём, что инструкции в DecodedCode могут пересекаться. Найдём "верную дорожку".
 
-                    var instructions = new List<CSharpInstruction>();
+                    var instructions = new List<ICSharpInstruction>();
 
                     CSharpInstruction lastInstr = null;
                     var lastInstrEnd = firstCmd.Begin;
@@ -312,7 +312,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     }
 
                     // Убираем конечные закомментированные инструкции.
-                    while (instructions.Count != 0 && instructions[instructions.Count - 1].CommentThis)
+                    while (instructions.Count != 0 && instructions[instructions.Count - 1] is CSharpInstruction csi && csi.CommentThis)
                         instructions.RemoveAt(instructions.Count - 1);
 
                     if (instructions.Count == 0)
@@ -473,7 +473,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 // Call onAttachToMethod.
 
-                foreach (var instruction in _onAttachToMethod.GreaterThat(new CSharpInstruction(method.Begin - 1))
+                foreach (var instruction in _onAttachToMethod.GreaterThat(new CSharpInstructionAddressSearch(method.Begin - 1))
                     .Where(x => x.Begin < method.End).ToList())
                 {
                     var index = method.InstructionIndexOf(instruction);

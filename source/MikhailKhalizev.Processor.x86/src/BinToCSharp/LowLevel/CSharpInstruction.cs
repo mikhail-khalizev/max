@@ -11,7 +11,74 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class CSharpInstruction
+    public interface ICSharpInstruction
+    {
+        public static IEqualityComparer<ICSharpInstruction> BeginEqualityComparer =>
+            new CustomEqualityComparer<ICSharpInstruction>(
+                (x, y) => x.Begin == y.Begin,
+                x => x.Begin.GetHashCode());
+
+        public static IComparer<ICSharpInstruction> BeginComparer =>
+            new CustomComparer<ICSharpInstruction>(
+                (x, y) => x.Begin.CompareTo(y.Begin));
+
+
+        Address Begin { get; set; }
+        Address End { get; set; }
+
+        bool HasLabel { get; set; }
+        bool IsJmpOrJcc { get; }
+        bool IsLoopOrLoopcc { get; }
+        bool IsRet { get; }
+        bool IsJmp { get; }
+        bool IsJmpOrRet => IsJmp || IsRet;
+        bool IsLocalBranch { get; set; }
+
+
+        public IEnumerable<string> GetCode(bool isLastInstructionInMethod);
+    }
+
+    public class CSharpInstructionAddressSearch : ICSharpInstruction
+    {
+        /// <inheritdoc />
+        public Address Begin { get; set; }
+
+        /// <inheritdoc />
+        public Address End { get; set; }
+
+        /// <inheritdoc />
+        public bool HasLabel { get; set; }
+
+        /// <inheritdoc />
+        public bool IsJmpOrJcc { get; }
+
+        /// <inheritdoc />
+        public bool IsLoopOrLoopcc { get; }
+
+        /// <inheritdoc />
+        public bool IsRet { get; }
+
+        /// <inheritdoc />
+        public bool IsJmp { get; }
+
+        public CSharpInstructionAddressSearch(Address address)
+        {
+            Begin = address;
+            End = address;
+        }
+
+        /// <inheritdoc />
+        public bool IsLocalBranch { get; set; }
+
+        /// <inheritdoc />
+        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class CSharpInstruction : ICSharpInstruction
     {
         public Address Begin { get; set; }
         public Address End { get; set; }
@@ -64,13 +131,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         private int DecimalLimit => 0xfff;
 
-
-        public CSharpInstruction(Address address)
-        {
-            Begin = address;
-            End = address;
-        }
-
+        
         public CSharpInstruction(Address begin, Address end, string comment = null)
         {
             Begin = begin;
@@ -752,15 +813,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return str;
         }
 
-
-        public static IEqualityComparer<CSharpInstruction> BeginEqualityComparer =>
-            new CustomEqualityComparer<CSharpInstruction>(
-                (x, y) => x.Begin == y.Begin,
-                x => x.Begin.GetHashCode());
-
-        public static IComparer<CSharpInstruction> BeginComparer =>
-            new CustomComparer<CSharpInstruction>(
-                (x, y) => x.Begin.CompareTo(y.Begin));
 
 
         public static IEnumerable<CSharpInstruction> DecodeCode(

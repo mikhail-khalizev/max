@@ -370,4 +370,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 });
         }
     }
+
+    //public class SwitchCSharpInstruction : CSharpInstruction
+    //{
+    //
+    //}
 }

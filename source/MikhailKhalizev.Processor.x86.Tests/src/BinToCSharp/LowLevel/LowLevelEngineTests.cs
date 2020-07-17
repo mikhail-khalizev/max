@@ -40,6 +40,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
             method.MethodInfo.Id.Should().Be(mi.Id);
             method.End.Should().Be(mi.Address + mi.Raw.Length / 2);
             method.Instructions.Should().Contain(x => x.Begin == 0x18_a4fa)
+                .Which.Should().BeOfType<CSharpInstruction>()
                 .Which.CommentThis.Should().BeFalse();
         }
 
