@@ -187,6 +187,48 @@ namespace MikhailKhalizev.Max.Dos
             RawProgramMain = rawProgramMain;
         }
 
+        public void SubscribeToCpuPortEvents()
+        {
+            Implementation.runInb += (sender, args) =>
+            {
+                try
+                {
+                    MyInb(args.value, args.port);
+                    // NonBlockingConsole.WriteLine($"inb, port: {args.port}, value: {args.value}");
+                }
+                catch
+                {
+                    NonBlockingConsole.WriteLine($"inb, port: {args.port}, value: {args.value}");
+                    throw;
+                }
+            };
+            Implementation.runOutb += (sender, args) =>
+            {
+                try
+                {
+                    MyOutb(args.port, args.value);
+                    // NonBlockingConsole.WriteLine($"outb, port: {args.port}, value: {args.value}");
+                }
+                catch
+                {
+                    NonBlockingConsole.WriteLine($"outb, port: {args.port}, value: {args.value}");
+                    throw;
+                }
+            };
+            Implementation.runOutw += (sender, args) =>
+            {
+                try
+                {
+                    MyOutw(args.port, args.value);
+                }
+                catch
+                {
+                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
+                    throw;
+                }
+            };
+        }
+
         public void MyInb(ValueBase value, ValueBase port)
         {
             value.Int32 = 0;

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
@@ -9,21 +8,6 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
-    public class SwitchFeature : IInstructionFeature
-    {
-        public List<Address> Addresses { get; }
-
-        public SwitchFeature()
-        {
-            Addresses = new List<Address>();
-        }
-
-        public SwitchFeature(List<Address> addresses)
-        {
-            Addresses = addresses;
-        }
-    }
-
     public class SwitchPlugin : PluginBase
     {
         private int _state;
@@ -304,16 +288,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. (");
 
-            Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var jtka);
-            if (jtka == null)
-            {
-                jtka = new BranchInfo(cmd.Begin);
-                jtka.To = new MySortedSet<Address>();
-                Engine.BranchesInfo.Add(jtka);
-            }
-
             var switchFeature = new SwitchFeature();
-            cmd.Features.Add(switchFeature);
 
             var notFirst = false;
             for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)
@@ -338,16 +313,29 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 notFirst = true;
                 os.Append(to.ToString());
 
-                jtka.To.Add(to);
                 Engine.AddToDecode(to);
                 
                 switchFeature.Addresses.Add(to);
             }
 
             os.Append(").");
-
             Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
 
+
+            cmd.Features.Add(switchFeature);
+
+            Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var jtka);
+            if (jtka == null)
+            {
+                jtka = new BranchInfo(cmd.Begin);
+                jtka.To = new MySortedSet<Address>();
+                Engine.BranchesInfo.Add(jtka);
+            }
+
+            foreach (var to in switchFeature.Addresses)
+                jtka.To.Add(to);
+
+            
             var copyAddrAreaBegin = _addrAreaBegin;
             var copySizeOfAddrArea = _sizeOfAddrArea;
 
@@ -378,6 +366,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         throw new NotImplementedException("curJmp.To.Count == 0");
 
                     cmd.SwitchAddresses = curJmp.To.ToList();
+                    cmd.CommandSuffix.Add("_switch");
                 });
         }
     }

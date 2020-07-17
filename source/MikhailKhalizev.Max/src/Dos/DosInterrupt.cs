@@ -117,7 +117,7 @@ namespace MikhailKhalizev.Max.Dos
 
                                 if (added_callback_setwindow == false)
                                 {
-                                    RawProgramMain.add_internal_dyn_func(callback_setwindow, 16, 0xf0001320);
+                                    RawProgramMain.AddInternalDynamicMethod(callback_setwindow, 16, 0xf0001320);
                                     added_callback_setwindow = true;
                                 }
 
@@ -858,7 +858,7 @@ namespace MikhailKhalizev.Max.Dos
 
                         if (xms_handler_added == false)
                         {
-                            RawProgramMain.add_internal_dyn_func(RawProgramMain.DosMemory.xms_handler, 16, es[bx]);
+                            RawProgramMain.AddInternalDynamicMethod(RawProgramMain.DosMemory.xms_handler, 16, es[bx]);
                             xms_handler_added = true;
                         }
                     }
@@ -1110,7 +1110,7 @@ namespace MikhailKhalizev.Max.Dos
             for (var i = 0; i < intFunc.Length; i++)
             {
                 Address address = intVec[2 * intFunc[i].num + 1] * 16 + intVec[2 * intFunc[i].num];
-                RawProgramMain.add_internal_dyn_func(intFunc[i].func, 16, address);
+                RawProgramMain.AddInternalDynamicMethod(intFunc[i].func, 16, address);
             }
 
             for (var i = 0; i < intVec.Length / 2; i++)
@@ -1120,7 +1120,7 @@ namespace MikhailKhalizev.Max.Dos
                 if (address == 0)
                     continue;
 
-                RawProgramMain.add_internal_dyn_func_if_free(int_unknown, 16, address);
+                RawProgramMain.AddInternalDynamicMethodIfFree(int_unknown, 16, address);
             }
 
             var span = Memory.GetFixSize(0, intVec.Length * 2);

@@ -176,12 +176,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             {
                 var address = _addressesToDecode.First();
                 _addressesToDecode.Remove(address);
-                ProcessStep(address);
+                ProcessDecodeStep(address);
             }
         }
 
 
-        private void ProcessStep(Address address)
+        private void ProcessDecodeStep(Address address)
         {
             if (address < CsBase)
                 return;

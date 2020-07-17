@@ -80,10 +80,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp
             public bool NullIfNoName { get; set; }
             public bool WriteAddressAsDecimal { get; set; }
 
-            public Options WithWriteAddressAsDecimal(bool value = true)
+            public Options WithWriteAddressAsDecimal(bool writeAddressAsDecimal = true)
             {
                 var opt = this;
-                opt.WriteAddressAsDecimal = value;
+                opt.WriteAddressAsDecimal = writeAddressAsDecimal;
                 return opt;
             }
         }

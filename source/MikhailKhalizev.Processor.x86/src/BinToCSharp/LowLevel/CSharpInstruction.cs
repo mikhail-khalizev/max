@@ -11,24 +11,10 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public interface IInstructionFeature
-    {}
-
     public class CSharpInstruction
     {
-        public DefinitionCollection DefinitionCollection { get; }
         public Address Begin { get; set; }
         public Address End { get; set; }
-
-        /// <summary>
-        /// Закомментировать всю напечатанную строку.
-        /// </summary>
-        public bool CommentThis { get; set; }
-
-        /// <summary>
-        /// Комментарии к инструкции.
-        /// </summary>
-        public List<string> Comments { get; set; }
 
         public int Mode { get; set; }
         public int AddrMode { get; set; }
@@ -57,10 +43,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool IsJmpOrRet => IsJmp || IsRet;
         public bool IsJmpOrJcc { get; set; }
         public bool IsLocalBranch { get; set; }
+
+        
+        public DefinitionCollection DefinitionCollection { get; }
+
+        /// <summary>
+        /// Закомментировать всю напечатанную строку.
+        /// </summary>
+        public bool CommentThis { get; set; }
+
+        /// <summary>
+        /// Комментарии к инструкции.
+        /// </summary>
+        public List<string> Comments { get; set; }
+        public List<string> CommandSuffix { get; set; }
+
         public List<Address> SwitchAddresses { get; set; }
-
         public bool HasLabel { get; set; }
-
         public List<IInstructionFeature> Features { get; } = new List<IInstructionFeature>();
 
         private int DecimalLimit => 0xfff;
@@ -77,8 +76,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Begin = begin;
             End = end;
             CommentThis = true;
+
+            Comments = new List<string>();
             if (comment != null)
-                Comments = new List<string> { comment };
+                Comments.Add(comment);
+
+            CommandSuffix = new List<string>();
         }
 
         public CSharpInstruction(DefinitionCollection definitionCollection, ud ud)
@@ -88,6 +91,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             DefinitionCollection = definitionCollection;
 
             Comments = new List<string>();
+            CommandSuffix = new List<string>();
 
             Begin = ud.insn_offset;
             End = ud.pc;
@@ -205,9 +209,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 var cmd = GetCommandString(isLastInstructionInMethod && !IsLocalBranch);
                 var line = ii + cmd;
 
-                if (!string.IsNullOrEmpty(cmd) && Comments.Count != 0)
+                if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrEmpty(comments))
+                {
                     line = line.PadRight(59);
-                line += comments;
+                    line += comments;
+                }
 
                 lines = lines.Append(line);
             }
@@ -238,9 +244,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (IsCallUp)
                 cmdSuffix += "_up";
 
-            if (SwitchAddresses != null)
-                cmdSuffix += "_switch";
-
+            foreach (var suffix in CommandSuffix)
+                cmdSuffix += suffix;
+            
             var addIf = !onlyRawCmd && (IsCallUp || IsJmpOrJcc || IsLoopOrLoopcc) && (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
             var addGotoLabel = !onlyRawCmd && IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
             var addReturn = !onlyRawCmd && !IsLocalBranch && (
@@ -860,6 +866,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             /// <inheritdoc />
             public int Length => int.MaxValue;
+        }
+
+
+        public T GetFeature<T>()
+        {
+            return Features.OfType<T>().First();
+        }
+
+        public bool TryGetFeature<T>(out T feature)
+        {
+            feature = Features.OfType<T>().FirstOrDefault();
+            return feature != null;
         }
     }
 }
