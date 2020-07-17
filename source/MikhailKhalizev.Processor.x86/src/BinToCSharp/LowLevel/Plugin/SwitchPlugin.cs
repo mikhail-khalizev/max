@@ -347,11 +347,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                     var localCmd = method.Instructions[index];
 
-                    Engine.BranchesInfo.TryGetValue(new BranchInfo(localCmd.Begin), out var curJmp);
-                    if (curJmp == null)
-                        throw new NotImplementedException("curJmp == null");
-
-                    foreach (var to in curJmp.To)
+                    foreach (var to in switchFeature.Addresses)
                     {
                         if (method.InstructionOf(to)?.HasLabel != true)
                         {
@@ -362,9 +358,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                             return;
                         }
                     }
-
-                    if (curJmp.To.Count == 0)
-                        throw new NotImplementedException("curJmp.To.Count == 0");
 
                     cmd.CommandSuffix.Add("_switch");
 
