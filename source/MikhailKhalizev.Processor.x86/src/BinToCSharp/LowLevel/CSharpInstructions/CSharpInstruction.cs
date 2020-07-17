@@ -34,187 +34,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         bool IsJmpOrRet => IsJmp || IsRet;
         bool IsLocalBranch { get; set; }
 
-
         IEnumerable<string> GetCode(bool isLastInstructionInMethod);
     }
 
-    public static class CSharpInstructionExtensions
-    {
-        public static string GetInstructionInfoStringStatic(bool withRightPadding, Address begin, Address end)
-        {
-            var str = $"ii({begin}, {end - begin});";
-
-            if (withRightPadding)
-                str += "  ";
-
-            return str;
-        }
-
-        public static string GetInstructionInfoString(this ICSharpInstruction cmd)
-        {
-            return GetInstructionInfoStringStatic(true, cmd.Begin, cmd.End);
-        }
-    }
-
-
-    public class ProxyCSharpInstruction : ICSharpInstruction
-    {
-        public ICSharpInstruction IcSharpInstructionImplementation { get; }
-
-        public ProxyCSharpInstruction(ICSharpInstruction icSharpInstructionImplementation)
-        {
-            IcSharpInstructionImplementation = icSharpInstructionImplementation;
-        }
-
-        /// <inheritdoc />
-        public virtual Address End
-        {
-            get => IcSharpInstructionImplementation.End;
-            set => IcSharpInstructionImplementation.End = value;
-        }
-
-        /// <inheritdoc />
-        public virtual bool HasLabel
-        {
-            get => IcSharpInstructionImplementation.HasLabel;
-            set => IcSharpInstructionImplementation.HasLabel = value;
-        }
-
-        /// <inheritdoc />
-        public virtual bool IsJmpOrJcc => IcSharpInstructionImplementation.IsJmpOrJcc;
-
-        /// <inheritdoc />
-        public virtual bool IsLoopOrLoopcc => IcSharpInstructionImplementation.IsLoopOrLoopcc;
-
-        /// <inheritdoc />
-        public virtual bool IsRet => IcSharpInstructionImplementation.IsRet;
-
-        /// <inheritdoc />
-        public virtual bool IsJmp => IcSharpInstructionImplementation.IsJmp;
-
-        /// <inheritdoc />
-        public virtual bool IsLocalBranch
-        {
-            get => IcSharpInstructionImplementation.IsLocalBranch;
-            set => IcSharpInstructionImplementation.IsLocalBranch = value;
-        }
-
-        /// <inheritdoc />
-        public virtual IEnumerable<string> GetCode(bool isLastInstructionInMethod)
-        {
-            return IcSharpInstructionImplementation.GetCode(isLastInstructionInMethod);
-        }
-
-        /// <inheritdoc />
-        public virtual Address Begin
-        {
-            get => IcSharpInstructionImplementation.Begin;
-            set => IcSharpInstructionImplementation.Begin = value;
-        }
-    }
-
-    public class CSharpInstructionAddressSearch : ICSharpInstruction
-    {
-        /// <inheritdoc />
-        public Address Begin { get; set; }
-
-        /// <inheritdoc />
-        public Address End
-        {
-            get => Begin;
-            set => Begin = value;
-        }
-
-        /// <inheritdoc />
-        public bool HasLabel
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool IsJmpOrJcc => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public bool IsLoopOrLoopcc => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public bool IsRet => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public bool IsJmp => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public bool IsLocalBranch
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
-
-        public CSharpInstructionAddressSearch(Address address)
-        {
-            Begin = address;
-            End = address;
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class CommentCSharpInstruction : ICSharpInstruction
-    {
-        /// <inheritdoc />
-        public Address Begin { get; set; }
-
-        /// <inheritdoc />
-        public Address End { get; set; }
-
-        /// <inheritdoc />
-        public bool HasLabel { get; set; }
-
-        /// <inheritdoc />
-        public bool IsJmpOrJcc => false;
-
-        /// <inheritdoc />
-        public bool IsLoopOrLoopcc => false;
-
-        /// <inheritdoc />
-        public bool IsRet => false;
-
-        /// <inheritdoc />
-        public bool IsJmp => false;
-
-        /// <inheritdoc />
-        public bool IsLocalBranch { get; set; }
-
-        
-        private readonly string _comment;
-
-        public CommentCSharpInstruction(Address begin, Address end, string comment)
-        {
-            _comment = comment;
-            Begin = begin;
-            End = end;
-        }
-
-        /// <inheritdoc />
-        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
-        {
-            var ii = this.GetInstructionInfoString();
-
-            var lines = Enumerable.Empty<string>();
-            
-            if (HasLabel)
-                lines = lines.Append($"l_{Begin}:");
-
-            lines = lines.Append( "//  " + ii + _comment);
-
-            return lines;
-        }
-    }
 
     public class CSharpInstruction : ICSharpInstruction
     {
@@ -262,13 +84,42 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         public List<string> Comments { get; set; }
 
-        public List<string> CommandSuffix { get; set; }
-
         public bool HasLabel { get; set; }
-        public List<IInstructionFeature> Features { get; } = new List<IInstructionFeature>();
+        public List<IInstructionFeature> Features { get; }
 
-        private int DecimalLimit => 0xfff;
+        protected const int DecimalLimit = 0xfff;
 
+
+        public CSharpInstruction(CSharpInstruction other)
+        {
+            Begin = other.Begin;
+            End = other.End;
+            Mode = other.Mode;
+            AddrMode = other.AddrMode;
+            OprMode = other.OprMode;
+            EffOprMode = other.EffOprMode;
+            Mnemonic = other.Mnemonic;
+            Operands = other.Operands;
+            PfxSeg = other.PfxSeg;
+            PfxAddress = other.PfxAddress;
+            PfxOpr = other.PfxOpr;
+            PfxRep = other.PfxRep;
+            PfxRepe = other.PfxRepe;
+            PfxRepne = other.PfxRepne;
+            BrFar = other.BrFar;
+            IsCall = other.IsCall;
+            IsCallUp = other.IsCallUp;
+            IsLoopOrLoopcc = other.IsLoopOrLoopcc;
+            IsRet = other.IsRet;
+            IsJmp = other.IsJmp;
+            IsJmpOrJcc = other.IsJmpOrJcc;
+            IsLocalBranch = other.IsLocalBranch;
+            DefinitionCollection = other.DefinitionCollection;
+            CommentThis = other.CommentThis;
+            Comments = other.Comments;
+            HasLabel = other.HasLabel;
+            Features = other.Features;
+        }
 
         public CSharpInstruction(DefinitionCollection definitionCollection, ud ud)
         {
@@ -277,7 +128,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             DefinitionCollection = definitionCollection;
 
             Comments = new List<string>();
-            CommandSuffix = new List<string>();
+            Features = new List<IInstructionFeature>();
 
             Begin = ud.insn_offset;
             End = ud.pc;
@@ -330,6 +181,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     EffOprMode = 8;
         }
 
+
         public ud_type GetEffectiveSegmentOfOperand(ud_operand op)
         {
             if (PfxSeg != ud_type.UD_NONE)
@@ -348,7 +200,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return str;
         }
 
-        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        public virtual IEnumerable<string> GetCode(bool isLastInstructionInMethod)
         {
             var lines = Enumerable.Empty<string>();
 
@@ -367,11 +219,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             lines = lines.Append(line);
 
-
-            lines =
-                CommentThis
-                    ? lines.Select(x => "//  " + x)
-                    : lines.Select(x => "    " + x);
+            lines = CommentThis
+                ? lines.Select(x => "//  " + x)
+                : lines.Select(x => "    " + x);
 
             if (HasLabel)
                 lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);
@@ -464,13 +314,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (IsCallUp)
                 method += "_up";
 
-            foreach (var suffix in CommandSuffix)
-                method += suffix;
-
             return method;
         }
 
-        public string GetCommandString(bool onlyRawCmd = false)
+        public virtual string GetCommandString(bool onlyRawCmd = false)
         {
             if (Mnemonic == ud_mnemonic_code.UD_Inone)
                 return "";

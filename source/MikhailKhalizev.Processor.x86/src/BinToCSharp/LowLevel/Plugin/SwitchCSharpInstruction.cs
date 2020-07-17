@@ -3,19 +3,21 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
-    public class SwitchCSharpInstruction : ProxyCSharpInstruction
+    public class SwitchCSharpInstruction : CSharpInstruction
     {
-        private readonly CSharpInstruction _instruction;
         private readonly SwitchFeature _switchFeature;
 
         /// <inheritdoc />
-        public SwitchCSharpInstruction(
-            ICSharpInstruction icSharpInstructionImplementation,
-            SwitchFeature switchFeature)
-            : base(icSharpInstructionImplementation)
+        public SwitchCSharpInstruction(CSharpInstruction origInstruction, SwitchFeature switchFeature)
+            : base(origInstruction)
         {
-            _instruction = (CSharpInstruction) icSharpInstructionImplementation;
             _switchFeature = switchFeature;
+        }
+
+        /// <inheritdoc />
+        public override string GetCommandMethodName()
+        {
+            return base.GetCommandMethodName() + "_switch";
         }
 
         /// <inheritdoc />
@@ -24,9 +26,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             var lines = Enumerable.Empty<string>();
 
             var ii = this.GetInstructionInfoString();
-            var comments = string.Join(" ", _instruction.Comments.Select(x => $"/* {x} */"));
+            var comments = string.Join(" ", Comments.Select(x => $"/* {x} */"));
 
-            var cmd = _instruction.GetCommandString().TrimEnd(';');
+            var cmd = GetCommandString().TrimEnd(';');
 
             lines = lines
                 .Append((ii + comments).TrimEnd())
@@ -56,10 +58,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     });
 
 
-            lines =
-                _instruction.CommentThis
-                    ? lines.Select(x => "//  " + x)
-                    : lines.Select(x => "    " + x);
+            lines = CommentThis
+                ? lines.Select(x => "//  " + x)
+                : lines.Select(x => "    " + x);
 
             if (HasLabel)
                 lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);

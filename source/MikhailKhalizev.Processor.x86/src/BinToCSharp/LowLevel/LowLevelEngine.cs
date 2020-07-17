@@ -473,7 +473,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 // Call onAttachToMethod.
 
-                foreach (var instruction in _onAttachToMethod.GreaterThat(new CSharpInstructionAddressSearch(method.Begin - 1))
+                foreach (var instruction in _onAttachToMethod.GreaterThat(new AddressSearchCSharpInstruction(method.Begin - 1))
                     .Where(x => x.Begin < method.End).ToList())
                 {
                     var index = method.InstructionIndexOf(instruction);

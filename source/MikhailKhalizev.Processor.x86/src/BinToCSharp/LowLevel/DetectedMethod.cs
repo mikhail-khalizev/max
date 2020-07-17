@@ -22,13 +22,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         public ICSharpInstruction InstructionOf(Address address)
         {
-            var index = Instructions.BinarySearch(new CSharpInstructionAddressSearch(address), ICSharpInstruction.BeginComparer);
+            var index = Instructions.BinarySearch(new AddressSearchCSharpInstruction(address), ICSharpInstruction.BeginComparer);
             return index < 0 ? null : Instructions[index];
         }
 
         public int InstructionIndexOf(Address address)
         {
-            return Instructions.BinarySearch(new CSharpInstructionAddressSearch(address), ICSharpInstruction.BeginComparer);
+            return Instructions.BinarySearch(new AddressSearchCSharpInstruction(address), ICSharpInstruction.BeginComparer);
         }
 
         public int InstructionIndexOf(ICSharpInstruction instruction)

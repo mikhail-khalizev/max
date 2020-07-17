@@ -345,7 +345,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     var raw = Engine.Memory.ReadAll(copyAddrAreaBegin, copySizeOfAddrArea);
                     Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, copyAddrAreaBegin, raw);
 
-                    var localCmd = method.Instructions[index];
+                    var localCmd = method.Instructions[index] as CSharpInstruction;
+                    if (localCmd == null)
+                    {
+                        NonBlockingConsole.WriteLine(
+                            "Ожидается CSharpInstruction. " +
+                            $"Method.Id = {method.MethodInfo.Id}. index = {index}.");
+                        return;
+                    }
 
                     foreach (var to in switchFeature.Addresses)
                     {
@@ -358,8 +365,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                             return;
                         }
                     }
-
-                    cmd.CommandSuffix.Add("_switch");
 
                     method.Instructions[index] = new SwitchCSharpInstruction(localCmd, switchFeature);
                 });
