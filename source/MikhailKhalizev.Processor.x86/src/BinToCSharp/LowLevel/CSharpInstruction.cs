@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public static IComparer<ICSharpInstruction> BeginComparer =>
             new CustomComparer<ICSharpInstruction>(
                 (x, y) => x.Begin.CompareTo(y.Begin));
-
+        
 
         Address Begin { get; set; }
         Address End { get; set; }
@@ -35,7 +35,83 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         bool IsLocalBranch { get; set; }
 
 
-        public IEnumerable<string> GetCode(bool isLastInstructionInMethod);
+        IEnumerable<string> GetCode(bool isLastInstructionInMethod);
+
+    }
+
+    public static class CSharpInstructionExtensions
+    {
+        public static string GetInstructionInfoStringStatic(bool withRightPadding, Address begin, Address end)
+        {
+            var str = $"ii({begin}, {end - begin});";
+
+            if (withRightPadding)
+                str += "  ";
+
+            return str;
+        }
+
+        public static string GetInstructionInfoString(this ICSharpInstruction cmd, bool withRightPadding)
+        {
+            return GetInstructionInfoStringStatic(withRightPadding, cmd.Begin, cmd.End);
+        }
+    }
+
+    
+    public class ProxyCSharpInstruction : ICSharpInstruction
+    {
+        public ICSharpInstruction IcSharpInstructionImplementation { get; }
+
+        public ProxyCSharpInstruction(ICSharpInstruction icSharpInstructionImplementation)
+        {
+            IcSharpInstructionImplementation = icSharpInstructionImplementation;
+        }
+
+        /// <inheritdoc />
+        public virtual Address End
+        {
+            get => IcSharpInstructionImplementation.End;
+            set => IcSharpInstructionImplementation.End = value;
+        }
+
+        /// <inheritdoc />
+        public virtual bool HasLabel
+        {
+            get => IcSharpInstructionImplementation.HasLabel;
+            set => IcSharpInstructionImplementation.HasLabel = value;
+        }
+
+        /// <inheritdoc />
+        public virtual bool IsJmpOrJcc => IcSharpInstructionImplementation.IsJmpOrJcc;
+
+        /// <inheritdoc />
+        public virtual bool IsLoopOrLoopcc => IcSharpInstructionImplementation.IsLoopOrLoopcc;
+
+        /// <inheritdoc />
+        public virtual bool IsRet => IcSharpInstructionImplementation.IsRet;
+
+        /// <inheritdoc />
+        public virtual bool IsJmp => IcSharpInstructionImplementation.IsJmp;
+
+        /// <inheritdoc />
+        public virtual bool IsLocalBranch
+        {
+            get => IcSharpInstructionImplementation.IsLocalBranch;
+            set => IcSharpInstructionImplementation.IsLocalBranch = value;
+        }
+
+        /// <inheritdoc />
+        public virtual IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        {
+            return IcSharpInstructionImplementation.GetCode(isLastInstructionInMethod);
+        }
+
+        /// <inheritdoc />
+        public virtual Address Begin
+        {
+            get => IcSharpInstructionImplementation.Begin;
+            set => IcSharpInstructionImplementation.Begin = value;
+        }
     }
 
     public class CSharpInstructionAddressSearch : ICSharpInstruction
@@ -125,7 +201,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public List<string> Comments { get; set; }
         public List<string> CommandSuffix { get; set; }
 
-        public List<Address> SwitchAddresses { get; set; }
         public bool HasLabel { get; set; }
         public List<IInstructionFeature> Features { get; } = new List<IInstructionFeature>();
 
@@ -231,53 +306,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         {
             var lines = Enumerable.Empty<string>();
 
-            var ii = GetInstructionInfoString(true);
+            var ii = this.GetInstructionInfoString(true);
             var comments = string.Join(" ", Comments.Select(x => $"/* {x} */"));
 
-            if (SwitchAddresses != null)
+            
+            var cmd = GetCommandString(isLastInstructionInMethod && !IsLocalBranch);
+            var line = ii + cmd;
+
+            if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrEmpty(comments))
             {
-                var cmd = GetCommandString().TrimEnd(';');
-
-                lines = lines
-                    .Append((ii + comments).TrimEnd())
-                    .Concat(
-                        new[]
-                        {
-                            $"switch ({cmd})",
-                            "{"
-                        })
-                    .Concat(
-                        SwitchAddresses.SelectMany(
-                            to =>
-                            {
-                                return
-                                    new[]
-                                    {
-                                        $"    case {to}:",
-                                        $"        goto l_{to};"
-                                    };
-                            }))
-                    .Concat(
-                        new[]
-                        {
-                            "    default:",
-                            "        throw new NotImplementedException();",
-                            "}"
-                        });
+                line = line.PadRight(59);
+                line += comments;
             }
-            else
-            {
-                var cmd = GetCommandString(isLastInstructionInMethod && !IsLocalBranch);
-                var line = ii + cmd;
 
-                if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrEmpty(comments))
-                {
-                    line = line.PadRight(59);
-                    line += comments;
-                }
-
-                lines = lines.Append(line);
-            }
+            lines = lines.Append(line);
 
 
             lines =
@@ -797,21 +839,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         #endregion
 
-
-        public string GetInstructionInfoString(bool withRightPadding)
-        {
-            return GetInstructionInfoStringStatic(withRightPadding, Begin, End);
-        }
-
-        public static string GetInstructionInfoStringStatic(bool withRightPadding, Address begin, Address end)
-        {
-            var str = $"ii({begin}, {end - begin});";
-
-            if (withRightPadding)
-                str += "  ";
-
-            return str;
-        }
 
 
 

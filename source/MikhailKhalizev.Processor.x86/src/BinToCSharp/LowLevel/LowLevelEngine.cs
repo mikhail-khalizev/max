@@ -706,7 +706,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
-                    var ii = CSharpInstruction.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
+                    var ii = CSharpInstructionExtensions.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
                     lines = lines.Append(
                         lastInstrJmpOrRet
                             ? $"//  {ii}Недостижимый код."

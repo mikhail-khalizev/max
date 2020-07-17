@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Decoder;
@@ -137,7 +136,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
-                        && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
+                        && cmd.Operands[1].lval.uqword == (uint) Engine.Mode / 16)
                         _state++;
                     else
                         _state = 0;
@@ -174,8 +173,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imovzx
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
-                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
-                    //                && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg
                     )
                     {
                         _state++;
@@ -184,7 +183,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
                         && cmd.Operands[0].@base == cmd.Operands[1].@base
-                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                     {
                         _state = 10;
@@ -193,7 +192,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_CONST)
-                        && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
+                        && cmd.Operands[1].lval.uqword == (uint) Engine.Mode / 16)
                     {
                         _state = 11;
                     }
@@ -215,7 +214,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
-                        && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
+                        && cmd.Operands[1].lval.uqword == (uint) Engine.Mode / 16)
                         _state = 6;
                     else
                         _state = 0;
@@ -225,7 +224,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 case 10:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                         _state = 9;
                     else
@@ -262,7 +261,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 && cmd.Operands[1].type == ud_type.UD_OP_IMM
                 && cmd.Operands[1].size <= 16)
             {
-                _sizeOfAddrArea = (cmd.Operands[1].lval.uword + 1) * ((int)Engine.Mode / 8);
+                _sizeOfAddrArea = (cmd.Operands[1].lval.uword + 1) * ((int) Engine.Mode / 8);
 
                 if (cmd.Operands[0].type == ud_type.UD_OP_MEM)
                 {
@@ -291,10 +290,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             var switchFeature = new SwitchFeature();
 
             var notFirst = false;
-            for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)
+            for (Address i = 0; i < _sizeOfAddrArea; i += (uint) Engine.Mode / 8)
             {
                 Address to;
-                switch ((int)Engine.Mode)
+                switch ((int) Engine.Mode)
                 {
                     case 16:
                         to = Engine.Memory.Ref<ushort>(addrOfAddrs + i);
@@ -303,7 +302,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         to = Engine.Memory.Ref<uint>(addrOfAddrs + i);
                         break;
                     default:
-                        throw new NotImplementedException($"Engine.Mode: {(int)Engine.Mode}.");
+                        throw new NotImplementedException($"Engine.Mode: {(int) Engine.Mode}.");
                 }
 
                 to += Engine.CsBase;
@@ -314,7 +313,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 os.Append(to.ToString());
 
                 Engine.AddToDecode(to);
-                
+
                 switchFeature.Addresses.Add(to);
             }
 
@@ -335,7 +334,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             foreach (var to in switchFeature.Addresses)
                 jtka.To.Add(to);
 
-            
+
             var copyAddrAreaBegin = _addrAreaBegin;
             var copySizeOfAddrArea = _sizeOfAddrArea;
 
@@ -346,7 +345,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     var raw = Engine.Memory.ReadAll(copyAddrAreaBegin, copySizeOfAddrArea);
                     Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, copyAddrAreaBegin, raw);
 
-                    Engine.BranchesInfo.TryGetValue(new BranchInfo(method.Instructions[index].Begin), out var curJmp);
+                    var localCmd = method.Instructions[index];
+
+                    Engine.BranchesInfo.TryGetValue(new BranchInfo(localCmd.Begin), out var curJmp);
                     if (curJmp == null)
                         throw new NotImplementedException("curJmp == null");
 
@@ -365,14 +366,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     if (curJmp.To.Count == 0)
                         throw new NotImplementedException("curJmp.To.Count == 0");
 
-                    cmd.SwitchAddresses = curJmp.To.ToList();
                     cmd.CommandSuffix.Add("_switch");
+
+                    method.Instructions[index] = new SwitchCSharpInstruction(localCmd, switchFeature);
                 });
         }
     }
-
-    //public class SwitchCSharpInstruction : CSharpInstruction
-    //{
-    //
-    //}
 }
