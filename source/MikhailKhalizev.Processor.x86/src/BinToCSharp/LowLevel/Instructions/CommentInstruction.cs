@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class CommentCSharpInstruction : ICSharpInstruction
+    public class CommentInstruction : IInstruction
     {
         /// <inheritdoc />
         public Address Begin { get; set; }
@@ -32,7 +32,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         private readonly string _comment;
 
-        public CommentCSharpInstruction(Address begin, Address end, string comment)
+        public CommentInstruction(Address begin, Address end, string comment)
         {
             _comment = comment;
             Begin = begin;

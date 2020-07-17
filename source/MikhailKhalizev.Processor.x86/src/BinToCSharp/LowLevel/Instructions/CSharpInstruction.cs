@@ -11,15 +11,15 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public interface ICSharpInstruction
+    public interface IInstruction
     {
-        public static IEqualityComparer<ICSharpInstruction> BeginEqualityComparer =>
-            new CustomEqualityComparer<ICSharpInstruction>(
+        public static IEqualityComparer<IInstruction> BeginEqualityComparer =>
+            new CustomEqualityComparer<IInstruction>(
                 (x, y) => x.Begin == y.Begin,
                 x => x.Begin.GetHashCode());
 
-        public static IComparer<ICSharpInstruction> BeginComparer =>
-            new CustomComparer<ICSharpInstruction>(
+        public static IComparer<IInstruction> BeginComparer =>
+            new CustomComparer<IInstruction>(
                 (x, y) => x.Begin.CompareTo(y.Begin));
 
 
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     }
 
 
-    public class CSharpInstruction : ICSharpInstruction
+    public class CSharpInstruction : IInstruction
     {
         public Address Begin { get; set; }
         public Address End { get; set; }

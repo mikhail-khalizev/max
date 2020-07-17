@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class AddressSearchCSharpInstruction : ICSharpInstruction
+    public class AddressSearchInstruction : IInstruction
     {
         /// <inheritdoc />
         public Address Begin { get; set; }
@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             set => throw new NotImplementedException();
         }
 
-        public AddressSearchCSharpInstruction(Address address)
+        public AddressSearchInstruction(Address address)
         {
             Begin = address;
             End = address;

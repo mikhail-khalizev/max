@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class ProxyCSharpInstruction : ICSharpInstruction
+    public class ProxyInstruction : IInstruction
     {
-        public ICSharpInstruction IcSharpInstructionImplementation { get; }
+        public IInstruction IcSharpInstructionImplementation { get; }
 
-        public ProxyCSharpInstruction(ICSharpInstruction icSharpInstructionImplementation)
+        public ProxyInstruction(IInstruction icSharpInstructionImplementation)
         {
             IcSharpInstructionImplementation = icSharpInstructionImplementation;
         }

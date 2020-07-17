@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     {
         public Address Begin { get; }
         public Address End { get; set; } // 0 if unknown
-        public List<ICSharpInstruction> Instructions { get; set; } = new List<ICSharpInstruction>();
+        public List<IInstruction> Instructions { get; set; } = new List<IInstruction>();
         public byte[] RawBytes { get; set; }
         public MethodInfoDto MethodInfo { get; set; }
 
@@ -20,20 +20,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Begin = begin;
         }
 
-        public ICSharpInstruction InstructionOf(Address address)
+        public IInstruction InstructionOf(Address address)
         {
-            var index = Instructions.BinarySearch(new AddressSearchCSharpInstruction(address), ICSharpInstruction.BeginComparer);
+            var index = Instructions.BinarySearch(new AddressSearchInstruction(address), IInstruction.BeginComparer);
             return index < 0 ? null : Instructions[index];
         }
 
         public int InstructionIndexOf(Address address)
         {
-            return Instructions.BinarySearch(new AddressSearchCSharpInstruction(address), ICSharpInstruction.BeginComparer);
+            return Instructions.BinarySearch(new AddressSearchInstruction(address), IInstruction.BeginComparer);
         }
 
-        public int InstructionIndexOf(ICSharpInstruction instruction)
+        public int InstructionIndexOf(IInstruction instruction)
         {
-            return Instructions.BinarySearch(instruction, ICSharpInstruction.BeginComparer);
+            return Instructions.BinarySearch(instruction, IInstruction.BeginComparer);
         }
         
         public static IEqualityComparer<DetectedMethod> BeginEqualityComparer =>

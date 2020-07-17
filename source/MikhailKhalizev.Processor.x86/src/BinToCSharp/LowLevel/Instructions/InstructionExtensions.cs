@@ -1,6 +1,6 @@
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public static class CSharpInstructionExtensions
+    public static class InstructionExtensions
     {
         public static string GetInstructionInfoStringStatic(bool withRightPadding, Address begin, Address end)
         {
@@ -12,7 +12,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return str;
         }
 
-        public static string GetInstructionInfoString(this ICSharpInstruction cmd)
+        public static string GetInstructionInfoString(this IInstruction cmd)
         {
             return GetInstructionInfoStringStatic(true, cmd.Begin, cmd.End);
         }

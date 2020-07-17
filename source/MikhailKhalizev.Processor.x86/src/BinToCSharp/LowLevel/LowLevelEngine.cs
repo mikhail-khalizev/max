@@ -72,8 +72,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private readonly ReadCStringPlugin _readCStringPlugin;
 
         public delegate void OnInstructionAttachToMethodDelegate(DetectedMethod method, int instructionIndex);
-        private readonly MySortedDictionary<ICSharpInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
-            new MySortedDictionary<ICSharpInstruction, OnInstructionAttachToMethodDelegate>(ICSharpInstruction.BeginComparer);
+        private readonly MySortedDictionary<IInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
+            new MySortedDictionary<IInstruction, OnInstructionAttachToMethodDelegate>(IInstruction.BeginComparer);
 
         public LowLevelEngine(
             BinToCSharpDto configuration,
@@ -280,9 +280,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     // Учтём, что инструкции в DecodedCode могут пересекаться. Найдём "верную дорожку".
 
-                    var instructions = new List<ICSharpInstruction>();
+                    var instructions = new List<IInstruction>();
 
-                    ICSharpInstruction lastInstr = null;
+                    IInstruction lastInstr = null;
                     var lastInstrEnd = firstCmd.Begin;
 
                     for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
@@ -473,7 +473,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 // Call onAttachToMethod.
 
-                foreach (var instruction in _onAttachToMethod.GreaterThat(new AddressSearchCSharpInstruction(method.Begin - 1))
+                foreach (var instruction in _onAttachToMethod.GreaterThat(new AddressSearchInstruction(method.Begin - 1))
                     .Where(x => x.Begin < method.End).ToList())
                 {
                     var index = method.InstructionIndexOf(instruction);
@@ -706,7 +706,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 if (lastInstrEnd != cmd.Begin) // Обнаружен недекодированный код.
                 {
-                    var ii = CSharpInstructionExtensions.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
+                    var ii = InstructionExtensions.GetInstructionInfoStringStatic(true, lastInstrEnd, cmd.Begin);
                     lines = lines.Append(
                         lastInstrJmpOrRet
                             ? $"//  {ii}Недостижимый код."
