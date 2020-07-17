@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
         {
             var lines = Enumerable.Empty<string>();
 
-            var ii = this.GetInstructionInfoString(true);
+            var ii = this.GetInstructionInfoString();
             var comments = string.Join(" ", _instruction.Comments.Select(x => $"/* {x} */"));
 
             var cmd = _instruction.GetCommandString().TrimEnd(';');

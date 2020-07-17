@@ -5,8 +5,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     public class DecodedCode
     {
         // NOTE. Инструкции могут пересекаться.
-        private readonly MySortedSet<(Address Address, CSharpInstruction Instruction)> _instructions 
-            = new MySortedSet<(Address Address, CSharpInstruction Instruction)>(new CustomComparer<(Address Address, CSharpInstruction Instruction)>((a, b) => a.Address.CompareTo(b.Address)));
+        private readonly MySortedSet<(Address Address, ICSharpInstruction Instruction)> _instructions
+            = new MySortedSet<(Address Address, ICSharpInstruction Instruction)>(
+                new CustomComparer<(Address Address, ICSharpInstruction Instruction)>(
+                    (a, b) => a.Address.CompareTo(b.Address)));
+
         public UsedSpace<Address> Area { get; } = new UsedSpace<Address>();
 
         public void Clear()
@@ -15,13 +18,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Area.Clear();
         }
 
-        public CSharpInstruction GetInstructionOrNull(Address address)
+        public ICSharpInstruction GetInstructionOrNull(Address address)
         {
             _instructions.TryGetValue((address, null), out var actual);
             return actual.Instruction;
         }
 
-        public CSharpInstruction GetInstructionBefore(Address address)
+        public ICSharpInstruction GetInstructionBefore(Address address)
         {
             return _instructions.FirstLessOrDefault((address, null)).Instruction;
         }
@@ -31,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         /// <param name="instruction">Инструкция, для которой необходимо определить следующую инструкцию.</param>
         /// <returns></returns>
-        public CSharpInstruction GetNextInstruction(CSharpInstruction instruction)
+        public ICSharpInstruction GetNextInstruction(ICSharpInstruction instruction)
         {
             return _instructions.FirstNotLessOrDefault((instruction.End, null)).Instruction;
         }
@@ -41,7 +44,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return _instructions.Contains((address, null));
         }
 
-        public void Insert(CSharpInstruction instruction)
+        public void Insert(ICSharpInstruction instruction)
         {
             _instructions.Add((instruction.Begin, instruction));
             Area.Add(instruction.Begin, instruction.End);

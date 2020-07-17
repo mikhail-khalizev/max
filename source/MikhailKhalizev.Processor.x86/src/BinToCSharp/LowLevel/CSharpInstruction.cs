@@ -50,9 +50,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return str;
         }
 
-        public static string GetInstructionInfoString(this ICSharpInstruction cmd, bool withRightPadding)
+        public static string GetInstructionInfoString(this ICSharpInstruction cmd)
         {
-            return GetInstructionInfoStringStatic(withRightPadding, cmd.Begin, cmd.End);
+            return GetInstructionInfoStringStatic(true, cmd.Begin, cmd.End);
         }
     }
 
@@ -164,6 +164,57 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
     }
 
+    public class CommentCSharpInstruction : ICSharpInstruction
+    {
+        /// <inheritdoc />
+        public Address Begin { get; set; }
+
+        /// <inheritdoc />
+        public Address End { get; set; }
+
+        /// <inheritdoc />
+        public bool HasLabel { get; set; }
+
+        /// <inheritdoc />
+        public bool IsJmpOrJcc => false;
+
+        /// <inheritdoc />
+        public bool IsLoopOrLoopcc => false;
+
+        /// <inheritdoc />
+        public bool IsRet => false;
+
+        /// <inheritdoc />
+        public bool IsJmp => false;
+
+        /// <inheritdoc />
+        public bool IsLocalBranch { get; set; }
+
+        
+        private readonly string _comment;
+
+        public CommentCSharpInstruction(Address begin, Address end, string comment)
+        {
+            _comment = comment;
+            Begin = begin;
+            End = end;
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        {
+            var ii = this.GetInstructionInfoString();
+
+            var lines = Enumerable.Empty<string>();
+            
+            if (HasLabel)
+                lines = lines.Append($"l_{Begin}:");
+
+            lines = lines.Append( "//  " + ii + _comment);
+
+            return lines;
+        }
+    }
 
     public class CSharpInstruction : ICSharpInstruction
     {
@@ -219,19 +270,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private int DecimalLimit => 0xfff;
 
 
-        public CSharpInstruction(Address begin, Address end, string comment = null)
-        {
-            Begin = begin;
-            End = end;
-            CommentThis = true;
-
-            Comments = new List<string>();
-            if (comment != null)
-                Comments.Add(comment);
-
-            CommandSuffix = new List<string>();
-        }
-
         public CSharpInstruction(DefinitionCollection definitionCollection, ud ud)
         {
             if (ud == null)
@@ -274,13 +312,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             AddrMode = ud.adr_mode;
             OprMode = ud.opr_mode;
 
-            try
-            {
-                var str = new string(ud.asm_buf, 0, ud.asm_buf_fill);
-                Comments.Add(str);
-            }
-            catch
-            { }
+            var str = new string(ud.asm_buf, 0, ud.asm_buf_fill);
+            Comments.Add(str);
 
 
             // Fix instruction.
@@ -319,7 +352,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         {
             var lines = Enumerable.Empty<string>();
 
-            var ii = this.GetInstructionInfoString(true);
+            var ii = this.GetInstructionInfoString();
             var comments = string.Join(" ", Comments.Select(x => $"/* {x} */"));
 
 

@@ -318,7 +318,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             }
 
             os.Append(").");
-            Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
+            Engine.DecodedCode.Insert(new CommentCSharpInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
 
 
             cmd.Features.Add(switchFeature);

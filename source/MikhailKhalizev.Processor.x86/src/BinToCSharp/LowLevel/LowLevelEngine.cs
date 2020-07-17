@@ -282,7 +282,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     var instructions = new List<ICSharpInstruction>();
 
-                    CSharpInstruction lastInstr = null;
+                    ICSharpInstruction lastInstr = null;
                     var lastInstrEnd = firstCmd.Begin;
 
                     for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
