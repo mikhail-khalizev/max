@@ -14,13 +14,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// <inheritdoc />
         public InstructionMetadata Metadata => _metadata ??= new InstructionMetadata();
         private InstructionMetadata _metadata;
-
-        /// <inheritdoc />
-        public bool IsRet => false;
-
-        /// <inheritdoc />
-        public bool IsJmp => false;
-
+        
 
         private readonly string _comment;
 
@@ -32,7 +26,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
         /// <inheritdoc />
-        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        public IEnumerable<string> GetCode()
         {
             var ii = this.GetInstructionInfoString();
 

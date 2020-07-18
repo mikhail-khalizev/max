@@ -127,12 +127,12 @@ namespace MikhailKhalizev.Processor.x86.Utils
             }
         }
 
-        public IEnumerable<TKey> GreaterThat(TKey value)
+        public IEnumerable<TKey> GreaterThat(TKey key)
         {
             if (_comparer.SearchNearest)
                 throw new NotImplementedException("SearchNearest is true");
-
-            var i = value;
+            
+            var i = key;
             while (true)
             {
                 _comparer.SearchNearest = true;

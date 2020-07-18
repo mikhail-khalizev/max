@@ -24,6 +24,30 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     /// </summary>
     public class LowLevelEngine
     {
+        public static DetectedMethod GetMethod(MethodInfoDto mi, Action<LowLevelEngine> configure = null)
+        {
+            var engine = new LowLevelEngine(
+                new BinToCSharpDto(),
+                new DefinitionCollection(),
+                new InMemoryMethodInfoCollection());
+
+            engine.Memory = new MemoryFromMethodInfo(mi);
+            engine.CsBase = mi.CsBase;
+            engine.Mode = mi.Mode;
+
+            engine.SuppressDecodeIntervals.Add(0, mi.Address);
+            engine.SuppressDecodeIntervals.Add(mi.Address + mi.RawBytes.Length, 0);
+
+            configure?.Invoke(engine);
+
+            engine.DecodeMethod(mi.Address);
+            engine.DetectMethods();
+
+            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
+            return method;
+        }
+
+
         public BinToCSharpDto Configuration { get; }
         public DefinitionCollection DefinitionCollection { get; }
         public IMethodInfoCollection MethodInfoCollection { get; }
@@ -52,7 +76,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </remarks>
         private MySortedSet<Address> ForceEndOfMethod { get; } = new MySortedSet<Address>();
 
-        private MultiValueDictionary<Address, MethodInfoDto> AlreadyDecodedMethods { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
+        private MultiValueDictionary<Address, MethodInfoDto> AlreadyKnowMethods { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
 
         /// <summary>
         /// Набор адресов начиная с которых необходимо произвести декодирование.
@@ -72,7 +96,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private readonly ReadCStringPlugin _readCStringPlugin;
 
         public delegate void OnInstructionAttachToMethodDelegate(DetectedMethod method, int instructionIndex);
-        private readonly MySortedDictionary<IInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethod =
+        private readonly MySortedDictionary<IInstruction, OnInstructionAttachToMethodDelegate> _onAttachToMethodDelegates =
             new MySortedDictionary<IInstruction, OnInstructionAttachToMethodDelegate>(IInstruction.BeginComparer);
 
         public LowLevelEngine(
@@ -98,10 +122,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         public void RegisterOnInstructionAttachToMethod(CSharpInstruction instruction, OnInstructionAttachToMethodDelegate action)
         {
-            if (_onAttachToMethod.TryGetValue(instruction, out var prevAction))
+            if (_onAttachToMethodDelegates.TryGetValue(instruction, out var prevAction))
                 action += prevAction;
 
-            _onAttachToMethod[instruction] = action;
+            _onAttachToMethodDelegates[instruction] = action;
         }
 
         public void AddForceEndOfMethod(Address fullAddress)
@@ -109,19 +133,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             ForceEndOfMethod.Add(fullAddress);
         }
 
-        public void AddAlreadyDecodedFunc(MethodInfoDto model)
+        public void AddAlreadyKnownMethod(MethodInfoDto model)
         {
-            AlreadyDecodedMethods.Add(model.Address, model);
+            AlreadyKnowMethods.Add(model.Address, model);
         }
 
-        public void RemoveAlreadyDecodedFunc(Address fullAddress)
+        public void RemoveAlreadyKnownMethod(Address fullAddress)
         {
-            AlreadyDecodedMethods.Remove(fullAddress);
+            AlreadyKnowMethods.Remove(fullAddress);
         }
 
-        public bool HaveAlreadyDecodedMethodStartedWith(Address fullAddress)
+        public bool CheckIsHaveAlreadyKnownMethodWithStartAddress(Address fullAddress)
         {
-            if (!AlreadyDecodedMethods.TryGetValue(fullAddress, out var models))
+            if (!AlreadyKnowMethods.TryGetValue(fullAddress, out var models))
                 return false;
 
             foreach (var model in models)
@@ -136,9 +160,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return false;
         }
 
-        private bool AlreadyDecodedMethodsContainsMethodInfo(MethodInfoDto methodInfoDto)
+        private bool CheckIsAlreadyKnowMethodsContainsMethodInfo(MethodInfoDto methodInfoDto)
         {
-            return AlreadyDecodedMethods.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
+            return AlreadyKnowMethods.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
         }
 
 
@@ -147,7 +171,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (SuppressDecodeIntervals.Contains(addressOfMethodBegin, false))
                 return false;
 
-            if (HaveAlreadyDecodedMethodStartedWith(addressOfMethodBegin))
+            if (CheckIsHaveAlreadyKnownMethodWithStartAddress(addressOfMethodBegin))
                 return false;
 
             return NewDetectedMethods.Add(new DetectedMethod(addressOfMethodBegin));
@@ -214,7 +238,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 DecodedCode.Insert(cmd);
                 InstructionDecoded?.Invoke(this, cmd);
 
-                if (cmd.IsJmpOrRet)
+                if (cmd.Metadata.IsJmpOrRet)
                     break; // Потенциальный конец функции.
 
                 if (DecodedCode.ContainsInstruction(cmd.End))
@@ -257,10 +281,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                         if (otherMethod == null || method.End <= otherMethod.Begin)
                         {
+                            // Пересечения с другим методом нет. Всё корректно.
                             successCount++;
                             continue;
                         }
 
+                        // Надо заново разбить этот метод.
                         method.End = 0;
                     }
 
@@ -270,7 +296,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     if (firstCmd == null)
                     {
-                        // Вообще не декодировали этот адрес. Видимо он либо AlreadyDecodedMethods или SuppressDecode.
+                        // Вообще не декодировали этот адрес. Видимо он либо AlreadyKnownMethods или SuppressDecode.
                         toRemove.Add(method);
                         continue;
                     }
@@ -284,8 +310,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     var instructions = new List<IInstruction>();
 
-                    IInstruction lastInstr = null;
-                    var lastInstrEnd = firstCmd.Begin;
+                    IInstruction prevInstr = null;
+                    var prevInstrEnd = firstCmd.Begin;
 
                     for (var cmd = firstCmd; cmd != null; cmd = DecodedCode.GetNextInstruction(cmd))
                     {
@@ -293,24 +319,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             break;
 
                         // Не допускаем большие "дыры".
-                        var holeSize = cmd.Begin - lastInstrEnd;
-                        if (2 * (int)Mode < holeSize && 2 * (lastInstrEnd - firstCmd.Begin) < holeSize)
+
+                        var holeSize = cmd.Begin - prevInstrEnd;
+                        if (2 * (int)Mode < holeSize && 2 * (prevInstrEnd - firstCmd.Begin) < holeSize)
                             break;
 
-                        // Проверим на принадлежность к AlreadyDecodedMethods.
+                        // Проверим на принадлежность к AlreadyKnownMethods.
                         // Разрешим методам пересекаться при отсутствии ret и jmp в конце метода.
                         // Так выполнение кода может быть быстрее (при циклах), т.к. нет постоянных вызовов других методов.
-                        if ((lastInstr == null || lastInstr.IsJmpOrRet) &&
-                            (HaveAlreadyDecodedMethodStartedWith(lastInstrEnd) ||
-                                (cmd.Begin != lastInstrEnd && HaveAlreadyDecodedMethodStartedWith(cmd.Begin))))
+
+                        if ((prevInstr == null || prevInstr.Metadata.IsJmpOrRet) &&
+                            (CheckIsHaveAlreadyKnownMethodWithStartAddress(prevInstrEnd) ||
+                                (cmd.Begin != prevInstrEnd && CheckIsHaveAlreadyKnownMethodWithStartAddress(cmd.Begin))))
                         {
-                            // Нашли среди декодированных.
+                            // Нашли среди уже существующих методов.
                             break;
                         }
 
                         instructions.Add(cmd);
-                        lastInstr = cmd;
-                        lastInstrEnd = cmd.End;
+
+                        prevInstr = cmd;
+                        prevInstrEnd = cmd.End;
                     }
 
                     // Убираем конечные закомментированные инструкции.
@@ -323,14 +352,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         continue;
                     }
 
-                    var methodEnd = instructions[instructions.Count - 1].End;
                     method.Instructions = instructions;
-                    method.End = methodEnd;
+                    method.End = instructions[instructions.Count - 1].End;
                     method.RawBytes = Memory.ReadAll(method.Begin, method.End - method.Begin);
 
                     // Заполняем label.
 
-                    foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(methodBegin), new BranchInfo(methodEnd)))
+                    foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(methodBegin), new BranchInfo(method.End)))
                     {
                         var branchInstructionIndex = method.InstructionIndexOf(branchInfo.From);
                         if (branchInstructionIndex < 0)
@@ -338,7 +366,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                         foreach (var addressTo in branchInfo.To)
                         {
-                            if (methodBegin <= addressTo && addressTo < methodEnd)
+                            if (methodBegin <= addressTo && addressTo < method.End)
                             {
                                 // Переход внутрь метода.
 
@@ -378,24 +406,24 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         {
                             var decodeStart = prev.End;
 
-                            while (decodeStart != 0 && decodeStart < instruction.Begin && DecodedCode.GetInstructionBefore(decodeStart).IsJmp)
+                            while (decodeStart != 0 && decodeStart < instruction.Begin && DecodedCode.GetInstructionBefore(decodeStart).Metadata.IsJmp)
                             {
                                 // Перед декодированием, временно, добавляем адрес instruction.Begin в ForceEndMethod для безопасности.
                                 // А то вдруг там некорректный код и адрес instruction.Begin находится внутри инструкции и тогда мы можем уйти далеко за наш метод.
-                                var fem = ForceEndOfMethod.Contains(instruction.Begin);
-                                if (!fem)
+                                var shouldAddFam = ForceEndOfMethod.Contains(instruction.Begin);
+                                if (!shouldAddFam)
                                     AddForceEndOfMethod(instruction.Begin);
 
                                 Decode(decodeStart);
 
-                                if (!fem)
+                                if (!shouldAddFam)
                                     ForceEndOfMethod.Remove(instruction.Begin);
 
                                 if (DecodedCode.GetInstructionOrNull(decodeStart) == null)
                                     break; // Decode fail. Skip this hole.
 
                                 decodeStart = DecodedCode.Area.FindIntervalThatContainsValue(decodeStart, false)
-                                    .End; // Can be 0 if decodeStart in AlreadyDecodedMethod.
+                                    .End; // Can be 0 if decodeStart in AlreadyKnownMethods.
 
                                 // Заново пересчитываем метод.
                                 method.End = 0;
@@ -432,7 +460,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 method.MethodInfo = mi;
 
-                if (AlreadyDecodedMethodsContainsMethodInfo(mi))
+                if (CheckIsAlreadyKnowMethodsContainsMethodInfo(mi))
                     throw new InvalidOperationException("Detect already decoded method. Error in algorithm.");
 
                 // Заполняем HasLabel и IsLocalBranch.
@@ -451,7 +479,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     }
 
                     var fromInstruction = method.Instructions[fromInstructionIndex];
-                    fromInstruction.Metadata.IsLocalBranch ??= branchInfo.To.All(
+                    fromInstruction.Metadata.IsLocalBranch = branchInfo.To.All(
                         addressTo =>
                         {
                             if (method.Begin <= addressTo && addressTo < method.End)
@@ -468,13 +496,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }
 
                 // Call onAttachToMethod.
-
-                foreach (var instruction in _onAttachToMethod.GreaterThat(new AddressSearchInstruction(method.Begin - 1))
+                
+                foreach (var instruction in _onAttachToMethodDelegates
+                    .GreaterThat(new AddressSearchInstruction(method.Begin - 1))
                     .Where(x => x.Begin < method.End).ToList())
                 {
                     var index = method.InstructionIndexOf(instruction);
                     if (0 <= index)
-                        _onAttachToMethod[instruction](method, index);
+                        _onAttachToMethodDelegates[instruction](method, index);
                 }
 
                 // Удаляем недостижимый код.
@@ -493,7 +522,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         if (cmd.Metadata.HasLabel)
                             skip = false;
 
-                        if (skip /* && !cmd.CommentThis */)
+                        if (skip)
                         {
                             if (BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var branchInfo))
                             {
@@ -504,8 +533,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             method.Instructions.RemoveAt(cmdIndex);
                             cmdIndex--;
                         }
-                        else if (cmd.IsRet || (cmd.IsJmp && cmd.Metadata.IsLocalBranch == true /* is 'goto'. */))
+                        else if (cmd.Metadata.IsRet || (cmd.Metadata.IsJmp && cmd.Metadata.IsLocalBranch /* is 'goto'. */))
+                        {
+                            // NOTE Если это не локальный переход, а просто IsJmp,
+                            // то часто встречается ситуация, что после этого перехода
+                            // осуществляется возврат на следующую после данной инструкции инструкцию.
+                            //
+                            // Поэтому все нелокальные переходы допускают продолжение:
+                            //
+                            //    ii(0xa14a, 5);  if(jmp_far_ind(memw[cs, 0x17be])) return;  /* jmp far word [cs:0x17be] */
+                            //    ii(0xa14f, 2);  jmp(0xa167, 0x16); goto l_0xa167;          /* jmp 0xa167 */
+                            //
+                            //    (обратите внимание на 'if' и 'return')
+
+
                             skip = true;
+                        }
                     }
 
                     if (!anyBranchSkipped)
@@ -711,8 +754,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 try
                 {
-                    var isLast = detectedMethod.Instructions.Count <= cmdIndex + 1;
-                    lines = lines.Concat(cmd.GetCode(isLast));
+                    cmd.Metadata.IsLastInstructionInMethod = detectedMethod.Instructions.Count <= cmdIndex + 1;
+                    if (cmd.Metadata.HasLabel)
+                        lines = lines.Append($"l_{cmd.Begin}:");
+
+                    lines = lines.Concat(cmd.GetCode());
 
                     foreach (var str in lines)
                     {
@@ -726,35 +772,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }
 
                 lastInstrEnd = cmd.End;
-                lastInstrJmpOrRet = cmd.IsJmpOrRet;
+                lastInstrJmpOrRet = cmd.Metadata.IsJmpOrRet;
             }
 
             output.AppendLine("        }");
             output.AppendLine("    }");
             output.AppendLine("}");
-        }
-
-        public static DetectedMethod GetMethod(MethodInfoDto mi, Action<LowLevelEngine> configure = null)
-        {
-            var engine = new LowLevelEngine(
-                new BinToCSharpDto(),
-                new DefinitionCollection(),
-                new InMemoryMethodInfoCollection());
-
-            engine.Memory = new MemoryFromMethodInfo(mi);
-            engine.CsBase = mi.CsBase;
-            engine.Mode = mi.Mode;
-
-            engine.SuppressDecodeIntervals.Add(0, mi.Address);
-            engine.SuppressDecodeIntervals.Add(mi.Address + mi.RawBytes.Length, 0);
-
-            configure?.Invoke(engine);
-
-            engine.DecodeMethod(mi.Address);
-            engine.DetectMethods();
-
-            var method = engine.NewDetectedMethods.First(x => x.Begin == mi.Address);
-            return method;
         }
     }
 }

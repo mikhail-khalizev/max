@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
                 engine =>
                 {
                     engine.MethodInfoCollection.Add(decodedMi);
-                    engine.AddAlreadyDecodedFunc(decodedMi);
+                    engine.AddAlreadyKnownMethod(decodedMi);
                 });
 
             method.End.Should().Be(0x17_d8c8);

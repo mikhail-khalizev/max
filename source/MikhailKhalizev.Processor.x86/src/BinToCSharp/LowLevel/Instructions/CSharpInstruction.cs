@@ -15,12 +15,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     {
         public Address Begin { get; set; }
         public Address End { get; set; }
+        public int Length => End - Begin;
 
         /// <inheritdoc />
         public InstructionMetadata Metadata { get; }
-
-        public int Length => End - Begin;
-
+        
         public int Mode { get; set; }
         public int AddrMode { get; set; }
         public int OprMode { get; set; }
@@ -43,9 +42,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool IsCall { get; set; }
         public bool IsCallUp { get; set; }
         public bool IsLoopOrLoopcc { get; set; }
-        public bool IsRet { get; set; }
-        public bool IsJmp { get; set; }
-        public bool IsJmpOrRet => IsJmp || IsRet;
         public bool IsJmpOrJcc { get; set; }
 
 
@@ -84,8 +80,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             IsCall = other.IsCall;
             IsCallUp = other.IsCallUp;
             IsLoopOrLoopcc = other.IsLoopOrLoopcc;
-            IsRet = other.IsRet;
-            IsJmp = other.IsJmp;
             IsJmpOrJcc = other.IsJmpOrJcc;
             DefinitionCollection = other.DefinitionCollection;
             CommentThis = other.CommentThis;
@@ -115,11 +109,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             PfxAddress = ud.pfx_adr != 0;
             PfxOpr = ud.pfx_opr != 0;
 
-            IsJmp = ud.mnemonic == ud_mnemonic_code.UD_Ijmp;
+            Metadata.IsJmp = ud.mnemonic == ud_mnemonic_code.UD_Ijmp;
             IsCall = ud.mnemonic == ud_mnemonic_code.UD_Icall;
             IsJmpOrJcc = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("j");
             IsLoopOrLoopcc = udis86.ud_lookup_mnemonic(Mnemonic).StartsWith("loop");
-            IsRet = 0 <= ud.mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
+            Metadata.IsRet = 0 <= ud.mnemonic.ToString().IndexOf("ret", StringComparison.OrdinalIgnoreCase);
 
             if (ud.pfx_rex != 0) // unknown ud_obj.pfx_insn ?
                 throw new NotImplementedException();
@@ -172,7 +166,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return str;
         }
 
-        public virtual IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        public virtual IEnumerable<string> GetCode()
         {
             var lines = Enumerable.Empty<string>();
 
@@ -180,7 +174,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             var comments = string.Join(" ", Comments.Select(x => $"/* {x} */"));
 
 
-            var cmd = GetCommandString(isLastInstructionInMethod && Metadata.IsLocalBranch != true);
+            var cmd = GetCommandString(Metadata.IsLastInstructionInMethod && !Metadata.IsLocalBranch);
             var line = ii + cmd;
 
             if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrEmpty(comments))
@@ -194,9 +188,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             lines = CommentThis
                 ? lines.Select(x => "//  " + x)
                 : lines.Select(x => "    " + x);
-
-            if (Metadata.HasLabel)
-                lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);
 
             return lines;
         }
@@ -280,7 +271,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (new[] { "int", "in", "out" }.Contains(method))
                 method = "@" + method;
 
-            if ((IsLoopOrLoopcc || IsJmpOrJcc) && Metadata.IsLocalBranch != true && Operands[0].type == ud_type.UD_OP_JIMM)
+            if ((IsLoopOrLoopcc || IsJmpOrJcc) && !Metadata.IsLocalBranch && Operands[0].type == ud_type.UD_OP_JIMM)
                 method += "_func";
 
             if (IsCallUp)
@@ -295,9 +286,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 return "";
 
             var addIf = !onlyRawCmd && (IsCallUp || IsJmpOrJcc || IsLoopOrLoopcc) &&
-                (Mnemonic != ud_mnemonic_code.UD_Ijmp || Metadata.IsLocalBranch != true);
-            var addGotoLabel = !onlyRawCmd && Metadata.IsLocalBranch == true && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
-            var addReturn = !onlyRawCmd && Metadata.IsLocalBranch != true && (
+                (Mnemonic != ud_mnemonic_code.UD_Ijmp || !Metadata.IsLocalBranch);
+            var addGoto = !onlyRawCmd && Metadata.IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
+            var addReturn = !onlyRawCmd && !Metadata.IsLocalBranch && (
                 addIf ||
                 new[]
                 {
@@ -372,7 +363,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             sb.Append(")");
             sb.Append(addIf ? ")" : ";");
 
-            if (addGotoLabel)
+            if (addGoto)
             {
                 Address val;
                 var op = Operands[0];

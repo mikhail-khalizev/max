@@ -23,16 +23,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
 
         /// <inheritdoc />
-        public virtual bool IsRet => IcSharpInstructionImplementation.IsRet;
-
-        /// <inheritdoc />
-        public virtual bool IsJmp => IcSharpInstructionImplementation.IsJmp;
-
-
-        /// <inheritdoc />
-        public virtual IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        public virtual IEnumerable<string> GetCode()
         {
-            return IcSharpInstructionImplementation.GetCode(isLastInstructionInMethod);
+            return IcSharpInstructionImplementation.GetCode();
         }
     }
 }

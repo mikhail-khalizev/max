@@ -423,8 +423,8 @@ namespace MikhailKhalizev.Max.Program
 
             foreach (var pair in MethodsByAddress)
                 foreach (var info in pair.Value)
-                    engine.AddAlreadyDecodedFunc(info.MethodInfo);
-            engine.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
+                    engine.AddAlreadyKnownMethod(info.MethodInfo);
+            engine.RemoveAlreadyKnownMethod(fullAddress); // force decode.
 
 
             // Замечено, что многие функции начинаются со следующих двух команд.

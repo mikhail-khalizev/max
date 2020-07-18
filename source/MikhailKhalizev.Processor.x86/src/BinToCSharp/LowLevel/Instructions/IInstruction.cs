@@ -1,14 +1,9 @@
+using System;
 using System.Collections.Generic;
 using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class InstructionMetadata
-    {
-        public bool HasLabel { get; set; }
-        public bool? IsLocalBranch { get; set; }
-    }
-
     public interface IInstruction
     {
         public static IEqualityComparer<IInstruction> BeginEqualityComparer =>
@@ -21,15 +16,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 (x, y) => x.Begin.CompareTo(y.Begin));
 
 
-        Address Begin { get; }
-        Address End { get; }
+        public Address Begin { get; }
+        public Address End { get; }
+        public int Length => End - Begin;
 
-        InstructionMetadata Metadata { get; }
+        public InstructionMetadata Metadata { get; }
 
-        bool IsRet { get; }
-        bool IsJmp { get; }
-        bool IsJmpOrRet => IsJmp || IsRet;
-
-        IEnumerable<string> GetCode(bool isLastInstructionInMethod);
+        public IEnumerable<string> GetCode();
     }
 }

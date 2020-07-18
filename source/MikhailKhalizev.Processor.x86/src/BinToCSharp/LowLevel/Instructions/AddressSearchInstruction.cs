@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
@@ -19,12 +20,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public InstructionMetadata Metadata => _metadata ??= new InstructionMetadata();
         private InstructionMetadata _metadata;
 
-        /// <inheritdoc />
-        public bool IsRet => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public bool IsJmp => throw new NotImplementedException();
-
 
         public AddressSearchInstruction(Address address)
         {
@@ -33,9 +28,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
         /// <inheritdoc />
-        public IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        public IEnumerable<string> GetCode()
         {
-            throw new NotImplementedException();
+            return Enumerable.Empty<string>();
         }
     }
 }

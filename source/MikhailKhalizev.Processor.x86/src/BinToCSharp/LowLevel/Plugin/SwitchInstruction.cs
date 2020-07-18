@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> GetCode(bool isLastInstructionInMethod)
+        public override IEnumerable<string> GetCode()
         {
             var lines = Enumerable.Empty<string>();
 
@@ -61,9 +61,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             lines = CommentThis
                 ? lines.Select(x => "//  " + x)
                 : lines.Select(x => "    " + x);
-
-            if (Metadata.HasLabel)
-                lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);
 
             return lines;
         }
