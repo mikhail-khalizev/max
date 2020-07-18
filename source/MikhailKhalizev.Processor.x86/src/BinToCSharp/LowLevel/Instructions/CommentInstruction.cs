@@ -12,22 +12,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public Address End { get; set; }
 
         /// <inheritdoc />
-        public bool HasLabel { get; set; }
+        public InstructionMetadata Metadata => _metadata ??= new InstructionMetadata();
+        private InstructionMetadata _metadata;
 
         /// <inheritdoc />
         public bool IsJmpOrJcc => false;
-
-        /// <inheritdoc />
-        public bool IsLoopOrLoopcc => false;
 
         /// <inheritdoc />
         public bool IsRet => false;
 
         /// <inheritdoc />
         public bool IsJmp => false;
-
-        /// <inheritdoc />
-        public bool IsLocalBranch { get; set; }
 
 
         private readonly string _comment;
@@ -46,7 +41,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             var lines = Enumerable.Empty<string>();
 
-            if (HasLabel)
+            if (Metadata.HasLabel)
                 lines = lines.Append($"l_{Begin}:");
 
             lines = lines.Append("//  " + ii + _comment);

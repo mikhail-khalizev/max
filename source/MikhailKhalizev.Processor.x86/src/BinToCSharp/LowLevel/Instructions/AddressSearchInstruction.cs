@@ -14,19 +14,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             get => Begin;
             set => Begin = value;
         }
-
+        
         /// <inheritdoc />
-        public bool HasLabel
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+        public InstructionMetadata Metadata => _metadata ??= new InstructionMetadata();
+        private InstructionMetadata _metadata;
 
         /// <inheritdoc />
         public bool IsJmpOrJcc => throw new NotImplementedException();
-
-        /// <inheritdoc />
-        public bool IsLoopOrLoopcc => throw new NotImplementedException();
 
         /// <inheritdoc />
         public bool IsRet => throw new NotImplementedException();
@@ -34,12 +28,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// <inheritdoc />
         public bool IsJmp => throw new NotImplementedException();
 
-        /// <inheritdoc />
-        public bool IsLocalBranch
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
 
         public AddressSearchInstruction(Address address)
         {

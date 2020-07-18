@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Decoder;
@@ -287,7 +288,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. (");
 
-            var switchFeature = new SwitchFeature();
+            var switchAddresses = new List<Address>();
 
             var notFirst = false;
             for (Address i = 0; i < _sizeOfAddrArea; i += (uint) Engine.Mode / 8)
@@ -314,14 +315,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                 Engine.AddToDecode(to);
 
-                switchFeature.Addresses.Add(to);
+                switchAddresses.Add(to);
             }
 
             os.Append(").");
             Engine.DecodedCode.Insert(new CommentInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
 
-
-            cmd.Features.Add(switchFeature);
 
             Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var jtka);
             if (jtka == null)
@@ -331,7 +330,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 Engine.BranchesInfo.Add(jtka);
             }
 
-            foreach (var to in switchFeature.Addresses)
+            foreach (var to in switchAddresses)
                 jtka.To.Add(to);
 
 
@@ -354,9 +353,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         return;
                     }
 
-                    foreach (var to in switchFeature.Addresses)
+                    foreach (var to in switchAddresses)
                     {
-                        if (method.InstructionOf(to)?.HasLabel != true)
+                        if (method.InstructionOf(to)?.Metadata.HasLabel != true)
                         {
                             NonBlockingConsole.WriteLine(
                                 "Не все метки switch находятся внутри одного метода " +
@@ -366,7 +365,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         }
                     }
 
-                    method.Instructions[index] = new SwitchCSharpInstruction(localCmd, switchFeature);
+                    method.Instructions[index] = new SwitchInstruction(localCmd, switchAddresses);
                 });
         }
     }

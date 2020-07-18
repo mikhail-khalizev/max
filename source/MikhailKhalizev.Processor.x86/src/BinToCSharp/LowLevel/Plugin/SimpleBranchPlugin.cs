@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
                         var to = branchInfo.To.Single();
                         
-                        if (method.InstructionOf(to)?.HasLabel != true)
+                        if (method.InstructionOf(to)?.Metadata.HasLabel != true)
                         {
                             if (method.Begin <= to && to < method.End)
                                 cmd.Comments.Add("Адрес перехода делит инструкцию в этой функции пополам.");

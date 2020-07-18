@@ -447,17 +447,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     {
                         var toInstructionIndex = method.InstructionIndexOf(to);
                         if (0 <= toInstructionIndex)
-                            method.Instructions[toInstructionIndex].HasLabel = true;
+                            method.Instructions[toInstructionIndex].Metadata.HasLabel = true;
                     }
 
                     var fromInstruction = method.Instructions[fromInstructionIndex];
-                    if (!fromInstruction.IsJmpOrJcc && !fromInstruction.IsLoopOrLoopcc)
-                        continue;
-
-                    if (fromInstruction.IsLocalBranch)
-                        continue;
-
-                    fromInstruction.IsLocalBranch = branchInfo.To.All(
+                    fromInstruction.Metadata.IsLocalBranch ??= branchInfo.To.All(
                         addressTo =>
                         {
                             if (method.Begin <= addressTo && addressTo < method.End)
@@ -496,7 +490,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     {
                         var cmd = method.Instructions[cmdIndex];
 
-                        if (cmd.HasLabel)
+                        if (cmd.Metadata.HasLabel)
                             skip = false;
 
                         if (skip /* && !cmd.CommentThis */)
@@ -510,7 +504,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             method.Instructions.RemoveAt(cmdIndex);
                             cmdIndex--;
                         }
-                        else if (cmd.IsRet || (cmd.IsJmp && cmd.IsLocalBranch /* is 'goto'. */))
+                        else if (cmd.IsRet || (cmd.IsJmp && cmd.Metadata.IsLocalBranch == true /* is 'goto'. */))
                             skip = true;
                     }
 
@@ -533,7 +527,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     {
                         var index = method.InstructionIndexOf(removeLabel);
                         if (0 <= index)
-                            method.Instructions[index].HasLabel = false;
+                            method.Instructions[index].Metadata.HasLabel = false;
                     }
                 }
             }

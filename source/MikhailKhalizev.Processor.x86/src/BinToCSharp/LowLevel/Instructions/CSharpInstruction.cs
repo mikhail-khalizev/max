@@ -11,37 +11,14 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public interface IInstruction
-    {
-        public static IEqualityComparer<IInstruction> BeginEqualityComparer =>
-            new CustomEqualityComparer<IInstruction>(
-                (x, y) => x.Begin == y.Begin,
-                x => x.Begin.GetHashCode());
-
-        public static IComparer<IInstruction> BeginComparer =>
-            new CustomComparer<IInstruction>(
-                (x, y) => x.Begin.CompareTo(y.Begin));
-
-
-        Address Begin { get; set; }
-        Address End { get; set; }
-
-        bool HasLabel { get; set; }
-        bool IsJmpOrJcc { get; }
-        bool IsLoopOrLoopcc { get; }
-        bool IsRet { get; }
-        bool IsJmp { get; }
-        bool IsJmpOrRet => IsJmp || IsRet;
-        bool IsLocalBranch { get; set; }
-
-        IEnumerable<string> GetCode(bool isLastInstructionInMethod);
-    }
-
-
     public class CSharpInstruction : IInstruction
     {
         public Address Begin { get; set; }
         public Address End { get; set; }
+
+        /// <inheritdoc />
+        public InstructionMetadata Metadata { get; }
+
         public int Length => End - Begin;
 
         public int Mode { get; set; }
@@ -70,7 +47,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public bool IsJmp { get; set; }
         public bool IsJmpOrRet => IsJmp || IsRet;
         public bool IsJmpOrJcc { get; set; }
-        public bool IsLocalBranch { get; set; }
 
 
         public DefinitionCollection DefinitionCollection { get; }
@@ -84,9 +60,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// Комментарии к инструкции.
         /// </summary>
         public List<string> Comments { get; set; }
-
-        public bool HasLabel { get; set; }
-        public List<IInstructionFeature> Features { get; }
 
         protected const int DecimalLimit = 0xfff;
 
@@ -114,12 +87,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             IsRet = other.IsRet;
             IsJmp = other.IsJmp;
             IsJmpOrJcc = other.IsJmpOrJcc;
-            IsLocalBranch = other.IsLocalBranch;
             DefinitionCollection = other.DefinitionCollection;
             CommentThis = other.CommentThis;
             Comments = other.Comments;
-            HasLabel = other.HasLabel;
-            Features = other.Features;
+            Metadata = other.Metadata;
         }
 
         public CSharpInstruction(DefinitionCollection definitionCollection, ud ud)
@@ -128,8 +99,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 throw new ArgumentNullException(nameof(ud));
             DefinitionCollection = definitionCollection;
 
+            Metadata = new InstructionMetadata();
             Comments = new List<string>();
-            Features = new List<IInstructionFeature>();
 
             Begin = ud.insn_offset;
             End = ud.pc;
@@ -209,7 +180,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             var comments = string.Join(" ", Comments.Select(x => $"/* {x} */"));
 
 
-            var cmd = GetCommandString(isLastInstructionInMethod && !IsLocalBranch);
+            var cmd = GetCommandString(isLastInstructionInMethod && Metadata.IsLocalBranch != true);
             var line = ii + cmd;
 
             if (!string.IsNullOrEmpty(cmd) && !string.IsNullOrEmpty(comments))
@@ -224,7 +195,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 ? lines.Select(x => "//  " + x)
                 : lines.Select(x => "    " + x);
 
-            if (HasLabel)
+            if (Metadata.HasLabel)
                 lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);
 
             return lines;
@@ -309,7 +280,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (new[] { "int", "in", "out" }.Contains(method))
                 method = "@" + method;
 
-            if ((IsLoopOrLoopcc || IsJmpOrJcc) && !IsLocalBranch && Operands[0].type == ud_type.UD_OP_JIMM)
+            if ((IsLoopOrLoopcc || IsJmpOrJcc) && Metadata.IsLocalBranch != true && Operands[0].type == ud_type.UD_OP_JIMM)
                 method += "_func";
 
             if (IsCallUp)
@@ -324,9 +295,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 return "";
 
             var addIf = !onlyRawCmd && (IsCallUp || IsJmpOrJcc || IsLoopOrLoopcc) &&
-                (Mnemonic != ud_mnemonic_code.UD_Ijmp || !IsLocalBranch);
-            var addGotoLabel = !onlyRawCmd && IsLocalBranch && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
-            var addReturn = !onlyRawCmd && !IsLocalBranch && (
+                (Mnemonic != ud_mnemonic_code.UD_Ijmp || Metadata.IsLocalBranch != true);
+            var addGotoLabel = !onlyRawCmd && Metadata.IsLocalBranch == true && (IsJmpOrJcc || IsLoopOrLoopcc) && Operands[0].type == ud_type.UD_OP_JIMM;
+            var addReturn = !onlyRawCmd && Metadata.IsLocalBranch != true && (
                 addIf ||
                 new[]
                 {
@@ -867,18 +838,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             /// <inheritdoc />
             public int Length => int.MaxValue;
-        }
-
-
-        public T GetFeature<T>()
-        {
-            return Features.OfType<T>().First();
-        }
-
-        public bool TryGetFeature<T>(out T feature)
-        {
-            feature = Features.OfType<T>().FirstOrDefault();
-            return feature != null;
         }
     }
 }

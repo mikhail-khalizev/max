@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
-    public class SwitchCSharpInstruction : CSharpInstruction
+    public class SwitchInstruction : CSharpInstruction
     {
-        private readonly SwitchFeature _switchFeature;
+        public List<Address> Addresses { get; }
 
         /// <inheritdoc />
-        public SwitchCSharpInstruction(CSharpInstruction origInstruction, SwitchFeature switchFeature)
+        public SwitchInstruction(CSharpInstruction origInstruction, List<Address> addresses)
             : base(origInstruction)
         {
-            _switchFeature = switchFeature;
+            Addresses = addresses;
         }
 
         /// <inheritdoc />
@@ -39,7 +39,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         "{"
                     })
                 .Concat(
-                    _switchFeature.Addresses.Distinct().OrderBy(x => x).SelectMany(
+                    Addresses.Distinct().OrderBy(x => x).SelectMany(
                         to =>
                         {
                             return
@@ -62,7 +62,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 ? lines.Select(x => "//  " + x)
                 : lines.Select(x => "    " + x);
 
-            if (HasLabel)
+            if (Metadata.HasLabel)
                 lines = Enumerable.Empty<string>().Append($"l_{Begin}:").Concat(lines);
 
             return lines;
