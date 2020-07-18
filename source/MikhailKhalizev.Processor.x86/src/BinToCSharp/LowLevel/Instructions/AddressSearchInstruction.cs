@@ -20,9 +20,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private InstructionMetadata _metadata;
 
         /// <inheritdoc />
-        public bool IsJmpOrJcc => throw new NotImplementedException();
-
-        /// <inheritdoc />
         public bool IsRet => throw new NotImplementedException();
 
         /// <inheritdoc />

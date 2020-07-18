@@ -26,7 +26,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         InstructionMetadata Metadata { get; }
 
-        bool IsJmpOrJcc { get; }
         bool IsRet { get; }
         bool IsJmp { get; }
         bool IsJmpOrRet => IsJmp || IsRet;

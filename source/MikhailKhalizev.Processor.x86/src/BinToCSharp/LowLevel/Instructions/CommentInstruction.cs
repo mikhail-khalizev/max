@@ -16,9 +16,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         private InstructionMetadata _metadata;
 
         /// <inheritdoc />
-        public bool IsJmpOrJcc => false;
-
-        /// <inheritdoc />
         public bool IsRet => false;
 
         /// <inheritdoc />

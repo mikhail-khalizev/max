@@ -13,23 +13,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         
 
         /// <inheritdoc />
-        public virtual Address Begin
-        {
-            get => IcSharpInstructionImplementation.Begin;
-        }
+        public virtual Address Begin => IcSharpInstructionImplementation.Begin;
 
         /// <inheritdoc />
-        public virtual Address End
-        {
-            get => IcSharpInstructionImplementation.End;
-        }
+        public virtual Address End => IcSharpInstructionImplementation.End;
 
         /// <inheritdoc />
         public InstructionMetadata Metadata => IcSharpInstructionImplementation.Metadata;
 
-
-        /// <inheritdoc />
-        public virtual bool IsJmpOrJcc => IcSharpInstructionImplementation.IsJmpOrJcc;
 
         /// <inheritdoc />
         public virtual bool IsRet => IcSharpInstructionImplementation.IsRet;
