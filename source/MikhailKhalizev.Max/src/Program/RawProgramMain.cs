@@ -65,44 +65,7 @@ namespace MikhailKhalizev.Max.Program
             Implementation.MethodInfoCollection = MethodInfoCollection;
             implementation.CompiledMethodCollection = this;
             implementation.runIrqs += (sender, args) => DosPic.RunIrqs();
-            implementation.runInb += (sender, args) =>
-            {
-                try
-                {
-                    DosPort.MyInb(args.value, args.port);
-                    // NonBlockingConsole.WriteLine($"inb, port: {args.port}, value: {args.value}");
-                }
-                catch
-                {
-                    NonBlockingConsole.WriteLine($"inb, port: {args.port}, value: {args.value}");
-                    throw;
-                }
-            };
-            implementation.runOutb += (sender, args) =>
-            {
-                try
-                {
-                    DosPort.MyOutb(args.port, args.value);
-                    // NonBlockingConsole.WriteLine($"outb, port: {args.port}, value: {args.value}");
-                }
-                catch
-                {
-                    NonBlockingConsole.WriteLine($"outb, port: {args.port}, value: {args.value}");
-                    throw;
-                }
-            };
-            implementation.runOutw += (sender, args) =>
-            {
-                try
-                {
-                    DosPort.MyOutw(args.port, args.value);
-                }
-                catch
-                {
-                    Console.WriteLine($"outb, value: {args.value}, port: {args.port}");
-                    throw;
-                }
-            };
+            DosPort.SubscribeToCpuPortEvents();
         }
 
         public void Start()
@@ -280,7 +243,7 @@ namespace MikhailKhalizev.Max.Program
                 if (fullAddress == 0)
                     throw new InvalidOperationException("Запрос метода по нулевому указателю.");
 
-                var info = find_func_exact(fullAddress);
+                var info = FindExactMethod(fullAddress);
                 if (info != null)
                 {
                     methodInfo = info.MethodInfo;
@@ -373,7 +336,7 @@ namespace MikhailKhalizev.Max.Program
             return assemblyDllPath;
         }
 
-        private MyMethodInfo find_func_exact(Address fullAddress)
+        private MyMethodInfo FindExactMethod(Address fullAddress)
         {
             var infos = MethodsByAddress.GetValues(fullAddress, false);
             if (infos == null)
@@ -392,34 +355,34 @@ namespace MikhailKhalizev.Max.Program
         }
 
 
-        public static void ConfigureEngine(Engine engine)
+        public static void ConfigureEngine(LowLevelEngine engine)
         {
             // Аргументы следующим методам установлены опытным путём.
 
-            engine.SuppressDecode.Add(0x1030_0000, 0);
+            engine.SuppressDecodeIntervals.Add(0x1030_0000, 0);
 
             engine.SetCStringDataArea(0x101a_0003, 0x101b_384d);
 
-            engine.AddForceEndMethod(0xbb03);
-            engine.AddForceEndMethod(0xbb6f);
-            engine.AddForceEndMethod(0xbb73);
-            engine.AddForceEndMethod(0xdb13);
-            engine.AddForceEndMethod(0x18_9b43);
-            engine.AddForceEndMethod(0x18_f4c7);
-            engine.AddForceEndMethod(0x18_b5b5);
-            engine.AddForceEndMethod(0x18_edfc);
-            engine.AddForceEndMethod(0x18_f88b);
-            engine.AddForceEndMethod(0x18_f8ef);
-            engine.AddForceEndMethod(0x19_8748);
-            engine.AddForceEndMethod(0x100f_e8f8);
-            engine.AddForceEndMethod(0x100f_bf17);
-            engine.AddForceEndMethod(0x100f_a6fe);
-            engine.AddForceEndMethod(0x100f_bf17);
+            engine.AddForceEndOfMethod(0xbb03);
+            engine.AddForceEndOfMethod(0xbb6f);
+            engine.AddForceEndOfMethod(0xbb73);
+            engine.AddForceEndOfMethod(0xdb13);
+            engine.AddForceEndOfMethod(0x18_9b43);
+            engine.AddForceEndOfMethod(0x18_f4c7);
+            engine.AddForceEndOfMethod(0x18_b5b5);
+            engine.AddForceEndOfMethod(0x18_edfc);
+            engine.AddForceEndOfMethod(0x18_f88b);
+            engine.AddForceEndOfMethod(0x18_f8ef);
+            engine.AddForceEndOfMethod(0x19_8748);
+            engine.AddForceEndOfMethod(0x100f_e8f8);
+            engine.AddForceEndOfMethod(0x100f_bf17);
+            engine.AddForceEndOfMethod(0x100f_a6fe);
+            engine.AddForceEndOfMethod(0x100f_bf17);
 
             // mve
             foreach (var interval in MveForceEndIntervals)
                 for (var i = interval.Begin; i <= interval.End; i++)
-                    engine.AddForceEndMethod(i);
+                    engine.AddForceEndOfMethod(i);
         }
 
         public static Interval<Address, Address.Comparer>[] MveForceEndIntervals { get; } = {
@@ -443,7 +406,7 @@ namespace MikhailKhalizev.Max.Program
 
             var fullAddress = cs[eip];
 
-            var engine = new Engine(
+            var engine = new LowLevelEngine(
                 Configuration.BinToCSharp,
                 DefinitionCollection,
                 MethodInfoCollection);
@@ -456,12 +419,12 @@ namespace MikhailKhalizev.Max.Program
             ConfigureEngine(engine);
 
             if (cs.Descriptor.Base + cs.Descriptor.Limit + 1 != 0)
-                engine.SuppressDecode.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
+                engine.SuppressDecodeIntervals.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
 
             foreach (var pair in MethodsByAddress)
                 foreach (var info in pair.Value)
-                    engine.AddAlreadyDecodedFunc(info.MethodInfo);
-            engine.RemoveAlreadyDecodedFunc(fullAddress); // force decode.
+                    engine.AddAlreadyKnownMethod(info.MethodInfo);
+            engine.RemoveAlreadyKnownMethod(fullAddress); // force decode.
 
 
             // Замечено, что многие функции начинаются со следующих двух команд.
@@ -474,9 +437,9 @@ namespace MikhailKhalizev.Max.Program
             Address code_start = 0x1007_0000;
             Address code_end = 0x1016_5d52;
 
-            if (cs[0] == 0 && cs.db && its_first && !MethodsByAddress.ContainsKey(0x1007_0010) && !MethodsByAddress.ContainsKey(0x1016_4ad4))
+            if (cs[0] == 0 && cs.db && _itsFirstCallAllCodeDecode && !MethodsByAddress.ContainsKey(0x1007_0010) && !MethodsByAddress.ContainsKey(0x1016_4ad4))
             {
-                its_first = false;
+                _itsFirstCallAllCodeDecode = false;
                 NonBlockingConsole.WriteLine("Декодирования всего пользовательского кода MAX.");
 
                 var code = Span<byte>.Empty;
@@ -512,9 +475,9 @@ namespace MikhailKhalizev.Max.Program
             }
         }
 
-        private bool its_first = true;
+        private bool _itsFirstCallAllCodeDecode = true;
 
-        public void add_internal_dyn_func(Action func, int mode, Address address)
+        public void AddInternalDynamicMethod(Action func, int mode, Address address)
         {
             var myMethodInfos = MethodsByAddress.GetValues(address, false);
 
@@ -540,12 +503,12 @@ namespace MikhailKhalizev.Max.Program
                 });
         }
 
-        public void add_internal_dyn_func_if_free(Action func, int mode, Address address)
+        public void AddInternalDynamicMethodIfFree(Action func, int mode, Address address)
         {
             if (MethodsByAddress.ContainsKey(address))
                 return;
 
-            add_internal_dyn_func(func, mode, address);
+            AddInternalDynamicMethod(func, mode, address);
         }
     }
 

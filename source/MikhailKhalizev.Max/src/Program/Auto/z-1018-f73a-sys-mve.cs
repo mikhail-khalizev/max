@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_f73a-992b")]
         public void /* sys_mve */ Method_1018_f73a()
         {
-            ii(0x1018_f73a, 2); mov(al, cl);                            /* mov al, cl */
+            ii(0x1018_f73a, 2);  mov(al, cl);                          /* mov al, cl */
         }
     }
 }

@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1019_0076-14de11")]
         public void /* sys_mve */ Method_1019_0076()
         {
-            ii(0x1019_0076, 3); shl(eax, 0x10);                         /* shl eax, 0x10 */
+            ii(0x1019_0076, 3);  shl(eax, 0x10);                       /* shl eax, 0x10 */
         }
     }
 }

@@ -8,9 +8,9 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_a40b-613f913a")]
         public void Method_0018_a40b()
         {
-            ii(0x18_a40b, 3); call(0x18_bd02, 0x18f4);                  /* call 0xbd02 */
-            ii(0x18_a40e, 3); mov(memw[ss, bp + 18], dx);               /* mov [bp+0x12], dx */
-            ii(0x18_a411, 1); ret();                                    /* ret */
+            ii(0x18_a40b, 3);  call(0x18_bd02, 0x18f4);                /* call 0xbd02 */
+            ii(0x18_a40e, 3);  mov(memw[ss, bp + 18], dx);             /* mov [bp+0x12], dx */
+            ii(0x18_a411, 1);  ret();                                  /* ret */
         }
     }
 }

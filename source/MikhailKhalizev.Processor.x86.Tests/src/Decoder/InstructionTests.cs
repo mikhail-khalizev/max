@@ -3,7 +3,7 @@ using MikhailKhalizev.Processor.x86.Decoder;
 using MikhailKhalizev.Processor.x86.Decoder.Metadata;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.InstructionDecode
+namespace MikhailKhalizev.Processor.x86.Tests.Decoder
 {
     public class InstructionTest
     {

@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x7e39-19e2273")]
         public void Method_0000_7e39()
         {
-            ii(0x7e39, 3);    call(0x66dc, -0x1760);                    /* call 0x66dc */
-            ii(0x7e3c, 1);    ret();                                    /* ret */
+            ii(0x7e39, 3);  call(0x66dc, -0x1760);                     /* call 0x66dc */
+            ii(0x7e3c, 1);  ret();                                     /* ret */
         }
     }
 }

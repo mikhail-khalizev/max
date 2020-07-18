@@ -12,8 +12,9 @@ using Newtonsoft.Json.Linq;
 using SharpDisasm;
 using SharpDisasm.Udis86;
 using Xunit;
+using Instruction = MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Instruction;
 
-namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
+namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
 {
     public class InstructionTests
     {
@@ -62,8 +63,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
                             length.Should().BeGreaterOrEqualTo(0);
                             u.error.Should().Be(0);
 
-                            var cmd = new CSharpInstruction(new DefinitionCollection(), u);
-                            var str = cmd.ToCodeString(onlyRawCmd: true);
+                            var cmd = new Instruction(new DefinitionCollection(), u);
+                            var str = cmd.GetCommandString(onlyRawCmd: true);
 
                             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 
@@ -102,8 +103,9 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp
             length.Should().BeGreaterOrEqualTo(0);
             u.error.Should().Be(0);
 
-            var cmd = new CSharpInstruction(new DefinitionCollection(), u);
-            var str = cmd.ToCodeString(onlyRawCmd: true);
+            var cmd = new Instruction(new DefinitionCollection(), u);
+            cmd.Metadata.IsLocalBranch = true;
+            var str = cmd.GetCommandString(onlyRawCmd: true);
 
             str = HexHelper.RemoveGroupSeparatorInAllHexInText(str);
 

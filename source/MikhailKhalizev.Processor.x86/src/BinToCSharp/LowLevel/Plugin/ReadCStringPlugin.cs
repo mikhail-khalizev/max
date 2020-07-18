@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 
 
         /// <inheritdoc />
-        public ReadCStringPlugin(Engine engine)
+        public ReadCStringPlugin(LowLevelEngine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
@@ -78,7 +78,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             }
         }
 
-        private void EngineOnInstructionDecoded(object sender, CSharpInstruction cmd)
+        private void EngineOnInstructionDecoded(object sender, Instruction cmd)
         {
             for (var i = 0; i < cmd.Operands.Count; i++)
             {

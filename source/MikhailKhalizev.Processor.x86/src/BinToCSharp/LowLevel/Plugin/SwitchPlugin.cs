@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory;
 using MikhailKhalizev.Processor.x86.Decoder;
@@ -9,19 +8,6 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
-    public class SwitchFeature : IInstructionFeature
-    {
-        public List<Address> Addresses { get; } = new List<Address>();
-
-        public SwitchFeature()
-        { }
-
-        public SwitchFeature(List<Address> addresses)
-        {
-            Addresses = addresses;
-        }
-    }
-
     public class SwitchPlugin : PluginBase
     {
         private int _state;
@@ -31,13 +17,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
         private int _sizeOfAddrArea;
 
         /// <inheritdoc />
-        public SwitchPlugin(Engine engine)
+        public SwitchPlugin(LowLevelEngine engine)
             : base(engine)
         {
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
         }
 
-        private void EngineOnInstructionDecoded(object sender, CSharpInstruction cmd)
+        private void EngineOnInstructionDecoded(object sender, Instruction cmd)
         {
 #if false
     /* Pattern for: */
@@ -127,7 +113,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG)
                     {
                         _reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
-                        if (_reg.IsGeneralPurpose && _reg.Size == 32 && Equals(cmd.Operands[1], _op))
+                        if (_reg.IsGeneralPurpose && _reg.Bits == 32 && Equals(cmd.Operands[1], _op))
                             _state = 5;
                     }
 
@@ -151,7 +137,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
-                        && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
+                        && cmd.Operands[1].lval.uqword == (uint) Engine.Mode / 16)
                         _state++;
                     else
                         _state = 0;
@@ -188,8 +174,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     else if (cmd.Mnemonic == ud_mnemonic_code.UD_Imovzx
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
-                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
-                    //                && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[1].@base) == reg
                     )
                     {
                         _state++;
@@ -198,7 +184,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && cmd.Operands[1].type == ud_type.UD_OP_REG
                         && cmd.Operands[0].@base == cmd.Operands[1].@base
-                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                     {
                         _state = 10;
@@ -207,7 +193,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         && RegisterInfo.GetRegister(cmd.Operands[0].@base) == _reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_CONST)
-                        && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
+                        && cmd.Operands[1].lval.uqword == (uint) Engine.Mode / 16)
                     {
                         _state = 11;
                     }
@@ -229,7 +215,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
                         //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                         && (cmd.Operands[1].type == ud_type.UD_OP_IMM)
-                        && cmd.Operands[1].lval.uqword == (uint)Engine.Mode / 16)
+                        && cmd.Operands[1].lval.uqword == (uint) Engine.Mode / 16)
                         _state = 6;
                     else
                         _state = 0;
@@ -239,7 +225,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 case 10:
                     if (cmd.Mnemonic == ud_mnemonic_code.UD_Imov
                         && cmd.Operands[0].type == ud_type.UD_OP_REG
-                    //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
+                        //                && RegisterInfo.GetRegister(cmd.Operands[0].@base) == reg
                     )
                         _state = 9;
                     else
@@ -276,7 +262,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 && cmd.Operands[1].type == ud_type.UD_OP_IMM
                 && cmd.Operands[1].size <= 16)
             {
-                _sizeOfAddrArea = (cmd.Operands[1].lval.uword + 1) * ((int)Engine.Mode / 8);
+                _sizeOfAddrArea = (cmd.Operands[1].lval.uword + 1) * ((int) Engine.Mode / 8);
 
                 if (cmd.Operands[0].type == ud_type.UD_OP_MEM)
                 {
@@ -291,7 +277,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             }
         }
 
-        private void AddSwitchAt(CSharpInstruction cmd)
+        private void AddSwitchAt(Instruction cmd)
         {
             if (cmd.BrFar)
                 return;
@@ -302,21 +288,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             var os = new StringBuilder();
             os.Append("Служебная область с абсолютными адресами переходов. (");
 
-            Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var jtka);
-            if (jtka == null)
-            {
-                jtka = new BranchInfo(cmd.Begin);
-                jtka.To = new SortedSet<Address>();
-                Engine.BranchesInfo.Add(jtka);
-            }
-
-            // TODO Add 'SwitchFeature' to 'cmd.Features'.
+            var switchAddresses = new List<Address>();
 
             var notFirst = false;
-            for (Address i = 0; i < _sizeOfAddrArea; i += (uint)Engine.Mode / 8)
+            for (Address i = 0; i < _sizeOfAddrArea; i += (uint) Engine.Mode / 8)
             {
                 Address to;
-                switch ((int)Engine.Mode)
+                switch ((int) Engine.Mode)
                 {
                     case 16:
                         to = Engine.Memory.Ref<ushort>(addrOfAddrs + i);
@@ -325,7 +303,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         to = Engine.Memory.Ref<uint>(addrOfAddrs + i);
                         break;
                     default:
-                        throw new NotImplementedException($"Engine.Mode: {(int)Engine.Mode}.");
+                        throw new NotImplementedException($"Engine.Mode: {(int) Engine.Mode}.");
                 }
 
                 to += Engine.CsBase;
@@ -335,81 +313,60 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                 notFirst = true;
                 os.Append(to.ToString());
 
-                jtka.To.Add(to);
                 Engine.AddToDecode(to);
+
+                switchAddresses.Add(to);
             }
 
             os.Append(").");
+            Engine.DecodedCode.Insert(new CommentInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
 
-            Engine.DecodedCode.Insert(new CSharpInstruction(addrOfAddrs, addrOfAddrs + _sizeOfAddrArea, os.ToString()));
+
+            Engine.BranchesInfo.TryGetValue(new BranchInfo(cmd.Begin), out var jtka);
+            if (jtka == null)
+            {
+                jtka = new BranchInfo(cmd.Begin);
+                jtka.To = new MySortedSet<Address>();
+                Engine.BranchesInfo.Add(jtka);
+            }
+
+            foreach (var to in switchAddresses)
+                jtka.To.Add(to);
+
 
             var copyAddrAreaBegin = _addrAreaBegin;
             var copySizeOfAddrArea = _sizeOfAddrArea;
-            cmd.WriteCmd = (engine, dm, index, func) => WriteCmd(copyAddrAreaBegin, copySizeOfAddrArea, engine, dm, index, func);
-        }
 
-        private static string WriteCmd(
-            Address addrAreaBegin, int sizeOfAddrArea,
-            Engine engine, DetectedMethod dm, int cmdIndex, List<string> commentsInCurrentFunc)
-        {
-            var raw = engine.Memory.ReadAll(addrAreaBegin, sizeOfAddrArea);
-            engine.MethodInfoCollection.AddExtraRaw(dm.MethodInfo, addrAreaBegin, raw);
-
-            engine.BranchesInfo.TryGetValue(new BranchInfo(dm.Instructions[cmdIndex].Begin), out var curJmp);
-            if (curJmp == null)
-                throw new NotImplementedException("curJmp == null");
-
-            var funcAddArg = new StringBuilder();
-
-            foreach (var to in curJmp.To)
-            {
-                if (!dm.Labels.Contains(to))
+            Engine.RegisterOnInstructionAttachToMethod(
+                cmd,
+                (method, index) =>
                 {
-                    NonBlockingConsole.WriteLine(
-                        "Не все метки switch находятся внутри одного метода " +
-                        "(видимо не удалось разбить код на методы так, чтобы switch целиком находился внутри метода). " +
-                        $"Method.Id = {dm.MethodInfo.Id}.");
-                    return dm.Instructions[cmdIndex].ToCodeString();
-                }
-                funcAddArg.Append($"({to})");
-            }
+                    var raw = Engine.Memory.ReadAll(copyAddrAreaBegin, copySizeOfAddrArea);
+                    Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, copyAddrAreaBegin, raw);
 
-            if (curJmp.To.Count == 0)
-                throw new NotImplementedException("curJmp.To.Count == 0");
-            var funcSuffix = "_switch";
-
-            if (!dm.Instructions[cmdIndex].IsLocalBranch)
-                throw new InvalidOperationException($"Должно быть уже заполнено в {nameof(Engine)}.{nameof(Engine.DetectMethods)}.");
-
-            var str = dm.Instructions[cmdIndex].ToCodeString(funcSuffix, "");
-
-            var lines = new[]
-                {
-                    $"            switch ({str.TrimEnd(';')})",
-                    "            {"
-                }
-                .Concat(curJmp.To.SelectMany(
-                    to =>
+                    var localCmd = method.Instructions[index] as Instruction;
+                    if (localCmd == null)
                     {
-                        if (!dm.Labels.Contains(to))
-                            throw new NotImplementedException("!dm.Labels.Contains(to) 2");
+                        NonBlockingConsole.WriteLine(
+                            "Ожидается Instruction. " +
+                            $"Method.Id = {method.MethodInfo.Id}. index = {index}.");
+                        return;
+                    }
 
-                        return
-                            new[]
-                            {
-                                $"                case {to}:",
-                                $"                    goto l_{to};"
-                            };
-                    }))
-                .Concat(
-                    new[]
+                    foreach (var to in switchAddresses)
                     {
-                        "                default:",
-                        "                    throw new NotImplementedException();",
-                        "            }"
-                    });
+                        if (method.InstructionOf(to)?.Metadata.HasLabel != true)
+                        {
+                            NonBlockingConsole.WriteLine(
+                                "Не все метки switch находятся внутри одного метода " +
+                                "(видимо не удалось разбить код на методы так, чтобы switch целиком находился внутри метода). " +
+                                $"Method.Id = {method.MethodInfo.Id}.");
+                            return;
+                        }
+                    }
 
-            return Environment.NewLine + string.Join(Environment.NewLine, lines);
+                    method.Instructions[index] = new SwitchInstruction(localCmd, switchAddresses);
+                });
         }
     }
 }

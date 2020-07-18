@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using MikhailKhalizev.Processor.x86.Utils;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests
+namespace MikhailKhalizev.Processor.x86.Tests.Utils
 {
     public class IntervalTests
     {

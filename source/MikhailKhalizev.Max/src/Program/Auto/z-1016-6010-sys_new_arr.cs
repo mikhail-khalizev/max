@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1016_6010-561aa19f")]
         public void /* sys */ sys_new_arr()
         {
-            ii(0x1016_6010, 5); if(jmp_func(Definitions.sys_new, -0x215)) return; /* jmp 0x10165e00 */
+            ii(0x1016_6010, 5);  jmp_func(Definitions.sys_new, -0x215);/* jmp 0x10165e00 */
         }
     }
 }

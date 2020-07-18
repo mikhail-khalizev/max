@@ -8,8 +8,8 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_70e5-1165d2")]
         public void /* sys */ Method_1018_70e5()
         {
-            ii(0x1018_70e5, 2); xor(eax, eax);                          /* xor eax, eax */
-            ii(0x1018_70e7, 1); ret();                                  /* ret */
+            ii(0x1018_70e5, 2);  xor(eax, eax);                        /* xor eax, eax */
+            ii(0x1018_70e7, 1);  ret();                                /* ret */
         }
     }
 }

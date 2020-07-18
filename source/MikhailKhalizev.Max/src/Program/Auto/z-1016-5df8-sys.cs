@@ -8,11 +8,11 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1016_5df8-1f21a9b6")]
         public void /* sys */ Method_1016_5df8()
         {
-            ii(0x1016_5df8, 2); test(eax, eax);                         /* test eax, eax */
-            ii(0x1016_5dfa, 2); if(jge(0x1016_5dfe, 2)) goto l_0x1016_5dfe; /* jge 0x10165dfe */
-            ii(0x1016_5dfc, 2); neg(eax);                               /* neg eax */
+            ii(0x1016_5df8, 2);  test(eax, eax);                       /* test eax, eax */
+            ii(0x1016_5dfa, 2);  if(jge(0x1016_5dfe, 2)) goto l_0x1016_5dfe;/* jge 0x10165dfe */
+            ii(0x1016_5dfc, 2);  neg(eax);                             /* neg eax */
         l_0x1016_5dfe:
-            ii(0x1016_5dfe, 1); ret();                                  /* ret */
+            ii(0x1016_5dfe, 1);  ret();                                /* ret */
         }
     }
 }

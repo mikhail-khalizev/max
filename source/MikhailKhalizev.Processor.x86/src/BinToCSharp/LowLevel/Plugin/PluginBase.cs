@@ -2,11 +2,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
     public abstract class PluginBase
     {
-        protected PluginBase(Engine engine)
+        protected PluginBase(LowLevelEngine engine)
         {
             Engine = engine;
         }
 
-        public Engine Engine { get; }
+        public LowLevelEngine Engine { get; }
     }
 }

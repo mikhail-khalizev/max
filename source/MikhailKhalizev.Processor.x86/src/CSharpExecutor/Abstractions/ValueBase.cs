@@ -76,11 +76,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                var maskSrc = BinaryHelper.Mask(Bits);
-
                 var val = UInt16;
                 if (IsNegative)
-                    val = (ushort)(val | (~(ushort)maskSrc));
+                {
+                    var maskSrc = BinaryHelper.Mask(Bits);
+                    val = (ushort) (val | (~(ushort) maskSrc));
+                }
 
                 return (short)val;
             }
@@ -117,11 +118,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                var maskSrc = BinaryHelper.Mask(Bits);
-
                 var val = UInt32;
                 if (IsNegative)
-                    val |= ~(uint)maskSrc;
+                {
+                    var maskSrc = BinaryHelper.Mask(Bits);
+                    val |= ~(uint) maskSrc;
+                }
 
                 return (int)val;
             }
@@ -152,11 +154,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                var maskSrc = BinaryHelper.Mask(Bits);
-
                 var val = UInt64;
                 if (IsNegative)
+                {
+                    var maskSrc = BinaryHelper.Mask(Bits);
                     val |= ~maskSrc;
+                }
 
                 return (long)val;
             }

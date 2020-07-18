@@ -58,10 +58,10 @@ namespace MikhailKhalizev.Max.Program
 
             // Работа с аудио. Загрука данных из файла в память?
 
-            if (chan.masked == false)
+            if (chan.Masked == false)
             {
                 var buf = new byte[2];
-                chan.read(buf);
+                chan.Read(buf);
             }
 
             ii(0x1017_9fe3, 6); mov(edx, memd[ds, 0x101b_e434]);        /* mov edx, [0x101be434] */
@@ -147,10 +147,10 @@ namespace MikhailKhalizev.Max.Program
             ii(0x1017_a130, 5); mov(memd[ds, 0x101b_e434], eax);        /* mov [0x101be434], eax */
         l_0x1017_a135:
 
-            if (chan.masked == false)
+            if (chan.Masked == false)
             {
                 var buf = new byte[2];
-                chan.read(buf);
+                chan.Read(buf);
             //        if (chan.currcnt == 0xffff)
             //            pic.activate_irq(7);
             }

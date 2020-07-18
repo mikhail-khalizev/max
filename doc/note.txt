@@ -31,11 +31,3 @@ push(eip)
 mve video decode/encode:
 
     ffmpeg -i MAXINT.MVE -c:v libx264 -preset veryslow -crf 20 MAXINT.MVE.mkv
-
----
-
-To C# high level decode:
-
-0x1013_3a88-a34a92f7
-0x1012_3850-81dcc4f2
-

@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x18_a49e-caabf")]
         public void Method_0018_a49e()
         {
-            ii(0x18_a49e, 3); if(jmp_func(0x18_a3fa, -0xa7)) return;    /* jmp 0xa3fa */
+            ii(0x18_a49e, 3);  jmp_func(0x18_a3fa, -0xa7);             /* jmp 0xa3fa */
         }
     }
 }

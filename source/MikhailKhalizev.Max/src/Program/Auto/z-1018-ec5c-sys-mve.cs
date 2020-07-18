@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Max.Program
         [MethodInfo("0x1018_ec5c-123fee")]
         public void /* sys_mve */ Method_1018_ec5c()
         {
-            ii(0x1018_ec5c, 3); mov(ax, bx);                            /* mov ax, bx */
+            ii(0x1018_ec5c, 3);  mov(ax, bx);                          /* mov ax, bx */
         }
     }
 }

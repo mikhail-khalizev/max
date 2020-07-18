@@ -3,7 +3,7 @@ using MikhailKhalizev.Processor.x86.Configuration;
 using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 using Xunit;
 
-namespace MikhailKhalizev.Processor.x86.Tests.Core
+namespace MikhailKhalizev.Processor.x86.Tests.CSharpExecutor
 {
     public class GenericRegisterTests
     {
@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.Core
         [Fact]
         public void CheckProcessorGenericRegister()
         {
-            var r = new CSharpExecutor.Cpu(new ProcessorDto());
+            var r = new x86.CSharpExecutor.Cpu(new ProcessorDto());
 
             r.eax.UInt64 = 0x1234_5678;
             r.ax.UInt64.Should().Be(0x5678);

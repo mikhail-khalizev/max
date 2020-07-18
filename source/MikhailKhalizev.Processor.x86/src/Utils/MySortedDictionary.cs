@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 
 namespace MikhailKhalizev.Processor.x86.Utils
 {
@@ -22,16 +23,41 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public TValue this[TKey key]
         {
-            get => _dict[key];
-            set => _dict[key] = value;
+            get
+            {
+                if (_comparer.SearchNearest)
+                    throw new NotImplementedException("SearchNearest is true");
+                return _dict[key];
+            }
+            set
+            {
+                if (_comparer.SearchNearest)
+                    throw new NotImplementedException("SearchNearest is true");
+                _dict[key] = value;
+            }
         }
 
-        public void Add(TKey key, TValue value) => _dict.Add(key, value);
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+            return _dict.TryGetValue(key, out value);
+        }
+
+        public void Add(TKey key, TValue value)
+        {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+            _dict.Add(key, value);
+        }
 
         public int Count => _dict.Count;
 
         public TKey FirstGreaterOrDefault(TKey value)
         {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+
             _comparer.SearchNearest = true;
             _comparer.SearchNearestGreater = true;
             try
@@ -48,6 +74,9 @@ namespace MikhailKhalizev.Processor.x86.Utils
         // GreaterOrEqual
         public TKey FirstNotLessOrDefault(TKey value)
         {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+
             _comparer.SearchNearest = true;
             try
             {
@@ -64,6 +93,9 @@ namespace MikhailKhalizev.Processor.x86.Utils
         // LessOrEqual
         public TKey FirstNotGreaterOrDefault(TKey value)
         {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+
             _comparer.SearchNearest = true;
             try
             {
@@ -79,6 +111,9 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public TKey FirstLessOrDefault(TKey value)
         {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+
             _comparer.SearchNearest = true;
             _comparer.SearchNearestLess = true;
             try
@@ -89,6 +124,32 @@ namespace MikhailKhalizev.Processor.x86.Utils
             finally
             {
                 _comparer.Reset();
+            }
+        }
+
+        public IEnumerable<TKey> GreaterThat(TKey key)
+        {
+            if (_comparer.SearchNearest)
+                throw new NotImplementedException("SearchNearest is true");
+            
+            var i = key;
+            while (true)
+            {
+                _comparer.SearchNearest = true;
+                _comparer.SearchNearestGreater = true;
+                try
+                {
+                    _dict.TryGetValue(i, out var dummy);
+                    if (!_comparer.NearestFollowingSet)
+                        yield break;
+
+                    i = _comparer.NearestFollowing;
+                    yield return i;
+                }
+                finally
+                {
+                    _comparer.Reset();
+                }
             }
         }
 
@@ -104,8 +165,8 @@ namespace MikhailKhalizev.Processor.x86.Utils
             public TKey NearestEqual;
             public TKey NearestFollowing;
 
-            private bool NearestPreceedingSet;
-            private bool NearestFollowingSet;
+            public bool NearestPreceedingSet;
+            public bool NearestFollowingSet;
 
 
             public MyComparer()

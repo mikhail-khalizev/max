@@ -36,7 +36,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
 
         public void Clear() => _set.Clear();
-        
+
         public bool Add(T item) => _set.Add(item);
 
         public bool TryGetValue(T equalValue, out T actualValue) => _set.TryGetValue(equalValue, out actualValue);
@@ -64,36 +64,12 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 _comparer.Reset();
             }
         }
-        
+
         public T FirstGreaterOrDefault(T value, T @default)
         {
             var v = FirstGreaterOrDefault(value);
             return EqualityComparer<T>.Default.Equals(v, default) ? @default : v;
         }
-
-        public IEnumerable<T> GreaterThat(T value)
-        {
-            var i = value;
-            while (true)
-            {
-                _comparer.SearchNearest = true;
-                _comparer.SearchNearestGreater = true;
-                try
-                {
-                    _set.TryGetValue(i, out var dummy);
-                    if (!_comparer.NearestFollowingSet)
-                        yield break;
-
-                    i = _comparer.NearestFollowing;
-                    yield return i;
-                }
-                finally
-                {
-                    _comparer.Reset();
-                }
-            }
-        }
-
 
         // GreaterOrEqual
         public T FirstNotLessOrDefault(T value)
@@ -126,7 +102,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 _comparer.Reset();
             }
         }
-        
+
         public T FirstLessOrDefault(T value)
         {
             _comparer.SearchNearest = true;
@@ -143,6 +119,52 @@ namespace MikhailKhalizev.Processor.x86.Utils
         }
 
 
+        public IEnumerable<T> GreaterThat(T value)
+        {
+            var i = value;
+            while (true)
+            {
+                _comparer.SearchNearest = true;
+                _comparer.SearchNearestGreater = true;
+                try
+                {
+                    _set.TryGetValue(i, out var dummy);
+                    if (!_comparer.NearestFollowingSet)
+                        yield break;
+
+                    i = _comparer.NearestFollowing;
+                    yield return i;
+                }
+                finally
+                {
+                    _comparer.Reset();
+                }
+            }
+        }
+
+        //public IEnumerable<T> Between(T first, T afterLast)
+        //{
+        //    var i = first;
+        //    while (true)
+        //    {
+        //        if (_comparer.Compare(afterLast, i) <= 0)
+        //            yield break;
+
+        //        _comparer.SearchNearest = true;
+        //        try
+        //        {
+        //            if (_set.TryGetValue(i, out var actual))
+        //                yield return actual;
+
+        //            i = _comparer.NearestFollowing;
+        //        }
+        //        finally
+        //        {
+        //            _comparer.Reset();
+        //        }
+        //    }
+        //}
+        
         public T[] ToArray()
         {
             var arr = new T[_set.Count];
@@ -151,7 +173,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 arr[i++] = x;
             return arr;
         }
-        
+
         public List<T> ToList()
         {
             var list = new List<T>(_set.Count);
@@ -169,14 +191,14 @@ namespace MikhailKhalizev.Processor.x86.Utils
         private class MyComparer : IComparer<T>
         {
             public readonly IComparer<T> Original;
-            
+
             public bool SearchNearest;
             public bool SearchNearestGreater;
             public bool SearchNearestLess;
-            
+
             public T NearestPreceeding;
             public T NearestFollowing;
-            
+
             public bool NearestPreceedingSet;
             public bool NearestFollowingSet;
 
@@ -201,7 +223,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
                     return 1;
                 if (comp == 0 && SearchNearestLess)
                     return -1;
-                    
+
                 if (0 < comp /* y < x */ &&
                     (!NearestPreceedingSet || Original.Compare(NearestPreceeding, y) < 0))
                 {
