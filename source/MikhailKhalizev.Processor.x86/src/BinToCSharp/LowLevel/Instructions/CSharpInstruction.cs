@@ -42,6 +42,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     {
         public Address Begin { get; set; }
         public Address End { get; set; }
+        public int Length => End - Begin;
 
         public int Mode { get; set; }
         public int AddrMode { get; set; }
@@ -569,7 +570,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                 AppendAddress(sb, (byte) -val, options.WithWriteAddressAsDecimal(-val < DecimalLimit && !hexValue));
                                 sb.Append(" /* ");
 
-                                AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal((byte) val < DecimalLimit && !hexValue));
+                                AppendAddress(sb, (byte) val, options.WithWriteAddressAsDecimal((int)(byte) val < DecimalLimit && !hexValue));
                                 sb.Append(" */");
                             }
                             else

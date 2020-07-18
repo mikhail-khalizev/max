@@ -112,7 +112,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             toAddr = Engine.CsBase + eip;
 
 
-            var notSuppressed = !Engine.SuppressDecode.Contains(toAddr, false);
+            var notSuppressed = !Engine.SuppressDecodeIntervals.Contains(toAddr, false);
             if (notSuppressed)
                 Engine.AddToDecode(toAddr);
 

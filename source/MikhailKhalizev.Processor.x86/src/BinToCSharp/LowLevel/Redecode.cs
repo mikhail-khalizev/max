@@ -95,8 +95,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             engine.CsBase = mi.CsBase;
                             engine.Mode = mi.Mode;
                             
-                            engine.SuppressDecode.Add(0, mi.Address);
-                            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
+                            engine.SuppressDecodeIntervals.Add(0, mi.Address);
+                            engine.SuppressDecodeIntervals.Add(mi.Address + mi.RawBytes.Length, 0);
                             
                             engine.DecodeMethod(mi.Address);
                             engine.DetectMethods();

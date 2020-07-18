@@ -5,11 +5,11 @@ using Xunit.Abstractions;
 
 namespace MikhailKhalizev.Processor.x86.Tests.Utils
 {
-    public class UsedSpaceTests
+    public class RangeCollectionTests
     {
         public ITestOutputHelper OutputHelper { get; }
 
-        public UsedSpaceTests(ITestOutputHelper outputHelper)
+        public RangeCollectionTests(ITestOutputHelper outputHelper)
         {
             OutputHelper = outputHelper;
         }
@@ -17,49 +17,49 @@ namespace MikhailKhalizev.Processor.x86.Tests.Utils
         [Fact]
         public void AddTest()
         {
-            var us = new UsedSpace<int>();
+            var us = new IntervalCollection<int>();
 
-            us.ToSpacesString().Should().Be("");
+            us.ToIntervalsString().Should().Be("");
 
             us.Add(5, 6);
-            us.ToSpacesString().Should().Be("{5, 6}");
+            us.ToIntervalsString().Should().Be("{5, 6}");
             
             us.Add(7, 8);
-            us.ToSpacesString().Should().Be("{5, 6}, {7, 8}");
+            us.ToIntervalsString().Should().Be("{5, 6}, {7, 8}");
 
             us.Add(6, 7);
-            us.ToSpacesString().Should().Be("{5, 8}");
+            us.ToIntervalsString().Should().Be("{5, 8}");
 
             us.Add(4, 9);
-            us.ToSpacesString().Should().Be("{4, 9}");
+            us.ToIntervalsString().Should().Be("{4, 9}");
 
             us.Add(12, 13);
-            us.ToSpacesString().Should().Be("{4, 9}, {12, 13}");
+            us.ToIntervalsString().Should().Be("{4, 9}, {12, 13}");
 
             us.Add(10, 11);
-            us.ToSpacesString().Should().Be("{4, 9}, {10, 11}, {12, 13}");
+            us.ToIntervalsString().Should().Be("{4, 9}, {10, 11}, {12, 13}");
 
             us.Add(14, 15);
-            us.ToSpacesString().Should().Be("{4, 9}, {10, 11}, {12, 13}, {14, 15}");
+            us.ToIntervalsString().Should().Be("{4, 9}, {10, 11}, {12, 13}, {14, 15}");
 
             us.Add(6, 13);
-            us.ToSpacesString().Should().Be("{4, 13}, {14, 15}");
+            us.ToIntervalsString().Should().Be("{4, 13}, {14, 15}");
 
             us.Add(3, 16);
-            us.ToSpacesString().Should().Be("{3, 16}");
+            us.ToIntervalsString().Should().Be("{3, 16}");
 
             us.Add(20, 25);
-            us.ToSpacesString().Should().Be("{3, 16}, {20, 25}");
+            us.ToIntervalsString().Should().Be("{3, 16}, {20, 25}");
 
             us.Add(2, int.MinValue);
-            us.ToSpacesString().Should().Be("{2, ∞}");
+            us.ToIntervalsString().Should().Be("{2, ∞}");
         }
 
         [Fact]
         public void FindTest()
         {
-            var us = new UsedSpace<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
-            us.ToSpacesString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
+            var us = new IntervalCollection<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
+            us.ToIntervalsString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
 
             us.FindIntervalThatContainsValue(0, false).Should().Be(Interval<uint>.Empty);
             us.FindIntervalThatContainsValue(0, true).Should().Be(Interval<uint>.Empty);
@@ -110,8 +110,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.Utils
         [Fact]
         public void ContainsTest()
         {
-            var us = new UsedSpace<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
-            us.ToSpacesString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
+            var us = new IntervalCollection<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
+            us.ToIntervalsString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
 
             us.Contains(0, false).Should().BeFalse();
             us.Contains(0, true).Should().BeFalse();
@@ -162,8 +162,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.Utils
         [Fact]
         public void LowerBoundTest()
         {
-            var us = new UsedSpace<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
-            us.ToSpacesString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
+            var us = new IntervalCollection<uint> { { 3, 5 }, { 10, 12 }, { 20, uint.MinValue } };
+            us.ToIntervalsString().Should().Be("{3, 5}, {10, 12}, {20, ∞}");
 
             us.LowerBound(0, false).Should().Be(Interval.From<uint>(3, 5));
             us.LowerBound(0, true).Should().Be(Interval.From<uint>(3, 5));

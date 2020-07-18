@@ -359,30 +359,30 @@ namespace MikhailKhalizev.Max.Program
         {
             // Аргументы следующим методам установлены опытным путём.
 
-            engine.SuppressDecode.Add(0x1030_0000, 0);
+            engine.SuppressDecodeIntervals.Add(0x1030_0000, 0);
 
             engine.SetCStringDataArea(0x101a_0003, 0x101b_384d);
 
-            engine.AddForceEndMethod(0xbb03);
-            engine.AddForceEndMethod(0xbb6f);
-            engine.AddForceEndMethod(0xbb73);
-            engine.AddForceEndMethod(0xdb13);
-            engine.AddForceEndMethod(0x18_9b43);
-            engine.AddForceEndMethod(0x18_f4c7);
-            engine.AddForceEndMethod(0x18_b5b5);
-            engine.AddForceEndMethod(0x18_edfc);
-            engine.AddForceEndMethod(0x18_f88b);
-            engine.AddForceEndMethod(0x18_f8ef);
-            engine.AddForceEndMethod(0x19_8748);
-            engine.AddForceEndMethod(0x100f_e8f8);
-            engine.AddForceEndMethod(0x100f_bf17);
-            engine.AddForceEndMethod(0x100f_a6fe);
-            engine.AddForceEndMethod(0x100f_bf17);
+            engine.AddForceEndOfMethod(0xbb03);
+            engine.AddForceEndOfMethod(0xbb6f);
+            engine.AddForceEndOfMethod(0xbb73);
+            engine.AddForceEndOfMethod(0xdb13);
+            engine.AddForceEndOfMethod(0x18_9b43);
+            engine.AddForceEndOfMethod(0x18_f4c7);
+            engine.AddForceEndOfMethod(0x18_b5b5);
+            engine.AddForceEndOfMethod(0x18_edfc);
+            engine.AddForceEndOfMethod(0x18_f88b);
+            engine.AddForceEndOfMethod(0x18_f8ef);
+            engine.AddForceEndOfMethod(0x19_8748);
+            engine.AddForceEndOfMethod(0x100f_e8f8);
+            engine.AddForceEndOfMethod(0x100f_bf17);
+            engine.AddForceEndOfMethod(0x100f_a6fe);
+            engine.AddForceEndOfMethod(0x100f_bf17);
 
             // mve
             foreach (var interval in MveForceEndIntervals)
                 for (var i = interval.Begin; i <= interval.End; i++)
-                    engine.AddForceEndMethod(i);
+                    engine.AddForceEndOfMethod(i);
         }
 
         public static Interval<Address, Address.Comparer>[] MveForceEndIntervals { get; } = {
@@ -419,7 +419,7 @@ namespace MikhailKhalizev.Max.Program
             ConfigureEngine(engine);
 
             if (cs.Descriptor.Base + cs.Descriptor.Limit + 1 != 0)
-                engine.SuppressDecode.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
+                engine.SuppressDecodeIntervals.Add(cs.Descriptor.Base + cs.Descriptor.Limit + 1 + 1, 0);
 
             foreach (var pair in MethodsByAddress)
                 foreach (var info in pair.Value)

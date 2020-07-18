@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public event EventHandler<CSharpInstruction> InstructionDecoded;
         public event EventHandler OnSave;
 
-        public UsedSpace<Address> SuppressDecode { get; } = new UsedSpace<Address>();
+        public IntervalCollection<Address> SuppressDecodeIntervals { get; } = new IntervalCollection<Address>();
         public DecodedCode DecodedCode { get; } = new DecodedCode();
 
         public int LimitDecodeTotalLength { get; set; }
@@ -47,10 +47,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// требуется принудительно остановить декодирование после данного call.
         /// </summary>
         /// <remarks>
-        /// Если <see cref="ForceEndMethod"/> делит инструкцию пополам,
+        /// Если <see cref="ForceEndOfMethod"/> делит инструкцию пополам,
         /// то эта инструкция относится к методу, расположенному с меньшим адресом.
         /// </remarks>
-        private MySortedSet<Address> ForceEndMethod { get; } = new MySortedSet<Address>();
+        private MySortedSet<Address> ForceEndOfMethod { get; } = new MySortedSet<Address>();
 
         private MultiValueDictionary<Address, MethodInfoDto> AlreadyDecodedMethods { get; } = new MultiValueDictionary<Address, MethodInfoDto>();
 
@@ -104,9 +104,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             _onAttachToMethod[instruction] = action;
         }
 
-        public void AddForceEndMethod(Address fullAddress)
+        public void AddForceEndOfMethod(Address fullAddress)
         {
-            ForceEndMethod.Add(fullAddress);
+            ForceEndOfMethod.Add(fullAddress);
         }
 
         public void AddAlreadyDecodedFunc(MethodInfoDto model)
@@ -126,7 +126,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             foreach (var model in models)
             {
-                if (SuppressDecode.Contains(model.Address + model.RawBytes.Length, false))
+                if (SuppressDecodeIntervals.Contains(model.Address + model.RawBytes.Length, false))
                     continue;
 
                 if (Memory.Equals(fullAddress, model.RawBytes))
@@ -136,26 +136,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return false;
         }
 
-        private bool AlreadyDecodedContainsMethodInfo(MethodInfoDto methodInfoDto)
+        private bool AlreadyDecodedMethodsContainsMethodInfo(MethodInfoDto methodInfoDto)
         {
             return AlreadyDecodedMethods.GetValues(methodInfoDto.Address, false)?.Contains(methodInfoDto) == true;
         }
 
 
-        public bool AddNewDetectedMethod(Address address)
+        public bool AddNewDetectedMethod(Address addressOfMethodBegin)
         {
-            if (SuppressDecode.Contains(address, false))
+            if (SuppressDecodeIntervals.Contains(addressOfMethodBegin, false))
                 return false;
 
-            if (HaveAlreadyDecodedMethodStartedWith(address))
+            if (HaveAlreadyDecodedMethodStartedWith(addressOfMethodBegin))
                 return false;
 
-            return NewDetectedMethods.Add(new DetectedMethod(address));
+            return NewDetectedMethods.Add(new DetectedMethod(addressOfMethodBegin));
         }
 
         public void DecodeMethod(Address start)
         {
             Decode(start);
+
+            // Mark that we have method started with 'start' address.
             AddNewDetectedMethod(start);
         }
 
@@ -192,7 +194,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (DecodedCode.ContainsInstruction(address))
                 return; // Код включающий этот адрес уже декодирован.
 
-            var lowerBound = SuppressDecode.LowerBound(address, false);
+            var lowerBound = SuppressDecodeIntervals.LowerBound(address, false);
             var nearestSuppressDecode = lowerBound.IsEmpty ? Address.MaxValue : lowerBound.Begin;
 
             if (nearestSuppressDecode <= address)
@@ -201,13 +203,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Memory.GetMinSize(address, 1); // Попробуем прочитать хоть один байт - вдруг чтение недоступно.
 
             // Функция, начинающаяся с точного совпадения ForceEndMethod может начать декодироваться.
-            var nearestForceEnd = ForceEndMethod.FirstGreaterOrDefault(address);
+            var nearestForceEnd = ForceEndOfMethod.FirstGreaterOrDefault(address);
             if (nearestForceEnd == default)
                 nearestForceEnd = Address.MaxValue;
 
             foreach (var cmd in CSharpInstruction.DecodeCode(Memory, address, Mode, DefinitionCollection))
             {
-                LimitDecodeTotalLength -= (cmd.End - cmd.Begin);
+                LimitDecodeTotalLength -= cmd.Length;
 
                 DecodedCode.Insert(cmd);
                 InstructionDecoded?.Invoke(this, cmd);
@@ -275,7 +277,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     // Посчитаем methodEnd - адрес конца метода, дальше которого функция точно уже не может продолжаться.
 
-                    var forceEndAfter = ForceEndMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue);
+                    var forceEndAfter = ForceEndOfMethod.FirstGreaterOrDefault(methodBegin, Address.MaxValue);
                     var forceEndInsideAfter = NewDetectedMethods.FirstGreaterOrDefault(method)?.Begin ?? Address.MaxValue;
 
                     // Учтём, что инструкции в DecodedCode могут пересекаться. Найдём "верную дорожку".
@@ -380,14 +382,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             {
                                 // Перед декодированием, временно, добавляем адрес instruction.Begin в ForceEndMethod для безопасности.
                                 // А то вдруг там некорректный код и адрес instruction.Begin находится внутри инструкции и тогда мы можем уйти далеко за наш метод.
-                                var fem = ForceEndMethod.Contains(instruction.Begin);
+                                var fem = ForceEndOfMethod.Contains(instruction.Begin);
                                 if (!fem)
-                                    AddForceEndMethod(instruction.Begin);
+                                    AddForceEndOfMethod(instruction.Begin);
 
                                 Decode(decodeStart);
 
                                 if (!fem)
-                                    ForceEndMethod.Remove(instruction.Begin);
+                                    ForceEndOfMethod.Remove(instruction.Begin);
 
                                 if (DecodedCode.GetInstructionOrNull(decodeStart) == null)
                                     break; // Decode fail. Skip this hole.
@@ -430,7 +432,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 method.MethodInfo = mi;
 
-                if (AlreadyDecodedContainsMethodInfo(mi))
+                if (AlreadyDecodedMethodsContainsMethodInfo(mi))
                     throw new InvalidOperationException("Detect already decoded method. Error in algorithm.");
 
                 // Заполняем HasLabel и IsLocalBranch.
@@ -749,8 +751,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             engine.CsBase = mi.CsBase;
             engine.Mode = mi.Mode;
 
-            engine.SuppressDecode.Add(0, mi.Address);
-            engine.SuppressDecode.Add(mi.Address + mi.RawBytes.Length, 0);
+            engine.SuppressDecodeIntervals.Add(0, mi.Address);
+            engine.SuppressDecodeIntervals.Add(mi.Address + mi.RawBytes.Length, 0);
 
             configure?.Invoke(engine);
 

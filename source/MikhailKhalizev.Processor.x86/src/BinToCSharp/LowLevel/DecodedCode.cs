@@ -5,12 +5,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
     public class DecodedCode
     {
         // NOTE. Инструкции могут пересекаться.
-        private readonly MySortedSet<(Address Address, IInstruction Instruction)> _instructions
-            = new MySortedSet<(Address Address, IInstruction Instruction)>(
-                new CustomComparer<(Address Address, IInstruction Instruction)>(
-                    (a, b) => a.Address.CompareTo(b.Address)));
+        private readonly MySortedSet<IInstruction> _instructions
+            = new MySortedSet<IInstruction>(IInstruction.BeginComparer);
 
-        public UsedSpace<Address> Area { get; } = new UsedSpace<Address>();
+        public IntervalCollection<Address> Area { get; } = new IntervalCollection<Address>();
 
         public void Clear()
         {
@@ -18,15 +16,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Area.Clear();
         }
 
-        public IInstruction GetInstructionOrNull(Address address)
+        public IInstruction GetInstructionOrNull(Address beginInstructionAddress)
         {
-            _instructions.TryGetValue((address, null), out var actual);
-            return actual.Instruction;
+            _instructions.TryGetValue(new AddressSearchInstruction(beginInstructionAddress), out var actual);
+            return actual;
         }
 
-        public IInstruction GetInstructionBefore(Address address)
+        public IInstruction GetInstructionBefore(Address beginInstructionAddress)
         {
-            return _instructions.FirstLessOrDefault((address, null)).Instruction;
+            return _instructions.FirstLessOrDefault(new AddressSearchInstruction(beginInstructionAddress));
         }
 
         /// <summary>
@@ -36,17 +34,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// <returns></returns>
         public IInstruction GetNextInstruction(IInstruction instruction)
         {
-            return _instructions.FirstNotLessOrDefault((instruction.End, null)).Instruction;
+            return _instructions.FirstNotLessOrDefault(new AddressSearchInstruction(instruction.End));
         }
 
         public bool ContainsInstruction(Address address)
         {
-            return _instructions.Contains((address, null));
+            return _instructions.Contains(new AddressSearchInstruction(address));
         }
 
         public void Insert(IInstruction instruction)
         {
-            _instructions.Add((instruction.Begin, instruction));
+            _instructions.Add(instruction);
             Area.Add(instruction.Begin, instruction.End);
         }
     }

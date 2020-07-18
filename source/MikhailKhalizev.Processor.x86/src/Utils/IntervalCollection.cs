@@ -8,9 +8,7 @@ namespace MikhailKhalizev.Processor.x86.Utils
 {
     // NOTE https://github.com/mbuchetics/RangeTree - A generic implementation of a centered interval tree in C#
 
-    // TODO Rename to Intervals?
-
-    public class UsedSpace<T> : IReadOnlyCollection<Interval<T>>
+    public class IntervalCollection<T> : IReadOnlyCollection<Interval<T>>
     {
         public static T MinValue { get; }
         public static T MaxValue { get; }
@@ -18,9 +16,9 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public static readonly IComparer<T> Comparer = Comparer<T>.Default;
         public static readonly IEqualityComparer<T> EqualityComparer = EqualityComparer<T>.Default;
 
-        private readonly MySortedSet<Interval<T>> _spaces = new MySortedSet<Interval<T>>(Interval<T>.BeginComparer);
+        private readonly MySortedSet<Interval<T>> _ranges = new MySortedSet<Interval<T>>(Interval<T>.BeginComparer);
 
-        static UsedSpace()
+        static IntervalCollection()
         {
             var minSet = false;
             var maxSet = false;
@@ -70,10 +68,11 @@ namespace MikhailKhalizev.Processor.x86.Utils
             if (minSet && maxSet)
                 return;
 
-            throw new NotImplementedException($"UsedSpace<T> for type {typeof(T)} not implemented.");
+
+            throw new NotImplementedException($"{nameof(IntervalCollection<T>)} can't detect MinValue and MaxValue of type {typeof(T)}.");
         }
 
-        public void Clear() => _spaces.Clear();
+        public void Clear() => _ranges.Clear();
 
         /// <summary>
         /// Добавляет область [begin, end).
@@ -81,13 +80,19 @@ namespace MikhailKhalizev.Processor.x86.Utils
         public Interval<T> Add(T begin, T end)
         {
             if (EqualityComparer.Equals(end, begin))
-                throw new InvalidOperationException("Попытка добавить пустой промежуток.");
+            {
+                // throw new InvalidOperationException("Попытка добавить пустой промежуток.");
+                return Interval.From(begin, end);
+            }
 
             if (Comparer.Compare(end, begin) < 0 && !EqualityComparer.Equals(end, MinValue))
-                throw new InvalidOperationException("Попытка добавить промежуток отрицательной длины.");
+            {
+                // throw new InvalidOperationException("Попытка добавить промежуток отрицательной длины.");
+                return Interval.From(begin, end);
+            }
 
 
-            var intervalBefore = _spaces.FirstNotGreaterOrDefault(Interval.From(begin, default));
+            var intervalBefore = _ranges.FirstNotGreaterOrDefault(Interval.From(begin, default));
             if (intervalBefore != default)
             {
                 if (Comparer.Compare(begin, intervalBefore.End) <= 0 || EqualityComparer.Equals(intervalBefore.End, MinValue))
@@ -95,21 +100,21 @@ namespace MikhailKhalizev.Processor.x86.Utils
             }
 
 
-            var intervalToCombine = _spaces.FirstNotLessOrDefault(Interval.From(begin, default));
+            var intervalToCombine = _ranges.FirstNotLessOrDefault(Interval.From(begin, default));
             if (intervalToCombine != default)
             {
                 if (Comparer.Compare(intervalToCombine.Begin, end) <= 0 || EqualityComparer.Equals(end, MinValue))
                 {
                     var newInterval = Interval.From(begin, intervalToCombine.End);
-                    _spaces.Remove(intervalToCombine);
-                    _spaces.Add(newInterval);
+                    _ranges.Remove(intervalToCombine);
+                    _ranges.Add(newInterval);
                     return SetEnd(newInterval, end);
                 }
             }
 
 
             var interval = Interval.From(begin, end);
-            if (!_spaces.Add(interval))
+            if (!_ranges.Add(interval))
                 throw new InvalidOperationException("Элемент уже существует, хотя не должен.");
 
             return interval;
@@ -127,16 +132,16 @@ namespace MikhailKhalizev.Processor.x86.Utils
             var last = interval;
             while (true)
             {
-                var next = _spaces.FirstGreaterOrDefault(interval);
+                var next = _ranges.FirstGreaterOrDefault(interval);
                 if (next == default)
                     break;
                 if (Comparer.Compare(end, next.Begin) < 0 && !EqualityComparer.Equals(end, MinValue))
                     break;
-                _spaces.Remove(next);
+                _ranges.Remove(next);
                 last = next;
             }
 
-            _spaces.Remove(interval);
+            _ranges.Remove(interval);
 
 
             if (EqualityComparer.Equals(interval.End, MinValue) || EqualityComparer.Equals(end, MinValue))
@@ -144,14 +149,14 @@ namespace MikhailKhalizev.Processor.x86.Utils
             else
                 interval = Interval.From(interval.Begin, Comparer.Compare(last.End, end) < 0 ? end : last.End);
 
-            _spaces.Add(interval);
+            _ranges.Add(interval);
 
             return interval;
         }
 
         public Interval<T> FindIntervalThatContainsValue(T val, bool withRightBound)
         {
-            var interval = _spaces.FirstNotGreaterOrDefault(Interval.From(val, default));
+            var interval = _ranges.FirstNotGreaterOrDefault(Interval.From(val, default));
             if (interval == default)
                 return Interval<T>.Empty;
 
@@ -179,15 +184,15 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public Interval<T> GetIntervalBefore(T begin)
         {
-            return _spaces.FirstLessOrDefault(Interval.From(begin, default));
+            return _ranges.FirstLessOrDefault(Interval.From(begin, default));
         }
 
         /// <summary>
-        /// Возвращает интервал с наименьшим Begin содержащим область значений больше и равную value.
+        /// Возвращает интервал с наименьшим Begin содержащим область со значениями больше и равными value.
         /// </summary>
         public Interval<T> LowerBound(T value, bool withRightBound)
         {
-            var interval = _spaces.FirstNotGreaterOrDefault(Interval.From(value, default));
+            var interval = _ranges.FirstNotGreaterOrDefault(Interval.From(value, default));
 
             if (interval != default)
             {
@@ -206,16 +211,16 @@ namespace MikhailKhalizev.Processor.x86.Utils
                 }
             }
 
-            return _spaces.FirstNotLessOrDefault(Interval.From(value, default));
+            return _ranges.FirstNotLessOrDefault(Interval.From(value, default));
         }
 
-        public string ToSpacesString()
+        public string ToIntervalsString()
         {
-            if (_spaces.Count == 0)
+            if (_ranges.Count == 0)
                 return "";
 
             var sb = new StringBuilder();
-            foreach (var interval in _spaces)
+            foreach (var interval in _ranges)
             {
                 var end = EqualityComparer.Equals(interval.End, MinValue) ? "∞" : interval.End.ToString();
                 sb.Append($"{{{interval.Begin}, {end}}}, ");
@@ -230,17 +235,17 @@ namespace MikhailKhalizev.Processor.x86.Utils
         /// <inheritdoc />
         public IEnumerator<Interval<T>> GetEnumerator()
         {
-            return _spaces.GetEnumerator();
+            return _ranges.GetEnumerator();
         }
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)_spaces).GetEnumerator();
+            return ((IEnumerable)_ranges).GetEnumerator();
         }
 
         /// <inheritdoc />
-        public int Count => _spaces.Count;
+        public int Count => _ranges.Count;
 
         #endregion
     }
