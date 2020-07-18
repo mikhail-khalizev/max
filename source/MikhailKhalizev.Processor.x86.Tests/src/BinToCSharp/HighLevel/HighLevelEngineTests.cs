@@ -4,6 +4,7 @@ using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using SharpDisasm;
 using Xunit;
+using Instruction = MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Instruction;
 
 namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
 {
@@ -436,7 +437,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
         {
             var method = LowLevelEngine.GetMethod(mi);
 
-            var hl = new HighLevelEngine(method.Instructions.OfType<CSharpInstruction>().ToList());
+            var hl = new HighLevelEngine(method.Instructions.OfType<Instruction>().ToList());
             hl.Decode();
             return hl;
         }

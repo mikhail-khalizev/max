@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.Decoder;
 using SharpDisasm.Udis86;
+using Instruction = MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Instruction;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class HighLevelEngine
     {
-        public List<CSharpInstruction> Instructions { get; }
+        public List<Instruction> Instructions { get; }
 
-        public HighLevelEngine(List<CSharpInstruction> instructions)
+        public HighLevelEngine(List<Instruction> instructions)
         {
             Instructions = instructions;
         }
@@ -19,7 +20,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         {
             var currentBlock = new Block();
 
-            CSharpInstruction prev = null;
+            Instruction prev = null;
             foreach (var instruction in Instructions)
             {
                 if (prev != null && prev.End != instruction.Begin)

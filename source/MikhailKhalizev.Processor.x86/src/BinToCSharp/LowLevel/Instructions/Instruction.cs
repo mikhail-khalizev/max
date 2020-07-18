@@ -11,7 +11,7 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
-    public class CSharpInstruction : IInstruction
+    public class Instruction : IInstruction
     {
         public Address Begin { get; set; }
         public Address End { get; set; }
@@ -60,7 +60,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         protected const int DecimalLimit = 0xfff;
 
 
-        public CSharpInstruction(CSharpInstruction other)
+        public Instruction(Instruction other)
         {
             Begin = other.Begin;
             End = other.End;
@@ -87,7 +87,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             Metadata = other.Metadata;
         }
 
-        public CSharpInstruction(DefinitionCollection definitionCollection, ud ud)
+        public Instruction(DefinitionCollection definitionCollection, ud ud)
         {
             if (ud == null)
                 throw new ArgumentNullException(nameof(ud));
@@ -726,7 +726,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         #endregion
 
 
-        public static IEnumerable<CSharpInstruction> DecodeCode(
+        public static IEnumerable<Instruction> DecodeCode(
             IRandomAccess memory,
             Address address,
             ArchitectureMode mode,
@@ -749,7 +749,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 if (length <= 0 || u.error != 0 || u.mnemonic == ud_mnemonic_code.UD_Iinvalid)
                     break; // throw new InvalidOperationException("Преждевременное завершение функции.");
 
-                var cmd = new CSharpInstruction(definitionCollection, u);
+                var cmd = new Instruction(definitionCollection, u);
                 yield return cmd;
             }
         }

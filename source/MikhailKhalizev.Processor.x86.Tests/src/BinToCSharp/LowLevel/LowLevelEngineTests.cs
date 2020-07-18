@@ -4,6 +4,7 @@ using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using SharpDisasm;
 using Xunit;
+using Instruction = MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Instruction;
 
 namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
 {
@@ -40,7 +41,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.LowLevel
             method.MethodInfo.Id.Should().Be(mi.Id);
             method.End.Should().Be(mi.Address + mi.Raw.Length / 2);
             method.Instructions.Should().Contain(x => x.Begin == 0x18_a4fa)
-                .Which.Should().BeOfType<CSharpInstruction>()
+                .Which.Should().BeOfType<Instruction>()
                 .Which.CommentThis.Should().BeFalse();
         }
 
