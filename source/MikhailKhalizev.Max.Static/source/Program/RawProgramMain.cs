@@ -71,6 +71,8 @@ namespace MikhailKhalizev.Max.Program
         public void Start()
         {
             ConnectDecodedMethods(GetType().Assembly);
+            ConnectDecodedMethods(Assembly.GetEntryAssembly());
+
             DosInterrupt.Initialize();
             InitializeX86DosProgram();
             DosTimer.Initialize();
