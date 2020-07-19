@@ -313,7 +313,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         blsi,
 
         /// <summary>
-        /// Get Mask Up to Lowest Set Bit.
+        /// Get MaskUInt64 Up to Lowest Set Bit.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/BLSMSK.html
@@ -2853,7 +2853,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kandw,
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html
@@ -2862,7 +2862,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kmovb,
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html
@@ -2871,7 +2871,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kmovd,
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html
@@ -2880,7 +2880,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kmovq,
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html
@@ -2889,7 +2889,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kmovw,
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html
@@ -2898,7 +2898,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         knotb,
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html
@@ -2907,7 +2907,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         knotd,
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html
@@ -2916,7 +2916,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         knotq,
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html
@@ -2997,7 +2997,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         korw,
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html
@@ -3006,7 +3006,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftlb,
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html
@@ -3015,7 +3015,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftld,
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html
@@ -3024,7 +3024,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftlq,
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html
@@ -3033,7 +3033,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftlw,
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html
@@ -3042,7 +3042,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftrb,
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html
@@ -3051,7 +3051,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftrd,
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html
@@ -3060,7 +3060,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kshiftrq,
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html
@@ -3105,7 +3105,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         ktestw,
 
         /// <summary>
-        /// Unpack for Mask Registers.
+        /// Unpack for MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html
@@ -3114,7 +3114,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kunpckbw,
 
         /// <summary>
-        /// Unpack for Mask Registers.
+        /// Unpack for MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html
@@ -3123,7 +3123,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         kunpckdq,
 
         /// <summary>
-        /// Unpack for Mask Registers.
+        /// Unpack for MaskUInt64 Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html
@@ -3649,7 +3649,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         movlps,
 
         /// <summary>
-        /// Extract Packed Double-Precision Floating-Point Sign Mask.
+        /// Extract Packed Double-Precision Floating-Point Sign MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/MOVMSKPD.html
@@ -3658,7 +3658,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         movmskpd,
 
         /// <summary>
-        /// Extract Packed Single-Precision Floating-Point Sign Mask.
+        /// Extract Packed Single-Precision Floating-Point Sign MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/MOVMSKPS.html
@@ -4292,7 +4292,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         pcmpestri,
 
         /// <summary>
-        /// Packed Compare Explicit Length Strings, Return Mask.
+        /// Packed Compare Explicit Length Strings, Return MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PCMPESTRM.html
@@ -4346,7 +4346,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         pcmpistri,
 
         /// <summary>
-        /// Packed Compare Implicit Length Strings, Return Mask.
+        /// Packed Compare Implicit Length Strings, Return MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PCMPISTRM.html
@@ -4634,7 +4634,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         pminuw,
 
         /// <summary>
-        /// Move Byte Mask.
+        /// Move Byte MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PMOVMSKB.html
@@ -8458,7 +8458,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vmovlps,
 
         /// <summary>
-        /// Extract Packed Double-Precision Floating-Point Sign Mask.
+        /// Extract Packed Double-Precision Floating-Point Sign MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/MOVMSKPD.html
@@ -8467,7 +8467,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vmovmskpd,
 
         /// <summary>
-        /// Extract Packed Single-Precision Floating-Point Sign Mask.
+        /// Extract Packed Single-Precision Floating-Point Sign MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/MOVMSKPS.html
@@ -8941,7 +8941,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpbroadcastd,
 
         /// <summary>
-        /// Broadcast Mask to Vector Register.
+        /// Broadcast MaskUInt64 to Vector Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPBROADCASTM.html
@@ -8950,7 +8950,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpbroadcastmb2q,
 
         /// <summary>
-        /// Broadcast Mask to Vector Register.
+        /// Broadcast MaskUInt64 to Vector Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPBROADCASTM.html
@@ -8990,7 +8990,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpclmulqdq,
 
         /// <summary>
-        /// Compare Packed Byte Values Into Mask.
+        /// Compare Packed Byte Values Into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPB:VPCMPUB.html
@@ -8999,7 +8999,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpb,
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPD:VPCMPUD.html
@@ -9053,7 +9053,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpestri,
 
         /// <summary>
-        /// Packed Compare Explicit Length Strings, Return Mask.
+        /// Packed Compare Explicit Length Strings, Return MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PCMPESTRM.html
@@ -9107,7 +9107,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpistri,
 
         /// <summary>
-        /// Packed Compare Implicit Length Strings, Return Mask.
+        /// Packed Compare Implicit Length Strings, Return MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PCMPISTRM.html
@@ -9116,7 +9116,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpistrm,
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPQ:VPCMPUQ.html
@@ -9125,7 +9125,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpq,
 
         /// <summary>
-        /// Compare Packed Byte Values Into Mask.
+        /// Compare Packed Byte Values Into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPB:VPCMPUB.html
@@ -9134,7 +9134,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpub,
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPD:VPCMPUD.html
@@ -9143,7 +9143,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpud,
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPQ:VPCMPUQ.html
@@ -9152,7 +9152,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpuq,
 
         /// <summary>
-        /// Compare Packed Word Values Into Mask.
+        /// Compare Packed Word Values Into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPW:VPCMPUW.html
@@ -9161,7 +9161,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpcmpuw,
 
         /// <summary>
-        /// Compare Packed Word Values Into Mask.
+        /// Compare Packed Word Values Into MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPCMPW:VPCMPUW.html
@@ -9817,7 +9817,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpminuw,
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html
@@ -9826,7 +9826,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovb2m,
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html
@@ -9853,7 +9853,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovdw,
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html
@@ -9862,7 +9862,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovm2b,
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html
@@ -9871,7 +9871,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovm2d,
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html
@@ -9880,7 +9880,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovm2q,
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html
@@ -9889,7 +9889,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovm2w,
 
         /// <summary>
-        /// Move Byte Mask.
+        /// Move Byte MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PMOVMSKB.html
@@ -9898,7 +9898,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovmskb,
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html
@@ -10096,7 +10096,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpmovuswb,
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html
@@ -10717,7 +10717,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vptest,
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html
@@ -10726,7 +10726,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vptestmb,
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html
@@ -10735,7 +10735,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vptestmd,
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html
@@ -10744,7 +10744,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vptestmq,
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html

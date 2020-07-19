@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
         }
 
         /// <summary>
-        /// Alignment Mask.
+        /// Alignment MaskUInt64.
         /// </summary>
         public virtual bool am
         {

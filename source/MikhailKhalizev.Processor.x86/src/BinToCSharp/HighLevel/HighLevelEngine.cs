@@ -7,6 +7,20 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
+    // NOTE
+    // arg1  eax
+    // arg2  edx
+    // arg3  ebx
+    // arg4  ecx
+    // arg5  push
+
+    // NOTE
+    // pushd(ebp);
+    // mov(ebp, esp);
+    //   sub(esp, 0x14);
+    //   mov(memd_a32(ss, ebp - 0x4), edx);
+    // mov(esp, ebp);
+
     public class HighLevelEngine
     {
         public static HighLevelEngine DecodeMethod(DetectedMethod method)

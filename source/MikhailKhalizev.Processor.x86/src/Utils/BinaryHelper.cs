@@ -6,22 +6,40 @@ namespace MikhailKhalizev.Processor.x86.Utils
 {
     public static class BinaryHelper
     {
-        public static ulong Mask(int bits)
+        public static int MaskInt32(int lengthInBits)
         {
-            if (bits < 0 || 64 < bits)
-                throw new ArgumentOutOfRangeException(nameof(bits));
-
-            if (bits == 0)
-                return 0;
-            if (bits == 64)
-                return 0xffff_ffff_ffff_ffff;
-            return (1ul << bits) - 1;
+            if (lengthInBits < 0 || 32 < lengthInBits)
+                throw new ArgumentOutOfRangeException(nameof(lengthInBits));
+            
+            if (lengthInBits == 32)
+                return unchecked((int)0xffff_ffff);
+            return (int)(~(uint.MaxValue << lengthInBits));
         }
 
-        public static ulong Mask(int bits, int offset) => Mask(bits) << offset;
+        public static uint MaskUInt32(int lengthInBits)
+        {
+            if (lengthInBits < 0 || 32 < lengthInBits)
+                throw new ArgumentOutOfRangeException(nameof(lengthInBits));
+            
+            if (lengthInBits == 32)
+                return 0xffff_ffff;
+            return ~(uint.MaxValue << lengthInBits);
+        }
+
+        public static ulong MaskUInt64(int lengthInBits)
+        {
+            if (lengthInBits < 0 || 64 < lengthInBits)
+                throw new ArgumentOutOfRangeException(nameof(lengthInBits));
+
+            if (lengthInBits == 64)
+                return 0xffff_ffff_ffff_ffff;
+            return ~(ulong.MaxValue << lengthInBits);
+        }
+
+        public static ulong MaskUInt64(int lengthInBits, int offset) => MaskUInt64(lengthInBits) << offset;
 
         // TODO rename to SignBitAndHigher
-        public static ulong HighBitsMask(int bit) => ~(Mask(bit) >> 1);
+        public static ulong HighBitsMask(int bit) => ~(MaskUInt64(bit) >> 1);
 
 
         public static bool IsSet(int value, int bit)
@@ -56,25 +74,25 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public static int GetInt(byte target, int bits = 8, int targetOffset = 0)
         {
-            var targetMask = (int) Mask(bits, targetOffset);
+            var targetMask = (int) MaskUInt64(bits, targetOffset);
             return (target & targetMask) >> targetOffset;
         }
 
         public static uint GetUInt(byte target, int bits = 8, int targetOffset = 0)
         {
-            var targetMask = (uint) Mask(bits, targetOffset);
+            var targetMask = (uint) MaskUInt64(bits, targetOffset);
             return (target & targetMask) >> targetOffset;
         }
 
         public static void Set(ref byte target, bool source, int targetOffset)
         {
-            var mask = Mask(1, targetOffset);
+            var mask = MaskUInt64(1, targetOffset);
             target = (byte) ((target & ~mask) | (source ? mask : 0));
         }
 
         public static void Set(ref uint target, bool source, int targetOffset)
         {
-            var mask = Mask(1, targetOffset);
+            var mask = MaskUInt64(1, targetOffset);
             target = (uint) ((target & ~mask) | (source ? mask : 0));
         }
 
@@ -85,14 +103,14 @@ namespace MikhailKhalizev.Processor.x86.Utils
 
         public static void Set(byte target, ref uint source, int sourceOffset = 0, int bits = 8, int targetOffset = 0)
         {
-            var targetMask = (uint) Mask(bits, targetOffset);
-            var sourceMask = (uint) Mask(bits, sourceOffset);
+            var targetMask = (uint) MaskUInt64(bits, targetOffset);
+            var sourceMask = (uint) MaskUInt64(bits, sourceOffset);
             source = (source & ~sourceMask) | ((((target & targetMask) >> targetOffset) << sourceOffset) & sourceMask);
         }
 
         public static void Set(ref byte target, ulong source, int sourceOffset = 0, int bits = 8, int targetOffset = 0)
         {
-            var targetMask = Mask(bits, targetOffset);
+            var targetMask = MaskUInt64(bits, targetOffset);
             target = (byte) ((target & ~targetMask) | (((source >> sourceOffset) << targetOffset) & targetMask));
         }
 

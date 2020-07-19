@@ -115,7 +115,5 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
     }
 
-    //public class CombineValue : Value
-
     //public class ConditionValue : Value // 1 Bit
 }

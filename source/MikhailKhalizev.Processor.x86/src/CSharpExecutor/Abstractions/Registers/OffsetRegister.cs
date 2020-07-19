@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
             Register = register;
             LengthInBits = lengthInBits;
             Offset = offset;
-            Mask = BinaryHelper.Mask(lengthInBits, offset);
+            Mask = BinaryHelper.MaskUInt64(lengthInBits, offset);
         }
     }
 }

@@ -298,7 +298,7 @@ namespace MikhailKhalizev.Max.Dos
                 case 0x9:    /* Request registers, memory to memory */
                     throw new NotImplementedException();
 
-                case 0xa:    /* Mask Register */
+                case 0xa:    /* MaskUInt64 Register */
                     get_channel(val & 3).set_mask((val & 0x4) != 0);
                     break;
 
@@ -325,7 +325,7 @@ namespace MikhailKhalizev.Max.Dos
                     _flipflop = false;
                     break;
 
-                case 0xe:    /* Clear Mask register */
+                case 0xe:    /* Clear MaskUInt64 register */
                     for (var ct = 0; ct < 4; ct++)
                     {
                         var chan = get_channel(ct);
@@ -333,7 +333,7 @@ namespace MikhailKhalizev.Max.Dos
                     }
                     break;
 
-                case 0xf:    /* Multiple Mask register */
+                case 0xf:    /* Multiple MaskUInt64 register */
                     for (var ct = 0; ct < 4; ct++)
                     {
                         var chan = get_channel(ct);

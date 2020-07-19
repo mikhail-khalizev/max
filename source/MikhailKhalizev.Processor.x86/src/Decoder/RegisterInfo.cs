@@ -84,16 +84,24 @@ namespace MikhailKhalizev.Processor.x86.Decoder
             LengthInBits = lengthInBits;
 
 
-            var s = 0;
+            var checkLengthInBits = 0;
             var m = byteMask;
+            var bitMaskAdd = 0xff;
             while (m != 0)
             {
                 if ((m & 1) != 0)
-                    s += 8;
+                {
+                    checkLengthInBits += 8;
+                    BitMask |= bitMaskAdd;
+                }
+                else
+                    BitOffset += 8;
+
                 m = m >> 1;
+                bitMaskAdd <<= 8;
             }
 
-            if (lengthInBits != s)
+            if (lengthInBits != checkLengthInBits)
                 throw new InvalidOperationException("Incorrect size");
 
 
@@ -139,6 +147,8 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         public ud_type UdType { get; }
         public int Index { get; }
         public int ByteMask { get; }
+        public int BitMask { get; }
+        public int BitOffset { get; }
         public int LengthInBits { get; }
 
         public bool IsGeneralPurpose { get; private set; }

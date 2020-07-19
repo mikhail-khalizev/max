@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public Value NextBlockIndex { get; set; }
         public List<Block> NextBlocks { get; set; }
 
-        private readonly Dictionary<int /* register index */, List<(RegisterInfo RegisterInfo, Value Value)>> _registers = new Dictionary<int, List<(RegisterInfo, Value)>>();
+        private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Value Value)> _registers = new Dictionary<int, (RegisterInfo, Value)>();
         private readonly Dictionary<Value /* address */, MemoryValue> _memory = new Dictionary<Value, MemoryValue>();
 
         public Value GetRegister(RegisterInfo registerInfo)
@@ -21,35 +21,53 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 var inputValue = new InputValue(new RegisterValue(registerInfo));
                 Input.Add(inputValue);
 
-                _registers[registerInfo.Index] = new List<(RegisterInfo, Value)> { (registerInfo, inputValue) };
+                _registers[registerInfo.Index] = (registerInfo, inputValue);
                 return inputValue;
             }
 
-            if (items.Count == 1 && items[0].RegisterInfo == registerInfo)
-                return items[0].Value;
+            if (items.RegisterInfo == registerInfo)
+                return items.Value;
 
             throw new NotImplementedException(
-                $"RegisterInfo = {registerInfo}, " +
-                $"Current registers = {string.Join(", ", items.Select(x => x.RegisterInfo))}.");
+                $"RegisterInfo = {registerInfo}, Current register = {items.RegisterInfo}.");
         }
 
         public void SetRegister(RegisterInfo registerInfo, Value value)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var items))
             {
-                _registers[registerInfo.Index] = new List<(RegisterInfo, Value)> { (registerInfo, value) };
+                _registers[registerInfo.Index] = (registerInfo, value);
                 return;
             }
 
-            if (items.Count == 1 && items[0].RegisterInfo == registerInfo)
+            if (items.RegisterInfo == registerInfo)
             {
-                items[0] = (registerInfo, value);
+                _registers[registerInfo.Index] = (registerInfo, value);
                 return;
             }
-            
-            throw new NotImplementedException(
-                $"RegisterInfo = {registerInfo}, " +
-                $"Current registers = {string.Join(", ", items.Select(x => x.RegisterInfo))}.");
+
+            var combination = Operations.Combine(
+                items.Value,
+                items.RegisterInfo.BitOffset,
+                items.RegisterInfo.BitMask,
+                value,
+                registerInfo.BitOffset,
+                registerInfo.BitMask,
+                Math.Max(
+                    items.RegisterInfo.LengthInBits + items.RegisterInfo.BitOffset,
+                    registerInfo.LengthInBits + registerInfo.BitOffset));
+
+            var resultRegisterInfo = new[] { registerInfo, items.RegisterInfo }
+                .OrderBy(x => x.LengthInBits)
+                .Concat(
+                    RegisterInfo.Registers
+                        .Where(x => x.Index == registerInfo.Index)
+                        .OrderBy(x => x.LengthInBits)
+                )
+                .Where(x => x.BitOffset == 0)
+                .First(x => combination.LengthInBits <= x.LengthInBits);
+
+            _registers[registerInfo.Index] = (resultRegisterInfo, combination);
         }
 
 

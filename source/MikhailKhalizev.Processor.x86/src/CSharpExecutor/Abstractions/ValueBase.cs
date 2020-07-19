@@ -59,7 +59,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 if (16 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(LengthInBits);
+                var mask = BinaryHelper.MaskUInt64(LengthInBits);
                 return (ushort)(UInt64Internal & mask);
             }
             set
@@ -67,7 +67,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 if (16 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(LengthInBits);
+                var mask = BinaryHelper.MaskUInt64(LengthInBits);
                 UInt64Internal = value & mask;
             }
         }
@@ -79,7 +79,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 var val = UInt16;
                 if (IsNegative)
                 {
-                    var maskSrc = BinaryHelper.Mask(LengthInBits);
+                    var maskSrc = BinaryHelper.MaskUInt64(LengthInBits);
                     val = (ushort) (val | (~(ushort) maskSrc));
                 }
 
@@ -95,7 +95,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 if (32 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(LengthInBits);
+                var mask = BinaryHelper.MaskUInt64(LengthInBits);
                 return (uint)(UInt64Internal & mask);
             }
             set
@@ -103,7 +103,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 if (32 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(LengthInBits);
+                var mask = BinaryHelper.MaskUInt64(LengthInBits);
                 UInt64Internal = value & mask;
             }
         }
@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 var val = UInt32;
                 if (IsNegative)
                 {
-                    var maskSrc = BinaryHelper.Mask(LengthInBits);
+                    var maskSrc = BinaryHelper.MaskUInt64(LengthInBits);
                     val |= ~(uint) maskSrc;
                 }
 
@@ -137,7 +137,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 if (64 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(LengthInBits);
+                var mask = BinaryHelper.MaskUInt64(LengthInBits);
                 return UInt64Internal & mask;
             }
             set
@@ -145,7 +145,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 if (64 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(LengthInBits);
+                var mask = BinaryHelper.MaskUInt64(LengthInBits);
                 UInt64Internal = value & mask;
             }
         }
@@ -157,7 +157,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 var val = UInt64;
                 if (IsNegative)
                 {
-                    var maskSrc = BinaryHelper.Mask(LengthInBits);
+                    var maskSrc = BinaryHelper.MaskUInt64(LengthInBits);
                     val |= ~maskSrc;
                 }
 
