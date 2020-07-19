@@ -394,76 +394,76 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
         private void AppendOperand(
-            ud_operand op,
+            ud_operand operand,
             StringBuilder sb,
             string adrModeStr,
             ref bool usePfxSeg,
             DefinitionCollection.Options options)
         {
-            var oprSize = op.size == 0 ? EffOprMode : op.size;
+            var operandSize = operand.size != 0 ? operand.size : EffOprMode;
 
             int val;
-            switch (op.type)
+            switch (operand.type)
             {
                 case ud_type.UD_NONE:
                     break;
 
                 case ud_type.UD_OP_REG:
-                    if (ud_type.UD_R_ST0 <= op.@base && op.@base <= ud_type.UD_R_ST7)
-                        sb.Append($"ST({op.@base - ud_type.UD_R_ST0})");
+                    if (ud_type.UD_R_ST0 <= operand.@base && operand.@base <= ud_type.UD_R_ST7)
+                        sb.Append($"ST({operand.@base - ud_type.UD_R_ST0})");
                     else
-                        sb.Append(RegisterInfo.GetRegister(op.@base));
+                        sb.Append(RegisterInfo.GetRegister(operand.@base));
                     break;
 
                 case ud_type.UD_OP_MEM:
                 {
                     sb.Append("mem");
-                    sb.Append(GetSizeSuffixByBits(oprSize));
+                    sb.Append(GetSizeSuffixByBits(operandSize));
                     sb.Append(adrModeStr);
-                    sb.Append($"[{RegisterInfo.GetRegister(GetEffectiveSegmentOfOperand(op))}, ");
+                    sb.Append($"[{RegisterInfo.GetRegister(GetEffectiveSegmentOfOperand(operand))}, ");
 
                     if (PfxSeg != ud_type.UD_NONE)
                         usePfxSeg = true;
 
                     var isNextOperation = false; // Cтоит ли писать '+' (т.е. 'не первое слагаемое').
-                    if (op.@base != ud_type.UD_NONE)
+                    if (operand.@base != ud_type.UD_NONE)
                     {
-                        sb.Append(syn.ud_reg_tab[op.@base - ud_type.UD_R_AL]);
+                        sb.Append(syn.ud_reg_tab[operand.@base - ud_type.UD_R_AL]);
                         isNextOperation = true;
                     }
 
-                    if (op.index != ud_type.UD_NONE)
+                    if (operand.index != ud_type.UD_NONE)
                     {
                         if (isNextOperation)
                             sb.Append(" + ");
                         isNextOperation = true;
 
-                        sb.Append(syn.ud_reg_tab[op.index - ud_type.UD_R_AL]);
+                        sb.Append(syn.ud_reg_tab[operand.index - ud_type.UD_R_AL]);
                     }
 
-                    if (1 < op.scale)
+                    if (1 < operand.scale)
                     {
-                        if (op.index == ud_type.UD_NONE)
+                        if (operand.index == ud_type.UD_NONE)
                             throw new NotImplementedException();
 
-                        sb.Append($" * {op.scale}");
+                        sb.Append($" * {operand.scale}");
                     }
 
-                    if (op.offset != 0)
+                    if (operand.offset != 0)
                     {
-                        switch (op.offset)
+                        switch (operand.offset)
                         {
                             case 8:
-                                val = op.lval.@sbyte;
+                                val = operand.lval.@sbyte;
                                 break;
                             case 16:
-                                val = op.lval.sword;
+                                val = operand.lval.sword;
                                 break;
                             case 32:
-                                val = op.lval.sdword;
+                                val = operand.lval.sdword;
                                 break;
                             default:
-                                throw new NotImplementedException($"op.offset: {op.offset}");
+                                throw new NotImplementedException($"operand.offset: {operand.offset}");
                         }
 
                         if (val < 0)
@@ -502,7 +502,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     //    ud_mnemonic_code.UD_Iint,
                     //}.Contains(Mnemonic);
 
-                    switch (oprSize)
+                    switch (operandSize)
                     {
                         case 8:
                         {
@@ -524,7 +524,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                     Mnemonic == ud_mnemonic_code.UD_Ior ||
                                     Mnemonic == ud_mnemonic_code.UD_Ixor;
 
-                            val = op.lval.@sbyte;
+                            val = operand.lval.@sbyte;
 
                             if (val < 0 && needSignExtend)
                             {
@@ -544,16 +544,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         }
 
                         case 16:
-                            AppendAddress(sb, op.lval.uword, options.WithWriteAddressAsDecimal(op.lval.uword < DecimalLimit && !hexValue));
+                            AppendAddress(sb, operand.lval.uword, options.WithWriteAddressAsDecimal(operand.lval.uword < DecimalLimit && !hexValue));
                             break;
                         case 32:
                             AppendAddress(
                                 sb,
-                                op.lval.udword,
-                                options.WithWriteAddressAsDecimal(op.lval.udword < DecimalLimit && !hexValue));
+                                operand.lval.udword,
+                                options.WithWriteAddressAsDecimal(operand.lval.udword < DecimalLimit && !hexValue));
                             break;
                         default:
-                            throw new NotImplementedException($"oprSize: {oprSize}");
+                            throw new NotImplementedException($"oprSize: {operandSize}");
                     }
 
                     break;
@@ -561,18 +561,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_type.UD_OP_JIMM:
                 {
-                    switch (oprSize)
+                    switch (operandSize)
                     {
                         case 8:
-                            val = op.lval.@sbyte;
+                            val = operand.lval.@sbyte;
                             break;
                         case 16:
-                            val = op.lval.sword;
+                            val = operand.lval.sword;
                             break;
                         case 32:
-                            val = op.lval.sdword;
+                            val = operand.lval.sdword;
                             break;
-                        default: throw new NotImplementedException($"oprSize: {oprSize}");
+                        default: throw new NotImplementedException($"oprSize: {operandSize}");
                     }
 
                     sb.Append(DefinitionCollection.GetAddressFullName(End + val, options));
@@ -585,15 +585,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }
 
                 case ud_type.UD_OP_CONST:
-                    AppendAddress(sb, op.lval.udword, options);
+                    AppendAddress(sb, operand.lval.udword, options);
                     break;
 
                 case ud_type.UD_OP_PTR:
-                    sb.Append($"{HexHelper.ToShortGrouped4Hex(op.lval.ptr_seg)}, {HexHelper.ToShortGrouped4Hex(op.lval.ptr_off)}");
+                    sb.Append($"{HexHelper.ToShortGrouped4Hex(operand.lval.ptr_seg)}, {HexHelper.ToShortGrouped4Hex(operand.lval.ptr_off)}");
                     break;
 
                 default:
-                    throw new NotImplementedException($"op.type: {op.type}");
+                    throw new NotImplementedException($"operand.type: {operand.type}");
             }
         }
 

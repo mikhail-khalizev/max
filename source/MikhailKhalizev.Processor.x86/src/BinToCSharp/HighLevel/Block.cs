@@ -11,7 +11,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public Value NextBlockIndex { get; set; }
         public List<Block> NextBlocks { get; set; }
 
-        private readonly Dictionary<int /* index */, List<(RegisterInfo RegisterInfo, Value Value)>> _registers = new Dictionary<int, List<(RegisterInfo, Value)>>();
+        private readonly Dictionary<int /* register index */, List<(RegisterInfo RegisterInfo, Value Value)>> _registers = new Dictionary<int, List<(RegisterInfo, Value)>>();
         private readonly Dictionary<Value /* address */, MemoryValue> _memory = new Dictionary<Value, MemoryValue>();
 
         public Value GetRegister(RegisterInfo registerInfo)
@@ -19,6 +19,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (!_registers.TryGetValue(registerInfo.Index, out var items))
             {
                 var inputValue = new InputValue(new RegisterValue(registerInfo));
+                Input.Add(inputValue);
+
                 _registers[registerInfo.Index] = new List<(RegisterInfo, Value)> { (registerInfo, inputValue) };
                 return inputValue;
             }
@@ -51,16 +53,18 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
 
 
-        public Value GetMemory(Value address)
+        public Value GetMemory(RegisterInfo segment, Value address, int lengthInBits)
         {
-            throw new NotImplementedException();
+            var v = new MemoryValue(segment, address, lengthInBits);
+            // Input.Add(v);
+            return v;
         }
 
-        public void SetMemory(Value address, Value value)
+        public void SetMemory(RegisterInfo segment, Value address, Value value)
         {
             // TODO Check bits!!!
             
-            _memory[address] = new MemoryValue(address, value);
+            _memory[address] = new MemoryValue(segment, address, value.LengthInBits);
         }
     }
 }

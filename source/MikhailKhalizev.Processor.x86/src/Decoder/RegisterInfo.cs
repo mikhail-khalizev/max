@@ -54,12 +54,12 @@ namespace MikhailKhalizev.Processor.x86.Decoder
             regs.Add(new RegisterInfo(ud_type.UD_R_DI, index, 0b0011, 16) { IsGeneralPurpose = true });
             regs.Add(new RegisterInfo(ud_type.UD_R_EDI, index, 0b1111, 32) { IsGeneralPurpose = true });
 
-            regs.Add(new RegisterInfo(ud_type.UD_R_CS, ++index, 0b0011, 16));
-            regs.Add(new RegisterInfo(ud_type.UD_R_SS, ++index, 0b0011, 16));
-            regs.Add(new RegisterInfo(ud_type.UD_R_DS, ++index, 0b0011, 16));
-            regs.Add(new RegisterInfo(ud_type.UD_R_ES, ++index, 0b0011, 16));
-            regs.Add(new RegisterInfo(ud_type.UD_R_GS, ++index, 0b0011, 16));
-            regs.Add(new RegisterInfo(ud_type.UD_R_FS, ++index, 0b0011, 16));
+            regs.Add(new RegisterInfo(ud_type.UD_R_CS, ++index, 0b0011, 16) { IsSegment = true });
+            regs.Add(new RegisterInfo(ud_type.UD_R_SS, ++index, 0b0011, 16) { IsSegment = true });
+            regs.Add(new RegisterInfo(ud_type.UD_R_DS, ++index, 0b0011, 16) { IsSegment = true });
+            regs.Add(new RegisterInfo(ud_type.UD_R_ES, ++index, 0b0011, 16) { IsSegment = true });
+            regs.Add(new RegisterInfo(ud_type.UD_R_GS, ++index, 0b0011, 16) { IsSegment = true });
+            regs.Add(new RegisterInfo(ud_type.UD_R_FS, ++index, 0b0011, 16) { IsSegment = true });
 
             regs.Add(new RegisterInfo(ud_type.UD_R_CR0, ++index, 0b1111, 32));
             regs.Add(new RegisterInfo(ud_type.UD_R_CR2, ++index, 0b1111, 32));
@@ -140,7 +140,9 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         public int Index { get; }
         public int ByteMask { get; }
         public int LengthInBits { get; }
+
         public bool IsGeneralPurpose { get; private set; }
+        public bool IsSegment { get; private set; }
 
         /// <inheritdoc />
         public override string ToString()

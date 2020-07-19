@@ -463,6 +463,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 if (CheckIsAlreadyKnowMethodsContainsMethodInfo(mi))
                     throw new InvalidOperationException("Detect already decoded method. Error in algorithm.");
 
+                // Заполняем IsLastInstructionInMethod.
+
+                method.Instructions[^1].Metadata.IsLastInstructionInMethod = true;
+
                 // Заполняем HasLabel и IsLocalBranch.
 
                 foreach (var branchInfo in BranchesInfo.GetViewBetween(new BranchInfo(method.Begin), new BranchInfo(method.End)))
@@ -754,7 +758,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 try
                 {
-                    cmd.Metadata.IsLastInstructionInMethod = detectedMethod.Instructions.Count <= cmdIndex + 1;
                     if (cmd.Metadata.HasLabel)
                         lines = lines.Append($"l_{cmd.Begin}:");
 
