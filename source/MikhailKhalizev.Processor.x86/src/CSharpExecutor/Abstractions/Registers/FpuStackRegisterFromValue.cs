@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
         public ValueBase Value { get; }
 
         /// <inheritdoc />
-        public override int Bits => Value.Bits;
+        public override int LengthInBits => Value.LengthInBits;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal

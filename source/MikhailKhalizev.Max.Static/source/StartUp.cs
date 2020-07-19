@@ -174,7 +174,7 @@ namespace MikhailKhalizev.Max
             app.UseMvc();
 
             // Start M.A.X.
-
+            
             var rawProgramMain = app.ApplicationServices.GetRequiredService<RawProgramMain>();
             Task.Run(
                 () =>

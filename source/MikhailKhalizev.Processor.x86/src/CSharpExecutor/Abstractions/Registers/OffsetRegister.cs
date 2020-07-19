@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
         public int Offset { get; }
         public ulong Mask { get; }
         /// <inheritdoc />
-        public override int Bits { get; }
+        public override int LengthInBits { get; }
 
         protected override ulong UInt64Internal
         {
@@ -16,12 +16,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
             set => Register.UInt64 = (Register.UInt64 & ~Mask) | ((value << Offset) & Mask);
         }
 
-        public OffsetRegister(Register register, int offset, int bits)
+        public OffsetRegister(Register register, int offset, int lengthInBits)
         {
             Register = register;
-            Bits = bits;
+            LengthInBits = lengthInBits;
             Offset = offset;
-            Mask = BinaryHelper.Mask(bits, offset);
+            Mask = BinaryHelper.Mask(lengthInBits, offset);
         }
     }
 }

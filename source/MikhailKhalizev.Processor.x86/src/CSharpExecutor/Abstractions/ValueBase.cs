@@ -47,7 +47,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 
     public abstract class ValueBase : IEquatable<ValueBase>
     {
-        public abstract int Bits { get; }
+        public abstract int LengthInBits { get; }
 
         protected abstract ulong UInt64Internal { get; set; }
 
@@ -56,18 +56,18 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                if (16 < Bits)
+                if (16 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(Bits);
+                var mask = BinaryHelper.Mask(LengthInBits);
                 return (ushort)(UInt64Internal & mask);
             }
             set
             {
-                if (16 < Bits)
+                if (16 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(Bits);
+                var mask = BinaryHelper.Mask(LengthInBits);
                 UInt64Internal = value & mask;
             }
         }
@@ -79,7 +79,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 var val = UInt16;
                 if (IsNegative)
                 {
-                    var maskSrc = BinaryHelper.Mask(Bits);
+                    var maskSrc = BinaryHelper.Mask(LengthInBits);
                     val = (ushort) (val | (~(ushort) maskSrc));
                 }
 
@@ -92,18 +92,18 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                if (32 < Bits)
+                if (32 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(Bits);
+                var mask = BinaryHelper.Mask(LengthInBits);
                 return (uint)(UInt64Internal & mask);
             }
             set
             {
-                if (32 < Bits)
+                if (32 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(Bits);
+                var mask = BinaryHelper.Mask(LengthInBits);
                 UInt64Internal = value & mask;
             }
         }
@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 var val = UInt32;
                 if (IsNegative)
                 {
-                    var maskSrc = BinaryHelper.Mask(Bits);
+                    var maskSrc = BinaryHelper.Mask(LengthInBits);
                     val |= ~(uint) maskSrc;
                 }
 
@@ -134,18 +134,18 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                if (64 < Bits)
+                if (64 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(Bits);
+                var mask = BinaryHelper.Mask(LengthInBits);
                 return UInt64Internal & mask;
             }
             set
             {
-                if (64 < Bits)
+                if (64 < LengthInBits)
                     throw new InvalidOperationException();
 
-                var mask = BinaryHelper.Mask(Bits);
+                var mask = BinaryHelper.Mask(LengthInBits);
                 UInt64Internal = value & mask;
             }
         }
@@ -157,7 +157,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                 var val = UInt64;
                 if (IsNegative)
                 {
-                    var maskSrc = BinaryHelper.Mask(Bits);
+                    var maskSrc = BinaryHelper.Mask(LengthInBits);
                     val |= ~maskSrc;
                 }
 
@@ -170,19 +170,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         {
             get
             {
-                switch (Bits)
+                switch (LengthInBits)
                 {
                     case 32:
                         return BitConverter.Int32BitsToSingle(Int32);
                     case 64:
                         return BitConverter.Int64BitsToDouble(Int64);
                     default:
-                        throw new NotSupportedException($"value.LengthInBits: {Bits}");
+                        throw new NotSupportedException($"value.LengthInBits: {LengthInBits}");
                 }
             }
             set
             {
-                switch (Bits)
+                switch (LengthInBits)
                 {
                     case 32:
                         Int32 = BitConverter.SingleToInt32Bits((float)value);
@@ -191,21 +191,21 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                         Int64 = BitConverter.DoubleToInt64Bits(value);
                         break;
                     default:
-                        throw new NotSupportedException($"value.LengthInBits: {Bits}");
+                        throw new NotSupportedException($"value.LengthInBits: {LengthInBits}");
                 }
             }
         }
 
 
-        public virtual bool IsNegative => BinaryHelper.IsSet(UInt64, Bits - 1);
-        public virtual bool IsPositive => !BinaryHelper.IsSet(UInt64, Bits - 1);
+        public virtual bool IsNegative => BinaryHelper.IsSet(UInt64, LengthInBits - 1);
+        public virtual bool IsPositive => !BinaryHelper.IsSet(UInt64, LengthInBits - 1);
         public virtual bool IsBitSet(int bit) => BinaryHelper.IsSet(UInt64, bit);
 
 
         /// <inheritdoc />
         public override string ToString()
         {
-            if (Bits <= 32)
+            if (LengthInBits <= 32)
                 return HexHelper.ToShortGrouped4Hex(UInt32);
             else
                 return HexHelper.ToShortGrouped4Hex(UInt64);
@@ -232,22 +232,22 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
 
         public static Value operator ~(ValueBase v1) => ~v1.UInt64;
 
-        public static Value operator +(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 + v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator +(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 + v2.UInt64, Math.Max(v1.LengthInBits, v2.LengthInBits));
 
-        public static Value operator -(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 - v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator -(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 - v2.UInt64, Math.Max(v1.LengthInBits, v2.LengthInBits));
 
         // Необходим для 'mov(memd_a32[gs, edi + ebx * 4], eax)'
-        public static Value operator *(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 * v2.UInt64, Math.Max(v1.Bits, v1.Bits));
+        public static Value operator *(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 * v2.UInt64, Math.Max(v1.LengthInBits, v1.LengthInBits));
 
-        public static Value operator &(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 & v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator &(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 & v2.UInt64, Math.Max(v1.LengthInBits, v2.LengthInBits));
 
-        public static Value operator |(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 | v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator |(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 | v2.UInt64, Math.Max(v1.LengthInBits, v2.LengthInBits));
 
-        public static Value operator ^(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 ^ v2.UInt64, Math.Max(v1.Bits, v2.Bits));
+        public static Value operator ^(ValueBase v1, ValueBase v2) => NumericValue.From(v1.UInt64 ^ v2.UInt64, Math.Max(v1.LengthInBits, v2.LengthInBits));
 
-        public static Value operator >>(ValueBase v1, int v2) => NumericValue.From(v1.UInt64 >> v2, v1.Bits);
+        public static Value operator >>(ValueBase v1, int v2) => NumericValue.From(v1.UInt64 >> v2, v1.LengthInBits);
 
-        public static Value operator <<(ValueBase v1, int v2) => NumericValue.From(v1.UInt64 << v2, v1.Bits);
+        public static Value operator <<(ValueBase v1, int v2) => NumericValue.From(v1.UInt64 << v2, v1.LengthInBits);
 
         public static Value operator ++(ValueBase v) => ++v.UInt64;
 

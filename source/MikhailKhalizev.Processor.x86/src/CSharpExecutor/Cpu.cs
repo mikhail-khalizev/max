@@ -1941,7 +1941,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void adc(ValueBase dst, ValueBase src)
         {
-            src = NumericValue.From(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.LengthInBits);
 
             var ss = src.IsPositive;
             var ds = dst.IsPositive;
@@ -1968,7 +1968,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void add(ValueBase dst, ValueBase src)
         {
-            src = NumericValue.From(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.LengthInBits);
 
             var ss = src.IsPositive;
             var ds = dst.IsPositive;
@@ -2239,14 +2239,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void bt(ValueBase dst, ValueBase src)
         {
-            eflags.cf = 0 != ((dst.UInt32 >> (int)(src.UInt32 % dst.Bits)) & 1);
+            eflags.cf = 0 != ((dst.UInt32 >> (int)(src.UInt32 % dst.LengthInBits)) & 1);
         }
 
         /// <inheritdoc />
         public void btc(ValueBase dst, ValueBase src)
         {
             bt(dst, src);
-            var x = (1u << (int)(src.UInt32 % dst.Bits));
+            var x = (1u << (int)(src.UInt32 % dst.LengthInBits));
             dst.UInt32 ^= x;
         }
 
@@ -2645,7 +2645,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             var bValue = b.UInt64;
             eflags.cf = aValue < bValue;
 
-            var r = NumericValue.From(aValue - bValue, a.Bits);
+            var r = NumericValue.From(aValue - bValue, a.LengthInBits);
             var ds = a.IsPositive;
             var ss = b.IsPositive;
             var rs = r.IsPositive;
@@ -2975,7 +2975,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void dec(ValueBase value)
         {
-            var r = NumericValue.From(value.UInt64 - 1, value.Bits);
+            var r = NumericValue.From(value.UInt64 - 1, value.LengthInBits);
             var ds = value.IsPositive;
             var ss = true;
             var rs = r.IsPositive;
@@ -2993,7 +2993,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             if (value == 0)
                 throw new NotImplementedException(); // #DE
 
-            switch (value.Bits)
+            switch (value.LengthInBits)
             {
                 case 8:
                     {
@@ -3035,7 +3035,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                 default:
-                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.LengthInBits}");
             }
         }
 
@@ -3353,7 +3353,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void fild(ValueBase value)
         {
-            switch (value.Bits)
+            switch (value.LengthInBits)
             {
                 case 16:
                     set_top(get_top() + 7); // TOP ← TOP − 1;
@@ -3366,7 +3366,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     break;
 
                 default:
-                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.LengthInBits}");
             }
         }
 
@@ -3397,7 +3397,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void fistp(ValueBase value)
         {
-            switch (value.Bits)
+            switch (value.LengthInBits)
             {
                 case 32:
                     if (get_tag(0) == 3)
@@ -3412,7 +3412,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     break;
 
                 default:
-                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.LengthInBits}");
             }
         }
 
@@ -3859,7 +3859,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             if (value == 0)
                 throw new NotImplementedException(); // #DE
 
-            switch (value.Bits)
+            switch (value.LengthInBits)
             {
                 case 16:
                     {
@@ -3888,14 +3888,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                 default:
-                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.LengthInBits}");
             }
         }
 
         /// <inheritdoc />
         public void imul(ValueBase value)
         {
-            switch (value.Bits)
+            switch (value.LengthInBits)
             {
                 case 16:
                     {
@@ -3907,7 +3907,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         break;
                     }
                 default:
-                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.LengthInBits}");
             }
         }
 
@@ -3942,7 +3942,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void inc(ValueBase value)
         {
-            var r = NumericValue.From(value.UInt64 + 1, value.Bits);
+            var r = NumericValue.From(value.UInt64 + 1, value.LengthInBits);
 
             var ds = value.IsPositive;
             var ss = true;
@@ -4731,35 +4731,35 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public void lds(ValueBase dst, MemoryValue src)
         {
             dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
-            ds.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+            ds.Selector = (memw_a32[src.Segment, src.Address + dst.LengthInBits / 8].UInt16);
         }
 
         /// <inheritdoc />
         public void les(ValueBase dst, MemoryValue src)
         {
             dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
-            es.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+            es.Selector = (memw_a32[src.Segment, src.Address + dst.LengthInBits / 8].UInt16);
         }
 
         /// <inheritdoc />
         public void lfs(ValueBase dst, MemoryValue src)
         {
             dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
-            fs.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+            fs.Selector = (memw_a32[src.Segment, src.Address + dst.LengthInBits / 8].UInt16);
         }
 
         /// <inheritdoc />
         public void lgs(ValueBase dst, MemoryValue src)
         {
             dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
-            gs.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+            gs.Selector = (memw_a32[src.Segment, src.Address + dst.LengthInBits / 8].UInt16);
         }
 
         /// <inheritdoc />
         public void lss(ValueBase dst, MemoryValue src)
         {
             dst.UInt32 = memd_a32[src.Segment, src.Address].UInt32;
-            ss.Selector = (memw_a32[src.Segment, src.Address + dst.Bits / 8].UInt16);
+            ss.Selector = (memw_a32[src.Segment, src.Address + dst.LengthInBits / 8].UInt16);
         }
 
 
@@ -5545,7 +5545,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void mul(ValueBase value)
         {
-            switch (value.Bits)
+            switch (value.LengthInBits)
             {
                 case 8:
                     {
@@ -5574,7 +5574,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                 default:
-                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.LengthInBits}");
             }
         }
 
@@ -6218,14 +6218,14 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             if (d is Register || d is MemoryValue)
             {
-                switch (d.Bits)
+                switch (d.LengthInBits)
                 {
                     case 16:
                         return popw(d);
                     case 32:
                         return popd(d);
                     default:
-                        throw new NotImplementedException($"LengthInBits: {d.Bits}");
+                        throw new NotImplementedException($"LengthInBits: {d.LengthInBits}");
                 }
             }
             else
@@ -6597,7 +6597,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             if (s is Register || s is MemoryValue)
             {
-                switch (s.Bits)
+                switch (s.LengthInBits)
                 {
                     case 16:
                         pushw(s);
@@ -6606,7 +6606,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         pushd(s);
                         break;
                     default:
-                        throw new NotImplementedException($"LengthInBits: {s.Bits}");
+                        throw new NotImplementedException($"LengthInBits: {s.LengthInBits}");
                 }
             }
             else
@@ -6729,7 +6729,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             int tempCount;
 
-            switch (dst.Bits)
+            switch (dst.LengthInBits)
             {
                 case 8:
                     tempCount = (count & 0x1f) % 9;
@@ -6744,17 +6744,17 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     tempCount = count & 0x3f;
                     break;
                 default:
-                    throw new NotImplementedException($"LengthInBits: {dst.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {dst.LengthInBits}");
             }
 
             var d = dst.UInt64;
-            var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
+            var mask = BinaryHelper.HighBitsMask(dst.LengthInBits); // 0x8000
 
             if (tempCount != 0)
             {
                 var new_cf = 0 != ((d << (tempCount - 1)) & mask);
 
-                d = (d << tempCount) | (d >> (dst.Bits - tempCount + 1));
+                d = (d << tempCount) | (d >> (dst.LengthInBits - tempCount + 1));
 
                 if (eflags.cf)
                     d |= 1ul << (tempCount - 1);
@@ -6785,7 +6785,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             int tempCount;
 
-            switch (dst.Bits)
+            switch (dst.LengthInBits)
             {
                 case 8:
                     tempCount = (count & 0x1F) % 9;
@@ -6800,20 +6800,20 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     tempCount = count & 0x3F;
                     break;
                 default:
-                    throw new NotImplementedException($"LengthInBits: {dst.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {dst.LengthInBits}");
             }
 
             var d = dst.UInt64;
-            var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
+            var mask = BinaryHelper.HighBitsMask(dst.LengthInBits); // 0x8000
 
             if (tempCount != 0)
             {
                 var new_cf = 0 != ((d >> (tempCount - 1)) & 1);
 
-                d = (d >> tempCount) | (d << (dst.Bits - tempCount + 1));
+                d = (d >> tempCount) | (d << (dst.LengthInBits - tempCount + 1));
 
                 if (eflags.cf)
-                    d |= 1ul << (dst.Bits - tempCount);
+                    d |= 1ul << (dst.LengthInBits - tempCount);
 
                 eflags.cf = new_cf;
             }
@@ -7055,16 +7055,16 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             var count = (int)c.UInt32;
 
-            var countMask = dst.Bits == 64 ? 0x3F : 0x1F;
-            var tempCount = (count & countMask) % dst.Bits;
+            var countMask = dst.LengthInBits == 64 ? 0x3F : 0x1F;
+            var tempCount = (count & countMask) % dst.LengthInBits;
 
             var d = dst.UInt64;
-            var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
+            var mask = BinaryHelper.HighBitsMask(dst.LengthInBits); // 0x8000
 
             if (tempCount != 0)
             {
                 var new_cf = 0 != ((d << (tempCount - 1)) & mask);
-                d = (d << tempCount) | (d >> (dst.Bits - tempCount));
+                d = (d << tempCount) | (d >> (dst.LengthInBits - tempCount));
                 eflags.cf = new_cf;
             }
 
@@ -7079,16 +7079,16 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             var count = (int)c.UInt32;
 
-            var countMask = dst.Bits == 64 ? 0x3F : 0x1F;
-            var tempCount = (count & countMask) % dst.Bits;
+            var countMask = dst.LengthInBits == 64 ? 0x3F : 0x1F;
+            var tempCount = (count & countMask) % dst.LengthInBits;
 
             var d = dst.UInt64;
-            var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
+            var mask = BinaryHelper.HighBitsMask(dst.LengthInBits); // 0x8000
 
             if (tempCount != 0)
             {
                 var new_cf = 0 != ((d >> (tempCount - 1)) & 1);
-                d = (d >> tempCount) | (d << (dst.Bits - tempCount));
+                d = (d >> tempCount) | (d << (dst.LengthInBits - tempCount));
                 eflags.cf = new_cf;
             }
 
@@ -7184,9 +7184,9 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void sbb(ValueBase dst, ValueBase src)
         {
-            src = NumericValue.From(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.LengthInBits);
 
-            var r = NumericValue.From(dst.UInt64 - src.UInt64 - (eflags.cf ? 1u : 0), dst.Bits);
+            var r = NumericValue.From(dst.UInt64 - src.UInt64 - (eflags.cf ? 1u : 0), dst.LengthInBits);
             var ds = dst.IsPositive;
             var ss = src.IsPositive;
             var rs = r.IsPositive;
@@ -7400,11 +7400,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public void shl(ValueBase dst, ValueBase count_)
         {
             var count = count_.Int32;
-            var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
+            var mask = BinaryHelper.HighBitsMask(dst.LengthInBits); // 0x8000
 
             if (count != 0)
             {
-                eflags.cf = dst.IsBitSet(dst.Bits - count);
+                eflags.cf = dst.IsBitSet(dst.LengthInBits - count);
                 dst.UInt64 = dst.UInt64 << count;
                 set_sf_zf_pf(dst);
             }
@@ -7416,16 +7416,16 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void shld(ValueBase dst, ValueBase src, int count)
         {
-            if (dst.Bits == 64)
+            if (dst.LengthInBits == 64)
                 count = count % 64;
             else
                 count = count % 32;
 
-            if (count != 0 && count <= dst.Bits)
+            if (count != 0 && count <= dst.LengthInBits)
             {
-                eflags.cf = dst.IsBitSet(dst.Bits - count);
-                var total = ((BigInteger)dst.UInt64 << src.Bits) + src.UInt64;
-                dst.UInt64 = (ulong)(total >> (src.Bits - count));
+                eflags.cf = dst.IsBitSet(dst.LengthInBits - count);
+                var total = ((BigInteger)dst.UInt64 << src.LengthInBits) + src.UInt64;
+                dst.UInt64 = (ulong)(total >> (src.LengthInBits - count));
             }
         }
 
@@ -7438,7 +7438,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void shr(ValueBase dst, ValueBase count)
         {
-            var mask = BinaryHelper.HighBitsMask(dst.Bits); // 0x8000
+            var mask = BinaryHelper.HighBitsMask(dst.LengthInBits); // 0x8000
 
             if (count == 1)
                 eflags.of = 0 < (dst.UInt64 & mask);
@@ -7454,15 +7454,15 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void shrd(ValueBase dst, ValueBase src, int count)
         {
-            if (dst.Bits == 64)
+            if (dst.LengthInBits == 64)
                 count = count % 64;
             else
                 count = count % 32;
 
-            if (count != 0 && count <= dst.Bits)
+            if (count != 0 && count <= dst.LengthInBits)
             {
                 eflags.cf = dst.IsBitSet(count - 1);
-                var total = ((BigInteger)src.UInt64 << dst.Bits) + dst.UInt64;
+                var total = ((BigInteger)src.UInt64 << dst.LengthInBits) + dst.UInt64;
                 dst.UInt64 = (ulong)(total >> count);
             }
         }
@@ -7700,7 +7700,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         /// <inheritdoc />
         public void sub(ValueBase dst, ValueBase src)
         {
-            src = NumericValue.From(src.UInt64, dst.Bits);
+            src = NumericValue.From(src.UInt64, dst.LengthInBits);
             cmp(dst, src);
             dst.UInt64 = dst.UInt64 - src.UInt64;
         }

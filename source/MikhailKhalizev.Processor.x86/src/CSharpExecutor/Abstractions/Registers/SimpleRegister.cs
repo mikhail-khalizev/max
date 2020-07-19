@@ -4,11 +4,11 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
     {
         public SimpleRegister(int bits)
         {
-            Bits = bits;
+            LengthInBits = bits;
         }
 
         /// <inheritdoc />
-        public override int Bits { get; }
+        public override int LengthInBits { get; }
 
         /// <inheritdoc />
         protected override ulong UInt64Internal { get; set; }

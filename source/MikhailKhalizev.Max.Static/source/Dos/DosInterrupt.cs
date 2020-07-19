@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
 using MikhailKhalizev.Processor.x86.CSharpExecutor;

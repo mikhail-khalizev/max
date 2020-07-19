@@ -212,7 +212,7 @@ namespace MikhailKhalizev.Max.Program
 
             // Устанавливаем начальные значения в регистры.
 
-            ds.Selector = (PspSeg);
+            ds.Selector = PspSeg;
             es = ds;
 
             ss.Selector = (ImageLoadSeg + dosMz.Hdr.InitialSs);
@@ -286,7 +286,7 @@ namespace MikhailKhalizev.Max.Program
             var assemblyPdbPath = Path.Combine(Path.GetTempPath(), assemblyName + ".pdb");
 
             var syntaxTrees = files
-                .Append(@"src\Program\RawProgram.cs")
+                .Append(@"source\Program\RawProgram.cs")
                 .Append(Path.Combine(Configuration.BinToCSharp.CodeOutput, Configuration.BinToCSharp.StringDefinitionsClassName + ".cs"))
                 .Select(
                     file =>

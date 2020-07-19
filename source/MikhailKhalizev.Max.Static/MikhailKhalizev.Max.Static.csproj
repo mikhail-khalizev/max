@@ -1,7 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <LangVersion>latest</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     
@@ -12,6 +11,13 @@
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2020.1.0" />
     <PackageReference Include="KaitaiStruct.Runtime.CSharp" Version="0.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.2.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.6.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.5" />
@@ -22,9 +28,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\MikhailKhalizev.Max.Static\MikhailKhalizev.Max.Static.csproj" />
     <ProjectReference Include="..\MikhailKhalizev.Processor.x86\MikhailKhalizev.Processor.x86.csproj" />
   </ItemGroup>
 

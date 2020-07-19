@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Memory
         public ValueBase Value { get; }
 
         /// <inheritdoc />
-        public override int Bits => this.Value.Bits;
+        public override int LengthInBits => this.Value.LengthInBits;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
