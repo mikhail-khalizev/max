@@ -32,6 +32,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         
         public static Value operator *(Value a, int b) => Operations.Mul(a, b);
         public static Value operator *(int a, Value b) => Operations.Mul(a, b);
+        
+        public static Value operator ^(Value a, Value b) => Operations.Xor(a, b);
     }
 
 
@@ -97,16 +99,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
     }
 
-
-    public class RegisterValue : Value
-    {
-        public RegisterInfo RegisterInfo { get; }
-
-        public RegisterValue(RegisterInfo registerInfo) : base(registerInfo.LengthInBits)
-        {
-            RegisterInfo = registerInfo;
-        }
-    }
 
     public class MemoryValue : Value
     {

@@ -25,6 +25,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static Value Mul(Value a, int b) => Sum(new[] { (b, a) });
         public static Value Mul(int a, Value b) => Sum(new[] { (a, b) });
 
+        public static Value Xor(Value a, Value b) => Xor(new[] { a, b });
+
+
         public static Value Sum(IEnumerable<(int Count, Value Value)> e)
         {
             var lengthInBits = 0;
@@ -66,7 +69,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 }
             }
 
-            if (constant != null)
+            if (constant != null && constant.Value != 0)
                 result[constant] = 1;
 
 
@@ -81,6 +84,54 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
 
             return new SumValue(result, lengthInBits);
+        }
+
+        public static Value Xor(IEnumerable<Value> items)
+        {
+            var lengthInBits = 0;
+            ConstantValue constant = null;
+            var result = new HashSet<Value>();
+            var toProcess = new List<IEnumerable<Value>> { items };
+
+            while (toProcess.Count != 0)
+            {
+                var ee = toProcess[^1];
+                toProcess.RemoveAt(toProcess.Count - 1);
+
+                foreach (var value in ee)
+                {
+                    if (lengthInBits == 0)
+                        lengthInBits = value.LengthInBits;
+                    else if (lengthInBits != value.LengthInBits)
+                        throw new NotSupportedException($"lengthInBits != value.LengthInBits. lengthInBits = {lengthInBits}, value.LengthInBits = {value.LengthInBits}.");
+
+                    switch (value)
+                    {
+                        case XorValue xor:
+                            toProcess.Add(xor.Items);
+                            break;
+                        case ConstantValue c:
+                            constant ^= c;
+                            break;
+                        default:
+                            if (!result.Remove(value))
+                                result.Add(value);
+                            break;
+                    }
+                }
+            }
+
+            if (constant != null && constant.Value != 0)
+                result.Add(constant);
+
+
+            if (result.Count == 0)
+                return ConstantValue.Zero(lengthInBits);
+
+            if (result.Count == 1)
+                return result.First();
+
+            return new XorValue(result.ToList(), lengthInBits);
         }
     }
 }

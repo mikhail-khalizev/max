@@ -77,6 +77,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         break;
                     }
 
+                    case ud_mnemonic_code.UD_Ixor:
+                    {
+                        var src = GetOperandValue(instruction, 1);
+                        var dst = GetOperandValue(instruction, 0);
+                        SetOperandValue(instruction, 0, src ^ dst);
+                        break;
+                    }
+
                     default:
                         throw new NotImplementedException($"X86Instruction = {instruction}.");
                 }
