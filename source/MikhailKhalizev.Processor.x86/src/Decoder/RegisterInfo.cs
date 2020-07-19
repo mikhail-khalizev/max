@@ -76,12 +76,12 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         }
         
         // TODO Remove size argument.
-        private RegisterInfo(ud_type udType, int index, int byteMask, int bits)
+        private RegisterInfo(ud_type udType, int index, int byteMask, int lengthInBits)
         {
             UdType = udType;
             Index = index;
             ByteMask = byteMask;
-            Bits = bits;
+            LengthInBits = lengthInBits;
 
 
             var s = 0;
@@ -93,7 +93,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
                 m = m >> 1;
             }
 
-            if (bits != s)
+            if (lengthInBits != s)
                 throw new InvalidOperationException("Incorrect size");
 
 
@@ -139,7 +139,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         public ud_type UdType { get; }
         public int Index { get; }
         public int ByteMask { get; }
-        public int Bits { get; }
+        public int LengthInBits { get; }
         public bool IsGeneralPurpose { get; private set; }
 
         /// <inheritdoc />

@@ -173,7 +173,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
     {
         public RegisterInfo RegisterInfo { get; }
 
-        public RegisterValue(RegisterInfo registerInfo) : base(registerInfo.Bits)
+        public RegisterValue(RegisterInfo registerInfo) : base(registerInfo.LengthInBits)
         {
             RegisterInfo = registerInfo;
         }

@@ -113,7 +113,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                         && cmd.Operands[0].type == ud_type.UD_OP_REG)
                     {
                         _reg = RegisterInfo.GetRegister(cmd.Operands[0].@base);
-                        if (_reg.IsGeneralPurpose && _reg.Bits == 32 && Equals(cmd.Operands[1], _op))
+                        if (_reg.IsGeneralPurpose && _reg.LengthInBits == 32 && Equals(cmd.Operands[1], _op))
                             _state = 5;
                     }
 

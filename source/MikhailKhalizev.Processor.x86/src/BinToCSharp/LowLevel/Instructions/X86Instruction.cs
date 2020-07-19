@@ -205,7 +205,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             {
                 var op = Operands[0];
                 if (Operands[0].type == ud_type.UD_OP_REG)
-                    addSizeSuffix = EffOprMode != RegisterInfo.GetRegister(op.@base).Bits;
+                    addSizeSuffix = EffOprMode != RegisterInfo.GetRegister(op.@base).LengthInBits;
                 else if (Operands[0].type == ud_type.UD_OP_MEM)
                     addSizeSuffix = EffOprMode != (op.size == 0 ? EffOprMode : op.size);
                 else

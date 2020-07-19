@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
             while (toProcess.Count != 0)
             {
-                var ee = toProcess[toProcess.Count - 1];
+                var ee = toProcess[^1];
                 toProcess.RemoveAt(toProcess.Count - 1);
 
                 foreach (var (count, value) in ee)
