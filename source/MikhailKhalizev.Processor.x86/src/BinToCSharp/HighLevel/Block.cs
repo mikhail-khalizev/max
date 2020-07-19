@@ -55,6 +55,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public Value GetMemory(RegisterInfo segment, Value address, int lengthInBits)
         {
+            // TODO
+
             var v = new MemoryValue(segment, address, lengthInBits);
             // Input.Add(v);
             return v;
@@ -62,7 +64,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public void SetMemory(RegisterInfo segment, Value address, Value value)
         {
-            // TODO Check bits!!!
+            // TODO
             
             _memory[address] = new MemoryValue(segment, address, value.LengthInBits);
         }

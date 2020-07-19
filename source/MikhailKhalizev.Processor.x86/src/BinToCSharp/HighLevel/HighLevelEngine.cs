@@ -101,7 +101,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             switch (operand.type)
             {
                 case ud_type.UD_OP_REG:
-                    return CurrentBlock.GetRegister(instruction.Operands[0].@base);
+                    return CurrentBlock.GetRegister(operand.@base);
 
                 case ud_type.UD_OP_MEM:
                 {
@@ -129,7 +129,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             switch (operand.type)
             {
                 case ud_type.UD_OP_REG:
-                    CurrentBlock.SetRegister(instruction.Operands[0].@base, value);
+                    CurrentBlock.SetRegister(operand.@base, value);
                     break;
 
                 case ud_type.UD_OP_MEM:
