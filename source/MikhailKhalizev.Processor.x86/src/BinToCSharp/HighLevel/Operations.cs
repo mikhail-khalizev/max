@@ -139,41 +139,70 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         // Combine of ((value << offset) & mask).
         public static Value Combine(
+            Value first,
+            int firstOffset,
+            int firstMask,
+            int lengthInBits)
+        {
+            return Combine(
+                new[]
+                {
+                    (first, firstOffset, firstMask)
+                },
+                lengthInBits);
+        }
+
+        // Combine of ((value << offset) & mask).
+        public static Value Combine(
             Value first, int firstOffset, int firstMask,
             Value second, int secondOffset, int secondMask,
             int lengthInBits)
         {
-            var items = new List<(Value Value, int Offset, int Mask)>();
+            return Combine(
+                new[]
+                {
+                    (first, firstOffset, firstMask),
+                    (second, secondOffset, secondMask)
+                },
+                lengthInBits);
+        }
 
-            if (first is CombineValue cv1)
-            {
-                if (firstOffset == 0)
-                    items.AddRange(cv1.Items.Select(x => (x.Value, x.Offset, Mask: x.Mask & firstMask & ~secondMask)));
-                else
-                    items.AddRange(cv1.Items.Select(x =>
-                        (x.Value, x.Offset + firstOffset, Mask: (x.Mask << firstOffset) & firstMask & ~secondMask)));
-            }
-            else
-                items.Add((first, firstOffset, BinaryHelper.MaskInt32(lengthInBits) & firstMask & ~secondMask));
+        // Combine of ((value << offset) & mask).
+        public static Value Combine(
+            IEnumerable<(Value Value, int Offset, int Mask)> sourceItems,
+            int lengthInBits)
+        {
+            var resultItems = new List<(Value Value, int Offset, int Mask)>();
+            var valueMask = BinaryHelper.MaskInt32(lengthInBits);
 
-            if (second is CombineValue cv2)
+            foreach (var sourceItem in sourceItems)
             {
-                if (secondOffset == 0)
-                    items.AddRange(cv2.Items.Select(x => (x.Value, x.Offset, Mask: x.Mask & secondMask)));
+                for (var i = 0; i < resultItems.Count; i++)
+                {
+                    var item = resultItems[i];
+                    resultItems[i] = (item.Value, item.Offset, item.Mask & ~sourceItem.Mask & valueMask);
+                }
+
+                if (sourceItem.Value is CombineValue cv)
+                {
+                    if (sourceItem.Offset == 0)
+                        resultItems.AddRange(cv.Items.Select(x =>
+                            (x.Value, x.Offset, Mask: x.Mask & sourceItem.Mask & valueMask)));
+                    else
+                        resultItems.AddRange(cv.Items.Select(x =>
+                            (x.Value, x.Offset + sourceItem.Offset, Mask: (x.Mask << sourceItem.Offset) & sourceItem.Mask & valueMask)));
+                }
                 else
-                    items.AddRange(cv2.Items.Select(x =>
-                        (x.Value, x.Offset + secondOffset, Mask: (x.Mask << secondOffset) & secondMask)));
+                    resultItems.Add((sourceItem.Value, sourceItem.Offset, BinaryHelper.MaskInt32(lengthInBits) & sourceItem.Mask & valueMask));
             }
-            else
-                items.Add((second, secondOffset, BinaryHelper.MaskInt32(lengthInBits) & secondMask));
 
 
             var constValue = 0;
             var constMask = 0;
 
-            for (var i = 0; i < items.Count; i++)
+            for (var i = 0; i < resultItems.Count; i++)
             {
-                var item = items[0];
+                var item = resultItems[i];
                 var shouldRemove = false;
 
                 if (item.Mask == 0)
@@ -189,21 +218,21 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                 if (shouldRemove)
                 {
-                    items.RemoveAt(i);
+                    resultItems.RemoveAt(i);
                     i--;
                 }
             }
 
             if (constValue != 0)
-                items.Add((From(constValue, lengthInBits), 0, constMask));
+                resultItems.Add((From(constValue, lengthInBits), 0, constMask));
 
 
-            if (items.Count == 0)
+            if (resultItems.Count == 0)
                 return ConstantValue.Zero(lengthInBits);
 
-            if (items.Count == 1)
+            if (resultItems.Count == 1)
             {
-                var item = items[0];
+                var item = resultItems[0];
 
                 if (item.Value is ConstantValue cv3)
                     return cv3;
@@ -213,7 +242,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
 
 
-            return new CombineValue(items, lengthInBits);
+            return new CombineValue(resultItems, lengthInBits);
         }
     }
 }
