@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         private static Value Sum(IEnumerable<(int Count, Value Value)> e)
         {
-            var bits = 0;
+            var lengthInBits = 0;
             ConstantValue constant = null;
             var result = new Dictionary<Value, int>();
             var toProcess = new List<IEnumerable<(int Count, Value Value)>> { e };
@@ -46,14 +46,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                 foreach (var (count, value) in ee)
                 {
-#if DEBUG
                     if (lengthInBits == 0)
                         lengthInBits = value.LengthInBits;
                     else if (lengthInBits != value.LengthInBits)
                         throw new InvalidOperationException($"lengthInBits != value.LengthInBits. lengthInBits = {lengthInBits}, value.LengthInBits = {value.LengthInBits}.");
-#else
-                    bits = value.LengthInBits;
-#endif
 
                     switch (value)
                     {
@@ -79,7 +75,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
 
             if (result.Count == 0)
-                return new ConstantValue(0, bits);
+                return new ConstantValue(0, lengthInBits);
 
             if (result.Count == 1)
             {
@@ -88,7 +84,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                     return first.Key;
             }
 
-            return new SumValue(result, bits);
+            return new SumValue(result, lengthInBits);
         }
     }
 }
