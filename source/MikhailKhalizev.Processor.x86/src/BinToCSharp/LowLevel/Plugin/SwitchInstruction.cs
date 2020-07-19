@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
 {
-    public class SwitchInstruction : Instruction
+    public class SwitchInstruction : X86Instruction
     {
         public List<Address> Addresses { get; }
 
         /// <inheritdoc />
-        public SwitchInstruction(Instruction origInstruction, List<Address> addresses)
+        public SwitchInstruction(X86Instruction origInstruction, List<Address> addresses)
             : base(origInstruction)
         {
             Addresses = addresses;

@@ -6263,7 +6263,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         ucomiss,
 
         /// <summary>
-        /// Undefined Instruction.
+        /// Undefined X86Instruction.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/UD.html
@@ -6272,7 +6272,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         ud01,
 
         /// <summary>
-        /// Undefined Instruction.
+        /// Undefined X86Instruction.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/UD.html
@@ -6281,7 +6281,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         ud1,
 
         /// <summary>
-        /// Undefined Instruction.
+        /// Undefined X86Instruction.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/UD.html

@@ -4698,7 +4698,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void ucomiss();
 
         /// <summary>
-        /// Undefined Instruction.
+        /// Undefined X86Instruction.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UD.html</remarks>
         void ud();

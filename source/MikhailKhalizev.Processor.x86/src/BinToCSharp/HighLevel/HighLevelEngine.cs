@@ -1,26 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.Decoder;
 using SharpDisasm.Udis86;
-using Instruction = MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Instruction;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class HighLevelEngine
     {
-        public List<Instruction> Instructions { get; }
+        public List<X86Instruction> Instructions { get; }
 
-        public HighLevelEngine(List<Instruction> instructions)
+        public HighLevelEngine(IEnumerable<IInstruction> instructions)
         {
-            Instructions = instructions;
+            Instructions = instructions.OfType<X86Instruction>().ToList();
         }
 
         public void Decode()
         {
             var currentBlock = new Block();
 
-            Instruction prev = null;
+            X86Instruction prev = null;
             foreach (var instruction in Instructions)
             {
                 if (prev != null && prev.End != instruction.Begin)
@@ -38,7 +38,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                                 break;
 
                             default:
-                                throw new NotImplementedException($"Instruction = {instruction}, Mode = {instruction.Mode}.");
+                                throw new NotImplementedException($"X86Instruction = {instruction}, Mode = {instruction.Mode}.");
                         }
                             
                         var sp = currentBlock.GetRegister(spInfo);
@@ -55,14 +55,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                             default:
                                 throw new NotImplementedException(
-                                    $"Instruction = {instruction}, Operands[0].type = {instruction.Operands[0].type}.");
+                                    $"X86Instruction = {instruction}, Operands[0].type = {instruction.Operands[0].type}.");
                         }
 
                         break;
                     }
 
                     default:
-                        throw new NotImplementedException($"Instruction = {instruction}.");
+                        throw new NotImplementedException($"X86Instruction = {instruction}.");
                 }
 
                 prev = instruction;

@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             Engine.InstructionDecoded += EngineOnInstructionDecoded;
         }
 
-        private void EngineOnInstructionDecoded(object sender, Instruction cmd)
+        private void EngineOnInstructionDecoded(object sender, X86Instruction cmd)
         {
 #if false
     /* Pattern for: */
@@ -277,7 +277,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
             }
         }
 
-        private void AddSwitchAt(Instruction cmd)
+        private void AddSwitchAt(X86Instruction cmd)
         {
             if (cmd.BrFar)
                 return;
@@ -344,11 +344,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
                     var raw = Engine.Memory.ReadAll(copyAddrAreaBegin, copySizeOfAddrArea);
                     Engine.MethodInfoCollection.AddExtraRaw(method.MethodInfo, copyAddrAreaBegin, raw);
 
-                    var localCmd = method.Instructions[index] as Instruction;
+                    var localCmd = method.Instructions[index] as X86Instruction;
                     if (localCmd == null)
                     {
                         NonBlockingConsole.WriteLine(
-                            "Ожидается Instruction. " +
+                            "Ожидается X86Instruction. " +
                             $"Method.Id = {method.MethodInfo.Id}. index = {index}.");
                         return;
                     }

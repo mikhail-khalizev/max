@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -302,10 +302,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
 
             var header = opcodesTable.RowList[0].CellList.Select(x => x.Text.TrimEnd('*')).ToList();
             var indexOpcode = header.IndexOf(x => x == "Opcode");
-            var indexInstruction = header.IndexOf(x => x == "Instruction");
+            var indexInstruction = header.IndexOf(x => x == "X86Instruction");
             var indexOpcodeInstruction = Math.Max(
-                header.IndexOf(x => x.StartsWith("Opcode Instruction")),
-                header.IndexOf(x => x.StartsWith("Opcode/Instruction")));
+                header.IndexOf(x => x.StartsWith("Opcode X86Instruction")),
+                header.IndexOf(x => x.StartsWith("Opcode/X86Instruction")));
             var indexOperandEncoding = header.IndexOf(x => x == "Op/En");
             var index64BitMode = header.IndexOf(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
             var indexCompatLegMode = header.IndexOf(x => x == "Compat/Leg Mode");

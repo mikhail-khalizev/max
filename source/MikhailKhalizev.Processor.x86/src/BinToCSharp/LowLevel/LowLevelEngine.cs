@@ -56,7 +56,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public Address DsBase { get; set; }
         public IRandomAccess Memory { get; set; }
 
-        public event EventHandler<Instruction> InstructionDecoded;
+        public event EventHandler<X86Instruction> InstructionDecoded;
         public event EventHandler OnSave;
 
         public IntervalCollection<Address> SuppressDecodeIntervals { get; } = new IntervalCollection<Address>();
@@ -120,7 +120,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             _readCStringPlugin.StringArea = Interval.From(begin, end);
         }
 
-        public void RegisterOnInstructionAttachToMethod(Instruction instruction, OnInstructionAttachToMethodDelegate action)
+        public void RegisterOnInstructionAttachToMethod(X86Instruction instruction, OnInstructionAttachToMethodDelegate action)
         {
             if (_onAttachToMethodDelegates.TryGetValue(instruction, out var prevAction))
                 action += prevAction;
@@ -231,7 +231,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             if (nearestForceEnd == default)
                 nearestForceEnd = Address.MaxValue;
 
-            foreach (var cmd in Instruction.DecodeCode(Memory, address, Mode, DefinitionCollection))
+            foreach (var cmd in X86Instruction.DecodeCode(Memory, address, Mode, DefinitionCollection))
             {
                 LimitDecodeTotalLength -= cmd.Length;
 
@@ -343,7 +343,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     }
 
                     // Убираем конечные закомментированные инструкции.
-                    while (instructions.Count != 0 && instructions[instructions.Count - 1] is Instruction csi && csi.CommentThis)
+                    while (instructions.Count != 0 && instructions[instructions.Count - 1] is X86Instruction csi && csi.CommentThis)
                         instructions.RemoveAt(instructions.Count - 1);
 
                     if (instructions.Count == 0)
@@ -768,7 +768,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
+                    throw new InvalidOperationException($"X86Instruction address: {cmd.Begin}, Method Id: '{detectedMethod.MethodInfo.Id}'", ex);
                 }
 
                 lastInstrEnd = cmd.End;

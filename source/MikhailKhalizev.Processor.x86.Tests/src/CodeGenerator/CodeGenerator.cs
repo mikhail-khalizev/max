@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -119,19 +119,19 @@ namespace MikhailKhalizev.Processor.x86.Tests.CodeGenerator
             var (table, header) = tables.FirstOrDefault(
                 x =>
                     string.Equals(x.Header[0], "Opcode", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(x.Header[0], "Opcode Instruction", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(x.Header[0], "Opcode/Instruction", StringComparison.OrdinalIgnoreCase));
+                    string.Equals(x.Header[0], "Opcode X86Instruction", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(x.Header[0], "Opcode/X86Instruction", StringComparison.OrdinalIgnoreCase));
             if (table == null)
                 return;
 
             instruction.Items = new List<InstructionItemDto>();
 
             var indexOpcode = header.FindIndex(x => string.Equals(x, "Opcode", StringComparison.OrdinalIgnoreCase));
-            var indexInstruction = header.FindIndex(x => string.Equals(x, "Instruction", StringComparison.OrdinalIgnoreCase));
+            var indexInstruction = header.FindIndex(x => string.Equals(x, "X86Instruction", StringComparison.OrdinalIgnoreCase));
             var indexOpcodeInstruction =
                 Math.Max(
-                    header.FindIndex(x => string.Equals(x, "Opcode Instruction", StringComparison.OrdinalIgnoreCase)),
-                    header.FindIndex(x => string.Equals(x, "Opcode/Instruction", StringComparison.OrdinalIgnoreCase)));
+                    header.FindIndex(x => string.Equals(x, "Opcode X86Instruction", StringComparison.OrdinalIgnoreCase)),
+                    header.FindIndex(x => string.Equals(x, "Opcode/X86Instruction", StringComparison.OrdinalIgnoreCase)));
             var indexOperandEncoding = header.FindIndex(x => string.Equals(x, "Op/En", StringComparison.OrdinalIgnoreCase));
             var index64BitMode = header.FindIndex(x => string.Equals(x, "64-bit Mode", StringComparison.OrdinalIgnoreCase));
             var indexCompatLegMode = header.FindIndex(x => string.Equals(x, "Compat/Leg Mode", StringComparison.OrdinalIgnoreCase));
