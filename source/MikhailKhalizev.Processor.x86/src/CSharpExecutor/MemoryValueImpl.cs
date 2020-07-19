@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     case 64:
                         return Span.Ref<ulong>();
                     default:
-                        throw new NotImplementedException($"Bits: {Bits}");
+                        throw new NotImplementedException($"LengthInBits: {Bits}");
                 }
             }
             set
@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         Span.Ref<ulong>() = (ulong)value;
                         break;
                     default:
-                        throw new NotImplementedException($"Bits: {Bits}");
+                        throw new NotImplementedException($"LengthInBits: {Bits}");
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     case 64:
                         return Span.Ref<long>();
                     default:
-                        throw new NotImplementedException($"Bits: {Bits}");
+                        throw new NotImplementedException($"LengthInBits: {Bits}");
                 }
             }
             set => UInt64Internal = (ulong)value;

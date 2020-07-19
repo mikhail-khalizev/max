@@ -502,7 +502,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void bts();
 
         /// <summary>
-        /// Zero High Bits Starting with Specified Bit Position.
+        /// Zero High LengthInBits Starting with Specified Bit Position.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BZHI.html</remarks>
         void bzhi();
@@ -2411,7 +2411,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void lar(ValueBase dst, ValueBase src);
 
         /// <summary>
-        /// Load Unaligned Integer 128 Bits.
+        /// Load Unaligned Integer 128 LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDDQU.html</remarks>
         void lddqu();
@@ -2630,7 +2630,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void ltr(ValueBase value);
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits.
+        /// Count the Number of Leading Zero LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LZCNT.html</remarks>
         void lzcnt();
@@ -3351,13 +3351,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void pcmpistrm();
 
         /// <summary>
-        /// Parallel Bits Deposit.
+        /// Parallel LengthInBits Deposit.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PDEP.html</remarks>
         void pdep();
 
         /// <summary>
-        /// Parallel Bits Extract.
+        /// Parallel LengthInBits Extract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PEXT.html</remarks>
         void pext();
@@ -3659,7 +3659,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void popad();
 
         /// <summary>
-        /// Return the Count of Number of Bits Set to 1.
+        /// Return the Count of Number of LengthInBits Set to 1.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POPCNT.html</remarks>
         void popcnt();
@@ -4680,7 +4680,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void test(ValueBase a, ValueBase b);
 
         /// <summary>
-        /// Count the Number of Trailing Zero Bits.
+        /// Count the Number of Trailing Zero LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/TZCNT.html</remarks>
         void tzcnt();
@@ -5952,13 +5952,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpgatherqq_s();
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
+        /// Count the Number of Leading Zero LengthInBits for Packed Dword, Packed Qword Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html</remarks>
         void vplzcntd();
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
+        /// Count the Number of Leading Zero LengthInBits for Packed Dword, Packed Qword Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html</remarks>
         void vplzcntq();
@@ -6402,25 +6402,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vreducess();
 
         /// <summary>
-        /// Round Packed Float64 Values To Include A Given Number Of Fraction Bits.
+        /// Round Packed Float64 Values To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALEPD.html</remarks>
         void vrndscalepd();
 
         /// <summary>
-        /// Round Packed Float32 Values To Include A Given Number Of Fraction Bits.
+        /// Round Packed Float32 Values To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALEPS.html</remarks>
         void vrndscaleps();
 
         /// <summary>
-        /// Round Scalar Float64 Value To Include A Given Number Of Fraction Bits.
+        /// Round Scalar Float64 Value To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALESD.html</remarks>
         void vrndscalesd();
 
         /// <summary>
-        /// Round Scalar Float32 Value To Include A Given Number Of Fraction Bits.
+        /// Round Scalar Float32 Value To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALESS.html</remarks>
         void vrndscaless();
@@ -6540,7 +6540,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vzeroall();
 
         /// <summary>
-        /// Zero Upper Bits of YMM Registers.
+        /// Zero Upper LengthInBits of YMM Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VZEROUPPER.html</remarks>
         void vzeroupper();

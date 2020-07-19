@@ -3035,7 +3035,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                 default:
-                    throw new NotImplementedException($"Bits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
             }
         }
 
@@ -3366,7 +3366,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     break;
 
                 default:
-                    throw new NotImplementedException($"Bits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
             }
         }
 
@@ -3412,7 +3412,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     break;
 
                 default:
-                    throw new NotImplementedException($"Bits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
             }
         }
 
@@ -3888,7 +3888,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                 default:
-                    throw new NotImplementedException($"Bits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
             }
         }
 
@@ -3907,7 +3907,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         break;
                     }
                 default:
-                    throw new NotImplementedException($"Bits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
             }
         }
 
@@ -5574,7 +5574,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     }
 
                 default:
-                    throw new NotImplementedException($"Bits: {value.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {value.Bits}");
             }
         }
 
@@ -6225,7 +6225,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     case 32:
                         return popd(d);
                     default:
-                        throw new NotImplementedException($"Bits: {d.Bits}");
+                        throw new NotImplementedException($"LengthInBits: {d.Bits}");
                 }
             }
             else
@@ -6606,7 +6606,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         pushd(s);
                         break;
                     default:
-                        throw new NotImplementedException($"Bits: {s.Bits}");
+                        throw new NotImplementedException($"LengthInBits: {s.Bits}");
                 }
             }
             else
@@ -6744,7 +6744,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     tempCount = count & 0x3f;
                     break;
                 default:
-                    throw new NotImplementedException($"Bits: {dst.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {dst.Bits}");
             }
 
             var d = dst.UInt64;
@@ -6800,7 +6800,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     tempCount = count & 0x3F;
                     break;
                 default:
-                    throw new NotImplementedException($"Bits: {dst.Bits}");
+                    throw new NotImplementedException($"LengthInBits: {dst.Bits}");
             }
 
             var d = dst.UInt64;

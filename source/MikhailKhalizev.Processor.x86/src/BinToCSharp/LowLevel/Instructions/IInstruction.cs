@@ -22,6 +22,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
         public InstructionMetadata Metadata { get; }
 
-        public IEnumerable<string> GetCode();
+        public IEnumerable<string> GetLowLevelCode();
+        // public IEnumerable<string> GetHighLevelCode();
     }
 }

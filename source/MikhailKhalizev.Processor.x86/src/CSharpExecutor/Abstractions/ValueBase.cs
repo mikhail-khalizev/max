@@ -177,7 +177,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                     case 64:
                         return BitConverter.Int64BitsToDouble(Int64);
                     default:
-                        throw new NotSupportedException($"value.Bits: {Bits}");
+                        throw new NotSupportedException($"value.LengthInBits: {Bits}");
                 }
             }
             set
@@ -191,7 +191,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
                         Int64 = BitConverter.DoubleToInt64Bits(value);
                         break;
                     default:
-                        throw new NotSupportedException($"value.Bits: {Bits}");
+                        throw new NotSupportedException($"value.LengthInBits: {Bits}");
                 }
             }
         }

@@ -435,10 +435,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
         private HighLevelEngine Decode(MethodInfoDto mi)
         {
             var method = LowLevelEngine.GetMethod(mi);
-
-            var hl = new HighLevelEngine(method.Instructions);
-            hl.Decode();
-            return hl;
+            return HighLevelEngine.DecodeMethod(method);
         }
     }
 }

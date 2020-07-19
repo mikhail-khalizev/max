@@ -8,19 +8,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public abstract class Value
     {
-        protected Value(int bits)
+        protected Value(int lengthInBits)
         {
-            Bits = bits;
+            LengthInBits = lengthInBits;
         }
 
-        public virtual int Bits { get; }
+        public virtual int LengthInBits { get; }
 
         public virtual bool UsedAsInt { get; set; }
         public virtual bool UsedAsUint { get; set; }
         public virtual bool UsedAsPointer { get; set; }
 
-        public static Value From(int value, int bits) => Operations.From(value, bits);
-        public static Value From(uint value, int bits) => Operations.From(value, bits);
+        public static Value From(int value, int lengthInBits) => Operations.From(value, lengthInBits);
+        public static Value From(uint value, int lengthInBits) => Operations.From(value, lengthInBits);
 
         public static Value operator +(Value a, Value b) => Operations.Add(a, b);
         public static Value operator +(Value a, int b) => Operations.Add(a, b);
@@ -41,7 +41,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         { }
 
         /// <inheritdoc />
-        public override int Bits => Source.Bits;
+        public override int LengthInBits => Source.LengthInBits;
 
         /// <inheritdoc />
         public override bool UsedAsInt
@@ -73,7 +73,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly List<Value> _sources = new List<Value>();
 
         /// <inheritdoc />
-        public InputValue(Value target) : base(target.Bits)
+        public InputValue(Value target) : base(target.LengthInBits)
         {
             Target = target;
         }
@@ -133,12 +133,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public int Value { get; }
 
         /// <inheritdoc />
-        public ConstantValue(int value, int bits) : base(bits)
+        public ConstantValue(int value, int lengthInBits) : base(lengthInBits)
         {
             Value = value;
         }
 
-        public static ConstantValue operator -(ConstantValue a) => new ConstantValue(-a.Value, a.Bits);
+        public static ConstantValue operator -(ConstantValue a) => new ConstantValue(-a.Value, a.LengthInBits);
 
         public static ConstantValue operator +(ConstantValue a, ConstantValue b)
         {
@@ -147,9 +147,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (b == null)
                 return a;
 
-            if (a.Bits != b.Bits)
-                throw new NotSupportedException("a.Bits != b.Bits");
-            return new ConstantValue(a.Value + b.Value, a.Bits);
+            if (a.LengthInBits != b.LengthInBits)
+                throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
+            return new ConstantValue(a.Value + b.Value, a.LengthInBits);
         }
 
         public static ConstantValue operator -(ConstantValue a, ConstantValue b)
@@ -159,12 +159,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (b == null)
                 return a;
 
-            if (a.Bits != b.Bits)
-                throw new NotSupportedException("a.Bits != b.Bits");
-            return new ConstantValue(a.Value - b.Value, a.Bits);
+            if (a.LengthInBits != b.LengthInBits)
+                throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
+            return new ConstantValue(a.Value - b.Value, a.LengthInBits);
         }
 
-        public static ConstantValue operator *(ConstantValue a, int b) => new ConstantValue(a.Value * b, a.Bits);
+        public static ConstantValue operator *(ConstantValue a, int b) => new ConstantValue(a.Value * b, a.LengthInBits);
 
         public static ConstantValue operator *(int a, ConstantValue b) => b * a;
     }
@@ -184,12 +184,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public Value Address { get; }
         public Value Value { get; }
 
-        public MemoryValue(Value address, int bits) : base(bits)
+        public MemoryValue(Value address, int lengthInBits) : base(lengthInBits)
         {
             Address = address;
         }
 
-        public MemoryValue(Value address, Value value) : base(value.Bits)
+        public MemoryValue(Value address, Value value) : base(value.LengthInBits)
         {
             Address = address;
             Value = value;
@@ -204,13 +204,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly Dictionary<Value, int> _items;
 
         public SumValue(Dictionary<Value, int> items)
-            : base(items.Select(x => x.Key.Bits).Distinct().Single())
+            : base(items.Select(x => x.Key.LengthInBits).Distinct().Single())
         {
             _items = items;
         }
 
-        public SumValue(Dictionary<Value, int> items, int bits)
-            : base(bits)
+        public SumValue(Dictionary<Value, int> items, int lengthInBits)
+            : base(lengthInBits)
         {
             _items = items;
         }

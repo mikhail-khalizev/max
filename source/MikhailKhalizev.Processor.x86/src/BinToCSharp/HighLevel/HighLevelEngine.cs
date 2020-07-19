@@ -9,9 +9,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class HighLevelEngine
     {
+        public static HighLevelEngine DecodeMethod(DetectedMethod method)
+        {
+            var hl = new HighLevelEngine(method.Instructions);
+            hl.Decode();
+            return hl;
+        }
+
+
         public List<X86Instruction> Instructions { get; }
 
-        public HighLevelEngine(IEnumerable<IInstruction> instructions)
+        private HighLevelEngine(IEnumerable<IInstruction> instructions)
         {
             Instructions = instructions.OfType<X86Instruction>().ToList();
         }
@@ -47,7 +55,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         {
                             case ud_type.UD_OP_REG:
                                 var src = currentBlock.GetRegister(instruction.Operands[0].@base);
-                                var newSp = sp - src.Bits / 8;
+                                var newSp = sp - src.LengthInBits / 8;
 
                                 currentBlock.SetRegister(spInfo, newSp);
                                 currentBlock.SetMemory(newSp, src);

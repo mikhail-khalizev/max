@@ -7,30 +7,30 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public static class Operations
     {
-        public static Value From(int value, int bits)
+        public static Value From(int value, int lengthInBits)
         {
-            if (bits != 32)
+            if (lengthInBits != 32)
             {
-                var isNegative = (value & (1 << (bits - 1))) != 0;
+                var isNegative = (value & (1 << (lengthInBits - 1))) != 0;
                 if (isNegative)
-                    value |= ~((1 << bits) - 1);
+                    value |= ~((1 << lengthInBits) - 1);
             }
 
-            return new ConstantValue(value, bits);
+            return new ConstantValue(value, lengthInBits);
         }
 
-        public static Value From(uint value, int bits) => new ConstantValue((int)value, bits);
+        public static Value From(uint value, int lengthInBits) => new ConstantValue((int)value, lengthInBits);
 
 
         public static Value Add(Value a, Value b) => Sum(new[] { (1, a), (1, b) });
 
-        public static Value Add(Value a, int b) => a + From(b, a.Bits);
-        public static Value Add(int a, Value b) => From(a, b.Bits) + b;
+        public static Value Add(Value a, int b) => a + From(b, a.LengthInBits);
+        public static Value Add(int a, Value b) => From(a, b.LengthInBits) + b;
 
         public static Value Sub(Value a, Value b) => Sum(new[] { (1, a), (-1, b) });
 
-        public static Value Sub(Value a, int b) => a - From(b, a.Bits);
-        public static Value Sub(int a, Value b) => From(a, b.Bits) - b;
+        public static Value Sub(Value a, int b) => a - From(b, a.LengthInBits);
+        public static Value Sub(int a, Value b) => From(a, b.LengthInBits) - b;
 
         private static Value Sum(IEnumerable<(int Count, Value Value)> e)
         {
@@ -47,12 +47,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 foreach (var (count, value) in ee)
                 {
 #if DEBUG
-                    if (bits == 0)
-                        bits = value.Bits;
-                    else if (bits != value.Bits)
-                        throw new InvalidOperationException($"bits != value.Bits. bits = {bits}, value.Bits = {value.Bits}.");
+                    if (lengthInBits == 0)
+                        lengthInBits = value.LengthInBits;
+                    else if (lengthInBits != value.LengthInBits)
+                        throw new InvalidOperationException($"lengthInBits != value.LengthInBits. lengthInBits = {lengthInBits}, value.LengthInBits = {value.LengthInBits}.");
 #else
-                    bits = value.Bits;
+                    bits = value.LengthInBits;
 #endif
 
                     switch (value)

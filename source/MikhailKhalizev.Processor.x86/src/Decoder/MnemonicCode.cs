@@ -250,7 +250,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         arpl,
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits.
+        /// Count the Number of Leading Zero LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/LZCNT.html
@@ -466,7 +466,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         bts,
 
         /// <summary>
-        /// Zero High Bits Starting with Specified Bit Position.
+        /// Zero High LengthInBits Starting with Specified Bit Position.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/BZHI.html
@@ -3213,7 +3213,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         lar,
 
         /// <summary>
-        /// Load Unaligned Integer 128 Bits.
+        /// Load Unaligned Integer 128 LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/LDDQU.html
@@ -4355,7 +4355,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         pcmpistrm,
 
         /// <summary>
-        /// Parallel Bits Deposit.
+        /// Parallel LengthInBits Deposit.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PDEP.html
@@ -4364,7 +4364,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         pdep,
 
         /// <summary>
-        /// Parallel Bits Extract.
+        /// Parallel LengthInBits Extract.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/PEXT.html
@@ -4841,7 +4841,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         popad,
 
         /// <summary>
-        /// Return the Count of Number of Bits Set to 1.
+        /// Return the Count of Number of LengthInBits Set to 1.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/POPCNT.html
@@ -6236,7 +6236,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         test,
 
         /// <summary>
-        /// Count the Number of Trailing Zero Bits.
+        /// Count the Number of Trailing Zero LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/TZCNT.html
@@ -8179,7 +8179,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vinsertps,
 
         /// <summary>
-        /// Load Unaligned Integer 128 Bits.
+        /// Load Unaligned Integer 128 LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/LDDQU.html
@@ -9601,7 +9601,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vpinsrw,
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
+        /// Count the Number of Leading Zero LengthInBits for Packed Dword, Packed Qword Values.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html
@@ -9610,7 +9610,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vplzcntd,
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
+        /// Count the Number of Leading Zero LengthInBits for Packed Dword, Packed Qword Values.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html
@@ -10969,7 +10969,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vreducess,
 
         /// <summary>
-        /// Round Packed Float64 Values To Include A Given Number Of Fraction Bits.
+        /// Round Packed Float64 Values To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VRNDSCALEPD.html
@@ -10978,7 +10978,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vrndscalepd,
 
         /// <summary>
-        /// Round Packed Float32 Values To Include A Given Number Of Fraction Bits.
+        /// Round Packed Float32 Values To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VRNDSCALEPS.html
@@ -10987,7 +10987,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vrndscaleps,
 
         /// <summary>
-        /// Round Scalar Float64 Value To Include A Given Number Of Fraction Bits.
+        /// Round Scalar Float64 Value To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VRNDSCALESD.html
@@ -10996,7 +10996,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vrndscalesd,
 
         /// <summary>
-        /// Round Scalar Float32 Value To Include A Given Number Of Fraction Bits.
+        /// Round Scalar Float32 Value To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VRNDSCALESS.html
@@ -11338,7 +11338,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         vzeroall,
 
         /// <summary>
-        /// Zero Upper Bits of YMM Registers.
+        /// Zero Upper LengthInBits of YMM Registers.
         /// </summary>
         /// <remarks>
         /// https://www.felixcloutier.com/x86/VZEROUPPER.html

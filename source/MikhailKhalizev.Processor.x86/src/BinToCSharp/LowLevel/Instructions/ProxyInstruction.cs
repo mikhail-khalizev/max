@@ -23,9 +23,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
 
         /// <inheritdoc />
-        public virtual IEnumerable<string> GetCode()
+        public virtual IEnumerable<string> GetLowLevelCode()
         {
-            return IcSharpInstructionImplementation.GetCode();
+            return IcSharpInstructionImplementation.GetLowLevelCode();
         }
     }
 }

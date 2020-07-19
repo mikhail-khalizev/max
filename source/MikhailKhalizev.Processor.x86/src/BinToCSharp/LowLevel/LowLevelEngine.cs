@@ -758,7 +758,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     if (cmd.Metadata.HasLabel)
                         lines = lines.Append($"l_{cmd.Begin}:");
 
-                    lines = lines.Concat(cmd.GetCode());
+                    lines = lines.Concat(cmd.GetLowLevelCode());
 
                     foreach (var str in lines)
                     {

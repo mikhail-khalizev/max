@@ -21,7 +21,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel.Plugin
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> GetCode()
+        public override IEnumerable<string> GetLowLevelCode()
         {
             var lines = Enumerable.Empty<string>();
 

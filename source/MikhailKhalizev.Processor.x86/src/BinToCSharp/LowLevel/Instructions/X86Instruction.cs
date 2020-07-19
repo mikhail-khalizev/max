@@ -166,7 +166,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             return str;
         }
 
-        public virtual IEnumerable<string> GetCode()
+        public virtual IEnumerable<string> GetLowLevelCode()
         {
             var lines = Enumerable.Empty<string>();
 
