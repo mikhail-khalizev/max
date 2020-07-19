@@ -116,7 +116,7 @@ namespace MikhailKhalizev.Max.Program
         {
             cr0.UInt32 = 0x0010;
 
-            var exeBytes = File.ReadAllBytes(Path.Combine(Configuration.Max.InstalledPath, Configuration.Max.ExeFileName));
+            var exeBytes = File.ReadAllBytes(Path.Combine(Configuration.Program.WorkingDirectory, Configuration.Program.ExeFileName));
             var dosMz = new DosMz(exeBytes);
 
             if (!dosMz.IsCorrect)

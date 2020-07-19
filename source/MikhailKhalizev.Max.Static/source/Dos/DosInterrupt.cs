@@ -961,7 +961,7 @@ namespace MikhailKhalizev.Max.Dos
 
         private string get_path()
         {
-            // RawProgramMain.Configuration.Max.InstalledPath;
+            // RawProgramMain.Configuration.Program.WorkingDirectory;
 
             var path = Memory.ReadCString(ds[dx]);
 
@@ -970,7 +970,7 @@ namespace MikhailKhalizev.Max.Dos
 
             //if (path[0] != '/')
             //{
-                path = Path.GetFullPath(path, RawProgramMain.Configuration.Max.InstalledPath);
+                path = Path.GetFullPath(path, RawProgramMain.Configuration.Program.WorkingDirectory);
             //}
 
             return path;

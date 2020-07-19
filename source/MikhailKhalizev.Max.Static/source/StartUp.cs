@@ -86,10 +86,10 @@ namespace MikhailKhalizev.Max
 
             // Check configuration.
 
-            var installedPath = ConfigurationDto.Max.InstalledPath;
+            var installedPath = ConfigurationDto.Program.WorkingDirectory;
             if (!Directory.Exists(installedPath))
                 throw new InvalidOperationException(
-                    $"Directory '{installedPath}' not found. Check Max:InstalledPath configuration option.");
+                    $"Directory '{installedPath}' not found. Check Program:WorkingDirectory configuration option.");
         }
 
         public void ConfigureServices(IServiceCollection services)
