@@ -16,6 +16,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         private readonly Dictionary<Value /* address */, MemoryValue> _memory = new Dictionary<Value, MemoryValue>();
 
+        // TODO Union input registers with the same index.
+
         public Value GetRegister(RegisterInfo registerInfo)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
