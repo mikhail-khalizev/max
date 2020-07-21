@@ -2,25 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using MikhailKhalizev.Processor.x86.Decoder;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public abstract class Value
     {
-        protected Value(int lengthInBits)
-        {
-            LengthInBits = lengthInBits;
-        }
-
-        public virtual int LengthInBits { get; }
-
-        public virtual bool UsedAsInt { get; set; }
-        public virtual bool UsedAsUint { get; set; }
-        public virtual bool UsedAsPointer { get; set; }
-
         public static Value From(int value, int lengthInBits) => Operations.From(value, lengthInBits);
         public static Value From(uint value, int lengthInBits) => Operations.From(value, lengthInBits);
+
+        public static Value True { get; } = From(1, 1);
+        public static Value False { get; } = From(0, 1);
 
         public static Value operator +(Value a, Value b) => Operations.Add(a, b);
         public static Value operator +(Value a, int b) => Operations.Add(a, b);
@@ -34,6 +27,29 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static Value operator *(int a, Value b) => Operations.Mul(a, b);
         
         public static Value operator ^(Value a, Value b) => Operations.Xor(a, b);
+
+
+        private static int _lastSequenceIndex;
+
+        protected Value(int lengthInBits)
+        {
+            LengthInBits = lengthInBits;
+            SequenceIndex = Interlocked.Increment(ref _lastSequenceIndex);
+        }
+
+        public static explicit operator Value(bool binary)
+        {
+            return binary ? True : False;
+        }
+
+
+        public virtual int LengthInBits { get; }
+
+        public int SequenceIndex { get; }
+
+        public virtual bool UsedAsInt { get; set; }
+        public virtual bool UsedAsUint { get; set; }
+        public virtual bool UsedAsPointer { get; set; }
     }
 
 

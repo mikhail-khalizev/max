@@ -139,38 +139,26 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         // Combine of ((value << offset) & mask).
         public static Value Combine(
+            int lengthInBits,
             Value first,
             int firstOffset,
-            int firstMask,
-            int lengthInBits)
+            int firstMask)
         {
-            return Combine(
+            return Combine(lengthInBits,
                 new[]
                 {
                     (first, firstOffset, firstMask)
-                },
-                lengthInBits);
+                });
         }
 
         // Combine of ((value << offset) & mask).
-        public static Value Combine(
-            Value first, int firstOffset, int firstMask,
-            Value second, int secondOffset, int secondMask,
-            int lengthInBits)
+        public static Value Combine(int lengthInBits, params (Value Value, int Offset, int Mask)[] sourceItems)
         {
-            return Combine(
-                new[]
-                {
-                    (first, firstOffset, firstMask),
-                    (second, secondOffset, secondMask)
-                },
-                lengthInBits);
+            return Combine(lengthInBits, sourceItems.AsEnumerable());
         }
 
         // Combine of ((value << offset) & mask).
-        public static Value Combine(
-            IEnumerable<(Value Value, int Offset, int Mask)> sourceItems,
-            int lengthInBits)
+        public static Value Combine(int lengthInBits, IEnumerable<(Value Value, int Offset, int Mask)> sourceItems)
         {
             var resultItems = new List<(Value Value, int Offset, int Mask)>();
             var valueMask = BinaryHelper.MaskInt32(lengthInBits);

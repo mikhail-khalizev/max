@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Decoder;
+using MikhailKhalizev.Processor.x86.Utils;
+using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
@@ -33,10 +36,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 return item.Value;
 
             return Operations.Combine(
+                registerInfo.LengthInBits,
                 item.Value,
                 item.RegisterInfo.BitOffset - registerInfo.BitOffset,
-                item.RegisterInfo.BitMask >> registerInfo.BitOffset,
-                registerInfo.LengthInBits);
+                item.RegisterInfo.BitMask >> registerInfo.BitOffset);
         }
 
         public void SetRegister(RegisterInfo registerInfo, Value value)
@@ -54,15 +57,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
 
             var combination = Operations.Combine(
-                item.Value,
-                item.RegisterInfo.BitOffset,
-                item.RegisterInfo.BitMask,
-                value,
-                registerInfo.BitOffset,
-                registerInfo.BitMask,
                 Math.Max(
                     item.RegisterInfo.LengthInBits + item.RegisterInfo.BitOffset,
-                    registerInfo.LengthInBits + registerInfo.BitOffset));
+                    registerInfo.LengthInBits + registerInfo.BitOffset),
+                (item.Value, item.RegisterInfo.BitOffset, item.RegisterInfo.BitMask),
+                (value, registerInfo.BitOffset, registerInfo.BitMask));
 
             var resultRegisterInfo = new[] { registerInfo, item.RegisterInfo }
                 .OrderBy(x => x.LengthInBits)
@@ -75,6 +74,48 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 .First(x => combination.LengthInBits <= x.LengthInBits);
 
             _registers[registerInfo.Index] = (resultRegisterInfo, combination);
+        }
+
+
+        public void UpdateFlags(EflagsMaskEnum flags, bool value)
+        {
+            UpdateFlags(flags, (Value) value);
+        }
+
+        public void UpdateFlags(EflagsMaskEnum flags, Value value)
+        {
+            UpdateFlags((flags, value));
+        }
+
+        public void UpdateFlags(params (EflagsMaskEnum flags, Value value)[] items)
+        {
+            UpdateFlags(items.AsEnumerable());
+        }
+
+        public void UpdateFlags(IEnumerable<(EflagsMaskEnum flags, Value value)> items)
+        {
+            var eflagsRegister = RegisterInfo.Eflags;
+            var eflagsValue = GetRegister(eflagsRegister);
+
+            var result = Enumerable.Empty<(Value Value, int Offset, int Mask)>()
+                .Append((eflagsValue, 0, BinaryHelper.MaskInt32(eflagsValue.LengthInBits)))
+                .Concat(
+                    items.Select(
+                        x =>
+                        {
+                            var (flags, value) = x;
+                            if (flags == 0)
+                                throw new ArgumentException($"{nameof(flags)} is 0.");
+
+                            var offset = 0;
+                            while (((int) flags & (1 << offset)) == 0)
+                                offset++;
+
+                            return (value, offset, 1 << offset);
+                        }));
+
+            var newEflagsValue = Operations.Combine(eflagsValue.LengthInBits, result);
+            SetRegister(eflagsRegister, newEflagsValue);
         }
 
 
