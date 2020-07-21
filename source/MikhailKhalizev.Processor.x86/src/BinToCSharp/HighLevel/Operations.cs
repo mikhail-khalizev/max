@@ -144,7 +144,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             int firstOffset,
             int firstMask)
         {
-            return Combine(lengthInBits,
+            return Combine(
+                lengthInBits,
                 new[]
                 {
                     (first, firstOffset, firstMask)
@@ -174,14 +175,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 if (sourceItem.Value is CombineValue cv)
                 {
                     if (sourceItem.Offset == 0)
-                        resultItems.AddRange(cv.Items.Select(x =>
-                            (x.Value, x.Offset, Mask: x.Mask & sourceItem.Mask & valueMask)));
+                        resultItems.AddRange(
+                            cv.Items.Select(
+                                x =>
+                                    (x.Value, x.Offset, Mask: x.Mask & sourceItem.Mask & valueMask)));
                     else
-                        resultItems.AddRange(cv.Items.Select(x =>
-                            (x.Value, x.Offset + sourceItem.Offset, Mask: (x.Mask << sourceItem.Offset) & sourceItem.Mask & valueMask)));
+                        resultItems.AddRange(
+                            cv.Items.Select(
+                                x =>
+                                    (x.Value, x.Offset + sourceItem.Offset,
+                                        Mask: (x.Mask << sourceItem.Offset) & sourceItem.Mask & valueMask)));
                 }
                 else
-                    resultItems.Add((sourceItem.Value, sourceItem.Offset, BinaryHelper.MaskInt32(lengthInBits) & sourceItem.Mask & valueMask));
+                    resultItems.Add(
+                        (sourceItem.Value, sourceItem.Offset, BinaryHelper.MaskInt32(lengthInBits) & sourceItem.Mask & valueMask));
             }
 
 
@@ -213,6 +220,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
             if (constValue != 0)
                 resultItems.Add((From(constValue, lengthInBits), 0, constMask));
+
+
+            resultItems = resultItems
+                .GroupBy(
+                    x => (x.Value, x.Offset),
+                    (tuple, tuples) => (tuple.Value, tuple.Offset, tuples.Aggregate(0, (mask, valueTuple) => mask | valueTuple.Mask)))
+                .ToList();
 
 
             if (resultItems.Count == 0)

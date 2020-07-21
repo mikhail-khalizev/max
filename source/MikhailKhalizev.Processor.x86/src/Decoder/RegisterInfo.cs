@@ -14,7 +14,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
         static RegisterInfo()
         {
             var regs = new List<RegisterInfo>();
-            var index = Empty.Index;
+            var index = 0;
 
             Empty = new RegisterInfo(ud_type.UD_NONE, 0, 0);
             regs.Add(Empty);
