@@ -10,7 +10,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public override int Bits => 8;
+        public override int LengthInBits => 8;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
@@ -78,7 +78,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public override int Bits => 16;
+        public override int LengthInBits => 16;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
@@ -151,7 +151,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public override int Bits => 32;
+        public override int LengthInBits => 32;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
@@ -210,7 +210,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
         /// <inheritdoc />
-        public override int Bits => 64;
+        public override int LengthInBits => 64;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
@@ -281,7 +281,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         }
 
 
-        public override int Bits { get; }
+        public override int LengthInBits { get; }
 
         /// <inheritdoc />
         protected override ulong UInt64Internal { get; set; }
@@ -290,7 +290,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         private NumericValue(ulong value, int bits)
         {
             UInt64Internal = value;
-            Bits = bits;
+            LengthInBits = bits;
         }
     }
 }

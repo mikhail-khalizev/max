@@ -400,7 +400,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void blsi();
 
         /// <summary>
-        /// Get Mask Up to Lowest Set Bit.
+        /// Get MaskUInt64 Up to Lowest Set Bit.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BLSMSK.html</remarks>
         void blsmsk();
@@ -502,7 +502,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void bts();
 
         /// <summary>
-        /// Zero High Bits Starting with Specified Bit Position.
+        /// Zero High LengthInBits Starting with Specified Bit Position.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/BZHI.html</remarks>
         void bzhi();
@@ -2165,49 +2165,49 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void kandw();
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html</remarks>
         void kmovb();
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html</remarks>
         void kmovd();
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html</remarks>
         void kmovq();
 
         /// <summary>
-        /// Move from and to Mask Registers.
+        /// Move from and to MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KMOVW:KMOVB:KMOVQ:KMOVD.html</remarks>
         void kmovw();
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html</remarks>
         void knotb();
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html</remarks>
         void knotd();
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html</remarks>
         void knotq();
 
         /// <summary>
-        /// NOT Mask Register.
+        /// NOT MaskUInt64 Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KNOTW:KNOTB:KNOTQ:KNOTD.html</remarks>
         void knotw();
@@ -2261,49 +2261,49 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void korw();
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html</remarks>
         void kshiftlb();
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html</remarks>
         void kshiftld();
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html</remarks>
         void kshiftlq();
 
         /// <summary>
-        /// Shift Left Mask Registers.
+        /// Shift Left MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTLW:KSHIFTLB:KSHIFTLQ:KSHIFTLD.html</remarks>
         void kshiftlw();
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html</remarks>
         void kshiftrb();
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html</remarks>
         void kshiftrd();
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html</remarks>
         void kshiftrq();
 
         /// <summary>
-        /// Shift Right Mask Registers.
+        /// Shift Right MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KSHIFTRW:KSHIFTRB:KSHIFTRQ:KSHIFTRD.html</remarks>
         void kshiftrw();
@@ -2333,19 +2333,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void ktestw();
 
         /// <summary>
-        /// Unpack for Mask Registers.
+        /// Unpack for MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html</remarks>
         void kunpckbw();
 
         /// <summary>
-        /// Unpack for Mask Registers.
+        /// Unpack for MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html</remarks>
         void kunpckdq();
 
         /// <summary>
-        /// Unpack for Mask Registers.
+        /// Unpack for MaskUInt64 Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/KUNPCKBW:KUNPCKWD:KUNPCKDQ.html</remarks>
         void kunpckwd();
@@ -2411,7 +2411,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void lar(ValueBase dst, ValueBase src);
 
         /// <summary>
-        /// Load Unaligned Integer 128 Bits.
+        /// Load Unaligned Integer 128 LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LDDQU.html</remarks>
         void lddqu();
@@ -2630,7 +2630,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void ltr(ValueBase value);
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits.
+        /// Count the Number of Leading Zero LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/LZCNT.html</remarks>
         void lzcnt();
@@ -2810,13 +2810,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void movlps();
 
         /// <summary>
-        /// Extract Packed Double-Precision Floating-Point Sign Mask.
+        /// Extract Packed Double-Precision Floating-Point Sign MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVMSKPD.html</remarks>
         void movmskpd();
 
         /// <summary>
-        /// Extract Packed Single-Precision Floating-Point Sign Mask.
+        /// Extract Packed Single-Precision Floating-Point Sign MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/MOVMSKPS.html</remarks>
         void movmskps();
@@ -3309,7 +3309,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void pcmpestri();
 
         /// <summary>
-        /// Packed Compare Explicit Length Strings, Return Mask.
+        /// Packed Compare Explicit Length Strings, Return MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PCMPESTRM.html</remarks>
         void pcmpestrm();
@@ -3345,19 +3345,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void pcmpistri();
 
         /// <summary>
-        /// Packed Compare Implicit Length Strings, Return Mask.
+        /// Packed Compare Implicit Length Strings, Return MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PCMPISTRM.html</remarks>
         void pcmpistrm();
 
         /// <summary>
-        /// Parallel Bits Deposit.
+        /// Parallel LengthInBits Deposit.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PDEP.html</remarks>
         void pdep();
 
         /// <summary>
-        /// Parallel Bits Extract.
+        /// Parallel LengthInBits Extract.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PEXT.html</remarks>
         void pext();
@@ -3561,7 +3561,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void pminuw();
 
         /// <summary>
-        /// Move Byte Mask.
+        /// Move Byte MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/PMOVMSKB.html</remarks>
         void pmovmskb();
@@ -3659,7 +3659,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void popad();
 
         /// <summary>
-        /// Return the Count of Number of Bits Set to 1.
+        /// Return the Count of Number of LengthInBits Set to 1.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/POPCNT.html</remarks>
         void popcnt();
@@ -4680,7 +4680,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void test(ValueBase a, ValueBase b);
 
         /// <summary>
-        /// Count the Number of Trailing Zero Bits.
+        /// Count the Number of Trailing Zero LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/TZCNT.html</remarks>
         void tzcnt();
@@ -4698,7 +4698,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void ucomiss();
 
         /// <summary>
-        /// Undefined Instruction.
+        /// Undefined X86Instruction.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/UD.html</remarks>
         void ud();
@@ -5670,7 +5670,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpbroadcastd();
 
         /// <summary>
-        /// Broadcast Mask to Vector Register.
+        /// Broadcast MaskUInt64 to Vector Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPBROADCASTM.html</remarks>
         void vpbroadcastm();
@@ -5688,49 +5688,49 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpbroadcastw();
 
         /// <summary>
-        /// Compare Packed Byte Values Into Mask.
+        /// Compare Packed Byte Values Into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPB:VPCMPUB.html</remarks>
         void vpcmpb();
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPD:VPCMPUD.html</remarks>
         void vpcmpd();
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPQ:VPCMPUQ.html</remarks>
         void vpcmpq();
 
         /// <summary>
-        /// Compare Packed Byte Values Into Mask.
+        /// Compare Packed Byte Values Into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPB:VPCMPUB.html</remarks>
         void vpcmpub();
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPD:VPCMPUD.html</remarks>
         void vpcmpud();
 
         /// <summary>
-        /// Compare Packed Integer Values into Mask.
+        /// Compare Packed Integer Values into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPQ:VPCMPUQ.html</remarks>
         void vpcmpuq();
 
         /// <summary>
-        /// Compare Packed Word Values Into Mask.
+        /// Compare Packed Word Values Into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPW:VPCMPUW.html</remarks>
         void vpcmpuw();
 
         /// <summary>
-        /// Compare Packed Word Values Into Mask.
+        /// Compare Packed Word Values Into MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPCMPW:VPCMPUW.html</remarks>
         void vpcmpw();
@@ -5952,13 +5952,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpgatherqq_s();
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
+        /// Count the Number of Leading Zero LengthInBits for Packed Dword, Packed Qword Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html</remarks>
         void vplzcntd();
 
         /// <summary>
-        /// Count the Number of Leading Zero Bits for Packed Dword, Packed Qword Values.
+        /// Count the Number of Leading Zero LengthInBits for Packed Dword, Packed Qword Values.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPLZCNTD:VPLZCNTQ.html</remarks>
         void vplzcntq();
@@ -5982,13 +5982,13 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpmaskmov();
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html</remarks>
         void vpmovb2m();
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html</remarks>
         void vpmovd2m();
@@ -6006,31 +6006,31 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpmovdw();
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html</remarks>
         void vpmovm2b();
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html</remarks>
         void vpmovm2d();
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html</remarks>
         void vpmovm2q();
 
         /// <summary>
-        /// Convert a Mask Register to a Vector Register.
+        /// Convert a MaskUInt64 Register to a Vector Register.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVM2B:VPMOVM2W:VPMOVM2D:VPMOVM2Q.html</remarks>
         void vpmovm2w();
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html</remarks>
         void vpmovq2m();
@@ -6126,7 +6126,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpmovuswb();
 
         /// <summary>
-        /// Convert a Vector Register to a Mask.
+        /// Convert a Vector Register to a MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPMOVB2M:VPMOVW2M:VPMOVD2M:VPMOVQ2M.html</remarks>
         void vpmovw2m();
@@ -6282,25 +6282,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vpternlogq();
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html</remarks>
         void vptestmb();
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html</remarks>
         void vptestmd();
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html</remarks>
         void vptestmq();
 
         /// <summary>
-        /// Logical AND and Set Mask.
+        /// Logical AND and Set MaskUInt64.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VPTESTMB:VPTESTMW:VPTESTMD:VPTESTMQ.html</remarks>
         void vptestmw();
@@ -6402,25 +6402,25 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vreducess();
 
         /// <summary>
-        /// Round Packed Float64 Values To Include A Given Number Of Fraction Bits.
+        /// Round Packed Float64 Values To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALEPD.html</remarks>
         void vrndscalepd();
 
         /// <summary>
-        /// Round Packed Float32 Values To Include A Given Number Of Fraction Bits.
+        /// Round Packed Float32 Values To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALEPS.html</remarks>
         void vrndscaleps();
 
         /// <summary>
-        /// Round Scalar Float64 Value To Include A Given Number Of Fraction Bits.
+        /// Round Scalar Float64 Value To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALESD.html</remarks>
         void vrndscalesd();
 
         /// <summary>
-        /// Round Scalar Float32 Value To Include A Given Number Of Fraction Bits.
+        /// Round Scalar Float32 Value To Include A Given Number Of Fraction LengthInBits.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VRNDSCALESS.html</remarks>
         void vrndscaless();
@@ -6540,7 +6540,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         void vzeroall();
 
         /// <summary>
-        /// Zero Upper Bits of YMM Registers.
+        /// Zero Upper LengthInBits of YMM Registers.
         /// </summary>
         /// <remarks>https://www.felixcloutier.com/x86/VZEROUPPER.html</remarks>
         void vzeroupper();

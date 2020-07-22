@@ -26,7 +26,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
         /// <inheritdoc />
-        public IEnumerable<string> GetCode()
+        public IEnumerable<string> GetLowLevelCode()
         {
             var ii = this.GetInstructionInfoString();
 

@@ -12,19 +12,19 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         public override Address Address { get; }
 
         /// <inheritdoc />
-        public override int Bits => MemoryAccess.DataBits;
+        public override int LengthInBits => MemoryAccess.DataBits;
 
         public Span<byte> Span =>
             Segment == null
-                ? MemoryAccess.Memory.GetMinSize(Address, Bits / 8)
-                : MemoryAccess.Memory.GetMinSize(Segment, Address, Bits / 8);
+                ? MemoryAccess.Memory.GetMinSize(Address, LengthInBits / 8)
+                : MemoryAccess.Memory.GetMinSize(Segment, Address, LengthInBits / 8);
 
         /// <inheritdoc />
         protected override ulong UInt64Internal
         {
             get
             {
-                switch (Bits)
+                switch (LengthInBits)
                 {
                     case 8:
                         return Span[0];
@@ -35,12 +35,12 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     case 64:
                         return Span.Ref<ulong>();
                     default:
-                        throw new NotImplementedException($"Bits: {Bits}");
+                        throw new NotImplementedException($"LengthInBits: {LengthInBits}");
                 }
             }
             set
             {
-                switch (Bits)
+                switch (LengthInBits)
                 {
                     case 8:
                         Span[0] = (byte)value;
@@ -55,7 +55,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         Span.Ref<ulong>() = (ulong)value;
                         break;
                     default:
-                        throw new NotImplementedException($"Bits: {Bits}");
+                        throw new NotImplementedException($"LengthInBits: {LengthInBits}");
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         {
             get
             {
-                switch (Bits)
+                switch (LengthInBits)
                 {
                     case 8:
                         return (sbyte)Span[0];
@@ -76,7 +76,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                     case 64:
                         return Span.Ref<long>();
                     default:
-                        throw new NotImplementedException($"Bits: {Bits}");
+                        throw new NotImplementedException($"LengthInBits: {LengthInBits}");
                 }
             }
             set => UInt64Internal = (ulong)value;

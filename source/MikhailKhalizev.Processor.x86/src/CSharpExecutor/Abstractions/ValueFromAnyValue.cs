@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions
         public ValueBase Value { get; }
 
         /// <inheritdoc />
-        public override int Bits => _bits ?? Value.Bits;
+        public override int LengthInBits => _bits ?? Value.LengthInBits;
 
         private readonly int? _bits;
 

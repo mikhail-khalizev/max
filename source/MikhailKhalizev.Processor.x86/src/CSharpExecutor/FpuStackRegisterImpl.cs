@@ -15,7 +15,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
         }
 
         /// <inheritdoc />
-        public override int Bits => 64;
+        public override int LengthInBits => 64;
 
         /// <inheritdoc />
         protected override ulong UInt64Internal

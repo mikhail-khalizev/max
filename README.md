@@ -75,8 +75,8 @@ The game code is as follows:
 
 ```json
     {
-      "Max": {
-        "InstalledPath": "Path to folder <M.A.X. En Orig With Patch 1.04>"
+      "Program": {
+        "WorkingDirectory": "Path to folder <M.A.X. En Orig With Patch 1.04>" // For example: "C:\\Users\\user-name\\Documents\\MAX\\M.A.X. En Orig With Patch 1.04"
       }
     }
 ```

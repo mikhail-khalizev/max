@@ -164,7 +164,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
 
 
         /// <inheritdoc />
-        public override int Bits => 32;
+        public override int LengthInBits => 32;
         
         /// <inheritdoc />
         protected override ulong UInt64Internal

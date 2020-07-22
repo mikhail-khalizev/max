@@ -3,7 +3,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers
     public abstract class SegmentRegister : Register
     {
         /// <inheritdoc />
-        public override int Bits => 16;
+        public override int LengthInBits => 16;
 
         public int Selector
         {

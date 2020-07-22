@@ -16,7 +16,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
             Memory = memory;
             DataBits = dataBits;
             AddressBits = addressBits;
-            AddressMask = BinaryHelper.Mask(AddressBits);
+            AddressMask = BinaryHelper.MaskUInt64(AddressBits);
         }
 
         /// <inheritdoc />

@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MikhailKhalizev.Max.Static\MikhailKhalizev.Max.Static.csproj" />
     <ProjectReference Include="..\MikhailKhalizev.Processor.x86\MikhailKhalizev.Processor.x86.csproj" />
   </ItemGroup>
 
