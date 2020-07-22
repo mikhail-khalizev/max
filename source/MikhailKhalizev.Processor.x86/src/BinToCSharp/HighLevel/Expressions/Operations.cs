@@ -7,23 +7,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public static class Operations
     {
-        public static Expression From(int value, int lengthInBits)
-        {
-            return new ConstantExpression(value, lengthInBits);
-        }
-
-        public static Expression From(uint value, int lengthInBits) => new ConstantExpression((int) value, lengthInBits);
-
-        public static Expression From(ConditionType condition, params Expression[] values) => new ConditionExpression(condition, values);
-
-
         public static Expression Add(Expression a, Expression b) => Sum(new[] { (1, a), (1, b) });
-        public static Expression Add(Expression a, int b) => Sum(new[] { (1, a), (1, From(b, a.LengthInBits)) });
-        public static Expression Add(int a, Expression b) => Sum(new[] { (1, From(a, b.LengthInBits)), (1, b) });
+        public static Expression Add(Expression a, int b) => Sum(new[] { (1, a), (1, Expression.Number(b, a.LengthInBits)) });
+        public static Expression Add(int a, Expression b) => Sum(new[] { (1, Expression.Number(a, b.LengthInBits)), (1, b) });
 
         public static Expression Sub(Expression a, Expression b) => Sum(new[] { (1, a), (-1, b) });
-        public static Expression Sub(Expression a, int b) => Sum(new[] { (1, a), (-1, From(b, a.LengthInBits)) });
-        public static Expression Sub(int a, Expression b) => Sum(new[] { (1, From(a, b.LengthInBits)), (-1, b) });
+        public static Expression Sub(Expression a, int b) => Sum(new[] { (1, a), (-1, Expression.Number(b, a.LengthInBits)) });
+        public static Expression Sub(int a, Expression b) => Sum(new[] { (1, Expression.Number(a, b.LengthInBits)), (-1, b) });
 
         public static Expression Mul(Expression a, int b) => Sum(new[] { (b, a) });
         public static Expression Mul(int a, Expression b) => Sum(new[] { (a, b) });
@@ -221,7 +211,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
 
             if (constValue != 0)
-                resultItems.Add((From(constValue, lengthInBits), 0, constMask));
+                resultItems.Add((Expression.Number(constValue, lengthInBits), 0, constMask));
 
 
             resultItems = resultItems

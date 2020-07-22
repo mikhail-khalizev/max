@@ -10,26 +10,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class Block
     {
-        public List<InputExpression> Input { get; } = new List<InputExpression>();
-        public Expression NextBlockIndex { get; set; }
-        public List<Block> NextBlocks { get; set; }
+        // public Expression NextBlockIndex { get; set; }
+        // public List<Block> NextBlocks { get; set; }
 
         private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
             new Dictionary<int, (RegisterInfo, Expression)>();
 
         private readonly Dictionary<Expression /* address */, MemoryExpression> _memory = new Dictionary<Expression, MemoryExpression>();
 
-        // TODO Union input registers with the same index.
 
         public Expression GetRegister(RegisterInfo registerInfo)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
-                var inputValue = new InputExpression(new RegisterExpression(registerInfo));
-                Input.Add(inputValue);
-
-                _registers[registerInfo.Index] = (registerInfo, inputValue);
-                return inputValue;
+                var register = new RegisterExpression(registerInfo);
+                _registers[registerInfo.Index] = (registerInfo, register);
+                return register;
             }
 
             if (item.RegisterInfo == registerInfo)
@@ -123,9 +119,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         {
             // TODO
 
-            var v = new MemoryExpression(segment, address, lengthInBits);
-            // Input.Add(v);
-            return v;
+            var memory = new MemoryExpression(segment, address, lengthInBits);
+            return memory;
         }
 
         public void SetMemory(RegisterInfo segment, Expression address, Expression expression)

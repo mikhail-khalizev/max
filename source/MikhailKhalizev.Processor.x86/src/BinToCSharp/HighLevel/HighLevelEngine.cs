@@ -120,8 +120,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         // Set sf, zf, pf flags.
         public IEnumerable<(EflagsMaskEnum flags, Expression value)> GetDefaultFlags(Expression dst)
         {
-            yield return (EflagsMaskEnum.sf, Operations.From(ConditionType.IsNegative, dst));
-            yield return (EflagsMaskEnum.zf, Operations.From(ConditionType.IsZero, dst));
+            yield return (EflagsMaskEnum.sf, Expression.IsNegative(dst));
+            yield return (EflagsMaskEnum.zf, Expression.IsZero(dst));
 
             // // pf - Сумма единиц в младшем байте + 1.
             // 
@@ -216,7 +216,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         throw new NotImplementedException($"operand.offset: {operand.offset}");
                 }
 
-                addressItems.Add((1, Operations.From(val, instruction.AddrMode)));
+                addressItems.Add((1, Expression.Number(val, instruction.AddrMode)));
             }
 
             var address = Operations.Sum(addressItems);

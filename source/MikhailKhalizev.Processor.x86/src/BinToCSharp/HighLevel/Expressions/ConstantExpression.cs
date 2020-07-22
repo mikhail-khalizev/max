@@ -4,11 +4,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class ConstantExpression : Expression
     {
-        public static ConstantExpression Zero(int lengthInBits)
-        {
-            return new ConstantExpression(0, lengthInBits);
-        }
-
         public int Value { get; }
 
         /// <inheritdoc />

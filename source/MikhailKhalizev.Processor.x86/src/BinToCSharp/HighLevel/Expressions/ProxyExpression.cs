@@ -36,5 +36,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             get => Source.UsedAsPointer;
             set => Source.UsedAsPointer = value;
         }
+
+        /// <inheritdoc />
+        protected internal override Expression Accept(ExpressionVisitor visitor)
+        {
+            return Source.Accept(visitor);
+        }
     }
 }

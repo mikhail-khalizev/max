@@ -4,14 +4,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class ConditionExpression : Expression
     {
+        public Expression Left { get; }
         public ConditionType Condition { get; }
-        public IReadOnlyCollection<Expression> Values { get; }
+        public Expression Right { get; }
 
-        public ConditionExpression(ConditionType condition, params Expression[] values)
+        public ConditionExpression(Expression left, ConditionType condition, Expression right)
             : base(1)
         {
             Condition = condition;
-            Values = values;
+            Left = left;
+            Right = right;
         }
     }
 }
