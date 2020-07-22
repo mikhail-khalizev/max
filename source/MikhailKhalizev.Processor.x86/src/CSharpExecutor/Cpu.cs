@@ -6609,7 +6609,7 @@ namespace MikhailKhalizev.Processor.x86.CSharpExecutor
                         throw new NotImplementedException($"LengthInBits: {s.LengthInBits}");
                 }
             }
-            else
+            else // constant
             {
                 switch (CSharpEmulateMode)
                 {

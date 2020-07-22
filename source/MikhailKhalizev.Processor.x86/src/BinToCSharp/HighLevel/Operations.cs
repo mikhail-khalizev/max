@@ -14,6 +14,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public static Value From(uint value, int lengthInBits) => new ConstantValue((int) value, lengthInBits);
 
+        public static Value From(ConditionType condition, params Value[] values) => new ConditionValue(condition, values);
+
 
         public static Value Add(Value a, Value b) => Sum(new[] { (1, a), (1, b) });
         public static Value Add(Value a, int b) => Sum(new[] { (1, a), (1, From(b, a.LengthInBits)) });

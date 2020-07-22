@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using MikhailKhalizev.Processor.x86.Decoder;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
@@ -114,22 +112,4 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             UsedAsPointer = UsedAsPointer;
         }
     }
-
-
-    public class MemoryValue : Value
-    {
-        public RegisterInfo Segment { get; }
-        public Value Address { get; }
-
-        public MemoryValue(RegisterInfo segment, Value address, int dataLengthInBits) : base(dataLengthInBits)
-        {
-            if (!segment.IsSegment)
-                throw new ArgumentException($"Expected segment register, but found {segment}");
-
-            Segment = segment;
-            Address = address;
-        }
-    }
-
-    //public class ConditionValue : Value // 1 Bit
 }

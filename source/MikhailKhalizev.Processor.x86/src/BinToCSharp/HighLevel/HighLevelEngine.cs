@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
+using MikhailKhalizev.Processor.x86.CSharpExecutor.Abstractions.Registers;
 using MikhailKhalizev.Processor.x86.Decoder;
 using SharpDisasm.Udis86;
 
@@ -95,7 +96,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                     {
                         var src = GetOperandValue(instruction, 1);
                         var dst = GetOperandValue(instruction, 0);
-                        SetOperandValue(instruction, 0, src ^ dst);
+
+                        dst ^= src;
+
+                        SetOperandValue(instruction, 0, dst);
+
+                        CurrentBlock.UpdateFlags(
+                            Get_sf_zf_pf_Flags(dst)
+                                .Append((EflagsMaskEnum.cf, Value.False))
+                                .Append((EflagsMaskEnum.of, Value.False)));
                         break;
                     }
 
@@ -105,6 +114,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                 prev = instruction;
             }
+        }
+
+
+        private IEnumerable<(EflagsMaskEnum flags, Value value)> Get_sf_zf_pf_Flags(Value dst)
+        {
+            yield return (EflagsMaskEnum.sf, Operations.From(ConditionType.IsNegative, dst));
+            yield return (EflagsMaskEnum.zf, Operations.From(ConditionType.IsZero, dst));
+
+            // // pf - Сумма единиц в младшем байте + 1.
+            // 
+            // var pf = true;
+            // var x = dstValue;
+            // for (var i = 0; i < 8; i++)
+            // {
+            //     pf ^= 0 != (x & 1);
+            //     x >>= 1;
+            // }
+            // 
+            // eflags.pf = pf;
         }
 
         private Value GetOperandValue(X86Instruction instruction, int operandIndex)

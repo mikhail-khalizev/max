@@ -28,11 +28,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public static ConstantValue operator +(ConstantValue a, ConstantValue b)
         {
-            if (a == null)
-                return b;
-            if (b == null)
-                return a;
-
             if (a.LengthInBits != b.LengthInBits)
                 throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
             return new ConstantValue(a.Value + b.Value, a.LengthInBits);
@@ -40,11 +35,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public static ConstantValue operator -(ConstantValue a, ConstantValue b)
         {
-            if (a == null)
-                return -b;
-            if (b == null)
-                return a;
-
             if (a.LengthInBits != b.LengthInBits)
                 throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
             return new ConstantValue(a.Value - b.Value, a.LengthInBits);
@@ -57,11 +47,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public static ConstantValue operator ^(ConstantValue a, ConstantValue b)
         {
-            if (a == null)
-                return b;
-            if (b == null)
-                return a;
-
             if (a.LengthInBits != b.LengthInBits)
                 throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
             return new ConstantValue(a.Value ^ b.Value, a.LengthInBits);
