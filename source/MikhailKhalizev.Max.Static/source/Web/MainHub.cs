@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using MikhailKhalizev.Max.Dos;
@@ -16,10 +17,10 @@ namespace MikhailKhalizev.Max
         public static Task SendClientUpdateImage(IServiceProvider serviceProvider)
         {
             var hc = serviceProvider.GetRequiredService<IHubContext<MainHub>>();
-            return hc.Clients.All.SendAsync(MainHub.ClientUpdateImage, MainController.GetImageUrl());
+            return hc.Clients.All.SendAsync(ClientUpdateImage, MainController.GetImageUrl());
         }
 
-        private RawProgramMain _rawProgramMain;
+        private readonly RawProgramMain _rawProgramMain;
 
         public MainHub(RawProgramMain rawProgramMain)
         {
@@ -28,10 +29,11 @@ namespace MikhailKhalizev.Max
 
         public override Task OnConnectedAsync(){
             return Clients.Caller.SendAsync(
-                MainHub.ClientUpdateImage,
+                ClientUpdateImage,
                 _rawProgramMain.DosInterrupt.PngBytes == null ? null : MainController.GetImageUrl());
         }
 
+        [UsedImplicitly]
         public void MouseEvent(JObject obj)
         {
             // NonBlockingConsole.WriteLine($"MouseEvent: {obj}");
@@ -51,6 +53,7 @@ namespace MikhailKhalizev.Max
             }
         }
 
+        [UsedImplicitly]
         public void KeyboardEvent(JObject obj)
         {
             var key = obj["key"]?.Value<string>();

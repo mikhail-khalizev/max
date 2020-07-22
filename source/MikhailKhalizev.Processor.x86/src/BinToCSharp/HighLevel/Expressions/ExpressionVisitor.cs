@@ -147,6 +147,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         // {
         //     return node.Update(Visit(node.Test), Visit(node.IfTrue), Visit(node.IfFalse));
         // }
+        // 
+        // protected internal virtual Expression VisitConstant(ConstantExpression node)
+        // {
+        //     return node;
+        // }
+        // 
+        // protected internal virtual Expression VisitGoto(GotoExpression node)
+        // {
+        //     return node.Update(VisitLabelTarget(node.Target), Visit(node.Value));
+        // }
 
         protected internal virtual Expression VisitDefault(Expression node)
         {

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MikhailKhalizev.Max.Configuration;
 using MikhailKhalizev.Max.Program;
 using MikhailKhalizev.Processor.x86;
@@ -21,6 +22,7 @@ using MikhailKhalizev.Processor.x86.BinToCSharp;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using MikhailKhalizev.Processor.x86.Utils;
+using IApplicationLifetime = Microsoft.AspNetCore.Hosting.IApplicationLifetime;
 
 namespace MikhailKhalizev.Max
 {
@@ -94,22 +96,16 @@ namespace MikhailKhalizev.Max
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(
-                options =>
-                {
-                    options.CheckConsentNeeded = context => true;
-                    options.MinimumSameSitePolicy = SameSiteMode.None;
-                });
-
             services
-                .AddMvc(o => { o.EnableEndpointRouting = false; })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                .AddRazorPages()
+                .AddApplicationPart(Assembly.GetEntryAssembly())
+                .AddApplicationPart(Assembly.GetExecutingAssembly());
             services.AddSignalR();
 
             services.AddSingleton(
                 provider => new Processor.x86.CSharpExecutor.Cpu(
                     ConfigurationDto.Processor,
-                    provider.GetRequiredService<IApplicationLifetime>().ApplicationStopping));
+                    provider.GetRequiredService<IHostApplicationLifetime>().ApplicationStopping));
             services.AddSingleton(p => MethodInfoCollection.Load(ConfigurationDto.BinToCSharp));
             services.AddSingleton(
                 p =>
@@ -125,17 +121,17 @@ namespace MikhailKhalizev.Max
                     p.GetRequiredService<MethodInfoCollection>(),
                     p.GetRequiredService<DefinitionCollection>(),
                     p));
-
-            // TODO Implement IDefinitionGroupArea with Begin, End. And remove AddressNameConverter.AddNamespace.
-            AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys");
-            foreach (var interval in RawProgramMain.MveForceEndIntervals)
-                AddressNameConverter.AddNamespace(interval, "mve");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime applicationLifetime)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
+            // TODO Implement IDefinitionGroupArea with Begin, End. And remove AddressNameConverter.AddNamespace.
+            AddressNameConverter.AddNamespace(new Interval<Address, Address.Comparer>(0x1016_5d52, 0x1019_c3ce), "sys");
+            foreach (var interval in RawProgramMain.MveForceEndIntervals)
+                AddressNameConverter.AddNamespace(interval, "mve");
+
             // Redecode.
 
             var redecodeCount = Configuration.GetValue<int?>("redecode");
@@ -163,15 +159,17 @@ namespace MikhailKhalizev.Max
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseSignalR(routes => { routes.MapHub<MainHub>("/signalr"); });
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapRazorPages();
+                    endpoints.MapHub<MainHub>("/signalr");
+                });
 
             // Start M.A.X.
             
@@ -183,7 +181,7 @@ namespace MikhailKhalizev.Max
                     {
                         rawProgramMain.Start();
                     }
-                    catch (System.OperationCanceledException ex)
+                    catch (OperationCanceledException ex)
                     {
                         NonBlockingConsole.WriteLine(ex.Message);
                         ExitCode = -2;
