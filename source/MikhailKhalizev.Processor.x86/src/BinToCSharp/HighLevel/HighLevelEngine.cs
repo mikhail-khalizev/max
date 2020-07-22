@@ -33,7 +33,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
 
         public List<X86Instruction> Instructions { get; }
-        public Block CurrentBlock;
+        public Block CurrentBlock { get; private set; }
 
         private HighLevelEngine(IEnumerable<IInstruction> instructions)
         {
@@ -102,9 +102,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         SetOperandValue(instruction, 0, dst);
 
                         CurrentBlock.UpdateFlags(
-                            Get_sf_zf_pf_Flags(dst)
-                                .Append((EflagsMaskEnum.cf, Value.False))
-                                .Append((EflagsMaskEnum.of, Value.False)));
+                            GetDefaultFlags(dst)
+                                .Append((EflagsMaskEnum.cf, Expression.False))
+                                .Append((EflagsMaskEnum.of, Expression.False)));
                         break;
                     }
 
@@ -117,7 +117,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
 
 
-        private IEnumerable<(EflagsMaskEnum flags, Value value)> Get_sf_zf_pf_Flags(Value dst)
+        // Set sf, zf, pf flags.
+        public IEnumerable<(EflagsMaskEnum flags, Expression value)> GetDefaultFlags(Expression dst)
         {
             yield return (EflagsMaskEnum.sf, Operations.From(ConditionType.IsNegative, dst));
             yield return (EflagsMaskEnum.zf, Operations.From(ConditionType.IsZero, dst));
@@ -135,7 +136,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             // eflags.pf = pf;
         }
 
-        private Value GetOperandValue(X86Instruction instruction, int operandIndex)
+        public Expression GetOperandValue(X86Instruction instruction, int operandIndex)
         {
             var operand = instruction.Operands[operandIndex];
             var operandSize = operand.size != 0 ? operand.size : instruction.EffOprMode;
@@ -157,28 +158,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
         }
 
-        private void SetOperandValue(X86Instruction instruction, int operandIndex, Value value)
+        public void SetOperandValue(X86Instruction instruction, int operandIndex, Expression expression)
         {
             var operand = instruction.Operands[operandIndex];
             var operandSize = operand.size != 0 ? operand.size : instruction.EffOprMode;
 
-            if (value.LengthInBits != operandSize)
+            if (expression.LengthInBits != operandSize)
                 throw new InvalidOperationException(
                     $"Logic error: value.LengthInBits != operandSize. " +
                     $"X86Instruction: {instruction}, operandIndex: {operandIndex}, " +
-                    $"value.LengthInBits: {value.LengthInBits}, operandSize: {operandSize}.");
+                    $"value.LengthInBits: {expression.LengthInBits}, operandSize: {operandSize}.");
 
             switch (operand.type)
             {
                 case ud_type.UD_OP_REG:
-                    CurrentBlock.SetRegister(operand.@base, value);
+                    CurrentBlock.SetRegister(operand.@base, expression);
                     break;
 
                 case ud_type.UD_OP_MEM:
                 {
                     var segment = instruction.GetEffectiveSegmentOfOperand(operand);
                     var address = GetOperandMemoryAddress(instruction, operandIndex, operand);
-                    CurrentBlock.SetMemory(segment, address, value);
+                    CurrentBlock.SetMemory(segment, address, expression);
                     break;
                 }
 
@@ -187,9 +188,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
         }
 
-        private Value GetOperandMemoryAddress(X86Instruction instruction, int operandIndex, ud_operand operand)
+        private Expression GetOperandMemoryAddress(X86Instruction instruction, int operandIndex, ud_operand operand)
         {
-            var addressItems = new List<(int Count, Value Value)>();
+            var addressItems = new List<(int Count, Expression Value)>();
 
             if (operand.@base != ud_type.UD_NONE)
                 addressItems.Add((1, CurrentBlock.GetRegister(operand.@base)));

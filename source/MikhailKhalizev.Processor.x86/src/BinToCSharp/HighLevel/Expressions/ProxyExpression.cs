@@ -1,14 +1,14 @@
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    public class ProxyValue : Value
+    public class ProxyExpression : Expression
     {
-        public Value Source { get; set; }
+        public Expression Source { get; set; }
 
         /// <inheritdoc />
-        public ProxyValue() : base(0)
+        public ProxyExpression() : base(0)
         { }
 
-        public ProxyValue(Value source) : base(source.LengthInBits)
+        public ProxyExpression(Expression source) : base(source.LengthInBits)
         {
             Source = source;
         }

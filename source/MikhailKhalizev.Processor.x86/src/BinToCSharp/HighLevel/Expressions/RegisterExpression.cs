@@ -3,11 +3,11 @@ using MikhailKhalizev.Processor.x86.Decoder;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    public class RegisterValue : Value
+    public class RegisterExpression : Expression
     {
         public RegisterInfo RegisterInfo { get; }
 
-        public RegisterValue(RegisterInfo registerInfo) : base(registerInfo.LengthInBits)
+        public RegisterExpression(RegisterInfo registerInfo) : base(registerInfo.LengthInBits)
         {
             RegisterInfo = registerInfo;
         }

@@ -10,22 +10,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class Block
     {
-        public List<InputValue> Input { get; } = new List<InputValue>();
-        public Value NextBlockIndex { get; set; }
+        public List<InputExpression> Input { get; } = new List<InputExpression>();
+        public Expression NextBlockIndex { get; set; }
         public List<Block> NextBlocks { get; set; }
 
-        private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Value Value)> _registers =
-            new Dictionary<int, (RegisterInfo, Value)>();
+        private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
+            new Dictionary<int, (RegisterInfo, Expression)>();
 
-        private readonly Dictionary<Value /* address */, MemoryValue> _memory = new Dictionary<Value, MemoryValue>();
+        private readonly Dictionary<Expression /* address */, MemoryExpression> _memory = new Dictionary<Expression, MemoryExpression>();
 
         // TODO Union input registers with the same index.
 
-        public Value GetRegister(RegisterInfo registerInfo)
+        public Expression GetRegister(RegisterInfo registerInfo)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
-                var inputValue = new InputValue(new RegisterValue(registerInfo));
+                var inputValue = new InputExpression(new RegisterExpression(registerInfo));
                 Input.Add(inputValue);
 
                 _registers[registerInfo.Index] = (registerInfo, inputValue);
@@ -42,17 +42,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 item.RegisterInfo.BitMask >> registerInfo.BitOffset);
         }
 
-        public void SetRegister(RegisterInfo registerInfo, Value value)
+        public void SetRegister(RegisterInfo registerInfo, Expression expression)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
-                _registers[registerInfo.Index] = (registerInfo, value);
+                _registers[registerInfo.Index] = (registerInfo, expression);
                 return;
             }
 
             if (item.RegisterInfo == registerInfo)
             {
-                _registers[registerInfo.Index] = (registerInfo, value);
+                _registers[registerInfo.Index] = (registerInfo, expression);
                 return;
             }
 
@@ -61,7 +61,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                     item.RegisterInfo.LengthInBits + item.RegisterInfo.BitOffset,
                     registerInfo.LengthInBits + registerInfo.BitOffset),
                 (item.Value, item.RegisterInfo.BitOffset, item.RegisterInfo.BitMask),
-                (value, registerInfo.BitOffset, registerInfo.BitMask));
+                (expression, registerInfo.BitOffset, registerInfo.BitMask));
 
             var resultRegisterInfo = new[] { registerInfo, item.RegisterInfo }
                 .OrderBy(x => x.LengthInBits)
@@ -79,25 +79,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public void UpdateFlags(EflagsMaskEnum flags, bool value)
         {
-            UpdateFlags(flags, (Value) value);
+            UpdateFlags(flags, (Expression) value);
         }
 
-        public void UpdateFlags(EflagsMaskEnum flags, Value value)
+        public void UpdateFlags(EflagsMaskEnum flags, Expression expression)
         {
-            UpdateFlags((flags, value));
+            UpdateFlags((flags, expression));
         }
 
-        public void UpdateFlags(params (EflagsMaskEnum flags, Value value)[] items)
+        public void UpdateFlags(params (EflagsMaskEnum flags, Expression value)[] items)
         {
             UpdateFlags(items.AsEnumerable());
         }
 
-        public void UpdateFlags(IEnumerable<(EflagsMaskEnum flags, Value value)> items)
+        public void UpdateFlags(IEnumerable<(EflagsMaskEnum flags, Expression value)> items)
         {
             var eflagsRegister = RegisterInfo.Eflags;
             var eflagsValue = GetRegister(eflagsRegister);
 
-            var result = Enumerable.Empty<(Value Value, int Offset, int Mask)>()
+            var result = Enumerable.Empty<(Expression Value, int Offset, int Mask)>()
                 .Append((eflagsValue, 0, BinaryHelper.MaskInt32(eflagsValue.LengthInBits)))
                 .Concat(
                     items.Select(
@@ -119,20 +119,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
 
 
-        public Value GetMemory(RegisterInfo segment, Value address, int lengthInBits)
+        public Expression GetMemory(RegisterInfo segment, Expression address, int lengthInBits)
         {
             // TODO
 
-            var v = new MemoryValue(segment, address, lengthInBits);
+            var v = new MemoryExpression(segment, address, lengthInBits);
             // Input.Add(v);
             return v;
         }
 
-        public void SetMemory(RegisterInfo segment, Value address, Value value)
+        public void SetMemory(RegisterInfo segment, Expression address, Expression expression)
         {
             // TODO
 
-            _memory[address] = new MemoryValue(segment, address, value.LengthInBits);
+            _memory[address] = new MemoryExpression(segment, address, expression.LengthInBits);
         }
     }
 }

@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    public class ConditionValue : Value
+    public class ConditionExpression : Expression
     {
         public ConditionType Condition { get; }
-        public IReadOnlyCollection<Value> Values { get; }
+        public IReadOnlyCollection<Expression> Values { get; }
 
-        public ConditionValue(ConditionType condition, params Value[] values)
+        public ConditionExpression(ConditionType condition, params Expression[] values)
             : base(1)
         {
             Condition = condition;

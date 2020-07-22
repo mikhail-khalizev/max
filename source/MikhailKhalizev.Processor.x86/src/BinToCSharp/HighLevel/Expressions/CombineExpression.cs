@@ -4,20 +4,20 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    public class CombineValue : Value
+    public class CombineExpression : Expression
     {
         // Combination of ((value << offset) & mask).
 
-        public IReadOnlyList<(Value Value, int Offset, int Mask)> Items => _items;
-        private readonly List<(Value Value, int Offset, int Mask)> _items;
+        public IReadOnlyList<(Expression Value, int Offset, int Mask)> Items => _items;
+        private readonly List<(Expression Value, int Offset, int Mask)> _items;
 
 
-        public CombineValue(int lengthInBits) : base(lengthInBits)
+        public CombineExpression(int lengthInBits) : base(lengthInBits)
         {
-            _items = new List<(Value Value, int Offset, int Mask)>();
+            _items = new List<(Expression Value, int Offset, int Mask)>();
         }
 
-        public CombineValue(List<(Value Value, int Offset, int Mask)> items, int lengthInBits) : base(lengthInBits)
+        public CombineExpression(List<(Expression Value, int Offset, int Mask)> items, int lengthInBits) : base(lengthInBits)
         {
             _items = items;
 

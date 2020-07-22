@@ -10,8 +10,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
         [Fact]
         public void CheckOperationsCombineWithDuplicateValueAndIntersects()
         {
-            var r1 = new RegisterValue(ud_type.UD_R_AX);
-            var r2 = new RegisterValue(ud_type.UD_R_BX);
+            var r1 = new RegisterExpression(ud_type.UD_R_AX);
+            var r2 = new RegisterExpression(ud_type.UD_R_BX);
 
             var c = Operations.Combine(
                 16,
@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
                 (r1, 2, 0b1000_0011));
 
 
-            var cc = c.Should().BeOfType<CombineValue>().Subject;
+            var cc = c.Should().BeOfType<CombineExpression>().Subject;
             cc.Items.Should().HaveCount(2);
 
             var i1 = cc.Items.Should().ContainSingle(x => x.Value == r1).Subject;

@@ -3,18 +3,18 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    public class XorValue : Value
+    public class XorExpression : Expression
     {
-        public IEnumerable<Value> Items => _items;
-        private readonly List<Value> _items;
+        public IEnumerable<Expression> Items => _items;
+        private readonly List<Expression> _items;
 
-        public XorValue(List<Value> items)
+        public XorExpression(List<Expression> items)
             : base(items.Select(x => x.LengthInBits).Distinct().Single())
         {
             _items = items;
         }
 
-        public XorValue(List<Value> items, int lengthInBits)
+        public XorExpression(List<Expression> items, int lengthInBits)
             : base(lengthInBits)
         {
             _items = items;
