@@ -100,7 +100,9 @@ namespace MikhailKhalizev.Max
                 .AddRazorPages()
                 .AddApplicationPart(Assembly.GetEntryAssembly())
                 .AddApplicationPart(Assembly.GetExecutingAssembly());
-            services.AddSignalR();
+            services
+                .AddSignalR()
+                .AddNewtonsoftJsonProtocol();
 
             services.AddSingleton(
                 provider => new Processor.x86.CSharpExecutor.Cpu(
@@ -166,9 +168,9 @@ namespace MikhailKhalizev.Max
             app.UseEndpoints(
                 endpoints =>
                 {
+                    endpoints.MapHub<MainHub>("/signalr");
                     endpoints.MapControllers();
                     endpoints.MapRazorPages();
-                    endpoints.MapHub<MainHub>("/signalr");
                 });
 
             // Start M.A.X.
