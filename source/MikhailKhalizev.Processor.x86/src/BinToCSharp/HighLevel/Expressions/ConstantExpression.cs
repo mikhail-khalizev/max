@@ -7,7 +7,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public int Value { get; }
 
         /// <inheritdoc />
-        public ConstantExpression(int value, int lengthInBits) : base(lengthInBits)
+        public ConstantExpression(int value, int lengthInBits) : base(ExpressionType.Todo_Remove, lengthInBits)
         {
             if (lengthInBits != 32)
             {

@@ -12,12 +12,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly List<(Expression Value, int Offset, int Mask)> _items;
 
 
-        public CombineExpression(int lengthInBits) : base(lengthInBits)
+        public CombineExpression(int lengthInBits)
+            : base(ExpressionType.Todo_Remove, lengthInBits)
         {
             _items = new List<(Expression Value, int Offset, int Mask)>();
         }
 
-        public CombineExpression(List<(Expression Value, int Offset, int Mask)> items, int lengthInBits) : base(lengthInBits)
+        public CombineExpression(List<(Expression Value, int Offset, int Mask)> items, int lengthInBits)
+            : base(ExpressionType.Todo_Remove, lengthInBits)
         {
             _items = items;
 

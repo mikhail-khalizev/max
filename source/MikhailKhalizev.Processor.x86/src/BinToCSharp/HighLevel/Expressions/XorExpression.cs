@@ -9,13 +9,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly List<Expression> _items;
 
         public XorExpression(List<Expression> items)
-            : base(items.Select(x => x.LengthInBits).Distinct().Single())
+            : base(ExpressionType.Todo_Remove, items.Select(x => x.LengthInBits).Distinct().Single())
         {
             _items = items;
         }
 
         public XorExpression(List<Expression> items, int lengthInBits)
-            : base(lengthInBits)
+            : base(ExpressionType.Todo_Remove, lengthInBits)
         {
             _items = items;
         }

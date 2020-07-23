@@ -7,7 +7,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
     {
         public RegisterInfo RegisterInfo { get; }
 
-        public RegisterExpression(RegisterInfo registerInfo) : base(registerInfo.LengthInBits)
+        public RegisterExpression(RegisterInfo registerInfo) : base(ExpressionType.Todo_Remove, registerInfo.LengthInBits)
         {
             RegisterInfo = registerInfo;
         }

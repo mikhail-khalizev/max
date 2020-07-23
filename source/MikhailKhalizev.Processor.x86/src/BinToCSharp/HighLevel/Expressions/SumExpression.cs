@@ -9,13 +9,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly Dictionary<Expression, int> _items;
 
         public SumExpression(Dictionary<Expression, int /* count, multiply coefficient */> items)
-            : base(items.Select(x => x.Key.LengthInBits).Distinct().Single())
+            : base(ExpressionType.Todo_Remove, items.Select(x => x.Key.LengthInBits).Distinct().Single())
         {
             _items = items;
         }
 
         public SumExpression(Dictionary<Expression, int> items, int lengthInBits)
-            : base(lengthInBits)
+            : base(ExpressionType.Todo_Remove, lengthInBits)
         {
             _items = items;
         }

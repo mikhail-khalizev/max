@@ -75,7 +75,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public void UpdateFlags(EflagsMaskEnum flags, bool value)
         {
-            UpdateFlags(flags, (Expression) value);
+            UpdateFlags(flags, Expression.Boolean(value));
         }
 
         public void UpdateFlags(EflagsMaskEnum flags, Expression expression)

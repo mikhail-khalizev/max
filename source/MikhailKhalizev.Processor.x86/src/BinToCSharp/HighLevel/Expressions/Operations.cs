@@ -46,9 +46,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                     switch (value)
                     {
-                        case SumExpression sum:
-                            toProcess.Add(sum.Items.Select(x => (count * x.Value, x.Key)));
-                            break;
+                        // case SumExpression sum:
+                        //     toProcess.Add(sum.Items.Select(x => (count * x.Value, x.Key)));
+                        //     break;
                         case ConstantExpression c:
                             constant += count * c;
                             break;
@@ -102,9 +102,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                     switch (value)
                     {
-                        case XorExpression xor:
-                            toProcess.Add(xor.Items);
-                            break;
+                        // case XorExpression xor:
+                        //     toProcess.Add(xor.Items);
+                        //     break;
                         case ConstantExpression c:
                             constant ^= c;
                             break;

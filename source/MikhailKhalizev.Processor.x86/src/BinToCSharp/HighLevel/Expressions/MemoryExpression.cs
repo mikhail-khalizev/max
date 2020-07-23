@@ -8,7 +8,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public RegisterInfo Segment { get; }
         public Expression Address { get; }
 
-        public MemoryExpression(RegisterInfo segment, Expression address, int dataLengthInBits) : base(dataLengthInBits)
+        public MemoryExpression(RegisterInfo segment, Expression address, int dataLengthInBits) : base(ExpressionType.Todo_Remove, dataLengthInBits)
         {
             if (!segment.IsSegment)
                 throw new ArgumentException($"Expected segment register, but found {segment}");

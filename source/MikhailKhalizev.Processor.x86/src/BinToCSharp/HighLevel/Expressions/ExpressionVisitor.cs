@@ -107,60 +107,50 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             return new ReadOnlyCollection<T>(newNodes);
         }
 
-        // private Expression[] VisitArguments(IArgumentProvider nodes)
-        // {
-        //     return ExpressionVisitorUtils.VisitArguments(this, nodes);
-        // }
-        // 
-        // private ParameterExpression[] VisitParameters(IParameterProvider nodes, string callerName)
-        // {
-        //     return ExpressionVisitorUtils.VisitParameters(this, nodes, callerName);
-        // }
-        // 
-        // protected internal virtual Expression VisitBinary(BinaryExpression node)
-        // {
-        //     // Walk children in evaluation order: left, conversion, right
-        //     return ValidateBinary(
-        //         node,
-        //         node.Update(
-        //             Visit(node.Left),
-        //             VisitAndConvert(node.Conversion, nameof(VisitBinary)),
-        //             Visit(node.Right)
-        //         )
-        //     );
-        // }
-        // 
-        // protected internal virtual Expression VisitBlock(BlockExpression node)
-        // {
-        //     Expression[] nodes = ExpressionVisitorUtils.VisitBlockExpressions(this, node);
-        //     ReadOnlyCollection<ParameterExpression> v = VisitAndConvert(node.Variables, "VisitBlock");
-        // 
-        //     if (v == node.Variables && nodes == null)
-        //     {
-        //         return node;
-        //     }
-        // 
-        //     return node.Rewrite(v, nodes);
-        // }
-        // 
-        // protected internal virtual Expression VisitConditional(ConditionalExpression node)
-        // {
-        //     return node.Update(Visit(node.Test), Visit(node.IfTrue), Visit(node.IfFalse));
-        // }
-        // 
-        // protected internal virtual Expression VisitConstant(ConstantExpression node)
-        // {
-        //     return node;
-        // }
-        // 
-        // protected internal virtual Expression VisitGoto(GotoExpression node)
-        // {
-        //     return node.Update(VisitLabelTarget(node.Target), Visit(node.Value));
-        // }
+        /// <summary>
+        /// Visits the children of the <see cref="BinaryExpression"/>.
+        /// </summary>
+        /// <param name="node">The expression to visit.</param>
+        /// <returns>The modified expression, if it or any subexpression was modified;
+        /// otherwise, returns the original expression.</returns>
+        protected internal virtual Expression VisitBinary(BinaryExpression node)
+        {
+            // Walk children in evaluation order: left, right.
+            return ValidateBinary(
+                node,
+                node.Update(
+                    Visit(node.Left),
+                    Visit(node.Right)
+                )
+            );
+        }
 
         protected internal virtual Expression VisitDefault(Expression node)
         {
             return node;
+        }
+
+        
+
+        private static BinaryExpression ValidateBinary(BinaryExpression before, BinaryExpression after)
+        {
+            if (before != after)
+            {
+                ValidateChildType(before.Left, after.Left, nameof(VisitBinary));
+                ValidateChildType(before.Right, after.Right, nameof(VisitBinary));
+            }
+            return after;
+        }
+
+        // Value types must stay as the same type, otherwise it's now a
+        // different operation, e.g. adding two doubles vs adding two ints.
+        private static void ValidateChildType(Expression before, Expression after, string methodName)
+        {
+            if (before.LengthInBits == after.LengthInBits)
+                return;
+
+            // Otherwise, it's an invalid type change.
+            throw new InvalidOperationException($"Error.MustRewriteChildToSameType({before}, {after}, {methodName})");
         }
     }
 }
