@@ -1,8 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
-using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public abstract class ExpressionVisitor
     {

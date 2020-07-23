@@ -1,7 +1,6 @@
 using System;
-using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public class ConstantExpression : Expression
     {
