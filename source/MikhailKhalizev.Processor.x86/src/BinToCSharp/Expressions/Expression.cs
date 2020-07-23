@@ -1,7 +1,7 @@
 using System;
-using System.Threading;
+using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     // Immutable with all derived classes.
     public abstract class Expression
@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static Expression operator *(Expression a, int b) => Operations.Mul(a, b);
         public static Expression operator *(int a, Expression b) => Operations.Mul(a, b);
 
-        public static Expression operator ^(Expression left, Expression right) => Expression.ExclusiveOr(left, right);
+        public static Expression operator ^(Expression left, Expression right) => ExclusiveOr(left, right);
 
 
         public static BinaryExpression MakeBinary(ExpressionType binaryType, Expression left, Expression right)

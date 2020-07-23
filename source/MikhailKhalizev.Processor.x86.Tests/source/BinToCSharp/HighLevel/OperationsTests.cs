@@ -1,4 +1,5 @@
 using FluentAssertions;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 using SharpDisasm.Udis86;
 using Xunit;

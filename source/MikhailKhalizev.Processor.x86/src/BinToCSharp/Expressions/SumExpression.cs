@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public class SumExpression : Expression
     {

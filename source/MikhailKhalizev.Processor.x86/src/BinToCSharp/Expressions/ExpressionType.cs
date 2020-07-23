@@ -1,4 +1,4 @@
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     /// <summary>
     /// Describes the node types for the nodes of an expression tree.

@@ -1,5 +1,7 @@
 using System;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 using MikhailKhalizev.Processor.x86.Decoder;
+using Expression = MikhailKhalizev.Processor.x86.BinToCSharp.Expressions.Expression;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {

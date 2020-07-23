@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Generic;
+using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public class BinaryExpression : Expression
     {

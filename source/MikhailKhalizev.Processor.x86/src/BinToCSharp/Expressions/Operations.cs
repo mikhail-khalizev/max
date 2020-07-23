@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 using MikhailKhalizev.Processor.x86.Utils;
 
-namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
+namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public static class Operations
     {
