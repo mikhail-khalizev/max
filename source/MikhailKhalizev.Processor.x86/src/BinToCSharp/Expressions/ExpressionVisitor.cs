@@ -115,42 +115,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// otherwise, returns the original expression.</returns>
         protected internal virtual Expression VisitBinary(BinaryExpression node)
         {
-            // Walk children in evaluation order: left, right.
-            return ValidateBinary(
-                node,
-                node.Update(
-                    Visit(node.Left),
-                    Visit(node.Right)
-                )
-            );
+            return node.Update(Visit(node.Left), Visit(node.Right));
         }
 
         protected internal virtual Expression VisitDefault(Expression node)
         {
             return node;
-        }
-
-        
-
-        private static BinaryExpression ValidateBinary(BinaryExpression before, BinaryExpression after)
-        {
-            if (before != after)
-            {
-                ValidateChildType(before.Left, after.Left, nameof(VisitBinary));
-                ValidateChildType(before.Right, after.Right, nameof(VisitBinary));
-            }
-            return after;
-        }
-
-        // Value types must stay as the same type, otherwise it's now a
-        // different operation, e.g. adding two doubles vs adding two ints.
-        private static void ValidateChildType(Expression before, Expression after, string methodName)
-        {
-            if (before.LengthInBits == after.LengthInBits)
-                return;
-
-            // Otherwise, it's an invalid type change.
-            throw new InvalidOperationException($"Error.MustRewriteChildToSameType({before}, {after}, {methodName})");
         }
     }
 }

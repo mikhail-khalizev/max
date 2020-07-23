@@ -14,6 +14,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             Right = right;
         }
 
+        protected internal BinaryExpression(ExpressionType nodeType, NumberType numberType, int lengthInBits, Expression left, Expression right)
+            : base(nodeType, numberType, lengthInBits)
+        {
+            Left = left;
+            Right = right;
+        }
+
         /// <summary>
         /// Creates a new expression that is like this one, but using the
         /// supplied children. If all of the children are the same, it will
@@ -27,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             if (left == Left && right == Right)
                 return this;
 
-            return MakeBinary(NodeType, left, right);
+            return MakeBinary(NodeType, NumberType, LengthInBits, left, right);
         }
 
 

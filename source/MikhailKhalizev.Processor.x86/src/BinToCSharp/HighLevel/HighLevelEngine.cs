@@ -65,7 +65,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                             default:
                                 throw new NotImplementedException($"X86Instruction = {instruction}, Mode = {instruction.Mode}.");
                         }
-                            
+
                         var sp = CurrentBlock.GetRegister(spRegInfo);
 
                         switch (instruction.Operands[0].type)
@@ -121,7 +121,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         // Set sf, zf, pf flags.
         public IEnumerable<(EflagsMaskEnum flags, Expression value)> GetDefaultFlags(Expression dst)
         {
-            yield return (EflagsMaskEnum.sf, Expression.IsNegative(dst));
+            yield return (EflagsMaskEnum.sf, Expression.LessThan(NumberType.SignedInteger, dst, Expression.Zero(dst.LengthInBits)));
             yield return (EflagsMaskEnum.zf, Expression.IsZero(dst));
 
             // // pf - Сумма единиц в младшем байте + 1.
@@ -191,13 +191,25 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         private Expression GetOperandMemoryAddress(X86Instruction instruction, int operandIndex, ud_operand operand)
         {
-            var addressItems = new List<(int Count, Expression Value)>();
+            var addressItems = new List<Expression>();
 
             if (operand.@base != ud_type.UD_NONE)
-                addressItems.Add((1, CurrentBlock.GetRegister(operand.@base)));
+                addressItems.Add(CurrentBlock.GetRegister(operand.@base));
 
             if (operand.index != ud_type.UD_NONE)
-                addressItems.Add((1 < operand.scale ? operand.scale : 1, CurrentBlock.GetRegister(operand.index)));
+            {
+                var e = CurrentBlock.GetRegister(operand.index);
+
+                if (1 < operand.scale)
+                {
+                    e = Expression.Multiply(
+                        NumberType.UnsignedInteger,
+                        Expression.Number(operand.scale, e.LengthInBits),
+                        e);
+                }
+
+                addressItems.Add(e);
+            }
 
             if (operand.offset != 0)
             {
@@ -217,10 +229,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         throw new NotImplementedException($"operand.offset: {operand.offset}");
                 }
 
-                addressItems.Add((1, Expression.Number(val, instruction.AddrMode)));
+                addressItems.Add(Expression.Number(val, instruction.AddrMode));
             }
 
-            var address = Operations.Sum(addressItems);
+            var address = Expression.Add(addressItems);
 
             if (address.LengthInBits != instruction.AddrMode)
                 throw new InvalidOperationException(
