@@ -183,87 +183,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         /// A node that represents a switch operation.
         /// </summary>
         Switch,
-
-        // TODO Remove?
-        // /// <summary>
-        // /// A node that represents an arithmetic addition compound assignment without overflow checking.
-        // /// </summary>
-        // AddAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents a bitwise AND compound assignment.
-        // /// </summary>
-        // AndAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents an arithmetic division compound assignment .
-        // /// </summary>
-        // DivideAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents a bitwise XOR compound assignment.
-        // /// </summary>
-        // ExclusiveOrAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents a bitwise left-shift compound assignment.
-        // /// </summary>
-        // LeftShiftAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents an arithmetic remainder compound assignment.
-        // /// </summary>
-        // ModuloAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents arithmetic multiplication compound assignment without overflow checking.
-        // /// </summary>
-        // MultiplyAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents a bitwise OR compound assignment.
-        // /// </summary>
-        // OrAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents raising a number to a power compound assignment.
-        // /// </summary>
-        // PowerAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents a bitwise right-shift compound assignment.
-        // /// </summary>
-        // RightShiftAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents arithmetic subtraction compound assignment without overflow checking.
-        // /// </summary>
-        // SubtractAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents an unary prefix increment.
-        // /// </summary>
-        // PreIncrementAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents an unary prefix decrement.
-        // /// </summary>
-        // PreDecrementAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents an unary postfix increment.
-        // /// </summary>
-        // PostIncrementAssign,
-        // 
-        // /// <summary>
-        // /// A node that represents an unary postfix decrement.
-        // /// </summary>
-        // PostDecrementAssign,
         
         /// <summary>
         /// A node that represents a true condition value.
         /// </summary>
         IsTrue,
+
         /// <summary>
         /// A node that represents a false condition value.
         /// </summary>

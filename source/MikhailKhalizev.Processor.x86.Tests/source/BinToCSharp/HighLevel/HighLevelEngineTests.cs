@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
@@ -18,7 +19,14 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "535189c38a0331c98a2288c183f9417c0783f95a7f02042031c988e183f9417c0883f95a7f0380c42038e0750884e474044342ebcf31d288c288e025ff00000029c289d0595bc3";
 
-            //var hl = Decode(mi);
+            try
+            {
+                var hl = Decode(mi);
+            }
+            catch (Exception ex)
+            {
+                // Ignore. HighLevelEngine in develop.
+            }
         }
 
 #if false

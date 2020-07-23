@@ -18,8 +18,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static Expression Mul(Expression a, int b) => Sum(new[] { (b, a) });
         public static Expression Mul(int a, Expression b) => Sum(new[] { (a, b) });
 
-        public static Expression Xor(Expression a, Expression b) => Xor(new[] { a, b });
-
 
         public static Expression Sum(IEnumerable<(int Count, Expression Value)> e)
         {
@@ -78,55 +76,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
 
             return new SumExpression(result, lengthInBits);
-        }
-
-        public static Expression Xor(IEnumerable<Expression> items)
-        {
-            var lengthInBits = 0;
-            ConstantExpression constant = null;
-            var result = new HashSet<Expression>();
-            var toProcess = new List<IEnumerable<Expression>> { items };
-
-            while (toProcess.Count != 0)
-            {
-                var ee = toProcess[^1];
-                toProcess.RemoveAt(toProcess.Count - 1);
-
-                foreach (var value in ee)
-                {
-                    if (lengthInBits == 0)
-                        lengthInBits = value.LengthInBits;
-                    else if (lengthInBits != value.LengthInBits)
-                        throw new NotSupportedException(
-                            $"lengthInBits != expression.LengthInBits. lengthInBits = {lengthInBits}, expression.LengthInBits = {value.LengthInBits}.");
-
-                    switch (value)
-                    {
-                        // case XorExpression xor:
-                        //     toProcess.Add(xor.Items);
-                        //     break;
-                        case ConstantExpression c:
-                            constant ^= c;
-                            break;
-                        default:
-                            if (!result.Remove(value))
-                                result.Add(value);
-                            break;
-                    }
-                }
-            }
-
-            if (constant != null && constant.Value != 0)
-                result.Add(constant);
-
-
-            if (result.Count == 0)
-                return ConstantExpression.Zero(lengthInBits);
-
-            if (result.Count == 1)
-                return result.First();
-
-            return new XorExpression(result.ToList(), lengthInBits);
         }
 
         // Combine of ((expression << offset) & mask).

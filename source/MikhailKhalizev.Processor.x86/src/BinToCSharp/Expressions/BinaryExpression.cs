@@ -28,8 +28,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (left == Left && right == Right)
                 return this;
 
-            // return Expression.MakeBinary(NodeType, left, right);
-            throw new NotImplementedException();
+            return MakeBinary(NodeType, left, right);
         }
 
 

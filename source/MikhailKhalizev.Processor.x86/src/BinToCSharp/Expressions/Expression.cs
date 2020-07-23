@@ -31,7 +31,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static Expression operator *(Expression a, int b) => Operations.Mul(a, b);
         public static Expression operator *(int a, Expression b) => Operations.Mul(a, b);
 
-        public static Expression operator ^(Expression a, Expression b) => Operations.Xor(a, b);
+        public static Expression operator ^(Expression left, Expression right) => Expression.ExclusiveOr(left, right);
 
 
         public static BinaryExpression MakeBinary(ExpressionType binaryType, Expression left, Expression right)
@@ -76,8 +76,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 //     return Equal(left, right, liftToNull, method);
                 // case ExpressionType.NotEqual:
                 //     return NotEqual(left, right, liftToNull, method);
-                // case ExpressionType.ExclusiveOr:
-                //     return ExclusiveOr(left, right, method);
+                case ExpressionType.ExclusiveOr:
+                    return ExclusiveOr(left, right);
                 // case ExpressionType.Coalesce:
                 //     return Coalesce(left, right, conversion);
                 // case ExpressionType.ArrayIndex:
@@ -88,34 +88,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 //     return LeftShift(left, right, method);
                 // case ExpressionType.Assign:
                 //     return Assign(left, right);
-                // case ExpressionType.AddAssign:
-                //     return AddAssign(left, right, method, conversion);
-                // case ExpressionType.AndAssign:
-                //     return AndAssign(left, right, method, conversion);
-                // case ExpressionType.DivideAssign:
-                //     return DivideAssign(left, right, method, conversion);
-                // case ExpressionType.ExclusiveOrAssign:
-                //     return ExclusiveOrAssign(left, right, method, conversion);
-                // case ExpressionType.LeftShiftAssign:
-                //     return LeftShiftAssign(left, right, method, conversion);
-                // case ExpressionType.ModuloAssign:
-                //     return ModuloAssign(left, right, method, conversion);
-                // case ExpressionType.MultiplyAssign:
-                //     return MultiplyAssign(left, right, method, conversion);
-                // case ExpressionType.OrAssign:
-                //     return OrAssign(left, right, method, conversion);
-                // case ExpressionType.PowerAssign:
-                //     return PowerAssign(left, right, method, conversion);
-                // case ExpressionType.RightShiftAssign:
-                //     return RightShiftAssign(left, right, method, conversion);
-                // case ExpressionType.SubtractAssign:
-                //     return SubtractAssign(left, right, method, conversion);
-                // case ExpressionType.AddAssignChecked:
-                //     return AddAssignChecked(left, right, method, conversion);
-                // case ExpressionType.SubtractAssignChecked:
-                //     return SubtractAssignChecked(left, right, method, conversion);
-                // case ExpressionType.MultiplyAssignChecked:
-                //     return MultiplyAssignChecked(left, right, method, conversion);
                 default:
                     throw new InvalidOperationException($"Error.UnhandledBinary({binaryType}, {nameof(binaryType)})");
             }
@@ -198,6 +170,24 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static BinaryExpression NotEqual(Expression left, Expression right)
         {
             return new BinaryExpression(ExpressionType.NotEqual, 1, left, right);
+        }
+
+        #endregion
+
+        #region Arithmetic Expressions
+
+        /// <summary>
+        /// Creates a <see cref="BinaryExpression"/> that represents a bitwise or logical XOR operation, using op_ExclusiveOr for user-defined types.
+        /// </summary>
+        /// <param name="left">An <see cref="Expression"/> to set the <see cref="BinaryExpression.Left"/> property equal to.</param>
+        /// <param name="right">An <see cref="Expression"/> to set the <see cref="BinaryExpression.Right"/> property equal to.</param>
+        /// <returns>A <see cref="BinaryExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.ExclusiveOr"/>
+        /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
+        public static BinaryExpression ExclusiveOr(Expression left, Expression right)
+        {
+            if (left.LengthInBits != right.LengthInBits)
+                throw new ArgumentException($"LengthInBits of operand differ.");
+            return new BinaryExpression(ExpressionType.ExclusiveOr, left.LengthInBits, left, right);
         }
 
         #endregion
