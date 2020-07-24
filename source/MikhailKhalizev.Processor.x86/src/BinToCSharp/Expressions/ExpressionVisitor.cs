@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using MikhailKhalizev.Processor.x86.Decoder;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
@@ -107,6 +108,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return new ReadOnlyCollection<T>(newNodes);
         }
 
+
+        protected internal virtual Expression VisitDefault(Expression node)
+        {
+            return node;
+        }
+
         /// <summary>
         /// Visits the children of the <see cref="BinaryExpression"/>.
         /// </summary>
@@ -118,7 +125,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return node.Update(Visit(node.Left), Visit(node.Right));
         }
 
-        protected internal virtual Expression VisitDefault(Expression node)
+        protected virtual RegisterInfo VisitSegment(RegisterInfo segment)
+        {
+            return segment;
+        }
+
+        protected internal virtual Expression VisitMemoryAccess(MemoryAccessExpression node)
+        {
+            return node.Update(VisitSegment(node.Segment), Visit(node.Address));
+        }
+
+        protected virtual RegisterInfo VisitRegisterInfo(RegisterInfo registerInfo)
+        {
+            return registerInfo;
+        }
+
+        protected internal virtual Expression VisitRegisterAccess(RegisterExpression node)
+        {
+            return node.Update(VisitRegisterInfo(node.RegisterInfo));
+        }
+
+        protected internal virtual Expression VisitConstant(ConstantExpression node)
         {
             return node;
         }

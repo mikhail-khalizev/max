@@ -4,10 +4,41 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public class ConstantExpression : Expression
     {
+        public static ConstantExpression operator -(ConstantExpression a) => new ConstantExpression(-a.Value, a.LengthInBits);
+
+        public static ConstantExpression operator +(ConstantExpression left, ConstantExpression right)
+        {
+            if (left.LengthInBits != right.LengthInBits)
+                throw new NotSupportedException("left.LengthInBits != right.LengthInBits");
+            return new ConstantExpression(left.Value + right.Value, left.LengthInBits);
+        }
+
+        public static ConstantExpression operator -(ConstantExpression left, ConstantExpression right)
+        {
+            if (left.LengthInBits != right.LengthInBits)
+                throw new NotSupportedException("left.LengthInBits != right.LengthInBits");
+            return new ConstantExpression(left.Value - right.Value, left.LengthInBits);
+        }
+
+        public static ConstantExpression operator *(ConstantExpression left, int right) =>
+            new ConstantExpression(left.Value * right, left.LengthInBits);
+
+        public static ConstantExpression operator *(int left, ConstantExpression right) =>
+            new ConstantExpression(left * right.Value, right.LengthInBits);
+
+
+        public static ConstantExpression operator ^(ConstantExpression left, ConstantExpression right)
+        {
+            if (left.LengthInBits != right.LengthInBits)
+                throw new NotSupportedException("left.LengthInBits != right.LengthInBits");
+            return new ConstantExpression(left.Value ^ right.Value, left.LengthInBits);
+        }
+
+
         public int Value { get; }
 
         /// <inheritdoc />
-        public ConstantExpression(int value, int lengthInBits) : base(ExpressionType.Todo_Remove, lengthInBits)
+        public ConstantExpression(int value, int lengthInBits) : base(ExpressionType.Constant, lengthInBits)
         {
             if (lengthInBits != 32)
             {
@@ -19,32 +50,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             Value = value;
         }
 
-        public static ConstantExpression operator -(ConstantExpression a) => new ConstantExpression(-a.Value, a.LengthInBits);
-
-        public static ConstantExpression operator +(ConstantExpression a, ConstantExpression b)
+        /// <summary>
+        /// Dispatches to the specific visit method for this node type.
+        /// </summary>
+        protected internal override Expression Accept(ExpressionVisitor visitor)
         {
-            if (a.LengthInBits != b.LengthInBits)
-                throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
-            return new ConstantExpression(a.Value + b.Value, a.LengthInBits);
-        }
-
-        public static ConstantExpression operator -(ConstantExpression a, ConstantExpression b)
-        {
-            if (a.LengthInBits != b.LengthInBits)
-                throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
-            return new ConstantExpression(a.Value - b.Value, a.LengthInBits);
-        }
-
-        public static ConstantExpression operator *(ConstantExpression a, int b) => new ConstantExpression(a.Value * b, a.LengthInBits);
-
-        public static ConstantExpression operator *(int a, ConstantExpression b) => b * a;
-        
-
-        public static ConstantExpression operator ^(ConstantExpression a, ConstantExpression b)
-        {
-            if (a.LengthInBits != b.LengthInBits)
-                throw new NotSupportedException("a.LengthInBits != b.LengthInBits");
-            return new ConstantExpression(a.Value ^ b.Value, a.LengthInBits);
+            return visitor.VisitConstant(this);
         }
     }
 }

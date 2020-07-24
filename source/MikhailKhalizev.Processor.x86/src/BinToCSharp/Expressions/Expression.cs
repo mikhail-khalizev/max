@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
+using MikhailKhalizev.Processor.x86.Decoder;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
@@ -25,6 +27,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static Expression operator -(Expression left, Expression right) => Subtract(left, right);
         public static Expression operator -(Expression left, int right) => Subtract(left, Number(right, left.LengthInBits));
         public static Expression operator -(int left, Expression right) => Subtract(Number(left, right.LengthInBits), right);
+
+        public static Expression operator &(Expression left, Expression right) => And(left, right);
+        public static Expression operator &(Expression left, int right) => And(left, Number(right, left.LengthInBits));
+        public static Expression operator &(int left, Expression right) => And(Number(left, right.LengthInBits), right);
+
+        public static Expression operator |(Expression left, Expression right) => Or(left, right);
+        public static Expression operator |(Expression left, int right) => Or(left, Number(right, left.LengthInBits));
+        public static Expression operator |(int left, Expression right) => Or(Number(left, right.LengthInBits), right);
 
         public static Expression operator ^(Expression left, Expression right) => ExclusiveOr(left, right);
         public static Expression operator ^(Expression left, int right) => ExclusiveOr(left, Number(right, left.LengthInBits));
@@ -83,6 +93,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 default:
                     throw new InvalidOperationException($"Error.UnhandledBinary({binaryType}, {nameof(binaryType)})");
             }
+        }
+
+        public static MemoryAccessExpression MakeMemoryAccess(RegisterInfo segment, Expression address, int dataLengthInBits)
+        {
+            return new MemoryAccessExpression(segment, address, dataLengthInBits);
+        }
+
+        public static RegisterExpression MakeRegisterAccess(RegisterInfo registerInfo)
+        {
+            return new RegisterExpression(registerInfo);
         }
 
         #region Assign

@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
             new Dictionary<int, (RegisterInfo, Expression)>();
 
-        private readonly Dictionary<Expression /* address */, MemoryExpression> _memory = new Dictionary<Expression, MemoryExpression>();
+        private readonly Dictionary<Expression /* address */, MemoryAccessExpression> _memory = new Dictionary<Expression, MemoryAccessExpression>();
 
 
         public Expression GetRegister(RegisterInfo registerInfo)
@@ -120,7 +120,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         {
             // TODO
 
-            var memory = new MemoryExpression(segment, address, lengthInBits);
+            var memory = new MemoryAccessExpression(segment, address, lengthInBits);
             return memory;
         }
 
@@ -128,7 +128,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         {
             // TODO
 
-            _memory[address] = new MemoryExpression(segment, address, expression.LengthInBits);
+            _memory[address] = new MemoryAccessExpression(segment, address, expression.LengthInBits);
         }
     }
 }

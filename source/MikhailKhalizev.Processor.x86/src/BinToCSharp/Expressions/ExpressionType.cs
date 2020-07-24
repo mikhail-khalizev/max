@@ -83,10 +83,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// </summary>
         LessThanOrEqual,
         
-        // /// <summary>
-        // /// A node that represents reading from a field or property.
-        // /// </summary>
-        // MemberAccess,
+        /// <summary>
+        /// A node that represents access to register.
+        /// </summary>
+        RegisterAccess,
+        
+        /// <summary>
+        /// A node that represents access to memory.
+        /// </summary>
+        MemoryAccess,
         
         /// <summary>
         /// A node that represents an arithmetic remainder operation.
