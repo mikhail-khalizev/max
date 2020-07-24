@@ -160,19 +160,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         Block,
         
         /// <summary>
-        /// A node that represents a unary decrement.
-        /// </summary>
-        Decrement,
-        
-        /// <summary>
         /// A node that represents a goto.
         /// </summary>
         Goto,
-        
-        /// <summary>
-        /// A node that represents a unary increment.
-        /// </summary>
-        Increment,
         
         /// <summary>
         /// A node that represents a label.
@@ -190,15 +180,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         Switch,
         
         /// <summary>
-        /// A node that represents a true condition value.
+        /// A node that represents a ones complement.
         /// </summary>
-        IsTrue,
-
-        /// <summary>
-        /// A node that represents a false condition value.
-        /// </summary>
-        IsFalse,
-
-        Todo_Remove,
+        OnesComplement,
     }
 }

@@ -11,35 +11,36 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
     // Immutable with all derived classes.
     public abstract class Expression
     {
-        public static Expression True { get; } = Number(1, 1);
-        public static Expression False { get; } = Number(0, 1);
+        public static Expression True { get; } = Constant(1, 1);
+        public static Expression False { get; } = Constant(0, 1);
 
         public static Expression Boolean(bool value) => value ? True : False;
-        public static Expression Zero(int lengthInBits) => Number(0, lengthInBits);
-        public static Expression Number(int value, int lengthInBits) => new ConstantExpression(value, lengthInBits);
-        public static Expression Number(uint value, int lengthInBits) => new ConstantExpression((int) value, lengthInBits);
+        public static Expression Zero(int lengthInBits) => Constant(0, lengthInBits);
+        public static Expression Constant(int value, int lengthInBits) => new ConstantExpression(value, lengthInBits);
+        public static Expression Constant(uint value, int lengthInBits) => new ConstantExpression((int) value, lengthInBits);
+        public static Expression Constant(ConstantType constantType, int value, int lengthInBits) => new ConstantExpression(constantType, value, lengthInBits);
 
         public static Expression IsZero(Expression exp) => Equal(exp, Zero(exp.LengthInBits));
 
         public static Expression operator +(Expression left, Expression right) => Add(left, right);
-        public static Expression operator +(Expression left, int right) => Add(left, Number(right, left.LengthInBits));
-        public static Expression operator +(int left, Expression right) => Add(Number(left, right.LengthInBits), right);
+        public static Expression operator +(Expression left, int right) => Add(left, Constant(right, left.LengthInBits));
+        public static Expression operator +(int left, Expression right) => Add(Constant(left, right.LengthInBits), right);
 
         public static Expression operator -(Expression left, Expression right) => Subtract(left, right);
-        public static Expression operator -(Expression left, int right) => Subtract(left, Number(right, left.LengthInBits));
-        public static Expression operator -(int left, Expression right) => Subtract(Number(left, right.LengthInBits), right);
+        public static Expression operator -(Expression left, int right) => Subtract(left, Constant(right, left.LengthInBits));
+        public static Expression operator -(int left, Expression right) => Subtract(Constant(left, right.LengthInBits), right);
 
         public static Expression operator &(Expression left, Expression right) => And(left, right);
-        public static Expression operator &(Expression left, int right) => And(left, Number(right, left.LengthInBits));
-        public static Expression operator &(int left, Expression right) => And(Number(left, right.LengthInBits), right);
+        public static Expression operator &(Expression left, int right) => And(left, Constant(right, left.LengthInBits));
+        public static Expression operator &(int left, Expression right) => And(Constant(left, right.LengthInBits), right);
 
         public static Expression operator |(Expression left, Expression right) => Or(left, right);
-        public static Expression operator |(Expression left, int right) => Or(left, Number(right, left.LengthInBits));
-        public static Expression operator |(int left, Expression right) => Or(Number(left, right.LengthInBits), right);
+        public static Expression operator |(Expression left, int right) => Or(left, Constant(right, left.LengthInBits));
+        public static Expression operator |(int left, Expression right) => Or(Constant(left, right.LengthInBits), right);
 
         public static Expression operator ^(Expression left, Expression right) => ExclusiveOr(left, right);
-        public static Expression operator ^(Expression left, int right) => ExclusiveOr(left, Number(right, left.LengthInBits));
-        public static Expression operator ^(int left, Expression right) => ExclusiveOr(Number(left, right.LengthInBits), right);
+        public static Expression operator ^(Expression left, int right) => ExclusiveOr(left, Constant(right, left.LengthInBits));
+        public static Expression operator ^(int left, Expression right) => ExclusiveOr(Constant(left, right.LengthInBits), right);
 
 
         public static BinaryExpression MakeBinary(
@@ -508,7 +509,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             }
 
             if (constValue != 0)
-                resultItems.Add((Number(constValue, lengthInBits), 0, constMask));
+                resultItems.Add((Constant(constValue, lengthInBits), 0, constMask));
 
 
             resultItems = resultItems
@@ -540,10 +541,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 var e = expression;
 
                 if (offset != 0 || lengthInBits != e.LengthInBits)
-                    e = LeftShift(NumberType.UnsignedInteger, lengthInBits, e, Number(offset, lengthInBits));
+                    e = LeftShift(NumberType.UnsignedInteger, lengthInBits, e, Constant(offset, lengthInBits));
 
                 if (mask != resultMask)
-                    e = And(e, Number(mask, lengthInBits));
+                    e = And(e, Constant(ConstantType.Hex, mask, lengthInBits));
 
                 result = result == null ? e : Or(result, e);
             }
@@ -587,6 +588,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         // Length in bits of result data or 0, if no result available by this type of Expression.
         public virtual int LengthInBits { get; }
+        
+
+        /// <summary>
+        /// Creates a <see cref="String"/> representation of the Expression.
+        /// </summary>
+        /// <returns>A <see cref="String"/> representation of the Expression.</returns>
+        public override string ToString()
+        {
+            return ExpressionStringBuilder.ExpressionToString(this);
+        }
 
 
         protected Expression(ExpressionType nodeType, int lengthInBits)
@@ -607,15 +618,5 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         {
             return visitor.VisitDefault(this);
         }
-
-        // TODO
-        // /// <summary>
-        // /// Creates a <see cref="String"/> representation of the Expression.
-        // /// </summary>
-        // /// <returns>A <see cref="String"/> representation of the Expression.</returns>
-        // public override string ToString()
-        // {
-        //     return ExpressionStringBuilder.ExpressionToString(this);
-        // }
     }
 }

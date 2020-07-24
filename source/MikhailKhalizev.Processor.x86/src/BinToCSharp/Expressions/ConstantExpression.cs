@@ -26,7 +26,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static ConstantExpression operator *(int left, ConstantExpression right) =>
             new ConstantExpression(left * right.Value, right.LengthInBits);
 
-
         public static ConstantExpression operator ^(ConstantExpression left, ConstantExpression right)
         {
             if (left.LengthInBits != right.LengthInBits)
@@ -36,10 +35,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
 
         public int Value { get; }
+        public ConstantType ConstantType { get; }
 
         /// <inheritdoc />
-        public ConstantExpression(int value, int lengthInBits) : base(ExpressionType.Constant, lengthInBits)
+        public ConstantExpression(int value, int lengthInBits)
+            : this(ConstantType.Default, value, lengthInBits)
+        { }
+
+        /// <inheritdoc />
+        public ConstantExpression(ConstantType constantType, int value, int lengthInBits)
+            : base(ExpressionType.Constant, lengthInBits)
         {
+            ConstantType = constantType;
+
             if (lengthInBits != 32)
             {
                 var isNegative = (value & (1 << (lengthInBits - 1))) != 0;

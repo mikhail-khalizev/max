@@ -204,7 +204,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 {
                     e = Expression.Multiply(
                         NumberType.UnsignedInteger,
-                        Expression.Number(operand.scale, e.LengthInBits),
+                        Expression.Constant(operand.scale, e.LengthInBits),
                         e);
                 }
 
@@ -229,7 +229,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         throw new NotImplementedException($"operand.offset: {operand.offset}");
                 }
 
-                addressItems.Add(Expression.Number(val, instruction.AddrMode));
+                addressItems.Add(Expression.Constant(val, instruction.AddrMode));
             }
 
             var address = Expression.Add(addressItems);
