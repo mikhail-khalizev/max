@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
 using MikhailKhalizev.Processor.x86.Decoder;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
@@ -87,7 +88,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 case ExpressionType.RightShift:
                     return RightShift(numberType, left, right);
                 case ExpressionType.LeftShift:
-                    return LeftShift(numberType, left, right);
+                    return LeftShift(numberType, lengthInBits, left, right);
                 case ExpressionType.Assign:
                     return Assign(left, right);
                 default:
@@ -378,8 +379,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
         public static BinaryExpression LeftShift(NumberType numberType, Expression left, Expression right)
         {
+            return LeftShift(numberType, left.LengthInBits, left, right);
+        }
+
+        public static BinaryExpression LeftShift(NumberType numberType, int lengthInBits, Expression left, Expression right)
+        {
             RequiresIntegerNumberType(numberType);
-            return new BinaryExpression(ExpressionType.LeftShift, numberType, left.LengthInBits, left, right);
+            return new BinaryExpression(ExpressionType.LeftShift, numberType, lengthInBits, left, right);
         }
 
         /// <summary>
@@ -448,6 +454,105 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         #endregion
 
+        #region Combine Expressions
+        
+        // Combine of ((value << offset) & mask).
+        public static Expression Combine(int lengthInBits, params (Expression Value, int Offset, int Mask)[] sourceItems)
+        {
+            return Combine(lengthInBits, sourceItems.AsEnumerable());
+        }
+
+        // Combine of ((value << offset) & mask).
+        public static Expression Combine(int lengthInBits, IEnumerable<(Expression Value, int Offset, int Mask)> sourceItems)
+        {
+            var resultMask = BinaryHelper.MaskInt32(lengthInBits);
+            var resultItems = new List<(Expression Value, int Offset, int Mask)>();
+            
+            foreach (var sourceItem in sourceItems)
+            {
+                for (var i = 0; i < resultItems.Count; i++)
+                {
+                    var item = resultItems[i];
+                    resultItems[i] = (item.Value, item.Offset, item.Mask & ~sourceItem.Mask & resultMask);
+                }
+
+                resultItems.Add(
+                    (sourceItem.Value, sourceItem.Offset, BinaryHelper.MaskInt32(lengthInBits) & sourceItem.Mask & resultMask));
+            }
+
+
+            var constValue = 0;
+            var constMask = 0;
+
+            for (var i = 0; i < resultItems.Count; i++)
+            {
+                var item = resultItems[i];
+                var shouldRemove = false;
+
+                if (item.Mask == 0)
+                {
+                    shouldRemove = true;
+                }
+                else if (item.Value is ConstantExpression cv)
+                {
+                    constValue |= (cv.Value << item.Offset) & item.Mask;
+                    constMask |= item.Mask;
+                    shouldRemove = true;
+                }
+
+                if (shouldRemove)
+                {
+                    resultItems.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            if (constValue != 0)
+                resultItems.Add((Number(constValue, lengthInBits), 0, constMask));
+
+
+            resultItems = resultItems
+                .GroupBy(
+                    x => (x.Value, x.Offset),
+                    (tuple, tuples) => (tuple.Value, tuple.Offset, tuples.Aggregate(0, (mask, valueTuple) => mask | valueTuple.Mask)))
+                .ToList();
+
+
+            if (resultItems.Count == 0)
+                return Zero(lengthInBits);
+
+            if (resultItems.Count == 1)
+            {
+                var item = resultItems[0];
+
+                if (item.Value is ConstantExpression cv3)
+                    return cv3;
+
+                if (item.Offset == 0 && item.Mask == resultMask)
+                    return item.Value;
+            }
+
+
+            Expression result = null;
+
+            foreach (var (expression, offset, mask) in resultItems)
+            {
+                var e = expression;
+
+                if (offset != 0 || lengthInBits != e.LengthInBits)
+                    e = LeftShift(NumberType.UnsignedInteger, lengthInBits, e, Number(offset, lengthInBits));
+
+                if (mask != resultMask)
+                    e = And(e, Number(mask, lengthInBits));
+
+                result = result == null ? e : Or(result, e);
+            }
+
+            return result;
+        }
+
+        #endregion
+
         protected static void RequiresSameLengthInBits(Expression left, Expression right)
         {
             if (left.LengthInBits != right.LengthInBits)
@@ -468,10 +573,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         protected static void RequiresIntegerNumberType(NumberType numberType)
         {
-            if (numberType != NumberType.SignedInteger ||
+            if (numberType != NumberType.SignedInteger &&
                 numberType != NumberType.UnsignedInteger)
             {
-                throw new ArgumentException($"Expected 'Integer' number type.");
+                throw new ArgumentException($"Expected 'Integer' number type, but passed {numberType}.");
             }
         }
 

@@ -32,11 +32,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (item.RegisterInfo == registerInfo)
                 return item.Value;
 
-            return Operations.Combine(
+            return Expression.Combine(
                 registerInfo.LengthInBits,
-                item.Value,
+                (item.Value,
                 item.RegisterInfo.BitOffset - registerInfo.BitOffset,
-                item.RegisterInfo.BitMask >> registerInfo.BitOffset);
+                item.RegisterInfo.BitMask >> registerInfo.BitOffset));
         }
 
         public void SetRegister(RegisterInfo registerInfo, Expression expression)
@@ -53,7 +53,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 return;
             }
 
-            var combination = Operations.Combine(
+            var combination = Expression.Combine(
                 Math.Max(
                     item.RegisterInfo.LengthInBits + item.RegisterInfo.BitOffset,
                     registerInfo.LengthInBits + registerInfo.BitOffset),
@@ -111,7 +111,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                             return (value, offset, 1 << offset);
                         }));
 
-            var newEflagsValue = Operations.Combine(eflagsValue.LengthInBits, result);
+            var newEflagsValue = Expression.Combine(eflagsValue.LengthInBits, result);
             SetRegister(eflagsRegister, newEflagsValue);
         }
 
