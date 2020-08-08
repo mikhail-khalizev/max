@@ -554,6 +554,52 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         #endregion
 
+        #region Flag
+
+        public static Expression UpdateFlags(RegisterInfo info, int flag, bool value)
+        {
+            return UpdateFlags(info, flag, Expression.Boolean(value));
+        }
+
+        public static Expression UpdateFlags(RegisterInfo info, int flag, Expression expression)
+        {
+            return UpdateFlags(info, (flag, expression));
+        }
+
+        public static Expression UpdateFlags(RegisterInfo info, params (int flag, Expression value)[] items)
+        {
+            return UpdateFlags(info, items.AsEnumerable());
+        }
+
+        public static Expression UpdateFlags(RegisterInfo info, IEnumerable<(int flag, Expression value)> items)
+        {
+            var register = MakeRegisterAccess(info);
+
+            var result = Enumerable.Empty<(Expression Value, int Offset, int Mask)>()
+                .Append((register, 0, BinaryHelper.MaskInt32(register.LengthInBits)))
+                .Concat(
+                    items.Select(
+                        x =>
+                        {
+                            var (flags, value) = x;
+                            if (flags == 0)
+                                throw new ArgumentException($"{nameof(flags)} is 0.");
+
+                            var offset = 0;
+                            while (((int) flags & (1 << offset)) == 0)
+                                offset++;
+
+                            return (value, offset, 1 << offset);
+                        }));
+
+            var newValue = Expression.Combine(register.LengthInBits, result);
+
+            return Assign(register, newValue);
+        }
+
+        #endregion
+
+
         protected static void RequiresSameLengthInBits(Expression left, Expression right)
         {
             if (left.LengthInBits != right.LengthInBits)

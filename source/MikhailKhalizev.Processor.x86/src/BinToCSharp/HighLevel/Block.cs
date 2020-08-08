@@ -74,48 +74,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
 
 
-        public void UpdateFlags(EflagsMaskEnum flags, bool value)
-        {
-            UpdateFlags(flags, Expression.Boolean(value));
-        }
-
-        public void UpdateFlags(EflagsMaskEnum flags, Expression expression)
-        {
-            UpdateFlags((flags, expression));
-        }
-
-        public void UpdateFlags(params (EflagsMaskEnum flags, Expression value)[] items)
-        {
-            UpdateFlags(items.AsEnumerable());
-        }
-
-        public void UpdateFlags(IEnumerable<(EflagsMaskEnum flags, Expression value)> items)
-        {
-            var eflagsRegister = RegisterInfo.Eflags;
-            var eflagsValue = GetRegister(eflagsRegister);
-
-            var result = Enumerable.Empty<(Expression Value, int Offset, int Mask)>()
-                .Append((eflagsValue, 0, BinaryHelper.MaskInt32(eflagsValue.LengthInBits)))
-                .Concat(
-                    items.Select(
-                        x =>
-                        {
-                            var (flags, value) = x;
-                            if (flags == 0)
-                                throw new ArgumentException($"{nameof(flags)} is 0.");
-
-                            var offset = 0;
-                            while (((int) flags & (1 << offset)) == 0)
-                                offset++;
-
-                            return (value, offset, 1 << offset);
-                        }));
-
-            var newEflagsValue = Expression.Combine(eflagsValue.LengthInBits, result);
-            SetRegister(eflagsRegister, newEflagsValue);
-        }
-
-
         public Expression GetMemory(RegisterInfo segment, Expression address, int lengthInBits)
         {
             // TODO

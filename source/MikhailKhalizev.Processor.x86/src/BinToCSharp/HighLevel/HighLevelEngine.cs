@@ -102,10 +102,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                         SetOperandValue(instruction, 0, dst);
 
-                        CurrentBlock.UpdateFlags(
+                        // TODO
+                        Expression.UpdateFlags(
+                            RegisterInfo.Eflags,
                             GetDefaultFlags(dst)
-                                .Append((EflagsMaskEnum.cf, Expression.False))
-                                .Append((EflagsMaskEnum.of, Expression.False)));
+                                .Append(((int)EflagsMaskEnum.cf, Expression.False))
+                                .Append(((int)EflagsMaskEnum.of, Expression.False)));
                         break;
                     }
 
@@ -119,10 +121,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
 
         // Set sf, zf, pf flags.
-        public IEnumerable<(EflagsMaskEnum flags, Expression value)> GetDefaultFlags(Expression dst)
+        public IEnumerable<(int flags, Expression value)> GetDefaultFlags(Expression dst)
         {
-            yield return (EflagsMaskEnum.sf, Expression.LessThan(NumberType.SignedInteger, dst, Expression.Zero(dst.LengthInBits)));
-            yield return (EflagsMaskEnum.zf, Expression.IsZero(dst));
+            yield return ((int)EflagsMaskEnum.sf, Expression.LessThan(NumberType.SignedInteger, dst, Expression.Zero(dst.LengthInBits)));
+            yield return ((int)EflagsMaskEnum.zf, Expression.IsZero(dst));
 
             // // pf - Сумма единиц в младшем байте + 1.
             // 
