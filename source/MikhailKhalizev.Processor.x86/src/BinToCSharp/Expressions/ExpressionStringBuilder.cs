@@ -17,6 +17,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             None,
             Space,
             NewLine,
+            NewLineWithIndent,
 
             Break = 0x8000 // newline if column > MaxColumn
         };
@@ -138,6 +139,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                     WriteLine();
                     Write(new string(' ', Depth));
                     break;
+                case Flow.NewLineWithIndent:
+                    WriteLine();
+                    Write(new string(' ', Depth + Tab));
+                    break;
             }
 
             Write(s);
@@ -171,7 +176,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             {
                 if (_column > (MaxColumn + Depth))
                 {
-                    flow = Flow.NewLine;
+                    flow = Flow.NewLineWithIndent;
                 }
                 else
                 {
@@ -223,6 +228,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                     visit(e);
                 }
 
+                Out(separator.ToString());
                 Dedent();
             }
 
@@ -254,6 +260,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         {
             bool parenthesizeLeft = NeedsParentheses(node, node.Left);
             bool parenthesizeRight = NeedsParentheses(node, node.Right);
+
+            var numberType = "";
+            switch (node.NumberType)
+            {
+                case NumberType.Irrelevant:
+                    numberType = "";
+                    break;
+                case NumberType.UnsignedInteger:
+                    numberType = "u";
+                    break;
+                case NumberType.SignedInteger:
+                    numberType = "s";
+                    break;
+                case NumberType.Float32:
+                    numberType = "f32";
+                    break;
+                case NumberType.Float64:
+                    numberType = "f64";
+                    break;
+                default:
+                    throw new NotSupportedException($"node: {node}, node.NumberType: {node.NumberType}");
+            }
 
             string op;
             Flow beforeOp = Flow.Space;
@@ -325,6 +353,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 default:
                     throw new InvalidOperationException();
             }
+
+            op += numberType;
 
             if (parenthesizeLeft)
             {
@@ -400,7 +430,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 Visit(node.IfFalse);
                 Dedent();
             }
-            
+
             Out(Flow.NewLine, "}");
 
             return node;
@@ -425,18 +455,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         }
 
         /// <inheritdoc />
-        protected override RegisterInfo VisitSegment(RegisterInfo segment)
-        {
-            Out(segment.Name);
-            return segment;
-        }
-
-        /// <inheritdoc />
         protected internal override Expression VisitMemoryAccess(MemoryAccessExpression node)
         {
-            Out($"mem{X86Instruction.GetSizeSuffixByBits(node.LengthInBits)})[");
-            VisitSegment(node.Segment);
-            Out(Flow.None, ",", Flow.Space);
+            Out($"mem{X86Instruction.GetSizeSuffixByBits(node.LengthInBits)}[");
             Visit(node.Address);
             Out("]");
             return node;
@@ -649,7 +670,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         protected internal override Expression VisitBlock(BlockExpression node)
         {
-            Out("Block");
+            Out("block", Flow.Space);
             VisitExpressions('{', ';', node.Expressions);
             return node;
         }
@@ -665,17 +686,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         //     return node;
         // }
 
+        protected internal override Expression VisitLabel(LabelExpression node)
+        {
+            Out($"label {(int)node.Address}");
+            return node;
+        }
+
         protected internal override Expression VisitGoto(GotoExpression node)
         {
-            Out("Goto");
+            Out("goto", Flow.Space);
             Visit(node.Address);
-            Out("", Flow.NewLine);
             return node;
         }
 
         protected internal override Expression VisitReturn(ReturnExpression node)
         {
-            Out("Return", Flow.NewLine);
+            Out("return");
+            return node;
+        }
+
+        protected internal override Expression VisitDebugInfo(DebugInfoExpression node)
+        {
+            Out($"DebugInfo {node.DebugInfoType}: {node.GetAsText()}");
             return node;
         }
 

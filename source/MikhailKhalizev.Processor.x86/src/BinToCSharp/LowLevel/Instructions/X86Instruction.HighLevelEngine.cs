@@ -104,12 +104,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     }
 
                     var sp = Expression.RegisterAccess(spRegInfo);
-
                     var src = GetOperandValue(0);
                     var newSp = sp - src.LengthInBits / 8;
 
                     yield return Expression.Assign(sp, newSp);
-                    yield return Expression.MemoryWrite(ud_type.UD_R_SS, newSp, src);
+
+                    sp = Expression.RegisterAccess(spRegInfo);
+                    yield return Expression.MemoryWrite(sp, src);
 
                     break;
                 }
@@ -193,8 +194,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
 
-                    var sf = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.sf);
-                    var of = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.of);
+                    var sf = Expression.IsNonZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.sf, eflags.LengthInBits));
+                    var of = Expression.IsNonZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.of, eflags.LengthInBits));
 
                     yield return Expression.IfThen(
                         Expression.NotEqual(sf, of),
@@ -211,9 +212,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
 
-                    var nzf = Expression.IsZero(eflags & (int) EflagsMaskEnum.zf);
-                    var sf = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.sf);
-                    var of = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.of);
+                    var nzf = Expression.IsZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.zf, eflags.LengthInBits));
+                    var sf = Expression.IsNonZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.sf, eflags.LengthInBits));
+                    var of = Expression.IsNonZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.of, eflags.LengthInBits));
 
                     yield return Expression.IfThen(
                         Expression.AndAlso(
@@ -227,7 +228,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 case ud_mnemonic_code.UD_Ijz:
                 {
                     var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
-                    var zf = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.zf);
+                    var zf = Expression.IsNonZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.zf, eflags.LengthInBits));
 
                     yield return Expression.IfThen(
                         zf,
@@ -239,7 +240,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 case ud_mnemonic_code.UD_Ijnz:
                 {
                     var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
-                    var nzf = Expression.IsZero(eflags & (int) EflagsMaskEnum.zf);
+                    var nzf = Expression.IsZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.zf, eflags.LengthInBits));
 
                     yield return Expression.IfThen(
                         nzf,
@@ -252,6 +253,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {
                     foreach (var expression in PopExpression(Expression.RegisterAccess(RegisterInfo.Eip)))
                         yield return expression;
+                    yield return Expression.Return();
                     break;
                 }
 
@@ -277,8 +279,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
             var newSp = sp + dst.LengthInBits / 8;
                         
+            yield return Expression.Assign(dst, Expression.MemoryAccess(sp, dst.LengthInBits));
             yield return Expression.Assign(sp, newSp);
-            yield return Expression.Assign(dst, Expression.MemoryAccess(ud_type.UD_R_SS, sp /* it is oldSp */, dst.LengthInBits));
         }
 
         private IEnumerable<Expression> SubOrCmpExpression(bool isSub)
@@ -308,7 +310,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             Expression.AndAlso(
                                 Expression.NotEqual(leftSign, rightSign),
                                 Expression.Equal(rightSign, resultSign)))));
-
         }
 
 
@@ -351,9 +352,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_type.UD_OP_MEM:
                 {
-                    var segment = GetEffectiveSegmentOfOperand(operand);
                     var address = GetOperandMemoryAddress(operandIndex, operand);
-                    return Expression.MemoryAccess(segment, address, operandSize);
+                    return Expression.MemoryAccess(address, operandSize);
                 }
 
                 case ud_type.UD_OP_IMM:
@@ -443,9 +443,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_type.UD_OP_MEM:
                 {
-                    var segment = GetEffectiveSegmentOfOperand(operand);
                     var address = GetOperandMemoryAddress(operandIndex, operand);
-                    return Expression.MemoryWrite(segment, address, expression);
+                    return Expression.MemoryWrite(address, expression);
                 }
 
                 default:

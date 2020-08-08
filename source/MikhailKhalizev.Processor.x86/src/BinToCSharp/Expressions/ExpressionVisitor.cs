@@ -125,14 +125,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return node.Update(Visit(node.Left), Visit(node.Right));
         }
 
-        protected virtual RegisterInfo VisitSegment(RegisterInfo segment)
-        {
-            return segment;
-        }
-
         protected internal virtual Expression VisitMemoryAccess(MemoryAccessExpression node)
         {
-            return node.Update(VisitSegment(node.Segment), Visit(node.Address));
+            return node.Update(Visit(node.Address));
         }
 
         protected virtual RegisterInfo VisitRegisterInfo(RegisterInfo registerInfo)
@@ -151,6 +146,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         }
 
         protected internal virtual Expression VisitConstant(ConstantExpression node)
+        {
+            return node;
+        }
+        
+        protected internal virtual Expression VisitDebugInfo(DebugInfoExpression node)
+        {
+            return node;
+        }
+
+        protected internal virtual Expression VisitLabel(LabelExpression node)
         {
             return node;
         }

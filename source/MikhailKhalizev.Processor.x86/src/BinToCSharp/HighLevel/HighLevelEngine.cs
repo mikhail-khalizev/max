@@ -48,7 +48,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             {
                 if (prev != null && prev.End != instruction.Begin)
                     throw new NotImplementedException("prev.End != instruction.Begin");
-
+                
+                if (instruction.Metadata.HasLabel)
+                    Expressions.Add(Expression.Label(instruction.Begin));
+                Expressions.Add(Expression.Comment(instruction.ToString()));
                 Expressions.AddRange(instruction.GetExpressions());
 
                 prev = instruction;

@@ -97,7 +97,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 case ExpressionType.RightShift:
                     return RightShift(numberType, left, right);
                 case ExpressionType.LeftShift:
-                    return LeftShift(numberType, lengthInBits, left, right);
+                    return LeftShift(lengthInBits, left, right);
                 case ExpressionType.Assign:
                     return Assign(left, right);
                 default:
@@ -105,14 +105,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             }
         }
 
-        public static MemoryAccessExpression MemoryAccess(RegisterInfo segment, Expression address, int dataLengthInBits)
+        public static MemoryAccessExpression MemoryAccess(Expression address, int dataLengthInBits)
         {
-            return new MemoryAccessExpression(segment, address, dataLengthInBits);
+            return new MemoryAccessExpression(address, dataLengthInBits);
         }
 
-        public static Expression MemoryWrite(RegisterInfo segment, Expression address, Expression value)
+        public static Expression MemoryWrite(Expression address, Expression value)
         {
-            return Expression.Assign(MemoryAccess(segment, address, value.LengthInBits), value);
+            return Expression.Assign(MemoryAccess(address, value.LengthInBits), value);
         }
 
         public static RegisterExpression RegisterAccess(RegisterInfo registerInfo)
@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static BinaryExpression Assign(Expression left, Expression right)
         {
             RequiresSameLengthInBits(left, right);
-            return new BinaryExpression(ExpressionType.Equal, left.LengthInBits, left, right);
+            return new BinaryExpression(ExpressionType.Assign, left.LengthInBits, left, right);
         }
 
         #endregion
@@ -391,15 +391,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// <param name="right">An <see cref="Expression"/> to set the <see cref="BinaryExpression.Right"/> property equal to.</param>
         /// <returns>A <see cref="BinaryExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.LeftShift"/>
         /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
-        public static BinaryExpression LeftShift(NumberType numberType, Expression left, Expression right)
+        public static BinaryExpression LeftShift(Expression left, Expression right)
         {
-            return LeftShift(numberType, left.LengthInBits, left, right);
+            return LeftShift(left.LengthInBits, left, right);
         }
 
-        public static BinaryExpression LeftShift(NumberType numberType, int lengthInBits, Expression left, Expression right)
+        public static BinaryExpression LeftShift(int lengthInBits, Expression left, Expression right)
         {
-            RequiresIntegerNumberType(numberType);
-            return new BinaryExpression(ExpressionType.LeftShift, numberType, lengthInBits, left, right);
+            return new BinaryExpression(ExpressionType.LeftShift, NumberType.Irrelevant, lengthInBits, left, right);
         }
 
         /// <summary>
@@ -554,9 +553,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 var e = expression;
 
                 if (offset != 0 || lengthInBits != e.LengthInBits)
-                    e = LeftShift(NumberType.UnsignedInteger, lengthInBits, e, Constant(offset, lengthInBits));
+                    e = LeftShift(lengthInBits, e, Constant(offset, lengthInBits));
 
-                if (mask != resultMask)
+                if (mask != resultMask && mask != (BinaryHelper.MaskInt32(expression.LengthInBits) << offset))
                     e = And(e, Constant(ConstantType.Hex, mask, lengthInBits));
 
                 result = result == null ? e : Or(result, e);
@@ -631,6 +630,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         #endregion
 
+        public static ReturnExpression Return()
+        {
+            return new ReturnExpression();
+        }
+
+        public static LabelExpression Label(Address address)
+        {
+            return new LabelExpression(address);
+        }
+
         public static GotoExpression Goto(Expression address)
         {
             return new GotoExpression(address);
@@ -639,6 +648,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static BlockExpression Block(IEnumerable<Expression> expressions)
         {
             return new BlockExpression(expressions);
+        }
+
+        public static CommentExpression Comment(string comment)
+        {
+            return new CommentExpression(comment);
         }
 
 

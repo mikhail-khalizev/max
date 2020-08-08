@@ -5,25 +5,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public class MemoryAccessExpression : Expression
     {
-        public RegisterInfo Segment { get; }
         public Expression Address { get; }
 
-        protected internal MemoryAccessExpression(RegisterInfo segment, Expression address, int dataLengthInBits)
+        protected internal MemoryAccessExpression(Expression address, int dataLengthInBits)
             : base(ExpressionType.MemoryAccess, dataLengthInBits)
         {
-            if (!segment.IsSegment)
-                throw new ArgumentException($"Expected segment register, but found {segment}");
-
-            Segment = segment;
             Address = address;
         }
 
-        public MemoryAccessExpression Update(RegisterInfo segment, Expression address)
+        public MemoryAccessExpression Update(Expression address)
         {
-            if (segment == Segment && address == Address)
+            if (address == Address)
                 return this;
 
-            return MemoryAccess(segment, address, LengthInBits);
+            return MemoryAccess(address, LengthInBits);
         }
 
         /// <summary>

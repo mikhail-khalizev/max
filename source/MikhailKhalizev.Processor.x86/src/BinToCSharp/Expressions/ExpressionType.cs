@@ -184,5 +184,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// A node that represents a ones complement.
         /// </summary>
         OnesComplement,
+
+        DebugInfo
     }
 }
