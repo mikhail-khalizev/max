@@ -168,16 +168,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                     Mnemonic == ud_mnemonic_code.UD_Ixor;
 
                             if (needSignExtend)
-                                return Expression.Constant(operand.lval.@sbyte, operandSize);
+                                return Expression.Constant(operand.lval.@sbyte, EffOprMode);
                             else
-                                return Expression.Constant(operand.lval.@ubyte, operandSize);
+                                return Expression.Constant(operand.lval.@ubyte, EffOprMode);
                         }
 
                         case 16:
-                            return Expression.Constant(operand.lval.uword, operandSize);
+                            return Expression.Constant(operand.lval.uword, EffOprMode);
 
                         case 32:
-                            return Expression.Constant(operand.lval.udword, operandSize);
+                            return Expression.Constant(operand.lval.udword, EffOprMode);
 
                         default:
                             throw new NotImplementedException($"oprSize: {operandSize}");

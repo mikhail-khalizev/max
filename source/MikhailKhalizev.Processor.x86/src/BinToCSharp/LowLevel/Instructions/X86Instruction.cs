@@ -59,6 +59,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         public List<string> Comments { get; set; }
 
+        public string AsmString { get; set; }
+
         protected const int DecimalLimit = 0xfff;
 
 
@@ -131,8 +133,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             AddrMode = ud.adr_mode;
             OprMode = ud.opr_mode;
 
-            var str = new string(ud.asm_buf, 0, ud.asm_buf_fill);
-            Comments.Add(str);
+            AsmString = new string(ud.asm_buf, 0, ud.asm_buf_fill);
+            Comments.Add(AsmString);
 
 
             // Fix instruction.
@@ -162,6 +164,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// <inheritdoc />
         public override string ToString()
         {
+            if (!string.IsNullOrWhiteSpace(AsmString))
+                return AsmString;
+
             var str = GetCommandString();
             if (string.IsNullOrEmpty(str))
                 str = string.Join(" ", Comments);
