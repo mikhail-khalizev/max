@@ -41,15 +41,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_mnemonic_code.UD_Imov:
                 {
-                    var src = GetOperandValue(1);
+                    var src = GetOperandValue(1, GetOperandValue(0).LengthInBits);
                     yield return SetOperandValue(0, src);
                     break;
                 }
 
                 case ud_mnemonic_code.UD_Ixor:
                 {
-                    var src = GetOperandValue(1);
                     var dst = GetOperandValue(0);
+                    var src = GetOperandValue(1, dst.LengthInBits);
 
                     dst ^= src;
 
@@ -68,9 +68,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var right = GetOperandValue(1);
 
                     var r = left - right;
-                    var leftSign = Expression.IsIntegerPositive(left);
-                    var rightSign = Expression.IsIntegerPositive(right);
-                    var resultSign = Expression.IsIntegerPositive(r);
+                    var leftSign = Expression.IsSignedIntegerPositive(left);
+                    var rightSign = Expression.IsSignedIntegerPositive(right);
+                    var resultSign = Expression.IsSignedIntegerPositive(r);
 
                     /* l  r  rr of
                      * +  +  +   0
@@ -106,7 +106,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     // Signed less.
                     // left < right
                     // eflags.sf != eflags.of
-                    
+
                     // left - right < 0 !=
                     //   (0 <= left   !=  0 <= right) &&
                     //   (0 <= right  ==  0 <= left - right )
@@ -138,7 +138,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     // Signed less.
                     // left > right
                     // !eflags.zf && eflags.sf == eflags.of
-                    
+
                     var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
 
                     var nzf = Expression.IsZero(eflags & (int) EflagsMaskEnum.zf);
@@ -147,10 +147,39 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     yield return Expression.IfThen(
                         Expression.AndAlso(
-                            nzf, 
+                            nzf,
                             Expression.Equal(sf, of)),
                         Expression.Goto(GetOperandValue(0))
                     );
+                    break;
+                }
+
+                case ud_mnemonic_code.UD_Iadd:
+                {
+                    var dst = GetOperandValue(0);
+                    var src = GetOperandValue(1, dst.LengthInBits);
+                    var res = dst + src;
+
+                    var ss = Expression.IsSignedIntegerPositive(src);
+                    var ds = Expression.IsSignedIntegerPositive(dst);
+                    var rs = Expression.IsSignedIntegerPositive(res);
+
+                    yield return SetOperandValue(0, res);
+
+                    // NOTE. af на практике не используется. Пропускаем.
+                    yield return Expression.UpdateFlags(
+                        RegisterInfo.Eflags,
+                        GetDefaultFlags(dst)
+                            .Append(
+                                ((int) EflagsMaskEnum.cf,
+                                    Expression.OrElse(
+                                        Expression.LessThan(NumberType.UnsignedInteger, res, src),
+                                        Expression.LessThan(NumberType.UnsignedInteger, res, dst))))
+                            .Append(
+                                ((int) EflagsMaskEnum.of,
+                                    Expression.AndAlso(
+                                        Expression.Equal(ds, ss),
+                                        Expression.NotEqual(ss, rs)))));
                     break;
                 }
 
@@ -164,7 +193,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         public static IEnumerable<(int flags, Expression value)> GetDefaultFlags(Expression dst)
         {
-            yield return ((int) EflagsMaskEnum.sf, Expression.IsIntegerNegative(dst));
+            yield return ((int) EflagsMaskEnum.sf, Expression.IsSignedIntegerNegative(dst));
             yield return ((int) EflagsMaskEnum.zf, Expression.IsZero(dst));
 
             // NOTE. pf - Сумма единиц в младшем байте + 1.
@@ -182,6 +211,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         }
 
         public Expression GetOperandValue(int operandIndex)
+        {
+            return GetOperandValue(operandIndex, EffOprMode);
+        }
+
+        public Expression GetOperandValue(int operandIndex, int lengthInBits)
         {
             var operand = Operands[operandIndex];
             var operandSize = operand.size != 0 ? operand.size : EffOprMode;
@@ -223,16 +257,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                                     Mnemonic == ud_mnemonic_code.UD_Ixor;
 
                             if (needSignExtend)
-                                return Expression.Constant(operand.lval.@sbyte, EffOprMode);
+                                return Expression.Constant(operand.lval.@sbyte, lengthInBits);
                             else
-                                return Expression.Constant(operand.lval.@ubyte, EffOprMode);
+                                return Expression.Constant(operand.lval.@ubyte, lengthInBits);
                         }
 
                         case 16:
-                            return Expression.Constant(operand.lval.uword, EffOprMode);
+                            return Expression.Constant(operand.lval.uword, lengthInBits);
 
                         case 32:
-                            return Expression.Constant(operand.lval.udword, EffOprMode);
+                            return Expression.Constant(operand.lval.udword, lengthInBits);
 
                         default:
                             throw new NotImplementedException($"oprSize: {operandSize}");
@@ -256,11 +290,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         default: throw new NotImplementedException($"oprSize: {operandSize}");
                     }
 
-                    return Expression.Constant(ConstantType.Address,(int)End + val, EffOprMode);
+                    return Expression.Constant(ConstantType.Address, (int) End + val, AddrMode);
                 }
 
                 case ud_type.UD_OP_CONST:
-                    return Expression.Constant(operand.lval.udword, EffOprMode);
+                    return Expression.Constant(operand.lval.udword, lengthInBits);
 
                 default:
                     throw new NotImplementedException($"X86Instruction: {this}, operandIndex: {operandIndex}.");

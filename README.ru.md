@@ -87,3 +87,13 @@
 ```
 
 3. Откройте  в браузере страницу https://localhost:5001.
+
+# Ключевые слова
+
+* interplay
+* max
+* x86
+* disassembler
+* dos
+* game 
+* x86 to c# converter

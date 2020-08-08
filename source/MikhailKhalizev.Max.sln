@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A194DC10-B7F1-402B-A607-D2799CB22740}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
+		..\README.ru.md = ..\README.ru.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{4B31A797-375A-4E66-B6AB-26224AFDC743}"

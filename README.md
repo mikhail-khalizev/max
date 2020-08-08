@@ -89,3 +89,13 @@ The game code is as follows:
 ```
 
 3. Open a browser page https://localhost:5001.
+
+# Keywords
+
+* interplay
+* max
+* x86
+* disassembler
+* dos
+* game 
+* x86 to c# converter

@@ -27,8 +27,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         public static Expression IsZero(Expression exp) => Equal(exp, Zero(exp.LengthInBits));
         public static Expression IsNonZero(Expression exp) => NotEqual(exp, Zero(exp.LengthInBits));
-        public static Expression IsIntegerNegative(Expression exp) => Expression.LessThan(NumberType.SignedInteger, exp, Expression.Zero(exp.LengthInBits));
-        public static Expression IsIntegerPositive(Expression exp) => Expression.LessThanOrEqual(NumberType.SignedInteger, Expression.Zero(exp.LengthInBits), exp);
+        public static Expression IsSignedIntegerNegative(Expression exp) => Expression.LessThan(NumberType.SignedInteger, exp, Expression.Zero(exp.LengthInBits));
+        public static Expression IsSignedIntegerPositive(Expression exp) => Expression.LessThanOrEqual(NumberType.SignedInteger, Expression.Zero(exp.LengthInBits), exp);
 
         public static Expression operator +(Expression left, Expression right) => Add(left, right);
         public static Expression operator +(Expression left, int right) => Add(left, Constant(right, left.LengthInBits));
