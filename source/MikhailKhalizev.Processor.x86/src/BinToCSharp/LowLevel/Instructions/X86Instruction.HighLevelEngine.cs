@@ -133,6 +133,27 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     break;
                 }
 
+                case ud_mnemonic_code.UD_Ijg:
+                {
+                    // Signed less.
+                    // left > right
+                    // !eflags.zf && eflags.sf == eflags.of
+                    
+                    var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
+
+                    var nzf = Expression.IsZero(eflags & (int) EflagsMaskEnum.zf);
+                    var sf = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.sf);
+                    var of = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.of);
+
+                    yield return Expression.IfThen(
+                        Expression.AndAlso(
+                            nzf, 
+                            Expression.Equal(sf, of)),
+                        Expression.Goto(GetOperandValue(0))
+                    );
+                    break;
+                }
+
                 default:
                     throw new NotImplementedException($"X86Instruction = {this}.");
             }
