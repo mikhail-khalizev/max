@@ -23,7 +23,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             if (segment == Segment && address == Address)
                 return this;
 
-            return MakeMemoryAccess(segment, address, LengthInBits);
+            return MemoryAccess(segment, address, LengthInBits);
         }
 
         /// <summary>

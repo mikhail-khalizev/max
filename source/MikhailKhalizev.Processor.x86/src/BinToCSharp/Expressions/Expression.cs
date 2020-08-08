@@ -99,12 +99,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             }
         }
 
-        public static MemoryAccessExpression MakeMemoryAccess(RegisterInfo segment, Expression address, int dataLengthInBits)
+        public static MemoryAccessExpression MemoryAccess(RegisterInfo segment, Expression address, int dataLengthInBits)
         {
             return new MemoryAccessExpression(segment, address, dataLengthInBits);
         }
 
-        public static RegisterExpression MakeRegisterAccess(RegisterInfo registerInfo)
+        public static Expression MemoryWrite(RegisterInfo segment, Expression address, Expression value)
+        {
+            return Expression.Assign(MemoryAccess(segment, address, value.LengthInBits), value);
+        }
+
+        public static RegisterExpression RegisterAccess(RegisterInfo registerInfo)
         {
             return new RegisterExpression(registerInfo);
         }
@@ -575,7 +580,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         public static Expression UpdateFlags(RegisterInfo info, IEnumerable<(int flag, Expression value)> items)
         {
-            var register = MakeRegisterAccess(info);
+            var register = RegisterAccess(info);
 
             var newValue = Expression.Combine(
                 register.LengthInBits,

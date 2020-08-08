@@ -28,24 +28,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             throw new NotImplementedException($"X86Instruction = {this}, Mode = {Mode}.");
                     }
 
-                    var sp = Expression.MakeRegisterAccess(spRegInfo);
+                    var sp = Expression.RegisterAccess(spRegInfo);
 
-                    switch (Operands[0].type)
-                    {
-                        case ud_type.UD_OP_REG:
-                            var src = GetOperandValue(0);
-                            var newSp = sp - src.LengthInBits / 8;
+                    var src = GetOperandValue(0);
+                    var newSp = sp - src.LengthInBits / 8;
 
-                            yield return Expression.Assign(sp, newSp);
-                            yield return Expression.Assign(
-                                Expression.MakeMemoryAccess(ud_type.UD_R_SS, newSp, src.LengthInBits),
-                                src);
-                            break;
-
-                        default:
-                            throw new NotImplementedException(
-                                $"X86Instruction = {this}, Operands[0].type = {Operands[0].type}.");
-                    }
+                    yield return Expression.Assign(sp, newSp);
+                    yield return Expression.MemoryWrite(ud_type.UD_R_SS, newSp, src);
 
                     break;
                 }
@@ -77,7 +66,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     throw new NotImplementedException($"X86Instruction = {this}.");
             }
         }
-        
+
         /// <summary>
         /// Set sf, zf, pf flags. 
         /// </summary>
@@ -108,13 +97,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             switch (operand.type)
             {
                 case ud_type.UD_OP_REG:
-                    return Expression.MakeRegisterAccess(operand.@base);
+                    return Expression.RegisterAccess(operand.@base);
 
                 case ud_type.UD_OP_MEM:
                 {
                     var segment = GetEffectiveSegmentOfOperand(operand);
                     var address = GetOperandMemoryAddress(operandIndex, operand);
-                    return Expression.MakeMemoryAccess(segment, address, operandSize);
+                    return Expression.MemoryAccess(segment, address, operandSize);
                 }
 
                 default:
@@ -136,15 +125,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             switch (operand.type)
             {
                 case ud_type.UD_OP_REG:
-                    return Expression.Assign(Expression.MakeRegisterAccess(operand.@base), expression);
+                    return Expression.Assign(Expression.RegisterAccess(operand.@base), expression);
 
                 case ud_type.UD_OP_MEM:
                 {
                     var segment = GetEffectiveSegmentOfOperand(operand);
                     var address = GetOperandMemoryAddress(operandIndex, operand);
-                    return Expression.Assign(
-                        Expression.MakeMemoryAccess(segment, address, expression.LengthInBits),
-                        expression);
+                    return Expression.MemoryWrite(segment, address, expression);
                 }
 
                 default:
@@ -157,11 +144,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             var addressItems = new List<Expression>();
 
             if (operand.@base != ud_type.UD_NONE)
-                addressItems.Add(Expression.MakeRegisterAccess(operand.@base));
+                addressItems.Add(Expression.RegisterAccess(operand.@base));
 
             if (operand.index != ud_type.UD_NONE)
             {
-                Expression e = Expression.MakeRegisterAccess(operand.index);
+                Expression e = Expression.RegisterAccess(operand.index);
 
                 if (1 < operand.scale)
                 {

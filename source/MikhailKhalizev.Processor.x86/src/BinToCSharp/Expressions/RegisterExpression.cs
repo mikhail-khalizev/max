@@ -17,7 +17,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             if (registerInfo == RegisterInfo)
                 return this;
 
-            return MakeRegisterAccess(registerInfo);
+            return RegisterAccess(registerInfo);
         }
 
         /// <summary>
