@@ -354,7 +354,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                     throw new InvalidOperationException();
             }
 
-            op += numberType;
+            if (node.NodeType == ExpressionType.LeftShift && node.LengthInBits == node.Left.LengthInBits)
+            {
+                // skip add numberType
+            }
+            else
+                op += numberType;
 
             if (parenthesizeLeft)
             {
