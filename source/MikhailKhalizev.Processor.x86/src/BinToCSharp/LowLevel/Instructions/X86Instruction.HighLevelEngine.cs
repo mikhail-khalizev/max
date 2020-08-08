@@ -68,11 +68,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var right = GetOperandValue(1);
 
                     var r = left - right;
-                    var ds = Expression.IsIntegerPositive(left);
-                    var ss = Expression.IsIntegerPositive(right);
-                    var rs = Expression.IsIntegerPositive(r);
+                    var leftSign = Expression.IsIntegerPositive(left);
+                    var rightSign = Expression.IsIntegerPositive(right);
+                    var resultSign = Expression.IsIntegerPositive(r);
 
-                    /* d  s  r  of
+                    /* l  r  rr of
                      * +  +  +   0
                      * +  +  -   0
                      * +  -  +   0
@@ -81,21 +81,55 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                      * -  +  -   0
                      * -  -  +   0
                      * -  -  -   0  */
-                    
+
                     // NOTE. af на практике не используется. Пропускаем.
 
                     yield return Expression.UpdateFlags(
                         RegisterInfo.Eflags,
                         GetDefaultFlags(r)
-                            .Append(((int)
-                                EflagsMaskEnum.cf,
-                                Expression.LessThan(NumberType.SignedInteger, left, right)))
-                            .Append(((int)
-                                EflagsMaskEnum.of,
-                                Expression.AndAlso(
-                                    Expression.NotEqual(ds, ss),
-                                    Expression.Equal(ss, rs)))));
+                            .Append(
+                                ((int)
+                                    EflagsMaskEnum.cf,
+                                    Expression.LessThan(NumberType.UnsignedInteger, left, right)))
+                            .Append(
+                                ((int)
+                                    EflagsMaskEnum.of,
+                                    Expression.AndAlso(
+                                        Expression.NotEqual(leftSign, rightSign),
+                                        Expression.Equal(rightSign, resultSign)))));
 
+                    break;
+                }
+
+                case ud_mnemonic_code.UD_Ijl:
+                {
+                    // Signed less.
+                    // left < right
+                    // eflags.sf != eflags.of
+                    
+                    // left - right < 0 !=
+                    //   (0 <= left   !=  0 <= right) &&
+                    //   (0 <= right  ==  0 <= left - right )
+
+                    /* l  r  rr sf of sf!=of
+                     * +  +  +   0  0     0
+                     * +  +  -   1  0     1
+                     * +  -  +   0  0     0
+                     * +  -  -   1  1     0
+                     * -  +  +   0  1     1
+                     * -  +  -   1  0     1
+                     * -  -  +   0  0     0
+                     * -  -  -   1  0     1  */
+
+                    var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
+
+                    var sf = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.sf);
+                    var of = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.of);
+
+                    yield return Expression.IfThen(
+                        Expression.NotEqual(sf, of),
+                        Expression.Goto(GetOperandValue(0))
+                    );
                     break;
                 }
 
@@ -109,7 +143,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         /// </summary>
         public static IEnumerable<(int flags, Expression value)> GetDefaultFlags(Expression dst)
         {
-            yield return ((int) EflagsMaskEnum.sf, Expression.LessThan(NumberType.SignedInteger, dst, Expression.Zero(dst.LengthInBits)));
+            yield return ((int) EflagsMaskEnum.sf, Expression.IsIntegerNegative(dst));
             yield return ((int) EflagsMaskEnum.zf, Expression.IsZero(dst));
 
             // NOTE. pf - Сумма единиц в младшем байте + 1.
@@ -183,6 +217,29 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             throw new NotImplementedException($"oprSize: {operandSize}");
                     }
                 }
+
+                case ud_type.UD_OP_JIMM:
+                {
+                    int val;
+                    switch (operandSize)
+                    {
+                        case 8:
+                            val = operand.lval.@sbyte;
+                            break;
+                        case 16:
+                            val = operand.lval.sword;
+                            break;
+                        case 32:
+                            val = operand.lval.sdword;
+                            break;
+                        default: throw new NotImplementedException($"oprSize: {operandSize}");
+                    }
+
+                    return Expression.Constant(ConstantType.Address,(int)End + val, EffOprMode);
+                }
+
+                case ud_type.UD_OP_CONST:
+                    return Expression.Constant(operand.lval.udword, EffOprMode);
 
                 default:
                     throw new NotImplementedException($"X86Instruction: {this}, operandIndex: {operandIndex}.");

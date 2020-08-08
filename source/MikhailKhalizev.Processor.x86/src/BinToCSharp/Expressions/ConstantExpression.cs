@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
@@ -38,12 +39,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public ConstantType ConstantType { get; }
 
         /// <inheritdoc />
-        public ConstantExpression(int value, int lengthInBits)
+        protected internal ConstantExpression(int value, int lengthInBits)
             : this(ConstantType.Default, value, lengthInBits)
         { }
 
         /// <inheritdoc />
-        public ConstantExpression(ConstantType constantType, int value, int lengthInBits)
+        protected internal ConstantExpression(ConstantType constantType, int value, int lengthInBits)
             : base(ExpressionType.Constant, lengthInBits)
         {
             ConstantType = constantType;

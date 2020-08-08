@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel;
@@ -11,6 +12,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
     // Immutable with all derived classes.
     public abstract class Expression
     {
+        public static Expression Empty { get; } = Constant(0, 0);
+
         public static Expression True { get; } = Constant(1, 1);
         public static Expression False { get; } = Constant(0, 1);
 
@@ -23,6 +26,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             new ConstantExpression(constantType, value, lengthInBits);
 
         public static Expression IsZero(Expression exp) => Equal(exp, Zero(exp.LengthInBits));
+        public static Expression IsNonZero(Expression exp) => NotEqual(exp, Zero(exp.LengthInBits));
         public static Expression IsIntegerNegative(Expression exp) => Expression.LessThan(NumberType.SignedInteger, exp, Expression.Zero(exp.LengthInBits));
         public static Expression IsIntegerPositive(Expression exp) => Expression.LessThanOrEqual(NumberType.SignedInteger, Expression.Zero(exp.LengthInBits), exp);
 
@@ -607,6 +611,35 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         }
 
         #endregion
+
+        #region Conditional
+
+        public static ConditionalExpression Condition(Expression test, Expression ifTrue, Expression ifFalse)
+        {
+            return new ConditionalExpression(test, ifTrue, ifFalse);
+        }
+
+        public static ConditionalExpression IfThen(Expression test, Expression ifTrue)
+        {
+            return new ConditionalExpression(test, ifTrue);
+        }
+
+        public static ConditionalExpression IfThenElse(Expression test, Expression ifTrue, Expression ifFalse)
+        {
+            return Condition(test, ifTrue, ifFalse);
+        }
+
+        #endregion
+
+        public static GotoExpression Goto(Expression address)
+        {
+            return new GotoExpression(address);
+        }
+
+        public static BlockExpression Block(IEnumerable<Expression> expressions)
+        {
+            return new BlockExpression(expressions);
+        }
 
 
         protected static void RequiresSameLengthInBits(Expression left, Expression right)

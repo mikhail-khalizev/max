@@ -372,32 +372,39 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return false;
         }
 
-        // protected internal override Expression VisitConditional(ConditionalExpression node)
-        // {
-        //     if (IsSimpleExpression(node.Test))
-        //     {
-        //         Out("If (");
-        //         Visit(node.Test);
-        //         Out(") {", Flow.NewLine);
-        //     }
-        //     else
-        //     {
-        //         Out("If (", Flow.NewLine);
-        //         Indent();
-        //         Visit(node.Test);
-        //         Dedent();
-        //         Out(Flow.NewLine, ") {", Flow.NewLine);
-        //     }
-        //     Indent();
-        //     Visit(node.IfTrue);
-        //     Dedent();
-        //     Out(Flow.NewLine, "} .Else {", Flow.NewLine);
-        //     Indent();
-        //     Visit(node.IfFalse);
-        //     Dedent();
-        //     Out(Flow.NewLine, "}");
-        //     return node;
-        // }
+        protected internal override Expression VisitConditional(ConditionalExpression node)
+        {
+            if (IsSimpleExpression(node.Test))
+            {
+                Out("If (");
+                Visit(node.Test);
+                Out(") {", Flow.NewLine);
+            }
+            else
+            {
+                Out("If (", Flow.NewLine);
+                Indent();
+                Visit(node.Test);
+                Dedent();
+                Out(Flow.NewLine, ") {", Flow.NewLine);
+            }
+
+            Indent();
+            Visit(node.IfTrue);
+            Dedent();
+
+            if (node.IfFalse != Expression.Empty)
+            {
+                Out(Flow.NewLine, "} .Else {", Flow.NewLine);
+                Indent();
+                Visit(node.IfFalse);
+                Dedent();
+            }
+            
+            Out(Flow.NewLine, "}");
+
+            return node;
+        }
 
         protected internal override Expression VisitConstant(ConstantExpression node)
         {
@@ -640,24 +647,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         //     return node;
         // }
 
-        // protected internal override Expression VisitBlock(BlockExpression node)
-        // {
-        //     Out(".Block");
-        // 
-        //     // Display <type> if the type of the BlockExpression is different from the
-        //     // last expression's type in the block.
-        //     if (node.Type != node.GetExpression(node.ExpressionCount - 1).Type)
-        //     {
-        //         Out(string.Format(CultureInfo.CurrentCulture, "<{0}>", node.Type.ToString()));
-        //     }
-        // 
-        //     VisitDeclarations(node.Variables);
-        //     Out(" ");
-        //     // Use ; to separate expressions in the block
-        //     VisitExpressions('{', ';', node.Expressions);
-        // 
-        //     return node;
-        // }
+        protected internal override Expression VisitBlock(BlockExpression node)
+        {
+            Out("Block");
+            VisitExpressions('{', ';', node.Expressions);
+            return node;
+        }
 
         // protected internal override Expression VisitLabel(LabelExpression node)
         // {
@@ -670,15 +665,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         //     return node;
         // }
 
-        // protected internal override Expression VisitGoto(GotoExpression node)
-        // {
-        //     Out("." + node.Kind.ToString(), Flow.Space);
-        //     Out(GetLabelTargetName(node.Target), Flow.Space);
-        //     Out("{", Flow.Space);
-        //     Visit(node.Value);
-        //     Out(Flow.Space, "}");
-        //     return node;
-        // }
+        protected internal override Expression VisitGoto(GotoExpression node)
+        {
+            Out("Goto");
+            Visit(node.Address);
+            Out("", Flow.NewLine);
+            return node;
+        }
 
         // protected internal override Expression VisitLoop(LoopExpression node)
         // {
