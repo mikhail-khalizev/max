@@ -107,10 +107,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var src = GetOperandValue(0);
 
                     var newSp = sp - src.LengthInBits / 8;
-                    yield return Expression.Assign(sp, newSp);
 
-                    sp = Expression.RegisterAccess(spRegInfo);
-                    yield return Expression.MemoryWrite(sp, src);
+                    if (src is RegisterExpression re && re.RegisterInfo == spRegInfo)
+                    {
+                        yield return Expression.MemoryWrite(newSp, src);
+                        yield return Expression.Assign(sp, newSp);
+                    }
+                    else
+                    {
+                        yield return Expression.Assign(sp, newSp);
+
+                        sp = Expression.RegisterAccess(spRegInfo); // Read newSp.
+                        yield return Expression.MemoryWrite(sp, src);
+                    }
 
                     break;
                 }
