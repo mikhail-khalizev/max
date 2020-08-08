@@ -69,7 +69,12 @@ namespace MikhailKhalizev.Processor.x86.Decoder
             Eflags = new RegisterInfo("eflags", ++index, 0b1111);
             regs.Add(Eflags);
 
-            RegisterByType = regs.ToDictionary(x => x.UdType, x => x);
+            Eip = new RegisterInfo("eip", ++index, 0b1111);
+            regs.Add(Eip);
+
+            RegisterByType = regs
+                .Where(x => x.UdType != (ud_type)(-1))
+                .ToDictionary(x => x.UdType, x => x);
 
             AllRegNames = Enum.GetValues(typeof(ud_type))
                 .Cast<ud_type>()
@@ -81,6 +86,7 @@ namespace MikhailKhalizev.Processor.x86.Decoder
 
         public static RegisterInfo Empty { get; }
         public static RegisterInfo Eflags { get; }
+        public static RegisterInfo Eip { get; }
         
         public static IReadOnlyCollection<RegisterInfo> Registers => RegisterByType.Values;
 

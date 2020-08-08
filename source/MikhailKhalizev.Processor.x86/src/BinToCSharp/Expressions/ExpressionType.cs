@@ -163,6 +163,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// A node that represents a goto.
         /// </summary>
         Goto,
+        Return,
         
         /// <summary>
         /// A node that represents a label.

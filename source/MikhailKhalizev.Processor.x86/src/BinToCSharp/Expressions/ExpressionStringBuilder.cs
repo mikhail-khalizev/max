@@ -673,6 +673,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return node;
         }
 
+        protected internal override Expression VisitReturn(ReturnExpression node)
+        {
+            Out("Return", Flow.NewLine);
+            return node;
+        }
+
         // protected internal override Expression VisitLoop(LoopExpression node)
         // {
         //     Out(".Loop", Flow.Space);

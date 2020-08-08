@@ -15,6 +15,81 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         {
             switch (Mnemonic)
             {
+                case ud_mnemonic_code.UD_Iand:
+                {
+                    var left = GetOperandValue(0);
+                    var right = GetOperandValue(1, left.LengthInBits);
+                    var res = left & right;
+
+                    yield return SetOperandValue(0, res);
+
+                    yield return Expression.UpdateFlags(
+                        RegisterInfo.Eflags,
+                        GetDefaultFlags(res)
+                            .Append(((int) EflagsMaskEnum.cf, Expression.False))
+                            .Append(((int) EflagsMaskEnum.of, Expression.False)));
+                    break;
+                }
+
+                case ud_mnemonic_code.UD_Iadd:
+                {
+                    var left = GetOperandValue(0);
+                    var right = GetOperandValue(1, left.LengthInBits);
+                    var res = left + right;
+
+                    var ss = Expression.IsSignedIntegerPositive(right);
+                    var ds = Expression.IsSignedIntegerPositive(left);
+                    var rs = Expression.IsSignedIntegerPositive(res);
+
+                    yield return SetOperandValue(0, res);
+
+                    // NOTE. af на практике не используется. Пропускаем.
+                    yield return Expression.UpdateFlags(
+                        RegisterInfo.Eflags,
+                        GetDefaultFlags(left)
+                            .Append(
+                                ((int) EflagsMaskEnum.cf,
+                                    Expression.OrElse(
+                                        Expression.LessThan(NumberType.UnsignedInteger, res, right),
+                                        Expression.LessThan(NumberType.UnsignedInteger, res, left))))
+                            .Append(
+                                ((int) EflagsMaskEnum.of,
+                                    Expression.AndAlso(
+                                        Expression.Equal(ds, ss),
+                                        Expression.NotEqual(ss, rs)))));
+                    break;
+                }
+                
+                case ud_mnemonic_code.UD_Iinc:
+                {
+                    var dst = GetOperandValue(0);
+                    var res = dst + Expression.Constant(1, dst.LengthInBits);
+
+                    var ss = Expression.True;
+                    var ds = Expression.IsSignedIntegerPositive(dst);
+                    var rs = Expression.IsSignedIntegerPositive(res);
+
+                    yield return SetOperandValue(0, res);
+
+                    // NOTE. af на практике не используется. Пропускаем.
+                    yield return Expression.UpdateFlags(
+                        RegisterInfo.Eflags,
+                        GetDefaultFlags(dst)
+                            .Append(
+                                ((int) EflagsMaskEnum.of,
+                                    Expression.AndAlso(
+                                        Expression.Equal(ds, ss),
+                                        Expression.NotEqual(ss, rs)))));
+                    break;
+                }
+
+                case ud_mnemonic_code.UD_Isub:
+                {
+                    foreach (var expression in SubOrCmpExpression(true))
+                        yield return expression;
+                    break;
+                }
+
                 case ud_mnemonic_code.UD_Ipush:
                 {
                     RegisterInfo spRegInfo;
@@ -39,6 +114,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     break;
                 }
 
+                case ud_mnemonic_code.UD_Ipop:
+                {
+                    foreach (var expression in PopExpression(GetOperandValue(0)))
+                        yield return expression;
+                    break;
+                }
+
                 case ud_mnemonic_code.UD_Imov:
                 {
                     var src = GetOperandValue(1, GetOperandValue(0).LengthInBits);
@@ -48,15 +130,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_mnemonic_code.UD_Ixor:
                 {
-                    var dst = GetOperandValue(0);
-                    var src = GetOperandValue(1, dst.LengthInBits);
+                    var left = GetOperandValue(0);
+                    var right = GetOperandValue(1, left.LengthInBits);
 
-                    dst ^= src;
+                    left ^= right;
 
-                    yield return SetOperandValue(0, dst);
+                    yield return SetOperandValue(0, left);
                     yield return Expression.UpdateFlags(
                         RegisterInfo.Eflags,
-                        GetDefaultFlags(dst)
+                        GetDefaultFlags(left)
                             .Append(((int) EflagsMaskEnum.cf, Expression.False))
                             .Append(((int) EflagsMaskEnum.of, Expression.False)));
                     break;
@@ -64,40 +146,28 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_mnemonic_code.UD_Icmp:
                 {
+                    foreach (var expression in SubOrCmpExpression(false))
+                        yield return expression;
+                    break;
+                }
+
+                case ud_mnemonic_code.UD_Itest:
+                {
                     var left = GetOperandValue(0);
-                    var right = GetOperandValue(1);
-
-                    var r = left - right;
-                    var leftSign = Expression.IsSignedIntegerPositive(left);
-                    var rightSign = Expression.IsSignedIntegerPositive(right);
-                    var resultSign = Expression.IsSignedIntegerPositive(r);
-
-                    /* l  r  rr of
-                     * +  +  +   0
-                     * +  +  -   0
-                     * +  -  +   0
-                     * +  -  -   1
-                     * -  +  +   1
-                     * -  +  -   0
-                     * -  -  +   0
-                     * -  -  -   0  */
-
-                    // NOTE. af на практике не используется. Пропускаем.
+                    var right = GetOperandValue(1, left.LengthInBits);
+                    var res = left & right;
 
                     yield return Expression.UpdateFlags(
                         RegisterInfo.Eflags,
-                        GetDefaultFlags(r)
-                            .Append(
-                                ((int)
-                                    EflagsMaskEnum.cf,
-                                    Expression.LessThan(NumberType.UnsignedInteger, left, right)))
-                            .Append(
-                                ((int)
-                                    EflagsMaskEnum.of,
-                                    Expression.AndAlso(
-                                        Expression.NotEqual(leftSign, rightSign),
-                                        Expression.Equal(rightSign, resultSign)))));
-
+                        GetDefaultFlags(res)
+                            .Append(((int) EflagsMaskEnum.cf, Expression.False))
+                            .Append(((int) EflagsMaskEnum.of, Expression.False)));
+                    break;
+                }
+                    
+                case ud_mnemonic_code.UD_Ijmp:
+                {
+                    yield return Expression.Goto(GetOperandValue(0));
                     break;
                 }
 
@@ -135,7 +205,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                 case ud_mnemonic_code.UD_Ijg:
                 {
-                    // Signed less.
+                    // Signed greater.
                     // left > right
                     // !eflags.zf && eflags.sf == eflags.of
 
@@ -154,32 +224,34 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     break;
                 }
 
-                case ud_mnemonic_code.UD_Iadd:
+                case ud_mnemonic_code.UD_Ijz:
                 {
-                    var dst = GetOperandValue(0);
-                    var src = GetOperandValue(1, dst.LengthInBits);
-                    var res = dst + src;
+                    var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
+                    var zf = Expression.IsNonZero(eflags & (int) EflagsMaskEnum.zf);
 
-                    var ss = Expression.IsSignedIntegerPositive(src);
-                    var ds = Expression.IsSignedIntegerPositive(dst);
-                    var rs = Expression.IsSignedIntegerPositive(res);
+                    yield return Expression.IfThen(
+                        zf,
+                        Expression.Goto(GetOperandValue(0))
+                    );
+                    break;
+                }
 
-                    yield return SetOperandValue(0, res);
+                case ud_mnemonic_code.UD_Ijnz:
+                {
+                    var eflags = Expression.RegisterAccess(RegisterInfo.Eflags);
+                    var nzf = Expression.IsZero(eflags & (int) EflagsMaskEnum.zf);
 
-                    // NOTE. af на практике не используется. Пропускаем.
-                    yield return Expression.UpdateFlags(
-                        RegisterInfo.Eflags,
-                        GetDefaultFlags(dst)
-                            .Append(
-                                ((int) EflagsMaskEnum.cf,
-                                    Expression.OrElse(
-                                        Expression.LessThan(NumberType.UnsignedInteger, res, src),
-                                        Expression.LessThan(NumberType.UnsignedInteger, res, dst))))
-                            .Append(
-                                ((int) EflagsMaskEnum.of,
-                                    Expression.AndAlso(
-                                        Expression.Equal(ds, ss),
-                                        Expression.NotEqual(ss, rs)))));
+                    yield return Expression.IfThen(
+                        nzf,
+                        Expression.Goto(GetOperandValue(0))
+                    );
+                    break;
+                }
+
+                case ud_mnemonic_code.UD_Iret:
+                {
+                    foreach (var expression in PopExpression(Expression.RegisterAccess(RegisterInfo.Eip)))
+                        yield return expression;
                     break;
                 }
 
@@ -187,6 +259,58 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     throw new NotImplementedException($"X86Instruction = {this}.");
             }
         }
+
+        public IEnumerable<Expression> PopExpression(Expression dst)
+        {
+            RegisterInfo spRegInfo;
+            switch (Mode)
+            {
+                case 32:
+                    spRegInfo = ud_type.UD_R_ESP;
+                    break;
+
+                default:
+                    throw new NotImplementedException($"X86Instruction = {this}, Mode = {Mode}.");
+            }
+
+            var sp = Expression.RegisterAccess(spRegInfo);
+
+            var newSp = sp + dst.LengthInBits / 8;
+                        
+            yield return Expression.Assign(sp, newSp);
+            yield return Expression.Assign(dst, Expression.MemoryAccess(ud_type.UD_R_SS, sp /* it is oldSp */, dst.LengthInBits));
+        }
+
+        private IEnumerable<Expression> SubOrCmpExpression(bool isSub)
+        {
+            var left = GetOperandValue(0);
+            var right = GetOperandValue(1, left.LengthInBits);
+
+            var res = left - right;
+            var leftSign = Expression.IsSignedIntegerPositive(left);
+            var rightSign = Expression.IsSignedIntegerPositive(right);
+            var resultSign = Expression.IsSignedIntegerPositive(res);
+
+            if (isSub)
+                yield return SetOperandValue(0, res);
+                        
+            // NOTE. af на практике не используется. Пропускаем.
+            yield return Expression.UpdateFlags(
+                RegisterInfo.Eflags,
+                GetDefaultFlags(res)
+                    .Append(
+                        ((int)
+                            EflagsMaskEnum.cf,
+                            Expression.LessThan(NumberType.UnsignedInteger, left, right)))
+                    .Append(
+                        ((int)
+                            EflagsMaskEnum.of,
+                            Expression.AndAlso(
+                                Expression.NotEqual(leftSign, rightSign),
+                                Expression.Equal(rightSign, resultSign)))));
+
+        }
+
 
         /// <summary>
         /// Set sf, zf, pf flags. 

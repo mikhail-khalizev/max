@@ -160,6 +160,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return node.Update(Visit(node.Address));
         }
 
+        protected internal virtual Expression VisitReturn(ReturnExpression node)
+        {
+            return node;
+        }
+
         protected internal virtual Expression VisitBlock(BlockExpression node)
         {
             var nodes = VisitAndConvert(node.Expressions, nameof(VisitBlock));

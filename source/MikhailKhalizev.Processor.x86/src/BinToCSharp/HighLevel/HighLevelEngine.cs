@@ -53,6 +53,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                 prev = instruction;
             }
+
+            var result = Expression.Block(Expressions);
+            var str = result.ToString();
         }
     }
 }
