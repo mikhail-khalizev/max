@@ -656,6 +656,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return new CommentExpression(comment);
         }
 
+        public static ParameterExpression Parameter(int lengthInBits)
+        {
+            return new ParameterExpression(null, lengthInBits);
+        }
+
+        public static ParameterExpression Parameter(string name, int lengthInBits)
+        {
+            return new ParameterExpression(name, lengthInBits);
+        }
+
 
         protected static void RequiresSameLengthInBits(Expression left, Expression right)
         {
