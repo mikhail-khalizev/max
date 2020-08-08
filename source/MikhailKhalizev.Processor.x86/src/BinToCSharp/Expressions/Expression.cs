@@ -97,7 +97,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 case ExpressionType.RightShift:
                     return RightShift(numberType, left, right);
                 case ExpressionType.LeftShift:
-                    return LeftShift(lengthInBits, left, right);
+                    return LeftShift(numberType, lengthInBits, left, right);
                 case ExpressionType.Assign:
                     return Assign(left, right);
                 default:
@@ -391,14 +391,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// <param name="right">An <see cref="Expression"/> to set the <see cref="BinaryExpression.Right"/> property equal to.</param>
         /// <returns>A <see cref="BinaryExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.LeftShift"/>
         /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
-        public static BinaryExpression LeftShift(Expression left, Expression right)
+        public static BinaryExpression LeftShift(NumberType numberType, Expression left, Expression right)
         {
-            return LeftShift(left.LengthInBits, left, right);
+            return LeftShift(numberType, left.LengthInBits, left, right);
         }
 
-        public static BinaryExpression LeftShift(int lengthInBits, Expression left, Expression right)
+        public static BinaryExpression LeftShift(NumberType numberType, int lengthInBits, Expression left, Expression right)
         {
-            return new BinaryExpression(ExpressionType.LeftShift, NumberType.Irrelevant, lengthInBits, left, right);
+            RequiresIntegerNumberType(numberType);
+            return new BinaryExpression(ExpressionType.LeftShift, numberType, lengthInBits, left, right);
         }
 
         /// <summary>
@@ -553,7 +554,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 var e = expression;
 
                 if (offset != 0 || lengthInBits != e.LengthInBits)
-                    e = LeftShift(lengthInBits, e, Constant(offset, lengthInBits));
+                    e = LeftShift(NumberType.UnsignedInteger, lengthInBits, e, Constant(offset, lengthInBits));
 
                 if (mask != resultMask && mask != (BinaryHelper.MaskInt32(expression.LengthInBits) << offset))
                     e = And(e, Constant(ConstantType.Hex, mask, lengthInBits));

@@ -34,7 +34,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
 
         public List<X86Instruction> Instructions { get; }
-        public List<Expression> Expressions { get; } = new List<Expression>();
 
         private HighLevelEngine(IEnumerable<IInstruction> instructions)
         {
@@ -43,21 +42,34 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public void Decode()
         {
+            var blocks = new List<Expression>();
+            var currentBlock = new List<Expression>();
+
             X86Instruction prev = null;
             foreach (var instruction in Instructions)
             {
                 if (prev != null && prev.End != instruction.Begin)
                     throw new NotImplementedException("prev.End != instruction.Begin");
-                
+
                 if (instruction.Metadata.HasLabel)
-                    Expressions.Add(Expression.Label(instruction.Begin));
-                Expressions.Add(Expression.Comment(instruction.ToString()));
-                Expressions.AddRange(instruction.GetExpressions());
+                {
+                    if (currentBlock.Count != 0)
+                        blocks.Add(Expression.Block(currentBlock));
+
+                    currentBlock = new List<Expression>();
+                    currentBlock.Add(Expression.Label(instruction.Begin));
+                }
+
+                currentBlock.Add(Expression.Comment(instruction.ToString()));
+                currentBlock.AddRange(instruction.GetExpressions());
 
                 prev = instruction;
             }
 
-            var result = Expression.Block(Expressions);
+            if (currentBlock.Count != 0)
+                blocks.Add(Expression.Block(currentBlock));
+
+            var result = Expression.Block(blocks);
             var str = result.ToString();
         }
     }
