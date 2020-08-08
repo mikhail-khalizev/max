@@ -62,6 +62,43 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     break;
                 }
 
+                case ud_mnemonic_code.UD_Icmp:
+                {
+                    var left = GetOperandValue(0);
+                    var right = GetOperandValue(1);
+
+                    var r = left - right;
+                    var ds = Expression.IsIntegerPositive(left);
+                    var ss = Expression.IsIntegerPositive(right);
+                    var rs = Expression.IsIntegerPositive(r);
+
+                    /* d  s  r  of
+                     * +  +  +   0
+                     * +  +  -   0
+                     * +  -  +   0
+                     * +  -  -   1
+                     * -  +  +   1
+                     * -  +  -   0
+                     * -  -  +   0
+                     * -  -  -   0  */
+                    
+                    // NOTE. af на практике не используется. Пропускаем.
+
+                    yield return Expression.UpdateFlags(
+                        RegisterInfo.Eflags,
+                        GetDefaultFlags(r)
+                            .Append(((int)
+                                EflagsMaskEnum.cf,
+                                Expression.LessThan(NumberType.SignedInteger, left, right)))
+                            .Append(((int)
+                                EflagsMaskEnum.of,
+                                Expression.AndAlso(
+                                    Expression.NotEqual(ds, ss),
+                                    Expression.Equal(ss, rs)))));
+
+                    break;
+                }
+
                 default:
                     throw new NotImplementedException($"X86Instruction = {this}.");
             }
@@ -75,7 +112,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             yield return ((int) EflagsMaskEnum.sf, Expression.LessThan(NumberType.SignedInteger, dst, Expression.Zero(dst.LengthInBits)));
             yield return ((int) EflagsMaskEnum.zf, Expression.IsZero(dst));
 
-            // pf - Сумма единиц в младшем байте + 1.
+            // NOTE. pf - Сумма единиц в младшем байте + 1.
             // На практике не используется. Пропускаем.
             // 
             // var pf = true;
@@ -104,6 +141,47 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var segment = GetEffectiveSegmentOfOperand(operand);
                     var address = GetOperandMemoryAddress(operandIndex, operand);
                     return Expression.MemoryAccess(segment, address, operandSize);
+                }
+
+                case ud_type.UD_OP_IMM:
+                {
+                    switch (operandSize)
+                    {
+                        case 8:
+                        {
+                            var needSignExtend = new[]
+                            {
+                                ud_mnemonic_code.UD_Iimul,
+                                ud_mnemonic_code.UD_Ipush,
+                                ud_mnemonic_code.UD_Iadc,
+                                ud_mnemonic_code.UD_Iadd,
+                                ud_mnemonic_code.UD_Isbb,
+                                ud_mnemonic_code.UD_Isub,
+                                ud_mnemonic_code.UD_Icmp
+                            }.Contains(Mnemonic);
+
+                            // Работа не с 8-битной инструкцией.
+                            if (!(ud_type.UD_R_AL <= Operands[0].@base && Operands[0].@base <= ud_type.UD_R_BH))
+                                needSignExtend = needSignExtend ||
+                                    Mnemonic == ud_mnemonic_code.UD_Iand ||
+                                    Mnemonic == ud_mnemonic_code.UD_Ior ||
+                                    Mnemonic == ud_mnemonic_code.UD_Ixor;
+
+                            if (needSignExtend)
+                                return Expression.Constant(operand.lval.@sbyte, operandSize);
+                            else
+                                return Expression.Constant(operand.lval.@ubyte, operandSize);
+                        }
+
+                        case 16:
+                            return Expression.Constant(operand.lval.uword, operandSize);
+
+                        case 32:
+                            return Expression.Constant(operand.lval.udword, operandSize);
+
+                        default:
+                            throw new NotImplementedException($"oprSize: {operandSize}");
+                    }
                 }
 
                 default:
