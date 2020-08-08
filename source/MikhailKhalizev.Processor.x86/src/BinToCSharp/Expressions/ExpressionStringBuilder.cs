@@ -32,6 +32,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         private int _delta;
         private Flow _flow;
 
+        private Dictionary<ParameterExpression, int> _paramIds;
+
         protected ExpressionStringBuilder(TextWriter file)
         {
             _out = file;
@@ -78,6 +80,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
                 return id;
             }
+        }
+
+        private int GetParamId(ParameterExpression p)
+        {
+            Debug.Assert(string.IsNullOrEmpty(p.Name));
+            return GetId(p, ref _paramIds);
         }
 
         /// <summary>
@@ -680,16 +688,24 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return node;
         }
 
-        // protected internal override Expression VisitLabel(LabelExpression node)
-        // {
-        //     Out(".Label", Flow.NewLine);
-        //     Indent();
-        //     Visit(node.DefaultValue);
-        //     Dedent();
-        //     NewLine();
-        //     DumpLabel(node.Target);
-        //     return node;
-        // }
+        protected internal override Expression VisitParameter(ParameterExpression node)
+        {
+            // Have '$' for the DebugView of ParameterExpressions
+            Out("$");
+            if (string.IsNullOrEmpty(node.Name))
+            {
+                // If no name if provided, generate a name as $var1, $var2.
+                // No guarantee for not having name conflicts with user provided variable names.
+                //
+                int id = GetParamId(node);
+                Out("var" + id);
+            }
+            else
+            {
+                Out(GetDisplayName(node.Name));
+            }
+            return node;
+        }
 
         protected internal override Expression VisitLabel(LabelExpression node)
         {

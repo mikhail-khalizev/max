@@ -185,6 +185,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// </summary>
         OnesComplement,
 
-        DebugInfo
+        DebugInfo,
+        Parameter
     }
 }

@@ -6,7 +6,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
     {
         public RegisterInfo RegisterInfo { get; }
 
-        public RegisterExpression(RegisterInfo registerInfo)
+        protected internal RegisterExpression(RegisterInfo registerInfo)
             : base(ExpressionType.RegisterAccess, registerInfo.LengthInBits)
         {
             RegisterInfo = registerInfo;

@@ -178,5 +178,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
             return node.Update(nodes);
         }
+
+        protected internal virtual Expression VisitParameter(ParameterExpression node)
+        {
+            return node;
+        }
     }
 }

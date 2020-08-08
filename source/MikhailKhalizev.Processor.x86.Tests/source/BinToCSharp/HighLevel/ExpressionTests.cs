@@ -11,8 +11,8 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
         [Fact]
         public void CheckCombine()
         {
-            var ax = new RegisterExpression(ud_type.UD_R_AX);
-            var bx = new RegisterExpression(ud_type.UD_R_BX);
+            var ax = Expression.RegisterAccess(ud_type.UD_R_AX);
+            var bx = Expression.RegisterAccess(ud_type.UD_R_BX);
 
             var c = Expression.Combine(
                 16,
