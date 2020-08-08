@@ -105,8 +105,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 
                     var sp = Expression.RegisterAccess(spRegInfo);
                     var src = GetOperandValue(0);
-                    var newSp = sp - src.LengthInBits / 8;
 
+                    var newSp = sp - src.LengthInBits / 8;
                     yield return Expression.Assign(sp, newSp);
 
                     sp = Expression.RegisterAccess(spRegInfo);
@@ -276,11 +276,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             }
 
             var sp = Expression.RegisterAccess(spRegInfo);
-
-            var newSp = sp + dst.LengthInBits / 8;
-                        
+            
             yield return Expression.Assign(dst, Expression.MemoryAccess(sp, dst.LengthInBits));
-            yield return Expression.Assign(sp, newSp);
+
+            if (!(dst is RegisterExpression re && re.RegisterInfo == spRegInfo))
+            {
+                var newSp = sp + dst.LengthInBits / 8;
+                yield return Expression.Assign(sp, newSp);
+            }
         }
 
         private IEnumerable<Expression> SubOrCmpExpression(bool isSub)
