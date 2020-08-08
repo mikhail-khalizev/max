@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
@@ -38,6 +39,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             lines = lines.Append("//  " + ii + _comment);
 
             return lines;
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Expression> GetExpressions()
+        {
+            return Enumerable.Empty<Expression>();
         }
     }
 }

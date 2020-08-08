@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
@@ -31,6 +32,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public IEnumerable<string> GetLowLevelCode()
         {
             return Enumerable.Empty<string>();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Expression> GetExpressions()
+        {
+            return Enumerable.Empty<Expression>();
         }
     }
 }

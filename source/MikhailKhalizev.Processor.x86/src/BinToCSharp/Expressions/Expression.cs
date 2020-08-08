@@ -18,7 +18,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static Expression Zero(int lengthInBits) => Constant(0, lengthInBits);
         public static Expression Constant(int value, int lengthInBits) => new ConstantExpression(value, lengthInBits);
         public static Expression Constant(uint value, int lengthInBits) => new ConstantExpression((int) value, lengthInBits);
-        public static Expression Constant(ConstantType constantType, int value, int lengthInBits) => new ConstantExpression(constantType, value, lengthInBits);
+
+        public static Expression Constant(ConstantType constantType, int value, int lengthInBits) =>
+            new ConstantExpression(constantType, value, lengthInBits);
 
         public static Expression IsZero(Expression exp) => Equal(exp, Zero(exp.LengthInBits));
 
@@ -456,7 +458,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         #endregion
 
         #region Combine Expressions
-        
+
         // Combine of ((value << offset) & mask).
         public static Expression Combine(int lengthInBits, params (Expression Value, int Offset, int Mask)[] sourceItems)
         {
@@ -468,7 +470,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         {
             var resultMask = BinaryHelper.MaskInt32(lengthInBits);
             var resultItems = new List<(Expression Value, int Offset, int Mask)>();
-            
+
             foreach (var sourceItem in sourceItems)
             {
                 for (var i = 0; i < resultItems.Count; i++)
@@ -554,7 +556,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         #endregion
 
-        #region Flag
+        #region UpdateFlags
 
         public static Expression UpdateFlags(RegisterInfo info, int flag, bool value)
         {
@@ -575,24 +577,24 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         {
             var register = MakeRegisterAccess(info);
 
-            var result = Enumerable.Empty<(Expression Value, int Offset, int Mask)>()
-                .Append((register, 0, BinaryHelper.MaskInt32(register.LengthInBits)))
-                .Concat(
-                    items.Select(
-                        x =>
-                        {
-                            var (flags, value) = x;
-                            if (flags == 0)
-                                throw new ArgumentException($"{nameof(flags)} is 0.");
+            var newValue = Expression.Combine(
+                register.LengthInBits,
+                Enumerable.Empty<(Expression Value, int Offset, int Mask)>()
+                    .Append((register, 0, BinaryHelper.MaskInt32(register.LengthInBits)))
+                    .Concat(
+                        items.Select(
+                            x =>
+                            {
+                                var (flags, value) = x;
+                                if (flags == 0)
+                                    throw new ArgumentException($"{nameof(flags)} is 0.");
 
-                            var offset = 0;
-                            while (((int) flags & (1 << offset)) == 0)
-                                offset++;
+                                var offset = 0;
+                                while (((int) flags & (1 << offset)) == 0)
+                                    offset++;
 
-                            return (value, offset, 1 << offset);
-                        }));
-
-            var newValue = Expression.Combine(register.LengthInBits, result);
+                                return (value, offset, 1 << offset);
+                            })));
 
             return Assign(register, newValue);
         }
@@ -634,7 +636,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         // Length in bits of result data or 0, if no result available by this type of Expression.
         public virtual int LengthInBits { get; }
-        
+
 
         /// <summary>
         /// Creates a <see cref="String"/> representation of the Expression.

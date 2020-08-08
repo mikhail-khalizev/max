@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
 {
@@ -26,6 +27,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public virtual IEnumerable<string> GetLowLevelCode()
         {
             return IcSharpInstructionImplementation.GetLowLevelCode();
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Expression> GetExpressions()
+        {
+            return IcSharpInstructionImplementation.GetExpressions();
         }
     }
 }

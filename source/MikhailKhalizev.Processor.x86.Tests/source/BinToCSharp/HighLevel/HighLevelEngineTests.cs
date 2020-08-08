@@ -5,11 +5,19 @@ using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.BinToCSharp.MethodInfo;
 using SharpDisasm;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
 {
     public class HighLevelEngineTests
     {
+        public ITestOutputHelper OutputHelper { get; }
+
+        public HighLevelEngineTests(ITestOutputHelper outputHelper)
+        {
+            OutputHelper = outputHelper;
+        }
+
         [Fact]
         public void DecodeStrCaseCmp()
         {
@@ -25,7 +33,9 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             }
             catch (Exception ex)
             {
-                // Ignore. HighLevelEngine in develop.
+                OutputHelper.WriteLine(ex.ToString());
+                
+                // Ignore exception: HighLevelEngine in develop.
             }
         }
 

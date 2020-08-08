@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using MikhailKhalizev.Processor.x86.BinToCSharp.Expressions;
 using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
@@ -23,6 +24,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
         public InstructionMetadata Metadata { get; }
 
         public IEnumerable<string> GetLowLevelCode();
-        // public IEnumerable<string> GetHighLevelCode();
+        public IEnumerable<Expression> GetExpressions();
     }
 }

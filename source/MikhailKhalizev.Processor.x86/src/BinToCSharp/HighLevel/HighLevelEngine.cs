@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
 
         public List<X86Instruction> Instructions { get; }
-        public Block CurrentBlock { get; private set; }
+        public List<Expression> Expressions { get; } = new List<Expression>();
 
         private HighLevelEngine(IEnumerable<IInstruction> instructions)
         {
@@ -43,206 +43,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public void Decode()
         {
-            CurrentBlock = new Block();
-
             X86Instruction prev = null;
             foreach (var instruction in Instructions)
             {
                 if (prev != null && prev.End != instruction.Begin)
                     throw new NotImplementedException("prev.End != instruction.Begin");
 
-                switch (instruction.Mnemonic)
-                {
-                    case ud_mnemonic_code.UD_Ipush:
-                    {
-                        RegisterInfo spRegInfo;
-                        switch (instruction.Mode)
-                        {
-                            case 32:
-                                spRegInfo = ud_type.UD_R_ESP;
-                                break;
-
-                            default:
-                                throw new NotImplementedException($"X86Instruction = {instruction}, Mode = {instruction.Mode}.");
-                        }
-
-                        var sp = CurrentBlock.GetRegister(spRegInfo);
-
-                        switch (instruction.Operands[0].type)
-                        {
-                            case ud_type.UD_OP_REG:
-                                var src = GetOperandValue(instruction, 0);
-                                var newSp = sp - src.LengthInBits / 8;
-
-                                CurrentBlock.SetRegister(spRegInfo, newSp);
-                                CurrentBlock.SetMemory(ud_type.UD_R_SS, newSp, src);
-                                break;
-
-                            default:
-                                throw new NotImplementedException(
-                                    $"X86Instruction = {instruction}, Operands[0].type = {instruction.Operands[0].type}.");
-                        }
-
-                        break;
-                    }
-
-                    case ud_mnemonic_code.UD_Imov:
-                    {
-                        var src = GetOperandValue(instruction, 1);
-                        SetOperandValue(instruction, 0, src);
-                        break;
-                    }
-
-                    case ud_mnemonic_code.UD_Ixor:
-                    {
-                        var src = GetOperandValue(instruction, 1);
-                        var dst = GetOperandValue(instruction, 0);
-
-                        dst ^= src;
-
-                        SetOperandValue(instruction, 0, dst);
-
-                        // TODO
-                        Expression.UpdateFlags(
-                            RegisterInfo.Eflags,
-                            GetDefaultFlags(dst)
-                                .Append(((int)EflagsMaskEnum.cf, Expression.False))
-                                .Append(((int)EflagsMaskEnum.of, Expression.False)));
-                        break;
-                    }
-
-                    default:
-                        throw new NotImplementedException($"X86Instruction = {instruction}.");
-                }
+                Expressions.AddRange(instruction.GetExpressions());
 
                 prev = instruction;
             }
-        }
-
-
-        // Set sf, zf, pf flags.
-        public IEnumerable<(int flags, Expression value)> GetDefaultFlags(Expression dst)
-        {
-            yield return ((int)EflagsMaskEnum.sf, Expression.LessThan(NumberType.SignedInteger, dst, Expression.Zero(dst.LengthInBits)));
-            yield return ((int)EflagsMaskEnum.zf, Expression.IsZero(dst));
-
-            // // pf - Сумма единиц в младшем байте + 1.
-            // 
-            // var pf = true;
-            // var x = dstValue;
-            // for (var i = 0; i < 8; i++)
-            // {
-            //     pf ^= 0 != (x & 1);
-            //     x >>= 1;
-            // }
-            // 
-            // eflags.pf = pf;
-        }
-
-        public Expression GetOperandValue(X86Instruction instruction, int operandIndex)
-        {
-            var operand = instruction.Operands[operandIndex];
-            var operandSize = operand.size != 0 ? operand.size : instruction.EffOprMode;
-
-            switch (operand.type)
-            {
-                case ud_type.UD_OP_REG:
-                    return CurrentBlock.GetRegister(operand.@base);
-
-                case ud_type.UD_OP_MEM:
-                {
-                    var segment = instruction.GetEffectiveSegmentOfOperand(operand);
-                    var address = GetOperandMemoryAddress(instruction, operandIndex, operand);
-                    return CurrentBlock.GetMemory(segment, address, operandSize);
-                }
-
-                default:
-                    throw new NotImplementedException($"X86Instruction: {instruction}, operandIndex: {operandIndex}.");
-            }
-        }
-
-        public void SetOperandValue(X86Instruction instruction, int operandIndex, Expression expression)
-        {
-            var operand = instruction.Operands[operandIndex];
-            var operandSize = operand.size != 0 ? operand.size : instruction.EffOprMode;
-
-            if (expression.LengthInBits != operandSize)
-                throw new InvalidOperationException(
-                    $"Logic error: value.LengthInBits != operandSize. " +
-                    $"X86Instruction: {instruction}, operandIndex: {operandIndex}, " +
-                    $"value.LengthInBits: {expression.LengthInBits}, operandSize: {operandSize}.");
-
-            switch (operand.type)
-            {
-                case ud_type.UD_OP_REG:
-                    CurrentBlock.SetRegister(operand.@base, expression);
-                    break;
-
-                case ud_type.UD_OP_MEM:
-                {
-                    var segment = instruction.GetEffectiveSegmentOfOperand(operand);
-                    var address = GetOperandMemoryAddress(instruction, operandIndex, operand);
-                    CurrentBlock.SetMemory(segment, address, expression);
-                    break;
-                }
-
-                default:
-                    throw new NotImplementedException($"X86Instruction: {instruction}, operandIndex: {operandIndex}.");
-            }
-        }
-
-        private Expression GetOperandMemoryAddress(X86Instruction instruction, int operandIndex, ud_operand operand)
-        {
-            var addressItems = new List<Expression>();
-
-            if (operand.@base != ud_type.UD_NONE)
-                addressItems.Add(CurrentBlock.GetRegister(operand.@base));
-
-            if (operand.index != ud_type.UD_NONE)
-            {
-                var e = CurrentBlock.GetRegister(operand.index);
-
-                if (1 < operand.scale)
-                {
-                    e = Expression.Multiply(
-                        NumberType.UnsignedInteger,
-                        Expression.Constant(operand.scale, e.LengthInBits),
-                        e);
-                }
-
-                addressItems.Add(e);
-            }
-
-            if (operand.offset != 0)
-            {
-                int val;
-                switch (operand.offset)
-                {
-                    case 8:
-                        val = operand.lval.@sbyte;
-                        break;
-                    case 16:
-                        val = operand.lval.sword;
-                        break;
-                    case 32:
-                        val = operand.lval.sdword;
-                        break;
-                    default:
-                        throw new NotImplementedException($"operand.offset: {operand.offset}");
-                }
-
-                addressItems.Add(Expression.Constant(val, instruction.AddrMode));
-            }
-
-            var address = Expression.Add(addressItems);
-
-            if (address.LengthInBits != instruction.AddrMode)
-                throw new InvalidOperationException(
-                    $"Logic error: address.LengthInBits != instruction.AddrMode. " +
-                    $"X86Instruction: {instruction}, operandIndex: {operandIndex}, " +
-                    $"address.LengthInBits: {address.LengthInBits}, instruction.AddrMode: {instruction.AddrMode}.");
-
-            return address;
         }
     }
 }
