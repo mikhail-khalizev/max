@@ -12,8 +12,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
             new Dictionary<int, (RegisterInfo, Expression)>();
 
-        private List<Expression> _statementInit = new List<Expression>();
-        private int _statementCount = 0;
+        private readonly List<Expression> _statementInit = new List<Expression>();
 
         /// <inheritdoc />
         protected internal override Expression VisitLabel(LabelExpression node)
@@ -25,21 +24,17 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         /// <inheritdoc />
         protected override Expression VisitStatement(Expression node)
         {
-            _statementCount++;
-
             node = base.VisitStatement(node);
 
-            if (_statementCount == 1 && _statementInit.Count != 0)
-            {
-                if (node is BlockExpression block)
-                    node = Expression.Block(_statementInit.Concat(block.Expressions));
-                else
-                    node = Expression.Block(_statementInit.Append(node));
+            if (_statementInit.Count == 0)
+                return node;
 
-                _statementInit.Clear();
-            }
+            if (node is BlockExpression block)
+                node = Expression.Block(_statementInit.Concat(block.Expressions).Where(x => x != Expression.Empty));
+            else
+                node = Expression.Block(_statementInit.Append(node).Where(x => x != Expression.Empty));
 
-            _statementCount--;
+            _statementInit.Clear();
 
             return node;
         }
@@ -108,31 +103,52 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
                 var register = new RegisterExpression(registerInfo);
-                var p1 = Expression.Parameter(register.LengthInBits);
-                _registers[registerInfo.Index] = (registerInfo, p1);
-                _statementInit.Add(Expression.Assign(p1, register));
-                return p1;
+                var parameter = Expression.Parameter(register.LengthInBits);
+                _statementInit.Add(Expression.Assign(parameter, register));
+
+                _registers[registerInfo.Index] = (registerInfo, parameter);
+                return parameter;
             }
 
             if (item.RegisterInfo == registerInfo)
                 return item.Value;
 
-            // var p2 = Expression.Parameter(registerInfo.LengthInBits);
-            // 
-            // var val = Expression.Combine(
-            //     registerInfo.LengthInBits,
-            //     (item.Value,
-            //     item.RegisterInfo.BitOffset - registerInfo.BitOffset,
-            //     item.RegisterInfo.BitMask >> registerInfo.BitOffset));
-            // 
-            // SetRegister(registerInfo, p2);
-            // return Expression.Assign(p2, val);
+            if ((registerInfo.ByteMask | item.RegisterInfo.ByteMask) == item.RegisterInfo.ByteMask)
+            {
+                // Request subpart of existence register.
+                // Example: get al from ax.
 
-            return Expression.Combine(
-                registerInfo.LengthInBits,
-                (item.Value,
-                    item.RegisterInfo.BitOffset - registerInfo.BitOffset,
-                    item.RegisterInfo.BitMask >> registerInfo.BitOffset));
+                return Expression.Combine(
+                    registerInfo.LengthInBits,
+                    (item.Value, item.RegisterInfo.BitOffset - registerInfo.BitOffset, item.RegisterInfo.BitMask >> registerInfo.BitOffset));
+            }
+            else if ((registerInfo.ByteMask & item.RegisterInfo.ByteMask) == 0)
+            {
+                // Request absolute new part.
+                var register = new RegisterExpression(registerInfo);
+                var parameter = Expression.Parameter(register.LengthInBits);
+                _statementInit.Add(Expression.Assign(parameter, register));
+
+                _statementInit.Add(SetRegister(registerInfo, parameter));
+                return parameter;
+            }
+            else
+            {
+                // Request new part with intersection.
+                var register = new RegisterExpression(registerInfo);
+                var parameter = Expression.Parameter(register.LengthInBits);
+
+                _statementInit.Add(Expression.Assign(parameter,
+                    Expression.Combine(
+                        Math.Max(
+                            item.RegisterInfo.LengthInBits + item.RegisterInfo.BitOffset,
+                            registerInfo.LengthInBits + registerInfo.BitOffset),
+                        (register, registerInfo.BitOffset, registerInfo.BitMask),
+                        (item.Value, item.RegisterInfo.BitOffset, item.RegisterInfo.BitMask))));
+                
+                _statementInit.Add(SetRegister(registerInfo, parameter));
+                return parameter;
+            }
         }
 
         public Expression SetRegister(RegisterInfo registerInfo, Expression expression)
@@ -165,6 +181,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 )
                 .Where(x => x.BitOffset == 0)
                 .First(x => combination.LengthInBits <= x.LengthInBits);
+
+            if (combination is ParameterExpression)
+            {
+                _registers[registerInfo.Index] = (resultRegisterInfo, combination);
+                return Expression.Empty;
+            }
 
             var parameter = Expression.Parameter(resultRegisterInfo.LengthInBits);
             _registers[registerInfo.Index] = (resultRegisterInfo, parameter);
