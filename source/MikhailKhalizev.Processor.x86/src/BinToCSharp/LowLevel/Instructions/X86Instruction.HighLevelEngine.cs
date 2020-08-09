@@ -50,12 +50,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         GetDefaultFlags(left)
                             .Append(
                                 ((int) EflagsMaskEnum.cf,
-                                    Expression.OrElse(
+                                    Expression.Or(
                                         Expression.LessThan(NumberType.UnsignedInteger, result, right),
                                         Expression.LessThan(NumberType.UnsignedInteger, result, left))))
                             .Append(
                                 ((int) EflagsMaskEnum.of,
-                                    Expression.AndAlso(
+                                    Expression.And(
                                         Expression.Equal(ds, ss),
                                         Expression.NotEqual(ss, rs)))));
                     break;
@@ -78,7 +78,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                         GetDefaultFlags(left)
                             .Append(
                                 ((int) EflagsMaskEnum.of,
-                                    Expression.AndAlso(
+                                    Expression.And(
                                         Expression.Equal(ds, ss),
                                         Expression.NotEqual(ss, rs)))));
                     break;
@@ -227,7 +227,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var of = Expression.IsNonZero(eflags & Expression.Constant(ConstantType.Hex, (int) EflagsMaskEnum.of, eflags.LengthInBits));
 
                     yield return Expression.IfThen(
-                        Expression.AndAlso(
+                        Expression.And(
                             nzf,
                             Expression.Equal(sf, of)),
                         Expression.Goto(GetOperandValue(0))
@@ -328,7 +328,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     .Append(
                         ((int)
                             EflagsMaskEnum.of,
-                            Expression.AndAlso(
+                            Expression.And(
                                 Expression.NotEqual(leftSign, rightSign),
                                 Expression.Equal(rightSign, resultSign)))));
         }

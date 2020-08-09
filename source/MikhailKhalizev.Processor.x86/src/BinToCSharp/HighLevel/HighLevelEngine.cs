@@ -65,6 +65,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             result = new IntroduceLocalVariablesVisitor().Visit(result);
             var result2Str = result.ToString();
 
+            result = new SimplifyExpressionVisitor().Visit(result);
+            var result3Str = result.ToString();
+
             // result = new RemoveInnerBlockVisitor().Visit(result);
             // var result2Str = result.ToString();
         }

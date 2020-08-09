@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
@@ -38,6 +39,22 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public int Value { get; }
         public ConstantType ConstantType { get; }
 
+        public int AsUnsigned => Value;
+        public int AsSigned
+        {
+            get
+            {
+                if (LengthInBits == 32)
+                    return Value;
+
+                var isPositive = (Value & (1 << (LengthInBits - 1))) == 0;
+                if (isPositive)
+                    return Value;
+
+                return  Value | ~((1 << LengthInBits) - 1);
+            }
+        }
+
         /// <inheritdoc />
         protected internal ConstantExpression(int value, int lengthInBits)
             : this(ConstantType.Default, value, lengthInBits)
@@ -48,15 +65,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             : base(ExpressionType.Constant, lengthInBits)
         {
             ConstantType = constantType;
-
-            if (lengthInBits != 32)
-            {
-                var isNegative = (value & (1 << (lengthInBits - 1))) != 0;
-                if (isNegative)
-                    value |= ~((1 << lengthInBits) - 1);
-            }
-
-            Value = value;
+            Value = value & BinaryHelper.MaskInt32(lengthInBits);
         }
 
         /// <summary>
