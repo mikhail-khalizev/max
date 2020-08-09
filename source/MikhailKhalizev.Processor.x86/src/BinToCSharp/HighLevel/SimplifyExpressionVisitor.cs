@@ -81,29 +81,33 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
 
 
-            if (cleft != null && cleft.LengthInBits == 1)
+            if (cleft != null)
             {
                 switch (node.NodeType)
                 {
-                    case ExpressionType.And:
+                    case ExpressionType.And when cleft.LengthInBits == 1:
                         return cleft.Value == 0 ? Expression.False : right;
-                    case ExpressionType.Or:
+                    case ExpressionType.Or when cleft.LengthInBits == 1:
                         return cleft.Value == 0 ? right : Expression.True;
-                    case ExpressionType.AndAlso:
+                    case ExpressionType.AndAlso when cleft.LengthInBits == 1:
                         return cleft.Value == 0 ? Expression.False : right;
-                    case ExpressionType.OrElse:
+                    case ExpressionType.OrElse when cleft.LengthInBits == 1:
                         return cleft.Value == 0 ? right : Expression.True;
                 }
             }
             
-            if (cright != null && cright.LengthInBits == 1)
+            if (cright != null)
             {
                 switch (node.NodeType)
                 {
-                    case ExpressionType.And:
+                    case ExpressionType.And when cright.LengthInBits == 1:
                         return cright.Value == 0 ? Expression.False : left;
-                    case ExpressionType.Or:
+                    case ExpressionType.Or when cright.LengthInBits == 1:
                         return cright.Value == 0 ? left : Expression.True;
+                    case ExpressionType.LeftShift when cright.Value == 0 && left.LengthInBits == node.LengthInBits:
+                        return left;
+                    case ExpressionType.RightShift when cright.Value == 0 && left.LengthInBits == node.LengthInBits:
+                        return left;
                 }
             }
 
