@@ -62,11 +62,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             Expression result = Expression.Block(currentBlock);
             var resultStr = result.ToString();
 
-            // result = new RemoveInnerBlockVisitor().Visit(result);
-            // var result2Str = result.ToString();
-
             result = new IntroduceLocalVariablesVisitor().Visit(result);
             var result2Str = result.ToString();
+
+            // result = new RemoveInnerBlockVisitor().Visit(result);
+            // var result2Str = result.ToString();
         }
     }
 }

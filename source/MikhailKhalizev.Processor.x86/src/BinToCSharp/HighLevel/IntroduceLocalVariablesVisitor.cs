@@ -12,28 +12,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
             new Dictionary<int, (RegisterInfo, Expression)>();
 
-        private readonly List<Expression> _preinit = new List<Expression>();
-        private Expression _main = null;
-
-        /// <inheritdoc />
-        public override Expression Visit(Expression node)
-        {
-            if (_main == null)
-                _main = node;
-
-            var newNode = base.Visit(node);
-
-            if (_main == node && _preinit.Count != 0)
-            {
-                if (newNode is BlockExpression block)
-                    return Expression.Block(_preinit.Concat(block.Expressions));
-
-                return Expression.Block(_preinit.Append(newNode));
-            }
-
-            return newNode;
-        }
-
         /// <inheritdoc />
         protected internal override Expression VisitLabel(LabelExpression node)
         {
@@ -50,20 +28,41 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
                 if (right is ParameterExpression)
                 {
-                    SetRegister(registerExpression.RegisterInfo, right);
-                    return node.Update(node.Left, right);
+                    var ex1 = SetRegister(registerExpression.RegisterInfo, right);
+                    var ex2 = node.Update(node.Left, right);
+
+                    if (ex1 == Expression.Empty)
+                        return ex2;
+                    else
+                        return Expression.Block(
+                            new[]
+                            {
+                                ex1,
+                                ex2
+                            });
                 }
 
                 if (right is BinaryExpression be && be.NodeType == ExpressionType.Assign && be.Left is ParameterExpression p1)
                 {
-                    SetRegister(registerExpression.RegisterInfo, p1);
-                    return node.Update(node.Left, right);
+                    return Expression.Block(
+                        new[]
+                        {
+                            right,
+                            SetRegister(registerExpression.RegisterInfo, p1),
+                            Expression.Assign(node.Left, p1)
+                        }.Where(x => x != Expression.Empty));
                 }
                 else
                 {
                     var p2 = Expression.Parameter(right.LengthInBits);
-                    SetRegister(registerExpression.RegisterInfo, p2);
-                    return node.Update(node.Left, Expression.Assign(p2, right));
+                    
+                    return Expression.Block(
+                        new[]
+                        {
+                            Expression.Assign(p2, right),
+                            SetRegister(registerExpression.RegisterInfo, p2),
+                            Expression.Assign(node.Left, p2)
+                        }.Where(x => x != Expression.Empty));
                 }
             }
 
@@ -84,44 +83,53 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
                 var register = new RegisterExpression(registerInfo);
-                var parameter = Expression.Parameter(register.LengthInBits);
-                _preinit.Add(Expression.Assign(parameter, register));
-
-                _registers[registerInfo.Index] = (registerInfo, parameter);
-                return parameter;
+                var p1 = Expression.Parameter(register.LengthInBits);
+                _registers[registerInfo.Index] = (registerInfo, p1);
+                return Expression.Assign(p1, register); // TODO
             }
-    
+
             if (item.RegisterInfo == registerInfo)
                 return item.Value;
-    
+
+            // var p2 = Expression.Parameter(registerInfo.LengthInBits);
+            // 
+            // var val = Expression.Combine(
+            //     registerInfo.LengthInBits,
+            //     (item.Value,
+            //     item.RegisterInfo.BitOffset - registerInfo.BitOffset,
+            //     item.RegisterInfo.BitMask >> registerInfo.BitOffset));
+            // 
+            // SetRegister(registerInfo, p2);
+            // return Expression.Assign(p2, val);
+
             return Expression.Combine(
                 registerInfo.LengthInBits,
                 (item.Value,
-                item.RegisterInfo.BitOffset - registerInfo.BitOffset,
-                item.RegisterInfo.BitMask >> registerInfo.BitOffset));
+                    item.RegisterInfo.BitOffset - registerInfo.BitOffset,
+                    item.RegisterInfo.BitMask >> registerInfo.BitOffset));
         }
-    
-        public void SetRegister(RegisterInfo registerInfo, Expression expression)
+
+        public Expression SetRegister(RegisterInfo registerInfo, Expression expression)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
                 _registers[registerInfo.Index] = (registerInfo, expression);
-                return;
+                return Expression.Empty;
             }
-    
+
             if (item.RegisterInfo == registerInfo)
             {
                 _registers[registerInfo.Index] = (registerInfo, expression);
-                return;
+                return Expression.Empty;
             }
-    
+
             var combination = Expression.Combine(
                 Math.Max(
                     item.RegisterInfo.LengthInBits + item.RegisterInfo.BitOffset,
                     registerInfo.LengthInBits + registerInfo.BitOffset),
                 (item.Value, item.RegisterInfo.BitOffset, item.RegisterInfo.BitMask),
                 (expression, registerInfo.BitOffset, registerInfo.BitMask));
-    
+
             var resultRegisterInfo = new[] { registerInfo, item.RegisterInfo }
                 .OrderBy(x => x.LengthInBits)
                 .Concat(
@@ -131,8 +139,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 )
                 .Where(x => x.BitOffset == 0)
                 .First(x => combination.LengthInBits <= x.LengthInBits);
-    
-            _registers[registerInfo.Index] = (resultRegisterInfo, combination);
+
+            var parameter = Expression.Parameter(resultRegisterInfo.LengthInBits);
+            _registers[registerInfo.Index] = (resultRegisterInfo, parameter);
+            return Expression.Assign(parameter, combination);
         }
     }
 }
