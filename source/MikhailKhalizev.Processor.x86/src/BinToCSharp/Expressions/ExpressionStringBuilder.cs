@@ -456,6 +456,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             switch (node.ConstantType)
             {
                 case ConstantType.Hex:
+                case ConstantType.Address:
                     Out($"0x{value:x}");
                     break;
 
@@ -709,7 +710,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         protected internal override Expression VisitLabel(LabelExpression node)
         {
-            Out($"label {(int)node.Address}");
+            Out($"label 0x{(int)node.Address:x}");
             return node;
         }
 

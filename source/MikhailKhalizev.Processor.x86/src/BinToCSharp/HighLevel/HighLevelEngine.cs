@@ -42,7 +42,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
         public void Decode()
         {
-            var blocks = new List<Expression>();
             var currentBlock = new List<Expression>();
 
             X86Instruction prev = null;
@@ -52,13 +51,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                     throw new NotImplementedException("prev.End != instruction.Begin");
 
                 if (instruction.Metadata.HasLabel)
-                {
-                    if (currentBlock.Count != 0)
-                        blocks.Add(Expression.Block(currentBlock));
-
-                    currentBlock = new List<Expression>();
                     currentBlock.Add(Expression.Label(instruction.Begin));
-                }
 
                 currentBlock.Add(Expression.Comment(instruction.ToString()));
                 currentBlock.AddRange(instruction.GetExpressions());
@@ -66,11 +59,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 prev = instruction;
             }
 
-            if (currentBlock.Count != 0)
-                blocks.Add(Expression.Block(currentBlock));
+            Expression result = Expression.Block(currentBlock);
+            var resultStr = result.ToString();
 
-            var result = Expression.Block(blocks);
-            var str = result.ToString();
+            // result = new RemoveInnerBlockVisitor().Visit(result);
+            // var result2Str = result.ToString();
+
+            result = new IntroduceLocalVariablesVisitor().Visit(result);
+            var result2Str = result.ToString();
         }
     }
 }

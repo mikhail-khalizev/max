@@ -542,7 +542,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
                 if (item.Value is ConstantExpression cv3)
                     return cv3;
 
-                if (item.Offset == 0 && item.Mask == resultMask)
+                if (item.Offset == 0 && item.Mask == resultMask && item.Value.LengthInBits == lengthInBits)
                     return item.Value;
             }
 

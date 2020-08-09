@@ -19,13 +19,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {
                     var left = GetOperandValue(0);
                     var right = GetOperandValue(1, left.LengthInBits);
-                    var res = left & right;
 
-                    yield return SetOperandValue(0, res);
+                    var result = Expression.Parameter(left.LengthInBits);
+                    yield return SetOperandValue(0, Expression.Assign(result, left & right));
 
                     yield return Expression.UpdateFlags(
                         RegisterInfo.Eflags,
-                        GetDefaultFlags(res)
+                        GetDefaultFlags(result)
                             .Append(((int) EflagsMaskEnum.cf, Expression.False))
                             .Append(((int) EflagsMaskEnum.of, Expression.False)));
                     break;
@@ -35,13 +35,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 {
                     var left = GetOperandValue(0);
                     var right = GetOperandValue(1, left.LengthInBits);
-                    var res = left + right;
+
+                    var result = Expression.Parameter(left.LengthInBits);
+                    yield return SetOperandValue(0, Expression.Assign(result, left + right));
 
                     var ss = Expression.IsSignedIntegerPositive(right);
                     var ds = Expression.IsSignedIntegerPositive(left);
-                    var rs = Expression.IsSignedIntegerPositive(res);
-
-                    yield return SetOperandValue(0, res);
+                    var rs = Expression.IsSignedIntegerPositive(result);
+                        
 
                     // NOTE. af на практике не используется. Пропускаем.
                     yield return Expression.UpdateFlags(
@@ -50,8 +51,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             .Append(
                                 ((int) EflagsMaskEnum.cf,
                                     Expression.OrElse(
-                                        Expression.LessThan(NumberType.UnsignedInteger, res, right),
-                                        Expression.LessThan(NumberType.UnsignedInteger, res, left))))
+                                        Expression.LessThan(NumberType.UnsignedInteger, result, right),
+                                        Expression.LessThan(NumberType.UnsignedInteger, result, left))))
                             .Append(
                                 ((int) EflagsMaskEnum.of,
                                     Expression.AndAlso(
@@ -62,19 +63,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 
                 case ud_mnemonic_code.UD_Iinc:
                 {
-                    var dst = GetOperandValue(0);
-                    var res = dst + Expression.Constant(1, dst.LengthInBits);
+                    var left = GetOperandValue(0);
+
+                    var result = Expression.Parameter(left.LengthInBits);
+                    yield return SetOperandValue(0, Expression.Assign(result, left + Expression.Constant(1, left.LengthInBits)));
 
                     var ss = Expression.True;
-                    var ds = Expression.IsSignedIntegerPositive(dst);
-                    var rs = Expression.IsSignedIntegerPositive(res);
-
-                    yield return SetOperandValue(0, res);
+                    var ds = Expression.IsSignedIntegerPositive(left);
+                    var rs = Expression.IsSignedIntegerPositive(result);
 
                     // NOTE. af на практике не используется. Пропускаем.
                     yield return Expression.UpdateFlags(
                         RegisterInfo.Eflags,
-                        GetDefaultFlags(dst)
+                        GetDefaultFlags(left)
                             .Append(
                                 ((int) EflagsMaskEnum.of,
                                     Expression.AndAlso(
@@ -143,12 +144,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                     var left = GetOperandValue(0);
                     var right = GetOperandValue(1, left.LengthInBits);
 
-                    left ^= right;
+                    var result = Expression.Parameter(left.LengthInBits);
+                    yield return SetOperandValue(0, Expression.Assign(result, left ^ right));
 
-                    yield return SetOperandValue(0, left);
                     yield return Expression.UpdateFlags(
                         RegisterInfo.Eflags,
-                        GetDefaultFlags(left)
+                        GetDefaultFlags(result)
                             .Append(((int) EflagsMaskEnum.cf, Expression.False))
                             .Append(((int) EflagsMaskEnum.of, Expression.False)));
                     break;
@@ -300,18 +301,26 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
             var left = GetOperandValue(0);
             var right = GetOperandValue(1, left.LengthInBits);
 
-            var res = left - right;
+            Expression result = null;
+            if (isSub)
+            {
+                result = Expression.Parameter(left.LengthInBits);
+                yield return SetOperandValue(0, Expression.Assign(result, left - right));
+            }
+            else
+            {
+                result = left - right;
+            }
+
             var leftSign = Expression.IsSignedIntegerPositive(left);
             var rightSign = Expression.IsSignedIntegerPositive(right);
-            var resultSign = Expression.IsSignedIntegerPositive(res);
+            var resultSign = Expression.IsSignedIntegerPositive(result);
 
-            if (isSub)
-                yield return SetOperandValue(0, res);
                         
             // NOTE. af на практике не используется. Пропускаем.
             yield return Expression.UpdateFlags(
                 RegisterInfo.Eflags,
-                GetDefaultFlags(res)
+                GetDefaultFlags(result)
                     .Append(
                         ((int)
                             EflagsMaskEnum.cf,
