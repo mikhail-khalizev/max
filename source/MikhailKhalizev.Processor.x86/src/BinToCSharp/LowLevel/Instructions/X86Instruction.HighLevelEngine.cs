@@ -104,23 +104,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                             throw new NotImplementedException($"X86Instruction = {this}, Mode = {Mode}.");
                     }
 
-                    var sp = Expression.RegisterAccess(spRegInfo);
                     var src = GetOperandValue(0);
+                    var srcParam = Expression.Parameter(src.LengthInBits);
 
-                    var newSp = sp - src.LengthInBits / 8;
-
-                    if (src is RegisterExpression re && re.RegisterInfo == spRegInfo)
-                    {
-                        yield return Expression.MemoryWrite(newSp, src);
-                        yield return Expression.Assign(sp, newSp);
-                    }
-                    else
-                    {
-                        yield return Expression.Assign(sp, newSp);
-
-                        sp = Expression.RegisterAccess(spRegInfo); // Read newSp.
-                        yield return Expression.MemoryWrite(sp, src);
-                    }
+                    var sp = Expression.RegisterAccess(spRegInfo);
+                    var newSpParam = Expression.Parameter(sp.LengthInBits);
+                    
+                    yield return Expression.Assign(srcParam, src);
+                    yield return Expression.Assign(newSpParam, sp - src.LengthInBits / 8);
+                    yield return Expression.Assign(sp, newSpParam);
+                    yield return Expression.MemoryWrite(newSpParam, srcParam);
 
                     break;
                 }
@@ -284,16 +277,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel
                 default:
                     throw new NotImplementedException($"X86Instruction = {this}, Mode = {Mode}.");
             }
-
-            var sp = Expression.RegisterAccess(spRegInfo);
             
-            yield return Expression.Assign(dst, Expression.MemoryAccess(sp, dst.LengthInBits));
-
-            if (!(dst is RegisterExpression re && re.RegisterInfo == spRegInfo))
-            {
-                var newSp = sp + dst.LengthInBits / 8;
-                yield return Expression.Assign(sp, newSp);
-            }
+            var sp = Expression.RegisterAccess(spRegInfo);
+            var spParam = Expression.Parameter(sp.LengthInBits);
+            
+            yield return Expression.Assign(spParam, sp);
+            yield return Expression.Assign(sp, spParam + dst.LengthInBits / 8);
+            yield return Expression.Assign(dst, Expression.MemoryAccess(spParam, dst.LengthInBits));
         }
 
         private IEnumerable<Expression> SubOrCmpExpression(bool isSub)
