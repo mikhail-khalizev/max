@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.Decoder;
+using MikhailKhalizev.Processor.x86.Utils;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
@@ -457,7 +458,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             {
                 case ConstantType.Hex:
                 case ConstantType.Address:
-                    Out($"0x{value:x}");
+                    Out(HexHelper.ToShortGrouped4Hex(value));
                     break;
 
                 default:
@@ -710,7 +711,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         protected internal override Expression VisitLabel(LabelExpression node)
         {
-            Out($"label 0x{(int)node.Address:x}");
+            Out($"label {HexHelper.ToShortGrouped4Hex((int)node.Address)}");
             return node;
         }
 
