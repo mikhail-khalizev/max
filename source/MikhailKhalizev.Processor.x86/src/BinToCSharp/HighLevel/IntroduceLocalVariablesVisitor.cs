@@ -7,12 +7,14 @@ using MikhailKhalizev.Processor.x86.Decoder;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    public class IntroduceLocalVariablesVisitor : StatementVisitor
+    public class IntroduceLocalVariablesVisitor : ExpressionVisitor
     {
         private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
             new Dictionary<int, (RegisterInfo, Expression)>();
 
-        private readonly List<Expression> _statementInit = new List<Expression>();
+        private int _assignLevel = 0;
+        private readonly List<Expression> _preAssignExpressions = new List<Expression>();
+
 
         /// <inheritdoc />
         protected internal override Expression VisitLabel(LabelExpression node)
@@ -22,25 +24,32 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         }
 
         /// <inheritdoc />
-        protected override Expression VisitStatement(Expression node)
+        protected internal override Expression VisitBinary(BinaryExpression nodeIn)
         {
-            node = base.VisitStatement(node);
+            if (nodeIn.NodeType == ExpressionType.Assign)
+                _assignLevel++;
 
-            if (_statementInit.Count == 0)
-                return node;
+            var node = VisitBinaryInternal(nodeIn);
 
-            if (node is BlockExpression block)
-                node = Expression.Block(_statementInit.Concat(block.Expressions).Where(x => x != Expression.Empty));
-            else
-                node = Expression.Block(_statementInit.Append(node).Where(x => x != Expression.Empty));
+            if (nodeIn.NodeType == ExpressionType.Assign)
+            {
+                _assignLevel--;
 
-            _statementInit.Clear();
+                if (_assignLevel == 0 && _preAssignExpressions.Count != 0)
+                {
+                    if (node is BlockExpression block)
+                        node = Expression.Block(_preAssignExpressions.Concat(block.Expressions).Where(x => x != Expression.Empty));
+                    else
+                        node = Expression.Block(_preAssignExpressions.Append(node).Where(x => x != Expression.Empty));
+
+                    _preAssignExpressions.Clear();
+                }
+            }
 
             return node;
         }
 
-        /// <inheritdoc />
-        protected override Expression VisitBinaryInternal(BinaryExpression node)
+        private Expression VisitBinaryInternal(BinaryExpression node)
         {
             if (node.NodeType == ExpressionType.Assign && node.Left is RegisterExpression registerExpression)
             {
@@ -86,7 +95,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 }
             }
 
-            return base.VisitBinaryInternal(node);
+            return base.VisitBinary(node);
         }
 
         /// <inheritdoc />
@@ -104,7 +113,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             {
                 var register = new RegisterExpression(registerInfo);
                 var parameter = Expression.Parameter(register.LengthInBits);
-                _statementInit.Add(Expression.Assign(parameter, register));
+                _preAssignExpressions.Add(Expression.Assign(parameter, register));
 
                 _registers[registerInfo.Index] = (registerInfo, parameter);
                 return parameter;
@@ -127,9 +136,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 // Request absolute new part.
                 var register = new RegisterExpression(registerInfo);
                 var parameter = Expression.Parameter(register.LengthInBits);
-                _statementInit.Add(Expression.Assign(parameter, register));
+                _preAssignExpressions.Add(Expression.Assign(parameter, register));
 
-                _statementInit.Add(SetRegister(registerInfo, parameter));
+                _preAssignExpressions.Add(SetRegister(registerInfo, parameter));
                 return parameter;
             }
             else
@@ -138,7 +147,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 var register = new RegisterExpression(registerInfo);
                 var parameter = Expression.Parameter(register.LengthInBits);
 
-                _statementInit.Add(Expression.Assign(parameter,
+                _preAssignExpressions.Add(Expression.Assign(parameter,
                     Expression.Combine(
                         Math.Max(
                             item.RegisterInfo.LengthInBits + item.RegisterInfo.BitOffset,
@@ -146,7 +155,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                         (register, registerInfo.BitOffset, registerInfo.BitMask),
                         (item.Value, item.RegisterInfo.BitOffset, item.RegisterInfo.BitMask))));
                 
-                _statementInit.Add(SetRegister(registerInfo, parameter));
+                _preAssignExpressions.Add(SetRegister(registerInfo, parameter));
                 return parameter;
             }
         }
