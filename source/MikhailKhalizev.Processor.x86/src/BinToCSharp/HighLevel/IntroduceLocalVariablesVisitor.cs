@@ -9,8 +9,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
     public class IntroduceLocalVariablesVisitor : ExpressionVisitor
     {
-        private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, Expression Value)> _registers =
-            new Dictionary<int, (RegisterInfo, Expression)>();
+        private readonly Dictionary<int /* register index */, (RegisterInfo RegisterInfo, ParameterExpression Value)> _registers =
+            new Dictionary<int, (RegisterInfo, ParameterExpression)>();
 
         private int _assignLevel = 0;
         private readonly List<Expression> _preAssignExpressions = new List<Expression>();
@@ -55,9 +55,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             {
                 var right = Visit(node.Right);
 
-                if (right is ParameterExpression)
+                if (right is ParameterExpression rightParameter)
                 {
-                    var ex1 = SetRegister(registerExpression.RegisterInfo, right);
+                    var ex1 = SetRegister(registerExpression.RegisterInfo, rightParameter);
                     var ex2 = node.Update(node.Left, right);
 
                     if (ex1 == Expression.Empty)
@@ -111,6 +111,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
+                // Ранее этот регистр не запрашивали.
+                // Впервые читаем из него данные.
+
                 var register = new RegisterExpression(registerInfo);
                 var parameter = Expression.Parameter(register.LengthInBits);
                 _preAssignExpressions.Add(Expression.Assign(parameter, register));
@@ -160,7 +163,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             }
         }
 
-        public Expression SetRegister(RegisterInfo registerInfo, Expression expression)
+        public Expression SetRegister(RegisterInfo registerInfo, ParameterExpression expression)
         {
             if (!_registers.TryGetValue(registerInfo.Index, out var item))
             {
@@ -191,9 +194,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 .Where(x => x.BitOffset == 0)
                 .First(x => combination.LengthInBits <= x.LengthInBits);
 
-            if (combination is ParameterExpression)
+            if (combination is ParameterExpression p2)
             {
-                _registers[registerInfo.Index] = (resultRegisterInfo, combination);
+                _registers[registerInfo.Index] = (resultRegisterInfo, p2);
                 return Expression.Empty;
             }
 
