@@ -651,9 +651,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             return new BlockExpression(expressions);
         }
 
-        public static ScopeExpression Scope(Expression expression, IEnumerable<ScopeExpression> prevScopes, IEnumerable<ScopeExpression> nextScopes)
+        public static ScopeExpression Scope(Expression expression, ScopeId id, IEnumerable<ScopeId> prevScopes, IEnumerable<ScopeId> nextScopes)
         {
-            return new ScopeExpression(expression, prevScopes, nextScopes);
+            return new ScopeExpression(expression, id, prevScopes, nextScopes);
         }
 
         public static CommentExpression Comment(string comment)

@@ -4,28 +4,23 @@ using System.Linq;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
+    public class ScopeId
+    { }
+
     public class ScopeExpression : Expression
     {
-        private static readonly ReadOnlyCollection<ScopeExpression> _empty = new ReadOnlyCollection<ScopeExpression>(new List<ScopeExpression>());
-
+        public ScopeId Id { get; }
         public Expression Expression { get; }
-        public virtual ReadOnlyCollection<ScopeExpression> PrevScopes { get; }
-        public virtual ReadOnlyCollection<ScopeExpression> NextScopes { get; }
+        public virtual ReadOnlyCollection<ScopeId> PrevScopes { get; }
+        public virtual ReadOnlyCollection<ScopeId> NextScopes { get; }
 
-        public ScopeExpression(Expression expression)
+        public ScopeExpression(Expression expression, ScopeId id, IEnumerable<ScopeId> prevScopes, IEnumerable<ScopeId> nextScopes)
             : base(ExpressionType.Scope, expression.LengthInBits)
         {
             Expression = expression;
-            PrevScopes = _empty;
-            NextScopes = _empty;
-        }
-
-        public ScopeExpression(Expression expression, IEnumerable<ScopeExpression> prevScopes, IEnumerable<ScopeExpression> nextScopes)
-            : base(ExpressionType.Scope, expression.LengthInBits)
-        {
-            Expression = expression;
-            PrevScopes = prevScopes as ReadOnlyCollection<ScopeExpression> ?? new ReadOnlyCollection<ScopeExpression>(prevScopes.ToList());
-            NextScopes = nextScopes as ReadOnlyCollection<ScopeExpression> ?? new ReadOnlyCollection<ScopeExpression>(nextScopes.ToList());
+            Id = id;
+            PrevScopes = prevScopes as ReadOnlyCollection<ScopeId> ?? new ReadOnlyCollection<ScopeId>(prevScopes.ToList());
+            NextScopes = nextScopes as ReadOnlyCollection<ScopeId> ?? new ReadOnlyCollection<ScopeId>(nextScopes.ToList());
         }
         
         /// <summary>
@@ -41,7 +36,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             if (expression == Expression)
                 return this;
 
-            return Expression.Scope(expression, PrevScopes, NextScopes);
+            return Expression.Scope(expression, Id, PrevScopes, NextScopes);
         }
     }
 }

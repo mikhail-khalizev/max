@@ -20,11 +20,12 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         private class ScopeInfo : Expression
         {
             public static ScopeInfo NoScope { get; } = new ScopeInfo();
+
+            public ScopeId Id { get; } = new ScopeId();
             public List<Expression> Expressions { get; } = new List<Expression>();
             public HashSet<ScopeInfo> PrevScopes { get; } = new HashSet<ScopeInfo>();
             public HashSet<ScopeInfo> NextScopes { get; } = new HashSet<ScopeInfo>();
-            private ScopeExpressionBuilder _self;
-
+            
             /// <inheritdoc />
             public ScopeInfo()
                 : base(ExpressionType.Scope, 0)
@@ -44,7 +45,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 Expressions.Add(expression);
             }
 
-            private Expression GetExpression()
+            private Expression GetInnerExpression()
             {
                 return Expressions.Count switch
                 {
@@ -58,19 +59,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             protected internal override Expression Accept(ExpressionVisitor visitor)
             {
                 // Для ToString.
-                return visitor.Visit(GetExpression());
+                return visitor.Visit(GetInnerExpression());
             }
 
             public ScopeExpression GetScopeExpression()
             {
-                if (_self != null)
-                    return _self;
-
-                _self = new ScopeExpressionBuilder(GetExpression());
-                _self.SetNextScopes(NextScopes.Select(x => x.GetScopeExpression()));
-                _self.SetPrevScopes(PrevScopes.Select(x => x.GetScopeExpression()));
-
-                return _self;
+                return Expression.Scope(
+                    GetInnerExpression(),
+                    Id,
+                    PrevScopes.Select(x => x.Id),
+                    NextScopes.Select(x => x.Id));
             }
         }
 
@@ -195,10 +193,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                     list = new HashSet<ScopeInfo>();
                     _prevScopeByLabel[ce.Value] = list;
                 }
-
                 list.Add(_current);
-                _current = ScopeInfo.NoScope;
 
+                _current = ScopeInfo.NoScope;
                 return node;
             }
 
@@ -219,8 +216,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 var afterTestScope = _current;
 
 
-                ScopeInfo afterIfTrueScope = afterTestScope;
-                Expression ifTrueExpression = Expression.Empty;
+                var afterIfTrueScope = afterTestScope;
+                var ifTrueExpression = Expression.Empty;
                 if (node.IfTrue != Expression.Empty)
                 {
                     var (resultExpression, newScope) = ProcessInNewScope(node.IfTrue);
@@ -230,8 +227,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 }
 
 
-                ScopeInfo afterIfFalseScope = afterTestScope;
-                Expression ifFalseExpression = Expression.Empty;
+                var afterIfFalseScope = afterTestScope;
+                var ifFalseExpression = Expression.Empty;
                 if (node.IfFalse != Expression.Empty)
                 {
                     var (resultExpression, newScope) = ProcessInNewScope(node.IfFalse);

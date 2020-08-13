@@ -35,7 +35,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         private Flow _flow;
 
         private Dictionary<ParameterExpression, int> _paramIds;
-        private Dictionary<ScopeExpression, int> _scopeIds;
+        private Dictionary<ScopeId, int> _scopeIds;
 
         protected ExpressionStringBuilder(TextWriter file)
         {
@@ -85,9 +85,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             }
         }
 
-        private int GetScopeId(ScopeExpression node)
+        private int GetScopeId(ScopeId id)
         {
-            return GetId(node, ref _scopeIds);
+            return GetId(id, ref _scopeIds);
         }
 
         private int GetParamId(ParameterExpression node)
@@ -459,6 +459,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         protected internal override Expression VisitConstant(ConstantExpression node)
         {
+            if (node == Expression.Empty)
+                return node; 
+
             var value = node.Value;
 
             switch (node.ConstantType)
@@ -692,7 +695,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         protected internal override Expression VisitScope(ScopeExpression node)
         {
-            var id = GetScopeId(node);
+            var id = GetScopeId(node.Id);
             var nextIds = string.Join(",", node.NextScopes.Select(GetScopeId));
             var prevIds = string.Join(",", node.PrevScopes.Select(GetScopeId));
 
