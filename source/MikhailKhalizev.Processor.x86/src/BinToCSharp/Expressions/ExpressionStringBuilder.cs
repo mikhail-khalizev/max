@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using MikhailKhalizev.Processor.x86.BinToCSharp.LowLevel;
 using MikhailKhalizev.Processor.x86.Decoder;
@@ -34,6 +35,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         private Flow _flow;
 
         private Dictionary<ParameterExpression, int> _paramIds;
+        private Dictionary<ScopeExpression, int> _scopeIds;
 
         protected ExpressionStringBuilder(TextWriter file)
         {
@@ -83,10 +85,15 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             }
         }
 
-        private int GetParamId(ParameterExpression p)
+        private int GetScopeId(ScopeExpression node)
         {
-            Debug.Assert(string.IsNullOrEmpty(p.Name));
-            return GetId(p, ref _paramIds);
+            return GetId(node, ref _scopeIds);
+        }
+
+        private int GetParamId(ParameterExpression node)
+        {
+            Debug.Assert(string.IsNullOrEmpty(node.Name));
+            return GetId(node, ref _paramIds);
         }
 
         /// <summary>
@@ -683,6 +690,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         //     return node;
         // }
 
+        protected internal override Expression VisitScope(ScopeExpression node)
+        {
+            var id = GetScopeId(node);
+            var nextIds = string.Join(",", node.NextScopes.Select(GetScopeId));
+            var prevIds = string.Join(",", node.PrevScopes.Select(GetScopeId));
+
+            Out($"scope {id} (\"{prevIds}\" -> \"{id}\" -> \"{nextIds}\") {{", Flow.NewLine);
+            Indent();
+            Visit(node.Expression);
+            Dedent();
+            Out("}", Flow.Break);
+            return node;
+        }
+
         protected internal override Expression VisitBlock(BlockExpression node)
         {
             Out("block", Flow.Space);
@@ -786,24 +807,6 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         //     }
         //     Out("}");
         //     return node;
-        // }
-
-        // private void DumpLabel(LabelTarget target)
-        // {
-        //     Out(string.Format(CultureInfo.CurrentCulture, ".LabelTarget {0}:", GetLabelTargetName(target)));
-        // }
-
-        // private string GetLabelTargetName(LabelTarget target)
-        // {
-        //     if (string.IsNullOrEmpty(target.Name))
-        //     {
-        //         // Create the label target name as #Label1, #Label2, etc.
-        //         return "#Label" + GetLabelTargetId(target);
-        //     }
-        //     else
-        //     {
-        //         return GetDisplayName(target.Name);
-        //     }
         // }
 
         /// <summary>

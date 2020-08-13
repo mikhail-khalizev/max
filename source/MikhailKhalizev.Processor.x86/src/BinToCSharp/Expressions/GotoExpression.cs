@@ -2,6 +2,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 {
     public class GotoExpression : Expression
     {
+        // TODO Change to from Expression to Address?
         public Expression Address { get; }
 
         protected internal GotoExpression(Expression address)
@@ -17,7 +18,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         {
             return visitor.VisitGoto(this);
         }
-
+        
         /// <summary>
         /// Creates a new expression that is like this one, but using the
         /// supplied children. If all of the children are the same, it will

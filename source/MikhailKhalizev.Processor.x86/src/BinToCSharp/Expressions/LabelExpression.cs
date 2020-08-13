@@ -5,7 +5,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public Address Address { get; }
 
         protected internal LabelExpression(Address address)
-            : base(ExpressionType.Goto, 0)
+            : base(ExpressionType.Label, 0)
         {
             Address = address;
         }

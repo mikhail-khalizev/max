@@ -20,7 +20,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
             Left = left;
             Right = right;
         }
-
+        
         /// <summary>
         /// Creates a new expression that is like this one, but using the
         /// supplied children. If all of the children are the same, it will

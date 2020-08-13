@@ -170,22 +170,23 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// </summary>
         Label,
         
-        /// <summary>
-        /// A node that represents a loop.
-        /// </summary>
-        Loop,
-
-        /// <summary>
-        /// A node that represents a switch operation.
-        /// </summary>
-        Switch,
-        
-        /// <summary>
-        /// A node that represents a ones complement.
-        /// </summary>
-        OnesComplement,
+        // /// <summary>
+        // /// A node that represents a loop.
+        // /// </summary>
+        // Loop,
+        // 
+        // /// <summary>
+        // /// A node that represents a switch operation.
+        // /// </summary>
+        // Switch,
+        // 
+        // /// <summary>
+        // /// A node that represents a ones complement.
+        // /// </summary>
+        // OnesComplement,
 
         DebugInfo,
-        Parameter
+        Parameter,
+        Scope
     }
 }

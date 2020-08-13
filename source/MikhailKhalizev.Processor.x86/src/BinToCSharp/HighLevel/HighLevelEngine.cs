@@ -62,11 +62,19 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             Expression result = Expression.Block(currentBlock);
             var resultStr = result.ToString();
 
-            result = new IntroduceLocalVariablesVisitor().Visit(result);
-            var result2Str = result.ToString();
 
-            result = new SimplifyExpressionVisitor().Visit(result);
-            var result3Str = result.ToString();
+            var r4 = SplitToScope.Process(result);
+            var r4str = r4.ToString();
+
+            var result3 = new IntroduceLocalVariablesVisitorV2(r4).Process();
+            var result3Str = result3.ToString();
+            
+
+            var result2 = new IntroduceLocalVariablesVisitor().Visit(result);
+            var result2Str = result2.ToString();
+
+            // result = new SimplifyExpressionVisitor().Visit(result);
+            // var result3Str = result.ToString();
 
             // result = new RemoveInnerBlockVisitor().Visit(result);
             // var result2Str = result.ToString();

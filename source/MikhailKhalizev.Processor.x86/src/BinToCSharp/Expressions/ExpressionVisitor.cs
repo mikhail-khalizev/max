@@ -183,5 +183,10 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         {
             return node;
         }
+
+        protected internal virtual Expression VisitScope(ScopeExpression node)
+        {
+            return node.Update(Visit(node.Expression));
+        }
     }
 }
