@@ -15,12 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.ru.md = ..\README.ru.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{4B31A797-375A-4E66-B6AB-26224AFDC743}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandwych.QuickGraph.Core", "..\external\QuickGraph\Sandwych.QuickGraph.Core\Sandwych.QuickGraph.Core.csproj", "{3DF6B434-0B87-4222-87D2-E964F26C72AA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandwych.QuickGraph.Graphviz", "..\external\QuickGraph\Sandwych.QuickGraph.Graphviz\Sandwych.QuickGraph.Graphviz.csproj", "{C2768F03-D38E-4216-83C2-E2B8B2970157}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MikhailKhalizev.Max.Static", "MikhailKhalizev.Max.Static\MikhailKhalizev.Max.Static.csproj", "{2C3F951B-1EED-4A7F-8FF2-7BE797840FA0}"
 EndProject
 Global
@@ -41,14 +35,6 @@ Global
 		{71252369-CDCF-4157-BF65-42401E4E5CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71252369-CDCF-4157-BF65-42401E4E5CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71252369-CDCF-4157-BF65-42401E4E5CB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DF6B434-0B87-4222-87D2-E964F26C72AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2768F03-D38E-4216-83C2-E2B8B2970157}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C3F951B-1EED-4A7F-8FF2-7BE797840FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C3F951B-1EED-4A7F-8FF2-7BE797840FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C3F951B-1EED-4A7F-8FF2-7BE797840FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,10 +42,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3DF6B434-0B87-4222-87D2-E964F26C72AA} = {4B31A797-375A-4E66-B6AB-26224AFDC743}
-		{C2768F03-D38E-4216-83C2-E2B8B2970157} = {4B31A797-375A-4E66-B6AB-26224AFDC743}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D740980D-0938-4102-8647-85E6FE320B83}

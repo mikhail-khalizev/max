@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "535189c38a0331c98a2288c183f9417c0783f95a7f02042031c988e183f9417c0883f95a7f0380c42038e0750884e474044342ebcf31d288c288e025ff00000029c289d0595bc3";
 
-            var hl = Decode(mi);
+            Decode(mi);
         }
 
 #if false
@@ -84,7 +84,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "6828000000e818ba0d0053515256575589e581ec0c0000008945fc8b45fce8f1cafeff8945fc8d45fc8945f88b45fc8945f48b45f489ec5d5f5e5a595bc3";
 
-            var hl = Decode(mi);
+            Decode(mi);
         }
 
 #if false
@@ -133,7 +133,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "6844000000e8c022030056575589e581ec340000008945f08955f4895df8884dfcc745e8ffffff7fc745e400000000eb048345e4030fbf45e43d000300000f8dea000000807dfc0075360fbf45e483f81b7c090fbf45e483f85d7e02eb05e9c60000000fbf45e43d200100007c0b0fbf45e43d7d0100007e02eb05e9a90000000fbf55e4a164941c1001d08a0025ff0000008945e00fbf45f08b55e029c28955dc0fbf45e48b1564941c1001d08a400125ff0000008945e00fbf45f48b55e029c28955d80fbf55e4a164941c1001d08a400225ff0000008945e00fbf45f88b55e029c28955d48b55dc0faf55dc8b45d80faf45d801c28b45d40faf45d401c28955d08b45d03b45e87d1f8b45d08945e80fbf55e4bb0300000089d0c1fa1ff7fb8945cc837dd0007405e903ffffff8a45cc8845ec8a45ec89ec5d5f5ec3";
             
-            var hl = Decode(mi);
+            Decode(mi);
         }
 
 #if false
@@ -262,7 +262,7 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
             mi.Mode = ArchitectureMode.x86_32;
             mi.Raw = "6830000000e8f82404005356575589e581ec1c000000c745fc000000008b45148b80900000008945e88b45148b80940000008945f88b45148b90840000008b45148b808800000001d08945f48b45188945f08b45e88a108b45f03a100f85de0000008b45e88945ec8b45e8ff45e88b45f0ff45f08b45f8ff45f88b45e88a108b45f03a1075088b45e83b45f47202eb148b45e8ff45e88b45f0ff45f08b45f8ff45f8ebd68b45f08a0025ff00000085c00f858a0000008b45e83b45f473088b45e880383d7502eb0f8b45e88a0025ff00000083f80d7502eb0e8b45e8ff45e88b45f8ff45f8ebcf8b45e83b45f473088b45e880383d7402eb1a8b45e8ff45e88b45f8ff45f88b45e88b55148982a0000000eb0d8b4514c780a0000000000000008b45ec8b551489829c0000008b4514c780a400000000000000c745fc01000000837dfc0075278b45e83b45f4730f8b45e88a0025ff00000083f80a7502eb0e8b45e8ff45e88b45f8ff45f8ebd98b45e83b45f473068b45e8ff45e88b45f8ff45f8837dfc0075088b45e83b45f47202eb088b45e880385b7502eb05e9acfeffff8b45fc8945e48b45e489ec5d5f5e5bc3";
             
-            var hl = Decode(mi);
+            Decode(mi);
         }
 
 #if false
@@ -441,10 +441,10 @@ namespace MikhailKhalizev.Processor.x86.Tests.BinToCSharp.HighLevel
 
 #endif
         
-        private HighLevelEngine Decode(MethodInfoDto mi)
+        private void Decode(MethodInfoDto mi)
         {
             var method = LowLevelEngine.GetMethod(mi);
-            return HighLevelEngine.DecodeMethod(method);
+            HighLevelEngine.DecodeMethod(method);
         }
     }
 }
