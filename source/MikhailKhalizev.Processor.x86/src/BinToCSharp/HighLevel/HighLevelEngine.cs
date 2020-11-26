@@ -25,52 +25,20 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
     public class HighLevelEngine
     {
-        public static HighLevelEngine DecodeMethod(DetectedMethod method)
+        public static Expression DecodeMethod(DetectedMethod method)
         {
-            var hl = new HighLevelEngine(method.Instructions);
-            hl.Decode();
-            return hl;
-        }
+            var rootExpression = GetRootExpression(method.Instructions.OfType<X86Instruction>());
+            var resultStr = rootExpression.ToString();
 
 
-        public List<X86Instruction> Instructions { get; }
-
-        private HighLevelEngine(IEnumerable<IInstruction> instructions)
-        {
-            Instructions = instructions.OfType<X86Instruction>().ToList();
-        }
-
-        public void Decode()
-        {
-            var currentBlock = new List<Expression>();
-
-            X86Instruction prev = null;
-            foreach (var instruction in Instructions)
-            {
-                if (prev != null && prev.End != instruction.Begin)
-                    throw new NotImplementedException("prev.End != instruction.Begin");
-
-                if (instruction.Metadata.HasLabel)
-                    currentBlock.Add(Expression.Label(instruction.Begin));
-
-                currentBlock.Add(Expression.Comment(instruction.ToString()));
-                currentBlock.AddRange(instruction.GetExpressions());
-
-                prev = instruction;
-            }
-
-            Expression result = Expression.Block(currentBlock);
-            var resultStr = result.ToString();
-
-
-            var r4 = SplitToScope.Process(result);
+            var r4 = SplitToScope.Process(rootExpression);
             var r4str = r4.ToString();
 
             var result3 = new IntroduceLocalVariablesVisitorV2(r4).Process();
             var result3Str = result3.ToString();
             
 
-            var result2 = new IntroduceLocalVariablesVisitor().Visit(result);
+            var result2 = new IntroduceLocalVariablesVisitor().Visit(rootExpression);
             var result2Str = result2.ToString();
 
             // result = new SimplifyExpressionVisitor().Visit(result);
@@ -78,6 +46,30 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 
             // result = new RemoveInnerBlockVisitor().Visit(result);
             // var result2Str = result.ToString();
+
+            return rootExpression;
+        }
+
+        private static Expression GetRootExpression(IEnumerable<X86Instruction> instructions)
+        {
+            var block = new List<Expression>();
+
+            X86Instruction prev = null;
+            foreach (var instruction in instructions)
+            {
+                if (prev != null && prev.End != instruction.Begin)
+                    throw new NotImplementedException("prev.End != instruction.Begin");
+
+                if (instruction.Metadata.HasLabel)
+                    block.Add(Expression.Label(instruction.Begin));
+
+                block.Add(Expression.Comment(instruction.ToString()));
+                block.AddRange(instruction.GetExpressions());
+
+                prev = instruction;
+            }
+
+            return Expression.Block(block);
         }
     }
 }
