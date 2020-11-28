@@ -271,11 +271,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
         public static BinaryExpression Add(Expression left, Expression right)
         {
+            // TODO RequiresSameLengthInBits(left, right);
             return Add(Math.Max(left.LengthInBits, right.LengthInBits), left, right);
         }
 
         public static BinaryExpression Add(int lengthInBits, Expression left, Expression right)
         {
+            // TODO lengthInBits always left.LengthInBits with equal right.LengthInBit.
             return new BinaryExpression(ExpressionType.Add, lengthInBits, left, right);
         }
 
@@ -286,6 +288,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
 
         public static Expression Add(int lengthInBits, IEnumerable<Expression> items)
         {
+            // TODO lengthInBits always items[any].LengthInBits.
+
             Expression e = null;
             foreach (var item in items)
             {
@@ -331,11 +335,13 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
         public static BinaryExpression Subtract(Expression left, Expression right)
         {
+            // TODO RequiresSameLengthInBits(left, right);
             return Subtract(Math.Max(left.LengthInBits, right.LengthInBits), left, right);
         }
 
         public static BinaryExpression Subtract(int lengthInBits, Expression left, Expression right)
         {
+            // TODO lengthInBits always left.LengthInBits with equal right.LengthInBit.
             return new BinaryExpression(ExpressionType.Subtract, lengthInBits, left, right);
         }
 
@@ -375,12 +381,14 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static BinaryExpression Multiply(NumberType numberType, Expression left, Expression right)
         {
             RequiresNumberType(numberType);
+            // TODO RequiresSameLengthInBits(left, right);
             return Multiply(numberType, Math.Max(left.LengthInBits, right.LengthInBits), left, right);
         }
 
         public static BinaryExpression Multiply(NumberType numberType, int lengthInBits, Expression left, Expression right)
         {
             RequiresNumberType(numberType);
+            // TODO lengthInBits always left.LengthInBits with equal right.LengthInBit.
             return new BinaryExpression(ExpressionType.Multiply, numberType, lengthInBits, left, right);
         }
 
@@ -399,6 +407,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public static BinaryExpression LeftShift(NumberType numberType, int lengthInBits, Expression left, Expression right)
         {
             RequiresIntegerNumberType(numberType);
+            // TODO lengthInBits always left.LengthInBits
             return new BinaryExpression(ExpressionType.LeftShift, numberType, lengthInBits, left, right);
         }
 
@@ -463,6 +472,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         /// and the <see cref="BinaryExpression.Left"/> and <see cref="BinaryExpression.Right"/> properties set to the specified values.</returns>
         public static BinaryExpression Power(NumberType numberType, int lengthInBits, Expression left, Expression right)
         {
+            // TODO Remove this Expression?
             return new BinaryExpression(ExpressionType.Power, numberType, lengthInBits, left, right);
         }
 

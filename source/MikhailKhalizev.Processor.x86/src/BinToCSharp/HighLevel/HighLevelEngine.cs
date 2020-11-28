@@ -28,7 +28,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
         public static Expression DecodeMethod(DetectedMethod method)
         {
             var rootExpression = GetRootExpression(method.Instructions.OfType<X86Instruction>());
-            var resultStr = rootExpression.ToString();
+            var rootExpressionStr = rootExpression.ToString();
 
 
             var r4 = SplitToScope.Process(rootExpression);
