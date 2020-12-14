@@ -17,8 +17,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.Expressions
         public ScopeExpression(Expression expression, ScopeId id, IEnumerable<ScopeId> prevScopes, IEnumerable<ScopeId> nextScopes)
             : base(ExpressionType.Scope, expression.LengthInBits)
         {
-            Expression = expression;
             Id = id;
+            Expression = expression;
             PrevScopes = prevScopes as ReadOnlyCollection<ScopeId> ?? new ReadOnlyCollection<ScopeId>(prevScopes.ToList());
             NextScopes = nextScopes as ReadOnlyCollection<ScopeId> ?? new ReadOnlyCollection<ScopeId>(nextScopes.ToList());
         }

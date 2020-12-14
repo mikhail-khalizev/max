@@ -211,6 +211,21 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             {
                 var prev = _current;
 
+                var lastDebugs = new List<Expression>();
+                for (var i = prev.Expressions.Count - 1; 0 <= i; i--)
+                {
+                    var e = prev.Expressions[i];
+                    if (e is DebugInfoExpression)
+                    {
+                        prev.Expressions.RemoveAt(i);
+                        lastDebugs.Add(e);
+                    }
+                    else
+                        break;
+                }
+                lastDebugs.Reverse();
+
+
                 var (testExpression, testScope) = ProcessInNewScope(node.Test);
                 testScope.AddPrevScope(prev);
                 var afterTestScope = _current;
@@ -246,11 +261,9 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 _current = resultScope;
                 return
                     Expression.Block(
-                        new Expression[]
-                        {
-                            node.Update(testExpression, ifTrueExpression, ifFalseExpression),
-                            resultScope
-                        });
+                        lastDebugs
+                            .Append(node.Update(testExpression, ifTrueExpression, ifFalseExpression))
+                            .Append(resultScope));
             }
         }
     }
