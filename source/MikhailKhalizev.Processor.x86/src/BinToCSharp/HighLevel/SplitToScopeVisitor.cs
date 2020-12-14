@@ -123,18 +123,16 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                     scope.AddExpression(node);
                     return (scope, scope);
                 }
-                else
-                {
-                    if (node is BlockExpression block)
-                        return (Expression.Block(block.Expressions.Prepend(scope)), scope);
 
-                    return (Expression.Block(
-                        new[]
-                        {
-                            scope,
-                            node
-                        }), scope);
-                }
+                if (node is BlockExpression block)
+                    return (Expression.Block(block.Expressions.Prepend(scope)), scope);
+
+                return (Expression.Block(
+                    new[]
+                    {
+                        scope,
+                        node
+                    }), scope);
             }
 
             /// <inheritdoc />
@@ -226,8 +224,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 lastDebugs.Reverse();
 
 
-                var (testExpression, testScope) = ProcessInNewScope(node.Test);
-                testScope.AddPrevScope(prev);
+                var (testExpression, _) = ProcessInNewScope(node.Test);
                 var afterTestScope = _current;
 
 
@@ -235,8 +232,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 var ifTrueExpression = Expression.Empty;
                 if (node.IfTrue != Expression.Empty)
                 {
-                    var (resultExpression, newScope) = ProcessInNewScope(node.IfTrue);
-                    newScope.AddPrevScope(afterTestScope);
+                    _current = afterTestScope;
+                    var (resultExpression, _) = ProcessInNewScope(node.IfTrue);
                     afterIfTrueScope = _current;
                     ifTrueExpression = resultExpression;
                 }
@@ -246,8 +243,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 var ifFalseExpression = Expression.Empty;
                 if (node.IfFalse != Expression.Empty)
                 {
-                    var (resultExpression, newScope) = ProcessInNewScope(node.IfFalse);
-                    newScope.AddPrevScope(afterTestScope);
+                    _current = afterTestScope;
+                    var (resultExpression, _) = ProcessInNewScope(node.IfFalse);
                     afterIfFalseScope = _current;
                     ifFalseExpression = resultExpression;
                 }
@@ -256,9 +253,8 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
                 var resultScope = new ScopeInfo();
                 resultScope.AddPrevScope(afterIfTrueScope);
                 resultScope.AddPrevScope(afterIfFalseScope);
-
-
                 _current = resultScope;
+
                 return
                     Expression.Block(
                         lastDebugs
