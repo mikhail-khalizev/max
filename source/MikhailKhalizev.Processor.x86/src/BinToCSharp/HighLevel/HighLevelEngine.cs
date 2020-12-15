@@ -27,7 +27,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
     {
         public static Expression DecodeMethod(DetectedMethod method)
         {
-            var rootExpression = GetRootExpression(method.Instructions.OfType<X86Instruction>());
+            var rootExpression = GetRootExpression(method.Instructions);
             var rootExpressionStr = rootExpression.ToString();
 
 
@@ -50,11 +50,11 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             return rootExpression;
         }
 
-        private static Expression GetRootExpression(IEnumerable<X86Instruction> instructions)
+        private static Expression GetRootExpression(IEnumerable<IInstruction> instructions)
         {
             var block = new List<Expression>();
 
-            X86Instruction prev = null;
+            IInstruction prev = null;
             foreach (var instruction in instructions)
             {
                 if (prev != null && prev.End != instruction.Begin)
