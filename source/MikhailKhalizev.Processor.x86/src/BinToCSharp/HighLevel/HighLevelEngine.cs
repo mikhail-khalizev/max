@@ -9,22 +9,22 @@ using SharpDisasm.Udis86;
 
 namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
 {
-    // NOTE
-    // arg1  eax
-    // arg2  edx
-    // arg3  ebx
-    // arg4  ecx
-    // arg5  push
-
-    // NOTE
-    // pushd(ebp);
-    // mov(ebp, esp);
-    //   sub(esp, 0x14);
-    //   mov(memd_a32(ss, ebp - 0x4), edx);
-    // mov(esp, ebp);
-
     public class HighLevelEngine
     {
+        // NOTE
+        // arg1 -> eax
+        // arg2 -> edx
+        // arg3 -> ebx
+        // arg4 -> ecx
+        // arg5 -> push
+
+        // NOTE
+        // pushd(ebp);
+        // mov(ebp, esp);
+        //   sub(esp, 0x14);
+        //   mov(memd_a32(ss, ebp - 0x4), edx);
+        // mov(esp, ebp);
+        
         public static Expression DecodeMethod(DetectedMethod method)
         {
             var rootExpression = GetRootExpression(method.Instructions);
@@ -34,7 +34,7 @@ namespace MikhailKhalizev.Processor.x86.BinToCSharp.HighLevel
             var r4 = SplitToScope.Process(rootExpression);
             var r4str = r4.ToString();
 
-            var result3 = new IntroduceLocalVariablesVisitorV2(r4).Process();
+            var result3 = IntroduceLocalVariablesVisitorV2.Process(r4);
             var result3Str = result3.ToString();
             
 
